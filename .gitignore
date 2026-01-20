@@ -1,0 +1,46 @@
+# SBT specific
+target/
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
+.history
+.cache
+.lib/
+
+# Scala-IDE specific
+.scala_dependencies
+.worksheet
+.classpath
+.project
+.settings/
+
+# IntelliJ IDEA
+.bsp/
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# VS Code
+.vscode/
+.metals/
+.bloop/
+
+# Mac
+.DS_Store
+
+# Scala Native build artifacts
+*.ll
+*.s
+*.o
+*.so
+*.dylib
+*.dll
+*.exe
+
+# Godot specific
+.import/
+.godot/
+*.import
