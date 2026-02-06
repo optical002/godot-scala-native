@@ -1,9 +1,15 @@
-import java.io.File
+import InterfaceGenerator.Type.Kind
+
+import java.io.{File, FileWriter}
 import scala.io.Source
-import pprint.*
+import scala.scalanative.unsafe.*
+import scala.scalanative.unsigned.*
 
 object InterfaceGenerator {
-  def run(jsonPath: String): Unit = {
+  def run(
+    jsonPath: String,
+    codeGenPath: String
+  ): Unit = {
     val jsonFile = new File(jsonPath)
     val jsonSource = Source.fromFile(jsonFile)
     try {
@@ -11,7 +17,7 @@ object InterfaceGenerator {
       val jsonStr = jsonSource.mkString
       val json = ujson.read(jsonStr)
       val types = parseTypes(json("types"))
-      pprintln(types)
+      generate(types, codeGenPath)
     } finally {
       jsonSource.close()
     }
@@ -39,8 +45,8 @@ object InterfaceGenerator {
             values = typeJson("values").arr.map { valueJson =>
               val name = valueJson("name").str
               val value = valueJson("value").num.toInt
-              value -> name
-            }.toMap,
+              (value, name)
+            }.toVector,
             isBitfield = typeJson.obj.get("is_bitfield").exists(_.bool)
           )
         case "handle" =>
@@ -59,8 +65,8 @@ object InterfaceGenerator {
             members = typeJson("members").arr.map { memberJson =>
               val name = memberJson("name").str
               val typeDescription = extractTypeDescription(memberJson)
-              name -> typeDescription
-            }.toMap
+              (name, typeDescription)
+            }.toVector
           )
         case "function" =>
           Function(
@@ -89,6 +95,88 @@ object InterfaceGenerator {
       )
     }.toVector
   }
+  // TODO parse Interface from json as well.
+
+  def generate(types: Vector[Type], path: String): Unit = {
+    new File(path).mkdirs()
+    produceScalaFiles(types).foreach { scalaFile =>
+      val subPath = s"$path/${scalaFile.path}"
+      new File(subPath).mkdirs()
+      val writer =
+        new FileWriter(s"$subPath/${scalaFile.name}.scala")
+      try {
+        writer.write(scalaFile.content)
+      } finally {
+        writer.close()
+      }
+    }
+  }
+
+  def produceScalaFiles(
+    types: Vector[Type]
+  ): Vector[ScalaFile] = {
+    def formatComment(type_ : Type): String = {
+      if (type_.description.isEmpty && type_.deprecated.isEmpty) ""
+      else
+        Vector(
+          Vector("/**"),
+          type_.description.toVector.flatMap { desc =>
+            desc.split("\n").map { line =>
+              s" * $line"
+            }
+          },
+          type_.deprecated.toVector.flatMap { dep =>
+            Vector(
+              " *",
+              s" * @deprecated Since ${dep.since}. Use ${dep.replaceWith} instead."
+            )
+          },
+          Vector(" */")
+        ).flatten.mkString("\n")
+    }
+
+    def produceTypes: Vector[ScalaFile] = {
+      types.map { type_ =>
+        ScalaFile(
+          path = "types", name = type_.name,
+          content = type_.kind match {
+            case Kind.Enum(values, isBitfield) => {
+              val typeName = if (isBitfield) "CInt" else "CUnsignedInt"
+              val valueSuffix = if (isBitfield) "" else ".toUInt"
+              val valuesStr = values.sortBy(_._1).map { case (value, valueName) =>
+                s"  final val $valueName: $typeName = $value$valueSuffix"
+              }.mkString("\n")
+              val comment = formatComment(type_)
+
+              s"""
+                 |package godot.gdextensioninterface.codegen.types
+                 |
+                 |import scala.scalanative.unsafe.*
+                 |import scala.scalanative.unsigned.*
+                 |
+                 |$comment
+                 |object ${type_.name} {
+                 |$valuesStr
+                 |}
+                 |""".stripMargin
+            }
+            case Kind.Handle(isConst, isUninitialized, parent) => ""
+            case Kind.Alias(type_) => ""
+            case Kind.Struct(members) => ""
+            case Kind.Function(arguments, returnValue) => ""
+          }
+        )
+      }
+    }
+
+    produceTypes
+  }
+
+  case class ScalaFile(
+    content: String,
+    path: String,
+    name: String
+  )
 
   case class Deprecated(since: String, replaceWith: String)
 
@@ -110,7 +198,7 @@ object InterfaceGenerator {
       // An enum should be represented as an int32_t, unless is_bitfield is true,
       // in which case an uint32_t should be used.
       case class Enum(
-        values: Map[Int, String],
+        values: Vector[(Int, String)],
         isBitfield: Boolean
       ) extends Kind
 
@@ -125,7 +213,7 @@ object InterfaceGenerator {
       ) extends Kind
 
       case class Struct(
-        members: Map[VarName, TypeDescription]
+        members: Vector[(VarName, TypeDescription)]
       ) extends Kind
 
       case class Function(
