@@ -12,7 +12,11 @@ lazy val igen = (project in file("modules/interface-generator"))
   .enablePlugins(ScalaNativePlugin)
   .settings(
     name := "interface-generator",
-    scalaVersion := scalaVersionStr
+    scalaVersion := scalaVersionStr,
+    libraryDependencies ++= Seq(
+      "com.lihaoyi" %%% "upickle" % "4.4.2", // json
+      "com.lihaoyi" %%% "pprint" % "0.9.6",
+    ),
   )
 
 lazy val gdext =
@@ -28,7 +32,7 @@ lazy val gdext =
       build := {
         val libFile = (Compile / nativeLink).value
 
-        val demoDir = baseDirectory.value / "demo"
+        val demoDir = baseDirectory.value / ".." / ".." / "demo"
         val demoLibDir = demoDir / "lib"
 
         IO.createDirectory(demoLibDir)

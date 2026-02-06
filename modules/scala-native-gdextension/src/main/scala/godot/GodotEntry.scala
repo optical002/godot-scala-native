@@ -1,5 +1,8 @@
 package godot
 
+import scala.scalanative.unsafe.*
+import scala.scalanative.unsigned.*
+
 object GodotEntry {
   @exported("godot_scala_init")
   def godotScalaInit(
