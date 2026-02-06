@@ -44,3 +44,6 @@ out/
 .import/
 .godot/
 *.import
+
+demo/godot-init
+demo/godot-init-prev
