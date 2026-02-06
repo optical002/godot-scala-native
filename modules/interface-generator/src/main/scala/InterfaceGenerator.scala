@@ -2,8 +2,6 @@ import InterfaceGenerator.Type.Kind
 
 import java.io.{File, FileWriter}
 import scala.io.Source
-import scala.scalanative.unsafe.*
-import scala.scalanative.unsigned.*
 
 object InterfaceGenerator {
   def run(
@@ -17,7 +15,8 @@ object InterfaceGenerator {
       val jsonStr = jsonSource.mkString
       val json = ujson.read(jsonStr)
       val types = parseTypes(json("types"))
-      generate(types, codeGenPath)
+      val scalaFiles = produceScalaFiles(types)
+      write(scalaFiles, codeGenPath)
     } finally {
       jsonSource.close()
     }
@@ -97,9 +96,9 @@ object InterfaceGenerator {
   }
   // TODO parse Interface from json as well.
 
-  def generate(types: Vector[Type], path: String): Unit = {
+  def write(scalaFiles: Vector[ScalaFile], path: String): Unit = {
     new File(path).mkdirs()
-    produceScalaFiles(types).foreach { scalaFile =>
+    scalaFiles.foreach { scalaFile =>
       val subPath = s"$path/${scalaFile.path}"
       new File(subPath).mkdirs()
       val writer =
