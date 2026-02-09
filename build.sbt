@@ -15,8 +15,8 @@ lazy val igen = (project in file("modules/interface-generator"))
     scalaVersion := scalaVersionStr,
     libraryDependencies ++= Seq(
       "com.lihaoyi" %%% "upickle" % "4.4.2", // json
-      "com.lihaoyi" %%% "pprint" % "0.9.6",
-    ),
+      "com.lihaoyi" %%% "pprint" % "0.9.6"
+    )
   )
 
 lazy val gdext =

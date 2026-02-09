@@ -10,10 +10,10 @@ object GodotEntry {
     libraryRaw: Ptr[Byte],
     initPtr: Ptr[Byte]
   ): CUnsignedChar = FileLogger.use("godot-init") { logger =>
-    logger.log("Starting Scala-Native language binding.")
-    
-    
-    
+    logger.log(
+      "Starting Scala-Native language binding."
+    )
+
     1.toUByte // Success
   }
 }
