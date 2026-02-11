@@ -31,7 +31,9 @@ object InterfaceGenerator {
           json.arr.map(_.str).mkString("\n")
         }
       }
-      def extractTypeDescription(innerJson: ujson.Value): TypeDescription = {
+      def extractTypeDescription(
+        innerJson: ujson.Value
+      ): Type.TypeDescription = {
         val type_ = innerJson("type").str
         val description = extractDescription(innerJson)
         (type_, description)
@@ -135,37 +137,49 @@ object InterfaceGenerator {
     }
 
     def produceTypes: Vector[ScalaFile] = {
-      types.map { type_ =>
-        ScalaFile(
-          path = "types", name = type_.name,
-          content = type_.kind match {
-            case Kind.Enum(values, isBitfield) => {
-              val typeName = if (isBitfield) "CInt" else "CUnsignedInt"
-              val valueSuffix = if (isBitfield) "" else ".toUInt"
-              val valuesStr = values.sortBy(_._1).map { case (value, valueName) =>
-                s"  final val $valueName: $typeName = $value$valueSuffix"
-              }.mkString("\n")
-              val comment = formatComment(type_)
+      types
+        .groupBy(_.kind.name)
+        .map { case (name, types) =>
+          ScalaFile(
+            path = "types",
+            name = name,
+            content = {
+              val contents = types.map { type_ =>
+                type_.kind match
+                  case Kind.Enum(values, isBitfield) =>
+                    val typeName = if (isBitfield) "CInt" else "CUnsignedInt"
+                    val valueSuffix = if (isBitfield) "" else ".toUInt"
+                    val valuesStr = values
+                      .sortBy(_._1)
+                      .map { case (value, valueName) =>
+                        s"  final val $valueName: $typeName = $value$valueSuffix"
+                      }
+                      .mkString("\n")
+                    val comment = formatComment(type_)
+                    s"""
+                     |$comment
+                     |object ${type_.name} {
+                     |$valuesStr
+                     |}""".stripMargin
 
+                  case Kind.Handle(isConst, isUninitialized, parent) => ""
+                  case Kind.Alias(type_)                             => ""
+                  case Kind.Struct(members)                          => ""
+                  case Kind.Function(arguments, returnValue)         => ""
+              }
               s"""
-                 |package godot.gdextensioninterface.codegen.types
-                 |
-                 |import scala.scalanative.unsafe.*
-                 |import scala.scalanative.unsigned.*
-                 |
-                 |$comment
-                 |object ${type_.name} {
-                 |$valuesStr
-                 |}
-                 |""".stripMargin
+               |package godot.gdextensioninterface.codegen.types
+               |
+               |import scala.scalanative.unsafe.*
+               |import scala.scalanative.unsigned.*
+               |import scala.scalanative.unsigned.UInt.*
+               |
+               |${contents.mkString}
+               |""".stripMargin
             }
-            case Kind.Handle(isConst, isUninitialized, parent) => ""
-            case Kind.Alias(type_) => ""
-            case Kind.Struct(members) => ""
-            case Kind.Function(arguments, returnValue) => ""
-          }
-        )
-      }
+          )
+        }
+        .toVector
     }
 
     produceTypes
@@ -186,39 +200,38 @@ object InterfaceGenerator {
     deprecated: Option[Deprecated]
   )
   object Type {
-    sealed trait Kind
-    object Kind {
-      type VarName = String
-      type TypeName = String
-      type TypeDescription =
-        (TypeName, Option[String]) // (type, maybe-description)
+    type VarName = String
+    type TypeName = String
+    type TypeDescription =
+      (TypeName, Option[String]) // (type, maybe-description)
 
+    enum Kind(val name: String) {
       // NOTE from godot docs:
       // An enum should be represented as an int32_t, unless is_bitfield is true,
       // in which case an uint32_t should be used.
-      case class Enum(
+      case Enum(
         values: Vector[(Int, String)],
         isBitfield: Boolean
-      ) extends Kind
+      ) extends Kind("Enum")
 
-      case class Handle(
+      case Handle(
         isConst: Boolean,
         isUninitialized: Boolean,
         parent: Option[TypeName]
-      ) extends Kind
+      ) extends Kind("Handle")
 
-      case class Alias(
+      case Alias(
         type_ : TypeName
-      ) extends Kind
+      ) extends Kind("Alias")
 
-      case class Struct(
+      case Struct(
         members: Vector[(VarName, TypeDescription)]
-      ) extends Kind
+      ) extends Kind("Struct")
 
-      case class Function(
+      case Function(
         arguments: Vector[(Option[VarName], TypeDescription)],
         returnValue: Option[TypeDescription]
-      ) extends Kind
+      ) extends Kind("Function")
     }
   }
 }
