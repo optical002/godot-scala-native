@@ -145,6 +145,7 @@ object InterfaceGenerator {
             name = name,
             content = {
               val contents = types.map { type_ =>
+                val comment = formatComment(type_)
                 type_.kind match
                   case Kind.Enum(values, isBitfield) =>
                     val typeName = if (isBitfield) "CInt" else "CUnsignedInt"
@@ -155,17 +156,44 @@ object InterfaceGenerator {
                         s"  final val $valueName: $typeName = $value$valueSuffix"
                       }
                       .mkString("\n")
-                    val comment = formatComment(type_)
                     s"""
                      |$comment
                      |object ${type_.name} {
                      |$valuesStr
                      |}""".stripMargin
 
-                  case Kind.Handle(isConst, isUninitialized, parent) => ""
-                  case Kind.Alias(type_)                             => ""
-                  case Kind.Struct(members)                          => ""
-                  case Kind.Function(arguments, returnValue)         => ""
+                  case Kind.Handle(isConst, isUninitialized, parent) =>
+                    val ptrType = if (isConst) "Ptr[Byte]" else "ConstPtr[Byte]"
+                    s"""
+                     |$comment
+                     |type ${type_.name} = $ptrType
+                     |""".stripMargin
+                  case Kind.Alias(aliasTypeName) =>
+                    val baseTypeMap: Map[String, String] = Vector(
+                      ("void" -> "CVoidPtr"),
+                      ("int8_t" -> "CSignedChar"),
+                      ("uint8_t" -> "UByte"),
+                      ("int16_t" -> "Short"),
+                      ("uint16_t" -> "UShort"),
+                      ("int32_t" -> "CInt"),
+                      ("uint32_t" -> "CUnsignedInt"),
+                      ("int64_t" -> "CLongLong"),
+                      ("uint64_t" -> "CUnsignedLongLong"),
+                      ("size_t" -> "CSize"),
+                      ("char" -> "CChar"),
+                      ("char16_t" -> "CChar16"),
+                      ("char32_t" -> "CChar32"),
+                      ("wchar_t" -> "CWideChar"),
+                      ("float" -> "CFloat"),
+                      ("double" -> "CDouble")
+                    ).toMap
+                    val aliasType =
+                      baseTypeMap.get(aliasTypeName).getOrElse(aliasTypeName)
+                    s"""
+                     |type ${type_.name} = $aliasType
+                     |""".stripMargin
+                  case Kind.Struct(members)                  => ""
+                  case Kind.Function(arguments, returnValue) => ""
               }
               s"""
                |package godot.gdextensioninterface.codegen.types
@@ -173,6 +201,7 @@ object InterfaceGenerator {
                |import scala.scalanative.unsafe.*
                |import scala.scalanative.unsigned.*
                |import scala.scalanative.unsigned.UInt.*
+               |import godot.types.ConstPtr
                |
                |${contents.mkString}
                |""".stripMargin

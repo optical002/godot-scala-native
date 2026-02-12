@@ -1,9 +1,11 @@
-import scala.scalanative.unsafe.Ptr
+package godot.types
+
+import scala.scalanative.unsafe.*
 
 opaque type ConstPtr[T] = Ptr[T]
 
 object ConstPtr {
-  extension [T](p: ConstPtr[T]) {
+  extension [T](p: ConstPtr[T])(using Tag[T]) {
     def apply(i: Int): T = p(i)
   }
 
