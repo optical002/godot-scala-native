@@ -5,6 +5,7 @@ import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
 import scala.scalanative.unsigned.UInt.*
 import godot.types.ConstPtr
+import godot.types.CStruct23
 
 
 /**

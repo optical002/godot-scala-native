@@ -2,6 +2,7 @@ import InterfaceGenerator.Type.Kind
 
 import java.io.{File, FileWriter}
 import scala.io.Source
+import scala.scalanative.unsafe.CStruct22
 
 object InterfaceGenerator {
   def run(
@@ -145,6 +146,39 @@ object InterfaceGenerator {
             name = name,
             content = {
               val contents = types.map { type_ =>
+                def parseTypeName(toParseType: String): String = {
+                  val baseTypeMap: Map[String, String] = Vector(
+                    ("void" -> "CVoidPtr"),
+                    ("int8_t" -> "CSignedChar"),
+                    ("uint8_t" -> "UByte"),
+                    ("int16_t" -> "Short"),
+                    ("uint16_t" -> "UShort"),
+                    ("int32_t" -> "CInt"),
+                    ("uint32_t" -> "CUnsignedInt"),
+                    ("int64_t" -> "CLongLong"),
+                    ("uint64_t" -> "CUnsignedLongLong"),
+                    ("size_t" -> "CSize"),
+                    ("char" -> "CChar"),
+                    ("char16_t" -> "CChar16"),
+                    ("char32_t" -> "CChar32"),
+                    ("wchar_t" -> "CWideChar"),
+                    ("float" -> "CFloat"),
+                    ("double" -> "CDouble")
+                  ).toMap
+                  def maybePtr: String = {
+                    if (toParseType.endsWith("*")) {
+                      val isConst = toParseType.startsWith("const ")
+                      val rawType =
+                        toParseType.stripPrefix("const ").stripSuffix("*")
+                      val ptrType = if (isConst) "ConstPtr" else "Ptr"
+                      s"$ptrType[${baseTypeMap.get(rawType).getOrElse(rawType)}]"
+                    } else {
+                      toParseType
+                    }
+                  }
+                  baseTypeMap.get(toParseType).getOrElse(maybePtr)
+                }
+
                 val comment = formatComment(type_)
                 type_.kind match
                   case Kind.Enum(values, isBitfield) =>
@@ -153,11 +187,12 @@ object InterfaceGenerator {
                     val valuesStr = values
                       .sortBy(_._1)
                       .map { case (value, valueName) =>
-                        s"  final val $valueName: $typeName = $value$valueSuffix"
+                        s"  final val $valueName: ${type_.name} = $value$valueSuffix"
                       }
                       .mkString("\n")
                     s"""
                      |$comment
+                     |type ${type_.name} = ${typeName}
                      |object ${type_.name} {
                      |$valuesStr
                      |}""".stripMargin
@@ -169,30 +204,37 @@ object InterfaceGenerator {
                      |type ${type_.name} = $ptrType
                      |""".stripMargin
                   case Kind.Alias(aliasTypeName) =>
-                    val baseTypeMap: Map[String, String] = Vector(
-                      ("void" -> "CVoidPtr"),
-                      ("int8_t" -> "CSignedChar"),
-                      ("uint8_t" -> "UByte"),
-                      ("int16_t" -> "Short"),
-                      ("uint16_t" -> "UShort"),
-                      ("int32_t" -> "CInt"),
-                      ("uint32_t" -> "CUnsignedInt"),
-                      ("int64_t" -> "CLongLong"),
-                      ("uint64_t" -> "CUnsignedLongLong"),
-                      ("size_t" -> "CSize"),
-                      ("char" -> "CChar"),
-                      ("char16_t" -> "CChar16"),
-                      ("char32_t" -> "CChar32"),
-                      ("wchar_t" -> "CWideChar"),
-                      ("float" -> "CFloat"),
-                      ("double" -> "CDouble")
-                    ).toMap
-                    val aliasType =
-                      baseTypeMap.get(aliasTypeName).getOrElse(aliasTypeName)
                     s"""
-                     |type ${type_.name} = $aliasType
+                     |$comment
+                     |type ${type_.name} = ${parseTypeName(aliasTypeName)}
                      |""".stripMargin
-                  case Kind.Struct(members)                  => ""
+                  case Kind.Struct(members) =>
+                    val memberTypes = members
+                      .map(m => parseTypeName(m._2._1))
+                      .mkString(",\n  ")
+                    val memberMethods = members
+                      .zipWithIndex
+                      .map { case (m, idx) =>
+                        val varName = if (m._1 == "type") "_type" else m._1
+                        val i = idx + 1
+                        val tName = parseTypeName(m._2._1)
+                        s"""
+                         |    def ${varName}: $tName = struct._$i
+                         |    def ${varName}_=(v: $tName) = struct._${i}_=(v)
+                         |    def at_${varName}: Ptr[$tName] = struct.at$i
+                         |""".stripMargin
+                      }
+                    s"""
+                     |$comment
+                     |opaque type ${type_.name} = CStruct${members.length}[
+                     |  $memberTypes
+                     |]
+                     |object ${type_.name} {
+                     |  extension (struct: ${type_.name}) {
+                     |    def at: Ptr[${type_.name}] = struct.toPtr
+                     |    ${memberMethods.mkString("")}
+                     |  }
+                     |}""".stripMargin
                   case Kind.Function(arguments, returnValue) => ""
               }
               s"""
@@ -202,6 +244,7 @@ object InterfaceGenerator {
                |import scala.scalanative.unsigned.*
                |import scala.scalanative.unsigned.UInt.*
                |import godot.types.ConstPtr
+               |import godot.types.CStruct23
                |
                |${contents.mkString}
                |""".stripMargin
