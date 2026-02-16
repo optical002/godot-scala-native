@@ -165,7 +165,7 @@ object InterfaceGenerator {
                     ("float" -> "CFloat"),
                     ("double" -> "CDouble")
                   ).toMap
-                  def maybePtr: String = {
+                  def ptrOrRaw: String = {
                     if (toParseType.endsWith("*")) {
                       val isConst = toParseType.startsWith("const ")
                       val rawType =
@@ -176,7 +176,7 @@ object InterfaceGenerator {
                       toParseType
                     }
                   }
-                  baseTypeMap.get(toParseType).getOrElse(maybePtr)
+                  baseTypeMap.get(toParseType).getOrElse(ptrOrRaw)
                 }
 
                 val comment = formatComment(type_)
@@ -211,31 +211,77 @@ object InterfaceGenerator {
                   case Kind.Struct(members) =>
                     val memberTypes = members
                       .map(m => parseTypeName(m._2._1))
-                      .mkString(",\n  ")
-                    val memberMethods = members
-                      .zipWithIndex
+                    val memberMethods = members.zipWithIndex
                       .map { case (m, idx) =>
                         val varName = if (m._1 == "type") "_type" else m._1
                         val i = idx + 1
                         val tName = parseTypeName(m._2._1)
                         s"""
-                         |    def ${varName}: $tName = struct._$i
-                         |    def ${varName}_=(v: $tName) = struct._${i}_=(v)
-                         |    def at_${varName}: Ptr[$tName] = struct.at$i
+                         |    inline def ${varName}: $tName = struct._$i
+                         |    inline def ${varName}_=(v: $tName) = struct._${i}_=(v)
+                         |    inline def at_${varName}: Ptr[$tName] = struct.at$i
                          |""".stripMargin
                       }
+                    val tagImport =
+                      if (memberTypes.length >= 23)
+                        "import godot.types.Tags.*"
+                      else
+                        s"import Tag.materializeCStruct${memberTypes.length}Tag"
                     s"""
                      |$comment
                      |opaque type ${type_.name} = CStruct${members.length}[
-                     |  $memberTypes
+                     |  ${memberTypes.mkString(",\n  ")}
                      |]
                      |object ${type_.name} {
+                     |  $tagImport
+                     |
+                     |  given Tag[${type_.name}] = 
+                     |    materializeCStruct${memberTypes.length}Tag[${memberTypes
+                        .mkString(
+                          ", "
+                        )}].asInstanceOf[Tag[${type_.name}]]
+                     |
                      |  extension (struct: ${type_.name}) {
-                     |    def at: Ptr[${type_.name}] = struct.toPtr
                      |    ${memberMethods.mkString("")}
                      |  }
                      |}""".stripMargin
-                  case Kind.Function(arguments, returnValue) => ""
+                  case Kind.Function(arguments, returnValue) =>
+                    val argumentTypes = arguments
+                      .map(a => parseTypeName(a._2._1))
+                      .mkString(",\n  ")
+                    val returnType = returnValue
+                      .map(r => parseTypeName(r._1))
+                      .getOrElse("Unit")
+                    val funcParams = arguments.zipWithIndex
+                      .map { case (a, idx) =>
+                        val paramName = a._1
+                          .filter(_.nonEmpty)
+                          .getOrElse(s"_$idx")
+                        val paramType = parseTypeName(a._2._1)
+                        (paramName, paramType)
+                      }
+                    val callParams = funcParams.map(_._1).mkString(", ")
+                    val funcParamsStr = funcParams
+                      .map { case (pName, pType) => s"$pName: $pType" }
+                      .mkString(",\n      ")
+                    s"""
+                     |$comment
+                     |opaque type ${type_.name} = CFuncPtr${arguments.length}[
+                     |  $argumentTypes${
+                        if (arguments.isEmpty) "" else ","
+                      }
+                     |  $returnType
+                     |]
+                     |object ${type_.name} {
+                     |  given Tag[${type_.name}] = Tag.Ptr.asInstanceOf[Tag[${type_.name}]]
+                     |  
+                     |  extension (func: ${type_.name}) {
+                     |    inline def apply(
+                     |      $funcParamsStr
+                     |    ): $returnType = func($callParams)
+                     |  } 
+                     |}
+                     |""".stripMargin
               }
               s"""
                |package godot.gdextensioninterface.codegen.types
@@ -243,8 +289,7 @@ object InterfaceGenerator {
                |import scala.scalanative.unsafe.*
                |import scala.scalanative.unsigned.*
                |import scala.scalanative.unsigned.UInt.*
-               |import godot.types.ConstPtr
-               |import godot.types.CStruct23
+               |import godot.types.*
                |
                |${contents.mkString}
                |""".stripMargin

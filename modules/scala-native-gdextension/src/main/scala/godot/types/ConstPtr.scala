@@ -5,6 +5,9 @@ import scala.scalanative.unsafe.*
 opaque type ConstPtr[T] = Ptr[T]
 
 object ConstPtr {
+  given [T](using tag: Tag[T]): Tag[ConstPtr[T]] =
+    Tag.Ptr.asInstanceOf[Tag[ConstPtr[T]]]
+
   extension [T](p: ConstPtr[T])(using Tag[T]) {
     def apply(i: Int): T = p(i)
   }
