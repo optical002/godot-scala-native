@@ -16,30 +16,58 @@ object InterfaceGenerator {
       val jsonStr = jsonSource.mkString
       val json = ujson.read(jsonStr)
       val types = parseTypes(json("types"))
-      val scalaFiles = produceScalaFiles(types)
+      val interfaces = parseInterface(json("interface"))
+      val scalaFiles = processTypes(types) ++ processInterface(interfaces)
       write(scalaFiles, codeGenPath)
     } finally {
       jsonSource.close()
     }
   }
 
+  def extractDescription(innerJson: ujson.Value): Option[String] = {
+    innerJson.obj.get("description").map { json =>
+      json.arr.map(_.str).mkString("\n")
+    }
+  }
+
+  def extractTypeDescription(
+    innerJson: ujson.Value
+  ): TypeDescription = {
+    val type_ = innerJson("type").str
+    val description = extractDescription(innerJson)
+    (type_, description)
+  }
+
+  def extractDeprecated(
+    innerJson: ujson.Value
+  ): Option[Deprecated] = {
+    innerJson.obj.get("deprecated").map { json =>
+      Deprecated(
+        since = json("since").str,
+        replaceWith = json.obj.get("replace_with").map(_.str).getOrElse("")
+      )
+    }
+  }
+
+  def extractArguments(
+    innerJson: ujson.Value
+  ): Arguments = {
+    innerJson("arguments").arr.map { memberJson =>
+      val maybeName = memberJson.obj.get("name").map(_.str)
+      val typeDescription = extractTypeDescription(memberJson)
+      (maybeName, typeDescription)
+    }.toVector
+  }
+
+  def extractReturnValue(
+    innerJson: ujson.Value
+  ): Option[TypeDescription] = {
+    innerJson.obj.get("return_value").map(extractTypeDescription)
+  }
+
   def parseTypes(json: ujson.Value): Vector[Type] = {
     json.arr.map { typeJson =>
       import Type.Kind.*
-
-      def extractDescription(innerJson: ujson.Value): Option[String] = {
-        innerJson.obj.get("description").map { json =>
-          json.arr.map(_.str).mkString("\n")
-        }
-      }
-      def extractTypeDescription(
-        innerJson: ujson.Value
-      ): Type.TypeDescription = {
-        val type_ = innerJson("type").str
-        val description = extractDescription(innerJson)
-        (type_, description)
-      }
-
       val name = typeJson("name").str
       val kind: Type.Kind = typeJson("kind").str match {
         case "enum" =>
@@ -72,23 +100,13 @@ object InterfaceGenerator {
           )
         case "function" =>
           Function(
-            arguments = typeJson("arguments").arr.map { memberJson =>
-              val maybeName = memberJson.obj.get("name").map(_.str)
-              val typeDescription = extractTypeDescription(memberJson)
-              (maybeName, typeDescription)
-            }.toVector,
-            returnValue =
-              typeJson.obj.get("return_value").map(extractTypeDescription)
+            arguments = extractArguments(typeJson),
+            returnValue = extractReturnValue(typeJson)
           )
         case keyword => throw new Exception(s"Invalid kind keyword: $keyword")
       }
       val description = extractDescription(typeJson)
-      val deprecated = typeJson.obj.get("deprecated").map { json =>
-        Deprecated(
-          since = json("since").str,
-          replaceWith = json("replace_with").str
-        )
-      }
+      val deprecated = extractDeprecated(typeJson)
       Type(
         name = name,
         kind = kind,
@@ -97,7 +115,23 @@ object InterfaceGenerator {
       )
     }.toVector
   }
-  // TODO parse Interface from json as well.
+
+  def parseInterface(json: ujson.Value): Vector[Interface] = {
+    json.arr.map { interfaceJson =>
+      Interface(
+        name = interfaceJson("name").str,
+        description = extractDescription(interfaceJson),
+        deprecated = extractDeprecated(interfaceJson),
+        arguments = extractArguments(interfaceJson),
+        returnValue = extractReturnValue(interfaceJson),
+        since = interfaceJson("since").str,
+        see = interfaceJson.obj.get("see")
+          .map(_.arr.map(_.str).toVector)
+          .getOrElse(Vector.empty),
+        legacyTypeName = interfaceJson.obj.get("legacy_type_name").map(_.str)
+      )
+    }.toVector
+  }
 
   def write(scalaFiles: Vector[ScalaFile], path: String): Unit = {
     new File(path).mkdirs()
@@ -114,192 +148,195 @@ object InterfaceGenerator {
     }
   }
 
-  def produceScalaFiles(
+  def formatComment(type_ : Type): String = {
+    if (type_.description.isEmpty && type_.deprecated.isEmpty) ""
+    else
+      Vector(
+        Vector("/**"),
+        type_.description.toVector.flatMap { desc =>
+          desc.split("\n").map { line =>
+            s" * $line"
+          }
+        },
+        type_.deprecated.toVector.flatMap { dep =>
+          Vector(
+            " *",
+            s" * @deprecated Since ${dep.since}. Use ${dep.replaceWith} instead."
+          )
+        },
+        Vector(" */")
+      ).flatten.mkString("\n")
+  }
+
+  def parseTypeName(toParseType: String): String = {
+    val baseTypeMap: Map[String, String] = Vector(
+      ("void" -> "CVoidPtr"),
+      ("int8_t" -> "CSignedChar"),
+      ("uint8_t" -> "UByte"),
+      ("int16_t" -> "Short"),
+      ("uint16_t" -> "UShort"),
+      ("int32_t" -> "CInt"),
+      ("uint32_t" -> "CUnsignedInt"),
+      ("int64_t" -> "CLongLong"),
+      ("uint64_t" -> "CUnsignedLongLong"),
+      ("size_t" -> "CSize"),
+      ("char" -> "CChar"),
+      ("char16_t" -> "CChar16"),
+      ("char32_t" -> "CChar32"),
+      ("wchar_t" -> "CWideChar"),
+      ("float" -> "CFloat"),
+      ("double" -> "CDouble")
+    ).toMap
+    def ptrOrRaw: String = {
+      if (toParseType.endsWith("*")) {
+        val isConst = toParseType.startsWith("const ")
+        val rawType =
+          toParseType.stripPrefix("const ").stripSuffix("*")
+        val ptrType = if (isConst) "ConstPtr" else "Ptr"
+        s"$ptrType[${baseTypeMap.get(rawType).getOrElse(rawType)}]"
+      } else {
+        toParseType
+      }
+    }
+    baseTypeMap.get(toParseType).getOrElse(ptrOrRaw)
+  }
+
+  def processTypes(
     types: Vector[Type]
   ): Vector[ScalaFile] = {
-    def formatComment(type_ : Type): String = {
-      if (type_.description.isEmpty && type_.deprecated.isEmpty) ""
-      else
-        Vector(
-          Vector("/**"),
-          type_.description.toVector.flatMap { desc =>
-            desc.split("\n").map { line =>
-              s" * $line"
-            }
-          },
-          type_.deprecated.toVector.flatMap { dep =>
-            Vector(
-              " *",
-              s" * @deprecated Since ${dep.since}. Use ${dep.replaceWith} instead."
-            )
-          },
-          Vector(" */")
-        ).flatten.mkString("\n")
-    }
-
-    def produceTypes: Vector[ScalaFile] = {
-      types
-        .groupBy(_.kind.name)
-        .map { case (name, types) =>
-          ScalaFile(
-            path = "types",
-            name = name,
-            content = {
-              val contents = types.map { type_ =>
-                def parseTypeName(toParseType: String): String = {
-                  val baseTypeMap: Map[String, String] = Vector(
-                    ("void" -> "CVoidPtr"),
-                    ("int8_t" -> "CSignedChar"),
-                    ("uint8_t" -> "UByte"),
-                    ("int16_t" -> "Short"),
-                    ("uint16_t" -> "UShort"),
-                    ("int32_t" -> "CInt"),
-                    ("uint32_t" -> "CUnsignedInt"),
-                    ("int64_t" -> "CLongLong"),
-                    ("uint64_t" -> "CUnsignedLongLong"),
-                    ("size_t" -> "CSize"),
-                    ("char" -> "CChar"),
-                    ("char16_t" -> "CChar16"),
-                    ("char32_t" -> "CChar32"),
-                    ("wchar_t" -> "CWideChar"),
-                    ("float" -> "CFloat"),
-                    ("double" -> "CDouble")
-                  ).toMap
-                  def ptrOrRaw: String = {
-                    if (toParseType.endsWith("*")) {
-                      val isConst = toParseType.startsWith("const ")
-                      val rawType =
-                        toParseType.stripPrefix("const ").stripSuffix("*")
-                      val ptrType = if (isConst) "ConstPtr" else "Ptr"
-                      s"$ptrType[${baseTypeMap.get(rawType).getOrElse(rawType)}]"
-                    } else {
-                      toParseType
+    types
+      .groupBy(_.kind.name)
+      .map { case (name, types) =>
+        ScalaFile(
+          path = "types",
+          name = name,
+          content = {
+            val contents = types.map { type_ =>
+              val comment = formatComment(type_)
+              type_.kind match
+                case Kind.Enum(values, isBitfield) =>
+                  val typeName = if (isBitfield) "CInt" else "CUnsignedInt"
+                  val valueSuffix = if (isBitfield) "" else ".toUInt"
+                  val valuesStr = values
+                    .sortBy(_._1)
+                    .map { case (value, valueName) =>
+                      s"  final val $valueName: ${type_.name} = $value$valueSuffix"
                     }
-                  }
-                  baseTypeMap.get(toParseType).getOrElse(ptrOrRaw)
-                }
+                    .mkString("\n")
+                  s"""
+                   |$comment
+                   |type ${type_.name} = ${typeName}
+                   |object ${type_.name} {
+                   |$valuesStr
+                   |}""".stripMargin
 
-                val comment = formatComment(type_)
-                type_.kind match
-                  case Kind.Enum(values, isBitfield) =>
-                    val typeName = if (isBitfield) "CInt" else "CUnsignedInt"
-                    val valueSuffix = if (isBitfield) "" else ".toUInt"
-                    val valuesStr = values
-                      .sortBy(_._1)
-                      .map { case (value, valueName) =>
-                        s"  final val $valueName: ${type_.name} = $value$valueSuffix"
-                      }
-                      .mkString("\n")
-                    s"""
-                     |$comment
-                     |type ${type_.name} = ${typeName}
-                     |object ${type_.name} {
-                     |$valuesStr
-                     |}""".stripMargin
-
-                  case Kind.Handle(isConst, isUninitialized, parent) =>
-                    val ptrType = if (isConst) "Ptr[Byte]" else "ConstPtr[Byte]"
-                    s"""
-                     |$comment
-                     |type ${type_.name} = $ptrType
-                     |""".stripMargin
-                  case Kind.Alias(aliasTypeName) =>
-                    s"""
-                     |$comment
-                     |type ${type_.name} = ${parseTypeName(aliasTypeName)}
-                     |""".stripMargin
-                  case Kind.Struct(members) =>
-                    val memberTypes = members
-                      .map(m => parseTypeName(m._2._1))
-                    val memberMethods = members.zipWithIndex
-                      .map { case (m, idx) =>
-                        val varName = if (m._1 == "type") "_type" else m._1
-                        val i = idx + 1
-                        val tName = parseTypeName(m._2._1)
-                        s"""
-                         |    inline def ${varName}: $tName = struct._$i
-                         |    inline def ${varName}_=(v: $tName) = struct._${i}_=(v)
-                         |    inline def at_${varName}: Ptr[$tName] = struct.at$i
-                         |""".stripMargin
-                      }
-                    val tagImport =
-                      if (memberTypes.length >= 23)
-                        "import godot.types.Tags.*"
-                      else
-                        s"import Tag.materializeCStruct${memberTypes.length}Tag"
-                    s"""
-                     |$comment
-                     |opaque type ${type_.name} = CStruct${members.length}[
-                     |  ${memberTypes.mkString(",\n  ")}
-                     |]
-                     |object ${type_.name} {
-                     |  $tagImport
-                     |
-                     |  given Tag[${type_.name}] = 
-                     |    materializeCStruct${memberTypes.length}Tag[${memberTypes
-                        .mkString(
-                          ", "
-                        )}].asInstanceOf[Tag[${type_.name}]]
-                     |
-                     |  extension (struct: ${type_.name}) {
-                     |    ${memberMethods.mkString("")}
-                     |  }
-                     |}""".stripMargin
-                  case Kind.Function(arguments, returnValue) =>
-                    val argumentTypes = arguments
-                      .map(a => parseTypeName(a._2._1))
-                      .mkString(",\n  ")
-                    val returnType = returnValue
-                      .map(r => parseTypeName(r._1))
-                      .getOrElse("Unit")
-                    val funcParams = arguments.zipWithIndex
-                      .map { case (a, idx) =>
-                        val paramName = a._1
-                          .filter(_.nonEmpty)
-                          .getOrElse(s"_$idx")
-                        val paramType = parseTypeName(a._2._1)
-                        (paramName, paramType)
-                      }
-                    val callParams = funcParams.map(_._1).mkString(", ")
-                    val funcParamsStr = funcParams
-                      .map { case (pName, pType) => s"$pName: $pType" }
-                      .mkString(",\n      ")
-                    s"""
-                     |$comment
-                     |opaque type ${type_.name} = CFuncPtr${arguments.length}[
-                     |  $argumentTypes${
-                        if (arguments.isEmpty) "" else ","
-                      }
-                     |  $returnType
-                     |]
-                     |object ${type_.name} {
-                     |  given Tag[${type_.name}] = Tag.Ptr.asInstanceOf[Tag[${type_.name}]]
-                     |  
-                     |  extension (func: ${type_.name}) {
-                     |    inline def apply(
-                     |      $funcParamsStr
-                     |    ): $returnType = func($callParams)
-                     |  } 
-                     |}
-                     |""".stripMargin
-              }
-              s"""
-               |package godot.gdextensioninterface.codegen.types
-               |
-               |import scala.scalanative.unsafe.*
-               |import scala.scalanative.unsigned.*
-               |import scala.scalanative.unsigned.UInt.*
-               |import godot.types.*
-               |
-               |${contents.mkString}
-               |""".stripMargin
+                case Kind.Handle(isConst, isUninitialized, parent) =>
+                  val ptrType = if (isConst) "Ptr[Byte]" else "ConstPtr[Byte]"
+                  s"""
+                   |$comment
+                   |type ${type_.name} = $ptrType
+                   |""".stripMargin
+                case Kind.Alias(aliasTypeName) =>
+                  s"""
+                   |$comment
+                   |type ${type_.name} = ${parseTypeName(aliasTypeName)}
+                   |""".stripMargin
+                case Kind.Struct(members) =>
+                  val memberTypes = members
+                    .map(m => parseTypeName(m._2._1))
+                  val memberMethods = members.zipWithIndex
+                    .map { case (m, idx) =>
+                      val varName = if (m._1 == "type") "_type" else m._1
+                      val i = idx + 1
+                      val tName = parseTypeName(m._2._1)
+                      s"""
+                       |    inline def ${varName}: $tName = struct._$i
+                       |    inline def ${varName}_=(v: $tName) = struct._${i}_=(v)
+                       |    inline def at_${varName}: Ptr[$tName] = struct.at$i
+                       |""".stripMargin
+                    }
+                  val tagImport =
+                    if (memberTypes.length >= 23)
+                      "import godot.types.Tags.*"
+                    else
+                      s"import Tag.materializeCStruct${memberTypes.length}Tag"
+                  s"""
+                   |$comment
+                   |opaque type ${type_.name} = CStruct${members.length}[
+                   |  ${memberTypes.mkString(",\n  ")}
+                   |]
+                   |object ${type_.name} {
+                   |  $tagImport
+                   |
+                   |  given Tag[${type_.name}] = 
+                   |    materializeCStruct${memberTypes.length}Tag[${memberTypes
+                      .mkString(
+                        ", "
+                      )}].asInstanceOf[Tag[${type_.name}]]
+                   |
+                   |  extension (struct: ${type_.name}) {
+                   |    ${memberMethods.mkString("")}
+                   |  }
+                   |}""".stripMargin
+                case Kind.Function(arguments, returnValue) =>
+                  val argumentTypes = arguments
+                    .map(a => parseTypeName(a._2._1))
+                    .mkString(",\n  ")
+                  val returnType = returnValue
+                    .map(r => parseTypeName(r._1))
+                    .getOrElse("Unit")
+                  val funcParams = arguments.zipWithIndex
+                    .map { case (a, idx) =>
+                      val paramName = a._1
+                        .filter(_.nonEmpty)
+                        .getOrElse(s"_$idx")
+                      val paramType = parseTypeName(a._2._1)
+                      (paramName, paramType)
+                    }
+                  val callParams = funcParams.map(_._1).mkString(", ")
+                  val funcParamsStr = funcParams
+                    .map { case (pName, pType) => s"$pName: $pType" }
+                    .mkString(",\n      ")
+                  s"""
+                   |$comment
+                   |opaque type ${type_.name} = CFuncPtr${arguments.length}[
+                   |  $argumentTypes${
+                      if (arguments.isEmpty) "" else ","
+                    }
+                   |  $returnType
+                   |]
+                   |object ${type_.name} {
+                   |  given Tag[${type_.name}] = Tag.Ptr.asInstanceOf[Tag[${type_.name}]]
+                   |  
+                   |  extension (func: ${type_.name}) {
+                   |    inline def apply(
+                   |      $funcParamsStr
+                   |    ): $returnType = func($callParams)
+                   |  } 
+                   |}
+                   |""".stripMargin
             }
-          )
-        }
-        .toVector
-    }
+            s"""
+             |package godot.gdextensioninterface.codegen.types
+             |
+             |import scala.scalanative.unsafe.*
+             |import scala.scalanative.unsigned.*
+             |import scala.scalanative.unsigned.UInt.*
+             |import godot.types.*
+             |
+             |${contents.mkString}
+             |""".stripMargin
+          }
+        )
+      }
+      .toVector
+  }
 
-    produceTypes
+  def processInterface(
+    interfaces: Vector[Interface]
+  ): Vector[ScalaFile] = {
+    pprint.pprintln(interfaces)
+    Vector.empty
   }
 
   case class ScalaFile(
@@ -310,6 +347,13 @@ object InterfaceGenerator {
 
   case class Deprecated(since: String, replaceWith: String)
 
+  type VarName = String
+  type TypeName = String
+  type TypeDescription =
+    (TypeName, Option[String]) // (type, maybe-description)
+
+  type Arguments = Vector[(Option[VarName], TypeDescription)]
+
   case class Type(
     name: String,
     kind: Type.Kind,
@@ -317,11 +361,6 @@ object InterfaceGenerator {
     deprecated: Option[Deprecated]
   )
   object Type {
-    type VarName = String
-    type TypeName = String
-    type TypeDescription =
-      (TypeName, Option[String]) // (type, maybe-description)
-
     enum Kind(val name: String) {
       // NOTE from godot docs:
       // An enum should be represented as an int32_t, unless is_bitfield is true,
@@ -346,9 +385,20 @@ object InterfaceGenerator {
       ) extends Kind("Struct")
 
       case Function(
-        arguments: Vector[(Option[VarName], TypeDescription)],
+        arguments: Arguments,
         returnValue: Option[TypeDescription]
       ) extends Kind("Function")
     }
   }
+
+  case class Interface(
+    name: String,
+    description: Option[String],
+    deprecated: Option[Deprecated],
+    arguments: Arguments,
+    returnValue: Option[TypeDescription],
+    since: String,
+    see: Vector[String],
+    legacyTypeName: Option[String]
+  )
 }
