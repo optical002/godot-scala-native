@@ -1,5 +1,5 @@
 
-package godot.gdextensioninterface.codegen.types
+package godot.codegen.gdextensioninterface.types
 
 import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
@@ -14,8 +14,8 @@ opaque type GDExtensionVariantFromTypeConstructorFunc = CFuncPtr2[
   Unit
 ]
 object GDExtensionVariantFromTypeConstructorFunc {
-  given Tag[GDExtensionVariantFromTypeConstructorFunc] = Tag.Ptr.asInstanceOf[Tag[GDExtensionVariantFromTypeConstructorFunc]]
-  
+  given Tag[GDExtensionVariantFromTypeConstructorFunc] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionVariantFromTypeConstructorFunc]]
+
   extension (func: GDExtensionVariantFromTypeConstructorFunc) {
     inline def apply(
       _0: GDExtensionUninitializedVariantPtr,
@@ -31,8 +31,8 @@ opaque type GDExtensionTypeFromVariantConstructorFunc = CFuncPtr2[
   Unit
 ]
 object GDExtensionTypeFromVariantConstructorFunc {
-  given Tag[GDExtensionTypeFromVariantConstructorFunc] = Tag.Ptr.asInstanceOf[Tag[GDExtensionTypeFromVariantConstructorFunc]]
-  
+  given Tag[GDExtensionTypeFromVariantConstructorFunc] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionTypeFromVariantConstructorFunc]]
+
   extension (func: GDExtensionTypeFromVariantConstructorFunc) {
     inline def apply(
       _0: GDExtensionUninitializedTypePtr,
@@ -44,15 +44,15 @@ object GDExtensionTypeFromVariantConstructorFunc {
 
 opaque type GDExtensionVariantGetInternalPtrFunc = CFuncPtr1[
   GDExtensionVariantPtr,
-  Ptr[CVoidPtr]
+  CVoidPtr
 ]
 object GDExtensionVariantGetInternalPtrFunc {
-  given Tag[GDExtensionVariantGetInternalPtrFunc] = Tag.Ptr.asInstanceOf[Tag[GDExtensionVariantGetInternalPtrFunc]]
-  
+  given Tag[GDExtensionVariantGetInternalPtrFunc] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionVariantGetInternalPtrFunc]]
+
   extension (func: GDExtensionVariantGetInternalPtrFunc) {
     inline def apply(
       _0: GDExtensionVariantPtr
-    ): Ptr[CVoidPtr] = func(_0)
+    ): CVoidPtr = func(_0)
   } 
 }
 
@@ -64,8 +64,8 @@ opaque type GDExtensionPtrOperatorEvaluator = CFuncPtr3[
   Unit
 ]
 object GDExtensionPtrOperatorEvaluator {
-  given Tag[GDExtensionPtrOperatorEvaluator] = Tag.Ptr.asInstanceOf[Tag[GDExtensionPtrOperatorEvaluator]]
-  
+  given Tag[GDExtensionPtrOperatorEvaluator] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionPtrOperatorEvaluator]]
+
   extension (func: GDExtensionPtrOperatorEvaluator) {
     inline def apply(
       p_left: GDExtensionConstTypePtr,
@@ -84,8 +84,8 @@ opaque type GDExtensionPtrBuiltInMethod = CFuncPtr4[
   Unit
 ]
 object GDExtensionPtrBuiltInMethod {
-  given Tag[GDExtensionPtrBuiltInMethod] = Tag.Ptr.asInstanceOf[Tag[GDExtensionPtrBuiltInMethod]]
-  
+  given Tag[GDExtensionPtrBuiltInMethod] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionPtrBuiltInMethod]]
+
   extension (func: GDExtensionPtrBuiltInMethod) {
     inline def apply(
       p_base: GDExtensionTypePtr,
@@ -103,8 +103,8 @@ opaque type GDExtensionPtrConstructor = CFuncPtr2[
   Unit
 ]
 object GDExtensionPtrConstructor {
-  given Tag[GDExtensionPtrConstructor] = Tag.Ptr.asInstanceOf[Tag[GDExtensionPtrConstructor]]
-  
+  given Tag[GDExtensionPtrConstructor] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionPtrConstructor]]
+
   extension (func: GDExtensionPtrConstructor) {
     inline def apply(
       p_base: GDExtensionUninitializedTypePtr,
@@ -119,8 +119,8 @@ opaque type GDExtensionPtrDestructor = CFuncPtr1[
   Unit
 ]
 object GDExtensionPtrDestructor {
-  given Tag[GDExtensionPtrDestructor] = Tag.Ptr.asInstanceOf[Tag[GDExtensionPtrDestructor]]
-  
+  given Tag[GDExtensionPtrDestructor] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionPtrDestructor]]
+
   extension (func: GDExtensionPtrDestructor) {
     inline def apply(
       p_base: GDExtensionTypePtr
@@ -135,8 +135,8 @@ opaque type GDExtensionPtrSetter = CFuncPtr2[
   Unit
 ]
 object GDExtensionPtrSetter {
-  given Tag[GDExtensionPtrSetter] = Tag.Ptr.asInstanceOf[Tag[GDExtensionPtrSetter]]
-  
+  given Tag[GDExtensionPtrSetter] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionPtrSetter]]
+
   extension (func: GDExtensionPtrSetter) {
     inline def apply(
       p_base: GDExtensionTypePtr,
@@ -152,8 +152,8 @@ opaque type GDExtensionPtrGetter = CFuncPtr2[
   Unit
 ]
 object GDExtensionPtrGetter {
-  given Tag[GDExtensionPtrGetter] = Tag.Ptr.asInstanceOf[Tag[GDExtensionPtrGetter]]
-  
+  given Tag[GDExtensionPtrGetter] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionPtrGetter]]
+
   extension (func: GDExtensionPtrGetter) {
     inline def apply(
       p_base: GDExtensionConstTypePtr,
@@ -170,8 +170,8 @@ opaque type GDExtensionPtrIndexedSetter = CFuncPtr3[
   Unit
 ]
 object GDExtensionPtrIndexedSetter {
-  given Tag[GDExtensionPtrIndexedSetter] = Tag.Ptr.asInstanceOf[Tag[GDExtensionPtrIndexedSetter]]
-  
+  given Tag[GDExtensionPtrIndexedSetter] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionPtrIndexedSetter]]
+
   extension (func: GDExtensionPtrIndexedSetter) {
     inline def apply(
       p_base: GDExtensionTypePtr,
@@ -189,8 +189,8 @@ opaque type GDExtensionPtrIndexedGetter = CFuncPtr3[
   Unit
 ]
 object GDExtensionPtrIndexedGetter {
-  given Tag[GDExtensionPtrIndexedGetter] = Tag.Ptr.asInstanceOf[Tag[GDExtensionPtrIndexedGetter]]
-  
+  given Tag[GDExtensionPtrIndexedGetter] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionPtrIndexedGetter]]
+
   extension (func: GDExtensionPtrIndexedGetter) {
     inline def apply(
       p_base: GDExtensionConstTypePtr,
@@ -208,8 +208,8 @@ opaque type GDExtensionPtrKeyedSetter = CFuncPtr3[
   Unit
 ]
 object GDExtensionPtrKeyedSetter {
-  given Tag[GDExtensionPtrKeyedSetter] = Tag.Ptr.asInstanceOf[Tag[GDExtensionPtrKeyedSetter]]
-  
+  given Tag[GDExtensionPtrKeyedSetter] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionPtrKeyedSetter]]
+
   extension (func: GDExtensionPtrKeyedSetter) {
     inline def apply(
       p_base: GDExtensionTypePtr,
@@ -227,8 +227,8 @@ opaque type GDExtensionPtrKeyedGetter = CFuncPtr3[
   Unit
 ]
 object GDExtensionPtrKeyedGetter {
-  given Tag[GDExtensionPtrKeyedGetter] = Tag.Ptr.asInstanceOf[Tag[GDExtensionPtrKeyedGetter]]
-  
+  given Tag[GDExtensionPtrKeyedGetter] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionPtrKeyedGetter]]
+
   extension (func: GDExtensionPtrKeyedGetter) {
     inline def apply(
       p_base: GDExtensionConstTypePtr,
@@ -245,8 +245,8 @@ opaque type GDExtensionPtrKeyedChecker = CFuncPtr2[
   CUnsignedInt
 ]
 object GDExtensionPtrKeyedChecker {
-  given Tag[GDExtensionPtrKeyedChecker] = Tag.Ptr.asInstanceOf[Tag[GDExtensionPtrKeyedChecker]]
-  
+  given Tag[GDExtensionPtrKeyedChecker] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionPtrKeyedChecker]]
+
   extension (func: GDExtensionPtrKeyedChecker) {
     inline def apply(
       p_base: GDExtensionConstVariantPtr,
@@ -263,8 +263,8 @@ opaque type GDExtensionPtrUtilityFunction = CFuncPtr3[
   Unit
 ]
 object GDExtensionPtrUtilityFunction {
-  given Tag[GDExtensionPtrUtilityFunction] = Tag.Ptr.asInstanceOf[Tag[GDExtensionPtrUtilityFunction]]
-  
+  given Tag[GDExtensionPtrUtilityFunction] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionPtrUtilityFunction]]
+
   extension (func: GDExtensionPtrUtilityFunction) {
     inline def apply(
       r_return: GDExtensionTypePtr,
@@ -280,8 +280,8 @@ opaque type GDExtensionClassConstructor = CFuncPtr0[
   GDExtensionObjectPtr
 ]
 object GDExtensionClassConstructor {
-  given Tag[GDExtensionClassConstructor] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassConstructor]]
-  
+  given Tag[GDExtensionClassConstructor] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassConstructor]]
+
   extension (func: GDExtensionClassConstructor) {
     inline def apply(
       
@@ -291,54 +291,54 @@ object GDExtensionClassConstructor {
 
 
 opaque type GDExtensionInstanceBindingCreateCallback = CFuncPtr2[
-  Ptr[CVoidPtr],
-  Ptr[CVoidPtr],
-  Ptr[CVoidPtr]
+  CVoidPtr,
+  CVoidPtr,
+  CVoidPtr
 ]
 object GDExtensionInstanceBindingCreateCallback {
-  given Tag[GDExtensionInstanceBindingCreateCallback] = Tag.Ptr.asInstanceOf[Tag[GDExtensionInstanceBindingCreateCallback]]
-  
+  given Tag[GDExtensionInstanceBindingCreateCallback] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInstanceBindingCreateCallback]]
+
   extension (func: GDExtensionInstanceBindingCreateCallback) {
     inline def apply(
-      p_token: Ptr[CVoidPtr],
-      p_instance: Ptr[CVoidPtr]
-    ): Ptr[CVoidPtr] = func(p_token, p_instance)
+      p_token: CVoidPtr,
+      p_instance: CVoidPtr
+    ): CVoidPtr = func(p_token, p_instance)
   } 
 }
 
 
 opaque type GDExtensionInstanceBindingFreeCallback = CFuncPtr3[
-  Ptr[CVoidPtr],
-  Ptr[CVoidPtr],
-  Ptr[CVoidPtr],
+  CVoidPtr,
+  CVoidPtr,
+  CVoidPtr,
   Unit
 ]
 object GDExtensionInstanceBindingFreeCallback {
-  given Tag[GDExtensionInstanceBindingFreeCallback] = Tag.Ptr.asInstanceOf[Tag[GDExtensionInstanceBindingFreeCallback]]
-  
+  given Tag[GDExtensionInstanceBindingFreeCallback] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInstanceBindingFreeCallback]]
+
   extension (func: GDExtensionInstanceBindingFreeCallback) {
     inline def apply(
-      p_token: Ptr[CVoidPtr],
-      p_instance: Ptr[CVoidPtr],
-      p_binding: Ptr[CVoidPtr]
+      p_token: CVoidPtr,
+      p_instance: CVoidPtr,
+      p_binding: CVoidPtr
     ): Unit = func(p_token, p_instance, p_binding)
   } 
 }
 
 
 opaque type GDExtensionInstanceBindingReferenceCallback = CFuncPtr3[
-  Ptr[CVoidPtr],
-  Ptr[CVoidPtr],
+  CVoidPtr,
+  CVoidPtr,
   GDExtensionBool,
   GDExtensionBool
 ]
 object GDExtensionInstanceBindingReferenceCallback {
-  given Tag[GDExtensionInstanceBindingReferenceCallback] = Tag.Ptr.asInstanceOf[Tag[GDExtensionInstanceBindingReferenceCallback]]
-  
+  given Tag[GDExtensionInstanceBindingReferenceCallback] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInstanceBindingReferenceCallback]]
+
   extension (func: GDExtensionInstanceBindingReferenceCallback) {
     inline def apply(
-      p_token: Ptr[CVoidPtr],
-      p_binding: Ptr[CVoidPtr],
+      p_token: CVoidPtr,
+      p_binding: CVoidPtr,
       p_reference: GDExtensionBool
     ): GDExtensionBool = func(p_token, p_binding, p_reference)
   } 
@@ -352,8 +352,8 @@ opaque type GDExtensionClassSet = CFuncPtr3[
   GDExtensionBool
 ]
 object GDExtensionClassSet {
-  given Tag[GDExtensionClassSet] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassSet]]
-  
+  given Tag[GDExtensionClassSet] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassSet]]
+
   extension (func: GDExtensionClassSet) {
     inline def apply(
       p_instance: GDExtensionClassInstancePtr,
@@ -371,8 +371,8 @@ opaque type GDExtensionClassGet = CFuncPtr3[
   GDExtensionBool
 ]
 object GDExtensionClassGet {
-  given Tag[GDExtensionClassGet] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassGet]]
-  
+  given Tag[GDExtensionClassGet] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassGet]]
+
   extension (func: GDExtensionClassGet) {
     inline def apply(
       p_instance: GDExtensionClassInstancePtr,
@@ -388,8 +388,8 @@ opaque type GDExtensionClassGetRID = CFuncPtr1[
   CUnsignedLongLong
 ]
 object GDExtensionClassGetRID {
-  given Tag[GDExtensionClassGetRID] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassGetRID]]
-  
+  given Tag[GDExtensionClassGetRID] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassGetRID]]
+
   extension (func: GDExtensionClassGetRID) {
     inline def apply(
       p_instance: GDExtensionClassInstancePtr
@@ -404,8 +404,8 @@ opaque type GDExtensionClassGetPropertyList = CFuncPtr2[
   ConstPtr[GDExtensionPropertyInfo]
 ]
 object GDExtensionClassGetPropertyList {
-  given Tag[GDExtensionClassGetPropertyList] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassGetPropertyList]]
-  
+  given Tag[GDExtensionClassGetPropertyList] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassGetPropertyList]]
+
   extension (func: GDExtensionClassGetPropertyList) {
     inline def apply(
       p_instance: GDExtensionClassInstancePtr,
@@ -421,8 +421,8 @@ opaque type GDExtensionClassFreePropertyList = CFuncPtr2[
   Unit
 ]
 object GDExtensionClassFreePropertyList {
-  given Tag[GDExtensionClassFreePropertyList] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassFreePropertyList]]
-  
+  given Tag[GDExtensionClassFreePropertyList] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassFreePropertyList]]
+
   extension (func: GDExtensionClassFreePropertyList) {
     inline def apply(
       p_instance: GDExtensionClassInstancePtr,
@@ -439,8 +439,8 @@ opaque type GDExtensionClassFreePropertyList2 = CFuncPtr3[
   Unit
 ]
 object GDExtensionClassFreePropertyList2 {
-  given Tag[GDExtensionClassFreePropertyList2] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassFreePropertyList2]]
-  
+  given Tag[GDExtensionClassFreePropertyList2] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassFreePropertyList2]]
+
   extension (func: GDExtensionClassFreePropertyList2) {
     inline def apply(
       p_instance: GDExtensionClassInstancePtr,
@@ -457,8 +457,8 @@ opaque type GDExtensionClassPropertyCanRevert = CFuncPtr2[
   GDExtensionBool
 ]
 object GDExtensionClassPropertyCanRevert {
-  given Tag[GDExtensionClassPropertyCanRevert] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassPropertyCanRevert]]
-  
+  given Tag[GDExtensionClassPropertyCanRevert] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassPropertyCanRevert]]
+
   extension (func: GDExtensionClassPropertyCanRevert) {
     inline def apply(
       p_instance: GDExtensionClassInstancePtr,
@@ -475,8 +475,8 @@ opaque type GDExtensionClassPropertyGetRevert = CFuncPtr3[
   GDExtensionBool
 ]
 object GDExtensionClassPropertyGetRevert {
-  given Tag[GDExtensionClassPropertyGetRevert] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassPropertyGetRevert]]
-  
+  given Tag[GDExtensionClassPropertyGetRevert] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassPropertyGetRevert]]
+
   extension (func: GDExtensionClassPropertyGetRevert) {
     inline def apply(
       p_instance: GDExtensionClassInstancePtr,
@@ -493,8 +493,8 @@ opaque type GDExtensionClassValidateProperty = CFuncPtr2[
   GDExtensionBool
 ]
 object GDExtensionClassValidateProperty {
-  given Tag[GDExtensionClassValidateProperty] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassValidateProperty]]
-  
+  given Tag[GDExtensionClassValidateProperty] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassValidateProperty]]
+
   extension (func: GDExtensionClassValidateProperty) {
     inline def apply(
       p_instance: GDExtensionClassInstancePtr,
@@ -513,8 +513,8 @@ opaque type GDExtensionClassNotification = CFuncPtr2[
   Unit
 ]
 object GDExtensionClassNotification {
-  given Tag[GDExtensionClassNotification] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassNotification]]
-  
+  given Tag[GDExtensionClassNotification] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassNotification]]
+
   extension (func: GDExtensionClassNotification) {
     inline def apply(
       p_instance: GDExtensionClassInstancePtr,
@@ -531,8 +531,8 @@ opaque type GDExtensionClassNotification2 = CFuncPtr3[
   Unit
 ]
 object GDExtensionClassNotification2 {
-  given Tag[GDExtensionClassNotification2] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassNotification2]]
-  
+  given Tag[GDExtensionClassNotification2] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassNotification2]]
+
   extension (func: GDExtensionClassNotification2) {
     inline def apply(
       p_instance: GDExtensionClassInstancePtr,
@@ -550,8 +550,8 @@ opaque type GDExtensionClassToString = CFuncPtr3[
   Unit
 ]
 object GDExtensionClassToString {
-  given Tag[GDExtensionClassToString] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassToString]]
-  
+  given Tag[GDExtensionClassToString] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassToString]]
+
   extension (func: GDExtensionClassToString) {
     inline def apply(
       p_instance: GDExtensionClassInstancePtr,
@@ -567,8 +567,8 @@ opaque type GDExtensionClassReference = CFuncPtr1[
   Unit
 ]
 object GDExtensionClassReference {
-  given Tag[GDExtensionClassReference] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassReference]]
-  
+  given Tag[GDExtensionClassReference] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassReference]]
+
   extension (func: GDExtensionClassReference) {
     inline def apply(
       p_instance: GDExtensionClassInstancePtr
@@ -582,8 +582,8 @@ opaque type GDExtensionClassUnreference = CFuncPtr1[
   Unit
 ]
 object GDExtensionClassUnreference {
-  given Tag[GDExtensionClassUnreference] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassUnreference]]
-  
+  given Tag[GDExtensionClassUnreference] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassUnreference]]
+
   extension (func: GDExtensionClassUnreference) {
     inline def apply(
       p_instance: GDExtensionClassInstancePtr
@@ -599,8 +599,8 @@ opaque type GDExtensionClassCallVirtual = CFuncPtr3[
   Unit
 ]
 object GDExtensionClassCallVirtual {
-  given Tag[GDExtensionClassCallVirtual] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassCallVirtual]]
-  
+  given Tag[GDExtensionClassCallVirtual] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassCallVirtual]]
+
   extension (func: GDExtensionClassCallVirtual) {
     inline def apply(
       p_instance: GDExtensionClassInstancePtr,
@@ -612,31 +612,31 @@ object GDExtensionClassCallVirtual {
 
 
 opaque type GDExtensionClassCreateInstance = CFuncPtr1[
-  Ptr[CVoidPtr],
+  CVoidPtr,
   GDExtensionObjectPtr
 ]
 object GDExtensionClassCreateInstance {
-  given Tag[GDExtensionClassCreateInstance] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassCreateInstance]]
-  
+  given Tag[GDExtensionClassCreateInstance] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassCreateInstance]]
+
   extension (func: GDExtensionClassCreateInstance) {
     inline def apply(
-      p_class_userdata: Ptr[CVoidPtr]
+      p_class_userdata: CVoidPtr
     ): GDExtensionObjectPtr = func(p_class_userdata)
   } 
 }
 
 
 opaque type GDExtensionClassCreateInstance2 = CFuncPtr2[
-  Ptr[CVoidPtr],
+  CVoidPtr,
   GDExtensionBool,
   GDExtensionObjectPtr
 ]
 object GDExtensionClassCreateInstance2 {
-  given Tag[GDExtensionClassCreateInstance2] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassCreateInstance2]]
-  
+  given Tag[GDExtensionClassCreateInstance2] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassCreateInstance2]]
+
   extension (func: GDExtensionClassCreateInstance2) {
     inline def apply(
-      p_class_userdata: Ptr[CVoidPtr],
+      p_class_userdata: CVoidPtr,
       p_notify_postinitialize: GDExtensionBool
     ): GDExtensionObjectPtr = func(p_class_userdata, p_notify_postinitialize)
   } 
@@ -644,16 +644,16 @@ object GDExtensionClassCreateInstance2 {
 
 
 opaque type GDExtensionClassFreeInstance = CFuncPtr2[
-  Ptr[CVoidPtr],
+  CVoidPtr,
   GDExtensionClassInstancePtr,
   Unit
 ]
 object GDExtensionClassFreeInstance {
-  given Tag[GDExtensionClassFreeInstance] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassFreeInstance]]
-  
+  given Tag[GDExtensionClassFreeInstance] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassFreeInstance]]
+
   extension (func: GDExtensionClassFreeInstance) {
     inline def apply(
-      p_class_userdata: Ptr[CVoidPtr],
+      p_class_userdata: CVoidPtr,
       p_instance: GDExtensionClassInstancePtr
     ): Unit = func(p_class_userdata, p_instance)
   } 
@@ -661,16 +661,16 @@ object GDExtensionClassFreeInstance {
 
 
 opaque type GDExtensionClassRecreateInstance = CFuncPtr2[
-  Ptr[CVoidPtr],
+  CVoidPtr,
   GDExtensionObjectPtr,
   GDExtensionClassInstancePtr
 ]
 object GDExtensionClassRecreateInstance {
-  given Tag[GDExtensionClassRecreateInstance] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassRecreateInstance]]
-  
+  given Tag[GDExtensionClassRecreateInstance] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassRecreateInstance]]
+
   extension (func: GDExtensionClassRecreateInstance) {
     inline def apply(
-      p_class_userdata: Ptr[CVoidPtr],
+      p_class_userdata: CVoidPtr,
       p_object: GDExtensionObjectPtr
     ): GDExtensionClassInstancePtr = func(p_class_userdata, p_object)
   } 
@@ -678,16 +678,16 @@ object GDExtensionClassRecreateInstance {
 
 
 opaque type GDExtensionClassGetVirtual = CFuncPtr2[
-  Ptr[CVoidPtr],
+  CVoidPtr,
   GDExtensionConstStringNamePtr,
   GDExtensionClassCallVirtual
 ]
 object GDExtensionClassGetVirtual {
-  given Tag[GDExtensionClassGetVirtual] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassGetVirtual]]
-  
+  given Tag[GDExtensionClassGetVirtual] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassGetVirtual]]
+
   extension (func: GDExtensionClassGetVirtual) {
     inline def apply(
-      p_class_userdata: Ptr[CVoidPtr],
+      p_class_userdata: CVoidPtr,
       p_name: GDExtensionConstStringNamePtr
     ): GDExtensionClassCallVirtual = func(p_class_userdata, p_name)
   } 
@@ -695,17 +695,17 @@ object GDExtensionClassGetVirtual {
 
 
 opaque type GDExtensionClassGetVirtual2 = CFuncPtr3[
-  Ptr[CVoidPtr],
+  CVoidPtr,
   GDExtensionConstStringNamePtr,
   CUnsignedInt,
   GDExtensionClassCallVirtual
 ]
 object GDExtensionClassGetVirtual2 {
-  given Tag[GDExtensionClassGetVirtual2] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassGetVirtual2]]
-  
+  given Tag[GDExtensionClassGetVirtual2] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassGetVirtual2]]
+
   extension (func: GDExtensionClassGetVirtual2) {
     inline def apply(
-      p_class_userdata: Ptr[CVoidPtr],
+      p_class_userdata: CVoidPtr,
       p_name: GDExtensionConstStringNamePtr,
       p_hash: CUnsignedInt
     ): GDExtensionClassCallVirtual = func(p_class_userdata, p_name, p_hash)
@@ -714,37 +714,37 @@ object GDExtensionClassGetVirtual2 {
 
 
 opaque type GDExtensionClassGetVirtualCallData = CFuncPtr2[
-  Ptr[CVoidPtr],
+  CVoidPtr,
   GDExtensionConstStringNamePtr,
-  Ptr[CVoidPtr]
+  CVoidPtr
 ]
 object GDExtensionClassGetVirtualCallData {
-  given Tag[GDExtensionClassGetVirtualCallData] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassGetVirtualCallData]]
-  
+  given Tag[GDExtensionClassGetVirtualCallData] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassGetVirtualCallData]]
+
   extension (func: GDExtensionClassGetVirtualCallData) {
     inline def apply(
-      p_class_userdata: Ptr[CVoidPtr],
+      p_class_userdata: CVoidPtr,
       p_name: GDExtensionConstStringNamePtr
-    ): Ptr[CVoidPtr] = func(p_class_userdata, p_name)
+    ): CVoidPtr = func(p_class_userdata, p_name)
   } 
 }
 
 
 opaque type GDExtensionClassGetVirtualCallData2 = CFuncPtr3[
-  Ptr[CVoidPtr],
+  CVoidPtr,
   GDExtensionConstStringNamePtr,
   CUnsignedInt,
-  Ptr[CVoidPtr]
+  CVoidPtr
 ]
 object GDExtensionClassGetVirtualCallData2 {
-  given Tag[GDExtensionClassGetVirtualCallData2] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassGetVirtualCallData2]]
-  
+  given Tag[GDExtensionClassGetVirtualCallData2] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassGetVirtualCallData2]]
+
   extension (func: GDExtensionClassGetVirtualCallData2) {
     inline def apply(
-      p_class_userdata: Ptr[CVoidPtr],
+      p_class_userdata: CVoidPtr,
       p_name: GDExtensionConstStringNamePtr,
       p_hash: CUnsignedInt
-    ): Ptr[CVoidPtr] = func(p_class_userdata, p_name, p_hash)
+    ): CVoidPtr = func(p_class_userdata, p_name, p_hash)
   } 
 }
 
@@ -752,19 +752,19 @@ object GDExtensionClassGetVirtualCallData2 {
 opaque type GDExtensionClassCallVirtualWithData = CFuncPtr5[
   GDExtensionClassInstancePtr,
   GDExtensionConstStringNamePtr,
-  Ptr[CVoidPtr],
+  CVoidPtr,
   ConstPtr[GDExtensionConstTypePtr],
   GDExtensionTypePtr,
   Unit
 ]
 object GDExtensionClassCallVirtualWithData {
-  given Tag[GDExtensionClassCallVirtualWithData] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassCallVirtualWithData]]
-  
+  given Tag[GDExtensionClassCallVirtualWithData] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassCallVirtualWithData]]
+
   extension (func: GDExtensionClassCallVirtualWithData) {
     inline def apply(
       p_instance: GDExtensionClassInstancePtr,
       p_name: GDExtensionConstStringNamePtr,
-      p_virtual_call_userdata: Ptr[CVoidPtr],
+      p_virtual_call_userdata: CVoidPtr,
       p_args: ConstPtr[GDExtensionConstTypePtr],
       r_ret: GDExtensionTypePtr
     ): Unit = func(p_instance, p_name, p_virtual_call_userdata, p_args, r_ret)
@@ -779,8 +779,8 @@ opaque type GDExtensionEditorGetClassesUsedCallback = CFuncPtr1[
   Unit
 ]
 object GDExtensionEditorGetClassesUsedCallback {
-  given Tag[GDExtensionEditorGetClassesUsedCallback] = Tag.Ptr.asInstanceOf[Tag[GDExtensionEditorGetClassesUsedCallback]]
-  
+  given Tag[GDExtensionEditorGetClassesUsedCallback] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionEditorGetClassesUsedCallback]]
+
   extension (func: GDExtensionEditorGetClassesUsedCallback) {
     inline def apply(
       p_packed_string_array: GDExtensionTypePtr
@@ -790,7 +790,7 @@ object GDExtensionEditorGetClassesUsedCallback {
 
 
 opaque type GDExtensionClassMethodCall = CFuncPtr6[
-  Ptr[CVoidPtr],
+  CVoidPtr,
   GDExtensionClassInstancePtr,
   ConstPtr[GDExtensionConstVariantPtr],
   GDExtensionInt,
@@ -799,11 +799,11 @@ opaque type GDExtensionClassMethodCall = CFuncPtr6[
   Unit
 ]
 object GDExtensionClassMethodCall {
-  given Tag[GDExtensionClassMethodCall] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassMethodCall]]
-  
+  given Tag[GDExtensionClassMethodCall] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassMethodCall]]
+
   extension (func: GDExtensionClassMethodCall) {
     inline def apply(
-      method_userdata: Ptr[CVoidPtr],
+      method_userdata: CVoidPtr,
       p_instance: GDExtensionClassInstancePtr,
       p_args: ConstPtr[GDExtensionConstVariantPtr],
       p_argument_count: GDExtensionInt,
@@ -815,18 +815,18 @@ object GDExtensionClassMethodCall {
 
 
 opaque type GDExtensionClassMethodValidatedCall = CFuncPtr4[
-  Ptr[CVoidPtr],
+  CVoidPtr,
   GDExtensionClassInstancePtr,
   ConstPtr[GDExtensionConstVariantPtr],
   GDExtensionVariantPtr,
   Unit
 ]
 object GDExtensionClassMethodValidatedCall {
-  given Tag[GDExtensionClassMethodValidatedCall] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassMethodValidatedCall]]
-  
+  given Tag[GDExtensionClassMethodValidatedCall] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassMethodValidatedCall]]
+
   extension (func: GDExtensionClassMethodValidatedCall) {
     inline def apply(
-      method_userdata: Ptr[CVoidPtr],
+      method_userdata: CVoidPtr,
       p_instance: GDExtensionClassInstancePtr,
       p_args: ConstPtr[GDExtensionConstVariantPtr],
       r_return: GDExtensionVariantPtr
@@ -836,18 +836,18 @@ object GDExtensionClassMethodValidatedCall {
 
 
 opaque type GDExtensionClassMethodPtrCall = CFuncPtr4[
-  Ptr[CVoidPtr],
+  CVoidPtr,
   GDExtensionClassInstancePtr,
   ConstPtr[GDExtensionConstTypePtr],
   GDExtensionTypePtr,
   Unit
 ]
 object GDExtensionClassMethodPtrCall {
-  given Tag[GDExtensionClassMethodPtrCall] = Tag.Ptr.asInstanceOf[Tag[GDExtensionClassMethodPtrCall]]
-  
+  given Tag[GDExtensionClassMethodPtrCall] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionClassMethodPtrCall]]
+
   extension (func: GDExtensionClassMethodPtrCall) {
     inline def apply(
-      method_userdata: Ptr[CVoidPtr],
+      method_userdata: CVoidPtr,
       p_instance: GDExtensionClassInstancePtr,
       p_args: ConstPtr[GDExtensionConstTypePtr],
       r_ret: GDExtensionTypePtr
@@ -857,7 +857,7 @@ object GDExtensionClassMethodPtrCall {
 
 
 opaque type GDExtensionCallableCustomCall = CFuncPtr5[
-  Ptr[CVoidPtr],
+  CVoidPtr,
   ConstPtr[GDExtensionConstVariantPtr],
   GDExtensionInt,
   GDExtensionVariantPtr,
@@ -865,11 +865,11 @@ opaque type GDExtensionCallableCustomCall = CFuncPtr5[
   Unit
 ]
 object GDExtensionCallableCustomCall {
-  given Tag[GDExtensionCallableCustomCall] = Tag.Ptr.asInstanceOf[Tag[GDExtensionCallableCustomCall]]
-  
+  given Tag[GDExtensionCallableCustomCall] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionCallableCustomCall]]
+
   extension (func: GDExtensionCallableCustomCall) {
     inline def apply(
-      callable_userdata: Ptr[CVoidPtr],
+      callable_userdata: CVoidPtr,
       p_args: ConstPtr[GDExtensionConstVariantPtr],
       p_argument_count: GDExtensionInt,
       r_return: GDExtensionVariantPtr,
@@ -880,96 +880,96 @@ object GDExtensionCallableCustomCall {
 
 
 opaque type GDExtensionCallableCustomIsValid = CFuncPtr1[
-  Ptr[CVoidPtr],
+  CVoidPtr,
   GDExtensionBool
 ]
 object GDExtensionCallableCustomIsValid {
-  given Tag[GDExtensionCallableCustomIsValid] = Tag.Ptr.asInstanceOf[Tag[GDExtensionCallableCustomIsValid]]
-  
+  given Tag[GDExtensionCallableCustomIsValid] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionCallableCustomIsValid]]
+
   extension (func: GDExtensionCallableCustomIsValid) {
     inline def apply(
-      callable_userdata: Ptr[CVoidPtr]
+      callable_userdata: CVoidPtr
     ): GDExtensionBool = func(callable_userdata)
   } 
 }
 
 
 opaque type GDExtensionCallableCustomFree = CFuncPtr1[
-  Ptr[CVoidPtr],
+  CVoidPtr,
   Unit
 ]
 object GDExtensionCallableCustomFree {
-  given Tag[GDExtensionCallableCustomFree] = Tag.Ptr.asInstanceOf[Tag[GDExtensionCallableCustomFree]]
-  
+  given Tag[GDExtensionCallableCustomFree] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionCallableCustomFree]]
+
   extension (func: GDExtensionCallableCustomFree) {
     inline def apply(
-      callable_userdata: Ptr[CVoidPtr]
+      callable_userdata: CVoidPtr
     ): Unit = func(callable_userdata)
   } 
 }
 
 
 opaque type GDExtensionCallableCustomHash = CFuncPtr1[
-  Ptr[CVoidPtr],
+  CVoidPtr,
   CUnsignedInt
 ]
 object GDExtensionCallableCustomHash {
-  given Tag[GDExtensionCallableCustomHash] = Tag.Ptr.asInstanceOf[Tag[GDExtensionCallableCustomHash]]
-  
+  given Tag[GDExtensionCallableCustomHash] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionCallableCustomHash]]
+
   extension (func: GDExtensionCallableCustomHash) {
     inline def apply(
-      callable_userdata: Ptr[CVoidPtr]
+      callable_userdata: CVoidPtr
     ): CUnsignedInt = func(callable_userdata)
   } 
 }
 
 
 opaque type GDExtensionCallableCustomEqual = CFuncPtr2[
-  Ptr[CVoidPtr],
-  Ptr[CVoidPtr],
+  CVoidPtr,
+  CVoidPtr,
   GDExtensionBool
 ]
 object GDExtensionCallableCustomEqual {
-  given Tag[GDExtensionCallableCustomEqual] = Tag.Ptr.asInstanceOf[Tag[GDExtensionCallableCustomEqual]]
-  
+  given Tag[GDExtensionCallableCustomEqual] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionCallableCustomEqual]]
+
   extension (func: GDExtensionCallableCustomEqual) {
     inline def apply(
-      callable_userdata_a: Ptr[CVoidPtr],
-      callable_userdata_b: Ptr[CVoidPtr]
+      callable_userdata_a: CVoidPtr,
+      callable_userdata_b: CVoidPtr
     ): GDExtensionBool = func(callable_userdata_a, callable_userdata_b)
   } 
 }
 
 
 opaque type GDExtensionCallableCustomLessThan = CFuncPtr2[
-  Ptr[CVoidPtr],
-  Ptr[CVoidPtr],
+  CVoidPtr,
+  CVoidPtr,
   GDExtensionBool
 ]
 object GDExtensionCallableCustomLessThan {
-  given Tag[GDExtensionCallableCustomLessThan] = Tag.Ptr.asInstanceOf[Tag[GDExtensionCallableCustomLessThan]]
-  
+  given Tag[GDExtensionCallableCustomLessThan] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionCallableCustomLessThan]]
+
   extension (func: GDExtensionCallableCustomLessThan) {
     inline def apply(
-      callable_userdata_a: Ptr[CVoidPtr],
-      callable_userdata_b: Ptr[CVoidPtr]
+      callable_userdata_a: CVoidPtr,
+      callable_userdata_b: CVoidPtr
     ): GDExtensionBool = func(callable_userdata_a, callable_userdata_b)
   } 
 }
 
 
 opaque type GDExtensionCallableCustomToString = CFuncPtr3[
-  Ptr[CVoidPtr],
+  CVoidPtr,
   Ptr[GDExtensionBool],
   GDExtensionStringPtr,
   Unit
 ]
 object GDExtensionCallableCustomToString {
-  given Tag[GDExtensionCallableCustomToString] = Tag.Ptr.asInstanceOf[Tag[GDExtensionCallableCustomToString]]
-  
+  given Tag[GDExtensionCallableCustomToString] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionCallableCustomToString]]
+
   extension (func: GDExtensionCallableCustomToString) {
     inline def apply(
-      callable_userdata: Ptr[CVoidPtr],
+      callable_userdata: CVoidPtr,
       r_is_valid: Ptr[GDExtensionBool],
       r_out: GDExtensionStringPtr
     ): Unit = func(callable_userdata, r_is_valid, r_out)
@@ -978,16 +978,16 @@ object GDExtensionCallableCustomToString {
 
 
 opaque type GDExtensionCallableCustomGetArgumentCount = CFuncPtr2[
-  Ptr[CVoidPtr],
+  CVoidPtr,
   Ptr[GDExtensionBool],
   GDExtensionInt
 ]
 object GDExtensionCallableCustomGetArgumentCount {
-  given Tag[GDExtensionCallableCustomGetArgumentCount] = Tag.Ptr.asInstanceOf[Tag[GDExtensionCallableCustomGetArgumentCount]]
-  
+  given Tag[GDExtensionCallableCustomGetArgumentCount] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionCallableCustomGetArgumentCount]]
+
   extension (func: GDExtensionCallableCustomGetArgumentCount) {
     inline def apply(
-      callable_userdata: Ptr[CVoidPtr],
+      callable_userdata: CVoidPtr,
       r_is_valid: Ptr[GDExtensionBool]
     ): GDExtensionInt = func(callable_userdata, r_is_valid)
   } 
@@ -1001,8 +1001,8 @@ opaque type GDExtensionScriptInstanceSet = CFuncPtr3[
   GDExtensionBool
 ]
 object GDExtensionScriptInstanceSet {
-  given Tag[GDExtensionScriptInstanceSet] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceSet]]
-  
+  given Tag[GDExtensionScriptInstanceSet] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceSet]]
+
   extension (func: GDExtensionScriptInstanceSet) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr,
@@ -1020,8 +1020,8 @@ opaque type GDExtensionScriptInstanceGet = CFuncPtr3[
   GDExtensionBool
 ]
 object GDExtensionScriptInstanceGet {
-  given Tag[GDExtensionScriptInstanceGet] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceGet]]
-  
+  given Tag[GDExtensionScriptInstanceGet] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceGet]]
+
   extension (func: GDExtensionScriptInstanceGet) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr,
@@ -1038,8 +1038,8 @@ opaque type GDExtensionScriptInstanceGetPropertyList = CFuncPtr2[
   ConstPtr[GDExtensionPropertyInfo]
 ]
 object GDExtensionScriptInstanceGetPropertyList {
-  given Tag[GDExtensionScriptInstanceGetPropertyList] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceGetPropertyList]]
-  
+  given Tag[GDExtensionScriptInstanceGetPropertyList] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceGetPropertyList]]
+
   extension (func: GDExtensionScriptInstanceGetPropertyList) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr,
@@ -1058,8 +1058,8 @@ opaque type GDExtensionScriptInstanceFreePropertyList = CFuncPtr2[
   Unit
 ]
 object GDExtensionScriptInstanceFreePropertyList {
-  given Tag[GDExtensionScriptInstanceFreePropertyList] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceFreePropertyList]]
-  
+  given Tag[GDExtensionScriptInstanceFreePropertyList] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceFreePropertyList]]
+
   extension (func: GDExtensionScriptInstanceFreePropertyList) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr,
@@ -1076,8 +1076,8 @@ opaque type GDExtensionScriptInstanceFreePropertyList2 = CFuncPtr3[
   Unit
 ]
 object GDExtensionScriptInstanceFreePropertyList2 {
-  given Tag[GDExtensionScriptInstanceFreePropertyList2] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceFreePropertyList2]]
-  
+  given Tag[GDExtensionScriptInstanceFreePropertyList2] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceFreePropertyList2]]
+
   extension (func: GDExtensionScriptInstanceFreePropertyList2) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr,
@@ -1094,8 +1094,8 @@ opaque type GDExtensionScriptInstanceGetClassCategory = CFuncPtr2[
   GDExtensionBool
 ]
 object GDExtensionScriptInstanceGetClassCategory {
-  given Tag[GDExtensionScriptInstanceGetClassCategory] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceGetClassCategory]]
-  
+  given Tag[GDExtensionScriptInstanceGetClassCategory] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceGetClassCategory]]
+
   extension (func: GDExtensionScriptInstanceGetClassCategory) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr,
@@ -1112,8 +1112,8 @@ opaque type GDExtensionScriptInstanceGetPropertyType = CFuncPtr3[
   GDExtensionVariantType
 ]
 object GDExtensionScriptInstanceGetPropertyType {
-  given Tag[GDExtensionScriptInstanceGetPropertyType] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceGetPropertyType]]
-  
+  given Tag[GDExtensionScriptInstanceGetPropertyType] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceGetPropertyType]]
+
   extension (func: GDExtensionScriptInstanceGetPropertyType) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr,
@@ -1130,8 +1130,8 @@ opaque type GDExtensionScriptInstanceValidateProperty = CFuncPtr2[
   GDExtensionBool
 ]
 object GDExtensionScriptInstanceValidateProperty {
-  given Tag[GDExtensionScriptInstanceValidateProperty] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceValidateProperty]]
-  
+  given Tag[GDExtensionScriptInstanceValidateProperty] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceValidateProperty]]
+
   extension (func: GDExtensionScriptInstanceValidateProperty) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr,
@@ -1147,8 +1147,8 @@ opaque type GDExtensionScriptInstancePropertyCanRevert = CFuncPtr2[
   GDExtensionBool
 ]
 object GDExtensionScriptInstancePropertyCanRevert {
-  given Tag[GDExtensionScriptInstancePropertyCanRevert] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstancePropertyCanRevert]]
-  
+  given Tag[GDExtensionScriptInstancePropertyCanRevert] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstancePropertyCanRevert]]
+
   extension (func: GDExtensionScriptInstancePropertyCanRevert) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr,
@@ -1165,8 +1165,8 @@ opaque type GDExtensionScriptInstancePropertyGetRevert = CFuncPtr3[
   GDExtensionBool
 ]
 object GDExtensionScriptInstancePropertyGetRevert {
-  given Tag[GDExtensionScriptInstancePropertyGetRevert] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstancePropertyGetRevert]]
-  
+  given Tag[GDExtensionScriptInstancePropertyGetRevert] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstancePropertyGetRevert]]
+
   extension (func: GDExtensionScriptInstancePropertyGetRevert) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr,
@@ -1182,8 +1182,8 @@ opaque type GDExtensionScriptInstanceGetOwner = CFuncPtr1[
   GDExtensionObjectPtr
 ]
 object GDExtensionScriptInstanceGetOwner {
-  given Tag[GDExtensionScriptInstanceGetOwner] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceGetOwner]]
-  
+  given Tag[GDExtensionScriptInstanceGetOwner] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceGetOwner]]
+
   extension (func: GDExtensionScriptInstanceGetOwner) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr
@@ -1195,17 +1195,17 @@ object GDExtensionScriptInstanceGetOwner {
 opaque type GDExtensionScriptInstancePropertyStateAdd = CFuncPtr3[
   GDExtensionConstStringNamePtr,
   GDExtensionConstVariantPtr,
-  Ptr[CVoidPtr],
+  CVoidPtr,
   Unit
 ]
 object GDExtensionScriptInstancePropertyStateAdd {
-  given Tag[GDExtensionScriptInstancePropertyStateAdd] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstancePropertyStateAdd]]
-  
+  given Tag[GDExtensionScriptInstancePropertyStateAdd] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstancePropertyStateAdd]]
+
   extension (func: GDExtensionScriptInstancePropertyStateAdd) {
     inline def apply(
       p_name: GDExtensionConstStringNamePtr,
       p_value: GDExtensionConstVariantPtr,
-      p_userdata: Ptr[CVoidPtr]
+      p_userdata: CVoidPtr
     ): Unit = func(p_name, p_value, p_userdata)
   } 
 }
@@ -1214,17 +1214,17 @@ object GDExtensionScriptInstancePropertyStateAdd {
 opaque type GDExtensionScriptInstanceGetPropertyState = CFuncPtr3[
   GDExtensionScriptInstanceDataPtr,
   GDExtensionScriptInstancePropertyStateAdd,
-  Ptr[CVoidPtr],
+  CVoidPtr,
   Unit
 ]
 object GDExtensionScriptInstanceGetPropertyState {
-  given Tag[GDExtensionScriptInstanceGetPropertyState] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceGetPropertyState]]
-  
+  given Tag[GDExtensionScriptInstanceGetPropertyState] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceGetPropertyState]]
+
   extension (func: GDExtensionScriptInstanceGetPropertyState) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr,
       p_add_func: GDExtensionScriptInstancePropertyStateAdd,
-      p_userdata: Ptr[CVoidPtr]
+      p_userdata: CVoidPtr
     ): Unit = func(p_instance, p_add_func, p_userdata)
   } 
 }
@@ -1236,8 +1236,8 @@ opaque type GDExtensionScriptInstanceGetMethodList = CFuncPtr2[
   ConstPtr[GDExtensionMethodInfo]
 ]
 object GDExtensionScriptInstanceGetMethodList {
-  given Tag[GDExtensionScriptInstanceGetMethodList] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceGetMethodList]]
-  
+  given Tag[GDExtensionScriptInstanceGetMethodList] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceGetMethodList]]
+
   extension (func: GDExtensionScriptInstanceGetMethodList) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr,
@@ -1256,8 +1256,8 @@ opaque type GDExtensionScriptInstanceFreeMethodList = CFuncPtr2[
   Unit
 ]
 object GDExtensionScriptInstanceFreeMethodList {
-  given Tag[GDExtensionScriptInstanceFreeMethodList] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceFreeMethodList]]
-  
+  given Tag[GDExtensionScriptInstanceFreeMethodList] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceFreeMethodList]]
+
   extension (func: GDExtensionScriptInstanceFreeMethodList) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr,
@@ -1274,8 +1274,8 @@ opaque type GDExtensionScriptInstanceFreeMethodList2 = CFuncPtr3[
   Unit
 ]
 object GDExtensionScriptInstanceFreeMethodList2 {
-  given Tag[GDExtensionScriptInstanceFreeMethodList2] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceFreeMethodList2]]
-  
+  given Tag[GDExtensionScriptInstanceFreeMethodList2] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceFreeMethodList2]]
+
   extension (func: GDExtensionScriptInstanceFreeMethodList2) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr,
@@ -1292,8 +1292,8 @@ opaque type GDExtensionScriptInstanceHasMethod = CFuncPtr2[
   GDExtensionBool
 ]
 object GDExtensionScriptInstanceHasMethod {
-  given Tag[GDExtensionScriptInstanceHasMethod] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceHasMethod]]
-  
+  given Tag[GDExtensionScriptInstanceHasMethod] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceHasMethod]]
+
   extension (func: GDExtensionScriptInstanceHasMethod) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr,
@@ -1310,8 +1310,8 @@ opaque type GDExtensionScriptInstanceGetMethodArgumentCount = CFuncPtr3[
   GDExtensionInt
 ]
 object GDExtensionScriptInstanceGetMethodArgumentCount {
-  given Tag[GDExtensionScriptInstanceGetMethodArgumentCount] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceGetMethodArgumentCount]]
-  
+  given Tag[GDExtensionScriptInstanceGetMethodArgumentCount] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceGetMethodArgumentCount]]
+
   extension (func: GDExtensionScriptInstanceGetMethodArgumentCount) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr,
@@ -1332,8 +1332,8 @@ opaque type GDExtensionScriptInstanceCall = CFuncPtr6[
   Unit
 ]
 object GDExtensionScriptInstanceCall {
-  given Tag[GDExtensionScriptInstanceCall] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceCall]]
-  
+  given Tag[GDExtensionScriptInstanceCall] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceCall]]
+
   extension (func: GDExtensionScriptInstanceCall) {
     inline def apply(
       p_self: GDExtensionScriptInstanceDataPtr,
@@ -1356,8 +1356,8 @@ opaque type GDExtensionScriptInstanceNotification = CFuncPtr2[
   Unit
 ]
 object GDExtensionScriptInstanceNotification {
-  given Tag[GDExtensionScriptInstanceNotification] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceNotification]]
-  
+  given Tag[GDExtensionScriptInstanceNotification] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceNotification]]
+
   extension (func: GDExtensionScriptInstanceNotification) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr,
@@ -1374,8 +1374,8 @@ opaque type GDExtensionScriptInstanceNotification2 = CFuncPtr3[
   Unit
 ]
 object GDExtensionScriptInstanceNotification2 {
-  given Tag[GDExtensionScriptInstanceNotification2] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceNotification2]]
-  
+  given Tag[GDExtensionScriptInstanceNotification2] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceNotification2]]
+
   extension (func: GDExtensionScriptInstanceNotification2) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr,
@@ -1393,8 +1393,8 @@ opaque type GDExtensionScriptInstanceToString = CFuncPtr3[
   Unit
 ]
 object GDExtensionScriptInstanceToString {
-  given Tag[GDExtensionScriptInstanceToString] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceToString]]
-  
+  given Tag[GDExtensionScriptInstanceToString] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceToString]]
+
   extension (func: GDExtensionScriptInstanceToString) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr,
@@ -1410,8 +1410,8 @@ opaque type GDExtensionScriptInstanceRefCountIncremented = CFuncPtr1[
   Unit
 ]
 object GDExtensionScriptInstanceRefCountIncremented {
-  given Tag[GDExtensionScriptInstanceRefCountIncremented] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceRefCountIncremented]]
-  
+  given Tag[GDExtensionScriptInstanceRefCountIncremented] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceRefCountIncremented]]
+
   extension (func: GDExtensionScriptInstanceRefCountIncremented) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr
@@ -1425,8 +1425,8 @@ opaque type GDExtensionScriptInstanceRefCountDecremented = CFuncPtr1[
   GDExtensionBool
 ]
 object GDExtensionScriptInstanceRefCountDecremented {
-  given Tag[GDExtensionScriptInstanceRefCountDecremented] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceRefCountDecremented]]
-  
+  given Tag[GDExtensionScriptInstanceRefCountDecremented] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceRefCountDecremented]]
+
   extension (func: GDExtensionScriptInstanceRefCountDecremented) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr
@@ -1440,8 +1440,8 @@ opaque type GDExtensionScriptInstanceGetScript = CFuncPtr1[
   GDExtensionObjectPtr
 ]
 object GDExtensionScriptInstanceGetScript {
-  given Tag[GDExtensionScriptInstanceGetScript] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceGetScript]]
-  
+  given Tag[GDExtensionScriptInstanceGetScript] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceGetScript]]
+
   extension (func: GDExtensionScriptInstanceGetScript) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr
@@ -1455,8 +1455,8 @@ opaque type GDExtensionScriptInstanceIsPlaceholder = CFuncPtr1[
   GDExtensionBool
 ]
 object GDExtensionScriptInstanceIsPlaceholder {
-  given Tag[GDExtensionScriptInstanceIsPlaceholder] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceIsPlaceholder]]
-  
+  given Tag[GDExtensionScriptInstanceIsPlaceholder] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceIsPlaceholder]]
+
   extension (func: GDExtensionScriptInstanceIsPlaceholder) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr
@@ -1470,8 +1470,8 @@ opaque type GDExtensionScriptInstanceGetLanguage = CFuncPtr1[
   GDExtensionScriptLanguagePtr
 ]
 object GDExtensionScriptInstanceGetLanguage {
-  given Tag[GDExtensionScriptInstanceGetLanguage] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceGetLanguage]]
-  
+  given Tag[GDExtensionScriptInstanceGetLanguage] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceGetLanguage]]
+
   extension (func: GDExtensionScriptInstanceGetLanguage) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr
@@ -1485,8 +1485,8 @@ opaque type GDExtensionScriptInstanceFree = CFuncPtr1[
   Unit
 ]
 object GDExtensionScriptInstanceFree {
-  given Tag[GDExtensionScriptInstanceFree] = Tag.Ptr.asInstanceOf[Tag[GDExtensionScriptInstanceFree]]
-  
+  given Tag[GDExtensionScriptInstanceFree] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionScriptInstanceFree]]
+
   extension (func: GDExtensionScriptInstanceFree) {
     inline def apply(
       p_instance: GDExtensionScriptInstanceDataPtr
@@ -1496,16 +1496,16 @@ object GDExtensionScriptInstanceFree {
 
 
 opaque type GDExtensionWorkerThreadPoolGroupTask = CFuncPtr2[
-  Ptr[CVoidPtr],
+  CVoidPtr,
   CUnsignedInt,
   Unit
 ]
 object GDExtensionWorkerThreadPoolGroupTask {
-  given Tag[GDExtensionWorkerThreadPoolGroupTask] = Tag.Ptr.asInstanceOf[Tag[GDExtensionWorkerThreadPoolGroupTask]]
-  
+  given Tag[GDExtensionWorkerThreadPoolGroupTask] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionWorkerThreadPoolGroupTask]]
+
   extension (func: GDExtensionWorkerThreadPoolGroupTask) {
     inline def apply(
-      _0: Ptr[CVoidPtr],
+      _0: CVoidPtr,
       _1: CUnsignedInt
     ): Unit = func(_0, _1)
   } 
@@ -1513,31 +1513,31 @@ object GDExtensionWorkerThreadPoolGroupTask {
 
 
 opaque type GDExtensionWorkerThreadPoolTask = CFuncPtr1[
-  Ptr[CVoidPtr],
+  CVoidPtr,
   Unit
 ]
 object GDExtensionWorkerThreadPoolTask {
-  given Tag[GDExtensionWorkerThreadPoolTask] = Tag.Ptr.asInstanceOf[Tag[GDExtensionWorkerThreadPoolTask]]
-  
+  given Tag[GDExtensionWorkerThreadPoolTask] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionWorkerThreadPoolTask]]
+
   extension (func: GDExtensionWorkerThreadPoolTask) {
     inline def apply(
-      _0: Ptr[CVoidPtr]
+      _0: CVoidPtr
     ): Unit = func(_0)
   } 
 }
 
 
 opaque type GDExtensionInitializeCallback = CFuncPtr2[
-  Ptr[CVoidPtr],
+  CVoidPtr,
   GDExtensionInitializationLevel,
   Unit
 ]
 object GDExtensionInitializeCallback {
-  given Tag[GDExtensionInitializeCallback] = Tag.Ptr.asInstanceOf[Tag[GDExtensionInitializeCallback]]
-  
+  given Tag[GDExtensionInitializeCallback] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInitializeCallback]]
+
   extension (func: GDExtensionInitializeCallback) {
     inline def apply(
-      p_userdata: Ptr[CVoidPtr],
+      p_userdata: CVoidPtr,
       p_level: GDExtensionInitializationLevel
     ): Unit = func(p_userdata, p_level)
   } 
@@ -1545,16 +1545,16 @@ object GDExtensionInitializeCallback {
 
 
 opaque type GDExtensionDeinitializeCallback = CFuncPtr2[
-  Ptr[CVoidPtr],
+  CVoidPtr,
   GDExtensionInitializationLevel,
   Unit
 ]
 object GDExtensionDeinitializeCallback {
-  given Tag[GDExtensionDeinitializeCallback] = Tag.Ptr.asInstanceOf[Tag[GDExtensionDeinitializeCallback]]
-  
+  given Tag[GDExtensionDeinitializeCallback] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionDeinitializeCallback]]
+
   extension (func: GDExtensionDeinitializeCallback) {
     inline def apply(
-      p_userdata: Ptr[CVoidPtr],
+      p_userdata: CVoidPtr,
       p_level: GDExtensionInitializationLevel
     ): Unit = func(p_userdata, p_level)
   } 
@@ -1566,8 +1566,8 @@ opaque type GDExtensionInterfaceFunctionPtr = CFuncPtr0[
   Unit
 ]
 object GDExtensionInterfaceFunctionPtr {
-  given Tag[GDExtensionInterfaceFunctionPtr] = Tag.Ptr.asInstanceOf[Tag[GDExtensionInterfaceFunctionPtr]]
-  
+  given Tag[GDExtensionInterfaceFunctionPtr] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceFunctionPtr]]
+
   extension (func: GDExtensionInterfaceFunctionPtr) {
     inline def apply(
       
@@ -1581,8 +1581,8 @@ opaque type GDExtensionInterfaceGetProcAddress = CFuncPtr1[
   GDExtensionInterfaceFunctionPtr
 ]
 object GDExtensionInterfaceGetProcAddress {
-  given Tag[GDExtensionInterfaceGetProcAddress] = Tag.Ptr.asInstanceOf[Tag[GDExtensionInterfaceGetProcAddress]]
-  
+  given Tag[GDExtensionInterfaceGetProcAddress] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceGetProcAddress]]
+
   extension (func: GDExtensionInterfaceGetProcAddress) {
     inline def apply(
       p_function_name: ConstPtr[CChar]
@@ -1631,8 +1631,8 @@ opaque type GDExtensionInitializationFunction = CFuncPtr3[
   GDExtensionBool
 ]
 object GDExtensionInitializationFunction {
-  given Tag[GDExtensionInitializationFunction] = Tag.Ptr.asInstanceOf[Tag[GDExtensionInitializationFunction]]
-  
+  given Tag[GDExtensionInitializationFunction] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInitializationFunction]]
+
   extension (func: GDExtensionInitializationFunction) {
     inline def apply(
       p_get_proc_address: GDExtensionInterfaceGetProcAddress,
@@ -1650,8 +1650,8 @@ opaque type GDExtensionMainLoopStartupCallback = CFuncPtr0[
   Unit
 ]
 object GDExtensionMainLoopStartupCallback {
-  given Tag[GDExtensionMainLoopStartupCallback] = Tag.Ptr.asInstanceOf[Tag[GDExtensionMainLoopStartupCallback]]
-  
+  given Tag[GDExtensionMainLoopStartupCallback] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionMainLoopStartupCallback]]
+
   extension (func: GDExtensionMainLoopStartupCallback) {
     inline def apply(
       
@@ -1667,8 +1667,8 @@ opaque type GDExtensionMainLoopShutdownCallback = CFuncPtr0[
   Unit
 ]
 object GDExtensionMainLoopShutdownCallback {
-  given Tag[GDExtensionMainLoopShutdownCallback] = Tag.Ptr.asInstanceOf[Tag[GDExtensionMainLoopShutdownCallback]]
-  
+  given Tag[GDExtensionMainLoopShutdownCallback] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionMainLoopShutdownCallback]]
+
   extension (func: GDExtensionMainLoopShutdownCallback) {
     inline def apply(
       
@@ -1684,8 +1684,8 @@ opaque type GDExtensionMainLoopFrameCallback = CFuncPtr0[
   Unit
 ]
 object GDExtensionMainLoopFrameCallback {
-  given Tag[GDExtensionMainLoopFrameCallback] = Tag.Ptr.asInstanceOf[Tag[GDExtensionMainLoopFrameCallback]]
-  
+  given Tag[GDExtensionMainLoopFrameCallback] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionMainLoopFrameCallback]]
+
   extension (func: GDExtensionMainLoopFrameCallback) {
     inline def apply(
       

@@ -1,5 +1,5 @@
 
-package godot.gdextensioninterface.codegen.types
+package godot.codegen.gdextensioninterface.types
 
 import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
@@ -180,13 +180,13 @@ opaque type GDExtensionClassCreationInfo = CStruct17[
   GDExtensionClassFreeInstance,
   GDExtensionClassGetVirtual,
   GDExtensionClassGetRID,
-  Ptr[CVoidPtr]
+  CVoidPtr
 ]
 object GDExtensionClassCreationInfo {
   import Tag.materializeCStruct17Tag
 
   given Tag[GDExtensionClassCreationInfo] = 
-    materializeCStruct17Tag[GDExtensionBool, GDExtensionBool, GDExtensionClassSet, GDExtensionClassGet, GDExtensionClassGetPropertyList, GDExtensionClassFreePropertyList, GDExtensionClassPropertyCanRevert, GDExtensionClassPropertyGetRevert, GDExtensionClassNotification, GDExtensionClassToString, GDExtensionClassReference, GDExtensionClassUnreference, GDExtensionClassCreateInstance, GDExtensionClassFreeInstance, GDExtensionClassGetVirtual, GDExtensionClassGetRID, Ptr[CVoidPtr]].asInstanceOf[Tag[GDExtensionClassCreationInfo]]
+    materializeCStruct17Tag[GDExtensionBool, GDExtensionBool, GDExtensionClassSet, GDExtensionClassGet, GDExtensionClassGetPropertyList, GDExtensionClassFreePropertyList, GDExtensionClassPropertyCanRevert, GDExtensionClassPropertyGetRevert, GDExtensionClassNotification, GDExtensionClassToString, GDExtensionClassReference, GDExtensionClassUnreference, GDExtensionClassCreateInstance, GDExtensionClassFreeInstance, GDExtensionClassGetVirtual, GDExtensionClassGetRID, CVoidPtr].asInstanceOf[Tag[GDExtensionClassCreationInfo]]
 
   extension (struct: GDExtensionClassCreationInfo) {
     
@@ -254,9 +254,9 @@ object GDExtensionClassCreationInfo {
     inline def get_rid_func_=(v: GDExtensionClassGetRID) = struct._16_=(v)
     inline def at_get_rid_func: Ptr[GDExtensionClassGetRID] = struct.at16
 
-    inline def class_userdata: Ptr[CVoidPtr] = struct._17
-    inline def class_userdata_=(v: Ptr[CVoidPtr]) = struct._17_=(v)
-    inline def at_class_userdata: Ptr[Ptr[CVoidPtr]] = struct.at17
+    inline def class_userdata: CVoidPtr = struct._17
+    inline def class_userdata_=(v: CVoidPtr) = struct._17_=(v)
+    inline def at_class_userdata: Ptr[CVoidPtr] = struct.at17
 
   }
 }
@@ -286,13 +286,13 @@ opaque type GDExtensionClassCreationInfo2 = CStruct22[
   GDExtensionClassGetVirtualCallData,
   GDExtensionClassCallVirtualWithData,
   GDExtensionClassGetRID,
-  Ptr[CVoidPtr]
+  CVoidPtr
 ]
 object GDExtensionClassCreationInfo2 {
   import Tag.materializeCStruct22Tag
 
   given Tag[GDExtensionClassCreationInfo2] = 
-    materializeCStruct22Tag[GDExtensionBool, GDExtensionBool, GDExtensionBool, GDExtensionClassSet, GDExtensionClassGet, GDExtensionClassGetPropertyList, GDExtensionClassFreePropertyList, GDExtensionClassPropertyCanRevert, GDExtensionClassPropertyGetRevert, GDExtensionClassValidateProperty, GDExtensionClassNotification2, GDExtensionClassToString, GDExtensionClassReference, GDExtensionClassUnreference, GDExtensionClassCreateInstance, GDExtensionClassFreeInstance, GDExtensionClassRecreateInstance, GDExtensionClassGetVirtual, GDExtensionClassGetVirtualCallData, GDExtensionClassCallVirtualWithData, GDExtensionClassGetRID, Ptr[CVoidPtr]].asInstanceOf[Tag[GDExtensionClassCreationInfo2]]
+    materializeCStruct22Tag[GDExtensionBool, GDExtensionBool, GDExtensionBool, GDExtensionClassSet, GDExtensionClassGet, GDExtensionClassGetPropertyList, GDExtensionClassFreePropertyList, GDExtensionClassPropertyCanRevert, GDExtensionClassPropertyGetRevert, GDExtensionClassValidateProperty, GDExtensionClassNotification2, GDExtensionClassToString, GDExtensionClassReference, GDExtensionClassUnreference, GDExtensionClassCreateInstance, GDExtensionClassFreeInstance, GDExtensionClassRecreateInstance, GDExtensionClassGetVirtual, GDExtensionClassGetVirtualCallData, GDExtensionClassCallVirtualWithData, GDExtensionClassGetRID, CVoidPtr].asInstanceOf[Tag[GDExtensionClassCreationInfo2]]
 
   extension (struct: GDExtensionClassCreationInfo2) {
     
@@ -380,9 +380,9 @@ object GDExtensionClassCreationInfo2 {
     inline def get_rid_func_=(v: GDExtensionClassGetRID) = struct._21_=(v)
     inline def at_get_rid_func: Ptr[GDExtensionClassGetRID] = struct.at21
 
-    inline def class_userdata: Ptr[CVoidPtr] = struct._22
-    inline def class_userdata_=(v: Ptr[CVoidPtr]) = struct._22_=(v)
-    inline def at_class_userdata: Ptr[Ptr[CVoidPtr]] = struct.at22
+    inline def class_userdata: CVoidPtr = struct._22
+    inline def class_userdata_=(v: CVoidPtr) = struct._22_=(v)
+    inline def at_class_userdata: Ptr[CVoidPtr] = struct.at22
 
   }
 }
@@ -413,13 +413,13 @@ opaque type GDExtensionClassCreationInfo3 = CStruct23[
   GDExtensionClassGetVirtualCallData,
   GDExtensionClassCallVirtualWithData,
   GDExtensionClassGetRID,
-  Ptr[CVoidPtr]
+  CVoidPtr
 ]
 object GDExtensionClassCreationInfo3 {
   import godot.types.Tags.*
 
   given Tag[GDExtensionClassCreationInfo3] = 
-    materializeCStruct23Tag[GDExtensionBool, GDExtensionBool, GDExtensionBool, GDExtensionBool, GDExtensionClassSet, GDExtensionClassGet, GDExtensionClassGetPropertyList, GDExtensionClassFreePropertyList2, GDExtensionClassPropertyCanRevert, GDExtensionClassPropertyGetRevert, GDExtensionClassValidateProperty, GDExtensionClassNotification2, GDExtensionClassToString, GDExtensionClassReference, GDExtensionClassUnreference, GDExtensionClassCreateInstance, GDExtensionClassFreeInstance, GDExtensionClassRecreateInstance, GDExtensionClassGetVirtual, GDExtensionClassGetVirtualCallData, GDExtensionClassCallVirtualWithData, GDExtensionClassGetRID, Ptr[CVoidPtr]].asInstanceOf[Tag[GDExtensionClassCreationInfo3]]
+    materializeCStruct23Tag[GDExtensionBool, GDExtensionBool, GDExtensionBool, GDExtensionBool, GDExtensionClassSet, GDExtensionClassGet, GDExtensionClassGetPropertyList, GDExtensionClassFreePropertyList2, GDExtensionClassPropertyCanRevert, GDExtensionClassPropertyGetRevert, GDExtensionClassValidateProperty, GDExtensionClassNotification2, GDExtensionClassToString, GDExtensionClassReference, GDExtensionClassUnreference, GDExtensionClassCreateInstance, GDExtensionClassFreeInstance, GDExtensionClassRecreateInstance, GDExtensionClassGetVirtual, GDExtensionClassGetVirtualCallData, GDExtensionClassCallVirtualWithData, GDExtensionClassGetRID, CVoidPtr].asInstanceOf[Tag[GDExtensionClassCreationInfo3]]
 
   extension (struct: GDExtensionClassCreationInfo3) {
     
@@ -511,9 +511,9 @@ object GDExtensionClassCreationInfo3 {
     inline def get_rid_func_=(v: GDExtensionClassGetRID) = struct._22_=(v)
     inline def at_get_rid_func: Ptr[GDExtensionClassGetRID] = struct.at22
 
-    inline def class_userdata: Ptr[CVoidPtr] = struct._23
-    inline def class_userdata_=(v: Ptr[CVoidPtr]) = struct._23_=(v)
-    inline def at_class_userdata: Ptr[Ptr[CVoidPtr]] = struct.at23
+    inline def class_userdata: CVoidPtr = struct._23
+    inline def class_userdata_=(v: CVoidPtr) = struct._23_=(v)
+    inline def at_class_userdata: Ptr[CVoidPtr] = struct.at23
 
   }
 }
@@ -541,13 +541,13 @@ opaque type GDExtensionClassCreationInfo4 = CStruct23[
   GDExtensionClassGetVirtual2,
   GDExtensionClassGetVirtualCallData2,
   GDExtensionClassCallVirtualWithData,
-  Ptr[CVoidPtr]
+  CVoidPtr
 ]
 object GDExtensionClassCreationInfo4 {
   import godot.types.Tags.*
 
   given Tag[GDExtensionClassCreationInfo4] = 
-    materializeCStruct23Tag[GDExtensionBool, GDExtensionBool, GDExtensionBool, GDExtensionBool, GDExtensionConstStringPtr, GDExtensionClassSet, GDExtensionClassGet, GDExtensionClassGetPropertyList, GDExtensionClassFreePropertyList2, GDExtensionClassPropertyCanRevert, GDExtensionClassPropertyGetRevert, GDExtensionClassValidateProperty, GDExtensionClassNotification2, GDExtensionClassToString, GDExtensionClassReference, GDExtensionClassUnreference, GDExtensionClassCreateInstance2, GDExtensionClassFreeInstance, GDExtensionClassRecreateInstance, GDExtensionClassGetVirtual2, GDExtensionClassGetVirtualCallData2, GDExtensionClassCallVirtualWithData, Ptr[CVoidPtr]].asInstanceOf[Tag[GDExtensionClassCreationInfo4]]
+    materializeCStruct23Tag[GDExtensionBool, GDExtensionBool, GDExtensionBool, GDExtensionBool, GDExtensionConstStringPtr, GDExtensionClassSet, GDExtensionClassGet, GDExtensionClassGetPropertyList, GDExtensionClassFreePropertyList2, GDExtensionClassPropertyCanRevert, GDExtensionClassPropertyGetRevert, GDExtensionClassValidateProperty, GDExtensionClassNotification2, GDExtensionClassToString, GDExtensionClassReference, GDExtensionClassUnreference, GDExtensionClassCreateInstance2, GDExtensionClassFreeInstance, GDExtensionClassRecreateInstance, GDExtensionClassGetVirtual2, GDExtensionClassGetVirtualCallData2, GDExtensionClassCallVirtualWithData, CVoidPtr].asInstanceOf[Tag[GDExtensionClassCreationInfo4]]
 
   extension (struct: GDExtensionClassCreationInfo4) {
     
@@ -639,16 +639,16 @@ object GDExtensionClassCreationInfo4 {
     inline def call_virtual_with_data_func_=(v: GDExtensionClassCallVirtualWithData) = struct._22_=(v)
     inline def at_call_virtual_with_data_func: Ptr[GDExtensionClassCallVirtualWithData] = struct.at22
 
-    inline def class_userdata: Ptr[CVoidPtr] = struct._23
-    inline def class_userdata_=(v: Ptr[CVoidPtr]) = struct._23_=(v)
-    inline def at_class_userdata: Ptr[Ptr[CVoidPtr]] = struct.at23
+    inline def class_userdata: CVoidPtr = struct._23
+    inline def class_userdata_=(v: CVoidPtr) = struct._23_=(v)
+    inline def at_class_userdata: Ptr[CVoidPtr] = struct.at23
 
   }
 }
 
 opaque type GDExtensionClassMethodInfo = CStruct13[
   GDExtensionStringNamePtr,
-  Ptr[CVoidPtr],
+  CVoidPtr,
   GDExtensionClassMethodCall,
   GDExtensionClassMethodPtrCall,
   CUnsignedInt,
@@ -665,7 +665,7 @@ object GDExtensionClassMethodInfo {
   import Tag.materializeCStruct13Tag
 
   given Tag[GDExtensionClassMethodInfo] = 
-    materializeCStruct13Tag[GDExtensionStringNamePtr, Ptr[CVoidPtr], GDExtensionClassMethodCall, GDExtensionClassMethodPtrCall, CUnsignedInt, GDExtensionBool, Ptr[GDExtensionPropertyInfo], GDExtensionClassMethodArgumentMetadata, CUnsignedInt, Ptr[GDExtensionPropertyInfo], Ptr[GDExtensionClassMethodArgumentMetadata], CUnsignedInt, Ptr[GDExtensionVariantPtr]].asInstanceOf[Tag[GDExtensionClassMethodInfo]]
+    materializeCStruct13Tag[GDExtensionStringNamePtr, CVoidPtr, GDExtensionClassMethodCall, GDExtensionClassMethodPtrCall, CUnsignedInt, GDExtensionBool, Ptr[GDExtensionPropertyInfo], GDExtensionClassMethodArgumentMetadata, CUnsignedInt, Ptr[GDExtensionPropertyInfo], Ptr[GDExtensionClassMethodArgumentMetadata], CUnsignedInt, Ptr[GDExtensionVariantPtr]].asInstanceOf[Tag[GDExtensionClassMethodInfo]]
 
   extension (struct: GDExtensionClassMethodInfo) {
     
@@ -673,9 +673,9 @@ object GDExtensionClassMethodInfo {
     inline def name_=(v: GDExtensionStringNamePtr) = struct._1_=(v)
     inline def at_name: Ptr[GDExtensionStringNamePtr] = struct.at1
 
-    inline def method_userdata: Ptr[CVoidPtr] = struct._2
-    inline def method_userdata_=(v: Ptr[CVoidPtr]) = struct._2_=(v)
-    inline def at_method_userdata: Ptr[Ptr[CVoidPtr]] = struct.at2
+    inline def method_userdata: CVoidPtr = struct._2
+    inline def method_userdata_=(v: CVoidPtr) = struct._2_=(v)
+    inline def at_method_userdata: Ptr[CVoidPtr] = struct.at2
 
     inline def call_func: GDExtensionClassMethodCall = struct._3
     inline def call_func_=(v: GDExtensionClassMethodCall) = struct._3_=(v)
@@ -789,8 +789,8 @@ object GDExtensionClassVirtualMethodInfo {
  * @deprecated Since 4.3. Use GDExtensionCallableCustomInfo2 instead.
  */
 opaque type GDExtensionCallableCustomInfo = CStruct10[
-  Ptr[CVoidPtr],
-  Ptr[CVoidPtr],
+  CVoidPtr,
+  CVoidPtr,
   GDObjectInstanceID,
   GDExtensionCallableCustomCall,
   GDExtensionCallableCustomIsValid,
@@ -804,17 +804,17 @@ object GDExtensionCallableCustomInfo {
   import Tag.materializeCStruct10Tag
 
   given Tag[GDExtensionCallableCustomInfo] = 
-    materializeCStruct10Tag[Ptr[CVoidPtr], Ptr[CVoidPtr], GDObjectInstanceID, GDExtensionCallableCustomCall, GDExtensionCallableCustomIsValid, GDExtensionCallableCustomFree, GDExtensionCallableCustomHash, GDExtensionCallableCustomEqual, GDExtensionCallableCustomLessThan, GDExtensionCallableCustomToString].asInstanceOf[Tag[GDExtensionCallableCustomInfo]]
+    materializeCStruct10Tag[CVoidPtr, CVoidPtr, GDObjectInstanceID, GDExtensionCallableCustomCall, GDExtensionCallableCustomIsValid, GDExtensionCallableCustomFree, GDExtensionCallableCustomHash, GDExtensionCallableCustomEqual, GDExtensionCallableCustomLessThan, GDExtensionCallableCustomToString].asInstanceOf[Tag[GDExtensionCallableCustomInfo]]
 
   extension (struct: GDExtensionCallableCustomInfo) {
     
-    inline def callable_userdata: Ptr[CVoidPtr] = struct._1
-    inline def callable_userdata_=(v: Ptr[CVoidPtr]) = struct._1_=(v)
-    inline def at_callable_userdata: Ptr[Ptr[CVoidPtr]] = struct.at1
+    inline def callable_userdata: CVoidPtr = struct._1
+    inline def callable_userdata_=(v: CVoidPtr) = struct._1_=(v)
+    inline def at_callable_userdata: Ptr[CVoidPtr] = struct.at1
 
-    inline def token: Ptr[CVoidPtr] = struct._2
-    inline def token_=(v: Ptr[CVoidPtr]) = struct._2_=(v)
-    inline def at_token: Ptr[Ptr[CVoidPtr]] = struct.at2
+    inline def token: CVoidPtr = struct._2
+    inline def token_=(v: CVoidPtr) = struct._2_=(v)
+    inline def at_token: Ptr[CVoidPtr] = struct.at2
 
     inline def object_id: GDObjectInstanceID = struct._3
     inline def object_id_=(v: GDObjectInstanceID) = struct._3_=(v)
@@ -866,8 +866,8 @@ object GDExtensionCallableCustomInfo {
  * `free_func` is necessary if `callable_userdata` needs to be cleaned up when the callable is freed.
  */
 opaque type GDExtensionCallableCustomInfo2 = CStruct11[
-  Ptr[CVoidPtr],
-  Ptr[CVoidPtr],
+  CVoidPtr,
+  CVoidPtr,
   GDObjectInstanceID,
   GDExtensionCallableCustomCall,
   GDExtensionCallableCustomIsValid,
@@ -882,17 +882,17 @@ object GDExtensionCallableCustomInfo2 {
   import Tag.materializeCStruct11Tag
 
   given Tag[GDExtensionCallableCustomInfo2] = 
-    materializeCStruct11Tag[Ptr[CVoidPtr], Ptr[CVoidPtr], GDObjectInstanceID, GDExtensionCallableCustomCall, GDExtensionCallableCustomIsValid, GDExtensionCallableCustomFree, GDExtensionCallableCustomHash, GDExtensionCallableCustomEqual, GDExtensionCallableCustomLessThan, GDExtensionCallableCustomToString, GDExtensionCallableCustomGetArgumentCount].asInstanceOf[Tag[GDExtensionCallableCustomInfo2]]
+    materializeCStruct11Tag[CVoidPtr, CVoidPtr, GDObjectInstanceID, GDExtensionCallableCustomCall, GDExtensionCallableCustomIsValid, GDExtensionCallableCustomFree, GDExtensionCallableCustomHash, GDExtensionCallableCustomEqual, GDExtensionCallableCustomLessThan, GDExtensionCallableCustomToString, GDExtensionCallableCustomGetArgumentCount].asInstanceOf[Tag[GDExtensionCallableCustomInfo2]]
 
   extension (struct: GDExtensionCallableCustomInfo2) {
     
-    inline def callable_userdata: Ptr[CVoidPtr] = struct._1
-    inline def callable_userdata_=(v: Ptr[CVoidPtr]) = struct._1_=(v)
-    inline def at_callable_userdata: Ptr[Ptr[CVoidPtr]] = struct.at1
+    inline def callable_userdata: CVoidPtr = struct._1
+    inline def callable_userdata_=(v: CVoidPtr) = struct._1_=(v)
+    inline def at_callable_userdata: Ptr[CVoidPtr] = struct.at1
 
-    inline def token: Ptr[CVoidPtr] = struct._2
-    inline def token_=(v: Ptr[CVoidPtr]) = struct._2_=(v)
-    inline def at_token: Ptr[Ptr[CVoidPtr]] = struct.at2
+    inline def token: CVoidPtr = struct._2
+    inline def token_=(v: CVoidPtr) = struct._2_=(v)
+    inline def at_token: Ptr[CVoidPtr] = struct.at2
 
     inline def object_id: GDObjectInstanceID = struct._3
     inline def object_id_=(v: GDObjectInstanceID) = struct._3_=(v)
@@ -1350,7 +1350,7 @@ object GDExtensionScriptInstanceInfo3 {
 
 opaque type GDExtensionInitialization = CStruct4[
   GDExtensionInitializationLevel,
-  Ptr[CVoidPtr],
+  CVoidPtr,
   GDExtensionInitializeCallback,
   GDExtensionDeinitializeCallback
 ]
@@ -1358,7 +1358,7 @@ object GDExtensionInitialization {
   import Tag.materializeCStruct4Tag
 
   given Tag[GDExtensionInitialization] = 
-    materializeCStruct4Tag[GDExtensionInitializationLevel, Ptr[CVoidPtr], GDExtensionInitializeCallback, GDExtensionDeinitializeCallback].asInstanceOf[Tag[GDExtensionInitialization]]
+    materializeCStruct4Tag[GDExtensionInitializationLevel, CVoidPtr, GDExtensionInitializeCallback, GDExtensionDeinitializeCallback].asInstanceOf[Tag[GDExtensionInitialization]]
 
   extension (struct: GDExtensionInitialization) {
     
@@ -1366,9 +1366,9 @@ object GDExtensionInitialization {
     inline def minimum_initialization_level_=(v: GDExtensionInitializationLevel) = struct._1_=(v)
     inline def at_minimum_initialization_level: Ptr[GDExtensionInitializationLevel] = struct.at1
 
-    inline def userdata: Ptr[CVoidPtr] = struct._2
-    inline def userdata_=(v: Ptr[CVoidPtr]) = struct._2_=(v)
-    inline def at_userdata: Ptr[Ptr[CVoidPtr]] = struct.at2
+    inline def userdata: CVoidPtr = struct._2
+    inline def userdata_=(v: CVoidPtr) = struct._2_=(v)
+    inline def at_userdata: Ptr[CVoidPtr] = struct.at2
 
     inline def initialize: GDExtensionInitializeCallback = struct._3
     inline def initialize_=(v: GDExtensionInitializeCallback) = struct._3_=(v)

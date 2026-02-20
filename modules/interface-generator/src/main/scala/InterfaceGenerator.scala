@@ -125,7 +125,8 @@ object InterfaceGenerator {
         arguments = extractArguments(interfaceJson),
         returnValue = extractReturnValue(interfaceJson),
         since = interfaceJson("since").str,
-        see = interfaceJson.obj.get("see")
+        see = interfaceJson.obj
+          .get("see")
           .map(_.arr.map(_.str).toVector)
           .getOrElse(Vector.empty),
         legacyTypeName = interfaceJson.obj.get("legacy_type_name").map(_.str)
@@ -148,17 +149,20 @@ object InterfaceGenerator {
     }
   }
 
-  def formatComment(type_ : Type): String = {
-    if (type_.description.isEmpty && type_.deprecated.isEmpty) ""
+  def formatComment(
+    description: Option[String],
+    deprecated: Option[Deprecated]
+  ) = {
+    if (description.isEmpty && deprecated.isEmpty) ""
     else
       Vector(
         Vector("/**"),
-        type_.description.toVector.flatMap { desc =>
+        description.toVector.flatMap { desc =>
           desc.split("\n").map { line =>
             s" * $line"
           }
         },
-        type_.deprecated.toVector.flatMap { dep =>
+        deprecated.toVector.flatMap { dep =>
           Vector(
             " *",
             s" * @deprecated Since ${dep.since}. Use ${dep.replaceWith} instead."
@@ -166,6 +170,10 @@ object InterfaceGenerator {
         },
         Vector(" */")
       ).flatten.mkString("\n")
+  }
+
+  def formatComment(type_ : Type): String = {
+    formatComment(type_.description, type_.deprecated)
   }
 
   def parseTypeName(toParseType: String): String = {
@@ -192,13 +200,59 @@ object InterfaceGenerator {
         val isConst = toParseType.startsWith("const ")
         val rawType =
           toParseType.stripPrefix("const ").stripSuffix("*")
-        val ptrType = if (isConst) "ConstPtr" else "Ptr"
-        s"$ptrType[${baseTypeMap.get(rawType).getOrElse(rawType)}]"
+        if (rawType == "void") {
+          "CVoidPtr"
+        } else {
+          val ptrType = if (isConst) "ConstPtr" else "Ptr"
+          s"$ptrType[${baseTypeMap.get(rawType).getOrElse(rawType)}]"
+        }
       } else {
         toParseType
       }
     }
     baseTypeMap.get(toParseType).getOrElse(ptrOrRaw)
+  }
+
+  def generateFunctionDefinition(
+    comment: String,
+    name: String,
+    function: Kind.Function
+  ): String = {
+    val Kind.Function(arguments, returnValue) = function
+    val argumentTypes = arguments
+      .map(a => parseTypeName(a._2._1))
+      .mkString(",\n  ")
+    val returnType = returnValue
+      .map(r => parseTypeName(r._1))
+      .getOrElse("Unit")
+    val funcParams = arguments.zipWithIndex
+      .map { case (a, idx) =>
+        val paramName = a._1
+          .filter(_.nonEmpty)
+          .getOrElse(s"_$idx")
+        val paramType = parseTypeName(a._2._1)
+        (paramName, paramType)
+      }
+    val callParams = funcParams.map(_._1).mkString(", ")
+    val funcParamsStr = funcParams
+      .map { case (pName, pType) => s"$pName: $pType" }
+      .mkString(",\n      ")
+    s"""
+     |$comment
+     |opaque type ${name} = CFuncPtr${arguments.length}[
+     |  $argumentTypes${if (arguments.isEmpty) "" else ","}
+     |  $returnType
+     |]
+     |object ${name} {
+     |  given Tag[${name}] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[${name}]]
+     |
+     |  extension (func: ${name}) {
+     |    inline def apply(
+     |      $funcParamsStr
+     |    ): $returnType = func($callParams)
+     |  } 
+     |}
+     |""".stripMargin
   }
 
   def processTypes(
@@ -278,46 +332,15 @@ object InterfaceGenerator {
                    |    ${memberMethods.mkString("")}
                    |  }
                    |}""".stripMargin
-                case Kind.Function(arguments, returnValue) =>
-                  val argumentTypes = arguments
-                    .map(a => parseTypeName(a._2._1))
-                    .mkString(",\n  ")
-                  val returnType = returnValue
-                    .map(r => parseTypeName(r._1))
-                    .getOrElse("Unit")
-                  val funcParams = arguments.zipWithIndex
-                    .map { case (a, idx) =>
-                      val paramName = a._1
-                        .filter(_.nonEmpty)
-                        .getOrElse(s"_$idx")
-                      val paramType = parseTypeName(a._2._1)
-                      (paramName, paramType)
-                    }
-                  val callParams = funcParams.map(_._1).mkString(", ")
-                  val funcParamsStr = funcParams
-                    .map { case (pName, pType) => s"$pName: $pType" }
-                    .mkString(",\n      ")
-                  s"""
-                   |$comment
-                   |opaque type ${type_.name} = CFuncPtr${arguments.length}[
-                   |  $argumentTypes${
-                      if (arguments.isEmpty) "" else ","
-                    }
-                   |  $returnType
-                   |]
-                   |object ${type_.name} {
-                   |  given Tag[${type_.name}] = Tag.Ptr.asInstanceOf[Tag[${type_.name}]]
-                   |  
-                   |  extension (func: ${type_.name}) {
-                   |    inline def apply(
-                   |      $funcParamsStr
-                   |    ): $returnType = func($callParams)
-                   |  } 
-                   |}
-                   |""".stripMargin
+                case function: Kind.Function =>
+                  generateFunctionDefinition(
+                    comment = comment,
+                    name = type_.name,
+                    function = function
+                  )
             }
             s"""
-             |package godot.gdextensioninterface.codegen.types
+             |package godot.codegen.gdextensioninterface.types
              |
              |import scala.scalanative.unsafe.*
              |import scala.scalanative.unsigned.*
@@ -334,10 +357,63 @@ object InterfaceGenerator {
 
   def processInterface(
     interfaces: Vector[Interface]
-  ): Vector[ScalaFile] = {
-    pprint.pprintln(interfaces)
-    Vector.empty
-  }
+  ): Vector[ScalaFile] =
+    Vector(
+      ScalaFile(
+        path = "interface",
+        name = "Interface",
+        content = {
+          def getInterfaceName(fromName: String) =
+            s"GDExtensionInterface${fromName.split("_").map(_.capitalize).mkString}"
+          val definitions = interfaces.map { interface =>
+            generateFunctionDefinition(
+              comment =
+                formatComment(interface.description, interface.deprecated),
+              name = getInterfaceName(interface.name),
+              function =
+                Kind.Function(interface.arguments, interface.returnValue)
+            )
+          }.mkString
+          val interfaceVals = interfaces
+            .map { interface =>
+              s"val ${interface.name}: ${{ getInterfaceName(interface.name) }}"
+            }
+            .mkString(",\n  ")
+          val definitionLoad = interfaces
+            .map { interface =>
+              s"${interface.name} = getProcAddr(toCString(\"${interface.name}\")).asInstanceOf[${{
+                  getInterfaceName(interface.name)
+                }}]"
+            }
+            .mkString(",\n      ")
+
+          s"""
+           |package godot.codegen.gdextensioninterface.codegen.types
+           |
+           |import scala.scalanative.unsafe.*
+           |import scala.scalanative.unsigned.*
+           |import scala.scalanative.unsigned.UInt.*
+           |import godot.types.*
+           |import godot.codegen.gdextensioninterface.types.*
+           |
+           |$definitions
+           |
+           |class Interface private(
+           |  $interfaceVals
+           |)
+           |object Interface {
+           |  def load(
+           |    getProcAddr: GDExtensionInterfaceGetProcAddress
+           |  ): Interface = Zone.acquire { implicit zone: Zone =>
+           |    new Interface(
+           |      $definitionLoad
+           |    )
+           |  }
+           |}
+           |""".stripMargin
+        }
+      )
+    )
 
   case class ScalaFile(
     content: String,

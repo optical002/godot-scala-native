@@ -1,5 +1,5 @@
 
-package godot.gdextensioninterface.codegen.types
+package godot.codegen.gdextensioninterface.types
 
 import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
