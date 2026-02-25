@@ -21,7 +21,7 @@ object GDExtensionInterfaceGetGodotVersion {
   given Tag[GDExtensionInterfaceGetGodotVersion] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceGetGodotVersion]]
 
   extension (func: GDExtensionInterfaceGetGodotVersion) {
-    inline def apply(
+    def apply(
       r_godot_version: Ptr[GDExtensionGodotVersion]
     ): Unit = func(r_godot_version)
   } 
@@ -38,7 +38,7 @@ object GDExtensionInterfaceGetGodotVersion2 {
   given Tag[GDExtensionInterfaceGetGodotVersion2] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceGetGodotVersion2]]
 
   extension (func: GDExtensionInterfaceGetGodotVersion2) {
-    inline def apply(
+    def apply(
       r_godot_version: Ptr[GDExtensionGodotVersion2]
     ): Unit = func(r_godot_version)
   } 
@@ -57,7 +57,7 @@ object GDExtensionInterfaceMemAlloc {
   given Tag[GDExtensionInterfaceMemAlloc] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceMemAlloc]]
 
   extension (func: GDExtensionInterfaceMemAlloc) {
-    inline def apply(
+    def apply(
       p_bytes: CSize
     ): CVoidPtr = func(p_bytes)
   } 
@@ -77,7 +77,7 @@ object GDExtensionInterfaceMemRealloc {
   given Tag[GDExtensionInterfaceMemRealloc] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceMemRealloc]]
 
   extension (func: GDExtensionInterfaceMemRealloc) {
-    inline def apply(
+    def apply(
       p_ptr: CVoidPtr,
       p_bytes: CSize
     ): CVoidPtr = func(p_ptr, p_bytes)
@@ -97,7 +97,7 @@ object GDExtensionInterfaceMemFree {
   given Tag[GDExtensionInterfaceMemFree] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceMemFree]]
 
   extension (func: GDExtensionInterfaceMemFree) {
-    inline def apply(
+    def apply(
       p_ptr: CVoidPtr
     ): Unit = func(p_ptr)
   } 
@@ -115,7 +115,7 @@ object GDExtensionInterfaceMemAlloc2 {
   given Tag[GDExtensionInterfaceMemAlloc2] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceMemAlloc2]]
 
   extension (func: GDExtensionInterfaceMemAlloc2) {
-    inline def apply(
+    def apply(
       p_bytes: CSize,
       p_pad_align: GDExtensionBool
     ): CVoidPtr = func(p_bytes, p_pad_align)
@@ -135,7 +135,7 @@ object GDExtensionInterfaceMemRealloc2 {
   given Tag[GDExtensionInterfaceMemRealloc2] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceMemRealloc2]]
 
   extension (func: GDExtensionInterfaceMemRealloc2) {
-    inline def apply(
+    def apply(
       p_ptr: CVoidPtr,
       p_bytes: CSize,
       p_pad_align: GDExtensionBool
@@ -155,7 +155,7 @@ object GDExtensionInterfaceMemFree2 {
   given Tag[GDExtensionInterfaceMemFree2] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceMemFree2]]
 
   extension (func: GDExtensionInterfaceMemFree2) {
-    inline def apply(
+    def apply(
       p_ptr: CVoidPtr,
       p_pad_align: GDExtensionBool
     ): Unit = func(p_ptr, p_pad_align)
@@ -177,7 +177,7 @@ object GDExtensionInterfacePrintError {
   given Tag[GDExtensionInterfacePrintError] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePrintError]]
 
   extension (func: GDExtensionInterfacePrintError) {
-    inline def apply(
+    def apply(
       p_description: ConstPtr[CChar],
       p_function: ConstPtr[CChar],
       p_file: ConstPtr[CChar],
@@ -203,7 +203,7 @@ object GDExtensionInterfacePrintErrorWithMessage {
   given Tag[GDExtensionInterfacePrintErrorWithMessage] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePrintErrorWithMessage]]
 
   extension (func: GDExtensionInterfacePrintErrorWithMessage) {
-    inline def apply(
+    def apply(
       p_description: ConstPtr[CChar],
       p_message: ConstPtr[CChar],
       p_function: ConstPtr[CChar],
@@ -229,7 +229,7 @@ object GDExtensionInterfacePrintWarning {
   given Tag[GDExtensionInterfacePrintWarning] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePrintWarning]]
 
   extension (func: GDExtensionInterfacePrintWarning) {
-    inline def apply(
+    def apply(
       p_description: ConstPtr[CChar],
       p_function: ConstPtr[CChar],
       p_file: ConstPtr[CChar],
@@ -255,7 +255,7 @@ object GDExtensionInterfacePrintWarningWithMessage {
   given Tag[GDExtensionInterfacePrintWarningWithMessage] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePrintWarningWithMessage]]
 
   extension (func: GDExtensionInterfacePrintWarningWithMessage) {
-    inline def apply(
+    def apply(
       p_description: ConstPtr[CChar],
       p_message: ConstPtr[CChar],
       p_function: ConstPtr[CChar],
@@ -281,7 +281,7 @@ object GDExtensionInterfacePrintScriptError {
   given Tag[GDExtensionInterfacePrintScriptError] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePrintScriptError]]
 
   extension (func: GDExtensionInterfacePrintScriptError) {
-    inline def apply(
+    def apply(
       p_description: ConstPtr[CChar],
       p_function: ConstPtr[CChar],
       p_file: ConstPtr[CChar],
@@ -307,7 +307,7 @@ object GDExtensionInterfacePrintScriptErrorWithMessage {
   given Tag[GDExtensionInterfacePrintScriptErrorWithMessage] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePrintScriptErrorWithMessage]]
 
   extension (func: GDExtensionInterfacePrintScriptErrorWithMessage) {
-    inline def apply(
+    def apply(
       p_description: ConstPtr[CChar],
       p_message: ConstPtr[CChar],
       p_function: ConstPtr[CChar],
@@ -329,7 +329,7 @@ object GDExtensionInterfaceGetNativeStructSize {
   given Tag[GDExtensionInterfaceGetNativeStructSize] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceGetNativeStructSize]]
 
   extension (func: GDExtensionInterfaceGetNativeStructSize) {
-    inline def apply(
+    def apply(
       p_name: GDExtensionConstStringNamePtr
     ): CUnsignedLongLong = func(p_name)
   } 
@@ -347,7 +347,7 @@ object GDExtensionInterfaceVariantNewCopy {
   given Tag[GDExtensionInterfaceVariantNewCopy] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantNewCopy]]
 
   extension (func: GDExtensionInterfaceVariantNewCopy) {
-    inline def apply(
+    def apply(
       r_dest: GDExtensionUninitializedVariantPtr,
       p_src: GDExtensionConstVariantPtr
     ): Unit = func(r_dest, p_src)
@@ -365,7 +365,7 @@ object GDExtensionInterfaceVariantNewNil {
   given Tag[GDExtensionInterfaceVariantNewNil] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantNewNil]]
 
   extension (func: GDExtensionInterfaceVariantNewNil) {
-    inline def apply(
+    def apply(
       r_dest: GDExtensionUninitializedVariantPtr
     ): Unit = func(r_dest)
   } 
@@ -382,7 +382,7 @@ object GDExtensionInterfaceVariantDestroy {
   given Tag[GDExtensionInterfaceVariantDestroy] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantDestroy]]
 
   extension (func: GDExtensionInterfaceVariantDestroy) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionVariantPtr
     ): Unit = func(p_self)
   } 
@@ -404,7 +404,7 @@ object GDExtensionInterfaceVariantCall {
   given Tag[GDExtensionInterfaceVariantCall] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantCall]]
 
   extension (func: GDExtensionInterfaceVariantCall) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionVariantPtr,
       p_method: GDExtensionConstStringNamePtr,
       p_args: ConstPtr[GDExtensionConstVariantPtr],
@@ -431,7 +431,7 @@ object GDExtensionInterfaceVariantCallStatic {
   given Tag[GDExtensionInterfaceVariantCallStatic] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantCallStatic]]
 
   extension (func: GDExtensionInterfaceVariantCallStatic) {
-    inline def apply(
+    def apply(
       p_type: GDExtensionVariantType,
       p_method: GDExtensionConstStringNamePtr,
       p_args: ConstPtr[GDExtensionConstVariantPtr],
@@ -457,7 +457,7 @@ object GDExtensionInterfaceVariantEvaluate {
   given Tag[GDExtensionInterfaceVariantEvaluate] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantEvaluate]]
 
   extension (func: GDExtensionInterfaceVariantEvaluate) {
-    inline def apply(
+    def apply(
       p_op: GDExtensionVariantOperator,
       p_a: GDExtensionConstVariantPtr,
       p_b: GDExtensionConstVariantPtr,
@@ -481,7 +481,7 @@ object GDExtensionInterfaceVariantSet {
   given Tag[GDExtensionInterfaceVariantSet] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantSet]]
 
   extension (func: GDExtensionInterfaceVariantSet) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionVariantPtr,
       p_key: GDExtensionConstVariantPtr,
       p_value: GDExtensionConstVariantPtr,
@@ -504,7 +504,7 @@ object GDExtensionInterfaceVariantSetNamed {
   given Tag[GDExtensionInterfaceVariantSetNamed] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantSetNamed]]
 
   extension (func: GDExtensionInterfaceVariantSetNamed) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionVariantPtr,
       p_key: GDExtensionConstStringNamePtr,
       p_value: GDExtensionConstVariantPtr,
@@ -527,7 +527,7 @@ object GDExtensionInterfaceVariantSetKeyed {
   given Tag[GDExtensionInterfaceVariantSetKeyed] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantSetKeyed]]
 
   extension (func: GDExtensionInterfaceVariantSetKeyed) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionVariantPtr,
       p_key: GDExtensionConstVariantPtr,
       p_value: GDExtensionConstVariantPtr,
@@ -551,7 +551,7 @@ object GDExtensionInterfaceVariantSetIndexed {
   given Tag[GDExtensionInterfaceVariantSetIndexed] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantSetIndexed]]
 
   extension (func: GDExtensionInterfaceVariantSetIndexed) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionVariantPtr,
       p_index: GDExtensionInt,
       p_value: GDExtensionConstVariantPtr,
@@ -575,7 +575,7 @@ object GDExtensionInterfaceVariantGet {
   given Tag[GDExtensionInterfaceVariantGet] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantGet]]
 
   extension (func: GDExtensionInterfaceVariantGet) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstVariantPtr,
       p_key: GDExtensionConstVariantPtr,
       r_ret: GDExtensionUninitializedVariantPtr,
@@ -598,7 +598,7 @@ object GDExtensionInterfaceVariantGetNamed {
   given Tag[GDExtensionInterfaceVariantGetNamed] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantGetNamed]]
 
   extension (func: GDExtensionInterfaceVariantGetNamed) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstVariantPtr,
       p_key: GDExtensionConstStringNamePtr,
       r_ret: GDExtensionUninitializedVariantPtr,
@@ -621,7 +621,7 @@ object GDExtensionInterfaceVariantGetKeyed {
   given Tag[GDExtensionInterfaceVariantGetKeyed] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantGetKeyed]]
 
   extension (func: GDExtensionInterfaceVariantGetKeyed) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstVariantPtr,
       p_key: GDExtensionConstVariantPtr,
       r_ret: GDExtensionUninitializedVariantPtr,
@@ -645,7 +645,7 @@ object GDExtensionInterfaceVariantGetIndexed {
   given Tag[GDExtensionInterfaceVariantGetIndexed] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantGetIndexed]]
 
   extension (func: GDExtensionInterfaceVariantGetIndexed) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstVariantPtr,
       p_index: GDExtensionInt,
       r_ret: GDExtensionUninitializedVariantPtr,
@@ -668,7 +668,7 @@ object GDExtensionInterfaceVariantIterInit {
   given Tag[GDExtensionInterfaceVariantIterInit] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantIterInit]]
 
   extension (func: GDExtensionInterfaceVariantIterInit) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstVariantPtr,
       r_iter: GDExtensionUninitializedVariantPtr,
       r_valid: Ptr[GDExtensionBool]
@@ -689,7 +689,7 @@ object GDExtensionInterfaceVariantIterNext {
   given Tag[GDExtensionInterfaceVariantIterNext] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantIterNext]]
 
   extension (func: GDExtensionInterfaceVariantIterNext) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstVariantPtr,
       r_iter: GDExtensionVariantPtr,
       r_valid: Ptr[GDExtensionBool]
@@ -711,7 +711,7 @@ object GDExtensionInterfaceVariantIterGet {
   given Tag[GDExtensionInterfaceVariantIterGet] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantIterGet]]
 
   extension (func: GDExtensionInterfaceVariantIterGet) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstVariantPtr,
       r_iter: GDExtensionVariantPtr,
       r_ret: GDExtensionUninitializedVariantPtr,
@@ -731,7 +731,7 @@ object GDExtensionInterfaceVariantHash {
   given Tag[GDExtensionInterfaceVariantHash] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantHash]]
 
   extension (func: GDExtensionInterfaceVariantHash) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstVariantPtr
     ): GDExtensionInt = func(p_self)
   } 
@@ -749,7 +749,7 @@ object GDExtensionInterfaceVariantRecursiveHash {
   given Tag[GDExtensionInterfaceVariantRecursiveHash] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantRecursiveHash]]
 
   extension (func: GDExtensionInterfaceVariantRecursiveHash) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstVariantPtr,
       p_recursion_count: GDExtensionInt
     ): GDExtensionInt = func(p_self, p_recursion_count)
@@ -768,7 +768,7 @@ object GDExtensionInterfaceVariantHashCompare {
   given Tag[GDExtensionInterfaceVariantHashCompare] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantHashCompare]]
 
   extension (func: GDExtensionInterfaceVariantHashCompare) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstVariantPtr,
       p_other: GDExtensionConstVariantPtr
     ): GDExtensionBool = func(p_self, p_other)
@@ -786,7 +786,7 @@ object GDExtensionInterfaceVariantBooleanize {
   given Tag[GDExtensionInterfaceVariantBooleanize] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantBooleanize]]
 
   extension (func: GDExtensionInterfaceVariantBooleanize) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstVariantPtr
     ): GDExtensionBool = func(p_self)
   } 
@@ -805,7 +805,7 @@ object GDExtensionInterfaceVariantDuplicate {
   given Tag[GDExtensionInterfaceVariantDuplicate] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantDuplicate]]
 
   extension (func: GDExtensionInterfaceVariantDuplicate) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstVariantPtr,
       r_ret: GDExtensionVariantPtr,
       p_deep: GDExtensionBool
@@ -825,7 +825,7 @@ object GDExtensionInterfaceVariantStringify {
   given Tag[GDExtensionInterfaceVariantStringify] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantStringify]]
 
   extension (func: GDExtensionInterfaceVariantStringify) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstVariantPtr,
       r_ret: GDExtensionStringPtr
     ): Unit = func(p_self, r_ret)
@@ -843,7 +843,7 @@ object GDExtensionInterfaceVariantGetType {
   given Tag[GDExtensionInterfaceVariantGetType] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantGetType]]
 
   extension (func: GDExtensionInterfaceVariantGetType) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstVariantPtr
     ): GDExtensionVariantType = func(p_self)
   } 
@@ -861,7 +861,7 @@ object GDExtensionInterfaceVariantHasMethod {
   given Tag[GDExtensionInterfaceVariantHasMethod] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantHasMethod]]
 
   extension (func: GDExtensionInterfaceVariantHasMethod) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstVariantPtr,
       p_method: GDExtensionConstStringNamePtr
     ): GDExtensionBool = func(p_self, p_method)
@@ -880,7 +880,7 @@ object GDExtensionInterfaceVariantHasMember {
   given Tag[GDExtensionInterfaceVariantHasMember] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantHasMember]]
 
   extension (func: GDExtensionInterfaceVariantHasMember) {
-    inline def apply(
+    def apply(
       p_type: GDExtensionVariantType,
       p_member: GDExtensionConstStringNamePtr
     ): GDExtensionBool = func(p_type, p_member)
@@ -900,7 +900,7 @@ object GDExtensionInterfaceVariantHasKey {
   given Tag[GDExtensionInterfaceVariantHasKey] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantHasKey]]
 
   extension (func: GDExtensionInterfaceVariantHasKey) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstVariantPtr,
       p_key: GDExtensionConstVariantPtr,
       r_valid: Ptr[GDExtensionBool]
@@ -921,7 +921,7 @@ object GDExtensionInterfaceVariantGetObjectInstanceId {
   given Tag[GDExtensionInterfaceVariantGetObjectInstanceId] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantGetObjectInstanceId]]
 
   extension (func: GDExtensionInterfaceVariantGetObjectInstanceId) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstVariantPtr
     ): GDObjectInstanceID = func(p_self)
   } 
@@ -939,7 +939,7 @@ object GDExtensionInterfaceVariantGetTypeName {
   given Tag[GDExtensionInterfaceVariantGetTypeName] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantGetTypeName]]
 
   extension (func: GDExtensionInterfaceVariantGetTypeName) {
-    inline def apply(
+    def apply(
       p_type: GDExtensionVariantType,
       r_name: GDExtensionUninitializedStringPtr
     ): Unit = func(p_type, r_name)
@@ -958,7 +958,7 @@ object GDExtensionInterfaceVariantCanConvert {
   given Tag[GDExtensionInterfaceVariantCanConvert] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantCanConvert]]
 
   extension (func: GDExtensionInterfaceVariantCanConvert) {
-    inline def apply(
+    def apply(
       p_from: GDExtensionVariantType,
       p_to: GDExtensionVariantType
     ): GDExtensionBool = func(p_from, p_to)
@@ -977,7 +977,7 @@ object GDExtensionInterfaceVariantCanConvertStrict {
   given Tag[GDExtensionInterfaceVariantCanConvertStrict] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantCanConvertStrict]]
 
   extension (func: GDExtensionInterfaceVariantCanConvertStrict) {
-    inline def apply(
+    def apply(
       p_from: GDExtensionVariantType,
       p_to: GDExtensionVariantType
     ): GDExtensionBool = func(p_from, p_to)
@@ -995,7 +995,7 @@ object GDExtensionInterfaceGetVariantFromTypeConstructor {
   given Tag[GDExtensionInterfaceGetVariantFromTypeConstructor] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceGetVariantFromTypeConstructor]]
 
   extension (func: GDExtensionInterfaceGetVariantFromTypeConstructor) {
-    inline def apply(
+    def apply(
       p_type: GDExtensionVariantType
     ): GDExtensionVariantFromTypeConstructorFunc = func(p_type)
   } 
@@ -1012,7 +1012,7 @@ object GDExtensionInterfaceGetVariantToTypeConstructor {
   given Tag[GDExtensionInterfaceGetVariantToTypeConstructor] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceGetVariantToTypeConstructor]]
 
   extension (func: GDExtensionInterfaceGetVariantToTypeConstructor) {
-    inline def apply(
+    def apply(
       p_type: GDExtensionVariantType
     ): GDExtensionTypeFromVariantConstructorFunc = func(p_type)
   } 
@@ -1034,7 +1034,7 @@ object GDExtensionInterfaceVariantGetPtrInternalGetter {
   given Tag[GDExtensionInterfaceVariantGetPtrInternalGetter] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantGetPtrInternalGetter]]
 
   extension (func: GDExtensionInterfaceVariantGetPtrInternalGetter) {
-    inline def apply(
+    def apply(
       p_type: GDExtensionVariantType
     ): GDExtensionVariantGetInternalPtrFunc = func(p_type)
   } 
@@ -1053,7 +1053,7 @@ object GDExtensionInterfaceVariantGetPtrOperatorEvaluator {
   given Tag[GDExtensionInterfaceVariantGetPtrOperatorEvaluator] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantGetPtrOperatorEvaluator]]
 
   extension (func: GDExtensionInterfaceVariantGetPtrOperatorEvaluator) {
-    inline def apply(
+    def apply(
       p_operator: GDExtensionVariantOperator,
       p_type_a: GDExtensionVariantType,
       p_type_b: GDExtensionVariantType
@@ -1074,7 +1074,7 @@ object GDExtensionInterfaceVariantGetPtrBuiltinMethod {
   given Tag[GDExtensionInterfaceVariantGetPtrBuiltinMethod] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantGetPtrBuiltinMethod]]
 
   extension (func: GDExtensionInterfaceVariantGetPtrBuiltinMethod) {
-    inline def apply(
+    def apply(
       p_type: GDExtensionVariantType,
       p_method: GDExtensionConstStringNamePtr,
       p_hash: GDExtensionInt
@@ -1094,7 +1094,7 @@ object GDExtensionInterfaceVariantGetPtrConstructor {
   given Tag[GDExtensionInterfaceVariantGetPtrConstructor] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantGetPtrConstructor]]
 
   extension (func: GDExtensionInterfaceVariantGetPtrConstructor) {
-    inline def apply(
+    def apply(
       p_type: GDExtensionVariantType,
       p_constructor: CInt
     ): GDExtensionPtrConstructor = func(p_type, p_constructor)
@@ -1112,7 +1112,7 @@ object GDExtensionInterfaceVariantGetPtrDestructor {
   given Tag[GDExtensionInterfaceVariantGetPtrDestructor] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantGetPtrDestructor]]
 
   extension (func: GDExtensionInterfaceVariantGetPtrDestructor) {
-    inline def apply(
+    def apply(
       p_type: GDExtensionVariantType
     ): GDExtensionPtrDestructor = func(p_type)
   } 
@@ -1133,7 +1133,7 @@ object GDExtensionInterfaceVariantConstruct {
   given Tag[GDExtensionInterfaceVariantConstruct] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantConstruct]]
 
   extension (func: GDExtensionInterfaceVariantConstruct) {
-    inline def apply(
+    def apply(
       p_type: GDExtensionVariantType,
       r_base: GDExtensionUninitializedVariantPtr,
       p_args: ConstPtr[GDExtensionConstVariantPtr],
@@ -1155,7 +1155,7 @@ object GDExtensionInterfaceVariantGetPtrSetter {
   given Tag[GDExtensionInterfaceVariantGetPtrSetter] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantGetPtrSetter]]
 
   extension (func: GDExtensionInterfaceVariantGetPtrSetter) {
-    inline def apply(
+    def apply(
       p_type: GDExtensionVariantType,
       p_member: GDExtensionConstStringNamePtr
     ): GDExtensionPtrSetter = func(p_type, p_member)
@@ -1174,7 +1174,7 @@ object GDExtensionInterfaceVariantGetPtrGetter {
   given Tag[GDExtensionInterfaceVariantGetPtrGetter] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantGetPtrGetter]]
 
   extension (func: GDExtensionInterfaceVariantGetPtrGetter) {
-    inline def apply(
+    def apply(
       p_type: GDExtensionVariantType,
       p_member: GDExtensionConstStringNamePtr
     ): GDExtensionPtrGetter = func(p_type, p_member)
@@ -1192,7 +1192,7 @@ object GDExtensionInterfaceVariantGetPtrIndexedSetter {
   given Tag[GDExtensionInterfaceVariantGetPtrIndexedSetter] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantGetPtrIndexedSetter]]
 
   extension (func: GDExtensionInterfaceVariantGetPtrIndexedSetter) {
-    inline def apply(
+    def apply(
       p_type: GDExtensionVariantType
     ): GDExtensionPtrIndexedSetter = func(p_type)
   } 
@@ -1209,7 +1209,7 @@ object GDExtensionInterfaceVariantGetPtrIndexedGetter {
   given Tag[GDExtensionInterfaceVariantGetPtrIndexedGetter] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantGetPtrIndexedGetter]]
 
   extension (func: GDExtensionInterfaceVariantGetPtrIndexedGetter) {
-    inline def apply(
+    def apply(
       p_type: GDExtensionVariantType
     ): GDExtensionPtrIndexedGetter = func(p_type)
   } 
@@ -1226,7 +1226,7 @@ object GDExtensionInterfaceVariantGetPtrKeyedSetter {
   given Tag[GDExtensionInterfaceVariantGetPtrKeyedSetter] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantGetPtrKeyedSetter]]
 
   extension (func: GDExtensionInterfaceVariantGetPtrKeyedSetter) {
-    inline def apply(
+    def apply(
       p_type: GDExtensionVariantType
     ): GDExtensionPtrKeyedSetter = func(p_type)
   } 
@@ -1243,7 +1243,7 @@ object GDExtensionInterfaceVariantGetPtrKeyedGetter {
   given Tag[GDExtensionInterfaceVariantGetPtrKeyedGetter] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantGetPtrKeyedGetter]]
 
   extension (func: GDExtensionInterfaceVariantGetPtrKeyedGetter) {
-    inline def apply(
+    def apply(
       p_type: GDExtensionVariantType
     ): GDExtensionPtrKeyedGetter = func(p_type)
   } 
@@ -1260,7 +1260,7 @@ object GDExtensionInterfaceVariantGetPtrKeyedChecker {
   given Tag[GDExtensionInterfaceVariantGetPtrKeyedChecker] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantGetPtrKeyedChecker]]
 
   extension (func: GDExtensionInterfaceVariantGetPtrKeyedChecker) {
-    inline def apply(
+    def apply(
       p_type: GDExtensionVariantType
     ): GDExtensionPtrKeyedChecker = func(p_type)
   } 
@@ -1279,7 +1279,7 @@ object GDExtensionInterfaceVariantGetConstantValue {
   given Tag[GDExtensionInterfaceVariantGetConstantValue] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantGetConstantValue]]
 
   extension (func: GDExtensionInterfaceVariantGetConstantValue) {
-    inline def apply(
+    def apply(
       p_type: GDExtensionVariantType,
       p_constant: GDExtensionConstStringNamePtr,
       r_ret: GDExtensionUninitializedVariantPtr
@@ -1299,7 +1299,7 @@ object GDExtensionInterfaceVariantGetPtrUtilityFunction {
   given Tag[GDExtensionInterfaceVariantGetPtrUtilityFunction] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceVariantGetPtrUtilityFunction]]
 
   extension (func: GDExtensionInterfaceVariantGetPtrUtilityFunction) {
-    inline def apply(
+    def apply(
       p_function: GDExtensionConstStringNamePtr,
       p_hash: GDExtensionInt
     ): GDExtensionPtrUtilityFunction = func(p_function, p_hash)
@@ -1318,7 +1318,7 @@ object GDExtensionInterfaceStringNewWithLatin1Chars {
   given Tag[GDExtensionInterfaceStringNewWithLatin1Chars] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringNewWithLatin1Chars]]
 
   extension (func: GDExtensionInterfaceStringNewWithLatin1Chars) {
-    inline def apply(
+    def apply(
       r_dest: GDExtensionUninitializedStringPtr,
       p_contents: ConstPtr[CChar]
     ): Unit = func(r_dest, p_contents)
@@ -1337,7 +1337,7 @@ object GDExtensionInterfaceStringNewWithUtf8Chars {
   given Tag[GDExtensionInterfaceStringNewWithUtf8Chars] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringNewWithUtf8Chars]]
 
   extension (func: GDExtensionInterfaceStringNewWithUtf8Chars) {
-    inline def apply(
+    def apply(
       r_dest: GDExtensionUninitializedStringPtr,
       p_contents: ConstPtr[CChar]
     ): Unit = func(r_dest, p_contents)
@@ -1356,7 +1356,7 @@ object GDExtensionInterfaceStringNewWithUtf16Chars {
   given Tag[GDExtensionInterfaceStringNewWithUtf16Chars] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringNewWithUtf16Chars]]
 
   extension (func: GDExtensionInterfaceStringNewWithUtf16Chars) {
-    inline def apply(
+    def apply(
       r_dest: GDExtensionUninitializedStringPtr,
       p_contents: ConstPtr[CChar16]
     ): Unit = func(r_dest, p_contents)
@@ -1375,7 +1375,7 @@ object GDExtensionInterfaceStringNewWithUtf32Chars {
   given Tag[GDExtensionInterfaceStringNewWithUtf32Chars] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringNewWithUtf32Chars]]
 
   extension (func: GDExtensionInterfaceStringNewWithUtf32Chars) {
-    inline def apply(
+    def apply(
       r_dest: GDExtensionUninitializedStringPtr,
       p_contents: ConstPtr[CChar32]
     ): Unit = func(r_dest, p_contents)
@@ -1394,7 +1394,7 @@ object GDExtensionInterfaceStringNewWithWideChars {
   given Tag[GDExtensionInterfaceStringNewWithWideChars] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringNewWithWideChars]]
 
   extension (func: GDExtensionInterfaceStringNewWithWideChars) {
-    inline def apply(
+    def apply(
       r_dest: GDExtensionUninitializedStringPtr,
       p_contents: ConstPtr[CWideChar]
     ): Unit = func(r_dest, p_contents)
@@ -1414,7 +1414,7 @@ object GDExtensionInterfaceStringNewWithLatin1CharsAndLen {
   given Tag[GDExtensionInterfaceStringNewWithLatin1CharsAndLen] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringNewWithLatin1CharsAndLen]]
 
   extension (func: GDExtensionInterfaceStringNewWithLatin1CharsAndLen) {
-    inline def apply(
+    def apply(
       r_dest: GDExtensionUninitializedStringPtr,
       p_contents: ConstPtr[CChar],
       p_size: GDExtensionInt
@@ -1437,7 +1437,7 @@ object GDExtensionInterfaceStringNewWithUtf8CharsAndLen {
   given Tag[GDExtensionInterfaceStringNewWithUtf8CharsAndLen] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringNewWithUtf8CharsAndLen]]
 
   extension (func: GDExtensionInterfaceStringNewWithUtf8CharsAndLen) {
-    inline def apply(
+    def apply(
       r_dest: GDExtensionUninitializedStringPtr,
       p_contents: ConstPtr[CChar],
       p_size: GDExtensionInt
@@ -1458,7 +1458,7 @@ object GDExtensionInterfaceStringNewWithUtf8CharsAndLen2 {
   given Tag[GDExtensionInterfaceStringNewWithUtf8CharsAndLen2] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringNewWithUtf8CharsAndLen2]]
 
   extension (func: GDExtensionInterfaceStringNewWithUtf8CharsAndLen2) {
-    inline def apply(
+    def apply(
       r_dest: GDExtensionUninitializedStringPtr,
       p_contents: ConstPtr[CChar],
       p_size: GDExtensionInt
@@ -1481,7 +1481,7 @@ object GDExtensionInterfaceStringNewWithUtf16CharsAndLen {
   given Tag[GDExtensionInterfaceStringNewWithUtf16CharsAndLen] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringNewWithUtf16CharsAndLen]]
 
   extension (func: GDExtensionInterfaceStringNewWithUtf16CharsAndLen) {
-    inline def apply(
+    def apply(
       r_dest: GDExtensionUninitializedStringPtr,
       p_contents: ConstPtr[CChar16],
       p_char_count: GDExtensionInt
@@ -1503,7 +1503,7 @@ object GDExtensionInterfaceStringNewWithUtf16CharsAndLen2 {
   given Tag[GDExtensionInterfaceStringNewWithUtf16CharsAndLen2] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringNewWithUtf16CharsAndLen2]]
 
   extension (func: GDExtensionInterfaceStringNewWithUtf16CharsAndLen2) {
-    inline def apply(
+    def apply(
       r_dest: GDExtensionUninitializedStringPtr,
       p_contents: ConstPtr[CChar16],
       p_char_count: GDExtensionInt,
@@ -1525,7 +1525,7 @@ object GDExtensionInterfaceStringNewWithUtf32CharsAndLen {
   given Tag[GDExtensionInterfaceStringNewWithUtf32CharsAndLen] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringNewWithUtf32CharsAndLen]]
 
   extension (func: GDExtensionInterfaceStringNewWithUtf32CharsAndLen) {
-    inline def apply(
+    def apply(
       r_dest: GDExtensionUninitializedStringPtr,
       p_contents: ConstPtr[CChar32],
       p_char_count: GDExtensionInt
@@ -1546,7 +1546,7 @@ object GDExtensionInterfaceStringNewWithWideCharsAndLen {
   given Tag[GDExtensionInterfaceStringNewWithWideCharsAndLen] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringNewWithWideCharsAndLen]]
 
   extension (func: GDExtensionInterfaceStringNewWithWideCharsAndLen) {
-    inline def apply(
+    def apply(
       r_dest: GDExtensionUninitializedStringPtr,
       p_contents: ConstPtr[CWideChar],
       p_char_count: GDExtensionInt
@@ -1568,7 +1568,7 @@ object GDExtensionInterfaceStringToLatin1Chars {
   given Tag[GDExtensionInterfaceStringToLatin1Chars] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringToLatin1Chars]]
 
   extension (func: GDExtensionInterfaceStringToLatin1Chars) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstStringPtr,
       r_text: Ptr[CChar],
       p_max_write_length: GDExtensionInt
@@ -1590,7 +1590,7 @@ object GDExtensionInterfaceStringToUtf8Chars {
   given Tag[GDExtensionInterfaceStringToUtf8Chars] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringToUtf8Chars]]
 
   extension (func: GDExtensionInterfaceStringToUtf8Chars) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstStringPtr,
       r_text: Ptr[CChar],
       p_max_write_length: GDExtensionInt
@@ -1612,7 +1612,7 @@ object GDExtensionInterfaceStringToUtf16Chars {
   given Tag[GDExtensionInterfaceStringToUtf16Chars] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringToUtf16Chars]]
 
   extension (func: GDExtensionInterfaceStringToUtf16Chars) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstStringPtr,
       r_text: Ptr[CChar16],
       p_max_write_length: GDExtensionInt
@@ -1634,7 +1634,7 @@ object GDExtensionInterfaceStringToUtf32Chars {
   given Tag[GDExtensionInterfaceStringToUtf32Chars] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringToUtf32Chars]]
 
   extension (func: GDExtensionInterfaceStringToUtf32Chars) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstStringPtr,
       r_text: Ptr[CChar32],
       p_max_write_length: GDExtensionInt
@@ -1656,7 +1656,7 @@ object GDExtensionInterfaceStringToWideChars {
   given Tag[GDExtensionInterfaceStringToWideChars] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringToWideChars]]
 
   extension (func: GDExtensionInterfaceStringToWideChars) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstStringPtr,
       r_text: Ptr[CWideChar],
       p_max_write_length: GDExtensionInt
@@ -1676,7 +1676,7 @@ object GDExtensionInterfaceStringOperatorIndex {
   given Tag[GDExtensionInterfaceStringOperatorIndex] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringOperatorIndex]]
 
   extension (func: GDExtensionInterfaceStringOperatorIndex) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionStringPtr,
       p_index: GDExtensionInt
     ): Ptr[CChar32] = func(p_self, p_index)
@@ -1695,7 +1695,7 @@ object GDExtensionInterfaceStringOperatorIndexConst {
   given Tag[GDExtensionInterfaceStringOperatorIndexConst] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringOperatorIndexConst]]
 
   extension (func: GDExtensionInterfaceStringOperatorIndexConst) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstStringPtr,
       p_index: GDExtensionInt
     ): ConstPtr[CChar32] = func(p_self, p_index)
@@ -1714,7 +1714,7 @@ object GDExtensionInterfaceStringOperatorPlusEqString {
   given Tag[GDExtensionInterfaceStringOperatorPlusEqString] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringOperatorPlusEqString]]
 
   extension (func: GDExtensionInterfaceStringOperatorPlusEqString) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionStringPtr,
       p_b: GDExtensionConstStringPtr
     ): Unit = func(p_self, p_b)
@@ -1733,7 +1733,7 @@ object GDExtensionInterfaceStringOperatorPlusEqChar {
   given Tag[GDExtensionInterfaceStringOperatorPlusEqChar] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringOperatorPlusEqChar]]
 
   extension (func: GDExtensionInterfaceStringOperatorPlusEqChar) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionStringPtr,
       p_b: CChar32
     ): Unit = func(p_self, p_b)
@@ -1752,7 +1752,7 @@ object GDExtensionInterfaceStringOperatorPlusEqCstr {
   given Tag[GDExtensionInterfaceStringOperatorPlusEqCstr] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringOperatorPlusEqCstr]]
 
   extension (func: GDExtensionInterfaceStringOperatorPlusEqCstr) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionStringPtr,
       p_b: ConstPtr[CChar]
     ): Unit = func(p_self, p_b)
@@ -1771,7 +1771,7 @@ object GDExtensionInterfaceStringOperatorPlusEqWcstr {
   given Tag[GDExtensionInterfaceStringOperatorPlusEqWcstr] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringOperatorPlusEqWcstr]]
 
   extension (func: GDExtensionInterfaceStringOperatorPlusEqWcstr) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionStringPtr,
       p_b: ConstPtr[CWideChar]
     ): Unit = func(p_self, p_b)
@@ -1790,7 +1790,7 @@ object GDExtensionInterfaceStringOperatorPlusEqC32str {
   given Tag[GDExtensionInterfaceStringOperatorPlusEqC32str] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringOperatorPlusEqC32str]]
 
   extension (func: GDExtensionInterfaceStringOperatorPlusEqC32str) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionStringPtr,
       p_b: ConstPtr[CChar32]
     ): Unit = func(p_self, p_b)
@@ -1814,7 +1814,7 @@ object GDExtensionInterfaceStringResize {
   given Tag[GDExtensionInterfaceStringResize] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringResize]]
 
   extension (func: GDExtensionInterfaceStringResize) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionStringPtr,
       p_resize: GDExtensionInt
     ): GDExtensionInt = func(p_self, p_resize)
@@ -1840,7 +1840,7 @@ object GDExtensionInterfaceStringNameNewWithLatin1Chars {
   given Tag[GDExtensionInterfaceStringNameNewWithLatin1Chars] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringNameNewWithLatin1Chars]]
 
   extension (func: GDExtensionInterfaceStringNameNewWithLatin1Chars) {
-    inline def apply(
+    def apply(
       r_dest: GDExtensionUninitializedStringNamePtr,
       p_contents: ConstPtr[CChar],
       p_is_static: GDExtensionBool
@@ -1860,7 +1860,7 @@ object GDExtensionInterfaceStringNameNewWithUtf8Chars {
   given Tag[GDExtensionInterfaceStringNameNewWithUtf8Chars] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringNameNewWithUtf8Chars]]
 
   extension (func: GDExtensionInterfaceStringNameNewWithUtf8Chars) {
-    inline def apply(
+    def apply(
       r_dest: GDExtensionUninitializedStringNamePtr,
       p_contents: ConstPtr[CChar]
     ): Unit = func(r_dest, p_contents)
@@ -1880,7 +1880,7 @@ object GDExtensionInterfaceStringNameNewWithUtf8CharsAndLen {
   given Tag[GDExtensionInterfaceStringNameNewWithUtf8CharsAndLen] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceStringNameNewWithUtf8CharsAndLen]]
 
   extension (func: GDExtensionInterfaceStringNameNewWithUtf8CharsAndLen) {
-    inline def apply(
+    def apply(
       r_dest: GDExtensionUninitializedStringNamePtr,
       p_contents: ConstPtr[CChar],
       p_size: GDExtensionInt
@@ -1901,7 +1901,7 @@ object GDExtensionInterfaceXmlParserOpenBuffer {
   given Tag[GDExtensionInterfaceXmlParserOpenBuffer] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceXmlParserOpenBuffer]]
 
   extension (func: GDExtensionInterfaceXmlParserOpenBuffer) {
-    inline def apply(
+    def apply(
       p_instance: GDExtensionObjectPtr,
       p_buffer: ConstPtr[UByte],
       p_size: CSize
@@ -1922,7 +1922,7 @@ object GDExtensionInterfaceFileAccessStoreBuffer {
   given Tag[GDExtensionInterfaceFileAccessStoreBuffer] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceFileAccessStoreBuffer]]
 
   extension (func: GDExtensionInterfaceFileAccessStoreBuffer) {
-    inline def apply(
+    def apply(
       p_instance: GDExtensionObjectPtr,
       p_src: ConstPtr[UByte],
       p_length: CUnsignedLongLong
@@ -1943,7 +1943,7 @@ object GDExtensionInterfaceFileAccessGetBuffer {
   given Tag[GDExtensionInterfaceFileAccessGetBuffer] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceFileAccessGetBuffer]]
 
   extension (func: GDExtensionInterfaceFileAccessGetBuffer) {
-    inline def apply(
+    def apply(
       p_instance: GDExtensionConstObjectPtr,
       p_dst: Ptr[UByte],
       p_length: CUnsignedLongLong
@@ -1962,7 +1962,7 @@ object GDExtensionInterfaceImagePtrw {
   given Tag[GDExtensionInterfaceImagePtrw] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceImagePtrw]]
 
   extension (func: GDExtensionInterfaceImagePtrw) {
-    inline def apply(
+    def apply(
       p_instance: GDExtensionObjectPtr
     ): Ptr[UByte] = func(p_instance)
   } 
@@ -1979,7 +1979,7 @@ object GDExtensionInterfaceImagePtr {
   given Tag[GDExtensionInterfaceImagePtr] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceImagePtr]]
 
   extension (func: GDExtensionInterfaceImagePtr) {
-    inline def apply(
+    def apply(
       p_instance: GDExtensionObjectPtr
     ): ConstPtr[UByte] = func(p_instance)
   } 
@@ -2002,7 +2002,7 @@ object GDExtensionInterfaceWorkerThreadPoolAddNativeGroupTask {
   given Tag[GDExtensionInterfaceWorkerThreadPoolAddNativeGroupTask] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceWorkerThreadPoolAddNativeGroupTask]]
 
   extension (func: GDExtensionInterfaceWorkerThreadPoolAddNativeGroupTask) {
-    inline def apply(
+    def apply(
       p_instance: GDExtensionObjectPtr,
       p_func: GDExtensionWorkerThreadPoolGroupTask,
       p_userdata: CVoidPtr,
@@ -2029,7 +2029,7 @@ object GDExtensionInterfaceWorkerThreadPoolAddNativeTask {
   given Tag[GDExtensionInterfaceWorkerThreadPoolAddNativeTask] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceWorkerThreadPoolAddNativeTask]]
 
   extension (func: GDExtensionInterfaceWorkerThreadPoolAddNativeTask) {
-    inline def apply(
+    def apply(
       p_instance: GDExtensionObjectPtr,
       p_func: GDExtensionWorkerThreadPoolTask,
       p_userdata: CVoidPtr,
@@ -2051,7 +2051,7 @@ object GDExtensionInterfacePackedByteArrayOperatorIndex {
   given Tag[GDExtensionInterfacePackedByteArrayOperatorIndex] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePackedByteArrayOperatorIndex]]
 
   extension (func: GDExtensionInterfacePackedByteArrayOperatorIndex) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionTypePtr,
       p_index: GDExtensionInt
     ): Ptr[UByte] = func(p_self, p_index)
@@ -2070,7 +2070,7 @@ object GDExtensionInterfacePackedByteArrayOperatorIndexConst {
   given Tag[GDExtensionInterfacePackedByteArrayOperatorIndexConst] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePackedByteArrayOperatorIndexConst]]
 
   extension (func: GDExtensionInterfacePackedByteArrayOperatorIndexConst) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstTypePtr,
       p_index: GDExtensionInt
     ): ConstPtr[UByte] = func(p_self, p_index)
@@ -2089,7 +2089,7 @@ object GDExtensionInterfacePackedFloat32ArrayOperatorIndex {
   given Tag[GDExtensionInterfacePackedFloat32ArrayOperatorIndex] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePackedFloat32ArrayOperatorIndex]]
 
   extension (func: GDExtensionInterfacePackedFloat32ArrayOperatorIndex) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionTypePtr,
       p_index: GDExtensionInt
     ): Ptr[CFloat] = func(p_self, p_index)
@@ -2108,7 +2108,7 @@ object GDExtensionInterfacePackedFloat32ArrayOperatorIndexConst {
   given Tag[GDExtensionInterfacePackedFloat32ArrayOperatorIndexConst] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePackedFloat32ArrayOperatorIndexConst]]
 
   extension (func: GDExtensionInterfacePackedFloat32ArrayOperatorIndexConst) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstTypePtr,
       p_index: GDExtensionInt
     ): ConstPtr[CFloat] = func(p_self, p_index)
@@ -2127,7 +2127,7 @@ object GDExtensionInterfacePackedFloat64ArrayOperatorIndex {
   given Tag[GDExtensionInterfacePackedFloat64ArrayOperatorIndex] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePackedFloat64ArrayOperatorIndex]]
 
   extension (func: GDExtensionInterfacePackedFloat64ArrayOperatorIndex) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionTypePtr,
       p_index: GDExtensionInt
     ): Ptr[CDouble] = func(p_self, p_index)
@@ -2146,7 +2146,7 @@ object GDExtensionInterfacePackedFloat64ArrayOperatorIndexConst {
   given Tag[GDExtensionInterfacePackedFloat64ArrayOperatorIndexConst] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePackedFloat64ArrayOperatorIndexConst]]
 
   extension (func: GDExtensionInterfacePackedFloat64ArrayOperatorIndexConst) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstTypePtr,
       p_index: GDExtensionInt
     ): ConstPtr[CDouble] = func(p_self, p_index)
@@ -2165,7 +2165,7 @@ object GDExtensionInterfacePackedInt32ArrayOperatorIndex {
   given Tag[GDExtensionInterfacePackedInt32ArrayOperatorIndex] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePackedInt32ArrayOperatorIndex]]
 
   extension (func: GDExtensionInterfacePackedInt32ArrayOperatorIndex) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionTypePtr,
       p_index: GDExtensionInt
     ): Ptr[CInt] = func(p_self, p_index)
@@ -2184,7 +2184,7 @@ object GDExtensionInterfacePackedInt32ArrayOperatorIndexConst {
   given Tag[GDExtensionInterfacePackedInt32ArrayOperatorIndexConst] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePackedInt32ArrayOperatorIndexConst]]
 
   extension (func: GDExtensionInterfacePackedInt32ArrayOperatorIndexConst) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstTypePtr,
       p_index: GDExtensionInt
     ): ConstPtr[CInt] = func(p_self, p_index)
@@ -2203,7 +2203,7 @@ object GDExtensionInterfacePackedInt64ArrayOperatorIndex {
   given Tag[GDExtensionInterfacePackedInt64ArrayOperatorIndex] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePackedInt64ArrayOperatorIndex]]
 
   extension (func: GDExtensionInterfacePackedInt64ArrayOperatorIndex) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionTypePtr,
       p_index: GDExtensionInt
     ): Ptr[CLongLong] = func(p_self, p_index)
@@ -2222,7 +2222,7 @@ object GDExtensionInterfacePackedInt64ArrayOperatorIndexConst {
   given Tag[GDExtensionInterfacePackedInt64ArrayOperatorIndexConst] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePackedInt64ArrayOperatorIndexConst]]
 
   extension (func: GDExtensionInterfacePackedInt64ArrayOperatorIndexConst) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstTypePtr,
       p_index: GDExtensionInt
     ): ConstPtr[CLongLong] = func(p_self, p_index)
@@ -2241,7 +2241,7 @@ object GDExtensionInterfacePackedStringArrayOperatorIndex {
   given Tag[GDExtensionInterfacePackedStringArrayOperatorIndex] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePackedStringArrayOperatorIndex]]
 
   extension (func: GDExtensionInterfacePackedStringArrayOperatorIndex) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionTypePtr,
       p_index: GDExtensionInt
     ): GDExtensionStringPtr = func(p_self, p_index)
@@ -2260,7 +2260,7 @@ object GDExtensionInterfacePackedStringArrayOperatorIndexConst {
   given Tag[GDExtensionInterfacePackedStringArrayOperatorIndexConst] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePackedStringArrayOperatorIndexConst]]
 
   extension (func: GDExtensionInterfacePackedStringArrayOperatorIndexConst) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstTypePtr,
       p_index: GDExtensionInt
     ): GDExtensionStringPtr = func(p_self, p_index)
@@ -2279,7 +2279,7 @@ object GDExtensionInterfacePackedVector2ArrayOperatorIndex {
   given Tag[GDExtensionInterfacePackedVector2ArrayOperatorIndex] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePackedVector2ArrayOperatorIndex]]
 
   extension (func: GDExtensionInterfacePackedVector2ArrayOperatorIndex) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionTypePtr,
       p_index: GDExtensionInt
     ): GDExtensionTypePtr = func(p_self, p_index)
@@ -2298,7 +2298,7 @@ object GDExtensionInterfacePackedVector2ArrayOperatorIndexConst {
   given Tag[GDExtensionInterfacePackedVector2ArrayOperatorIndexConst] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePackedVector2ArrayOperatorIndexConst]]
 
   extension (func: GDExtensionInterfacePackedVector2ArrayOperatorIndexConst) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstTypePtr,
       p_index: GDExtensionInt
     ): GDExtensionTypePtr = func(p_self, p_index)
@@ -2317,7 +2317,7 @@ object GDExtensionInterfacePackedVector3ArrayOperatorIndex {
   given Tag[GDExtensionInterfacePackedVector3ArrayOperatorIndex] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePackedVector3ArrayOperatorIndex]]
 
   extension (func: GDExtensionInterfacePackedVector3ArrayOperatorIndex) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionTypePtr,
       p_index: GDExtensionInt
     ): GDExtensionTypePtr = func(p_self, p_index)
@@ -2336,7 +2336,7 @@ object GDExtensionInterfacePackedVector3ArrayOperatorIndexConst {
   given Tag[GDExtensionInterfacePackedVector3ArrayOperatorIndexConst] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePackedVector3ArrayOperatorIndexConst]]
 
   extension (func: GDExtensionInterfacePackedVector3ArrayOperatorIndexConst) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstTypePtr,
       p_index: GDExtensionInt
     ): GDExtensionTypePtr = func(p_self, p_index)
@@ -2355,7 +2355,7 @@ object GDExtensionInterfacePackedVector4ArrayOperatorIndex {
   given Tag[GDExtensionInterfacePackedVector4ArrayOperatorIndex] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePackedVector4ArrayOperatorIndex]]
 
   extension (func: GDExtensionInterfacePackedVector4ArrayOperatorIndex) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionTypePtr,
       p_index: GDExtensionInt
     ): GDExtensionTypePtr = func(p_self, p_index)
@@ -2374,7 +2374,7 @@ object GDExtensionInterfacePackedVector4ArrayOperatorIndexConst {
   given Tag[GDExtensionInterfacePackedVector4ArrayOperatorIndexConst] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePackedVector4ArrayOperatorIndexConst]]
 
   extension (func: GDExtensionInterfacePackedVector4ArrayOperatorIndexConst) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstTypePtr,
       p_index: GDExtensionInt
     ): GDExtensionTypePtr = func(p_self, p_index)
@@ -2393,7 +2393,7 @@ object GDExtensionInterfacePackedColorArrayOperatorIndex {
   given Tag[GDExtensionInterfacePackedColorArrayOperatorIndex] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePackedColorArrayOperatorIndex]]
 
   extension (func: GDExtensionInterfacePackedColorArrayOperatorIndex) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionTypePtr,
       p_index: GDExtensionInt
     ): GDExtensionTypePtr = func(p_self, p_index)
@@ -2412,7 +2412,7 @@ object GDExtensionInterfacePackedColorArrayOperatorIndexConst {
   given Tag[GDExtensionInterfacePackedColorArrayOperatorIndexConst] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePackedColorArrayOperatorIndexConst]]
 
   extension (func: GDExtensionInterfacePackedColorArrayOperatorIndexConst) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstTypePtr,
       p_index: GDExtensionInt
     ): GDExtensionTypePtr = func(p_self, p_index)
@@ -2431,7 +2431,7 @@ object GDExtensionInterfaceArrayOperatorIndex {
   given Tag[GDExtensionInterfaceArrayOperatorIndex] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceArrayOperatorIndex]]
 
   extension (func: GDExtensionInterfaceArrayOperatorIndex) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionTypePtr,
       p_index: GDExtensionInt
     ): GDExtensionVariantPtr = func(p_self, p_index)
@@ -2450,7 +2450,7 @@ object GDExtensionInterfaceArrayOperatorIndexConst {
   given Tag[GDExtensionInterfaceArrayOperatorIndexConst] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceArrayOperatorIndexConst]]
 
   extension (func: GDExtensionInterfaceArrayOperatorIndexConst) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstTypePtr,
       p_index: GDExtensionInt
     ): GDExtensionVariantPtr = func(p_self, p_index)
@@ -2471,7 +2471,7 @@ object GDExtensionInterfaceArrayRef {
   given Tag[GDExtensionInterfaceArrayRef] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceArrayRef]]
 
   extension (func: GDExtensionInterfaceArrayRef) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionTypePtr,
       p_from: GDExtensionConstTypePtr
     ): Unit = func(p_self, p_from)
@@ -2492,7 +2492,7 @@ object GDExtensionInterfaceArraySetTyped {
   given Tag[GDExtensionInterfaceArraySetTyped] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceArraySetTyped]]
 
   extension (func: GDExtensionInterfaceArraySetTyped) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionTypePtr,
       p_type: GDExtensionVariantType,
       p_class_name: GDExtensionConstStringNamePtr,
@@ -2513,7 +2513,7 @@ object GDExtensionInterfaceDictionaryOperatorIndex {
   given Tag[GDExtensionInterfaceDictionaryOperatorIndex] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceDictionaryOperatorIndex]]
 
   extension (func: GDExtensionInterfaceDictionaryOperatorIndex) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionTypePtr,
       p_key: GDExtensionConstVariantPtr
     ): GDExtensionVariantPtr = func(p_self, p_key)
@@ -2532,7 +2532,7 @@ object GDExtensionInterfaceDictionaryOperatorIndexConst {
   given Tag[GDExtensionInterfaceDictionaryOperatorIndexConst] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceDictionaryOperatorIndexConst]]
 
   extension (func: GDExtensionInterfaceDictionaryOperatorIndexConst) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionConstTypePtr,
       p_key: GDExtensionConstVariantPtr
     ): GDExtensionVariantPtr = func(p_self, p_key)
@@ -2556,7 +2556,7 @@ object GDExtensionInterfaceDictionarySetTyped {
   given Tag[GDExtensionInterfaceDictionarySetTyped] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceDictionarySetTyped]]
 
   extension (func: GDExtensionInterfaceDictionarySetTyped) {
-    inline def apply(
+    def apply(
       p_self: GDExtensionTypePtr,
       p_key_type: GDExtensionVariantType,
       p_key_class_name: GDExtensionConstStringNamePtr,
@@ -2584,7 +2584,7 @@ object GDExtensionInterfaceObjectMethodBindCall {
   given Tag[GDExtensionInterfaceObjectMethodBindCall] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceObjectMethodBindCall]]
 
   extension (func: GDExtensionInterfaceObjectMethodBindCall) {
-    inline def apply(
+    def apply(
       p_method_bind: GDExtensionMethodBindPtr,
       p_instance: GDExtensionObjectPtr,
       p_args: ConstPtr[GDExtensionConstVariantPtr],
@@ -2609,7 +2609,7 @@ object GDExtensionInterfaceObjectMethodBindPtrcall {
   given Tag[GDExtensionInterfaceObjectMethodBindPtrcall] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceObjectMethodBindPtrcall]]
 
   extension (func: GDExtensionInterfaceObjectMethodBindPtrcall) {
-    inline def apply(
+    def apply(
       p_method_bind: GDExtensionMethodBindPtr,
       p_instance: GDExtensionObjectPtr,
       p_args: ConstPtr[GDExtensionConstTypePtr],
@@ -2629,7 +2629,7 @@ object GDExtensionInterfaceObjectDestroy {
   given Tag[GDExtensionInterfaceObjectDestroy] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceObjectDestroy]]
 
   extension (func: GDExtensionInterfaceObjectDestroy) {
-    inline def apply(
+    def apply(
       p_o: GDExtensionObjectPtr
     ): Unit = func(p_o)
   } 
@@ -2646,7 +2646,7 @@ object GDExtensionInterfaceGlobalGetSingleton {
   given Tag[GDExtensionInterfaceGlobalGetSingleton] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceGlobalGetSingleton]]
 
   extension (func: GDExtensionInterfaceGlobalGetSingleton) {
-    inline def apply(
+    def apply(
       p_name: GDExtensionConstStringNamePtr
     ): GDExtensionObjectPtr = func(p_name)
   } 
@@ -2665,7 +2665,7 @@ object GDExtensionInterfaceObjectGetInstanceBinding {
   given Tag[GDExtensionInterfaceObjectGetInstanceBinding] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceObjectGetInstanceBinding]]
 
   extension (func: GDExtensionInterfaceObjectGetInstanceBinding) {
-    inline def apply(
+    def apply(
       p_o: GDExtensionObjectPtr,
       p_token: CVoidPtr,
       p_callbacks: ConstPtr[GDExtensionInstanceBindingCallbacks]
@@ -2687,7 +2687,7 @@ object GDExtensionInterfaceObjectSetInstanceBinding {
   given Tag[GDExtensionInterfaceObjectSetInstanceBinding] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceObjectSetInstanceBinding]]
 
   extension (func: GDExtensionInterfaceObjectSetInstanceBinding) {
-    inline def apply(
+    def apply(
       p_o: GDExtensionObjectPtr,
       p_token: CVoidPtr,
       p_binding: CVoidPtr,
@@ -2708,7 +2708,7 @@ object GDExtensionInterfaceObjectFreeInstanceBinding {
   given Tag[GDExtensionInterfaceObjectFreeInstanceBinding] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceObjectFreeInstanceBinding]]
 
   extension (func: GDExtensionInterfaceObjectFreeInstanceBinding) {
-    inline def apply(
+    def apply(
       p_o: GDExtensionObjectPtr,
       p_token: CVoidPtr
     ): Unit = func(p_o, p_token)
@@ -2729,7 +2729,7 @@ object GDExtensionInterfaceObjectSetInstance {
   given Tag[GDExtensionInterfaceObjectSetInstance] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceObjectSetInstance]]
 
   extension (func: GDExtensionInterfaceObjectSetInstance) {
-    inline def apply(
+    def apply(
       p_o: GDExtensionObjectPtr,
       p_classname: GDExtensionConstStringNamePtr,
       p_instance: GDExtensionClassInstancePtr
@@ -2752,7 +2752,7 @@ object GDExtensionInterfaceObjectGetClassName {
   given Tag[GDExtensionInterfaceObjectGetClassName] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceObjectGetClassName]]
 
   extension (func: GDExtensionInterfaceObjectGetClassName) {
-    inline def apply(
+    def apply(
       p_object: GDExtensionConstObjectPtr,
       p_library: GDExtensionClassLibraryPtr,
       r_class_name: GDExtensionUninitializedStringNamePtr
@@ -2772,7 +2772,7 @@ object GDExtensionInterfaceObjectCastTo {
   given Tag[GDExtensionInterfaceObjectCastTo] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceObjectCastTo]]
 
   extension (func: GDExtensionInterfaceObjectCastTo) {
-    inline def apply(
+    def apply(
       p_object: GDExtensionConstObjectPtr,
       p_class_tag: CVoidPtr
     ): GDExtensionObjectPtr = func(p_object, p_class_tag)
@@ -2790,7 +2790,7 @@ object GDExtensionInterfaceObjectGetInstanceFromId {
   given Tag[GDExtensionInterfaceObjectGetInstanceFromId] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceObjectGetInstanceFromId]]
 
   extension (func: GDExtensionInterfaceObjectGetInstanceFromId) {
-    inline def apply(
+    def apply(
       p_instance_id: GDObjectInstanceID
     ): GDExtensionObjectPtr = func(p_instance_id)
   } 
@@ -2807,7 +2807,7 @@ object GDExtensionInterfaceObjectGetInstanceId {
   given Tag[GDExtensionInterfaceObjectGetInstanceId] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceObjectGetInstanceId]]
 
   extension (func: GDExtensionInterfaceObjectGetInstanceId) {
-    inline def apply(
+    def apply(
       p_object: GDExtensionConstObjectPtr
     ): GDObjectInstanceID = func(p_object)
   } 
@@ -2825,7 +2825,7 @@ object GDExtensionInterfaceObjectHasScriptMethod {
   given Tag[GDExtensionInterfaceObjectHasScriptMethod] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceObjectHasScriptMethod]]
 
   extension (func: GDExtensionInterfaceObjectHasScriptMethod) {
-    inline def apply(
+    def apply(
       p_object: GDExtensionConstObjectPtr,
       p_method: GDExtensionConstStringNamePtr
     ): GDExtensionBool = func(p_object, p_method)
@@ -2848,7 +2848,7 @@ object GDExtensionInterfaceObjectCallScriptMethod {
   given Tag[GDExtensionInterfaceObjectCallScriptMethod] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceObjectCallScriptMethod]]
 
   extension (func: GDExtensionInterfaceObjectCallScriptMethod) {
-    inline def apply(
+    def apply(
       p_object: GDExtensionObjectPtr,
       p_method: GDExtensionConstStringNamePtr,
       p_args: ConstPtr[GDExtensionConstVariantPtr],
@@ -2870,7 +2870,7 @@ object GDExtensionInterfaceRefGetObject {
   given Tag[GDExtensionInterfaceRefGetObject] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceRefGetObject]]
 
   extension (func: GDExtensionInterfaceRefGetObject) {
-    inline def apply(
+    def apply(
       p_ref: GDExtensionConstRefPtr
     ): GDExtensionObjectPtr = func(p_ref)
   } 
@@ -2888,7 +2888,7 @@ object GDExtensionInterfaceRefSetObject {
   given Tag[GDExtensionInterfaceRefSetObject] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceRefSetObject]]
 
   extension (func: GDExtensionInterfaceRefSetObject) {
-    inline def apply(
+    def apply(
       p_ref: GDExtensionRefPtr,
       p_object: GDExtensionObjectPtr
     ): Unit = func(p_ref, p_object)
@@ -2909,7 +2909,7 @@ object GDExtensionInterfaceScriptInstanceCreate {
   given Tag[GDExtensionInterfaceScriptInstanceCreate] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceScriptInstanceCreate]]
 
   extension (func: GDExtensionInterfaceScriptInstanceCreate) {
-    inline def apply(
+    def apply(
       p_info: ConstPtr[GDExtensionScriptInstanceInfo],
       p_instance_data: GDExtensionScriptInstanceDataPtr
     ): GDExtensionScriptInstancePtr = func(p_info, p_instance_data)
@@ -2930,7 +2930,7 @@ object GDExtensionInterfaceScriptInstanceCreate2 {
   given Tag[GDExtensionInterfaceScriptInstanceCreate2] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceScriptInstanceCreate2]]
 
   extension (func: GDExtensionInterfaceScriptInstanceCreate2) {
-    inline def apply(
+    def apply(
       p_info: ConstPtr[GDExtensionScriptInstanceInfo2],
       p_instance_data: GDExtensionScriptInstanceDataPtr
     ): GDExtensionScriptInstancePtr = func(p_info, p_instance_data)
@@ -2949,7 +2949,7 @@ object GDExtensionInterfaceScriptInstanceCreate3 {
   given Tag[GDExtensionInterfaceScriptInstanceCreate3] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceScriptInstanceCreate3]]
 
   extension (func: GDExtensionInterfaceScriptInstanceCreate3) {
-    inline def apply(
+    def apply(
       p_info: ConstPtr[GDExtensionScriptInstanceInfo3],
       p_instance_data: GDExtensionScriptInstanceDataPtr
     ): GDExtensionScriptInstancePtr = func(p_info, p_instance_data)
@@ -2970,7 +2970,7 @@ object GDExtensionInterfacePlaceholderScriptInstanceCreate {
   given Tag[GDExtensionInterfacePlaceholderScriptInstanceCreate] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePlaceholderScriptInstanceCreate]]
 
   extension (func: GDExtensionInterfacePlaceholderScriptInstanceCreate) {
-    inline def apply(
+    def apply(
       p_language: GDExtensionObjectPtr,
       p_script: GDExtensionObjectPtr,
       p_owner: GDExtensionObjectPtr
@@ -2993,7 +2993,7 @@ object GDExtensionInterfacePlaceholderScriptInstanceUpdate {
   given Tag[GDExtensionInterfacePlaceholderScriptInstanceUpdate] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfacePlaceholderScriptInstanceUpdate]]
 
   extension (func: GDExtensionInterfacePlaceholderScriptInstanceUpdate) {
-    inline def apply(
+    def apply(
       p_placeholder: GDExtensionScriptInstancePtr,
       p_properties: GDExtensionConstTypePtr,
       p_values: GDExtensionConstTypePtr
@@ -3013,7 +3013,7 @@ object GDExtensionInterfaceObjectGetScriptInstance {
   given Tag[GDExtensionInterfaceObjectGetScriptInstance] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceObjectGetScriptInstance]]
 
   extension (func: GDExtensionInterfaceObjectGetScriptInstance) {
-    inline def apply(
+    def apply(
       p_object: GDExtensionConstObjectPtr,
       p_language: GDExtensionObjectPtr
     ): GDExtensionScriptInstanceDataPtr = func(p_object, p_language)
@@ -3032,7 +3032,7 @@ object GDExtensionInterfaceObjectSetScriptInstance {
   given Tag[GDExtensionInterfaceObjectSetScriptInstance] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceObjectSetScriptInstance]]
 
   extension (func: GDExtensionInterfaceObjectSetScriptInstance) {
-    inline def apply(
+    def apply(
       p_object: GDExtensionObjectPtr,
       p_script_instance: GDExtensionScriptInstanceDataPtr
     ): Unit = func(p_object, p_script_instance)
@@ -3054,7 +3054,7 @@ object GDExtensionInterfaceCallableCustomCreate {
   given Tag[GDExtensionInterfaceCallableCustomCreate] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceCallableCustomCreate]]
 
   extension (func: GDExtensionInterfaceCallableCustomCreate) {
-    inline def apply(
+    def apply(
       r_callable: GDExtensionUninitializedTypePtr,
       p_callable_custom_info: Ptr[GDExtensionCallableCustomInfo]
     ): Unit = func(r_callable, p_callable_custom_info)
@@ -3074,7 +3074,7 @@ object GDExtensionInterfaceCallableCustomCreate2 {
   given Tag[GDExtensionInterfaceCallableCustomCreate2] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceCallableCustomCreate2]]
 
   extension (func: GDExtensionInterfaceCallableCustomCreate2) {
-    inline def apply(
+    def apply(
       r_callable: GDExtensionUninitializedTypePtr,
       p_callable_custom_info: Ptr[GDExtensionCallableCustomInfo2]
     ): Unit = func(r_callable, p_callable_custom_info)
@@ -3094,7 +3094,7 @@ object GDExtensionInterfaceCallableCustomGetUserdata {
   given Tag[GDExtensionInterfaceCallableCustomGetUserdata] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceCallableCustomGetUserdata]]
 
   extension (func: GDExtensionInterfaceCallableCustomGetUserdata) {
-    inline def apply(
+    def apply(
       p_callable: GDExtensionConstTypePtr,
       p_token: CVoidPtr
     ): CVoidPtr = func(p_callable, p_token)
@@ -3115,7 +3115,7 @@ object GDExtensionInterfaceClassdbConstructObject {
   given Tag[GDExtensionInterfaceClassdbConstructObject] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceClassdbConstructObject]]
 
   extension (func: GDExtensionInterfaceClassdbConstructObject) {
-    inline def apply(
+    def apply(
       p_classname: GDExtensionConstStringNamePtr
     ): GDExtensionObjectPtr = func(p_classname)
   } 
@@ -3135,7 +3135,7 @@ object GDExtensionInterfaceClassdbConstructObject2 {
   given Tag[GDExtensionInterfaceClassdbConstructObject2] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceClassdbConstructObject2]]
 
   extension (func: GDExtensionInterfaceClassdbConstructObject2) {
-    inline def apply(
+    def apply(
       p_classname: GDExtensionConstStringNamePtr
     ): GDExtensionObjectPtr = func(p_classname)
   } 
@@ -3154,7 +3154,7 @@ object GDExtensionInterfaceClassdbGetMethodBind {
   given Tag[GDExtensionInterfaceClassdbGetMethodBind] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceClassdbGetMethodBind]]
 
   extension (func: GDExtensionInterfaceClassdbGetMethodBind) {
-    inline def apply(
+    def apply(
       p_classname: GDExtensionConstStringNamePtr,
       p_methodname: GDExtensionConstStringNamePtr,
       p_hash: GDExtensionInt
@@ -3173,7 +3173,7 @@ object GDExtensionInterfaceClassdbGetClassTag {
   given Tag[GDExtensionInterfaceClassdbGetClassTag] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceClassdbGetClassTag]]
 
   extension (func: GDExtensionInterfaceClassdbGetClassTag) {
-    inline def apply(
+    def apply(
       p_classname: GDExtensionConstStringNamePtr
     ): CVoidPtr = func(p_classname)
   } 
@@ -3196,7 +3196,7 @@ object GDExtensionInterfaceClassdbRegisterExtensionClass {
   given Tag[GDExtensionInterfaceClassdbRegisterExtensionClass] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceClassdbRegisterExtensionClass]]
 
   extension (func: GDExtensionInterfaceClassdbRegisterExtensionClass) {
-    inline def apply(
+    def apply(
       p_library: GDExtensionClassLibraryPtr,
       p_class_name: GDExtensionConstStringNamePtr,
       p_parent_class_name: GDExtensionConstStringNamePtr,
@@ -3222,7 +3222,7 @@ object GDExtensionInterfaceClassdbRegisterExtensionClass2 {
   given Tag[GDExtensionInterfaceClassdbRegisterExtensionClass2] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceClassdbRegisterExtensionClass2]]
 
   extension (func: GDExtensionInterfaceClassdbRegisterExtensionClass2) {
-    inline def apply(
+    def apply(
       p_library: GDExtensionClassLibraryPtr,
       p_class_name: GDExtensionConstStringNamePtr,
       p_parent_class_name: GDExtensionConstStringNamePtr,
@@ -3248,7 +3248,7 @@ object GDExtensionInterfaceClassdbRegisterExtensionClass3 {
   given Tag[GDExtensionInterfaceClassdbRegisterExtensionClass3] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceClassdbRegisterExtensionClass3]]
 
   extension (func: GDExtensionInterfaceClassdbRegisterExtensionClass3) {
-    inline def apply(
+    def apply(
       p_library: GDExtensionClassLibraryPtr,
       p_class_name: GDExtensionConstStringNamePtr,
       p_parent_class_name: GDExtensionConstStringNamePtr,
@@ -3274,7 +3274,7 @@ object GDExtensionInterfaceClassdbRegisterExtensionClass4 {
   given Tag[GDExtensionInterfaceClassdbRegisterExtensionClass4] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceClassdbRegisterExtensionClass4]]
 
   extension (func: GDExtensionInterfaceClassdbRegisterExtensionClass4) {
-    inline def apply(
+    def apply(
       p_library: GDExtensionClassLibraryPtr,
       p_class_name: GDExtensionConstStringNamePtr,
       p_parent_class_name: GDExtensionConstStringNamePtr,
@@ -3298,7 +3298,7 @@ object GDExtensionInterfaceClassdbRegisterExtensionClass5 {
   given Tag[GDExtensionInterfaceClassdbRegisterExtensionClass5] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceClassdbRegisterExtensionClass5]]
 
   extension (func: GDExtensionInterfaceClassdbRegisterExtensionClass5) {
-    inline def apply(
+    def apply(
       p_library: GDExtensionClassLibraryPtr,
       p_class_name: GDExtensionConstStringNamePtr,
       p_parent_class_name: GDExtensionConstStringNamePtr,
@@ -3321,7 +3321,7 @@ object GDExtensionInterfaceClassdbRegisterExtensionClassMethod {
   given Tag[GDExtensionInterfaceClassdbRegisterExtensionClassMethod] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceClassdbRegisterExtensionClassMethod]]
 
   extension (func: GDExtensionInterfaceClassdbRegisterExtensionClassMethod) {
-    inline def apply(
+    def apply(
       p_library: GDExtensionClassLibraryPtr,
       p_class_name: GDExtensionConstStringNamePtr,
       p_method_info: ConstPtr[GDExtensionClassMethodInfo]
@@ -3343,7 +3343,7 @@ object GDExtensionInterfaceClassdbRegisterExtensionClassVirtualMethod {
   given Tag[GDExtensionInterfaceClassdbRegisterExtensionClassVirtualMethod] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceClassdbRegisterExtensionClassVirtualMethod]]
 
   extension (func: GDExtensionInterfaceClassdbRegisterExtensionClassVirtualMethod) {
-    inline def apply(
+    def apply(
       p_library: GDExtensionClassLibraryPtr,
       p_class_name: GDExtensionConstStringNamePtr,
       p_method_info: ConstPtr[GDExtensionClassVirtualMethodInfo]
@@ -3370,7 +3370,7 @@ object GDExtensionInterfaceClassdbRegisterExtensionClassIntegerConstant {
   given Tag[GDExtensionInterfaceClassdbRegisterExtensionClassIntegerConstant] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceClassdbRegisterExtensionClassIntegerConstant]]
 
   extension (func: GDExtensionInterfaceClassdbRegisterExtensionClassIntegerConstant) {
-    inline def apply(
+    def apply(
       p_library: GDExtensionClassLibraryPtr,
       p_class_name: GDExtensionConstStringNamePtr,
       p_enum_name: GDExtensionConstStringNamePtr,
@@ -3397,7 +3397,7 @@ object GDExtensionInterfaceClassdbRegisterExtensionClassProperty {
   given Tag[GDExtensionInterfaceClassdbRegisterExtensionClassProperty] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceClassdbRegisterExtensionClassProperty]]
 
   extension (func: GDExtensionInterfaceClassdbRegisterExtensionClassProperty) {
-    inline def apply(
+    def apply(
       p_library: GDExtensionClassLibraryPtr,
       p_class_name: GDExtensionConstStringNamePtr,
       p_info: ConstPtr[GDExtensionPropertyInfo],
@@ -3424,7 +3424,7 @@ object GDExtensionInterfaceClassdbRegisterExtensionClassPropertyIndexed {
   given Tag[GDExtensionInterfaceClassdbRegisterExtensionClassPropertyIndexed] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceClassdbRegisterExtensionClassPropertyIndexed]]
 
   extension (func: GDExtensionInterfaceClassdbRegisterExtensionClassPropertyIndexed) {
-    inline def apply(
+    def apply(
       p_library: GDExtensionClassLibraryPtr,
       p_class_name: GDExtensionConstStringNamePtr,
       p_info: ConstPtr[GDExtensionPropertyInfo],
@@ -3449,7 +3449,7 @@ object GDExtensionInterfaceClassdbRegisterExtensionClassPropertyGroup {
   given Tag[GDExtensionInterfaceClassdbRegisterExtensionClassPropertyGroup] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceClassdbRegisterExtensionClassPropertyGroup]]
 
   extension (func: GDExtensionInterfaceClassdbRegisterExtensionClassPropertyGroup) {
-    inline def apply(
+    def apply(
       p_library: GDExtensionClassLibraryPtr,
       p_class_name: GDExtensionConstStringNamePtr,
       p_group_name: GDExtensionConstStringPtr,
@@ -3472,7 +3472,7 @@ object GDExtensionInterfaceClassdbRegisterExtensionClassPropertySubgroup {
   given Tag[GDExtensionInterfaceClassdbRegisterExtensionClassPropertySubgroup] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceClassdbRegisterExtensionClassPropertySubgroup]]
 
   extension (func: GDExtensionInterfaceClassdbRegisterExtensionClassPropertySubgroup) {
-    inline def apply(
+    def apply(
       p_library: GDExtensionClassLibraryPtr,
       p_class_name: GDExtensionConstStringNamePtr,
       p_subgroup_name: GDExtensionConstStringPtr,
@@ -3497,7 +3497,7 @@ object GDExtensionInterfaceClassdbRegisterExtensionClassSignal {
   given Tag[GDExtensionInterfaceClassdbRegisterExtensionClassSignal] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceClassdbRegisterExtensionClassSignal]]
 
   extension (func: GDExtensionInterfaceClassdbRegisterExtensionClassSignal) {
-    inline def apply(
+    def apply(
       p_library: GDExtensionClassLibraryPtr,
       p_class_name: GDExtensionConstStringNamePtr,
       p_signal_name: GDExtensionConstStringNamePtr,
@@ -3520,7 +3520,7 @@ object GDExtensionInterfaceClassdbUnregisterExtensionClass {
   given Tag[GDExtensionInterfaceClassdbUnregisterExtensionClass] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceClassdbUnregisterExtensionClass]]
 
   extension (func: GDExtensionInterfaceClassdbUnregisterExtensionClass) {
-    inline def apply(
+    def apply(
       p_library: GDExtensionClassLibraryPtr,
       p_class_name: GDExtensionConstStringNamePtr
     ): Unit = func(p_library, p_class_name)
@@ -3539,7 +3539,7 @@ object GDExtensionInterfaceGetLibraryPath {
   given Tag[GDExtensionInterfaceGetLibraryPath] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceGetLibraryPath]]
 
   extension (func: GDExtensionInterfaceGetLibraryPath) {
-    inline def apply(
+    def apply(
       p_library: GDExtensionClassLibraryPtr,
       r_path: GDExtensionUninitializedStringPtr
     ): Unit = func(p_library, r_path)
@@ -3558,7 +3558,7 @@ object GDExtensionInterfaceEditorAddPlugin {
   given Tag[GDExtensionInterfaceEditorAddPlugin] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceEditorAddPlugin]]
 
   extension (func: GDExtensionInterfaceEditorAddPlugin) {
-    inline def apply(
+    def apply(
       p_class_name: GDExtensionConstStringNamePtr
     ): Unit = func(p_class_name)
   } 
@@ -3575,7 +3575,7 @@ object GDExtensionInterfaceEditorRemovePlugin {
   given Tag[GDExtensionInterfaceEditorRemovePlugin] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceEditorRemovePlugin]]
 
   extension (func: GDExtensionInterfaceEditorRemovePlugin) {
-    inline def apply(
+    def apply(
       p_class_name: GDExtensionConstStringNamePtr
     ): Unit = func(p_class_name)
   } 
@@ -3593,7 +3593,7 @@ object GDExtensionInterfaceEditorHelpLoadXmlFromUtf8Chars {
   given Tag[GDExtensionInterfaceEditorHelpLoadXmlFromUtf8Chars] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceEditorHelpLoadXmlFromUtf8Chars]]
 
   extension (func: GDExtensionInterfaceEditorHelpLoadXmlFromUtf8Chars) {
-    inline def apply(
+    def apply(
       p_data: ConstPtr[CChar]
     ): Unit = func(p_data)
   } 
@@ -3612,7 +3612,7 @@ object GDExtensionInterfaceEditorHelpLoadXmlFromUtf8CharsAndLen {
   given Tag[GDExtensionInterfaceEditorHelpLoadXmlFromUtf8CharsAndLen] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceEditorHelpLoadXmlFromUtf8CharsAndLen]]
 
   extension (func: GDExtensionInterfaceEditorHelpLoadXmlFromUtf8CharsAndLen) {
-    inline def apply(
+    def apply(
       p_data: ConstPtr[CChar],
       p_size: GDExtensionInt
     ): Unit = func(p_data, p_size)
@@ -3635,7 +3635,7 @@ object GDExtensionInterfaceEditorRegisterGetClassesUsedCallback {
   given Tag[GDExtensionInterfaceEditorRegisterGetClassesUsedCallback] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceEditorRegisterGetClassesUsedCallback]]
 
   extension (func: GDExtensionInterfaceEditorRegisterGetClassesUsedCallback) {
-    inline def apply(
+    def apply(
       p_library: GDExtensionClassLibraryPtr,
       p_callback: GDExtensionEditorGetClassesUsedCallback
     ): Unit = func(p_library, p_callback)
@@ -3654,7 +3654,7 @@ object GDExtensionInterfaceRegisterMainLoopCallbacks {
   given Tag[GDExtensionInterfaceRegisterMainLoopCallbacks] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[GDExtensionInterfaceRegisterMainLoopCallbacks]]
 
   extension (func: GDExtensionInterfaceRegisterMainLoopCallbacks) {
-    inline def apply(
+    def apply(
       p_library: GDExtensionClassLibraryPtr,
       p_callbacks: ConstPtr[GDExtensionMainLoopCallbacks]
     ): Unit = func(p_library, p_callbacks)

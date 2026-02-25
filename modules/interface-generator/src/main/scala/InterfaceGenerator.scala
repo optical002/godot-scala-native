@@ -247,7 +247,7 @@ object InterfaceGenerator {
      |  given Tag[${name}] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[${name}]]
      |
      |  extension (func: ${name}) {
-     |    inline def apply(
+     |    def apply(
      |      $funcParamsStr
      |    ): $returnType = func($callParams)
      |  } 
@@ -304,9 +304,9 @@ object InterfaceGenerator {
                       val i = idx + 1
                       val tName = parseTypeName(m._2._1)
                       s"""
-                       |    inline def ${varName}: $tName = struct._$i
-                       |    inline def ${varName}_=(v: $tName) = struct._${i}_=(v)
-                       |    inline def at_${varName}: Ptr[$tName] = struct.at$i
+                       |    def ${varName}: $tName = struct._$i
+                       |    def ${varName}_=(v: $tName) = struct._${i}_=(v)
+                       |    def at_${varName}: Ptr[$tName] = struct.at$i
                        |""".stripMargin
                     }
                   val tagImport =
