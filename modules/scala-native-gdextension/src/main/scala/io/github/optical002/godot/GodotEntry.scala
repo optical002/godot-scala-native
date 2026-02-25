@@ -1,4 +1,4 @@
-package godot
+package io.github.optical002.godot
 
 import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*

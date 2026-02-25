@@ -1,5 +1,5 @@
 // format: off
-package godot.types
+package io.github.optical002.godot.types
 
 import scala.scalanative.unsafe.*
 

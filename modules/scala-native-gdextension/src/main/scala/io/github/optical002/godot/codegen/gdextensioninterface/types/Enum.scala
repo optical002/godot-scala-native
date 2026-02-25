@@ -1,10 +1,10 @@
 
-package godot.codegen.gdextensioninterface.types
+package io.github.optical002.godot.codegen.gdextensioninterface.types
 
 import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
 import scala.scalanative.unsigned.UInt.*
-import godot.types.*
+import io.github.optical002.godot.types.*
 
 
 

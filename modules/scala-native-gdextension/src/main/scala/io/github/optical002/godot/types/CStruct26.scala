@@ -1,8 +1,8 @@
 // format: off
-package godot.types
+package io.github.optical002.godot.types
 
 import scala.scalanative.unsafe.*
-import godot.types.Tags.*
+import io.github.optical002.godot.types.Tags.*
 
 opaque type CStruct26[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26] = CStruct2[CStruct25[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25], T26]
 

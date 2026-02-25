@@ -1,10 +1,10 @@
 
-package godot.codegen.gdextensioninterface.types
+package io.github.optical002.godot.codegen.gdextensioninterface.types
 
 import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
 import scala.scalanative.unsigned.UInt.*
-import godot.types.*
+import io.github.optical002.godot.types.*
 
 
 
@@ -416,7 +416,7 @@ opaque type GDExtensionClassCreationInfo3 = CStruct23[
   CVoidPtr
 ]
 object GDExtensionClassCreationInfo3 {
-  import godot.types.Tags.*
+  import io.github.optical002.godot.types.Tags.*
 
   given Tag[GDExtensionClassCreationInfo3] = 
     materializeCStruct23Tag[GDExtensionBool, GDExtensionBool, GDExtensionBool, GDExtensionBool, GDExtensionClassSet, GDExtensionClassGet, GDExtensionClassGetPropertyList, GDExtensionClassFreePropertyList2, GDExtensionClassPropertyCanRevert, GDExtensionClassPropertyGetRevert, GDExtensionClassValidateProperty, GDExtensionClassNotification2, GDExtensionClassToString, GDExtensionClassReference, GDExtensionClassUnreference, GDExtensionClassCreateInstance, GDExtensionClassFreeInstance, GDExtensionClassRecreateInstance, GDExtensionClassGetVirtual, GDExtensionClassGetVirtualCallData, GDExtensionClassCallVirtualWithData, GDExtensionClassGetRID, CVoidPtr].asInstanceOf[Tag[GDExtensionClassCreationInfo3]]
@@ -544,7 +544,7 @@ opaque type GDExtensionClassCreationInfo4 = CStruct23[
   CVoidPtr
 ]
 object GDExtensionClassCreationInfo4 {
-  import godot.types.Tags.*
+  import io.github.optical002.godot.types.Tags.*
 
   given Tag[GDExtensionClassCreationInfo4] = 
     materializeCStruct23Tag[GDExtensionBool, GDExtensionBool, GDExtensionBool, GDExtensionBool, GDExtensionConstStringPtr, GDExtensionClassSet, GDExtensionClassGet, GDExtensionClassGetPropertyList, GDExtensionClassFreePropertyList2, GDExtensionClassPropertyCanRevert, GDExtensionClassPropertyGetRevert, GDExtensionClassValidateProperty, GDExtensionClassNotification2, GDExtensionClassToString, GDExtensionClassReference, GDExtensionClassUnreference, GDExtensionClassCreateInstance2, GDExtensionClassFreeInstance, GDExtensionClassRecreateInstance, GDExtensionClassGetVirtual2, GDExtensionClassGetVirtualCallData2, GDExtensionClassCallVirtualWithData, CVoidPtr].asInstanceOf[Tag[GDExtensionClassCreationInfo4]]
@@ -962,7 +962,7 @@ opaque type GDExtensionScriptInstanceInfo = CStruct23[
   GDExtensionScriptInstanceFree
 ]
 object GDExtensionScriptInstanceInfo {
-  import godot.types.Tags.*
+  import io.github.optical002.godot.types.Tags.*
 
   given Tag[GDExtensionScriptInstanceInfo] = 
     materializeCStruct23Tag[GDExtensionScriptInstanceSet, GDExtensionScriptInstanceGet, GDExtensionScriptInstanceGetPropertyList, GDExtensionScriptInstanceFreePropertyList, GDExtensionScriptInstancePropertyCanRevert, GDExtensionScriptInstancePropertyGetRevert, GDExtensionScriptInstanceGetOwner, GDExtensionScriptInstanceGetPropertyState, GDExtensionScriptInstanceGetMethodList, GDExtensionScriptInstanceFreeMethodList, GDExtensionScriptInstanceGetPropertyType, GDExtensionScriptInstanceHasMethod, GDExtensionScriptInstanceCall, GDExtensionScriptInstanceNotification, GDExtensionScriptInstanceToString, GDExtensionScriptInstanceRefCountIncremented, GDExtensionScriptInstanceRefCountDecremented, GDExtensionScriptInstanceGetScript, GDExtensionScriptInstanceIsPlaceholder, GDExtensionScriptInstanceSet, GDExtensionScriptInstanceGet, GDExtensionScriptInstanceGetLanguage, GDExtensionScriptInstanceFree].asInstanceOf[Tag[GDExtensionScriptInstanceInfo]]
@@ -1095,7 +1095,7 @@ opaque type GDExtensionScriptInstanceInfo2 = CStruct25[
   GDExtensionScriptInstanceFree
 ]
 object GDExtensionScriptInstanceInfo2 {
-  import godot.types.Tags.*
+  import io.github.optical002.godot.types.Tags.*
 
   given Tag[GDExtensionScriptInstanceInfo2] = 
     materializeCStruct25Tag[GDExtensionScriptInstanceSet, GDExtensionScriptInstanceGet, GDExtensionScriptInstanceGetPropertyList, GDExtensionScriptInstanceFreePropertyList, GDExtensionScriptInstanceGetClassCategory, GDExtensionScriptInstancePropertyCanRevert, GDExtensionScriptInstancePropertyGetRevert, GDExtensionScriptInstanceGetOwner, GDExtensionScriptInstanceGetPropertyState, GDExtensionScriptInstanceGetMethodList, GDExtensionScriptInstanceFreeMethodList, GDExtensionScriptInstanceGetPropertyType, GDExtensionScriptInstanceValidateProperty, GDExtensionScriptInstanceHasMethod, GDExtensionScriptInstanceCall, GDExtensionScriptInstanceNotification2, GDExtensionScriptInstanceToString, GDExtensionScriptInstanceRefCountIncremented, GDExtensionScriptInstanceRefCountDecremented, GDExtensionScriptInstanceGetScript, GDExtensionScriptInstanceIsPlaceholder, GDExtensionScriptInstanceSet, GDExtensionScriptInstanceGet, GDExtensionScriptInstanceGetLanguage, GDExtensionScriptInstanceFree].asInstanceOf[Tag[GDExtensionScriptInstanceInfo2]]
@@ -1234,7 +1234,7 @@ opaque type GDExtensionScriptInstanceInfo3 = CStruct26[
   GDExtensionScriptInstanceFree
 ]
 object GDExtensionScriptInstanceInfo3 {
-  import godot.types.Tags.*
+  import io.github.optical002.godot.types.Tags.*
 
   given Tag[GDExtensionScriptInstanceInfo3] = 
     materializeCStruct26Tag[GDExtensionScriptInstanceSet, GDExtensionScriptInstanceGet, GDExtensionScriptInstanceGetPropertyList, GDExtensionScriptInstanceFreePropertyList2, GDExtensionScriptInstanceGetClassCategory, GDExtensionScriptInstancePropertyCanRevert, GDExtensionScriptInstancePropertyGetRevert, GDExtensionScriptInstanceGetOwner, GDExtensionScriptInstanceGetPropertyState, GDExtensionScriptInstanceGetMethodList, GDExtensionScriptInstanceFreeMethodList2, GDExtensionScriptInstanceGetPropertyType, GDExtensionScriptInstanceValidateProperty, GDExtensionScriptInstanceHasMethod, GDExtensionScriptInstanceGetMethodArgumentCount, GDExtensionScriptInstanceCall, GDExtensionScriptInstanceNotification2, GDExtensionScriptInstanceToString, GDExtensionScriptInstanceRefCountIncremented, GDExtensionScriptInstanceRefCountDecremented, GDExtensionScriptInstanceGetScript, GDExtensionScriptInstanceIsPlaceholder, GDExtensionScriptInstanceSet, GDExtensionScriptInstanceGet, GDExtensionScriptInstanceGetLanguage, GDExtensionScriptInstanceFree].asInstanceOf[Tag[GDExtensionScriptInstanceInfo3]]

@@ -297,7 +297,7 @@ object InterfaceGenerator {
                     }
                   val tagImport =
                     if (memberTypes.length >= 23)
-                      "import godot.types.Tags.*"
+                      "import io.github.optical002.godot.types.Tags.*"
                     else
                       s"import Tag.materializeCStruct${memberTypes.length}Tag"
                   s"""
@@ -334,12 +334,12 @@ object InterfaceGenerator {
                   }
             }
             s"""
-             |package godot.codegen.gdextensioninterface.types
+             |package io.github.optical002.godot.codegen.gdextensioninterface.types
              |
              |import scala.scalanative.unsafe.*
              |import scala.scalanative.unsigned.*
              |import scala.scalanative.unsigned.UInt.*
-             |import godot.types.*
+             |import io.github.optical002.godot.types.*
              |
              |${contents.mkString}
              |""".stripMargin
@@ -396,13 +396,13 @@ object InterfaceGenerator {
           }.mkString("\n")
 
           s"""
-           |package godot.codegen.gdextensioninterface.codegen.types
+           |package io.github.optical002.godot.codegen.gdextensioninterface.codegen.types
            |
            |import scala.scalanative.unsafe.*
            |import scala.scalanative.unsigned.*
            |import scala.scalanative.unsigned.UInt.*
-           |import godot.types.*
-           |import godot.codegen.gdextensioninterface.types.*
+           |import io.github.optical002.godot.types.*
+           |import io.github.optical002.godot.codegen.gdextensioninterface.types.*
            |
            |$definitions
            |

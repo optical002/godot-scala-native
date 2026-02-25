@@ -1,4 +1,4 @@
-package godot
+package io.github.optical002.godot
 
 import java.io.{File, FileWriter}
 import java.nio.file.{Files, Paths, StandardCopyOption}
