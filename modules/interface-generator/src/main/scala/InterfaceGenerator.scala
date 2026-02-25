@@ -218,28 +218,24 @@ object InterfaceGenerator {
     function: Kind.Function
   ): String = {
     val Kind.Function(arguments, returnValue) = function
-    val argumentTypes = arguments
-      .map(a => parseTypeName(a._2._1))
-      .mkString(",\n  ")
+
+    // Generate argument types with inline parameter name comments
+    val argumentTypesWithComments = arguments.zipWithIndex
+      .map { case (a, idx) =>
+        val paramName = a._1.filter(_.nonEmpty).getOrElse(s"_$idx")
+        val paramType = parseTypeName(a._2._1)
+        s"$paramType, // $paramName"
+      }
+      .mkString("\n  ")
+
     val returnType = returnValue
       .map(r => parseTypeName(r._1))
       .getOrElse("Unit")
-    val funcParams = arguments.zipWithIndex
-      .map { case (a, idx) =>
-        val paramName = a._1
-          .filter(_.nonEmpty)
-          .getOrElse(s"_$idx")
-        val paramType = parseTypeName(a._2._1)
-        (paramName, paramType)
-      }
-    val callParams = funcParams.map(_._1).mkString(", ")
-    val funcParamsStr = funcParams
-      .map { case (pName, pType) => s"$pName: $pType" }
-      .mkString(",\n      ")
+
     s"""
      |$comment
      |type ${name} = CFuncPtr${arguments.length}[
-     |  $argumentTypes${if (arguments.isEmpty) "" else ","}
+     |  ${argumentTypesWithComments}
      |  $returnType
      |]
      |""".stripMargin

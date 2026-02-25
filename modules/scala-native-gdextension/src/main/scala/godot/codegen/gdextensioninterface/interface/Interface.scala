@@ -14,7 +14,7 @@ import godot.codegen.gdextensioninterface.types.*
  * @deprecated Since 4.5. Use get_godot_version2 instead.
  */
 type GDExtensionInterfaceGetGodotVersion = CFuncPtr1[
-  Ptr[GDExtensionGodotVersion],
+  Ptr[GDExtensionGodotVersion], // r_godot_version
   Unit
 ]
 
@@ -22,7 +22,7 @@ type GDExtensionInterfaceGetGodotVersion = CFuncPtr1[
  * Gets the Godot version that the GDExtension was loaded into.
  */
 type GDExtensionInterfaceGetGodotVersion2 = CFuncPtr1[
-  Ptr[GDExtensionGodotVersion2],
+  Ptr[GDExtensionGodotVersion2], // r_godot_version
   Unit
 ]
 
@@ -32,7 +32,7 @@ type GDExtensionInterfaceGetGodotVersion2 = CFuncPtr1[
  * @deprecated Since 4.6. Use mem_alloc2 instead.
  */
 type GDExtensionInterfaceMemAlloc = CFuncPtr1[
-  CSize,
+  CSize, // p_bytes
   CVoidPtr
 ]
 
@@ -42,8 +42,8 @@ type GDExtensionInterfaceMemAlloc = CFuncPtr1[
  * @deprecated Since 4.6. Use mem_realloc2 instead.
  */
 type GDExtensionInterfaceMemRealloc = CFuncPtr2[
-  CVoidPtr,
-  CSize,
+  CVoidPtr, // p_ptr
+  CSize, // p_bytes
   CVoidPtr
 ]
 
@@ -53,7 +53,7 @@ type GDExtensionInterfaceMemRealloc = CFuncPtr2[
  * @deprecated Since 4.6. Use mem_free2 instead.
  */
 type GDExtensionInterfaceMemFree = CFuncPtr1[
-  CVoidPtr,
+  CVoidPtr, // p_ptr
   Unit
 ]
 
@@ -61,8 +61,8 @@ type GDExtensionInterfaceMemFree = CFuncPtr1[
  * Allocates memory.
  */
 type GDExtensionInterfaceMemAlloc2 = CFuncPtr2[
-  CSize,
-  GDExtensionBool,
+  CSize, // p_bytes
+  GDExtensionBool, // p_pad_align
   CVoidPtr
 ]
 
@@ -70,9 +70,9 @@ type GDExtensionInterfaceMemAlloc2 = CFuncPtr2[
  * Reallocates memory.
  */
 type GDExtensionInterfaceMemRealloc2 = CFuncPtr3[
-  CVoidPtr,
-  CSize,
-  GDExtensionBool,
+  CVoidPtr, // p_ptr
+  CSize, // p_bytes
+  GDExtensionBool, // p_pad_align
   CVoidPtr
 ]
 
@@ -80,8 +80,8 @@ type GDExtensionInterfaceMemRealloc2 = CFuncPtr3[
  * Frees memory.
  */
 type GDExtensionInterfaceMemFree2 = CFuncPtr2[
-  CVoidPtr,
-  GDExtensionBool,
+  CVoidPtr, // p_ptr
+  GDExtensionBool, // p_pad_align
   Unit
 ]
 
@@ -89,11 +89,11 @@ type GDExtensionInterfaceMemFree2 = CFuncPtr2[
  * Logs an error to Godot's built-in debugger and to the OS terminal.
  */
 type GDExtensionInterfacePrintError = CFuncPtr5[
-  Ptr[CChar],
-  Ptr[CChar],
-  Ptr[CChar],
-  CInt,
-  GDExtensionBool,
+  Ptr[CChar], // p_description
+  Ptr[CChar], // p_function
+  Ptr[CChar], // p_file
+  CInt, // p_line
+  GDExtensionBool, // p_editor_notify
   Unit
 ]
 
@@ -101,12 +101,12 @@ type GDExtensionInterfacePrintError = CFuncPtr5[
  * Logs an error with a message to Godot's built-in debugger and to the OS terminal.
  */
 type GDExtensionInterfacePrintErrorWithMessage = CFuncPtr6[
-  Ptr[CChar],
-  Ptr[CChar],
-  Ptr[CChar],
-  Ptr[CChar],
-  CInt,
-  GDExtensionBool,
+  Ptr[CChar], // p_description
+  Ptr[CChar], // p_message
+  Ptr[CChar], // p_function
+  Ptr[CChar], // p_file
+  CInt, // p_line
+  GDExtensionBool, // p_editor_notify
   Unit
 ]
 
@@ -114,11 +114,11 @@ type GDExtensionInterfacePrintErrorWithMessage = CFuncPtr6[
  * Logs a warning to Godot's built-in debugger and to the OS terminal.
  */
 type GDExtensionInterfacePrintWarning = CFuncPtr5[
-  Ptr[CChar],
-  Ptr[CChar],
-  Ptr[CChar],
-  CInt,
-  GDExtensionBool,
+  Ptr[CChar], // p_description
+  Ptr[CChar], // p_function
+  Ptr[CChar], // p_file
+  CInt, // p_line
+  GDExtensionBool, // p_editor_notify
   Unit
 ]
 
@@ -126,12 +126,12 @@ type GDExtensionInterfacePrintWarning = CFuncPtr5[
  * Logs a warning with a message to Godot's built-in debugger and to the OS terminal.
  */
 type GDExtensionInterfacePrintWarningWithMessage = CFuncPtr6[
-  Ptr[CChar],
-  Ptr[CChar],
-  Ptr[CChar],
-  Ptr[CChar],
-  CInt,
-  GDExtensionBool,
+  Ptr[CChar], // p_description
+  Ptr[CChar], // p_message
+  Ptr[CChar], // p_function
+  Ptr[CChar], // p_file
+  CInt, // p_line
+  GDExtensionBool, // p_editor_notify
   Unit
 ]
 
@@ -139,11 +139,11 @@ type GDExtensionInterfacePrintWarningWithMessage = CFuncPtr6[
  * Logs a script error to Godot's built-in debugger and to the OS terminal.
  */
 type GDExtensionInterfacePrintScriptError = CFuncPtr5[
-  Ptr[CChar],
-  Ptr[CChar],
-  Ptr[CChar],
-  CInt,
-  GDExtensionBool,
+  Ptr[CChar], // p_description
+  Ptr[CChar], // p_function
+  Ptr[CChar], // p_file
+  CInt, // p_line
+  GDExtensionBool, // p_editor_notify
   Unit
 ]
 
@@ -151,12 +151,12 @@ type GDExtensionInterfacePrintScriptError = CFuncPtr5[
  * Logs a script error with a message to Godot's built-in debugger and to the OS terminal.
  */
 type GDExtensionInterfacePrintScriptErrorWithMessage = CFuncPtr6[
-  Ptr[CChar],
-  Ptr[CChar],
-  Ptr[CChar],
-  Ptr[CChar],
-  CInt,
-  GDExtensionBool,
+  Ptr[CChar], // p_description
+  Ptr[CChar], // p_message
+  Ptr[CChar], // p_function
+  Ptr[CChar], // p_file
+  CInt, // p_line
+  GDExtensionBool, // p_editor_notify
   Unit
 ]
 
@@ -164,7 +164,7 @@ type GDExtensionInterfacePrintScriptErrorWithMessage = CFuncPtr6[
  * Gets the size of a native struct (ex. ObjectID) in bytes.
  */
 type GDExtensionInterfaceGetNativeStructSize = CFuncPtr1[
-  GDExtensionConstStringNamePtr,
+  GDExtensionConstStringNamePtr, // p_name
   CUnsignedLongLong
 ]
 
@@ -172,8 +172,8 @@ type GDExtensionInterfaceGetNativeStructSize = CFuncPtr1[
  * Copies one Variant into a another.
  */
 type GDExtensionInterfaceVariantNewCopy = CFuncPtr2[
-  GDExtensionUninitializedVariantPtr,
-  GDExtensionConstVariantPtr,
+  GDExtensionUninitializedVariantPtr, // r_dest
+  GDExtensionConstVariantPtr, // p_src
   Unit
 ]
 
@@ -181,7 +181,7 @@ type GDExtensionInterfaceVariantNewCopy = CFuncPtr2[
  * Creates a new Variant containing nil.
  */
 type GDExtensionInterfaceVariantNewNil = CFuncPtr1[
-  GDExtensionUninitializedVariantPtr,
+  GDExtensionUninitializedVariantPtr, // r_dest
   Unit
 ]
 
@@ -189,7 +189,7 @@ type GDExtensionInterfaceVariantNewNil = CFuncPtr1[
  * Destroys a Variant.
  */
 type GDExtensionInterfaceVariantDestroy = CFuncPtr1[
-  GDExtensionVariantPtr,
+  GDExtensionVariantPtr, // p_self
   Unit
 ]
 
@@ -197,12 +197,12 @@ type GDExtensionInterfaceVariantDestroy = CFuncPtr1[
  * Calls a method on a Variant.
  */
 type GDExtensionInterfaceVariantCall = CFuncPtr6[
-  GDExtensionVariantPtr,
-  GDExtensionConstStringNamePtr,
-  Ptr[GDExtensionConstVariantPtr],
-  GDExtensionInt,
-  GDExtensionUninitializedVariantPtr,
-  Ptr[GDExtensionCallError],
+  GDExtensionVariantPtr, // p_self
+  GDExtensionConstStringNamePtr, // p_method
+  Ptr[GDExtensionConstVariantPtr], // p_args
+  GDExtensionInt, // p_argument_count
+  GDExtensionUninitializedVariantPtr, // r_return
+  Ptr[GDExtensionCallError], // r_error
   Unit
 ]
 
@@ -210,12 +210,12 @@ type GDExtensionInterfaceVariantCall = CFuncPtr6[
  * Calls a static method on a Variant.
  */
 type GDExtensionInterfaceVariantCallStatic = CFuncPtr6[
-  GDExtensionVariantType,
-  GDExtensionConstStringNamePtr,
-  Ptr[GDExtensionConstVariantPtr],
-  GDExtensionInt,
-  GDExtensionUninitializedVariantPtr,
-  Ptr[GDExtensionCallError],
+  GDExtensionVariantType, // p_type
+  GDExtensionConstStringNamePtr, // p_method
+  Ptr[GDExtensionConstVariantPtr], // p_args
+  GDExtensionInt, // p_argument_count
+  GDExtensionUninitializedVariantPtr, // r_return
+  Ptr[GDExtensionCallError], // r_error
   Unit
 ]
 
@@ -223,11 +223,11 @@ type GDExtensionInterfaceVariantCallStatic = CFuncPtr6[
  * Evaluate an operator on two Variants.
  */
 type GDExtensionInterfaceVariantEvaluate = CFuncPtr5[
-  GDExtensionVariantOperator,
-  GDExtensionConstVariantPtr,
-  GDExtensionConstVariantPtr,
-  GDExtensionUninitializedVariantPtr,
-  Ptr[GDExtensionBool],
+  GDExtensionVariantOperator, // p_op
+  GDExtensionConstVariantPtr, // p_a
+  GDExtensionConstVariantPtr, // p_b
+  GDExtensionUninitializedVariantPtr, // r_return
+  Ptr[GDExtensionBool], // r_valid
   Unit
 ]
 
@@ -235,10 +235,10 @@ type GDExtensionInterfaceVariantEvaluate = CFuncPtr5[
  * Sets a key on a Variant to a value.
  */
 type GDExtensionInterfaceVariantSet = CFuncPtr4[
-  GDExtensionVariantPtr,
-  GDExtensionConstVariantPtr,
-  GDExtensionConstVariantPtr,
-  Ptr[GDExtensionBool],
+  GDExtensionVariantPtr, // p_self
+  GDExtensionConstVariantPtr, // p_key
+  GDExtensionConstVariantPtr, // p_value
+  Ptr[GDExtensionBool], // r_valid
   Unit
 ]
 
@@ -246,10 +246,10 @@ type GDExtensionInterfaceVariantSet = CFuncPtr4[
  * Sets a named key on a Variant to a value.
  */
 type GDExtensionInterfaceVariantSetNamed = CFuncPtr4[
-  GDExtensionVariantPtr,
-  GDExtensionConstStringNamePtr,
-  GDExtensionConstVariantPtr,
-  Ptr[GDExtensionBool],
+  GDExtensionVariantPtr, // p_self
+  GDExtensionConstStringNamePtr, // p_key
+  GDExtensionConstVariantPtr, // p_value
+  Ptr[GDExtensionBool], // r_valid
   Unit
 ]
 
@@ -257,10 +257,10 @@ type GDExtensionInterfaceVariantSetNamed = CFuncPtr4[
  * Sets a keyed property on a Variant to a value.
  */
 type GDExtensionInterfaceVariantSetKeyed = CFuncPtr4[
-  GDExtensionVariantPtr,
-  GDExtensionConstVariantPtr,
-  GDExtensionConstVariantPtr,
-  Ptr[GDExtensionBool],
+  GDExtensionVariantPtr, // p_self
+  GDExtensionConstVariantPtr, // p_key
+  GDExtensionConstVariantPtr, // p_value
+  Ptr[GDExtensionBool], // r_valid
   Unit
 ]
 
@@ -268,11 +268,11 @@ type GDExtensionInterfaceVariantSetKeyed = CFuncPtr4[
  * Sets an index on a Variant to a value.
  */
 type GDExtensionInterfaceVariantSetIndexed = CFuncPtr5[
-  GDExtensionVariantPtr,
-  GDExtensionInt,
-  GDExtensionConstVariantPtr,
-  Ptr[GDExtensionBool],
-  Ptr[GDExtensionBool],
+  GDExtensionVariantPtr, // p_self
+  GDExtensionInt, // p_index
+  GDExtensionConstVariantPtr, // p_value
+  Ptr[GDExtensionBool], // r_valid
+  Ptr[GDExtensionBool], // r_oob
   Unit
 ]
 
@@ -280,10 +280,10 @@ type GDExtensionInterfaceVariantSetIndexed = CFuncPtr5[
  * Gets the value of a key from a Variant.
  */
 type GDExtensionInterfaceVariantGet = CFuncPtr4[
-  GDExtensionConstVariantPtr,
-  GDExtensionConstVariantPtr,
-  GDExtensionUninitializedVariantPtr,
-  Ptr[GDExtensionBool],
+  GDExtensionConstVariantPtr, // p_self
+  GDExtensionConstVariantPtr, // p_key
+  GDExtensionUninitializedVariantPtr, // r_ret
+  Ptr[GDExtensionBool], // r_valid
   Unit
 ]
 
@@ -291,10 +291,10 @@ type GDExtensionInterfaceVariantGet = CFuncPtr4[
  * Gets the value of a named key from a Variant.
  */
 type GDExtensionInterfaceVariantGetNamed = CFuncPtr4[
-  GDExtensionConstVariantPtr,
-  GDExtensionConstStringNamePtr,
-  GDExtensionUninitializedVariantPtr,
-  Ptr[GDExtensionBool],
+  GDExtensionConstVariantPtr, // p_self
+  GDExtensionConstStringNamePtr, // p_key
+  GDExtensionUninitializedVariantPtr, // r_ret
+  Ptr[GDExtensionBool], // r_valid
   Unit
 ]
 
@@ -302,10 +302,10 @@ type GDExtensionInterfaceVariantGetNamed = CFuncPtr4[
  * Gets the value of a keyed property from a Variant.
  */
 type GDExtensionInterfaceVariantGetKeyed = CFuncPtr4[
-  GDExtensionConstVariantPtr,
-  GDExtensionConstVariantPtr,
-  GDExtensionUninitializedVariantPtr,
-  Ptr[GDExtensionBool],
+  GDExtensionConstVariantPtr, // p_self
+  GDExtensionConstVariantPtr, // p_key
+  GDExtensionUninitializedVariantPtr, // r_ret
+  Ptr[GDExtensionBool], // r_valid
   Unit
 ]
 
@@ -313,11 +313,11 @@ type GDExtensionInterfaceVariantGetKeyed = CFuncPtr4[
  * Gets the value of an index from a Variant.
  */
 type GDExtensionInterfaceVariantGetIndexed = CFuncPtr5[
-  GDExtensionConstVariantPtr,
-  GDExtensionInt,
-  GDExtensionUninitializedVariantPtr,
-  Ptr[GDExtensionBool],
-  Ptr[GDExtensionBool],
+  GDExtensionConstVariantPtr, // p_self
+  GDExtensionInt, // p_index
+  GDExtensionUninitializedVariantPtr, // r_ret
+  Ptr[GDExtensionBool], // r_valid
+  Ptr[GDExtensionBool], // r_oob
   Unit
 ]
 
@@ -325,9 +325,9 @@ type GDExtensionInterfaceVariantGetIndexed = CFuncPtr5[
  * Initializes an iterator over a Variant.
  */
 type GDExtensionInterfaceVariantIterInit = CFuncPtr3[
-  GDExtensionConstVariantPtr,
-  GDExtensionUninitializedVariantPtr,
-  Ptr[GDExtensionBool],
+  GDExtensionConstVariantPtr, // p_self
+  GDExtensionUninitializedVariantPtr, // r_iter
+  Ptr[GDExtensionBool], // r_valid
   GDExtensionBool
 ]
 
@@ -335,9 +335,9 @@ type GDExtensionInterfaceVariantIterInit = CFuncPtr3[
  * Gets the next value for an iterator over a Variant.
  */
 type GDExtensionInterfaceVariantIterNext = CFuncPtr3[
-  GDExtensionConstVariantPtr,
-  GDExtensionVariantPtr,
-  Ptr[GDExtensionBool],
+  GDExtensionConstVariantPtr, // p_self
+  GDExtensionVariantPtr, // r_iter
+  Ptr[GDExtensionBool], // r_valid
   GDExtensionBool
 ]
 
@@ -345,10 +345,10 @@ type GDExtensionInterfaceVariantIterNext = CFuncPtr3[
  * Gets the next value for an iterator over a Variant.
  */
 type GDExtensionInterfaceVariantIterGet = CFuncPtr4[
-  GDExtensionConstVariantPtr,
-  GDExtensionVariantPtr,
-  GDExtensionUninitializedVariantPtr,
-  Ptr[GDExtensionBool],
+  GDExtensionConstVariantPtr, // p_self
+  GDExtensionVariantPtr, // r_iter
+  GDExtensionUninitializedVariantPtr, // r_ret
+  Ptr[GDExtensionBool], // r_valid
   Unit
 ]
 
@@ -356,7 +356,7 @@ type GDExtensionInterfaceVariantIterGet = CFuncPtr4[
  * Gets the hash of a Variant.
  */
 type GDExtensionInterfaceVariantHash = CFuncPtr1[
-  GDExtensionConstVariantPtr,
+  GDExtensionConstVariantPtr, // p_self
   GDExtensionInt
 ]
 
@@ -364,8 +364,8 @@ type GDExtensionInterfaceVariantHash = CFuncPtr1[
  * Gets the recursive hash of a Variant.
  */
 type GDExtensionInterfaceVariantRecursiveHash = CFuncPtr2[
-  GDExtensionConstVariantPtr,
-  GDExtensionInt,
+  GDExtensionConstVariantPtr, // p_self
+  GDExtensionInt, // p_recursion_count
   GDExtensionInt
 ]
 
@@ -373,8 +373,8 @@ type GDExtensionInterfaceVariantRecursiveHash = CFuncPtr2[
  * Compares two Variants by their hash.
  */
 type GDExtensionInterfaceVariantHashCompare = CFuncPtr2[
-  GDExtensionConstVariantPtr,
-  GDExtensionConstVariantPtr,
+  GDExtensionConstVariantPtr, // p_self
+  GDExtensionConstVariantPtr, // p_other
   GDExtensionBool
 ]
 
@@ -382,7 +382,7 @@ type GDExtensionInterfaceVariantHashCompare = CFuncPtr2[
  * Converts a Variant to a boolean.
  */
 type GDExtensionInterfaceVariantBooleanize = CFuncPtr1[
-  GDExtensionConstVariantPtr,
+  GDExtensionConstVariantPtr, // p_self
   GDExtensionBool
 ]
 
@@ -390,9 +390,9 @@ type GDExtensionInterfaceVariantBooleanize = CFuncPtr1[
  * Duplicates a Variant.
  */
 type GDExtensionInterfaceVariantDuplicate = CFuncPtr3[
-  GDExtensionConstVariantPtr,
-  GDExtensionVariantPtr,
-  GDExtensionBool,
+  GDExtensionConstVariantPtr, // p_self
+  GDExtensionVariantPtr, // r_ret
+  GDExtensionBool, // p_deep
   Unit
 ]
 
@@ -400,8 +400,8 @@ type GDExtensionInterfaceVariantDuplicate = CFuncPtr3[
  * Converts a Variant to a string.
  */
 type GDExtensionInterfaceVariantStringify = CFuncPtr2[
-  GDExtensionConstVariantPtr,
-  GDExtensionStringPtr,
+  GDExtensionConstVariantPtr, // p_self
+  GDExtensionStringPtr, // r_ret
   Unit
 ]
 
@@ -409,7 +409,7 @@ type GDExtensionInterfaceVariantStringify = CFuncPtr2[
  * Gets the type of a Variant.
  */
 type GDExtensionInterfaceVariantGetType = CFuncPtr1[
-  GDExtensionConstVariantPtr,
+  GDExtensionConstVariantPtr, // p_self
   GDExtensionVariantType
 ]
 
@@ -417,8 +417,8 @@ type GDExtensionInterfaceVariantGetType = CFuncPtr1[
  * Checks if a Variant has the given method.
  */
 type GDExtensionInterfaceVariantHasMethod = CFuncPtr2[
-  GDExtensionConstVariantPtr,
-  GDExtensionConstStringNamePtr,
+  GDExtensionConstVariantPtr, // p_self
+  GDExtensionConstStringNamePtr, // p_method
   GDExtensionBool
 ]
 
@@ -426,8 +426,8 @@ type GDExtensionInterfaceVariantHasMethod = CFuncPtr2[
  * Checks if a type of Variant has the given member.
  */
 type GDExtensionInterfaceVariantHasMember = CFuncPtr2[
-  GDExtensionVariantType,
-  GDExtensionConstStringNamePtr,
+  GDExtensionVariantType, // p_type
+  GDExtensionConstStringNamePtr, // p_member
   GDExtensionBool
 ]
 
@@ -435,9 +435,9 @@ type GDExtensionInterfaceVariantHasMember = CFuncPtr2[
  * Checks if a Variant has a key.
  */
 type GDExtensionInterfaceVariantHasKey = CFuncPtr3[
-  GDExtensionConstVariantPtr,
-  GDExtensionConstVariantPtr,
-  Ptr[GDExtensionBool],
+  GDExtensionConstVariantPtr, // p_self
+  GDExtensionConstVariantPtr, // p_key
+  Ptr[GDExtensionBool], // r_valid
   GDExtensionBool
 ]
 
@@ -447,7 +447,7 @@ type GDExtensionInterfaceVariantHasKey = CFuncPtr3[
  * The instance ID will be returned even if the object is no longer valid - use `object_get_instance_by_id()` to check if the object is still valid.
  */
 type GDExtensionInterfaceVariantGetObjectInstanceId = CFuncPtr1[
-  GDExtensionConstVariantPtr,
+  GDExtensionConstVariantPtr, // p_self
   GDObjectInstanceID
 ]
 
@@ -455,8 +455,8 @@ type GDExtensionInterfaceVariantGetObjectInstanceId = CFuncPtr1[
  * Gets the name of a Variant type.
  */
 type GDExtensionInterfaceVariantGetTypeName = CFuncPtr2[
-  GDExtensionVariantType,
-  GDExtensionUninitializedStringPtr,
+  GDExtensionVariantType, // p_type
+  GDExtensionUninitializedStringPtr, // r_name
   Unit
 ]
 
@@ -464,8 +464,8 @@ type GDExtensionInterfaceVariantGetTypeName = CFuncPtr2[
  * Checks if Variants can be converted from one type to another.
  */
 type GDExtensionInterfaceVariantCanConvert = CFuncPtr2[
-  GDExtensionVariantType,
-  GDExtensionVariantType,
+  GDExtensionVariantType, // p_from
+  GDExtensionVariantType, // p_to
   GDExtensionBool
 ]
 
@@ -473,8 +473,8 @@ type GDExtensionInterfaceVariantCanConvert = CFuncPtr2[
  * Checks if Variant can be converted from one type to another using stricter rules.
  */
 type GDExtensionInterfaceVariantCanConvertStrict = CFuncPtr2[
-  GDExtensionVariantType,
-  GDExtensionVariantType,
+  GDExtensionVariantType, // p_from
+  GDExtensionVariantType, // p_to
   GDExtensionBool
 ]
 
@@ -482,7 +482,7 @@ type GDExtensionInterfaceVariantCanConvertStrict = CFuncPtr2[
  * Gets a pointer to a function that can create a Variant of the given type from a raw value.
  */
 type GDExtensionInterfaceGetVariantFromTypeConstructor = CFuncPtr1[
-  GDExtensionVariantType,
+  GDExtensionVariantType, // p_type
   GDExtensionVariantFromTypeConstructorFunc
 ]
 
@@ -490,7 +490,7 @@ type GDExtensionInterfaceGetVariantFromTypeConstructor = CFuncPtr1[
  * Gets a pointer to a function that can get the raw value from a Variant of the given type.
  */
 type GDExtensionInterfaceGetVariantToTypeConstructor = CFuncPtr1[
-  GDExtensionVariantType,
+  GDExtensionVariantType, // p_type
   GDExtensionTypeFromVariantConstructorFunc
 ]
 
@@ -503,7 +503,7 @@ type GDExtensionInterfaceGetVariantToTypeConstructor = CFuncPtr1[
  * Invoking the function with a variant of a mismatched type has undefined behavior, and may lead to a segmentation fault.
  */
 type GDExtensionInterfaceVariantGetPtrInternalGetter = CFuncPtr1[
-  GDExtensionVariantType,
+  GDExtensionVariantType, // p_type
   GDExtensionVariantGetInternalPtrFunc
 ]
 
@@ -511,9 +511,9 @@ type GDExtensionInterfaceVariantGetPtrInternalGetter = CFuncPtr1[
  * Gets a pointer to a function that can evaluate the given Variant operator on the given Variant types.
  */
 type GDExtensionInterfaceVariantGetPtrOperatorEvaluator = CFuncPtr3[
-  GDExtensionVariantOperator,
-  GDExtensionVariantType,
-  GDExtensionVariantType,
+  GDExtensionVariantOperator, // p_operator
+  GDExtensionVariantType, // p_type_a
+  GDExtensionVariantType, // p_type_b
   GDExtensionPtrOperatorEvaluator
 ]
 
@@ -521,9 +521,9 @@ type GDExtensionInterfaceVariantGetPtrOperatorEvaluator = CFuncPtr3[
  * Gets a pointer to a function that can call a builtin method on a type of Variant.
  */
 type GDExtensionInterfaceVariantGetPtrBuiltinMethod = CFuncPtr3[
-  GDExtensionVariantType,
-  GDExtensionConstStringNamePtr,
-  GDExtensionInt,
+  GDExtensionVariantType, // p_type
+  GDExtensionConstStringNamePtr, // p_method
+  GDExtensionInt, // p_hash
   GDExtensionPtrBuiltInMethod
 ]
 
@@ -531,8 +531,8 @@ type GDExtensionInterfaceVariantGetPtrBuiltinMethod = CFuncPtr3[
  * Gets a pointer to a function that can call one of the constructors for a type of Variant.
  */
 type GDExtensionInterfaceVariantGetPtrConstructor = CFuncPtr2[
-  GDExtensionVariantType,
-  CInt,
+  GDExtensionVariantType, // p_type
+  CInt, // p_constructor
   GDExtensionPtrConstructor
 ]
 
@@ -540,7 +540,7 @@ type GDExtensionInterfaceVariantGetPtrConstructor = CFuncPtr2[
  * Gets a pointer to a function than can call the destructor for a type of Variant.
  */
 type GDExtensionInterfaceVariantGetPtrDestructor = CFuncPtr1[
-  GDExtensionVariantType,
+  GDExtensionVariantType, // p_type
   GDExtensionPtrDestructor
 ]
 
@@ -548,11 +548,11 @@ type GDExtensionInterfaceVariantGetPtrDestructor = CFuncPtr1[
  * Constructs a Variant of the given type, using the first constructor that matches the given arguments.
  */
 type GDExtensionInterfaceVariantConstruct = CFuncPtr5[
-  GDExtensionVariantType,
-  GDExtensionUninitializedVariantPtr,
-  Ptr[GDExtensionConstVariantPtr],
-  CInt,
-  Ptr[GDExtensionCallError],
+  GDExtensionVariantType, // p_type
+  GDExtensionUninitializedVariantPtr, // r_base
+  Ptr[GDExtensionConstVariantPtr], // p_args
+  CInt, // p_argument_count
+  Ptr[GDExtensionCallError], // r_error
   Unit
 ]
 
@@ -560,8 +560,8 @@ type GDExtensionInterfaceVariantConstruct = CFuncPtr5[
  * Gets a pointer to a function that can call a member's setter on the given Variant type.
  */
 type GDExtensionInterfaceVariantGetPtrSetter = CFuncPtr2[
-  GDExtensionVariantType,
-  GDExtensionConstStringNamePtr,
+  GDExtensionVariantType, // p_type
+  GDExtensionConstStringNamePtr, // p_member
   GDExtensionPtrSetter
 ]
 
@@ -569,8 +569,8 @@ type GDExtensionInterfaceVariantGetPtrSetter = CFuncPtr2[
  * Gets a pointer to a function that can call a member's getter on the given Variant type.
  */
 type GDExtensionInterfaceVariantGetPtrGetter = CFuncPtr2[
-  GDExtensionVariantType,
-  GDExtensionConstStringNamePtr,
+  GDExtensionVariantType, // p_type
+  GDExtensionConstStringNamePtr, // p_member
   GDExtensionPtrGetter
 ]
 
@@ -578,7 +578,7 @@ type GDExtensionInterfaceVariantGetPtrGetter = CFuncPtr2[
  * Gets a pointer to a function that can set an index on the given Variant type.
  */
 type GDExtensionInterfaceVariantGetPtrIndexedSetter = CFuncPtr1[
-  GDExtensionVariantType,
+  GDExtensionVariantType, // p_type
   GDExtensionPtrIndexedSetter
 ]
 
@@ -586,7 +586,7 @@ type GDExtensionInterfaceVariantGetPtrIndexedSetter = CFuncPtr1[
  * Gets a pointer to a function that can get an index on the given Variant type.
  */
 type GDExtensionInterfaceVariantGetPtrIndexedGetter = CFuncPtr1[
-  GDExtensionVariantType,
+  GDExtensionVariantType, // p_type
   GDExtensionPtrIndexedGetter
 ]
 
@@ -594,7 +594,7 @@ type GDExtensionInterfaceVariantGetPtrIndexedGetter = CFuncPtr1[
  * Gets a pointer to a function that can set a key on the given Variant type.
  */
 type GDExtensionInterfaceVariantGetPtrKeyedSetter = CFuncPtr1[
-  GDExtensionVariantType,
+  GDExtensionVariantType, // p_type
   GDExtensionPtrKeyedSetter
 ]
 
@@ -602,7 +602,7 @@ type GDExtensionInterfaceVariantGetPtrKeyedSetter = CFuncPtr1[
  * Gets a pointer to a function that can get a key on the given Variant type.
  */
 type GDExtensionInterfaceVariantGetPtrKeyedGetter = CFuncPtr1[
-  GDExtensionVariantType,
+  GDExtensionVariantType, // p_type
   GDExtensionPtrKeyedGetter
 ]
 
@@ -610,7 +610,7 @@ type GDExtensionInterfaceVariantGetPtrKeyedGetter = CFuncPtr1[
  * Gets a pointer to a function that can check a key on the given Variant type.
  */
 type GDExtensionInterfaceVariantGetPtrKeyedChecker = CFuncPtr1[
-  GDExtensionVariantType,
+  GDExtensionVariantType, // p_type
   GDExtensionPtrKeyedChecker
 ]
 
@@ -618,9 +618,9 @@ type GDExtensionInterfaceVariantGetPtrKeyedChecker = CFuncPtr1[
  * Gets the value of a constant from the given Variant type.
  */
 type GDExtensionInterfaceVariantGetConstantValue = CFuncPtr3[
-  GDExtensionVariantType,
-  GDExtensionConstStringNamePtr,
-  GDExtensionUninitializedVariantPtr,
+  GDExtensionVariantType, // p_type
+  GDExtensionConstStringNamePtr, // p_constant
+  GDExtensionUninitializedVariantPtr, // r_ret
   Unit
 ]
 
@@ -628,8 +628,8 @@ type GDExtensionInterfaceVariantGetConstantValue = CFuncPtr3[
  * Gets a pointer to a function that can call a Variant utility function.
  */
 type GDExtensionInterfaceVariantGetPtrUtilityFunction = CFuncPtr2[
-  GDExtensionConstStringNamePtr,
-  GDExtensionInt,
+  GDExtensionConstStringNamePtr, // p_function
+  GDExtensionInt, // p_hash
   GDExtensionPtrUtilityFunction
 ]
 
@@ -637,8 +637,8 @@ type GDExtensionInterfaceVariantGetPtrUtilityFunction = CFuncPtr2[
  * Creates a String from a Latin-1 encoded C string.
  */
 type GDExtensionInterfaceStringNewWithLatin1Chars = CFuncPtr2[
-  GDExtensionUninitializedStringPtr,
-  Ptr[CChar],
+  GDExtensionUninitializedStringPtr, // r_dest
+  Ptr[CChar], // p_contents
   Unit
 ]
 
@@ -646,8 +646,8 @@ type GDExtensionInterfaceStringNewWithLatin1Chars = CFuncPtr2[
  * Creates a String from a UTF-8 encoded C string.
  */
 type GDExtensionInterfaceStringNewWithUtf8Chars = CFuncPtr2[
-  GDExtensionUninitializedStringPtr,
-  Ptr[CChar],
+  GDExtensionUninitializedStringPtr, // r_dest
+  Ptr[CChar], // p_contents
   Unit
 ]
 
@@ -655,8 +655,8 @@ type GDExtensionInterfaceStringNewWithUtf8Chars = CFuncPtr2[
  * Creates a String from a UTF-16 encoded C string.
  */
 type GDExtensionInterfaceStringNewWithUtf16Chars = CFuncPtr2[
-  GDExtensionUninitializedStringPtr,
-  Ptr[CChar16],
+  GDExtensionUninitializedStringPtr, // r_dest
+  Ptr[CChar16], // p_contents
   Unit
 ]
 
@@ -664,8 +664,8 @@ type GDExtensionInterfaceStringNewWithUtf16Chars = CFuncPtr2[
  * Creates a String from a UTF-32 encoded C string.
  */
 type GDExtensionInterfaceStringNewWithUtf32Chars = CFuncPtr2[
-  GDExtensionUninitializedStringPtr,
-  Ptr[CChar32],
+  GDExtensionUninitializedStringPtr, // r_dest
+  Ptr[CChar32], // p_contents
   Unit
 ]
 
@@ -673,8 +673,8 @@ type GDExtensionInterfaceStringNewWithUtf32Chars = CFuncPtr2[
  * Creates a String from a wide C string.
  */
 type GDExtensionInterfaceStringNewWithWideChars = CFuncPtr2[
-  GDExtensionUninitializedStringPtr,
-  Ptr[CWideChar],
+  GDExtensionUninitializedStringPtr, // r_dest
+  Ptr[CWideChar], // p_contents
   Unit
 ]
 
@@ -682,9 +682,9 @@ type GDExtensionInterfaceStringNewWithWideChars = CFuncPtr2[
  * Creates a String from a Latin-1 encoded C string with the given length.
  */
 type GDExtensionInterfaceStringNewWithLatin1CharsAndLen = CFuncPtr3[
-  GDExtensionUninitializedStringPtr,
-  Ptr[CChar],
-  GDExtensionInt,
+  GDExtensionUninitializedStringPtr, // r_dest
+  Ptr[CChar], // p_contents
+  GDExtensionInt, // p_size
   Unit
 ]
 
@@ -694,9 +694,9 @@ type GDExtensionInterfaceStringNewWithLatin1CharsAndLen = CFuncPtr3[
  * @deprecated Since 4.3. Use string_new_with_utf8_chars_and_len2 instead.
  */
 type GDExtensionInterfaceStringNewWithUtf8CharsAndLen = CFuncPtr3[
-  GDExtensionUninitializedStringPtr,
-  Ptr[CChar],
-  GDExtensionInt,
+  GDExtensionUninitializedStringPtr, // r_dest
+  Ptr[CChar], // p_contents
+  GDExtensionInt, // p_size
   Unit
 ]
 
@@ -704,9 +704,9 @@ type GDExtensionInterfaceStringNewWithUtf8CharsAndLen = CFuncPtr3[
  * Creates a String from a UTF-8 encoded C string with the given length.
  */
 type GDExtensionInterfaceStringNewWithUtf8CharsAndLen2 = CFuncPtr3[
-  GDExtensionUninitializedStringPtr,
-  Ptr[CChar],
-  GDExtensionInt,
+  GDExtensionUninitializedStringPtr, // r_dest
+  Ptr[CChar], // p_contents
+  GDExtensionInt, // p_size
   GDExtensionInt
 ]
 
@@ -716,9 +716,9 @@ type GDExtensionInterfaceStringNewWithUtf8CharsAndLen2 = CFuncPtr3[
  * @deprecated Since 4.3. Use string_new_with_utf16_chars_and_len2 instead.
  */
 type GDExtensionInterfaceStringNewWithUtf16CharsAndLen = CFuncPtr3[
-  GDExtensionUninitializedStringPtr,
-  Ptr[CChar16],
-  GDExtensionInt,
+  GDExtensionUninitializedStringPtr, // r_dest
+  Ptr[CChar16], // p_contents
+  GDExtensionInt, // p_char_count
   Unit
 ]
 
@@ -726,10 +726,10 @@ type GDExtensionInterfaceStringNewWithUtf16CharsAndLen = CFuncPtr3[
  * Creates a String from a UTF-16 encoded C string with the given length.
  */
 type GDExtensionInterfaceStringNewWithUtf16CharsAndLen2 = CFuncPtr4[
-  GDExtensionUninitializedStringPtr,
-  Ptr[CChar16],
-  GDExtensionInt,
-  GDExtensionBool,
+  GDExtensionUninitializedStringPtr, // r_dest
+  Ptr[CChar16], // p_contents
+  GDExtensionInt, // p_char_count
+  GDExtensionBool, // p_default_little_endian
   GDExtensionInt
 ]
 
@@ -737,9 +737,9 @@ type GDExtensionInterfaceStringNewWithUtf16CharsAndLen2 = CFuncPtr4[
  * Creates a String from a UTF-32 encoded C string with the given length.
  */
 type GDExtensionInterfaceStringNewWithUtf32CharsAndLen = CFuncPtr3[
-  GDExtensionUninitializedStringPtr,
-  Ptr[CChar32],
-  GDExtensionInt,
+  GDExtensionUninitializedStringPtr, // r_dest
+  Ptr[CChar32], // p_contents
+  GDExtensionInt, // p_char_count
   Unit
 ]
 
@@ -747,9 +747,9 @@ type GDExtensionInterfaceStringNewWithUtf32CharsAndLen = CFuncPtr3[
  * Creates a String from a wide C string with the given length.
  */
 type GDExtensionInterfaceStringNewWithWideCharsAndLen = CFuncPtr3[
-  GDExtensionUninitializedStringPtr,
-  Ptr[CWideChar],
-  GDExtensionInt,
+  GDExtensionUninitializedStringPtr, // r_dest
+  Ptr[CWideChar], // p_contents
+  GDExtensionInt, // p_char_count
   Unit
 ]
 
@@ -758,9 +758,9 @@ type GDExtensionInterfaceStringNewWithWideCharsAndLen = CFuncPtr3[
  * It doesn't write a null terminator.
  */
 type GDExtensionInterfaceStringToLatin1Chars = CFuncPtr3[
-  GDExtensionConstStringPtr,
-  Ptr[CChar],
-  GDExtensionInt,
+  GDExtensionConstStringPtr, // p_self
+  Ptr[CChar], // r_text
+  GDExtensionInt, // p_max_write_length
   GDExtensionInt
 ]
 
@@ -769,9 +769,9 @@ type GDExtensionInterfaceStringToLatin1Chars = CFuncPtr3[
  * It doesn't write a null terminator.
  */
 type GDExtensionInterfaceStringToUtf8Chars = CFuncPtr3[
-  GDExtensionConstStringPtr,
-  Ptr[CChar],
-  GDExtensionInt,
+  GDExtensionConstStringPtr, // p_self
+  Ptr[CChar], // r_text
+  GDExtensionInt, // p_max_write_length
   GDExtensionInt
 ]
 
@@ -780,9 +780,9 @@ type GDExtensionInterfaceStringToUtf8Chars = CFuncPtr3[
  * It doesn't write a null terminator.
  */
 type GDExtensionInterfaceStringToUtf16Chars = CFuncPtr3[
-  GDExtensionConstStringPtr,
-  Ptr[CChar16],
-  GDExtensionInt,
+  GDExtensionConstStringPtr, // p_self
+  Ptr[CChar16], // r_text
+  GDExtensionInt, // p_max_write_length
   GDExtensionInt
 ]
 
@@ -791,9 +791,9 @@ type GDExtensionInterfaceStringToUtf16Chars = CFuncPtr3[
  * It doesn't write a null terminator.
  */
 type GDExtensionInterfaceStringToUtf32Chars = CFuncPtr3[
-  GDExtensionConstStringPtr,
-  Ptr[CChar32],
-  GDExtensionInt,
+  GDExtensionConstStringPtr, // p_self
+  Ptr[CChar32], // r_text
+  GDExtensionInt, // p_max_write_length
   GDExtensionInt
 ]
 
@@ -802,9 +802,9 @@ type GDExtensionInterfaceStringToUtf32Chars = CFuncPtr3[
  * It doesn't write a null terminator.
  */
 type GDExtensionInterfaceStringToWideChars = CFuncPtr3[
-  GDExtensionConstStringPtr,
-  Ptr[CWideChar],
-  GDExtensionInt,
+  GDExtensionConstStringPtr, // p_self
+  Ptr[CWideChar], // r_text
+  GDExtensionInt, // p_max_write_length
   GDExtensionInt
 ]
 
@@ -812,8 +812,8 @@ type GDExtensionInterfaceStringToWideChars = CFuncPtr3[
  * Gets a pointer to the character at the given index from a String.
  */
 type GDExtensionInterfaceStringOperatorIndex = CFuncPtr2[
-  GDExtensionStringPtr,
-  GDExtensionInt,
+  GDExtensionStringPtr, // p_self
+  GDExtensionInt, // p_index
   Ptr[CChar32]
 ]
 
@@ -821,8 +821,8 @@ type GDExtensionInterfaceStringOperatorIndex = CFuncPtr2[
  * Gets a const pointer to the character at the given index from a String.
  */
 type GDExtensionInterfaceStringOperatorIndexConst = CFuncPtr2[
-  GDExtensionConstStringPtr,
-  GDExtensionInt,
+  GDExtensionConstStringPtr, // p_self
+  GDExtensionInt, // p_index
   Ptr[CChar32]
 ]
 
@@ -830,8 +830,8 @@ type GDExtensionInterfaceStringOperatorIndexConst = CFuncPtr2[
  * Appends another String to a String.
  */
 type GDExtensionInterfaceStringOperatorPlusEqString = CFuncPtr2[
-  GDExtensionStringPtr,
-  GDExtensionConstStringPtr,
+  GDExtensionStringPtr, // p_self
+  GDExtensionConstStringPtr, // p_b
   Unit
 ]
 
@@ -839,8 +839,8 @@ type GDExtensionInterfaceStringOperatorPlusEqString = CFuncPtr2[
  * Appends a character to a String.
  */
 type GDExtensionInterfaceStringOperatorPlusEqChar = CFuncPtr2[
-  GDExtensionStringPtr,
-  CChar32,
+  GDExtensionStringPtr, // p_self
+  CChar32, // p_b
   Unit
 ]
 
@@ -848,8 +848,8 @@ type GDExtensionInterfaceStringOperatorPlusEqChar = CFuncPtr2[
  * Appends a Latin-1 encoded C string to a String.
  */
 type GDExtensionInterfaceStringOperatorPlusEqCstr = CFuncPtr2[
-  GDExtensionStringPtr,
-  Ptr[CChar],
+  GDExtensionStringPtr, // p_self
+  Ptr[CChar], // p_b
   Unit
 ]
 
@@ -857,8 +857,8 @@ type GDExtensionInterfaceStringOperatorPlusEqCstr = CFuncPtr2[
  * Appends a wide C string to a String.
  */
 type GDExtensionInterfaceStringOperatorPlusEqWcstr = CFuncPtr2[
-  GDExtensionStringPtr,
-  Ptr[CWideChar],
+  GDExtensionStringPtr, // p_self
+  Ptr[CWideChar], // p_b
   Unit
 ]
 
@@ -866,8 +866,8 @@ type GDExtensionInterfaceStringOperatorPlusEqWcstr = CFuncPtr2[
  * Appends a UTF-32 encoded C string to a String.
  */
 type GDExtensionInterfaceStringOperatorPlusEqC32str = CFuncPtr2[
-  GDExtensionStringPtr,
-  Ptr[CChar32],
+  GDExtensionStringPtr, // p_self
+  Ptr[CChar32], // p_b
   Unit
 ]
 
@@ -880,8 +880,8 @@ type GDExtensionInterfaceStringOperatorPlusEqC32str = CFuncPtr2[
  * efficient way to accomplish your goal.
  */
 type GDExtensionInterfaceStringResize = CFuncPtr2[
-  GDExtensionStringPtr,
-  GDExtensionInt,
+  GDExtensionStringPtr, // p_self
+  GDExtensionInt, // p_resize
   GDExtensionInt
 ]
 
@@ -895,9 +895,9 @@ type GDExtensionInterfaceStringResize = CFuncPtr2[
  * `p_is_static` is purely an optimization and can easily introduce undefined behavior if used wrong. In case of doubt, set it to false.
  */
 type GDExtensionInterfaceStringNameNewWithLatin1Chars = CFuncPtr3[
-  GDExtensionUninitializedStringNamePtr,
-  Ptr[CChar],
-  GDExtensionBool,
+  GDExtensionUninitializedStringNamePtr, // r_dest
+  Ptr[CChar], // p_contents
+  GDExtensionBool, // p_is_static
   Unit
 ]
 
@@ -905,8 +905,8 @@ type GDExtensionInterfaceStringNameNewWithLatin1Chars = CFuncPtr3[
  * Creates a StringName from a UTF-8 encoded C string.
  */
 type GDExtensionInterfaceStringNameNewWithUtf8Chars = CFuncPtr2[
-  GDExtensionUninitializedStringNamePtr,
-  Ptr[CChar],
+  GDExtensionUninitializedStringNamePtr, // r_dest
+  Ptr[CChar], // p_contents
   Unit
 ]
 
@@ -914,9 +914,9 @@ type GDExtensionInterfaceStringNameNewWithUtf8Chars = CFuncPtr2[
  * Creates a StringName from a UTF-8 encoded string with a given number of characters.
  */
 type GDExtensionInterfaceStringNameNewWithUtf8CharsAndLen = CFuncPtr3[
-  GDExtensionUninitializedStringNamePtr,
-  Ptr[CChar],
-  GDExtensionInt,
+  GDExtensionUninitializedStringNamePtr, // r_dest
+  Ptr[CChar], // p_contents
+  GDExtensionInt, // p_size
   Unit
 ]
 
@@ -924,9 +924,9 @@ type GDExtensionInterfaceStringNameNewWithUtf8CharsAndLen = CFuncPtr3[
  * Opens a raw XML buffer on an XMLParser instance.
  */
 type GDExtensionInterfaceXmlParserOpenBuffer = CFuncPtr3[
-  GDExtensionObjectPtr,
-  Ptr[UByte],
-  CSize,
+  GDExtensionObjectPtr, // p_instance
+  Ptr[UByte], // p_buffer
+  CSize, // p_size
   GDExtensionInt
 ]
 
@@ -934,9 +934,9 @@ type GDExtensionInterfaceXmlParserOpenBuffer = CFuncPtr3[
  * Stores the given buffer using an instance of FileAccess.
  */
 type GDExtensionInterfaceFileAccessStoreBuffer = CFuncPtr3[
-  GDExtensionObjectPtr,
-  Ptr[UByte],
-  CUnsignedLongLong,
+  GDExtensionObjectPtr, // p_instance
+  Ptr[UByte], // p_src
+  CUnsignedLongLong, // p_length
   Unit
 ]
 
@@ -944,9 +944,9 @@ type GDExtensionInterfaceFileAccessStoreBuffer = CFuncPtr3[
  * Reads the next p_length bytes into the given buffer using an instance of FileAccess.
  */
 type GDExtensionInterfaceFileAccessGetBuffer = CFuncPtr3[
-  GDExtensionConstObjectPtr,
-  Ptr[UByte],
-  CUnsignedLongLong,
+  GDExtensionConstObjectPtr, // p_instance
+  Ptr[UByte], // p_dst
+  CUnsignedLongLong, // p_length
   CUnsignedLongLong
 ]
 
@@ -954,7 +954,7 @@ type GDExtensionInterfaceFileAccessGetBuffer = CFuncPtr3[
  * Returns writable pointer to internal Image buffer.
  */
 type GDExtensionInterfaceImagePtrw = CFuncPtr1[
-  GDExtensionObjectPtr,
+  GDExtensionObjectPtr, // p_instance
   Ptr[UByte]
 ]
 
@@ -962,7 +962,7 @@ type GDExtensionInterfaceImagePtrw = CFuncPtr1[
  * Returns read only pointer to internal Image buffer.
  */
 type GDExtensionInterfaceImagePtr = CFuncPtr1[
-  GDExtensionObjectPtr,
+  GDExtensionObjectPtr, // p_instance
   Ptr[UByte]
 ]
 
@@ -970,13 +970,13 @@ type GDExtensionInterfaceImagePtr = CFuncPtr1[
  * Adds a group task to an instance of WorkerThreadPool.
  */
 type GDExtensionInterfaceWorkerThreadPoolAddNativeGroupTask = CFuncPtr7[
-  GDExtensionObjectPtr,
-  GDExtensionWorkerThreadPoolGroupTask,
-  CVoidPtr,
-  CInt,
-  CInt,
-  GDExtensionBool,
-  GDExtensionConstStringPtr,
+  GDExtensionObjectPtr, // p_instance
+  GDExtensionWorkerThreadPoolGroupTask, // p_func
+  CVoidPtr, // p_userdata
+  CInt, // p_elements
+  CInt, // p_tasks
+  GDExtensionBool, // p_high_priority
+  GDExtensionConstStringPtr, // p_description
   CLongLong
 ]
 
@@ -984,11 +984,11 @@ type GDExtensionInterfaceWorkerThreadPoolAddNativeGroupTask = CFuncPtr7[
  * Adds a task to an instance of WorkerThreadPool.
  */
 type GDExtensionInterfaceWorkerThreadPoolAddNativeTask = CFuncPtr5[
-  GDExtensionObjectPtr,
-  GDExtensionWorkerThreadPoolTask,
-  CVoidPtr,
-  GDExtensionBool,
-  GDExtensionConstStringPtr,
+  GDExtensionObjectPtr, // p_instance
+  GDExtensionWorkerThreadPoolTask, // p_func
+  CVoidPtr, // p_userdata
+  GDExtensionBool, // p_high_priority
+  GDExtensionConstStringPtr, // p_description
   CLongLong
 ]
 
@@ -996,8 +996,8 @@ type GDExtensionInterfaceWorkerThreadPoolAddNativeTask = CFuncPtr5[
  * Gets a pointer to a byte in a PackedByteArray.
  */
 type GDExtensionInterfacePackedByteArrayOperatorIndex = CFuncPtr2[
-  GDExtensionTypePtr,
-  GDExtensionInt,
+  GDExtensionTypePtr, // p_self
+  GDExtensionInt, // p_index
   Ptr[UByte]
 ]
 
@@ -1005,8 +1005,8 @@ type GDExtensionInterfacePackedByteArrayOperatorIndex = CFuncPtr2[
  * Gets a const pointer to a byte in a PackedByteArray.
  */
 type GDExtensionInterfacePackedByteArrayOperatorIndexConst = CFuncPtr2[
-  GDExtensionConstTypePtr,
-  GDExtensionInt,
+  GDExtensionConstTypePtr, // p_self
+  GDExtensionInt, // p_index
   Ptr[UByte]
 ]
 
@@ -1014,8 +1014,8 @@ type GDExtensionInterfacePackedByteArrayOperatorIndexConst = CFuncPtr2[
  * Gets a pointer to a 32-bit float in a PackedFloat32Array.
  */
 type GDExtensionInterfacePackedFloat32ArrayOperatorIndex = CFuncPtr2[
-  GDExtensionTypePtr,
-  GDExtensionInt,
+  GDExtensionTypePtr, // p_self
+  GDExtensionInt, // p_index
   Ptr[CFloat]
 ]
 
@@ -1023,8 +1023,8 @@ type GDExtensionInterfacePackedFloat32ArrayOperatorIndex = CFuncPtr2[
  * Gets a const pointer to a 32-bit float in a PackedFloat32Array.
  */
 type GDExtensionInterfacePackedFloat32ArrayOperatorIndexConst = CFuncPtr2[
-  GDExtensionConstTypePtr,
-  GDExtensionInt,
+  GDExtensionConstTypePtr, // p_self
+  GDExtensionInt, // p_index
   Ptr[CFloat]
 ]
 
@@ -1032,8 +1032,8 @@ type GDExtensionInterfacePackedFloat32ArrayOperatorIndexConst = CFuncPtr2[
  * Gets a pointer to a 64-bit float in a PackedFloat64Array.
  */
 type GDExtensionInterfacePackedFloat64ArrayOperatorIndex = CFuncPtr2[
-  GDExtensionTypePtr,
-  GDExtensionInt,
+  GDExtensionTypePtr, // p_self
+  GDExtensionInt, // p_index
   Ptr[CDouble]
 ]
 
@@ -1041,8 +1041,8 @@ type GDExtensionInterfacePackedFloat64ArrayOperatorIndex = CFuncPtr2[
  * Gets a const pointer to a 64-bit float in a PackedFloat64Array.
  */
 type GDExtensionInterfacePackedFloat64ArrayOperatorIndexConst = CFuncPtr2[
-  GDExtensionConstTypePtr,
-  GDExtensionInt,
+  GDExtensionConstTypePtr, // p_self
+  GDExtensionInt, // p_index
   Ptr[CDouble]
 ]
 
@@ -1050,8 +1050,8 @@ type GDExtensionInterfacePackedFloat64ArrayOperatorIndexConst = CFuncPtr2[
  * Gets a pointer to a 32-bit integer in a PackedInt32Array.
  */
 type GDExtensionInterfacePackedInt32ArrayOperatorIndex = CFuncPtr2[
-  GDExtensionTypePtr,
-  GDExtensionInt,
+  GDExtensionTypePtr, // p_self
+  GDExtensionInt, // p_index
   Ptr[CInt]
 ]
 
@@ -1059,8 +1059,8 @@ type GDExtensionInterfacePackedInt32ArrayOperatorIndex = CFuncPtr2[
  * Gets a const pointer to a 32-bit integer in a PackedInt32Array.
  */
 type GDExtensionInterfacePackedInt32ArrayOperatorIndexConst = CFuncPtr2[
-  GDExtensionConstTypePtr,
-  GDExtensionInt,
+  GDExtensionConstTypePtr, // p_self
+  GDExtensionInt, // p_index
   Ptr[CInt]
 ]
 
@@ -1068,8 +1068,8 @@ type GDExtensionInterfacePackedInt32ArrayOperatorIndexConst = CFuncPtr2[
  * Gets a pointer to a 64-bit integer in a PackedInt64Array.
  */
 type GDExtensionInterfacePackedInt64ArrayOperatorIndex = CFuncPtr2[
-  GDExtensionTypePtr,
-  GDExtensionInt,
+  GDExtensionTypePtr, // p_self
+  GDExtensionInt, // p_index
   Ptr[CLongLong]
 ]
 
@@ -1077,8 +1077,8 @@ type GDExtensionInterfacePackedInt64ArrayOperatorIndex = CFuncPtr2[
  * Gets a const pointer to a 64-bit integer in a PackedInt64Array.
  */
 type GDExtensionInterfacePackedInt64ArrayOperatorIndexConst = CFuncPtr2[
-  GDExtensionConstTypePtr,
-  GDExtensionInt,
+  GDExtensionConstTypePtr, // p_self
+  GDExtensionInt, // p_index
   Ptr[CLongLong]
 ]
 
@@ -1086,8 +1086,8 @@ type GDExtensionInterfacePackedInt64ArrayOperatorIndexConst = CFuncPtr2[
  * Gets a pointer to a string in a PackedStringArray.
  */
 type GDExtensionInterfacePackedStringArrayOperatorIndex = CFuncPtr2[
-  GDExtensionTypePtr,
-  GDExtensionInt,
+  GDExtensionTypePtr, // p_self
+  GDExtensionInt, // p_index
   GDExtensionStringPtr
 ]
 
@@ -1095,8 +1095,8 @@ type GDExtensionInterfacePackedStringArrayOperatorIndex = CFuncPtr2[
  * Gets a const pointer to a string in a PackedStringArray.
  */
 type GDExtensionInterfacePackedStringArrayOperatorIndexConst = CFuncPtr2[
-  GDExtensionConstTypePtr,
-  GDExtensionInt,
+  GDExtensionConstTypePtr, // p_self
+  GDExtensionInt, // p_index
   GDExtensionStringPtr
 ]
 
@@ -1104,8 +1104,8 @@ type GDExtensionInterfacePackedStringArrayOperatorIndexConst = CFuncPtr2[
  * Gets a pointer to a Vector2 in a PackedVector2Array.
  */
 type GDExtensionInterfacePackedVector2ArrayOperatorIndex = CFuncPtr2[
-  GDExtensionTypePtr,
-  GDExtensionInt,
+  GDExtensionTypePtr, // p_self
+  GDExtensionInt, // p_index
   GDExtensionTypePtr
 ]
 
@@ -1113,8 +1113,8 @@ type GDExtensionInterfacePackedVector2ArrayOperatorIndex = CFuncPtr2[
  * Gets a const pointer to a Vector2 in a PackedVector2Array.
  */
 type GDExtensionInterfacePackedVector2ArrayOperatorIndexConst = CFuncPtr2[
-  GDExtensionConstTypePtr,
-  GDExtensionInt,
+  GDExtensionConstTypePtr, // p_self
+  GDExtensionInt, // p_index
   GDExtensionTypePtr
 ]
 
@@ -1122,8 +1122,8 @@ type GDExtensionInterfacePackedVector2ArrayOperatorIndexConst = CFuncPtr2[
  * Gets a pointer to a Vector3 in a PackedVector3Array.
  */
 type GDExtensionInterfacePackedVector3ArrayOperatorIndex = CFuncPtr2[
-  GDExtensionTypePtr,
-  GDExtensionInt,
+  GDExtensionTypePtr, // p_self
+  GDExtensionInt, // p_index
   GDExtensionTypePtr
 ]
 
@@ -1131,8 +1131,8 @@ type GDExtensionInterfacePackedVector3ArrayOperatorIndex = CFuncPtr2[
  * Gets a const pointer to a Vector3 in a PackedVector3Array.
  */
 type GDExtensionInterfacePackedVector3ArrayOperatorIndexConst = CFuncPtr2[
-  GDExtensionConstTypePtr,
-  GDExtensionInt,
+  GDExtensionConstTypePtr, // p_self
+  GDExtensionInt, // p_index
   GDExtensionTypePtr
 ]
 
@@ -1140,8 +1140,8 @@ type GDExtensionInterfacePackedVector3ArrayOperatorIndexConst = CFuncPtr2[
  * Gets a pointer to a Vector4 in a PackedVector4Array.
  */
 type GDExtensionInterfacePackedVector4ArrayOperatorIndex = CFuncPtr2[
-  GDExtensionTypePtr,
-  GDExtensionInt,
+  GDExtensionTypePtr, // p_self
+  GDExtensionInt, // p_index
   GDExtensionTypePtr
 ]
 
@@ -1149,8 +1149,8 @@ type GDExtensionInterfacePackedVector4ArrayOperatorIndex = CFuncPtr2[
  * Gets a const pointer to a Vector4 in a PackedVector4Array.
  */
 type GDExtensionInterfacePackedVector4ArrayOperatorIndexConst = CFuncPtr2[
-  GDExtensionConstTypePtr,
-  GDExtensionInt,
+  GDExtensionConstTypePtr, // p_self
+  GDExtensionInt, // p_index
   GDExtensionTypePtr
 ]
 
@@ -1158,8 +1158,8 @@ type GDExtensionInterfacePackedVector4ArrayOperatorIndexConst = CFuncPtr2[
  * Gets a pointer to a color in a PackedColorArray.
  */
 type GDExtensionInterfacePackedColorArrayOperatorIndex = CFuncPtr2[
-  GDExtensionTypePtr,
-  GDExtensionInt,
+  GDExtensionTypePtr, // p_self
+  GDExtensionInt, // p_index
   GDExtensionTypePtr
 ]
 
@@ -1167,8 +1167,8 @@ type GDExtensionInterfacePackedColorArrayOperatorIndex = CFuncPtr2[
  * Gets a const pointer to a color in a PackedColorArray.
  */
 type GDExtensionInterfacePackedColorArrayOperatorIndexConst = CFuncPtr2[
-  GDExtensionConstTypePtr,
-  GDExtensionInt,
+  GDExtensionConstTypePtr, // p_self
+  GDExtensionInt, // p_index
   GDExtensionTypePtr
 ]
 
@@ -1176,8 +1176,8 @@ type GDExtensionInterfacePackedColorArrayOperatorIndexConst = CFuncPtr2[
  * Gets a pointer to a Variant in an Array.
  */
 type GDExtensionInterfaceArrayOperatorIndex = CFuncPtr2[
-  GDExtensionTypePtr,
-  GDExtensionInt,
+  GDExtensionTypePtr, // p_self
+  GDExtensionInt, // p_index
   GDExtensionVariantPtr
 ]
 
@@ -1185,8 +1185,8 @@ type GDExtensionInterfaceArrayOperatorIndex = CFuncPtr2[
  * Gets a const pointer to a Variant in an Array.
  */
 type GDExtensionInterfaceArrayOperatorIndexConst = CFuncPtr2[
-  GDExtensionConstTypePtr,
-  GDExtensionInt,
+  GDExtensionConstTypePtr, // p_self
+  GDExtensionInt, // p_index
   GDExtensionVariantPtr
 ]
 
@@ -1196,8 +1196,8 @@ type GDExtensionInterfaceArrayOperatorIndexConst = CFuncPtr2[
  * @deprecated Since 4.5. Use  instead.
  */
 type GDExtensionInterfaceArrayRef = CFuncPtr2[
-  GDExtensionTypePtr,
-  GDExtensionConstTypePtr,
+  GDExtensionTypePtr, // p_self
+  GDExtensionConstTypePtr, // p_from
   Unit
 ]
 
@@ -1205,10 +1205,10 @@ type GDExtensionInterfaceArrayRef = CFuncPtr2[
  * Makes an Array into a typed Array.
  */
 type GDExtensionInterfaceArraySetTyped = CFuncPtr4[
-  GDExtensionTypePtr,
-  GDExtensionVariantType,
-  GDExtensionConstStringNamePtr,
-  GDExtensionConstVariantPtr,
+  GDExtensionTypePtr, // p_self
+  GDExtensionVariantType, // p_type
+  GDExtensionConstStringNamePtr, // p_class_name
+  GDExtensionConstVariantPtr, // p_script
   Unit
 ]
 
@@ -1216,8 +1216,8 @@ type GDExtensionInterfaceArraySetTyped = CFuncPtr4[
  * Gets a pointer to a Variant in a Dictionary with the given key.
  */
 type GDExtensionInterfaceDictionaryOperatorIndex = CFuncPtr2[
-  GDExtensionTypePtr,
-  GDExtensionConstVariantPtr,
+  GDExtensionTypePtr, // p_self
+  GDExtensionConstVariantPtr, // p_key
   GDExtensionVariantPtr
 ]
 
@@ -1225,8 +1225,8 @@ type GDExtensionInterfaceDictionaryOperatorIndex = CFuncPtr2[
  * Gets a const pointer to a Variant in a Dictionary with the given key.
  */
 type GDExtensionInterfaceDictionaryOperatorIndexConst = CFuncPtr2[
-  GDExtensionConstTypePtr,
-  GDExtensionConstVariantPtr,
+  GDExtensionConstTypePtr, // p_self
+  GDExtensionConstVariantPtr, // p_key
   GDExtensionVariantPtr
 ]
 
@@ -1234,13 +1234,13 @@ type GDExtensionInterfaceDictionaryOperatorIndexConst = CFuncPtr2[
  * Makes a Dictionary into a typed Dictionary.
  */
 type GDExtensionInterfaceDictionarySetTyped = CFuncPtr7[
-  GDExtensionTypePtr,
-  GDExtensionVariantType,
-  GDExtensionConstStringNamePtr,
-  GDExtensionConstVariantPtr,
-  GDExtensionVariantType,
-  GDExtensionConstStringNamePtr,
-  GDExtensionConstVariantPtr,
+  GDExtensionTypePtr, // p_self
+  GDExtensionVariantType, // p_key_type
+  GDExtensionConstStringNamePtr, // p_key_class_name
+  GDExtensionConstVariantPtr, // p_key_script
+  GDExtensionVariantType, // p_value_type
+  GDExtensionConstStringNamePtr, // p_value_class_name
+  GDExtensionConstVariantPtr, // p_value_script
   Unit
 ]
 
@@ -1248,12 +1248,12 @@ type GDExtensionInterfaceDictionarySetTyped = CFuncPtr7[
  * Calls a method on an Object.
  */
 type GDExtensionInterfaceObjectMethodBindCall = CFuncPtr6[
-  GDExtensionMethodBindPtr,
-  GDExtensionObjectPtr,
-  Ptr[GDExtensionConstVariantPtr],
-  GDExtensionInt,
-  GDExtensionUninitializedVariantPtr,
-  Ptr[GDExtensionCallError],
+  GDExtensionMethodBindPtr, // p_method_bind
+  GDExtensionObjectPtr, // p_instance
+  Ptr[GDExtensionConstVariantPtr], // p_args
+  GDExtensionInt, // p_arg_count
+  GDExtensionUninitializedVariantPtr, // r_ret
+  Ptr[GDExtensionCallError], // r_error
   Unit
 ]
 
@@ -1261,10 +1261,10 @@ type GDExtensionInterfaceObjectMethodBindCall = CFuncPtr6[
  * Calls a method on an Object (using a "ptrcall").
  */
 type GDExtensionInterfaceObjectMethodBindPtrcall = CFuncPtr4[
-  GDExtensionMethodBindPtr,
-  GDExtensionObjectPtr,
-  Ptr[GDExtensionConstTypePtr],
-  GDExtensionTypePtr,
+  GDExtensionMethodBindPtr, // p_method_bind
+  GDExtensionObjectPtr, // p_instance
+  Ptr[GDExtensionConstTypePtr], // p_args
+  GDExtensionTypePtr, // r_ret
   Unit
 ]
 
@@ -1272,7 +1272,7 @@ type GDExtensionInterfaceObjectMethodBindPtrcall = CFuncPtr4[
  * Destroys an Object.
  */
 type GDExtensionInterfaceObjectDestroy = CFuncPtr1[
-  GDExtensionObjectPtr,
+  GDExtensionObjectPtr, // p_o
   Unit
 ]
 
@@ -1280,7 +1280,7 @@ type GDExtensionInterfaceObjectDestroy = CFuncPtr1[
  * Gets a global singleton by name.
  */
 type GDExtensionInterfaceGlobalGetSingleton = CFuncPtr1[
-  GDExtensionConstStringNamePtr,
+  GDExtensionConstStringNamePtr, // p_name
   GDExtensionObjectPtr
 ]
 
@@ -1288,9 +1288,9 @@ type GDExtensionInterfaceGlobalGetSingleton = CFuncPtr1[
  * Gets a pointer representing an Object's instance binding.
  */
 type GDExtensionInterfaceObjectGetInstanceBinding = CFuncPtr3[
-  GDExtensionObjectPtr,
-  CVoidPtr,
-  Ptr[GDExtensionInstanceBindingCallbacks],
+  GDExtensionObjectPtr, // p_o
+  CVoidPtr, // p_token
+  Ptr[GDExtensionInstanceBindingCallbacks], // p_callbacks
   CVoidPtr
 ]
 
@@ -1298,10 +1298,10 @@ type GDExtensionInterfaceObjectGetInstanceBinding = CFuncPtr3[
  * Sets an Object's instance binding.
  */
 type GDExtensionInterfaceObjectSetInstanceBinding = CFuncPtr4[
-  GDExtensionObjectPtr,
-  CVoidPtr,
-  CVoidPtr,
-  Ptr[GDExtensionInstanceBindingCallbacks],
+  GDExtensionObjectPtr, // p_o
+  CVoidPtr, // p_token
+  CVoidPtr, // p_binding
+  Ptr[GDExtensionInstanceBindingCallbacks], // p_callbacks
   Unit
 ]
 
@@ -1309,8 +1309,8 @@ type GDExtensionInterfaceObjectSetInstanceBinding = CFuncPtr4[
  * Free an Object's instance binding.
  */
 type GDExtensionInterfaceObjectFreeInstanceBinding = CFuncPtr2[
-  GDExtensionObjectPtr,
-  CVoidPtr,
+  GDExtensionObjectPtr, // p_o
+  CVoidPtr, // p_token
   Unit
 ]
 
@@ -1319,9 +1319,9 @@ type GDExtensionInterfaceObjectFreeInstanceBinding = CFuncPtr2[
  * `p_classname` should be a registered extension class and should extend the `p_o` Object's class.
  */
 type GDExtensionInterfaceObjectSetInstance = CFuncPtr3[
-  GDExtensionObjectPtr,
-  GDExtensionConstStringNamePtr,
-  GDExtensionClassInstancePtr,
+  GDExtensionObjectPtr, // p_o
+  GDExtensionConstStringNamePtr, // p_classname
+  GDExtensionClassInstancePtr, // p_instance
   Unit
 ]
 
@@ -1331,9 +1331,9 @@ type GDExtensionInterfaceObjectSetInstance = CFuncPtr3[
  * function that should be used to determine which wrapper to use.
  */
 type GDExtensionInterfaceObjectGetClassName = CFuncPtr3[
-  GDExtensionConstObjectPtr,
-  GDExtensionClassLibraryPtr,
-  GDExtensionUninitializedStringNamePtr,
+  GDExtensionConstObjectPtr, // p_object
+  GDExtensionClassLibraryPtr, // p_library
+  GDExtensionUninitializedStringNamePtr, // r_class_name
   GDExtensionBool
 ]
 
@@ -1341,8 +1341,8 @@ type GDExtensionInterfaceObjectGetClassName = CFuncPtr3[
  * Casts an Object to a different type.
  */
 type GDExtensionInterfaceObjectCastTo = CFuncPtr2[
-  GDExtensionConstObjectPtr,
-  CVoidPtr,
+  GDExtensionConstObjectPtr, // p_object
+  CVoidPtr, // p_class_tag
   GDExtensionObjectPtr
 ]
 
@@ -1350,7 +1350,7 @@ type GDExtensionInterfaceObjectCastTo = CFuncPtr2[
  * Gets an Object by its instance ID.
  */
 type GDExtensionInterfaceObjectGetInstanceFromId = CFuncPtr1[
-  GDObjectInstanceID,
+  GDObjectInstanceID, // p_instance_id
   GDExtensionObjectPtr
 ]
 
@@ -1358,7 +1358,7 @@ type GDExtensionInterfaceObjectGetInstanceFromId = CFuncPtr1[
  * Gets the instance ID from an Object.
  */
 type GDExtensionInterfaceObjectGetInstanceId = CFuncPtr1[
-  GDExtensionConstObjectPtr,
+  GDExtensionConstObjectPtr, // p_object
   GDObjectInstanceID
 ]
 
@@ -1366,8 +1366,8 @@ type GDExtensionInterfaceObjectGetInstanceId = CFuncPtr1[
  * Checks if this object has a script with the given method.
  */
 type GDExtensionInterfaceObjectHasScriptMethod = CFuncPtr2[
-  GDExtensionConstObjectPtr,
-  GDExtensionConstStringNamePtr,
+  GDExtensionConstObjectPtr, // p_object
+  GDExtensionConstStringNamePtr, // p_method
   GDExtensionBool
 ]
 
@@ -1375,12 +1375,12 @@ type GDExtensionInterfaceObjectHasScriptMethod = CFuncPtr2[
  * Call the given script method on this object.
  */
 type GDExtensionInterfaceObjectCallScriptMethod = CFuncPtr6[
-  GDExtensionObjectPtr,
-  GDExtensionConstStringNamePtr,
-  Ptr[GDExtensionConstVariantPtr],
-  GDExtensionInt,
-  GDExtensionUninitializedVariantPtr,
-  Ptr[GDExtensionCallError],
+  GDExtensionObjectPtr, // p_object
+  GDExtensionConstStringNamePtr, // p_method
+  Ptr[GDExtensionConstVariantPtr], // p_args
+  GDExtensionInt, // p_argument_count
+  GDExtensionUninitializedVariantPtr, // r_return
+  Ptr[GDExtensionCallError], // r_error
   Unit
 ]
 
@@ -1388,7 +1388,7 @@ type GDExtensionInterfaceObjectCallScriptMethod = CFuncPtr6[
  * Gets the Object from a reference.
  */
 type GDExtensionInterfaceRefGetObject = CFuncPtr1[
-  GDExtensionConstRefPtr,
+  GDExtensionConstRefPtr, // p_ref
   GDExtensionObjectPtr
 ]
 
@@ -1396,8 +1396,8 @@ type GDExtensionInterfaceRefGetObject = CFuncPtr1[
  * Sets the Object referred to by a reference.
  */
 type GDExtensionInterfaceRefSetObject = CFuncPtr2[
-  GDExtensionRefPtr,
-  GDExtensionObjectPtr,
+  GDExtensionRefPtr, // p_ref
+  GDExtensionObjectPtr, // p_object
   Unit
 ]
 
@@ -1407,8 +1407,8 @@ type GDExtensionInterfaceRefSetObject = CFuncPtr2[
  * @deprecated Since 4.2. Use script_instance_create3 instead.
  */
 type GDExtensionInterfaceScriptInstanceCreate = CFuncPtr2[
-  Ptr[GDExtensionScriptInstanceInfo],
-  GDExtensionScriptInstanceDataPtr,
+  Ptr[GDExtensionScriptInstanceInfo], // p_info
+  GDExtensionScriptInstanceDataPtr, // p_instance_data
   GDExtensionScriptInstancePtr
 ]
 
@@ -1418,8 +1418,8 @@ type GDExtensionInterfaceScriptInstanceCreate = CFuncPtr2[
  * @deprecated Since 4.3. Use script_instance_create3 instead.
  */
 type GDExtensionInterfaceScriptInstanceCreate2 = CFuncPtr2[
-  Ptr[GDExtensionScriptInstanceInfo2],
-  GDExtensionScriptInstanceDataPtr,
+  Ptr[GDExtensionScriptInstanceInfo2], // p_info
+  GDExtensionScriptInstanceDataPtr, // p_instance_data
   GDExtensionScriptInstancePtr
 ]
 
@@ -1427,8 +1427,8 @@ type GDExtensionInterfaceScriptInstanceCreate2 = CFuncPtr2[
  * Creates a script instance that contains the given info and instance data.
  */
 type GDExtensionInterfaceScriptInstanceCreate3 = CFuncPtr2[
-  Ptr[GDExtensionScriptInstanceInfo3],
-  GDExtensionScriptInstanceDataPtr,
+  Ptr[GDExtensionScriptInstanceInfo3], // p_info
+  GDExtensionScriptInstanceDataPtr, // p_instance_data
   GDExtensionScriptInstancePtr
 ]
 
@@ -1437,9 +1437,9 @@ type GDExtensionInterfaceScriptInstanceCreate3 = CFuncPtr2[
  * This interface is optional as a custom placeholder could also be created with script_instance_create().
  */
 type GDExtensionInterfacePlaceholderScriptInstanceCreate = CFuncPtr3[
-  GDExtensionObjectPtr,
-  GDExtensionObjectPtr,
-  GDExtensionObjectPtr,
+  GDExtensionObjectPtr, // p_language
+  GDExtensionObjectPtr, // p_script
+  GDExtensionObjectPtr, // p_owner
   GDExtensionScriptInstancePtr
 ]
 
@@ -1449,9 +1449,9 @@ type GDExtensionInterfacePlaceholderScriptInstanceCreate = CFuncPtr3[
  * such as the one returned by placeholder_script_instance_create().
  */
 type GDExtensionInterfacePlaceholderScriptInstanceUpdate = CFuncPtr3[
-  GDExtensionScriptInstancePtr,
-  GDExtensionConstTypePtr,
-  GDExtensionConstTypePtr,
+  GDExtensionScriptInstancePtr, // p_placeholder
+  GDExtensionConstTypePtr, // p_properties
+  GDExtensionConstTypePtr, // p_values
   Unit
 ]
 
@@ -1459,8 +1459,8 @@ type GDExtensionInterfacePlaceholderScriptInstanceUpdate = CFuncPtr3[
  * Get the script instance data attached to this object.
  */
 type GDExtensionInterfaceObjectGetScriptInstance = CFuncPtr2[
-  GDExtensionConstObjectPtr,
-  GDExtensionObjectPtr,
+  GDExtensionConstObjectPtr, // p_object
+  GDExtensionObjectPtr, // p_language
   GDExtensionScriptInstanceDataPtr
 ]
 
@@ -1468,8 +1468,8 @@ type GDExtensionInterfaceObjectGetScriptInstance = CFuncPtr2[
  * Set the script instance data attached to this object.
  */
 type GDExtensionInterfaceObjectSetScriptInstance = CFuncPtr2[
-  GDExtensionObjectPtr,
-  GDExtensionScriptInstanceDataPtr,
+  GDExtensionObjectPtr, // p_object
+  GDExtensionScriptInstanceDataPtr, // p_script_instance
   Unit
 ]
 
@@ -1480,8 +1480,8 @@ type GDExtensionInterfaceObjectSetScriptInstance = CFuncPtr2[
  * @deprecated Since 4.3. Use callable_custom_create2 instead.
  */
 type GDExtensionInterfaceCallableCustomCreate = CFuncPtr2[
-  GDExtensionUninitializedTypePtr,
-  Ptr[GDExtensionCallableCustomInfo],
+  GDExtensionUninitializedTypePtr, // r_callable
+  Ptr[GDExtensionCallableCustomInfo], // p_callable_custom_info
   Unit
 ]
 
@@ -1490,8 +1490,8 @@ type GDExtensionInterfaceCallableCustomCreate = CFuncPtr2[
  * Provided struct can be safely freed once the function returns.
  */
 type GDExtensionInterfaceCallableCustomCreate2 = CFuncPtr2[
-  GDExtensionUninitializedTypePtr,
-  Ptr[GDExtensionCallableCustomInfo2],
+  GDExtensionUninitializedTypePtr, // r_callable
+  Ptr[GDExtensionCallableCustomInfo2], // p_callable_custom_info
   Unit
 ]
 
@@ -1500,8 +1500,8 @@ type GDExtensionInterfaceCallableCustomCreate2 = CFuncPtr2[
  * If the Callable is not a custom Callable or the token does not match the one provided to callable_custom_create() via GDExtensionCallableCustomInfo then NULL will be returned.
  */
 type GDExtensionInterfaceCallableCustomGetUserdata = CFuncPtr2[
-  GDExtensionConstTypePtr,
-  CVoidPtr,
+  GDExtensionConstTypePtr, // p_callable
+  CVoidPtr, // p_token
   CVoidPtr
 ]
 
@@ -1512,7 +1512,7 @@ type GDExtensionInterfaceCallableCustomGetUserdata = CFuncPtr2[
  * @deprecated Since 4.4. Use classdb_construct_object2 instead.
  */
 type GDExtensionInterfaceClassdbConstructObject = CFuncPtr1[
-  GDExtensionConstStringNamePtr,
+  GDExtensionConstStringNamePtr, // p_classname
   GDExtensionObjectPtr
 ]
 
@@ -1523,7 +1523,7 @@ type GDExtensionInterfaceClassdbConstructObject = CFuncPtr1[
  * "NOTIFICATION_POSTINITIALIZE" must be sent after construction.
  */
 type GDExtensionInterfaceClassdbConstructObject2 = CFuncPtr1[
-  GDExtensionConstStringNamePtr,
+  GDExtensionConstStringNamePtr, // p_classname
   GDExtensionObjectPtr
 ]
 
@@ -1531,9 +1531,9 @@ type GDExtensionInterfaceClassdbConstructObject2 = CFuncPtr1[
  * Gets a pointer to the MethodBind in ClassDB for the given class, method and hash.
  */
 type GDExtensionInterfaceClassdbGetMethodBind = CFuncPtr3[
-  GDExtensionConstStringNamePtr,
-  GDExtensionConstStringNamePtr,
-  GDExtensionInt,
+  GDExtensionConstStringNamePtr, // p_classname
+  GDExtensionConstStringNamePtr, // p_methodname
+  GDExtensionInt, // p_hash
   GDExtensionMethodBindPtr
 ]
 
@@ -1541,7 +1541,7 @@ type GDExtensionInterfaceClassdbGetMethodBind = CFuncPtr3[
  * Gets a pointer uniquely identifying the given built-in class in the ClassDB.
  */
 type GDExtensionInterfaceClassdbGetClassTag = CFuncPtr1[
-  GDExtensionConstStringNamePtr,
+  GDExtensionConstStringNamePtr, // p_classname
   CVoidPtr
 ]
 
@@ -1552,10 +1552,10 @@ type GDExtensionInterfaceClassdbGetClassTag = CFuncPtr1[
  * @deprecated Since 4.2. Use classdb_register_extension_class5 instead.
  */
 type GDExtensionInterfaceClassdbRegisterExtensionClass = CFuncPtr4[
-  GDExtensionClassLibraryPtr,
-  GDExtensionConstStringNamePtr,
-  GDExtensionConstStringNamePtr,
-  Ptr[GDExtensionClassCreationInfo],
+  GDExtensionClassLibraryPtr, // p_library
+  GDExtensionConstStringNamePtr, // p_class_name
+  GDExtensionConstStringNamePtr, // p_parent_class_name
+  Ptr[GDExtensionClassCreationInfo], // p_extension_funcs
   Unit
 ]
 
@@ -1566,10 +1566,10 @@ type GDExtensionInterfaceClassdbRegisterExtensionClass = CFuncPtr4[
  * @deprecated Since 4.3. Use classdb_register_extension_class5 instead.
  */
 type GDExtensionInterfaceClassdbRegisterExtensionClass2 = CFuncPtr4[
-  GDExtensionClassLibraryPtr,
-  GDExtensionConstStringNamePtr,
-  GDExtensionConstStringNamePtr,
-  Ptr[GDExtensionClassCreationInfo2],
+  GDExtensionClassLibraryPtr, // p_library
+  GDExtensionConstStringNamePtr, // p_class_name
+  GDExtensionConstStringNamePtr, // p_parent_class_name
+  Ptr[GDExtensionClassCreationInfo2], // p_extension_funcs
   Unit
 ]
 
@@ -1580,10 +1580,10 @@ type GDExtensionInterfaceClassdbRegisterExtensionClass2 = CFuncPtr4[
  * @deprecated Since 4.4. Use classdb_register_extension_class5 instead.
  */
 type GDExtensionInterfaceClassdbRegisterExtensionClass3 = CFuncPtr4[
-  GDExtensionClassLibraryPtr,
-  GDExtensionConstStringNamePtr,
-  GDExtensionConstStringNamePtr,
-  Ptr[GDExtensionClassCreationInfo3],
+  GDExtensionClassLibraryPtr, // p_library
+  GDExtensionConstStringNamePtr, // p_class_name
+  GDExtensionConstStringNamePtr, // p_parent_class_name
+  Ptr[GDExtensionClassCreationInfo3], // p_extension_funcs
   Unit
 ]
 
@@ -1594,10 +1594,10 @@ type GDExtensionInterfaceClassdbRegisterExtensionClass3 = CFuncPtr4[
  * @deprecated Since 4.5. Use classdb_register_extension_class5 instead.
  */
 type GDExtensionInterfaceClassdbRegisterExtensionClass4 = CFuncPtr4[
-  GDExtensionClassLibraryPtr,
-  GDExtensionConstStringNamePtr,
-  GDExtensionConstStringNamePtr,
-  Ptr[GDExtensionClassCreationInfo4],
+  GDExtensionClassLibraryPtr, // p_library
+  GDExtensionConstStringNamePtr, // p_class_name
+  GDExtensionConstStringNamePtr, // p_parent_class_name
+  Ptr[GDExtensionClassCreationInfo4], // p_extension_funcs
   Unit
 ]
 
@@ -1606,10 +1606,10 @@ type GDExtensionInterfaceClassdbRegisterExtensionClass4 = CFuncPtr4[
  * Provided struct can be safely freed once the function returns.
  */
 type GDExtensionInterfaceClassdbRegisterExtensionClass5 = CFuncPtr4[
-  GDExtensionClassLibraryPtr,
-  GDExtensionConstStringNamePtr,
-  GDExtensionConstStringNamePtr,
-  Ptr[GDExtensionClassCreationInfo5],
+  GDExtensionClassLibraryPtr, // p_library
+  GDExtensionConstStringNamePtr, // p_class_name
+  GDExtensionConstStringNamePtr, // p_parent_class_name
+  Ptr[GDExtensionClassCreationInfo5], // p_extension_funcs
   Unit
 ]
 
@@ -1618,9 +1618,9 @@ type GDExtensionInterfaceClassdbRegisterExtensionClass5 = CFuncPtr4[
  * Provided struct can be safely freed once the function returns.
  */
 type GDExtensionInterfaceClassdbRegisterExtensionClassMethod = CFuncPtr3[
-  GDExtensionClassLibraryPtr,
-  GDExtensionConstStringNamePtr,
-  Ptr[GDExtensionClassMethodInfo],
+  GDExtensionClassLibraryPtr, // p_library
+  GDExtensionConstStringNamePtr, // p_class_name
+  Ptr[GDExtensionClassMethodInfo], // p_method_info
   Unit
 ]
 
@@ -1629,9 +1629,9 @@ type GDExtensionInterfaceClassdbRegisterExtensionClassMethod = CFuncPtr3[
  * Provided struct can be safely freed once the function returns.
  */
 type GDExtensionInterfaceClassdbRegisterExtensionClassVirtualMethod = CFuncPtr3[
-  GDExtensionClassLibraryPtr,
-  GDExtensionConstStringNamePtr,
-  Ptr[GDExtensionClassVirtualMethodInfo],
+  GDExtensionClassLibraryPtr, // p_library
+  GDExtensionConstStringNamePtr, // p_class_name
+  Ptr[GDExtensionClassVirtualMethodInfo], // p_method_info
   Unit
 ]
 
@@ -1642,12 +1642,12 @@ type GDExtensionInterfaceClassdbRegisterExtensionClassVirtualMethod = CFuncPtr3[
  * Language APIs should thus provide an abstraction that registers bitfields (uint64_t) separately from regular constants (int64_t).
  */
 type GDExtensionInterfaceClassdbRegisterExtensionClassIntegerConstant = CFuncPtr6[
-  GDExtensionClassLibraryPtr,
-  GDExtensionConstStringNamePtr,
-  GDExtensionConstStringNamePtr,
-  GDExtensionConstStringNamePtr,
-  GDExtensionInt,
-  GDExtensionBool,
+  GDExtensionClassLibraryPtr, // p_library
+  GDExtensionConstStringNamePtr, // p_class_name
+  GDExtensionConstStringNamePtr, // p_enum_name
+  GDExtensionConstStringNamePtr, // p_constant_name
+  GDExtensionInt, // p_constant_value
+  GDExtensionBool, // p_is_bitfield
   Unit
 ]
 
@@ -1656,11 +1656,11 @@ type GDExtensionInterfaceClassdbRegisterExtensionClassIntegerConstant = CFuncPtr
  * Provided struct can be safely freed once the function returns.
  */
 type GDExtensionInterfaceClassdbRegisterExtensionClassProperty = CFuncPtr5[
-  GDExtensionClassLibraryPtr,
-  GDExtensionConstStringNamePtr,
-  Ptr[GDExtensionPropertyInfo],
-  GDExtensionConstStringNamePtr,
-  GDExtensionConstStringNamePtr,
+  GDExtensionClassLibraryPtr, // p_library
+  GDExtensionConstStringNamePtr, // p_class_name
+  Ptr[GDExtensionPropertyInfo], // p_info
+  GDExtensionConstStringNamePtr, // p_setter
+  GDExtensionConstStringNamePtr, // p_getter
   Unit
 ]
 
@@ -1669,12 +1669,12 @@ type GDExtensionInterfaceClassdbRegisterExtensionClassProperty = CFuncPtr5[
  * Provided struct can be safely freed once the function returns.
  */
 type GDExtensionInterfaceClassdbRegisterExtensionClassPropertyIndexed = CFuncPtr6[
-  GDExtensionClassLibraryPtr,
-  GDExtensionConstStringNamePtr,
-  Ptr[GDExtensionPropertyInfo],
-  GDExtensionConstStringNamePtr,
-  GDExtensionConstStringNamePtr,
-  GDExtensionInt,
+  GDExtensionClassLibraryPtr, // p_library
+  GDExtensionConstStringNamePtr, // p_class_name
+  Ptr[GDExtensionPropertyInfo], // p_info
+  GDExtensionConstStringNamePtr, // p_setter
+  GDExtensionConstStringNamePtr, // p_getter
+  GDExtensionInt, // p_index
   Unit
 ]
 
@@ -1682,10 +1682,10 @@ type GDExtensionInterfaceClassdbRegisterExtensionClassPropertyIndexed = CFuncPtr
  * Registers a property group on an extension class in the ClassDB.
  */
 type GDExtensionInterfaceClassdbRegisterExtensionClassPropertyGroup = CFuncPtr4[
-  GDExtensionClassLibraryPtr,
-  GDExtensionConstStringNamePtr,
-  GDExtensionConstStringPtr,
-  GDExtensionConstStringPtr,
+  GDExtensionClassLibraryPtr, // p_library
+  GDExtensionConstStringNamePtr, // p_class_name
+  GDExtensionConstStringPtr, // p_group_name
+  GDExtensionConstStringPtr, // p_prefix
   Unit
 ]
 
@@ -1693,10 +1693,10 @@ type GDExtensionInterfaceClassdbRegisterExtensionClassPropertyGroup = CFuncPtr4[
  * Registers a property subgroup on an extension class in the ClassDB.
  */
 type GDExtensionInterfaceClassdbRegisterExtensionClassPropertySubgroup = CFuncPtr4[
-  GDExtensionClassLibraryPtr,
-  GDExtensionConstStringNamePtr,
-  GDExtensionConstStringPtr,
-  GDExtensionConstStringPtr,
+  GDExtensionClassLibraryPtr, // p_library
+  GDExtensionConstStringNamePtr, // p_class_name
+  GDExtensionConstStringPtr, // p_subgroup_name
+  GDExtensionConstStringPtr, // p_prefix
   Unit
 ]
 
@@ -1705,11 +1705,11 @@ type GDExtensionInterfaceClassdbRegisterExtensionClassPropertySubgroup = CFuncPt
  * Provided structs can be safely freed once the function returns.
  */
 type GDExtensionInterfaceClassdbRegisterExtensionClassSignal = CFuncPtr5[
-  GDExtensionClassLibraryPtr,
-  GDExtensionConstStringNamePtr,
-  GDExtensionConstStringNamePtr,
-  Ptr[GDExtensionPropertyInfo],
-  GDExtensionInt,
+  GDExtensionClassLibraryPtr, // p_library
+  GDExtensionConstStringNamePtr, // p_class_name
+  GDExtensionConstStringNamePtr, // p_signal_name
+  Ptr[GDExtensionPropertyInfo], // p_argument_info
+  GDExtensionInt, // p_argument_count
   Unit
 ]
 
@@ -1718,8 +1718,8 @@ type GDExtensionInterfaceClassdbRegisterExtensionClassSignal = CFuncPtr5[
  * Unregistering a parent class before a class that inherits it will result in failure. Inheritors must be unregistered first.
  */
 type GDExtensionInterfaceClassdbUnregisterExtensionClass = CFuncPtr2[
-  GDExtensionClassLibraryPtr,
-  GDExtensionConstStringNamePtr,
+  GDExtensionClassLibraryPtr, // p_library
+  GDExtensionConstStringNamePtr, // p_class_name
   Unit
 ]
 
@@ -1727,8 +1727,8 @@ type GDExtensionInterfaceClassdbUnregisterExtensionClass = CFuncPtr2[
  * Gets the path to the current GDExtension library.
  */
 type GDExtensionInterfaceGetLibraryPath = CFuncPtr2[
-  GDExtensionClassLibraryPtr,
-  GDExtensionUninitializedStringPtr,
+  GDExtensionClassLibraryPtr, // p_library
+  GDExtensionUninitializedStringPtr, // r_path
   Unit
 ]
 
@@ -1737,7 +1737,7 @@ type GDExtensionInterfaceGetLibraryPath = CFuncPtr2[
  * It's safe to call during initialization.
  */
 type GDExtensionInterfaceEditorAddPlugin = CFuncPtr1[
-  GDExtensionConstStringNamePtr,
+  GDExtensionConstStringNamePtr, // p_class_name
   Unit
 ]
 
@@ -1745,7 +1745,7 @@ type GDExtensionInterfaceEditorAddPlugin = CFuncPtr1[
  * Removes an editor plugin.
  */
 type GDExtensionInterfaceEditorRemovePlugin = CFuncPtr1[
-  GDExtensionConstStringNamePtr,
+  GDExtensionConstStringNamePtr, // p_class_name
   Unit
 ]
 
@@ -1754,7 +1754,7 @@ type GDExtensionInterfaceEditorRemovePlugin = CFuncPtr1[
  * The provided pointer can be immediately freed once the function returns.
  */
 type GDExtensionInterfaceEditorHelpLoadXmlFromUtf8Chars = CFuncPtr1[
-  Ptr[CChar],
+  Ptr[CChar], // p_data
   Unit
 ]
 
@@ -1763,8 +1763,8 @@ type GDExtensionInterfaceEditorHelpLoadXmlFromUtf8Chars = CFuncPtr1[
  * The provided pointer can be immediately freed once the function returns.
  */
 type GDExtensionInterfaceEditorHelpLoadXmlFromUtf8CharsAndLen = CFuncPtr2[
-  Ptr[CChar],
-  GDExtensionInt,
+  Ptr[CChar], // p_data
+  GDExtensionInt, // p_size
   Unit
 ]
 
@@ -1776,8 +1776,8 @@ type GDExtensionInterfaceEditorHelpLoadXmlFromUtf8CharsAndLen = CFuncPtr2[
  * If a GDExtension doesn't register a callback, Godot will assume that it could be using any classes.
  */
 type GDExtensionInterfaceEditorRegisterGetClassesUsedCallback = CFuncPtr2[
-  GDExtensionClassLibraryPtr,
-  GDExtensionEditorGetClassesUsedCallback,
+  GDExtensionClassLibraryPtr, // p_library
+  GDExtensionEditorGetClassesUsedCallback, // p_callback
   Unit
 ]
 
@@ -1785,8 +1785,8 @@ type GDExtensionInterfaceEditorRegisterGetClassesUsedCallback = CFuncPtr2[
  * Registers callbacks to be called at different phases of the main loop.
  */
 type GDExtensionInterfaceRegisterMainLoopCallbacks = CFuncPtr2[
-  GDExtensionClassLibraryPtr,
-  Ptr[GDExtensionMainLoopCallbacks],
+  GDExtensionClassLibraryPtr, // p_library
+  Ptr[GDExtensionMainLoopCallbacks], // p_callbacks
   Unit
 ]
 

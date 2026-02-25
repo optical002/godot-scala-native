@@ -9,112 +9,112 @@ import godot.types.*
 
 
 type GDExtensionVariantFromTypeConstructorFunc = CFuncPtr2[
-  GDExtensionUninitializedVariantPtr,
-  GDExtensionTypePtr,
+  GDExtensionUninitializedVariantPtr, // _0
+  GDExtensionTypePtr, // _1
   Unit
 ]
 
 
 type GDExtensionTypeFromVariantConstructorFunc = CFuncPtr2[
-  GDExtensionUninitializedTypePtr,
-  GDExtensionVariantPtr,
+  GDExtensionUninitializedTypePtr, // _0
+  GDExtensionVariantPtr, // _1
   Unit
 ]
 
 
 type GDExtensionVariantGetInternalPtrFunc = CFuncPtr1[
-  GDExtensionVariantPtr,
+  GDExtensionVariantPtr, // _0
   CVoidPtr
 ]
 
 
 type GDExtensionPtrOperatorEvaluator = CFuncPtr3[
-  GDExtensionConstTypePtr,
-  GDExtensionConstTypePtr,
-  GDExtensionTypePtr,
+  GDExtensionConstTypePtr, // p_left
+  GDExtensionConstTypePtr, // p_right
+  GDExtensionTypePtr, // r_result
   Unit
 ]
 
 
 type GDExtensionPtrBuiltInMethod = CFuncPtr4[
-  GDExtensionTypePtr,
-  Ptr[GDExtensionConstTypePtr],
-  GDExtensionTypePtr,
-  CInt,
+  GDExtensionTypePtr, // p_base
+  Ptr[GDExtensionConstTypePtr], // p_args
+  GDExtensionTypePtr, // r_return
+  CInt, // p_argument_count
   Unit
 ]
 
 
 type GDExtensionPtrConstructor = CFuncPtr2[
-  GDExtensionUninitializedTypePtr,
-  Ptr[GDExtensionConstTypePtr],
+  GDExtensionUninitializedTypePtr, // p_base
+  Ptr[GDExtensionConstTypePtr], // p_args
   Unit
 ]
 
 
 type GDExtensionPtrDestructor = CFuncPtr1[
-  GDExtensionTypePtr,
+  GDExtensionTypePtr, // p_base
   Unit
 ]
 
 
 type GDExtensionPtrSetter = CFuncPtr2[
-  GDExtensionTypePtr,
-  GDExtensionConstTypePtr,
+  GDExtensionTypePtr, // p_base
+  GDExtensionConstTypePtr, // p_value
   Unit
 ]
 
 
 type GDExtensionPtrGetter = CFuncPtr2[
-  GDExtensionConstTypePtr,
-  GDExtensionTypePtr,
+  GDExtensionConstTypePtr, // p_base
+  GDExtensionTypePtr, // r_value
   Unit
 ]
 
 
 type GDExtensionPtrIndexedSetter = CFuncPtr3[
-  GDExtensionTypePtr,
-  GDExtensionInt,
-  GDExtensionConstTypePtr,
+  GDExtensionTypePtr, // p_base
+  GDExtensionInt, // p_index
+  GDExtensionConstTypePtr, // p_value
   Unit
 ]
 
 
 type GDExtensionPtrIndexedGetter = CFuncPtr3[
-  GDExtensionConstTypePtr,
-  GDExtensionInt,
-  GDExtensionTypePtr,
+  GDExtensionConstTypePtr, // p_base
+  GDExtensionInt, // p_index
+  GDExtensionTypePtr, // r_value
   Unit
 ]
 
 
 type GDExtensionPtrKeyedSetter = CFuncPtr3[
-  GDExtensionTypePtr,
-  GDExtensionConstTypePtr,
-  GDExtensionConstTypePtr,
+  GDExtensionTypePtr, // p_base
+  GDExtensionConstTypePtr, // p_key
+  GDExtensionConstTypePtr, // p_value
   Unit
 ]
 
 
 type GDExtensionPtrKeyedGetter = CFuncPtr3[
-  GDExtensionConstTypePtr,
-  GDExtensionConstTypePtr,
-  GDExtensionTypePtr,
+  GDExtensionConstTypePtr, // p_base
+  GDExtensionConstTypePtr, // p_key
+  GDExtensionTypePtr, // r_value
   Unit
 ]
 
 
 type GDExtensionPtrKeyedChecker = CFuncPtr2[
-  GDExtensionConstVariantPtr,
-  GDExtensionConstVariantPtr,
+  GDExtensionConstVariantPtr, // p_base
+  GDExtensionConstVariantPtr, // p_key
   CUnsignedInt
 ]
 
 
 type GDExtensionPtrUtilityFunction = CFuncPtr3[
-  GDExtensionTypePtr,
-  Ptr[GDExtensionConstTypePtr],
-  CInt,
+  GDExtensionTypePtr, // r_return
+  Ptr[GDExtensionConstTypePtr], // p_args
+  CInt, // p_argument_count
   Unit
 ]
 
@@ -126,90 +126,90 @@ type GDExtensionClassConstructor = CFuncPtr0[
 
 
 type GDExtensionInstanceBindingCreateCallback = CFuncPtr2[
-  CVoidPtr,
-  CVoidPtr,
+  CVoidPtr, // p_token
+  CVoidPtr, // p_instance
   CVoidPtr
 ]
 
 
 type GDExtensionInstanceBindingFreeCallback = CFuncPtr3[
-  CVoidPtr,
-  CVoidPtr,
-  CVoidPtr,
+  CVoidPtr, // p_token
+  CVoidPtr, // p_instance
+  CVoidPtr, // p_binding
   Unit
 ]
 
 
 type GDExtensionInstanceBindingReferenceCallback = CFuncPtr3[
-  CVoidPtr,
-  CVoidPtr,
-  GDExtensionBool,
+  CVoidPtr, // p_token
+  CVoidPtr, // p_binding
+  GDExtensionBool, // p_reference
   GDExtensionBool
 ]
 
 
 type GDExtensionClassSet = CFuncPtr3[
-  GDExtensionClassInstancePtr,
-  GDExtensionConstStringNamePtr,
-  GDExtensionConstVariantPtr,
+  GDExtensionClassInstancePtr, // p_instance
+  GDExtensionConstStringNamePtr, // p_name
+  GDExtensionConstVariantPtr, // p_value
   GDExtensionBool
 ]
 
 
 type GDExtensionClassGet = CFuncPtr3[
-  GDExtensionClassInstancePtr,
-  GDExtensionConstStringNamePtr,
-  GDExtensionVariantPtr,
+  GDExtensionClassInstancePtr, // p_instance
+  GDExtensionConstStringNamePtr, // p_name
+  GDExtensionVariantPtr, // r_ret
   GDExtensionBool
 ]
 
 
 type GDExtensionClassGetRID = CFuncPtr1[
-  GDExtensionClassInstancePtr,
+  GDExtensionClassInstancePtr, // p_instance
   CUnsignedLongLong
 ]
 
 
 type GDExtensionClassGetPropertyList = CFuncPtr2[
-  GDExtensionClassInstancePtr,
-  Ptr[CUnsignedInt],
+  GDExtensionClassInstancePtr, // p_instance
+  Ptr[CUnsignedInt], // r_count
   Ptr[GDExtensionPropertyInfo]
 ]
 
 
 type GDExtensionClassFreePropertyList = CFuncPtr2[
-  GDExtensionClassInstancePtr,
-  Ptr[GDExtensionPropertyInfo],
+  GDExtensionClassInstancePtr, // p_instance
+  Ptr[GDExtensionPropertyInfo], // p_list
   Unit
 ]
 
 
 type GDExtensionClassFreePropertyList2 = CFuncPtr3[
-  GDExtensionClassInstancePtr,
-  Ptr[GDExtensionPropertyInfo],
-  CUnsignedInt,
+  GDExtensionClassInstancePtr, // p_instance
+  Ptr[GDExtensionPropertyInfo], // p_list
+  CUnsignedInt, // p_count
   Unit
 ]
 
 
 type GDExtensionClassPropertyCanRevert = CFuncPtr2[
-  GDExtensionClassInstancePtr,
-  GDExtensionConstStringNamePtr,
+  GDExtensionClassInstancePtr, // p_instance
+  GDExtensionConstStringNamePtr, // p_name
   GDExtensionBool
 ]
 
 
 type GDExtensionClassPropertyGetRevert = CFuncPtr3[
-  GDExtensionClassInstancePtr,
-  GDExtensionConstStringNamePtr,
-  GDExtensionVariantPtr,
+  GDExtensionClassInstancePtr, // p_instance
+  GDExtensionConstStringNamePtr, // p_name
+  GDExtensionVariantPtr, // r_ret
   GDExtensionBool
 ]
 
 
 type GDExtensionClassValidateProperty = CFuncPtr2[
-  GDExtensionClassInstancePtr,
-  Ptr[GDExtensionPropertyInfo],
+  GDExtensionClassInstancePtr, // p_instance
+  Ptr[GDExtensionPropertyInfo], // p_property
   GDExtensionBool
 ]
 
@@ -218,111 +218,111 @@ type GDExtensionClassValidateProperty = CFuncPtr2[
  * @deprecated Since 4.2. Use GDExtensionClassNotification2 instead.
  */
 type GDExtensionClassNotification = CFuncPtr2[
-  GDExtensionClassInstancePtr,
-  CInt,
+  GDExtensionClassInstancePtr, // p_instance
+  CInt, // p_what
   Unit
 ]
 
 
 type GDExtensionClassNotification2 = CFuncPtr3[
-  GDExtensionClassInstancePtr,
-  CInt,
-  GDExtensionBool,
+  GDExtensionClassInstancePtr, // p_instance
+  CInt, // p_what
+  GDExtensionBool, // p_reversed
   Unit
 ]
 
 
 type GDExtensionClassToString = CFuncPtr3[
-  GDExtensionClassInstancePtr,
-  Ptr[GDExtensionBool],
-  GDExtensionStringPtr,
+  GDExtensionClassInstancePtr, // p_instance
+  Ptr[GDExtensionBool], // r_is_valid
+  GDExtensionStringPtr, // p_out
   Unit
 ]
 
 
 type GDExtensionClassReference = CFuncPtr1[
-  GDExtensionClassInstancePtr,
+  GDExtensionClassInstancePtr, // p_instance
   Unit
 ]
 
 
 type GDExtensionClassUnreference = CFuncPtr1[
-  GDExtensionClassInstancePtr,
+  GDExtensionClassInstancePtr, // p_instance
   Unit
 ]
 
 
 type GDExtensionClassCallVirtual = CFuncPtr3[
-  GDExtensionClassInstancePtr,
-  Ptr[GDExtensionConstTypePtr],
-  GDExtensionTypePtr,
+  GDExtensionClassInstancePtr, // p_instance
+  Ptr[GDExtensionConstTypePtr], // p_args
+  GDExtensionTypePtr, // r_ret
   Unit
 ]
 
 
 type GDExtensionClassCreateInstance = CFuncPtr1[
-  CVoidPtr,
+  CVoidPtr, // p_class_userdata
   GDExtensionObjectPtr
 ]
 
 
 type GDExtensionClassCreateInstance2 = CFuncPtr2[
-  CVoidPtr,
-  GDExtensionBool,
+  CVoidPtr, // p_class_userdata
+  GDExtensionBool, // p_notify_postinitialize
   GDExtensionObjectPtr
 ]
 
 
 type GDExtensionClassFreeInstance = CFuncPtr2[
-  CVoidPtr,
-  GDExtensionClassInstancePtr,
+  CVoidPtr, // p_class_userdata
+  GDExtensionClassInstancePtr, // p_instance
   Unit
 ]
 
 
 type GDExtensionClassRecreateInstance = CFuncPtr2[
-  CVoidPtr,
-  GDExtensionObjectPtr,
+  CVoidPtr, // p_class_userdata
+  GDExtensionObjectPtr, // p_object
   GDExtensionClassInstancePtr
 ]
 
 
 type GDExtensionClassGetVirtual = CFuncPtr2[
-  CVoidPtr,
-  GDExtensionConstStringNamePtr,
+  CVoidPtr, // p_class_userdata
+  GDExtensionConstStringNamePtr, // p_name
   GDExtensionClassCallVirtual
 ]
 
 
 type GDExtensionClassGetVirtual2 = CFuncPtr3[
-  CVoidPtr,
-  GDExtensionConstStringNamePtr,
-  CUnsignedInt,
+  CVoidPtr, // p_class_userdata
+  GDExtensionConstStringNamePtr, // p_name
+  CUnsignedInt, // p_hash
   GDExtensionClassCallVirtual
 ]
 
 
 type GDExtensionClassGetVirtualCallData = CFuncPtr2[
-  CVoidPtr,
-  GDExtensionConstStringNamePtr,
+  CVoidPtr, // p_class_userdata
+  GDExtensionConstStringNamePtr, // p_name
   CVoidPtr
 ]
 
 
 type GDExtensionClassGetVirtualCallData2 = CFuncPtr3[
-  CVoidPtr,
-  GDExtensionConstStringNamePtr,
-  CUnsignedInt,
+  CVoidPtr, // p_class_userdata
+  GDExtensionConstStringNamePtr, // p_name
+  CUnsignedInt, // p_hash
   CVoidPtr
 ]
 
 
 type GDExtensionClassCallVirtualWithData = CFuncPtr5[
-  GDExtensionClassInstancePtr,
-  GDExtensionConstStringNamePtr,
-  CVoidPtr,
-  Ptr[GDExtensionConstTypePtr],
-  GDExtensionTypePtr,
+  GDExtensionClassInstancePtr, // p_instance
+  GDExtensionConstStringNamePtr, // p_name
+  CVoidPtr, // p_virtual_call_userdata
+  Ptr[GDExtensionConstTypePtr], // p_args
+  GDExtensionTypePtr, // r_ret
   Unit
 ]
 
@@ -330,116 +330,116 @@ type GDExtensionClassCallVirtualWithData = CFuncPtr5[
  * Passed a pointer to a PackedStringArray that should be filled with the classes that may be used by the GDExtension.
  */
 type GDExtensionEditorGetClassesUsedCallback = CFuncPtr1[
-  GDExtensionTypePtr,
+  GDExtensionTypePtr, // p_packed_string_array
   Unit
 ]
 
 
 type GDExtensionClassMethodCall = CFuncPtr6[
-  CVoidPtr,
-  GDExtensionClassInstancePtr,
-  Ptr[GDExtensionConstVariantPtr],
-  GDExtensionInt,
-  GDExtensionVariantPtr,
-  Ptr[GDExtensionCallError],
+  CVoidPtr, // method_userdata
+  GDExtensionClassInstancePtr, // p_instance
+  Ptr[GDExtensionConstVariantPtr], // p_args
+  GDExtensionInt, // p_argument_count
+  GDExtensionVariantPtr, // r_return
+  Ptr[GDExtensionCallError], // r_error
   Unit
 ]
 
 
 type GDExtensionClassMethodValidatedCall = CFuncPtr4[
-  CVoidPtr,
-  GDExtensionClassInstancePtr,
-  Ptr[GDExtensionConstVariantPtr],
-  GDExtensionVariantPtr,
+  CVoidPtr, // method_userdata
+  GDExtensionClassInstancePtr, // p_instance
+  Ptr[GDExtensionConstVariantPtr], // p_args
+  GDExtensionVariantPtr, // r_return
   Unit
 ]
 
 
 type GDExtensionClassMethodPtrCall = CFuncPtr4[
-  CVoidPtr,
-  GDExtensionClassInstancePtr,
-  Ptr[GDExtensionConstTypePtr],
-  GDExtensionTypePtr,
+  CVoidPtr, // method_userdata
+  GDExtensionClassInstancePtr, // p_instance
+  Ptr[GDExtensionConstTypePtr], // p_args
+  GDExtensionTypePtr, // r_ret
   Unit
 ]
 
 
 type GDExtensionCallableCustomCall = CFuncPtr5[
-  CVoidPtr,
-  Ptr[GDExtensionConstVariantPtr],
-  GDExtensionInt,
-  GDExtensionVariantPtr,
-  Ptr[GDExtensionCallError],
+  CVoidPtr, // callable_userdata
+  Ptr[GDExtensionConstVariantPtr], // p_args
+  GDExtensionInt, // p_argument_count
+  GDExtensionVariantPtr, // r_return
+  Ptr[GDExtensionCallError], // r_error
   Unit
 ]
 
 
 type GDExtensionCallableCustomIsValid = CFuncPtr1[
-  CVoidPtr,
+  CVoidPtr, // callable_userdata
   GDExtensionBool
 ]
 
 
 type GDExtensionCallableCustomFree = CFuncPtr1[
-  CVoidPtr,
+  CVoidPtr, // callable_userdata
   Unit
 ]
 
 
 type GDExtensionCallableCustomHash = CFuncPtr1[
-  CVoidPtr,
+  CVoidPtr, // callable_userdata
   CUnsignedInt
 ]
 
 
 type GDExtensionCallableCustomEqual = CFuncPtr2[
-  CVoidPtr,
-  CVoidPtr,
+  CVoidPtr, // callable_userdata_a
+  CVoidPtr, // callable_userdata_b
   GDExtensionBool
 ]
 
 
 type GDExtensionCallableCustomLessThan = CFuncPtr2[
-  CVoidPtr,
-  CVoidPtr,
+  CVoidPtr, // callable_userdata_a
+  CVoidPtr, // callable_userdata_b
   GDExtensionBool
 ]
 
 
 type GDExtensionCallableCustomToString = CFuncPtr3[
-  CVoidPtr,
-  Ptr[GDExtensionBool],
-  GDExtensionStringPtr,
+  CVoidPtr, // callable_userdata
+  Ptr[GDExtensionBool], // r_is_valid
+  GDExtensionStringPtr, // r_out
   Unit
 ]
 
 
 type GDExtensionCallableCustomGetArgumentCount = CFuncPtr2[
-  CVoidPtr,
-  Ptr[GDExtensionBool],
+  CVoidPtr, // callable_userdata
+  Ptr[GDExtensionBool], // r_is_valid
   GDExtensionInt
 ]
 
 
 type GDExtensionScriptInstanceSet = CFuncPtr3[
-  GDExtensionScriptInstanceDataPtr,
-  GDExtensionConstStringNamePtr,
-  GDExtensionConstVariantPtr,
+  GDExtensionScriptInstanceDataPtr, // p_instance
+  GDExtensionConstStringNamePtr, // p_name
+  GDExtensionConstVariantPtr, // p_value
   GDExtensionBool
 ]
 
 
 type GDExtensionScriptInstanceGet = CFuncPtr3[
-  GDExtensionScriptInstanceDataPtr,
-  GDExtensionConstStringNamePtr,
-  GDExtensionVariantPtr,
+  GDExtensionScriptInstanceDataPtr, // p_instance
+  GDExtensionConstStringNamePtr, // p_name
+  GDExtensionVariantPtr, // r_ret
   GDExtensionBool
 ]
 
 
 type GDExtensionScriptInstanceGetPropertyList = CFuncPtr2[
-  GDExtensionScriptInstanceDataPtr,
-  Ptr[CUnsignedInt],
+  GDExtensionScriptInstanceDataPtr, // p_instance
+  Ptr[CUnsignedInt], // r_count
   Ptr[GDExtensionPropertyInfo]
 ]
 
@@ -448,82 +448,82 @@ type GDExtensionScriptInstanceGetPropertyList = CFuncPtr2[
  * @deprecated Since 4.3. Use GDExtensionScriptInstanceFreePropertyList2 instead.
  */
 type GDExtensionScriptInstanceFreePropertyList = CFuncPtr2[
-  GDExtensionScriptInstanceDataPtr,
-  Ptr[GDExtensionPropertyInfo],
+  GDExtensionScriptInstanceDataPtr, // p_instance
+  Ptr[GDExtensionPropertyInfo], // p_list
   Unit
 ]
 
 
 type GDExtensionScriptInstanceFreePropertyList2 = CFuncPtr3[
-  GDExtensionScriptInstanceDataPtr,
-  Ptr[GDExtensionPropertyInfo],
-  CUnsignedInt,
+  GDExtensionScriptInstanceDataPtr, // p_instance
+  Ptr[GDExtensionPropertyInfo], // p_list
+  CUnsignedInt, // p_count
   Unit
 ]
 
 
 type GDExtensionScriptInstanceGetClassCategory = CFuncPtr2[
-  GDExtensionScriptInstanceDataPtr,
-  Ptr[GDExtensionPropertyInfo],
+  GDExtensionScriptInstanceDataPtr, // p_instance
+  Ptr[GDExtensionPropertyInfo], // p_class_category
   GDExtensionBool
 ]
 
 
 type GDExtensionScriptInstanceGetPropertyType = CFuncPtr3[
-  GDExtensionScriptInstanceDataPtr,
-  GDExtensionConstStringNamePtr,
-  Ptr[GDExtensionBool],
+  GDExtensionScriptInstanceDataPtr, // p_instance
+  GDExtensionConstStringNamePtr, // p_name
+  Ptr[GDExtensionBool], // r_is_valid
   GDExtensionVariantType
 ]
 
 
 type GDExtensionScriptInstanceValidateProperty = CFuncPtr2[
-  GDExtensionScriptInstanceDataPtr,
-  Ptr[GDExtensionPropertyInfo],
+  GDExtensionScriptInstanceDataPtr, // p_instance
+  Ptr[GDExtensionPropertyInfo], // p_property
   GDExtensionBool
 ]
 
 
 type GDExtensionScriptInstancePropertyCanRevert = CFuncPtr2[
-  GDExtensionScriptInstanceDataPtr,
-  GDExtensionConstStringNamePtr,
+  GDExtensionScriptInstanceDataPtr, // p_instance
+  GDExtensionConstStringNamePtr, // p_name
   GDExtensionBool
 ]
 
 
 type GDExtensionScriptInstancePropertyGetRevert = CFuncPtr3[
-  GDExtensionScriptInstanceDataPtr,
-  GDExtensionConstStringNamePtr,
-  GDExtensionVariantPtr,
+  GDExtensionScriptInstanceDataPtr, // p_instance
+  GDExtensionConstStringNamePtr, // p_name
+  GDExtensionVariantPtr, // r_ret
   GDExtensionBool
 ]
 
 
 type GDExtensionScriptInstanceGetOwner = CFuncPtr1[
-  GDExtensionScriptInstanceDataPtr,
+  GDExtensionScriptInstanceDataPtr, // p_instance
   GDExtensionObjectPtr
 ]
 
 
 type GDExtensionScriptInstancePropertyStateAdd = CFuncPtr3[
-  GDExtensionConstStringNamePtr,
-  GDExtensionConstVariantPtr,
-  CVoidPtr,
+  GDExtensionConstStringNamePtr, // p_name
+  GDExtensionConstVariantPtr, // p_value
+  CVoidPtr, // p_userdata
   Unit
 ]
 
 
 type GDExtensionScriptInstanceGetPropertyState = CFuncPtr3[
-  GDExtensionScriptInstanceDataPtr,
-  GDExtensionScriptInstancePropertyStateAdd,
-  CVoidPtr,
+  GDExtensionScriptInstanceDataPtr, // p_instance
+  GDExtensionScriptInstancePropertyStateAdd, // p_add_func
+  CVoidPtr, // p_userdata
   Unit
 ]
 
 
 type GDExtensionScriptInstanceGetMethodList = CFuncPtr2[
-  GDExtensionScriptInstanceDataPtr,
-  Ptr[CUnsignedInt],
+  GDExtensionScriptInstanceDataPtr, // p_instance
+  Ptr[CUnsignedInt], // r_count
   Ptr[GDExtensionMethodInfo]
 ]
 
@@ -532,42 +532,42 @@ type GDExtensionScriptInstanceGetMethodList = CFuncPtr2[
  * @deprecated Since 4.3. Use GDExtensionScriptInstanceFreeMethodList2 instead.
  */
 type GDExtensionScriptInstanceFreeMethodList = CFuncPtr2[
-  GDExtensionScriptInstanceDataPtr,
-  Ptr[GDExtensionMethodInfo],
+  GDExtensionScriptInstanceDataPtr, // p_instance
+  Ptr[GDExtensionMethodInfo], // p_list
   Unit
 ]
 
 
 type GDExtensionScriptInstanceFreeMethodList2 = CFuncPtr3[
-  GDExtensionScriptInstanceDataPtr,
-  Ptr[GDExtensionMethodInfo],
-  CUnsignedInt,
+  GDExtensionScriptInstanceDataPtr, // p_instance
+  Ptr[GDExtensionMethodInfo], // p_list
+  CUnsignedInt, // p_count
   Unit
 ]
 
 
 type GDExtensionScriptInstanceHasMethod = CFuncPtr2[
-  GDExtensionScriptInstanceDataPtr,
-  GDExtensionConstStringNamePtr,
+  GDExtensionScriptInstanceDataPtr, // p_instance
+  GDExtensionConstStringNamePtr, // p_name
   GDExtensionBool
 ]
 
 
 type GDExtensionScriptInstanceGetMethodArgumentCount = CFuncPtr3[
-  GDExtensionScriptInstanceDataPtr,
-  GDExtensionConstStringNamePtr,
-  Ptr[GDExtensionBool],
+  GDExtensionScriptInstanceDataPtr, // p_instance
+  GDExtensionConstStringNamePtr, // p_name
+  Ptr[GDExtensionBool], // r_is_valid
   GDExtensionInt
 ]
 
 
 type GDExtensionScriptInstanceCall = CFuncPtr6[
-  GDExtensionScriptInstanceDataPtr,
-  GDExtensionConstStringNamePtr,
-  Ptr[GDExtensionConstVariantPtr],
-  GDExtensionInt,
-  GDExtensionVariantPtr,
-  Ptr[GDExtensionCallError],
+  GDExtensionScriptInstanceDataPtr, // p_self
+  GDExtensionConstStringNamePtr, // p_method
+  Ptr[GDExtensionConstVariantPtr], // p_args
+  GDExtensionInt, // p_argument_count
+  GDExtensionVariantPtr, // r_return
+  Ptr[GDExtensionCallError], // r_error
   Unit
 ]
 
@@ -576,87 +576,87 @@ type GDExtensionScriptInstanceCall = CFuncPtr6[
  * @deprecated Since 4.2. Use GDExtensionScriptInstanceNotification2 instead.
  */
 type GDExtensionScriptInstanceNotification = CFuncPtr2[
-  GDExtensionScriptInstanceDataPtr,
-  CInt,
+  GDExtensionScriptInstanceDataPtr, // p_instance
+  CInt, // p_what
   Unit
 ]
 
 
 type GDExtensionScriptInstanceNotification2 = CFuncPtr3[
-  GDExtensionScriptInstanceDataPtr,
-  CInt,
-  GDExtensionBool,
+  GDExtensionScriptInstanceDataPtr, // p_instance
+  CInt, // p_what
+  GDExtensionBool, // p_reversed
   Unit
 ]
 
 
 type GDExtensionScriptInstanceToString = CFuncPtr3[
-  GDExtensionScriptInstanceDataPtr,
-  Ptr[GDExtensionBool],
-  GDExtensionStringPtr,
+  GDExtensionScriptInstanceDataPtr, // p_instance
+  Ptr[GDExtensionBool], // r_is_valid
+  GDExtensionStringPtr, // r_out
   Unit
 ]
 
 
 type GDExtensionScriptInstanceRefCountIncremented = CFuncPtr1[
-  GDExtensionScriptInstanceDataPtr,
+  GDExtensionScriptInstanceDataPtr, // p_instance
   Unit
 ]
 
 
 type GDExtensionScriptInstanceRefCountDecremented = CFuncPtr1[
-  GDExtensionScriptInstanceDataPtr,
+  GDExtensionScriptInstanceDataPtr, // p_instance
   GDExtensionBool
 ]
 
 
 type GDExtensionScriptInstanceGetScript = CFuncPtr1[
-  GDExtensionScriptInstanceDataPtr,
+  GDExtensionScriptInstanceDataPtr, // p_instance
   GDExtensionObjectPtr
 ]
 
 
 type GDExtensionScriptInstanceIsPlaceholder = CFuncPtr1[
-  GDExtensionScriptInstanceDataPtr,
+  GDExtensionScriptInstanceDataPtr, // p_instance
   GDExtensionBool
 ]
 
 
 type GDExtensionScriptInstanceGetLanguage = CFuncPtr1[
-  GDExtensionScriptInstanceDataPtr,
+  GDExtensionScriptInstanceDataPtr, // p_instance
   GDExtensionScriptLanguagePtr
 ]
 
 
 type GDExtensionScriptInstanceFree = CFuncPtr1[
-  GDExtensionScriptInstanceDataPtr,
+  GDExtensionScriptInstanceDataPtr, // p_instance
   Unit
 ]
 
 
 type GDExtensionWorkerThreadPoolGroupTask = CFuncPtr2[
-  CVoidPtr,
-  CUnsignedInt,
+  CVoidPtr, // _0
+  CUnsignedInt, // _1
   Unit
 ]
 
 
 type GDExtensionWorkerThreadPoolTask = CFuncPtr1[
-  CVoidPtr,
+  CVoidPtr, // _0
   Unit
 ]
 
 
 type GDExtensionInitializeCallback = CFuncPtr2[
-  CVoidPtr,
-  GDExtensionInitializationLevel,
+  CVoidPtr, // p_userdata
+  GDExtensionInitializationLevel, // p_level
   Unit
 ]
 
 
 type GDExtensionDeinitializeCallback = CFuncPtr2[
-  CVoidPtr,
-  GDExtensionInitializationLevel,
+  CVoidPtr, // p_userdata
+  GDExtensionInitializationLevel, // p_level
   Unit
 ]
 
@@ -665,7 +665,7 @@ type GDExtensionInterfaceFunctionPtr = CVoidPtr
 
 
 type GDExtensionInterfaceGetProcAddress = CFuncPtr1[
-  Ptr[CChar],
+  Ptr[CChar], // p_function_name
   GDExtensionInterfaceFunctionPtr
 ]
 
@@ -704,9 +704,9 @@ type GDExtensionInterfaceGetProcAddress = CFuncPtr1[
  * and the function pointer typedef that shows its signature.
  */
 type GDExtensionInitializationFunction = CFuncPtr3[
-  GDExtensionInterfaceGetProcAddress,
-  GDExtensionClassLibraryPtr,
-  Ptr[GDExtensionInitialization],
+  GDExtensionInterfaceGetProcAddress, // p_get_proc_address
+  GDExtensionClassLibraryPtr, // p_library
+  Ptr[GDExtensionInitialization], // r_initialization
   GDExtensionBool
 ]
 
