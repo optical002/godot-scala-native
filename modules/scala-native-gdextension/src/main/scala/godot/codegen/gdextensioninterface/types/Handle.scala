@@ -24,75 +24,75 @@ import godot.types.*
  * - Some types have no destructor (see `extension_api.json`'s `has_destructor` field), for
  * them it is always safe to skip the constructor for the return value if you are in a hurry ;-)
  */
-type GDExtensionVariantPtr = ConstPtr[Byte]
+type GDExtensionVariantPtr = Ptr[Byte]
 
 
 type GDExtensionConstVariantPtr = Ptr[Byte]
 
 
-type GDExtensionUninitializedVariantPtr = ConstPtr[Byte]
+type GDExtensionUninitializedVariantPtr = Ptr[Byte]
 
 
-type GDExtensionStringNamePtr = ConstPtr[Byte]
+type GDExtensionStringNamePtr = Ptr[Byte]
 
 
 type GDExtensionConstStringNamePtr = Ptr[Byte]
 
 
-type GDExtensionUninitializedStringNamePtr = ConstPtr[Byte]
+type GDExtensionUninitializedStringNamePtr = Ptr[Byte]
 
 
-type GDExtensionStringPtr = ConstPtr[Byte]
+type GDExtensionStringPtr = Ptr[Byte]
 
 
 type GDExtensionConstStringPtr = Ptr[Byte]
 
 
-type GDExtensionUninitializedStringPtr = ConstPtr[Byte]
+type GDExtensionUninitializedStringPtr = Ptr[Byte]
 
 
-type GDExtensionObjectPtr = ConstPtr[Byte]
+type GDExtensionObjectPtr = Ptr[Byte]
 
 
 type GDExtensionConstObjectPtr = Ptr[Byte]
 
 
-type GDExtensionUninitializedObjectPtr = ConstPtr[Byte]
+type GDExtensionUninitializedObjectPtr = Ptr[Byte]
 
 
-type GDExtensionTypePtr = ConstPtr[Byte]
+type GDExtensionTypePtr = Ptr[Byte]
 
 
 type GDExtensionConstTypePtr = Ptr[Byte]
 
 
-type GDExtensionUninitializedTypePtr = ConstPtr[Byte]
+type GDExtensionUninitializedTypePtr = Ptr[Byte]
 
 
 type GDExtensionMethodBindPtr = Ptr[Byte]
 
 
-type GDExtensionRefPtr = ConstPtr[Byte]
+type GDExtensionRefPtr = Ptr[Byte]
 
 
 type GDExtensionConstRefPtr = Ptr[Byte]
 
 
-type GDExtensionClassInstancePtr = ConstPtr[Byte]
+type GDExtensionClassInstancePtr = Ptr[Byte]
 
 
-type GDExtensionClassLibraryPtr = ConstPtr[Byte]
+type GDExtensionClassLibraryPtr = Ptr[Byte]
 
 /**
  * Pointer to custom ScriptInstance native implementation.
  */
-type GDExtensionScriptInstanceDataPtr = ConstPtr[Byte]
+type GDExtensionScriptInstanceDataPtr = Ptr[Byte]
 
 
-type GDExtensionScriptLanguagePtr = ConstPtr[Byte]
+type GDExtensionScriptLanguagePtr = Ptr[Byte]
 
 /**
  * Pointer to ScriptInstance.
  */
-type GDExtensionScriptInstancePtr = ConstPtr[Byte]
+type GDExtensionScriptInstancePtr = Ptr[Byte]
 

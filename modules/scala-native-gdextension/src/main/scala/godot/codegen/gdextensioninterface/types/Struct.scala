@@ -1385,13 +1385,13 @@ opaque type GDExtensionGodotVersion = CStruct4[
   CUnsignedInt,
   CUnsignedInt,
   CUnsignedInt,
-  ConstPtr[CChar]
+  Ptr[CChar]
 ]
 object GDExtensionGodotVersion {
   import Tag.materializeCStruct4Tag
 
   given Tag[GDExtensionGodotVersion] = 
-    materializeCStruct4Tag[CUnsignedInt, CUnsignedInt, CUnsignedInt, ConstPtr[CChar]].asInstanceOf[Tag[GDExtensionGodotVersion]]
+    materializeCStruct4Tag[CUnsignedInt, CUnsignedInt, CUnsignedInt, Ptr[CChar]].asInstanceOf[Tag[GDExtensionGodotVersion]]
 
   extension (struct: GDExtensionGodotVersion) {
     
@@ -1407,9 +1407,9 @@ object GDExtensionGodotVersion {
     def patch_=(v: CUnsignedInt) = struct._3_=(v)
     def at_patch: Ptr[CUnsignedInt] = struct.at3
 
-    def string: ConstPtr[CChar] = struct._4
-    def string_=(v: ConstPtr[CChar]) = struct._4_=(v)
-    def at_string: Ptr[ConstPtr[CChar]] = struct.at4
+    def string: Ptr[CChar] = struct._4
+    def string_=(v: Ptr[CChar]) = struct._4_=(v)
+    def at_string: Ptr[Ptr[CChar]] = struct.at4
 
   }
 }
@@ -1419,17 +1419,17 @@ opaque type GDExtensionGodotVersion2 = CStruct9[
   CUnsignedInt,
   CUnsignedInt,
   CUnsignedInt,
-  ConstPtr[CChar],
-  ConstPtr[CChar],
-  ConstPtr[CChar],
+  Ptr[CChar],
+  Ptr[CChar],
+  Ptr[CChar],
   CUnsignedLongLong,
-  ConstPtr[CChar]
+  Ptr[CChar]
 ]
 object GDExtensionGodotVersion2 {
   import Tag.materializeCStruct9Tag
 
   given Tag[GDExtensionGodotVersion2] = 
-    materializeCStruct9Tag[CUnsignedInt, CUnsignedInt, CUnsignedInt, CUnsignedInt, ConstPtr[CChar], ConstPtr[CChar], ConstPtr[CChar], CUnsignedLongLong, ConstPtr[CChar]].asInstanceOf[Tag[GDExtensionGodotVersion2]]
+    materializeCStruct9Tag[CUnsignedInt, CUnsignedInt, CUnsignedInt, CUnsignedInt, Ptr[CChar], Ptr[CChar], Ptr[CChar], CUnsignedLongLong, Ptr[CChar]].asInstanceOf[Tag[GDExtensionGodotVersion2]]
 
   extension (struct: GDExtensionGodotVersion2) {
     
@@ -1449,25 +1449,25 @@ object GDExtensionGodotVersion2 {
     def hex_=(v: CUnsignedInt) = struct._4_=(v)
     def at_hex: Ptr[CUnsignedInt] = struct.at4
 
-    def status: ConstPtr[CChar] = struct._5
-    def status_=(v: ConstPtr[CChar]) = struct._5_=(v)
-    def at_status: Ptr[ConstPtr[CChar]] = struct.at5
+    def status: Ptr[CChar] = struct._5
+    def status_=(v: Ptr[CChar]) = struct._5_=(v)
+    def at_status: Ptr[Ptr[CChar]] = struct.at5
 
-    def build: ConstPtr[CChar] = struct._6
-    def build_=(v: ConstPtr[CChar]) = struct._6_=(v)
-    def at_build: Ptr[ConstPtr[CChar]] = struct.at6
+    def build: Ptr[CChar] = struct._6
+    def build_=(v: Ptr[CChar]) = struct._6_=(v)
+    def at_build: Ptr[Ptr[CChar]] = struct.at6
 
-    def hash: ConstPtr[CChar] = struct._7
-    def hash_=(v: ConstPtr[CChar]) = struct._7_=(v)
-    def at_hash: Ptr[ConstPtr[CChar]] = struct.at7
+    def hash: Ptr[CChar] = struct._7
+    def hash_=(v: Ptr[CChar]) = struct._7_=(v)
+    def at_hash: Ptr[Ptr[CChar]] = struct.at7
 
     def timestamp: CUnsignedLongLong = struct._8
     def timestamp_=(v: CUnsignedLongLong) = struct._8_=(v)
     def at_timestamp: Ptr[CUnsignedLongLong] = struct.at8
 
-    def string: ConstPtr[CChar] = struct._9
-    def string_=(v: ConstPtr[CChar]) = struct._9_=(v)
-    def at_string: Ptr[ConstPtr[CChar]] = struct.at9
+    def string: Ptr[CChar] = struct._9
+    def string_=(v: Ptr[CChar]) = struct._9_=(v)
+    def at_string: Ptr[Ptr[CChar]] = struct.at9
 
   }
 }

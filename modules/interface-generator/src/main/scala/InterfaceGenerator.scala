@@ -197,14 +197,13 @@ object InterfaceGenerator {
     ).toMap
     def ptrOrRaw: String = {
       if (toParseType.endsWith("*")) {
-        val isConst = toParseType.startsWith("const ")
         val rawType =
           toParseType.stripPrefix("const ").stripSuffix("*")
         if (rawType == "void") {
           "CVoidPtr"
         } else {
-          val ptrType = if (isConst) "ConstPtr" else "Ptr"
-          s"$ptrType[${baseTypeMap.get(rawType).getOrElse(rawType)}]"
+          // Always use Ptr, ignore const qualifier
+          s"Ptr[${baseTypeMap.get(rawType).getOrElse(rawType)}]"
         }
       } else {
         toParseType
@@ -239,19 +238,10 @@ object InterfaceGenerator {
       .mkString(",\n      ")
     s"""
      |$comment
-     |opaque type ${name} = CFuncPtr${arguments.length}[
+     |type ${name} = CFuncPtr${arguments.length}[
      |  $argumentTypes${if (arguments.isEmpty) "" else ","}
      |  $returnType
      |]
-     |object ${name} {
-     |  given Tag[${name}] = Tag.Ptr(Tag.Unit).asInstanceOf[Tag[${name}]]
-     |
-     |  extension (func: ${name}) {
-     |    def apply(
-     |      $funcParamsStr
-     |    ): $returnType = func($callParams)
-     |  } 
-     |}
      |""".stripMargin
   }
 
@@ -285,10 +275,10 @@ object InterfaceGenerator {
                    |}""".stripMargin
 
                 case Kind.Handle(isConst, isUninitialized, parent) =>
-                  val ptrType = if (isConst) "Ptr[Byte]" else "ConstPtr[Byte]"
+                  // Always use Ptr[Byte], ignore const qualifier
                   s"""
                    |$comment
-                   |type ${type_.name} = $ptrType
+                   |type ${type_.name} = Ptr[Byte]
                    |""".stripMargin
                 case Kind.Alias(aliasTypeName) =>
                   s"""
@@ -333,11 +323,19 @@ object InterfaceGenerator {
                    |  }
                    |}""".stripMargin
                 case function: Kind.Function =>
-                  generateFunctionDefinition(
-                    comment = comment,
-                    name = type_.name,
-                    function = function
-                  )
+                  // Special case: GDExtensionInterfaceFunctionPtr is a generic void pointer
+                  if (type_.name == "GDExtensionInterfaceFunctionPtr") {
+                    s"""
+                     |$comment
+                     |type ${type_.name} = CVoidPtr
+                     |""".stripMargin
+                  } else {
+                    generateFunctionDefinition(
+                      comment = comment,
+                      name = type_.name,
+                      function = function
+                    )
+                  }
             }
             s"""
              |package godot.codegen.gdextensioninterface.types
@@ -374,18 +372,32 @@ object InterfaceGenerator {
                 Kind.Function(interface.arguments, interface.returnValue)
             )
           }.mkString
-          val interfaceVals = interfaces
+          val interfaceVars = interfaces
             .map { interface =>
-              s"val ${interface.name}: ${{ getInterfaceName(interface.name) }}"
+              s"var ${interface.name}: ${{ getInterfaceName(interface.name) }} = null.asInstanceOf[${{ getInterfaceName(interface.name) }}]"
             }
-            .mkString(",\n  ")
-          val definitionLoad = interfaces
-            .map { interface =>
-              s"${interface.name} = getProcAddr(toCString(\"${interface.name}\")).asInstanceOf[${{
-                  getInterfaceName(interface.name)
-                }}]"
-            }
-            .mkString(",\n      ")
+            .mkString("\n  ")
+
+          // Split interfaces into groups of 20 to avoid UTF8 string too large
+          val batchSize = 20
+          val batches = interfaces.grouped(batchSize).toVector
+
+          val helperMethods = batches.zipWithIndex.map { case (batch, idx) =>
+            val loadAndAssign = batch.map { interface =>
+              val nameLit = interface.name
+              val typeName = getInterfaceName(interface.name)
+              s"""result.${nameLit} = getProcAddr.apply(toCString("${nameLit}")).asInstanceOf[${typeName}]"""
+            }.mkString("\n      ")
+
+            s"""
+             |  private def loadBatch${idx}(
+             |    result: Interface,
+             |    getProcAddr: GDExtensionInterfaceGetProcAddress
+             |  )(implicit zone: Zone): Unit = {
+             |      $loadAndAssign
+             |  }
+             |""".stripMargin
+          }.mkString("\n")
 
           s"""
            |package godot.codegen.gdextensioninterface.codegen.types
@@ -398,16 +410,18 @@ object InterfaceGenerator {
            |
            |$definitions
            |
-           |class Interface private(
-           |  $interfaceVals
-           |)
+           |class Interface private() {
+           |  $interfaceVars
+           |}
            |object Interface {
+           |$helperMethods
+           |
            |  def load(
            |    getProcAddr: GDExtensionInterfaceGetProcAddress
            |  ): Interface = Zone.acquire { implicit zone: Zone =>
-           |    new Interface(
-           |      $definitionLoad
-           |    )
+           |      val result = new Interface()
+           |      ${batches.indices.map(i => s"loadBatch$i(result, getProcAddr)").mkString("\n      ")}
+           |      result
            |  }
            |}
            |""".stripMargin

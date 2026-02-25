@@ -4,6 +4,11 @@ package godot.types
 import scala.scalanative.unsafe.*
 
 object Tags {
+  // Helper for function pointer types - all function pointers are just void pointers at runtime
+  // We create this once to avoid HKTypeLambda issues with polymorphic Tag.Ptr
+  private val voidPtrTag: Tag[CVoidPtr] = Tag.Byte.asInstanceOf[Tag[CVoidPtr]]
+
+  def funcPtrTag[T]: Tag[T] = voidPtrTag.asInstanceOf[Tag[T]]
 
   // CStruct23 = CStruct2[CStruct22[T1..T22], T23]
   def materializeCStruct23Tag[T1: Tag, T2: Tag, T3: Tag, T4: Tag, T5: Tag, T6: Tag, T7: Tag, T8: Tag, T9: Tag, T10: Tag, T11: Tag, T12: Tag, T13: Tag, T14: Tag, T15: Tag, T16: Tag, T17: Tag, T18: Tag, T19: Tag, T20: Tag, T21: Tag, T22: Tag, T23: Tag]: Tag[CStruct23[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23]] = {
