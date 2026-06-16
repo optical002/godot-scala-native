@@ -3,5 +3,5 @@ entry_symbol = "godot_scala_init"
 compatibility_minimum = 4.2
 
 [libraries]
-linux.debug.x86_64 = "res://lib/libgodot-scala-native.so"
-linux.release.x86_64 = "res://lib/libgodot-scala-native.so"
+linux.debug.x86_64 = "res://lib/libscala-native-gdextension.so"
+linux.release.x86_64 = "res://lib/libscala-native-gdextension.so"
