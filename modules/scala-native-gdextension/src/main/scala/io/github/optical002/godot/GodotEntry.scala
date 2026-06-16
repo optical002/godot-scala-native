@@ -57,8 +57,12 @@ object GodotEntry {
    */
   private val initialize: GDExtensionInitializeCallback =
     (userdata: CVoidPtr, level: GDExtensionInitializationLevel) => {
-      if (level == GDEXTENSION_INITIALIZATION_SCENE)
+      if (level == GDEXTENSION_INITIALIZATION_SCENE) {
         logAppend("godot-init", "initialize(SCENE)")
+        io.github.optical002.godot.builtin.BuiltinSelfTest.run(
+          msg => logAppend("godot-init", msg)
+        )
+      }
     }
 
   /**
