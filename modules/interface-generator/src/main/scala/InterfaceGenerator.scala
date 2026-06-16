@@ -382,7 +382,10 @@ object InterfaceGenerator {
             val loadAndAssign = batch.map { interface =>
               val nameLit = interface.name
               val typeName = getInterfaceName(interface.name)
-              s"""result.${nameLit} = getProcAddr.apply(toCString("${nameLit}")).asInstanceOf[${typeName}]"""
+              // get_proc_address returns a raw data pointer (CVoidPtr). A
+              // CFuncPtr must be built from it with CFuncPtr.fromPtr; an
+              // asInstanceOf cast throws ClassCastException at runtime.
+              s"""result.${nameLit} = CFuncPtr.fromPtr[${typeName}](getProcAddr.apply(toCString("${nameLit}")))"""
             }.mkString("\n      ")
 
             s"""
@@ -396,7 +399,7 @@ object InterfaceGenerator {
           }.mkString("\n")
 
           s"""
-           |package io.github.optical002.godot.codegen.gdextensioninterface.codegen.types
+           |package io.github.optical002.godot.codegen.gdextensioninterface.interface
            |
            |import scala.scalanative.unsafe.*
            |import scala.scalanative.unsigned.*

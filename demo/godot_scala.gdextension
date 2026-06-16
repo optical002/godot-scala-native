@@ -3,5 +3,20 @@ entry_symbol = "godot_scala_init"
 compatibility_minimum = 4.2
 
 [libraries]
+; Scala Native names the dynamic library per-platform:
+;   Linux:   lib<name>.so
+;   macOS:   lib<name>.dylib
+;   Windows: <name>.dll   (no "lib" prefix)
+; Build each platform's library with `sbt gdext/build` on that OS and drop the
+; produced file into demo/lib/. Only the matching row needs to exist to run on
+; a given platform.
 linux.debug.x86_64 = "res://lib/libscala-native-gdextension.so"
 linux.release.x86_64 = "res://lib/libscala-native-gdextension.so"
+
+macos.debug = "res://lib/libscala-native-gdextension.dylib"
+macos.release = "res://lib/libscala-native-gdextension.dylib"
+macos.debug.arm64 = "res://lib/libscala-native-gdextension.dylib"
+macos.release.arm64 = "res://lib/libscala-native-gdextension.dylib"
+
+windows.debug.x86_64 = "res://lib/scala-native-gdextension.dll"
+windows.release.x86_64 = "res://lib/scala-native-gdextension.dll"

@@ -1,5 +1,5 @@
 
-package io.github.optical002.godot.codegen.gdextensioninterface.codegen.types
+package io.github.optical002.godot.codegen.gdextensioninterface.interface
 
 import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
@@ -1975,26 +1975,26 @@ object Interface {
     result: Interface,
     getProcAddr: GDExtensionInterfaceGetProcAddress
   )(implicit zone: Zone): Unit = {
-      result.get_godot_version = getProcAddr.apply(toCString("get_godot_version")).asInstanceOf[GDExtensionInterfaceGetGodotVersion]
-      result.get_godot_version2 = getProcAddr.apply(toCString("get_godot_version2")).asInstanceOf[GDExtensionInterfaceGetGodotVersion2]
-      result.mem_alloc = getProcAddr.apply(toCString("mem_alloc")).asInstanceOf[GDExtensionInterfaceMemAlloc]
-      result.mem_realloc = getProcAddr.apply(toCString("mem_realloc")).asInstanceOf[GDExtensionInterfaceMemRealloc]
-      result.mem_free = getProcAddr.apply(toCString("mem_free")).asInstanceOf[GDExtensionInterfaceMemFree]
-      result.mem_alloc2 = getProcAddr.apply(toCString("mem_alloc2")).asInstanceOf[GDExtensionInterfaceMemAlloc2]
-      result.mem_realloc2 = getProcAddr.apply(toCString("mem_realloc2")).asInstanceOf[GDExtensionInterfaceMemRealloc2]
-      result.mem_free2 = getProcAddr.apply(toCString("mem_free2")).asInstanceOf[GDExtensionInterfaceMemFree2]
-      result.print_error = getProcAddr.apply(toCString("print_error")).asInstanceOf[GDExtensionInterfacePrintError]
-      result.print_error_with_message = getProcAddr.apply(toCString("print_error_with_message")).asInstanceOf[GDExtensionInterfacePrintErrorWithMessage]
-      result.print_warning = getProcAddr.apply(toCString("print_warning")).asInstanceOf[GDExtensionInterfacePrintWarning]
-      result.print_warning_with_message = getProcAddr.apply(toCString("print_warning_with_message")).asInstanceOf[GDExtensionInterfacePrintWarningWithMessage]
-      result.print_script_error = getProcAddr.apply(toCString("print_script_error")).asInstanceOf[GDExtensionInterfacePrintScriptError]
-      result.print_script_error_with_message = getProcAddr.apply(toCString("print_script_error_with_message")).asInstanceOf[GDExtensionInterfacePrintScriptErrorWithMessage]
-      result.get_native_struct_size = getProcAddr.apply(toCString("get_native_struct_size")).asInstanceOf[GDExtensionInterfaceGetNativeStructSize]
-      result.variant_new_copy = getProcAddr.apply(toCString("variant_new_copy")).asInstanceOf[GDExtensionInterfaceVariantNewCopy]
-      result.variant_new_nil = getProcAddr.apply(toCString("variant_new_nil")).asInstanceOf[GDExtensionInterfaceVariantNewNil]
-      result.variant_destroy = getProcAddr.apply(toCString("variant_destroy")).asInstanceOf[GDExtensionInterfaceVariantDestroy]
-      result.variant_call = getProcAddr.apply(toCString("variant_call")).asInstanceOf[GDExtensionInterfaceVariantCall]
-      result.variant_call_static = getProcAddr.apply(toCString("variant_call_static")).asInstanceOf[GDExtensionInterfaceVariantCallStatic]
+      result.get_godot_version = CFuncPtr.fromPtr[GDExtensionInterfaceGetGodotVersion](getProcAddr.apply(toCString("get_godot_version")))
+      result.get_godot_version2 = CFuncPtr.fromPtr[GDExtensionInterfaceGetGodotVersion2](getProcAddr.apply(toCString("get_godot_version2")))
+      result.mem_alloc = CFuncPtr.fromPtr[GDExtensionInterfaceMemAlloc](getProcAddr.apply(toCString("mem_alloc")))
+      result.mem_realloc = CFuncPtr.fromPtr[GDExtensionInterfaceMemRealloc](getProcAddr.apply(toCString("mem_realloc")))
+      result.mem_free = CFuncPtr.fromPtr[GDExtensionInterfaceMemFree](getProcAddr.apply(toCString("mem_free")))
+      result.mem_alloc2 = CFuncPtr.fromPtr[GDExtensionInterfaceMemAlloc2](getProcAddr.apply(toCString("mem_alloc2")))
+      result.mem_realloc2 = CFuncPtr.fromPtr[GDExtensionInterfaceMemRealloc2](getProcAddr.apply(toCString("mem_realloc2")))
+      result.mem_free2 = CFuncPtr.fromPtr[GDExtensionInterfaceMemFree2](getProcAddr.apply(toCString("mem_free2")))
+      result.print_error = CFuncPtr.fromPtr[GDExtensionInterfacePrintError](getProcAddr.apply(toCString("print_error")))
+      result.print_error_with_message = CFuncPtr.fromPtr[GDExtensionInterfacePrintErrorWithMessage](getProcAddr.apply(toCString("print_error_with_message")))
+      result.print_warning = CFuncPtr.fromPtr[GDExtensionInterfacePrintWarning](getProcAddr.apply(toCString("print_warning")))
+      result.print_warning_with_message = CFuncPtr.fromPtr[GDExtensionInterfacePrintWarningWithMessage](getProcAddr.apply(toCString("print_warning_with_message")))
+      result.print_script_error = CFuncPtr.fromPtr[GDExtensionInterfacePrintScriptError](getProcAddr.apply(toCString("print_script_error")))
+      result.print_script_error_with_message = CFuncPtr.fromPtr[GDExtensionInterfacePrintScriptErrorWithMessage](getProcAddr.apply(toCString("print_script_error_with_message")))
+      result.get_native_struct_size = CFuncPtr.fromPtr[GDExtensionInterfaceGetNativeStructSize](getProcAddr.apply(toCString("get_native_struct_size")))
+      result.variant_new_copy = CFuncPtr.fromPtr[GDExtensionInterfaceVariantNewCopy](getProcAddr.apply(toCString("variant_new_copy")))
+      result.variant_new_nil = CFuncPtr.fromPtr[GDExtensionInterfaceVariantNewNil](getProcAddr.apply(toCString("variant_new_nil")))
+      result.variant_destroy = CFuncPtr.fromPtr[GDExtensionInterfaceVariantDestroy](getProcAddr.apply(toCString("variant_destroy")))
+      result.variant_call = CFuncPtr.fromPtr[GDExtensionInterfaceVariantCall](getProcAddr.apply(toCString("variant_call")))
+      result.variant_call_static = CFuncPtr.fromPtr[GDExtensionInterfaceVariantCallStatic](getProcAddr.apply(toCString("variant_call_static")))
   }
 
 
@@ -2002,26 +2002,26 @@ object Interface {
     result: Interface,
     getProcAddr: GDExtensionInterfaceGetProcAddress
   )(implicit zone: Zone): Unit = {
-      result.variant_evaluate = getProcAddr.apply(toCString("variant_evaluate")).asInstanceOf[GDExtensionInterfaceVariantEvaluate]
-      result.variant_set = getProcAddr.apply(toCString("variant_set")).asInstanceOf[GDExtensionInterfaceVariantSet]
-      result.variant_set_named = getProcAddr.apply(toCString("variant_set_named")).asInstanceOf[GDExtensionInterfaceVariantSetNamed]
-      result.variant_set_keyed = getProcAddr.apply(toCString("variant_set_keyed")).asInstanceOf[GDExtensionInterfaceVariantSetKeyed]
-      result.variant_set_indexed = getProcAddr.apply(toCString("variant_set_indexed")).asInstanceOf[GDExtensionInterfaceVariantSetIndexed]
-      result.variant_get = getProcAddr.apply(toCString("variant_get")).asInstanceOf[GDExtensionInterfaceVariantGet]
-      result.variant_get_named = getProcAddr.apply(toCString("variant_get_named")).asInstanceOf[GDExtensionInterfaceVariantGetNamed]
-      result.variant_get_keyed = getProcAddr.apply(toCString("variant_get_keyed")).asInstanceOf[GDExtensionInterfaceVariantGetKeyed]
-      result.variant_get_indexed = getProcAddr.apply(toCString("variant_get_indexed")).asInstanceOf[GDExtensionInterfaceVariantGetIndexed]
-      result.variant_iter_init = getProcAddr.apply(toCString("variant_iter_init")).asInstanceOf[GDExtensionInterfaceVariantIterInit]
-      result.variant_iter_next = getProcAddr.apply(toCString("variant_iter_next")).asInstanceOf[GDExtensionInterfaceVariantIterNext]
-      result.variant_iter_get = getProcAddr.apply(toCString("variant_iter_get")).asInstanceOf[GDExtensionInterfaceVariantIterGet]
-      result.variant_hash = getProcAddr.apply(toCString("variant_hash")).asInstanceOf[GDExtensionInterfaceVariantHash]
-      result.variant_recursive_hash = getProcAddr.apply(toCString("variant_recursive_hash")).asInstanceOf[GDExtensionInterfaceVariantRecursiveHash]
-      result.variant_hash_compare = getProcAddr.apply(toCString("variant_hash_compare")).asInstanceOf[GDExtensionInterfaceVariantHashCompare]
-      result.variant_booleanize = getProcAddr.apply(toCString("variant_booleanize")).asInstanceOf[GDExtensionInterfaceVariantBooleanize]
-      result.variant_duplicate = getProcAddr.apply(toCString("variant_duplicate")).asInstanceOf[GDExtensionInterfaceVariantDuplicate]
-      result.variant_stringify = getProcAddr.apply(toCString("variant_stringify")).asInstanceOf[GDExtensionInterfaceVariantStringify]
-      result.variant_get_type = getProcAddr.apply(toCString("variant_get_type")).asInstanceOf[GDExtensionInterfaceVariantGetType]
-      result.variant_has_method = getProcAddr.apply(toCString("variant_has_method")).asInstanceOf[GDExtensionInterfaceVariantHasMethod]
+      result.variant_evaluate = CFuncPtr.fromPtr[GDExtensionInterfaceVariantEvaluate](getProcAddr.apply(toCString("variant_evaluate")))
+      result.variant_set = CFuncPtr.fromPtr[GDExtensionInterfaceVariantSet](getProcAddr.apply(toCString("variant_set")))
+      result.variant_set_named = CFuncPtr.fromPtr[GDExtensionInterfaceVariantSetNamed](getProcAddr.apply(toCString("variant_set_named")))
+      result.variant_set_keyed = CFuncPtr.fromPtr[GDExtensionInterfaceVariantSetKeyed](getProcAddr.apply(toCString("variant_set_keyed")))
+      result.variant_set_indexed = CFuncPtr.fromPtr[GDExtensionInterfaceVariantSetIndexed](getProcAddr.apply(toCString("variant_set_indexed")))
+      result.variant_get = CFuncPtr.fromPtr[GDExtensionInterfaceVariantGet](getProcAddr.apply(toCString("variant_get")))
+      result.variant_get_named = CFuncPtr.fromPtr[GDExtensionInterfaceVariantGetNamed](getProcAddr.apply(toCString("variant_get_named")))
+      result.variant_get_keyed = CFuncPtr.fromPtr[GDExtensionInterfaceVariantGetKeyed](getProcAddr.apply(toCString("variant_get_keyed")))
+      result.variant_get_indexed = CFuncPtr.fromPtr[GDExtensionInterfaceVariantGetIndexed](getProcAddr.apply(toCString("variant_get_indexed")))
+      result.variant_iter_init = CFuncPtr.fromPtr[GDExtensionInterfaceVariantIterInit](getProcAddr.apply(toCString("variant_iter_init")))
+      result.variant_iter_next = CFuncPtr.fromPtr[GDExtensionInterfaceVariantIterNext](getProcAddr.apply(toCString("variant_iter_next")))
+      result.variant_iter_get = CFuncPtr.fromPtr[GDExtensionInterfaceVariantIterGet](getProcAddr.apply(toCString("variant_iter_get")))
+      result.variant_hash = CFuncPtr.fromPtr[GDExtensionInterfaceVariantHash](getProcAddr.apply(toCString("variant_hash")))
+      result.variant_recursive_hash = CFuncPtr.fromPtr[GDExtensionInterfaceVariantRecursiveHash](getProcAddr.apply(toCString("variant_recursive_hash")))
+      result.variant_hash_compare = CFuncPtr.fromPtr[GDExtensionInterfaceVariantHashCompare](getProcAddr.apply(toCString("variant_hash_compare")))
+      result.variant_booleanize = CFuncPtr.fromPtr[GDExtensionInterfaceVariantBooleanize](getProcAddr.apply(toCString("variant_booleanize")))
+      result.variant_duplicate = CFuncPtr.fromPtr[GDExtensionInterfaceVariantDuplicate](getProcAddr.apply(toCString("variant_duplicate")))
+      result.variant_stringify = CFuncPtr.fromPtr[GDExtensionInterfaceVariantStringify](getProcAddr.apply(toCString("variant_stringify")))
+      result.variant_get_type = CFuncPtr.fromPtr[GDExtensionInterfaceVariantGetType](getProcAddr.apply(toCString("variant_get_type")))
+      result.variant_has_method = CFuncPtr.fromPtr[GDExtensionInterfaceVariantHasMethod](getProcAddr.apply(toCString("variant_has_method")))
   }
 
 
@@ -2029,26 +2029,26 @@ object Interface {
     result: Interface,
     getProcAddr: GDExtensionInterfaceGetProcAddress
   )(implicit zone: Zone): Unit = {
-      result.variant_has_member = getProcAddr.apply(toCString("variant_has_member")).asInstanceOf[GDExtensionInterfaceVariantHasMember]
-      result.variant_has_key = getProcAddr.apply(toCString("variant_has_key")).asInstanceOf[GDExtensionInterfaceVariantHasKey]
-      result.variant_get_object_instance_id = getProcAddr.apply(toCString("variant_get_object_instance_id")).asInstanceOf[GDExtensionInterfaceVariantGetObjectInstanceId]
-      result.variant_get_type_name = getProcAddr.apply(toCString("variant_get_type_name")).asInstanceOf[GDExtensionInterfaceVariantGetTypeName]
-      result.variant_can_convert = getProcAddr.apply(toCString("variant_can_convert")).asInstanceOf[GDExtensionInterfaceVariantCanConvert]
-      result.variant_can_convert_strict = getProcAddr.apply(toCString("variant_can_convert_strict")).asInstanceOf[GDExtensionInterfaceVariantCanConvertStrict]
-      result.get_variant_from_type_constructor = getProcAddr.apply(toCString("get_variant_from_type_constructor")).asInstanceOf[GDExtensionInterfaceGetVariantFromTypeConstructor]
-      result.get_variant_to_type_constructor = getProcAddr.apply(toCString("get_variant_to_type_constructor")).asInstanceOf[GDExtensionInterfaceGetVariantToTypeConstructor]
-      result.variant_get_ptr_internal_getter = getProcAddr.apply(toCString("variant_get_ptr_internal_getter")).asInstanceOf[GDExtensionInterfaceVariantGetPtrInternalGetter]
-      result.variant_get_ptr_operator_evaluator = getProcAddr.apply(toCString("variant_get_ptr_operator_evaluator")).asInstanceOf[GDExtensionInterfaceVariantGetPtrOperatorEvaluator]
-      result.variant_get_ptr_builtin_method = getProcAddr.apply(toCString("variant_get_ptr_builtin_method")).asInstanceOf[GDExtensionInterfaceVariantGetPtrBuiltinMethod]
-      result.variant_get_ptr_constructor = getProcAddr.apply(toCString("variant_get_ptr_constructor")).asInstanceOf[GDExtensionInterfaceVariantGetPtrConstructor]
-      result.variant_get_ptr_destructor = getProcAddr.apply(toCString("variant_get_ptr_destructor")).asInstanceOf[GDExtensionInterfaceVariantGetPtrDestructor]
-      result.variant_construct = getProcAddr.apply(toCString("variant_construct")).asInstanceOf[GDExtensionInterfaceVariantConstruct]
-      result.variant_get_ptr_setter = getProcAddr.apply(toCString("variant_get_ptr_setter")).asInstanceOf[GDExtensionInterfaceVariantGetPtrSetter]
-      result.variant_get_ptr_getter = getProcAddr.apply(toCString("variant_get_ptr_getter")).asInstanceOf[GDExtensionInterfaceVariantGetPtrGetter]
-      result.variant_get_ptr_indexed_setter = getProcAddr.apply(toCString("variant_get_ptr_indexed_setter")).asInstanceOf[GDExtensionInterfaceVariantGetPtrIndexedSetter]
-      result.variant_get_ptr_indexed_getter = getProcAddr.apply(toCString("variant_get_ptr_indexed_getter")).asInstanceOf[GDExtensionInterfaceVariantGetPtrIndexedGetter]
-      result.variant_get_ptr_keyed_setter = getProcAddr.apply(toCString("variant_get_ptr_keyed_setter")).asInstanceOf[GDExtensionInterfaceVariantGetPtrKeyedSetter]
-      result.variant_get_ptr_keyed_getter = getProcAddr.apply(toCString("variant_get_ptr_keyed_getter")).asInstanceOf[GDExtensionInterfaceVariantGetPtrKeyedGetter]
+      result.variant_has_member = CFuncPtr.fromPtr[GDExtensionInterfaceVariantHasMember](getProcAddr.apply(toCString("variant_has_member")))
+      result.variant_has_key = CFuncPtr.fromPtr[GDExtensionInterfaceVariantHasKey](getProcAddr.apply(toCString("variant_has_key")))
+      result.variant_get_object_instance_id = CFuncPtr.fromPtr[GDExtensionInterfaceVariantGetObjectInstanceId](getProcAddr.apply(toCString("variant_get_object_instance_id")))
+      result.variant_get_type_name = CFuncPtr.fromPtr[GDExtensionInterfaceVariantGetTypeName](getProcAddr.apply(toCString("variant_get_type_name")))
+      result.variant_can_convert = CFuncPtr.fromPtr[GDExtensionInterfaceVariantCanConvert](getProcAddr.apply(toCString("variant_can_convert")))
+      result.variant_can_convert_strict = CFuncPtr.fromPtr[GDExtensionInterfaceVariantCanConvertStrict](getProcAddr.apply(toCString("variant_can_convert_strict")))
+      result.get_variant_from_type_constructor = CFuncPtr.fromPtr[GDExtensionInterfaceGetVariantFromTypeConstructor](getProcAddr.apply(toCString("get_variant_from_type_constructor")))
+      result.get_variant_to_type_constructor = CFuncPtr.fromPtr[GDExtensionInterfaceGetVariantToTypeConstructor](getProcAddr.apply(toCString("get_variant_to_type_constructor")))
+      result.variant_get_ptr_internal_getter = CFuncPtr.fromPtr[GDExtensionInterfaceVariantGetPtrInternalGetter](getProcAddr.apply(toCString("variant_get_ptr_internal_getter")))
+      result.variant_get_ptr_operator_evaluator = CFuncPtr.fromPtr[GDExtensionInterfaceVariantGetPtrOperatorEvaluator](getProcAddr.apply(toCString("variant_get_ptr_operator_evaluator")))
+      result.variant_get_ptr_builtin_method = CFuncPtr.fromPtr[GDExtensionInterfaceVariantGetPtrBuiltinMethod](getProcAddr.apply(toCString("variant_get_ptr_builtin_method")))
+      result.variant_get_ptr_constructor = CFuncPtr.fromPtr[GDExtensionInterfaceVariantGetPtrConstructor](getProcAddr.apply(toCString("variant_get_ptr_constructor")))
+      result.variant_get_ptr_destructor = CFuncPtr.fromPtr[GDExtensionInterfaceVariantGetPtrDestructor](getProcAddr.apply(toCString("variant_get_ptr_destructor")))
+      result.variant_construct = CFuncPtr.fromPtr[GDExtensionInterfaceVariantConstruct](getProcAddr.apply(toCString("variant_construct")))
+      result.variant_get_ptr_setter = CFuncPtr.fromPtr[GDExtensionInterfaceVariantGetPtrSetter](getProcAddr.apply(toCString("variant_get_ptr_setter")))
+      result.variant_get_ptr_getter = CFuncPtr.fromPtr[GDExtensionInterfaceVariantGetPtrGetter](getProcAddr.apply(toCString("variant_get_ptr_getter")))
+      result.variant_get_ptr_indexed_setter = CFuncPtr.fromPtr[GDExtensionInterfaceVariantGetPtrIndexedSetter](getProcAddr.apply(toCString("variant_get_ptr_indexed_setter")))
+      result.variant_get_ptr_indexed_getter = CFuncPtr.fromPtr[GDExtensionInterfaceVariantGetPtrIndexedGetter](getProcAddr.apply(toCString("variant_get_ptr_indexed_getter")))
+      result.variant_get_ptr_keyed_setter = CFuncPtr.fromPtr[GDExtensionInterfaceVariantGetPtrKeyedSetter](getProcAddr.apply(toCString("variant_get_ptr_keyed_setter")))
+      result.variant_get_ptr_keyed_getter = CFuncPtr.fromPtr[GDExtensionInterfaceVariantGetPtrKeyedGetter](getProcAddr.apply(toCString("variant_get_ptr_keyed_getter")))
   }
 
 
@@ -2056,26 +2056,26 @@ object Interface {
     result: Interface,
     getProcAddr: GDExtensionInterfaceGetProcAddress
   )(implicit zone: Zone): Unit = {
-      result.variant_get_ptr_keyed_checker = getProcAddr.apply(toCString("variant_get_ptr_keyed_checker")).asInstanceOf[GDExtensionInterfaceVariantGetPtrKeyedChecker]
-      result.variant_get_constant_value = getProcAddr.apply(toCString("variant_get_constant_value")).asInstanceOf[GDExtensionInterfaceVariantGetConstantValue]
-      result.variant_get_ptr_utility_function = getProcAddr.apply(toCString("variant_get_ptr_utility_function")).asInstanceOf[GDExtensionInterfaceVariantGetPtrUtilityFunction]
-      result.string_new_with_latin1_chars = getProcAddr.apply(toCString("string_new_with_latin1_chars")).asInstanceOf[GDExtensionInterfaceStringNewWithLatin1Chars]
-      result.string_new_with_utf8_chars = getProcAddr.apply(toCString("string_new_with_utf8_chars")).asInstanceOf[GDExtensionInterfaceStringNewWithUtf8Chars]
-      result.string_new_with_utf16_chars = getProcAddr.apply(toCString("string_new_with_utf16_chars")).asInstanceOf[GDExtensionInterfaceStringNewWithUtf16Chars]
-      result.string_new_with_utf32_chars = getProcAddr.apply(toCString("string_new_with_utf32_chars")).asInstanceOf[GDExtensionInterfaceStringNewWithUtf32Chars]
-      result.string_new_with_wide_chars = getProcAddr.apply(toCString("string_new_with_wide_chars")).asInstanceOf[GDExtensionInterfaceStringNewWithWideChars]
-      result.string_new_with_latin1_chars_and_len = getProcAddr.apply(toCString("string_new_with_latin1_chars_and_len")).asInstanceOf[GDExtensionInterfaceStringNewWithLatin1CharsAndLen]
-      result.string_new_with_utf8_chars_and_len = getProcAddr.apply(toCString("string_new_with_utf8_chars_and_len")).asInstanceOf[GDExtensionInterfaceStringNewWithUtf8CharsAndLen]
-      result.string_new_with_utf8_chars_and_len2 = getProcAddr.apply(toCString("string_new_with_utf8_chars_and_len2")).asInstanceOf[GDExtensionInterfaceStringNewWithUtf8CharsAndLen2]
-      result.string_new_with_utf16_chars_and_len = getProcAddr.apply(toCString("string_new_with_utf16_chars_and_len")).asInstanceOf[GDExtensionInterfaceStringNewWithUtf16CharsAndLen]
-      result.string_new_with_utf16_chars_and_len2 = getProcAddr.apply(toCString("string_new_with_utf16_chars_and_len2")).asInstanceOf[GDExtensionInterfaceStringNewWithUtf16CharsAndLen2]
-      result.string_new_with_utf32_chars_and_len = getProcAddr.apply(toCString("string_new_with_utf32_chars_and_len")).asInstanceOf[GDExtensionInterfaceStringNewWithUtf32CharsAndLen]
-      result.string_new_with_wide_chars_and_len = getProcAddr.apply(toCString("string_new_with_wide_chars_and_len")).asInstanceOf[GDExtensionInterfaceStringNewWithWideCharsAndLen]
-      result.string_to_latin1_chars = getProcAddr.apply(toCString("string_to_latin1_chars")).asInstanceOf[GDExtensionInterfaceStringToLatin1Chars]
-      result.string_to_utf8_chars = getProcAddr.apply(toCString("string_to_utf8_chars")).asInstanceOf[GDExtensionInterfaceStringToUtf8Chars]
-      result.string_to_utf16_chars = getProcAddr.apply(toCString("string_to_utf16_chars")).asInstanceOf[GDExtensionInterfaceStringToUtf16Chars]
-      result.string_to_utf32_chars = getProcAddr.apply(toCString("string_to_utf32_chars")).asInstanceOf[GDExtensionInterfaceStringToUtf32Chars]
-      result.string_to_wide_chars = getProcAddr.apply(toCString("string_to_wide_chars")).asInstanceOf[GDExtensionInterfaceStringToWideChars]
+      result.variant_get_ptr_keyed_checker = CFuncPtr.fromPtr[GDExtensionInterfaceVariantGetPtrKeyedChecker](getProcAddr.apply(toCString("variant_get_ptr_keyed_checker")))
+      result.variant_get_constant_value = CFuncPtr.fromPtr[GDExtensionInterfaceVariantGetConstantValue](getProcAddr.apply(toCString("variant_get_constant_value")))
+      result.variant_get_ptr_utility_function = CFuncPtr.fromPtr[GDExtensionInterfaceVariantGetPtrUtilityFunction](getProcAddr.apply(toCString("variant_get_ptr_utility_function")))
+      result.string_new_with_latin1_chars = CFuncPtr.fromPtr[GDExtensionInterfaceStringNewWithLatin1Chars](getProcAddr.apply(toCString("string_new_with_latin1_chars")))
+      result.string_new_with_utf8_chars = CFuncPtr.fromPtr[GDExtensionInterfaceStringNewWithUtf8Chars](getProcAddr.apply(toCString("string_new_with_utf8_chars")))
+      result.string_new_with_utf16_chars = CFuncPtr.fromPtr[GDExtensionInterfaceStringNewWithUtf16Chars](getProcAddr.apply(toCString("string_new_with_utf16_chars")))
+      result.string_new_with_utf32_chars = CFuncPtr.fromPtr[GDExtensionInterfaceStringNewWithUtf32Chars](getProcAddr.apply(toCString("string_new_with_utf32_chars")))
+      result.string_new_with_wide_chars = CFuncPtr.fromPtr[GDExtensionInterfaceStringNewWithWideChars](getProcAddr.apply(toCString("string_new_with_wide_chars")))
+      result.string_new_with_latin1_chars_and_len = CFuncPtr.fromPtr[GDExtensionInterfaceStringNewWithLatin1CharsAndLen](getProcAddr.apply(toCString("string_new_with_latin1_chars_and_len")))
+      result.string_new_with_utf8_chars_and_len = CFuncPtr.fromPtr[GDExtensionInterfaceStringNewWithUtf8CharsAndLen](getProcAddr.apply(toCString("string_new_with_utf8_chars_and_len")))
+      result.string_new_with_utf8_chars_and_len2 = CFuncPtr.fromPtr[GDExtensionInterfaceStringNewWithUtf8CharsAndLen2](getProcAddr.apply(toCString("string_new_with_utf8_chars_and_len2")))
+      result.string_new_with_utf16_chars_and_len = CFuncPtr.fromPtr[GDExtensionInterfaceStringNewWithUtf16CharsAndLen](getProcAddr.apply(toCString("string_new_with_utf16_chars_and_len")))
+      result.string_new_with_utf16_chars_and_len2 = CFuncPtr.fromPtr[GDExtensionInterfaceStringNewWithUtf16CharsAndLen2](getProcAddr.apply(toCString("string_new_with_utf16_chars_and_len2")))
+      result.string_new_with_utf32_chars_and_len = CFuncPtr.fromPtr[GDExtensionInterfaceStringNewWithUtf32CharsAndLen](getProcAddr.apply(toCString("string_new_with_utf32_chars_and_len")))
+      result.string_new_with_wide_chars_and_len = CFuncPtr.fromPtr[GDExtensionInterfaceStringNewWithWideCharsAndLen](getProcAddr.apply(toCString("string_new_with_wide_chars_and_len")))
+      result.string_to_latin1_chars = CFuncPtr.fromPtr[GDExtensionInterfaceStringToLatin1Chars](getProcAddr.apply(toCString("string_to_latin1_chars")))
+      result.string_to_utf8_chars = CFuncPtr.fromPtr[GDExtensionInterfaceStringToUtf8Chars](getProcAddr.apply(toCString("string_to_utf8_chars")))
+      result.string_to_utf16_chars = CFuncPtr.fromPtr[GDExtensionInterfaceStringToUtf16Chars](getProcAddr.apply(toCString("string_to_utf16_chars")))
+      result.string_to_utf32_chars = CFuncPtr.fromPtr[GDExtensionInterfaceStringToUtf32Chars](getProcAddr.apply(toCString("string_to_utf32_chars")))
+      result.string_to_wide_chars = CFuncPtr.fromPtr[GDExtensionInterfaceStringToWideChars](getProcAddr.apply(toCString("string_to_wide_chars")))
   }
 
 
@@ -2083,26 +2083,26 @@ object Interface {
     result: Interface,
     getProcAddr: GDExtensionInterfaceGetProcAddress
   )(implicit zone: Zone): Unit = {
-      result.string_operator_index = getProcAddr.apply(toCString("string_operator_index")).asInstanceOf[GDExtensionInterfaceStringOperatorIndex]
-      result.string_operator_index_const = getProcAddr.apply(toCString("string_operator_index_const")).asInstanceOf[GDExtensionInterfaceStringOperatorIndexConst]
-      result.string_operator_plus_eq_string = getProcAddr.apply(toCString("string_operator_plus_eq_string")).asInstanceOf[GDExtensionInterfaceStringOperatorPlusEqString]
-      result.string_operator_plus_eq_char = getProcAddr.apply(toCString("string_operator_plus_eq_char")).asInstanceOf[GDExtensionInterfaceStringOperatorPlusEqChar]
-      result.string_operator_plus_eq_cstr = getProcAddr.apply(toCString("string_operator_plus_eq_cstr")).asInstanceOf[GDExtensionInterfaceStringOperatorPlusEqCstr]
-      result.string_operator_plus_eq_wcstr = getProcAddr.apply(toCString("string_operator_plus_eq_wcstr")).asInstanceOf[GDExtensionInterfaceStringOperatorPlusEqWcstr]
-      result.string_operator_plus_eq_c32str = getProcAddr.apply(toCString("string_operator_plus_eq_c32str")).asInstanceOf[GDExtensionInterfaceStringOperatorPlusEqC32str]
-      result.string_resize = getProcAddr.apply(toCString("string_resize")).asInstanceOf[GDExtensionInterfaceStringResize]
-      result.string_name_new_with_latin1_chars = getProcAddr.apply(toCString("string_name_new_with_latin1_chars")).asInstanceOf[GDExtensionInterfaceStringNameNewWithLatin1Chars]
-      result.string_name_new_with_utf8_chars = getProcAddr.apply(toCString("string_name_new_with_utf8_chars")).asInstanceOf[GDExtensionInterfaceStringNameNewWithUtf8Chars]
-      result.string_name_new_with_utf8_chars_and_len = getProcAddr.apply(toCString("string_name_new_with_utf8_chars_and_len")).asInstanceOf[GDExtensionInterfaceStringNameNewWithUtf8CharsAndLen]
-      result.xml_parser_open_buffer = getProcAddr.apply(toCString("xml_parser_open_buffer")).asInstanceOf[GDExtensionInterfaceXmlParserOpenBuffer]
-      result.file_access_store_buffer = getProcAddr.apply(toCString("file_access_store_buffer")).asInstanceOf[GDExtensionInterfaceFileAccessStoreBuffer]
-      result.file_access_get_buffer = getProcAddr.apply(toCString("file_access_get_buffer")).asInstanceOf[GDExtensionInterfaceFileAccessGetBuffer]
-      result.image_ptrw = getProcAddr.apply(toCString("image_ptrw")).asInstanceOf[GDExtensionInterfaceImagePtrw]
-      result.image_ptr = getProcAddr.apply(toCString("image_ptr")).asInstanceOf[GDExtensionInterfaceImagePtr]
-      result.worker_thread_pool_add_native_group_task = getProcAddr.apply(toCString("worker_thread_pool_add_native_group_task")).asInstanceOf[GDExtensionInterfaceWorkerThreadPoolAddNativeGroupTask]
-      result.worker_thread_pool_add_native_task = getProcAddr.apply(toCString("worker_thread_pool_add_native_task")).asInstanceOf[GDExtensionInterfaceWorkerThreadPoolAddNativeTask]
-      result.packed_byte_array_operator_index = getProcAddr.apply(toCString("packed_byte_array_operator_index")).asInstanceOf[GDExtensionInterfacePackedByteArrayOperatorIndex]
-      result.packed_byte_array_operator_index_const = getProcAddr.apply(toCString("packed_byte_array_operator_index_const")).asInstanceOf[GDExtensionInterfacePackedByteArrayOperatorIndexConst]
+      result.string_operator_index = CFuncPtr.fromPtr[GDExtensionInterfaceStringOperatorIndex](getProcAddr.apply(toCString("string_operator_index")))
+      result.string_operator_index_const = CFuncPtr.fromPtr[GDExtensionInterfaceStringOperatorIndexConst](getProcAddr.apply(toCString("string_operator_index_const")))
+      result.string_operator_plus_eq_string = CFuncPtr.fromPtr[GDExtensionInterfaceStringOperatorPlusEqString](getProcAddr.apply(toCString("string_operator_plus_eq_string")))
+      result.string_operator_plus_eq_char = CFuncPtr.fromPtr[GDExtensionInterfaceStringOperatorPlusEqChar](getProcAddr.apply(toCString("string_operator_plus_eq_char")))
+      result.string_operator_plus_eq_cstr = CFuncPtr.fromPtr[GDExtensionInterfaceStringOperatorPlusEqCstr](getProcAddr.apply(toCString("string_operator_plus_eq_cstr")))
+      result.string_operator_plus_eq_wcstr = CFuncPtr.fromPtr[GDExtensionInterfaceStringOperatorPlusEqWcstr](getProcAddr.apply(toCString("string_operator_plus_eq_wcstr")))
+      result.string_operator_plus_eq_c32str = CFuncPtr.fromPtr[GDExtensionInterfaceStringOperatorPlusEqC32str](getProcAddr.apply(toCString("string_operator_plus_eq_c32str")))
+      result.string_resize = CFuncPtr.fromPtr[GDExtensionInterfaceStringResize](getProcAddr.apply(toCString("string_resize")))
+      result.string_name_new_with_latin1_chars = CFuncPtr.fromPtr[GDExtensionInterfaceStringNameNewWithLatin1Chars](getProcAddr.apply(toCString("string_name_new_with_latin1_chars")))
+      result.string_name_new_with_utf8_chars = CFuncPtr.fromPtr[GDExtensionInterfaceStringNameNewWithUtf8Chars](getProcAddr.apply(toCString("string_name_new_with_utf8_chars")))
+      result.string_name_new_with_utf8_chars_and_len = CFuncPtr.fromPtr[GDExtensionInterfaceStringNameNewWithUtf8CharsAndLen](getProcAddr.apply(toCString("string_name_new_with_utf8_chars_and_len")))
+      result.xml_parser_open_buffer = CFuncPtr.fromPtr[GDExtensionInterfaceXmlParserOpenBuffer](getProcAddr.apply(toCString("xml_parser_open_buffer")))
+      result.file_access_store_buffer = CFuncPtr.fromPtr[GDExtensionInterfaceFileAccessStoreBuffer](getProcAddr.apply(toCString("file_access_store_buffer")))
+      result.file_access_get_buffer = CFuncPtr.fromPtr[GDExtensionInterfaceFileAccessGetBuffer](getProcAddr.apply(toCString("file_access_get_buffer")))
+      result.image_ptrw = CFuncPtr.fromPtr[GDExtensionInterfaceImagePtrw](getProcAddr.apply(toCString("image_ptrw")))
+      result.image_ptr = CFuncPtr.fromPtr[GDExtensionInterfaceImagePtr](getProcAddr.apply(toCString("image_ptr")))
+      result.worker_thread_pool_add_native_group_task = CFuncPtr.fromPtr[GDExtensionInterfaceWorkerThreadPoolAddNativeGroupTask](getProcAddr.apply(toCString("worker_thread_pool_add_native_group_task")))
+      result.worker_thread_pool_add_native_task = CFuncPtr.fromPtr[GDExtensionInterfaceWorkerThreadPoolAddNativeTask](getProcAddr.apply(toCString("worker_thread_pool_add_native_task")))
+      result.packed_byte_array_operator_index = CFuncPtr.fromPtr[GDExtensionInterfacePackedByteArrayOperatorIndex](getProcAddr.apply(toCString("packed_byte_array_operator_index")))
+      result.packed_byte_array_operator_index_const = CFuncPtr.fromPtr[GDExtensionInterfacePackedByteArrayOperatorIndexConst](getProcAddr.apply(toCString("packed_byte_array_operator_index_const")))
   }
 
 
@@ -2110,26 +2110,26 @@ object Interface {
     result: Interface,
     getProcAddr: GDExtensionInterfaceGetProcAddress
   )(implicit zone: Zone): Unit = {
-      result.packed_float32_array_operator_index = getProcAddr.apply(toCString("packed_float32_array_operator_index")).asInstanceOf[GDExtensionInterfacePackedFloat32ArrayOperatorIndex]
-      result.packed_float32_array_operator_index_const = getProcAddr.apply(toCString("packed_float32_array_operator_index_const")).asInstanceOf[GDExtensionInterfacePackedFloat32ArrayOperatorIndexConst]
-      result.packed_float64_array_operator_index = getProcAddr.apply(toCString("packed_float64_array_operator_index")).asInstanceOf[GDExtensionInterfacePackedFloat64ArrayOperatorIndex]
-      result.packed_float64_array_operator_index_const = getProcAddr.apply(toCString("packed_float64_array_operator_index_const")).asInstanceOf[GDExtensionInterfacePackedFloat64ArrayOperatorIndexConst]
-      result.packed_int32_array_operator_index = getProcAddr.apply(toCString("packed_int32_array_operator_index")).asInstanceOf[GDExtensionInterfacePackedInt32ArrayOperatorIndex]
-      result.packed_int32_array_operator_index_const = getProcAddr.apply(toCString("packed_int32_array_operator_index_const")).asInstanceOf[GDExtensionInterfacePackedInt32ArrayOperatorIndexConst]
-      result.packed_int64_array_operator_index = getProcAddr.apply(toCString("packed_int64_array_operator_index")).asInstanceOf[GDExtensionInterfacePackedInt64ArrayOperatorIndex]
-      result.packed_int64_array_operator_index_const = getProcAddr.apply(toCString("packed_int64_array_operator_index_const")).asInstanceOf[GDExtensionInterfacePackedInt64ArrayOperatorIndexConst]
-      result.packed_string_array_operator_index = getProcAddr.apply(toCString("packed_string_array_operator_index")).asInstanceOf[GDExtensionInterfacePackedStringArrayOperatorIndex]
-      result.packed_string_array_operator_index_const = getProcAddr.apply(toCString("packed_string_array_operator_index_const")).asInstanceOf[GDExtensionInterfacePackedStringArrayOperatorIndexConst]
-      result.packed_vector2_array_operator_index = getProcAddr.apply(toCString("packed_vector2_array_operator_index")).asInstanceOf[GDExtensionInterfacePackedVector2ArrayOperatorIndex]
-      result.packed_vector2_array_operator_index_const = getProcAddr.apply(toCString("packed_vector2_array_operator_index_const")).asInstanceOf[GDExtensionInterfacePackedVector2ArrayOperatorIndexConst]
-      result.packed_vector3_array_operator_index = getProcAddr.apply(toCString("packed_vector3_array_operator_index")).asInstanceOf[GDExtensionInterfacePackedVector3ArrayOperatorIndex]
-      result.packed_vector3_array_operator_index_const = getProcAddr.apply(toCString("packed_vector3_array_operator_index_const")).asInstanceOf[GDExtensionInterfacePackedVector3ArrayOperatorIndexConst]
-      result.packed_vector4_array_operator_index = getProcAddr.apply(toCString("packed_vector4_array_operator_index")).asInstanceOf[GDExtensionInterfacePackedVector4ArrayOperatorIndex]
-      result.packed_vector4_array_operator_index_const = getProcAddr.apply(toCString("packed_vector4_array_operator_index_const")).asInstanceOf[GDExtensionInterfacePackedVector4ArrayOperatorIndexConst]
-      result.packed_color_array_operator_index = getProcAddr.apply(toCString("packed_color_array_operator_index")).asInstanceOf[GDExtensionInterfacePackedColorArrayOperatorIndex]
-      result.packed_color_array_operator_index_const = getProcAddr.apply(toCString("packed_color_array_operator_index_const")).asInstanceOf[GDExtensionInterfacePackedColorArrayOperatorIndexConst]
-      result.array_operator_index = getProcAddr.apply(toCString("array_operator_index")).asInstanceOf[GDExtensionInterfaceArrayOperatorIndex]
-      result.array_operator_index_const = getProcAddr.apply(toCString("array_operator_index_const")).asInstanceOf[GDExtensionInterfaceArrayOperatorIndexConst]
+      result.packed_float32_array_operator_index = CFuncPtr.fromPtr[GDExtensionInterfacePackedFloat32ArrayOperatorIndex](getProcAddr.apply(toCString("packed_float32_array_operator_index")))
+      result.packed_float32_array_operator_index_const = CFuncPtr.fromPtr[GDExtensionInterfacePackedFloat32ArrayOperatorIndexConst](getProcAddr.apply(toCString("packed_float32_array_operator_index_const")))
+      result.packed_float64_array_operator_index = CFuncPtr.fromPtr[GDExtensionInterfacePackedFloat64ArrayOperatorIndex](getProcAddr.apply(toCString("packed_float64_array_operator_index")))
+      result.packed_float64_array_operator_index_const = CFuncPtr.fromPtr[GDExtensionInterfacePackedFloat64ArrayOperatorIndexConst](getProcAddr.apply(toCString("packed_float64_array_operator_index_const")))
+      result.packed_int32_array_operator_index = CFuncPtr.fromPtr[GDExtensionInterfacePackedInt32ArrayOperatorIndex](getProcAddr.apply(toCString("packed_int32_array_operator_index")))
+      result.packed_int32_array_operator_index_const = CFuncPtr.fromPtr[GDExtensionInterfacePackedInt32ArrayOperatorIndexConst](getProcAddr.apply(toCString("packed_int32_array_operator_index_const")))
+      result.packed_int64_array_operator_index = CFuncPtr.fromPtr[GDExtensionInterfacePackedInt64ArrayOperatorIndex](getProcAddr.apply(toCString("packed_int64_array_operator_index")))
+      result.packed_int64_array_operator_index_const = CFuncPtr.fromPtr[GDExtensionInterfacePackedInt64ArrayOperatorIndexConst](getProcAddr.apply(toCString("packed_int64_array_operator_index_const")))
+      result.packed_string_array_operator_index = CFuncPtr.fromPtr[GDExtensionInterfacePackedStringArrayOperatorIndex](getProcAddr.apply(toCString("packed_string_array_operator_index")))
+      result.packed_string_array_operator_index_const = CFuncPtr.fromPtr[GDExtensionInterfacePackedStringArrayOperatorIndexConst](getProcAddr.apply(toCString("packed_string_array_operator_index_const")))
+      result.packed_vector2_array_operator_index = CFuncPtr.fromPtr[GDExtensionInterfacePackedVector2ArrayOperatorIndex](getProcAddr.apply(toCString("packed_vector2_array_operator_index")))
+      result.packed_vector2_array_operator_index_const = CFuncPtr.fromPtr[GDExtensionInterfacePackedVector2ArrayOperatorIndexConst](getProcAddr.apply(toCString("packed_vector2_array_operator_index_const")))
+      result.packed_vector3_array_operator_index = CFuncPtr.fromPtr[GDExtensionInterfacePackedVector3ArrayOperatorIndex](getProcAddr.apply(toCString("packed_vector3_array_operator_index")))
+      result.packed_vector3_array_operator_index_const = CFuncPtr.fromPtr[GDExtensionInterfacePackedVector3ArrayOperatorIndexConst](getProcAddr.apply(toCString("packed_vector3_array_operator_index_const")))
+      result.packed_vector4_array_operator_index = CFuncPtr.fromPtr[GDExtensionInterfacePackedVector4ArrayOperatorIndex](getProcAddr.apply(toCString("packed_vector4_array_operator_index")))
+      result.packed_vector4_array_operator_index_const = CFuncPtr.fromPtr[GDExtensionInterfacePackedVector4ArrayOperatorIndexConst](getProcAddr.apply(toCString("packed_vector4_array_operator_index_const")))
+      result.packed_color_array_operator_index = CFuncPtr.fromPtr[GDExtensionInterfacePackedColorArrayOperatorIndex](getProcAddr.apply(toCString("packed_color_array_operator_index")))
+      result.packed_color_array_operator_index_const = CFuncPtr.fromPtr[GDExtensionInterfacePackedColorArrayOperatorIndexConst](getProcAddr.apply(toCString("packed_color_array_operator_index_const")))
+      result.array_operator_index = CFuncPtr.fromPtr[GDExtensionInterfaceArrayOperatorIndex](getProcAddr.apply(toCString("array_operator_index")))
+      result.array_operator_index_const = CFuncPtr.fromPtr[GDExtensionInterfaceArrayOperatorIndexConst](getProcAddr.apply(toCString("array_operator_index_const")))
   }
 
 
@@ -2137,26 +2137,26 @@ object Interface {
     result: Interface,
     getProcAddr: GDExtensionInterfaceGetProcAddress
   )(implicit zone: Zone): Unit = {
-      result.array_ref = getProcAddr.apply(toCString("array_ref")).asInstanceOf[GDExtensionInterfaceArrayRef]
-      result.array_set_typed = getProcAddr.apply(toCString("array_set_typed")).asInstanceOf[GDExtensionInterfaceArraySetTyped]
-      result.dictionary_operator_index = getProcAddr.apply(toCString("dictionary_operator_index")).asInstanceOf[GDExtensionInterfaceDictionaryOperatorIndex]
-      result.dictionary_operator_index_const = getProcAddr.apply(toCString("dictionary_operator_index_const")).asInstanceOf[GDExtensionInterfaceDictionaryOperatorIndexConst]
-      result.dictionary_set_typed = getProcAddr.apply(toCString("dictionary_set_typed")).asInstanceOf[GDExtensionInterfaceDictionarySetTyped]
-      result.object_method_bind_call = getProcAddr.apply(toCString("object_method_bind_call")).asInstanceOf[GDExtensionInterfaceObjectMethodBindCall]
-      result.object_method_bind_ptrcall = getProcAddr.apply(toCString("object_method_bind_ptrcall")).asInstanceOf[GDExtensionInterfaceObjectMethodBindPtrcall]
-      result.object_destroy = getProcAddr.apply(toCString("object_destroy")).asInstanceOf[GDExtensionInterfaceObjectDestroy]
-      result.global_get_singleton = getProcAddr.apply(toCString("global_get_singleton")).asInstanceOf[GDExtensionInterfaceGlobalGetSingleton]
-      result.object_get_instance_binding = getProcAddr.apply(toCString("object_get_instance_binding")).asInstanceOf[GDExtensionInterfaceObjectGetInstanceBinding]
-      result.object_set_instance_binding = getProcAddr.apply(toCString("object_set_instance_binding")).asInstanceOf[GDExtensionInterfaceObjectSetInstanceBinding]
-      result.object_free_instance_binding = getProcAddr.apply(toCString("object_free_instance_binding")).asInstanceOf[GDExtensionInterfaceObjectFreeInstanceBinding]
-      result.object_set_instance = getProcAddr.apply(toCString("object_set_instance")).asInstanceOf[GDExtensionInterfaceObjectSetInstance]
-      result.object_get_class_name = getProcAddr.apply(toCString("object_get_class_name")).asInstanceOf[GDExtensionInterfaceObjectGetClassName]
-      result.object_cast_to = getProcAddr.apply(toCString("object_cast_to")).asInstanceOf[GDExtensionInterfaceObjectCastTo]
-      result.object_get_instance_from_id = getProcAddr.apply(toCString("object_get_instance_from_id")).asInstanceOf[GDExtensionInterfaceObjectGetInstanceFromId]
-      result.object_get_instance_id = getProcAddr.apply(toCString("object_get_instance_id")).asInstanceOf[GDExtensionInterfaceObjectGetInstanceId]
-      result.object_has_script_method = getProcAddr.apply(toCString("object_has_script_method")).asInstanceOf[GDExtensionInterfaceObjectHasScriptMethod]
-      result.object_call_script_method = getProcAddr.apply(toCString("object_call_script_method")).asInstanceOf[GDExtensionInterfaceObjectCallScriptMethod]
-      result.ref_get_object = getProcAddr.apply(toCString("ref_get_object")).asInstanceOf[GDExtensionInterfaceRefGetObject]
+      result.array_ref = CFuncPtr.fromPtr[GDExtensionInterfaceArrayRef](getProcAddr.apply(toCString("array_ref")))
+      result.array_set_typed = CFuncPtr.fromPtr[GDExtensionInterfaceArraySetTyped](getProcAddr.apply(toCString("array_set_typed")))
+      result.dictionary_operator_index = CFuncPtr.fromPtr[GDExtensionInterfaceDictionaryOperatorIndex](getProcAddr.apply(toCString("dictionary_operator_index")))
+      result.dictionary_operator_index_const = CFuncPtr.fromPtr[GDExtensionInterfaceDictionaryOperatorIndexConst](getProcAddr.apply(toCString("dictionary_operator_index_const")))
+      result.dictionary_set_typed = CFuncPtr.fromPtr[GDExtensionInterfaceDictionarySetTyped](getProcAddr.apply(toCString("dictionary_set_typed")))
+      result.object_method_bind_call = CFuncPtr.fromPtr[GDExtensionInterfaceObjectMethodBindCall](getProcAddr.apply(toCString("object_method_bind_call")))
+      result.object_method_bind_ptrcall = CFuncPtr.fromPtr[GDExtensionInterfaceObjectMethodBindPtrcall](getProcAddr.apply(toCString("object_method_bind_ptrcall")))
+      result.object_destroy = CFuncPtr.fromPtr[GDExtensionInterfaceObjectDestroy](getProcAddr.apply(toCString("object_destroy")))
+      result.global_get_singleton = CFuncPtr.fromPtr[GDExtensionInterfaceGlobalGetSingleton](getProcAddr.apply(toCString("global_get_singleton")))
+      result.object_get_instance_binding = CFuncPtr.fromPtr[GDExtensionInterfaceObjectGetInstanceBinding](getProcAddr.apply(toCString("object_get_instance_binding")))
+      result.object_set_instance_binding = CFuncPtr.fromPtr[GDExtensionInterfaceObjectSetInstanceBinding](getProcAddr.apply(toCString("object_set_instance_binding")))
+      result.object_free_instance_binding = CFuncPtr.fromPtr[GDExtensionInterfaceObjectFreeInstanceBinding](getProcAddr.apply(toCString("object_free_instance_binding")))
+      result.object_set_instance = CFuncPtr.fromPtr[GDExtensionInterfaceObjectSetInstance](getProcAddr.apply(toCString("object_set_instance")))
+      result.object_get_class_name = CFuncPtr.fromPtr[GDExtensionInterfaceObjectGetClassName](getProcAddr.apply(toCString("object_get_class_name")))
+      result.object_cast_to = CFuncPtr.fromPtr[GDExtensionInterfaceObjectCastTo](getProcAddr.apply(toCString("object_cast_to")))
+      result.object_get_instance_from_id = CFuncPtr.fromPtr[GDExtensionInterfaceObjectGetInstanceFromId](getProcAddr.apply(toCString("object_get_instance_from_id")))
+      result.object_get_instance_id = CFuncPtr.fromPtr[GDExtensionInterfaceObjectGetInstanceId](getProcAddr.apply(toCString("object_get_instance_id")))
+      result.object_has_script_method = CFuncPtr.fromPtr[GDExtensionInterfaceObjectHasScriptMethod](getProcAddr.apply(toCString("object_has_script_method")))
+      result.object_call_script_method = CFuncPtr.fromPtr[GDExtensionInterfaceObjectCallScriptMethod](getProcAddr.apply(toCString("object_call_script_method")))
+      result.ref_get_object = CFuncPtr.fromPtr[GDExtensionInterfaceRefGetObject](getProcAddr.apply(toCString("ref_get_object")))
   }
 
 
@@ -2164,26 +2164,26 @@ object Interface {
     result: Interface,
     getProcAddr: GDExtensionInterfaceGetProcAddress
   )(implicit zone: Zone): Unit = {
-      result.ref_set_object = getProcAddr.apply(toCString("ref_set_object")).asInstanceOf[GDExtensionInterfaceRefSetObject]
-      result.script_instance_create = getProcAddr.apply(toCString("script_instance_create")).asInstanceOf[GDExtensionInterfaceScriptInstanceCreate]
-      result.script_instance_create2 = getProcAddr.apply(toCString("script_instance_create2")).asInstanceOf[GDExtensionInterfaceScriptInstanceCreate2]
-      result.script_instance_create3 = getProcAddr.apply(toCString("script_instance_create3")).asInstanceOf[GDExtensionInterfaceScriptInstanceCreate3]
-      result.placeholder_script_instance_create = getProcAddr.apply(toCString("placeholder_script_instance_create")).asInstanceOf[GDExtensionInterfacePlaceholderScriptInstanceCreate]
-      result.placeholder_script_instance_update = getProcAddr.apply(toCString("placeholder_script_instance_update")).asInstanceOf[GDExtensionInterfacePlaceholderScriptInstanceUpdate]
-      result.object_get_script_instance = getProcAddr.apply(toCString("object_get_script_instance")).asInstanceOf[GDExtensionInterfaceObjectGetScriptInstance]
-      result.object_set_script_instance = getProcAddr.apply(toCString("object_set_script_instance")).asInstanceOf[GDExtensionInterfaceObjectSetScriptInstance]
-      result.callable_custom_create = getProcAddr.apply(toCString("callable_custom_create")).asInstanceOf[GDExtensionInterfaceCallableCustomCreate]
-      result.callable_custom_create2 = getProcAddr.apply(toCString("callable_custom_create2")).asInstanceOf[GDExtensionInterfaceCallableCustomCreate2]
-      result.callable_custom_get_userdata = getProcAddr.apply(toCString("callable_custom_get_userdata")).asInstanceOf[GDExtensionInterfaceCallableCustomGetUserdata]
-      result.classdb_construct_object = getProcAddr.apply(toCString("classdb_construct_object")).asInstanceOf[GDExtensionInterfaceClassdbConstructObject]
-      result.classdb_construct_object2 = getProcAddr.apply(toCString("classdb_construct_object2")).asInstanceOf[GDExtensionInterfaceClassdbConstructObject2]
-      result.classdb_get_method_bind = getProcAddr.apply(toCString("classdb_get_method_bind")).asInstanceOf[GDExtensionInterfaceClassdbGetMethodBind]
-      result.classdb_get_class_tag = getProcAddr.apply(toCString("classdb_get_class_tag")).asInstanceOf[GDExtensionInterfaceClassdbGetClassTag]
-      result.classdb_register_extension_class = getProcAddr.apply(toCString("classdb_register_extension_class")).asInstanceOf[GDExtensionInterfaceClassdbRegisterExtensionClass]
-      result.classdb_register_extension_class2 = getProcAddr.apply(toCString("classdb_register_extension_class2")).asInstanceOf[GDExtensionInterfaceClassdbRegisterExtensionClass2]
-      result.classdb_register_extension_class3 = getProcAddr.apply(toCString("classdb_register_extension_class3")).asInstanceOf[GDExtensionInterfaceClassdbRegisterExtensionClass3]
-      result.classdb_register_extension_class4 = getProcAddr.apply(toCString("classdb_register_extension_class4")).asInstanceOf[GDExtensionInterfaceClassdbRegisterExtensionClass4]
-      result.classdb_register_extension_class5 = getProcAddr.apply(toCString("classdb_register_extension_class5")).asInstanceOf[GDExtensionInterfaceClassdbRegisterExtensionClass5]
+      result.ref_set_object = CFuncPtr.fromPtr[GDExtensionInterfaceRefSetObject](getProcAddr.apply(toCString("ref_set_object")))
+      result.script_instance_create = CFuncPtr.fromPtr[GDExtensionInterfaceScriptInstanceCreate](getProcAddr.apply(toCString("script_instance_create")))
+      result.script_instance_create2 = CFuncPtr.fromPtr[GDExtensionInterfaceScriptInstanceCreate2](getProcAddr.apply(toCString("script_instance_create2")))
+      result.script_instance_create3 = CFuncPtr.fromPtr[GDExtensionInterfaceScriptInstanceCreate3](getProcAddr.apply(toCString("script_instance_create3")))
+      result.placeholder_script_instance_create = CFuncPtr.fromPtr[GDExtensionInterfacePlaceholderScriptInstanceCreate](getProcAddr.apply(toCString("placeholder_script_instance_create")))
+      result.placeholder_script_instance_update = CFuncPtr.fromPtr[GDExtensionInterfacePlaceholderScriptInstanceUpdate](getProcAddr.apply(toCString("placeholder_script_instance_update")))
+      result.object_get_script_instance = CFuncPtr.fromPtr[GDExtensionInterfaceObjectGetScriptInstance](getProcAddr.apply(toCString("object_get_script_instance")))
+      result.object_set_script_instance = CFuncPtr.fromPtr[GDExtensionInterfaceObjectSetScriptInstance](getProcAddr.apply(toCString("object_set_script_instance")))
+      result.callable_custom_create = CFuncPtr.fromPtr[GDExtensionInterfaceCallableCustomCreate](getProcAddr.apply(toCString("callable_custom_create")))
+      result.callable_custom_create2 = CFuncPtr.fromPtr[GDExtensionInterfaceCallableCustomCreate2](getProcAddr.apply(toCString("callable_custom_create2")))
+      result.callable_custom_get_userdata = CFuncPtr.fromPtr[GDExtensionInterfaceCallableCustomGetUserdata](getProcAddr.apply(toCString("callable_custom_get_userdata")))
+      result.classdb_construct_object = CFuncPtr.fromPtr[GDExtensionInterfaceClassdbConstructObject](getProcAddr.apply(toCString("classdb_construct_object")))
+      result.classdb_construct_object2 = CFuncPtr.fromPtr[GDExtensionInterfaceClassdbConstructObject2](getProcAddr.apply(toCString("classdb_construct_object2")))
+      result.classdb_get_method_bind = CFuncPtr.fromPtr[GDExtensionInterfaceClassdbGetMethodBind](getProcAddr.apply(toCString("classdb_get_method_bind")))
+      result.classdb_get_class_tag = CFuncPtr.fromPtr[GDExtensionInterfaceClassdbGetClassTag](getProcAddr.apply(toCString("classdb_get_class_tag")))
+      result.classdb_register_extension_class = CFuncPtr.fromPtr[GDExtensionInterfaceClassdbRegisterExtensionClass](getProcAddr.apply(toCString("classdb_register_extension_class")))
+      result.classdb_register_extension_class2 = CFuncPtr.fromPtr[GDExtensionInterfaceClassdbRegisterExtensionClass2](getProcAddr.apply(toCString("classdb_register_extension_class2")))
+      result.classdb_register_extension_class3 = CFuncPtr.fromPtr[GDExtensionInterfaceClassdbRegisterExtensionClass3](getProcAddr.apply(toCString("classdb_register_extension_class3")))
+      result.classdb_register_extension_class4 = CFuncPtr.fromPtr[GDExtensionInterfaceClassdbRegisterExtensionClass4](getProcAddr.apply(toCString("classdb_register_extension_class4")))
+      result.classdb_register_extension_class5 = CFuncPtr.fromPtr[GDExtensionInterfaceClassdbRegisterExtensionClass5](getProcAddr.apply(toCString("classdb_register_extension_class5")))
   }
 
 
@@ -2191,22 +2191,22 @@ object Interface {
     result: Interface,
     getProcAddr: GDExtensionInterfaceGetProcAddress
   )(implicit zone: Zone): Unit = {
-      result.classdb_register_extension_class_method = getProcAddr.apply(toCString("classdb_register_extension_class_method")).asInstanceOf[GDExtensionInterfaceClassdbRegisterExtensionClassMethod]
-      result.classdb_register_extension_class_virtual_method = getProcAddr.apply(toCString("classdb_register_extension_class_virtual_method")).asInstanceOf[GDExtensionInterfaceClassdbRegisterExtensionClassVirtualMethod]
-      result.classdb_register_extension_class_integer_constant = getProcAddr.apply(toCString("classdb_register_extension_class_integer_constant")).asInstanceOf[GDExtensionInterfaceClassdbRegisterExtensionClassIntegerConstant]
-      result.classdb_register_extension_class_property = getProcAddr.apply(toCString("classdb_register_extension_class_property")).asInstanceOf[GDExtensionInterfaceClassdbRegisterExtensionClassProperty]
-      result.classdb_register_extension_class_property_indexed = getProcAddr.apply(toCString("classdb_register_extension_class_property_indexed")).asInstanceOf[GDExtensionInterfaceClassdbRegisterExtensionClassPropertyIndexed]
-      result.classdb_register_extension_class_property_group = getProcAddr.apply(toCString("classdb_register_extension_class_property_group")).asInstanceOf[GDExtensionInterfaceClassdbRegisterExtensionClassPropertyGroup]
-      result.classdb_register_extension_class_property_subgroup = getProcAddr.apply(toCString("classdb_register_extension_class_property_subgroup")).asInstanceOf[GDExtensionInterfaceClassdbRegisterExtensionClassPropertySubgroup]
-      result.classdb_register_extension_class_signal = getProcAddr.apply(toCString("classdb_register_extension_class_signal")).asInstanceOf[GDExtensionInterfaceClassdbRegisterExtensionClassSignal]
-      result.classdb_unregister_extension_class = getProcAddr.apply(toCString("classdb_unregister_extension_class")).asInstanceOf[GDExtensionInterfaceClassdbUnregisterExtensionClass]
-      result.get_library_path = getProcAddr.apply(toCString("get_library_path")).asInstanceOf[GDExtensionInterfaceGetLibraryPath]
-      result.editor_add_plugin = getProcAddr.apply(toCString("editor_add_plugin")).asInstanceOf[GDExtensionInterfaceEditorAddPlugin]
-      result.editor_remove_plugin = getProcAddr.apply(toCString("editor_remove_plugin")).asInstanceOf[GDExtensionInterfaceEditorRemovePlugin]
-      result.editor_help_load_xml_from_utf8_chars = getProcAddr.apply(toCString("editor_help_load_xml_from_utf8_chars")).asInstanceOf[GDExtensionInterfaceEditorHelpLoadXmlFromUtf8Chars]
-      result.editor_help_load_xml_from_utf8_chars_and_len = getProcAddr.apply(toCString("editor_help_load_xml_from_utf8_chars_and_len")).asInstanceOf[GDExtensionInterfaceEditorHelpLoadXmlFromUtf8CharsAndLen]
-      result.editor_register_get_classes_used_callback = getProcAddr.apply(toCString("editor_register_get_classes_used_callback")).asInstanceOf[GDExtensionInterfaceEditorRegisterGetClassesUsedCallback]
-      result.register_main_loop_callbacks = getProcAddr.apply(toCString("register_main_loop_callbacks")).asInstanceOf[GDExtensionInterfaceRegisterMainLoopCallbacks]
+      result.classdb_register_extension_class_method = CFuncPtr.fromPtr[GDExtensionInterfaceClassdbRegisterExtensionClassMethod](getProcAddr.apply(toCString("classdb_register_extension_class_method")))
+      result.classdb_register_extension_class_virtual_method = CFuncPtr.fromPtr[GDExtensionInterfaceClassdbRegisterExtensionClassVirtualMethod](getProcAddr.apply(toCString("classdb_register_extension_class_virtual_method")))
+      result.classdb_register_extension_class_integer_constant = CFuncPtr.fromPtr[GDExtensionInterfaceClassdbRegisterExtensionClassIntegerConstant](getProcAddr.apply(toCString("classdb_register_extension_class_integer_constant")))
+      result.classdb_register_extension_class_property = CFuncPtr.fromPtr[GDExtensionInterfaceClassdbRegisterExtensionClassProperty](getProcAddr.apply(toCString("classdb_register_extension_class_property")))
+      result.classdb_register_extension_class_property_indexed = CFuncPtr.fromPtr[GDExtensionInterfaceClassdbRegisterExtensionClassPropertyIndexed](getProcAddr.apply(toCString("classdb_register_extension_class_property_indexed")))
+      result.classdb_register_extension_class_property_group = CFuncPtr.fromPtr[GDExtensionInterfaceClassdbRegisterExtensionClassPropertyGroup](getProcAddr.apply(toCString("classdb_register_extension_class_property_group")))
+      result.classdb_register_extension_class_property_subgroup = CFuncPtr.fromPtr[GDExtensionInterfaceClassdbRegisterExtensionClassPropertySubgroup](getProcAddr.apply(toCString("classdb_register_extension_class_property_subgroup")))
+      result.classdb_register_extension_class_signal = CFuncPtr.fromPtr[GDExtensionInterfaceClassdbRegisterExtensionClassSignal](getProcAddr.apply(toCString("classdb_register_extension_class_signal")))
+      result.classdb_unregister_extension_class = CFuncPtr.fromPtr[GDExtensionInterfaceClassdbUnregisterExtensionClass](getProcAddr.apply(toCString("classdb_unregister_extension_class")))
+      result.get_library_path = CFuncPtr.fromPtr[GDExtensionInterfaceGetLibraryPath](getProcAddr.apply(toCString("get_library_path")))
+      result.editor_add_plugin = CFuncPtr.fromPtr[GDExtensionInterfaceEditorAddPlugin](getProcAddr.apply(toCString("editor_add_plugin")))
+      result.editor_remove_plugin = CFuncPtr.fromPtr[GDExtensionInterfaceEditorRemovePlugin](getProcAddr.apply(toCString("editor_remove_plugin")))
+      result.editor_help_load_xml_from_utf8_chars = CFuncPtr.fromPtr[GDExtensionInterfaceEditorHelpLoadXmlFromUtf8Chars](getProcAddr.apply(toCString("editor_help_load_xml_from_utf8_chars")))
+      result.editor_help_load_xml_from_utf8_chars_and_len = CFuncPtr.fromPtr[GDExtensionInterfaceEditorHelpLoadXmlFromUtf8CharsAndLen](getProcAddr.apply(toCString("editor_help_load_xml_from_utf8_chars_and_len")))
+      result.editor_register_get_classes_used_callback = CFuncPtr.fromPtr[GDExtensionInterfaceEditorRegisterGetClassesUsedCallback](getProcAddr.apply(toCString("editor_register_get_classes_used_callback")))
+      result.register_main_loop_callbacks = CFuncPtr.fromPtr[GDExtensionInterfaceRegisterMainLoopCallbacks](getProcAddr.apply(toCString("register_main_loop_callbacks")))
   }
 
 

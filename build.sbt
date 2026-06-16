@@ -1,6 +1,8 @@
 lazy val scalaVersionStr = "3.8.1"
 lazy val build =
   taskKey[Unit]("Builds godot library and copies it to demo project")
+lazy val regenerate =
+  taskKey[Unit]("Regenerates the GDExtension bindings from the JSON API")
 
 Global / onLoad := {
   (Global / onLoad).value.andThen { state =>
@@ -16,7 +18,10 @@ lazy val igen = (project in file("modules/interface-generator"))
     libraryDependencies ++= Seq(
       "com.lihaoyi" %%% "upickle" % "4.4.2", // json
       "com.lihaoyi" %%% "pprint" % "0.9.6"
-    )
+    ),
+    // Runs the generator. Paths in Main.scala are relative to the repo root,
+    // which is sbt's working directory, so no extra configuration is needed.
+    regenerate := (Compile / run).toTask("").value
   )
 
 lazy val gdext =
