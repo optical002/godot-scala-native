@@ -16,12 +16,12 @@ import io.github.optical002.godot.codegen.gdextensioninterface.types.GDExtension
 final case class Color(r: Float, g: Float, b: Float, a: Float = 1.0f)
 
 object Color {
-  private[builtin] def writeType(c: Color, p: GDExtensionTypePtr): Unit = {
+  private[godot] def writeType(c: Color, p: GDExtensionTypePtr): Unit = {
     val f = p.asInstanceOf[Ptr[CFloat]]
     f(0) = c.r; f(1) = c.g; f(2) = c.b; f(3) = c.a
   }
 
-  private[builtin] def readType(p: GDExtensionTypePtr): Color = {
+  private[godot] def readType(p: GDExtensionTypePtr): Color = {
     val f = p.asInstanceOf[Ptr[CFloat]]
     Color(f(0), f(1), f(2), f(3))
   }

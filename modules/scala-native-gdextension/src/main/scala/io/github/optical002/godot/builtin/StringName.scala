@@ -31,6 +31,29 @@ object StringName {
   /** Wrap an existing engine StringName pointer without copying. */
   def fromPtr(p: GDExtensionStringNamePtr): StringName = p
 
+  /**
+   * Decode a StringName handle to a Scala `String` by constructing a Godot
+   * `String` from it (String constructor index 2 takes a StringName) and
+   * reading that out. Used to match incoming engine StringNames by text, since
+   * two StringName *handles* for the same text are not pointer-equal.
+   */
+  def toScala(sn: GDExtensionConstStringNamePtr): String = {
+    import scala.scalanative.unsafe.*
+    import scala.scalanative.unsigned.*
+    val strBuf = stackalloc[Byte](BuiltinSizes.String.toCSize)
+    val ctor = Godot.interface.variant_get_ptr_constructor(
+      GDEXTENSION_VARIANT_TYPE_STRING,
+      2
+    )
+    val args = stackalloc[GDExtensionConstTypePtr](1)
+    args(0) = sn
+    ctor(strBuf, args)
+    val gstr = GString.fromPtr(strBuf)
+    val out = gstr.toScala
+    gstr.destroy()
+    out
+  }
+
   /** Construct a StringName from a Scala `String` into caller storage. */
   def from(value: String, dest: GDExtensionStringNamePtr): StringName = {
     val bytes = value.getBytes(java.nio.charset.StandardCharsets.UTF_8)

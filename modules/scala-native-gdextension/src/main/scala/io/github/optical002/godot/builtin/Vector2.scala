@@ -23,14 +23,14 @@ final case class Vector2(x: Float, y: Float)
 
 object Vector2 {
   /** Write the raw 8-byte layout into a type buffer. */
-  private[builtin] def writeType(v: Vector2, p: GDExtensionTypePtr): Unit = {
+  private[godot] def writeType(v: Vector2, p: GDExtensionTypePtr): Unit = {
     val f = p.asInstanceOf[Ptr[CFloat]]
     f(0) = v.x
     f(1) = v.y
   }
 
   /** Read a Vector2 from a raw 8-byte type buffer. */
-  private[builtin] def readType(p: GDExtensionTypePtr): Vector2 = {
+  private[godot] def readType(p: GDExtensionTypePtr): Vector2 = {
     val f = p.asInstanceOf[Ptr[CFloat]]
     Vector2(f(0), f(1))
   }

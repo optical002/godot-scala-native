@@ -34,6 +34,9 @@ object Godot {
   /** The opaque class-library handle Godot passed to the entry point. */
   def library: GDExtensionClassLibraryPtr = _library
 
+  /** True once the interface table has been loaded and is safe to call. */
+  def isReady: Boolean = _interface != null
+
   private[godot] def initialize(
     interface: Interface,
     library: GDExtensionClassLibraryPtr
