@@ -1,0 +1,954 @@
+[
+  {
+    "name": "HarnessAcceptDialog",
+    "base": "AcceptDialog"
+  },
+  {
+    "name": "HarnessAimModifier3D",
+    "base": "AimModifier3D"
+  },
+  {
+    "name": "HarnessAnimatableBody2D",
+    "base": "AnimatableBody2D"
+  },
+  {
+    "name": "HarnessAnimatableBody3D",
+    "base": "AnimatableBody3D"
+  },
+  {
+    "name": "HarnessAnimatedSprite2D",
+    "base": "AnimatedSprite2D"
+  },
+  {
+    "name": "HarnessAnimatedSprite3D",
+    "base": "AnimatedSprite3D"
+  },
+  {
+    "name": "HarnessAnimationPlayer",
+    "base": "AnimationPlayer"
+  },
+  {
+    "name": "HarnessAnimationTree",
+    "base": "AnimationTree"
+  },
+  {
+    "name": "HarnessArea2D",
+    "base": "Area2D"
+  },
+  {
+    "name": "HarnessArea3D",
+    "base": "Area3D"
+  },
+  {
+    "name": "HarnessAspectRatioContainer",
+    "base": "AspectRatioContainer"
+  },
+  {
+    "name": "HarnessAudioListener2D",
+    "base": "AudioListener2D"
+  },
+  {
+    "name": "HarnessAudioListener3D",
+    "base": "AudioListener3D"
+  },
+  {
+    "name": "HarnessAudioStreamPlayer",
+    "base": "AudioStreamPlayer"
+  },
+  {
+    "name": "HarnessAudioStreamPlayer2D",
+    "base": "AudioStreamPlayer2D"
+  },
+  {
+    "name": "HarnessAudioStreamPlayer3D",
+    "base": "AudioStreamPlayer3D"
+  },
+  {
+    "name": "HarnessBackBufferCopy",
+    "base": "BackBufferCopy"
+  },
+  {
+    "name": "HarnessBaseButton",
+    "base": "BaseButton"
+  },
+  {
+    "name": "HarnessBone2D",
+    "base": "Bone2D"
+  },
+  {
+    "name": "HarnessBoneAttachment3D",
+    "base": "BoneAttachment3D"
+  },
+  {
+    "name": "HarnessBoneConstraint3D",
+    "base": "BoneConstraint3D"
+  },
+  {
+    "name": "HarnessBoneTwistDisperser3D",
+    "base": "BoneTwistDisperser3D"
+  },
+  {
+    "name": "HarnessBoxContainer",
+    "base": "BoxContainer"
+  },
+  {
+    "name": "HarnessButton",
+    "base": "Button"
+  },
+  {
+    "name": "HarnessCCDIK3D",
+    "base": "CCDIK3D"
+  },
+  {
+    "name": "HarnessCPUParticles2D",
+    "base": "CPUParticles2D"
+  },
+  {
+    "name": "HarnessCPUParticles3D",
+    "base": "CPUParticles3D"
+  },
+  {
+    "name": "HarnessCSGBox3D",
+    "base": "CSGBox3D"
+  },
+  {
+    "name": "HarnessCSGCombiner3D",
+    "base": "CSGCombiner3D"
+  },
+  {
+    "name": "HarnessCSGCylinder3D",
+    "base": "CSGCylinder3D"
+  },
+  {
+    "name": "HarnessCSGMesh3D",
+    "base": "CSGMesh3D"
+  },
+  {
+    "name": "HarnessCSGPolygon3D",
+    "base": "CSGPolygon3D"
+  },
+  {
+    "name": "HarnessCSGSphere3D",
+    "base": "CSGSphere3D"
+  },
+  {
+    "name": "HarnessCSGTorus3D",
+    "base": "CSGTorus3D"
+  },
+  {
+    "name": "HarnessCamera2D",
+    "base": "Camera2D"
+  },
+  {
+    "name": "HarnessCamera3D",
+    "base": "Camera3D"
+  },
+  {
+    "name": "HarnessCanvasGroup",
+    "base": "CanvasGroup"
+  },
+  {
+    "name": "HarnessCanvasLayer",
+    "base": "CanvasLayer"
+  },
+  {
+    "name": "HarnessCanvasModulate",
+    "base": "CanvasModulate"
+  },
+  {
+    "name": "HarnessCenterContainer",
+    "base": "CenterContainer"
+  },
+  {
+    "name": "HarnessCharacterBody2D",
+    "base": "CharacterBody2D"
+  },
+  {
+    "name": "HarnessCharacterBody3D",
+    "base": "CharacterBody3D"
+  },
+  {
+    "name": "HarnessCheckBox",
+    "base": "CheckBox"
+  },
+  {
+    "name": "HarnessCheckButton",
+    "base": "CheckButton"
+  },
+  {
+    "name": "HarnessCodeEdit",
+    "base": "CodeEdit"
+  },
+  {
+    "name": "HarnessCollisionPolygon2D",
+    "base": "CollisionPolygon2D"
+  },
+  {
+    "name": "HarnessCollisionPolygon3D",
+    "base": "CollisionPolygon3D"
+  },
+  {
+    "name": "HarnessCollisionShape2D",
+    "base": "CollisionShape2D"
+  },
+  {
+    "name": "HarnessCollisionShape3D",
+    "base": "CollisionShape3D"
+  },
+  {
+    "name": "HarnessColorPicker",
+    "base": "ColorPicker"
+  },
+  {
+    "name": "HarnessColorPickerButton",
+    "base": "ColorPickerButton"
+  },
+  {
+    "name": "HarnessColorRect",
+    "base": "ColorRect"
+  },
+  {
+    "name": "HarnessConeTwistJoint3D",
+    "base": "ConeTwistJoint3D"
+  },
+  {
+    "name": "HarnessConfirmationDialog",
+    "base": "ConfirmationDialog"
+  },
+  {
+    "name": "HarnessContainer",
+    "base": "Container"
+  },
+  {
+    "name": "HarnessControl",
+    "base": "Control"
+  },
+  {
+    "name": "HarnessConvertTransformModifier3D",
+    "base": "ConvertTransformModifier3D"
+  },
+  {
+    "name": "HarnessCopyTransformModifier3D",
+    "base": "CopyTransformModifier3D"
+  },
+  {
+    "name": "HarnessDampedSpringJoint2D",
+    "base": "DampedSpringJoint2D"
+  },
+  {
+    "name": "HarnessDecal",
+    "base": "Decal"
+  },
+  {
+    "name": "HarnessDirectionalLight2D",
+    "base": "DirectionalLight2D"
+  },
+  {
+    "name": "HarnessDirectionalLight3D",
+    "base": "DirectionalLight3D"
+  },
+  {
+    "name": "HarnessFABRIK3D",
+    "base": "FABRIK3D"
+  },
+  {
+    "name": "HarnessFileDialog",
+    "base": "FileDialog"
+  },
+  {
+    "name": "HarnessFlowContainer",
+    "base": "FlowContainer"
+  },
+  {
+    "name": "HarnessFogVolume",
+    "base": "FogVolume"
+  },
+  {
+    "name": "HarnessFoldableContainer",
+    "base": "FoldableContainer"
+  },
+  {
+    "name": "HarnessGPUParticles2D",
+    "base": "GPUParticles2D"
+  },
+  {
+    "name": "HarnessGPUParticles3D",
+    "base": "GPUParticles3D"
+  },
+  {
+    "name": "HarnessGPUParticlesAttractorBox3D",
+    "base": "GPUParticlesAttractorBox3D"
+  },
+  {
+    "name": "HarnessGPUParticlesAttractorSphere3D",
+    "base": "GPUParticlesAttractorSphere3D"
+  },
+  {
+    "name": "HarnessGPUParticlesAttractorVectorField3D",
+    "base": "GPUParticlesAttractorVectorField3D"
+  },
+  {
+    "name": "HarnessGPUParticlesCollisionBox3D",
+    "base": "GPUParticlesCollisionBox3D"
+  },
+  {
+    "name": "HarnessGPUParticlesCollisionHeightField3D",
+    "base": "GPUParticlesCollisionHeightField3D"
+  },
+  {
+    "name": "HarnessGPUParticlesCollisionSDF3D",
+    "base": "GPUParticlesCollisionSDF3D"
+  },
+  {
+    "name": "HarnessGPUParticlesCollisionSphere3D",
+    "base": "GPUParticlesCollisionSphere3D"
+  },
+  {
+    "name": "HarnessGeneric6DOFJoint3D",
+    "base": "Generic6DOFJoint3D"
+  },
+  {
+    "name": "HarnessGeometryInstance3D",
+    "base": "GeometryInstance3D"
+  },
+  {
+    "name": "HarnessGraphEdit",
+    "base": "GraphEdit"
+  },
+  {
+    "name": "HarnessGraphElement",
+    "base": "GraphElement"
+  },
+  {
+    "name": "HarnessGraphFrame",
+    "base": "GraphFrame"
+  },
+  {
+    "name": "HarnessGraphNode",
+    "base": "GraphNode"
+  },
+  {
+    "name": "HarnessGridContainer",
+    "base": "GridContainer"
+  },
+  {
+    "name": "HarnessGridMap",
+    "base": "GridMap"
+  },
+  {
+    "name": "HarnessGrooveJoint2D",
+    "base": "GrooveJoint2D"
+  },
+  {
+    "name": "HarnessHBoxContainer",
+    "base": "HBoxContainer"
+  },
+  {
+    "name": "HarnessHFlowContainer",
+    "base": "HFlowContainer"
+  },
+  {
+    "name": "HarnessHScrollBar",
+    "base": "HScrollBar"
+  },
+  {
+    "name": "HarnessHSeparator",
+    "base": "HSeparator"
+  },
+  {
+    "name": "HarnessHSlider",
+    "base": "HSlider"
+  },
+  {
+    "name": "HarnessHSplitContainer",
+    "base": "HSplitContainer"
+  },
+  {
+    "name": "HarnessHTTPRequest",
+    "base": "HTTPRequest"
+  },
+  {
+    "name": "HarnessHingeJoint3D",
+    "base": "HingeJoint3D"
+  },
+  {
+    "name": "HarnessImporterMeshInstance3D",
+    "base": "ImporterMeshInstance3D"
+  },
+  {
+    "name": "HarnessItemList",
+    "base": "ItemList"
+  },
+  {
+    "name": "HarnessJacobianIK3D",
+    "base": "JacobianIK3D"
+  },
+  {
+    "name": "HarnessLabel",
+    "base": "Label"
+  },
+  {
+    "name": "HarnessLabel3D",
+    "base": "Label3D"
+  },
+  {
+    "name": "HarnessLightOccluder2D",
+    "base": "LightOccluder2D"
+  },
+  {
+    "name": "HarnessLightmapGI",
+    "base": "LightmapGI"
+  },
+  {
+    "name": "HarnessLightmapProbe",
+    "base": "LightmapProbe"
+  },
+  {
+    "name": "HarnessLimitAngularVelocityModifier3D",
+    "base": "LimitAngularVelocityModifier3D"
+  },
+  {
+    "name": "HarnessLine2D",
+    "base": "Line2D"
+  },
+  {
+    "name": "HarnessLineEdit",
+    "base": "LineEdit"
+  },
+  {
+    "name": "HarnessLinkButton",
+    "base": "LinkButton"
+  },
+  {
+    "name": "HarnessLookAtModifier3D",
+    "base": "LookAtModifier3D"
+  },
+  {
+    "name": "HarnessMarginContainer",
+    "base": "MarginContainer"
+  },
+  {
+    "name": "HarnessMarker2D",
+    "base": "Marker2D"
+  },
+  {
+    "name": "HarnessMarker3D",
+    "base": "Marker3D"
+  },
+  {
+    "name": "HarnessMenuBar",
+    "base": "MenuBar"
+  },
+  {
+    "name": "HarnessMenuButton",
+    "base": "MenuButton"
+  },
+  {
+    "name": "HarnessMeshInstance2D",
+    "base": "MeshInstance2D"
+  },
+  {
+    "name": "HarnessMeshInstance3D",
+    "base": "MeshInstance3D"
+  },
+  {
+    "name": "HarnessMissingNode",
+    "base": "MissingNode"
+  },
+  {
+    "name": "HarnessModifierBoneTarget3D",
+    "base": "ModifierBoneTarget3D"
+  },
+  {
+    "name": "HarnessMultiMeshInstance2D",
+    "base": "MultiMeshInstance2D"
+  },
+  {
+    "name": "HarnessMultiMeshInstance3D",
+    "base": "MultiMeshInstance3D"
+  },
+  {
+    "name": "HarnessMultiplayerSpawner",
+    "base": "MultiplayerSpawner"
+  },
+  {
+    "name": "HarnessMultiplayerSynchronizer",
+    "base": "MultiplayerSynchronizer"
+  },
+  {
+    "name": "HarnessNavigationAgent2D",
+    "base": "NavigationAgent2D"
+  },
+  {
+    "name": "HarnessNavigationAgent3D",
+    "base": "NavigationAgent3D"
+  },
+  {
+    "name": "HarnessNavigationLink2D",
+    "base": "NavigationLink2D"
+  },
+  {
+    "name": "HarnessNavigationLink3D",
+    "base": "NavigationLink3D"
+  },
+  {
+    "name": "HarnessNavigationObstacle2D",
+    "base": "NavigationObstacle2D"
+  },
+  {
+    "name": "HarnessNavigationObstacle3D",
+    "base": "NavigationObstacle3D"
+  },
+  {
+    "name": "HarnessNavigationRegion2D",
+    "base": "NavigationRegion2D"
+  },
+  {
+    "name": "HarnessNavigationRegion3D",
+    "base": "NavigationRegion3D"
+  },
+  {
+    "name": "HarnessNinePatchRect",
+    "base": "NinePatchRect"
+  },
+  {
+    "name": "HarnessNode",
+    "base": "Node"
+  },
+  {
+    "name": "HarnessNode2D",
+    "base": "Node2D"
+  },
+  {
+    "name": "HarnessNode3D",
+    "base": "Node3D"
+  },
+  {
+    "name": "HarnessOccluderInstance3D",
+    "base": "OccluderInstance3D"
+  },
+  {
+    "name": "HarnessOmniLight3D",
+    "base": "OmniLight3D"
+  },
+  {
+    "name": "HarnessOpenXRCompositionLayerCylinder",
+    "base": "OpenXRCompositionLayerCylinder"
+  },
+  {
+    "name": "HarnessOpenXRCompositionLayerEquirect",
+    "base": "OpenXRCompositionLayerEquirect"
+  },
+  {
+    "name": "HarnessOpenXRCompositionLayerQuad",
+    "base": "OpenXRCompositionLayerQuad"
+  },
+  {
+    "name": "HarnessOpenXRHand",
+    "base": "OpenXRHand"
+  },
+  {
+    "name": "HarnessOpenXRRenderModel",
+    "base": "OpenXRRenderModel"
+  },
+  {
+    "name": "HarnessOpenXRRenderModelManager",
+    "base": "OpenXRRenderModelManager"
+  },
+  {
+    "name": "HarnessOpenXRVisibilityMask",
+    "base": "OpenXRVisibilityMask"
+  },
+  {
+    "name": "HarnessOptionButton",
+    "base": "OptionButton"
+  },
+  {
+    "name": "HarnessPanel",
+    "base": "Panel"
+  },
+  {
+    "name": "HarnessPanelContainer",
+    "base": "PanelContainer"
+  },
+  {
+    "name": "HarnessParallax2D",
+    "base": "Parallax2D"
+  },
+  {
+    "name": "HarnessParallaxBackground",
+    "base": "ParallaxBackground"
+  },
+  {
+    "name": "HarnessParallaxLayer",
+    "base": "ParallaxLayer"
+  },
+  {
+    "name": "HarnessPath2D",
+    "base": "Path2D"
+  },
+  {
+    "name": "HarnessPath3D",
+    "base": "Path3D"
+  },
+  {
+    "name": "HarnessPathFollow2D",
+    "base": "PathFollow2D"
+  },
+  {
+    "name": "HarnessPathFollow3D",
+    "base": "PathFollow3D"
+  },
+  {
+    "name": "HarnessPhysicalBone2D",
+    "base": "PhysicalBone2D"
+  },
+  {
+    "name": "HarnessPhysicalBone3D",
+    "base": "PhysicalBone3D"
+  },
+  {
+    "name": "HarnessPhysicalBoneSimulator3D",
+    "base": "PhysicalBoneSimulator3D"
+  },
+  {
+    "name": "HarnessPinJoint2D",
+    "base": "PinJoint2D"
+  },
+  {
+    "name": "HarnessPinJoint3D",
+    "base": "PinJoint3D"
+  },
+  {
+    "name": "HarnessPointLight2D",
+    "base": "PointLight2D"
+  },
+  {
+    "name": "HarnessPolygon2D",
+    "base": "Polygon2D"
+  },
+  {
+    "name": "HarnessPopup",
+    "base": "Popup"
+  },
+  {
+    "name": "HarnessPopupMenu",
+    "base": "PopupMenu"
+  },
+  {
+    "name": "HarnessPopupPanel",
+    "base": "PopupPanel"
+  },
+  {
+    "name": "HarnessProgressBar",
+    "base": "ProgressBar"
+  },
+  {
+    "name": "HarnessRange",
+    "base": "Range"
+  },
+  {
+    "name": "HarnessRayCast2D",
+    "base": "RayCast2D"
+  },
+  {
+    "name": "HarnessRayCast3D",
+    "base": "RayCast3D"
+  },
+  {
+    "name": "HarnessReferenceRect",
+    "base": "ReferenceRect"
+  },
+  {
+    "name": "HarnessReflectionProbe",
+    "base": "ReflectionProbe"
+  },
+  {
+    "name": "HarnessRemoteTransform2D",
+    "base": "RemoteTransform2D"
+  },
+  {
+    "name": "HarnessRemoteTransform3D",
+    "base": "RemoteTransform3D"
+  },
+  {
+    "name": "HarnessResourcePreloader",
+    "base": "ResourcePreloader"
+  },
+  {
+    "name": "HarnessRetargetModifier3D",
+    "base": "RetargetModifier3D"
+  },
+  {
+    "name": "HarnessRichTextLabel",
+    "base": "RichTextLabel"
+  },
+  {
+    "name": "HarnessRigidBody2D",
+    "base": "RigidBody2D"
+  },
+  {
+    "name": "HarnessRigidBody3D",
+    "base": "RigidBody3D"
+  },
+  {
+    "name": "HarnessRootMotionView",
+    "base": "RootMotionView"
+  },
+  {
+    "name": "HarnessScrollContainer",
+    "base": "ScrollContainer"
+  },
+  {
+    "name": "HarnessShaderGlobalsOverride",
+    "base": "ShaderGlobalsOverride"
+  },
+  {
+    "name": "HarnessShapeCast2D",
+    "base": "ShapeCast2D"
+  },
+  {
+    "name": "HarnessShapeCast3D",
+    "base": "ShapeCast3D"
+  },
+  {
+    "name": "HarnessSkeleton2D",
+    "base": "Skeleton2D"
+  },
+  {
+    "name": "HarnessSkeleton3D",
+    "base": "Skeleton3D"
+  },
+  {
+    "name": "HarnessSkeletonIK3D",
+    "base": "SkeletonIK3D"
+  },
+  {
+    "name": "HarnessSkeletonModifier3D",
+    "base": "SkeletonModifier3D"
+  },
+  {
+    "name": "HarnessSliderJoint3D",
+    "base": "SliderJoint3D"
+  },
+  {
+    "name": "HarnessSoftBody3D",
+    "base": "SoftBody3D"
+  },
+  {
+    "name": "HarnessSpinBox",
+    "base": "SpinBox"
+  },
+  {
+    "name": "HarnessSplineIK3D",
+    "base": "SplineIK3D"
+  },
+  {
+    "name": "HarnessSplitContainer",
+    "base": "SplitContainer"
+  },
+  {
+    "name": "HarnessSpotLight3D",
+    "base": "SpotLight3D"
+  },
+  {
+    "name": "HarnessSpringArm3D",
+    "base": "SpringArm3D"
+  },
+  {
+    "name": "HarnessSpringBoneCollision3D",
+    "base": "SpringBoneCollision3D"
+  },
+  {
+    "name": "HarnessSpringBoneCollisionCapsule3D",
+    "base": "SpringBoneCollisionCapsule3D"
+  },
+  {
+    "name": "HarnessSpringBoneCollisionPlane3D",
+    "base": "SpringBoneCollisionPlane3D"
+  },
+  {
+    "name": "HarnessSpringBoneCollisionSphere3D",
+    "base": "SpringBoneCollisionSphere3D"
+  },
+  {
+    "name": "HarnessSpringBoneSimulator3D",
+    "base": "SpringBoneSimulator3D"
+  },
+  {
+    "name": "HarnessSprite2D",
+    "base": "Sprite2D"
+  },
+  {
+    "name": "HarnessSprite3D",
+    "base": "Sprite3D"
+  },
+  {
+    "name": "HarnessStaticBody2D",
+    "base": "StaticBody2D"
+  },
+  {
+    "name": "HarnessStaticBody3D",
+    "base": "StaticBody3D"
+  },
+  {
+    "name": "HarnessStatusIndicator",
+    "base": "StatusIndicator"
+  },
+  {
+    "name": "HarnessSubViewport",
+    "base": "SubViewport"
+  },
+  {
+    "name": "HarnessSubViewportContainer",
+    "base": "SubViewportContainer"
+  },
+  {
+    "name": "HarnessTabBar",
+    "base": "TabBar"
+  },
+  {
+    "name": "HarnessTabContainer",
+    "base": "TabContainer"
+  },
+  {
+    "name": "HarnessTextEdit",
+    "base": "TextEdit"
+  },
+  {
+    "name": "HarnessTextureButton",
+    "base": "TextureButton"
+  },
+  {
+    "name": "HarnessTextureProgressBar",
+    "base": "TextureProgressBar"
+  },
+  {
+    "name": "HarnessTextureRect",
+    "base": "TextureRect"
+  },
+  {
+    "name": "HarnessTileMap",
+    "base": "TileMap"
+  },
+  {
+    "name": "HarnessTileMapLayer",
+    "base": "TileMapLayer"
+  },
+  {
+    "name": "HarnessTimer",
+    "base": "Timer"
+  },
+  {
+    "name": "HarnessTouchScreenButton",
+    "base": "TouchScreenButton"
+  },
+  {
+    "name": "HarnessTree",
+    "base": "Tree"
+  },
+  {
+    "name": "HarnessTwoBoneIK3D",
+    "base": "TwoBoneIK3D"
+  },
+  {
+    "name": "HarnessVBoxContainer",
+    "base": "VBoxContainer"
+  },
+  {
+    "name": "HarnessVFlowContainer",
+    "base": "VFlowContainer"
+  },
+  {
+    "name": "HarnessVScrollBar",
+    "base": "VScrollBar"
+  },
+  {
+    "name": "HarnessVSeparator",
+    "base": "VSeparator"
+  },
+  {
+    "name": "HarnessVSlider",
+    "base": "VSlider"
+  },
+  {
+    "name": "HarnessVSplitContainer",
+    "base": "VSplitContainer"
+  },
+  {
+    "name": "HarnessVehicleBody3D",
+    "base": "VehicleBody3D"
+  },
+  {
+    "name": "HarnessVehicleWheel3D",
+    "base": "VehicleWheel3D"
+  },
+  {
+    "name": "HarnessVideoStreamPlayer",
+    "base": "VideoStreamPlayer"
+  },
+  {
+    "name": "HarnessVisibleOnScreenEnabler2D",
+    "base": "VisibleOnScreenEnabler2D"
+  },
+  {
+    "name": "HarnessVisibleOnScreenEnabler3D",
+    "base": "VisibleOnScreenEnabler3D"
+  },
+  {
+    "name": "HarnessVisibleOnScreenNotifier2D",
+    "base": "VisibleOnScreenNotifier2D"
+  },
+  {
+    "name": "HarnessVisibleOnScreenNotifier3D",
+    "base": "VisibleOnScreenNotifier3D"
+  },
+  {
+    "name": "HarnessVisualInstance3D",
+    "base": "VisualInstance3D"
+  },
+  {
+    "name": "HarnessVoxelGI",
+    "base": "VoxelGI"
+  },
+  {
+    "name": "HarnessWindow",
+    "base": "Window"
+  },
+  {
+    "name": "HarnessWorldEnvironment",
+    "base": "WorldEnvironment"
+  },
+  {
+    "name": "HarnessXRAnchor3D",
+    "base": "XRAnchor3D"
+  },
+  {
+    "name": "HarnessXRBodyModifier3D",
+    "base": "XRBodyModifier3D"
+  },
+  {
+    "name": "HarnessXRCamera3D",
+    "base": "XRCamera3D"
+  },
+  {
+    "name": "HarnessXRController3D",
+    "base": "XRController3D"
+  },
+  {
+    "name": "HarnessXRFaceModifier3D",
+    "base": "XRFaceModifier3D"
+  },
+  {
+    "name": "HarnessXRHandModifier3D",
+    "base": "XRHandModifier3D"
+  },
+  {
+    "name": "HarnessXRNode3D",
+    "base": "XRNode3D"
+  },
+  {
+    "name": "HarnessXROrigin3D",
+    "base": "XROrigin3D"
+  }
+]

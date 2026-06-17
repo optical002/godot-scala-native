@@ -20,12 +20,20 @@ Two StringName *handles* for the same text are NOT pointer-equal. Compare by
 decoding (`StringName.toScala`), e.g. in `get_virtual` dispatch.
 
 ## Editor hot-reload
-- `.gdextension` has `reloadable = true`; `harness/build` atomically renames the
-  `.so` (no in-place overwrite — that freezes the editor).
+- `.gdextension` has `reloadable = true`; `harness-scala`'s `build` task
+  atomically renames the `.so` (no in-place overwrite — that freezes the editor).
 - `recreate_instance_func` rebinds instances on reload.
 - Registration must be reload-safe (probe + unregister stale before register);
   do NOT unregister on deinit (races the new image → "unregister unexisting").
 - `is_runtime=1` so virtuals don't run while editing.
+- **Reload detection + timing**: `ClassRegistration.register` finding a class
+  already in ClassDB (non-null tag) == hot-reload (a first load finds none);
+  exposed via `ClassRegistration.consumeReloadDetected()`. On reload,
+  `GodotEngine` `GodotPrint`s `[scala-native] hot-reload complete in N ms` to the
+  Output panel. The `N ms` is full swap→live latency: the `build` task stamps
+  `godot/reload.stamp` (epoch millis) after the atomic swap; the binding reads
+  (relative to Godot's CWD, like `godot-init`) and deletes it on reload. Headless
+  one-shot runs never trigger it.
 
 ## Logging (split)
 `Log` (gdext) has split channels. Binding internals → `Log.file` (file
@@ -33,5 +41,6 @@ decoding (`StringName.toScala`), e.g. in `get_virtual` dispatch.
 
 ## Codegen
 `codegen/` is generated — never hand-edit; change the generator in `igen` and
-`sbt igen/regenerate`. After moving the entry symbol, `sbt gdext/clean` (stale
-`.nir` causes "multiple definition of godot_scala_init").
+run `cd language-binding-scala && sbt igen/regenerate`. After moving the entry
+symbol, `cd harness-scala && sbt clean` (stale `.nir` causes "multiple definition
+of godot_scala_init").

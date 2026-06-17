@@ -17,13 +17,23 @@ The Variant marshalling seam everything above depends on.
 - `StringName.scala` — interned 8-byte handle + `StringNames.cached(name)` cache
   (used for ALL class/method/property/signal names). `StringName.toScala(sn)`
   decodes via String-from-StringName constructor.
-- `Vector2.scala`, `Color.scala` — math value types. **Components are 32-bit
-  float even in float_64** (Vector2 = 2×CFloat = 8 bytes). `writeType`/`readType`
-  are `private[godot]` (used by Ptrcall). Remaining math types are TODO codegen.
+- `Vector2.scala`, `Color.scala` — representative math value types.
+  **Components are 32-bit float even in float_64** (Vector2 = 2×CFloat = 8 bytes;
+  `*i` vectors are CInt). `writeType`/`readType` are `private[godot]` (used by
+  Ptrcall).
+- `MathBuiltins.scala` — the rest of the fixed-layout math family in one file:
+  Vector2i/3/3i/4/4i, Rect2/Rect2i, Quaternion, Plane, AABB, Basis,
+  Transform2D/3D, Projection. Same `writeType`/`readType` + `ToVariant`/
+  `FromVariant` pattern; sizes from `BuiltinSizes`. (Still hand-written, not yet
+  codegen.)
 - `GArray.scala`, `Dictionary.scala` — containers via builtin-method ptrcall.
   Method hashes hardcoded from API (e.g. Array.size=3173160232).
+- `Dict.scala` — typed `Dict[K,V]` over `Dictionary` (heap-owned backing handle);
+  `ToVariant`/`FromVariant[Dict[K,V]]` (DICTIONARY variant). Used by `@gdexport`.
 - `BuiltinMethods.scala` — caches builtin-method ptrcall pointers.
 
-## Gotcha
-No `ToVariant[String]` (String is a handle, not a primitive). Build a
-String-typed Variant via `VariantConstructors.fromType(STRING)(dest, gstr.ptr)`.
+## Variant marshalling notes
+- `ToVariant[String]`/`FromVariant[String]` now exist (build a STRING Variant from
+  a temp GString via `VariantConstructors.fromType(STRING)`; decode + destroy).
+- OBJECT-typed Variants (node/resource refs): `engine/ObjectVariant.scala`
+  read/write the object handle through the OBJECT type constructors.

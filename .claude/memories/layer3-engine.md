@@ -23,11 +23,26 @@ object Node2D { given GodotClass[Node2D] with { def className="Node2D"; def wrap
 ## Runtime (`engine/`)
 - `MethodBind.scala` — caches `classdb_get_method_bind(class,method,hash)`.
 - `Ptrcall.scala` — `PtrArg`/`PtrRet` typeclasses + fixed-arity dispatchers
-  (`callVoid0..2`, `call0..2`). **Dispatchers are NOT `inline`** (inlining caused
-  a dotty crash).
+  (`callVoid0..6`, `call0..6`). **Dispatchers are NOT `inline`** (inlining caused
+  a dotty crash). PtrArg/PtrRet givens cover: Long/Int/Bool/Double, String,
+  StringName (handle), and all fixed-layout math builtins.
 
-## Generator scope
-Curated `allowlist` (Object/Node/CanvasItem/Node2D/Sprite2D/Engine/RefCounted) +
-inheritance closure. Skips: vararg, static, virtual, >2 args, unmapped types,
-universal Any/AnyRef names (`getClass`/`toString`/… — emitting them crashes dotty).
-Lifting `allowlist` generates more.
+## Generator scope (now: ALL classes)
+Generates **every** class in `extension_api.json` (~1023 files) — full type
+universe so any object arg/return resolves, and every node/editor type is
+available to subclass. `toGenerate = byName.keySet` (allowlist removed).
+- Type map (`builtinScalar` + `isEnumLike`): primitives, String, StringName,
+  and the math builtins → Scala types; `enum::`/`bitfield::` → **`Long`**
+  (int64 on the ptrcall boundary); any generated class → object (passed as
+  `hostObject`, returned as raw `GodotObject`).
+- Method skipped if: vararg, static, virtual, no hash, **>6 args**, any
+  arg/return type unmappable, or a universal Any/AnyRef name
+  (`getClass`/`toString`/… — emitting crashes dotty).
+- Method names + arg names backticked via `sanitize` (full Scala keyword set;
+  Godot has args named `override`, etc.).
+- Singletons read from the JSON `singletons` array → `def singleton`.
+- Method emission is best-effort, not full GDScript parity: NodePath, typed
+  arrays, Variant, Callable/Signal/RID, packed arrays are still unmapped →
+  those methods are skipped. (Full GDScript API parity for a Harness subclass
+  is still achieved engine-side: it's registered with the real base, so ClassDB
+  exposes the base's whole method list.)

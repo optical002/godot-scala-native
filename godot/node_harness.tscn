@@ -1,0 +1,479 @@
+[gd_scene format=3]
+
+[node name="HarnessRoot" type="Node"]
+
+[node name="HarnessAcceptDialog" type="HarnessAcceptDialog" parent="."]
+
+[node name="HarnessAimModifier3D" type="HarnessAimModifier3D" parent="."]
+
+[node name="HarnessAnimatableBody2D" type="HarnessAnimatableBody2D" parent="."]
+
+[node name="HarnessAnimatableBody3D" type="HarnessAnimatableBody3D" parent="."]
+
+[node name="HarnessAnimatedSprite2D" type="HarnessAnimatedSprite2D" parent="."]
+
+[node name="HarnessAnimatedSprite3D" type="HarnessAnimatedSprite3D" parent="."]
+
+[node name="HarnessAnimationPlayer" type="HarnessAnimationPlayer" parent="."]
+
+[node name="HarnessAnimationTree" type="HarnessAnimationTree" parent="."]
+
+[node name="HarnessArea2D" type="HarnessArea2D" parent="."]
+
+[node name="HarnessArea3D" type="HarnessArea3D" parent="."]
+
+[node name="HarnessAspectRatioContainer" type="HarnessAspectRatioContainer" parent="."]
+
+[node name="HarnessAudioListener2D" type="HarnessAudioListener2D" parent="."]
+
+[node name="HarnessAudioListener3D" type="HarnessAudioListener3D" parent="."]
+
+[node name="HarnessAudioStreamPlayer" type="HarnessAudioStreamPlayer" parent="."]
+
+[node name="HarnessAudioStreamPlayer2D" type="HarnessAudioStreamPlayer2D" parent="."]
+
+[node name="HarnessAudioStreamPlayer3D" type="HarnessAudioStreamPlayer3D" parent="."]
+
+[node name="HarnessBackBufferCopy" type="HarnessBackBufferCopy" parent="."]
+
+[node name="HarnessBaseButton" type="HarnessBaseButton" parent="."]
+
+[node name="HarnessBone2D" type="HarnessBone2D" parent="."]
+
+[node name="HarnessBoneAttachment3D" type="HarnessBoneAttachment3D" parent="."]
+
+[node name="HarnessBoneConstraint3D" type="HarnessBoneConstraint3D" parent="."]
+
+[node name="HarnessBoneTwistDisperser3D" type="HarnessBoneTwistDisperser3D" parent="."]
+
+[node name="HarnessBoxContainer" type="HarnessBoxContainer" parent="."]
+
+[node name="HarnessButton" type="HarnessButton" parent="."]
+
+[node name="HarnessCCDIK3D" type="HarnessCCDIK3D" parent="."]
+
+[node name="HarnessCPUParticles2D" type="HarnessCPUParticles2D" parent="."]
+
+[node name="HarnessCPUParticles3D" type="HarnessCPUParticles3D" parent="."]
+
+[node name="HarnessCSGBox3D" type="HarnessCSGBox3D" parent="."]
+
+[node name="HarnessCSGCombiner3D" type="HarnessCSGCombiner3D" parent="."]
+
+[node name="HarnessCSGCylinder3D" type="HarnessCSGCylinder3D" parent="."]
+
+[node name="HarnessCSGMesh3D" type="HarnessCSGMesh3D" parent="."]
+
+[node name="HarnessCSGPolygon3D" type="HarnessCSGPolygon3D" parent="."]
+
+[node name="HarnessCSGSphere3D" type="HarnessCSGSphere3D" parent="."]
+
+[node name="HarnessCSGTorus3D" type="HarnessCSGTorus3D" parent="."]
+
+[node name="HarnessCamera2D" type="HarnessCamera2D" parent="."]
+
+[node name="HarnessCamera3D" type="HarnessCamera3D" parent="."]
+
+[node name="HarnessCanvasGroup" type="HarnessCanvasGroup" parent="."]
+
+[node name="HarnessCanvasLayer" type="HarnessCanvasLayer" parent="."]
+
+[node name="HarnessCanvasModulate" type="HarnessCanvasModulate" parent="."]
+
+[node name="HarnessCenterContainer" type="HarnessCenterContainer" parent="."]
+
+[node name="HarnessCharacterBody2D" type="HarnessCharacterBody2D" parent="."]
+
+[node name="HarnessCharacterBody3D" type="HarnessCharacterBody3D" parent="."]
+
+[node name="HarnessCheckBox" type="HarnessCheckBox" parent="."]
+
+[node name="HarnessCheckButton" type="HarnessCheckButton" parent="."]
+
+[node name="HarnessCodeEdit" type="HarnessCodeEdit" parent="."]
+
+[node name="HarnessCollisionPolygon2D" type="HarnessCollisionPolygon2D" parent="."]
+
+[node name="HarnessCollisionPolygon3D" type="HarnessCollisionPolygon3D" parent="."]
+
+[node name="HarnessCollisionShape2D" type="HarnessCollisionShape2D" parent="."]
+
+[node name="HarnessCollisionShape3D" type="HarnessCollisionShape3D" parent="."]
+
+[node name="HarnessColorPicker" type="HarnessColorPicker" parent="."]
+
+[node name="HarnessColorPickerButton" type="HarnessColorPickerButton" parent="."]
+
+[node name="HarnessColorRect" type="HarnessColorRect" parent="."]
+
+[node name="HarnessConeTwistJoint3D" type="HarnessConeTwistJoint3D" parent="."]
+
+[node name="HarnessConfirmationDialog" type="HarnessConfirmationDialog" parent="."]
+
+[node name="HarnessContainer" type="HarnessContainer" parent="."]
+
+[node name="HarnessControl" type="HarnessControl" parent="."]
+
+[node name="HarnessConvertTransformModifier3D" type="HarnessConvertTransformModifier3D" parent="."]
+
+[node name="HarnessCopyTransformModifier3D" type="HarnessCopyTransformModifier3D" parent="."]
+
+[node name="HarnessDampedSpringJoint2D" type="HarnessDampedSpringJoint2D" parent="."]
+
+[node name="HarnessDecal" type="HarnessDecal" parent="."]
+
+[node name="HarnessDirectionalLight2D" type="HarnessDirectionalLight2D" parent="."]
+
+[node name="HarnessDirectionalLight3D" type="HarnessDirectionalLight3D" parent="."]
+
+[node name="HarnessFABRIK3D" type="HarnessFABRIK3D" parent="."]
+
+[node name="HarnessFileDialog" type="HarnessFileDialog" parent="."]
+
+[node name="HarnessFlowContainer" type="HarnessFlowContainer" parent="."]
+
+[node name="HarnessFogVolume" type="HarnessFogVolume" parent="."]
+
+[node name="HarnessFoldableContainer" type="HarnessFoldableContainer" parent="."]
+
+[node name="HarnessGPUParticles2D" type="HarnessGPUParticles2D" parent="."]
+
+[node name="HarnessGPUParticles3D" type="HarnessGPUParticles3D" parent="."]
+
+[node name="HarnessGPUParticlesAttractorBox3D" type="HarnessGPUParticlesAttractorBox3D" parent="."]
+
+[node name="HarnessGPUParticlesAttractorSphere3D" type="HarnessGPUParticlesAttractorSphere3D" parent="."]
+
+[node name="HarnessGPUParticlesAttractorVectorField3D" type="HarnessGPUParticlesAttractorVectorField3D" parent="."]
+
+[node name="HarnessGPUParticlesCollisionBox3D" type="HarnessGPUParticlesCollisionBox3D" parent="."]
+
+[node name="HarnessGPUParticlesCollisionHeightField3D" type="HarnessGPUParticlesCollisionHeightField3D" parent="."]
+
+[node name="HarnessGPUParticlesCollisionSDF3D" type="HarnessGPUParticlesCollisionSDF3D" parent="."]
+
+[node name="HarnessGPUParticlesCollisionSphere3D" type="HarnessGPUParticlesCollisionSphere3D" parent="."]
+
+[node name="HarnessGeneric6DOFJoint3D" type="HarnessGeneric6DOFJoint3D" parent="."]
+
+[node name="HarnessGeometryInstance3D" type="HarnessGeometryInstance3D" parent="."]
+
+[node name="HarnessGraphEdit" type="HarnessGraphEdit" parent="."]
+
+[node name="HarnessGraphElement" type="HarnessGraphElement" parent="."]
+
+[node name="HarnessGraphFrame" type="HarnessGraphFrame" parent="."]
+
+[node name="HarnessGraphNode" type="HarnessGraphNode" parent="."]
+
+[node name="HarnessGridContainer" type="HarnessGridContainer" parent="."]
+
+[node name="HarnessGridMap" type="HarnessGridMap" parent="."]
+
+[node name="HarnessGrooveJoint2D" type="HarnessGrooveJoint2D" parent="."]
+
+[node name="HarnessHBoxContainer" type="HarnessHBoxContainer" parent="."]
+
+[node name="HarnessHFlowContainer" type="HarnessHFlowContainer" parent="."]
+
+[node name="HarnessHScrollBar" type="HarnessHScrollBar" parent="."]
+
+[node name="HarnessHSeparator" type="HarnessHSeparator" parent="."]
+
+[node name="HarnessHSlider" type="HarnessHSlider" parent="."]
+
+[node name="HarnessHSplitContainer" type="HarnessHSplitContainer" parent="."]
+
+[node name="HarnessHTTPRequest" type="HarnessHTTPRequest" parent="."]
+
+[node name="HarnessHingeJoint3D" type="HarnessHingeJoint3D" parent="."]
+
+[node name="HarnessImporterMeshInstance3D" type="HarnessImporterMeshInstance3D" parent="."]
+
+[node name="HarnessItemList" type="HarnessItemList" parent="."]
+
+[node name="HarnessJacobianIK3D" type="HarnessJacobianIK3D" parent="."]
+
+[node name="HarnessLabel" type="HarnessLabel" parent="."]
+
+[node name="HarnessLabel3D" type="HarnessLabel3D" parent="."]
+
+[node name="HarnessLightOccluder2D" type="HarnessLightOccluder2D" parent="."]
+
+[node name="HarnessLightmapGI" type="HarnessLightmapGI" parent="."]
+
+[node name="HarnessLightmapProbe" type="HarnessLightmapProbe" parent="."]
+
+[node name="HarnessLimitAngularVelocityModifier3D" type="HarnessLimitAngularVelocityModifier3D" parent="."]
+
+[node name="HarnessLine2D" type="HarnessLine2D" parent="."]
+
+[node name="HarnessLineEdit" type="HarnessLineEdit" parent="."]
+
+[node name="HarnessLinkButton" type="HarnessLinkButton" parent="."]
+
+[node name="HarnessLookAtModifier3D" type="HarnessLookAtModifier3D" parent="."]
+
+[node name="HarnessMarginContainer" type="HarnessMarginContainer" parent="."]
+
+[node name="HarnessMarker2D" type="HarnessMarker2D" parent="."]
+
+[node name="HarnessMarker3D" type="HarnessMarker3D" parent="."]
+
+[node name="HarnessMenuBar" type="HarnessMenuBar" parent="."]
+
+[node name="HarnessMenuButton" type="HarnessMenuButton" parent="."]
+
+[node name="HarnessMeshInstance2D" type="HarnessMeshInstance2D" parent="."]
+
+[node name="HarnessMeshInstance3D" type="HarnessMeshInstance3D" parent="."]
+
+[node name="HarnessMissingNode" type="HarnessMissingNode" parent="."]
+
+[node name="HarnessModifierBoneTarget3D" type="HarnessModifierBoneTarget3D" parent="."]
+
+[node name="HarnessMultiMeshInstance2D" type="HarnessMultiMeshInstance2D" parent="."]
+
+[node name="HarnessMultiMeshInstance3D" type="HarnessMultiMeshInstance3D" parent="."]
+
+[node name="HarnessMultiplayerSpawner" type="HarnessMultiplayerSpawner" parent="."]
+
+[node name="HarnessMultiplayerSynchronizer" type="HarnessMultiplayerSynchronizer" parent="."]
+
+[node name="HarnessNavigationAgent2D" type="HarnessNavigationAgent2D" parent="."]
+
+[node name="HarnessNavigationAgent3D" type="HarnessNavigationAgent3D" parent="."]
+
+[node name="HarnessNavigationLink2D" type="HarnessNavigationLink2D" parent="."]
+
+[node name="HarnessNavigationLink3D" type="HarnessNavigationLink3D" parent="."]
+
+[node name="HarnessNavigationObstacle2D" type="HarnessNavigationObstacle2D" parent="."]
+
+[node name="HarnessNavigationObstacle3D" type="HarnessNavigationObstacle3D" parent="."]
+
+[node name="HarnessNavigationRegion2D" type="HarnessNavigationRegion2D" parent="."]
+
+[node name="HarnessNavigationRegion3D" type="HarnessNavigationRegion3D" parent="."]
+
+[node name="HarnessNinePatchRect" type="HarnessNinePatchRect" parent="."]
+
+[node name="HarnessNode" type="HarnessNode" parent="."]
+
+[node name="HarnessNode2D" type="HarnessNode2D" parent="."]
+
+[node name="HarnessNode3D" type="HarnessNode3D" parent="."]
+
+[node name="HarnessOccluderInstance3D" type="HarnessOccluderInstance3D" parent="."]
+
+[node name="HarnessOmniLight3D" type="HarnessOmniLight3D" parent="."]
+
+[node name="HarnessOpenXRCompositionLayerCylinder" type="HarnessOpenXRCompositionLayerCylinder" parent="."]
+
+[node name="HarnessOpenXRCompositionLayerEquirect" type="HarnessOpenXRCompositionLayerEquirect" parent="."]
+
+[node name="HarnessOpenXRCompositionLayerQuad" type="HarnessOpenXRCompositionLayerQuad" parent="."]
+
+[node name="HarnessOpenXRHand" type="HarnessOpenXRHand" parent="."]
+
+[node name="HarnessOpenXRRenderModel" type="HarnessOpenXRRenderModel" parent="."]
+
+[node name="HarnessOpenXRRenderModelManager" type="HarnessOpenXRRenderModelManager" parent="."]
+
+[node name="HarnessOpenXRVisibilityMask" type="HarnessOpenXRVisibilityMask" parent="."]
+
+[node name="HarnessOptionButton" type="HarnessOptionButton" parent="."]
+
+[node name="HarnessPanel" type="HarnessPanel" parent="."]
+
+[node name="HarnessPanelContainer" type="HarnessPanelContainer" parent="."]
+
+[node name="HarnessParallax2D" type="HarnessParallax2D" parent="."]
+
+[node name="HarnessParallaxBackground" type="HarnessParallaxBackground" parent="."]
+
+[node name="HarnessParallaxLayer" type="HarnessParallaxLayer" parent="."]
+
+[node name="HarnessPath2D" type="HarnessPath2D" parent="."]
+
+[node name="HarnessPath3D" type="HarnessPath3D" parent="."]
+
+[node name="HarnessPathFollow2D" type="HarnessPathFollow2D" parent="."]
+
+[node name="HarnessPathFollow3D" type="HarnessPathFollow3D" parent="."]
+
+[node name="HarnessPhysicalBone2D" type="HarnessPhysicalBone2D" parent="."]
+
+[node name="HarnessPhysicalBone3D" type="HarnessPhysicalBone3D" parent="."]
+
+[node name="HarnessPhysicalBoneSimulator3D" type="HarnessPhysicalBoneSimulator3D" parent="."]
+
+[node name="HarnessPinJoint2D" type="HarnessPinJoint2D" parent="."]
+
+[node name="HarnessPinJoint3D" type="HarnessPinJoint3D" parent="."]
+
+[node name="HarnessPointLight2D" type="HarnessPointLight2D" parent="."]
+
+[node name="HarnessPolygon2D" type="HarnessPolygon2D" parent="."]
+
+[node name="HarnessPopup" type="HarnessPopup" parent="."]
+
+[node name="HarnessPopupMenu" type="HarnessPopupMenu" parent="."]
+
+[node name="HarnessPopupPanel" type="HarnessPopupPanel" parent="."]
+
+[node name="HarnessProgressBar" type="HarnessProgressBar" parent="."]
+
+[node name="HarnessRange" type="HarnessRange" parent="."]
+
+[node name="HarnessRayCast2D" type="HarnessRayCast2D" parent="."]
+
+[node name="HarnessRayCast3D" type="HarnessRayCast3D" parent="."]
+
+[node name="HarnessReferenceRect" type="HarnessReferenceRect" parent="."]
+
+[node name="HarnessReflectionProbe" type="HarnessReflectionProbe" parent="."]
+
+[node name="HarnessRemoteTransform2D" type="HarnessRemoteTransform2D" parent="."]
+
+[node name="HarnessRemoteTransform3D" type="HarnessRemoteTransform3D" parent="."]
+
+[node name="HarnessResourcePreloader" type="HarnessResourcePreloader" parent="."]
+
+[node name="HarnessRetargetModifier3D" type="HarnessRetargetModifier3D" parent="."]
+
+[node name="HarnessRichTextLabel" type="HarnessRichTextLabel" parent="."]
+
+[node name="HarnessRigidBody2D" type="HarnessRigidBody2D" parent="."]
+
+[node name="HarnessRigidBody3D" type="HarnessRigidBody3D" parent="."]
+
+[node name="HarnessRootMotionView" type="HarnessRootMotionView" parent="."]
+
+[node name="HarnessScrollContainer" type="HarnessScrollContainer" parent="."]
+
+[node name="HarnessShaderGlobalsOverride" type="HarnessShaderGlobalsOverride" parent="."]
+
+[node name="HarnessShapeCast2D" type="HarnessShapeCast2D" parent="."]
+
+[node name="HarnessShapeCast3D" type="HarnessShapeCast3D" parent="."]
+
+[node name="HarnessSkeleton2D" type="HarnessSkeleton2D" parent="."]
+
+[node name="HarnessSkeleton3D" type="HarnessSkeleton3D" parent="."]
+
+[node name="HarnessSkeletonIK3D" type="HarnessSkeletonIK3D" parent="."]
+
+[node name="HarnessSkeletonModifier3D" type="HarnessSkeletonModifier3D" parent="."]
+
+[node name="HarnessSliderJoint3D" type="HarnessSliderJoint3D" parent="."]
+
+[node name="HarnessSoftBody3D" type="HarnessSoftBody3D" parent="."]
+
+[node name="HarnessSpinBox" type="HarnessSpinBox" parent="."]
+
+[node name="HarnessSplineIK3D" type="HarnessSplineIK3D" parent="."]
+
+[node name="HarnessSplitContainer" type="HarnessSplitContainer" parent="."]
+
+[node name="HarnessSpotLight3D" type="HarnessSpotLight3D" parent="."]
+
+[node name="HarnessSpringArm3D" type="HarnessSpringArm3D" parent="."]
+
+[node name="HarnessSpringBoneCollision3D" type="HarnessSpringBoneCollision3D" parent="."]
+
+[node name="HarnessSpringBoneCollisionCapsule3D" type="HarnessSpringBoneCollisionCapsule3D" parent="."]
+
+[node name="HarnessSpringBoneCollisionPlane3D" type="HarnessSpringBoneCollisionPlane3D" parent="."]
+
+[node name="HarnessSpringBoneCollisionSphere3D" type="HarnessSpringBoneCollisionSphere3D" parent="."]
+
+[node name="HarnessSpringBoneSimulator3D" type="HarnessSpringBoneSimulator3D" parent="."]
+
+[node name="HarnessSprite2D" type="HarnessSprite2D" parent="."]
+
+[node name="HarnessSprite3D" type="HarnessSprite3D" parent="."]
+
+[node name="HarnessStaticBody2D" type="HarnessStaticBody2D" parent="."]
+
+[node name="HarnessStaticBody3D" type="HarnessStaticBody3D" parent="."]
+
+[node name="HarnessStatusIndicator" type="HarnessStatusIndicator" parent="."]
+
+[node name="HarnessSubViewport" type="HarnessSubViewport" parent="."]
+
+[node name="HarnessSubViewportContainer" type="HarnessSubViewportContainer" parent="."]
+
+[node name="HarnessTabBar" type="HarnessTabBar" parent="."]
+
+[node name="HarnessTabContainer" type="HarnessTabContainer" parent="."]
+
+[node name="HarnessTextEdit" type="HarnessTextEdit" parent="."]
+
+[node name="HarnessTextureButton" type="HarnessTextureButton" parent="."]
+
+[node name="HarnessTextureProgressBar" type="HarnessTextureProgressBar" parent="."]
+
+[node name="HarnessTextureRect" type="HarnessTextureRect" parent="."]
+
+[node name="HarnessTileMap" type="HarnessTileMap" parent="."]
+
+[node name="HarnessTileMapLayer" type="HarnessTileMapLayer" parent="."]
+
+[node name="HarnessTimer" type="HarnessTimer" parent="."]
+
+[node name="HarnessTouchScreenButton" type="HarnessTouchScreenButton" parent="."]
+
+[node name="HarnessTree" type="HarnessTree" parent="."]
+
+[node name="HarnessTwoBoneIK3D" type="HarnessTwoBoneIK3D" parent="."]
+
+[node name="HarnessVBoxContainer" type="HarnessVBoxContainer" parent="."]
+
+[node name="HarnessVFlowContainer" type="HarnessVFlowContainer" parent="."]
+
+[node name="HarnessVScrollBar" type="HarnessVScrollBar" parent="."]
+
+[node name="HarnessVSeparator" type="HarnessVSeparator" parent="."]
+
+[node name="HarnessVSlider" type="HarnessVSlider" parent="."]
+
+[node name="HarnessVSplitContainer" type="HarnessVSplitContainer" parent="."]
+
+[node name="HarnessVehicleBody3D" type="HarnessVehicleBody3D" parent="."]
+
+[node name="HarnessVehicleWheel3D" type="HarnessVehicleWheel3D" parent="."]
+
+[node name="HarnessVideoStreamPlayer" type="HarnessVideoStreamPlayer" parent="."]
+
+[node name="HarnessVisibleOnScreenEnabler2D" type="HarnessVisibleOnScreenEnabler2D" parent="."]
+
+[node name="HarnessVisibleOnScreenEnabler3D" type="HarnessVisibleOnScreenEnabler3D" parent="."]
+
+[node name="HarnessVisibleOnScreenNotifier2D" type="HarnessVisibleOnScreenNotifier2D" parent="."]
+
+[node name="HarnessVisibleOnScreenNotifier3D" type="HarnessVisibleOnScreenNotifier3D" parent="."]
+
+[node name="HarnessVisualInstance3D" type="HarnessVisualInstance3D" parent="."]
+
+[node name="HarnessVoxelGI" type="HarnessVoxelGI" parent="."]
+
+[node name="HarnessWindow" type="HarnessWindow" parent="."]
+
+[node name="HarnessWorldEnvironment" type="HarnessWorldEnvironment" parent="."]
+
+[node name="HarnessXRAnchor3D" type="HarnessXRAnchor3D" parent="."]
+
+[node name="HarnessXRBodyModifier3D" type="HarnessXRBodyModifier3D" parent="."]
+
+[node name="HarnessXRCamera3D" type="HarnessXRCamera3D" parent="."]
+
+[node name="HarnessXRController3D" type="HarnessXRController3D" parent="."]
+
+[node name="HarnessXRFaceModifier3D" type="HarnessXRFaceModifier3D" parent="."]
+
+[node name="HarnessXRHandModifier3D" type="HarnessXRHandModifier3D" parent="."]
+
+[node name="HarnessXRNode3D" type="HarnessXRNode3D" parent="."]
+
+[node name="HarnessXROrigin3D" type="HarnessXROrigin3D" parent="."]

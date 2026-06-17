@@ -1,0 +1,89 @@
+package io.github.optical002.godot.codegen.engine
+
+import io.github.optical002.godot.Godot
+import io.github.optical002.godot.builtin.*
+import io.github.optical002.godot.engine.*
+import io.github.optical002.godot.engine.GodotObject.*
+
+/** Generated wrapper for Godot's `GLTFPhysicsBody`, extends `Resource`. */
+abstract class GLTFPhysicsBody extends Resource {
+
+  /** GLTFPhysicsBody.to_node */
+  final def toNode(): GodotObject =
+    Ptrcall.call0[GodotObject](MethodBind.get("GLTFPhysicsBody", "to_node", 3224013656L), hostObject.objectPtr)
+
+  /** GLTFPhysicsBody.get_body_type */
+  final def getBodyType(): String =
+    Ptrcall.call0[String](MethodBind.get("GLTFPhysicsBody", "get_body_type", 201670096L), hostObject.objectPtr)
+
+  /** GLTFPhysicsBody.set_body_type */
+  final def setBodyType(body_type: String): Unit =
+    Ptrcall.callVoid1(MethodBind.get("GLTFPhysicsBody", "set_body_type", 83702148L), hostObject.objectPtr, body_type)
+
+  /** GLTFPhysicsBody.get_mass */
+  final def getMass(): Double =
+    Ptrcall.call0[Double](MethodBind.get("GLTFPhysicsBody", "get_mass", 1740695150L), hostObject.objectPtr)
+
+  /** GLTFPhysicsBody.set_mass */
+  final def setMass(mass: Double): Unit =
+    Ptrcall.callVoid1(MethodBind.get("GLTFPhysicsBody", "set_mass", 373806689L), hostObject.objectPtr, mass)
+
+  /** GLTFPhysicsBody.get_linear_velocity */
+  final def getLinearVelocity(): io.github.optical002.godot.builtin.Vector3 =
+    Ptrcall.call0[io.github.optical002.godot.builtin.Vector3](MethodBind.get("GLTFPhysicsBody", "get_linear_velocity", 3360562783L), hostObject.objectPtr)
+
+  /** GLTFPhysicsBody.set_linear_velocity */
+  final def setLinearVelocity(linear_velocity: io.github.optical002.godot.builtin.Vector3): Unit =
+    Ptrcall.callVoid1(MethodBind.get("GLTFPhysicsBody", "set_linear_velocity", 3460891852L), hostObject.objectPtr, linear_velocity)
+
+  /** GLTFPhysicsBody.get_angular_velocity */
+  final def getAngularVelocity(): io.github.optical002.godot.builtin.Vector3 =
+    Ptrcall.call0[io.github.optical002.godot.builtin.Vector3](MethodBind.get("GLTFPhysicsBody", "get_angular_velocity", 3360562783L), hostObject.objectPtr)
+
+  /** GLTFPhysicsBody.set_angular_velocity */
+  final def setAngularVelocity(angular_velocity: io.github.optical002.godot.builtin.Vector3): Unit =
+    Ptrcall.callVoid1(MethodBind.get("GLTFPhysicsBody", "set_angular_velocity", 3460891852L), hostObject.objectPtr, angular_velocity)
+
+  /** GLTFPhysicsBody.get_center_of_mass */
+  final def getCenterOfMass(): io.github.optical002.godot.builtin.Vector3 =
+    Ptrcall.call0[io.github.optical002.godot.builtin.Vector3](MethodBind.get("GLTFPhysicsBody", "get_center_of_mass", 3360562783L), hostObject.objectPtr)
+
+  /** GLTFPhysicsBody.set_center_of_mass */
+  final def setCenterOfMass(center_of_mass: io.github.optical002.godot.builtin.Vector3): Unit =
+    Ptrcall.callVoid1(MethodBind.get("GLTFPhysicsBody", "set_center_of_mass", 3460891852L), hostObject.objectPtr, center_of_mass)
+
+  /** GLTFPhysicsBody.get_inertia_diagonal */
+  final def getInertiaDiagonal(): io.github.optical002.godot.builtin.Vector3 =
+    Ptrcall.call0[io.github.optical002.godot.builtin.Vector3](MethodBind.get("GLTFPhysicsBody", "get_inertia_diagonal", 3360562783L), hostObject.objectPtr)
+
+  /** GLTFPhysicsBody.set_inertia_diagonal */
+  final def setInertiaDiagonal(inertia_diagonal: io.github.optical002.godot.builtin.Vector3): Unit =
+    Ptrcall.callVoid1(MethodBind.get("GLTFPhysicsBody", "set_inertia_diagonal", 3460891852L), hostObject.objectPtr, inertia_diagonal)
+
+  /** GLTFPhysicsBody.get_inertia_orientation */
+  final def getInertiaOrientation(): io.github.optical002.godot.builtin.Quaternion =
+    Ptrcall.call0[io.github.optical002.godot.builtin.Quaternion](MethodBind.get("GLTFPhysicsBody", "get_inertia_orientation", 1222331677L), hostObject.objectPtr)
+
+  /** GLTFPhysicsBody.set_inertia_orientation */
+  final def setInertiaOrientation(inertia_orientation: io.github.optical002.godot.builtin.Quaternion): Unit =
+    Ptrcall.callVoid1(MethodBind.get("GLTFPhysicsBody", "set_inertia_orientation", 1727505552L), hostObject.objectPtr, inertia_orientation)
+
+  /** GLTFPhysicsBody.get_inertia_tensor */
+  final def getInertiaTensor(): io.github.optical002.godot.builtin.Basis =
+    Ptrcall.call0[io.github.optical002.godot.builtin.Basis](MethodBind.get("GLTFPhysicsBody", "get_inertia_tensor", 2716978435L), hostObject.objectPtr)
+
+  /** GLTFPhysicsBody.set_inertia_tensor */
+  final def setInertiaTensor(inertia_tensor: io.github.optical002.godot.builtin.Basis): Unit =
+    Ptrcall.callVoid1(MethodBind.get("GLTFPhysicsBody", "set_inertia_tensor", 1055510324L), hostObject.objectPtr, inertia_tensor)
+
+}
+
+object GLTFPhysicsBody {
+  /** Class metadata for Gd[GLTFPhysicsBody] lifetime management and casting. */
+  given GodotClass[GLTFPhysicsBody] with {
+    def className = "GLTFPhysicsBody"
+    def isRefCounted = true
+    def wrap(o: GodotObject): GLTFPhysicsBody = new GLTFPhysicsBody {}.withHost(o.objectPtr)
+    def unwrap(t: GLTFPhysicsBody): GodotObject = t.hostObject
+  }
+}

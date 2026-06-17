@@ -45,5 +45,6 @@ out/
 .godot/
 *.import
 
-demo/godot-init
-demo/godot-init-prev
+godot/godot-init
+godot/godot-init-prev
+godot/reload.stamp

@@ -1,0 +1,45 @@
+package io.github.optical002.godot.codegen.engine
+
+import io.github.optical002.godot.Godot
+import io.github.optical002.godot.builtin.*
+import io.github.optical002.godot.engine.*
+import io.github.optical002.godot.engine.GodotObject.*
+
+/** Generated wrapper for Godot's `XRTracker`, extends `RefCounted`. */
+abstract class XRTracker extends RefCounted {
+
+  /** XRTracker.get_tracker_type */
+  final def getTrackerType(): Long =
+    Ptrcall.call0[Long](MethodBind.get("XRTracker", "get_tracker_type", 2784508102L), hostObject.objectPtr)
+
+  /** XRTracker.set_tracker_type */
+  final def setTrackerType(`type`: Long): Unit =
+    Ptrcall.callVoid1(MethodBind.get("XRTracker", "set_tracker_type", 3055763575L), hostObject.objectPtr, `type`)
+
+  /** XRTracker.get_tracker_name */
+  final def getTrackerName(): io.github.optical002.godot.builtin.StringName =
+    Ptrcall.call0[io.github.optical002.godot.builtin.StringName](MethodBind.get("XRTracker", "get_tracker_name", 2002593661L), hostObject.objectPtr)
+
+  /** XRTracker.set_tracker_name */
+  final def setTrackerName(name: io.github.optical002.godot.builtin.StringName): Unit =
+    Ptrcall.callVoid1(MethodBind.get("XRTracker", "set_tracker_name", 3304788590L), hostObject.objectPtr, name)
+
+  /** XRTracker.get_tracker_desc */
+  final def getTrackerDesc(): String =
+    Ptrcall.call0[String](MethodBind.get("XRTracker", "get_tracker_desc", 201670096L), hostObject.objectPtr)
+
+  /** XRTracker.set_tracker_desc */
+  final def setTrackerDesc(description: String): Unit =
+    Ptrcall.callVoid1(MethodBind.get("XRTracker", "set_tracker_desc", 83702148L), hostObject.objectPtr, description)
+
+}
+
+object XRTracker {
+  /** Class metadata for Gd[XRTracker] lifetime management and casting. */
+  given GodotClass[XRTracker] with {
+    def className = "XRTracker"
+    def isRefCounted = true
+    def wrap(o: GodotObject): XRTracker = new XRTracker {}.withHost(o.objectPtr)
+    def unwrap(t: XRTracker): GodotObject = t.hostObject
+  }
+}

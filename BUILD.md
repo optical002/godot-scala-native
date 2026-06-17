@@ -24,19 +24,20 @@ for the canonical per-OS instructions.
 # Regenerate the Layer-1 FFI bindings from gdextension/gdextension_interface.json.
 # Run this after editing the JSON or the InterfaceGenerator. Output lands under
 # .../godot/codegen/gdextensioninterface/ and is a build artifact (never hand-edit).
-sbt igen/regenerate
+cd language-binding-scala && sbt igen/regenerate
 
-# Compile, native-link, and copy the produced dynamic library into demo/lib/.
-sbt gdext/build
+# Compile, native-link, and copy the produced dynamic library into godot/lib/.
+cd harness-scala && sbt build
 ```
 
-`gdext/build` copies whatever Scala Native produced for the current OS
-(`.so` / `.dylib` / `.dll`) into `demo/lib/`. Build on each target OS and
-collect the three libraries into `demo/lib/` to ship a cross-platform extension;
-the matching row in `demo/godot_scala.gdextension` selects the right one at load
-time.
+`harness-scala`'s `build` task copies whatever Scala Native produced for the
+current OS (`.so` / `.dylib` / `.dll`) into `godot/lib/`. It pulls in the binding
+library from `../language-binding-scala` via a source `ProjectRef`, so no
+separate publish step is needed. Build on each target OS and collect the three
+libraries into `godot/lib/` to ship a cross-platform extension; the matching row
+in `godot/godot_scala.gdextension` selects the right one at load time.
 
-## Running the demo
+## Running the godot project
 
-Open `demo/` in Godot 4.5. On load, the extension writes an initialization line
+Open `godot/` in Godot 4.5. On load, the extension writes an initialization line
 to a `godot-init` log file in Godot's working directory (see `FileLogger`).

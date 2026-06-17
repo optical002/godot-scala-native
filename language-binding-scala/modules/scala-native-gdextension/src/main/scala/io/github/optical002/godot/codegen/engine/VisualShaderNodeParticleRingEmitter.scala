@@ -1,0 +1,21 @@
+package io.github.optical002.godot.codegen.engine
+
+import io.github.optical002.godot.Godot
+import io.github.optical002.godot.builtin.*
+import io.github.optical002.godot.engine.*
+import io.github.optical002.godot.engine.GodotObject.*
+
+/** Generated wrapper for Godot's `VisualShaderNodeParticleRingEmitter`, extends `VisualShaderNodeParticleEmitter`. */
+abstract class VisualShaderNodeParticleRingEmitter extends VisualShaderNodeParticleEmitter {
+
+}
+
+object VisualShaderNodeParticleRingEmitter {
+  /** Class metadata for Gd[VisualShaderNodeParticleRingEmitter] lifetime management and casting. */
+  given GodotClass[VisualShaderNodeParticleRingEmitter] with {
+    def className = "VisualShaderNodeParticleRingEmitter"
+    def isRefCounted = true
+    def wrap(o: GodotObject): VisualShaderNodeParticleRingEmitter = new VisualShaderNodeParticleRingEmitter {}.withHost(o.objectPtr)
+    def unwrap(t: VisualShaderNodeParticleRingEmitter): GodotObject = t.hostObject
+  }
+}
