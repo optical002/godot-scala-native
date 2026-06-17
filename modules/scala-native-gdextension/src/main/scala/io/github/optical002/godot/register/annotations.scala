@@ -3,20 +3,14 @@ package io.github.optical002.godot.register
 import scala.annotation.StaticAnnotation
 
 /**
- * Annotations that drive automatic class registration. A game class extends
- * [[GodotScriptClass]] and marks its members with these; the macro then scans
- * the class at compile time and emits all the registration calls, so game code
- * never touches the registration APIs directly.
+ * Annotations that drive automatic class registration. A game class extends an
+ * engine class directly (`class Player extends Node2D`) and marks its members
+ * with these; `Register.auto[T]` scans the class at compile time, derives the
+ * Godot base from the superclass, and emits all the registration calls — so
+ * game code never touches the registration APIs directly.
  *
  * The supported set mirrors gdext's `#[func]` / `#[export]` / `#[signal]`.
  */
-
-/**
- * The engine base class this Scala class extends (e.g. `Node2D`). Required:
- * it cannot be inferred from `extends GodotScriptClass`, so it is declared here,
- * matching gdext's `#[class(base = Node2D)]`. Read by `Register.auto[T]`.
- */
-final class godotClass(val base: String) extends StaticAnnotation
 
 /** Marks a method as callable from Godot/GDScript (gdext `#[func]`). */
 final class func extends StaticAnnotation

@@ -5,360 +5,313 @@ import io.github.optical002.godot.builtin.*
 import io.github.optical002.godot.engine.*
 import io.github.optical002.godot.engine.GodotObject.*
 
-/** Generated wrapper for Godot's `Node`, inherits `Object`. */
-opaque type Node = GodotObject
+/** Generated wrapper for Godot's `Node`, extends `Object`. */
+abstract class Node extends Object {
+
+  /** Node.add_sibling */
+  final def addSibling(sibling: Node, force_readable_name: Boolean): Unit =
+    Ptrcall.callVoid2(MethodBind.get("Node", "add_sibling", 2570952461L), hostObject.objectPtr, sibling.hostObject, force_readable_name)
+
+  /** Node.remove_child */
+  final def removeChild(node: Node): Unit =
+    Ptrcall.callVoid1(MethodBind.get("Node", "remove_child", 1078189570L), hostObject.objectPtr, node.hostObject)
+
+  /** Node.reparent */
+  final def reparent(new_parent: Node, keep_global_transform: Boolean): Unit =
+    Ptrcall.callVoid2(MethodBind.get("Node", "reparent", 3685795103L), hostObject.objectPtr, new_parent.hostObject, keep_global_transform)
+
+  /** Node.get_child_count */
+  final def getChildCount(include_internal: Boolean): Long =
+    Ptrcall.call1[Boolean, Long](MethodBind.get("Node", "get_child_count", 894402480L), hostObject.objectPtr, include_internal)
+
+  /** Node.get_child */
+  final def getChild(idx: Long, include_internal: Boolean): GodotObject =
+    Ptrcall.call2[Long, Boolean, GodotObject](MethodBind.get("Node", "get_child", 541253412L), hostObject.objectPtr, idx, include_internal)
+
+  /** Node.get_parent */
+  final def getParent(): GodotObject =
+    Ptrcall.call0[GodotObject](MethodBind.get("Node", "get_parent", 3160264692L), hostObject.objectPtr)
+
+  /** Node.find_parent */
+  final def findParent(pattern: String): GodotObject =
+    Ptrcall.call1[String, GodotObject](MethodBind.get("Node", "find_parent", 1140089439L), hostObject.objectPtr, pattern)
+
+  /** Node.is_inside_tree */
+  final def isInsideTree(): Boolean =
+    Ptrcall.call0[Boolean](MethodBind.get("Node", "is_inside_tree", 36873697L), hostObject.objectPtr)
+
+  /** Node.is_part_of_edited_scene */
+  final def isPartOfEditedScene(): Boolean =
+    Ptrcall.call0[Boolean](MethodBind.get("Node", "is_part_of_edited_scene", 36873697L), hostObject.objectPtr)
+
+  /** Node.is_ancestor_of */
+  final def isAncestorOf(node: Node): Boolean =
+    Ptrcall.call1[GodotObject, Boolean](MethodBind.get("Node", "is_ancestor_of", 3093956946L), hostObject.objectPtr, node.hostObject)
+
+  /** Node.is_greater_than */
+  final def isGreaterThan(node: Node): Boolean =
+    Ptrcall.call1[GodotObject, Boolean](MethodBind.get("Node", "is_greater_than", 3093956946L), hostObject.objectPtr, node.hostObject)
+
+  /** Node.move_child */
+  final def moveChild(child_node: Node, to_index: Long): Unit =
+    Ptrcall.callVoid2(MethodBind.get("Node", "move_child", 3315886247L), hostObject.objectPtr, child_node.hostObject, to_index)
+
+  /** Node.set_owner */
+  final def setOwner(owner: Node): Unit =
+    Ptrcall.callVoid1(MethodBind.get("Node", "set_owner", 1078189570L), hostObject.objectPtr, owner.hostObject)
+
+  /** Node.get_owner */
+  final def getOwner(): GodotObject =
+    Ptrcall.call0[GodotObject](MethodBind.get("Node", "get_owner", 3160264692L), hostObject.objectPtr)
+
+  /** Node.get_index */
+  final def getIndex(include_internal: Boolean): Long =
+    Ptrcall.call1[Boolean, Long](MethodBind.get("Node", "get_index", 894402480L), hostObject.objectPtr, include_internal)
+
+  /** Node.print_tree */
+  final def printTree(): Unit =
+    Ptrcall.callVoid0(MethodBind.get("Node", "print_tree", 3218959716L), hostObject.objectPtr)
+
+  /** Node.print_tree_pretty */
+  final def printTreePretty(): Unit =
+    Ptrcall.callVoid0(MethodBind.get("Node", "print_tree_pretty", 3218959716L), hostObject.objectPtr)
+
+  /** Node.get_tree_string */
+  final def getTreeString(): String =
+    Ptrcall.call0[String](MethodBind.get("Node", "get_tree_string", 2841200299L), hostObject.objectPtr)
+
+  /** Node.get_tree_string_pretty */
+  final def getTreeStringPretty(): String =
+    Ptrcall.call0[String](MethodBind.get("Node", "get_tree_string_pretty", 2841200299L), hostObject.objectPtr)
+
+  /** Node.set_scene_file_path */
+  final def setSceneFilePath(scene_file_path: String): Unit =
+    Ptrcall.callVoid1(MethodBind.get("Node", "set_scene_file_path", 83702148L), hostObject.objectPtr, scene_file_path)
+
+  /** Node.get_scene_file_path */
+  final def getSceneFilePath(): String =
+    Ptrcall.call0[String](MethodBind.get("Node", "get_scene_file_path", 201670096L), hostObject.objectPtr)
+
+  /** Node.propagate_notification */
+  final def propagateNotification(what: Long): Unit =
+    Ptrcall.callVoid1(MethodBind.get("Node", "propagate_notification", 1286410249L), hostObject.objectPtr, what)
+
+  /** Node.set_physics_process */
+  final def setPhysicsProcess(enable: Boolean): Unit =
+    Ptrcall.callVoid1(MethodBind.get("Node", "set_physics_process", 2586408642L), hostObject.objectPtr, enable)
+
+  /** Node.get_physics_process_delta_time */
+  final def getPhysicsProcessDeltaTime(): Double =
+    Ptrcall.call0[Double](MethodBind.get("Node", "get_physics_process_delta_time", 1740695150L), hostObject.objectPtr)
+
+  /** Node.is_physics_processing */
+  final def isPhysicsProcessing(): Boolean =
+    Ptrcall.call0[Boolean](MethodBind.get("Node", "is_physics_processing", 36873697L), hostObject.objectPtr)
+
+  /** Node.get_process_delta_time */
+  final def getProcessDeltaTime(): Double =
+    Ptrcall.call0[Double](MethodBind.get("Node", "get_process_delta_time", 1740695150L), hostObject.objectPtr)
+
+  /** Node.set_process */
+  final def setProcess(enable: Boolean): Unit =
+    Ptrcall.callVoid1(MethodBind.get("Node", "set_process", 2586408642L), hostObject.objectPtr, enable)
+
+  /** Node.set_process_priority */
+  final def setProcessPriority(priority: Long): Unit =
+    Ptrcall.callVoid1(MethodBind.get("Node", "set_process_priority", 1286410249L), hostObject.objectPtr, priority)
+
+  /** Node.get_process_priority */
+  final def getProcessPriority(): Long =
+    Ptrcall.call0[Long](MethodBind.get("Node", "get_process_priority", 3905245786L), hostObject.objectPtr)
+
+  /** Node.set_physics_process_priority */
+  final def setPhysicsProcessPriority(priority: Long): Unit =
+    Ptrcall.callVoid1(MethodBind.get("Node", "set_physics_process_priority", 1286410249L), hostObject.objectPtr, priority)
+
+  /** Node.get_physics_process_priority */
+  final def getPhysicsProcessPriority(): Long =
+    Ptrcall.call0[Long](MethodBind.get("Node", "get_physics_process_priority", 3905245786L), hostObject.objectPtr)
+
+  /** Node.is_processing */
+  final def isProcessing(): Boolean =
+    Ptrcall.call0[Boolean](MethodBind.get("Node", "is_processing", 36873697L), hostObject.objectPtr)
+
+  /** Node.set_process_input */
+  final def setProcessInput(enable: Boolean): Unit =
+    Ptrcall.callVoid1(MethodBind.get("Node", "set_process_input", 2586408642L), hostObject.objectPtr, enable)
+
+  /** Node.is_processing_input */
+  final def isProcessingInput(): Boolean =
+    Ptrcall.call0[Boolean](MethodBind.get("Node", "is_processing_input", 36873697L), hostObject.objectPtr)
+
+  /** Node.set_process_shortcut_input */
+  final def setProcessShortcutInput(enable: Boolean): Unit =
+    Ptrcall.callVoid1(MethodBind.get("Node", "set_process_shortcut_input", 2586408642L), hostObject.objectPtr, enable)
+
+  /** Node.is_processing_shortcut_input */
+  final def isProcessingShortcutInput(): Boolean =
+    Ptrcall.call0[Boolean](MethodBind.get("Node", "is_processing_shortcut_input", 36873697L), hostObject.objectPtr)
+
+  /** Node.set_process_unhandled_input */
+  final def setProcessUnhandledInput(enable: Boolean): Unit =
+    Ptrcall.callVoid1(MethodBind.get("Node", "set_process_unhandled_input", 2586408642L), hostObject.objectPtr, enable)
+
+  /** Node.is_processing_unhandled_input */
+  final def isProcessingUnhandledInput(): Boolean =
+    Ptrcall.call0[Boolean](MethodBind.get("Node", "is_processing_unhandled_input", 36873697L), hostObject.objectPtr)
+
+  /** Node.set_process_unhandled_key_input */
+  final def setProcessUnhandledKeyInput(enable: Boolean): Unit =
+    Ptrcall.callVoid1(MethodBind.get("Node", "set_process_unhandled_key_input", 2586408642L), hostObject.objectPtr, enable)
+
+  /** Node.is_processing_unhandled_key_input */
+  final def isProcessingUnhandledKeyInput(): Boolean =
+    Ptrcall.call0[Boolean](MethodBind.get("Node", "is_processing_unhandled_key_input", 36873697L), hostObject.objectPtr)
+
+  /** Node.can_process */
+  final def canProcess(): Boolean =
+    Ptrcall.call0[Boolean](MethodBind.get("Node", "can_process", 36873697L), hostObject.objectPtr)
+
+  /** Node.set_process_thread_group_order */
+  final def setProcessThreadGroupOrder(order: Long): Unit =
+    Ptrcall.callVoid1(MethodBind.get("Node", "set_process_thread_group_order", 1286410249L), hostObject.objectPtr, order)
+
+  /** Node.get_process_thread_group_order */
+  final def getProcessThreadGroupOrder(): Long =
+    Ptrcall.call0[Long](MethodBind.get("Node", "get_process_thread_group_order", 3905245786L), hostObject.objectPtr)
+
+  /** Node.queue_accessibility_update */
+  final def queueAccessibilityUpdate(): Unit =
+    Ptrcall.callVoid0(MethodBind.get("Node", "queue_accessibility_update", 3218959716L), hostObject.objectPtr)
+
+  /** Node.set_display_folded */
+  final def setDisplayFolded(fold: Boolean): Unit =
+    Ptrcall.callVoid1(MethodBind.get("Node", "set_display_folded", 2586408642L), hostObject.objectPtr, fold)
+
+  /** Node.is_displayed_folded */
+  final def isDisplayedFolded(): Boolean =
+    Ptrcall.call0[Boolean](MethodBind.get("Node", "is_displayed_folded", 36873697L), hostObject.objectPtr)
+
+  /** Node.set_process_internal */
+  final def setProcessInternal(enable: Boolean): Unit =
+    Ptrcall.callVoid1(MethodBind.get("Node", "set_process_internal", 2586408642L), hostObject.objectPtr, enable)
+
+  /** Node.is_processing_internal */
+  final def isProcessingInternal(): Boolean =
+    Ptrcall.call0[Boolean](MethodBind.get("Node", "is_processing_internal", 36873697L), hostObject.objectPtr)
+
+  /** Node.set_physics_process_internal */
+  final def setPhysicsProcessInternal(enable: Boolean): Unit =
+    Ptrcall.callVoid1(MethodBind.get("Node", "set_physics_process_internal", 2586408642L), hostObject.objectPtr, enable)
+
+  /** Node.is_physics_processing_internal */
+  final def isPhysicsProcessingInternal(): Boolean =
+    Ptrcall.call0[Boolean](MethodBind.get("Node", "is_physics_processing_internal", 36873697L), hostObject.objectPtr)
+
+  /** Node.is_physics_interpolated */
+  final def isPhysicsInterpolated(): Boolean =
+    Ptrcall.call0[Boolean](MethodBind.get("Node", "is_physics_interpolated", 36873697L), hostObject.objectPtr)
+
+  /** Node.is_physics_interpolated_and_enabled */
+  final def isPhysicsInterpolatedAndEnabled(): Boolean =
+    Ptrcall.call0[Boolean](MethodBind.get("Node", "is_physics_interpolated_and_enabled", 36873697L), hostObject.objectPtr)
+
+  /** Node.reset_physics_interpolation */
+  final def resetPhysicsInterpolation(): Unit =
+    Ptrcall.callVoid0(MethodBind.get("Node", "reset_physics_interpolation", 3218959716L), hostObject.objectPtr)
+
+  /** Node.can_auto_translate */
+  final def canAutoTranslate(): Boolean =
+    Ptrcall.call0[Boolean](MethodBind.get("Node", "can_auto_translate", 36873697L), hostObject.objectPtr)
+
+  /** Node.set_translation_domain_inherited */
+  final def setTranslationDomainInherited(): Unit =
+    Ptrcall.callVoid0(MethodBind.get("Node", "set_translation_domain_inherited", 3218959716L), hostObject.objectPtr)
+
+  /** Node.duplicate */
+  final def duplicate(flags: Long): GodotObject =
+    Ptrcall.call1[Long, GodotObject](MethodBind.get("Node", "duplicate", 3511555459L), hostObject.objectPtr, flags)
+
+  /** Node.replace_by */
+  final def replaceBy(node: Node, keep_groups: Boolean): Unit =
+    Ptrcall.callVoid2(MethodBind.get("Node", "replace_by", 2570952461L), hostObject.objectPtr, node.hostObject, keep_groups)
+
+  /** Node.set_scene_instance_load_placeholder */
+  final def setSceneInstanceLoadPlaceholder(load_placeholder: Boolean): Unit =
+    Ptrcall.callVoid1(MethodBind.get("Node", "set_scene_instance_load_placeholder", 2586408642L), hostObject.objectPtr, load_placeholder)
+
+  /** Node.get_scene_instance_load_placeholder */
+  final def getSceneInstanceLoadPlaceholder(): Boolean =
+    Ptrcall.call0[Boolean](MethodBind.get("Node", "get_scene_instance_load_placeholder", 36873697L), hostObject.objectPtr)
+
+  /** Node.set_editable_instance */
+  final def setEditableInstance(node: Node, is_editable: Boolean): Unit =
+    Ptrcall.callVoid2(MethodBind.get("Node", "set_editable_instance", 2731852923L), hostObject.objectPtr, node.hostObject, is_editable)
+
+  /** Node.is_editable_instance */
+  final def isEditableInstance(node: Node): Boolean =
+    Ptrcall.call1[GodotObject, Boolean](MethodBind.get("Node", "is_editable_instance", 3093956946L), hostObject.objectPtr, node.hostObject)
+
+  /** Node.queue_free */
+  final def queueFree(): Unit =
+    Ptrcall.callVoid0(MethodBind.get("Node", "queue_free", 3218959716L), hostObject.objectPtr)
+
+  /** Node.request_ready */
+  final def requestReady(): Unit =
+    Ptrcall.callVoid0(MethodBind.get("Node", "request_ready", 3218959716L), hostObject.objectPtr)
+
+  /** Node.is_node_ready */
+  final def isNodeReady(): Boolean =
+    Ptrcall.call0[Boolean](MethodBind.get("Node", "is_node_ready", 36873697L), hostObject.objectPtr)
+
+  /** Node.set_multiplayer_authority */
+  final def setMultiplayerAuthority(id: Long, recursive: Boolean): Unit =
+    Ptrcall.callVoid2(MethodBind.get("Node", "set_multiplayer_authority", 972357352L), hostObject.objectPtr, id, recursive)
+
+  /** Node.get_multiplayer_authority */
+  final def getMultiplayerAuthority(): Long =
+    Ptrcall.call0[Long](MethodBind.get("Node", "get_multiplayer_authority", 3905245786L), hostObject.objectPtr)
+
+  /** Node.is_multiplayer_authority */
+  final def isMultiplayerAuthority(): Boolean =
+    Ptrcall.call0[Boolean](MethodBind.get("Node", "is_multiplayer_authority", 36873697L), hostObject.objectPtr)
+
+  /** Node.set_editor_description */
+  final def setEditorDescription(editor_description: String): Unit =
+    Ptrcall.callVoid1(MethodBind.get("Node", "set_editor_description", 83702148L), hostObject.objectPtr, editor_description)
+
+  /** Node.get_editor_description */
+  final def getEditorDescription(): String =
+    Ptrcall.call0[String](MethodBind.get("Node", "get_editor_description", 201670096L), hostObject.objectPtr)
+
+  /** Node.set_unique_name_in_owner */
+  final def setUniqueNameInOwner(enable: Boolean): Unit =
+    Ptrcall.callVoid1(MethodBind.get("Node", "set_unique_name_in_owner", 2586408642L), hostObject.objectPtr, enable)
+
+  /** Node.is_unique_name_in_owner */
+  final def isUniqueNameInOwner(): Boolean =
+    Ptrcall.call0[Boolean](MethodBind.get("Node", "is_unique_name_in_owner", 36873697L), hostObject.objectPtr)
+
+  /** Node.update_configuration_warnings */
+  final def updateConfigurationWarnings(): Unit =
+    Ptrcall.callVoid0(MethodBind.get("Node", "update_configuration_warnings", 3218959716L), hostObject.objectPtr)
+
+  /** Node.notify_deferred_thread_group */
+  final def notifyDeferredThreadGroup(what: Long): Unit =
+    Ptrcall.callVoid1(MethodBind.get("Node", "notify_deferred_thread_group", 1286410249L), hostObject.objectPtr, what)
+
+  /** Node.notify_thread_safe */
+  final def notifyThreadSafe(what: Long): Unit =
+    Ptrcall.callVoid1(MethodBind.get("Node", "notify_thread_safe", 1286410249L), hostObject.objectPtr, what)
+
+}
 
 object Node {
-  /** Wrap a raw object handle as a `Node` (no checked cast). */
-  def fromObject(o: GodotObject): Node = o
-
   /** Class metadata for Gd[Node] lifetime management and casting. */
   given GodotClass[Node] with {
     def className = "Node"
     def isRefCounted = false
-    def wrap(o: GodotObject): Node = o
-    def unwrap(t: Node): GodotObject = t
-  }
-
-  extension (self: Node) {
-    /** The underlying object handle. */
-    def asObject: GodotObject = self
-
-    /** Node.add_sibling */
-    def addSibling(sibling: Node, force_readable_name: Boolean): Unit =
-      Ptrcall.callVoid2(MethodBind.get("Node", "add_sibling", 2570952461L), self.asObject.objectPtr, sibling.asObject, force_readable_name)
-
-    /** Node.remove_child */
-    def removeChild(node: Node): Unit =
-      Ptrcall.callVoid1(MethodBind.get("Node", "remove_child", 1078189570L), self.asObject.objectPtr, node.asObject)
-
-    /** Node.reparent */
-    def reparent(new_parent: Node, keep_global_transform: Boolean): Unit =
-      Ptrcall.callVoid2(MethodBind.get("Node", "reparent", 3685795103L), self.asObject.objectPtr, new_parent.asObject, keep_global_transform)
-
-    /** Node.get_child_count */
-    def getChildCount(include_internal: Boolean): Long =
-      Ptrcall.call1[Boolean, Long](MethodBind.get("Node", "get_child_count", 894402480L), self.asObject.objectPtr, include_internal)
-
-    /** Node.get_child */
-    def getChild(idx: Long, include_internal: Boolean): Node =
-      Node.fromObject(Ptrcall.call2[Long, Boolean, GodotObject](MethodBind.get("Node", "get_child", 541253412L), self.asObject.objectPtr, idx, include_internal))
-
-    /** Node.get_parent */
-    def getParent(): Node =
-      Node.fromObject(Ptrcall.call0[GodotObject](MethodBind.get("Node", "get_parent", 3160264692L), self.asObject.objectPtr))
-
-    /** Node.find_parent */
-    def findParent(pattern: String): Node =
-      Node.fromObject(Ptrcall.call1[String, GodotObject](MethodBind.get("Node", "find_parent", 1140089439L), self.asObject.objectPtr, pattern))
-
-    /** Node.is_inside_tree */
-    def isInsideTree(): Boolean =
-      Ptrcall.call0[Boolean](MethodBind.get("Node", "is_inside_tree", 36873697L), self.asObject.objectPtr)
-
-    /** Node.is_part_of_edited_scene */
-    def isPartOfEditedScene(): Boolean =
-      Ptrcall.call0[Boolean](MethodBind.get("Node", "is_part_of_edited_scene", 36873697L), self.asObject.objectPtr)
-
-    /** Node.is_ancestor_of */
-    def isAncestorOf(node: Node): Boolean =
-      Ptrcall.call1[GodotObject, Boolean](MethodBind.get("Node", "is_ancestor_of", 3093956946L), self.asObject.objectPtr, node.asObject)
-
-    /** Node.is_greater_than */
-    def isGreaterThan(node: Node): Boolean =
-      Ptrcall.call1[GodotObject, Boolean](MethodBind.get("Node", "is_greater_than", 3093956946L), self.asObject.objectPtr, node.asObject)
-
-    /** Node.move_child */
-    def moveChild(child_node: Node, to_index: Long): Unit =
-      Ptrcall.callVoid2(MethodBind.get("Node", "move_child", 3315886247L), self.asObject.objectPtr, child_node.asObject, to_index)
-
-    /** Node.set_owner */
-    def setOwner(owner: Node): Unit =
-      Ptrcall.callVoid1(MethodBind.get("Node", "set_owner", 1078189570L), self.asObject.objectPtr, owner.asObject)
-
-    /** Node.get_owner */
-    def getOwner(): Node =
-      Node.fromObject(Ptrcall.call0[GodotObject](MethodBind.get("Node", "get_owner", 3160264692L), self.asObject.objectPtr))
-
-    /** Node.get_index */
-    def getIndex(include_internal: Boolean): Long =
-      Ptrcall.call1[Boolean, Long](MethodBind.get("Node", "get_index", 894402480L), self.asObject.objectPtr, include_internal)
-
-    /** Node.print_tree */
-    def printTree(): Unit =
-      Ptrcall.callVoid0(MethodBind.get("Node", "print_tree", 3218959716L), self.asObject.objectPtr)
-
-    /** Node.print_tree_pretty */
-    def printTreePretty(): Unit =
-      Ptrcall.callVoid0(MethodBind.get("Node", "print_tree_pretty", 3218959716L), self.asObject.objectPtr)
-
-    /** Node.get_tree_string */
-    def getTreeString(): String =
-      Ptrcall.call0[String](MethodBind.get("Node", "get_tree_string", 2841200299L), self.asObject.objectPtr)
-
-    /** Node.get_tree_string_pretty */
-    def getTreeStringPretty(): String =
-      Ptrcall.call0[String](MethodBind.get("Node", "get_tree_string_pretty", 2841200299L), self.asObject.objectPtr)
-
-    /** Node.set_scene_file_path */
-    def setSceneFilePath(scene_file_path: String): Unit =
-      Ptrcall.callVoid1(MethodBind.get("Node", "set_scene_file_path", 83702148L), self.asObject.objectPtr, scene_file_path)
-
-    /** Node.get_scene_file_path */
-    def getSceneFilePath(): String =
-      Ptrcall.call0[String](MethodBind.get("Node", "get_scene_file_path", 201670096L), self.asObject.objectPtr)
-
-    /** Node.propagate_notification */
-    def propagateNotification(what: Long): Unit =
-      Ptrcall.callVoid1(MethodBind.get("Node", "propagate_notification", 1286410249L), self.asObject.objectPtr, what)
-
-    /** Node.set_physics_process */
-    def setPhysicsProcess(enable: Boolean): Unit =
-      Ptrcall.callVoid1(MethodBind.get("Node", "set_physics_process", 2586408642L), self.asObject.objectPtr, enable)
-
-    /** Node.get_physics_process_delta_time */
-    def getPhysicsProcessDeltaTime(): Double =
-      Ptrcall.call0[Double](MethodBind.get("Node", "get_physics_process_delta_time", 1740695150L), self.asObject.objectPtr)
-
-    /** Node.is_physics_processing */
-    def isPhysicsProcessing(): Boolean =
-      Ptrcall.call0[Boolean](MethodBind.get("Node", "is_physics_processing", 36873697L), self.asObject.objectPtr)
-
-    /** Node.get_process_delta_time */
-    def getProcessDeltaTime(): Double =
-      Ptrcall.call0[Double](MethodBind.get("Node", "get_process_delta_time", 1740695150L), self.asObject.objectPtr)
-
-    /** Node.set_process */
-    def setProcess(enable: Boolean): Unit =
-      Ptrcall.callVoid1(MethodBind.get("Node", "set_process", 2586408642L), self.asObject.objectPtr, enable)
-
-    /** Node.set_process_priority */
-    def setProcessPriority(priority: Long): Unit =
-      Ptrcall.callVoid1(MethodBind.get("Node", "set_process_priority", 1286410249L), self.asObject.objectPtr, priority)
-
-    /** Node.get_process_priority */
-    def getProcessPriority(): Long =
-      Ptrcall.call0[Long](MethodBind.get("Node", "get_process_priority", 3905245786L), self.asObject.objectPtr)
-
-    /** Node.set_physics_process_priority */
-    def setPhysicsProcessPriority(priority: Long): Unit =
-      Ptrcall.callVoid1(MethodBind.get("Node", "set_physics_process_priority", 1286410249L), self.asObject.objectPtr, priority)
-
-    /** Node.get_physics_process_priority */
-    def getPhysicsProcessPriority(): Long =
-      Ptrcall.call0[Long](MethodBind.get("Node", "get_physics_process_priority", 3905245786L), self.asObject.objectPtr)
-
-    /** Node.is_processing */
-    def isProcessing(): Boolean =
-      Ptrcall.call0[Boolean](MethodBind.get("Node", "is_processing", 36873697L), self.asObject.objectPtr)
-
-    /** Node.set_process_input */
-    def setProcessInput(enable: Boolean): Unit =
-      Ptrcall.callVoid1(MethodBind.get("Node", "set_process_input", 2586408642L), self.asObject.objectPtr, enable)
-
-    /** Node.is_processing_input */
-    def isProcessingInput(): Boolean =
-      Ptrcall.call0[Boolean](MethodBind.get("Node", "is_processing_input", 36873697L), self.asObject.objectPtr)
-
-    /** Node.set_process_shortcut_input */
-    def setProcessShortcutInput(enable: Boolean): Unit =
-      Ptrcall.callVoid1(MethodBind.get("Node", "set_process_shortcut_input", 2586408642L), self.asObject.objectPtr, enable)
-
-    /** Node.is_processing_shortcut_input */
-    def isProcessingShortcutInput(): Boolean =
-      Ptrcall.call0[Boolean](MethodBind.get("Node", "is_processing_shortcut_input", 36873697L), self.asObject.objectPtr)
-
-    /** Node.set_process_unhandled_input */
-    def setProcessUnhandledInput(enable: Boolean): Unit =
-      Ptrcall.callVoid1(MethodBind.get("Node", "set_process_unhandled_input", 2586408642L), self.asObject.objectPtr, enable)
-
-    /** Node.is_processing_unhandled_input */
-    def isProcessingUnhandledInput(): Boolean =
-      Ptrcall.call0[Boolean](MethodBind.get("Node", "is_processing_unhandled_input", 36873697L), self.asObject.objectPtr)
-
-    /** Node.set_process_unhandled_key_input */
-    def setProcessUnhandledKeyInput(enable: Boolean): Unit =
-      Ptrcall.callVoid1(MethodBind.get("Node", "set_process_unhandled_key_input", 2586408642L), self.asObject.objectPtr, enable)
-
-    /** Node.is_processing_unhandled_key_input */
-    def isProcessingUnhandledKeyInput(): Boolean =
-      Ptrcall.call0[Boolean](MethodBind.get("Node", "is_processing_unhandled_key_input", 36873697L), self.asObject.objectPtr)
-
-    /** Node.can_process */
-    def canProcess(): Boolean =
-      Ptrcall.call0[Boolean](MethodBind.get("Node", "can_process", 36873697L), self.asObject.objectPtr)
-
-    /** Node.set_process_thread_group_order */
-    def setProcessThreadGroupOrder(order: Long): Unit =
-      Ptrcall.callVoid1(MethodBind.get("Node", "set_process_thread_group_order", 1286410249L), self.asObject.objectPtr, order)
-
-    /** Node.get_process_thread_group_order */
-    def getProcessThreadGroupOrder(): Long =
-      Ptrcall.call0[Long](MethodBind.get("Node", "get_process_thread_group_order", 3905245786L), self.asObject.objectPtr)
-
-    /** Node.queue_accessibility_update */
-    def queueAccessibilityUpdate(): Unit =
-      Ptrcall.callVoid0(MethodBind.get("Node", "queue_accessibility_update", 3218959716L), self.asObject.objectPtr)
-
-    /** Node.set_display_folded */
-    def setDisplayFolded(fold: Boolean): Unit =
-      Ptrcall.callVoid1(MethodBind.get("Node", "set_display_folded", 2586408642L), self.asObject.objectPtr, fold)
-
-    /** Node.is_displayed_folded */
-    def isDisplayedFolded(): Boolean =
-      Ptrcall.call0[Boolean](MethodBind.get("Node", "is_displayed_folded", 36873697L), self.asObject.objectPtr)
-
-    /** Node.set_process_internal */
-    def setProcessInternal(enable: Boolean): Unit =
-      Ptrcall.callVoid1(MethodBind.get("Node", "set_process_internal", 2586408642L), self.asObject.objectPtr, enable)
-
-    /** Node.is_processing_internal */
-    def isProcessingInternal(): Boolean =
-      Ptrcall.call0[Boolean](MethodBind.get("Node", "is_processing_internal", 36873697L), self.asObject.objectPtr)
-
-    /** Node.set_physics_process_internal */
-    def setPhysicsProcessInternal(enable: Boolean): Unit =
-      Ptrcall.callVoid1(MethodBind.get("Node", "set_physics_process_internal", 2586408642L), self.asObject.objectPtr, enable)
-
-    /** Node.is_physics_processing_internal */
-    def isPhysicsProcessingInternal(): Boolean =
-      Ptrcall.call0[Boolean](MethodBind.get("Node", "is_physics_processing_internal", 36873697L), self.asObject.objectPtr)
-
-    /** Node.is_physics_interpolated */
-    def isPhysicsInterpolated(): Boolean =
-      Ptrcall.call0[Boolean](MethodBind.get("Node", "is_physics_interpolated", 36873697L), self.asObject.objectPtr)
-
-    /** Node.is_physics_interpolated_and_enabled */
-    def isPhysicsInterpolatedAndEnabled(): Boolean =
-      Ptrcall.call0[Boolean](MethodBind.get("Node", "is_physics_interpolated_and_enabled", 36873697L), self.asObject.objectPtr)
-
-    /** Node.reset_physics_interpolation */
-    def resetPhysicsInterpolation(): Unit =
-      Ptrcall.callVoid0(MethodBind.get("Node", "reset_physics_interpolation", 3218959716L), self.asObject.objectPtr)
-
-    /** Node.can_auto_translate */
-    def canAutoTranslate(): Boolean =
-      Ptrcall.call0[Boolean](MethodBind.get("Node", "can_auto_translate", 36873697L), self.asObject.objectPtr)
-
-    /** Node.set_translation_domain_inherited */
-    def setTranslationDomainInherited(): Unit =
-      Ptrcall.callVoid0(MethodBind.get("Node", "set_translation_domain_inherited", 3218959716L), self.asObject.objectPtr)
-
-    /** Node.duplicate */
-    def duplicate(flags: Long): Node =
-      Node.fromObject(Ptrcall.call1[Long, GodotObject](MethodBind.get("Node", "duplicate", 3511555459L), self.asObject.objectPtr, flags))
-
-    /** Node.replace_by */
-    def replaceBy(node: Node, keep_groups: Boolean): Unit =
-      Ptrcall.callVoid2(MethodBind.get("Node", "replace_by", 2570952461L), self.asObject.objectPtr, node.asObject, keep_groups)
-
-    /** Node.set_scene_instance_load_placeholder */
-    def setSceneInstanceLoadPlaceholder(load_placeholder: Boolean): Unit =
-      Ptrcall.callVoid1(MethodBind.get("Node", "set_scene_instance_load_placeholder", 2586408642L), self.asObject.objectPtr, load_placeholder)
-
-    /** Node.get_scene_instance_load_placeholder */
-    def getSceneInstanceLoadPlaceholder(): Boolean =
-      Ptrcall.call0[Boolean](MethodBind.get("Node", "get_scene_instance_load_placeholder", 36873697L), self.asObject.objectPtr)
-
-    /** Node.set_editable_instance */
-    def setEditableInstance(node: Node, is_editable: Boolean): Unit =
-      Ptrcall.callVoid2(MethodBind.get("Node", "set_editable_instance", 2731852923L), self.asObject.objectPtr, node.asObject, is_editable)
-
-    /** Node.is_editable_instance */
-    def isEditableInstance(node: Node): Boolean =
-      Ptrcall.call1[GodotObject, Boolean](MethodBind.get("Node", "is_editable_instance", 3093956946L), self.asObject.objectPtr, node.asObject)
-
-    /** Node.queue_free */
-    def queueFree(): Unit =
-      Ptrcall.callVoid0(MethodBind.get("Node", "queue_free", 3218959716L), self.asObject.objectPtr)
-
-    /** Node.request_ready */
-    def requestReady(): Unit =
-      Ptrcall.callVoid0(MethodBind.get("Node", "request_ready", 3218959716L), self.asObject.objectPtr)
-
-    /** Node.is_node_ready */
-    def isNodeReady(): Boolean =
-      Ptrcall.call0[Boolean](MethodBind.get("Node", "is_node_ready", 36873697L), self.asObject.objectPtr)
-
-    /** Node.set_multiplayer_authority */
-    def setMultiplayerAuthority(id: Long, recursive: Boolean): Unit =
-      Ptrcall.callVoid2(MethodBind.get("Node", "set_multiplayer_authority", 972357352L), self.asObject.objectPtr, id, recursive)
-
-    /** Node.get_multiplayer_authority */
-    def getMultiplayerAuthority(): Long =
-      Ptrcall.call0[Long](MethodBind.get("Node", "get_multiplayer_authority", 3905245786L), self.asObject.objectPtr)
-
-    /** Node.is_multiplayer_authority */
-    def isMultiplayerAuthority(): Boolean =
-      Ptrcall.call0[Boolean](MethodBind.get("Node", "is_multiplayer_authority", 36873697L), self.asObject.objectPtr)
-
-    /** Node.set_editor_description */
-    def setEditorDescription(editor_description: String): Unit =
-      Ptrcall.callVoid1(MethodBind.get("Node", "set_editor_description", 83702148L), self.asObject.objectPtr, editor_description)
-
-    /** Node.get_editor_description */
-    def getEditorDescription(): String =
-      Ptrcall.call0[String](MethodBind.get("Node", "get_editor_description", 201670096L), self.asObject.objectPtr)
-
-    /** Node.set_unique_name_in_owner */
-    def setUniqueNameInOwner(enable: Boolean): Unit =
-      Ptrcall.callVoid1(MethodBind.get("Node", "set_unique_name_in_owner", 2586408642L), self.asObject.objectPtr, enable)
-
-    /** Node.is_unique_name_in_owner */
-    def isUniqueNameInOwner(): Boolean =
-      Ptrcall.call0[Boolean](MethodBind.get("Node", "is_unique_name_in_owner", 36873697L), self.asObject.objectPtr)
-
-    /** Node.update_configuration_warnings */
-    def updateConfigurationWarnings(): Unit =
-      Ptrcall.callVoid0(MethodBind.get("Node", "update_configuration_warnings", 3218959716L), self.asObject.objectPtr)
-
-    /** Node.notify_deferred_thread_group */
-    def notifyDeferredThreadGroup(what: Long): Unit =
-      Ptrcall.callVoid1(MethodBind.get("Node", "notify_deferred_thread_group", 1286410249L), self.asObject.objectPtr, what)
-
-    /** Node.notify_thread_safe */
-    def notifyThreadSafe(what: Long): Unit =
-      Ptrcall.callVoid1(MethodBind.get("Node", "notify_thread_safe", 1286410249L), self.asObject.objectPtr, what)
-
-    /** Object.is_class */
-    def isClass(`class`: String): Boolean =
-      Ptrcall.call1[String, Boolean](MethodBind.get("Object", "is_class", 3927539163L), self.asObject.objectPtr, `class`)
-
-    /** Object.notification */
-    def notification(what: Long, reversed: Boolean): Unit =
-      Ptrcall.callVoid2(MethodBind.get("Object", "notification", 4023243586L), self.asObject.objectPtr, what, reversed)
-
-    /** Object.get_instance_id */
-    def getInstanceId(): Long =
-      Ptrcall.call0[Long](MethodBind.get("Object", "get_instance_id", 3905245786L), self.asObject.objectPtr)
-
-    /** Object.set_block_signals */
-    def setBlockSignals(enable: Boolean): Unit =
-      Ptrcall.callVoid1(MethodBind.get("Object", "set_block_signals", 2586408642L), self.asObject.objectPtr, enable)
-
-    /** Object.is_blocking_signals */
-    def isBlockingSignals(): Boolean =
-      Ptrcall.call0[Boolean](MethodBind.get("Object", "is_blocking_signals", 36873697L), self.asObject.objectPtr)
-
-    /** Object.notify_property_list_changed */
-    def notifyPropertyListChanged(): Unit =
-      Ptrcall.callVoid0(MethodBind.get("Object", "notify_property_list_changed", 3218959716L), self.asObject.objectPtr)
-
-    /** Object.set_message_translation */
-    def setMessageTranslation(enable: Boolean): Unit =
-      Ptrcall.callVoid1(MethodBind.get("Object", "set_message_translation", 2586408642L), self.asObject.objectPtr, enable)
-
-    /** Object.can_translate_messages */
-    def canTranslateMessages(): Boolean =
-      Ptrcall.call0[Boolean](MethodBind.get("Object", "can_translate_messages", 36873697L), self.asObject.objectPtr)
-
-    /** Object.is_queued_for_deletion */
-    def isQueuedForDeletion(): Boolean =
-      Ptrcall.call0[Boolean](MethodBind.get("Object", "is_queued_for_deletion", 36873697L), self.asObject.objectPtr)
-
-    /** Object.cancel_free */
-    def cancelFree(): Unit =
-      Ptrcall.callVoid0(MethodBind.get("Object", "cancel_free", 3218959716L), self.asObject.objectPtr)
-
+    def wrap(o: GodotObject): Node = new Node {}.withHost(o.objectPtr)
+    def unwrap(t: Node): GodotObject = t.hostObject
   }
 }

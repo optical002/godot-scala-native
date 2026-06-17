@@ -4,29 +4,37 @@ import io.github.optical002.godot.engine.GodotObject
 import io.github.optical002.godot.codegen.gdextensioninterface.types.*
 
 /**
- * Base class for user-defined Scala classes that are exposed to Godot.
+ * Root base for everything in the engine class hierarchy.
  *
- * A subclass becomes a real Godot class (registered with ClassDB) via
- * [[ClassRegistration]] (or the macro layer that wraps it). Each live Godot
- * object of the class is backed by one instance of the subclass; the engine
- * object handle is injected by the create callback and available as
- * [[hostObject]].
+ * Generated engine classes extend this (transitively via `Object`), and user
+ * classes extend an engine class (`class Player extends Node2D`). It carries the
+ * engine-object handle every instance is backed by, the overridable engine
+ * virtuals, and the small plumbing the generated wrappers and registration use.
  *
- * Subclasses override the engine virtuals they care about (`_ready`,
- * `_process`, ...). The defaults are no-ops, and only overridden ones are
- * reported to Godot (so non-overridden virtuals keep the engine's own
- * behaviour). This mirrors gdext's `I*` virtual traits.
+ * Two ways an instance gets its handle:
+ *  - a **user class** is constructed by Godot via the create callback, which
+ *    calls [[setHostObject]];
+ *  - an engine wrapper around a **fetched** object (e.g. from `Gd[T].wrap` or a
+ *    singleton) is built then handed a handle via [[withHost]].
  */
 abstract class GodotScriptClass {
 
-  /** The engine object this Scala instance backs. Set during construction. */
   private var _hostObject: GDExtensionObjectPtr = null
 
   /** The engine-side object handle for this instance. */
   final def hostObject: GodotObject = GodotObject.fromPtr(_hostObject)
 
+  /** The raw handle, as the engine pointer type (used by generated methods). */
+  private[godot] def hostPtr: GDExtensionObjectPtr = _hostObject
+
   private[register] def setHostObject(o: GDExtensionObjectPtr): Unit =
     _hostObject = o
+
+  /** Set the handle and return `this` (fluent, for wrapping fetched objects). */
+  final def withHost(o: GDExtensionObjectPtr): this.type = {
+    _hostObject = o
+    this
+  }
 
   // --- overridable engine virtuals (no-op defaults) ---------------------
 

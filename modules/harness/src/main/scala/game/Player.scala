@@ -7,16 +7,15 @@ import io.github.optical002.godot.register.*
 
 /**
  * Example game class: a `Node2D` written in Scala that moves itself every
- * frame, exposes a method and an `@export` property to Godot, and emits a
+ * frame, exposes a method and an `@gdexport` property to Godot, and emits a
  * signal.
  *
- * Everything is declared with annotations — `@godotClass` for the engine base,
- * `@func` for a callable method, `@export` for an inspector property, `@signal`
- * for a signal. There is no registration boilerplate; `Register.auto[Player]()`
- * (called from the entry point) scans these annotations and registers it all.
+ * It extends the engine class directly (`extends Node2D`), so it inherits all
+ * of Node2D's methods and the engine virtuals. Members are annotated with
+ * `@func` / `@gdexport` / `@signal`; `Register.auto[Player]()` scans them and
+ * derives the Godot base (`Node2D`) from the superclass. No registration code.
  */
-@godotClass(base = "Node2D")
-final class Player extends GodotScriptClass {
+final class Player extends Node2D {
   private var elapsed: Double = 0.0
   private var frame = 0
 
@@ -30,12 +29,12 @@ final class Player extends GodotScriptClass {
   @signal def pinged(): Unit = ()
 
   override def _ready(): Unit =
-    GodotPrint.print("Player._ready (auto-registered)")
+    GodotPrint.print("Player._ready (extends Node2D)")
 
   override def _process(delta: Double): Unit = {
     elapsed += delta
-    val self = Node2D.fromObject(hostObject)
-    self.setPosition(
+    // `setPosition` is inherited from Node2D and operates on this instance.
+    setPosition(
       Vector2((elapsed * speed).toFloat, (math.sin(elapsed * 3) * 150).toFloat)
     )
     if (frame == 1)

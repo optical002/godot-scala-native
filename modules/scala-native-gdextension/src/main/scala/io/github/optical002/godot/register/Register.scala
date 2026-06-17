@@ -7,10 +7,11 @@ import scala.quoted.*
  * `#[derive(GodotClass)]` analogue.
  *
  * `Register.auto[Player]()` scans `Player` at compile time and emits *all* the
- * registration calls: the class itself (with auto-detected virtual overrides),
- * every `@func` method, every `@export` property, and every `@signal`. Game
- * code therefore writes zero registration boilerplate — it only annotates
- * members and declares the engine base via `@godotClass(base = "Node2D")`.
+ * registration calls: the class itself (Godot base derived from the superclass,
+ * with auto-detected virtual overrides), every `@func` method, every
+ * `@gdexport` property, and every `@signal`. Game code therefore writes zero
+ * registration boilerplate — it only extends an engine class and annotates
+ * members.
  */
 object Register {
 
@@ -35,29 +36,19 @@ object Register {
     val className = sym.name
     val classNameExpr = Expr(className)
 
-    // --- engine base class from @godotClass(base = "...") ----------------
-    val godotClassSym = TypeRepr.of[godotClass].typeSymbol
-    val baseName: String = sym.getAnnotation(godotClassSym) match {
-      case Some(ann) =>
-        // Find the string literal argument regardless of how the annotation
-        // term is shaped (positional or named arg, with or without New).
-        def findString(t: Tree): Option[String] = t match {
-          case Literal(StringConstant(s)) => Some(s)
-          case NamedArg(_, v)             => findString(v)
-          case Apply(_, args)             => args.flatMap(findString).headOption
-          case Typed(e, _)                => findString(e)
-          case Block(_, e)                => findString(e)
-          case _                          => None
-        }
-        findString(ann).getOrElse(
-          report.errorAndAbort(
-            s"@godotClass on $className must have a string base, e.g. @godotClass(base = \"Node2D\")"
-          )
-        )
-      case None =>
+    // --- engine base class from the direct superclass --------------------
+    // `class Player extends Node2D` -> the Godot parent is `Node2D`. We take the
+    // first non-trait base class above T; its simple name is the engine class.
+    val baseName: String = {
+      val supers = sym.typeRef.baseClasses
+      // baseClasses lists T then its ancestors most-derived first. The element
+      // right after T (skipping T itself) is the direct engine superclass.
+      val parent = supers.drop(1).headOption.getOrElse(
         report.errorAndAbort(
-          s"$className must be annotated with @godotClass(base = \"<EngineClass>\"), e.g. @godotClass(base = \"Node2D\")"
+          s"$className must extend a generated Godot engine class, e.g. `class $className extends Node2D`"
         )
+      )
+      parent.name
     }
     val baseNameExpr = Expr(baseName)
 
