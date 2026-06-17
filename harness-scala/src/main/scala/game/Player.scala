@@ -3,7 +3,7 @@ package game
 import io.github.optical002.godot.GodotPrint
 import io.github.optical002.godot.builtin.Vector2
 import io.github.optical002.godot.codegen.engine.Node2D
-import io.github.optical002.godot.engine.{Gd, Tres}
+import io.github.optical002.godot.engine.{Gd, Tres, Tscn}
 import io.github.optical002.godot.register.*
 
 /**
@@ -34,6 +34,12 @@ final class Player extends Node2D {
 
   /** Required stats resource (bare `Tres` == Required; unassigned by default). */
   @gdexport var stats: Tres[PlayerStats] = Tres.unassigned[PlayerStats]
+
+  /** Optional scene whose root node is a Player (`.tscn` picker). */
+  @gdexport var maybeScene: Option[Tscn[Player]] = None
+
+  /** Required scene whose root node is a Player (bare `Tscn` == Required). */
+  @gdexport var scene: Tscn[Player] = Tscn.unassigned[Player]
 
   /** Callable from Godot/GDScript. */
   @func def getScore(): Long = (elapsed * 10).toLong

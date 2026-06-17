@@ -35,16 +35,21 @@ object Log {
   }
 
   /**
-   * Verbose hot-reload tracing. Prefixes every line with a millisecond timestamp
-   * and the current thread (id/name) so a cross-thread deadlock — e.g. the
-   * editor's resource-preview worker contending with the main thread — is
-   * visible in the ordering. Flushes per line (via [[file]]) so the last line
-   * before a freeze always survives.
+   * Verbose hot-reload/editor tracing, OFF by default. Enable by setting the
+   * `GODOT_SCALA_TRACE` environment variable (any non-empty value) to diagnose
+   * reload/registration/editor issues. Each line is prefixed with a millisecond
+   * timestamp and the current thread (id/name) so cross-thread ordering — e.g. an
+   * editor worker contending with the main thread — is visible, and flushes per
+   * line (via [[file]]) so the last line before a freeze always survives.
    */
-  def trace(msg: String): Unit = {
-    val t = Thread.currentThread()
-    file(s"[${System.nanoTime() / 1000000L}ms t=${t.getId}/${t.getName}] $msg")
-  }
+  val traceEnabled: Boolean =
+    Option(System.getenv("GODOT_SCALA_TRACE")).exists(_.nonEmpty)
+
+  def trace(msg: String): Unit =
+    if (traceEnabled) {
+      val t = Thread.currentThread()
+      file(s"[${System.nanoTime() / 1000000L}ms t=${t.getId}/${t.getName}] $msg")
+    }
 
   /** Truncate the side log file and write the first line (start-of-run). */
   def fileReset(msg: String): Unit = FileLogger.use(File)(_.log(msg))

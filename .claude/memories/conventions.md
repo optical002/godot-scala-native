@@ -22,9 +22,18 @@ decoding (`StringName.toScala`), e.g. in `get_virtual` dispatch.
 ## Editor hot-reload
 - `.gdextension` has `reloadable = true`; `harness-scala`'s `build` task
   atomically renames the `.so` (no in-place overwrite — that freezes the editor).
-- `recreate_instance_func` rebinds instances on reload.
-- Registration must be reload-safe (probe + unregister stale before register);
-  do NOT unregister on deinit (races the new image → "unregister unexisting").
+- **Reload protocol (critical, hard-won)**: the old image **must** unregister its
+  classes in `deinitialize(SCENE)` (`ClassRegistration.unregisterAll()`), and the
+  register side must **NOT** unregister-stale. Timestamped logs prove the order is
+  clean: old-image `deinitialize` fully completes *before* the new image's
+  `run`/`initialize` (they do NOT interleave — the old "races the new image"
+  belief was wrong). Only with this old-deinit cleanup does Godot drive
+  `recreate_instance_func` to rebind live editor instances; **without it Godot
+  never recreates, live nodes/resources stay bound to the unloaded image, and
+  selecting any custom node in the inspector after a reload freezes the editor**.
+  Doing the unregister on the *register* side instead races Godot's own teardown
+  and deadlocks. Set `GODOT_SCALA_TRACE=1` to get the verbose `Log.trace` reload
+  trace (thread id + ms timestamp per line) when diagnosing this.
 - `is_runtime=1` so virtuals don't run while editing.
 - **`is_runtime` is Node-only**: `Register.auto` sets `ClassDescriptor.isRuntime`
   from `T <: codegen.engine.Node`. Nodes are runtime (editor doesn't tick their
