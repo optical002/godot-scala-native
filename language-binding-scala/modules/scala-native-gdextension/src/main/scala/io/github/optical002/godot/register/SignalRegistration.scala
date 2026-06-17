@@ -27,7 +27,8 @@ object SignalRegistration {
   private final val EmitSignalHash = 4047867050L
 
   /** Register a no-argument signal `signalName` on `className`. */
-  def registerSignal(className: String, signalName: String): Unit =
+  def registerSignal(className: String, signalName: String): Unit = {
+    io.github.optical002.godot.Log.trace(s"registerSignal: $className.$signalName")
     Godot.interface.classdb_register_extension_class_signal(
       Godot.library,
       StringNames.cached(className).ptr,
@@ -35,6 +36,7 @@ object SignalRegistration {
       null, // no argument info
       0L
     )
+  }
 
   /** Emit a no-argument signal from `host`. */
   def emit(host: GodotObject, signalName: String): Unit = {

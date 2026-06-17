@@ -32,8 +32,13 @@ object ClassRegistry {
 
   def registerClass(desc: ClassDescriptor): Long = {
     val id = classIds.getAndIncrement()
+    val replaced = classTokensByName.containsKey(desc.className)
     classes.put(id, desc)
     classTokensByName.put(desc.className, id)
+    io.github.optical002.godot.Log.trace(
+      s"ClassRegistry.registerClass: ${desc.className} -> token $id" +
+        (if (replaced) " (replaced prior token)" else "")
+    )
     id
   }
 
@@ -56,12 +61,21 @@ object ClassRegistry {
   def addInstance(obj: GodotScriptClass): Long = {
     val id = instanceIds.getAndIncrement()
     instances.put(id, obj)
+    io.github.optical002.godot.Log.trace(
+      s"ClassRegistry.addInstance: token $id = ${obj.getClass.getSimpleName} (live=${instances.size})"
+    )
     id
   }
 
   def instanceFor(token: Long): GodotScriptClass = instances.get(token)
 
-  def removeInstance(token: Long): GodotScriptClass = instances.remove(token)
+  def removeInstance(token: Long): GodotScriptClass = {
+    val r = instances.remove(token)
+    io.github.optical002.godot.Log.trace(
+      s"ClassRegistry.removeInstance: token $token = ${if (r == null) "null" else r.getClass.getSimpleName} (live=${instances.size})"
+    )
+    r
+  }
 }
 
 /**

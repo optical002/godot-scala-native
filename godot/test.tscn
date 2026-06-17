@@ -1,3 +1,13 @@
 [gd_scene format=3 uid="uid://c4an27spm0lh8"]
 
-[node name="Player" type="Player"]
+[ext_resource type="PlayerStats" uid="uid://b2iwotqttl8jt" path="res://new_player_stats.tres" id="1_37kl0"]
+
+[sub_resource type="PlayerStats" id="PlayerStats_8uh7m"]
+
+[node name="Player" type="Player" unique_id=74334957 node_paths=PackedStringArray("maybe_projectile", "projectile")]
+maybe_projectile = NodePath("Projectile")
+projectile = NodePath("Projectile")
+maybe_stats = ExtResource("1_37kl0")
+stats = SubResource("PlayerStats_8uh7m")
+
+[node name="Projectile" type="Projectile" parent="." unique_id=1624292338]

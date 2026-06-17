@@ -56,6 +56,10 @@ object PropertyRegistration {
     val getter = s"get_$propertyName"
     val setter = s"set_$propertyName"
 
+    io.github.optical002.godot.Log.trace(
+      s"registerExport: $className.$propertyName variantType=${et.variantType} " +
+        s"hint=${et.hint} hintString='${et.hintString}' className='${et.className}' usage=${et.usage}"
+    )
     MethodRegistration.registerExportGetter(className, getter, get)
     MethodRegistration.registerExportSetter(className, setter, set)
 
@@ -68,6 +72,7 @@ object PropertyRegistration {
       et.usage
     )
 
+    io.github.optical002.godot.Log.trace(s"registerExport: $className.$propertyName classdb_register_extension_class_property begin")
     Godot.interface.classdb_register_extension_class_property(
       Godot.library,
       StringNames.cached(className).ptr,
@@ -75,6 +80,7 @@ object PropertyRegistration {
       StringNames.cached(setter).ptr,
       StringNames.cached(getter).ptr
     )
+    io.github.optical002.godot.Log.trace(s"registerExport: $className.$propertyName done")
 
     et.sceneRootType.foreach { rt =>
       SceneExportRegistry.record(className, propertyName, rt)

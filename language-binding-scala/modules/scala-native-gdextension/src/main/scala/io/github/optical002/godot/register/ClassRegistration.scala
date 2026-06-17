@@ -46,19 +46,33 @@ object ClassRegistration {
 
   /** Register `desc` so Godot can instantiate and drive instances of it. */
   def register(desc: ClassDescriptor): Unit = {
-    // If this class is somehow still registered (a reload where the previous
-    // image was not cleanly deinitialized), unregister the stale copy first so
-    // the fresh registration below does not hit "already registered". The probe
-    // (non-null class tag) means we never call unregister on a class Godot does
-    // not have, avoiding "unregister unexisting class" on a clean first load.
-    // A non-null tag here also tells us we are in a hot-reload (see above).
+    // Hot-reload detection only. A non-null class tag here means the class was
+    // already in ClassDB, i.e. we are in an editor hot-reload (a clean first
+    // load finds nothing).
+    //
+    // We deliberately do NOT manually unregister the stale class. On reload Godot
+    // tears down the previous image's classes itself (verified: by the time our
+    // new image registers, every probe already reads null). Calling
+    // classdb_unregister_extension_class ourselves races that teardown — and when
+    // the class still has a live instance (a node or a custom Resource held by
+    // the open scene/inspector) the two collide and DEADLOCK the editor. The
+    // freeze is timing-sensitive (adding logging moves where it hangs), the
+    // signature of a cross-thread race. Letting Godot own the old-class lifecycle
+    // and only (re)registering our fresh class avoids it.
+    io.github.optical002.godot.Log.trace(
+      s"register: BEGIN ${desc.className} (parent=${desc.parentClassName}, " +
+        s"isRuntime=${desc.isRuntime}, virtuals=${desc.overriddenVirtuals.mkString(",")})"
+    )
     val nameSn = StringNames.cached(desc.className).ptr
-    if (Godot.interface.classdb_get_class_tag(nameSn) != null) {
+    val existingTag = Godot.interface.classdb_get_class_tag(nameSn)
+    io.github.optical002.godot.Log.trace(
+      s"register: ${desc.className} probe tag=${if (existingTag == null) "null" else "PRESENT"}"
+    )
+    if (existingTag != null)
       reloadDetected = true
-      Godot.interface.classdb_unregister_extension_class(Godot.library, nameSn)
-    }
 
     val classToken = ClassRegistry.registerClass(desc)
+    io.github.optical002.godot.Log.trace(s"register: ${desc.className} classToken=$classToken")
 
     // Allocate the creation-info struct with malloc: Godot keeps a pointer to
     // it for the class's lifetime, so it must not be stack- or GC-managed.
@@ -86,12 +100,14 @@ object ClassRegistration {
     !(!info).at_get_virtual_func = getVirtual
     !(!info).at_class_userdata = Tokens.toPtr(classToken)
 
+    io.github.optical002.godot.Log.trace(s"register: ${desc.className} classdb_register_extension_class4 begin")
     Godot.interface.classdb_register_extension_class4(
       Godot.library,
       StringNames.cached(desc.className).ptr,
       StringNames.cached(desc.parentClassName).ptr,
       info
     )
+    io.github.optical002.godot.Log.trace(s"register: END ${desc.className}")
   }
 
   /**
@@ -100,12 +116,18 @@ object ClassRegistration {
    * instead of hitting Godot's "already registered" error.
    */
   def unregisterAll(): Unit = {
-    ClassRegistry.registeredClassNames.foreach { name =>
+    val names = ClassRegistry.registeredClassNames
+    io.github.optical002.godot.Log.trace(s"unregisterAll: ${names.length} classes")
+    names.foreach { name =>
       val sn = StringNames.cached(name).ptr
-      if (Godot.interface.classdb_get_class_tag(sn) != null)
+      if (Godot.interface.classdb_get_class_tag(sn) != null) {
+        io.github.optical002.godot.Log.trace(s"unregisterAll: unregister $name")
         Godot.interface.classdb_unregister_extension_class(Godot.library, sn)
+      }
     }
+    io.github.optical002.godot.Log.trace("unregisterAll: clearClasses")
     ClassRegistry.clearClasses()
+    io.github.optical002.godot.Log.trace("unregisterAll: done")
   }
 
   // --- static trampolines -------------------------------------------------
@@ -115,9 +137,13 @@ object ClassRegistration {
     desc: ClassDescriptor,
     obj: GDExtensionObjectPtr
   ): GDExtensionClassInstancePtr = {
+    io.github.optical002.godot.Log.trace(s"bind: ${desc.className} factory() begin")
     val scala = desc.factory()
     scala.setHostObject(obj)
     val instanceToken = ClassRegistry.addInstance(scala)
+    io.github.optical002.godot.Log.trace(
+      s"bind: ${desc.className} instanceToken=$instanceToken object_set_instance begin"
+    )
     val instancePtr =
       Tokens.toPtr(instanceToken).asInstanceOf[GDExtensionClassInstancePtr]
     Godot.interface.object_set_instance(
@@ -125,17 +151,22 @@ object ClassRegistration {
       StringNames.cached(desc.className).ptr,
       instancePtr
     )
+    io.github.optical002.godot.Log.trace(s"bind: ${desc.className} DONE (token=$instanceToken)")
     instancePtr
   }
 
   private val createInstance: GDExtensionClassCreateInstance2 =
     (classUserdata: CVoidPtr, _notifyPostInit: GDExtensionBool) => {
       val desc = ClassRegistry.classFor(Tokens.fromPtr(classUserdata))
+      io.github.optical002.godot.Log.trace(s"createInstance: ENTER ${desc.className}")
       // Construct the underlying engine object of the parent class, then bind.
+      io.github.optical002.godot.Log.trace(s"createInstance: ${desc.className} construct parent ${desc.parentClassName} begin")
       val obj = Godot.interface.classdb_construct_object2(
         StringNames.cached(desc.parentClassName).ptr
       )
+      io.github.optical002.godot.Log.trace(s"createInstance: ${desc.className} parent constructed, binding")
       bindInstance(desc, obj)
+      io.github.optical002.godot.Log.trace(s"createInstance: EXIT ${desc.className}")
       obj
     }
 
@@ -148,12 +179,20 @@ object ClassRegistration {
   private val recreateInstance: GDExtensionClassRecreateInstance =
     (classUserdata: CVoidPtr, obj: GDExtensionObjectPtr) => {
       val desc = ClassRegistry.classFor(Tokens.fromPtr(classUserdata))
-      bindInstance(desc, obj)
+      io.github.optical002.godot.Log.trace(s"recreateInstance: ENTER ${desc.className}")
+      val r = bindInstance(desc, obj)
+      io.github.optical002.godot.Log.trace(s"recreateInstance: EXIT ${desc.className}")
+      r
     }
 
   private val freeInstance: GDExtensionClassFreeInstance =
     (_classUserdata: CVoidPtr, instance: GDExtensionClassInstancePtr) => {
-      ClassRegistry.removeInstance(Tokens.fromPtr(instance))
+      val tok = Tokens.fromPtr(instance)
+      io.github.optical002.godot.Log.trace(s"freeInstance: ENTER token=$tok")
+      val removed = ClassRegistry.removeInstance(tok)
+      io.github.optical002.godot.Log.trace(
+        s"freeInstance: EXIT token=$tok removed=${if (removed == null) "null" else removed.getClass.getSimpleName}"
+      )
       ()
     }
 
@@ -163,8 +202,12 @@ object ClassRegistration {
       // Match by the StringName's text. Two StringName *handles* for the same
       // text are not pointer-equal, so we decode and compare the string.
       val vname = io.github.optical002.godot.builtin.StringName.toScala(name)
+      val overridden = desc.overriddenVirtuals.contains(vname)
+      io.github.optical002.godot.Log.trace(
+        s"getVirtual: ${desc.className} '$vname' overridden=$overridden"
+      )
       val dispatcher =
-        if (desc.overriddenVirtuals.contains(vname))
+        if (overridden)
           vname match {
             case "_process"         => processDispatch
             case "_physics_process" => physicsProcessDispatch
@@ -188,7 +231,7 @@ object ClassRegistration {
       if (scala != null) {
         val delta = !args(0).asInstanceOf[Ptr[CDouble]]
         scala._process(delta)
-      }
+      } else io.github.optical002.godot.Log.trace(s"_process: token=${Tokens.fromPtr(instance)} scala=null (stale?)")
     }
 
   private val physicsProcessDispatch: GDExtensionClassCallVirtual =
@@ -202,7 +245,9 @@ object ClassRegistration {
 
   private val readyDispatch: GDExtensionClassCallVirtual =
     (instance: GDExtensionClassInstancePtr, _args: Ptr[GDExtensionConstTypePtr], _ret: GDExtensionTypePtr) => {
-      val scala = ClassRegistry.instanceFor(Tokens.fromPtr(instance))
+      val tok = Tokens.fromPtr(instance)
+      val scala = ClassRegistry.instanceFor(tok)
+      io.github.optical002.godot.Log.trace(s"_ready: token=$tok scala=${if (scala == null) "null" else scala.getClass.getSimpleName}")
       if (scala != null) scala._ready()
     }
 
@@ -210,19 +255,27 @@ object ClassRegistration {
 
   private val enterTreeDispatch: GDExtensionClassCallVirtual =
     (instance: GDExtensionClassInstancePtr, _args: Ptr[GDExtensionConstTypePtr], _ret: GDExtensionTypePtr) => {
-      val scala = ClassRegistry.instanceFor(Tokens.fromPtr(instance))
+      val tok = Tokens.fromPtr(instance)
+      val scala = ClassRegistry.instanceFor(tok)
+      io.github.optical002.godot.Log.trace(s"_enter_tree: ENTER token=$tok scala=${if (scala == null) "null" else scala.getClass.getSimpleName}")
       if (scala != null) scala._enter_tree()
+      io.github.optical002.godot.Log.trace(s"_enter_tree: EXIT token=$tok")
     }
 
   private val exitTreeDispatch: GDExtensionClassCallVirtual =
     (instance: GDExtensionClassInstancePtr, _args: Ptr[GDExtensionConstTypePtr], _ret: GDExtensionTypePtr) => {
-      val scala = ClassRegistry.instanceFor(Tokens.fromPtr(instance))
+      val tok = Tokens.fromPtr(instance)
+      val scala = ClassRegistry.instanceFor(tok)
+      io.github.optical002.godot.Log.trace(s"_exit_tree: ENTER token=$tok scala=${if (scala == null) "null" else scala.getClass.getSimpleName}")
       if (scala != null) scala._exit_tree()
+      io.github.optical002.godot.Log.trace(s"_exit_tree: EXIT token=$tok")
     }
 
   private val updatePropertyDispatch: GDExtensionClassCallVirtual =
     (instance: GDExtensionClassInstancePtr, _args: Ptr[GDExtensionConstTypePtr], _ret: GDExtensionTypePtr) => {
-      val scala = ClassRegistry.instanceFor(Tokens.fromPtr(instance))
+      val tok = Tokens.fromPtr(instance)
+      val scala = ClassRegistry.instanceFor(tok)
+      io.github.optical002.godot.Log.trace(s"_update_property: token=$tok scala=${if (scala == null) "null" else scala.getClass.getSimpleName}")
       if (scala != null) scala._update_property()
     }
 
@@ -236,19 +289,24 @@ object ClassRegistration {
 
   private val canHandleDispatch: GDExtensionClassCallVirtual =
     (instance: GDExtensionClassInstancePtr, args: Ptr[GDExtensionConstTypePtr], ret: GDExtensionTypePtr) => {
-      val scala = ClassRegistry.instanceFor(Tokens.fromPtr(instance))
+      val tok = Tokens.fromPtr(instance)
+      val scala = ClassRegistry.instanceFor(tok)
+      io.github.optical002.godot.Log.trace(s"_can_handle: ENTER token=$tok scala=${if (scala == null) "null" else scala.getClass.getSimpleName}")
       if (scala != null) {
         val objPtr = !args(0).asInstanceOf[Ptr[GDExtensionObjectPtr]]
         val r = scala._can_handle(
           io.github.optical002.godot.engine.GodotObject.fromPtr(objPtr)
         )
+        io.github.optical002.godot.Log.trace(s"_can_handle: EXIT token=$tok result=$r")
         writeBool(ret, r)
-      } else writeBool(ret, false)
+      } else { io.github.optical002.godot.Log.trace(s"_can_handle: EXIT token=$tok scala=null -> false"); writeBool(ret, false) }
     }
 
   private val parsePropertyDispatch: GDExtensionClassCallVirtual =
     (instance: GDExtensionClassInstancePtr, args: Ptr[GDExtensionConstTypePtr], ret: GDExtensionTypePtr) => {
-      val scala = ClassRegistry.instanceFor(Tokens.fromPtr(instance))
+      val tok = Tokens.fromPtr(instance)
+      val scala = ClassRegistry.instanceFor(tok)
+      io.github.optical002.godot.Log.trace(s"_parse_property: ENTER token=$tok")
       if (scala != null) {
         val objPtr = !args(0).asInstanceOf[Ptr[GDExtensionObjectPtr]]
         val varType = !args(1).asInstanceOf[Ptr[GDExtensionInt]]
@@ -257,6 +315,9 @@ object ClassRegistration {
         val hintString = readString(args(4))
         val usage = !args(5).asInstanceOf[Ptr[GDExtensionInt]]
         val wide = (!args(6).asInstanceOf[Ptr[GDExtensionBool]]).toInt != 0
+        io.github.optical002.godot.Log.trace(
+          s"_parse_property: name='$name' varType=$varType hint=$hintType hintStr='$hintString' usage=$usage wide=$wide"
+        )
         val r = scala._parse_property(
           io.github.optical002.godot.engine.GodotObject.fromPtr(objPtr),
           varType,
@@ -266,7 +327,8 @@ object ClassRegistration {
           usage,
           wide
         )
+        io.github.optical002.godot.Log.trace(s"_parse_property: EXIT name='$name' result=$r")
         writeBool(ret, r)
-      } else writeBool(ret, false)
+      } else { io.github.optical002.godot.Log.trace(s"_parse_property: EXIT token=$tok scala=null -> false"); writeBool(ret, false) }
     }
 }

@@ -34,6 +34,18 @@ object Log {
     finally w.close()
   }
 
+  /**
+   * Verbose hot-reload tracing. Prefixes every line with a millisecond timestamp
+   * and the current thread (id/name) so a cross-thread deadlock — e.g. the
+   * editor's resource-preview worker contending with the main thread — is
+   * visible in the ordering. Flushes per line (via [[file]]) so the last line
+   * before a freeze always survives.
+   */
+  def trace(msg: String): Unit = {
+    val t = Thread.currentThread()
+    file(s"[${System.nanoTime() / 1000000L}ms t=${t.getId}/${t.getName}] $msg")
+  }
+
   /** Truncate the side log file and write the first line (start-of-run). */
   def fileReset(msg: String): Unit = FileLogger.use(File)(_.log(msg))
 

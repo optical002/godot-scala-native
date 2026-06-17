@@ -3,6 +3,7 @@ package game
 import io.github.optical002.godot.GodotPrint
 import io.github.optical002.godot.builtin.Vector2
 import io.github.optical002.godot.codegen.engine.Node2D
+import io.github.optical002.godot.engine.{Gd, Tres}
 import io.github.optical002.godot.register.*
 
 /**
@@ -22,6 +23,18 @@ final class Player extends Node2D {
   /** Editable in the inspector and from GDScript. */
   @gdexport var speed: Double = 120.0
 
+  /** Optional projectile reference — the editor allows leaving it empty. */
+  @gdexport var maybeProjectile: Option[Gd[Projectile]] = None
+
+  /** Required projectile reference (bare `Gd` == Required; null if unassigned). */
+  @gdexport var projectile: Gd[Projectile] = Gd.nullOf
+
+  /** Optional stats resource — the inspector shows a filesystem resource picker. */
+  @gdexport var maybeStats: Option[Tres[PlayerStats]] = None
+
+  /** Required stats resource (bare `Tres` == Required; unassigned by default). */
+  @gdexport var stats: Tres[PlayerStats] = Tres.unassigned[PlayerStats]
+
   /** Callable from Godot/GDScript. */
   @func def getScore(): Long = (elapsed * 10).toLong
 
@@ -29,7 +42,7 @@ final class Player extends Node2D {
   @signal def pinged(): Unit = ()
 
   override def _ready(): Unit =
-    GodotPrint.print("Player._ready (extends Node2D)")
+    GodotPrint.print("Player._ready (extends Node2D) [reload probe 12]")
 
   override def _process(delta: Double): Unit = {
     elapsed += delta

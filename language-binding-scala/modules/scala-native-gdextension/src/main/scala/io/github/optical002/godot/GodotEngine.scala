@@ -50,11 +50,14 @@ object GodotEngine {
     selfTest: Boolean = false
   ): CUnsignedChar = {
     try {
+      Log.trace(s"GodotEngine.run: ENTER (selfTest=$selfTest)")
       registerClasses = register
       runSelfTests = selfTest
 
       val interface = Interface.load(getProcAddress)
+      Log.trace("GodotEngine.run: interface loaded")
       Godot.initialize(interface, library)
+      Log.trace("GodotEngine.run: Godot.initialize done")
 
       // Write through the field-pointer accessors so the assignments target
       // Godot's struct memory directly (no risk of mutating a local copy).
@@ -65,6 +68,7 @@ object GodotEngine {
       !(!r_initialization).at_deinitialize = deinitialize
 
       Log.fileReset("Scala-Native language binding initialized.")
+      Log.trace("GodotEngine.run: EXIT success (callbacks registered)")
       1.toUByte // Success
     } catch {
       case e: Throwable =>
@@ -78,39 +82,51 @@ object GodotEngine {
 
   private val initialize: GDExtensionInitializeCallback =
     (userdata: CVoidPtr, level: GDExtensionInitializationLevel) => {
+      Log.trace(s"initialize: ENTER level=${level.toInt}")
       if (level == GDEXTENSION_INITIALIZATION_SCENE) {
-        Log.file("initialize(SCENE)")
+        Log.trace("initialize(SCENE): begin")
         if (runSelfTests && !selfTestsRan) {
           selfTestsRan = true
+          Log.trace("initialize(SCENE): running self-tests")
           io.github.optical002.godot.builtin.BuiltinSelfTest.run(Log.file)
           io.github.optical002.godot.engine.EngineSelfTest.run(Log.file)
           io.github.optical002.godot.engine.GdSelfTest.run(Log.file)
+          Log.trace("initialize(SCENE): self-tests done")
         }
+        Log.trace("initialize(SCENE): registerClasses() begin")
         registerClasses()
+        Log.trace("initialize(SCENE): registerClasses() done")
         Log.file("registered game classes")
 
         // If this SCENE init replaced classes left over from a previous library
         // image, we just completed an editor hot-reload. Announce it on the
         // Output panel, timing the full "library swap → extension live" latency
         // via the stamp the sbt `build` task drops right after the atomic swap.
-        if (
-          io.github.optical002.godot.register.ClassRegistration
-            .consumeReloadDetected()
-        ) {
+        val wasReload = io.github.optical002.godot.register.ClassRegistration
+          .consumeReloadDetected()
+        Log.trace(s"initialize(SCENE): consumeReloadDetected=$wasReload")
+        if (wasReload) {
           val suffix = reloadElapsedMs() match {
             case Some(ms) => s" in $ms ms"
             case None     => "" // stamp missing/unreadable — report without timing
           }
+          Log.trace(s"initialize(SCENE): about to GodotPrint hot-reload complete$suffix")
           GodotPrint.print(s"[scala-native] hot-reload complete$suffix")
+          Log.trace("initialize(SCENE): GodotPrint hot-reload complete returned")
           Log.file(s"hot-reload complete$suffix")
         }
+        Log.trace("initialize(SCENE): end")
       } else if (level == GDEXTENSION_INITIALIZATION_EDITOR) {
         // Editor-only: install the inspector plugin for typed scene exports.
         // Reached only when Godot runs as the editor (not in a game run).
-        Log.file("initialize(EDITOR)")
+        Log.trace("initialize(EDITOR): begin")
         io.github.optical002.godot.register.editor.EditorIntegration
           .registerAtEditorLevel()
+        Log.trace("initialize(EDITOR): end")
+      } else {
+        Log.trace(s"initialize: level ${level.toInt} (no-op)")
       }
+      Log.trace(s"initialize: EXIT level=${level.toInt}")
     }
 
   // Name of the file the sbt `build` task stamps (epoch millis) right after it
@@ -125,8 +141,9 @@ object GodotEngine {
    */
   private def reloadElapsedMs(): Option[Long] =
     try {
+      Log.trace("reloadElapsedMs: begin")
       val f = new java.io.File(ReloadStampFile)
-      if (!f.exists()) None
+      if (!f.exists()) { Log.trace("reloadElapsedMs: stamp absent"); None }
       else {
         val stamp =
           new String(java.nio.file.Files.readAllBytes(f.toPath)).trim.toLong
@@ -137,13 +154,19 @@ object GodotEngine {
 
   private val deinitialize: GDExtensionDeinitializeCallback =
     (userdata: CVoidPtr, level: GDExtensionInitializationLevel) => {
+      Log.trace(s"deinitialize: level=${level.toInt}")
       if (level == GDEXTENSION_INITIALIZATION_SCENE) {
-        // NOTE: we deliberately do NOT unregister classes here. On an editor
-        // hot-reload the new library image initializes before the old one is
-        // deinitialized, so a deinit-side unregister races the new image's
-        // registration and produces "unregister unexisting" errors. Instead,
-        // registration is made reload-safe on the init side: `register` probes
-        // ClassDB and unregisters any stale copy before re-registering.
+        // Unregister this (old) image's classes as part of its teardown — the
+        // standard GDExtension reload protocol. Timestamped reload logs confirm
+        // the old image fully deinitializes BEFORE the new image's `run`/
+        // `initialize` (no interleaving), so this does not race the new
+        // registration. Cleaning up here gives Godot a well-formed
+        // unregister(old) -> register(new) -> recreate_instance(new) handoff;
+        // without it the live editor instances are never rebound and inspecting
+        // them after a reload freezes the editor.
+        Log.trace("deinitialize(SCENE): unregisterAll begin")
+        io.github.optical002.godot.register.ClassRegistration.unregisterAll()
+        Log.trace("deinitialize(SCENE): unregisterAll done")
         Log.file("deinitialize(SCENE)")
       }
     }

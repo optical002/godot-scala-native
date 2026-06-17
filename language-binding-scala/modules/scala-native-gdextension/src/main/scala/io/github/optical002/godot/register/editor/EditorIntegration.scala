@@ -27,6 +27,7 @@ object EditorIntegration {
 
   /** Register the editor tool classes and add the plugin. Reload-safe. */
   def registerAtEditorLevel(): Unit = {
+    Log.trace("registerAtEditorLevel: BEGIN")
     ClassRegistration.register(
       ClassDescriptor(
         className = "ScalaExportInspectorPlugin",
@@ -45,7 +46,9 @@ object EditorIntegration {
         isRuntime = false
       )
     )
+    Log.trace("registerAtEditorLevel: editor_add_plugin(ScalaExportPlugin) begin")
     Godot.interface.editor_add_plugin(StringNames.cached("ScalaExportPlugin").ptr)
+    Log.trace("registerAtEditorLevel: editor_add_plugin returned")
     Log.file("[editor] registered ScalaExportPlugin + inspector plugin")
   }
 }
@@ -55,24 +58,38 @@ final class ScalaExportPlugin extends EditorPlugin {
   private var inspector: EditorInspectorPlugin = null
 
   override def _enter_tree(): Unit = {
+    Log.trace("ScalaExportPlugin._enter_tree: BEGIN")
     val handle = Godot.interface.classdb_construct_object2(
       StringNames.cached("ScalaExportInspectorPlugin").ptr
     )
+    Log.trace("ScalaExportPlugin._enter_tree: inspector constructed")
     inspector = new EditorInspectorPlugin {}.withHost(handle)
+    Log.trace("ScalaExportPlugin._enter_tree: addInspectorPlugin begin")
     addInspectorPlugin(inspector)
+    Log.trace("ScalaExportPlugin._enter_tree: END")
     Log.file("[editor] ScalaExportPlugin: inspector plugin installed")
   }
 
-  override def _exit_tree(): Unit =
+  override def _exit_tree(): Unit = {
+    Log.trace("ScalaExportPlugin._exit_tree: BEGIN")
     if (inspector != null) {
       removeInspectorPlugin(inspector)
       inspector = null
     }
+    Log.trace("ScalaExportPlugin._exit_tree: END")
+  }
 }
 
 /** Inspector plugin that recognises `Tscn[T]` scene exports. */
 final class ScalaExportInspectorPlugin extends EditorInspectorPlugin {
-  override def _can_handle(obj: GodotObject): Boolean = true
+  // Inert for now. This plugin's only intended job is filtering the scene picker
+  // for `Tscn[T]` exports, which is unimplemented (`_parse_property` always
+  // returns false and just logs). Claiming objects (returning true) makes Godot
+  // route every property of every inspected object — and the sub-inspector it
+  // builds for a custom `Resource` property — through our Scala dispatch; during
+  // an editor hot-reload that reentrant path deadlocks the editor. Until the
+  // scene-picker feature is built, stay out of the inspector entirely.
+  override def _can_handle(obj: GodotObject): Boolean = false
 
   override def _parse_property(
     obj: GodotObject,

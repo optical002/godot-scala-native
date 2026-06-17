@@ -70,7 +70,11 @@ object MethodRegistration {
       methodName,
       argTypes = Nil,
       returnType = Some(et.variantType),
-      dispatch = (inst, _args, _n, rRet) => et.toVariant(get(inst), rRet)
+      dispatch = (inst, _args, _n, rRet) => {
+        io.github.optical002.godot.Log.trace(s"EXPORT-GET: $className.$methodName begin")
+        et.toVariant(get(inst), rRet)
+        io.github.optical002.godot.Log.trace(s"EXPORT-GET: $className.$methodName done")
+      }
     )
 
   /** Setter backed by an [[ExportType]]. */
@@ -84,7 +88,11 @@ object MethodRegistration {
       methodName,
       argTypes = List(et.variantType),
       returnType = None,
-      dispatch = (inst, args, _n, _rRet) => set(inst, et.fromVariant(args(0)))
+      dispatch = (inst, args, _n, _rRet) => {
+        io.github.optical002.godot.Log.trace(s"EXPORT-SET: $className.$methodName begin")
+        set(inst, et.fromVariant(args(0)))
+        io.github.optical002.godot.Log.trace(s"EXPORT-SET: $className.$methodName done")
+      }
     )
 
   // --- core registration --------------------------------------------------
@@ -144,6 +152,9 @@ object MethodRegistration {
       !(!info).at_arguments_metadata = metaArr
     }
 
+    io.github.optical002.godot.Log.trace(
+      s"registerMethod: $className.$methodName (token=$methodToken, args=${argTypes.size}, hasReturn=${returnType.isDefined})"
+    )
     Godot.interface.classdb_register_extension_class_method(
       Godot.library,
       StringNames.cached(className).ptr,
@@ -160,10 +171,17 @@ object MethodRegistration {
       rReturn: GDExtensionVariantPtr,
       _rError: Ptr[GDExtensionCallError]
     ) => {
-      val scala = ClassRegistry.instanceFor(Tokens.fromPtr(instance))
-      val dispatch = methods.get(Tokens.fromPtr(methodUserdata))
+      val instTok = Tokens.fromPtr(instance)
+      val mTok = Tokens.fromPtr(methodUserdata)
+      val scala = ClassRegistry.instanceFor(instTok)
+      val dispatch = methods.get(mTok)
+      io.github.optical002.godot.Log.trace(
+        s"callTrampoline: ENTER methodToken=$mTok instToken=$instTok argc=$argCount " +
+          s"scala=${if (scala == null) "null" else scala.getClass.getSimpleName} dispatch=${if (dispatch == null) "null" else "ok"}"
+      )
       if (scala != null && dispatch != null)
         dispatch(scala, args, argCount.toLong, rReturn)
+      io.github.optical002.godot.Log.trace(s"callTrampoline: EXIT methodToken=$mTok instToken=$instTok")
     }
 
   // --- helpers ------------------------------------------------------------

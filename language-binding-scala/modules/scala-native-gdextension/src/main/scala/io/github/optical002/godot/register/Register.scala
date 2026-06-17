@@ -56,6 +56,17 @@ object Register {
     }
     val baseNameExpr = Expr(baseName)
 
+    // --- runtime vs. tool class ------------------------------------------
+    // `is_runtime` is only meaningful for Nodes: it keeps the editor from
+    // ticking their _process/_ready while merely editing a scene. Resources
+    // (and any other non-Node Object) are never ticked, and they must be REAL
+    // instances in the editor because you edit and save them there. Registering
+    // a Resource as runtime sends the editor down its placeholder/recreate path,
+    // which hangs the editor on hot-reload when the resource is referenced by an
+    // open scene. So: Node subtree -> runtime; everything else -> tool/non-runtime.
+    val isRuntimeExpr =
+      Expr(tpe <:< TypeRepr.of[io.github.optical002.godot.codegen.engine.Node])
+
     // --- overridden virtuals ---------------------------------------------
     val baseSym = TypeRepr.of[GodotScriptClass].typeSymbol
     def declaresOverride(name: String): Boolean = {
@@ -250,7 +261,8 @@ object Register {
           className = $classNameExpr,
           parentClassName = $baseNameExpr,
           factory = $factory,
-          overriddenVirtuals = $overridden
+          overriddenVirtuals = $overridden,
+          isRuntime = $isRuntimeExpr
         )
       )
     }

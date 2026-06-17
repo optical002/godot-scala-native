@@ -26,6 +26,19 @@ decoding (`StringName.toScala`), e.g. in `get_virtual` dispatch.
 - Registration must be reload-safe (probe + unregister stale before register);
   do NOT unregister on deinit (races the new image → "unregister unexisting").
 - `is_runtime=1` so virtuals don't run while editing.
+- **`is_runtime` is Node-only**: `Register.auto` sets `ClassDescriptor.isRuntime`
+  from `T <: codegen.engine.Node`. Nodes are runtime (editor doesn't tick their
+  `_process`/`_ready`); **Resources / other Objects must be non-runtime**. A
+  custom `Resource` registered as runtime makes the editor use a placeholder and
+  go through the placeholder↔real recreate path on hot-reload — which **freezes
+  the editor** when the resource is referenced by an open scene.
+- **Editor inspector plugin must stay inert when idle**: `ScalaExportInspectorPlugin._can_handle`
+  returns `true` only when `SceneExportRegistry.size > 0` (a real `Tscn[T]`
+  export exists). Returning `true` unconditionally routes every property of every
+  inspected object through our `_parse_property` Scala dispatch; on hot-reload,
+  the sub-inspector Godot builds for a custom `Resource` property (`Tres[T]`)
+  then **deadlocks/freezes the editor**. `_parse_property` never takes a property
+  over (always false), so this guard is behaviour-preserving.
 - **Reload detection + timing**: `ClassRegistration.register` finding a class
   already in ClassDB (non-null tag) == hot-reload (a first load finds none);
   exposed via `ClassRegistration.consumeReloadDetected()`. On reload,
