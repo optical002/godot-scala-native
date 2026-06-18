@@ -7,7 +7,12 @@ For holding/managing engine objects you fetch or construct.
   `.get` (typed wrapper via `cls.wrap`), `.instanceId`, `.cast[U]`, `.free`,
   `.unref`.
 - **`GodotClass[T]`** — typeclass: `className`, `isRefCounted`, `wrap`/`unwrap`.
-  One `given` is generated per engine class (Layer 3).
+  One `given` is generated per engine class (Layer 3); user classes get
+  `GodotClass.derived`. `derived.wrap` builds a throwaway `new T(...)` then rebinds
+  via `withHost`, so it passes `null.asInstanceOf[A]` (0/false/null) for each ctor
+  param — cheap, and avoids the recursion real defaults would cause for a
+  self-referential class (e.g. `Player(var scene: Tscn[Player])`). Concrete
+  classes only; ctor params are fine (no-arg-only restriction was removed).
 - **`ClassTags.scala`** — caches `classdb_get_class_tag(name)` for `object_cast_to`.
 
 ## Two lifetime regimes

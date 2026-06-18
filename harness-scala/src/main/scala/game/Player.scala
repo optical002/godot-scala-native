@@ -3,46 +3,66 @@ package game
 import io.github.optical002.godot.GodotPrint
 import io.github.optical002.godot.builtin.{Dict, Vector2}
 import io.github.optical002.godot.codegen.engine.Node2D
-import io.github.optical002.godot.engine.{Gd, Tres, Tscn}
+import io.github.optical002.godot.engine.{Tres, Tscn}
 import io.github.optical002.godot.register.*
+
+/** Player's high-level state, exported as a Godot ENUM property. */
+enum CharacterState {
+  case Idle, Walking, Running, Jumping, Falling
+}
 
 /**
  * Example game class: a `Node2D` written in Scala that moves itself every
- * frame, exposes a method and an `@gdexport` property to Godot, and emits a
- * signal.
+ * frame, exposes a method and exported properties to Godot, and emits a signal.
  *
- * It extends the engine class directly (`extends Node2D`), so it inherits all
- * of Node2D's methods and the engine virtuals. Members are annotated with
- * `@func` / `@gdexport` / `@signal`; `Register.auto[Player]()` scans them and
- * derives the Godot base (`Node2D`) from the superclass. No registration code.
+ * It extends the engine class directly (`extends Node2D`), so it inherits all of
+ * Node2D's methods and the engine virtuals. The exported properties are written
+ * as `var` **constructor params** — every `var` param auto-exports (no
+ * `@gdexport` needed) and needs **no default**: the macro factory fills each one
+ * from its type's `DefaultValue`. A bare game class also needs no `Gd`/`Tres`
+ * wrapper: a node type stands in for `Gd[T]` and a resource type for `Tres[T]`,
+ * with the matching default (null / unassigned). So `var projectile: Projectile`
+ * is a Required node reference, defaulting to null — no wrapper, no `= ...`.
+ * `Option[T]` → `None`, `Tscn[T]` → unassigned, `Dict` → empty, enum → first
+ * case. Write an explicit `= ...` only to override, as `speed` does.
+ * `Register.auto[Player]()` derives the Godot base (`Node2D`) from the
+ * superclass. No registration code.
  */
-final class Player extends Node2D {
+final class Player(
+  /** Editable in the inspector and from GDScript (explicit non-zero default). */
+  var speed: Double = 120.0,
+  /**
+   * Optional projectile reference — the editor allows leaving it empty. Bare
+   * node type: `Option[Projectile]` is shorthand for `Option[Gd[Projectile]]`.
+   */
+  var maybeProjectile: Option[Projectile],
+  /**
+   * Required projectile reference. Bare node type: `Projectile` stands in for
+   * `Gd[Projectile]` (== Required), defaulting to null — no wrapper, no default.
+   */
+  var projectile: Projectile,
+  /**
+   * Optional stats resource — the inspector shows a filesystem resource picker.
+   * Bare resource type: `Option[PlayerStats]` is shorthand for
+   * `Option[Tres[PlayerStats]]`.
+   */
+  var maybeStats: Option[PlayerStats],
+  /**
+   * Required stats resource. Bare resource type: `PlayerStats` stands in for
+   * `Tres[PlayerStats]` (== Required), unassigned by default.
+   */
+  var stats: PlayerStats,
+  /** Optional scene whose root node is a Player (`.tscn` picker). */
+  var maybeScene: Option[Tscn[Player]],
+  /** Required scene whose root node is a Player (bare `Tscn` == Required). */
+  var scene: Tscn[Player],
+  /** Typed dictionary: Int level/slot id -> a PlayerStats resource. */
+  var statsById: Dict[Int, Tres[PlayerStats]],
+  /** Current high-level state, shown as an enum dropdown in the inspector. */
+  var characterState: CharacterState
+) extends Node2D {
   private var elapsed: Double = 0.0
   private var frame = 0
-
-  /** Editable in the inspector and from GDScript. */
-  @gdexport var speed: Double = 120.0
-
-  /** Optional projectile reference — the editor allows leaving it empty. */
-  @gdexport var maybeProjectile: Option[Gd[Projectile]] = None
-
-  /** Required projectile reference (bare `Gd` == Required; null if unassigned). */
-  @gdexport var projectile: Gd[Projectile] = Gd.nullOf
-
-  /** Optional stats resource — the inspector shows a filesystem resource picker. */
-  @gdexport var maybeStats: Option[Tres[PlayerStats]] = None
-
-  /** Required stats resource (bare `Tres` == Required; unassigned by default). */
-  @gdexport var stats: Tres[PlayerStats] = Tres.unassigned[PlayerStats]
-
-  /** Optional scene whose root node is a Player (`.tscn` picker). */
-  @gdexport var maybeScene: Option[Tscn[Player]] = None
-
-  /** Required scene whose root node is a Player (bare `Tscn` == Required). */
-  @gdexport var scene: Tscn[Player] = Tscn.unassigned[Player]
-
-  /** Typed dictionary: Int level/slot id -> a PlayerStats resource. */
-  @gdexport var statsById: Dict[Int, Tres[PlayerStats]] = Dict.empty
 
   /** Callable from Godot/GDScript. */
   @func def getScore(): Long = (elapsed * 10).toLong

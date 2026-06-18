@@ -12,10 +12,14 @@ import scala.meta._
  * this scanner parses the game sources at build time and generates the list.
  *
  * A class is registered iff it is a concrete `class` (not abstract, not a trait
- * or object), its primary constructor takes no parameters (Godot's factory
- * builds instances with no args), and its parent chain reaches a Godot engine
- * class — either directly or through other classes in this module (so an
- * abstract base extending an engine class still links its concrete subclasses).
+ * or object), every primary-constructor parameter is constructible with no
+ * caller args — i.e. it either has a default OR is a `var` (the macro factory
+ * fills an un-defaulted `var` from its type's DefaultValue; see Register.scala)
+ * — and its parent chain reaches a Godot engine class, either directly or
+ * through other classes in this module (so an abstract base extending an engine
+ * class still links its concrete subclasses). A zero-param class is vacuously
+ * fine; a `case class` (or plain class) whose params are all `var` thus
+ * qualifies, and the macro auto-exports those `var` params.
  */
 object RegistrationScan {
 
@@ -23,7 +27,7 @@ object RegistrationScan {
     pkg: String,
     name: String,
     isAbstract: Boolean,
-    ctorParams: Int,
+    allParamsConstructible: Boolean,
     parent: Option[String]
   )
 
@@ -55,7 +59,7 @@ object RegistrationScan {
     val registerable = classes
       .filter { c =>
         !c.isAbstract &&
-        c.ctorParams == 0 &&
+        c.allParamsConstructible &&
         c.parent.exists(reachesEngine(_, Set(c.name)))
       }
       .sortBy(c => (c.pkg, c.name))
@@ -122,7 +126,9 @@ object RegistrationScan {
             pkg = pkg,
             name = c.name.value,
             isAbstract = c.mods.exists(_.is[Mod.Abstract]),
-            ctorParams = c.ctor.paramss.iterator.map(_.size).sum,
+            allParamsConstructible = c.ctor.paramss.forall(_.forall { p =>
+              p.default.isDefined || p.mods.exists(_.is[Mod.VarParam])
+            }),
             parent = c.templ.inits.headOption.map(i => typeName(i.tpe))
           )
         )

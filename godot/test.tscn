@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c4an27spm0lh8"]
 
 [ext_resource type="PlayerStats" uid="uid://b2iwotqttl8jt" path="res://new_player_stats.tres" id="1_37kl0"]
+[ext_resource type="PackedScene" uid="uid://b0sqyjy0v2r0q" path="res://node_3d.tscn" id="2_8uh7m"]
 
 [sub_resource type="PlayerStats" id="PlayerStats_8uh7m"]
 
@@ -9,5 +10,10 @@ maybe_projectile = NodePath("Projectile")
 projectile = NodePath("Projectile")
 maybe_stats = ExtResource("1_37kl0")
 stats = SubResource("PlayerStats_8uh7m")
+character_state = 3
 
 [node name="Projectile" type="Projectile" parent="." unique_id=1624292338]
+
+[node name="Enemy" type="Enemy" parent="." unique_id=1644787849 node_paths=PackedStringArray("projectile")]
+projectile = NodePath("../Projectile")
+scene = ExtResource("2_8uh7m")

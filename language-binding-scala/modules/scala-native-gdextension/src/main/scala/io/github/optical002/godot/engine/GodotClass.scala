@@ -47,16 +47,26 @@ object GodotClass {
       report.errorAndAbort(
         s"Cannot derive GodotClass for abstract ${sym.name}; only concrete registered classes"
       )
-    if (sym.primaryConstructor.paramSymss.flatten.nonEmpty)
-      report.errorAndAbort(
-        s"Cannot derive GodotClass for ${sym.name}: its constructor must take no arguments"
-      )
 
     val name = Expr(sym.name)
     val isRc = Expr(tpe <:< TypeRepr.of[RefCounted])
-    // `new T()` (a fresh Scala wrapper); bound to the handle in `wrap` below.
-    val fresh =
-      Apply(Select(New(Inferred(tpe)), sym.primaryConstructor), Nil).asExprOf[T]
+    // A fresh Scala wrapper, immediately rebound to the real handle via
+    // `withHost` — so the constructor-param values are throwaway. We pass the
+    // zero value for each (`null.asInstanceOf[A]`: null for refs, 0/false for
+    // primitives) rather than summoning real defaults. That keeps `wrap` cheap
+    // (no allocation per call) and, crucially, breaks the recursion a real
+    // default would cause for a self-referential class (e.g. a `Player` whose
+    // ctor takes a `Tscn[Player]` would otherwise need `GodotClass[Player]`).
+    val ctor = sym.primaryConstructor
+    val ctorArgs: List[Term] =
+      ctor.paramSymss.flatten.filterNot(_.isType).map { p =>
+        val ptpe = p.tree match {
+          case v: ValDef => v.tpt.tpe
+          case _         => TypeRepr.of[Any]
+        }
+        ptpe.asType match { case '[a] => '{ null.asInstanceOf[a] }.asTerm }
+      }
+    val fresh = Apply(Select(New(Inferred(tpe)), ctor), ctorArgs).asExprOf[T]
 
     '{
       new GodotClass[T] {

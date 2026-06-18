@@ -43,15 +43,20 @@ object Register {
     // --- engine base class from the direct superclass --------------------
     // `class Player extends Node2D` -> the Godot parent is `Node2D`. We take the
     // first non-trait base class above T; its simple name is the engine class.
+    // Filtering out traits matters for `case class`es, which the compiler also
+    // mixes with `Product`/`Serializable` — these can sort ahead of the real
+    // superclass in the linearization.
     val baseName: String = {
       val supers = sym.typeRef.baseClasses
-      // baseClasses lists T then its ancestors most-derived first. The element
-      // right after T (skipping T itself) is the direct engine superclass.
-      val parent = supers.drop(1).headOption.getOrElse(
-        report.errorAndAbort(
-          s"$className must extend a generated Godot engine class, e.g. `class $className extends Node2D`"
+      // baseClasses lists T then its ancestors most-derived first. The first
+      // class (non-trait) above T is the direct engine superclass.
+      val parent = supers.drop(1)
+        .find(s => !s.flags.is(Flags.Trait))
+        .getOrElse(
+          report.errorAndAbort(
+            s"$className must extend a generated Godot engine class, e.g. `class $className extends Node2D`"
+          )
         )
-      )
       parent.name
     }
     val baseNameExpr = Expr(baseName)
@@ -245,13 +250,94 @@ object Register {
     def registerSignalFor(m: Symbol): Expr[Unit] =
       '{ SignalRegistration.registerSignal($classNameExpr, ${ Expr(snake(m.name)) }) }
 
+    // --- constructor-param auto-export ------------------------------------
+    // Any class (case or not) extending an engine class exports each `var`
+    // primary-ctor param as if `@gdexport` were inlined on it — a `var` so a
+    // setter exists for Godot to write through (`val`/plain params are skipped
+    // silently). Params need no explicit default: the factory below fills any
+    // un-defaulted one from its type's `DefaultValue` (an explicit `= ...` still
+    // wins). So `class Player(var projectile: Gd[Projectile]) extends Node2D`
+    // exports `projectile` with no annotation and no default.
+    val ctorParamFields: List[Symbol] = {
+      val paramNames = sym.primaryConstructor.paramSymss.flatten.map(_.name).toSet
+      fields.filter(f => paramNames.contains(f.name) && f.flags.is(Flags.Mutable))
+    }
+
     val funcRegs = methods.filter(hasAnn(_, funcAnn)).map(registerFuncFor)
-    val exportRegs = fields.filter(hasAnn(_, exportAnn)).map(registerExportFor)
+    // Body-annotated exports plus the case-class ctor-param exports, de-duped by
+    // name so a param that is also `@gdexport`-annotated only registers once.
+    val exportFields =
+      (fields.filter(hasAnn(_, exportAnn)) ++ ctorParamFields)
+        .foldLeft((Set.empty[String], List.empty[Symbol])) {
+          case ((seen, acc), f) =>
+            if (seen.contains(f.name)) (seen, acc)
+            else (seen + f.name, f :: acc)
+        }
+        ._2
+        .reverse
+    val exportRegs = exportFields.map(registerExportFor)
     val signalRegs = methods.filter(hasAnn(_, signalAnn)).map(registerSignalFor)
 
     // --- assemble ---------------------------------------------------------
+    // Godot builds instances with no args, so we must supply every primary-ctor
+    // param explicitly (a `Nil` Apply does NOT fill defaults). For each param,
+    // in order of preference:
+    //   1. the user's explicit default, if any — its getter lives on the
+    //      companion as `<init>$default$N` (mangled `$lessinit$greater$default$N`);
+    //   2. otherwise a value summoned from the param type's `DefaultValue`;
+    //   3. otherwise, for a parameterless enum, its first case (`fromOrdinal(0)`).
+    // So params need no `= ...` for any supported export type.
     val factory: Expr[() => GodotScriptClass] = {
-      val newExpr = Apply(Select(New(Inferred(tpe)), tpe.typeSymbol.primaryConstructor), Nil)
+      val ctor = sym.primaryConstructor
+      val params = ctor.paramSymss.flatten.filterNot(_.isType)
+      val companion = sym.companionModule
+      val defaultGetters: Map[String, Symbol] =
+        if (companion.exists)
+          companion.declaredMethods
+            .filter(_.name.contains("$default$"))
+            .map(m => m.name -> m)
+            .toMap
+        else Map.empty
+
+      def defaultValueArg(p: Symbol): Term = {
+        val ptpe = p.tree match {
+          case v: ValDef => v.tpt.tpe
+          case _ =>
+            report.errorAndAbort(
+              s"$className: cannot determine the type of constructor parameter '${p.name}'"
+            )
+        }
+        ptpe.asType match {
+          case '[a] =>
+            Expr.summon[DefaultValue[a]] match {
+              case Some(dv) => '{ $dv.default }.asTerm
+              case None =>
+                val es = TypeRepr.of[a].typeSymbol
+                if (es.flags.is(Flags.Enum))
+                  Select
+                    .unique(Ref(es.companionModule), "fromOrdinal")
+                    .appliedTo(Literal(IntConstant(0)))
+                else
+                  report.errorAndAbort(
+                    s"$className: constructor parameter '${p.name}' of type " +
+                      s"'${typeName(ptpe)}' has no default — give it one (`= ...`) " +
+                      "or provide a DefaultValue given for its type"
+                  )
+            }
+        }
+      }
+
+      val args: List[Term] = params.zipWithIndex.map { case (p, i) =>
+        val direct = s"$$lessinit$$greater$$default$$${i + 1}"
+        val alt    = s"<init>$$default$$${i + 1}"
+        defaultGetters.get(direct).orElse(defaultGetters.get(alt)) match {
+          // The getter is a nullary method (`def ...$default$N = <expr>`), so
+          // referencing it via Select evaluates it — no empty arg list.
+          case Some(m) => Select(Ref(companion), m)
+          case None    => defaultValueArg(p)
+        }
+      }
+      val newExpr = Apply(Select(New(Inferred(tpe)), ctor), args)
       '{ () => ${ newExpr.asExprOf[T] }.asInstanceOf[GodotScriptClass] }
     }
 

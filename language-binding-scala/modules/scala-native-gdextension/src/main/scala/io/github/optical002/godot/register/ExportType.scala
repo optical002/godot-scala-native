@@ -3,7 +3,7 @@ package io.github.optical002.godot.register
 import scala.scalanative.unsigned.*
 import io.github.optical002.godot.builtin.*
 import io.github.optical002.godot.engine.*
-import io.github.optical002.godot.codegen.engine.PackedScene
+import io.github.optical002.godot.codegen.engine.{PackedScene, Node, Resource}
 import io.github.optical002.godot.codegen.gdextensioninterface.types.*
 import io.github.optical002.godot.codegen.gdextensioninterface.types.GDExtensionVariantType.*
 
@@ -126,6 +126,28 @@ trait RefLeaf[A] {
 }
 
 object RefLeaf {
+  /**
+   * Bare node type as shorthand for `Gd[T]`: `@gdexport var p: Option[Projectile]`
+   * means `Option[Gd[Projectile]]`. The node-vs-resource hint is inferred from the
+   * class hierarchy, so no wrapper is needed. Marshals via `GodotClass.wrap/unwrap`.
+   */
+  given bareNodeLeaf[T <: Node](using cls: GodotClass[T]): RefLeaf[T] =
+    new RefLeaf[T] {
+      def hint = PropertyHint.NodeType
+      def className = cls.className
+      def handleOf(a: T) = cls.unwrap(a).objectPtr
+      def fromHandle(p: GDExtensionObjectPtr) = cls.wrap(GodotObject.fromPtr(p))
+    }
+
+  /** Bare resource type as shorthand for `Tres[T]` (see [[bareNodeLeaf]]). */
+  given bareResourceLeaf[T <: Resource](using cls: GodotClass[T]): RefLeaf[T] =
+    new RefLeaf[T] {
+      def hint = PropertyHint.ResourceType
+      def className = cls.className
+      def handleOf(a: T) = cls.unwrap(a).objectPtr
+      def fromHandle(p: GDExtensionObjectPtr) = cls.wrap(GodotObject.fromPtr(p))
+    }
+
   given gdLeaf[T](using cls: GodotClass[T]): RefLeaf[Gd[T]] = new RefLeaf[Gd[T]] {
     def hint = PropertyHint.NodeType
     def className = cls.className

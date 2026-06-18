@@ -49,6 +49,7 @@ func _initialize() -> void:
 	o.free()
 
 	_check_player()
+	_check_enemy()
 	_done()
 
 # Player carries a typed dictionary export `stats_by_id: Dict[int, PlayerStats]`.
@@ -62,6 +63,30 @@ func _check_player() -> void:
 		props[pr.name] = pr
 	# key = int (T_INT, no hint); value = PlayerStats resource (OBJECT/RESOURCE).
 	_check_meta(props, "stats_by_id", T_DICT, H_TYPESTRING, "2:;24/17:PlayerStats", "")
+	# Bare-type export shorthand: `Option[Projectile]` (a Node) gets the NODE hint,
+	# `Option[PlayerStats]` (a Resource) gets the RESOURCE hint — no Gd/Tres wrapper.
+	_check_meta(props, "maybe_projectile", T_OBJECT, H_NODE,     "Projectile", "Projectile")
+	_check_meta(props, "maybe_stats",      T_OBJECT, H_RESOURCE, "PlayerStats", "PlayerStats")
+	# Bare Required form (no wrapper, no default): `var projectile: Projectile` ==
+	# Gd[Projectile] (NODE), `var stats: PlayerStats` == Tres[PlayerStats] (RESOURCE).
+	_check_meta(props, "projectile", T_OBJECT, H_NODE,     "Projectile",  "Projectile")
+	_check_meta(props, "stats",      T_OBJECT, H_RESOURCE, "PlayerStats", "PlayerStats")
+	# No default written: a fresh instance leaves the bare node reference null.
+	if p.get("projectile") != null:
+		_fail("projectile default should be null, got %s" % p.get("projectile"))
+	# Object round-trip through set()/get() on the bare node reference.
+	var proj = ClassDB.instantiate("Projectile")
+	p.set("projectile", proj)
+	if p.get("projectile") != proj:
+		_fail("projectile round-trip failed")
+	proj.free()
+	# enum: int-typed with ENUM hint listing the case names.
+	_check_meta(props, "character_state", T_INT, H_ENUM, "Idle,Walking,Running,Jumping,Falling", "")
+
+	# Enum round-trip (Running == 2).
+	p.set("character_state", 2)
+	if p.get("character_state") != 2:
+		_fail("character_state round-trip failed: got %s" % p.get("character_state"))
 
 	# Round-trip a {int -> PlayerStats} dictionary through set()/get().
 	var stats = ClassDB.instantiate("PlayerStats")
@@ -70,6 +95,33 @@ func _check_player() -> void:
 	if typeof(d) != TYPE_DICTIONARY or d.get(7) != stats:
 		_fail("stats_by_id round-trip failed: got %s" % d)
 	p.free()
+
+# Enemy is a `case class` node: every `var` constructor param is auto-exported
+# as if it carried `@gdexport`, with no per-field annotation in the body.
+func _check_enemy() -> void:
+	if not ClassDB.class_exists("Enemy"):
+		_fail("Enemy class not registered")
+		return
+	var e = ClassDB.instantiate("Enemy")
+	var props := {}
+	for pr in e.get_property_list():
+		props[pr.name] = pr
+	# hp: plain int; projectile: Option[Projectile] (Node hint); scene: Tscn[Player]
+	# (PackedScene resource hint). All from ctor params, none annotated.
+	_check_meta(props, "hp",         T_INT,    0,          "",            "")
+	_check_meta(props, "projectile", T_OBJECT, H_NODE,     "Projectile",  "Projectile")
+	_check_meta(props, "scene",      T_OBJECT, H_RESOURCE, "PackedScene", "PackedScene")
+
+	# Param value round-trips through set()/get().
+	e.set("hp", 42)
+	if e.get("hp") != 42:
+		_fail("hp round-trip failed: got %s" % e.get("hp"))
+	var proj = ClassDB.instantiate("Projectile")
+	e.set("projectile", proj)
+	if e.get("projectile") != proj:
+		_fail("projectile round-trip failed")
+	proj.free()
+	e.free()
 
 func _check_meta(props, name, type, hint, hint_string, class_name_):
 	if not props.has(name):
