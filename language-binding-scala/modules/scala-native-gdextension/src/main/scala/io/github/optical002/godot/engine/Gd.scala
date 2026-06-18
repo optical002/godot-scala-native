@@ -76,11 +76,23 @@ final class Gd[T] private (
 }
 
 object Gd {
+  import io.github.optical002.godot.builtin.{ToVariant, FromVariant}
+
   /** Wrap a raw handle with explicit class evidence (no ownership change). */
   def fromHandle[T](
     handle: GDExtensionObjectPtr
   )(using cls: GodotClass[T]): Gd[T] =
     new Gd[T](handle, cls)
+
+  /**
+   * OBJECT-Variant marshalling for a live object reference, so a `Gd[T]` can be
+   * a [[io.github.optical002.godot.builtin.Dict]] key or value. A null handle
+   * round-trips as an empty (NIL) object Variant.
+   */
+  given toVariant[T]: ToVariant[Gd[T]] =
+    (value, dest) => ObjectVariant.write(value.objectPtr, dest)
+  given fromVariant[T](using GodotClass[T]): FromVariant[Gd[T]] =
+    v => Gd.fromHandle[T](ObjectVariant.read(v))
 
   /** A null `Gd[T]`. */
   def nullOf[T](using cls: GodotClass[T]): Gd[T] = new Gd[T](null, cls)

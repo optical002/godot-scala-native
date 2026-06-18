@@ -20,3 +20,11 @@ For holding/managing engine objects you fetch or construct.
 ## Casting
 `gd.cast[U]` uses `object_cast_to(handle, ClassTags.tag(U))`; returns a null
 `Gd[U]` if not actually a `U` (real engine type check, not a Scala cast).
+
+## Variant marshalling for object refs
+`object Gd` and `object Tres` (in `ExportWrappers.scala`) each provide
+`given ToVariant`/`FromVariant` over `ObjectVariant.write/read` (null handle ⇄
+empty/NIL OBJECT Variant; `from` needs `GodotClass[T]`). This is what lets a
+`Dict[K,V]` hold object values, e.g. `Dict[Int, Tres[PlayerStats]]` (the Dict
+givens require `ToVariant`/`FromVariant` for K and V). The `@gdexport` ref path
+itself still goes through `RefLeaf`/`ObjectVariant`, not these givens.

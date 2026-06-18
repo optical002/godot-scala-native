@@ -38,8 +38,20 @@ final class Tres[T] private[engine] (val raw: Gd[T]) {
   def toOption: Option[Gd[T]] = if (raw.isNull) None else Some(raw)
 }
 object Tres {
+  import io.github.optical002.godot.builtin.{ToVariant, FromVariant}
+
   def apply[T](g: Gd[T]): Tres[T] = new Tres(g)
   def unassigned[T](using cls: GodotClass[T]): Tres[T] = new Tres(Gd.nullOf[T])
+
+  /**
+   * OBJECT-Variant marshalling for a typed resource reference, so a `Tres[T]`
+   * can be a [[io.github.optical002.godot.builtin.Dict]] key or value. A null
+   * `raw` round-trips as an empty (NIL) object Variant.
+   */
+  given toVariant[T]: ToVariant[Tres[T]] =
+    (value, dest) => ObjectVariant.write(value.raw.objectPtr, dest)
+  given fromVariant[T](using GodotClass[T]): FromVariant[Tres[T]] =
+    v => Tres(Gd.fromHandle[T](ObjectVariant.read(v)))
 }
 
 /**

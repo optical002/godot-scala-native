@@ -1,7 +1,7 @@
 package game
 
 import io.github.optical002.godot.GodotPrint
-import io.github.optical002.godot.builtin.Vector2
+import io.github.optical002.godot.builtin.{Dict, Vector2}
 import io.github.optical002.godot.codegen.engine.Node2D
 import io.github.optical002.godot.engine.{Gd, Tres, Tscn}
 import io.github.optical002.godot.register.*
@@ -40,6 +40,9 @@ final class Player extends Node2D {
 
   /** Required scene whose root node is a Player (bare `Tscn` == Required). */
   @gdexport var scene: Tscn[Player] = Tscn.unassigned[Player]
+
+  /** Typed dictionary: Int level/slot id -> a PlayerStats resource. */
+  @gdexport var statsById: Dict[Int, Tres[PlayerStats]] = Dict.empty
 
   /** Callable from Godot/GDScript. */
   @func def getScore(): Long = (elapsed * 10).toLong

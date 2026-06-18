@@ -47,7 +47,29 @@ func _initialize() -> void:
 	_roundtrips(o)
 
 	o.free()
+
+	_check_player()
 	_done()
+
+# Player carries a typed dictionary export `stats_by_id: Dict[int, PlayerStats]`.
+func _check_player() -> void:
+	if not ClassDB.class_exists("Player"):
+		_fail("Player class not registered")
+		return
+	var p = ClassDB.instantiate("Player")
+	var props := {}
+	for pr in p.get_property_list():
+		props[pr.name] = pr
+	# key = int (T_INT, no hint); value = PlayerStats resource (OBJECT/RESOURCE).
+	_check_meta(props, "stats_by_id", T_DICT, H_TYPESTRING, "2:;24/17:PlayerStats", "")
+
+	# Round-trip a {int -> PlayerStats} dictionary through set()/get().
+	var stats = ClassDB.instantiate("PlayerStats")
+	p.set("stats_by_id", {7: stats})
+	var d = p.get("stats_by_id")
+	if typeof(d) != TYPE_DICTIONARY or d.get(7) != stats:
+		_fail("stats_by_id round-trip failed: got %s" % d)
+	p.free()
 
 func _check_meta(props, name, type, hint, hint_string, class_name_):
 	if not props.has(name):
