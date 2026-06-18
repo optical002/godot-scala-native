@@ -120,6 +120,30 @@ class (abstract bases relay). (Scalameta checks `p.default.isDefined ||
 Mod.VarParam`.)
 Add a class → it registers; no edits to `GameEntry` or any list.
 
+## Custom-node inheritance (custom extends custom)
+A custom node may extend **another custom node**, not just an engine class —
+e.g. `class Skeleton(var skeletonName: String=…) extends Enemy(hp, …)`. It just
+works: the macro's base-name derivation (`baseClasses.drop(1).find(non-trait)`)
+yields the custom parent's name (`"Enemy"`), `declaresOverride` walks the whole
+chain so inherited virtual overrides are still detected, and Godot's ClassDB
+exposes the parent's properties/methods/signals on the child — the child's macro
+registers only its **own** declared members (no double-registration). Example:
+`harness-scala/src/main/scala/game/{Enemy,Skeleton}.scala`, verified by
+`godot/export_verify.gd` `_check_skeleton`.
+Requirements/gotchas:
+- The base must be an **open `class`** — not `final`, not a `case class` (Scala
+  forbids extending a case class). The child forwards the base's required ctor
+  args in its `extends Base(...)` clause; its own primary-ctor params must still
+  all be `var`-or-defaulted so the no-arg factory works.
+- **Ordering matters.** Godot needs a parent extension class registered *before*
+  its child, and refuses to *unregister* a class while a registered child still
+  inherits it. So: `RegistrationScan` emits parents-first (sorts by `depth` = hops
+  up the in-module parent chain, then pkg/name); `ClassRegistration.unregisterAll`
+  removes children-first (sorts by **descending** depth, using
+  `ClassRegistry.parentNameOf`). Don't revert these to plain alphabetical sorts.
+- A `String` property named after a built-in (e.g. `name` on `Node`) collides —
+  use a distinct field name (`skeletonName`).
+
 ## Reliability note (Scala Native DCE)
 SN dead-code-eliminates unreferenced classes and never runs module initializers
 at load — so truly self-registering classes don't work, and discovery must be at

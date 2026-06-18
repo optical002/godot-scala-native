@@ -6,7 +6,7 @@ import io.github.optical002.godot.engine.Tscn
 import io.github.optical002.godot.register.*
 
 /**
- * Example of the compact `case class` export form: every `var` constructor
+ * Example of the compact `var`-param export form: every `var` constructor
  * parameter behaves as if it carried an inlined `@gdexport`, so the class body
  * needs no per-field annotation. `Register.auto[Enemy]` exports the `var`
  * params; the build-time scanner registers the class because all its params are
@@ -17,8 +17,12 @@ import io.github.optical002.godot.register.*
  * **no default** — `hp` starts at 0, `projectile` at `None`, `scene` unassigned.
  * Write an explicit `= ...` only to override the type's natural default. Body
  * `@func` / `@signal` (and `@gdexport`s) still work alongside the params.
+ *
+ * Declared as a plain open `class` (not `final`, not `case`) so it can serve as
+ * the base of another custom node — see [[Skeleton]], which extends it and is
+ * registered with Godot as a node deriving from `Enemy`.
  */
-final case class Enemy(
+class Enemy(
   var hp: Int,
   var projectile: Option[Projectile],
   var scene: Tscn[Player]
@@ -31,5 +35,5 @@ final case class Enemy(
   @signal def died(): Unit = ()
 
   override def _ready(): Unit =
-    GodotPrint.print(s"Enemy._ready (case class, hp=$hp)")
+    GodotPrint.print(s"Enemy._ready (hp=$hp)")
 }

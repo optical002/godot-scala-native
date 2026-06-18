@@ -117,8 +117,19 @@ object ClassRegistration {
    */
   def unregisterAll(): Unit = {
     val names = ClassRegistry.registeredClassNames
-    io.github.optical002.godot.Log.trace(s"unregisterAll: ${names.length} classes")
-    names.foreach { name =>
+    // Godot refuses to unregister a class while a registered extension class
+    // still inherits from it, so unregister children before parents. `depth`
+    // counts hops up the chain of still-registered parents; ordering by
+    // descending depth puts the deepest subclasses first.
+    val present = names.toSet
+    def depth(n: String, seen: Set[String]): Int = {
+      val p = ClassRegistry.parentNameOf(n)
+      if (p != null && present.contains(p) && !seen.contains(p)) 1 + depth(p, seen + n)
+      else 0
+    }
+    val ordered = names.sortBy(n => -depth(n, Set(n)))
+    io.github.optical002.godot.Log.trace(s"unregisterAll: ${ordered.length} classes")
+    ordered.foreach { name =>
       val sn = StringNames.cached(name).ptr
       if (Godot.interface.classdb_get_class_tag(sn) != null) {
         io.github.optical002.godot.Log.trace(s"unregisterAll: unregister $name")

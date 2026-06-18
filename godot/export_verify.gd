@@ -50,6 +50,7 @@ func _initialize() -> void:
 
 	_check_player()
 	_check_enemy()
+	_check_skeleton()
 	_done()
 
 # Player carries a typed dictionary export `stats_by_id: Dict[int, PlayerStats]`.
@@ -96,7 +97,7 @@ func _check_player() -> void:
 		_fail("stats_by_id round-trip failed: got %s" % d)
 	p.free()
 
-# Enemy is a `case class` node: every `var` constructor param is auto-exported
+# Enemy is an open node class: every `var` constructor param is auto-exported
 # as if it carried `@gdexport`, with no per-field annotation in the body.
 func _check_enemy() -> void:
 	if not ClassDB.class_exists("Enemy"):
@@ -122,6 +123,35 @@ func _check_enemy() -> void:
 		_fail("projectile round-trip failed")
 	proj.free()
 	e.free()
+
+# Skeleton is a custom node that extends another custom node (Enemy). It must
+# register with Godot as a class deriving from Enemy: its own String property
+# `skeleton_name` plus everything inherited from Enemy (hp, remaining_health()).
+func _check_skeleton() -> void:
+	if not ClassDB.class_exists("Skeleton"):
+		_fail("Skeleton class not registered")
+		return
+	# Custom-to-custom parentage is recorded in Godot's ClassDB.
+	if ClassDB.get_parent_class("Skeleton") != "Enemy":
+		_fail("Skeleton parent: got %s, expected Enemy" % ClassDB.get_parent_class("Skeleton"))
+	var s = ClassDB.instantiate("Skeleton")
+	if not s.is_class("Enemy"):
+		_fail("Skeleton instance is not an Enemy")
+	var props := {}
+	for pr in s.get_property_list():
+		props[pr.name] = pr
+	# Own property (String) and an inherited one (Enemy.hp) both present.
+	_check_meta(props, "skeleton_name", TYPE_STRING, 0, "", "")
+	if not props.has("hp"):
+		_fail("Skeleton missing inherited 'hp' property")
+	# Inherited member round-trips, own property round-trips.
+	s.set("hp", 7)
+	if s.call("remaining_health") != 7:
+		_fail("inherited remaining_health() failed: got %s" % s.call("remaining_health"))
+	s.set("skeleton_name", "Rattles")
+	if s.get("skeleton_name") != "Rattles":
+		_fail("skeleton_name round-trip failed: got %s" % s.get("skeleton_name"))
+	s.free()
 
 func _check_meta(props, name, type, hint, hint_string, class_name_):
 	if not props.has(name):

@@ -56,13 +56,26 @@ object RegistrationScan {
           case None     => false
         }
 
+    // Godot requires a parent extension class to be registered before its
+    // child, so emit classes parents-first. `depth` counts hops up the
+    // in-module parent chain: a class rooted directly on an engine class is
+    // depth 0, its custom subclass depth 1, and so on. Single inheritance means
+    // a depth-ascending order is a valid topological order; (pkg, name) stays as
+    // a deterministic tiebreaker.
+    def depth(name: String, seen: Set[String]): Int =
+      byName.get(name).flatMap(_.parent) match {
+        case Some(p) if byName.contains(p) && !seen.contains(p) =>
+          1 + depth(p, seen + name)
+        case _ => 0
+      }
+
     val registerable = classes
       .filter { c =>
         !c.isAbstract &&
         c.allParamsConstructible &&
         c.parent.exists(reachesEngine(_, Set(c.name)))
       }
-      .sortBy(c => (c.pkg, c.name))
+      .sortBy(c => (depth(c.name, Set(c.name)), c.pkg, c.name))
 
     val calls =
       if (registerable.isEmpty) "    // (no game classes discovered)"

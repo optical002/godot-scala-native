@@ -52,6 +52,18 @@ object ClassRegistry {
   def registeredClassNames: Array[String] =
     classTokensByName.keySet().toArray(Array.empty[String])
 
+  /**
+   * The Godot parent-class name registered for `className`, or null if unknown.
+   * Lets callers order unregistration children-before-parents (Godot refuses to
+   * unregister a class while a registered extension class still inherits it).
+   */
+  def parentNameOf(className: String): String =
+    if (!classTokensByName.containsKey(className)) null
+    else {
+      val d = classes.get(classTokensByName.get(className))
+      if (d == null) null else d.parentClassName
+    }
+
   /** Forget all class registrations (instances are kept; see callers). */
   def clearClasses(): Unit = {
     classes.clear()
