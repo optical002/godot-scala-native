@@ -57,6 +57,26 @@ decoding (`StringName.toScala`), e.g. in `get_virtual` dispatch.
   (relative to Godot's CWD, like `godot-init`) and deletes it on reload. Headless
   one-shot runs never trigger it.
 
+## Editor widgets / signals (primitives + a hard gotcha)
+- **Callable→Scala + connect**: `builtin/Callable.scala` builds `Callable(object,
+  method)` (variant ctor index 2); `engine/Signals.connect` wires a signal to it
+  (`Object.connect` hash `1518946055`, via `Ptrcall.call3` + `PtrArg[Callable]`).
+  When fired, Godot calls `method` on the object → routes into Scala iff that
+  method is registered (`MethodRegistration.registerAction` = no-arg void).
+  `SignalRegistration.callDeferred` = `Object.call_deferred(name)` (hash
+  `3400424181`, vararg via `object_method_bind_call`, like `emit`).
+- **`@gdexport Tscn[T]` works** (PackedScene picker) but is **unfiltered** — Godot
+  exposes no root-type filter for its scene picker; `ScalaExportInspectorPlugin`
+  stays inert (`_can_handle=false`).
+- **GOTCHA (blocks the custom picker)**: a child `Control` (e.g. `Button`) added
+  to an **extension-created `EditorProperty`** (via `add_property_editor`)
+  **segfaults reading its theme on enter-tree** ("theme items too early") — and
+  this reproduces in `--headless` editor too (run `godot --headless --editor
+  --path . --quit-after N` to get a C++ backtrace). Unresolved across pre-tree /
+  `_ready` / `call_deferred` / minimal-`addChild` timings; likely a theme-owner
+  propagation issue. Filtered picker also needs missing codegen methods
+  (`PopupMenu.popup`, `DirAccess`/`PackedStringArray`, `EditorProperty.emit_changed`).
+
 ## Logging (split)
 `Log` (gdext) has split channels. Binding internals → `Log.file` (file
 `godot-init`). Game code → `GodotPrint.print` (Godot Output). Don't mix.

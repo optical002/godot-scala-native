@@ -89,6 +89,19 @@ object PtrArg {
       !b.asInstanceOf[Ptr[GDExtensionStringNamePtr]] = v.ptr
   }
 
+  /**
+   * Callable arguments: the buffer holds the 16-byte Callable value, copied from
+   * the caller-built storage (a Callable is an inline builtin, not a handle).
+   */
+  given PtrArg[Callable] with {
+    def size = BuiltinSizes.Callable
+    def write(v: Callable, b: Ptr[Byte]) = {
+      val src = v.ptr
+      var i = 0
+      while (i < BuiltinSizes.Callable) { b(i) = src(i); i += 1 }
+    }
+  }
+
   // Fixed-layout math builtins (see MathBuiltins.scala / Vector2 / Color).
   given PtrArg[Vector2i] with {
     def size = BuiltinSizes.Vector2i

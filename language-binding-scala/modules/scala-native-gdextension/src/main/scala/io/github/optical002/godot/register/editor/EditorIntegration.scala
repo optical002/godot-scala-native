@@ -9,25 +9,31 @@ import io.github.optical002.godot.register.*
 /**
  * Editor-side integration for typed scene (`Tscn[T]`) exports.
  *
- * Godot has no native property hint to filter a PackedScene picker by root-node
- * type, so we install an [[EditorInspectorPlugin]] that, for properties recorded
- * in [[SceneExportRegistry]] (i.e. `Tscn[T]` exports), knows the required root
- * type `T`. Registration happens at the EDITOR initialization level (these are
- * tool classes, `isRuntime=false`), driven from `GodotEngine`.
+ * Installs an [[EditorInspectorPlugin]]; for `Tscn[T]` properties (recorded in
+ * [[SceneExportRegistry]]) it knows the required root node type `T`. Registered
+ * at the EDITOR init level (tool classes, `isRuntime=false`).
  *
- * Status: the plugin pipeline (editor-level registration → `editor_add_plugin`
- * → `EditorPlugin._enter_tree` → `add_inspector_plugin` → the inspector's
- * `_can_handle`/`_parse_property`) is wired and exercised. The interactive
- * scene-picker widget that *rejects* a wrong-root scene needs a Callable→Scala
- * primitive (to react to the picker's selection signal) and is the remaining
- * follow-up; for now `_parse_property` detects scene exports and reports the
- * required root type.
+ * Status — the plugin pipeline (editor registration → `editor_add_plugin` →
+ * `EditorPlugin._enter_tree` → `add_inspector_plugin` → `_can_handle`/
+ * `_parse_property`) is wired and the reusable primitives for a custom picker
+ * exist (`Callable`, `Signals.connect`, `SignalRegistration.callDeferred`,
+ * `MethodRegistration.registerAction`, a custom `EditorProperty` that renders).
+ *
+ * **Follow-up (deferred):** a custom property editor that filters the scene
+ * picker by root type. Two blockers remain: (1) a child `Control` (e.g. a
+ * `Button`) added to an extension-created `EditorProperty` **segfaults reading
+ * its theme on enter-tree** ("theme items too early") — unresolved across
+ * pre-tree / `_ready` / `call_deferred` / minimal-`addChild` attempts; likely a
+ * theme-owner propagation issue for extension `EditorProperty`s. (2) The picker
+ * UI also needs engine methods absent from the curated codegen (`PopupMenu.popup`,
+ * `DirAccess`/`PackedStringArray` for scanning, `EditorProperty.emit_changed`).
+ * Until then the plugin stays inert and the default (unfiltered) PackedScene
+ * picker is used.
  */
 object EditorIntegration {
 
   /** Register the editor tool classes and add the plugin. Reload-safe. */
   def registerAtEditorLevel(): Unit = {
-    Log.trace("registerAtEditorLevel: BEGIN")
     ClassRegistration.register(
       ClassDescriptor(
         className = "ScalaExportInspectorPlugin",
@@ -46,9 +52,7 @@ object EditorIntegration {
         isRuntime = false
       )
     )
-    Log.trace("registerAtEditorLevel: editor_add_plugin(ScalaExportPlugin) begin")
     Godot.interface.editor_add_plugin(StringNames.cached("ScalaExportPlugin").ptr)
-    Log.trace("registerAtEditorLevel: editor_add_plugin returned")
     Log.file("[editor] registered ScalaExportPlugin + inspector plugin")
   }
 }
@@ -58,37 +62,27 @@ final class ScalaExportPlugin extends EditorPlugin {
   private var inspector: EditorInspectorPlugin = null
 
   override def _enter_tree(): Unit = {
-    Log.trace("ScalaExportPlugin._enter_tree: BEGIN")
     val handle = Godot.interface.classdb_construct_object2(
       StringNames.cached("ScalaExportInspectorPlugin").ptr
     )
-    Log.trace("ScalaExportPlugin._enter_tree: inspector constructed")
     inspector = new EditorInspectorPlugin {}.withHost(handle)
-    Log.trace("ScalaExportPlugin._enter_tree: addInspectorPlugin begin")
     addInspectorPlugin(inspector)
-    Log.trace("ScalaExportPlugin._enter_tree: END")
     Log.file("[editor] ScalaExportPlugin: inspector plugin installed")
   }
 
-  override def _exit_tree(): Unit = {
-    Log.trace("ScalaExportPlugin._exit_tree: BEGIN")
+  override def _exit_tree(): Unit =
     if (inspector != null) {
       removeInspectorPlugin(inspector)
       inspector = null
     }
-    Log.trace("ScalaExportPlugin._exit_tree: END")
-  }
 }
 
 /** Inspector plugin that recognises `Tscn[T]` scene exports. */
 final class ScalaExportInspectorPlugin extends EditorInspectorPlugin {
-  // Inert for now. This plugin's only intended job is filtering the scene picker
-  // for `Tscn[T]` exports, which is unimplemented (`_parse_property` always
-  // returns false and just logs). Claiming objects (returning true) makes Godot
-  // route every property of every inspected object — and the sub-inspector it
-  // builds for a custom `Resource` property — through our Scala dispatch; during
-  // an editor hot-reload that reentrant path deadlocks the editor. Until the
-  // scene-picker feature is built, stay out of the inspector entirely.
+  // Inert: a custom scene-picker editor is the deferred follow-up (see
+  // EditorIntegration's docs — blocked on a Godot child-control theme crash and
+  // some missing engine bindings). Returning false keeps Godot's default
+  // PackedScene picker and stays out of every other inspection.
   override def _can_handle(obj: GodotObject): Boolean = false
 
   override def _parse_property(
@@ -99,16 +93,5 @@ final class ScalaExportInspectorPlugin extends EditorInspectorPlugin {
     hintString: String,
     usage: Long,
     wide: Boolean
-  ): Boolean = {
-    val root = SceneExportRegistry.rootTypeByProp(name)
-    if (root != null) {
-      Log.file(
-        s"[editor] scene export '$name': restrict picker to scenes with root '$root'"
-      )
-      // Returning false keeps Godot's default PackedScene picker. A custom
-      // EditorProperty that rejects wrong-root scenes is the documented
-      // follow-up (needs a Callable->Scala primitive for the selection signal).
-      false
-    } else false
-  }
+  ): Boolean = false
 }

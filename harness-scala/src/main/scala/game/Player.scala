@@ -48,7 +48,7 @@ final class Player extends Node2D {
   @signal def pinged(): Unit = ()
 
   override def _ready(): Unit =
-    GodotPrint.print("Player._ready (extends Node2D) [reload probe 12]")
+    GodotPrint.print("Player._ready (extends Node2D)")
 
   override def _process(delta: Double): Unit = {
     elapsed += delta

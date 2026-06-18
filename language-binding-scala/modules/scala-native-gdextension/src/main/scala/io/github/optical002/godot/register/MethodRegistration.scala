@@ -95,6 +95,24 @@ object MethodRegistration {
       }
     )
 
+  /**
+   * A no-argument, void "action" method — e.g. a signal handler bound via a
+   * [[io.github.optical002.godot.builtin.Callable]] (`Callable(object, name)`).
+   * When the engine invokes it, `action` runs with the live Scala instance.
+   */
+  def registerAction(
+    className: String,
+    methodName: String,
+    action: GodotScriptClass => Unit
+  ): Unit =
+    register(
+      className,
+      methodName,
+      argTypes = Nil,
+      returnType = None,
+      dispatch = (inst, _args, _n, _rRet) => action(inst)
+    )
+
   // --- core registration --------------------------------------------------
 
   private def register(

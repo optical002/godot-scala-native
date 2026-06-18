@@ -66,4 +66,39 @@ object SignalRegistration {
     )
     nameVar.destroy()
   }
+
+  // Object.call_deferred(method, ...) hash (Godot 4.6.1).
+  private final val CallDeferredHash = 3400424181L
+
+  /**
+   * Defer a no-argument call to `methodName` on `host` to the next idle frame
+   * (`Object.call_deferred`). Used to delay editor UI construction until a
+   * control is fully in-tree and themed — building children during `_ready`
+   * accesses theme "too early" and crashes.
+   */
+  def callDeferred(host: GodotObject, methodName: String): Unit = {
+    val bind = MethodBind.get("Object", "call_deferred", CallDeferredHash)
+    if (bind == null) return
+
+    val nameVarBuf = stackalloc[Byte](BuiltinSizes.Variant.toCSize)
+    val nameVar = Variant.fromPtr(nameVarBuf)
+    val fromType =
+      VariantConstructors.fromType(GDEXTENSION_VARIANT_TYPE_STRING_NAME)
+    fromType(nameVar.ptr, StringNames.cached(methodName).ptr)
+
+    val args = stackalloc[GDExtensionConstVariantPtr](1)
+    args(0) = nameVar.ptr
+
+    val retBuf = stackalloc[Byte](BuiltinSizes.Variant.toCSize)
+    val err = stackalloc[GDExtensionCallError]()
+    Godot.interface.object_method_bind_call(
+      bind,
+      host.objectPtr,
+      args,
+      1L,
+      retBuf,
+      err
+    )
+    nameVar.destroy()
+  }
 }
