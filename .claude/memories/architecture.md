@@ -30,12 +30,15 @@ The repo root is a workspace, **not** an sbt build. Top level:
 5. **register** (`register/`) — register user `game` classes via macros/annotations.
 
 ## Bootstrap flow
-`game.GameEntry.godot_scala_init` → `GodotEngine.run(..., register = () =>
-GeneratedRegistrations.registerAll())`. `GameEntry` is fixed once and **never
-edited** to add classes — see auto-discovery below. `GodotEngine` (in gdext)
-loads the interface, fills the init struct, runs self-tests once, and on SCENE
-init runs the register callback. `Godot` object holds the global interface
-table + library handle.
+The `@exported` entry symbol → `GodotEngine.run(..., register = () =>
+GeneratedRegistrations.registerAll())`. The entry point is **fully generated**:
+`game.GeneratedEntry` is emitted by `RegistrationScan` alongside
+`GeneratedRegistrations`, and its exported symbol comes from the `entrySymbol`
+build setting in `harness-scala/build.sbt` (must equal `entry_symbol` in
+`godot/godot_scala.gdextension`). No hand-written entry file exists. `GodotEngine`
+(in gdext) loads the interface, fills the init struct, runs self-tests once, and
+on SCENE init runs the register callback. `Godot` object holds the global
+interface table + library handle.
 
 ## Build / run
 - `cd harness-scala && sbt build` → runs the auto-registration source generator,

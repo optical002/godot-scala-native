@@ -56,6 +56,23 @@ object ExportType {
     else s"$t/${e.hint}:${e.hintString}"
   }
 
+  // --- typed array --------------------------------------------------------
+  // Same encoding as a Dict element: hint=TYPE_STRING, hint_string = one
+  // elemPart "<variant_type>[/<elem_hint>]:<elem_hint_string>" (e.g. "2:" for
+  // Int, "4:" for String, "24/34:Enemy" for a node element).
+  given arrExport[A](using
+    ea: ExportType[A],
+    ta: ToVariant[Arr[A]],
+    fa: FromVariant[Arr[A]]
+  ): ExportType[Arr[A]] = new ExportType[Arr[A]] {
+    def variantType = GDEXTENSION_VARIANT_TYPE_ARRAY
+    override def hint = PropertyHint.TypeString
+    override def hintString = elemPart(ea)
+    def toVariant(value: Arr[A], dest: GDExtensionVariantPtr) =
+      ta.toVariant(value, dest)
+    def fromVariant(v: GDExtensionVariantPtr) = fa.fromVariant(v)
+  }
+
   given dictExport[K, V](using
     ek: ExportType[K],
     ev: ExportType[V],

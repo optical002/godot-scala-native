@@ -2,6 +2,16 @@ lazy val scalaVersionStr = "3.8.1"
 lazy val build =
   taskKey[Unit]("Builds the godot library and copies it to the godot project")
 
+// The GDExtension entry point is generated, not hand-written (see
+// RegistrationScan / GeneratedEntry). These two keys are the only project-specific
+// inputs. `entrySymbol` MUST equal `entry_symbol` in godot/godot_scala.gdextension.
+lazy val entrySymbol = settingKey[String](
+  "C symbol Godot loads as entry_symbol (must match godot/godot_scala.gdextension)"
+)
+lazy val entrySelfTest = settingKey[Boolean](
+  "Run the binding's internal self-tests once at SCENE init"
+)
+
 // Source dependency on the language binding. This mimics a real downstream game
 // project consuming the binding: here it references the sibling build directly
 // (no publishing). To switch to a published artifact later, replace this with a
@@ -19,15 +29,18 @@ lazy val harness =
     .settings(
       name := "harness",
       scalaVersion := scalaVersionStr,
+      entrySymbol := "godot_scala_init",
+      entrySelfTest := true,
       nativeConfig ~= {
         _.withMode(scalanative.build.Mode.debug)
           .withBuildTarget(scalanative.build.BuildTarget.libraryDynamic)
       },
       // Auto-registration: scan this project's sources every compile and generate
-      // `game.GeneratedRegistrations`, which lists one `Register.auto[T]()` per
-      // game class (any concrete class extending a Godot engine class). GameEntry
-      // calls `registerAll()` once and is never edited to add classes. The output
-      // is a managed source under target/ — never committed, never hand-edited.
+      // `game.GeneratedRegistrations` (one `Register.auto[T]()` per concrete game
+      // class extending a Godot engine class) plus `game.GeneratedEntry` (the
+      // `@exported(entrySymbol)` GDExtension entry point that calls `registerAll()`
+      // once). No entry code is hand-written. The output is a managed source under
+      // target/ — never committed, never hand-edited.
       Compile / sourceGenerators += Def.task {
         val srcDir = baseDirectory.value / "src" / "main" / "scala"
         // Resolves into ../language-binding-scala/modules/scala-native-gdextension
@@ -37,7 +50,15 @@ lazy val harness =
             "io" / "github" / "optical002" / "godot" / "codegen" / "engine"
         val outFile =
           (Compile / sourceManaged).value / "game" / "GeneratedRegistrations.scala"
-        IO.write(outFile, RegistrationScan.generate(srcDir, engineDir))
+        IO.write(
+          outFile,
+          RegistrationScan.generate(
+            srcDir,
+            engineDir,
+            entrySymbol.value,
+            entrySelfTest.value
+          )
+        )
         streams.value.log.info(s"[auto-register] generated $outFile")
         Seq(outFile)
       }.taskValue,

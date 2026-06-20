@@ -35,8 +35,18 @@ object RegistrationScan {
    * @param harnessSrcDir the module's `src/main/scala` directory
    * @param engineDir     the generated engine-class package directory; its file
    *                      names are the authoritative set of Godot base classes
+   * @param entrySymbol   C symbol Godot loads as the GDExtension `entry_symbol`;
+   *                      `@exported` onto the generated entry method (must equal
+   *                      `entry_symbol` in `godot/godot_scala.gdextension`)
+   * @param selfTest      whether the generated entry runs the binding's internal
+   *                      self-tests once at SCENE init
    */
-  def generate(harnessSrcDir: File, engineDir: File): String = {
+  def generate(
+    harnessSrcDir: File,
+    engineDir: File,
+    entrySymbol: String,
+    selfTest: Boolean
+  ): String = {
     val engineNames: Set[String] =
       Option(engineDir.listFiles).getOrElse(Array.empty[File]).iterator
         .filter(f => f.isFile && f.getName.endsWith(".scala"))
@@ -90,18 +100,52 @@ object RegistrationScan {
     s"""// GENERATED — DO NOT EDIT.
        |// Regenerated on every compile by RegistrationScan (see project/ and build.sbt).
        |// Every concrete class in this module that extends a Godot engine class is
-       |// discovered automatically: add a class and it registers, with no edits to
-       |// GameEntry or any list. See .claude/memories/layer5-register.md.
+       |// discovered automatically: add a class and it registers, with no entry
+       |// edits or any list. The GDExtension entry point below is generated too —
+       |// the exported symbol comes from the `entrySymbol` build setting.
+       |// See .claude/memories/layer5-register.md.
        |package game
        |
+       |import scala.scalanative.unsafe.*
+       |import scala.scalanative.unsigned.*
+       |import io.github.optical002.godot.GodotEngine
+       |import io.github.optical002.godot.codegen.gdextensioninterface.types.*
        |import io.github.optical002.godot.register.Register
        |
        |object GeneratedRegistrations {
        |
-       |  /** Registers every auto-discovered game class. Called once from GameEntry. */
+       |  /** Registers every auto-discovered game class. Called once from the
+       |    * generated entry point. */
        |  def registerAll(): Unit = {
        |$calls
        |  }
+       |}
+       |
+       |/**
+       | * The game project's GDExtension entry point.
+       | *
+       | * Godot calls the `@exported` C symbol "$entrySymbol" (see
+       | * godot/godot_scala.gdextension's `entry_symbol`) when the extension loads;
+       | * we forward to the binding's `GodotEngine.run`. The `@exported` annotation
+       | * also keeps this method a reachable Scala Native linker root.
+       | *
+       | * Generated — set the symbol via `entrySymbol` in harness-scala/build.sbt;
+       | * it must equal `entry_symbol` in the .gdextension manifest.
+       | */
+       |object GeneratedEntry {
+       |  @exported("$entrySymbol")
+       |  def init(
+       |    getProcAddress: GDExtensionInterfaceGetProcAddress,
+       |    library: GDExtensionClassLibraryPtr,
+       |    r_initialization: Ptr[GDExtensionInitialization]
+       |  ): CUnsignedChar =
+       |    GodotEngine.run(
+       |      getProcAddress,
+       |      library,
+       |      r_initialization,
+       |      register = () => GeneratedRegistrations.registerAll(),
+       |      selfTest = $selfTest
+       |    )
        |}
        |""".stripMargin
   }

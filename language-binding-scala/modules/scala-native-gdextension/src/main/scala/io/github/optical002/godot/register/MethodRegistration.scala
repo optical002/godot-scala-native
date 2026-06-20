@@ -261,4 +261,5 @@ object VariantTypeOf {
   given VariantTypeOf[Int] with { def variantType = GDEXTENSION_VARIANT_TYPE_INT }
   given VariantTypeOf[Double] with { def variantType = GDEXTENSION_VARIANT_TYPE_FLOAT }
   given VariantTypeOf[Boolean] with { def variantType = GDEXTENSION_VARIANT_TYPE_BOOL }
+  given VariantTypeOf[String] with { def variantType = GDEXTENSION_VARIANT_TYPE_STRING }
 }

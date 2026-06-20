@@ -18,8 +18,9 @@ final class Player(                           // base derived from superclass
 Two export forms: **body** `@gdexport var` fields (need a Scala initializer) and
 **`var` constructor params** (auto-export, need NO default — see `DefaultValue`).
 **No manual registration anywhere.** Just write the class. A build-time source
-generator discovers it; `game.GameEntry` is set up once and **never edited** to
-add/remove classes. No `@godotClass` annotation — base comes from `extends`.
+generator discovers it; the GDExtension entry point is generated too, so no entry
+file is hand-written or edited to add/remove classes. No `@godotClass` annotation
+— base comes from `extends`.
 
 ## Macro: `Register.scala` (`Register.auto[T]`)
 Scans `T` at compile time and emits all registration calls:
@@ -76,6 +77,12 @@ Per-type logic is in givens, NOT the macro. Supported field types:
 - **typed dict** `Dict[K,V]` (`builtin/Dict.scala`): hint **TYPE_STRING(23)** with
   encoded `hint_string` `"<key>;<value>"`, each part `<type>[/<hint>]:<hintstr>`
   (this is what GDScript emits — NOT DICTIONARY_TYPE; verified vs live engine).
+- **typed array** `Arr[A]` (`builtin/Arr.scala`): variant ARRAY(28), hint
+  TYPE_STRING(23), `hint_string` = ONE elemPart `<type>[/<hint>]:<hintstr>`
+  (e.g. `"2:"` Int, `"4:"` String, `"24/34:Enemy"` node). `arrExport`/`arrDefault`
+  givens summon `ExportType[A]`. Object elements need `Gd`/`Tres` wrapper
+  (`Arr[Gd[Enemy]]`) — `Arr.fromVariant[A]` needs `To`/`FromVariant[A]`, which bare
+  nodes lack. Verified vs live engine (`export_verify.gd` `_check_player`).
 Hints/usage constants in `PropertyHints.scala`. `MethodRegistration.fillPropertyInfo`
 now writes hint/hint_string/class_name/usage (was all-zero before).
 
@@ -103,13 +110,16 @@ picker's selection signal); currently `_parse_property` only detects + logs.
   builder APIs the macro targets. Dispatch via Variant `call_func` trampoline.
 
 ## Auto-discovery (build-time codegen)
-`GameEntry` only calls `GeneratedRegistrations.registerAll()` — fixed forever.
 An sbt **source generator** (`harness-scala/project/RegistrationScan.scala`,
 wired in `harness-scala/build.sbt` as `harness`'s `Compile / sourceGenerators`,
 uses scalameta from `harness-scala/project/build.sbt`) scans `harness-scala/src`
 every compile and emits `game.GeneratedRegistrations` (a managed source under
-`target/`, never committed)
-with one `Register.auto[T]()` per discovered class.
+`target/`, never committed) with one `Register.auto[T]()` per discovered class.
+The same generator also emits `game.GeneratedEntry` — the
+`@exported(entrySymbol)` GDExtension entry point that calls `registerAll()` once.
+The exported symbol + `selfTest` come from the `entrySymbol` / `entrySelfTest`
+settings in `harness-scala/build.sbt`; `entrySymbol` must equal `entry_symbol` in
+`godot/godot_scala.gdextension`. No entry file is hand-written.
 Registers iff: concrete `class` (not abstract/trait/object) **and** every
 primary-ctor param is constructible with no caller args — has a default **OR** is
 a `var` (the macro factory fills an un-defaulted `var` from its `DefaultValue`);
@@ -118,7 +128,7 @@ qualifies **and** parent chain reaches a Godot engine class (engine class names 
 file names under generated `codegen/engine/`), directly or via another harness
 class (abstract bases relay). (Scalameta checks `p.default.isDefined ||
 Mod.VarParam`.)
-Add a class → it registers; no edits to `GameEntry` or any list.
+Add a class → it registers; no edits to any entry file or list.
 
 ## Custom-node inheritance (custom extends custom)
 A custom node may extend **another custom node**, not just an engine class —

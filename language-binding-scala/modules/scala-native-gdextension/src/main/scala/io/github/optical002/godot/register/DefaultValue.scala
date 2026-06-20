@@ -1,6 +1,6 @@
 package io.github.optical002.godot.register
 
-import io.github.optical002.godot.builtin.{Dict, ToVariant, FromVariant}
+import io.github.optical002.godot.builtin.{Arr, Dict, ToVariant, FromVariant}
 import io.github.optical002.godot.engine.*
 import io.github.optical002.godot.codegen.engine.{Node, PackedScene, Resource}
 
@@ -54,4 +54,12 @@ object DefaultValue {
   given dictDefault[K, V](using
     ToVariant[K], FromVariant[K], ToVariant[V], FromVariant[V]
   ): DefaultValue[Dict[K, V]] = of(Dict.empty[K, V])
+
+  // --- typed array --------------------------------------------------------
+  // Build a Godot-typed Array (element type from ExportType[A]) so the inspector
+  // defaults added rows to the element's zero value (e.g. "") not <null>.
+  given arrDefault[A](using
+    et: ExportType[A], tv: ToVariant[A], fv: FromVariant[A]
+  ): DefaultValue[Arr[A]] =
+    of(Arr.emptyTyped[A](et.variantType, et.className))
 }

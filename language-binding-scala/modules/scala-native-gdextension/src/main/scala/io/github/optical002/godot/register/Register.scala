@@ -141,13 +141,14 @@ object Register {
         }
       }
       tn match {
-        case "scala.Long"    => getterCall[Long]
-        case "scala.Int"     => getterCall[Int]
-        case "scala.Double"  => getterCall[Double]
-        case "scala.Boolean" => getterCall[Boolean]
+        case "scala.Long"      => getterCall[Long]
+        case "scala.Int"       => getterCall[Int]
+        case "scala.Double"    => getterCall[Double]
+        case "scala.Boolean"   => getterCall[Boolean]
+        case "java.lang.String" => getterCall[String]
         case other =>
           report.errorAndAbort(
-            s"@func $className.$mName: unsupported return type '$other' (supported: Long, Int, Double, Boolean)"
+            s"@func $className.$mName: unsupported return type '$other' (supported: Long, Int, Double, Boolean, String)"
           )
       }
     }

@@ -9,8 +9,10 @@ extends SceneTree
 
 # Godot variant types / hints (see PropertyHints.scala).
 const T_INT := 2
+const T_STRING := 4
 const T_OBJECT := 24
 const T_DICT := 27
+const T_ARRAY := 28
 const H_ENUM := 2
 const H_RESOURCE := 17
 const H_TYPESTRING := 23
@@ -81,6 +83,26 @@ func _check_player() -> void:
 	if p.get("projectile") != proj:
 		_fail("projectile round-trip failed")
 	proj.free()
+	# Typed arrays: variant type ARRAY with a TYPE_STRING element encoding —
+	# "2:" for int, "4:" for String, "24/34:Enemy" for a node element.
+	_check_meta(props, "scores",  T_ARRAY, H_TYPESTRING, "2:",          "")
+	_check_meta(props, "enemies", T_ARRAY, H_TYPESTRING, "24/34:Enemy", "")
+	_check_meta(props, "tags",    T_ARRAY, H_TYPESTRING, "4:",          "")
+	# The default arrays are Godot-typed, so the inspector adds rows with the
+	# element's zero value (e.g. "" for String), not <null>. Mirror "Add Element"
+	# by resizing the default value and checking the new slot's default.
+	var def_tags = p.get("tags")
+	if not def_tags.is_typed() or def_tags.get_typed_builtin() != T_STRING:
+		_fail("tags default is not a typed Array[String]")
+	def_tags.resize(1)
+	if def_tags[0] != "":
+		_fail("tags new element default: got %s, expected empty string" % [def_tags[0]])
+	var def_scores = p.get("scores")
+	if not def_scores.is_typed() or def_scores.get_typed_builtin() != T_INT:
+		_fail("scores default is not a typed Array[int]")
+	def_scores.resize(1)
+	if def_scores[0] != 0:
+		_fail("scores new element default: got %s, expected 0" % [def_scores[0]])
 	# enum: int-typed with ENUM hint listing the case names.
 	_check_meta(props, "character_state", T_INT, H_ENUM, "Idle,Walking,Running,Jumping,Falling", "")
 
@@ -95,6 +117,27 @@ func _check_player() -> void:
 	var d = p.get("stats_by_id")
 	if typeof(d) != TYPE_DICTIONARY or d.get(7) != stats:
 		_fail("stats_by_id round-trip failed: got %s" % d)
+
+	# Typed-array round-trips through set()/get().
+	p.set("scores", [10, 20, 30])
+	var sc = p.get("scores")
+	if typeof(sc) != TYPE_ARRAY or sc.size() != 3 or sc[1] != 20:
+		_fail("scores round-trip failed: got %s" % [sc])
+	p.set("tags", ["alpha", "beta"])
+	var tg = p.get("tags")
+	if typeof(tg) != TYPE_ARRAY or tg.size() != 2 or tg[0] != "alpha":
+		_fail("tags round-trip failed: got %s" % [tg])
+	# Prove Scala actually DECODES the String elements (not just hands the handle
+	# back): joinTags() reads tags.size()/tags(i) on the Scala side and joins them.
+	var joined = p.call("join_tags")
+	if joined != "alpha,beta":
+		_fail("Scala-side String array read failed: join_tags() got '%s', expected 'alpha,beta'" % [joined])
+	var en = ClassDB.instantiate("Enemy")
+	p.set("enemies", [en])
+	var es = p.get("enemies")
+	if typeof(es) != TYPE_ARRAY or es.size() != 1 or es[0] != en:
+		_fail("enemies round-trip failed: got %s" % [es])
+	en.free()
 	p.free()
 
 # Enemy is an open node class: every `var` constructor param is auto-exported

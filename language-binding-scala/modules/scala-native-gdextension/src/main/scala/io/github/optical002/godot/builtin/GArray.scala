@@ -2,6 +2,7 @@ package io.github.optical002.godot.builtin
 
 import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
+import scala.scalanative.libc.string.memset
 import io.github.optical002.godot.Godot
 import io.github.optical002.godot.codegen.gdextensioninterface.types.*
 import io.github.optical002.godot.codegen.gdextensioninterface.types.GDExtensionVariantType.*
@@ -58,6 +59,9 @@ object GArray {
     }
   }
 
+  /** Reinterpret a raw handle as a `GArray` (the opaque type is its pointer). */
+  def fromPtr(p: GDExtensionTypePtr): GArray = p
+
   /** Construct an empty Array into caller storage. */
   def empty(dest: GDExtensionTypePtr): GArray = {
     // Constructor index 0 of Array is the default (empty) constructor.
@@ -66,6 +70,42 @@ object GArray {
       0
     )
     ctor(dest, null)
+    dest
+  }
+
+  /**
+   * Construct an empty **typed** Array into caller storage, via Array's typed
+   * constructor (index 2: `Array(base, type, class_name, script)`). Typing the
+   * array makes Godot fill new elements with the element type's default (e.g.
+   * `""` for String) instead of `<null>` when the inspector adds a row.
+   *
+   * `elemType` is the element's variant type; `className` is the element class
+   * name for OBJECT elements (e.g. `"Enemy"`), `""` for builtins.
+   */
+  def emptyTyped(
+    dest: GDExtensionTypePtr,
+    elemType: GDExtensionVariantType,
+    className: String
+  ): GArray = {
+    val base = stackalloc[Byte](BuiltinSizes.Array.toCSize)
+    empty(base)
+    val typeBuf = stackalloc[GDExtensionInt]()
+    !typeBuf = elemType.toInt.toLong
+    val classSn = StringNames.cached(className)
+    // A zeroed Variant is a valid NIL Variant (no script for builtin/native types).
+    val script = stackalloc[Byte](BuiltinSizes.Variant.toCSize)
+    memset(script, 0, BuiltinSizes.Variant.toCSize)
+    val args = stackalloc[GDExtensionConstTypePtr](4)
+    args(0) = base
+    args(1) = typeBuf.asInstanceOf[GDExtensionConstTypePtr]
+    args(2) = classSn.ptr
+    args(3) = script
+    val ctor = Godot.interface.variant_get_ptr_constructor(
+      GDEXTENSION_VARIANT_TYPE_ARRAY,
+      2
+    )
+    ctor(dest, args)
+    GArray.fromPtr(base).destroy()
     dest
   }
 

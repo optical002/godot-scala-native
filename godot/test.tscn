@@ -5,11 +5,14 @@
 
 [sub_resource type="PlayerStats" id="PlayerStats_8uh7m"]
 
-[node name="Player" type="Player" unique_id=74334957 node_paths=PackedStringArray("maybe_projectile", "projectile")]
+[node name="Player" type="Player" unique_id=74334957 node_paths=PackedStringArray("maybe_projectile", "projectile", "enemies")]
 maybe_projectile = NodePath("Projectile")
 projectile = NodePath("Projectile")
 maybe_stats = ExtResource("1_37kl0")
 stats = SubResource("PlayerStats_8uh7m")
+scores = Array[int]([232, 2566])
+enemies = [NodePath("Enemy")]
+tags = Array[String](["asdfas"])
 character_state = 3
 
 [node name="Projectile" type="Projectile" parent="." unique_id=1624292338]

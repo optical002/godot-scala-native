@@ -30,6 +30,18 @@ The Variant marshalling seam everything above depends on.
   Method hashes hardcoded from API (e.g. Array.size=3173160232).
 - `Dict.scala` — typed `Dict[K,V]` over `Dictionary` (heap-owned backing handle);
   `ToVariant`/`FromVariant[Dict[K,V]]` (DICTIONARY variant). Used by `@gdexport`.
+- `Arr.scala` — typed `Arr[A]` over `GArray` (same heap-owned-handle pattern as
+  Dict); `append`/`apply`/`size`; `ToVariant`/`FromVariant[Arr[A]]` (ARRAY
+  variant). Used by `@gdexport`. Element marshalling goes through `ToVariant`/
+  `FromVariant[A]`, so **object elements need a wrapper** (`Arr[Gd[Enemy]]`,
+  `Arr[Tres[T]]`) — the bare-node shorthand is field-only, not for elements.
+  `GArray.fromPtr` reinterprets a raw handle (mirrors `Dictionary.fromPtr`).
+  GOTCHA: the default `Arr` value MUST be a Godot **typed** array
+  (`GArray.emptyTyped`/`Arr.emptyTyped`, Array ctor index 2 `Array(base,type,
+  class_name,script)`), else the inspector adds new rows as `<null>` instead of
+  the element default (`""`/`0`). `DefaultValue.arrDefault` builds it typed using
+  `ExportType[A].variantType`/`className`. Verified via `export_verify.gd`
+  (`is_typed()` + `resize`).
 - `BuiltinMethods.scala` — caches builtin-method ptrcall pointers.
 
 ## Variant marshalling notes

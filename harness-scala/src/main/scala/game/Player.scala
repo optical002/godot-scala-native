@@ -1,9 +1,9 @@
 package game
 
 import io.github.optical002.godot.GodotPrint
-import io.github.optical002.godot.builtin.{Dict, Vector2}
+import io.github.optical002.godot.builtin.{Arr, Dict, Vector2}
 import io.github.optical002.godot.codegen.engine.Node2D
-import io.github.optical002.godot.engine.{Tres, Tscn}
+import io.github.optical002.godot.engine.{Gd, Tres, Tscn}
 import io.github.optical002.godot.register.*
 
 /** Player's high-level state, exported as a Godot ENUM property. */
@@ -58,6 +58,16 @@ final class Player(
   var scene: Tscn[Player],
   /** Typed dictionary: Int level/slot id -> a PlayerStats resource. */
   var statsById: Dict[Int, Tres[PlayerStats]],
+  /** Typed array of ints — inspector shows an editable Array[int]. */
+  var scores: Arr[Int],
+  /**
+   * Typed array of enemy nodes. Container elements take the `Gd`/`Tres` wrapper
+   * (like `Dict`'s `Tres[PlayerStats]` value) — the bare shorthand is only for
+   * direct fields/params, not collection elements.
+   */
+  var enemies: Arr[Gd[Enemy]],
+  /** Typed array of strings — inspector shows an editable Array[String]. */
+  var tags: Arr[String],
   /** Current high-level state, shown as an enum dropdown in the inspector. */
   var characterState: CharacterState
 ) extends Node2D {
@@ -66,6 +76,13 @@ final class Player(
 
   /** Callable from Godot/GDScript. */
   @func def getScore(): Long = (elapsed * 10).toLong
+
+  /**
+   * Reads the `tags` String array on the Scala side (via `size`/`apply`) and
+   * joins it — proves elements set from GDScript decode back to Scala correctly.
+   */
+  @func def joinTags(): String =
+    (0 until tags.size).map(tags.apply).mkString(",")
 
   /** A signal other nodes can connect to. */
   @signal def pinged(): Unit = ()
