@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `CheckButton`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessCheckButton
-    extends io.github.optical002.godot.codegen.engine.CheckButton
+    extends gdext.codegen.engine.CheckButton

@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `OpenXRRenderModelManager`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessOpenXRRenderModelManager
-    extends io.github.optical002.godot.codegen.engine.OpenXRRenderModelManager
+    extends gdext.codegen.engine.OpenXRRenderModelManager

@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `MenuButton`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessMenuButton
-    extends io.github.optical002.godot.codegen.engine.MenuButton
+    extends gdext.codegen.engine.MenuButton

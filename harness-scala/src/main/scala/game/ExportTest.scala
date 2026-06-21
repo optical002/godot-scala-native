@@ -1,8 +1,8 @@
 package game
 
-import io.github.optical002.godot.builtin.Color
-import io.github.optical002.godot.codegen.engine.Node
-import io.github.optical002.godot.register.*
+import gdext.builtin.Color
+import gdext.codegen.engine.Node
+import gdext.register.*
 
 /**
  * Showcases every inspector export hint the binding supports. Each `@gdexport`

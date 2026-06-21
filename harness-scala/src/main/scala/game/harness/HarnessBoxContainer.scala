@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `BoxContainer`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessBoxContainer
-    extends io.github.optical002.godot.codegen.engine.BoxContainer
+    extends gdext.codegen.engine.BoxContainer

@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `CanvasModulate`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessCanvasModulate
-    extends io.github.optical002.godot.codegen.engine.CanvasModulate
+    extends gdext.codegen.engine.CanvasModulate

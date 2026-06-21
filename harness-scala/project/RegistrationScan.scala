@@ -108,9 +108,9 @@ object RegistrationScan {
        |
        |import scala.scalanative.unsafe.*
        |import scala.scalanative.unsigned.*
-       |import io.github.optical002.godot.GodotEngine
-       |import io.github.optical002.godot.codegen.gdextensioninterface.types.*
-       |import io.github.optical002.godot.register.Register
+       |import gdext.GodotEngine
+       |import gdext.codegen.gdextensioninterface.types.*
+       |import gdext.register.Register
        |
        |object GeneratedRegistrations {
        |

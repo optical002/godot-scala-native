@@ -11,7 +11,7 @@ The repo root is a workspace, **not** an sbt build. Top level:
 ## Modules (sbt, Scala 3.8.1, Scala Native 0.5.10)
 - **`gdext`** — `language-binding-scala/modules/scala-native-gdextension`. The
   binding **library**. No exported entry symbol, not the `.so` target. Package
-  root `io.github.optical002.godot`. Default project of the
+  root `gdext`. Default project of the
   `language-binding-scala` build.
 - **`igen`** — `language-binding-scala/modules/interface-generator`. Code
   generators (run via `sbt igen/regenerate` from `language-binding-scala/`).

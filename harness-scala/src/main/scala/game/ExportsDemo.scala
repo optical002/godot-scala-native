@@ -1,9 +1,9 @@
 package game
 
-import io.github.optical002.godot.builtin.Dict
-import io.github.optical002.godot.engine.{Gd, Required, Tres, Tscn}
-import io.github.optical002.godot.codegen.engine.{Area2D, Node, Node2D, Resource}
-import io.github.optical002.godot.register.*
+import gdext.builtin.Dict
+import gdext.engine.{Gd, Required, Tres, Tscn}
+import gdext.codegen.engine.{Area2D, Node, Node2D, Resource}
+import gdext.register.*
 
 /** A simple parameterless enum, exported as a Godot ENUM property. */
 enum Team {

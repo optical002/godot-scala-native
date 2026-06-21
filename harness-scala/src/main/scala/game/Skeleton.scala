@@ -1,8 +1,8 @@
 package game
 
-import io.github.optical002.godot.GodotPrint
-import io.github.optical002.godot.engine.Tscn
-import io.github.optical002.godot.register.*
+import gdext.GodotPrint
+import gdext.engine.Tscn
+import gdext.register.*
 
 /**
  * A custom node that extends another custom node ([[Enemy]]) rather than an

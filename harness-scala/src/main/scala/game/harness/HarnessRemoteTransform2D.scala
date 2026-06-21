@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `RemoteTransform2D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessRemoteTransform2D
-    extends io.github.optical002.godot.codegen.engine.RemoteTransform2D
+    extends gdext.codegen.engine.RemoteTransform2D

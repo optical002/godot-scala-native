@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `GraphFrame`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessGraphFrame
-    extends io.github.optical002.godot.codegen.engine.GraphFrame
+    extends gdext.codegen.engine.GraphFrame

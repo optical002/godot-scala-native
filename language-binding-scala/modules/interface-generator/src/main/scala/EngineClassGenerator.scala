@@ -10,7 +10,7 @@ import scala.io.Source
  * Node2D`). Real Scala inheritance gives a subclass all of the base methods and
  * the virtual override points; registration derives a class's Godot parent from
  * its direct superclass. The chain roots at `Object`, which extends the binding
- * base [[io.github.optical002.godot.register.GodotScriptClass]] that carries the
+ * base [[gdext.register.GodotScriptClass]] that carries the
  * engine-object handle and the overridable virtuals.
  *
  * Methods dispatch through `Ptrcall` using `hostObject` (the instance's engine
@@ -59,7 +59,7 @@ object EngineClassGenerator {
 
   // --- type mapping -------------------------------------------------------
 
-  private val bp = "io.github.optical002.godot.builtin"
+  private val bp = "gdext.builtin"
 
   /** Godot builtin/scalar type -> Scala type. The keys are exactly the value
     * types the marshalling layer (`Ptrcall` PtrArg/PtrRet) knows how to pass. */
@@ -120,7 +120,7 @@ object EngineClassGenerator {
     // binding's script base which carries hostObject + the virtuals.
     val extendsClause = parent match {
       case Some(p) => s"$p"
-      case None    => "io.github.optical002.godot.register.GodotScriptClass"
+      case None    => "gdext.register.GodotScriptClass"
     }
 
     val singletonDef =
@@ -134,12 +134,12 @@ object EngineClassGenerator {
            |""".stripMargin
       } else ""
 
-    s"""package io.github.optical002.godot.codegen.engine
+    s"""package gdext.codegen.engine
        |
-       |import io.github.optical002.godot.Godot
-       |import io.github.optical002.godot.builtin.*
-       |import io.github.optical002.godot.engine.*
-       |import io.github.optical002.godot.engine.GodotObject.*
+       |import gdext.Godot
+       |import gdext.builtin.*
+       |import gdext.engine.*
+       |import gdext.engine.GodotObject.*
        |
        |/** Generated wrapper for Godot's `$name`${parent.map(p => s", extends `$p`").getOrElse("")}. */
        |abstract class $name extends $extendsClause {

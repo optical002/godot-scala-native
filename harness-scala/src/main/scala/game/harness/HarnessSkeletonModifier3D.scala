@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `SkeletonModifier3D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessSkeletonModifier3D
-    extends io.github.optical002.godot.codegen.engine.SkeletonModifier3D
+    extends gdext.codegen.engine.SkeletonModifier3D

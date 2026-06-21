@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `ResourcePreloader`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessResourcePreloader
-    extends io.github.optical002.godot.codegen.engine.ResourcePreloader
+    extends gdext.codegen.engine.ResourcePreloader

@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `Parallax2D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessParallax2D
-    extends io.github.optical002.godot.codegen.engine.Parallax2D
+    extends gdext.codegen.engine.Parallax2D

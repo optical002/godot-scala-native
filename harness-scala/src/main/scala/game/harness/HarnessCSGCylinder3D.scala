@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `CSGCylinder3D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessCSGCylinder3D
-    extends io.github.optical002.godot.codegen.engine.CSGCylinder3D
+    extends gdext.codegen.engine.CSGCylinder3D

@@ -19,7 +19,7 @@ The Variant marshalling seam everything above depends on.
   decodes via String-from-StringName constructor.
 - `Vector2.scala`, `Color.scala` — representative math value types.
   **Components are 32-bit float even in float_64** (Vector2 = 2×CFloat = 8 bytes;
-  `*i` vectors are CInt). `writeType`/`readType` are `private[godot]` (used by
+  `*i` vectors are CInt). `writeType`/`readType` are `private[gdext]` (used by
   Ptrcall).
 - `MathBuiltins.scala` — the rest of the fixed-layout math family in one file:
   Vector2i/3/3i/4/4i, Rect2/Rect2i, Quaternion, Plane, AABB, Basis,

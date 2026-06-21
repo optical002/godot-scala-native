@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `CopyTransformModifier3D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessCopyTransformModifier3D
-    extends io.github.optical002.godot.codegen.engine.CopyTransformModifier3D
+    extends gdext.codegen.engine.CopyTransformModifier3D

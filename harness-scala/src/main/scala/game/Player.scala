@@ -1,10 +1,10 @@
 package game
 
-import io.github.optical002.godot.GodotPrint
-import io.github.optical002.godot.builtin.{Arr, Dict, Vector2}
-import io.github.optical002.godot.codegen.engine.Node2D
-import io.github.optical002.godot.engine.{Gd, Tres, Tscn}
-import io.github.optical002.godot.register.*
+import gdext.GodotPrint
+import gdext.builtin.{Arr, Dict, Vector2}
+import gdext.codegen.engine.Node2D
+import gdext.engine.{Gd, Tres, Tscn}
+import gdext.register.*
 
 /** Player's high-level state, exported as a Godot ENUM property. */
 enum CharacterState {

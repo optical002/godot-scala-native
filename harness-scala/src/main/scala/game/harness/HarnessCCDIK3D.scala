@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `CCDIK3D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessCCDIK3D
-    extends io.github.optical002.godot.codegen.engine.CCDIK3D
+    extends gdext.codegen.engine.CCDIK3D

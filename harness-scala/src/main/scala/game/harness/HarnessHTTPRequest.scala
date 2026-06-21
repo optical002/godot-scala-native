@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `HTTPRequest`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessHTTPRequest
-    extends io.github.optical002.godot.codegen.engine.HTTPRequest
+    extends gdext.codegen.engine.HTTPRequest

@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `SpringArm3D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessSpringArm3D
-    extends io.github.optical002.godot.codegen.engine.SpringArm3D
+    extends gdext.codegen.engine.SpringArm3D

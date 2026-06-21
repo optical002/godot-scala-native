@@ -1,9 +1,9 @@
 package game
 
-import io.github.optical002.godot.GodotPrint
-import io.github.optical002.godot.codegen.engine.Node2D
-import io.github.optical002.godot.engine.Tscn
-import io.github.optical002.godot.register.*
+import gdext.GodotPrint
+import gdext.codegen.engine.Node2D
+import gdext.engine.Tscn
+import gdext.register.*
 
 /**
  * Example of the compact `var`-param export form: every `var` constructor

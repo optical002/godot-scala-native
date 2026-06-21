@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `TouchScreenButton`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessTouchScreenButton
-    extends io.github.optical002.godot.codegen.engine.TouchScreenButton
+    extends gdext.codegen.engine.TouchScreenButton

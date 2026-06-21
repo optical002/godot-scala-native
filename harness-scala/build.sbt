@@ -47,7 +47,7 @@ lazy val harness =
         // via the source ProjectRef above.
         val engineDir =
           (gdext / baseDirectory).value / "src" / "main" / "scala" /
-            "io" / "github" / "optical002" / "godot" / "codegen" / "engine"
+            "gdext" / "codegen" / "engine"
         val outFile =
           (Compile / sourceManaged).value / "game" / "GeneratedRegistrations.scala"
         IO.write(

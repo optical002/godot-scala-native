@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `AudioStreamPlayer3D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessAudioStreamPlayer3D
-    extends io.github.optical002.godot.codegen.engine.AudioStreamPlayer3D
+    extends gdext.codegen.engine.AudioStreamPlayer3D

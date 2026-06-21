@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `VSlider`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessVSlider
-    extends io.github.optical002.godot.codegen.engine.VSlider
+    extends gdext.codegen.engine.VSlider

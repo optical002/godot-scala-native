@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `StaticBody2D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessStaticBody2D
-    extends io.github.optical002.godot.codegen.engine.StaticBody2D
+    extends gdext.codegen.engine.StaticBody2D

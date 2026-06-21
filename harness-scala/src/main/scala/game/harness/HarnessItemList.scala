@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `ItemList`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessItemList
-    extends io.github.optical002.godot.codegen.engine.ItemList
+    extends gdext.codegen.engine.ItemList

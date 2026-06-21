@@ -1,8 +1,8 @@
 package game
 
-import io.github.optical002.godot.engine.{Gd, Tres}
-import io.github.optical002.godot.codegen.engine.{Node, Skeleton3D, AnimationPlayer, SpriteFrames, AnimationTree}
-import io.github.optical002.godot.register.*
+import gdext.engine.{Gd, Tres}
+import gdext.codegen.engine.{Node, Skeleton3D, AnimationPlayer, SpriteFrames, AnimationTree}
+import gdext.register.*
 
 /**
  * Component-reference string dropdowns. Each `String` property below becomes an
