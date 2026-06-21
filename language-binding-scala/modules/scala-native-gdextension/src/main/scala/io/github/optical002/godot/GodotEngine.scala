@@ -166,6 +166,8 @@ object GodotEngine {
         // them after a reload freezes the editor.
         Log.trace("deinitialize(SCENE): unregisterAll begin")
         io.github.optical002.godot.register.ClassRegistration.unregisterAll()
+        // Drop comp-dropdown builders so the reloaded image rebuilds them fresh.
+        io.github.optical002.godot.register.CompEnumRegistry.clear()
         Log.trace("deinitialize(SCENE): unregisterAll done")
         Log.file("deinitialize(SCENE)")
       }

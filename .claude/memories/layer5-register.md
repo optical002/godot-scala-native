@@ -74,6 +74,7 @@ Per-type logic is in givens, NOT the macro. Supported field types:
   `Gd`/`Tres` exports unchanged.
 - **enums**: parameterless Scala 3 enums, synthesized inline by the macro
   (hint ENUM, ordinal⇄`fromOrdinal`).
+- **Color** (`builtin/Color.scala`): variant COLOR(5), color-picker widget.
 - **typed dict** `Dict[K,V]` (`builtin/Dict.scala`): hint **TYPE_STRING(23)** with
   encoded `hint_string` `"<key>;<value>"`, each part `<type>[/<hint>]:<hintstr>`
   (this is what GDScript emits — NOT DICTIONARY_TYPE; verified vs live engine).
@@ -85,6 +86,65 @@ Per-type logic is in givens, NOT the macro. Supported field types:
   nodes lack. Verified vs live engine (`export_verify.gd` `_check_player`).
 Hints/usage constants in `PropertyHints.scala`. `MethodRegistration.fillPropertyInfo`
 now writes hint/hint_string/class_name/usage (was all-zero before).
+
+## Export hints & inspector sections (`ExportHint.scala`, `annotations.scala`)
+`@gdexport` takes an optional `ExportHint` (the GDScript `@export_range`/`_file`/…
+analogue): `@gdexport(ExportHint.range(0,100)) var hp: Int`. `ExportHint(hint,
+hintString, usageExtra)` **overrides** the `ExportType`'s hint/hint_string and ORs
+`usageExtra`; bare `@gdexport` = `ExportHint.none` (ExportType metadata used as-is).
+Factories: `range(min,max,step,flags*)` (flags e.g. `"or_greater"`,`"suffix:px"`),
+`expEasing`, `multiline`, `file(filter)`/`dir`/`globalFile`/`globalDir`, `locale`,
+`colorNoAlpha`. Hints pinned in `PropertyHints.scala` (RANGE=1, EXP_EASING=4,
+FILE=13, DIR=14, GLOBAL_FILE=15, GLOBAL_DIR=16, MULTILINE=18, COLOR_NO_ALPHA=21,
+LOCALE=32). The macro reads the annotation's arg **Term** and re-splices it into
+`registerExport(..., hint=…)` — no compile-time eval.
+**Inspector sections** = positional markers via `@exportCategory(name)` /
+`@exportGroup(name,prefix="")` / `@exportSubgroup(name,prefix="")` on a `@gdexport`
+field; each applies to every property registered *after* it. So the macro **sorts
+export fields by source position** (`f.pos.start`) and emits markers (category→
+group→subgroup) before that field's property. Group/subgroup use the dedicated
+ClassDB calls (`classdb_register_extension_class_property_{group,subgroup}`, which
+set their own usage flag); **category has no GDExtension call**, so it's emitted as
+a NIL marker property with `PropertyUsage.Category` and empty getter/setter names
+(works, no errors). **Godot usage-flag values** (don't reuse the wrong ones):
+GROUP=64, CATEGORY=128, SUBGROUP=256. Showcase: `game/ExportTest.scala` (extends
+Node, every hint+section); verified by `godot/export_hints_verify.gd`.
+
+## Component-reference dropdowns (`CompEnumRegistry.scala`, `annotations.scala`)
+Turn a `String` `@gdexport` into an inspector **ENUM dropdown** whose options are
+enumerated, at inspect time, from another exported "comp" property on the same
+class. Four annotations (each `class X(comp: String)`, `comp` = sibling Scala
+field name): `@exportBoneName` (Skeleton3D bones), `@exportAnimation`
+(AnimationPlayer/Mixer animations), `@exportSpriteAnimation` (SpriteFrames anims),
+`@exportAnimationProperty` (AnimationTree `parameters/...` paths). Usage:
+`@gdexport var skeleton: Gd[Skeleton3D] = …; @exportBoneName("skeleton") @gdexport
+var boneName: String = ""`.
+- **Mechanism = Godot `validate_property`** (NOT a custom editor widget, so no
+  theme crash). `ClassRegistration` now also sets `at_validate_property_func`
+  (struct field 12 of `GDExtensionClassCreationInfo4`) to a static trampoline
+  that, per property, looks up a `CompEnumRegistry` builder by
+  `(getClass.getSimpleName, propName)`; if found it rewrites the PropertyInfo's
+  `hint`→ENUM(2) and `hint_string`→comma-joined names (via
+  `MethodRegistration.heapGString`), returns true; else false. Exercised by a
+  plain headless `get_property_list()` (the instance is real).
+- **Macro** (`Register.scala`): `compAnnotationOf`/`compEnumRegFor` — finds the
+  sibling comp field, gets its type `C`, builds a typed getter via `fieldLambdas`,
+  summons `CompEnum.AsGd[C,E]` (E fixed by the annotation; `<:<`-based givens so
+  `Gd[AnimationPlayer]` projects to `Gd[AnimationMixer]`, plus `Tres`/`Option`/
+  `Required`), and emits `CompEnumRegistry.register(class, prop, builder)`. Comp
+  annotation is only valid on a `String` field.
+- **Enumeration** (`CompEnum`): boneNames iterates `getBoneCount`/`getBoneName`
+  (NOT `getConcatenatedBoneNames` — StringName ptrcall **return** is a known-buggy
+  Phase-2 caveat in `Ptrcall.PtrRet`, segfaults `toScala`). Animation/sprite use
+  `builtin/PackedStringArrayRead.call0` (codegen drops PackedStringArray-returning
+  methods, so it raw-`object_method_bind_ptrcall`s by baked hash — get_animation_list
+  /get_animation_names hash `1139954409`). Tree params use
+  `builtin/ObjectPropertyList.names` (raw `Object.get_property_list` hash
+  `3995934104`, reads each Dictionary's `"name"`, filters `parameters/`). Null comp
+  → `Seq("")`. Hashes from `gdextension/extension_api.json` (4.6.1, matches runtime).
+- Hot-reload: `GodotEngine` deinit(SCENE) calls `CompEnumRegistry.clear()` beside
+  `unregisterAll`. Demo: `harness/game/ExportCompProperties.scala`; verified by
+  `godot/export_comp_verify.gd`.
 
 ## Editor integration (Tscn filtering) — `register/editor/EditorIntegration.scala`
 `Tscn[T]` exports record `(class,prop)->rootType` in `SceneExportRegistry`. At the
@@ -101,7 +161,8 @@ picker's selection signal); currently `_parse_property` only detects + logs.
 ## Registration substrate
 - `GodotScriptClass.scala` — root base: `hostObject`, `withHost`, virtuals.
 - `ClassRegistration.scala` — fills `GDExtensionClassCreationInfo4` with static
-  trampolines (create/free/recreate/get_virtual). **`is_runtime=1`** (runtime-only,
+  trampolines (create/free/recreate/get_virtual + `validate_property` for the
+  comp-reference dropdowns above). **`is_runtime=1`** (runtime-only,
   so editor doesn't tick it). Reload-safe: probes `classdb_get_class_tag` and
   unregisters a stale class before re-registering. No deinit-side unregister.
 - `ClassRegistry.scala` / `Tokens.scala` — integer tokens (in `CVoidPtr` slots)

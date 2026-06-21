@@ -20,3 +20,10 @@ character_state = 3
 [node name="Enemy" type="Enemy" parent="." unique_id=1644787849 node_paths=PackedStringArray("projectile")]
 projectile = NodePath("../Projectile")
 scene = ExtResource("2_8uh7m")
+
+[node name="ExportTest" type="ExportTest" parent="." unique_id=211520968]
+health = 91
+damage = 4
+ratio = 0.05
+falloff = 6.0628376
+folder = "res://lib"

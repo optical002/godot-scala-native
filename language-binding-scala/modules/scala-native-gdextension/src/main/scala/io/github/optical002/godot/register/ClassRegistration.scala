@@ -98,6 +98,10 @@ object ClassRegistration {
     !(!info).at_free_instance_func = freeInstance
     !(!info).at_recreate_instance_func = recreateInstance
     !(!info).at_get_virtual_func = getVirtual
+    // Rewrites comp-reference String properties into ENUM dropdowns at inspect
+    // time (see CompEnumRegistry). Safe to set unconditionally: the trampoline
+    // returns "not handled" for every property without a registered builder.
+    !(!info).at_validate_property_func = validateProperty
     !(!info).at_class_userdata = Tokens.toPtr(classToken)
 
     io.github.optical002.godot.Log.trace(s"register: ${desc.className} classdb_register_extension_class4 begin")
@@ -341,5 +345,33 @@ object ClassRegistration {
         io.github.optical002.godot.Log.trace(s"_parse_property: EXIT name='$name' result=$r")
         writeBool(ret, r)
       } else { io.github.optical002.godot.Log.trace(s"_parse_property: EXIT token=$tok scala=null -> false"); writeBool(ret, false) }
+    }
+
+  // --- validate_property (component-reference ENUM dropdowns) -------------
+  // Unlike the editor virtuals above, this is a top-level class callback (not
+  // routed through get_virtual). For each property Godot builds, we look up a
+  // CompEnumRegistry builder by (className, propName); if one exists we rewrite
+  // the PropertyInfo to a PROPERTY_HINT_ENUM whose hint_string is the names
+  // enumerated from the comp's current value, and return true (handled).
+  private val validateProperty: GDExtensionClassValidateProperty =
+    (instance: GDExtensionClassInstancePtr, pi: Ptr[GDExtensionPropertyInfo]) => {
+      val scala = ClassRegistry.instanceFor(Tokens.fromPtr(instance))
+      if (scala == null) 0.toUByte
+      else {
+        val className = scala.getClass.getSimpleName
+        val propName =
+          io.github.optical002.godot.builtin.StringName.toScala(!(!pi).at_name)
+        CompEnumRegistry.namesFor(className, propName, scala) match {
+          case Some(names) =>
+            val joined = (if (names.isEmpty) Seq("") else names).mkString(",")
+            io.github.optical002.godot.Log.trace(
+              s"validate_property: $className.$propName -> ENUM '$joined'"
+            )
+            !(!pi).at_hint = PropertyHint.Enum.toUInt
+            !(!pi).at_hint_string = MethodRegistration.heapGString(joined)
+            1.toUByte
+          case None => 0.toUByte
+        }
+      }
     }
 }

@@ -2,6 +2,8 @@ package io.github.optical002.godot.register
 
 import scala.quoted.*
 import io.github.optical002.godot.builtin.{ToVariant, FromVariant}
+import io.github.optical002.godot.engine.Gd
+import io.github.optical002.godot.codegen.engine.{Skeleton3D, AnimationMixer, SpriteFrames, AnimationTree}
 import io.github.optical002.godot.codegen.gdextensioninterface.types.*
 import io.github.optical002.godot.codegen.gdextensioninterface.types.GDExtensionVariantType.*
 
@@ -87,6 +89,14 @@ object Register {
     val funcAnn = TypeRepr.of[func]
     val exportAnn = TypeRepr.of[gdexport]
     val signalAnn = TypeRepr.of[signal]
+    val groupAnn = TypeRepr.of[exportGroup]
+    val subgroupAnn = TypeRepr.of[exportSubgroup]
+    val categoryAnn = TypeRepr.of[exportCategory]
+    val boneNameAnn = TypeRepr.of[exportBoneName]
+    val animationAnn = TypeRepr.of[exportAnimation]
+    val spriteAnimAnn = TypeRepr.of[exportSpriteAnimation]
+    val animPropertyAnn = TypeRepr.of[exportAnimationProperty]
+    val compAnns = List(boneNameAnn, animationAnn, spriteAnimAnn, animPropertyAnn)
 
     // snake_case Godot name from a camelCase Scala name.
     def snake(n: String): String =
@@ -175,7 +185,8 @@ object Register {
     def emitExport[A: Type](
       fName: String,
       propName: String,
-      et: Expr[ExportType[A]]
+      et: Expr[ExportType[A]],
+      hint: Expr[ExportHint]
     ): Expr[Unit] = {
       val (g, s) = fieldLambdas[A](fName)
       '{
@@ -183,7 +194,8 @@ object Register {
           $classNameExpr,
           ${ Expr(propName) },
           get = $g,
-          set = $s
+          set = $s,
+          hint = $hint
         )(using $et)
       }
     }
@@ -224,20 +236,109 @@ object Register {
       }
     }
 
-    def registerExportFor(f: Symbol): Expr[Unit] = {
+    // The `@gdexport` hint argument, if the user wrote `@gdexport(ExportHint.…)`.
+    // The annotation tree is `new gdexport(<hintExpr>)`; a bare `@gdexport` has no
+    // arg (the default applies), so we fall back to `ExportHint.none`.
+    def hintExpr(f: Symbol): Expr[ExportHint] =
+      f.getAnnotation(exportAnn.typeSymbol) match {
+        case Some(Apply(_, arg :: _)) => arg.asExprOf[ExportHint]
+        case _                        => '{ ExportHint.none }
+      }
+
+    // Inspector section markers (`@exportCategory` / `@exportGroup` /
+    // `@exportSubgroup`) declared on this field. Positional: emitted before the
+    // field's property, in category→group→subgroup order.
+    def markerExprs(f: Symbol): List[Expr[Unit]] = {
+      def strArg(t: Term): Expr[String] = t.asExprOf[String]
+      val cat = f.getAnnotation(categoryAnn.typeSymbol).collect {
+        case Apply(_, name :: _) =>
+          '{ PropertyRegistration.registerCategory($classNameExpr, ${ strArg(name) }) }
+      }
+      val grp = f.getAnnotation(groupAnn.typeSymbol).collect {
+        case Apply(_, args) if args.nonEmpty =>
+          val prefix = args.lift(1).map(strArg).getOrElse('{ "" })
+          '{ PropertyRegistration.registerGroup($classNameExpr, ${ strArg(args.head) }, $prefix) }
+      }
+      val sub = f.getAnnotation(subgroupAnn.typeSymbol).collect {
+        case Apply(_, args) if args.nonEmpty =>
+          val prefix = args.lift(1).map(strArg).getOrElse('{ "" })
+          '{ PropertyRegistration.registerSubgroup($classNameExpr, ${ strArg(args.head) }, $prefix) }
+      }
+      List(cat, grp, sub).flatten
+    }
+
+    // The comp-reference annotation on a field (if any) plus its comp arg — the
+    // Scala name of the sibling field to enumerate from. Comp annotations take a
+    // single `String` literal, read directly like the marker args.
+    def compAnnotationOf(f: Symbol): Option[(TypeRepr, String)] =
+      compAnns.iterator.flatMap { ann =>
+        f.getAnnotation(ann.typeSymbol).collect {
+          case Apply(_, Literal(StringConstant(comp)) :: _) => (ann, comp)
+        }
+      }.nextOption()
+
+    // Emit a CompEnumRegistry.register(...) for a comp-annotated String field:
+    // locate the sibling comp field by Scala name to get its declared type, build
+    // a typed getter for it, project it to the engine type the annotation expects
+    // (via CompEnum.AsGd), and pair that with the matching enumeration function.
+    def compEnumRegFor(f: Symbol, ann: TypeRepr, compScalaName: String): Expr[Unit] = {
+      val propName = snake(f.name)
+      val annName = ann.typeSymbol.name
+      val compField = fields.find(_.name == compScalaName).getOrElse(
+        report.errorAndAbort(
+          s"@$annName $className.${f.name}: no sibling field named '$compScalaName'"
+        )
+      )
+      val compTpe = compField.tree match {
+        case v: ValDef => v.tpt.tpe
+        case _ =>
+          report.errorAndAbort(
+            s"@$annName $className.$compScalaName: cannot determine field type"
+          )
+      }
+      compTpe.asType match {
+        case '[c] =>
+          val (getC, _) = fieldLambdas[c](compScalaName)
+          def build[E: Type](enumerate: Expr[Gd[E] => Seq[String]]): Expr[Unit] = {
+            val asGd = Expr.summon[CompEnum.AsGd[c, E]].getOrElse(
+              report.errorAndAbort(
+                s"@$annName $className.$compScalaName: type '${typeName(compTpe)}' " +
+                  s"cannot be projected to Gd[${TypeRepr.of[E].typeSymbol.name}]"
+              )
+            )
+            val builder: Expr[GodotScriptClass => Seq[String]] =
+              '{ (inst: GodotScriptClass) => $enumerate($asGd.gd($getC(inst))) }
+            '{ CompEnumRegistry.register($classNameExpr, ${ Expr(propName) }, $builder) }
+          }
+          if (ann =:= boneNameAnn) build[Skeleton3D]('{ CompEnum.boneNames })
+          else if (ann =:= animationAnn) build[AnimationMixer]('{ CompEnum.animationNames })
+          else if (ann =:= spriteAnimAnn) build[SpriteFrames]('{ CompEnum.spriteAnimationNames })
+          else build[AnimationTree]('{ CompEnum.animationTreeParams })
+      }
+    }
+
+    def registerExportFor(f: Symbol): List[Expr[Unit]] = {
       val fName = f.name
       val propName = snake(fName)
       val fTpe = f.tree match {
         case v: ValDef => v.tpt.tpe
         case _         => TypeRepr.of[Any]
       }
-      fTpe.asType match {
+      val hint = hintExpr(f)
+      val compReg = compAnnotationOf(f).map { case (ann, comp) =>
+        if (typeName(fTpe) != "java.lang.String")
+          report.errorAndAbort(
+            s"@${ann.typeSymbol.name} $className.$fName: only valid on a String @gdexport field"
+          )
+        compEnumRegFor(f, ann, comp)
+      }.toList
+      val prop = fTpe.asType match {
         case '[a] =>
           Expr.summon[ExportType[a]] match {
-            case Some(et) => emitExport[a](fName, propName, et)
+            case Some(et) => emitExport[a](fName, propName, et, hint)
             case None =>
               enumExportType[a] match {
-                case Some(et) => emitExport[a](fName, propName, et)
+                case Some(et) => emitExport[a](fName, propName, et, hint)
                 case None =>
                   report.errorAndAbort(
                     s"@gdexport $className.$fName: unsupported type '${typeName(fTpe)}' " +
@@ -246,6 +347,7 @@ object Register {
               }
           }
       }
+      markerExprs(f) ++ (prop :: compReg)
     }
 
     def registerSignalFor(m: Symbol): Expr[Unit] =
@@ -267,6 +369,9 @@ object Register {
     val funcRegs = methods.filter(hasAnn(_, funcAnn)).map(registerFuncFor)
     // Body-annotated exports plus the case-class ctor-param exports, de-duped by
     // name so a param that is also `@gdexport`-annotated only registers once.
+    // Sorted by source position so inspector section markers (group/subgroup/
+    // category) land in the order the user declared the fields — these markers
+    // are positional and apply to every property registered after them.
     val exportFields =
       (fields.filter(hasAnn(_, exportAnn)) ++ ctorParamFields)
         .foldLeft((Set.empty[String], List.empty[Symbol])) {
@@ -276,7 +381,8 @@ object Register {
         }
         ._2
         .reverse
-    val exportRegs = exportFields.map(registerExportFor)
+        .sortBy(f => f.pos.map(_.start).getOrElse(Int.MaxValue))
+    val exportRegs = exportFields.flatMap(registerExportFor)
     val signalRegs = methods.filter(hasAnn(_, signalAnn)).map(registerSignalFor)
 
     // --- assemble ---------------------------------------------------------

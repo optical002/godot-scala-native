@@ -2,6 +2,7 @@ package io.github.optical002.godot.register
 
 import io.github.optical002.godot.Godot
 import io.github.optical002.godot.builtin.*
+import io.github.optical002.godot.codegen.gdextensioninterface.types.GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_NIL
 
 /**
  * Registers an `@export`-style property on a registered class.
@@ -51,14 +52,23 @@ object PropertyRegistration {
     className: String,
     propertyName: String,
     get: GodotScriptClass => A,
-    set: (GodotScriptClass, A) => Unit
+    set: (GodotScriptClass, A) => Unit,
+    hint: ExportHint = ExportHint.none
   )(using et: ExportType[A]): Unit = {
     val getter = s"get_$propertyName"
     val setter = s"set_$propertyName"
 
+    // An ExportHint (from `@gdexport(ExportHint.…)`) overrides the ExportType's
+    // own hint/hint_string and ORs any extra usage bits; with no hint the
+    // ExportType's inspector metadata is used verbatim (the common case).
+    val overriding = hint.hint != PropertyHint.None
+    val effHint       = if (overriding) hint.hint else et.hint
+    val effHintString = if (overriding) hint.hintString else et.hintString
+    val effUsage      = et.usage | hint.usageExtra
+
     io.github.optical002.godot.Log.trace(
       s"registerExport: $className.$propertyName variantType=${et.variantType} " +
-        s"hint=${et.hint} hintString='${et.hintString}' className='${et.className}' usage=${et.usage}"
+        s"hint=$effHint hintString='$effHintString' className='${et.className}' usage=$effUsage"
     )
     MethodRegistration.registerExportGetter(className, getter, get)
     MethodRegistration.registerExportSetter(className, setter, set)
@@ -66,10 +76,10 @@ object PropertyRegistration {
     val info = MethodRegistration.propertyInfo(
       et.variantType,
       propertyName,
-      et.hint,
-      et.hintString,
+      effHint,
+      effHintString,
       et.className,
-      et.usage
+      effUsage
     )
 
     io.github.optical002.godot.Log.trace(s"registerExport: $className.$propertyName classdb_register_extension_class_property begin")
@@ -85,5 +95,46 @@ object PropertyRegistration {
     et.sceneRootType.foreach { rt =>
       SceneExportRegistry.record(className, propertyName, rt)
     }
+  }
+
+  /**
+   * Inspector section markers (`@export_group` / `@export_subgroup` /
+   * `@export_category`). These are **positional**: each applies to every
+   * property registered *after* it, so the macro emits them interleaved in
+   * source order. Group and subgroup have dedicated ClassDB calls; category has
+   * none, so it is emitted as a NIL marker property carrying USAGE_CATEGORY.
+   */
+  def registerGroup(className: String, name: String, prefix: String): Unit =
+    Godot.interface.classdb_register_extension_class_property_group(
+      Godot.library,
+      StringNames.cached(className).ptr,
+      MethodRegistration.heapGString(name),
+      MethodRegistration.heapGString(prefix)
+    )
+
+  def registerSubgroup(className: String, name: String, prefix: String): Unit =
+    Godot.interface.classdb_register_extension_class_property_subgroup(
+      Godot.library,
+      StringNames.cached(className).ptr,
+      MethodRegistration.heapGString(name),
+      MethodRegistration.heapGString(prefix)
+    )
+
+  def registerCategory(className: String, name: String): Unit = {
+    val info = MethodRegistration.propertyInfo(
+      GDEXTENSION_VARIANT_TYPE_NIL,
+      name,
+      PropertyHint.None,
+      "",
+      "",
+      PropertyUsage.Category
+    )
+    Godot.interface.classdb_register_extension_class_property(
+      Godot.library,
+      StringNames.cached(className).ptr,
+      info,
+      StringNames.cached("").ptr,
+      StringNames.cached("").ptr
+    )
   }
 }

@@ -47,6 +47,11 @@ object ExportType {
   given ExportType[Boolean] = fromSeam[Boolean](GDEXTENSION_VARIANT_TYPE_BOOL)
   given ExportType[String]  = fromSeam[String](GDEXTENSION_VARIANT_TYPE_STRING)
 
+  // --- color --------------------------------------------------------------
+  // Exports as a COLOR-typed property (inspector shows a color picker). The
+  // alpha-less picker is opt-in via `@gdexport(ExportHint.colorNoAlpha)`.
+  given ExportType[Color] = fromSeam[Color](GDEXTENSION_VARIANT_TYPE_COLOR)
+
   // --- typed dictionary ---------------------------------------------------
   // Encoded like GDScript: hint=TYPE_STRING, hint_string = "<key>;<value>",
   // each part "<variant_type>[/<elem_hint>]:<elem_hint_string>".
