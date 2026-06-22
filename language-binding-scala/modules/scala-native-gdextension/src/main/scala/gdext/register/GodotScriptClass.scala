@@ -1,7 +1,7 @@
 package gdext.register
 
 import gdext.engine.GodotObject
-import gdext.codegen.gdextensioninterface.types.*
+import gdext.internal.ffi.types.*
 
 /**
  * Root base for everything in the engine class hierarchy.

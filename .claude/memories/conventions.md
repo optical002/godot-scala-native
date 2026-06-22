@@ -39,7 +39,7 @@ decoding (`StringName.toScala`), e.g. in `get_virtual` dispatch.
   trace (thread id + ms timestamp per line) when diagnosing this.
 - `is_runtime=1` so virtuals don't run while editing.
 - **`is_runtime` is Node-only**: `Register.auto` sets `ClassDescriptor.isRuntime`
-  from `T <: codegen.engine.Node`. Nodes are runtime (editor doesn't tick their
+  from `T <: gdext.classes.Node`. Nodes are runtime (editor doesn't tick their
   `_process`/`_ready`); **Resources / other Objects must be non-runtime**. A
   custom `Resource` registered as runtime makes the editor use a placeholder and
   go through the placeholder↔real recreate path on hot-reload — which **freezes
@@ -81,14 +81,25 @@ decoding (`StringName.toScala`), e.g. in `get_virtual` dispatch.
   (`PopupMenu.popup`, `DirAccess`/`PackedStringArray`, `EditorProperty.emit_changed`).
 
 ## Logging (split)
-`Log` (gdext) has split channels. Binding internals → `Log.file` (file
-`godot-init`). Game code → `GodotPrint.print` (Godot Output). Don't mix.
+`Log` (gdext, **`private[gdext]`**) has split channels. Binding internals →
+`Log.file` (file `.scala/godot-init`). Game code → `gdext.api.GodotPrint.print`
+(Godot Output). Don't mix.
 
 ## Codegen
-`codegen/` is generated — never hand-edit; change the generator in `igen` and
-run `cd language-binding-scala && sbt igen/regenerate`. After moving the entry
-symbol, `cd harness-scala && sbt clean` (stale `.nir` causes "multiple definition
-of godot_scala_init").
+The generated packages — `gdext.classes` (engine) and `gdext.internal.ffi` (FFI)
+— are generated, never hand-edit; change the generator in `igen` and run
+`cd language-binding-scala && sbt igen/regenerate`. (The generator emits the FFI
+`Interface` as `private[gdext]`.) After moving the entry symbol, `cd harness-scala
+&& sbt clean` (stale `.nir` causes "multiple definition of godot_scala_init").
+
+## Public API vs internal (compiler-enforced)
+Consumers import only `gdext.api.*`, `gdext.classes`, `gdext.builtin`,
+`gdext.annotations`. `Godot`, `GodotEngine`, `Log`, `FileLogger` and the FFI
+`Interface` are `private[gdext]` — a game file referencing them fails to compile
+("can only be accessed from package gdext"). The registration builders
+(`ClassRegistration`/`MethodRegistration`/…) stay accessible because the
+`Register` macro emits calls to them into consumer code. See
+[architecture](index.md) "Package layout".
 
 ## Decoupled consumer / publishLocal
 `harness-scala` no longer source-references the binding; it applies the published

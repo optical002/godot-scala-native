@@ -1,6 +1,6 @@
 package gdext.builtin
 
-import gdext.codegen.gdextensioninterface.types.GDExtensionVariantType.*
+import gdext.internal.ffi.types.GDExtensionVariantType.*
 
 /**
  * Self-test exercised from the SCENE initialize callback. Round-trips values

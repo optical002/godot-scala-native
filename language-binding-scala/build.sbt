@@ -91,7 +91,7 @@ lazy val gdext =
       // consumer needs only the published artifact — no access to these sources.
       Compile / resourceGenerators += Def.task {
         val engineDir =
-          (Compile / scalaSource).value / "gdext" / "codegen" / "engine"
+          (Compile / scalaSource).value / "gdext" / "classes"
         val names =
           Option(engineDir.listFiles)
             .getOrElse(Array.empty[File])

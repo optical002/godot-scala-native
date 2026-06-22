@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `SpringBoneCollision3D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessSpringBoneCollision3D
-    extends gdext.codegen.engine.SpringBoneCollision3D
+    extends gdext.classes.SpringBoneCollision3D

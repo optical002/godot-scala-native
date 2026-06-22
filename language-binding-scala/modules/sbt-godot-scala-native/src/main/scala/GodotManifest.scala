@@ -48,16 +48,16 @@ object GodotManifest {
        |reloadable = true
        |
        |[libraries]
-       |linux.debug.x86_64   = "res://lib/$so"
-       |linux.release.x86_64 = "res://lib/$so"
+       |linux.debug.x86_64   = "res://.scala/$so"
+       |linux.release.x86_64 = "res://.scala/$so"
        |
-       |macos.debug          = "res://lib/$dylib"
-       |macos.release        = "res://lib/$dylib"
-       |macos.debug.arm64    = "res://lib/$dylib"
-       |macos.release.arm64  = "res://lib/$dylib"
+       |macos.debug          = "res://.scala/$dylib"
+       |macos.release        = "res://.scala/$dylib"
+       |macos.debug.arm64    = "res://.scala/$dylib"
+       |macos.release.arm64  = "res://.scala/$dylib"
        |
-       |windows.debug.x86_64   = "res://lib/$dll"
-       |windows.release.x86_64 = "res://lib/$dll"
+       |windows.debug.x86_64   = "res://.scala/$dll"
+       |windows.release.x86_64 = "res://.scala/$dll"
        |""".stripMargin
   }
 }

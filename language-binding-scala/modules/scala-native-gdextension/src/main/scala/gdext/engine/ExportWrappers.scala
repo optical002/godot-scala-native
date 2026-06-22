@@ -1,6 +1,6 @@
 package gdext.engine
 
-import gdext.codegen.engine.PackedScene
+import gdext.classes.PackedScene
 
 /**
  * Export wrapper types used to give exported reference fields precise meaning.

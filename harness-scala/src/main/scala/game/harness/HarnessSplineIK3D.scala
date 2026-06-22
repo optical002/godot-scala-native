@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `SplineIK3D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessSplineIK3D
-    extends gdext.codegen.engine.SplineIK3D
+    extends gdext.classes.SplineIK3D

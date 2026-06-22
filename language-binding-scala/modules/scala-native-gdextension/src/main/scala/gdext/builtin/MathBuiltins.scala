@@ -2,8 +2,8 @@ package gdext.builtin
 
 import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
-import gdext.codegen.gdextensioninterface.types.*
-import gdext.codegen.gdextensioninterface.types.GDExtensionVariantType.*
+import gdext.internal.ffi.types.*
+import gdext.internal.ffi.types.GDExtensionVariantType.*
 
 /**
  * The fixed-layout math builtins beyond [[Vector2]]/[[Color]] (which keep their

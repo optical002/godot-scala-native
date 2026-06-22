@@ -2,7 +2,7 @@ package gdext.register
 
 import gdext.Godot
 import gdext.builtin.*
-import gdext.codegen.gdextensioninterface.types.GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_NIL
+import gdext.internal.ffi.types.GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_NIL
 
 /**
  * Registers an `@export`-style property on a registered class.

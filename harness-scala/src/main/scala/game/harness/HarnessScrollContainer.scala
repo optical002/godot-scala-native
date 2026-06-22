@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `ScrollContainer`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessScrollContainer
-    extends gdext.codegen.engine.ScrollContainer
+    extends gdext.classes.ScrollContainer

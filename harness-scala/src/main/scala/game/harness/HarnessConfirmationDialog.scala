@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `ConfirmationDialog`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessConfirmationDialog
-    extends gdext.codegen.engine.ConfirmationDialog
+    extends gdext.classes.ConfirmationDialog

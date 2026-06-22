@@ -4,8 +4,8 @@ import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
 import scala.scalanative.libc.string.memset
 import gdext.Godot
-import gdext.codegen.gdextensioninterface.types.*
-import gdext.codegen.gdextensioninterface.types.GDExtensionVariantType.*
+import gdext.internal.ffi.types.*
+import gdext.internal.ffi.types.GDExtensionVariantType.*
 
 /**
  * Godot's untyped `Array`. An 8-byte ([[BuiltinSizes.Array]]) reference-counted

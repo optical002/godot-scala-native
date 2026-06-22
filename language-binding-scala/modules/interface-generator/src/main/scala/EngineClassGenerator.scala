@@ -126,7 +126,7 @@ object EngineClassGenerator {
            |""".stripMargin
       } else ""
 
-    s"""package gdext.codegen.engine
+    s"""package gdext.classes
        |
        |import gdext.Godot
        |import gdext.builtin.*

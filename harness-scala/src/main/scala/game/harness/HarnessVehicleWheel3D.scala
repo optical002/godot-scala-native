@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `VehicleWheel3D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessVehicleWheel3D
-    extends gdext.codegen.engine.VehicleWheel3D
+    extends gdext.classes.VehicleWheel3D

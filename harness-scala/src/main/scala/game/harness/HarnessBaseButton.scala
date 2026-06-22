@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `BaseButton`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessBaseButton
-    extends gdext.codegen.engine.BaseButton
+    extends gdext.classes.BaseButton

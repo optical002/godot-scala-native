@@ -3,7 +3,7 @@ package gdext.register.editor
 import gdext.{Godot, Log}
 import gdext.builtin.StringNames
 import gdext.engine.GodotObject
-import gdext.codegen.engine.{EditorInspectorPlugin, EditorPlugin}
+import gdext.classes.{EditorInspectorPlugin, EditorPlugin}
 import gdext.register.*
 
 /**

@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `PanelContainer`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessPanelContainer
-    extends gdext.codegen.engine.PanelContainer
+    extends gdext.classes.PanelContainer

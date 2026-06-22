@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `GPUParticlesAttractorBox3D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessGPUParticlesAttractorBox3D
-    extends gdext.codegen.engine.GPUParticlesAttractorBox3D
+    extends gdext.classes.GPUParticlesAttractorBox3D

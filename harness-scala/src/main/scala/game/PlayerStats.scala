@@ -1,6 +1,6 @@
 package game
 
-import gdext.codegen.engine.Resource
+import gdext.classes.Resource
 
 /** A custom Resource holding player stats, referenced by `Player`'s exports. */
 final class PlayerStats extends Resource

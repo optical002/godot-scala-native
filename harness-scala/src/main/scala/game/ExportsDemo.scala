@@ -1,9 +1,10 @@
 package game
 
 import gdext.builtin.Dict
-import gdext.engine.{Gd, Required, Tres, Tscn}
-import gdext.codegen.engine.{Area2D, Node, Node2D, Resource}
-import gdext.register.*
+import gdext.api.{Gd, Required, Tres, Tscn}
+import gdext.classes.{Area2D, Node, Node2D, Resource}
+import gdext.annotations.*
+import gdext.api.*
 
 /** A simple parameterless enum, exported as a Godot ENUM property. */
 enum Team {

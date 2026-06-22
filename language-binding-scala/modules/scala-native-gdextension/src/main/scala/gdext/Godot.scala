@@ -1,7 +1,7 @@
 package gdext
 
-import gdext.codegen.gdextensioninterface.interface.Interface
-import gdext.codegen.gdextensioninterface.types.*
+import gdext.internal.ffi.interface.Interface
+import gdext.internal.ffi.types.*
 
 /**
  * Process-global access to the loaded GDExtension interface and the class
@@ -18,7 +18,7 @@ import gdext.codegen.gdextensioninterface.types.*
  * safe for the publish; later phases that spin up worker threads must revisit
  * this if they mutate it (they should not).
  */
-object Godot {
+private[gdext] object Godot {
   private var _interface: Interface = null
   private var _library: GDExtensionClassLibraryPtr = null
 

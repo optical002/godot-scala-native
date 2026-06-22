@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `RemoteTransform3D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessRemoteTransform3D
-    extends gdext.codegen.engine.RemoteTransform3D
+    extends gdext.classes.RemoteTransform3D

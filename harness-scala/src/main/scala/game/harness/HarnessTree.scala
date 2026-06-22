@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `Tree`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessTree
-    extends gdext.codegen.engine.Tree
+    extends gdext.classes.Tree

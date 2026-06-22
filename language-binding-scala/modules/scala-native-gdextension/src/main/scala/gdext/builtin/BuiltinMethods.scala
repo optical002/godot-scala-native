@@ -1,7 +1,7 @@
 package gdext.builtin
 
 import gdext.Godot
-import gdext.codegen.gdextensioninterface.types.*
+import gdext.internal.ffi.types.*
 
 /**
  * Caches `ptrcall` function pointers for builtin-type methods (Array.size,

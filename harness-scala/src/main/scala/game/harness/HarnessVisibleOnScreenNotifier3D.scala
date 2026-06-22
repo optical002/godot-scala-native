@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `VisibleOnScreenNotifier3D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessVisibleOnScreenNotifier3D
-    extends gdext.codegen.engine.VisibleOnScreenNotifier3D
+    extends gdext.classes.VisibleOnScreenNotifier3D

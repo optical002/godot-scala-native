@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `PhysicalBone3D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessPhysicalBone3D
-    extends gdext.codegen.engine.PhysicalBone3D
+    extends gdext.classes.PhysicalBone3D

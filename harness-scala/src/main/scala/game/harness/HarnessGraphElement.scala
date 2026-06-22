@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `GraphElement`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessGraphElement
-    extends gdext.codegen.engine.GraphElement
+    extends gdext.classes.GraphElement

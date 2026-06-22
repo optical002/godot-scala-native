@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `CSGMesh3D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessCSGMesh3D
-    extends gdext.codegen.engine.CSGMesh3D
+    extends gdext.classes.CSGMesh3D

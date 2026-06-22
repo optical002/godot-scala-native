@@ -1,8 +1,9 @@
 package game
 
-import gdext.GodotPrint
-import gdext.engine.Tscn
-import gdext.register.*
+import gdext.api.GodotPrint
+import gdext.api.Tscn
+import gdext.annotations.*
+import gdext.api.*
 
 /**
  * A custom node that extends another custom node ([[Enemy]]) rather than an

@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `TextEdit`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessTextEdit
-    extends gdext.codegen.engine.TextEdit
+    extends gdext.classes.TextEdit

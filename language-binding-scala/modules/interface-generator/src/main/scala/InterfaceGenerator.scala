@@ -297,7 +297,7 @@ object InterfaceGenerator {
                     }
                   val tagImport =
                     if (memberTypes.length >= 23)
-                      "import gdext.types.Tags.*"
+                      "import gdext.internal.types.Tags.*"
                     else
                       s"import Tag.materializeCStruct${memberTypes.length}Tag"
                   s"""
@@ -334,12 +334,12 @@ object InterfaceGenerator {
                   }
             }
             s"""
-             |package gdext.codegen.gdextensioninterface.types
+             |package gdext.internal.ffi.types
              |
              |import scala.scalanative.unsafe.*
              |import scala.scalanative.unsigned.*
              |import scala.scalanative.unsigned.UInt.*
-             |import gdext.types.*
+             |import gdext.internal.types.*
              |
              |${contents.mkString}
              |""".stripMargin
@@ -399,20 +399,20 @@ object InterfaceGenerator {
           }.mkString("\n")
 
           s"""
-           |package gdext.codegen.gdextensioninterface.interface
+           |package gdext.internal.ffi.interface
            |
            |import scala.scalanative.unsafe.*
            |import scala.scalanative.unsigned.*
            |import scala.scalanative.unsigned.UInt.*
-           |import gdext.types.*
-           |import gdext.codegen.gdextensioninterface.types.*
+           |import gdext.internal.types.*
+           |import gdext.internal.ffi.types.*
            |
            |$definitions
            |
-           |class Interface private() {
+           |private[gdext] class Interface private() {
            |  $interfaceVars
            |}
-           |object Interface {
+           |private[gdext] object Interface {
            |$helperMethods
            |
            |  def load(

@@ -4,6 +4,9 @@ How a `game` class becomes a real Godot class. **Zero registration code in the
 game** — only `extends` + annotations.
 
 ## User-facing (game)
+Imports a game file uses: `import gdext.api.*` (Gd/Tres/Tscn/Required/GodotPrint/
+ExportHint/emitSignal), `import gdext.classes.<Engine>`, `import gdext.builtin.*`,
+`import gdext.annotations.*` (the `@func`/`@gdexport`/`@signal`/… annotations).
 ```scala
 final class Player(                           // base derived from superclass
   var speed: Double = 120.0,                  // var ctor param = auto-export
@@ -31,7 +34,8 @@ Scans `T` at compile time and emits all registration calls:
   `_can_handle`/`_parse_property`).
 - `@func` → `MethodRegistration.registerGetter`; `@gdexport` →
   `PropertyRegistration.registerExport`; `@signal` → `SignalRegistration`.
-- Annotations in `annotations.scala`. `@gdexport` (not `@export` — keyword clash).
+- Annotations in `annotations/annotations.scala`, package **`gdext.annotations`**
+  (`Register.scala` imports them). `@gdexport` (not `@export` — keyword clash).
 - **ctor-param auto-export** (ANY class, case or not): every `var` primary-ctor
   param behaves as an inlined `@gdexport` — collected as the mutable
   (`Flags.Mutable`) fields matching the ctor param names; `val`/plain params
@@ -177,9 +181,12 @@ pulled in by that module), wired by `GodotScalaNativePlugin` into the consuming
 project's `Compile / sourceGenerators` — scans the consumer's `src/main/scala`
 every compile and emits `game.GeneratedRegistrations` (a managed source under
 `target/`, never committed) with one `Register.auto[T]()` per discovered class.
-The same generator also emits `game.GeneratedEntry` — the
-`@exported(RegistrationScan.EntrySymbol)` GDExtension entry point that calls
-`registerAll()` once. The exported symbol is **hardcoded** in
+The generated sources `import gdext.api.*` only (`Register`, the `GodotEntry`
+facade, and the entry FFI type aliases) — never an internal package. The same
+generator also emits `game.GeneratedEntry` — the
+`@exported(RegistrationScan.EntrySymbol)` GDExtension entry point that forwards to
+`gdext.api.GodotEntry.run` (a thin facade over the `private[gdext]` bootstrap),
+calling `registerAll()` once. The exported symbol is **hardcoded** in
 `RegistrationScan.EntrySymbol` (`"godot_scala_init"`, not a build setting) and
 must equal `entry_symbol` in `godot/godot_scala.gdextension`; only the self-test
 is a setting (`godotEntrySelfTest`, set in the consumer's `build.sbt`). No entry
@@ -195,7 +202,7 @@ Add a class → it registers; no edits to any entry file or list.
 
 **Engine base-class names come from the binding jar, not its sources.** The
 `gdext` build (`language-binding-scala/build.sbt`, a `Compile / resourceGenerator`)
-packages the list of `codegen/engine/*.scala` names into the artifact as the
+packages the list of `classes/*.scala` names into the artifact as the
 resource `gdext/engine-classes.txt`. `RegistrationScan.engineNamesFromClasspath`
 reads it off `(Compile / dependencyClasspath)` via a `URLClassLoader`, so it
 works from the **published `gdext` jar** the plugin adds — a downstream consumer

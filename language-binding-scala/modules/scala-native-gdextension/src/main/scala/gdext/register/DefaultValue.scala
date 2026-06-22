@@ -2,7 +2,7 @@ package gdext.register
 
 import gdext.builtin.{Arr, Dict, ToVariant, FromVariant}
 import gdext.engine.*
-import gdext.codegen.engine.{Node, PackedScene, Resource}
+import gdext.classes.{Node, PackedScene, Resource}
 
 /**
  * The "zero value" for an exportable type — what a registered class's

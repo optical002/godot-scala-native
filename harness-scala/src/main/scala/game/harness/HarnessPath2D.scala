@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `Path2D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessPath2D
-    extends gdext.codegen.engine.Path2D
+    extends gdext.classes.Path2D

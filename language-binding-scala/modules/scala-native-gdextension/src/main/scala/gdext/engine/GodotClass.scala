@@ -2,7 +2,7 @@ package gdext.engine
 
 import scala.quoted.*
 import gdext.register.GodotScriptClass
-import gdext.codegen.engine.RefCounted
+import gdext.classes.RefCounted
 
 /**
  * Type-class describing a Godot engine class `T` (one of the generated opaque

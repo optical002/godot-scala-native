@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `VScrollBar`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessVScrollBar
-    extends gdext.codegen.engine.VScrollBar
+    extends gdext.classes.VScrollBar

@@ -1,9 +1,10 @@
 package game
 
-import gdext.GodotPrint
-import gdext.codegen.engine.Node2D
-import gdext.engine.Tscn
-import gdext.register.*
+import gdext.api.GodotPrint
+import gdext.classes.Node2D
+import gdext.api.Tscn
+import gdext.annotations.*
+import gdext.api.*
 
 /**
  * Example of the compact `var`-param export form: every `var` constructor

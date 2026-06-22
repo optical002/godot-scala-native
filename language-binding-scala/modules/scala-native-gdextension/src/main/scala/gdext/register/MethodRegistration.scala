@@ -7,8 +7,8 @@ import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.atomic.AtomicLong
 import gdext.Godot
 import gdext.builtin.*
-import gdext.codegen.gdextensioninterface.types.*
-import gdext.codegen.gdextensioninterface.types.GDExtensionClassMethodFlags.*
+import gdext.internal.ffi.types.*
+import gdext.internal.ffi.types.GDExtensionClassMethodFlags.*
 
 /**
  * Registers Scala methods on a registered class so they are callable from

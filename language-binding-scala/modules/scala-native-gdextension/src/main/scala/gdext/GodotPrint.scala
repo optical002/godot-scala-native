@@ -3,8 +3,8 @@ package gdext
 import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
 import gdext.builtin.*
-import gdext.codegen.gdextensioninterface.types.*
-import gdext.codegen.gdextensioninterface.types.GDExtensionVariantType.*
+import gdext.internal.ffi.types.*
+import gdext.internal.ffi.types.GDExtensionVariantType.*
 
 /**
  * Routes log/diagnostic output into Godot's own Output and error consoles,

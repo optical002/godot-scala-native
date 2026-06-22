@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `Timer`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessTimer
-    extends gdext.codegen.engine.Timer
+    extends gdext.classes.Timer

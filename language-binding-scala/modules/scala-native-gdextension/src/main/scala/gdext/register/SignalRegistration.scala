@@ -5,8 +5,8 @@ import scala.scalanative.unsigned.*
 import gdext.Godot
 import gdext.builtin.*
 import gdext.engine.{GodotObject, MethodBind, Ptrcall}
-import gdext.codegen.gdextensioninterface.types.*
-import gdext.codegen.gdextensioninterface.types.GDExtensionVariantType.*
+import gdext.internal.ffi.types.*
+import gdext.internal.ffi.types.GDExtensionVariantType.*
 
 /**
  * Registers signals on a registered class and emits them.

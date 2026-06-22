@@ -4,8 +4,8 @@ import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
 import gdext.Godot
 import gdext.engine.MethodBind
-import gdext.codegen.gdextensioninterface.types.*
-import gdext.codegen.gdextensioninterface.types.GDExtensionVariantType.*
+import gdext.internal.ffi.types.*
+import gdext.internal.ffi.types.GDExtensionVariantType.*
 
 /**
  * Reads the property names of an arbitrary engine object via

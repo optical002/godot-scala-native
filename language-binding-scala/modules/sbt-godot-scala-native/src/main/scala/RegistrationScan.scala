@@ -143,9 +143,7 @@ object RegistrationScan {
        |
        |import scala.scalanative.unsafe.*
        |import scala.scalanative.unsigned.*
-       |import gdext.GodotEngine
-       |import gdext.codegen.gdextensioninterface.types.*
-       |import gdext.register.Register
+       |import gdext.api.*
        |
        |object GeneratedRegistrations {
        |
@@ -161,8 +159,10 @@ object RegistrationScan {
        | *
        | * Godot calls the `@exported` C symbol "$EntrySymbol" (see
        | * godot/godot_scala.gdextension's `entry_symbol`) when the extension loads;
-       | * we forward to the binding's `GodotEngine.run`. The `@exported` annotation
-       | * also keeps this method a reachable Scala Native linker root.
+       | * we forward to the binding's `gdext.api.GodotEntry.run`. The `@exported`
+       | * annotation also keeps this method a reachable Scala Native linker root.
+       | * The FFI types in the signature come via `gdext.api` aliases, so this
+       | * generated glue never names an internal package.
        | *
        | * Generated — the symbol is fixed in RegistrationScan.EntrySymbol; it must
        | * equal `entry_symbol` in the .gdextension manifest.
@@ -170,11 +170,11 @@ object RegistrationScan {
        |object GeneratedEntry {
        |  @exported("$EntrySymbol")
        |  def init(
-       |    getProcAddress: GDExtensionInterfaceGetProcAddress,
-       |    library: GDExtensionClassLibraryPtr,
-       |    r_initialization: Ptr[GDExtensionInitialization]
+       |    getProcAddress: EntryGetProcAddress,
+       |    library: EntryClassLibraryPtr,
+       |    r_initialization: Ptr[EntryInitialization]
        |  ): CUnsignedChar =
-       |    GodotEngine.run(
+       |    GodotEntry.run(
        |      getProcAddress,
        |      library,
        |      r_initialization,

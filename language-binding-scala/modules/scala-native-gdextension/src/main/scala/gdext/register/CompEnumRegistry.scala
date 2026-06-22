@@ -2,7 +2,7 @@ package gdext.register
 
 import gdext.engine.{Gd, Tres, Required}
 import gdext.builtin.{PackedStringArrayRead, ObjectPropertyList}
-import gdext.codegen.engine.{Skeleton3D, AnimationMixer, SpriteFrames, AnimationTree}
+import gdext.classes.{Skeleton3D, AnimationMixer, SpriteFrames, AnimationTree}
 
 /**
  * Runtime backing for the component-reference dropdown annotations

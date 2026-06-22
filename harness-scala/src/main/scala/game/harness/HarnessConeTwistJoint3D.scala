@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `ConeTwistJoint3D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessConeTwistJoint3D
-    extends gdext.codegen.engine.ConeTwistJoint3D
+    extends gdext.classes.ConeTwistJoint3D

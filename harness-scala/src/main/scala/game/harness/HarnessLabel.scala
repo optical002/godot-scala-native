@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `Label`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessLabel
-    extends gdext.codegen.engine.Label
+    extends gdext.classes.Label

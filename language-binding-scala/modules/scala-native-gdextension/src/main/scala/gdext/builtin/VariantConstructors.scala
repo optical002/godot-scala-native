@@ -2,7 +2,7 @@ package gdext.builtin
 
 import scala.scalanative.unsigned.*
 import gdext.Godot
-import gdext.codegen.gdextensioninterface.types.*
+import gdext.internal.ffi.types.*
 
 /**
  * Caches the engine's per-type Variant constructor functions.

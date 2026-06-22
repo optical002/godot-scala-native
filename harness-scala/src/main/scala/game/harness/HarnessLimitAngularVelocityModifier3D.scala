@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `LimitAngularVelocityModifier3D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessLimitAngularVelocityModifier3D
-    extends gdext.codegen.engine.LimitAngularVelocityModifier3D
+    extends gdext.classes.LimitAngularVelocityModifier3D

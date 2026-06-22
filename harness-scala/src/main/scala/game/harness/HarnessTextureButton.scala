@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `TextureButton`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessTextureButton
-    extends gdext.codegen.engine.TextureButton
+    extends gdext.classes.TextureButton

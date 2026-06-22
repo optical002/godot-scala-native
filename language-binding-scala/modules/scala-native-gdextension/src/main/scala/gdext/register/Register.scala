@@ -1,11 +1,12 @@
 package gdext.register
 
 import scala.quoted.*
+import gdext.annotations.*
 import gdext.builtin.{ToVariant, FromVariant}
 import gdext.engine.Gd
-import gdext.codegen.engine.{Skeleton3D, AnimationMixer, SpriteFrames, AnimationTree}
-import gdext.codegen.gdextensioninterface.types.*
-import gdext.codegen.gdextensioninterface.types.GDExtensionVariantType.*
+import gdext.classes.{Skeleton3D, AnimationMixer, SpriteFrames, AnimationTree}
+import gdext.internal.ffi.types.*
+import gdext.internal.ffi.types.GDExtensionVariantType.*
 
 /**
  * Automatic, annotation-driven class registration — the gdext
@@ -72,7 +73,7 @@ object Register {
     // which hangs the editor on hot-reload when the resource is referenced by an
     // open scene. So: Node subtree -> runtime; everything else -> tool/non-runtime.
     val isRuntimeExpr =
-      Expr(tpe <:< TypeRepr.of[gdext.codegen.engine.Node])
+      Expr(tpe <:< TypeRepr.of[gdext.classes.Node])
 
     // --- overridden virtuals ---------------------------------------------
     val baseSym = TypeRepr.of[GodotScriptClass].typeSymbol

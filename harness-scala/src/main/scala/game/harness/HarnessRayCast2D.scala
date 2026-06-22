@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `RayCast2D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessRayCast2D
-    extends gdext.codegen.engine.RayCast2D
+    extends gdext.classes.RayCast2D

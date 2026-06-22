@@ -3,7 +3,7 @@ package gdext
 import java.io.{File, FileWriter}
 import java.nio.file.{Files, Paths, StandardCopyOption}
 
-class FileLogger private (writer: FileWriter) {
+private[gdext] class FileLogger private (writer: FileWriter) {
   private def logBase(msg: String): Unit = {
     val millis = System.currentTimeMillis()
 
@@ -25,8 +25,10 @@ class FileLogger private (writer: FileWriter) {
   def logWarning(msg: String): Unit = logBase(s"[WARNING] $msg")
   def logError(msg: String): Unit = logBase(s"[ERROR] $msg")
 }
-object FileLogger {
+private[gdext] object FileLogger {
   def use[A](logFileName: String)(f: FileLogger => A): A = {
+    // The log lives under `.scala/`; make sure that dir exists before writing.
+    Log.ensureParentDir(logFileName)
     // Backup previous log file
     val sourceFile = new File(logFileName)
     if (sourceFile.exists()) {

@@ -78,7 +78,7 @@ object HarnessClassGenerator {
            |// Empty subclass of Godot's `$base`; proves the binding can subclass
            |// and register this base node type. Regenerate via `sbt igen/regenerate`.
            |final class $name
-           |    extends gdext.codegen.engine.$base
+           |    extends gdext.classes.$base
            |""".stripMargin
       val w = new FileWriter(new File(out, s"$name.scala"))
       try w.write(content)

@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `SpinBox`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessSpinBox
-    extends gdext.codegen.engine.SpinBox
+    extends gdext.classes.SpinBox

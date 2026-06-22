@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `XRNode3D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessXRNode3D
-    extends gdext.codegen.engine.XRNode3D
+    extends gdext.classes.XRNode3D

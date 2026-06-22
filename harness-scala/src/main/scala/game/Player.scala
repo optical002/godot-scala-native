@@ -1,10 +1,11 @@
 package game
 
-import gdext.GodotPrint
+import gdext.api.GodotPrint
 import gdext.builtin.{Arr, Dict, Vector2}
-import gdext.codegen.engine.Node2D
-import gdext.engine.{Gd, Tres, Tscn}
-import gdext.register.*
+import gdext.classes.Node2D
+import gdext.api.{Gd, Tres, Tscn}
+import gdext.annotations.*
+import gdext.api.*
 
 /** Player's high-level state, exported as a Godot ENUM property. */
 enum CharacterState {
@@ -97,7 +98,7 @@ final class Player(
       Vector2((elapsed * speed).toFloat, (math.sin(elapsed * 3) * 150).toFloat)
     )
     if (frame == 1)
-      SignalRegistration.emit(hostObject, "pinged") // fire once, observable
+      emitSignal(hostObject, "pinged") // fire once, observable
     GodotPrint.print(
       f"Player._process frame=$frame delta=$delta%.4f pos.x=${elapsed * speed}%.1f"
     )

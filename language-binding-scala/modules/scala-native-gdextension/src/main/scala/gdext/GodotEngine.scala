@@ -2,9 +2,9 @@ package gdext
 
 import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
-import gdext.codegen.gdextensioninterface.interface.Interface
-import gdext.codegen.gdextensioninterface.types.*
-import gdext.codegen.gdextensioninterface.types.GDExtensionInitializationLevel.*
+import gdext.internal.ffi.interface.Interface
+import gdext.internal.ffi.types.*
+import gdext.internal.ffi.types.GDExtensionInitializationLevel.*
 
 /**
  * Reusable GDExtension bootstrap provided by the binding library.
@@ -20,7 +20,7 @@ import gdext.codegen.gdextensioninterface.types.GDExtensionInitializationLevel.*
  * node types are available) and is re-run on each hot-reload; the registration
  * APIs are reload-safe (see ClassRegistration).
  */
-object GodotEngine {
+private[gdext] object GodotEngine {
 
   // The game project's class-registration callback. Stored statically because
   // the per-level `initialize` callback below is a CFuncPtr and cannot capture
@@ -132,10 +132,10 @@ object GodotEngine {
       Log.trace(s"initialize: EXIT level=${level.toInt}")
     }
 
-  // Name of the file the sbt `build` task stamps (epoch millis) right after it
-  // atomically swaps the new `.so` in. Read relative to Godot's working
-  // directory, mirroring the binding's `godot-init` log convention.
-  private final val ReloadStampFile = "reload.stamp"
+  // File the `godotBuild` task stamps (epoch millis) right after it atomically
+  // swaps the new `.so` in. Under the hidden `.scala/` dir (next to the `.so`),
+  // read relative to Godot's working directory — mirroring the `godot-init` log.
+  private final val ReloadStampFile = ".scala/reload.stamp"
 
   /**
    * Milliseconds elapsed since the library `.so` was swapped in, or `None` if

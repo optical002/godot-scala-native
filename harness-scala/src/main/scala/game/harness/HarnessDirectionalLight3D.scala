@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `DirectionalLight3D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessDirectionalLight3D
-    extends gdext.codegen.engine.DirectionalLight3D
+    extends gdext.classes.DirectionalLight3D

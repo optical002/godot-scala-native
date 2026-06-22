@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `NavigationAgent2D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessNavigationAgent2D
-    extends gdext.codegen.engine.NavigationAgent2D
+    extends gdext.classes.NavigationAgent2D

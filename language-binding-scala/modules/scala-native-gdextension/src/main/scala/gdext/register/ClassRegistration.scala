@@ -5,7 +5,7 @@ import scala.scalanative.unsigned.*
 import scala.scalanative.libc.stdlib
 import gdext.Godot
 import gdext.builtin.StringNames
-import gdext.codegen.gdextensioninterface.types.*
+import gdext.internal.ffi.types.*
 
 /**
  * Registers a user-defined Scala class with Godot's ClassDB.

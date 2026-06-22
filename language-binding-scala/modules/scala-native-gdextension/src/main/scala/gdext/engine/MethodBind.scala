@@ -2,7 +2,7 @@ package gdext.engine
 
 import gdext.Godot
 import gdext.builtin.StringNames
-import gdext.codegen.gdextensioninterface.types.*
+import gdext.internal.ffi.types.*
 
 /**
  * Resolves and caches engine `MethodBind` pointers.

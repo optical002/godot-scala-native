@@ -1,8 +1,9 @@
 package game
 
-import gdext.engine.{Gd, Tres}
-import gdext.codegen.engine.{Node, Skeleton3D, AnimationPlayer, SpriteFrames, AnimationTree}
-import gdext.register.*
+import gdext.api.{Gd, Tres}
+import gdext.classes.{Node, Skeleton3D, AnimationPlayer, SpriteFrames, AnimationTree}
+import gdext.annotations.*
+import gdext.api.*
 
 /**
  * Component-reference string dropdowns. Each `String` property below becomes an

@@ -42,12 +42,34 @@ The repo root is a workspace, **not** an sbt build. Top level:
   `ProjectRef`** — co-development uses `sbt publishLocal` (see Build / run).
 
 ## Layers (bottom→top) — see per-layer memories
-1. **FFI** (`codegen/gdextensioninterface`, `Interface`) — raw GDExtension C API.
+1. **FFI** (`internal/ffi`, `Interface`) — raw GDExtension C API. **Internal**:
+   `Interface` is `private[gdext]`; the FFI *types* stay public (needed by the
+   entry aliases) but live under `gdext.internal.ffi`.
 2. **builtin** (`builtin/`) — Variant + GString/StringName/Vector2/Array/Dictionary.
-3. **engine** (`codegen/engine`, generated) — typed engine classes as
-   `abstract class Node2D extends CanvasItem`.
+3. **engine** (`classes/`, generated) — typed engine classes as
+   `abstract class Node2D extends CanvasItem`, package **`gdext.classes`**.
 4. **obj** (`engine/Gd.scala`, `GodotClass`, `ClassTags`) — `Gd[T]`, casts, refcount.
 5. **register** (`register/`) — register user `game` classes via macros/annotations.
+
+## Package layout — public surface vs internal
+Consumer (game) code imports ONLY these:
+- **`gdext.classes`** — generated engine classes (was `gdext.codegen.engine`).
+- **`gdext.builtin`** — builtin types.
+- **`gdext.annotations`** — the registration annotations (`@func`/`@gdexport`/
+  `@signal`/… — was in `gdext.register`).
+- **`gdext.api`** (object `api` in package `gdext`) — everyday helpers re-exported
+  from internal homes: `Gd, Tres, Tscn, Required, GodotPrint, ExportHint,
+  emitSignal`, plus the generated-glue surface `Register`, `GodotEntry` and the
+  entry FFI type aliases `Entry{GetProcAddress,ClassLibraryPtr,Initialization}`.
+
+Internal (not for consumers): `gdext.internal.ffi` (was
+`gdext.codegen.gdextensioninterface`), `gdext.internal.types` (was `gdext.types`),
+the `gdext.engine` substrate and `gdext.register` machinery. **`private[gdext]`
+(compiler-enforced, even from the published jar): `Godot`, `GodotEngine`, `Log`,
+`FileLogger`, and the FFI `Interface`** — so no FFI method is reachable outside
+the library. The registration builders (`ClassRegistration`/`MethodRegistration`/
+…) stay accessible because the `Register` macro emits calls to them into the
+consumer's compiled code.
 
 ## Bootstrap flow
 The `@exported` entry symbol → `GodotEngine.run(..., register = () =>

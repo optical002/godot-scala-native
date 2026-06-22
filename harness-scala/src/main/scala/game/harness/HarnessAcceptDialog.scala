@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `AcceptDialog`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessAcceptDialog
-    extends gdext.codegen.engine.AcceptDialog
+    extends gdext.classes.AcceptDialog

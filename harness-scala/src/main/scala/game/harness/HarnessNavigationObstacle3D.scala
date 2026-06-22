@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `NavigationObstacle3D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessNavigationObstacle3D
-    extends gdext.codegen.engine.NavigationObstacle3D
+    extends gdext.classes.NavigationObstacle3D

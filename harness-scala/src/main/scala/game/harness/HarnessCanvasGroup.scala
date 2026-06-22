@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `CanvasGroup`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessCanvasGroup
-    extends gdext.codegen.engine.CanvasGroup
+    extends gdext.classes.CanvasGroup

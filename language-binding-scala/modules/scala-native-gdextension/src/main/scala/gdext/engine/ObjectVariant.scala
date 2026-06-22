@@ -3,8 +3,8 @@ package gdext.engine
 import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
 import gdext.builtin.*
-import gdext.codegen.gdextensioninterface.types.*
-import gdext.codegen.gdextensioninterface.types.GDExtensionVariantType.*
+import gdext.internal.ffi.types.*
+import gdext.internal.ffi.types.GDExtensionVariantType.*
 
 /**
  * Marshalling for OBJECT-typed Variants (node / resource / scene references).

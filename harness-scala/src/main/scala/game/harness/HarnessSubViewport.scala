@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `SubViewport`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessSubViewport
-    extends gdext.codegen.engine.SubViewport
+    extends gdext.classes.SubViewport

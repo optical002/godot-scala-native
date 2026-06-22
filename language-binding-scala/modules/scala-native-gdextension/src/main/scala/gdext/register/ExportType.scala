@@ -3,9 +3,9 @@ package gdext.register
 import scala.scalanative.unsigned.*
 import gdext.builtin.*
 import gdext.engine.*
-import gdext.codegen.engine.{PackedScene, Node, Resource}
-import gdext.codegen.gdextensioninterface.types.*
-import gdext.codegen.gdextensioninterface.types.GDExtensionVariantType.*
+import gdext.classes.{PackedScene, Node, Resource}
+import gdext.internal.ffi.types.*
+import gdext.internal.ffi.types.GDExtensionVariantType.*
 
 /**
  * The single seam the `@gdexport` macro summons. Bundles Variant marshalling

@@ -3,7 +3,7 @@ package gdext.engine
 import scala.scalanative.unsafe.*
 import gdext.Godot
 import gdext.builtin.StringNames
-import gdext.codegen.gdextensioninterface.types.*
+import gdext.internal.ffi.types.*
 
 /**
  * Caches per-class "class tags" used by `object_cast_to`.

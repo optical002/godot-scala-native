@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `TabBar`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessTabBar
-    extends gdext.codegen.engine.TabBar
+    extends gdext.classes.TabBar

@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `GeometryInstance3D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessGeometryInstance3D
-    extends gdext.codegen.engine.GeometryInstance3D
+    extends gdext.classes.GeometryInstance3D

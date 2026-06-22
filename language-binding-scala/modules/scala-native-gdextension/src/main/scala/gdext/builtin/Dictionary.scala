@@ -3,8 +3,8 @@ package gdext.builtin
 import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
 import gdext.Godot
-import gdext.codegen.gdextensioninterface.types.*
-import gdext.codegen.gdextensioninterface.types.GDExtensionVariantType.*
+import gdext.internal.ffi.types.*
+import gdext.internal.ffi.types.GDExtensionVariantType.*
 
 /**
  * Godot's `Dictionary`. An 8-byte ([[BuiltinSizes.Dictionary]]) reference-

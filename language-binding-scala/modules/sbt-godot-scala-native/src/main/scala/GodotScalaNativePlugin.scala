@@ -158,7 +158,9 @@ object GodotScalaNativePlugin extends AutoPlugin {
       val manifest = godotManifest.value
 
       val godotDir    = requireGodotDir(godotProjectDir.?.value)
-      val godotLibDir = godotDir / "lib"
+      // Everything the build drops into the Godot project lives under the hidden
+      // `.scala/` dir (only the .gdextension manifest sits at the project root).
+      val godotLibDir = godotDir / ".scala"
 
       IO.createDirectory(godotLibDir)
 
@@ -184,9 +186,9 @@ object GodotScalaNativePlugin extends AutoPlugin {
 
       // Stamp the swap time (epoch millis) for the running editor to read on its
       // next hot-reload, so the binding can report the full swap→live reload
-      // latency on the Godot Output panel. Written at the project root (Godot's
-      // working dir), matching where the binding reads it.
-      IO.write(godotDir / "reload.stamp", System.currentTimeMillis().toString)
+      // latency on the Godot Output panel. Written under `.scala/`, matching
+      // where the binding reads it (relative to Godot's working dir).
+      IO.write(godotLibDir / "reload.stamp", System.currentTimeMillis().toString)
 
       streams.value.log.info(s"[godot] swapped $targetName, manifest $manifest")
     }

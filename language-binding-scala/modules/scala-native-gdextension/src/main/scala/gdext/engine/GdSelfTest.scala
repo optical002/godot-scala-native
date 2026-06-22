@@ -1,6 +1,6 @@
 package gdext.engine
 
-import gdext.codegen.engine.*
+import gdext.classes.*
 
 /**
  * Exercises the Phase 3 object model: `Gd[T]` construction, instance ids,

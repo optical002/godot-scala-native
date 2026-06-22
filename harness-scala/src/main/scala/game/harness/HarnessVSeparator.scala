@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `VSeparator`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessVSeparator
-    extends gdext.codegen.engine.VSeparator
+    extends gdext.classes.VSeparator

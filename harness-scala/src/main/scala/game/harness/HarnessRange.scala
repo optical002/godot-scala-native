@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `Range`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessRange
-    extends gdext.codegen.engine.Range
+    extends gdext.classes.Range

@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `ColorPicker`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessColorPicker
-    extends gdext.codegen.engine.ColorPicker
+    extends gdext.classes.ColorPicker

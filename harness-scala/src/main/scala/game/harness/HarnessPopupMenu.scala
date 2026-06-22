@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `PopupMenu`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessPopupMenu
-    extends gdext.codegen.engine.PopupMenu
+    extends gdext.classes.PopupMenu

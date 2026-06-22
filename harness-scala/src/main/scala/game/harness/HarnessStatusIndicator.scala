@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `StatusIndicator`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessStatusIndicator
-    extends gdext.codegen.engine.StatusIndicator
+    extends gdext.classes.StatusIndicator

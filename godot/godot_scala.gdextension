@@ -9,13 +9,13 @@ compatibility_minimum = 4.2
 reloadable = true
 
 [libraries]
-linux.debug.x86_64   = "res://lib/libscala-native-gdextension.so"
-linux.release.x86_64 = "res://lib/libscala-native-gdextension.so"
+linux.debug.x86_64   = "res://.scala/libscala-native-gdextension.so"
+linux.release.x86_64 = "res://.scala/libscala-native-gdextension.so"
 
-macos.debug          = "res://lib/libscala-native-gdextension.dylib"
-macos.release        = "res://lib/libscala-native-gdextension.dylib"
-macos.debug.arm64    = "res://lib/libscala-native-gdextension.dylib"
-macos.release.arm64  = "res://lib/libscala-native-gdextension.dylib"
+macos.debug          = "res://.scala/libscala-native-gdextension.dylib"
+macos.release        = "res://.scala/libscala-native-gdextension.dylib"
+macos.debug.arm64    = "res://.scala/libscala-native-gdextension.dylib"
+macos.release.arm64  = "res://.scala/libscala-native-gdextension.dylib"
 
-windows.debug.x86_64   = "res://lib/scala-native-gdextension.dll"
-windows.release.x86_64 = "res://lib/scala-native-gdextension.dll"
+windows.debug.x86_64   = "res://.scala/scala-native-gdextension.dll"
+windows.release.x86_64 = "res://.scala/scala-native-gdextension.dll"

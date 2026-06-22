@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `OpenXRCompositionLayerCylinder`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessOpenXRCompositionLayerCylinder
-    extends gdext.codegen.engine.OpenXRCompositionLayerCylinder
+    extends gdext.classes.OpenXRCompositionLayerCylinder

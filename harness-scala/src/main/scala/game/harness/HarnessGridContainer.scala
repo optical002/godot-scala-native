@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `GridContainer`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessGridContainer
-    extends gdext.codegen.engine.GridContainer
+    extends gdext.classes.GridContainer

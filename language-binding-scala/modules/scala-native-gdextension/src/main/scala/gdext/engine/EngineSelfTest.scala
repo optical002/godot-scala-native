@@ -2,7 +2,7 @@ package gdext.engine
 
 import gdext.Godot
 import gdext.builtin.*
-import gdext.codegen.engine.*
+import gdext.classes.*
 
 /**
  * Exercises the *generated* engine-class wrappers against the live engine —

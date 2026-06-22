@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `Decal`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessDecal
-    extends gdext.codegen.engine.Decal
+    extends gdext.classes.Decal

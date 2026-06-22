@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `TileMapLayer`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessTileMapLayer
-    extends gdext.codegen.engine.TileMapLayer
+    extends gdext.classes.TileMapLayer

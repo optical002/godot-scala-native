@@ -4,4 +4,4 @@ package game.harness
 // Empty subclass of Godot's `MultiMeshInstance3D`; proves the binding can subclass
 // and register this base node type. Regenerate via `sbt igen/regenerate`.
 final class HarnessMultiMeshInstance3D
-    extends gdext.codegen.engine.MultiMeshInstance3D
+    extends gdext.classes.MultiMeshInstance3D

@@ -2,7 +2,7 @@ package gdext.engine
 
 import gdext.Godot
 import gdext.builtin.StringNames
-import gdext.codegen.gdextensioninterface.types.*
+import gdext.internal.ffi.types.*
 
 /**
  * A smart pointer to a Godot object of class `T` — the Scala analogue of

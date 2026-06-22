@@ -1,6 +1,6 @@
 package gdext.engine
 
-import gdext.codegen.gdextensioninterface.types.*
+import gdext.internal.ffi.types.*
 
 /**
  * The raw engine-object handle that every typed engine-class wrapper carries.

@@ -1,7 +1,9 @@
 # Layer 3 — engine classes
 
 Generated from `extension_api.json` by `igen/EngineClassGenerator.scala`.
-Output: `gdext/.../codegen/engine/*.scala` (do not hand-edit).
+Output: `gdext/.../classes/*.scala`, package **`gdext.classes`** (do not hand-edit).
+Consumers import engine classes from `gdext.classes` (e.g. `import
+gdext.classes.Node2D`).
 
 ## Shape (abstract-class model)
 ```scala

@@ -15,8 +15,17 @@ package gdext
  * goes to the [[file]] log, while game code (e.g. a `Player` node) uses
  * [[godot]] so it shows up in the editor's Output panel.
  */
-object Log {
-  private final val File = "godot-init"
+private[gdext] object Log {
+  // The binding's side log, kept under the hidden `.scala/` dir in the Godot
+  // project (next to the `.so`) so it doesn't clutter the project root. Read
+  // relative to Godot's working directory (the project root).
+  private final val File = ".scala/godot-init"
+
+  /** Ensure the parent dir of a project-relative path exists (best-effort). */
+  private[gdext] def ensureParentDir(path: String): Unit = {
+    val p = new java.io.File(path).getParentFile
+    if (p != null) { p.mkdirs(); () }
+  }
 
   /** Print to Godot's Output panel. */
   def godot(msg: String): Unit = GodotPrint.print(msg)
@@ -29,6 +38,7 @@ object Log {
 
   /** Append a line to the binding's side log file. */
   def file(msg: String): Unit = {
+    ensureParentDir(File)
     val w = new java.io.FileWriter(File, true)
     try w.write(s"$msg\n")
     finally w.close()

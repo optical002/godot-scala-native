@@ -1,8 +1,9 @@
 package game
 
 import gdext.builtin.Color
-import gdext.codegen.engine.Node
-import gdext.register.*
+import gdext.classes.Node
+import gdext.annotations.*
+import gdext.api.*
 
 /**
  * Showcases every inspector export hint the binding supports. Each `@gdexport`
