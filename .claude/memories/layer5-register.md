@@ -171,16 +171,19 @@ picker's selection signal); currently `_parse_property` only detects + logs.
   builder APIs the macro targets. Dispatch via Variant `call_func` trampoline.
 
 ## Auto-discovery (build-time codegen)
-An sbt **source generator** (`harness-scala/project/RegistrationScan.scala`,
-wired in `harness-scala/build.sbt` as `harness`'s `Compile / sourceGenerators`,
-uses scalameta from `harness-scala/project/build.sbt`) scans `harness-scala/src`
+An sbt **source generator** — `RegistrationScan` (in the `sbt-godot-scala-native`
+plugin at `language-binding-scala/modules/sbt-godot-scala-native`, uses scalameta
+pulled in by that module), wired by `GodotScalaNativePlugin` into the consuming
+project's `Compile / sourceGenerators` — scans the consumer's `src/main/scala`
 every compile and emits `game.GeneratedRegistrations` (a managed source under
 `target/`, never committed) with one `Register.auto[T]()` per discovered class.
 The same generator also emits `game.GeneratedEntry` — the
-`@exported(entrySymbol)` GDExtension entry point that calls `registerAll()` once.
-The exported symbol + `selfTest` come from the `entrySymbol` / `entrySelfTest`
-settings in `harness-scala/build.sbt`; `entrySymbol` must equal `entry_symbol` in
-`godot/godot_scala.gdextension`. No entry file is hand-written.
+`@exported(RegistrationScan.EntrySymbol)` GDExtension entry point that calls
+`registerAll()` once. The exported symbol is **hardcoded** in
+`RegistrationScan.EntrySymbol` (`"godot_scala_init"`, not a build setting) and
+must equal `entry_symbol` in `godot/godot_scala.gdextension`; only the self-test
+is a setting (`godotEntrySelfTest`, set in the consumer's `build.sbt`). No entry
+file is hand-written, and the consumer carries no build machinery.
 Registers iff: concrete `class` (not abstract/trait/object) **and** every
 primary-ctor param is constructible with no caller args — has a default **OR** is
 a `var` (the macro factory fills an un-defaulted `var` from its `DefaultValue`);
@@ -194,13 +197,12 @@ Add a class → it registers; no edits to any entry file or list.
 `gdext` build (`language-binding-scala/build.sbt`, a `Compile / resourceGenerator`)
 packages the list of `codegen/engine/*.scala` names into the artifact as the
 resource `gdext/engine-classes.txt`. `RegistrationScan.engineNamesFromClasspath`
-reads it off `(Compile / dependencyClasspath)` via a `URLClassLoader`, so it works
-identically whether `gdext` is a source `ProjectRef` (resource on a directory
-classpath entry) or the **published jar** — a downstream consumer needs ONLY the
-published artifact, no path into the binding sources. (Before, the generator read
-file names directly from the sibling `codegen/engine/` dir, which broke any
-standalone consumer.) See the standalone consumer at
-`~/work/godot-scala-native-template/` (uses `libraryDependencies += ... %%%`).
+reads it off `(Compile / dependencyClasspath)` via a `URLClassLoader`, so it
+works from the **published `gdext` jar** the plugin adds — a downstream consumer
+(including `harness-scala` itself, now decoupled) needs ONLY the published
+artifact, no path into the binding sources. The plugin adds the `gdext`
+dependency at its own version (embedded via the generated
+`GodotScalaNativeBuildInfo`), so plugin and binding are always in lockstep.
 
 ## Custom-node inheritance (custom extends custom)
 A custom node may extend **another custom node**, not just an engine class —

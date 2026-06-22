@@ -20,8 +20,11 @@ Two StringName *handles* for the same text are NOT pointer-equal. Compare by
 decoding (`StringName.toScala`), e.g. in `get_virtual` dispatch.
 
 ## Editor hot-reload
-- `.gdextension` has `reloadable = true`; `harness-scala`'s `build` task
-  atomically renames the `.so` (no in-place overwrite — that freezes the editor).
+- `godot/godot_scala.gdextension` is **GENERATED** by the plugin (`godotManifest`,
+  and as part of `godotBuild`) — don't hand-edit; change the plugin settings
+  (`godotLibName`, `godotCompatibilityMinimum`, …) instead. It has
+  `reloadable = true`; `godotBuild` atomically renames the `.so` (no in-place
+  overwrite — that freezes the editor).
 - **Reload protocol (critical, hard-won)**: the old image **must** unregister its
   classes in `deinitialize(SCENE)` (`ClassRegistration.unregisterAll()`), and the
   register side must **NOT** unregister-stale. Timestamped logs prove the order is
@@ -52,8 +55,8 @@ decoding (`StringName.toScala`), e.g. in `get_virtual` dispatch.
   already in ClassDB (non-null tag) == hot-reload (a first load finds none);
   exposed via `ClassRegistration.consumeReloadDetected()`. On reload,
   `GodotEngine` `GodotPrint`s `[scala-native] hot-reload complete in N ms` to the
-  Output panel. The `N ms` is full swap→live latency: the `build` task stamps
-  `godot/reload.stamp` (epoch millis) after the atomic swap; the binding reads
+  Output panel. The `N ms` is full swap→live latency: the `godotBuild` task
+  stamps `godot/reload.stamp` (epoch millis) after the atomic swap; the binding reads
   (relative to Godot's CWD, like `godot-init`) and deletes it on reload. Headless
   one-shot runs never trigger it.
 
@@ -86,3 +89,13 @@ decoding (`StringName.toScala`), e.g. in `get_virtual` dispatch.
 run `cd language-binding-scala && sbt igen/regenerate`. After moving the entry
 symbol, `cd harness-scala && sbt clean` (stale `.nir` causes "multiple definition
 of godot_scala_init").
+
+## Decoupled consumer / publishLocal
+`harness-scala` no longer source-references the binding; it applies the published
+`sbt-godot-scala-native` plugin and consumes the published `gdext`. So **any**
+change in `language-binding-scala` (binding, generator, or plugin) needs
+`cd language-binding-scala && sbt publishLocal` **before** `cd harness-scala &&
+sbt godotBuild`, or harness links the stale artifact. Both publish under
+`0.1.0-SNAPSHOT` (`ThisBuild / version` in the binding build; pinned in
+`harness-scala/project/plugins.sbt`). Changing the plugin's task/setting keys or
+the embedded `gdext` version requires a republish to take effect downstream.

@@ -5,10 +5,12 @@ sophistication. Scala 3.8.1 / Scala Native 0.5.10 / Godot 4.6.1.
 
 This repo is a **workspace** of three siblings:
 - `language-binding-scala/` — the reusable binding library (sbt build with the
-  `igen` and `gdext` projects). What downstream game projects depend on.
+  `igen`, `gdext`, and `sbtGodotPlugin` projects). What downstream game projects
+  depend on; also ships the `sbt-godot-scala-native` plugin.
 - `harness-scala/` — a separate sbt build that plays "someone's game project":
-  the `game` package + entry symbol. References the binding via a source
-  `ProjectRef(file("../language-binding-scala"), "gdext")` (no publishing).
+  it holds **only** the `game` package classes. It carries no build machinery:
+  it applies the published `GodotScalaNativePlugin` (one `addSbtPlugin` line) and
+  consumes the published `gdext` artifact — **no source `ProjectRef`**.
 - `godot/` — the Godot project the built `.so` is loaded into.
 
 ## Memories — read these first
@@ -28,9 +30,15 @@ Quick map:
 - **`codegen/` is generated** — never hand-edit. Change the generator in
   `language-binding-scala/modules/interface-generator` and run
   `cd language-binding-scala && sbt igen/regenerate`.
-- **Build the game lib**: `cd harness-scala && sbt build` (atomically swaps the
-  `.so` into `godot/lib/`). Verify with `cd godot && godot --headless --path .
-  --quit-after N` or `--script verify.gd`.
+- **Build the game lib**: `cd harness-scala && sbt godotBuild` (atomically swaps
+  the `.so` into `godot/lib/`; task provided by the plugin). Verify with
+  `cd godot && godot --headless --path . --quit-after N` or `--script verify.gd`.
+- **Co-development loop (publishLocal)**: harness consumes the binding + plugin
+  as **published artifacts**, so after any change in `language-binding-scala`
+  (binding code, the generator, or the plugin), run
+  `cd language-binding-scala && sbt publishLocal` **before** `sbt godotBuild` in
+  harness — otherwise harness links the stale artifact. Both publish under
+  `0.1.0-SNAPSHOT` (pinned in `harness-scala/project/plugins.sbt`).
 - **After changing how the language binding works, actually test it.** Build the
   lib and open the godot project in headless mode yourself (`cd godot && godot
   --headless --path . --quit-after N`), then read the output and check for errors —

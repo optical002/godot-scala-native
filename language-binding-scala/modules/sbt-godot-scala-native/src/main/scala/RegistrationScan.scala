@@ -1,3 +1,5 @@
+package gdext.sbtplugin
+
 import java.io.File
 import sbt.io.IO
 import scala.meta._
@@ -20,6 +22,10 @@ import scala.meta._
  * class still links its concrete subclasses). A zero-param class is vacuously
  * fine; a `case class` (or plain class) whose params are all `var` thus
  * qualifies, and the macro auto-exports those `var` params.
+ *
+ * Moved out of the consuming project (`harness-scala/project/`) into this sbt
+ * plugin so downstream game projects carry no build machinery — they apply
+ * [[GodotScalaNativePlugin]] and write only game classes.
  */
 object RegistrationScan {
 
@@ -35,6 +41,16 @@ object RegistrationScan {
     * engine base-class name, one per line. See the `engine-classes.txt`
     * resourceGenerator in language-binding-scala/build.sbt. */
   val EngineClassesResource = "gdext/engine-classes.txt"
+
+  /**
+   * The C symbol Godot loads as the GDExtension `entry_symbol`. Hardcoded (not a
+   * build setting): it is emitted as `@exported(EntrySymbol)` onto the generated
+   * entry point and **must** equal `entry_symbol` in
+   * `godot/godot_scala.gdextension`. Changing it requires editing both here and
+   * that manifest (and `sbt clean`, per conventions — stale `.nir` otherwise
+   * causes "multiple definition").
+   */
+  val EntrySymbol = "godot_scala_init"
 
   /**
    * Reads the authoritative set of Godot engine base-class names from the
@@ -64,16 +80,12 @@ object RegistrationScan {
    * @param harnessSrcDir the module's `src/main/scala` directory
    * @param engineNames   the authoritative set of Godot base-class names
    *                      (see [[engineNamesFromClasspath]])
-   * @param entrySymbol   C symbol Godot loads as the GDExtension `entry_symbol`;
-   *                      `@exported` onto the generated entry method (must equal
-   *                      `entry_symbol` in `godot/godot_scala.gdextension`)
    * @param selfTest      whether the generated entry runs the binding's internal
    *                      self-tests once at SCENE init
    */
   def generate(
     harnessSrcDir: File,
     engineNames: Set[String],
-    entrySymbol: String,
     selfTest: Boolean
   ): String = {
     val classes: Seq[ClassInfo] =
@@ -121,12 +133,12 @@ object RegistrationScan {
           .mkString("\n")
 
     s"""// GENERATED — DO NOT EDIT.
-       |// Regenerated on every compile by RegistrationScan (see project/ and build.sbt).
-       |// Every concrete class in this module that extends a Godot engine class is
-       |// discovered automatically: add a class and it registers, with no entry
-       |// edits or any list. The GDExtension entry point below is generated too —
-       |// the exported symbol comes from the `entrySymbol` build setting.
-       |// See .claude/memories/layer5-register.md.
+       |// Regenerated on every compile by RegistrationScan (shipped in the
+       |// sbt-godot-scala-native plugin). Every concrete class in this module that
+       |// extends a Godot engine class is discovered automatically: add a class and
+       |// it registers, with no entry edits or any list. The GDExtension entry point
+       |// below is generated too — the exported symbol is fixed
+       |// ("$EntrySymbol"). See .claude/memories/layer5-register.md.
        |package game
        |
        |import scala.scalanative.unsafe.*
@@ -147,16 +159,16 @@ object RegistrationScan {
        |/**
        | * The game project's GDExtension entry point.
        | *
-       | * Godot calls the `@exported` C symbol "$entrySymbol" (see
+       | * Godot calls the `@exported` C symbol "$EntrySymbol" (see
        | * godot/godot_scala.gdextension's `entry_symbol`) when the extension loads;
        | * we forward to the binding's `GodotEngine.run`. The `@exported` annotation
        | * also keeps this method a reachable Scala Native linker root.
        | *
-       | * Generated — set the symbol via `entrySymbol` in harness-scala/build.sbt;
-       | * it must equal `entry_symbol` in the .gdextension manifest.
+       | * Generated — the symbol is fixed in RegistrationScan.EntrySymbol; it must
+       | * equal `entry_symbol` in the .gdextension manifest.
        | */
        |object GeneratedEntry {
-       |  @exported("$entrySymbol")
+       |  @exported("$EntrySymbol")
        |  def init(
        |    getProcAddress: GDExtensionInterfaceGetProcAddress,
        |    library: GDExtensionClassLibraryPtr,

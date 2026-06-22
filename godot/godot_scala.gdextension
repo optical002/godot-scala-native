@@ -1,27 +1,21 @@
+; GENERATED — DO NOT EDIT. Written by the sbt-godot-scala-native plugin
+; (`godotManifest` / `godotBuild`). Change the plugin settings
+; (godotLibName, godotCompatibilityMinimum) instead, then rebuild.
 [configuration]
 entry_symbol = "godot_scala_init"
 compatibility_minimum = 4.2
-; Let the editor hot-reload the library when the .so is replaced, so rebuilding
-; from sbt does not require restarting the editor. Paired with an atomic library
-; swap in the sbt `build` task and `recreate_instance_func` in class
-; registration, which together keep live instances valid across a reload.
+; Hot-reload the library when the .so is replaced (paired with the atomic
+; swap in `godotBuild`), so rebuilding does not require an editor restart.
 reloadable = true
 
 [libraries]
-; Scala Native names the dynamic library per-platform:
-;   Linux:   lib<name>.so
-;   macOS:   lib<name>.dylib
-;   Windows: <name>.dll   (no "lib" prefix)
-; Build each platform's library with `sbt build` (from ../harness-scala) on that
-; OS and drop the produced file into godot/lib/. Only the matching row needs to
-; exist to run on a given platform.
-linux.debug.x86_64 = "res://lib/libscala-native-gdextension.so"
+linux.debug.x86_64   = "res://lib/libscala-native-gdextension.so"
 linux.release.x86_64 = "res://lib/libscala-native-gdextension.so"
 
-macos.debug = "res://lib/libscala-native-gdextension.dylib"
-macos.release = "res://lib/libscala-native-gdextension.dylib"
-macos.debug.arm64 = "res://lib/libscala-native-gdextension.dylib"
-macos.release.arm64 = "res://lib/libscala-native-gdextension.dylib"
+macos.debug          = "res://lib/libscala-native-gdextension.dylib"
+macos.release        = "res://lib/libscala-native-gdextension.dylib"
+macos.debug.arm64    = "res://lib/libscala-native-gdextension.dylib"
+macos.release.arm64  = "res://lib/libscala-native-gdextension.dylib"
 
-windows.debug.x86_64 = "res://lib/scala-native-gdextension.dll"
+windows.debug.x86_64   = "res://lib/scala-native-gdextension.dll"
 windows.release.x86_64 = "res://lib/scala-native-gdextension.dll"

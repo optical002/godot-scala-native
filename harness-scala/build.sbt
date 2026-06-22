@@ -1,104 +1,21 @@
-lazy val scalaVersionStr = "3.8.1"
-lazy val build =
-  taskKey[Unit]("Builds the godot library and copies it to the godot project")
-
-// The GDExtension entry point is generated, not hand-written (see
-// RegistrationScan / GeneratedEntry). These two keys are the only project-specific
-// inputs. `entrySymbol` MUST equal `entry_symbol` in godot/godot_scala.gdextension.
-lazy val entrySymbol = settingKey[String](
-  "C symbol Godot loads as entry_symbol (must match godot/godot_scala.gdextension)"
-)
-lazy val entrySelfTest = settingKey[Boolean](
-  "Run the binding's internal self-tests once at SCENE init"
-)
-
-// Source dependency on the language binding. This mimics a real downstream game
-// project consuming the binding, but references the sibling build directly so
-// the two can be co-developed without a publish round-trip. A project that just
-// *consumes* the binding would instead drop this ProjectRef and the
-// `.dependsOn(gdext)` below, and add the published artifact:
-//   libraryDependencies += "io.github.optical002" %%% "scala-native-gdextension" % "<version>"
-lazy val gdext = ProjectRef(file("../language-binding-scala"), "gdext")
-
-// The game/harness project: where a user of the binding writes their Godot
-// classes (base package `game`). This is the actual GDExtension dynamic library
-// Godot loads; it owns the exported entry symbol.
+// A downstream game project consuming the binding. It carries no build
+// machinery: the `sbt-godot-scala-native` plugin (applied below, resolved from
+// project/plugins.sbt) supplies the binding dependency, the Scala Native
+// dynamic-library config, the auto-registration source generator, and the
+// `godotBuild` task. This project holds only its game classes (package `game`)
+// plus the settings below.
+//
+// Local co-development loop (the binding is consumed as a published artifact,
+// not a source ProjectRef): in ../language-binding-scala run `sbt publishLocal`
+// after any binding/plugin change, then here run `sbt godotBuild`.
 lazy val harness =
   (project in file("."))
-    .enablePlugins(ScalaNativePlugin)
-    .dependsOn(gdext)
+    .enablePlugins(GodotScalaNativePlugin)
     .settings(
       name := "harness",
-      scalaVersion := scalaVersionStr,
-      entrySymbol := "godot_scala_init",
-      entrySelfTest := true,
-      nativeConfig ~= {
-        _.withMode(scalanative.build.Mode.debug)
-          .withBuildTarget(scalanative.build.BuildTarget.libraryDynamic)
-      },
-      // Auto-registration: scan this project's sources every compile and generate
-      // `game.GeneratedRegistrations` (one `Register.auto[T]()` per concrete game
-      // class extending a Godot engine class) plus `game.GeneratedEntry` (the
-      // `@exported(entrySymbol)` GDExtension entry point that calls `registerAll()`
-      // once). No entry code is hand-written. The output is a managed source under
-      // target/ — never committed, never hand-edited.
-      Compile / sourceGenerators += Def.task {
-        val srcDir = baseDirectory.value / "src" / "main" / "scala"
-        // Engine base-class names come from the binding's `engine-classes.txt`
-        // resource on the classpath (works for both the source ProjectRef and a
-        // published jar) — no path into the binding's sources.
-        val engineNames =
-          RegistrationScan.engineNamesFromClasspath(
-            (Compile / dependencyClasspath).value.files
-          )
-        val outFile =
-          (Compile / sourceManaged).value / "game" / "GeneratedRegistrations.scala"
-        IO.write(
-          outFile,
-          RegistrationScan.generate(
-            srcDir,
-            engineNames,
-            entrySymbol.value,
-            entrySelfTest.value
-          )
-        )
-        streams.value.log.info(s"[auto-register] generated $outFile")
-        Seq(outFile)
-      }.taskValue,
-      build := {
-        val libFile = (Compile / nativeLink).value
-
-        val godotDir = baseDirectory.value / ".." / "godot"
-        val godotLibDir = godotDir / "lib"
-
-        IO.createDirectory(godotLibDir)
-
-        // The Godot manifest expects `libscala-native-gdextension.so`; Scala
-        // Native names the output after this module (`libharness.so`), so copy
-        // under the manifest's expected name.
-        val targetName = "libscala-native-gdextension.so"
-
-        // Atomic swap: copy to a temp file in the same directory, then rename
-        // over the target. The editor may have the old .so mmap'd; overwriting
-        // it in place corrupts the running editor (freeze). A rename gives the
-        // editor a fresh inode to hot-reload while the old one stays valid until
-        // released. Combined with `reloadable = true` in the .gdextension
-        // manifest, this lets the editor pick up the new build without a
-        // restart.
-        val targetLib = godotLibDir / targetName
-        val tmpLib = godotLibDir / (targetName + ".new")
-        IO.copyFile(libFile, tmpLib)
-        java.nio.file.Files.move(
-          tmpLib.toPath,
-          targetLib.toPath,
-          java.nio.file.StandardCopyOption.REPLACE_EXISTING,
-          java.nio.file.StandardCopyOption.ATOMIC_MOVE
-        )
-
-        // Stamp the swap time (epoch millis) for the running editor to read on
-        // its next hot-reload, so the binding can report the full swap→live
-        // reload latency on the Godot Output panel. Written at the project root
-        // (Godot's working dir), matching where the binding reads it.
-        IO.write(godotDir / "reload.stamp", System.currentTimeMillis().toString)
-      }
+      scalaVersion := "3.8.1",
+      // Mandatory: where the built .so + generated .gdextension manifest go.
+      godotProjectDir := baseDirectory.value / ".." / "godot",
+      // Optional (defaults to false): run the binding's self-tests at scene init.
+      godotEntrySelfTest := true
     )

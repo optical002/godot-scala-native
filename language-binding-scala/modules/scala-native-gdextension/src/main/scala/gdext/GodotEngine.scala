@@ -61,9 +61,12 @@ object GodotEngine {
 
       // Write through the field-pointer accessors so the assignments target
       // Godot's struct memory directly (no risk of mutating a local copy).
-      !(!r_initialization).at_minimum_initialization_level =
-        GDEXTENSION_INITIALIZATION_SCENE
+      !(!r_initialization).at_minimum_initialization_level = GDEXTENSION_INITIALIZATION_SCENE
       !(!r_initialization).at_userdata = null
+      // TODO claude we are running these test every time a user would change their class,
+      //             does this initialize/deinitialize have any other use cases beside tests?
+      //
+      //             We should separete tests from actually running the code.
       !(!r_initialization).at_initialize = initialize
       !(!r_initialization).at_deinitialize = deinitialize
 
