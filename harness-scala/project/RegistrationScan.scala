@@ -31,10 +31,39 @@ object RegistrationScan {
     parent: Option[String]
   )
 
+  /** Classpath resource (packaged into the binding jar) listing every Godot
+    * engine base-class name, one per line. See the `engine-classes.txt`
+    * resourceGenerator in language-binding-scala/build.sbt. */
+  val EngineClassesResource = "gdext/engine-classes.txt"
+
+  /**
+   * Reads the authoritative set of Godot engine base-class names from the
+   * binding on the given classpath (the `gdext` dependency). Works whether the
+   * binding is a source `ProjectRef` (resources on a directory entry) or the
+   * published jar — both expose [[EngineClassesResource]] on the classpath.
+   */
+  def engineNamesFromClasspath(classpath: Seq[File]): Set[String] = {
+    val loader =
+      new java.net.URLClassLoader(classpath.map(_.toURI.toURL).toArray, null)
+    try {
+      val is = loader.getResourceAsStream(EngineClassesResource)
+      if (is == null) Set.empty
+      else
+        try
+          scala.io.Source
+            .fromInputStream(is, "UTF-8")
+            .getLines()
+            .map(_.trim)
+            .filter(_.nonEmpty)
+            .toSet
+        finally is.close()
+    } finally loader.close()
+  }
+
   /**
    * @param harnessSrcDir the module's `src/main/scala` directory
-   * @param engineDir     the generated engine-class package directory; its file
-   *                      names are the authoritative set of Godot base classes
+   * @param engineNames   the authoritative set of Godot base-class names
+   *                      (see [[engineNamesFromClasspath]])
    * @param entrySymbol   C symbol Godot loads as the GDExtension `entry_symbol`;
    *                      `@exported` onto the generated entry method (must equal
    *                      `entry_symbol` in `godot/godot_scala.gdextension`)
@@ -43,16 +72,10 @@ object RegistrationScan {
    */
   def generate(
     harnessSrcDir: File,
-    engineDir: File,
+    engineNames: Set[String],
     entrySymbol: String,
     selfTest: Boolean
   ): String = {
-    val engineNames: Set[String] =
-      Option(engineDir.listFiles).getOrElse(Array.empty[File]).iterator
-        .filter(f => f.isFile && f.getName.endsWith(".scala"))
-        .map(_.getName.stripSuffix(".scala"))
-        .toSet
-
     val classes: Seq[ClassInfo] =
       allScalaFiles(harnessSrcDir).flatMap(parseFile)
     val byName: Map[String, ClassInfo] = classes.map(c => c.name -> c).toMap

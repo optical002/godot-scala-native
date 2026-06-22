@@ -185,11 +185,22 @@ Registers iff: concrete `class` (not abstract/trait/object) **and** every
 primary-ctor param is constructible with no caller args — has a default **OR** is
 a `var` (the macro factory fills an un-defaulted `var` from its `DefaultValue`);
 zero-param is vacuously fine, so a class/`case class` with all-`var` params
-qualifies **and** parent chain reaches a Godot engine class (engine class names =
-file names under generated `codegen/engine/`), directly or via another harness
-class (abstract bases relay). (Scalameta checks `p.default.isDefined ||
-Mod.VarParam`.)
+qualifies **and** parent chain reaches a Godot engine class, directly or via
+another harness class (abstract bases relay). (Scalameta checks
+`p.default.isDefined || Mod.VarParam`.)
 Add a class → it registers; no edits to any entry file or list.
+
+**Engine base-class names come from the binding jar, not its sources.** The
+`gdext` build (`language-binding-scala/build.sbt`, a `Compile / resourceGenerator`)
+packages the list of `codegen/engine/*.scala` names into the artifact as the
+resource `gdext/engine-classes.txt`. `RegistrationScan.engineNamesFromClasspath`
+reads it off `(Compile / dependencyClasspath)` via a `URLClassLoader`, so it works
+identically whether `gdext` is a source `ProjectRef` (resource on a directory
+classpath entry) or the **published jar** — a downstream consumer needs ONLY the
+published artifact, no path into the binding sources. (Before, the generator read
+file names directly from the sibling `codegen/engine/` dir, which broke any
+standalone consumer.) See the standalone consumer at
+`~/work/godot-scala-native-template/` (uses `libraryDependencies += ... %%%`).
 
 ## Custom-node inheritance (custom extends custom)
 A custom node may extend **another custom node**, not just an engine class —

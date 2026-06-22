@@ -13,10 +13,11 @@ lazy val entrySelfTest = settingKey[Boolean](
 )
 
 // Source dependency on the language binding. This mimics a real downstream game
-// project consuming the binding: here it references the sibling build directly
-// (no publishing). To switch to a published artifact later, replace this with a
-// `libraryDependencies` entry against `gdext`'s coordinates and drop the
-// `.dependsOn(gdext)` below.
+// project consuming the binding, but references the sibling build directly so
+// the two can be co-developed without a publish round-trip. A project that just
+// *consumes* the binding would instead drop this ProjectRef and the
+// `.dependsOn(gdext)` below, and add the published artifact:
+//   libraryDependencies += "io.github.optical002" %%% "scala-native-gdextension" % "<version>"
 lazy val gdext = ProjectRef(file("../language-binding-scala"), "gdext")
 
 // The game/harness project: where a user of the binding writes their Godot
@@ -43,18 +44,20 @@ lazy val harness =
       // target/ — never committed, never hand-edited.
       Compile / sourceGenerators += Def.task {
         val srcDir = baseDirectory.value / "src" / "main" / "scala"
-        // Resolves into ../language-binding-scala/modules/scala-native-gdextension
-        // via the source ProjectRef above.
-        val engineDir =
-          (gdext / baseDirectory).value / "src" / "main" / "scala" /
-            "gdext" / "codegen" / "engine"
+        // Engine base-class names come from the binding's `engine-classes.txt`
+        // resource on the classpath (works for both the source ProjectRef and a
+        // published jar) — no path into the binding's sources.
+        val engineNames =
+          RegistrationScan.engineNamesFromClasspath(
+            (Compile / dependencyClasspath).value.files
+          )
         val outFile =
           (Compile / sourceManaged).value / "game" / "GeneratedRegistrations.scala"
         IO.write(
           outFile,
           RegistrationScan.generate(
             srcDir,
-            engineDir,
+            engineNames,
             entrySymbol.value,
             entrySelfTest.value
           )

@@ -11,15 +11,25 @@ The repo root is a workspace, **not** an sbt build. Top level:
 ## Modules (sbt, Scala 3.8.1, Scala Native 0.5.10)
 - **`gdext`** — `language-binding-scala/modules/scala-native-gdextension`. The
   binding **library**. No exported entry symbol, not the `.so` target. Package
-  root `gdext`. Default project of the
-  `language-binding-scala` build.
+  root `gdext`. **The only published artifact**
+  (`io.github.optical002:scala-native-gdextension`, Maven Central — see
+  Publishing below).
 - **`igen`** — `language-binding-scala/modules/interface-generator`. Code
   generators (run via `sbt igen/regenerate` from `language-binding-scala/`).
+  `publish / skip := true`.
+- **`root`** — explicit aggregating project (`in file(".")`,
+  `name := "godot-scala-native"`) in `language-binding-scala/build.sbt`,
+  aggregates `igen` + `gdext`, `publish / skip := true`. Exists only to group
+  the modules; do NOT add a `Global / onLoad` default-project override (breaks
+  the harness's source `ProjectRef` load). Invoke tasks as `sbt gdext/<task>` /
+  `sbt igen/<task>`.
 - **`harness`** — its **own** sbt build at `harness-scala/` (flat root project,
   sources at `harness-scala/src/main/scala`). The **game project**, base package
   **`game`**. Owns `@exported("godot_scala_init")` and IS the GDExtension dynamic
   library. Depends on the binding via a source
-  `ProjectRef(file("../language-binding-scala"), "gdext")` — no publishing.
+  `ProjectRef(file("../language-binding-scala"), "gdext")` so the two co-develop
+  without a publish round-trip; a pure consumer would instead use
+  `"io.github.optical002" %%% "scala-native-gdextension" % "<v>"`.
 
 ## Layers (bottom→top) — see per-layer memories
 1. **FFI** (`codegen/gdextensioninterface`, `Interface`) — raw GDExtension C API.
@@ -55,6 +65,23 @@ interface table + library handle.
   `--script verify.gd` (GDScript checks). Binding logs to file `godot-init`;
   game logs to Godot Output. See `BUILD.md`, `godot/godot_scala.gdextension`.
 
+## Publishing (gdext → Maven Central)
+`gdext` publishes to the Sonatype **Central Portal** as a normal Scala Native
+library (NIR JAR; cross-suffix `_native0.5_3` — no per-OS binaries; consumers
+link native code at their own build via `%%%`). Wired with **`sbt-ci-release`**
+(plugins.sbt): version from git tags via sbt-dynver (no hardcoded `version`;
+untagged → `-SNAPSHOT`). POM metadata (org `io.github.optical002`, MIT, scm,
+developers) is set in `inThisBuild(...)` in `build.sbt`;
+`sonatypeCredentialHost := xerial.sbt.Sonatype.sonatypeCentralHost` targets the
+new portal. `language-binding-scala/.sbtopts` sets `-mem 6144` because scaladoc
+over the large `codegen/` sources OOMs at the default heap (the javadoc jar is
+required by Central). Release: push a `vX.Y.Z` tag → `.github/workflows/release.yml`
+runs `sbt ci-release` (needs secrets `PGP_SECRET`, `PGP_PASSPHRASE`,
+`SONATYPE_USERNAME`, `SONATYPE_PASSWORD`). Verify packaging locally with
+`sbt gdext/publishM2` (or `publishLocalSigned` once a GPG key exists). One-time
+manual setup (namespace verification, GPG key, portal token, GH secrets) is in
+the root README.
+
 ## Node validation harness (igen `HarnessClassGenerator`)
 Proves every base node type is generated + subclassable + registerable.
 `igen/regenerate` also emits, for each of the ~238 instantiable non-editor
@@ -73,4 +100,5 @@ Phases 0–5 done and verified (41 self-tests + GDScript checks pass). Engine
 codegen now covers ALL ~1023 classes; all 238 instantiable node types validated
 from Godot (node_harness_verify.gd). Remaining: best-effort method coverage
 (NodePath/typed-arrays/Variant/packed arrays still skipped), release build,
-GC×threads, CI, docs.
+GC×threads, docs. Publishing wired (gdext → Maven Central, release CI); only
+manual portal/GPG setup + a `vX.Y.Z` tag remain to cut a release.

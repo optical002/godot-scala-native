@@ -1,0 +1,5 @@
+# Scaladoc over the large generated `gdext/codegen` sources needs more heap than
+# the sbt default; without this, `Compile / doc` (run when building the javadoc
+# jar for publishing) OOMs. Applied automatically by the sbt launcher when run
+# from this directory, including in CI (the release workflow runs sbt here).
+-mem 6144
