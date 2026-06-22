@@ -23,10 +23,6 @@ import scala.io.Source
  * skipped, never broken-emitted.
  */
 object EngineClassGenerator {
-
-  /** Singleton class name -> the name to pass to `global_get_singleton`. */
-  private var singletonLookup: Map[String, String] = Map.empty
-
   def run(jsonPath: String, codeGenPath: String): Unit = {
     val src = Source.fromFile(new File(jsonPath))
     val json =
@@ -36,28 +32,23 @@ object EngineClassGenerator {
     val allClasses = json("classes").arr.toVector
     val byName = allClasses.map(c => c("name").str -> c).toMap
 
-    singletonLookup = json.obj
+    val singletonLookup = json.obj
       .get("singletons")
       .map(_.arr.toVector)
       .getOrElse(Vector.empty)
       .map(s => s("type").str -> s("name").str)
       .toMap
 
-    // Generate every engine class. This gives the full type universe so any
-    // object-typed argument or return resolves, and every node (and editor)
-    // type is available to subclass. Unmappable *methods* are still skipped.
     val toGenerate: Set[String] = byName.keySet
 
     val files = toGenerate.toVector.sorted.flatMap { name =>
-      generateClass(name, byName, toGenerate).map(content =>
+      generateClass(name, byName, toGenerate, singletonLookup).map(content =>
         ScalaFile(name, content)
       )
     }
     write(files, codeGenPath)
     println(s"Generated ${files.size} engine classes into $codeGenPath")
   }
-
-  // --- type mapping -------------------------------------------------------
 
   private val bp = "gdext.builtin"
 
@@ -102,7 +93,8 @@ object EngineClassGenerator {
   def generateClass(
     name: String,
     byName: Map[String, ujson.Value],
-    generated: Set[String]
+    generated: Set[String],
+    singletonLookup: Map[String, String],
   ): Option[String] = byName.get(name).map { cls =>
     val parent = cls.obj.get("inherits").map(_.str)
     val isSingleton = singletonLookup.contains(name)
