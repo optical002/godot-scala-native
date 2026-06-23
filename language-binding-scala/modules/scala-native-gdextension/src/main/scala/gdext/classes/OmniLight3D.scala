@@ -2,8 +2,8 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
-import gdext.engine.*
-import gdext.engine.GodotObject.*
+import gdext.internal.engine.*
+import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OmniLight3D`, extends `Light3D`. */
 abstract class OmniLight3D extends Light3D {

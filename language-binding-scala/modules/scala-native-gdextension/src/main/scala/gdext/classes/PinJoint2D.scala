@@ -2,8 +2,8 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
-import gdext.engine.*
-import gdext.engine.GodotObject.*
+import gdext.internal.engine.*
+import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PinJoint2D`, extends `Joint2D`. */
 abstract class PinJoint2D extends Joint2D {

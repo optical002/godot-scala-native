@@ -1,4 +1,4 @@
-package gdext.sbtplugin
+package godotscala
 
 import sbt._
 import sbt.Keys._
@@ -84,7 +84,7 @@ object GodotScalaNativePlugin extends AutoPlugin {
     // project root; the tasks fail with a clear message if it is unset.
     godotEntrySelfTest        := false,
     godotLibName              := "scala-native-gdextension",
-    godotManifestName         := "godot_scala.gdextension",
+    godotManifestName         := "scala.gdextension",
     godotCompatibilityMinimum := "4.2",
 
     // The binding artifact. `.cross(ScalaNativeCrossVersion.binary)` applies the

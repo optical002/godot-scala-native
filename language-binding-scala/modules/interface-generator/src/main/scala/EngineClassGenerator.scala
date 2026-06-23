@@ -112,7 +112,7 @@ object EngineClassGenerator {
     // binding's script base which carries hostObject + the virtuals.
     val extendsClause = parent match {
       case Some(p) => s"$p"
-      case None    => "gdext.register.GodotScriptClass"
+      case None    => "gdext.internal.register.GodotScriptClass"
     }
 
     val singletonDef =
@@ -130,8 +130,8 @@ object EngineClassGenerator {
        |
        |import gdext.Godot
        |import gdext.builtin.*
-       |import gdext.engine.*
-       |import gdext.engine.GodotObject.*
+       |import gdext.internal.engine.*
+       |import gdext.internal.engine.GodotObject.*
        |
        |/** Generated wrapper for Godot's `$name`${parent.map(p => s", extends `$p`").getOrElse("")}. */
        |abstract class $name extends $extendsClause {

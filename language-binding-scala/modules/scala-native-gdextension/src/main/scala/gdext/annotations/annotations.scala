@@ -1,6 +1,6 @@
 package gdext.annotations
 
-import gdext.register.ExportHint
+import gdext.internal.register.ExportHint
 
 import scala.annotation.StaticAnnotation
 

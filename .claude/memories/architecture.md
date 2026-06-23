@@ -48,8 +48,8 @@ The repo root is a workspace, **not** an sbt build. Top level:
 2. **builtin** (`builtin/`) — Variant + GString/StringName/Vector2/Array/Dictionary.
 3. **engine** (`classes/`, generated) — typed engine classes as
    `abstract class Node2D extends CanvasItem`, package **`gdext.classes`**.
-4. **obj** (`engine/Gd.scala`, `GodotClass`, `ClassTags`) — `Gd[T]`, casts, refcount.
-5. **register** (`register/`) — register user `game` classes via macros/annotations.
+4. **obj** (`internal/engine/Gd.scala`, `GodotClass`, `ClassTags`) — `Gd[T]`, casts, refcount.
+5. **register** (`internal/register/`) — register user `game` classes via macros/annotations.
 
 ## Package layout — public surface vs internal
 Consumer (game) code imports ONLY these:
@@ -62,14 +62,20 @@ Consumer (game) code imports ONLY these:
   emitSignal`, plus the generated-glue surface `Register`, `GodotEntry` and the
   entry FFI type aliases `Entry{GetProcAddress,ClassLibraryPtr,Initialization}`.
 
-Internal (not for consumers): `gdext.internal.ffi` (was
+Internal (all under `gdext.internal.*`, so `import gdext.` shows only `api`,
+`classes`, `builtin`, `annotations`, `internal`): `gdext.internal.ffi` (was
 `gdext.codegen.gdextensioninterface`), `gdext.internal.types` (was `gdext.types`),
-the `gdext.engine` substrate and `gdext.register` machinery. **`private[gdext]`
-(compiler-enforced, even from the published jar): `Godot`, `GodotEngine`, `Log`,
-`FileLogger`, and the FFI `Interface`** — so no FFI method is reachable outside
-the library. The registration builders (`ClassRegistration`/`MethodRegistration`/
-…) stay accessible because the `Register` macro emits calls to them into the
-consumer's compiled code.
+`gdext.internal.engine` (substrate, was `gdext.engine`), `gdext.internal.register`
+(machinery, was `gdext.register`). **`private[gdext]` (compiler-enforced, even
+from the published jar): `Godot`, `GodotEngine`, `Log`, `FileLogger`, `GodotPrint`,
+and the FFI `Interface`** — so no top-level `gdext.*` object is visible and no FFI
+method is reachable outside the library (use `gdext.api.GodotPrint`). Things that
+MUST stay public because they appear in public signatures or macro-emitted calls —
+`Gd`/`GodotObject` (in `gdext.internal.engine`), the registration builders
+`ClassRegistration`/`MethodRegistration`/… (in `gdext.internal.register`), the FFI
+*types* — are public but live under `gdext.internal.*` (off the everyday surface).
+The sbt plugin's own package is **`godotscala`** (not `gdext.*`), so it never
+appears under `gdext.` either.
 
 ## Bootstrap flow
 The `@exported` entry symbol → `GodotEngine.run(..., register = () =>
@@ -77,7 +83,7 @@ GeneratedRegistrations.registerAll())`. The entry point is **fully generated**:
 `game.GeneratedEntry` is emitted by `RegistrationScan` alongside
 `GeneratedRegistrations`, and its exported symbol is fixed in
 `RegistrationScan.EntrySymbol` (`"godot_scala_init"` — not a build setting; must
-equal `entry_symbol` in `godot/godot_scala.gdextension`). No hand-written entry
+equal `entry_symbol` in `godot/scala.gdextension`). No hand-written entry
 file exists. `GodotEngine`
 (in gdext) loads the interface, fills the init struct, runs self-tests once, and
 on SCENE init runs the register callback. `Godot` object holds the global
@@ -92,7 +98,7 @@ interface table + library handle.
   auto-registration source generator, compiles (linking the published binding),
   native-links, atomically swaps the `.so` into
   `godot/lib/libscala-native-gdextension.so`, **and generates the
-  `godot/godot_scala.gdextension` manifest** (also available standalone as
+  `godot/scala.gdextension` manifest** (also available standalone as
   `godotManifest`). The manifest is GENERATED — don't hand-edit; tune it via the
   plugin settings `godotProjectDir` (Godot root — **mandatory, no default**;
   tasks fail with a clear message if unset), `godotLibName` (library base name),
@@ -106,8 +112,8 @@ interface table + library handle.
 - `cd language-binding-scala && sbt igen/regenerate` → regenerates all codegen:
   FFI, engine classes, AND the validation harness (see below).
 - Verify: `cd godot && godot --headless --path . --quit-after N` (scene) or
-  `--script verify.gd` (GDScript checks). Binding logs to file `godot-init`;
-  game logs to Godot Output. See `BUILD.md`, `godot/godot_scala.gdextension`.
+  `--script verify.gd` (GDScript checks). Binding logs to file `.scala/log`;
+  game logs to Godot Output. See `BUILD.md`, `godot/scala.gdextension`.
 
 ## Publishing (gdext → Maven Central)
 `gdext` publishes to the Sonatype **Central Portal** as a normal Scala Native

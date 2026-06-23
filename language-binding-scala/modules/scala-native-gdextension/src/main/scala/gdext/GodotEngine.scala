@@ -92,8 +92,8 @@ private[gdext] object GodotEngine {
           selfTestsRan = true
           Log.trace("initialize(SCENE): running self-tests")
           gdext.builtin.BuiltinSelfTest.run(Log.file)
-          gdext.engine.EngineSelfTest.run(Log.file)
-          gdext.engine.GdSelfTest.run(Log.file)
+          gdext.internal.engine.EngineSelfTest.run(Log.file)
+          gdext.internal.engine.GdSelfTest.run(Log.file)
           Log.trace("initialize(SCENE): self-tests done")
         }
         Log.trace("initialize(SCENE): registerClasses() begin")
@@ -105,7 +105,7 @@ private[gdext] object GodotEngine {
         // image, we just completed an editor hot-reload. Announce it on the
         // Output panel, timing the full "library swap → extension live" latency
         // via the stamp the sbt `build` task drops right after the atomic swap.
-        val wasReload = gdext.register.ClassRegistration
+        val wasReload = gdext.internal.register.ClassRegistration
           .consumeReloadDetected()
         Log.trace(s"initialize(SCENE): consumeReloadDetected=$wasReload")
         if (wasReload) {
@@ -123,7 +123,7 @@ private[gdext] object GodotEngine {
         // Editor-only: install the inspector plugin for typed scene exports.
         // Reached only when Godot runs as the editor (not in a game run).
         Log.trace("initialize(EDITOR): begin")
-        gdext.register.editor.EditorIntegration
+        gdext.internal.register.editor.EditorIntegration
           .registerAtEditorLevel()
         Log.trace("initialize(EDITOR): end")
       } else {
@@ -168,9 +168,9 @@ private[gdext] object GodotEngine {
         // without it the live editor instances are never rebound and inspecting
         // them after a reload freezes the editor.
         Log.trace("deinitialize(SCENE): unregisterAll begin")
-        gdext.register.ClassRegistration.unregisterAll()
+        gdext.internal.register.ClassRegistration.unregisterAll()
         // Drop comp-dropdown builders so the reloaded image rebuilds them fresh.
-        gdext.register.CompEnumRegistry.clear()
+        gdext.internal.register.CompEnumRegistry.clear()
         Log.trace("deinitialize(SCENE): unregisterAll done")
         Log.file("deinitialize(SCENE)")
       }

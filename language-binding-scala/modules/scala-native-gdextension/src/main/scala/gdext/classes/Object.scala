@@ -2,11 +2,11 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
-import gdext.engine.*
-import gdext.engine.GodotObject.*
+import gdext.internal.engine.*
+import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Object`. */
-abstract class Object extends gdext.register.GodotScriptClass {
+abstract class Object extends gdext.internal.register.GodotScriptClass {
 
   /** Object.is_class */
   final def isClass(`class`: String): Boolean =

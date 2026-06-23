@@ -2,8 +2,8 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
-import gdext.engine.*
-import gdext.engine.GodotObject.*
+import gdext.internal.engine.*
+import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AStarGrid2D`, extends `RefCounted`. */
 abstract class AStarGrid2D extends RefCounted {

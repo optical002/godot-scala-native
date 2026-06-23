@@ -10,7 +10,7 @@ func _on_pinged() -> void:
 
 func _initialize() -> void:
 	# The binding writes its side log under the hidden .scala/ dir (next to the .so).
-	var f := FileAccess.open(".scala/godot-init", FileAccess.READ_WRITE)
+	var f := FileAccess.open(".scala/log", FileAccess.READ_WRITE)
 	f.seek_end()
 
 	f.store_line("gd: class_exists(Player) = %s" % ClassDB.class_exists("Player"))

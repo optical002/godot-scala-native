@@ -2,8 +2,8 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
-import gdext.engine.*
-import gdext.engine.GodotObject.*
+import gdext.internal.engine.*
+import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CharacterBody2D`, extends `PhysicsBody2D`. */
 abstract class CharacterBody2D extends PhysicsBody2D {

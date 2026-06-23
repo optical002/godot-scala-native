@@ -132,11 +132,11 @@ lazy val sbtGodotPlugin =
           (Compile / sourceManaged).value / "GodotScalaNativeBuildInfo.scala"
         IO.write(
           out,
-          s"""package gdext.sbtplugin
+          s"""package godotscala
              |
              |/** Generated: this plugin's published version, used to pull the
              |  * matching `scala-native-gdextension` binding into consumers. */
-             |private[sbtplugin] object GodotScalaNativeBuildInfo {
+             |private[godotscala] object GodotScalaNativeBuildInfo {
              |  final val version: String = "${version.value}"
              |}
              |""".stripMargin

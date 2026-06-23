@@ -19,7 +19,7 @@ import gdext.internal.ffi.types.GDExtensionVariantType.*
  * ([[Godot.interface]]); before that they fall back to stdout so early-init
  * messages are never lost.
  */
-object GodotPrint {
+private[gdext] object GodotPrint {
 
   // Engine `print` utility function (vararg). Hash from extension_api.json 4.6.1.
   private final val PrintHash = 2648703342L

@@ -20,7 +20,7 @@ Two StringName *handles* for the same text are NOT pointer-equal. Compare by
 decoding (`StringName.toScala`), e.g. in `get_virtual` dispatch.
 
 ## Editor hot-reload
-- `godot/godot_scala.gdextension` is **GENERATED** by the plugin (`godotManifest`,
+- `godot/scala.gdextension` is **GENERATED** by the plugin (`godotManifest`,
   and as part of `godotBuild`) — don't hand-edit; change the plugin settings
   (`godotLibName`, `godotCompatibilityMinimum`, …) instead. It has
   `reloadable = true`; `godotBuild` atomically renames the `.so` (no in-place
@@ -57,7 +57,7 @@ decoding (`StringName.toScala`), e.g. in `get_virtual` dispatch.
   `GodotEngine` `GodotPrint`s `[scala-native] hot-reload complete in N ms` to the
   Output panel. The `N ms` is full swap→live latency: the `godotBuild` task
   stamps `godot/reload.stamp` (epoch millis) after the atomic swap; the binding reads
-  (relative to Godot's CWD, like `godot-init`) and deletes it on reload. Headless
+  (relative to Godot's CWD, like `.scala/log`) and deletes it on reload. Headless
   one-shot runs never trigger it.
 
 ## Editor widgets / signals (primitives + a hard gotcha)
@@ -82,7 +82,7 @@ decoding (`StringName.toScala`), e.g. in `get_virtual` dispatch.
 
 ## Logging (split)
 `Log` (gdext, **`private[gdext]`**) has split channels. Binding internals →
-`Log.file` (file `.scala/godot-init`). Game code → `gdext.api.GodotPrint.print`
+`Log.file` (file `.scala/log`). Game code → `gdext.api.GodotPrint.print`
 (Godot Output). Don't mix.
 
 ## Codegen

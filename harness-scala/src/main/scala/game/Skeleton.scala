@@ -24,7 +24,8 @@ import gdext.api.*
  */
 class Skeleton(
   var skeletonName: String = "Bonechill",
-  hp: Int = 10
+  hp: Int = 10,
+  var age: Int,
 ) extends Enemy(hp, None, Tscn.unassigned[Player]) {
 
   override def _ready(): Unit = {

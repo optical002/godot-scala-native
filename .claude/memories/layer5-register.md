@@ -188,7 +188,7 @@ generator also emits `game.GeneratedEntry` — the
 `gdext.api.GodotEntry.run` (a thin facade over the `private[gdext]` bootstrap),
 calling `registerAll()` once. The exported symbol is **hardcoded** in
 `RegistrationScan.EntrySymbol` (`"godot_scala_init"`, not a build setting) and
-must equal `entry_symbol` in `godot/godot_scala.gdextension`; only the self-test
+must equal `entry_symbol` in `godot/scala.gdextension`; only the self-test
 is a setting (`godotEntrySelfTest`, set in the consumer's `build.sbt`). No entry
 file is hand-written, and the consumer carries no build machinery.
 Registers iff: concrete `class` (not abstract/trait/object) **and** every

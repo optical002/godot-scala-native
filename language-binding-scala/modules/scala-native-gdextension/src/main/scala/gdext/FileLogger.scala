@@ -32,7 +32,7 @@ private[gdext] object FileLogger {
     // Backup previous log file
     val sourceFile = new File(logFileName)
     if (sourceFile.exists()) {
-      val backupFileName = logFileName + "-prev"
+      val backupFileName = logFileName + ".prev"
       val source = Paths.get(logFileName)
       val dest = Paths.get(backupFileName)
       Files.copy(source, dest, StandardCopyOption.REPLACE_EXISTING)

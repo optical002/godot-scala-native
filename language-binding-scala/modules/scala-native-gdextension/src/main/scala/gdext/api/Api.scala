@@ -17,15 +17,15 @@ object api {
 
   // ---- Everyday user-facing helpers (re-exported from their internal homes) --
   export gdext.GodotPrint
-  export gdext.engine.Gd
-  export gdext.engine.{Tres, Tscn, Required}
-  export gdext.register.ExportHint
+  export gdext.internal.engine.Gd
+  export gdext.internal.engine.{Tres, Tscn, Required}
+  export gdext.internal.register.ExportHint
 
   /** Emit a (currently no-arg) signal previously declared with `@signal`. */
-  export gdext.register.SignalRegistration.{emit as emitSignal}
+  export gdext.internal.register.SignalRegistration.{emit as emitSignal}
 
   // ---- Generated-glue surface (used by the auto-generated entry/registration)
-  export gdext.register.Register
+  export gdext.internal.register.Register
 
   /** GDExtension entry-point FFI types, surfaced as public aliases so the
     * generated entry can name them without importing `gdext.internal.ffi`. */

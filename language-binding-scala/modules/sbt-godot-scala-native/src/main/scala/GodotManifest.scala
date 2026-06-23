@@ -1,4 +1,4 @@
-package gdext.sbtplugin
+package godotscala
 
 /**
  * Renders the Godot `.gdextension` manifest and resolves per-platform library

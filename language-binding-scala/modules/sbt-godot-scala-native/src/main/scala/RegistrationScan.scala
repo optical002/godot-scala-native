@@ -1,4 +1,4 @@
-package gdext.sbtplugin
+package godotscala
 
 import java.io.File
 import sbt.io.IO

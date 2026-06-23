@@ -45,3 +45,4 @@ PASS RefCounted free() is a no-op (uses unref instead)
 GdSelfTest: 7 passed, 0 failed
 registered game classes
 [editor] registered ScalaExportPlugin + inspector plugin
+deinitialize(SCENE)

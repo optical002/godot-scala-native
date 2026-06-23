@@ -18,8 +18,9 @@ package gdext
 private[gdext] object Log {
   // The binding's side log, kept under the hidden `.scala/` dir in the Godot
   // project (next to the `.so`) so it doesn't clutter the project root. Read
-  // relative to Godot's working directory (the project root).
-  private final val File = ".scala/godot-init"
+  // relative to Godot's working directory (the project root). The previous run's
+  // log is rotated to `.scala/log.prev` (see FileLogger).
+  private final val File = ".scala/log"
 
   /** Ensure the parent dir of a project-relative path exists (best-effort). */
   private[gdext] def ensureParentDir(path: String): Unit = {

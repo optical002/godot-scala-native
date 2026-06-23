@@ -14,7 +14,7 @@ import gdext.internal.ffi.types.GDExtensionVariantType.*
  * later invokes it — e.g. a connected signal fires — it calls that method on
  * that object. For one of our registered classes, that routes back into Scala
  * through the method-call trampoline (so the bound method must be registered,
- * e.g. via [[gdext.register.MethodRegistration]]).
+ * e.g. via [[gdext.internal.register.MethodRegistration]]).
  *
  * Represented as a pointer to its 16-byte storage, like [[StringName]].
  */
