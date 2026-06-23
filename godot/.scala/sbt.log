@@ -1,147 +1,41 @@
 [[0minfo[0m] entering *experimental* thin client - BEEP WHIRR
+[[0minfo[0m] server was not detected. starting an instance
+[info] welcome to sbt 1.9.7 (N/A Java 21.0.8)
+[info] loading global plugins from /home/optick/.sbt/1.0/plugins
+[info] loading settings for project harness-scala-build-build-build from metals.sbt ...
+[info] loading project definition from /home/optick/work/godot-scala-native/harness-scala/project/project/project
+[info] loading settings for project harness-scala-build-build from metals.sbt ...
+[info] loading project definition from /home/optick/work/godot-scala-native/harness-scala/project/project
+[success] Generated .bloop/harness-scala-build-build.json
+[success] Total time: 2 s, completed Jun 23, 2026, 2:54:57 PM
+[info] loading settings for project harness-scala-build from metals.sbt,plugins.sbt ...
+[info] loading project definition from /home/optick/work/godot-scala-native/harness-scala/project
+[success] Generated .bloop/harness-scala-build.json
+[success] Total time: 1 s, completed Jun 23, 2026, 2:54:57 PM
+[info] loading settings for project harness from build.sbt ...
+[info] set current project to harness (in build file:/home/optick/work/godot-scala-native/harness-scala/)
+[info] sbt server started at local:///home/optick/.sbt/1.0/server/e12c146816330110c907/sock
+[info] started sbt server
 [[0minfo[0m] terminate the server with `shutdown`
 > ~godotBuild
 [info] [auto-register] generated /home/optick/work/godot-scala-native/harness-scala/target/scala-3.8.1/src_managed/main/game/GeneratedRegistrations.scala
-[info] Build skipped: No changes detected in build configuration and class path contents since last build.
+[info] Linking (multithreadingEnabled=detect) (2791 ms)
+[info] Discovered 2627 classes and 13852 methods after classloading
+[info] Checking intermediate code (quick) (159 ms)
+[info] Multithreading was not explicitly enabled - initial class loading has not detected any usage of system threads. Multithreading support will be disabled to improve performance.
+[info] Linking (multithreadingEnabled=false) (1267 ms)
+[info] Discovered 2568 classes and 13442 methods after classloading
+[info] Checking intermediate code (quick) (33 ms)
+[info] Discovered 2495 classes and 9585 methods after optimization
+[info] Optimizing (debug mode) (3248 ms)
+[info] Produced 72 LLVM IR files
+[info] Generating intermediate code (5157 ms)
+[info] Compiling to native code (3268 ms)
+[info] Linking with [pthread, dl, m]
+[info] Linking native code (immix gc, none lto) (372 ms)
+[info] Postprocessing (0 ms)
+[info] Total (14205 ms)
 [info] [godot] swapped libscala-native-gdextension.so, manifest /home/optick/work/godot-scala-native/harness-scala/../godot/scala.gdextension
-[success] Total time: 0 s, completed Jun 23, 2026, 2:27:02 PM
+[success] Total time: 16 s, completed Jun 23, 2026, 2:55:14 PM
 [info] 1. Monitoring source files for harness/godotBuild...
-[info]    Press <enter> to interrupt or '?' for more options.
-[info] Build triggered by /home/optick/work/godot-scala-native/harness-scala/src/main/scala/game/Projectile.scala. Running 'godotBuild'.
-[info] [auto-register] generated /home/optick/work/godot-scala-native/harness-scala/target/scala-3.8.1/src_managed/main/game/GeneratedRegistrations.scala
-[info] compiling 1 Scala source to /home/optick/work/godot-scala-native/harness-scala/target/scala-3.8.1/classes ...
-[info] done compiling
-[info] compiling 3 Scala sources to /home/optick/work/godot-scala-native/harness-scala/target/scala-3.8.1/classes ...
-[info] done compiling
-[info] Linking (multithreadingEnabled=detect) (2768 ms)
-[info] Discovered 2622 classes and 13830 methods after classloading
-[error] Found 1 unreachable symbols!
-[error] Unknown constructor game.Projectile(java.lang.String), referenced from:
-[error] static private method game.GeneratedRegistrations$.registerAll$$anonfun$98(): gdext.internal.register.GodotScriptClass at GeneratedRegistrations.scala:25
-[error]          method game.GeneratedRegistrations$$$Lambda$98.apply(): java.lang.Object at GeneratedRegistrations.scala:25
-[error]          method game.GeneratedRegistrations$.registerAll(): scala.runtime.BoxedUnit at GeneratedRegistrations.scala:25
-[error] static private method game.GeneratedEntry$.init$$anonfun$1(): scala.runtime.BoxedUnit at GeneratedRegistrations.scala:292
-[error]          method game.GeneratedEntry$$$Lambda$1.apply$mcV$sp(): scala.runtime.BoxedUnit at GeneratedRegistrations.scala:292
-[error]          method game.GeneratedEntry$.init(scala.scalanative.unsafe.CFuncPtr1, scala.scalanative.unsafe.Ptr, scala.scalanative.unsafe.Ptr): scala.scalanative.unsigned.UByte at GeneratedRegistrations.scala:292
-[error]   extern symbol game.GeneratedEntry$.godot_scala_init at GeneratedRegistrations.scala:283
-[error]            type game.GeneratedEntry$ at GeneratedRegistrations.scala:283
-[error] 
-[info] Total (2922 ms)
-[error] Unreachable symbols found after classloading run. It can happen when using dependencies not cross-compiled for Scala Native or not yet ported JDK definitions.
-[error] (Compile / nativeLink) Unreachable symbols found after classloading run. It can happen when using dependencies not cross-compiled for Scala Native or not yet ported JDK definitions.
-[error] Total time: 12 s, completed Jun 23, 2026, 2:27:46 PM
-[info] 2. Monitoring source files for harness/godotBuild...
-[info]    Press <enter> to interrupt or '?' for more options.
-[info] Build triggered by /home/optick/work/godot-scala-native/harness-scala/src/main/scala/game/Projectile.scala. Running 'godotBuild'.
-[info] [auto-register] generated /home/optick/work/godot-scala-native/harness-scala/target/scala-3.8.1/src_managed/main/game/GeneratedRegistrations.scala
-[info] compiling 1 Scala source to /home/optick/work/godot-scala-native/harness-scala/target/scala-3.8.1/classes ...
-[info] done compiling
-[info] compiling 3 Scala sources to /home/optick/work/godot-scala-native/harness-scala/target/scala-3.8.1/classes ...
-[info] done compiling
-[info] Linking (multithreadingEnabled=detect) (1572 ms)
-[info] Discovered 2622 classes and 13829 methods after classloading
-[info] Checking intermediate code (quick) (117 ms)
-[info] Multithreading was not explicitly enabled - initial class loading has not detected any usage of system threads. Multithreading support will be disabled to improve performance.
-[info] Linking (multithreadingEnabled=false) (1266 ms)
-[info] Discovered 2563 classes and 13419 methods after classloading
-[info] Checking intermediate code (quick) (37 ms)
-[info] Discovered 2490 classes and 9573 methods after optimization
-[info] Optimizing (debug mode) (2708 ms)
-[info] Produced 72 LLVM IR files
-[info] Generating intermediate code (5737 ms)
-[info] Compiling to native code (3589 ms)
-[info] Linking with [pthread, dl, m]
-[info] Linking native code (immix gc, none lto) (316 ms)
-[info] Postprocessing (0 ms)
-[info] Total (12811 ms)
-[info] [godot] swapped libscala-native-gdextension.so, manifest /home/optick/work/godot-scala-native/harness-scala/../godot/scala.gdextension
-[success] Total time: 17 s, completed Jun 23, 2026, 2:28:45 PM
-[info] 3. Monitoring source files for harness/godotBuild...
-[info]    Press <enter> to interrupt or '?' for more options.
-[info] Build triggered by /home/optick/work/godot-scala-native/harness-scala/src/main/scala/game/Projectile.scala. Running 'godotBuild'.
-[info] [auto-register] generated /home/optick/work/godot-scala-native/harness-scala/target/scala-3.8.1/src_managed/main/game/GeneratedRegistrations.scala
-[info] compiling 1 Scala source to /home/optick/work/godot-scala-native/harness-scala/target/scala-3.8.1/classes ...
-[info] done compiling
-[info] compiling 3 Scala sources to /home/optick/work/godot-scala-native/harness-scala/target/scala-3.8.1/classes ...
-[info] done compiling
-[info] Linking (multithreadingEnabled=detect) (2637 ms)
-[info] Discovered 2622 classes and 13830 methods after classloading
-[error] Found 1 unreachable symbols!
-[error] Unknown constructor game.Projectile(java.lang.String), referenced from:
-[error] static private method game.GeneratedRegistrations$.registerAll$$anonfun$98(): gdext.internal.register.GodotScriptClass at GeneratedRegistrations.scala:25
-[error]          method game.GeneratedRegistrations$$$Lambda$98.apply(): java.lang.Object at GeneratedRegistrations.scala:25
-[error]          method game.GeneratedRegistrations$.registerAll(): scala.runtime.BoxedUnit at GeneratedRegistrations.scala:25
-[error] static private method game.GeneratedEntry$.init$$anonfun$1(): scala.runtime.BoxedUnit at GeneratedRegistrations.scala:292
-[error]          method game.GeneratedEntry$$$Lambda$1.apply$mcV$sp(): scala.runtime.BoxedUnit at GeneratedRegistrations.scala:292
-[error]          method game.GeneratedEntry$.init(scala.scalanative.unsafe.CFuncPtr1, scala.scalanative.unsafe.Ptr, scala.scalanative.unsafe.Ptr): scala.scalanative.unsigned.UByte at GeneratedRegistrations.scala:292
-[error]   extern symbol game.GeneratedEntry$.godot_scala_init at GeneratedRegistrations.scala:283
-[error]            type game.GeneratedEntry$ at GeneratedRegistrations.scala:283
-[error] 
-[info] Total (2714 ms)
-[error] Unreachable symbols found after classloading run. It can happen when using dependencies not cross-compiled for Scala Native or not yet ported JDK definitions.
-[error] (Compile / nativeLink) Unreachable symbols found after classloading run. It can happen when using dependencies not cross-compiled for Scala Native or not yet ported JDK definitions.
-[error] Total time: 10 s, completed Jun 23, 2026, 2:29:10 PM
-[info] 4. Monitoring source files for harness/godotBuild...
-[info]    Press <enter> to interrupt or '?' for more options.
-[info] Build triggered by /home/optick/work/godot-scala-native/harness-scala/src/main/scala/game/Projectile.scala. Running 'godotBuild'.
-[info] [auto-register] generated /home/optick/work/godot-scala-native/harness-scala/target/scala-3.8.1/src_managed/main/game/GeneratedRegistrations.scala
-[info] compiling 1 Scala source to /home/optick/work/godot-scala-native/harness-scala/target/scala-3.8.1/classes ...
-[info] done compiling
-[info] compiling 3 Scala sources to /home/optick/work/godot-scala-native/harness-scala/target/scala-3.8.1/classes ...
-[info] done compiling
-[info] Linking (multithreadingEnabled=detect) (1436 ms)
-[info] Discovered 2622 classes and 13829 methods after classloading
-[info] Checking intermediate code (quick) (142 ms)
-[info] Multithreading was not explicitly enabled - initial class loading has not detected any usage of system threads. Multithreading support will be disabled to improve performance.
-[info] Linking (multithreadingEnabled=false) (1172 ms)
-[info] Discovered 2563 classes and 13419 methods after classloading
-[info] Checking intermediate code (quick) (34 ms)
-[info] Discovered 2490 classes and 9573 methods after optimization
-[info] Optimizing (debug mode) (2716 ms)
-[info] Produced 72 LLVM IR files
-[info] Generating intermediate code (5865 ms)
-[info] Compiling to native code (3882 ms)
-[info] Linking with [pthread, dl, m]
-[info] Linking native code (immix gc, none lto) (288 ms)
-[info] Postprocessing (0 ms)
-[info] Total (12498 ms)
-[info] [godot] swapped libscala-native-gdextension.so, manifest /home/optick/work/godot-scala-native/harness-scala/../godot/scala.gdextension
-[success] Total time: 16 s, completed Jun 23, 2026, 2:31:28 PM
-[info] 5. Monitoring source files for harness/godotBuild...
-[info]    Press <enter> to interrupt or '?' for more options.
-[info] Build triggered by /home/optick/work/godot-scala-native/harness-scala/src/main/scala/game/Skeleton.scala. Running 'godotBuild'.
-[auto-register] could not parse Skeleton.scala, skipping: `)` expected but `var` found
-[info] [auto-register] generated /home/optick/work/godot-scala-native/harness-scala/target/scala-3.8.1/src_managed/main/game/GeneratedRegistrations.scala
-[info] compiling 2 Scala sources to /home/optick/work/godot-scala-native/harness-scala/target/scala-3.8.1/classes ...
-[error] -- [E040] Syntax Error: /home/optick/work/godot-scala-native/harness-scala/src/main/scala/game/Skeleton.scala:28:2 
-[error] 28 |  var age: Int,
-[error]    |  ^^^
-[error]    |  ')' expected, but 'var' found
-[error] one error found
-[error] (Compile / compileIncremental) Compilation failed
-[error] Total time: 6 s, completed Jun 23, 2026, 2:32:05 PM
-[info] 6. Monitoring source files for harness/godotBuild...
-[info]    Press <enter> to interrupt or '?' for more options.
-[info] Build triggered by /home/optick/work/godot-scala-native/harness-scala/src/main/scala/game/Skeleton.scala. Running 'godotBuild'.
-[info] [auto-register] generated /home/optick/work/godot-scala-native/harness-scala/target/scala-3.8.1/src_managed/main/game/GeneratedRegistrations.scala
-[info] compiling 1 Scala source to /home/optick/work/godot-scala-native/harness-scala/target/scala-3.8.1/classes ...
-[info] done compiling
-[info] Linking (multithreadingEnabled=detect) (3832 ms)
-[info] Discovered 2621 classes and 13819 methods after classloading
-[error] Found 1 unreachable symbols!
-[error] Unknown constructor game.Skeleton(java.lang.String, int), referenced from:
-[error] static private method game.GeneratedRegistrations$.registerAll$$anonfun$339(): gdext.internal.register.GodotScriptClass at GeneratedRegistrations.scala:264
-[error]          method game.GeneratedRegistrations$$$Lambda$339.apply(): java.lang.Object at GeneratedRegistrations.scala:264
-[error]          method game.GeneratedRegistrations$.registerAll(): scala.runtime.BoxedUnit at GeneratedRegistrations.scala:264
-[error] static private method game.GeneratedEntry$.init$$anonfun$1(): scala.runtime.BoxedUnit at GeneratedRegistrations.scala:292
-[error]          method game.GeneratedEntry$$$Lambda$1.apply$mcV$sp(): scala.runtime.BoxedUnit at GeneratedRegistrations.scala:292
-[error]          method game.GeneratedEntry$.init(scala.scalanative.unsafe.CFuncPtr1, scala.scalanative.unsafe.Ptr, scala.scalanative.unsafe.Ptr): scala.scalanative.unsigned.UByte at GeneratedRegistrations.scala:292
-[error]   extern symbol game.GeneratedEntry$.godot_scala_init at GeneratedRegistrations.scala:283
-[error]            type game.GeneratedEntry$ at GeneratedRegistrations.scala:283
-[error] 
-[info] Total (3918 ms)
-[error] Unreachable symbols found after classloading run. It can happen when using dependencies not cross-compiled for Scala Native or not yet ported JDK definitions.
-[error] (Compile / nativeLink) Unreachable symbols found after classloading run. It can happen when using dependencies not cross-compiled for Scala Native or not yet ported JDK definitions.
-[error] Total time: 8 s, completed Jun 23, 2026, 2:32:13 PM
-[info] 7. Monitoring source files for harness/godotBuild...
 [info]    Press <enter> to interrupt or '?' for more options.

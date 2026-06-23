@@ -191,6 +191,16 @@ calling `registerAll()` once. The exported symbol is **hardcoded** in
 must equal `entry_symbol` in `godot/scala.gdextension`; only the self-test
 is a setting (`godotEntrySelfTest`, set in the consumer's `build.sbt`). No entry
 file is hand-written, and the consumer carries no build machinery.
+**Stale-NIR fix (`source-fingerprint`)**: the generated file embeds an MD5 of all
+scanned source contents in a header comment. Without it the generated text is
+byte-identical across builds (the class list is unchanged when you only edit a
+class body/ctor), so Zinc skips recompiling it and the `Register.auto[T]` macro
+**factory** keeps stale Scala Native NIR calling an old constructor — adding/
+removing a `var` field then breaks `nativeLink` with "unknown constructor /
+unreachable symbol" until `sbt clean`. The fingerprint changes whenever any game
+source changes, forcing a recompile so the factories re-expand against the
+current class shapes. Don't remove it. (`~godotBuild` only fires on source
+changes, so this recompiles the one generated file exactly when needed.)
 Registers iff: concrete `class` (not abstract/trait/object) **and** every
 primary-ctor param is constructible with no caller args — has a default **OR** is
 a `var` (the macro factory fills an un-defaulted `var` from its `DefaultValue`);

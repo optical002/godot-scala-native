@@ -132,6 +132,23 @@ object RegistrationScan {
           }
           .mkString("\n")
 
+    // Fingerprint of all scanned sources. Embedding it makes this generated file
+    // change whenever any game source changes, which forces Zinc to recompile it
+    // so the `Register.auto[T]` macro factories re-expand against the CURRENT
+    // class definitions. Without it the generated text is byte-identical across
+    // builds (the class list is unchanged), Zinc skips recompiling it, and the
+    // stale Scala Native NIR keeps calling an old constructor after you add/remove
+    // a `var` field — nativeLink then fails with "unknown constructor /
+    // unreachable symbol". (`~godotBuild` only triggers on source changes, so this
+    // recompiles exactly when a registered class might have changed shape.)
+    val srcFingerprint = {
+      val md = java.security.MessageDigest.getInstance("MD5")
+      allScalaFiles(harnessSrcDir)
+        .sortBy(_.getAbsolutePath)
+        .foreach(f => md.update(IO.read(f).getBytes("UTF-8")))
+      md.digest().map("%02x".format(_)).mkString
+    }
+
     s"""// GENERATED — DO NOT EDIT.
        |// Regenerated on every compile by RegistrationScan (shipped in the
        |// sbt-godot-scala-native plugin). Every concrete class in this module that
@@ -139,6 +156,7 @@ object RegistrationScan {
        |// it registers, with no entry edits or any list. The GDExtension entry point
        |// below is generated too — the exported symbol is fixed
        |// ("$EntrySymbol"). See .claude/memories/layer5-register.md.
+       |// source-fingerprint: $srcFingerprint
        |package game
        |
        |import scala.scalanative.unsafe.*

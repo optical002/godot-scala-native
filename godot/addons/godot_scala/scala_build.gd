@@ -48,8 +48,10 @@ func _enter_tree() -> void:
 	_sbt_log_abs = ProjectSettings.globalize_path("res://.scala/sbt.log")
 	_ansi = RegEx.new()
 	_ansi.compile("\\x1b\\[[0-9;?]*[ -/]*[@-~]")   # CSI / color escape sequences
+	# Always auto-start the sbt watch on editor/plugin startup. Deferred and
+	# queued first so it fires next frame regardless of any UI-setup hiccup.
+	call_deferred("_start_server")
 	_build_ui()
-	_start_server()
 	_timer = Timer.new()
 	_timer.wait_time = POLL_SECONDS
 	_timer.timeout.connect(_poll)
@@ -69,11 +71,34 @@ func _exit_tree() -> void:
 
 # --- UI construction --------------------------------------------------------
 func _build_ui() -> void:
-	# Bottom panel = the scrolling build log (full output / errors).
+	# Bottom panel = a console-styled, colorized build log.
+	var base := EditorInterface.get_base_control()
 	_log_view = RichTextLabel.new()
+	_log_view.bbcode_enabled = true
 	_log_view.scroll_following = true
-	_log_view.custom_minimum_size = Vector2(0, 160)
-	add_control_to_bottom_panel(_log_view, "Scala")
+	_log_view.selection_enabled = true
+	_log_view.focus_mode = Control.FOCUS_CLICK
+	_log_view.custom_minimum_size = Vector2(0, 180)
+	# Monospace editor font for readability.
+	var mono := base.get_theme_font("source", "EditorFonts")
+	if mono:
+		_log_view.add_theme_font_override("normal_font", mono)
+		_log_view.add_theme_font_override("mono_font", mono)
+		_log_view.add_theme_font_override("bold_font", mono)
+	var fsize := 13
+	var es := EditorInterface.get_editor_settings()
+	if es and es.has_setting("interface/editor/code_font_size"):
+		fsize = int(es.get_setting("interface/editor/code_font_size"))
+	_log_view.add_theme_font_size_override("normal_font_size", fsize)
+	_log_view.add_theme_font_size_override("bold_font_size", fsize)
+	# Dark, padded console background.
+	var console := StyleBoxFlat.new()
+	console.bg_color = Color(0.09, 0.09, 0.11)
+	console.set_corner_radius_all(4)
+	console.content_margin_left = 8; console.content_margin_right = 8
+	console.content_margin_top = 6;  console.content_margin_bottom = 6
+	_log_view.add_theme_stylebox_override("normal", console)
+	add_control_to_bottom_panel(_log_view, "SBT Output")
 
 	# Top toolbar = an outlined group: [ icon  Scala ]. Click -> SBT Server menu.
 	_status_panel = PanelContainer.new()
@@ -161,8 +186,6 @@ func _open_menu() -> void:
 	else:                                # running
 		_menu.add_item("Restart", 1)
 		_menu.add_item("Stop", 2)
-	_menu.add_separator()
-	_menu.add_item("Open build log", 3)
 	_menu.reset_size()
 	_menu.position = Vector2i(_status_panel.get_screen_position()) \
 		+ Vector2i(0, int(_status_panel.size.y))
@@ -174,7 +197,6 @@ func _on_menu(id: int) -> void:
 		4: _start_server()
 		1: _restart_server()
 		2: _stop_server()
-		3: OS.shell_open("file://" + _sbt_log_abs)
 
 # --- Server process ---------------------------------------------------------
 func _scala_dir_abs() -> String:
@@ -300,4 +322,27 @@ func _read_tail(path: String, from: int) -> Dictionary:
 	return {"text": buf.get_string_from_utf8(), "size": flen}
 
 func _log(s: String) -> void:
-	_log_view.append_text(s if s.ends_with("\n") else s + "\n")
+	if not _log_view:
+		return
+	for line in s.split("\n", false):
+		_log_view.append_text(_colorize(line) + "\n")
+
+# Colorize an sbt log line by its leading tag. Brackets are escaped to `[lb]` so
+# the literal `[info]` etc. show instead of being parsed as BBCode tags.
+func _colorize(line: String) -> String:
+	var color := "#9aa0a6"      # default: dim grey ([info] / plain)
+	var bold := false
+	if line.find("[error]") != -1 or line.find("error]") != -1:
+		color = "#ef6b6b"; bold = true
+	elif line.find("[warn]") != -1:
+		color = "#e2c044"
+	elif line.find("[success]") != -1:
+		color = "#62c66e"; bold = true
+	elif line.find("[godot]") != -1 or line.find("[plugin]") != -1:
+		color = "#56c2e0"
+	elif line.find("Monitoring source files") != -1 or line.find("Build triggered") != -1:
+		color = "#b08cdb"
+	var body := line.replace("[", "[lb]")
+	if bold:
+		return "[color=%s][b]%s[/b][/color]" % [color, body]
+	return "[color=%s]%s[/color]" % [color, body]

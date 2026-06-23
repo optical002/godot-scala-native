@@ -26,6 +26,7 @@ class Skeleton(
   var skeletonName: String = "Bonechill",
   hp: Int = 10,
   var age: Int,
+  var height: Double,
 ) extends Enemy(hp, None, Tscn.unassigned[Player]) {
 
   override def _ready(): Unit = {

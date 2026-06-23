@@ -1,4 +1,4 @@
-[11:31:37.109] [main] Scala-Native language binding initialized.
+[11:54:46.217] [main] Scala-Native language binding initialized.
 PASS Int round-trip
 PASS Long round-trip
 PASS Boolean true round-trip
@@ -45,3 +45,4 @@ PASS RefCounted free() is a no-op (uses unref instead)
 GdSelfTest: 7 passed, 0 failed
 registered game classes
 [editor] registered ScalaExportPlugin + inspector plugin
+[editor] ScalaExportPlugin: inspector plugin installed

@@ -1,4 +1,4 @@
-[11:27:53.148] [main] Scala-Native language binding initialized.
+[11:54:40.404] [main] Scala-Native language binding initialized.
 PASS Int round-trip
 PASS Long round-trip
 PASS Boolean true round-trip
