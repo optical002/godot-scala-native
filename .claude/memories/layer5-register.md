@@ -78,7 +78,15 @@ Per-type logic is in givens, NOT the macro. Supported field types:
   `Gd`/`Tres` exports unchanged.
 - **enums**: parameterless Scala 3 enums, synthesized inline by the macro
   (hint ENUM, ordinal⇄`fromOrdinal`).
-- **Color** (`builtin/Color.scala`): variant COLOR(5), color-picker widget.
+- **Color** (`builtin/Color.scala`): variant COLOR, color-picker widget.
+- **math value types** (`builtin/Vector2.scala`, `MathBuiltins.scala`): Vector2/2i/
+  3/3i/4/4i, Rect2/2i, Quaternion, Plane, AABB, Basis, Transform2D/3D, Projection.
+  Each is a one-line `given ExportType[X] = fromSeam[X](VARIANT_TYPE_X)` in
+  `ExportType.scala` (reuses the type's `ToVariant`/`FromVariant`); the inspector
+  picks the editor from the variant type alone (no hint). Matching `DefaultValue[X]`
+  (natural zero; identity Basis/Transform) so they work as bare `var` ctor params
+  with no `= ...`. Verified by `export_verify.gd` `_check_player` (spawn_offset/
+  aim_direction/tint/hitbox on `game/Player.scala`).
 - **typed dict** `Dict[K,V]` (`builtin/Dict.scala`): hint **TYPE_STRING(23)** with
   encoded `hint_string` `"<key>;<value>"`, each part `<type>[/<hint>]:<hintstr>`
   (this is what GDScript emits — NOT DICTIONARY_TYPE; verified vs live engine).

@@ -1,6 +1,6 @@
 package gdext.internal.register
 
-import gdext.builtin.{Arr, Dict, ToVariant, FromVariant}
+import gdext.builtin.*
 import gdext.internal.engine.*
 import gdext.classes.{Node, PackedScene, Resource}
 
@@ -31,6 +31,37 @@ object DefaultValue {
   given DefaultValue[Float]   = of(0.0f)
   given DefaultValue[Boolean] = of(false)
   given DefaultValue[String]  = of("")
+
+  // --- math value types ---------------------------------------------------
+  // Natural zero for each fixed-layout math builtin, so they can be used as a
+  // bare `var` ctor param (auto-export) with no explicit `= ...`. Mirrors the
+  // exportable math types in [[ExportType]].
+  private val v2  = Vector2(0f, 0f)
+  private val v2i = Vector2i(0, 0)
+  private val v3  = Vector3(0f, 0f, 0f)
+  private val v3i = Vector3i(0, 0, 0)
+  private val v4  = Vector4(0f, 0f, 0f, 0f)
+  given DefaultValue[Color]       = of(Color(0f, 0f, 0f, 1f))
+  given DefaultValue[Vector2]     = of(v2)
+  given DefaultValue[Vector2i]    = of(v2i)
+  given DefaultValue[Vector3]     = of(v3)
+  given DefaultValue[Vector3i]    = of(v3i)
+  given DefaultValue[Vector4]     = of(v4)
+  given DefaultValue[Vector4i]    = of(Vector4i(0, 0, 0, 0))
+  given DefaultValue[Rect2]       = of(Rect2(v2, v2))
+  given DefaultValue[Rect2i]      = of(Rect2i(v2i, v2i))
+  given DefaultValue[Quaternion]  = of(Quaternion(0f, 0f, 0f, 1f))
+  given DefaultValue[Plane]       = of(Plane(0f, 0f, 0f, 0f))
+  given DefaultValue[AABB]        = of(AABB(v3, v3))
+  // Identity basis / transforms — Godot's own defaults for these properties.
+  private val identityBasis = Basis(Vector3(1f, 0f, 0f), Vector3(0f, 1f, 0f), Vector3(0f, 0f, 1f))
+  given DefaultValue[Basis]       = of(identityBasis)
+  given DefaultValue[Transform2D] = of(Transform2D(Vector2(1f, 0f), Vector2(0f, 1f), v2))
+  given DefaultValue[Transform3D] = of(Transform3D(identityBasis, v3))
+  given DefaultValue[Projection]  = of(Projection(
+    Vector4(1f, 0f, 0f, 0f), Vector4(0f, 1f, 0f, 0f),
+    Vector4(0f, 0f, 1f, 0f), Vector4(0f, 0f, 0f, 1f)
+  ))
 
   // --- reference optionality ---------------------------------------------
   given optDefault[A]: DefaultValue[Option[A]] = of(None)

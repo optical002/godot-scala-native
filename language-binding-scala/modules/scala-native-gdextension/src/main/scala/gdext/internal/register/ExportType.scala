@@ -52,6 +52,27 @@ object ExportType {
   // alpha-less picker is opt-in via `@gdexport(ExportHint.colorNoAlpha)`.
   given ExportType[Color] = fromSeam[Color](GDEXTENSION_VARIANT_TYPE_COLOR)
 
+  // --- math value types ---------------------------------------------------
+  // Fixed-layout math builtins. Each exports as its own Variant type; the
+  // inspector picks the matching editor (vector spinboxes, rect fields, etc.)
+  // from the property's variant type alone — no hint needed. Marshalling reuses
+  // the `ToVariant`/`FromVariant` givens defined alongside each type.
+  given ExportType[Vector2]     = fromSeam[Vector2](GDEXTENSION_VARIANT_TYPE_VECTOR2)
+  given ExportType[Vector2i]    = fromSeam[Vector2i](GDEXTENSION_VARIANT_TYPE_VECTOR2I)
+  given ExportType[Vector3]     = fromSeam[Vector3](GDEXTENSION_VARIANT_TYPE_VECTOR3)
+  given ExportType[Vector3i]    = fromSeam[Vector3i](GDEXTENSION_VARIANT_TYPE_VECTOR3I)
+  given ExportType[Vector4]     = fromSeam[Vector4](GDEXTENSION_VARIANT_TYPE_VECTOR4)
+  given ExportType[Vector4i]    = fromSeam[Vector4i](GDEXTENSION_VARIANT_TYPE_VECTOR4I)
+  given ExportType[Rect2]       = fromSeam[Rect2](GDEXTENSION_VARIANT_TYPE_RECT2)
+  given ExportType[Rect2i]      = fromSeam[Rect2i](GDEXTENSION_VARIANT_TYPE_RECT2I)
+  given ExportType[Quaternion]  = fromSeam[Quaternion](GDEXTENSION_VARIANT_TYPE_QUATERNION)
+  given ExportType[Plane]       = fromSeam[Plane](GDEXTENSION_VARIANT_TYPE_PLANE)
+  given ExportType[AABB]        = fromSeam[AABB](GDEXTENSION_VARIANT_TYPE_AABB)
+  given ExportType[Basis]       = fromSeam[Basis](GDEXTENSION_VARIANT_TYPE_BASIS)
+  given ExportType[Transform2D] = fromSeam[Transform2D](GDEXTENSION_VARIANT_TYPE_TRANSFORM2D)
+  given ExportType[Transform3D] = fromSeam[Transform3D](GDEXTENSION_VARIANT_TYPE_TRANSFORM3D)
+  given ExportType[Projection]  = fromSeam[Projection](GDEXTENSION_VARIANT_TYPE_PROJECTION)
+
   // --- typed dictionary ---------------------------------------------------
   // Encoded like GDScript: hint=TYPE_STRING, hint_string = "<key>;<value>",
   // each part "<variant_type>[/<elem_hint>]:<elem_hint_string>".

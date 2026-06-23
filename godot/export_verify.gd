@@ -10,6 +10,10 @@ extends SceneTree
 # Godot variant types / hints (see PropertyHints.scala).
 const T_INT := 2
 const T_STRING := 4
+const T_VECTOR2 := 5
+const T_RECT2 := 7
+const T_VECTOR3 := 9
+const T_COLOR := 20
 const T_OBJECT := 24
 const T_DICT := 27
 const T_ARRAY := 28
@@ -105,6 +109,32 @@ func _check_player() -> void:
 		_fail("scores new element default: got %s, expected 0" % [def_scores[0]])
 	# enum: int-typed with ENUM hint listing the case names.
 	_check_meta(props, "character_state", T_INT, H_ENUM, "Idle,Walking,Running,Jumping,Falling", "")
+
+	# Math value types: each exports as its own Variant type with no hint, so
+	# the inspector shows the matching editor (vector spinboxes, color picker,
+	# rect fields).
+	_check_meta(props, "spawn_offset",  T_VECTOR2, 0, "", "")
+	_check_meta(props, "aim_direction", T_VECTOR3, 0, "", "")
+	_check_meta(props, "tint",          T_COLOR,   0, "", "")
+	_check_meta(props, "hitbox",        T_RECT2,   0, "", "")
+	# Explicit defaults round-trip from Scala (spawn_offset / tint).
+	if p.get("spawn_offset") != Vector2(10, -10):
+		_fail("spawn_offset default: got %s" % p.get("spawn_offset"))
+	if p.get("tint") != Color(1, 0, 0, 1):
+		_fail("tint default: got %s" % p.get("tint"))
+	# Value round-trips through set()/get().
+	p.set("spawn_offset", Vector2(3, 4))
+	if p.get("spawn_offset") != Vector2(3, 4):
+		_fail("spawn_offset round-trip failed: got %s" % p.get("spawn_offset"))
+	p.set("aim_direction", Vector3(1, 2, 3))
+	if p.get("aim_direction") != Vector3(1, 2, 3):
+		_fail("aim_direction round-trip failed: got %s" % p.get("aim_direction"))
+	p.set("tint", Color(0.1, 0.2, 0.3, 0.4))
+	if not p.get("tint").is_equal_approx(Color(0.1, 0.2, 0.3, 0.4)):
+		_fail("tint round-trip failed: got %s" % p.get("tint"))
+	p.set("hitbox", Rect2(1, 2, 3, 4))
+	if p.get("hitbox") != Rect2(1, 2, 3, 4):
+		_fail("hitbox round-trip failed: got %s" % p.get("hitbox"))
 
 	# Enum round-trip (Running == 2).
 	p.set("character_state", 2)

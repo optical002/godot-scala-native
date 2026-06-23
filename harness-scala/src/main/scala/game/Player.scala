@@ -1,7 +1,7 @@
 package game
 
 import gdext.api.GodotPrint
-import gdext.builtin.{Arr, Dict, Vector2}
+import gdext.builtin.{Arr, Dict, Vector2, Vector3, Color, Rect2}
 import gdext.classes.Node2D
 import gdext.api.{Gd, Tres, Tscn}
 import gdext.annotations.*
@@ -70,7 +70,20 @@ final class Player(
   /** Typed array of strings — inspector shows an editable Array[String]. */
   var tags: Arr[String],
   /** Current high-level state, shown as an enum dropdown in the inspector. */
-  var characterState: CharacterState
+  var characterState: CharacterState,
+  /**
+   * Math value types export with no wrapper or default needed — the inspector
+   * picks the right editor from the Variant type (vector spinboxes, color
+   * picker, rect fields). Each `var` param auto-exports; its `DefaultValue`
+   * supplies the zero value, or write `= ...` to override (as `spawnOffset`).
+   */
+  var spawnOffset: Vector2 = Vector2(10f, -10f),
+  /** A 3D vector property (Vector3 spinbox editor). */
+  var aimDirection: Vector3,
+  /** A color property (inspector shows a color picker). */
+  var tint: Color = Color(1f, 0f, 0f, 1f),
+  /** A rectangle property (Rect2 position/size editor). */
+  var hitbox: Rect2
 ) extends Node2D {
   private var elapsed: Double = 0.0
   private var frame = 0
