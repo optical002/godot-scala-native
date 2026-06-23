@@ -37,6 +37,13 @@ decoding (`StringName.toScala`), e.g. in `get_virtual` dispatch.
   Doing the unregister on the *register* side instead races Godot's own teardown
   and deadlocks. Set `GODOT_SCALA_TRACE=1` to get the verbose `Log.trace` reload
   trace (thread id + ms timestamp per line) when diagnosing this.
+- **Editor plugin must be removed on `deinitialize(EDITOR)`**: `initialize(EDITOR)`
+  calls `editor_add_plugin("ScalaExportPlugin")` (`EditorIntegration`), so the old
+  image **must** `editor_remove_plugin` in `deinitialize(EDITOR)`
+  (`EditorIntegration.unregisterAtEditorLevel`) — else each reload re-adds it and
+  Godot errors `Editor plugin already added for class: ScalaExportPlugin`.
+  deinit order is EDITOR-then-SCENE, so the plugin is removed before SCENE
+  `unregisterAll()` drops its class.
 - `is_runtime=1` so virtuals don't run while editing.
 - **`is_runtime` is Node-only**: `Register.auto` sets `ClassDescriptor.isRuntime`
   from `T <: gdext.classes.Node`. Nodes are runtime (editor doesn't tick their

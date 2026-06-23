@@ -38,6 +38,8 @@ var _had_warn := false
 var _reloaded := false
 var _spin := 0
 var _ansi: RegEx
+var _gem: Object               # GDExtensionManager singleton (reload signal)
+var _reload_started_ms := 0    # set when we trigger a reload after a swap
 
 # Log model (so filtering can hide/show types without re-reading the file).
 var _lines: Array = []      # [{ t: String, bb: String }] for the current build
@@ -55,6 +57,7 @@ var _filter_btns := {}
 var _timer: Timer
 
 func _enter_tree() -> void:
+	print("[scala-build] addon loaded — hot-reload timing active")
 	_sbt_log_abs = ProjectSettings.globalize_path("res://.scala/sbt.log")
 	_ansi = RegEx.new()
 	_ansi.compile("\\x1b\\[[0-9;?]*[ -/]*[@-~]")   # CSI / color escape sequences
@@ -68,9 +71,19 @@ func _enter_tree() -> void:
 	_timer.timeout.connect(_poll)
 	add_child(_timer)
 	_timer.start()
+	# Hook the editor's authoritative "extensions reloaded" signal to time the
+	# GDExtension hot-reload (start is when we trigger the rescan after a swap).
+	if Engine.has_singleton("GDExtensionManager"):
+		_gem = Engine.get_singleton("GDExtensionManager")
+		if _gem and _gem.has_signal("extensions_reloaded") \
+				and not _gem.extensions_reloaded.is_connected(_on_extensions_reloaded):
+			_gem.extensions_reloaded.connect(_on_extensions_reloaded)
 
 func _exit_tree() -> void:
 	_stop_server()
+	if _gem and _gem.has_signal("extensions_reloaded") \
+			and _gem.extensions_reloaded.is_connected(_on_extensions_reloaded):
+		_gem.extensions_reloaded.disconnect(_on_extensions_reloaded)
 	if _timer: _timer.queue_free()
 	if _bottom_root:
 		remove_control_from_bottom_panel(_bottom_root)
@@ -439,9 +452,25 @@ func _classify(chunk: String) -> void:
 		_apply_state(St.BUILDING)
 
 func _trigger_reload() -> void:
+	_reload_started_ms = Time.get_ticks_msec()
+	_announce("[plugin] GDExtension hot-reload starting…")
 	var fs := EditorInterface.get_resource_filesystem()
 	if fs:
 		fs.scan()
+
+func _on_extensions_reloaded() -> void:
+	if _reload_started_ms > 0:
+		var ms := Time.get_ticks_msec() - _reload_started_ms
+		_announce("[plugin] GDExtension hot-reload finished (%d ms)" % ms)
+		_reload_started_ms = 0
+	else:
+		_announce("[plugin] GDExtension hot-reload finished")
+
+# Emit to BOTH Godot's Output (print, if it routes there) and our own SBT Output
+# dock (always renders), so the message is visible regardless of editor quirks.
+func _announce(msg: String) -> void:
+	print("[scala-build] " + msg)
+	_log(msg)
 
 # --- State / icon -----------------------------------------------------------
 func _apply_state(s: int) -> void:

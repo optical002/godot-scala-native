@@ -55,6 +55,17 @@ object EditorIntegration {
     Godot.interface.editor_add_plugin(StringNames.cached("ScalaExportPlugin").ptr)
     Log.file("[editor] registered ScalaExportPlugin + inspector plugin")
   }
+
+  /**
+   * Remove the editor plugin during the old image's `deinitialize(EDITOR)` so a
+   * hot-reload's new image can re-add it cleanly. Without this, every reload
+   * re-runs `editor_add_plugin` while the previous plugin is still registered →
+   * "Editor plugin already added for class: ScalaExportPlugin".
+   */
+  def unregisterAtEditorLevel(): Unit = {
+    Godot.interface.editor_remove_plugin(StringNames.cached("ScalaExportPlugin").ptr)
+    Log.file("[editor] removed ScalaExportPlugin")
+  }
 }
 
 /** EditorPlugin that installs the export inspector plugin. */

@@ -173,6 +173,13 @@ private[gdext] object GodotEngine {
         gdext.internal.register.CompEnumRegistry.clear()
         Log.trace("deinitialize(SCENE): unregisterAll done")
         Log.file("deinitialize(SCENE)")
+      } else if (level == GDEXTENSION_INITIALIZATION_EDITOR) {
+        // Remove the editor plugin this (old) image added at EDITOR init, so the
+        // reloaded image can re-add it without "Editor plugin already added".
+        // deinitialize runs EDITOR-then-SCENE, so this fires before the SCENE
+        // unregisterAll() that drops the plugin's class.
+        Log.trace("deinitialize(EDITOR): removing ScalaExportPlugin")
+        gdext.internal.register.editor.EditorIntegration.unregisterAtEditorLevel()
       }
     }
 }
