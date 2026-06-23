@@ -96,10 +96,18 @@ interface table + library handle.
   plugin under `0.1.0-SNAPSHOT`) **before** building harness.
 - `cd harness-scala && sbt godotBuild` → (task from the plugin) runs the
   auto-registration source generator, compiles (linking the published binding),
-  native-links, atomically swaps the `.so` into
-  `godot/lib/libscala-native-gdextension.so`, **and generates the
+  native-links, atomically swaps the `.so` into `godot/.scala/`, **generates the
   `godot/scala.gdextension` manifest** (also available standalone as
-  `godotManifest`). The manifest is GENERATED — don't hand-edit; tune it via the
+  `godotManifest`), **and installs the GDScript editor addon** into
+  `godot/addons/godot_scala/` if absent. The addon source lives in the plugin jar
+  (`modules/sbt-godot-scala-native/src/main/resources/godot-addon/{plugin.cfg,
+  scala_build.gd,icon.svg}`); on install, `scala_build.gd`'s `@SBT_PROJECT_DIR@`
+  is templated to the godot→sbt relative path, and it's enabled in `project.godot`
+  when that file has no `[editor_plugins]` section yet. It's install-if-absent
+  (per the addon dir), so user edits are never clobbered — delete the dir to
+  reinstall. The addon runs `sbt --client "~godotBuild"` and shows build status in
+  the editor (top-bar "Scala" group + "SBT Output" dock). The manifest is
+  GENERATED — don't hand-edit; tune it via the
   plugin settings `godotProjectDir` (Godot root — **mandatory, no default**;
   tasks fail with a clear message if unset), `godotLibName` (library base name),
   `godotManifestName`, `godotCompatibilityMinimum`. `godotEntrySelfTest` is

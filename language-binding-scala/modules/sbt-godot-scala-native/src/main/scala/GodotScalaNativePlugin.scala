@@ -190,7 +190,75 @@ object GodotScalaNativePlugin extends AutoPlugin {
       // where the binding reads it (relative to Godot's working dir).
       IO.write(godotLibDir / "reload.stamp", System.currentTimeMillis().toString)
 
+      // First-run convenience: drop the editor addon into the Godot project (only
+      // if it isn't already there, so user edits are never clobbered).
+      installAddon(godotDir, baseDirectory.value, streams.value.log)
+
       streams.value.log.info(s"[godot] swapped $targetName, manifest $manifest")
     }
   )
+
+  /**
+   * Install the bundled GDScript editor addon into `<godotDir>/addons/godot_scala`
+   * if it is not already present. The addon's `SBT_PROJECT_DIR` is templated to
+   * the path from the Godot project to the sbt project, and the addon is enabled
+   * in `project.godot` when that project has no `[editor_plugins]` section yet.
+   */
+  private def installAddon(
+    godotDir: File,
+    sbtProjectDir: File,
+    log: sbt.util.Logger
+  ): Unit = {
+    val addonDir = godotDir / "addons" / "godot_scala"
+    if (addonDir.exists) return // already installed / customized — leave it
+
+    def resource(name: String): String = {
+      val is = getClass.getResourceAsStream("/godot-addon/" + name)
+      if (is == null) sys.error(s"plugin resource /godot-addon/$name not found")
+      try scala.io.Source.fromInputStream(is, "UTF-8").mkString
+      finally is.close()
+    }
+
+    // Path from the Godot project to the sbt project (forward slashes for Godot).
+    val rel = godotDir.getCanonicalFile.toPath
+      .relativize(sbtProjectDir.getCanonicalFile.toPath)
+      .toString
+      .replace('\\', '/')
+
+    IO.createDirectory(addonDir)
+    IO.write(addonDir / "plugin.cfg", resource("plugin.cfg"))
+    IO.write(addonDir / "icon.svg", resource("icon.svg"))
+    IO.write(
+      addonDir / "scala_build.gd",
+      resource("scala_build.gd").replace("@SBT_PROJECT_DIR@", rel)
+    )
+    log.info(s"[godot] installed editor addon -> $addonDir (sbt project: $rel)")
+
+    // Best-effort enable in project.godot (only when there's no editor_plugins
+    // section yet — avoids risky merges into an existing PackedStringArray).
+    val proj  = godotDir / "project.godot"
+    val entry = "res://addons/godot_scala/plugin.cfg"
+    if (proj.exists) {
+      val content = IO.read(proj)
+      if (!content.contains(entry)) {
+        if (!content.contains("[editor_plugins]")) {
+          IO.write(
+            proj,
+            content.stripLineEnd +
+              s"""
+                 |
+                 |[editor_plugins]
+                 |
+                 |enabled=PackedStringArray("$entry")
+                 |""".stripMargin
+          )
+          log.info("[godot] enabled the addon in project.godot")
+        } else
+          log.warn(
+            "[godot] addon installed but not auto-enabled (existing " +
+              "[editor_plugins] section) — enable it in Project Settings > Plugins"
+          )
+      }
+    }
+  }
 }
