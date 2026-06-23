@@ -34,18 +34,23 @@ inThisBuild(
   )
 )
 
-// Stable, pinnable version for local `publishLocal`. Untagged dynver builds
-// otherwise embed a dirty-tree timestamp (e.g. `0.0.0+38-<sha>+<date>-SNAPSHOT`)
-// that changes constantly, which the sibling `harness-scala` — now a published-
-// artifact consumer (it applies `sbt-godot-scala-native` and depends on the
-// published `gdext`, no source ProjectRef) — cannot pin. Both `gdext` and the
-// sbt plugin publish under this version, and harness pins it in its plugins.sbt.
-//
-// NOTE: this overrides sbt-dynver. The repo is currently untagged (no releases),
-// so dynver only ever produced snapshots anyway. When cutting a real release,
-// guard this on CI/tag presence so sbt-ci-release derives the version from the
-// git tag instead.
-ThisBuild / version := "0.1.0-SNAPSHOT"
+// Version resolution:
+//   * On a clean release tag (e.g. `v0.1.0`), use the dynver-derived version
+//     verbatim (`0.1.0`, no `-SNAPSHOT`) so `sbt ci-release` cuts a real Maven
+//     Central release.
+//   * Otherwise (untagged / dirty local tree) pin a stable, predictable
+//     `0.1.0-SNAPSHOT`. Plain dynver would embed a dirty-tree timestamp
+//     (`0.0.0+38-<sha>+<date>-SNAPSHOT`) that changes constantly, which the
+//     sibling `harness-scala` — a published-artifact consumer (it applies
+//     `sbt-godot-scala-native` and depends on the published `gdext`, no source
+//     ProjectRef) — cannot pin in its plugins.sbt.
+// Both `gdext` and the sbt plugin publish under the resolved version.
+ThisBuild / version := {
+  dynverGitDescribeOutput.value match {
+    case Some(out) if out.isCleanAfterTag => out.version
+    case _                                => "0.1.0-SNAPSHOT"
+  }
+}
 
 // Aggregating root. It exists only to group the modules; it is never published
 // (only `gdext` and the sbt plugin are).

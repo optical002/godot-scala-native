@@ -1,8 +1,10 @@
 name: Release
 
-# Publishes the `gdext` artifact (io.github.optical002:scala-native-gdextension)
-# to Maven Central via the Sonatype Central Portal. Triggered by pushing a
-# semver tag like `v0.1.0`; sbt-dynver turns the tag into the artifact version.
+# Publishes both artifacts to Maven Central via the Sonatype Central Portal:
+#   * io.github.optical002:scala-native-gdextension  (the binding, `gdext`)
+#   * io.github.optical002:sbt-godot-scala-native     (the sbt plugin)
+# Triggered by pushing a semver tag like `v0.1.0`; sbt-dynver turns the tag into
+# the artifact version (a clean tag yields `0.1.0`, no `-SNAPSHOT`).
 # `workflow_dispatch` allows a manual run (which, untagged, publishes a SNAPSHOT).
 on:
   push:
@@ -26,8 +28,8 @@ jobs:
       - uses: sbt/setup-sbt@v1
 
       # ci-release: signs with the imported PGP key, derives the version from the
-      # git tag, and uploads to the Central Portal. Only `gdext` is published
-      # (root and igen set `publish / skip := true`).
+      # git tag, and uploads to the Central Portal. `gdext` and the sbt plugin are
+      # published; the root and `igen` set `publish / skip := true`.
       - name: Publish to Maven Central
         working-directory: language-binding-scala
         run: sbt ci-release
