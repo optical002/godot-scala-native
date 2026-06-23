@@ -125,6 +125,14 @@ lazy val sbtGodotPlugin =
       name := "sbt-godot-scala-native",
       // sbt 1.9.x runs on Scala 2.12.
       scalaVersion := "2.12.20",
+      // Publish with the fully cross-versioned artifact filename
+      // (`sbt-godot-scala-native_2.12_1.0-<ver>.jar`) so it matches the Maven
+      // coordinate path. The legacy (default) style names the file with the bare
+      // module name (`sbt-godot-scala-native-<ver>.jar`) while the path carries
+      // the `_2.12_1.0` suffix; Maven Central's Central Portal validator rejects
+      // that mismatch ("Filename ... is not valid"). Required to publish an sbt
+      // plugin to Central.
+      sbtPluginPublishLegacyMavenStyle := false,
       // Depend on sbt-scala-native so `ScalaNativePlugin` / `nativeConfig` /
       // `%%%` are available to compile this plugin and, transitively, to the
       // consuming build (no extra addSbtPlugin line downstream).
