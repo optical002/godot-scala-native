@@ -39,8 +39,16 @@ object GodotClass {
    * chain at every spliced use site.
    */
   def boundInstance(o: GodotObject): GodotScriptClass = {
-    val objectId = gdext.Godot.interface.object_get_instance_id(o.objectPtr).toLong
-    gdext.internal.register.ClassRegistry.instanceForObjectId(objectId)
+    // A null handle has no engine object to query — `object_get_instance_id`
+    // dereferences the handle, so calling it on null segfaults. This path is hit
+    // routinely: `DefaultValue.bareNodeDefault` wraps a null handle to build the
+    // "zero value" for a bare node/resource ctor param. Treat null as "no bound
+    // instance" so `wrap` falls back to the (null-host) fresh wrapper.
+    if (o.isNull) null
+    else {
+      val objectId = gdext.Godot.interface.object_get_instance_id(o.objectPtr).toLong
+      gdext.internal.register.ClassRegistry.instanceForObjectId(objectId)
+    }
   }
 
   /**
