@@ -18,6 +18,7 @@ object api {
   // ---- Everyday user-facing helpers (re-exported from their internal homes) --
   export gdext.GodotPrint
   export gdext.internal.engine.Gd
+  export gdext.internal.engine.InstanceId
   export gdext.internal.engine.{Tres, Tscn, Required}
   export gdext.internal.register.ExportHint
 

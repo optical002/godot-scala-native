@@ -1,6 +1,8 @@
 package gdext.internal.register
 
-import gdext.internal.engine.GodotObject
+import gdext.Godot
+import gdext.internal.engine.{Gd, GodotObject, InstanceId}
+import gdext.classes.InputEvent
 import gdext.internal.ffi.types.*
 
 /**
@@ -36,6 +38,13 @@ abstract class GodotScriptClass {
     this
   }
 
+  /** This object's stable Godot [[InstanceId]] (the null sentinel if unbound).
+    * Mirrors `Object.get_instance_id`, but typed — pass it to APIs that key off a
+    * node's identity. */
+  final def instanceId: InstanceId =
+    if (_hostObject == null) InstanceId.none
+    else InstanceId.fromI64(Godot.interface.object_get_instance_id(_hostObject).toLong)
+
   // --- overridable engine virtuals (no-op defaults) ---------------------
 
   /** Called when the node enters the scene tree and is ready. */
@@ -46,6 +55,23 @@ abstract class GodotScriptClass {
 
   /** Called every physics frame; `delta` is the fixed physics step. */
   def _physics_process(delta: Double): Unit = ()
+
+  // --- input virtuals (Node) --------------------------------------------
+  // Each receives the engine `InputEvent` as a `Gd[InputEvent]` (a borrowed
+  // handle wrapped with class evidence; the binding does not free it). Dispatch
+  // is wired in ClassRegistration alongside the other node virtuals.
+
+  /** Called for every unhandled-or-not input event (`Node._input`). */
+  def _input(event: Gd[InputEvent]): Unit = ()
+
+  /** Called for shortcut input before `_unhandled_input` (`Node._shortcut_input`). */
+  def _shortcut_input(event: Gd[InputEvent]): Unit = ()
+
+  /** Called for input not consumed by the UI (`Node._unhandled_input`). */
+  def _unhandled_input(event: Gd[InputEvent]): Unit = ()
+
+  /** Called for unhandled key input (`Node._unhandled_key_input`). */
+  def _unhandled_key_input(event: Gd[InputEvent]): Unit = ()
 
   // --- editor virtuals (EditorPlugin / EditorInspectorPlugin / EditorProperty)
   // No-op defaults; only the binding's editor classes override these. Dispatch

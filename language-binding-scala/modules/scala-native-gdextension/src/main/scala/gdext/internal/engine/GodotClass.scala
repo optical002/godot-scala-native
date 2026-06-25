@@ -29,6 +29,21 @@ object GodotClass {
   def apply[T](using gc: GodotClass[T]): GodotClass[T] = gc
 
   /**
+   * The canonical Scala instance already bound to engine object `o` (the one
+   * Godot created and drives the virtuals on), or `null` if none is bound.
+   *
+   * Used by the derived `wrap` to preserve instance identity: fetching a
+   * user node through `Gd[T]` must return that same object, not a fresh wrapper
+   * with re-initialized fields. Kept as a plain method (not inlined into the
+   * `wrap` quote) so the Scala Native NIR generator never has to lower this call
+   * chain at every spliced use site.
+   */
+  def boundInstance(o: GodotObject): GodotScriptClass = {
+    val objectId = gdext.Godot.interface.object_get_instance_id(o.objectPtr).toLong
+    gdext.internal.register.ClassRegistry.instanceForObjectId(objectId)
+  }
+
+  /**
    * Auto-derive a `GodotClass[T]` for any user class in the engine hierarchy
    * (`T <: GodotScriptClass`). The Godot class name is `T`'s simple name (matching
    * how registration names it), ref-counting is read from the type, and `wrap`
@@ -72,8 +87,19 @@ object GodotClass {
       new GodotClass[T] {
         def className: String = $name
         def isRefCounted: Boolean = $isRc
-        def wrap(o: GodotObject): T =
-          $fresh.withHost(o.objectPtr).asInstanceOf[T]
+        def wrap(o: GodotObject): T = {
+          // Identity preservation: if this engine object already has a canonical
+          // Scala instance bound to it (one Godot created and drives the virtuals
+          // on), return THAT instance rather than a fresh wrapper. A fresh wrapper
+          // would re-run the class's field initializers, giving a second object
+          // whose state diverges from the one being processed. Only fall back to a
+          // fresh wrapper for objects with no bound Scala instance (pure engine
+          // objects). The lookup lives in `GodotClass.boundInstance` (a plain
+          // method) so this spliced body stays a single flat call.
+          val bound = GodotClass.boundInstance(o)
+          if (bound != null) bound.asInstanceOf[T]
+          else $fresh.withHost(o.objectPtr).asInstanceOf[T]
+        }
         def unwrap(t: T): GodotObject = t.hostObject
       }
     }

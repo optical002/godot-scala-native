@@ -109,14 +109,49 @@ object GodotScalaNativePlugin extends AutoPlugin {
     // `@exported(godotEntrySymbol)` GDExtension entry point that calls
     // `registerAll()` once). No entry code is hand-written. The output is a
     // managed source under target/ — never committed, never hand-edited.
+    // Resolve `sources`-classified artifacts too, so godot-library dependencies'
+    // published sources are available to the auto-registration scan below.
+    transitiveClassifiers := Seq("sources"),
+
     Compile / sourceGenerators += Def.task {
+      val log    = streams.value.log
       val srcDir = (Compile / scalaSource).value
+      val cpFiles = (Compile / dependencyClasspath).value.files
       // Engine base-class names come from the binding's `engine-classes.txt`
       // resource on the classpath — no path into the binding's sources.
-      val engineNames =
-        RegistrationScan.engineNamesFromClasspath(
-          (Compile / dependencyClasspath).value.files
-        )
+      val engineNames = RegistrationScan.engineNamesFromClasspath(cpFiles)
+
+      // Godot-library auto-registration: a dependency that packages the marker
+      // resource (RegistrationScan.GodotLibraryMarker) in its MAIN jar opts its
+      // nodes into the scan. We detect those marker-carrying MAIN jars on the
+      // dependency classpath, then pull the matching `-sources.jar` (resolved via
+      // updateClassifiers' `sources` classifier; its module reports carry ONLY
+      // the sources artifact, so we correlate by filename stem) and parse the
+      // `.scala` inside. The binding jar carries no marker, so its engine classes
+      // are never scanned. Consumers add only a normal `libraryDependencies` line.
+      val libraryStems: Set[String] =
+        cpFiles.iterator
+          .filter(RegistrationScan.isGodotLibraryArtifact)
+          .map(f => f.getName.stripSuffix(".jar"))
+          .toSet
+      val librarySources: Seq[(String, String)] =
+        if (libraryStems.isEmpty) Seq.empty
+        else
+          updateClassifiers.value.configurations.iterator
+            .flatMap(_.modules.iterator)
+            .flatMap(_.artifacts.iterator.map(_._2))
+            .filter { f =>
+              val n = f.getName
+              n.endsWith("-sources.jar") &&
+              libraryStems.contains(n.stripSuffix("-sources.jar"))
+            }
+            .toVector
+            .distinct
+            .flatMap { srcJar =>
+              log.info(s"[auto-register] godot-library sources: ${srcJar.getName}")
+              RegistrationScan.scalaSourcesFromJar(srcJar)
+            }
+
       val outFile =
         (Compile / sourceManaged).value / "game" / "GeneratedRegistrations.scala"
       IO.write(
@@ -124,7 +159,8 @@ object GodotScalaNativePlugin extends AutoPlugin {
         RegistrationScan.generate(
           srcDir,
           engineNames,
-          godotEntrySelfTest.value
+          godotEntrySelfTest.value,
+          librarySources
         )
       )
       streams.value.log.info(s"[auto-register] generated $outFile")

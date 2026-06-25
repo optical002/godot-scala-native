@@ -1,8 +1,10 @@
 package godotscala
 
 import java.io.File
+import java.util.zip.ZipFile
 import sbt.io.IO
 import scala.meta._
+import scala.collection.JavaConverters._
 
 /**
  * Build-time discovery of the game's Godot classes.
@@ -41,6 +43,52 @@ object RegistrationScan {
     * engine base-class name, one per line. See the `engine-classes.txt`
     * resourceGenerator in language-binding-scala/build.sbt. */
   val EngineClassesResource = "gdext/engine-classes.txt"
+
+  /**
+   * Marker resource a downstream "godot library" jar packages into its MAIN
+   * artifact to opt its node classes into auto-registration. A consuming game
+   * project lists such a library only in `libraryDependencies` (no extra
+   * setting); the plugin detects the marker on the dependency classpath, then
+   * resolves the library's `-sources.jar` and merges its `.scala` sources into
+   * the scan — so library nodes register exactly like local game classes, with
+   * no consumer-side code. The binding jar itself does NOT carry this marker, so
+   * its engine classes are never scanned as registerable. A library declares it
+   * with a tiny resourceGenerator (see ../utilities/build.sbt).
+   */
+  val GodotLibraryMarker = "gdext/godot-library.txt"
+
+  /** True if `jar` is a godot-library main artifact (carries
+    * [[GodotLibraryMarker]]). Directory classpath entries (source ProjectRefs)
+    * are checked too, for symmetry. */
+  def isGodotLibraryArtifact(entry: File): Boolean =
+    if (!entry.exists) false
+    else if (entry.isDirectory) new File(entry, GodotLibraryMarker).exists
+    else
+      try {
+        val zf = new ZipFile(entry)
+        try zf.getEntry(GodotLibraryMarker) != null
+        finally zf.close()
+      } catch { case _: Throwable => false }
+
+  /** Extract `(virtualPath -> content)` for every `.scala` entry in a sources
+    * jar. Used to feed a godot-library's published sources into the scan. */
+  def scalaSourcesFromJar(jar: File): Seq[(String, String)] =
+    if (!jar.exists || jar.isDirectory) Seq.empty
+    else {
+      val zf = new ZipFile(jar)
+      try
+        zf.entries.asScala
+          .filter(e => !e.isDirectory && e.getName.endsWith(".scala"))
+          .map { e =>
+            val is = zf.getInputStream(e)
+            try {
+              val content = scala.io.Source.fromInputStream(is, "UTF-8").mkString
+              (e.getName, content)
+            } finally is.close()
+          }
+          .toVector
+      finally zf.close()
+    }
 
   /**
    * The C symbol Godot loads as the GDExtension `entry_symbol`. Hardcoded (not a
@@ -82,14 +130,26 @@ object RegistrationScan {
    *                      (see [[engineNamesFromClasspath]])
    * @param selfTest      whether the generated entry runs the binding's internal
    *                      self-tests once at SCENE init
+   * @param librarySources `(virtualPath -> content)` pairs from godot-library
+   *                      dependencies' source jars (see [[scalaSourcesFromJar]]).
+   *                      Their concrete nodes are scanned and registered exactly
+   *                      like local game classes — that is what makes a published
+   *                      library's nodes auto-register with no consumer code.
    */
   def generate(
     harnessSrcDir: File,
     engineNames: Set[String],
-    selfTest: Boolean
+    selfTest: Boolean,
+    librarySources: Seq[(String, String)] = Seq.empty
   ): String = {
+    // Local game sources + every godot-library dependency's published sources,
+    // as uniform (path, content) units so both feed the same scan/fingerprint.
+    val localUnits: Seq[(String, String)] =
+      allScalaFiles(harnessSrcDir).map(f => (f.getAbsolutePath, IO.read(f)))
+    val allUnits: Seq[(String, String)] = localUnits ++ librarySources
+
     val classes: Seq[ClassInfo] =
-      allScalaFiles(harnessSrcDir).flatMap(parseFile)
+      allUnits.flatMap { case (path, content) => parseSource(path, content) }
     val byName: Map[String, ClassInfo] = classes.map(c => c.name -> c).toMap
 
     def reachesEngine(name: String, seen: Set[String]): Boolean =
@@ -143,9 +203,11 @@ object RegistrationScan {
     // recompiles exactly when a registered class might have changed shape.)
     val srcFingerprint = {
       val md = java.security.MessageDigest.getInstance("MD5")
-      allScalaFiles(harnessSrcDir)
-        .sortBy(_.getAbsolutePath)
-        .foreach(f => md.update(IO.read(f).getBytes("UTF-8")))
+      // Include library sources too: bumping a godot-library version changes its
+      // node shapes, which must re-expand the `Register.auto[T]` macros here.
+      allUnits
+        .sortBy(_._1)
+        .foreach { case (_, content) => md.update(content.getBytes("UTF-8")) }
       md.digest().map("%02x".format(_)).mkString
     }
 
@@ -211,13 +273,13 @@ object RegistrationScan {
         entries.filter(_.isDirectory).flatMap(allScalaFiles)
     }
 
-  private def parseFile(f: File): Seq[ClassInfo] = {
-    val input = Input.VirtualFile(f.getAbsolutePath, IO.read(f))
+  private def parseSource(path: String, content: String): Seq[ClassInfo] = {
+    val input = Input.VirtualFile(path, content)
     dialects.Scala3(input).parse[Source] match {
       case Parsed.Success(src) => collectClasses(src, "")
       case Parsed.Error(_, msg, _) =>
         System.err.println(
-          s"[auto-register] could not parse ${f.getName}, skipping: $msg"
+          s"[auto-register] could not parse $path, skipping: $msg"
         )
         Seq.empty
     }

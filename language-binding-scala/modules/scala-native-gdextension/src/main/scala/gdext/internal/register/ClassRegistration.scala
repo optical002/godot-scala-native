@@ -5,6 +5,7 @@ import scala.scalanative.unsigned.*
 import scala.scalanative.libc.stdlib
 import gdext.Godot
 import gdext.builtin.StringNames
+import gdext.internal.engine.Gd
 import gdext.internal.ffi.types.*
 
 /**
@@ -155,7 +156,8 @@ object ClassRegistration {
     gdext.Log.trace(s"bind: ${desc.className} factory() begin")
     val scala = desc.factory()
     scala.setHostObject(obj)
-    val instanceToken = ClassRegistry.addInstance(scala)
+    val objectId = Godot.interface.object_get_instance_id(obj).toLong
+    val instanceToken = ClassRegistry.addInstance(scala, objectId)
     gdext.Log.trace(
       s"bind: ${desc.className} instanceToken=$instanceToken object_set_instance begin"
     )
@@ -229,6 +231,10 @@ object ClassRegistration {
             case "_ready"           => readyDispatch
             case "_enter_tree"      => enterTreeDispatch
             case "_exit_tree"       => exitTreeDispatch
+            case "_input"           => inputDispatch
+            case "_shortcut_input"  => shortcutInputDispatch
+            case "_unhandled_input" => unhandledInputDispatch
+            case "_unhandled_key_input" => unhandledKeyInputDispatch
             case "_update_property" => updatePropertyDispatch
             case "_can_handle"      => canHandleDispatch
             case "_parse_property"  => parsePropertyDispatch
@@ -264,6 +270,39 @@ object ClassRegistration {
       val scala = ClassRegistry.instanceFor(tok)
       gdext.Log.trace(s"_ready: token=$tok scala=${if (scala == null) "null" else scala.getClass.getSimpleName}")
       if (scala != null) scala._ready()
+    }
+
+  // --- input virtual dispatchers -----------------------------------------
+  // All four share the same shape: arg0 is the InputEvent object handle. We wrap
+  // it as a borrowed `Gd[InputEvent]` (no ownership taken — the engine owns the
+  // event for the duration of the callback) and forward to the Scala override.
+  private def inputEventArg(args: Ptr[GDExtensionConstTypePtr]): Gd[gdext.classes.InputEvent] = {
+    val objPtr = !args(0).asInstanceOf[Ptr[GDExtensionObjectPtr]]
+    Gd.fromHandle[gdext.classes.InputEvent](objPtr)
+  }
+
+  private val inputDispatch: GDExtensionClassCallVirtual =
+    (instance: GDExtensionClassInstancePtr, args: Ptr[GDExtensionConstTypePtr], _ret: GDExtensionTypePtr) => {
+      val scala = ClassRegistry.instanceFor(Tokens.fromPtr(instance))
+      if (scala != null) scala._input(inputEventArg(args))
+    }
+
+  private val shortcutInputDispatch: GDExtensionClassCallVirtual =
+    (instance: GDExtensionClassInstancePtr, args: Ptr[GDExtensionConstTypePtr], _ret: GDExtensionTypePtr) => {
+      val scala = ClassRegistry.instanceFor(Tokens.fromPtr(instance))
+      if (scala != null) scala._shortcut_input(inputEventArg(args))
+    }
+
+  private val unhandledInputDispatch: GDExtensionClassCallVirtual =
+    (instance: GDExtensionClassInstancePtr, args: Ptr[GDExtensionConstTypePtr], _ret: GDExtensionTypePtr) => {
+      val scala = ClassRegistry.instanceFor(Tokens.fromPtr(instance))
+      if (scala != null) scala._unhandled_input(inputEventArg(args))
+    }
+
+  private val unhandledKeyInputDispatch: GDExtensionClassCallVirtual =
+    (instance: GDExtensionClassInstancePtr, args: Ptr[GDExtensionConstTypePtr], _ret: GDExtensionTypePtr) => {
+      val scala = ClassRegistry.instanceFor(Tokens.fromPtr(instance))
+      if (scala != null) scala._unhandled_key_input(inputEventArg(args))
     }
 
   // --- editor virtual dispatchers ----------------------------------------

@@ -25,7 +25,8 @@ object Register {
   private val knownVirtuals = List(
     "_ready", "_process", "_physics_process",
     "_enter_tree", "_exit_tree", "_update_property",
-    "_can_handle", "_parse_property"
+    "_can_handle", "_parse_property",
+    "_input", "_shortcut_input", "_unhandled_input", "_unhandled_key_input"
   )
 
   // No `<: GodotScriptClass` bound: the macro is invoked from the generated

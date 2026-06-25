@@ -26,6 +26,16 @@ object ClassRegistry {
   private val classIds = new AtomicLong(1L)
   private val instanceIds = new AtomicLong(1L)
 
+  // Secondary index: Godot object instance id -> the canonical Scala instance
+  // bound to it, plus instance token -> object id so free can evict both. This
+  // lets `GodotClass.wrap` return the SAME Scala object Godot drives the virtuals
+  // on (the one stored via `object_set_instance`) instead of a fresh wrapper with
+  // its own field state. Without it, fetching a user node through `Gd[T]` (e.g. an
+  // exported-node field) yields a second Scala object whose state diverges from
+  // the processed one.
+  private val instancesByObjectId = new ConcurrentHashMap[Long, GodotScriptClass]()
+  private val objectIdByToken = new ConcurrentHashMap[Long, java.lang.Long]()
+
   // Class name -> its token, so re-registration of the same class (e.g. on a
   // hot-reload) reuses the existing entry instead of duplicating it.
   private val classTokensByName = new ConcurrentHashMap[String, Long]()
@@ -70,19 +80,36 @@ object ClassRegistry {
     classTokensByName.clear()
   }
 
-  def addInstance(obj: GodotScriptClass): Long = {
+  /**
+   * Register a freshly-bound Scala instance. `objectId` is the Godot instance id
+   * of the engine object it is bound to (0 if unknown), used to index the
+   * instance so [[instanceForObjectId]] can recover this exact object when the
+   * same engine node is later fetched through `Gd[T]`.
+   */
+  def addInstance(obj: GodotScriptClass, objectId: Long): Long = {
     val id = instanceIds.getAndIncrement()
     instances.put(id, obj)
+    if (objectId != 0L) {
+      instancesByObjectId.put(objectId, obj)
+      objectIdByToken.put(id, objectId)
+    }
     gdext.Log.trace(
-      s"ClassRegistry.addInstance: token $id = ${obj.getClass.getSimpleName} (live=${instances.size})"
+      s"ClassRegistry.addInstance: token $id (objectId=$objectId) = ${obj.getClass.getSimpleName} (live=${instances.size})"
     )
     id
   }
 
   def instanceFor(token: Long): GodotScriptClass = instances.get(token)
 
+  /** The canonical Scala instance bound to the engine object with this instance
+    * id, or null if none is bound (e.g. a pure engine object). */
+  def instanceForObjectId(objectId: Long): GodotScriptClass =
+    instancesByObjectId.get(objectId)
+
   def removeInstance(token: Long): GodotScriptClass = {
     val r = instances.remove(token)
+    val objectId: java.lang.Long = objectIdByToken.remove(token)
+    if (objectId != null) instancesByObjectId.remove(objectId.longValue)
     gdext.Log.trace(
       s"ClassRegistry.removeInstance: token $token = ${if (r == null) "null" else r.getClass.getSimpleName} (live=${instances.size})"
     )

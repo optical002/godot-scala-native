@@ -34,21 +34,10 @@ inThisBuild(
   )
 )
 
-// Version resolution:
-//   * On a clean release tag (e.g. `v0.1.0`), use the dynver-derived version
-//     verbatim (`0.1.0`, no `-SNAPSHOT`) so `sbt ci-release` cuts a real Maven
-//     Central release.
-//   * Otherwise (untagged / dirty local tree) pin a stable, predictable
-//     `0.1.0-SNAPSHOT`. Plain dynver would embed a dirty-tree timestamp
-//     (`0.0.0+38-<sha>+<date>-SNAPSHOT`) that changes constantly, which the
-//     sibling `harness-scala` — a published-artifact consumer (it applies
-//     `sbt-godot-scala-native` and depends on the published `gdext`, no source
-//     ProjectRef) — cannot pin in its plugins.sbt.
-// Both `gdext` and the sbt plugin publish under the resolved version.
 ThisBuild / version := {
   dynverGitDescribeOutput.value match {
     case Some(out) if out.isCleanAfterTag => out.version
-    case _                                => "0.1.0-SNAPSHOT"
+    case _                                => "0.1.1-SNAPSHOT"
   }
 }
 

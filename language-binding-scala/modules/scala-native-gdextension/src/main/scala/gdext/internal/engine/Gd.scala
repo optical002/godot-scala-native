@@ -43,6 +43,12 @@ final class Gd[T] private (
     if (isNull) 0L
     else Godot.interface.object_get_instance_id(handle).toLong
 
+  /** Godot's stable instance id as a typed [[InstanceId]] (null sentinel if
+    * null). Prefer this over [[instanceId]] when handing the id to identity-keyed
+    * APIs. */
+  def instanceIdTyped: InstanceId =
+    if (isNull) InstanceId.none else InstanceId.fromI64(instanceId)
+
   /**
    * Free a manually-managed object via `object_destroy`. No-op (with a warning
    * path later) for reference-counted objects — use [[unref]] for those.
