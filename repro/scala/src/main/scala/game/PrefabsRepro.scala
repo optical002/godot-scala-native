@@ -17,7 +17,7 @@ import gdext.internal.engine.Gd
   * In survivor-game `scenes` came back null there; this isolates whether the
   * cause is object-valued dicts and/or access through a `Tres`/`Gd` handle. */
 final class PrefabsRepro(
-  var scenes: Dict[String, Tres[PackedScene]] = Dict.empty
+  var scenes: Dict[String, Tres[PackedScene]]
 ) extends Resource:
 
   /** -1 if the Scala field is null (the bug), else its size. Read directly on

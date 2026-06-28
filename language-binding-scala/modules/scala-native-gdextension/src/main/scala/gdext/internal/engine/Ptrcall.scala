@@ -79,14 +79,22 @@ object PtrArg {
   }
 
   /**
-   * StringName arguments: the buffer holds the 8-byte interned handle. Callers
-   * typically pass a cached handle (`StringNames.cached(...)`); the handle is
-   * borrowed for the duration of the call (no copy, no destroy).
+   * StringName arguments: ptrcall expects `args[i]` to point at the StringName's
+   * 8-byte opaque storage. A cached [[StringName]] (`v.ptr`) already points at
+   * that storage, so we copy its 8 handle bytes into the call buffer `b` (the
+   * same shape as [[PtrArg]] for `String`, which writes the handle into `b`).
+   *
+   * NB: writing the *pointer* `v.ptr` here instead would add one level of
+   * indirection — the engine would then read the storage address as if it were
+   * the StringName's internal data and crash.
    */
   given PtrArg[StringName] with {
     def size = BuiltinSizes.StringName
-    def write(v: StringName, b: Ptr[Byte]) =
-      !b.asInstanceOf[Ptr[GDExtensionStringNamePtr]] = v.ptr
+    def write(v: StringName, b: Ptr[Byte]) = {
+      val src = v.ptr.asInstanceOf[Ptr[Byte]]
+      var i = 0
+      while (i < BuiltinSizes.StringName) { b(i) = src(i); i += 1 }
+    }
   }
 
   /**
@@ -229,8 +237,19 @@ object PtrRet {
    */
   given PtrRet[StringName] with {
     def size = BuiltinSizes.StringName
-    def read(b: Ptr[Byte]) =
-      StringName.fromPtr(!b.asInstanceOf[Ptr[GDExtensionStringNamePtr]])
+    def read(b: Ptr[Byte]) = {
+      // The engine wrote the StringName's 8-byte handle INTO `b` (the return
+      // buffer), so the handle storage is `b` itself — not `*b`. `b` is a
+      // stack buffer that dies when the call returns, so copy the handle into
+      // stable malloc storage and wrap that (mirrors PtrRet[Variant]). The
+      // matching arg side copies handle bytes too (see PtrArg[StringName]).
+      val dest = scala.scalanative.libc.stdlib
+        .malloc(BuiltinSizes.StringName.toCSize)
+        .asInstanceOf[Ptr[Byte]]
+      var i = 0
+      while (i < BuiltinSizes.StringName) { dest(i) = b(i); i += 1 }
+      StringName.fromPtr(dest.asInstanceOf[GDExtensionStringNamePtr])
+    }
   }
 
   // Fixed-layout math builtins (see MathBuiltins.scala / Vector2 / Color).

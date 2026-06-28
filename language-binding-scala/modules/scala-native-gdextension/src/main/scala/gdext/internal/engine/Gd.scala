@@ -63,6 +63,24 @@ final class Gd[T] private (
       Gd.callRefMethod(handle, "unreference")
 
   /**
+   * Take one strong reference on a reference-counted object, keeping it alive
+   * for as long as this `Gd[T]` is held. No-op for manually-managed objects
+   * (nodes), which are not refcounted.
+   *
+   * This is what makes a long-lived `Gd[T]`/`Tres[T]` over a Resource behave
+   * like gdext's `Gd<T>`: holding the smart pointer holds a reference. The
+   * binding calls this when a Resource handle is read out of an OBJECT Variant
+   * to be stored in an export field — otherwise, once Godot drops the loader's
+   * temporary reference, the resource's refcount hits zero and it is freed,
+   * leaving the export pointing at a dangling/reused handle.
+   */
+  def reference(): Gd[T] = {
+    if (!isNull && cls.isRefCounted)
+      Gd.callRefMethod(handle, "reference")
+    this
+  }
+
+  /**
    * Cast to a (super- or sub-) class `U`. Returns a null `Gd[U]` if the object
    * is not actually a `U`. Uses `object_cast_to` with `U`'s class tag.
    */

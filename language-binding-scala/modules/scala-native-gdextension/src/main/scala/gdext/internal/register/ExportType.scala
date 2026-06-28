@@ -188,14 +188,20 @@ object RefLeaf {
       def hint = PropertyHint.ResourceType
       def className = cls.className
       def handleOf(a: T) = cls.unwrap(a).objectPtr
-      def fromHandle(p: GDExtensionObjectPtr) = cls.wrap(GodotObject.fromPtr(p))
+      // Take a reference: this handle is stored in an export field, so it must
+      // outlive Godot's temporary loader reference (see Gd.reference).
+      def fromHandle(p: GDExtensionObjectPtr) = {
+        Gd.fromHandle[T](p).reference()
+        cls.wrap(GodotObject.fromPtr(p))
+      }
     }
 
   given gdLeaf[T](using cls: GodotClass[T]): RefLeaf[Gd[T]] = new RefLeaf[Gd[T]] {
     def hint = PropertyHint.NodeType
     def className = cls.className
     def handleOf(a: Gd[T]) = a.objectPtr
-    def fromHandle(p: GDExtensionObjectPtr) = Gd.fromHandle[T](p)
+    // Reference (no-op for nodes) so a Gd[T] over a Resource keeps it alive.
+    def fromHandle(p: GDExtensionObjectPtr) = Gd.fromHandle[T](p).reference()
   }
 
   given tresLeaf[T](using cls: GodotClass[T]): RefLeaf[Tres[T]] =
@@ -203,7 +209,9 @@ object RefLeaf {
       def hint = PropertyHint.ResourceType
       def className = cls.className
       def handleOf(a: Tres[T]) = a.raw.objectPtr
-      def fromHandle(p: GDExtensionObjectPtr) = Tres(Gd.fromHandle[T](p))
+      // Reference: the Tres is stored in an export field and must keep the
+      // Resource alive past Godot's temporary loader reference.
+      def fromHandle(p: GDExtensionObjectPtr) = Tres(Gd.fromHandle[T](p).reference())
     }
 
   given tscnLeaf[T](using
