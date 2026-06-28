@@ -1,0 +1,10 @@
+[gd_resource type="PrefabsRepro" format=3 uid="uid://cprefabsrepro01"]
+
+[ext_resource type="PackedScene" uid="uid://dummya0001" path="res://dummy_a.tscn" id="1_a"]
+[ext_resource type="PackedScene" uid="uid://dummyb0001" path="res://dummy_b.tscn" id="2_b"]
+
+[resource]
+scenes = Dictionary[String, PackedScene]({
+"alpha": ExtResource("1_a"),
+"beta": ExtResource("2_b")
+})

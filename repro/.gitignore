@@ -1,0 +1,11 @@
+target/
+project/target/
+project/project/
+.bloop/
+.bsp/
+.metals/
+godot/.godot/
+godot/.scala/
+godot/addons/
+godot/scala.gdextension
+godot/scala.gdextension.uid

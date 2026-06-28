@@ -1,0 +1,10 @@
+config_version=5
+
+[application]
+
+config/name="repro"
+config/features=PackedStringArray("4.6", "Forward Plus")
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_scala/plugin.cfg")

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://creaderscene01"]
+
+[ext_resource type="PrefabsRepro" uid="uid://cprefabsrepro01" path="res://prefabs_repro.tres" id="1_p"]
+
+[node name="PrefabsReader" type="PrefabsReader"]
+prefabs = ExtResource("1_p")
+prefabs_gd = ExtResource("1_p")
