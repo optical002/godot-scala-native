@@ -35,6 +35,27 @@ extension (self: Object)
       property
     )
 
+  /** `Object.connect(signal, callable, flags)` — connect a built-in (or
+    * `@signal`) signal to a `Callable` (typically `Callable(self, "method")`).
+    * Returns the engine `Error` code as a `Long`. The generator skips it
+    * (Callable arg). */
+  def connect(signal: StringName, callable: gdext.builtin.Callable, flags: Long): Long =
+    Ptrcall.call3[StringName, gdext.builtin.Callable, Long, Long](
+      MethodBind.get("Object", "connect", 1518946055L),
+      self.hostObject.objectPtr,
+      signal,
+      callable,
+      flags
+    )
+
+  /** Connect `signal` on this object to `target.method` (a registered `@func`).
+    * Builds the `Callable(target, method)` and connects it. */
+  def connectMethod(signal: StringName, target: Object, method: StringName): Long = {
+    val buf = stackalloc[Byte](gdext.builtin.BuiltinSizes.Callable.toUInt)
+    val callable = gdext.builtin.Callable.of(target.hostObject.objectPtr, method, buf)
+    self.connect(signal, callable, 0L)
+  }
+
 extension (self: Area3D)
   /** `Area3D.get_overlapping_bodies()` — returns the `PhysicsBody3D`s currently
     * overlapping this area (as `Arr[Gd[Node3D]]`). The generator skips it (typed
