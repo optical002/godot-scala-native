@@ -39,8 +39,14 @@ object GodotClass {
    * chain at every spliced use site.
    */
   def boundInstance(o: GodotObject): GodotScriptClass = {
-    val objectId = gdext.Godot.interface.object_get_instance_id(o.objectPtr).toLong
-    gdext.internal.register.ClassRegistry.instanceForObjectId(objectId)
+    // A null handle has no bound instance — and `object_get_instance_id(null)`
+    // would crash. This path is hit when wrapping a null object, e.g. building
+    // the default value for a bare `var x: NodeType` export (DefaultValue).
+    if (o.isNull) null
+    else {
+      val objectId = gdext.Godot.interface.object_get_instance_id(o.objectPtr).toLong
+      gdext.internal.register.ClassRegistry.instanceForObjectId(objectId)
+    }
   }
 
   /**

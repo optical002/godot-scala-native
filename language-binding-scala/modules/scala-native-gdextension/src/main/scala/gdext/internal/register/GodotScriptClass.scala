@@ -103,3 +103,13 @@ abstract class GodotScriptClass {
   /** EditorProperty: refresh the widget from the edited property's value. */
   def _update_property(): Unit = ()
 }
+
+object GodotScriptClass {
+  import gdext.internal.engine.{Gd, GodotClass}
+
+  extension [A <: GodotScriptClass](self: A)
+    /** A `Gd[A]` over this instance's own engine handle — the typed smart pointer
+      * to `this`. Sugar for `Gd.from(self)`; use inside a custom node's methods
+      * instead of `Gd.fromHandle[A](self.hostObject.objectPtr)`. */
+    def asHandle(using GodotClass[A]): Gd[A] = Gd.from(self)
+}

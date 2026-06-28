@@ -74,6 +74,21 @@ final class Tscn[T] private[engine] (val raw: Gd[PackedScene])(using
   def instantiate(): Gd[T] =
     if (raw.isNull) Gd.nullOf[T]
     else Gd.fromHandle[T](raw.get.instantiate(0L).objectPtr).cast[T]
+
+  /**
+   * Instantiate the scene and add its root as a child of `parent`, returning the
+   * root as `Gd[T]`. Mirrors gdext's `instantiate_as_child`. `T` must be a node
+   * type (so its root can be parented); a null parent or unassigned scene yields
+   * a null `Gd[T]`.
+   */
+  def instantiate(parent: Gd[gdext.classes.Node])(using
+    GodotClass[gdext.classes.Node]
+  ): Gd[T] = {
+    val child = instantiate()
+    if (!child.isNull && !parent.isNull)
+      parent.get.addChild(child.cast[gdext.classes.Node].get, false, 0L)
+    child
+  }
 }
 object Tscn {
   def apply[T](packed: Gd[PackedScene])(using GodotClass[T]): Tscn[T] =

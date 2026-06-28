@@ -101,12 +101,39 @@ final class Gd[T] private (
 
 object Gd {
   import gdext.builtin.{ToVariant, FromVariant}
+  import gdext.internal.register.GodotScriptClass
 
   /** Wrap a raw handle with explicit class evidence (no ownership change). */
   def fromHandle[T](
     handle: GDExtensionObjectPtr
   )(using cls: GodotClass[T]): Gd[T] =
     new Gd[T](handle, cls)
+
+  /** A `Gd[A]` for a live registered instance `a` (the Scala object Godot is
+    * driving), wrapping its own engine handle. Lets a method on a custom node
+    * get a smart pointer to itself without `Gd.fromHandle[A](hostObject…)`
+    * boilerplate: `Gd.from(this)`. */
+  def from[A <: GodotScriptClass](a: A)(using cls: GodotClass[A]): Gd[A] =
+    new Gd[A](a.hostObject.objectPtr, cls)
+
+  /** Construct a fresh node of class `T` and add it as a child of `parent`,
+    * returning it. Convenience over `newInstance` + `parent.addChild`. */
+  def create[T](parent: Gd[gdext.classes.Node])(using
+    cls: GodotClass[T],
+    node: GodotClass[gdext.classes.Node]
+  ): Gd[T] = {
+    val child = newInstance[T]
+    if (!child.isNull && !parent.isNull)
+      parent.get.addChild(child.cast[gdext.classes.Node].get, false, 0L)
+    child
+  }
+
+  /** Add `child` (any node-kind `Gd[T]`) under this node. */
+  extension [T](self: Gd[T])
+    def addChild(child: Gd[?])(using GodotClass[gdext.classes.Node]): Unit =
+      if (!self.isNull && !child.isNull)
+        self.cast[gdext.classes.Node].get.addChild(
+          child.cast[gdext.classes.Node].get, false, 0L)
 
   /**
    * OBJECT-Variant marshalling for a live object reference, so a `Gd[T]` can be
