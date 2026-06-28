@@ -55,6 +55,23 @@ object Arr {
     new Arr(buf)
   }
 
+  /**
+   * Wrap an Array handle the engine wrote into `src` (e.g. a ptrcall return
+   * buffer) by copying its 8 bytes into heap storage, so the resulting `Arr`
+   * outlives the caller's buffer. Used by hand-written engine wrappers that
+   * return a typed Array (which the generator skips).
+   */
+  def fromHandle[A](src: GDExtensionTypePtr)(using ToVariant[A], FromVariant[A]): Arr[A] = {
+    val buf = stdlib
+      .malloc(BuiltinSizes.Array.toCSize)
+      .asInstanceOf[GDExtensionTypePtr]
+    val s = src.asInstanceOf[scala.scalanative.unsafe.Ptr[Byte]]
+    val d = buf.asInstanceOf[scala.scalanative.unsafe.Ptr[Byte]]
+    var i = 0
+    while (i < BuiltinSizes.Array) { d(i) = s(i); i += 1 }
+    new Arr(buf)
+  }
+
   given toVariant[A]: ToVariant[Arr[A]] =
     (value: Arr[A], dest: GDExtensionVariantPtr) =>
       VariantConstructors

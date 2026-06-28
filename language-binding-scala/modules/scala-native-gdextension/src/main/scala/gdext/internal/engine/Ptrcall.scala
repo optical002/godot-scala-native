@@ -159,6 +159,20 @@ object PtrArg {
     def size = BuiltinSizes.Projection
     def write(v: Projection, b: Ptr[Byte]) = Projection.writeType(v, b)
   }
+
+  /**
+   * Variant arguments: the ptrcall buffer is the 24-byte Variant storage. We
+   * copy the caller's Variant bytes into the call buffer; the caller still owns
+   * (and must destroy) the source Variant.
+   */
+  given PtrArg[Variant] with {
+    def size = BuiltinSizes.Variant
+    def write(v: Variant, b: Ptr[Byte]) = {
+      val src = v.ptr.asInstanceOf[Ptr[Byte]]
+      var i = 0
+      while (i < BuiltinSizes.Variant) { b(i) = src(i); i += 1 }
+    }
+  }
 }
 
 object PtrRet {
@@ -275,6 +289,24 @@ object PtrRet {
   given PtrRet[Projection] with {
     def size = BuiltinSizes.Projection
     def read(b: Ptr[Byte]) = Projection.readType(b)
+  }
+
+  /**
+   * Variant returns: the ptrcall buffer holds the 24-byte Variant the engine
+   * wrote. We copy it into heap storage so the returned [[Variant]] outlives the
+   * call's stack buffer; the caller is responsible for [[Variant.destroy]] when
+   * done (it may hold a ref-counted payload).
+   */
+  given PtrRet[Variant] with {
+    def size = BuiltinSizes.Variant
+    def read(b: Ptr[Byte]) = {
+      val dest = scala.scalanative.libc.stdlib
+        .malloc(BuiltinSizes.Variant.toCSize)
+        .asInstanceOf[Ptr[Byte]]
+      var i = 0
+      while (i < BuiltinSizes.Variant) { dest(i) = b(i); i += 1 }
+      Variant.fromPtr(dest.asInstanceOf[GDExtensionVariantPtr])
+    }
   }
 }
 
