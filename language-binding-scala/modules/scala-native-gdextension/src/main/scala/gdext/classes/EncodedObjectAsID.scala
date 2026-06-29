@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EncodedObjectAsID`, extends `RefCounted`. */
 abstract class EncodedObjectAsID extends RefCounted {
+  override def godotClassName: String = "EncodedObjectAsID"
 
   /** EncodedObjectAsID.set_object_id */
   final def setObjectId(id: Long): Unit =
@@ -16,14 +17,4 @@ abstract class EncodedObjectAsID extends RefCounted {
   final def getObjectId(): Long =
     Ptrcall.call0[Long](MethodBind.get("EncodedObjectAsID", "get_object_id", 3905245786L), hostObject.objectPtr)
 
-}
-
-object EncodedObjectAsID {
-  /** Class metadata for Gd[EncodedObjectAsID] lifetime management and casting. */
-  given GodotClass[EncodedObjectAsID] with {
-    def className = "EncodedObjectAsID"
-    def isRefCounted = true
-    def wrap(o: GodotObject): EncodedObjectAsID = new EncodedObjectAsID {}.withHost(o.objectPtr)
-    def unwrap(t: EncodedObjectAsID): GodotObject = t.hostObject
-  }
 }

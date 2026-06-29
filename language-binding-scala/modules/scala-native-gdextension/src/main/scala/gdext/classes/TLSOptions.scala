@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TLSOptions`, extends `RefCounted`. */
 abstract class TLSOptions extends RefCounted {
+  override def godotClassName: String = "TLSOptions"
 
   /** TLSOptions.is_server */
   final def isServer(): Boolean =
@@ -32,14 +33,4 @@ abstract class TLSOptions extends RefCounted {
   final def getOwnCertificate(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("TLSOptions", "get_own_certificate", 1120709175L), hostObject.objectPtr)
 
-}
-
-object TLSOptions {
-  /** Class metadata for Gd[TLSOptions] lifetime management and casting. */
-  given GodotClass[TLSOptions] with {
-    def className = "TLSOptions"
-    def isRefCounted = true
-    def wrap(o: GodotObject): TLSOptions = new TLSOptions {}.withHost(o.objectPtr)
-    def unwrap(t: TLSOptions): GodotObject = t.hostObject
-  }
 }

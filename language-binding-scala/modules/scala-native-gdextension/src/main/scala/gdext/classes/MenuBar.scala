@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `MenuBar`, extends `Control`. */
 abstract class MenuBar extends Control {
+  override def godotClassName: String = "MenuBar"
 
   /** MenuBar.set_switch_on_hover */
   final def setSwitchOnHover(enable: Boolean): Unit =
@@ -104,14 +105,4 @@ abstract class MenuBar extends Control {
   final def getMenuPopup(menu: Long): GodotObject =
     Ptrcall.call1[Long, GodotObject](MethodBind.get("MenuBar", "get_menu_popup", 2100501353L), hostObject.objectPtr, menu)
 
-}
-
-object MenuBar {
-  /** Class metadata for Gd[MenuBar] lifetime management and casting. */
-  given GodotClass[MenuBar] with {
-    def className = "MenuBar"
-    def isRefCounted = false
-    def wrap(o: GodotObject): MenuBar = new MenuBar {}.withHost(o.objectPtr)
-    def unwrap(t: MenuBar): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRFrameSynthesisExtension`, extends `OpenXRExtensionWrapper`. */
 abstract class OpenXRFrameSynthesisExtension extends OpenXRExtensionWrapper {
+  override def godotClassName: String = "OpenXRFrameSynthesisExtension"
 
   /** OpenXRFrameSynthesisExtension.is_available */
   final def isAvailable(): Boolean =
@@ -32,14 +33,4 @@ abstract class OpenXRFrameSynthesisExtension extends OpenXRExtensionWrapper {
   final def skipNextFrame(): Unit =
     Ptrcall.callVoid0(MethodBind.get("OpenXRFrameSynthesisExtension", "skip_next_frame", 3218959716L), hostObject.objectPtr)
 
-}
-
-object OpenXRFrameSynthesisExtension {
-  /** Class metadata for Gd[OpenXRFrameSynthesisExtension] lifetime management and casting. */
-  given GodotClass[OpenXRFrameSynthesisExtension] with {
-    def className = "OpenXRFrameSynthesisExtension"
-    def isRefCounted = false
-    def wrap(o: GodotObject): OpenXRFrameSynthesisExtension = new OpenXRFrameSynthesisExtension {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRFrameSynthesisExtension): GodotObject = t.hostObject
-  }
 }

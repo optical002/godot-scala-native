@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `UDPServer`, extends `RefCounted`. */
 abstract class UDPServer extends RefCounted {
+  override def godotClassName: String = "UDPServer"
 
   /** UDPServer.listen */
   final def listen(port: Long, bind_address: String): Long =
@@ -44,14 +45,4 @@ abstract class UDPServer extends RefCounted {
   final def getMaxPendingConnections(): Long =
     Ptrcall.call0[Long](MethodBind.get("UDPServer", "get_max_pending_connections", 3905245786L), hostObject.objectPtr)
 
-}
-
-object UDPServer {
-  /** Class metadata for Gd[UDPServer] lifetime management and casting. */
-  given GodotClass[UDPServer] with {
-    def className = "UDPServer"
-    def isRefCounted = true
-    def wrap(o: GodotObject): UDPServer = new UDPServer {}.withHost(o.objectPtr)
-    def unwrap(t: UDPServer): GodotObject = t.hostObject
-  }
 }

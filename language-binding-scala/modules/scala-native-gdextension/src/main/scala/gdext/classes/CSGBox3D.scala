@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CSGBox3D`, extends `CSGPrimitive3D`. */
 abstract class CSGBox3D extends CSGPrimitive3D {
+  override def godotClassName: String = "CSGBox3D"
 
   /** CSGBox3D.set_size */
   final def setSize(size: gdext.builtin.Vector3): Unit =
@@ -24,14 +25,4 @@ abstract class CSGBox3D extends CSGPrimitive3D {
   final def getMaterial(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("CSGBox3D", "get_material", 5934680L), hostObject.objectPtr)
 
-}
-
-object CSGBox3D {
-  /** Class metadata for Gd[CSGBox3D] lifetime management and casting. */
-  given GodotClass[CSGBox3D] with {
-    def className = "CSGBox3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): CSGBox3D = new CSGBox3D {}.withHost(o.objectPtr)
-    def unwrap(t: CSGBox3D): GodotObject = t.hostObject
-  }
 }

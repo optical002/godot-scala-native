@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRIPBinding`, extends `Resource`. */
 abstract class OpenXRIPBinding extends Resource {
+  override def godotClassName: String = "OpenXRIPBinding"
 
   /** OpenXRIPBinding.set_action */
   final def setAction(action: OpenXRAction): Unit =
@@ -48,14 +49,4 @@ abstract class OpenXRIPBinding extends Resource {
   final def removePath(path: String): Unit =
     Ptrcall.callVoid1(MethodBind.get("OpenXRIPBinding", "remove_path", 83702148L), hostObject.objectPtr, path)
 
-}
-
-object OpenXRIPBinding {
-  /** Class metadata for Gd[OpenXRIPBinding] lifetime management and casting. */
-  given GodotClass[OpenXRIPBinding] with {
-    def className = "OpenXRIPBinding"
-    def isRefCounted = true
-    def wrap(o: GodotObject): OpenXRIPBinding = new OpenXRIPBinding {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRIPBinding): GodotObject = t.hostObject
-  }
 }

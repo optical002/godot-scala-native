@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RenderSceneBuffersConfiguration`, extends `RefCounted`. */
 abstract class RenderSceneBuffersConfiguration extends RefCounted {
+  override def godotClassName: String = "RenderSceneBuffersConfiguration"
 
   /** RenderSceneBuffersConfiguration.get_internal_size */
   final def getInternalSize(): gdext.builtin.Vector2i =
@@ -80,14 +81,4 @@ abstract class RenderSceneBuffersConfiguration extends RefCounted {
   final def setAnisotropicFilteringLevel(anisotropic_filtering_level: Long): Unit =
     Ptrcall.callVoid1(MethodBind.get("RenderSceneBuffersConfiguration", "set_anisotropic_filtering_level", 2559658741L), hostObject.objectPtr, anisotropic_filtering_level)
 
-}
-
-object RenderSceneBuffersConfiguration {
-  /** Class metadata for Gd[RenderSceneBuffersConfiguration] lifetime management and casting. */
-  given GodotClass[RenderSceneBuffersConfiguration] with {
-    def className = "RenderSceneBuffersConfiguration"
-    def isRefCounted = true
-    def wrap(o: GodotObject): RenderSceneBuffersConfiguration = new RenderSceneBuffersConfiguration {}.withHost(o.objectPtr)
-    def unwrap(t: RenderSceneBuffersConfiguration): GodotObject = t.hostObject
-  }
 }

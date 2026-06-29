@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ButtonGroup`, extends `Resource`. */
 abstract class ButtonGroup extends Resource {
+  override def godotClassName: String = "ButtonGroup"
 
   /** ButtonGroup.get_pressed_button */
   final def getPressedButton(): GodotObject =
@@ -20,14 +21,4 @@ abstract class ButtonGroup extends Resource {
   final def isAllowUnpress(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("ButtonGroup", "is_allow_unpress", 2240911060L), hostObject.objectPtr)
 
-}
-
-object ButtonGroup {
-  /** Class metadata for Gd[ButtonGroup] lifetime management and casting. */
-  given GodotClass[ButtonGroup] with {
-    def className = "ButtonGroup"
-    def isRefCounted = true
-    def wrap(o: GodotObject): ButtonGroup = new ButtonGroup {}.withHost(o.objectPtr)
-    def unwrap(t: ButtonGroup): GodotObject = t.hostObject
-  }
 }

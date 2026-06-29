@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PinJoint3D`, extends `Joint3D`. */
 abstract class PinJoint3D extends Joint3D {
+  override def godotClassName: String = "PinJoint3D"
 
   /** PinJoint3D.set_param */
   final def setParam(param: Long, value: Double): Unit =
@@ -16,14 +17,4 @@ abstract class PinJoint3D extends Joint3D {
   final def getParam(param: Long): Double =
     Ptrcall.call1[Long, Double](MethodBind.get("PinJoint3D", "get_param", 1758438771L), hostObject.objectPtr, param)
 
-}
-
-object PinJoint3D {
-  /** Class metadata for Gd[PinJoint3D] lifetime management and casting. */
-  given GodotClass[PinJoint3D] with {
-    def className = "PinJoint3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): PinJoint3D = new PinJoint3D {}.withHost(o.objectPtr)
-    def unwrap(t: PinJoint3D): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AtlasTexture`, extends `Texture2D`. */
 abstract class AtlasTexture extends Texture2D {
+  override def godotClassName: String = "AtlasTexture"
 
   /** AtlasTexture.set_atlas */
   final def setAtlas(atlas: Texture2D): Unit =
@@ -40,14 +41,4 @@ abstract class AtlasTexture extends Texture2D {
   final def hasFilterClip(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("AtlasTexture", "has_filter_clip", 36873697L), hostObject.objectPtr)
 
-}
-
-object AtlasTexture {
-  /** Class metadata for Gd[AtlasTexture] lifetime management and casting. */
-  given GodotClass[AtlasTexture] with {
-    def className = "AtlasTexture"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AtlasTexture = new AtlasTexture {}.withHost(o.objectPtr)
-    def unwrap(t: AtlasTexture): GodotObject = t.hostObject
-  }
 }

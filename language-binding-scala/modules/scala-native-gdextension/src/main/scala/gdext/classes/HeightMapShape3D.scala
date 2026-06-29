@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `HeightMapShape3D`, extends `Shape3D`. */
 abstract class HeightMapShape3D extends Shape3D {
+  override def godotClassName: String = "HeightMapShape3D"
 
   /** HeightMapShape3D.set_map_width */
   final def setMapWidth(width: Long): Unit =
@@ -36,14 +37,4 @@ abstract class HeightMapShape3D extends Shape3D {
   final def updateMapDataFromImage(image: Image, height_min: Double, height_max: Double): Unit =
     Ptrcall.callVoid3(MethodBind.get("HeightMapShape3D", "update_map_data_from_image", 2636652979L), hostObject.objectPtr, image.hostObject, height_min, height_max)
 
-}
-
-object HeightMapShape3D {
-  /** Class metadata for Gd[HeightMapShape3D] lifetime management and casting. */
-  given GodotClass[HeightMapShape3D] with {
-    def className = "HeightMapShape3D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): HeightMapShape3D = new HeightMapShape3D {}.withHost(o.objectPtr)
-    def unwrap(t: HeightMapShape3D): GodotObject = t.hostObject
-  }
 }

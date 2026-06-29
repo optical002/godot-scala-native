@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ENetPacketPeer`, extends `PacketPeer`. */
 abstract class ENetPacketPeer extends PacketPeer {
+  override def godotClassName: String = "ENetPacketPeer"
 
   /** ENetPacketPeer.peer_disconnect */
   final def peerDisconnect(data: Long): Unit =
@@ -68,14 +69,4 @@ abstract class ENetPacketPeer extends PacketPeer {
   final def isActive(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("ENetPacketPeer", "is_active", 36873697L), hostObject.objectPtr)
 
-}
-
-object ENetPacketPeer {
-  /** Class metadata for Gd[ENetPacketPeer] lifetime management and casting. */
-  given GodotClass[ENetPacketPeer] with {
-    def className = "ENetPacketPeer"
-    def isRefCounted = true
-    def wrap(o: GodotObject): ENetPacketPeer = new ENetPacketPeer {}.withHost(o.objectPtr)
-    def unwrap(t: ENetPacketPeer): GodotObject = t.hostObject
-  }
 }

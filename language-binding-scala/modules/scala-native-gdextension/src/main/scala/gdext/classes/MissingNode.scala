@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `MissingNode`, extends `Node`. */
 abstract class MissingNode extends Node {
+  override def godotClassName: String = "MissingNode"
 
   /** MissingNode.set_original_class */
   final def setOriginalClass(name: String): Unit =
@@ -40,14 +41,4 @@ abstract class MissingNode extends Node {
   final def isRecordingSignals(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("MissingNode", "is_recording_signals", 36873697L), hostObject.objectPtr)
 
-}
-
-object MissingNode {
-  /** Class metadata for Gd[MissingNode] lifetime management and casting. */
-  given GodotClass[MissingNode] with {
-    def className = "MissingNode"
-    def isRefCounted = false
-    def wrap(o: GodotObject): MissingNode = new MissingNode {}.withHost(o.objectPtr)
-    def unwrap(t: MissingNode): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ShapeCast2D`, extends `Node2D`. */
 abstract class ShapeCast2D extends Node2D {
+  override def godotClassName: String = "ShapeCast2D"
 
   /** ShapeCast2D.set_enabled */
   final def setEnabled(enabled: Boolean): Unit =
@@ -136,14 +137,4 @@ abstract class ShapeCast2D extends Node2D {
   final def isCollideWithBodiesEnabled(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("ShapeCast2D", "is_collide_with_bodies_enabled", 36873697L), hostObject.objectPtr)
 
-}
-
-object ShapeCast2D {
-  /** Class metadata for Gd[ShapeCast2D] lifetime management and casting. */
-  given GodotClass[ShapeCast2D] with {
-    def className = "ShapeCast2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): ShapeCast2D = new ShapeCast2D {}.withHost(o.objectPtr)
-    def unwrap(t: ShapeCast2D): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorDock`, extends `MarginContainer`. */
 abstract class EditorDock extends MarginContainer {
+  override def godotClassName: String = "EditorDock"
 
   /** EditorDock.open */
   final def open(): Unit =
@@ -116,14 +117,4 @@ abstract class EditorDock extends MarginContainer {
   final def getAvailableLayouts(): Long =
     Ptrcall.call0[Long](MethodBind.get("EditorDock", "get_available_layouts", 495015512L), hostObject.objectPtr)
 
-}
-
-object EditorDock {
-  /** Class metadata for Gd[EditorDock] lifetime management and casting. */
-  given GodotClass[EditorDock] with {
-    def className = "EditorDock"
-    def isRefCounted = false
-    def wrap(o: GodotObject): EditorDock = new EditorDock {}.withHost(o.objectPtr)
-    def unwrap(t: EditorDock): GodotObject = t.hostObject
-  }
 }

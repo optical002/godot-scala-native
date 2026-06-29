@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRActionMap`, extends `Resource`. */
 abstract class OpenXRActionMap extends Resource {
+  override def godotClassName: String = "OpenXRActionMap"
 
   /** OpenXRActionMap.get_action_set_count */
   final def getActionSetCount(): Long =
@@ -52,14 +53,4 @@ abstract class OpenXRActionMap extends Resource {
   final def createDefaultActionSets(): Unit =
     Ptrcall.callVoid0(MethodBind.get("OpenXRActionMap", "create_default_action_sets", 3218959716L), hostObject.objectPtr)
 
-}
-
-object OpenXRActionMap {
-  /** Class metadata for Gd[OpenXRActionMap] lifetime management and casting. */
-  given GodotClass[OpenXRActionMap] with {
-    def className = "OpenXRActionMap"
-    def isRefCounted = true
-    def wrap(o: GodotObject): OpenXRActionMap = new OpenXRActionMap {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRActionMap): GodotObject = t.hostObject
-  }
 }

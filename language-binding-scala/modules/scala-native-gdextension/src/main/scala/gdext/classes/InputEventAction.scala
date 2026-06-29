@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `InputEventAction`, extends `InputEvent`. */
 abstract class InputEventAction extends InputEvent {
+  override def godotClassName: String = "InputEventAction"
 
   /** InputEventAction.set_action */
   final def setAction(action: gdext.builtin.StringName): Unit =
@@ -36,14 +37,4 @@ abstract class InputEventAction extends InputEvent {
   final def getEventIndex(): Long =
     Ptrcall.call0[Long](MethodBind.get("InputEventAction", "get_event_index", 3905245786L), hostObject.objectPtr)
 
-}
-
-object InputEventAction {
-  /** Class metadata for Gd[InputEventAction] lifetime management and casting. */
-  given GodotClass[InputEventAction] with {
-    def className = "InputEventAction"
-    def isRefCounted = true
-    def wrap(o: GodotObject): InputEventAction = new InputEventAction {}.withHost(o.objectPtr)
-    def unwrap(t: InputEventAction): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `HingeJoint3D`, extends `Joint3D`. */
 abstract class HingeJoint3D extends Joint3D {
+  override def godotClassName: String = "HingeJoint3D"
 
   /** HingeJoint3D.set_param */
   final def setParam(param: Long, value: Double): Unit =
@@ -24,14 +25,4 @@ abstract class HingeJoint3D extends Joint3D {
   final def getFlag(flag: Long): Boolean =
     Ptrcall.call1[Long, Boolean](MethodBind.get("HingeJoint3D", "get_flag", 2841369610L), hostObject.objectPtr, flag)
 
-}
-
-object HingeJoint3D {
-  /** Class metadata for Gd[HingeJoint3D] lifetime management and casting. */
-  given GodotClass[HingeJoint3D] with {
-    def className = "HingeJoint3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): HingeJoint3D = new HingeJoint3D {}.withHost(o.objectPtr)
-    def unwrap(t: HingeJoint3D): GodotObject = t.hostObject
-  }
 }

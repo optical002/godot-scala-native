@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `StreamPeerTLS`, extends `StreamPeer`. */
 abstract class StreamPeerTLS extends StreamPeer {
+  override def godotClassName: String = "StreamPeerTLS"
 
   /** StreamPeerTLS.poll */
   final def poll(): Unit =
@@ -32,14 +33,4 @@ abstract class StreamPeerTLS extends StreamPeer {
   final def disconnectFromStream(): Unit =
     Ptrcall.callVoid0(MethodBind.get("StreamPeerTLS", "disconnect_from_stream", 3218959716L), hostObject.objectPtr)
 
-}
-
-object StreamPeerTLS {
-  /** Class metadata for Gd[StreamPeerTLS] lifetime management and casting. */
-  given GodotClass[StreamPeerTLS] with {
-    def className = "StreamPeerTLS"
-    def isRefCounted = true
-    def wrap(o: GodotObject): StreamPeerTLS = new StreamPeerTLS {}.withHost(o.objectPtr)
-    def unwrap(t: StreamPeerTLS): GodotObject = t.hostObject
-  }
 }

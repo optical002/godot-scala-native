@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `StyleBoxTexture`, extends `StyleBox`. */
 abstract class StyleBoxTexture extends StyleBox {
+  override def godotClassName: String = "StyleBoxTexture"
 
   /** StyleBoxTexture.set_texture */
   final def setTexture(texture: Texture2D): Unit =
@@ -80,14 +81,4 @@ abstract class StyleBoxTexture extends StyleBox {
   final def getVAxisStretchMode(): Long =
     Ptrcall.call0[Long](MethodBind.get("StyleBoxTexture", "get_v_axis_stretch_mode", 3807744063L), hostObject.objectPtr)
 
-}
-
-object StyleBoxTexture {
-  /** Class metadata for Gd[StyleBoxTexture] lifetime management and casting. */
-  given GodotClass[StyleBoxTexture] with {
-    def className = "StyleBoxTexture"
-    def isRefCounted = true
-    def wrap(o: GodotObject): StyleBoxTexture = new StyleBoxTexture {}.withHost(o.objectPtr)
-    def unwrap(t: StyleBoxTexture): GodotObject = t.hostObject
-  }
 }

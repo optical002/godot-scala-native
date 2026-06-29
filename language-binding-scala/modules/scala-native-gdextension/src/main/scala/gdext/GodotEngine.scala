@@ -2,6 +2,7 @@ package gdext
 
 import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
+import gdext.api.Gd
 import gdext.internal.ffi.interface.Interface
 import gdext.internal.ffi.types.*
 import gdext.internal.ffi.types.GDExtensionInitializationLevel.*
@@ -113,9 +114,9 @@ private[gdext] object GodotEngine {
             case Some(ms) => s" in $ms ms"
             case None     => "" // stamp missing/unreadable — report without timing
           }
-          Log.trace(s"initialize(SCENE): about to GodotPrint hot-reload complete$suffix")
-          GodotPrint.print(s"[scala-native] hot-reload complete$suffix")
-          Log.trace("initialize(SCENE): GodotPrint hot-reload complete returned")
+          Log.trace(s"initialize(SCENE): about to print hot-reload complete$suffix")
+          Gd.print(s"[scala-native] hot-reload complete$suffix")
+          Log.trace("initialize(SCENE): print hot-reload complete returned")
           Log.file(s"hot-reload complete$suffix")
         }
         Log.trace("initialize(SCENE): end")

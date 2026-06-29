@@ -7,15 +7,6 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioStreamPlaybackPlaylist`, extends `AudioStreamPlayback`. */
 abstract class AudioStreamPlaybackPlaylist extends AudioStreamPlayback {
+  override def godotClassName: String = "AudioStreamPlaybackPlaylist"
 
-}
-
-object AudioStreamPlaybackPlaylist {
-  /** Class metadata for Gd[AudioStreamPlaybackPlaylist] lifetime management and casting. */
-  given GodotClass[AudioStreamPlaybackPlaylist] with {
-    def className = "AudioStreamPlaybackPlaylist"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioStreamPlaybackPlaylist = new AudioStreamPlaybackPlaylist {}.withHost(o.objectPtr)
-    def unwrap(t: AudioStreamPlaybackPlaylist): GodotObject = t.hostObject
-  }
 }

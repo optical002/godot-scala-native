@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `MultiMeshInstance2D`, extends `Node2D`. */
 abstract class MultiMeshInstance2D extends Node2D {
+  override def godotClassName: String = "MultiMeshInstance2D"
 
   /** MultiMeshInstance2D.set_multimesh */
   final def setMultimesh(multimesh: MultiMesh): Unit =
@@ -24,14 +25,4 @@ abstract class MultiMeshInstance2D extends Node2D {
   final def getTexture(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("MultiMeshInstance2D", "get_texture", 3635182373L), hostObject.objectPtr)
 
-}
-
-object MultiMeshInstance2D {
-  /** Class metadata for Gd[MultiMeshInstance2D] lifetime management and casting. */
-  given GodotClass[MultiMeshInstance2D] with {
-    def className = "MultiMeshInstance2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): MultiMeshInstance2D = new MultiMeshInstance2D {}.withHost(o.objectPtr)
-    def unwrap(t: MultiMeshInstance2D): GodotObject = t.hostObject
-  }
 }

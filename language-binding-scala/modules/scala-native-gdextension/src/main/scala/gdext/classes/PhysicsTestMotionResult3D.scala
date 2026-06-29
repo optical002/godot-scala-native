@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PhysicsTestMotionResult3D`, extends `RefCounted`. */
 abstract class PhysicsTestMotionResult3D extends RefCounted {
+  override def godotClassName: String = "PhysicsTestMotionResult3D"
 
   /** PhysicsTestMotionResult3D.get_travel */
   final def getTravel(): gdext.builtin.Vector3 =
@@ -60,14 +61,4 @@ abstract class PhysicsTestMotionResult3D extends RefCounted {
   final def getCollisionDepth(collision_index: Long): Double =
     Ptrcall.call1[Long, Double](MethodBind.get("PhysicsTestMotionResult3D", "get_collision_depth", 218038398L), hostObject.objectPtr, collision_index)
 
-}
-
-object PhysicsTestMotionResult3D {
-  /** Class metadata for Gd[PhysicsTestMotionResult3D] lifetime management and casting. */
-  given GodotClass[PhysicsTestMotionResult3D] with {
-    def className = "PhysicsTestMotionResult3D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): PhysicsTestMotionResult3D = new PhysicsTestMotionResult3D {}.withHost(o.objectPtr)
-    def unwrap(t: PhysicsTestMotionResult3D): GodotObject = t.hostObject
-  }
 }

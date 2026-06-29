@@ -7,15 +7,6 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `HBoxContainer`, extends `BoxContainer`. */
 abstract class HBoxContainer extends BoxContainer {
+  override def godotClassName: String = "HBoxContainer"
 
-}
-
-object HBoxContainer {
-  /** Class metadata for Gd[HBoxContainer] lifetime management and casting. */
-  given GodotClass[HBoxContainer] with {
-    def className = "HBoxContainer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): HBoxContainer = new HBoxContainer {}.withHost(o.objectPtr)
-    def unwrap(t: HBoxContainer): GodotObject = t.hostObject
-  }
 }

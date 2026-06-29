@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Tree`, extends `Control`. */
 abstract class Tree extends Control {
+  override def godotClassName: String = "Tree"
 
   /** Tree.clear */
   final def clear(): Unit =
@@ -292,14 +293,4 @@ abstract class Tree extends Control {
   final def isAutoTooltipEnabled(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("Tree", "is_auto_tooltip_enabled", 36873697L), hostObject.objectPtr)
 
-}
-
-object Tree {
-  /** Class metadata for Gd[Tree] lifetime management and casting. */
-  given GodotClass[Tree] with {
-    def className = "Tree"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Tree = new Tree {}.withHost(o.objectPtr)
-    def unwrap(t: Tree): GodotObject = t.hostObject
-  }
 }

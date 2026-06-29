@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeStep`, extends `VisualShaderNode`. */
 abstract class VisualShaderNodeStep extends VisualShaderNode {
+  override def godotClassName: String = "VisualShaderNodeStep"
 
   /** VisualShaderNodeStep.set_op_type */
   final def setOpType(op_type: Long): Unit =
@@ -16,14 +17,4 @@ abstract class VisualShaderNodeStep extends VisualShaderNode {
   final def getOpType(): Long =
     Ptrcall.call0[Long](MethodBind.get("VisualShaderNodeStep", "get_op_type", 3274022781L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeStep {
-  /** Class metadata for Gd[VisualShaderNodeStep] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeStep] with {
-    def className = "VisualShaderNodeStep"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeStep = new VisualShaderNodeStep {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeStep): GodotObject = t.hostObject
-  }
 }

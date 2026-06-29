@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TubeTrailMesh`, extends `PrimitiveMesh`. */
 abstract class TubeTrailMesh extends PrimitiveMesh {
+  override def godotClassName: String = "TubeTrailMesh"
 
   /** TubeTrailMesh.set_radius */
   final def setRadius(radius: Double): Unit =
@@ -72,14 +73,4 @@ abstract class TubeTrailMesh extends PrimitiveMesh {
   final def getCurve(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("TubeTrailMesh", "get_curve", 2460114913L), hostObject.objectPtr)
 
-}
-
-object TubeTrailMesh {
-  /** Class metadata for Gd[TubeTrailMesh] lifetime management and casting. */
-  given GodotClass[TubeTrailMesh] with {
-    def className = "TubeTrailMesh"
-    def isRefCounted = true
-    def wrap(o: GodotObject): TubeTrailMesh = new TubeTrailMesh {}.withHost(o.objectPtr)
-    def unwrap(t: TubeTrailMesh): GodotObject = t.hostObject
-  }
 }

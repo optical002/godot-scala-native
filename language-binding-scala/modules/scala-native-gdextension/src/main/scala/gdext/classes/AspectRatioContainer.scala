@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AspectRatioContainer`, extends `Container`. */
 abstract class AspectRatioContainer extends Container {
+  override def godotClassName: String = "AspectRatioContainer"
 
   /** AspectRatioContainer.set_ratio */
   final def setRatio(ratio: Double): Unit =
@@ -40,14 +41,4 @@ abstract class AspectRatioContainer extends Container {
   final def getAlignmentVertical(): Long =
     Ptrcall.call0[Long](MethodBind.get("AspectRatioContainer", "get_alignment_vertical", 3838875429L), hostObject.objectPtr)
 
-}
-
-object AspectRatioContainer {
-  /** Class metadata for Gd[AspectRatioContainer] lifetime management and casting. */
-  given GodotClass[AspectRatioContainer] with {
-    def className = "AspectRatioContainer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): AspectRatioContainer = new AspectRatioContainer {}.withHost(o.objectPtr)
-    def unwrap(t: AspectRatioContainer): GodotObject = t.hostObject
-  }
 }

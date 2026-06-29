@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `WebRTCMultiplayerPeer`, extends `MultiplayerPeer`. */
 abstract class WebRTCMultiplayerPeer extends MultiplayerPeer {
+  override def godotClassName: String = "WebRTCMultiplayerPeer"
 
   /** WebRTCMultiplayerPeer.add_peer */
   final def addPeer(peer: WebRTCPeerConnection, peer_id: Long, unreliable_lifetime: Long): Long =
@@ -20,14 +21,4 @@ abstract class WebRTCMultiplayerPeer extends MultiplayerPeer {
   final def hasPeer(peer_id: Long): Boolean =
     Ptrcall.call1[Long, Boolean](MethodBind.get("WebRTCMultiplayerPeer", "has_peer", 3067735520L), hostObject.objectPtr, peer_id)
 
-}
-
-object WebRTCMultiplayerPeer {
-  /** Class metadata for Gd[WebRTCMultiplayerPeer] lifetime management and casting. */
-  given GodotClass[WebRTCMultiplayerPeer] with {
-    def className = "WebRTCMultiplayerPeer"
-    def isRefCounted = true
-    def wrap(o: GodotObject): WebRTCMultiplayerPeer = new WebRTCMultiplayerPeer {}.withHost(o.objectPtr)
-    def unwrap(t: WebRTCMultiplayerPeer): GodotObject = t.hostObject
-  }
 }

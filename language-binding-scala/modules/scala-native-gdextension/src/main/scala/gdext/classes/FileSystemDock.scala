@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `FileSystemDock`, extends `EditorDock`. */
 abstract class FileSystemDock extends EditorDock {
+  override def godotClassName: String = "FileSystemDock"
 
   /** FileSystemDock.navigate_to_path */
   final def navigateToPath(path: String): Unit =
@@ -20,14 +21,4 @@ abstract class FileSystemDock extends EditorDock {
   final def removeResourceTooltipPlugin(plugin: EditorResourceTooltipPlugin): Unit =
     Ptrcall.callVoid1(MethodBind.get("FileSystemDock", "remove_resource_tooltip_plugin", 2258356838L), hostObject.objectPtr, plugin.hostObject)
 
-}
-
-object FileSystemDock {
-  /** Class metadata for Gd[FileSystemDock] lifetime management and casting. */
-  given GodotClass[FileSystemDock] with {
-    def className = "FileSystemDock"
-    def isRefCounted = false
-    def wrap(o: GodotObject): FileSystemDock = new FileSystemDock {}.withHost(o.objectPtr)
-    def unwrap(t: FileSystemDock): GodotObject = t.hostObject
-  }
 }

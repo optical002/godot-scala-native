@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PhysicsMaterial`, extends `Resource`. */
 abstract class PhysicsMaterial extends Resource {
+  override def godotClassName: String = "PhysicsMaterial"
 
   /** PhysicsMaterial.set_friction */
   final def setFriction(friction: Double): Unit =
@@ -40,14 +41,4 @@ abstract class PhysicsMaterial extends Resource {
   final def isAbsorbent(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("PhysicsMaterial", "is_absorbent", 36873697L), hostObject.objectPtr)
 
-}
-
-object PhysicsMaterial {
-  /** Class metadata for Gd[PhysicsMaterial] lifetime management and casting. */
-  given GodotClass[PhysicsMaterial] with {
-    def className = "PhysicsMaterial"
-    def isRefCounted = true
-    def wrap(o: GodotObject): PhysicsMaterial = new PhysicsMaterial {}.withHost(o.objectPtr)
-    def unwrap(t: PhysicsMaterial): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `NinePatchRect`, extends `Control`. */
 abstract class NinePatchRect extends Control {
+  override def godotClassName: String = "NinePatchRect"
 
   /** NinePatchRect.set_texture */
   final def setTexture(texture: Texture2D): Unit =
@@ -56,14 +57,4 @@ abstract class NinePatchRect extends Control {
   final def getVAxisStretchMode(): Long =
     Ptrcall.call0[Long](MethodBind.get("NinePatchRect", "get_v_axis_stretch_mode", 3317113799L), hostObject.objectPtr)
 
-}
-
-object NinePatchRect {
-  /** Class metadata for Gd[NinePatchRect] lifetime management and casting. */
-  given GodotClass[NinePatchRect] with {
-    def className = "NinePatchRect"
-    def isRefCounted = false
-    def wrap(o: GodotObject): NinePatchRect = new NinePatchRect {}.withHost(o.objectPtr)
-    def unwrap(t: NinePatchRect): GodotObject = t.hostObject
-  }
 }

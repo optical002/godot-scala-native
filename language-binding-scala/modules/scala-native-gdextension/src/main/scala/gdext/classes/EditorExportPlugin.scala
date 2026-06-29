@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorExportPlugin`, extends `RefCounted`. */
 abstract class EditorExportPlugin extends RefCounted {
+  override def godotClassName: String = "EditorExportPlugin"
 
   /** EditorExportPlugin.add_apple_embedded_platform_project_static_lib */
   final def addAppleEmbeddedPlatformProjectStaticLib(path: String): Unit =
@@ -80,14 +81,4 @@ abstract class EditorExportPlugin extends RefCounted {
   final def getExportPlatform(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("EditorExportPlugin", "get_export_platform", 282254641L), hostObject.objectPtr)
 
-}
-
-object EditorExportPlugin {
-  /** Class metadata for Gd[EditorExportPlugin] lifetime management and casting. */
-  given GodotClass[EditorExportPlugin] with {
-    def className = "EditorExportPlugin"
-    def isRefCounted = true
-    def wrap(o: GodotObject): EditorExportPlugin = new EditorExportPlugin {}.withHost(o.objectPtr)
-    def unwrap(t: EditorExportPlugin): GodotObject = t.hostObject
-  }
 }

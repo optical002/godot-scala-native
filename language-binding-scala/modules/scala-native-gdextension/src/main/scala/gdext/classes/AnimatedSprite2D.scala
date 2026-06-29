@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AnimatedSprite2D`, extends `Node2D`. */
 abstract class AnimatedSprite2D extends Node2D {
+  override def godotClassName: String = "AnimatedSprite2D"
 
   /** AnimatedSprite2D.set_sprite_frames */
   final def setSpriteFrames(sprite_frames: SpriteFrames): Unit =
@@ -116,14 +117,4 @@ abstract class AnimatedSprite2D extends Node2D {
   final def getPlayingSpeed(): Double =
     Ptrcall.call0[Double](MethodBind.get("AnimatedSprite2D", "get_playing_speed", 1740695150L), hostObject.objectPtr)
 
-}
-
-object AnimatedSprite2D {
-  /** Class metadata for Gd[AnimatedSprite2D] lifetime management and casting. */
-  given GodotClass[AnimatedSprite2D] with {
-    def className = "AnimatedSprite2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): AnimatedSprite2D = new AnimatedSprite2D {}.withHost(o.objectPtr)
-    def unwrap(t: AnimatedSprite2D): GodotObject = t.hostObject
-  }
 }

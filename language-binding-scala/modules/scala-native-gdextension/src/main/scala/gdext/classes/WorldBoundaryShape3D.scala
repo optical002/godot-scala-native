@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `WorldBoundaryShape3D`, extends `Shape3D`. */
 abstract class WorldBoundaryShape3D extends Shape3D {
+  override def godotClassName: String = "WorldBoundaryShape3D"
 
   /** WorldBoundaryShape3D.set_plane */
   final def setPlane(plane: gdext.builtin.Plane): Unit =
@@ -16,14 +17,4 @@ abstract class WorldBoundaryShape3D extends Shape3D {
   final def getPlane(): gdext.builtin.Plane =
     Ptrcall.call0[gdext.builtin.Plane](MethodBind.get("WorldBoundaryShape3D", "get_plane", 2753500971L), hostObject.objectPtr)
 
-}
-
-object WorldBoundaryShape3D {
-  /** Class metadata for Gd[WorldBoundaryShape3D] lifetime management and casting. */
-  given GodotClass[WorldBoundaryShape3D] with {
-    def className = "WorldBoundaryShape3D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): WorldBoundaryShape3D = new WorldBoundaryShape3D {}.withHost(o.objectPtr)
-    def unwrap(t: WorldBoundaryShape3D): GodotObject = t.hostObject
-  }
 }

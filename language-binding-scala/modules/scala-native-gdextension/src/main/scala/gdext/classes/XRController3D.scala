@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `XRController3D`, extends `XRNode3D`. */
 abstract class XRController3D extends XRNode3D {
+  override def godotClassName: String = "XRController3D"
 
   /** XRController3D.is_button_pressed */
   final def isButtonPressed(name: gdext.builtin.StringName): Boolean =
@@ -24,14 +25,4 @@ abstract class XRController3D extends XRNode3D {
   final def getTrackerHand(): Long =
     Ptrcall.call0[Long](MethodBind.get("XRController3D", "get_tracker_hand", 4181770860L), hostObject.objectPtr)
 
-}
-
-object XRController3D {
-  /** Class metadata for Gd[XRController3D] lifetime management and casting. */
-  given GodotClass[XRController3D] with {
-    def className = "XRController3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): XRController3D = new XRController3D {}.withHost(o.objectPtr)
-    def unwrap(t: XRController3D): GodotObject = t.hostObject
-  }
 }

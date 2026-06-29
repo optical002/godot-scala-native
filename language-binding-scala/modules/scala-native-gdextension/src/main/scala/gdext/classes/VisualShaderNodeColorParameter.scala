@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeColorParameter`, extends `VisualShaderNodeParameter`. */
 abstract class VisualShaderNodeColorParameter extends VisualShaderNodeParameter {
+  override def godotClassName: String = "VisualShaderNodeColorParameter"
 
   /** VisualShaderNodeColorParameter.set_default_value_enabled */
   final def setDefaultValueEnabled(enabled: Boolean): Unit =
@@ -24,14 +25,4 @@ abstract class VisualShaderNodeColorParameter extends VisualShaderNodeParameter 
   final def getDefaultValue(): gdext.builtin.Color =
     Ptrcall.call0[gdext.builtin.Color](MethodBind.get("VisualShaderNodeColorParameter", "get_default_value", 3444240500L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeColorParameter {
-  /** Class metadata for Gd[VisualShaderNodeColorParameter] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeColorParameter] with {
-    def className = "VisualShaderNodeColorParameter"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeColorParameter = new VisualShaderNodeColorParameter {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeColorParameter): GodotObject = t.hostObject
-  }
 }

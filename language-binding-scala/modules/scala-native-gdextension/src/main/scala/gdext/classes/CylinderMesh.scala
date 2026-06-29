@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CylinderMesh`, extends `PrimitiveMesh`. */
 abstract class CylinderMesh extends PrimitiveMesh {
+  override def godotClassName: String = "CylinderMesh"
 
   /** CylinderMesh.set_top_radius */
   final def setTopRadius(radius: Double): Unit =
@@ -64,14 +65,4 @@ abstract class CylinderMesh extends PrimitiveMesh {
   final def isCapBottom(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("CylinderMesh", "is_cap_bottom", 36873697L), hostObject.objectPtr)
 
-}
-
-object CylinderMesh {
-  /** Class metadata for Gd[CylinderMesh] lifetime management and casting. */
-  given GodotClass[CylinderMesh] with {
-    def className = "CylinderMesh"
-    def isRefCounted = true
-    def wrap(o: GodotObject): CylinderMesh = new CylinderMesh {}.withHost(o.objectPtr)
-    def unwrap(t: CylinderMesh): GodotObject = t.hostObject
-  }
 }

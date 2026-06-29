@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ProjectSettings`, extends `Object`. */
 abstract class ProjectSettings extends Object {
+  override def godotClassName: String = "ProjectSettings"
 
   /** ProjectSettings.has_setting */
   final def hasSetting(name: String): Boolean =
@@ -63,14 +64,6 @@ abstract class ProjectSettings extends Object {
 }
 
 object ProjectSettings {
-  /** Class metadata for Gd[ProjectSettings] lifetime management and casting. */
-  given GodotClass[ProjectSettings] with {
-    def className = "ProjectSettings"
-    def isRefCounted = false
-    def wrap(o: GodotObject): ProjectSettings = new ProjectSettings {}.withHost(o.objectPtr)
-    def unwrap(t: ProjectSettings): GodotObject = t.hostObject
-  }
-
   /** The process-global ProjectSettings singleton instance. */
   def singleton: ProjectSettings = new ProjectSettings {}
     .withHost(Godot.interface.global_get_singleton(

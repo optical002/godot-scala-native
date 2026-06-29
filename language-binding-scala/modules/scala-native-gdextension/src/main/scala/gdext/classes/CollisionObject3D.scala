@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CollisionObject3D`, extends `Node3D`. */
 abstract class CollisionObject3D extends Node3D {
+  override def godotClassName: String = "CollisionObject3D"
 
   /** CollisionObject3D.set_collision_layer */
   final def setCollisionLayer(layer: Long): Unit =
@@ -128,14 +129,4 @@ abstract class CollisionObject3D extends Node3D {
   final def shapeFindOwner(shape_index: Long): Long =
     Ptrcall.call1[Long, Long](MethodBind.get("CollisionObject3D", "shape_find_owner", 923996154L), hostObject.objectPtr, shape_index)
 
-}
-
-object CollisionObject3D {
-  /** Class metadata for Gd[CollisionObject3D] lifetime management and casting. */
-  given GodotClass[CollisionObject3D] with {
-    def className = "CollisionObject3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): CollisionObject3D = new CollisionObject3D {}.withHost(o.objectPtr)
-    def unwrap(t: CollisionObject3D): GodotObject = t.hostObject
-  }
 }

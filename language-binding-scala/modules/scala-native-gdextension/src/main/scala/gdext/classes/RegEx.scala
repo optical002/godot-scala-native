@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RegEx`, extends `RefCounted`. */
 abstract class RegEx extends RefCounted {
+  override def godotClassName: String = "RegEx"
 
   /** RegEx.clear */
   final def clear(): Unit =
@@ -36,14 +37,4 @@ abstract class RegEx extends RefCounted {
   final def getGroupCount(): Long =
     Ptrcall.call0[Long](MethodBind.get("RegEx", "get_group_count", 3905245786L), hostObject.objectPtr)
 
-}
-
-object RegEx {
-  /** Class metadata for Gd[RegEx] lifetime management and casting. */
-  given GodotClass[RegEx] with {
-    def className = "RegEx"
-    def isRefCounted = true
-    def wrap(o: GodotObject): RegEx = new RegEx {}.withHost(o.objectPtr)
-    def unwrap(t: RegEx): GodotObject = t.hostObject
-  }
 }

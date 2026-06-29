@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RenderSceneData`, extends `Object`. */
 abstract class RenderSceneData extends Object {
+  override def godotClassName: String = "RenderSceneData"
 
   /** RenderSceneData.get_cam_transform */
   final def getCamTransform(): gdext.builtin.Transform3D =
@@ -28,14 +29,4 @@ abstract class RenderSceneData extends Object {
   final def getViewProjection(view: Long): gdext.builtin.Projection =
     Ptrcall.call1[Long, gdext.builtin.Projection](MethodBind.get("RenderSceneData", "get_view_projection", 3179846605L), hostObject.objectPtr, view)
 
-}
-
-object RenderSceneData {
-  /** Class metadata for Gd[RenderSceneData] lifetime management and casting. */
-  given GodotClass[RenderSceneData] with {
-    def className = "RenderSceneData"
-    def isRefCounted = false
-    def wrap(o: GodotObject): RenderSceneData = new RenderSceneData {}.withHost(o.objectPtr)
-    def unwrap(t: RenderSceneData): GodotObject = t.hostObject
-  }
 }

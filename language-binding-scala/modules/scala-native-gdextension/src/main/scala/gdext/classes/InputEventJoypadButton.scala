@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `InputEventJoypadButton`, extends `InputEvent`. */
 abstract class InputEventJoypadButton extends InputEvent {
+  override def godotClassName: String = "InputEventJoypadButton"
 
   /** InputEventJoypadButton.set_button_index */
   final def setButtonIndex(button_index: Long): Unit =
@@ -28,14 +29,4 @@ abstract class InputEventJoypadButton extends InputEvent {
   final def setPressed(pressed: Boolean): Unit =
     Ptrcall.callVoid1(MethodBind.get("InputEventJoypadButton", "set_pressed", 2586408642L), hostObject.objectPtr, pressed)
 
-}
-
-object InputEventJoypadButton {
-  /** Class metadata for Gd[InputEventJoypadButton] lifetime management and casting. */
-  given GodotClass[InputEventJoypadButton] with {
-    def className = "InputEventJoypadButton"
-    def isRefCounted = true
-    def wrap(o: GodotObject): InputEventJoypadButton = new InputEventJoypadButton {}.withHost(o.objectPtr)
-    def unwrap(t: InputEventJoypadButton): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RenderSceneBuffersRD`, extends `RenderSceneBuffers`. */
 abstract class RenderSceneBuffersRD extends RenderSceneBuffers {
+  override def godotClassName: String = "RenderSceneBuffersRD"
 
   /** RenderSceneBuffersRD.has_texture */
   final def hasTexture(context: gdext.builtin.StringName, name: gdext.builtin.StringName): Boolean =
@@ -64,14 +65,4 @@ abstract class RenderSceneBuffersRD extends RenderSceneBuffers {
   final def getUseDebanding(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("RenderSceneBuffersRD", "get_use_debanding", 36873697L), hostObject.objectPtr)
 
-}
-
-object RenderSceneBuffersRD {
-  /** Class metadata for Gd[RenderSceneBuffersRD] lifetime management and casting. */
-  given GodotClass[RenderSceneBuffersRD] with {
-    def className = "RenderSceneBuffersRD"
-    def isRefCounted = true
-    def wrap(o: GodotObject): RenderSceneBuffersRD = new RenderSceneBuffersRD {}.withHost(o.objectPtr)
-    def unwrap(t: RenderSceneBuffersRD): GodotObject = t.hostObject
-  }
 }

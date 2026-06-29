@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AcceptDialog`, extends `Window`. */
 abstract class AcceptDialog extends Window {
+  override def godotClassName: String = "AcceptDialog"
 
   /** AcceptDialog.get_ok_button */
   final def getOkButton(): GodotObject =
@@ -72,14 +73,4 @@ abstract class AcceptDialog extends Window {
   final def getOkButtonText(): String =
     Ptrcall.call0[String](MethodBind.get("AcceptDialog", "get_ok_button_text", 201670096L), hostObject.objectPtr)
 
-}
-
-object AcceptDialog {
-  /** Class metadata for Gd[AcceptDialog] lifetime management and casting. */
-  given GodotClass[AcceptDialog] with {
-    def className = "AcceptDialog"
-    def isRefCounted = false
-    def wrap(o: GodotObject): AcceptDialog = new AcceptDialog {}.withHost(o.objectPtr)
-    def unwrap(t: AcceptDialog): GodotObject = t.hostObject
-  }
 }

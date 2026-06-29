@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioStreamInteractive`, extends `AudioStream`. */
 abstract class AudioStreamInteractive extends AudioStream {
+  override def godotClassName: String = "AudioStreamInteractive"
 
   /** AudioStreamInteractive.set_clip_count */
   final def setClipCount(clip_count: Long): Unit =
@@ -92,14 +93,4 @@ abstract class AudioStreamInteractive extends AudioStream {
   final def isTransitionHoldingPrevious(from_clip: Long, to_clip: Long): Boolean =
     Ptrcall.call2[Long, Long, Boolean](MethodBind.get("AudioStreamInteractive", "is_transition_holding_previous", 2522259332L), hostObject.objectPtr, from_clip, to_clip)
 
-}
-
-object AudioStreamInteractive {
-  /** Class metadata for Gd[AudioStreamInteractive] lifetime management and casting. */
-  given GodotClass[AudioStreamInteractive] with {
-    def className = "AudioStreamInteractive"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioStreamInteractive = new AudioStreamInteractive {}.withHost(o.objectPtr)
-    def unwrap(t: AudioStreamInteractive): GodotObject = t.hostObject
-  }
 }

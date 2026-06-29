@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeTransformParameter`, extends `VisualShaderNodeParameter`. */
 abstract class VisualShaderNodeTransformParameter extends VisualShaderNodeParameter {
+  override def godotClassName: String = "VisualShaderNodeTransformParameter"
 
   /** VisualShaderNodeTransformParameter.set_default_value_enabled */
   final def setDefaultValueEnabled(enabled: Boolean): Unit =
@@ -24,14 +25,4 @@ abstract class VisualShaderNodeTransformParameter extends VisualShaderNodeParame
   final def getDefaultValue(): gdext.builtin.Transform3D =
     Ptrcall.call0[gdext.builtin.Transform3D](MethodBind.get("VisualShaderNodeTransformParameter", "get_default_value", 3229777777L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeTransformParameter {
-  /** Class metadata for Gd[VisualShaderNodeTransformParameter] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeTransformParameter] with {
-    def className = "VisualShaderNodeTransformParameter"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeTransformParameter = new VisualShaderNodeTransformParameter {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeTransformParameter): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AnimationNodeSync`, extends `AnimationNode`. */
 abstract class AnimationNodeSync extends AnimationNode {
+  override def godotClassName: String = "AnimationNodeSync"
 
   /** AnimationNodeSync.set_use_sync */
   final def setUseSync(enable: Boolean): Unit =
@@ -16,14 +17,4 @@ abstract class AnimationNodeSync extends AnimationNode {
   final def isUsingSync(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("AnimationNodeSync", "is_using_sync", 36873697L), hostObject.objectPtr)
 
-}
-
-object AnimationNodeSync {
-  /** Class metadata for Gd[AnimationNodeSync] lifetime management and casting. */
-  given GodotClass[AnimationNodeSync] with {
-    def className = "AnimationNodeSync"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AnimationNodeSync = new AnimationNodeSync {}.withHost(o.objectPtr)
-    def unwrap(t: AnimationNodeSync): GodotObject = t.hostObject
-  }
 }

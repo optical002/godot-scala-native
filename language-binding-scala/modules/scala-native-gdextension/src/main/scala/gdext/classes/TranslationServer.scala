@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TranslationServer`, extends `Object`. */
 abstract class TranslationServer extends Object {
+  override def godotClassName: String = "TranslationServer"
 
   /** TranslationServer.set_locale */
   final def setLocale(locale: String): Unit =
@@ -123,14 +124,6 @@ abstract class TranslationServer extends Object {
 }
 
 object TranslationServer {
-  /** Class metadata for Gd[TranslationServer] lifetime management and casting. */
-  given GodotClass[TranslationServer] with {
-    def className = "TranslationServer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): TranslationServer = new TranslationServer {}.withHost(o.objectPtr)
-    def unwrap(t: TranslationServer): GodotObject = t.hostObject
-  }
-
   /** The process-global TranslationServer singleton instance. */
   def singleton: TranslationServer = new TranslationServer {}
     .withHost(Godot.interface.global_get_singleton(

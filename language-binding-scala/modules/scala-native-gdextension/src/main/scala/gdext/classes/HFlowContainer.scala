@@ -7,15 +7,6 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `HFlowContainer`, extends `FlowContainer`. */
 abstract class HFlowContainer extends FlowContainer {
+  override def godotClassName: String = "HFlowContainer"
 
-}
-
-object HFlowContainer {
-  /** Class metadata for Gd[HFlowContainer] lifetime management and casting. */
-  given GodotClass[HFlowContainer] with {
-    def className = "HFlowContainer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): HFlowContainer = new HFlowContainer {}.withHost(o.objectPtr)
-    def unwrap(t: HFlowContainer): GodotObject = t.hostObject
-  }
 }

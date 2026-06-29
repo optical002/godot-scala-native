@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CollisionShape2D`, extends `Node2D`. */
 abstract class CollisionShape2D extends Node2D {
+  override def godotClassName: String = "CollisionShape2D"
 
   /** CollisionShape2D.set_shape */
   final def setShape(shape: Shape2D): Unit =
@@ -48,14 +49,4 @@ abstract class CollisionShape2D extends Node2D {
   final def getDebugColor(): gdext.builtin.Color =
     Ptrcall.call0[gdext.builtin.Color](MethodBind.get("CollisionShape2D", "get_debug_color", 3444240500L), hostObject.objectPtr)
 
-}
-
-object CollisionShape2D {
-  /** Class metadata for Gd[CollisionShape2D] lifetime management and casting. */
-  given GodotClass[CollisionShape2D] with {
-    def className = "CollisionShape2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): CollisionShape2D = new CollisionShape2D {}.withHost(o.objectPtr)
-    def unwrap(t: CollisionShape2D): GodotObject = t.hostObject
-  }
 }

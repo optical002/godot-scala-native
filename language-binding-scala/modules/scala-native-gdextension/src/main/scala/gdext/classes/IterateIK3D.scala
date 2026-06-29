@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `IterateIK3D`, extends `ChainIK3D`. */
 abstract class IterateIK3D extends ChainIK3D {
+  override def godotClassName: String = "IterateIK3D"
 
   /** IterateIK3D.set_max_iterations */
   final def setMaxIterations(max_iterations: Long): Unit =
@@ -88,14 +89,4 @@ abstract class IterateIK3D extends ChainIK3D {
   final def getJointLimitationRotationOffset(index: Long, joint: Long): gdext.builtin.Quaternion =
     Ptrcall.call2[Long, Long, gdext.builtin.Quaternion](MethodBind.get("IterateIK3D", "get_joint_limitation_rotation_offset", 2722473700L), hostObject.objectPtr, index, joint)
 
-}
-
-object IterateIK3D {
-  /** Class metadata for Gd[IterateIK3D] lifetime management and casting. */
-  given GodotClass[IterateIK3D] with {
-    def className = "IterateIK3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): IterateIK3D = new IterateIK3D {}.withHost(o.objectPtr)
-    def unwrap(t: IterateIK3D): GodotObject = t.hostObject
-  }
 }

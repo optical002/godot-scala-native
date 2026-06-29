@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GLTFTexture`, extends `Resource`. */
 abstract class GLTFTexture extends Resource {
+  override def godotClassName: String = "GLTFTexture"
 
   /** GLTFTexture.get_src_image */
   final def getSrcImage(): Long =
@@ -24,14 +25,4 @@ abstract class GLTFTexture extends Resource {
   final def setSampler(sampler: Long): Unit =
     Ptrcall.callVoid1(MethodBind.get("GLTFTexture", "set_sampler", 1286410249L), hostObject.objectPtr, sampler)
 
-}
-
-object GLTFTexture {
-  /** Class metadata for Gd[GLTFTexture] lifetime management and casting. */
-  given GodotClass[GLTFTexture] with {
-    def className = "GLTFTexture"
-    def isRefCounted = true
-    def wrap(o: GodotObject): GLTFTexture = new GLTFTexture {}.withHost(o.objectPtr)
-    def unwrap(t: GLTFTexture): GodotObject = t.hostObject
-  }
 }

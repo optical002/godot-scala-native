@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeColorFunc`, extends `VisualShaderNode`. */
 abstract class VisualShaderNodeColorFunc extends VisualShaderNode {
+  override def godotClassName: String = "VisualShaderNodeColorFunc"
 
   /** VisualShaderNodeColorFunc.set_function */
   final def setFunction(func: Long): Unit =
@@ -16,14 +17,4 @@ abstract class VisualShaderNodeColorFunc extends VisualShaderNode {
   final def getFunction(): Long =
     Ptrcall.call0[Long](MethodBind.get("VisualShaderNodeColorFunc", "get_function", 554863321L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeColorFunc {
-  /** Class metadata for Gd[VisualShaderNodeColorFunc] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeColorFunc] with {
-    def className = "VisualShaderNodeColorFunc"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeColorFunc = new VisualShaderNodeColorFunc {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeColorFunc): GodotObject = t.hostObject
-  }
 }

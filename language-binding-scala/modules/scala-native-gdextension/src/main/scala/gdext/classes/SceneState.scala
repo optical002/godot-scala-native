@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SceneState`, extends `RefCounted`. */
 abstract class SceneState extends RefCounted {
+  override def godotClassName: String = "SceneState"
 
   /** SceneState.get_path */
   final def getPath(): String =
@@ -72,14 +73,4 @@ abstract class SceneState extends RefCounted {
   final def getConnectionUnbinds(idx: Long): Long =
     Ptrcall.call1[Long, Long](MethodBind.get("SceneState", "get_connection_unbinds", 923996154L), hostObject.objectPtr, idx)
 
-}
-
-object SceneState {
-  /** Class metadata for Gd[SceneState] lifetime management and casting. */
-  given GodotClass[SceneState] with {
-    def className = "SceneState"
-    def isRefCounted = true
-    def wrap(o: GodotObject): SceneState = new SceneState {}.withHost(o.objectPtr)
-    def unwrap(t: SceneState): GodotObject = t.hostObject
-  }
 }

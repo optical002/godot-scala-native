@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RDUniform`, extends `RefCounted`. */
 abstract class RDUniform extends RefCounted {
+  override def godotClassName: String = "RDUniform"
 
   /** RDUniform.set_uniform_type */
   final def setUniformType(p_member: Long): Unit =
@@ -28,14 +29,4 @@ abstract class RDUniform extends RefCounted {
   final def clearIds(): Unit =
     Ptrcall.callVoid0(MethodBind.get("RDUniform", "clear_ids", 3218959716L), hostObject.objectPtr)
 
-}
-
-object RDUniform {
-  /** Class metadata for Gd[RDUniform] lifetime management and casting. */
-  given GodotClass[RDUniform] with {
-    def className = "RDUniform"
-    def isRefCounted = true
-    def wrap(o: GodotObject): RDUniform = new RDUniform {}.withHost(o.objectPtr)
-    def unwrap(t: RDUniform): GodotObject = t.hostObject
-  }
 }

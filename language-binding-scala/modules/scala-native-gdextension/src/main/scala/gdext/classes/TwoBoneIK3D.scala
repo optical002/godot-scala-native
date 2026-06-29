@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TwoBoneIK3D`, extends `IKModifier3D`. */
 abstract class TwoBoneIK3D extends IKModifier3D {
+  override def godotClassName: String = "TwoBoneIK3D"
 
   /** TwoBoneIK3D.set_root_bone_name */
   final def setRootBoneName(index: Long, bone_name: String): Unit =
@@ -104,14 +105,4 @@ abstract class TwoBoneIK3D extends IKModifier3D {
   final def getEndBoneLength(index: Long): Double =
     Ptrcall.call1[Long, Double](MethodBind.get("TwoBoneIK3D", "get_end_bone_length", 2339986948L), hostObject.objectPtr, index)
 
-}
-
-object TwoBoneIK3D {
-  /** Class metadata for Gd[TwoBoneIK3D] lifetime management and casting. */
-  given GodotClass[TwoBoneIK3D] with {
-    def className = "TwoBoneIK3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): TwoBoneIK3D = new TwoBoneIK3D {}.withHost(o.objectPtr)
-    def unwrap(t: TwoBoneIK3D): GodotObject = t.hostObject
-  }
 }

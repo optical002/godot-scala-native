@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OptionButton`, extends `Button`. */
 abstract class OptionButton extends Button {
+  override def godotClassName: String = "OptionButton"
 
   /** OptionButton.add_item */
   final def addItem(label: String, id: Long): Unit =
@@ -140,14 +141,4 @@ abstract class OptionButton extends Button {
   final def setDisableShortcuts(disabled: Boolean): Unit =
     Ptrcall.callVoid1(MethodBind.get("OptionButton", "set_disable_shortcuts", 2586408642L), hostObject.objectPtr, disabled)
 
-}
-
-object OptionButton {
-  /** Class metadata for Gd[OptionButton] lifetime management and casting. */
-  given GodotClass[OptionButton] with {
-    def className = "OptionButton"
-    def isRefCounted = false
-    def wrap(o: GodotObject): OptionButton = new OptionButton {}.withHost(o.objectPtr)
-    def unwrap(t: OptionButton): GodotObject = t.hostObject
-  }
 }

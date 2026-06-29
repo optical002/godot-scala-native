@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CSGMesh3D`, extends `CSGPrimitive3D`. */
 abstract class CSGMesh3D extends CSGPrimitive3D {
+  override def godotClassName: String = "CSGMesh3D"
 
   /** CSGMesh3D.set_mesh */
   final def setMesh(mesh: Mesh): Unit =
@@ -24,14 +25,4 @@ abstract class CSGMesh3D extends CSGPrimitive3D {
   final def getMaterial(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("CSGMesh3D", "get_material", 5934680L), hostObject.objectPtr)
 
-}
-
-object CSGMesh3D {
-  /** Class metadata for Gd[CSGMesh3D] lifetime management and casting. */
-  given GodotClass[CSGMesh3D] with {
-    def className = "CSGMesh3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): CSGMesh3D = new CSGMesh3D {}.withHost(o.objectPtr)
-    def unwrap(t: CSGMesh3D): GodotObject = t.hostObject
-  }
 }

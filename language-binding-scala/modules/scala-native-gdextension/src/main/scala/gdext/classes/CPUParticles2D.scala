@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CPUParticles2D`, extends `Node2D`. */
 abstract class CPUParticles2D extends Node2D {
+  override def godotClassName: String = "CPUParticles2D"
 
   /** CPUParticles2D.set_emitting */
   final def setEmitting(emitting: Boolean): Unit =
@@ -292,14 +293,4 @@ abstract class CPUParticles2D extends Node2D {
   final def convertFromParticles(particles: Node): Unit =
     Ptrcall.callVoid1(MethodBind.get("CPUParticles2D", "convert_from_particles", 1078189570L), hostObject.objectPtr, particles.hostObject)
 
-}
-
-object CPUParticles2D {
-  /** Class metadata for Gd[CPUParticles2D] lifetime management and casting. */
-  given GodotClass[CPUParticles2D] with {
-    def className = "CPUParticles2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): CPUParticles2D = new CPUParticles2D {}.withHost(o.objectPtr)
-    def unwrap(t: CPUParticles2D): GodotObject = t.hostObject
-  }
 }

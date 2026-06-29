@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Decal`, extends `VisualInstance3D`. */
 abstract class Decal extends VisualInstance3D {
+  override def godotClassName: String = "Decal"
 
   /** Decal.set_size */
   final def setSize(size: gdext.builtin.Vector3): Unit =
@@ -104,14 +105,4 @@ abstract class Decal extends VisualInstance3D {
   final def getCullMask(): Long =
     Ptrcall.call0[Long](MethodBind.get("Decal", "get_cull_mask", 3905245786L), hostObject.objectPtr)
 
-}
-
-object Decal {
-  /** Class metadata for Gd[Decal] lifetime management and casting. */
-  given GodotClass[Decal] with {
-    def className = "Decal"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Decal = new Decal {}.withHost(o.objectPtr)
-    def unwrap(t: Decal): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `UPNP`, extends `RefCounted`. */
 abstract class UPNP extends RefCounted {
+  override def godotClassName: String = "UPNP"
 
   /** UPNP.get_device_count */
   final def getDeviceCount(): Long =
@@ -76,14 +77,4 @@ abstract class UPNP extends RefCounted {
   final def isDiscoverIpv6(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("UPNP", "is_discover_ipv6", 36873697L), hostObject.objectPtr)
 
-}
-
-object UPNP {
-  /** Class metadata for Gd[UPNP] lifetime management and casting. */
-  given GodotClass[UPNP] with {
-    def className = "UPNP"
-    def isRefCounted = true
-    def wrap(o: GodotObject): UPNP = new UPNP {}.withHost(o.objectPtr)
-    def unwrap(t: UPNP): GodotObject = t.hostObject
-  }
 }

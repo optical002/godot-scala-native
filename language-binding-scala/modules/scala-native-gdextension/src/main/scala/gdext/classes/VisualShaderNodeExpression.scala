@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeExpression`, extends `VisualShaderNodeGroupBase`. */
 abstract class VisualShaderNodeExpression extends VisualShaderNodeGroupBase {
+  override def godotClassName: String = "VisualShaderNodeExpression"
 
   /** VisualShaderNodeExpression.set_expression */
   final def setExpression(expression: String): Unit =
@@ -16,14 +17,4 @@ abstract class VisualShaderNodeExpression extends VisualShaderNodeGroupBase {
   final def getExpression(): String =
     Ptrcall.call0[String](MethodBind.get("VisualShaderNodeExpression", "get_expression", 201670096L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeExpression {
-  /** Class metadata for Gd[VisualShaderNodeExpression] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeExpression] with {
-    def className = "VisualShaderNodeExpression"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeExpression = new VisualShaderNodeExpression {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeExpression): GodotObject = t.hostObject
-  }
 }

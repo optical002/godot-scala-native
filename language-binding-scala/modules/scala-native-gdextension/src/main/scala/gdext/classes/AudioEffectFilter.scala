@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioEffectFilter`, extends `AudioEffect`. */
 abstract class AudioEffectFilter extends AudioEffect {
+  override def godotClassName: String = "AudioEffectFilter"
 
   /** AudioEffectFilter.set_cutoff */
   final def setCutoff(freq: Double): Unit =
@@ -40,14 +41,4 @@ abstract class AudioEffectFilter extends AudioEffect {
   final def getDb(): Long =
     Ptrcall.call0[Long](MethodBind.get("AudioEffectFilter", "get_db", 3981721890L), hostObject.objectPtr)
 
-}
-
-object AudioEffectFilter {
-  /** Class metadata for Gd[AudioEffectFilter] lifetime management and casting. */
-  given GodotClass[AudioEffectFilter] with {
-    def className = "AudioEffectFilter"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioEffectFilter = new AudioEffectFilter {}.withHost(o.objectPtr)
-    def unwrap(t: AudioEffectFilter): GodotObject = t.hostObject
-  }
 }

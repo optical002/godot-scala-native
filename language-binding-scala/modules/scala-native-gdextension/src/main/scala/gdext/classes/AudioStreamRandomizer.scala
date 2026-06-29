@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioStreamRandomizer`, extends `AudioStream`. */
 abstract class AudioStreamRandomizer extends AudioStream {
+  override def godotClassName: String = "AudioStreamRandomizer"
 
   /** AudioStreamRandomizer.add_stream */
   final def addStream(index: Long, stream: AudioStream, weight: Double): Unit =
@@ -76,14 +77,4 @@ abstract class AudioStreamRandomizer extends AudioStream {
   final def getPlaybackMode(): Long =
     Ptrcall.call0[Long](MethodBind.get("AudioStreamRandomizer", "get_playback_mode", 3943055077L), hostObject.objectPtr)
 
-}
-
-object AudioStreamRandomizer {
-  /** Class metadata for Gd[AudioStreamRandomizer] lifetime management and casting. */
-  given GodotClass[AudioStreamRandomizer] with {
-    def className = "AudioStreamRandomizer"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioStreamRandomizer = new AudioStreamRandomizer {}.withHost(o.objectPtr)
-    def unwrap(t: AudioStreamRandomizer): GodotObject = t.hostObject
-  }
 }

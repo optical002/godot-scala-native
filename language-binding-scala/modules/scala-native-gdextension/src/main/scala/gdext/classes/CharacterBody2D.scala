@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CharacterBody2D`, extends `PhysicsBody2D`. */
 abstract class CharacterBody2D extends PhysicsBody2D {
+  override def godotClassName: String = "CharacterBody2D"
 
   /** CharacterBody2D.move_and_slide */
   final def moveAndSlide(): Boolean =
@@ -200,14 +201,4 @@ abstract class CharacterBody2D extends PhysicsBody2D {
   final def getLastSlideCollision(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("CharacterBody2D", "get_last_slide_collision", 2161834755L), hostObject.objectPtr)
 
-}
-
-object CharacterBody2D {
-  /** Class metadata for Gd[CharacterBody2D] lifetime management and casting. */
-  given GodotClass[CharacterBody2D] with {
-    def className = "CharacterBody2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): CharacterBody2D = new CharacterBody2D {}.withHost(o.objectPtr)
-    def unwrap(t: CharacterBody2D): GodotObject = t.hostObject
-  }
 }

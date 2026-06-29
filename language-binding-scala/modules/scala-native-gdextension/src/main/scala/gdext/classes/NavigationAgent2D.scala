@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `NavigationAgent2D`, extends `Node`. */
 abstract class NavigationAgent2D extends Node {
+  override def godotClassName: String = "NavigationAgent2D"
 
   /** NavigationAgent2D.set_avoidance_enabled */
   final def setAvoidanceEnabled(enabled: Boolean): Unit =
@@ -312,14 +313,4 @@ abstract class NavigationAgent2D extends Node {
   final def getDebugPathCustomLineWidth(): Double =
     Ptrcall.call0[Double](MethodBind.get("NavigationAgent2D", "get_debug_path_custom_line_width", 1740695150L), hostObject.objectPtr)
 
-}
-
-object NavigationAgent2D {
-  /** Class metadata for Gd[NavigationAgent2D] lifetime management and casting. */
-  given GodotClass[NavigationAgent2D] with {
-    def className = "NavigationAgent2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): NavigationAgent2D = new NavigationAgent2D {}.withHost(o.objectPtr)
-    def unwrap(t: NavigationAgent2D): GodotObject = t.hostObject
-  }
 }

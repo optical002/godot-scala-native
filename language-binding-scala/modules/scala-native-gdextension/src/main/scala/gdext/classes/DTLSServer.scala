@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `DTLSServer`, extends `RefCounted`. */
 abstract class DTLSServer extends RefCounted {
+  override def godotClassName: String = "DTLSServer"
 
   /** DTLSServer.setup */
   final def setup(server_options: TLSOptions): Long =
@@ -16,14 +17,4 @@ abstract class DTLSServer extends RefCounted {
   final def takeConnection(udp_peer: PacketPeerUDP): GodotObject =
     Ptrcall.call1[GodotObject, GodotObject](MethodBind.get("DTLSServer", "take_connection", 3946580474L), hostObject.objectPtr, udp_peer.hostObject)
 
-}
-
-object DTLSServer {
-  /** Class metadata for Gd[DTLSServer] lifetime management and casting. */
-  given GodotClass[DTLSServer] with {
-    def className = "DTLSServer"
-    def isRefCounted = true
-    def wrap(o: GodotObject): DTLSServer = new DTLSServer {}.withHost(o.objectPtr)
-    def unwrap(t: DTLSServer): GodotObject = t.hostObject
-  }
 }

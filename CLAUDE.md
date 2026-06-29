@@ -22,7 +22,8 @@ task — they tell you which files matter and the gotchas to respect.
 
 Quick map:
 - [architecture](.claude/memories/index.md) — modules, layers, build/run flow
-- layer1–5 — FFI, builtin, engine classes, `Gd[T]`, registration
+- layer1–5 — FFI, builtin, engine classes, object model (`ClassMeta`/`Gd`
+  facade; no `Gd[T]` smart pointer), registration
 - conventions — native/FFI gotchas, hot-reload, logging, codegen rules
 
 ## Golden rules

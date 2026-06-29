@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `BoxMesh`, extends `PrimitiveMesh`. */
 abstract class BoxMesh extends PrimitiveMesh {
+  override def godotClassName: String = "BoxMesh"
 
   /** BoxMesh.set_size */
   final def setSize(size: gdext.builtin.Vector3): Unit =
@@ -40,14 +41,4 @@ abstract class BoxMesh extends PrimitiveMesh {
   final def getSubdivideDepth(): Long =
     Ptrcall.call0[Long](MethodBind.get("BoxMesh", "get_subdivide_depth", 3905245786L), hostObject.objectPtr)
 
-}
-
-object BoxMesh {
-  /** Class metadata for Gd[BoxMesh] lifetime management and casting. */
-  given GodotClass[BoxMesh] with {
-    def className = "BoxMesh"
-    def isRefCounted = true
-    def wrap(o: GodotObject): BoxMesh = new BoxMesh {}.withHost(o.objectPtr)
-    def unwrap(t: BoxMesh): GodotObject = t.hostObject
-  }
 }

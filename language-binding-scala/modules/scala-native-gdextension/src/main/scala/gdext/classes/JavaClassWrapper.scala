@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `JavaClassWrapper`, extends `Object`. */
 abstract class JavaClassWrapper extends Object {
+  override def godotClassName: String = "JavaClassWrapper"
 
   /** JavaClassWrapper.wrap */
   final def wrap(name: String): GodotObject =
@@ -19,14 +20,6 @@ abstract class JavaClassWrapper extends Object {
 }
 
 object JavaClassWrapper {
-  /** Class metadata for Gd[JavaClassWrapper] lifetime management and casting. */
-  given GodotClass[JavaClassWrapper] with {
-    def className = "JavaClassWrapper"
-    def isRefCounted = false
-    def wrap(o: GodotObject): JavaClassWrapper = new JavaClassWrapper {}.withHost(o.objectPtr)
-    def unwrap(t: JavaClassWrapper): GodotObject = t.hostObject
-  }
-
   /** The process-global JavaClassWrapper singleton instance. */
   def singleton: JavaClassWrapper = new JavaClassWrapper {}
     .withHost(Godot.interface.global_get_singleton(

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorContextMenuPlugin`, extends `RefCounted`. */
 abstract class EditorContextMenuPlugin extends RefCounted {
+  override def godotClassName: String = "EditorContextMenuPlugin"
 
   /** EditorContextMenuPlugin.add_context_menu_item_from_shortcut */
   final def addContextMenuItemFromShortcut(name: String, shortcut: Shortcut, icon: Texture2D): Unit =
@@ -16,14 +17,4 @@ abstract class EditorContextMenuPlugin extends RefCounted {
   final def addContextSubmenuItem(name: String, menu: PopupMenu, icon: Texture2D): Unit =
     Ptrcall.callVoid3(MethodBind.get("EditorContextMenuPlugin", "add_context_submenu_item", 1994674995L), hostObject.objectPtr, name, menu.hostObject, icon.hostObject)
 
-}
-
-object EditorContextMenuPlugin {
-  /** Class metadata for Gd[EditorContextMenuPlugin] lifetime management and casting. */
-  given GodotClass[EditorContextMenuPlugin] with {
-    def className = "EditorContextMenuPlugin"
-    def isRefCounted = true
-    def wrap(o: GodotObject): EditorContextMenuPlugin = new EditorContextMenuPlugin {}.withHost(o.objectPtr)
-    def unwrap(t: EditorContextMenuPlugin): GodotObject = t.hostObject
-  }
 }

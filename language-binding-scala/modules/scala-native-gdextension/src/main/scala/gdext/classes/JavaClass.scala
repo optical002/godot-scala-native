@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `JavaClass`, extends `RefCounted`. */
 abstract class JavaClass extends RefCounted {
+  override def godotClassName: String = "JavaClass"
 
   /** JavaClass.get_java_class_name */
   final def getJavaClassName(): String =
@@ -20,14 +21,4 @@ abstract class JavaClass extends RefCounted {
   final def hasJavaMethod(method: gdext.builtin.StringName): Boolean =
     Ptrcall.call1[gdext.builtin.StringName, Boolean](MethodBind.get("JavaClass", "has_java_method", 2619796661L), hostObject.objectPtr, method)
 
-}
-
-object JavaClass {
-  /** Class metadata for Gd[JavaClass] lifetime management and casting. */
-  given GodotClass[JavaClass] with {
-    def className = "JavaClass"
-    def isRefCounted = true
-    def wrap(o: GodotObject): JavaClass = new JavaClass {}.withHost(o.objectPtr)
-    def unwrap(t: JavaClass): GodotObject = t.hostObject
-  }
 }

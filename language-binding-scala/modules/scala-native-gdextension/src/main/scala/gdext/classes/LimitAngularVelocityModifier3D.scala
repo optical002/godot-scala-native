@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `LimitAngularVelocityModifier3D`, extends `SkeletonModifier3D`. */
 abstract class LimitAngularVelocityModifier3D extends SkeletonModifier3D {
+  override def godotClassName: String = "LimitAngularVelocityModifier3D"
 
   /** LimitAngularVelocityModifier3D.set_root_bone_name */
   final def setRootBoneName(index: Long, bone_name: String): Unit =
@@ -72,14 +73,4 @@ abstract class LimitAngularVelocityModifier3D extends SkeletonModifier3D {
   final def reset(): Unit =
     Ptrcall.callVoid0(MethodBind.get("LimitAngularVelocityModifier3D", "reset", 3218959716L), hostObject.objectPtr)
 
-}
-
-object LimitAngularVelocityModifier3D {
-  /** Class metadata for Gd[LimitAngularVelocityModifier3D] lifetime management and casting. */
-  given GodotClass[LimitAngularVelocityModifier3D] with {
-    def className = "LimitAngularVelocityModifier3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): LimitAngularVelocityModifier3D = new LimitAngularVelocityModifier3D {}.withHost(o.objectPtr)
-    def unwrap(t: LimitAngularVelocityModifier3D): GodotObject = t.hostObject
-  }
 }

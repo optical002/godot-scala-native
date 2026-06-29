@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ReflectionProbe`, extends `VisualInstance3D`. */
 abstract class ReflectionProbe extends VisualInstance3D {
+  override def godotClassName: String = "ReflectionProbe"
 
   /** ReflectionProbe.set_intensity */
   final def setIntensity(intensity: Double): Unit =
@@ -128,14 +129,4 @@ abstract class ReflectionProbe extends VisualInstance3D {
   final def getUpdateMode(): Long =
     Ptrcall.call0[Long](MethodBind.get("ReflectionProbe", "get_update_mode", 2367550552L), hostObject.objectPtr)
 
-}
-
-object ReflectionProbe {
-  /** Class metadata for Gd[ReflectionProbe] lifetime management and casting. */
-  given GodotClass[ReflectionProbe] with {
-    def className = "ReflectionProbe"
-    def isRefCounted = false
-    def wrap(o: GodotObject): ReflectionProbe = new ReflectionProbe {}.withHost(o.objectPtr)
-    def unwrap(t: ReflectionProbe): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SkeletonIK3D`, extends `SkeletonModifier3D`. */
 abstract class SkeletonIK3D extends SkeletonModifier3D {
+  override def godotClassName: String = "SkeletonIK3D"
 
   /** SkeletonIK3D.set_root_bone */
   final def setRootBone(root_bone: gdext.builtin.StringName): Unit =
@@ -96,14 +97,4 @@ abstract class SkeletonIK3D extends SkeletonModifier3D {
   final def getInterpolation(): Double =
     Ptrcall.call0[Double](MethodBind.get("SkeletonIK3D", "get_interpolation", 1740695150L), hostObject.objectPtr)
 
-}
-
-object SkeletonIK3D {
-  /** Class metadata for Gd[SkeletonIK3D] lifetime management and casting. */
-  given GodotClass[SkeletonIK3D] with {
-    def className = "SkeletonIK3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): SkeletonIK3D = new SkeletonIK3D {}.withHost(o.objectPtr)
-    def unwrap(t: SkeletonIK3D): GodotObject = t.hostObject
-  }
 }

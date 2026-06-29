@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `InputEventMouseButton`, extends `InputEventMouse`. */
 abstract class InputEventMouseButton extends InputEventMouse {
+  override def godotClassName: String = "InputEventMouseButton"
 
   /** InputEventMouseButton.set_factor */
   final def setFactor(factor: Double): Unit =
@@ -40,14 +41,4 @@ abstract class InputEventMouseButton extends InputEventMouse {
   final def isDoubleClick(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("InputEventMouseButton", "is_double_click", 36873697L), hostObject.objectPtr)
 
-}
-
-object InputEventMouseButton {
-  /** Class metadata for Gd[InputEventMouseButton] lifetime management and casting. */
-  given GodotClass[InputEventMouseButton] with {
-    def className = "InputEventMouseButton"
-    def isRefCounted = true
-    def wrap(o: GodotObject): InputEventMouseButton = new InputEventMouseButton {}.withHost(o.objectPtr)
-    def unwrap(t: InputEventMouseButton): GodotObject = t.hostObject
-  }
 }

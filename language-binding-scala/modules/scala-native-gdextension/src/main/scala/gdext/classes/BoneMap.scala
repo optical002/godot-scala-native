@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `BoneMap`, extends `Resource`. */
 abstract class BoneMap extends Resource {
+  override def godotClassName: String = "BoneMap"
 
   /** BoneMap.get_profile */
   final def getProfile(): GodotObject =
@@ -28,14 +29,4 @@ abstract class BoneMap extends Resource {
   final def findProfileBoneName(skeleton_bone_name: gdext.builtin.StringName): gdext.builtin.StringName =
     Ptrcall.call1[gdext.builtin.StringName, gdext.builtin.StringName](MethodBind.get("BoneMap", "find_profile_bone_name", 1965194235L), hostObject.objectPtr, skeleton_bone_name)
 
-}
-
-object BoneMap {
-  /** Class metadata for Gd[BoneMap] lifetime management and casting. */
-  given GodotClass[BoneMap] with {
-    def className = "BoneMap"
-    def isRefCounted = true
-    def wrap(o: GodotObject): BoneMap = new BoneMap {}.withHost(o.objectPtr)
-    def unwrap(t: BoneMap): GodotObject = t.hostObject
-  }
 }

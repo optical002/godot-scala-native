@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRSpatialAnchorCapability`, extends `OpenXRExtensionWrapper`. */
 abstract class OpenXRSpatialAnchorCapability extends OpenXRExtensionWrapper {
+  override def godotClassName: String = "OpenXRSpatialAnchorCapability"
 
   /** OpenXRSpatialAnchorCapability.is_spatial_anchor_supported */
   final def isSpatialAnchorSupported(): Boolean =
@@ -24,14 +25,4 @@ abstract class OpenXRSpatialAnchorCapability extends OpenXRExtensionWrapper {
   final def removeAnchor(anchor_tracker: OpenXRAnchorTracker): Unit =
     Ptrcall.callVoid1(MethodBind.get("OpenXRSpatialAnchorCapability", "remove_anchor", 3579451518L), hostObject.objectPtr, anchor_tracker.hostObject)
 
-}
-
-object OpenXRSpatialAnchorCapability {
-  /** Class metadata for Gd[OpenXRSpatialAnchorCapability] lifetime management and casting. */
-  given GodotClass[OpenXRSpatialAnchorCapability] with {
-    def className = "OpenXRSpatialAnchorCapability"
-    def isRefCounted = false
-    def wrap(o: GodotObject): OpenXRSpatialAnchorCapability = new OpenXRSpatialAnchorCapability {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRSpatialAnchorCapability): GodotObject = t.hostObject
-  }
 }

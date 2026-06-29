@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PopupMenu`, extends `Popup`. */
 abstract class PopupMenu extends Popup {
+  override def godotClassName: String = "PopupMenu"
 
   /** PopupMenu.activate_item_by_event */
   final def activateItemByEvent(event: InputEvent, for_global_only: Boolean): Boolean =
@@ -372,14 +373,4 @@ abstract class PopupMenu extends Popup {
   final def getShrinkWidth(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("PopupMenu", "get_shrink_width", 36873697L), hostObject.objectPtr)
 
-}
-
-object PopupMenu {
-  /** Class metadata for Gd[PopupMenu] lifetime management and casting. */
-  given GodotClass[PopupMenu] with {
-    def className = "PopupMenu"
-    def isRefCounted = false
-    def wrap(o: GodotObject): PopupMenu = new PopupMenu {}.withHost(o.objectPtr)
-    def unwrap(t: PopupMenu): GodotObject = t.hostObject
-  }
 }

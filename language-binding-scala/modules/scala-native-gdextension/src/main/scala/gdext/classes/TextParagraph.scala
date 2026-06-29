@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TextParagraph`, extends `RefCounted`. */
 abstract class TextParagraph extends RefCounted {
+  override def godotClassName: String = "TextParagraph"
 
   /** TextParagraph.clear */
   final def clear(): Unit =
@@ -188,14 +189,4 @@ abstract class TextParagraph extends RefCounted {
   final def hitTest(coords: gdext.builtin.Vector2): Long =
     Ptrcall.call1[gdext.builtin.Vector2, Long](MethodBind.get("TextParagraph", "hit_test", 3820158470L), hostObject.objectPtr, coords)
 
-}
-
-object TextParagraph {
-  /** Class metadata for Gd[TextParagraph] lifetime management and casting. */
-  given GodotClass[TextParagraph] with {
-    def className = "TextParagraph"
-    def isRefCounted = true
-    def wrap(o: GodotObject): TextParagraph = new TextParagraph {}.withHost(o.objectPtr)
-    def unwrap(t: TextParagraph): GodotObject = t.hostObject
-  }
 }

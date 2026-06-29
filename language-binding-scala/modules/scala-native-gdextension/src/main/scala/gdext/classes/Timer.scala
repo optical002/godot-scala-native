@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Timer`, extends `Node`. */
 abstract class Timer extends Node {
+  override def godotClassName: String = "Timer"
 
   /** Timer.set_wait_time */
   final def setWaitTime(time_sec: Double): Unit =
@@ -72,14 +73,4 @@ abstract class Timer extends Node {
   final def getTimerProcessCallback(): Long =
     Ptrcall.call0[Long](MethodBind.get("Timer", "get_timer_process_callback", 2672570227L), hostObject.objectPtr)
 
-}
-
-object Timer {
-  /** Class metadata for Gd[Timer] lifetime management and casting. */
-  given GodotClass[Timer] with {
-    def className = "Timer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Timer = new Timer {}.withHost(o.objectPtr)
-    def unwrap(t: Timer): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRCompositionLayerEquirect`, extends `OpenXRCompositionLayer`. */
 abstract class OpenXRCompositionLayerEquirect extends OpenXRCompositionLayer {
+  override def godotClassName: String = "OpenXRCompositionLayerEquirect"
 
   /** OpenXRCompositionLayerEquirect.set_radius */
   final def setRadius(radius: Double): Unit =
@@ -48,14 +49,4 @@ abstract class OpenXRCompositionLayerEquirect extends OpenXRCompositionLayer {
   final def getFallbackSegments(): Long =
     Ptrcall.call0[Long](MethodBind.get("OpenXRCompositionLayerEquirect", "get_fallback_segments", 3905245786L), hostObject.objectPtr)
 
-}
-
-object OpenXRCompositionLayerEquirect {
-  /** Class metadata for Gd[OpenXRCompositionLayerEquirect] lifetime management and casting. */
-  given GodotClass[OpenXRCompositionLayerEquirect] with {
-    def className = "OpenXRCompositionLayerEquirect"
-    def isRefCounted = false
-    def wrap(o: GodotObject): OpenXRCompositionLayerEquirect = new OpenXRCompositionLayerEquirect {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRCompositionLayerEquirect): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorExportPlatformExtension`, extends `EditorExportPlatform`. */
 abstract class EditorExportPlatformExtension extends EditorExportPlatform {
+  override def godotClassName: String = "EditorExportPlatformExtension"
 
   /** EditorExportPlatformExtension.set_config_error */
   final def setConfigError(error_text: String): Unit =
@@ -24,14 +25,4 @@ abstract class EditorExportPlatformExtension extends EditorExportPlatform {
   final def getConfigMissingTemplates(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("EditorExportPlatformExtension", "get_config_missing_templates", 36873697L), hostObject.objectPtr)
 
-}
-
-object EditorExportPlatformExtension {
-  /** Class metadata for Gd[EditorExportPlatformExtension] lifetime management and casting. */
-  given GodotClass[EditorExportPlatformExtension] with {
-    def className = "EditorExportPlatformExtension"
-    def isRefCounted = true
-    def wrap(o: GodotObject): EditorExportPlatformExtension = new EditorExportPlatformExtension {}.withHost(o.objectPtr)
-    def unwrap(t: EditorExportPlatformExtension): GodotObject = t.hostObject
-  }
 }

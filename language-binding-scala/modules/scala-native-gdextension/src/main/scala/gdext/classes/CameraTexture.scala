@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CameraTexture`, extends `Texture2D`. */
 abstract class CameraTexture extends Texture2D {
+  override def godotClassName: String = "CameraTexture"
 
   /** CameraTexture.set_camera_feed_id */
   final def setCameraFeedId(feed_id: Long): Unit =
@@ -32,14 +33,4 @@ abstract class CameraTexture extends Texture2D {
   final def getCameraActive(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("CameraTexture", "get_camera_active", 36873697L), hostObject.objectPtr)
 
-}
-
-object CameraTexture {
-  /** Class metadata for Gd[CameraTexture] lifetime management and casting. */
-  given GodotClass[CameraTexture] with {
-    def className = "CameraTexture"
-    def isRefCounted = true
-    def wrap(o: GodotObject): CameraTexture = new CameraTexture {}.withHost(o.objectPtr)
-    def unwrap(t: CameraTexture): GodotObject = t.hostObject
-  }
 }

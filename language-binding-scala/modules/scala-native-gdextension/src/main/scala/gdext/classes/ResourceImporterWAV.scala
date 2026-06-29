@@ -7,15 +7,6 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ResourceImporterWAV`, extends `ResourceImporter`. */
 abstract class ResourceImporterWAV extends ResourceImporter {
+  override def godotClassName: String = "ResourceImporterWAV"
 
-}
-
-object ResourceImporterWAV {
-  /** Class metadata for Gd[ResourceImporterWAV] lifetime management and casting. */
-  given GodotClass[ResourceImporterWAV] with {
-    def className = "ResourceImporterWAV"
-    def isRefCounted = true
-    def wrap(o: GodotObject): ResourceImporterWAV = new ResourceImporterWAV {}.withHost(o.objectPtr)
-    def unwrap(t: ResourceImporterWAV): GodotObject = t.hostObject
-  }
 }

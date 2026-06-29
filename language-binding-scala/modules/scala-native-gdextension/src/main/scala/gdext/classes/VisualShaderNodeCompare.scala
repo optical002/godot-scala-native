@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeCompare`, extends `VisualShaderNode`. */
 abstract class VisualShaderNodeCompare extends VisualShaderNode {
+  override def godotClassName: String = "VisualShaderNodeCompare"
 
   /** VisualShaderNodeCompare.set_comparison_type */
   final def setComparisonType(`type`: Long): Unit =
@@ -32,14 +33,4 @@ abstract class VisualShaderNodeCompare extends VisualShaderNode {
   final def getCondition(): Long =
     Ptrcall.call0[Long](MethodBind.get("VisualShaderNodeCompare", "get_condition", 3281078941L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeCompare {
-  /** Class metadata for Gd[VisualShaderNodeCompare] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeCompare] with {
-    def className = "VisualShaderNodeCompare"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeCompare = new VisualShaderNodeCompare {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeCompare): GodotObject = t.hostObject
-  }
 }

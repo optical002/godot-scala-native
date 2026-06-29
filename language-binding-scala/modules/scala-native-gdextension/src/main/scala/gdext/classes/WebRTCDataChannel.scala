@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `WebRTCDataChannel`, extends `PacketPeer`. */
 abstract class WebRTCDataChannel extends PacketPeer {
+  override def godotClassName: String = "WebRTCDataChannel"
 
   /** WebRTCDataChannel.poll */
   final def poll(): Long =
@@ -64,14 +65,4 @@ abstract class WebRTCDataChannel extends PacketPeer {
   final def getBufferedAmount(): Long =
     Ptrcall.call0[Long](MethodBind.get("WebRTCDataChannel", "get_buffered_amount", 3905245786L), hostObject.objectPtr)
 
-}
-
-object WebRTCDataChannel {
-  /** Class metadata for Gd[WebRTCDataChannel] lifetime management and casting. */
-  given GodotClass[WebRTCDataChannel] with {
-    def className = "WebRTCDataChannel"
-    def isRefCounted = true
-    def wrap(o: GodotObject): WebRTCDataChannel = new WebRTCDataChannel {}.withHost(o.objectPtr)
-    def unwrap(t: WebRTCDataChannel): GodotObject = t.hostObject
-  }
 }

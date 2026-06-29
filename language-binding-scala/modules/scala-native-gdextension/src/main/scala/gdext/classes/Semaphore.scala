@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Semaphore`, extends `RefCounted`. */
 abstract class Semaphore extends RefCounted {
+  override def godotClassName: String = "Semaphore"
 
   /** Semaphore.try_wait */
   final def tryWait(): Boolean =
@@ -16,14 +17,4 @@ abstract class Semaphore extends RefCounted {
   final def post(count: Long): Unit =
     Ptrcall.callVoid1(MethodBind.get("Semaphore", "post", 1667783136L), hostObject.objectPtr, count)
 
-}
-
-object Semaphore {
-  /** Class metadata for Gd[Semaphore] lifetime management and casting. */
-  given GodotClass[Semaphore] with {
-    def className = "Semaphore"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Semaphore = new Semaphore {}.withHost(o.objectPtr)
-    def unwrap(t: Semaphore): GodotObject = t.hostObject
-  }
 }

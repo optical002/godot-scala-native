@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Label`, extends `Control`. */
 abstract class Label extends Control {
+  override def godotClassName: String = "Label"
 
   /** Label.set_horizontal_alignment */
   final def setHorizontalAlignment(alignment: Long): Unit =
@@ -188,14 +189,4 @@ abstract class Label extends Control {
   final def getCharacterBounds(pos: Long): gdext.builtin.Rect2 =
     Ptrcall.call1[Long, gdext.builtin.Rect2](MethodBind.get("Label", "get_character_bounds", 3327874267L), hostObject.objectPtr, pos)
 
-}
-
-object Label {
-  /** Class metadata for Gd[Label] lifetime management and casting. */
-  given GodotClass[Label] with {
-    def className = "Label"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Label = new Label {}.withHost(o.objectPtr)
-    def unwrap(t: Label): GodotObject = t.hostObject
-  }
 }

@@ -7,15 +7,6 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ResourceImporterOggVorbis`, extends `ResourceImporter`. */
 abstract class ResourceImporterOggVorbis extends ResourceImporter {
+  override def godotClassName: String = "ResourceImporterOggVorbis"
 
-}
-
-object ResourceImporterOggVorbis {
-  /** Class metadata for Gd[ResourceImporterOggVorbis] lifetime management and casting. */
-  given GodotClass[ResourceImporterOggVorbis] with {
-    def className = "ResourceImporterOggVorbis"
-    def isRefCounted = true
-    def wrap(o: GodotObject): ResourceImporterOggVorbis = new ResourceImporterOggVorbis {}.withHost(o.objectPtr)
-    def unwrap(t: ResourceImporterOggVorbis): GodotObject = t.hostObject
-  }
 }

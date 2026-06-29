@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorScript`, extends `RefCounted`. */
 abstract class EditorScript extends RefCounted {
+  override def godotClassName: String = "EditorScript"
 
   /** EditorScript.add_root_node */
   final def addRootNode(node: Node): Unit =
@@ -20,14 +21,4 @@ abstract class EditorScript extends RefCounted {
   final def getEditorInterface(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("EditorScript", "get_editor_interface", 1976662476L), hostObject.objectPtr)
 
-}
-
-object EditorScript {
-  /** Class metadata for Gd[EditorScript] lifetime management and casting. */
-  given GodotClass[EditorScript] with {
-    def className = "EditorScript"
-    def isRefCounted = true
-    def wrap(o: GodotObject): EditorScript = new EditorScript {}.withHost(o.objectPtr)
-    def unwrap(t: EditorScript): GodotObject = t.hostObject
-  }
 }

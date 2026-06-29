@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SplineIK3D`, extends `ChainIK3D`. */
 abstract class SplineIK3D extends ChainIK3D {
+  override def godotClassName: String = "SplineIK3D"
 
   /** SplineIK3D.set_tilt_enabled */
   final def setTiltEnabled(index: Long, enabled: Boolean): Unit =
@@ -32,14 +33,4 @@ abstract class SplineIK3D extends ChainIK3D {
   final def getTiltFadeOut(index: Long): Long =
     Ptrcall.call1[Long, Long](MethodBind.get("SplineIK3D", "get_tilt_fade_out", 923996154L), hostObject.objectPtr, index)
 
-}
-
-object SplineIK3D {
-  /** Class metadata for Gd[SplineIK3D] lifetime management and casting. */
-  given GodotClass[SplineIK3D] with {
-    def className = "SplineIK3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): SplineIK3D = new SplineIK3D {}.withHost(o.objectPtr)
-    def unwrap(t: SplineIK3D): GodotObject = t.hostObject
-  }
 }

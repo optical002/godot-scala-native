@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeTransformVecMult`, extends `VisualShaderNode`. */
 abstract class VisualShaderNodeTransformVecMult extends VisualShaderNode {
+  override def godotClassName: String = "VisualShaderNodeTransformVecMult"
 
   /** VisualShaderNodeTransformVecMult.set_operator */
   final def setOperator(op: Long): Unit =
@@ -16,14 +17,4 @@ abstract class VisualShaderNodeTransformVecMult extends VisualShaderNode {
   final def getOperator(): Long =
     Ptrcall.call0[Long](MethodBind.get("VisualShaderNodeTransformVecMult", "get_operator", 1622088722L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeTransformVecMult {
-  /** Class metadata for Gd[VisualShaderNodeTransformVecMult] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeTransformVecMult] with {
-    def className = "VisualShaderNodeTransformVecMult"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeTransformVecMult = new VisualShaderNodeTransformVecMult {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeTransformVecMult): GodotObject = t.hostObject
-  }
 }

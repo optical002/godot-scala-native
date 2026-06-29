@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeClamp`, extends `VisualShaderNode`. */
 abstract class VisualShaderNodeClamp extends VisualShaderNode {
+  override def godotClassName: String = "VisualShaderNodeClamp"
 
   /** VisualShaderNodeClamp.set_op_type */
   final def setOpType(op_type: Long): Unit =
@@ -16,14 +17,4 @@ abstract class VisualShaderNodeClamp extends VisualShaderNode {
   final def getOpType(): Long =
     Ptrcall.call0[Long](MethodBind.get("VisualShaderNodeClamp", "get_op_type", 233276050L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeClamp {
-  /** Class metadata for Gd[VisualShaderNodeClamp] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeClamp] with {
-    def className = "VisualShaderNodeClamp"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeClamp = new VisualShaderNodeClamp {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeClamp): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GLTFSkeleton`, extends `Resource`. */
 abstract class GLTFSkeleton extends Resource {
+  override def godotClassName: String = "GLTFSkeleton"
 
   /** GLTFSkeleton.get_godot_skeleton */
   final def getGodotSkeleton(): GodotObject =
@@ -20,14 +21,4 @@ abstract class GLTFSkeleton extends Resource {
   final def getBoneAttachment(idx: Long): GodotObject =
     Ptrcall.call1[Long, GodotObject](MethodBind.get("GLTFSkeleton", "get_bone_attachment", 945440495L), hostObject.objectPtr, idx)
 
-}
-
-object GLTFSkeleton {
-  /** Class metadata for Gd[GLTFSkeleton] lifetime management and casting. */
-  given GodotClass[GLTFSkeleton] with {
-    def className = "GLTFSkeleton"
-    def isRefCounted = true
-    def wrap(o: GodotObject): GLTFSkeleton = new GLTFSkeleton {}.withHost(o.objectPtr)
-    def unwrap(t: GLTFSkeleton): GodotObject = t.hostObject
-  }
 }

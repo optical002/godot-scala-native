@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `NavigationPathQueryResult2D`, extends `RefCounted`. */
 abstract class NavigationPathQueryResult2D extends RefCounted {
+  override def godotClassName: String = "NavigationPathQueryResult2D"
 
   /** NavigationPathQueryResult2D.set_path_length */
   final def setPathLength(length: Double): Unit =
@@ -20,14 +21,4 @@ abstract class NavigationPathQueryResult2D extends RefCounted {
   final def reset(): Unit =
     Ptrcall.callVoid0(MethodBind.get("NavigationPathQueryResult2D", "reset", 3218959716L), hostObject.objectPtr)
 
-}
-
-object NavigationPathQueryResult2D {
-  /** Class metadata for Gd[NavigationPathQueryResult2D] lifetime management and casting. */
-  given GodotClass[NavigationPathQueryResult2D] with {
-    def className = "NavigationPathQueryResult2D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): NavigationPathQueryResult2D = new NavigationPathQueryResult2D {}.withHost(o.objectPtr)
-    def unwrap(t: NavigationPathQueryResult2D): GodotObject = t.hostObject
-  }
 }

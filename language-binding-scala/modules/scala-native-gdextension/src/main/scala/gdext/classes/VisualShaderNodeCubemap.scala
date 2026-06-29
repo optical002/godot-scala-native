@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeCubemap`, extends `VisualShaderNode`. */
 abstract class VisualShaderNodeCubemap extends VisualShaderNode {
+  override def godotClassName: String = "VisualShaderNodeCubemap"
 
   /** VisualShaderNodeCubemap.set_source */
   final def setSource(value: Long): Unit =
@@ -32,14 +33,4 @@ abstract class VisualShaderNodeCubemap extends VisualShaderNode {
   final def getTextureType(): Long =
     Ptrcall.call0[Long](MethodBind.get("VisualShaderNodeCubemap", "get_texture_type", 3356498888L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeCubemap {
-  /** Class metadata for Gd[VisualShaderNodeCubemap] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeCubemap] with {
-    def className = "VisualShaderNodeCubemap"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeCubemap = new VisualShaderNodeCubemap {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeCubemap): GodotObject = t.hostObject
-  }
 }

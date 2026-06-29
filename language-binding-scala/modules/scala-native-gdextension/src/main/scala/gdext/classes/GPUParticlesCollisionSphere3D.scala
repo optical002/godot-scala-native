@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GPUParticlesCollisionSphere3D`, extends `GPUParticlesCollision3D`. */
 abstract class GPUParticlesCollisionSphere3D extends GPUParticlesCollision3D {
+  override def godotClassName: String = "GPUParticlesCollisionSphere3D"
 
   /** GPUParticlesCollisionSphere3D.set_radius */
   final def setRadius(radius: Double): Unit =
@@ -16,14 +17,4 @@ abstract class GPUParticlesCollisionSphere3D extends GPUParticlesCollision3D {
   final def getRadius(): Double =
     Ptrcall.call0[Double](MethodBind.get("GPUParticlesCollisionSphere3D", "get_radius", 1740695150L), hostObject.objectPtr)
 
-}
-
-object GPUParticlesCollisionSphere3D {
-  /** Class metadata for Gd[GPUParticlesCollisionSphere3D] lifetime management and casting. */
-  given GodotClass[GPUParticlesCollisionSphere3D] with {
-    def className = "GPUParticlesCollisionSphere3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): GPUParticlesCollisionSphere3D = new GPUParticlesCollisionSphere3D {}.withHost(o.objectPtr)
-    def unwrap(t: GPUParticlesCollisionSphere3D): GodotObject = t.hostObject
-  }
 }

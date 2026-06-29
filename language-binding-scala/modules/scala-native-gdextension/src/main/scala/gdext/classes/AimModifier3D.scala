@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AimModifier3D`, extends `BoneConstraint3D`. */
 abstract class AimModifier3D extends BoneConstraint3D {
+  override def godotClassName: String = "AimModifier3D"
 
   /** AimModifier3D.set_forward_axis */
   final def setForwardAxis(index: Long, axis: Long): Unit =
@@ -48,14 +49,4 @@ abstract class AimModifier3D extends BoneConstraint3D {
   final def isRelative(index: Long): Boolean =
     Ptrcall.call1[Long, Boolean](MethodBind.get("AimModifier3D", "is_relative", 1116898809L), hostObject.objectPtr, index)
 
-}
-
-object AimModifier3D {
-  /** Class metadata for Gd[AimModifier3D] lifetime management and casting. */
-  given GodotClass[AimModifier3D] with {
-    def className = "AimModifier3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): AimModifier3D = new AimModifier3D {}.withHost(o.objectPtr)
-    def unwrap(t: AimModifier3D): GodotObject = t.hostObject
-  }
 }

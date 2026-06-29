@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SkeletonModification2DCCDIK`, extends `SkeletonModification2D`. */
 abstract class SkeletonModification2DCCDIK extends SkeletonModification2D {
+  override def godotClassName: String = "SkeletonModification2DCCDIK"
 
   /** SkeletonModification2DCCDIK.set_ccdik_data_chain_length */
   final def setCcdikDataChainLength(length: Long): Unit =
@@ -64,14 +65,4 @@ abstract class SkeletonModification2DCCDIK extends SkeletonModification2D {
   final def getCcdikJointConstraintAngleInvert(joint_idx: Long): Boolean =
     Ptrcall.call1[Long, Boolean](MethodBind.get("SkeletonModification2DCCDIK", "get_ccdik_joint_constraint_angle_invert", 1116898809L), hostObject.objectPtr, joint_idx)
 
-}
-
-object SkeletonModification2DCCDIK {
-  /** Class metadata for Gd[SkeletonModification2DCCDIK] lifetime management and casting. */
-  given GodotClass[SkeletonModification2DCCDIK] with {
-    def className = "SkeletonModification2DCCDIK"
-    def isRefCounted = true
-    def wrap(o: GodotObject): SkeletonModification2DCCDIK = new SkeletonModification2DCCDIK {}.withHost(o.objectPtr)
-    def unwrap(t: SkeletonModification2DCCDIK): GodotObject = t.hostObject
-  }
 }

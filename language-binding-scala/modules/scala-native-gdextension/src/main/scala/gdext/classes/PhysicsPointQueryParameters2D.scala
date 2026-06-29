@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PhysicsPointQueryParameters2D`, extends `RefCounted`. */
 abstract class PhysicsPointQueryParameters2D extends RefCounted {
+  override def godotClassName: String = "PhysicsPointQueryParameters2D"
 
   /** PhysicsPointQueryParameters2D.set_position */
   final def setPosition(position: gdext.builtin.Vector2): Unit =
@@ -48,14 +49,4 @@ abstract class PhysicsPointQueryParameters2D extends RefCounted {
   final def isCollideWithAreasEnabled(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("PhysicsPointQueryParameters2D", "is_collide_with_areas_enabled", 36873697L), hostObject.objectPtr)
 
-}
-
-object PhysicsPointQueryParameters2D {
-  /** Class metadata for Gd[PhysicsPointQueryParameters2D] lifetime management and casting. */
-  given GodotClass[PhysicsPointQueryParameters2D] with {
-    def className = "PhysicsPointQueryParameters2D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): PhysicsPointQueryParameters2D = new PhysicsPointQueryParameters2D {}.withHost(o.objectPtr)
-    def unwrap(t: PhysicsPointQueryParameters2D): GodotObject = t.hostObject
-  }
 }

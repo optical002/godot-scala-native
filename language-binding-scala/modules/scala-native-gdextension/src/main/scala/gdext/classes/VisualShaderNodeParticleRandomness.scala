@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeParticleRandomness`, extends `VisualShaderNode`. */
 abstract class VisualShaderNodeParticleRandomness extends VisualShaderNode {
+  override def godotClassName: String = "VisualShaderNodeParticleRandomness"
 
   /** VisualShaderNodeParticleRandomness.set_op_type */
   final def setOpType(`type`: Long): Unit =
@@ -16,14 +17,4 @@ abstract class VisualShaderNodeParticleRandomness extends VisualShaderNode {
   final def getOpType(): Long =
     Ptrcall.call0[Long](MethodBind.get("VisualShaderNodeParticleRandomness", "get_op_type", 3597061078L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeParticleRandomness {
-  /** Class metadata for Gd[VisualShaderNodeParticleRandomness] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeParticleRandomness] with {
-    def className = "VisualShaderNodeParticleRandomness"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeParticleRandomness = new VisualShaderNodeParticleRandomness {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeParticleRandomness): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeBillboard`, extends `VisualShaderNode`. */
 abstract class VisualShaderNodeBillboard extends VisualShaderNode {
+  override def godotClassName: String = "VisualShaderNodeBillboard"
 
   /** VisualShaderNodeBillboard.set_billboard_type */
   final def setBillboardType(billboard_type: Long): Unit =
@@ -24,14 +25,4 @@ abstract class VisualShaderNodeBillboard extends VisualShaderNode {
   final def isKeepScaleEnabled(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("VisualShaderNodeBillboard", "is_keep_scale_enabled", 36873697L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeBillboard {
-  /** Class metadata for Gd[VisualShaderNodeBillboard] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeBillboard] with {
-    def className = "VisualShaderNodeBillboard"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeBillboard = new VisualShaderNodeBillboard {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeBillboard): GodotObject = t.hostObject
-  }
 }

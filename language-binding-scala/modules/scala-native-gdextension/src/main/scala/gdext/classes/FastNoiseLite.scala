@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `FastNoiseLite`, extends `Noise`. */
 abstract class FastNoiseLite extends Noise {
+  override def godotClassName: String = "FastNoiseLite"
 
   /** FastNoiseLite.set_noise_type */
   final def setNoiseType(`type`: Long): Unit =
@@ -176,14 +177,4 @@ abstract class FastNoiseLite extends Noise {
   final def getDomainWarpFractalGain(): Double =
     Ptrcall.call0[Double](MethodBind.get("FastNoiseLite", "get_domain_warp_fractal_gain", 1740695150L), hostObject.objectPtr)
 
-}
-
-object FastNoiseLite {
-  /** Class metadata for Gd[FastNoiseLite] lifetime management and casting. */
-  given GodotClass[FastNoiseLite] with {
-    def className = "FastNoiseLite"
-    def isRefCounted = true
-    def wrap(o: GodotObject): FastNoiseLite = new FastNoiseLite {}.withHost(o.objectPtr)
-    def unwrap(t: FastNoiseLite): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RayCast3D`, extends `Node3D`. */
 abstract class RayCast3D extends Node3D {
+  override def godotClassName: String = "RayCast3D"
 
   /** RayCast3D.set_enabled */
   final def setEnabled(enabled: Boolean): Unit =
@@ -136,14 +137,4 @@ abstract class RayCast3D extends Node3D {
   final def getDebugShapeThickness(): Long =
     Ptrcall.call0[Long](MethodBind.get("RayCast3D", "get_debug_shape_thickness", 3905245786L), hostObject.objectPtr)
 
-}
-
-object RayCast3D {
-  /** Class metadata for Gd[RayCast3D] lifetime management and casting. */
-  given GodotClass[RayCast3D] with {
-    def className = "RayCast3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): RayCast3D = new RayCast3D {}.withHost(o.objectPtr)
-    def unwrap(t: RayCast3D): GodotObject = t.hostObject
-  }
 }

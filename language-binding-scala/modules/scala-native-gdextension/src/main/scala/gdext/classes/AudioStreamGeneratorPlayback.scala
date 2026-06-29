@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioStreamGeneratorPlayback`, extends `AudioStreamPlaybackResampled`. */
 abstract class AudioStreamGeneratorPlayback extends AudioStreamPlaybackResampled {
+  override def godotClassName: String = "AudioStreamGeneratorPlayback"
 
   /** AudioStreamGeneratorPlayback.push_frame */
   final def pushFrame(frame: gdext.builtin.Vector2): Boolean =
@@ -28,14 +29,4 @@ abstract class AudioStreamGeneratorPlayback extends AudioStreamPlaybackResampled
   final def clearBuffer(): Unit =
     Ptrcall.callVoid0(MethodBind.get("AudioStreamGeneratorPlayback", "clear_buffer", 3218959716L), hostObject.objectPtr)
 
-}
-
-object AudioStreamGeneratorPlayback {
-  /** Class metadata for Gd[AudioStreamGeneratorPlayback] lifetime management and casting. */
-  given GodotClass[AudioStreamGeneratorPlayback] with {
-    def className = "AudioStreamGeneratorPlayback"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioStreamGeneratorPlayback = new AudioStreamGeneratorPlayback {}.withHost(o.objectPtr)
-    def unwrap(t: AudioStreamGeneratorPlayback): GodotObject = t.hostObject
-  }
 }

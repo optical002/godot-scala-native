@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioStreamWAV`, extends `AudioStream`. */
 abstract class AudioStreamWAV extends AudioStream {
+  override def godotClassName: String = "AudioStreamWAV"
 
   /** AudioStreamWAV.set_format */
   final def setFormat(format: Long): Unit =
@@ -60,14 +61,4 @@ abstract class AudioStreamWAV extends AudioStream {
   final def saveToWav(path: String): Long =
     Ptrcall.call1[String, Long](MethodBind.get("AudioStreamWAV", "save_to_wav", 166001499L), hostObject.objectPtr, path)
 
-}
-
-object AudioStreamWAV {
-  /** Class metadata for Gd[AudioStreamWAV] lifetime management and casting. */
-  given GodotClass[AudioStreamWAV] with {
-    def className = "AudioStreamWAV"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioStreamWAV = new AudioStreamWAV {}.withHost(o.objectPtr)
-    def unwrap(t: AudioStreamWAV): GodotObject = t.hostObject
-  }
 }

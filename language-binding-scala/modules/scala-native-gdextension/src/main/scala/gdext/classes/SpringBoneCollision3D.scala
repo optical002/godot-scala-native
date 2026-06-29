@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SpringBoneCollision3D`, extends `Node3D`. */
 abstract class SpringBoneCollision3D extends Node3D {
+  override def godotClassName: String = "SpringBoneCollision3D"
 
   /** SpringBoneCollision3D.get_skeleton */
   final def getSkeleton(): GodotObject =
@@ -44,14 +45,4 @@ abstract class SpringBoneCollision3D extends Node3D {
   final def getRotationOffset(): gdext.builtin.Quaternion =
     Ptrcall.call0[gdext.builtin.Quaternion](MethodBind.get("SpringBoneCollision3D", "get_rotation_offset", 1222331677L), hostObject.objectPtr)
 
-}
-
-object SpringBoneCollision3D {
-  /** Class metadata for Gd[SpringBoneCollision3D] lifetime management and casting. */
-  given GodotClass[SpringBoneCollision3D] with {
-    def className = "SpringBoneCollision3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): SpringBoneCollision3D = new SpringBoneCollision3D {}.withHost(o.objectPtr)
-    def unwrap(t: SpringBoneCollision3D): GodotObject = t.hostObject
-  }
 }

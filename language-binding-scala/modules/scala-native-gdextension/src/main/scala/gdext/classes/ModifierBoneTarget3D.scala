@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ModifierBoneTarget3D`, extends `SkeletonModifier3D`. */
 abstract class ModifierBoneTarget3D extends SkeletonModifier3D {
+  override def godotClassName: String = "ModifierBoneTarget3D"
 
   /** ModifierBoneTarget3D.set_bone_name */
   final def setBoneName(bone_name: String): Unit =
@@ -24,14 +25,4 @@ abstract class ModifierBoneTarget3D extends SkeletonModifier3D {
   final def getBone(): Long =
     Ptrcall.call0[Long](MethodBind.get("ModifierBoneTarget3D", "get_bone", 3905245786L), hostObject.objectPtr)
 
-}
-
-object ModifierBoneTarget3D {
-  /** Class metadata for Gd[ModifierBoneTarget3D] lifetime management and casting. */
-  given GodotClass[ModifierBoneTarget3D] with {
-    def className = "ModifierBoneTarget3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): ModifierBoneTarget3D = new ModifierBoneTarget3D {}.withHost(o.objectPtr)
-    def unwrap(t: ModifierBoneTarget3D): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `FogMaterial`, extends `Material`. */
 abstract class FogMaterial extends Material {
+  override def godotClassName: String = "FogMaterial"
 
   /** FogMaterial.set_density */
   final def setDensity(density: Double): Unit =
@@ -56,14 +57,4 @@ abstract class FogMaterial extends Material {
   final def getDensityTexture(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("FogMaterial", "get_density_texture", 373985333L), hostObject.objectPtr)
 
-}
-
-object FogMaterial {
-  /** Class metadata for Gd[FogMaterial] lifetime management and casting. */
-  given GodotClass[FogMaterial] with {
-    def className = "FogMaterial"
-    def isRefCounted = true
-    def wrap(o: GodotObject): FogMaterial = new FogMaterial {}.withHost(o.objectPtr)
-    def unwrap(t: FogMaterial): GodotObject = t.hostObject
-  }
 }

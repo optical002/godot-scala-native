@@ -7,19 +7,10 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SubtweenTweener`, extends `Tweener`. */
 abstract class SubtweenTweener extends Tweener {
+  override def godotClassName: String = "SubtweenTweener"
 
   /** SubtweenTweener.set_delay */
   final def setDelay(delay: Double): GodotObject =
     Ptrcall.call1[Double, GodotObject](MethodBind.get("SubtweenTweener", "set_delay", 449181780L), hostObject.objectPtr, delay)
 
-}
-
-object SubtweenTweener {
-  /** Class metadata for Gd[SubtweenTweener] lifetime management and casting. */
-  given GodotClass[SubtweenTweener] with {
-    def className = "SubtweenTweener"
-    def isRefCounted = true
-    def wrap(o: GodotObject): SubtweenTweener = new SubtweenTweener {}.withHost(o.objectPtr)
-    def unwrap(t: SubtweenTweener): GodotObject = t.hostObject
-  }
 }

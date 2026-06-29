@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisibleOnScreenNotifier3D`, extends `VisualInstance3D`. */
 abstract class VisibleOnScreenNotifier3D extends VisualInstance3D {
+  override def godotClassName: String = "VisibleOnScreenNotifier3D"
 
   /** VisibleOnScreenNotifier3D.set_aabb */
   final def setAabb(rect: gdext.builtin.AABB): Unit =
@@ -16,14 +17,4 @@ abstract class VisibleOnScreenNotifier3D extends VisualInstance3D {
   final def isOnScreen(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("VisibleOnScreenNotifier3D", "is_on_screen", 36873697L), hostObject.objectPtr)
 
-}
-
-object VisibleOnScreenNotifier3D {
-  /** Class metadata for Gd[VisibleOnScreenNotifier3D] lifetime management and casting. */
-  given GodotClass[VisibleOnScreenNotifier3D] with {
-    def className = "VisibleOnScreenNotifier3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): VisibleOnScreenNotifier3D = new VisibleOnScreenNotifier3D {}.withHost(o.objectPtr)
-    def unwrap(t: VisibleOnScreenNotifier3D): GodotObject = t.hostObject
-  }
 }

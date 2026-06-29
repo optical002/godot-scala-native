@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PhysicsServer3DRenderingServerHandler`, extends `Object`. */
 abstract class PhysicsServer3DRenderingServerHandler extends Object {
+  override def godotClassName: String = "PhysicsServer3DRenderingServerHandler"
 
   /** PhysicsServer3DRenderingServerHandler.set_vertex */
   final def setVertex(vertex_id: Long, vertex: gdext.builtin.Vector3): Unit =
@@ -20,14 +21,4 @@ abstract class PhysicsServer3DRenderingServerHandler extends Object {
   final def setAabb(aabb: gdext.builtin.AABB): Unit =
     Ptrcall.callVoid1(MethodBind.get("PhysicsServer3DRenderingServerHandler", "set_aabb", 259215842L), hostObject.objectPtr, aabb)
 
-}
-
-object PhysicsServer3DRenderingServerHandler {
-  /** Class metadata for Gd[PhysicsServer3DRenderingServerHandler] lifetime management and casting. */
-  given GodotClass[PhysicsServer3DRenderingServerHandler] with {
-    def className = "PhysicsServer3DRenderingServerHandler"
-    def isRefCounted = false
-    def wrap(o: GodotObject): PhysicsServer3DRenderingServerHandler = new PhysicsServer3DRenderingServerHandler {}.withHost(o.objectPtr)
-    def unwrap(t: PhysicsServer3DRenderingServerHandler): GodotObject = t.hostObject
-  }
 }

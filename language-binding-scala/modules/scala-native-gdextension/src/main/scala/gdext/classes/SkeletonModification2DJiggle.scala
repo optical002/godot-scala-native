@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SkeletonModification2DJiggle`, extends `SkeletonModification2D`. */
 abstract class SkeletonModification2DJiggle extends SkeletonModification2D {
+  override def godotClassName: String = "SkeletonModification2DJiggle"
 
   /** SkeletonModification2DJiggle.set_jiggle_data_chain_length */
   final def setJiggleDataChainLength(length: Long): Unit =
@@ -128,14 +129,4 @@ abstract class SkeletonModification2DJiggle extends SkeletonModification2D {
   final def getJiggleJointGravity(joint_idx: Long): gdext.builtin.Vector2 =
     Ptrcall.call1[Long, gdext.builtin.Vector2](MethodBind.get("SkeletonModification2DJiggle", "get_jiggle_joint_gravity", 2299179447L), hostObject.objectPtr, joint_idx)
 
-}
-
-object SkeletonModification2DJiggle {
-  /** Class metadata for Gd[SkeletonModification2DJiggle] lifetime management and casting. */
-  given GodotClass[SkeletonModification2DJiggle] with {
-    def className = "SkeletonModification2DJiggle"
-    def isRefCounted = true
-    def wrap(o: GodotObject): SkeletonModification2DJiggle = new SkeletonModification2DJiggle {}.withHost(o.objectPtr)
-    def unwrap(t: SkeletonModification2DJiggle): GodotObject = t.hostObject
-  }
 }

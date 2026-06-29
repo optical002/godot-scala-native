@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Material`, extends `Resource`. */
 abstract class Material extends Resource {
+  override def godotClassName: String = "Material"
 
   /** Material.set_next_pass */
   final def setNextPass(next_pass: Material): Unit =
@@ -32,14 +33,4 @@ abstract class Material extends Resource {
   final def createPlaceholder(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("Material", "create_placeholder", 121922552L), hostObject.objectPtr)
 
-}
-
-object Material {
-  /** Class metadata for Gd[Material] lifetime management and casting. */
-  given GodotClass[Material] with {
-    def className = "Material"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Material = new Material {}.withHost(o.objectPtr)
-    def unwrap(t: Material): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ENetMultiplayerPeer`, extends `MultiplayerPeer`. */
 abstract class ENetMultiplayerPeer extends MultiplayerPeer {
+  override def godotClassName: String = "ENetMultiplayerPeer"
 
   /** ENetMultiplayerPeer.create_server */
   final def createServer(port: Long, max_clients: Long, max_channels: Long, in_bandwidth: Long, out_bandwidth: Long): Long =
@@ -36,14 +37,4 @@ abstract class ENetMultiplayerPeer extends MultiplayerPeer {
   final def getPeer(id: Long): GodotObject =
     Ptrcall.call1[Long, GodotObject](MethodBind.get("ENetMultiplayerPeer", "get_peer", 3793311544L), hostObject.objectPtr, id)
 
-}
-
-object ENetMultiplayerPeer {
-  /** Class metadata for Gd[ENetMultiplayerPeer] lifetime management and casting. */
-  given GodotClass[ENetMultiplayerPeer] with {
-    def className = "ENetMultiplayerPeer"
-    def isRefCounted = true
-    def wrap(o: GodotObject): ENetMultiplayerPeer = new ENetMultiplayerPeer {}.withHost(o.objectPtr)
-    def unwrap(t: ENetMultiplayerPeer): GodotObject = t.hostObject
-  }
 }

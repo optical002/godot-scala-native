@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CapsuleMesh`, extends `PrimitiveMesh`. */
 abstract class CapsuleMesh extends PrimitiveMesh {
+  override def godotClassName: String = "CapsuleMesh"
 
   /** CapsuleMesh.set_radius */
   final def setRadius(radius: Double): Unit =
@@ -40,14 +41,4 @@ abstract class CapsuleMesh extends PrimitiveMesh {
   final def getRings(): Long =
     Ptrcall.call0[Long](MethodBind.get("CapsuleMesh", "get_rings", 3905245786L), hostObject.objectPtr)
 
-}
-
-object CapsuleMesh {
-  /** Class metadata for Gd[CapsuleMesh] lifetime management and casting. */
-  given GodotClass[CapsuleMesh] with {
-    def className = "CapsuleMesh"
-    def isRefCounted = true
-    def wrap(o: GodotObject): CapsuleMesh = new CapsuleMesh {}.withHost(o.objectPtr)
-    def unwrap(t: CapsuleMesh): GodotObject = t.hostObject
-  }
 }

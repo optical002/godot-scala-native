@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Light3D`, extends `VisualInstance3D`. */
 abstract class Light3D extends VisualInstance3D {
+  override def godotClassName: String = "Light3D"
 
   /** Light3D.set_editor_only */
   final def setEditorOnly(editor_only: Boolean): Unit =
@@ -132,14 +133,4 @@ abstract class Light3D extends VisualInstance3D {
   final def getCorrelatedColor(): gdext.builtin.Color =
     Ptrcall.call0[gdext.builtin.Color](MethodBind.get("Light3D", "get_correlated_color", 3444240500L), hostObject.objectPtr)
 
-}
-
-object Light3D {
-  /** Class metadata for Gd[Light3D] lifetime management and casting. */
-  given GodotClass[Light3D] with {
-    def className = "Light3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Light3D = new Light3D {}.withHost(o.objectPtr)
-    def unwrap(t: Light3D): GodotObject = t.hostObject
-  }
 }

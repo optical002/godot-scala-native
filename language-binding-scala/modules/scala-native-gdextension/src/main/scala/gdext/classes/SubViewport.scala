@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SubViewport`, extends `Viewport`. */
 abstract class SubViewport extends Viewport {
+  override def godotClassName: String = "SubViewport"
 
   /** SubViewport.set_size */
   final def setSize(size: gdext.builtin.Vector2i): Unit =
@@ -48,14 +49,4 @@ abstract class SubViewport extends Viewport {
   final def getClearMode(): Long =
     Ptrcall.call0[Long](MethodBind.get("SubViewport", "get_clear_mode", 331324495L), hostObject.objectPtr)
 
-}
-
-object SubViewport {
-  /** Class metadata for Gd[SubViewport] lifetime management and casting. */
-  given GodotClass[SubViewport] with {
-    def className = "SubViewport"
-    def isRefCounted = false
-    def wrap(o: GodotObject): SubViewport = new SubViewport {}.withHost(o.objectPtr)
-    def unwrap(t: SubViewport): GodotObject = t.hostObject
-  }
 }

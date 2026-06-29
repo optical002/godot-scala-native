@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioStreamPlayer3D`, extends `Node3D`. */
 abstract class AudioStreamPlayer3D extends Node3D {
+  override def godotClassName: String = "AudioStreamPlayer3D"
 
   /** AudioStreamPlayer3D.set_stream */
   final def setStream(stream: AudioStream): Unit =
@@ -208,14 +209,4 @@ abstract class AudioStreamPlayer3D extends Node3D {
   final def getPlaybackType(): Long =
     Ptrcall.call0[Long](MethodBind.get("AudioStreamPlayer3D", "get_playback_type", 4011264623L), hostObject.objectPtr)
 
-}
-
-object AudioStreamPlayer3D {
-  /** Class metadata for Gd[AudioStreamPlayer3D] lifetime management and casting. */
-  given GodotClass[AudioStreamPlayer3D] with {
-    def className = "AudioStreamPlayer3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): AudioStreamPlayer3D = new AudioStreamPlayer3D {}.withHost(o.objectPtr)
-    def unwrap(t: AudioStreamPlayer3D): GodotObject = t.hostObject
-  }
 }

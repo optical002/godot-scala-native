@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `InputMap`, extends `Object`. */
 abstract class InputMap extends Object {
+  override def godotClassName: String = "InputMap"
 
   /** InputMap.has_action */
   final def hasAction(action: gdext.builtin.StringName): Boolean =
@@ -59,14 +60,6 @@ abstract class InputMap extends Object {
 }
 
 object InputMap {
-  /** Class metadata for Gd[InputMap] lifetime management and casting. */
-  given GodotClass[InputMap] with {
-    def className = "InputMap"
-    def isRefCounted = false
-    def wrap(o: GodotObject): InputMap = new InputMap {}.withHost(o.objectPtr)
-    def unwrap(t: InputMap): GodotObject = t.hostObject
-  }
-
   /** The process-global InputMap singleton instance. */
   def singleton: InputMap = new InputMap {}
     .withHost(Godot.interface.global_get_singleton(

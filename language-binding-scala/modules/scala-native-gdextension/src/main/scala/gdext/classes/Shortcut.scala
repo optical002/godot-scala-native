@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Shortcut`, extends `Resource`. */
 abstract class Shortcut extends Resource {
+  override def godotClassName: String = "Shortcut"
 
   /** Shortcut.has_valid_event */
   final def hasValidEvent(): Boolean =
@@ -20,14 +21,4 @@ abstract class Shortcut extends Resource {
   final def getAsText(): String =
     Ptrcall.call0[String](MethodBind.get("Shortcut", "get_as_text", 201670096L), hostObject.objectPtr)
 
-}
-
-object Shortcut {
-  /** Class metadata for Gd[Shortcut] lifetime management and casting. */
-  given GodotClass[Shortcut] with {
-    def className = "Shortcut"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Shortcut = new Shortcut {}.withHost(o.objectPtr)
-    def unwrap(t: Shortcut): GodotObject = t.hostObject
-  }
 }

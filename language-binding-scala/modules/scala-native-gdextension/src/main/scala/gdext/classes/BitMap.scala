@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `BitMap`, extends `Resource`. */
 abstract class BitMap extends Resource {
+  override def godotClassName: String = "BitMap"
 
   /** BitMap.create */
   final def create(size: gdext.builtin.Vector2i): Unit =
@@ -56,14 +57,4 @@ abstract class BitMap extends Resource {
   final def convertToImage(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("BitMap", "convert_to_image", 4190603485L), hostObject.objectPtr)
 
-}
-
-object BitMap {
-  /** Class metadata for Gd[BitMap] lifetime management and casting. */
-  given GodotClass[BitMap] with {
-    def className = "BitMap"
-    def isRefCounted = true
-    def wrap(o: GodotObject): BitMap = new BitMap {}.withHost(o.objectPtr)
-    def unwrap(t: BitMap): GodotObject = t.hostObject
-  }
 }

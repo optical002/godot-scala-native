@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SkeletonProfile`, extends `Resource`. */
 abstract class SkeletonProfile extends Resource {
+  override def godotClassName: String = "SkeletonProfile"
 
   /** SkeletonProfile.set_root_bone */
   final def setRootBone(bone_name: gdext.builtin.StringName): Unit =
@@ -124,14 +125,4 @@ abstract class SkeletonProfile extends Resource {
   final def setRequired(bone_idx: Long, required: Boolean): Unit =
     Ptrcall.callVoid2(MethodBind.get("SkeletonProfile", "set_required", 300928843L), hostObject.objectPtr, bone_idx, required)
 
-}
-
-object SkeletonProfile {
-  /** Class metadata for Gd[SkeletonProfile] lifetime management and casting. */
-  given GodotClass[SkeletonProfile] with {
-    def className = "SkeletonProfile"
-    def isRefCounted = true
-    def wrap(o: GodotObject): SkeletonProfile = new SkeletonProfile {}.withHost(o.objectPtr)
-    def unwrap(t: SkeletonProfile): GodotObject = t.hostObject
-  }
 }

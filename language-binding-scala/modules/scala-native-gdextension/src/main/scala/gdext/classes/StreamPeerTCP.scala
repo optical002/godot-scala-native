@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `StreamPeerTCP`, extends `StreamPeerSocket`. */
 abstract class StreamPeerTCP extends StreamPeerSocket {
+  override def godotClassName: String = "StreamPeerTCP"
 
   /** StreamPeerTCP.bind */
   final def bind(port: Long, host: String): Long =
@@ -32,14 +33,4 @@ abstract class StreamPeerTCP extends StreamPeerSocket {
   final def setNoDelay(enabled: Boolean): Unit =
     Ptrcall.callVoid1(MethodBind.get("StreamPeerTCP", "set_no_delay", 2586408642L), hostObject.objectPtr, enabled)
 
-}
-
-object StreamPeerTCP {
-  /** Class metadata for Gd[StreamPeerTCP] lifetime management and casting. */
-  given GodotClass[StreamPeerTCP] with {
-    def className = "StreamPeerTCP"
-    def isRefCounted = true
-    def wrap(o: GodotObject): StreamPeerTCP = new StreamPeerTCP {}.withHost(o.objectPtr)
-    def unwrap(t: StreamPeerTCP): GodotObject = t.hostObject
-  }
 }

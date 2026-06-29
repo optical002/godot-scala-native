@@ -7,15 +7,6 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ResourceImporterImage`, extends `ResourceImporter`. */
 abstract class ResourceImporterImage extends ResourceImporter {
+  override def godotClassName: String = "ResourceImporterImage"
 
-}
-
-object ResourceImporterImage {
-  /** Class metadata for Gd[ResourceImporterImage] lifetime management and casting. */
-  given GodotClass[ResourceImporterImage] with {
-    def className = "ResourceImporterImage"
-    def isRefCounted = true
-    def wrap(o: GodotObject): ResourceImporterImage = new ResourceImporterImage {}.withHost(o.objectPtr)
-    def unwrap(t: ResourceImporterImage): GodotObject = t.hostObject
-  }
 }

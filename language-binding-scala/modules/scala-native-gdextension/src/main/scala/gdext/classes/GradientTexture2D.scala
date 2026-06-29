@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GradientTexture2D`, extends `Texture2D`. */
 abstract class GradientTexture2D extends Texture2D {
+  override def godotClassName: String = "GradientTexture2D"
 
   /** GradientTexture2D.set_gradient */
   final def setGradient(gradient: Gradient): Unit =
@@ -64,14 +65,4 @@ abstract class GradientTexture2D extends Texture2D {
   final def getRepeat(): Long =
     Ptrcall.call0[Long](MethodBind.get("GradientTexture2D", "get_repeat", 3351758665L), hostObject.objectPtr)
 
-}
-
-object GradientTexture2D {
-  /** Class metadata for Gd[GradientTexture2D] lifetime management and casting. */
-  given GodotClass[GradientTexture2D] with {
-    def className = "GradientTexture2D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): GradientTexture2D = new GradientTexture2D {}.withHost(o.objectPtr)
-    def unwrap(t: GradientTexture2D): GodotObject = t.hostObject
-  }
 }

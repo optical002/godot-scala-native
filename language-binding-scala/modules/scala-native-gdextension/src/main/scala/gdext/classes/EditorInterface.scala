@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorInterface`, extends `Object`. */
 abstract class EditorInterface extends Object {
+  override def godotClassName: String = "EditorInterface"
 
   /** EditorInterface.restart_editor */
   final def restartEditor(save: Boolean): Unit =
@@ -255,14 +256,6 @@ abstract class EditorInterface extends Object {
 }
 
 object EditorInterface {
-  /** Class metadata for Gd[EditorInterface] lifetime management and casting. */
-  given GodotClass[EditorInterface] with {
-    def className = "EditorInterface"
-    def isRefCounted = false
-    def wrap(o: GodotObject): EditorInterface = new EditorInterface {}.withHost(o.objectPtr)
-    def unwrap(t: EditorInterface): GodotObject = t.hostObject
-  }
-
   /** The process-global EditorInterface singleton instance. */
   def singleton: EditorInterface = new EditorInterface {}
     .withHost(Godot.interface.global_get_singleton(

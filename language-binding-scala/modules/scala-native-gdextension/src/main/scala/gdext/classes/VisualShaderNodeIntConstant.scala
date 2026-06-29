@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeIntConstant`, extends `VisualShaderNodeConstant`. */
 abstract class VisualShaderNodeIntConstant extends VisualShaderNodeConstant {
+  override def godotClassName: String = "VisualShaderNodeIntConstant"
 
   /** VisualShaderNodeIntConstant.set_constant */
   final def setConstant(constant: Long): Unit =
@@ -16,14 +17,4 @@ abstract class VisualShaderNodeIntConstant extends VisualShaderNodeConstant {
   final def getConstant(): Long =
     Ptrcall.call0[Long](MethodBind.get("VisualShaderNodeIntConstant", "get_constant", 3905245786L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeIntConstant {
-  /** Class metadata for Gd[VisualShaderNodeIntConstant] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeIntConstant] with {
-    def className = "VisualShaderNodeIntConstant"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeIntConstant = new VisualShaderNodeIntConstant {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeIntConstant): GodotObject = t.hostObject
-  }
 }

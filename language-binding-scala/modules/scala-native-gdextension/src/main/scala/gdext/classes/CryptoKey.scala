@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CryptoKey`, extends `Resource`. */
 abstract class CryptoKey extends Resource {
+  override def godotClassName: String = "CryptoKey"
 
   /** CryptoKey.save */
   final def save(path: String, public_only: Boolean): Long =
@@ -28,14 +29,4 @@ abstract class CryptoKey extends Resource {
   final def loadFromString(string_key: String, public_only: Boolean): Long =
     Ptrcall.call2[String, Boolean, Long](MethodBind.get("CryptoKey", "load_from_string", 885841341L), hostObject.objectPtr, string_key, public_only)
 
-}
-
-object CryptoKey {
-  /** Class metadata for Gd[CryptoKey] lifetime management and casting. */
-  given GodotClass[CryptoKey] with {
-    def className = "CryptoKey"
-    def isRefCounted = true
-    def wrap(o: GodotObject): CryptoKey = new CryptoKey {}.withHost(o.objectPtr)
-    def unwrap(t: CryptoKey): GodotObject = t.hostObject
-  }
 }

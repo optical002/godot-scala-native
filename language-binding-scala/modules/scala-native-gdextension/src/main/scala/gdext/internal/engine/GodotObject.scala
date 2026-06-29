@@ -3,13 +3,11 @@ package gdext.internal.engine
 import gdext.internal.ffi.types.*
 
 /**
- * The raw engine-object handle that every typed engine-class wrapper carries.
- *
- * Engine classes (Node, Node2D, Sprite2D, ...) are generated as opaque types
- * that are all representationally this pointer; the type only exists to give
- * the Scala compiler the right method set and inheritance. The actual lifetime
- * and ref-counting management is Phase 4's `Gd[T]`; for Phase 2 we operate on
- * borrowed/raw handles (singletons, freshly constructed objects).
+ * A thin opaque view over the raw engine-object handle, used at FFI boundaries
+ * (object-typed method args/returns, the `ClassMeta.fromHandle` factory). The
+ * typed wrappers themselves (Node, Node2D, ...) are abstract classes that carry
+ * this handle via [[gdext.internal.register.GodotScriptClass]] and own the
+ * lifetime/ref-counting operations (`free`/`unref`/`refInc`/`cast`).
  *
  * A null handle is the engine's "no object" / failed-cast sentinel.
  */

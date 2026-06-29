@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioEffectPanner`, extends `AudioEffect`. */
 abstract class AudioEffectPanner extends AudioEffect {
+  override def godotClassName: String = "AudioEffectPanner"
 
   /** AudioEffectPanner.set_pan */
   final def setPan(cpanume: Double): Unit =
@@ -16,14 +17,4 @@ abstract class AudioEffectPanner extends AudioEffect {
   final def getPan(): Double =
     Ptrcall.call0[Double](MethodBind.get("AudioEffectPanner", "get_pan", 1740695150L), hostObject.objectPtr)
 
-}
-
-object AudioEffectPanner {
-  /** Class metadata for Gd[AudioEffectPanner] lifetime management and casting. */
-  given GodotClass[AudioEffectPanner] with {
-    def className = "AudioEffectPanner"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioEffectPanner = new AudioEffectPanner {}.withHost(o.objectPtr)
-    def unwrap(t: AudioEffectPanner): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PacketPeerStream`, extends `PacketPeer`. */
 abstract class PacketPeerStream extends PacketPeer {
+  override def godotClassName: String = "PacketPeerStream"
 
   /** PacketPeerStream.set_stream_peer */
   final def setStreamPeer(peer: StreamPeer): Unit =
@@ -32,14 +33,4 @@ abstract class PacketPeerStream extends PacketPeer {
   final def getOutputBufferMaxSize(): Long =
     Ptrcall.call0[Long](MethodBind.get("PacketPeerStream", "get_output_buffer_max_size", 3905245786L), hostObject.objectPtr)
 
-}
-
-object PacketPeerStream {
-  /** Class metadata for Gd[PacketPeerStream] lifetime management and casting. */
-  given GodotClass[PacketPeerStream] with {
-    def className = "PacketPeerStream"
-    def isRefCounted = true
-    def wrap(o: GodotObject): PacketPeerStream = new PacketPeerStream {}.withHost(o.objectPtr)
-    def unwrap(t: PacketPeerStream): GodotObject = t.hostObject
-  }
 }

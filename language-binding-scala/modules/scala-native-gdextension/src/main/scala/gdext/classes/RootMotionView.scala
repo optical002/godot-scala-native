@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RootMotionView`, extends `VisualInstance3D`. */
 abstract class RootMotionView extends VisualInstance3D {
+  override def godotClassName: String = "RootMotionView"
 
   /** RootMotionView.set_color */
   final def setColor(color: gdext.builtin.Color): Unit =
@@ -40,14 +41,4 @@ abstract class RootMotionView extends VisualInstance3D {
   final def getZeroY(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("RootMotionView", "get_zero_y", 36873697L), hostObject.objectPtr)
 
-}
-
-object RootMotionView {
-  /** Class metadata for Gd[RootMotionView] lifetime management and casting. */
-  given GodotClass[RootMotionView] with {
-    def className = "RootMotionView"
-    def isRefCounted = false
-    def wrap(o: GodotObject): RootMotionView = new RootMotionView {}.withHost(o.objectPtr)
-    def unwrap(t: RootMotionView): GodotObject = t.hostObject
-  }
 }

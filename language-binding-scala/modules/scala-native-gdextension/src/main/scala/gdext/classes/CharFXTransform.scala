@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CharFXTransform`, extends `RefCounted`. */
 abstract class CharFXTransform extends RefCounted {
+  override def godotClassName: String = "CharFXTransform"
 
   /** CharFXTransform.get_transform */
   final def getTransform(): gdext.builtin.Transform2D =
@@ -96,14 +97,4 @@ abstract class CharFXTransform extends RefCounted {
   final def setGlyphFlags(glyph_flags: Long): Unit =
     Ptrcall.callVoid1(MethodBind.get("CharFXTransform", "set_glyph_flags", 1286410249L), hostObject.objectPtr, glyph_flags)
 
-}
-
-object CharFXTransform {
-  /** Class metadata for Gd[CharFXTransform] lifetime management and casting. */
-  given GodotClass[CharFXTransform] with {
-    def className = "CharFXTransform"
-    def isRefCounted = true
-    def wrap(o: GodotObject): CharFXTransform = new CharFXTransform {}.withHost(o.objectPtr)
-    def unwrap(t: CharFXTransform): GodotObject = t.hostObject
-  }
 }

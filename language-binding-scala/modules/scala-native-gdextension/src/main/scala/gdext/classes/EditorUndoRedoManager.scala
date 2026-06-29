@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorUndoRedoManager`, extends `Object`. */
 abstract class EditorUndoRedoManager extends Object {
+  override def godotClassName: String = "EditorUndoRedoManager"
 
   /** EditorUndoRedoManager.create_action */
   final def createAction(name: String, merge_mode: Long, custom_context: Object, backward_undo_ops: Boolean, mark_unsaved: Boolean): Unit =
@@ -44,14 +45,4 @@ abstract class EditorUndoRedoManager extends Object {
   final def clearHistory(id: Long, increase_version: Boolean): Unit =
     Ptrcall.callVoid2(MethodBind.get("EditorUndoRedoManager", "clear_history", 2020603371L), hostObject.objectPtr, id, increase_version)
 
-}
-
-object EditorUndoRedoManager {
-  /** Class metadata for Gd[EditorUndoRedoManager] lifetime management and casting. */
-  given GodotClass[EditorUndoRedoManager] with {
-    def className = "EditorUndoRedoManager"
-    def isRefCounted = false
-    def wrap(o: GodotObject): EditorUndoRedoManager = new EditorUndoRedoManager {}.withHost(o.objectPtr)
-    def unwrap(t: EditorUndoRedoManager): GodotObject = t.hostObject
-  }
 }

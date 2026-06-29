@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Object`. */
 abstract class Object extends gdext.internal.register.GodotScriptClass {
+  override def godotClassName: String = "Object"
 
   /** Object.is_class */
   final def isClass(`class`: String): Boolean =
@@ -100,14 +101,4 @@ abstract class Object extends gdext.internal.register.GodotScriptClass {
   final def cancelFree(): Unit =
     Ptrcall.callVoid0(MethodBind.get("Object", "cancel_free", 3218959716L), hostObject.objectPtr)
 
-}
-
-object Object {
-  /** Class metadata for Gd[Object] lifetime management and casting. */
-  given GodotClass[Object] with {
-    def className = "Object"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Object = new Object {}.withHost(o.objectPtr)
-    def unwrap(t: Object): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PortableCompressedTexture2D`, extends `Texture2D`. */
 abstract class PortableCompressedTexture2D extends Texture2D {
+  override def godotClassName: String = "PortableCompressedTexture2D"
 
   /** PortableCompressedTexture2D.create_from_image */
   final def createFromImage(image: Image, compression_mode: Long, normal_map: Boolean, lossy_quality: Double): Unit =
@@ -40,14 +41,4 @@ abstract class PortableCompressedTexture2D extends Texture2D {
   final def setBasisuCompressorParams(uastc_level: Long, rdo_quality_loss: Double): Unit =
     Ptrcall.callVoid2(MethodBind.get("PortableCompressedTexture2D", "set_basisu_compressor_params", 1602489585L), hostObject.objectPtr, uastc_level, rdo_quality_loss)
 
-}
-
-object PortableCompressedTexture2D {
-  /** Class metadata for Gd[PortableCompressedTexture2D] lifetime management and casting. */
-  given GodotClass[PortableCompressedTexture2D] with {
-    def className = "PortableCompressedTexture2D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): PortableCompressedTexture2D = new PortableCompressedTexture2D {}.withHost(o.objectPtr)
-    def unwrap(t: PortableCompressedTexture2D): GodotObject = t.hostObject
-  }
 }

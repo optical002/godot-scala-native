@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `UDSServer`, extends `SocketServer`. */
 abstract class UDSServer extends SocketServer {
+  override def godotClassName: String = "UDSServer"
 
   /** UDSServer.listen */
   final def listen(path: String): Long =
@@ -16,14 +17,4 @@ abstract class UDSServer extends SocketServer {
   final def takeConnection(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("UDSServer", "take_connection", 1623851112L), hostObject.objectPtr)
 
-}
-
-object UDSServer {
-  /** Class metadata for Gd[UDSServer] lifetime management and casting. */
-  given GodotClass[UDSServer] with {
-    def className = "UDSServer"
-    def isRefCounted = true
-    def wrap(o: GodotObject): UDSServer = new UDSServer {}.withHost(o.objectPtr)
-    def unwrap(t: UDSServer): GodotObject = t.hostObject
-  }
 }

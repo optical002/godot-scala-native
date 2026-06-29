@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AnimatedTexture`, extends `Texture2D`. */
 abstract class AnimatedTexture extends Texture2D {
+  override def godotClassName: String = "AnimatedTexture"
 
   /** AnimatedTexture.set_frames */
   final def setFrames(frames: Long): Unit =
@@ -64,14 +65,4 @@ abstract class AnimatedTexture extends Texture2D {
   final def getFrameDuration(frame: Long): Double =
     Ptrcall.call1[Long, Double](MethodBind.get("AnimatedTexture", "get_frame_duration", 2339986948L), hostObject.objectPtr, frame)
 
-}
-
-object AnimatedTexture {
-  /** Class metadata for Gd[AnimatedTexture] lifetime management and casting. */
-  given GodotClass[AnimatedTexture] with {
-    def className = "AnimatedTexture"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AnimatedTexture = new AnimatedTexture {}.withHost(o.objectPtr)
-    def unwrap(t: AnimatedTexture): GodotObject = t.hostObject
-  }
 }

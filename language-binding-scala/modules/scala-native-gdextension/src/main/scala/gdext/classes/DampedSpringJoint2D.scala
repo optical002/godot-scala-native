@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `DampedSpringJoint2D`, extends `Joint2D`. */
 abstract class DampedSpringJoint2D extends Joint2D {
+  override def godotClassName: String = "DampedSpringJoint2D"
 
   /** DampedSpringJoint2D.set_length */
   final def setLength(length: Double): Unit =
@@ -40,14 +41,4 @@ abstract class DampedSpringJoint2D extends Joint2D {
   final def getDamping(): Double =
     Ptrcall.call0[Double](MethodBind.get("DampedSpringJoint2D", "get_damping", 1740695150L), hostObject.objectPtr)
 
-}
-
-object DampedSpringJoint2D {
-  /** Class metadata for Gd[DampedSpringJoint2D] lifetime management and casting. */
-  given GodotClass[DampedSpringJoint2D] with {
-    def className = "DampedSpringJoint2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): DampedSpringJoint2D = new DampedSpringJoint2D {}.withHost(o.objectPtr)
-    def unwrap(t: DampedSpringJoint2D): GodotObject = t.hostObject
-  }
 }

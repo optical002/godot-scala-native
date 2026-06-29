@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TabContainer`, extends `Container`. */
 abstract class TabContainer extends Container {
+  override def godotClassName: String = "TabContainer"
 
   /** TabContainer.get_tab_count */
   final def getTabCount(): Long =
@@ -204,14 +205,4 @@ abstract class TabContainer extends Container {
   final def getDeselectEnabled(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("TabContainer", "get_deselect_enabled", 36873697L), hostObject.objectPtr)
 
-}
-
-object TabContainer {
-  /** Class metadata for Gd[TabContainer] lifetime management and casting. */
-  given GodotClass[TabContainer] with {
-    def className = "TabContainer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): TabContainer = new TabContainer {}.withHost(o.objectPtr)
-    def unwrap(t: TabContainer): GodotObject = t.hostObject
-  }
 }

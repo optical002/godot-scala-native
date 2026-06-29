@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorNode3DGizmo`, extends `Node3DGizmo`. */
 abstract class EditorNode3DGizmo extends Node3DGizmo {
+  override def godotClassName: String = "EditorNode3DGizmo"
 
   /** EditorNode3DGizmo.add_mesh */
   final def addMesh(mesh: Mesh, material: Material, transform: gdext.builtin.Transform3D, skeleton: SkinReference): Unit =
@@ -44,14 +45,4 @@ abstract class EditorNode3DGizmo extends Node3DGizmo {
   final def isSubgizmoSelected(id: Long): Boolean =
     Ptrcall.call1[Long, Boolean](MethodBind.get("EditorNode3DGizmo", "is_subgizmo_selected", 1116898809L), hostObject.objectPtr, id)
 
-}
-
-object EditorNode3DGizmo {
-  /** Class metadata for Gd[EditorNode3DGizmo] lifetime management and casting. */
-  given GodotClass[EditorNode3DGizmo] with {
-    def className = "EditorNode3DGizmo"
-    def isRefCounted = true
-    def wrap(o: GodotObject): EditorNode3DGizmo = new EditorNode3DGizmo {}.withHost(o.objectPtr)
-    def unwrap(t: EditorNode3DGizmo): GodotObject = t.hostObject
-  }
 }

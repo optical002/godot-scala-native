@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AnimatedSprite3D`, extends `SpriteBase3D`. */
 abstract class AnimatedSprite3D extends SpriteBase3D {
+  override def godotClassName: String = "AnimatedSprite3D"
 
   /** AnimatedSprite3D.set_sprite_frames */
   final def setSpriteFrames(sprite_frames: SpriteFrames): Unit =
@@ -84,14 +85,4 @@ abstract class AnimatedSprite3D extends SpriteBase3D {
   final def getPlayingSpeed(): Double =
     Ptrcall.call0[Double](MethodBind.get("AnimatedSprite3D", "get_playing_speed", 1740695150L), hostObject.objectPtr)
 
-}
-
-object AnimatedSprite3D {
-  /** Class metadata for Gd[AnimatedSprite3D] lifetime management and casting. */
-  given GodotClass[AnimatedSprite3D] with {
-    def className = "AnimatedSprite3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): AnimatedSprite3D = new AnimatedSprite3D {}.withHost(o.objectPtr)
-    def unwrap(t: AnimatedSprite3D): GodotObject = t.hostObject
-  }
 }

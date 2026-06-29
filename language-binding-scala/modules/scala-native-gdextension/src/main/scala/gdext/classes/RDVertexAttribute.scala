@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RDVertexAttribute`, extends `RefCounted`. */
 abstract class RDVertexAttribute extends RefCounted {
+  override def godotClassName: String = "RDVertexAttribute"
 
   /** RDVertexAttribute.set_binding */
   final def setBinding(p_member: Long): Unit =
@@ -56,14 +57,4 @@ abstract class RDVertexAttribute extends RefCounted {
   final def getFrequency(): Long =
     Ptrcall.call0[Long](MethodBind.get("RDVertexAttribute", "get_frequency", 4154106413L), hostObject.objectPtr)
 
-}
-
-object RDVertexAttribute {
-  /** Class metadata for Gd[RDVertexAttribute] lifetime management and casting. */
-  given GodotClass[RDVertexAttribute] with {
-    def className = "RDVertexAttribute"
-    def isRefCounted = true
-    def wrap(o: GodotObject): RDVertexAttribute = new RDVertexAttribute {}.withHost(o.objectPtr)
-    def unwrap(t: RDVertexAttribute): GodotObject = t.hostObject
-  }
 }

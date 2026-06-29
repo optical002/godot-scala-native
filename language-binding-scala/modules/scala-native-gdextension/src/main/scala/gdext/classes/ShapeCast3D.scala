@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ShapeCast3D`, extends `Node3D`. */
 abstract class ShapeCast3D extends Node3D {
+  override def godotClassName: String = "ShapeCast3D"
 
   /** ShapeCast3D.resource_changed */
   final def resourceChanged(resource: Resource): Unit =
@@ -148,14 +149,4 @@ abstract class ShapeCast3D extends Node3D {
   final def getDebugShapeCustomColor(): gdext.builtin.Color =
     Ptrcall.call0[gdext.builtin.Color](MethodBind.get("ShapeCast3D", "get_debug_shape_custom_color", 3444240500L), hostObject.objectPtr)
 
-}
-
-object ShapeCast3D {
-  /** Class metadata for Gd[ShapeCast3D] lifetime management and casting. */
-  given GodotClass[ShapeCast3D] with {
-    def className = "ShapeCast3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): ShapeCast3D = new ShapeCast3D {}.withHost(o.objectPtr)
-    def unwrap(t: ShapeCast3D): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `WebXRInterface`, extends `XRInterface`. */
 abstract class WebXRInterface extends XRInterface {
+  override def godotClassName: String = "WebXRInterface"
 
   /** WebXRInterface.is_session_supported */
   final def isSessionSupported(session_mode: String): Unit =
@@ -76,14 +77,4 @@ abstract class WebXRInterface extends XRInterface {
   final def setDisplayRefreshRate(refresh_rate: Double): Unit =
     Ptrcall.callVoid1(MethodBind.get("WebXRInterface", "set_display_refresh_rate", 373806689L), hostObject.objectPtr, refresh_rate)
 
-}
-
-object WebXRInterface {
-  /** Class metadata for Gd[WebXRInterface] lifetime management and casting. */
-  given GodotClass[WebXRInterface] with {
-    def className = "WebXRInterface"
-    def isRefCounted = true
-    def wrap(o: GodotObject): WebXRInterface = new WebXRInterface {}.withHost(o.objectPtr)
-    def unwrap(t: WebXRInterface): GodotObject = t.hostObject
-  }
 }

@@ -19,7 +19,7 @@ import gdext.internal.ffi.types.GDExtensionVariantType.*
  * allocated within a [[Variant.scope]]). A Variant may hold a reference-counted
  * payload (e.g. a String or Object), so when you are done with one you must
  * [[destroy]] it to release that payload; the buffer itself is reclaimed by
- * whoever allocated it. Phase 3's `Gd[T]` will formalise owned lifetimes.
+ * whoever allocated it.
  */
 opaque type Variant = GDExtensionVariantPtr
 

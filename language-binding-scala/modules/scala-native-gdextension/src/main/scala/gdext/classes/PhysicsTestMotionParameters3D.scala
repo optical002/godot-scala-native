@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PhysicsTestMotionParameters3D`, extends `RefCounted`. */
 abstract class PhysicsTestMotionParameters3D extends RefCounted {
+  override def godotClassName: String = "PhysicsTestMotionParameters3D"
 
   /** PhysicsTestMotionParameters3D.get_from */
   final def getFrom(): gdext.builtin.Transform3D =
@@ -56,14 +57,4 @@ abstract class PhysicsTestMotionParameters3D extends RefCounted {
   final def setRecoveryAsCollisionEnabled(enabled: Boolean): Unit =
     Ptrcall.callVoid1(MethodBind.get("PhysicsTestMotionParameters3D", "set_recovery_as_collision_enabled", 2586408642L), hostObject.objectPtr, enabled)
 
-}
-
-object PhysicsTestMotionParameters3D {
-  /** Class metadata for Gd[PhysicsTestMotionParameters3D] lifetime management and casting. */
-  given GodotClass[PhysicsTestMotionParameters3D] with {
-    def className = "PhysicsTestMotionParameters3D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): PhysicsTestMotionParameters3D = new PhysicsTestMotionParameters3D {}.withHost(o.objectPtr)
-    def unwrap(t: PhysicsTestMotionParameters3D): GodotObject = t.hostObject
-  }
 }

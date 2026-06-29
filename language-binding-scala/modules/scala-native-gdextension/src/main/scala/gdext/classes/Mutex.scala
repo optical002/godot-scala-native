@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Mutex`, extends `RefCounted`. */
 abstract class Mutex extends RefCounted {
+  override def godotClassName: String = "Mutex"
 
   /** Mutex.lock */
   final def lock(): Unit =
@@ -20,14 +21,4 @@ abstract class Mutex extends RefCounted {
   final def unlock(): Unit =
     Ptrcall.callVoid0(MethodBind.get("Mutex", "unlock", 3218959716L), hostObject.objectPtr)
 
-}
-
-object Mutex {
-  /** Class metadata for Gd[Mutex] lifetime management and casting. */
-  given GodotClass[Mutex] with {
-    def className = "Mutex"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Mutex = new Mutex {}.withHost(o.objectPtr)
-    def unwrap(t: Mutex): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `NativeMenu`, extends `Object`. */
 abstract class NativeMenu extends Object {
+  override def godotClassName: String = "NativeMenu"
 
   /** NativeMenu.has_feature */
   final def hasFeature(feature: Long): Boolean =
@@ -31,14 +32,6 @@ abstract class NativeMenu extends Object {
 }
 
 object NativeMenu {
-  /** Class metadata for Gd[NativeMenu] lifetime management and casting. */
-  given GodotClass[NativeMenu] with {
-    def className = "NativeMenu"
-    def isRefCounted = false
-    def wrap(o: GodotObject): NativeMenu = new NativeMenu {}.withHost(o.objectPtr)
-    def unwrap(t: NativeMenu): GodotObject = t.hostObject
-  }
-
   /** The process-global NativeMenu singleton instance. */
   def singleton: NativeMenu = new NativeMenu {}
     .withHost(Godot.interface.global_get_singleton(

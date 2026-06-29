@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ResourceLoader`, extends `Object`. */
 abstract class ResourceLoader extends Object {
+  override def godotClassName: String = "ResourceLoader"
 
   /** ResourceLoader.load_threaded_request */
   final def loadThreadedRequest(path: String, type_hint: String, use_sub_threads: Boolean, cache_mode: Long): Long =
@@ -51,14 +52,6 @@ abstract class ResourceLoader extends Object {
 }
 
 object ResourceLoader {
-  /** Class metadata for Gd[ResourceLoader] lifetime management and casting. */
-  given GodotClass[ResourceLoader] with {
-    def className = "ResourceLoader"
-    def isRefCounted = false
-    def wrap(o: GodotObject): ResourceLoader = new ResourceLoader {}.withHost(o.objectPtr)
-    def unwrap(t: ResourceLoader): GodotObject = t.hostObject
-  }
-
   /** The process-global ResourceLoader singleton instance. */
   def singleton: ResourceLoader = new ResourceLoader {}
     .withHost(Godot.interface.global_get_singleton(

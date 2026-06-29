@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `NavigationPolygon`, extends `Resource`. */
 abstract class NavigationPolygon extends Resource {
+  override def godotClassName: String = "NavigationPolygon"
 
   /** NavigationPolygon.get_polygon_count */
   final def getPolygonCount(): Long =
@@ -128,14 +129,4 @@ abstract class NavigationPolygon extends Resource {
   final def clear(): Unit =
     Ptrcall.callVoid0(MethodBind.get("NavigationPolygon", "clear", 3218959716L), hostObject.objectPtr)
 
-}
-
-object NavigationPolygon {
-  /** Class metadata for Gd[NavigationPolygon] lifetime management and casting. */
-  given GodotClass[NavigationPolygon] with {
-    def className = "NavigationPolygon"
-    def isRefCounted = true
-    def wrap(o: GodotObject): NavigationPolygon = new NavigationPolygon {}.withHost(o.objectPtr)
-    def unwrap(t: NavigationPolygon): GodotObject = t.hostObject
-  }
 }

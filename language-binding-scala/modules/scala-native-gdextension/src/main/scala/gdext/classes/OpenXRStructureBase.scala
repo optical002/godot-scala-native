@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRStructureBase`, extends `RefCounted`. */
 abstract class OpenXRStructureBase extends RefCounted {
+  override def godotClassName: String = "OpenXRStructureBase"
 
   /** OpenXRStructureBase.get_structure_type */
   final def getStructureType(): Long =
@@ -20,14 +21,4 @@ abstract class OpenXRStructureBase extends RefCounted {
   final def getNext(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("OpenXRStructureBase", "get_next", 2798796760L), hostObject.objectPtr)
 
-}
-
-object OpenXRStructureBase {
-  /** Class metadata for Gd[OpenXRStructureBase] lifetime management and casting. */
-  given GodotClass[OpenXRStructureBase] with {
-    def className = "OpenXRStructureBase"
-    def isRefCounted = true
-    def wrap(o: GodotObject): OpenXRStructureBase = new OpenXRStructureBase {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRStructureBase): GodotObject = t.hostObject
-  }
 }

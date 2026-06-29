@@ -3,7 +3,6 @@ package gdext.internal.register
 import scala.quoted.*
 import gdext.annotations.*
 import gdext.builtin.{ToVariant, FromVariant}
-import gdext.internal.engine.Gd
 import gdext.classes.{Skeleton3D, AnimationMixer, SpriteFrames, AnimationTree}
 import gdext.internal.ffi.types.*
 import gdext.internal.ffi.types.GDExtensionVariantType.*
@@ -282,7 +281,7 @@ object Register {
     // Emit a CompEnumRegistry.register(...) for a comp-annotated String field:
     // locate the sibling comp field by Scala name to get its declared type, build
     // a typed getter for it, project it to the engine type the annotation expects
-    // (via CompEnum.AsGd), and pair that with the matching enumeration function.
+    // (via CompEnum.AsRef), and pair that with the matching enumeration function.
     def compEnumRegFor(f: Symbol, ann: TypeRepr, compScalaName: String): Expr[Unit] = {
       val propName = snake(f.name)
       val annName = ann.typeSymbol.name
@@ -301,15 +300,17 @@ object Register {
       compTpe.asType match {
         case '[c] =>
           val (getC, _) = fieldLambdas[c](compScalaName)
-          def build[E: Type](enumerate: Expr[Gd[E] => Seq[String]]): Expr[Unit] = {
-            val asGd = Expr.summon[CompEnum.AsGd[c, E]].getOrElse(
+          def build[E <: GodotScriptClass: Type](
+            enumerate: Expr[E => Seq[String]]
+          ): Expr[Unit] = {
+            val asRef = Expr.summon[CompEnum.AsRef[c, E]].getOrElse(
               report.errorAndAbort(
                 s"@$annName $className.$compScalaName: type '${typeName(compTpe)}' " +
-                  s"cannot be projected to Gd[${TypeRepr.of[E].typeSymbol.name}]"
+                  s"cannot be projected to ${TypeRepr.of[E].typeSymbol.name}"
               )
             )
             val builder: Expr[GodotScriptClass => Seq[String]] =
-              '{ (inst: GodotScriptClass) => $enumerate($asGd.gd($getC(inst))) }
+              '{ (inst: GodotScriptClass) => $enumerate($asRef.ref($getC(inst))) }
             '{ CompEnumRegistry.register($classNameExpr, ${ Expr(propName) }, $builder) }
           }
           if (ann =:= boneNameAnn) build[Skeleton3D]('{ CompEnum.boneNames })
@@ -361,7 +362,7 @@ object Register {
     // setter exists for Godot to write through (`val`/plain params are skipped
     // silently). Params need no explicit default: the factory below fills any
     // un-defaulted one from its type's `DefaultValue` (an explicit `= ...` still
-    // wins). So `class Player(var projectile: Gd[Projectile]) extends Node2D`
+    // wins). So `class Player(var projectile: Projectile) extends Node2D`
     // exports `projectile` with no annotation and no default.
     val ctorParamFields: List[Symbol] = {
       val paramNames = sym.primaryConstructor.paramSymss.flatten.map(_.name).toSet

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioListener3D`, extends `Node3D`. */
 abstract class AudioListener3D extends Node3D {
+  override def godotClassName: String = "AudioListener3D"
 
   /** AudioListener3D.make_current */
   final def makeCurrent(): Unit =
@@ -32,14 +33,4 @@ abstract class AudioListener3D extends Node3D {
   final def getDopplerTracking(): Long =
     Ptrcall.call0[Long](MethodBind.get("AudioListener3D", "get_doppler_tracking", 550229039L), hostObject.objectPtr)
 
-}
-
-object AudioListener3D {
-  /** Class metadata for Gd[AudioListener3D] lifetime management and casting. */
-  given GodotClass[AudioListener3D] with {
-    def className = "AudioListener3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): AudioListener3D = new AudioListener3D {}.withHost(o.objectPtr)
-    def unwrap(t: AudioListener3D): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SpringArm3D`, extends `Node3D`. */
 abstract class SpringArm3D extends Node3D {
+  override def godotClassName: String = "SpringArm3D"
 
   /** SpringArm3D.get_hit_length */
   final def getHitLength(): Double =
@@ -48,14 +49,4 @@ abstract class SpringArm3D extends Node3D {
   final def getMargin(): Double =
     Ptrcall.call0[Double](MethodBind.get("SpringArm3D", "get_margin", 191475506L), hostObject.objectPtr)
 
-}
-
-object SpringArm3D {
-  /** Class metadata for Gd[SpringArm3D] lifetime management and casting. */
-  given GodotClass[SpringArm3D] with {
-    def className = "SpringArm3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): SpringArm3D = new SpringArm3D {}.withHost(o.objectPtr)
-    def unwrap(t: SpringArm3D): GodotObject = t.hostObject
-  }
 }

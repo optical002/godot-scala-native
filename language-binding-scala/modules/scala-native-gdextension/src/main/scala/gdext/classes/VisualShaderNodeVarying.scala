@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeVarying`, extends `VisualShaderNode`. */
 abstract class VisualShaderNodeVarying extends VisualShaderNode {
+  override def godotClassName: String = "VisualShaderNodeVarying"
 
   /** VisualShaderNodeVarying.set_varying_name */
   final def setVaryingName(name: String): Unit =
@@ -24,14 +25,4 @@ abstract class VisualShaderNodeVarying extends VisualShaderNode {
   final def getVaryingType(): Long =
     Ptrcall.call0[Long](MethodBind.get("VisualShaderNodeVarying", "get_varying_type", 523183580L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeVarying {
-  /** Class metadata for Gd[VisualShaderNodeVarying] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeVarying] with {
-    def className = "VisualShaderNodeVarying"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeVarying = new VisualShaderNodeVarying {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeVarying): GodotObject = t.hostObject
-  }
 }

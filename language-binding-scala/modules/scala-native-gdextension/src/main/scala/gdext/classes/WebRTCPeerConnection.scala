@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `WebRTCPeerConnection`, extends `RefCounted`. */
 abstract class WebRTCPeerConnection extends RefCounted {
+  override def godotClassName: String = "WebRTCPeerConnection"
 
   /** WebRTCPeerConnection.create_offer */
   final def createOffer(): Long =
@@ -44,14 +45,4 @@ abstract class WebRTCPeerConnection extends RefCounted {
   final def getSignalingState(): Long =
     Ptrcall.call0[Long](MethodBind.get("WebRTCPeerConnection", "get_signaling_state", 3342956226L), hostObject.objectPtr)
 
-}
-
-object WebRTCPeerConnection {
-  /** Class metadata for Gd[WebRTCPeerConnection] lifetime management and casting. */
-  given GodotClass[WebRTCPeerConnection] with {
-    def className = "WebRTCPeerConnection"
-    def isRefCounted = true
-    def wrap(o: GodotObject): WebRTCPeerConnection = new WebRTCPeerConnection {}.withHost(o.objectPtr)
-    def unwrap(t: WebRTCPeerConnection): GodotObject = t.hostObject
-  }
 }

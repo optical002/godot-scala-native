@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Node3D`, extends `Node`. */
 abstract class Node3D extends Node {
+  override def godotClassName: String = "Node3D"
 
   /** Node3D.set_transform */
   final def setTransform(local: gdext.builtin.Transform3D): Unit =
@@ -280,14 +281,4 @@ abstract class Node3D extends Node {
   final def toGlobal(local_point: gdext.builtin.Vector3): gdext.builtin.Vector3 =
     Ptrcall.call1[gdext.builtin.Vector3, gdext.builtin.Vector3](MethodBind.get("Node3D", "to_global", 192990374L), hostObject.objectPtr, local_point)
 
-}
-
-object Node3D {
-  /** Class metadata for Gd[Node3D] lifetime management and casting. */
-  given GodotClass[Node3D] with {
-    def className = "Node3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Node3D = new Node3D {}.withHost(o.objectPtr)
-    def unwrap(t: Node3D): GodotObject = t.hostObject
-  }
 }

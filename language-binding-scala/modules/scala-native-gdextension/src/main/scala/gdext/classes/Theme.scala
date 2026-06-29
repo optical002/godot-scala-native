@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Theme`, extends `Resource`. */
 abstract class Theme extends Resource {
+  override def godotClassName: String = "Theme"
 
   /** Theme.set_icon */
   final def setIcon(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName, texture: Texture2D): Unit =
@@ -212,14 +213,4 @@ abstract class Theme extends Resource {
   final def clear(): Unit =
     Ptrcall.callVoid0(MethodBind.get("Theme", "clear", 3218959716L), hostObject.objectPtr)
 
-}
-
-object Theme {
-  /** Class metadata for Gd[Theme] lifetime management and casting. */
-  given GodotClass[Theme] with {
-    def className = "Theme"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Theme = new Theme {}.withHost(o.objectPtr)
-    def unwrap(t: Theme): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `MissingResource`, extends `Resource`. */
 abstract class MissingResource extends Resource {
+  override def godotClassName: String = "MissingResource"
 
   /** MissingResource.set_original_class */
   final def setOriginalClass(name: String): Unit =
@@ -24,14 +25,4 @@ abstract class MissingResource extends Resource {
   final def isRecordingProperties(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("MissingResource", "is_recording_properties", 36873697L), hostObject.objectPtr)
 
-}
-
-object MissingResource {
-  /** Class metadata for Gd[MissingResource] lifetime management and casting. */
-  given GodotClass[MissingResource] with {
-    def className = "MissingResource"
-    def isRefCounted = true
-    def wrap(o: GodotObject): MissingResource = new MissingResource {}.withHost(o.objectPtr)
-    def unwrap(t: MissingResource): GodotObject = t.hostObject
-  }
 }

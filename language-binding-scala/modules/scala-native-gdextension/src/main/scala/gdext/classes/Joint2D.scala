@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Joint2D`, extends `Node2D`. */
 abstract class Joint2D extends Node2D {
+  override def godotClassName: String = "Joint2D"
 
   /** Joint2D.set_bias */
   final def setBias(bias: Double): Unit =
@@ -24,14 +25,4 @@ abstract class Joint2D extends Node2D {
   final def getExcludeNodesFromCollision(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("Joint2D", "get_exclude_nodes_from_collision", 36873697L), hostObject.objectPtr)
 
-}
-
-object Joint2D {
-  /** Class metadata for Gd[Joint2D] lifetime management and casting. */
-  given GodotClass[Joint2D] with {
-    def className = "Joint2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Joint2D = new Joint2D {}.withHost(o.objectPtr)
-    def unwrap(t: Joint2D): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TileSetScenesCollectionSource`, extends `TileSetSource`. */
 abstract class TileSetScenesCollectionSource extends TileSetSource {
+  override def godotClassName: String = "TileSetScenesCollectionSource"
 
   /** TileSetScenesCollectionSource.get_scene_tiles_count */
   final def getSceneTilesCount(): Long =
@@ -52,14 +53,4 @@ abstract class TileSetScenesCollectionSource extends TileSetSource {
   final def getNextSceneTileId(): Long =
     Ptrcall.call0[Long](MethodBind.get("TileSetScenesCollectionSource", "get_next_scene_tile_id", 3905245786L), hostObject.objectPtr)
 
-}
-
-object TileSetScenesCollectionSource {
-  /** Class metadata for Gd[TileSetScenesCollectionSource] lifetime management and casting. */
-  given GodotClass[TileSetScenesCollectionSource] with {
-    def className = "TileSetScenesCollectionSource"
-    def isRefCounted = true
-    def wrap(o: GodotObject): TileSetScenesCollectionSource = new TileSetScenesCollectionSource {}.withHost(o.objectPtr)
-    def unwrap(t: TileSetScenesCollectionSource): GodotObject = t.hostObject
-  }
 }

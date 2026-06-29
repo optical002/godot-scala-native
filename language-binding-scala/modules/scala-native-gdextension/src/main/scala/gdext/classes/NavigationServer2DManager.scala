@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `NavigationServer2DManager`, extends `Object`. */
 abstract class NavigationServer2DManager extends Object {
+  override def godotClassName: String = "NavigationServer2DManager"
 
   /** NavigationServer2DManager.set_default_server */
   final def setDefaultServer(name: String, priority: Long): Unit =
@@ -15,14 +16,6 @@ abstract class NavigationServer2DManager extends Object {
 }
 
 object NavigationServer2DManager {
-  /** Class metadata for Gd[NavigationServer2DManager] lifetime management and casting. */
-  given GodotClass[NavigationServer2DManager] with {
-    def className = "NavigationServer2DManager"
-    def isRefCounted = false
-    def wrap(o: GodotObject): NavigationServer2DManager = new NavigationServer2DManager {}.withHost(o.objectPtr)
-    def unwrap(t: NavigationServer2DManager): GodotObject = t.hostObject
-  }
-
   /** The process-global NavigationServer2DManager singleton instance. */
   def singleton: NavigationServer2DManager = new NavigationServer2DManager {}
     .withHost(Godot.interface.global_get_singleton(

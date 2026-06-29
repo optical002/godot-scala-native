@@ -7,15 +7,6 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GDScriptSyntaxHighlighter`, extends `EditorSyntaxHighlighter`. */
 abstract class GDScriptSyntaxHighlighter extends EditorSyntaxHighlighter {
+  override def godotClassName: String = "GDScriptSyntaxHighlighter"
 
-}
-
-object GDScriptSyntaxHighlighter {
-  /** Class metadata for Gd[GDScriptSyntaxHighlighter] lifetime management and casting. */
-  given GodotClass[GDScriptSyntaxHighlighter] with {
-    def className = "GDScriptSyntaxHighlighter"
-    def isRefCounted = true
-    def wrap(o: GodotObject): GDScriptSyntaxHighlighter = new GDScriptSyntaxHighlighter {}.withHost(o.objectPtr)
-    def unwrap(t: GDScriptSyntaxHighlighter): GodotObject = t.hostObject
-  }
 }

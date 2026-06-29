@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CollisionPolygon3D`, extends `Node3D`. */
 abstract class CollisionPolygon3D extends Node3D {
+  override def godotClassName: String = "CollisionPolygon3D"
 
   /** CollisionPolygon3D.set_depth */
   final def setDepth(depth: Double): Unit =
@@ -48,14 +49,4 @@ abstract class CollisionPolygon3D extends Node3D {
   final def getMargin(): Double =
     Ptrcall.call0[Double](MethodBind.get("CollisionPolygon3D", "get_margin", 1740695150L), hostObject.objectPtr)
 
-}
-
-object CollisionPolygon3D {
-  /** Class metadata for Gd[CollisionPolygon3D] lifetime management and casting. */
-  given GodotClass[CollisionPolygon3D] with {
-    def className = "CollisionPolygon3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): CollisionPolygon3D = new CollisionPolygon3D {}.withHost(o.objectPtr)
-    def unwrap(t: CollisionPolygon3D): GodotObject = t.hostObject
-  }
 }

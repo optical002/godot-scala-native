@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `FoldableGroup`, extends `Resource`. */
 abstract class FoldableGroup extends Resource {
+  override def godotClassName: String = "FoldableGroup"
 
   /** FoldableGroup.get_expanded_container */
   final def getExpandedContainer(): GodotObject =
@@ -20,14 +21,4 @@ abstract class FoldableGroup extends Resource {
   final def isAllowFoldingAll(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("FoldableGroup", "is_allow_folding_all", 36873697L), hostObject.objectPtr)
 
-}
-
-object FoldableGroup {
-  /** Class metadata for Gd[FoldableGroup] lifetime management and casting. */
-  given GodotClass[FoldableGroup] with {
-    def className = "FoldableGroup"
-    def isRefCounted = true
-    def wrap(o: GodotObject): FoldableGroup = new FoldableGroup {}.withHost(o.objectPtr)
-    def unwrap(t: FoldableGroup): GodotObject = t.hostObject
-  }
 }

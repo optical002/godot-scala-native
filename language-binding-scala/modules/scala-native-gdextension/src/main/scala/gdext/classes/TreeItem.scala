@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TreeItem`, extends `Object`. */
 abstract class TreeItem extends Object {
+  override def godotClassName: String = "TreeItem"
 
   /** TreeItem.set_cell_mode */
   final def setCellMode(column: Long, mode: Long): Unit =
@@ -456,14 +457,4 @@ abstract class TreeItem extends Object {
   final def moveAfter(item: TreeItem): Unit =
     Ptrcall.callVoid1(MethodBind.get("TreeItem", "move_after", 1819951137L), hostObject.objectPtr, item.hostObject)
 
-}
-
-object TreeItem {
-  /** Class metadata for Gd[TreeItem] lifetime management and casting. */
-  given GodotClass[TreeItem] with {
-    def className = "TreeItem"
-    def isRefCounted = false
-    def wrap(o: GodotObject): TreeItem = new TreeItem {}.withHost(o.objectPtr)
-    def unwrap(t: TreeItem): GodotObject = t.hostObject
-  }
 }

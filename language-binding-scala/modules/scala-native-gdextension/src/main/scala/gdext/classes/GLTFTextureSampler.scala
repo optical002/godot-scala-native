@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GLTFTextureSampler`, extends `Resource`. */
 abstract class GLTFTextureSampler extends Resource {
+  override def godotClassName: String = "GLTFTextureSampler"
 
   /** GLTFTextureSampler.get_mag_filter */
   final def getMagFilter(): Long =
@@ -40,14 +41,4 @@ abstract class GLTFTextureSampler extends Resource {
   final def setWrapT(wrap_mode: Long): Unit =
     Ptrcall.callVoid1(MethodBind.get("GLTFTextureSampler", "set_wrap_t", 1286410249L), hostObject.objectPtr, wrap_mode)
 
-}
-
-object GLTFTextureSampler {
-  /** Class metadata for Gd[GLTFTextureSampler] lifetime management and casting. */
-  given GodotClass[GLTFTextureSampler] with {
-    def className = "GLTFTextureSampler"
-    def isRefCounted = true
-    def wrap(o: GodotObject): GLTFTextureSampler = new GLTFTextureSampler {}.withHost(o.objectPtr)
-    def unwrap(t: GLTFTextureSampler): GodotObject = t.hostObject
-  }
 }

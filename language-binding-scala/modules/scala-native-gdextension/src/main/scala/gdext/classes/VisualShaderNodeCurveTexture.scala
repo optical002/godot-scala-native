@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeCurveTexture`, extends `VisualShaderNodeResizableBase`. */
 abstract class VisualShaderNodeCurveTexture extends VisualShaderNodeResizableBase {
+  override def godotClassName: String = "VisualShaderNodeCurveTexture"
 
   /** VisualShaderNodeCurveTexture.set_texture */
   final def setTexture(texture: CurveTexture): Unit =
@@ -16,14 +17,4 @@ abstract class VisualShaderNodeCurveTexture extends VisualShaderNodeResizableBas
   final def getTexture(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("VisualShaderNodeCurveTexture", "get_texture", 2800800579L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeCurveTexture {
-  /** Class metadata for Gd[VisualShaderNodeCurveTexture] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeCurveTexture] with {
-    def className = "VisualShaderNodeCurveTexture"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeCurveTexture = new VisualShaderNodeCurveTexture {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeCurveTexture): GodotObject = t.hostObject
-  }
 }

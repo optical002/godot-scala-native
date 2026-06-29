@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ImageTexture`, extends `Texture2D`. */
 abstract class ImageTexture extends Texture2D {
+  override def godotClassName: String = "ImageTexture"
 
   /** ImageTexture.get_format */
   final def getFormat(): Long =
@@ -24,14 +25,4 @@ abstract class ImageTexture extends Texture2D {
   final def setSizeOverride(size: gdext.builtin.Vector2i): Unit =
     Ptrcall.callVoid1(MethodBind.get("ImageTexture", "set_size_override", 1130785943L), hostObject.objectPtr, size)
 
-}
-
-object ImageTexture {
-  /** Class metadata for Gd[ImageTexture] lifetime management and casting. */
-  given GodotClass[ImageTexture] with {
-    def className = "ImageTexture"
-    def isRefCounted = true
-    def wrap(o: GodotObject): ImageTexture = new ImageTexture {}.withHost(o.objectPtr)
-    def unwrap(t: ImageTexture): GodotObject = t.hostObject
-  }
 }

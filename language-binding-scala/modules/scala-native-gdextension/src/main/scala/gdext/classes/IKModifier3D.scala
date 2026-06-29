@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `IKModifier3D`, extends `SkeletonModifier3D`. */
 abstract class IKModifier3D extends SkeletonModifier3D {
+  override def godotClassName: String = "IKModifier3D"
 
   /** IKModifier3D.set_setting_count */
   final def setSettingCount(count: Long): Unit =
@@ -32,14 +33,4 @@ abstract class IKModifier3D extends SkeletonModifier3D {
   final def reset(): Unit =
     Ptrcall.callVoid0(MethodBind.get("IKModifier3D", "reset", 3218959716L), hostObject.objectPtr)
 
-}
-
-object IKModifier3D {
-  /** Class metadata for Gd[IKModifier3D] lifetime management and casting. */
-  given GodotClass[IKModifier3D] with {
-    def className = "IKModifier3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): IKModifier3D = new IKModifier3D {}.withHost(o.objectPtr)
-    def unwrap(t: IKModifier3D): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `LightmapGI`, extends `VisualInstance3D`. */
 abstract class LightmapGI extends VisualInstance3D {
+  override def godotClassName: String = "LightmapGI"
 
   /** LightmapGI.set_light_data */
   final def setLightData(data: LightmapGIData): Unit =
@@ -184,14 +185,4 @@ abstract class LightmapGI extends VisualInstance3D {
   final def getCameraAttributes(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("LightmapGI", "get_camera_attributes", 3921283215L), hostObject.objectPtr)
 
-}
-
-object LightmapGI {
-  /** Class metadata for Gd[LightmapGI] lifetime management and casting. */
-  given GodotClass[LightmapGI] with {
-    def className = "LightmapGI"
-    def isRefCounted = false
-    def wrap(o: GodotObject): LightmapGI = new LightmapGI {}.withHost(o.objectPtr)
-    def unwrap(t: LightmapGI): GodotObject = t.hostObject
-  }
 }

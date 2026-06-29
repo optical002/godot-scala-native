@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `LabelSettings`, extends `Resource`. */
 abstract class LabelSettings extends Resource {
+  override def godotClassName: String = "LabelSettings"
 
   /** LabelSettings.set_line_spacing */
   final def setLineSpacing(spacing: Double): Unit =
@@ -168,14 +169,4 @@ abstract class LabelSettings extends Resource {
   final def getStackedShadowOutlineSize(index: Long): Long =
     Ptrcall.call1[Long, Long](MethodBind.get("LabelSettings", "get_stacked_shadow_outline_size", 923996154L), hostObject.objectPtr, index)
 
-}
-
-object LabelSettings {
-  /** Class metadata for Gd[LabelSettings] lifetime management and casting. */
-  given GodotClass[LabelSettings] with {
-    def className = "LabelSettings"
-    def isRefCounted = true
-    def wrap(o: GodotObject): LabelSettings = new LabelSettings {}.withHost(o.objectPtr)
-    def unwrap(t: LabelSettings): GodotObject = t.hostObject
-  }
 }

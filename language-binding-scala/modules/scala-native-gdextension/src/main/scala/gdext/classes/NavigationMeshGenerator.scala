@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `NavigationMeshGenerator`, extends `Object`. */
 abstract class NavigationMeshGenerator extends Object {
+  override def godotClassName: String = "NavigationMeshGenerator"
 
   /** NavigationMeshGenerator.bake */
   final def bake(navigation_mesh: NavigationMesh, root_node: Node): Unit =
@@ -19,14 +20,6 @@ abstract class NavigationMeshGenerator extends Object {
 }
 
 object NavigationMeshGenerator {
-  /** Class metadata for Gd[NavigationMeshGenerator] lifetime management and casting. */
-  given GodotClass[NavigationMeshGenerator] with {
-    def className = "NavigationMeshGenerator"
-    def isRefCounted = false
-    def wrap(o: GodotObject): NavigationMeshGenerator = new NavigationMeshGenerator {}.withHost(o.objectPtr)
-    def unwrap(t: NavigationMeshGenerator): GodotObject = t.hostObject
-  }
-
   /** The process-global NavigationMeshGenerator singleton instance. */
   def singleton: NavigationMeshGenerator = new NavigationMeshGenerator {}
     .withHost(Godot.interface.global_get_singleton(

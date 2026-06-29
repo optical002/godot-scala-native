@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GridMap`, extends `Node3D`. */
 abstract class GridMap extends Node3D {
+  override def godotClassName: String = "GridMap"
 
   /** GridMap.set_collision_layer */
   final def setCollisionLayer(layer: Long): Unit =
@@ -168,14 +169,4 @@ abstract class GridMap extends Node3D {
   final def makeBakedMeshes(gen_lightmap_uv: Boolean, lightmap_uv_texel_size: Double): Unit =
     Ptrcall.callVoid2(MethodBind.get("GridMap", "make_baked_meshes", 3609286057L), hostObject.objectPtr, gen_lightmap_uv, lightmap_uv_texel_size)
 
-}
-
-object GridMap {
-  /** Class metadata for Gd[GridMap] lifetime management and casting. */
-  given GodotClass[GridMap] with {
-    def className = "GridMap"
-    def isRefCounted = false
-    def wrap(o: GodotObject): GridMap = new GridMap {}.withHost(o.objectPtr)
-    def unwrap(t: GridMap): GodotObject = t.hostObject
-  }
 }

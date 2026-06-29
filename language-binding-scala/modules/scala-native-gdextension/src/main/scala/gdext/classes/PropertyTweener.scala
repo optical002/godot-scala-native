@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PropertyTweener`, extends `Tweener`. */
 abstract class PropertyTweener extends Tweener {
+  override def godotClassName: String = "PropertyTweener"
 
   /** PropertyTweener.from_current */
   final def fromCurrent(): GodotObject =
@@ -28,14 +29,4 @@ abstract class PropertyTweener extends Tweener {
   final def setDelay(delay: Double): GodotObject =
     Ptrcall.call1[Double, GodotObject](MethodBind.get("PropertyTweener", "set_delay", 2171559331L), hostObject.objectPtr, delay)
 
-}
-
-object PropertyTweener {
-  /** Class metadata for Gd[PropertyTweener] lifetime management and casting. */
-  given GodotClass[PropertyTweener] with {
-    def className = "PropertyTweener"
-    def isRefCounted = true
-    def wrap(o: GodotObject): PropertyTweener = new PropertyTweener {}.withHost(o.objectPtr)
-    def unwrap(t: PropertyTweener): GodotObject = t.hostObject
-  }
 }

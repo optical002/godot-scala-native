@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `MobileVRInterface`, extends `XRInterface`. */
 abstract class MobileVRInterface extends XRInterface {
+  override def godotClassName: String = "MobileVRInterface"
 
   /** MobileVRInterface.set_eye_height */
   final def setEyeHeight(eye_height: Double): Unit =
@@ -88,14 +89,4 @@ abstract class MobileVRInterface extends XRInterface {
   final def setVrsStrength(strength: Double): Unit =
     Ptrcall.callVoid1(MethodBind.get("MobileVRInterface", "set_vrs_strength", 373806689L), hostObject.objectPtr, strength)
 
-}
-
-object MobileVRInterface {
-  /** Class metadata for Gd[MobileVRInterface] lifetime management and casting. */
-  given GodotClass[MobileVRInterface] with {
-    def className = "MobileVRInterface"
-    def isRefCounted = true
-    def wrap(o: GodotObject): MobileVRInterface = new MobileVRInterface {}.withHost(o.objectPtr)
-    def unwrap(t: MobileVRInterface): GodotObject = t.hostObject
-  }
 }

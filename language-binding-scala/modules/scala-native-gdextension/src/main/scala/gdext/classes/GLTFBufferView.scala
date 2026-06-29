@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GLTFBufferView`, extends `Resource`. */
 abstract class GLTFBufferView extends Resource {
+  override def godotClassName: String = "GLTFBufferView"
 
   /** GLTFBufferView.get_buffer */
   final def getBuffer(): Long =
@@ -56,14 +57,4 @@ abstract class GLTFBufferView extends Resource {
   final def setVertexAttributes(is_attributes: Boolean): Unit =
     Ptrcall.callVoid1(MethodBind.get("GLTFBufferView", "set_vertex_attributes", 2586408642L), hostObject.objectPtr, is_attributes)
 
-}
-
-object GLTFBufferView {
-  /** Class metadata for Gd[GLTFBufferView] lifetime management and casting. */
-  given GodotClass[GLTFBufferView] with {
-    def className = "GLTFBufferView"
-    def isRefCounted = true
-    def wrap(o: GodotObject): GLTFBufferView = new GLTFBufferView {}.withHost(o.objectPtr)
-    def unwrap(t: GLTFBufferView): GodotObject = t.hostObject
-  }
 }

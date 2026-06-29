@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `StreamPeerSocket`, extends `StreamPeer`. */
 abstract class StreamPeerSocket extends StreamPeer {
+  override def godotClassName: String = "StreamPeerSocket"
 
   /** StreamPeerSocket.poll */
   final def poll(): Long =
@@ -20,14 +21,4 @@ abstract class StreamPeerSocket extends StreamPeer {
   final def disconnectFromHost(): Unit =
     Ptrcall.callVoid0(MethodBind.get("StreamPeerSocket", "disconnect_from_host", 3218959716L), hostObject.objectPtr)
 
-}
-
-object StreamPeerSocket {
-  /** Class metadata for Gd[StreamPeerSocket] lifetime management and casting. */
-  given GodotClass[StreamPeerSocket] with {
-    def className = "StreamPeerSocket"
-    def isRefCounted = true
-    def wrap(o: GodotObject): StreamPeerSocket = new StreamPeerSocket {}.withHost(o.objectPtr)
-    def unwrap(t: StreamPeerSocket): GodotObject = t.hostObject
-  }
 }

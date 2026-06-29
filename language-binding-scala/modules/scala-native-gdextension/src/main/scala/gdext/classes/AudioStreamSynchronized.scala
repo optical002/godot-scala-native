@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioStreamSynchronized`, extends `AudioStream`. */
 abstract class AudioStreamSynchronized extends AudioStream {
+  override def godotClassName: String = "AudioStreamSynchronized"
 
   /** AudioStreamSynchronized.set_stream_count */
   final def setStreamCount(stream_count: Long): Unit =
@@ -32,14 +33,4 @@ abstract class AudioStreamSynchronized extends AudioStream {
   final def getSyncStreamVolume(stream_index: Long): Double =
     Ptrcall.call1[Long, Double](MethodBind.get("AudioStreamSynchronized", "get_sync_stream_volume", 2339986948L), hostObject.objectPtr, stream_index)
 
-}
-
-object AudioStreamSynchronized {
-  /** Class metadata for Gd[AudioStreamSynchronized] lifetime management and casting. */
-  given GodotClass[AudioStreamSynchronized] with {
-    def className = "AudioStreamSynchronized"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioStreamSynchronized = new AudioStreamSynchronized {}.withHost(o.objectPtr)
-    def unwrap(t: AudioStreamSynchronized): GodotObject = t.hostObject
-  }
 }

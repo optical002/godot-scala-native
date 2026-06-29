@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RefCounted`, extends `Object`. */
 abstract class RefCounted extends Object {
+  override def godotClassName: String = "RefCounted"
 
   /** RefCounted.init_ref */
   final def initRef(): Boolean =
@@ -24,14 +25,4 @@ abstract class RefCounted extends Object {
   final def getReferenceCount(): Long =
     Ptrcall.call0[Long](MethodBind.get("RefCounted", "get_reference_count", 3905245786L), hostObject.objectPtr)
 
-}
-
-object RefCounted {
-  /** Class metadata for Gd[RefCounted] lifetime management and casting. */
-  given GodotClass[RefCounted] with {
-    def className = "RefCounted"
-    def isRefCounted = true
-    def wrap(o: GodotObject): RefCounted = new RefCounted {}.withHost(o.objectPtr)
-    def unwrap(t: RefCounted): GodotObject = t.hostObject
-  }
 }

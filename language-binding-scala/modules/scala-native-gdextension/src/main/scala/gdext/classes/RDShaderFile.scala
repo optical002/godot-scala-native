@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RDShaderFile`, extends `Resource`. */
 abstract class RDShaderFile extends Resource {
+  override def godotClassName: String = "RDShaderFile"
 
   /** RDShaderFile.set_bytecode */
   final def setBytecode(bytecode: RDShaderSPIRV, version: gdext.builtin.StringName): Unit =
@@ -24,14 +25,4 @@ abstract class RDShaderFile extends Resource {
   final def getBaseError(): String =
     Ptrcall.call0[String](MethodBind.get("RDShaderFile", "get_base_error", 201670096L), hostObject.objectPtr)
 
-}
-
-object RDShaderFile {
-  /** Class metadata for Gd[RDShaderFile] lifetime management and casting. */
-  given GodotClass[RDShaderFile] with {
-    def className = "RDShaderFile"
-    def isRefCounted = true
-    def wrap(o: GodotObject): RDShaderFile = new RDShaderFile {}.withHost(o.objectPtr)
-    def unwrap(t: RDShaderFile): GodotObject = t.hostObject
-  }
 }

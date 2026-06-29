@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Joint3D`, extends `Node3D`. */
 abstract class Joint3D extends Node3D {
+  override def godotClassName: String = "Joint3D"
 
   /** Joint3D.set_solver_priority */
   final def setSolverPriority(priority: Long): Unit =
@@ -24,14 +25,4 @@ abstract class Joint3D extends Node3D {
   final def getExcludeNodesFromCollision(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("Joint3D", "get_exclude_nodes_from_collision", 36873697L), hostObject.objectPtr)
 
-}
-
-object Joint3D {
-  /** Class metadata for Gd[Joint3D] lifetime management and casting. */
-  given GodotClass[Joint3D] with {
-    def className = "Joint3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Joint3D = new Joint3D {}.withHost(o.objectPtr)
-    def unwrap(t: Joint3D): GodotObject = t.hostObject
-  }
 }

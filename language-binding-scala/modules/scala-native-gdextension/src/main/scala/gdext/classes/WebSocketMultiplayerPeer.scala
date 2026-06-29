@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `WebSocketMultiplayerPeer`, extends `MultiplayerPeer`. */
 abstract class WebSocketMultiplayerPeer extends MultiplayerPeer {
+  override def godotClassName: String = "WebSocketMultiplayerPeer"
 
   /** WebSocketMultiplayerPeer.create_client */
   final def createClient(url: String, tls_client_options: TLSOptions): Long =
@@ -60,14 +61,4 @@ abstract class WebSocketMultiplayerPeer extends MultiplayerPeer {
   final def getMaxQueuedPackets(): Long =
     Ptrcall.call0[Long](MethodBind.get("WebSocketMultiplayerPeer", "get_max_queued_packets", 3905245786L), hostObject.objectPtr)
 
-}
-
-object WebSocketMultiplayerPeer {
-  /** Class metadata for Gd[WebSocketMultiplayerPeer] lifetime management and casting. */
-  given GodotClass[WebSocketMultiplayerPeer] with {
-    def className = "WebSocketMultiplayerPeer"
-    def isRefCounted = true
-    def wrap(o: GodotObject): WebSocketMultiplayerPeer = new WebSocketMultiplayerPeer {}.withHost(o.objectPtr)
-    def unwrap(t: WebSocketMultiplayerPeer): GodotObject = t.hostObject
-  }
 }

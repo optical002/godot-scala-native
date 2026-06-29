@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `KinematicCollision2D`, extends `RefCounted`. */
 abstract class KinematicCollision2D extends RefCounted {
+  override def godotClassName: String = "KinematicCollision2D"
 
   /** KinematicCollision2D.get_position */
   final def getPosition(): gdext.builtin.Vector2 =
@@ -56,14 +57,4 @@ abstract class KinematicCollision2D extends RefCounted {
   final def getColliderVelocity(): gdext.builtin.Vector2 =
     Ptrcall.call0[gdext.builtin.Vector2](MethodBind.get("KinematicCollision2D", "get_collider_velocity", 3341600327L), hostObject.objectPtr)
 
-}
-
-object KinematicCollision2D {
-  /** Class metadata for Gd[KinematicCollision2D] lifetime management and casting. */
-  given GodotClass[KinematicCollision2D] with {
-    def className = "KinematicCollision2D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): KinematicCollision2D = new KinematicCollision2D {}.withHost(o.objectPtr)
-    def unwrap(t: KinematicCollision2D): GodotObject = t.hostObject
-  }
 }

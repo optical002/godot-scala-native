@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PCKPacker`, extends `RefCounted`. */
 abstract class PCKPacker extends RefCounted {
+  override def godotClassName: String = "PCKPacker"
 
   /** PCKPacker.pck_start */
   final def pckStart(pck_path: String, alignment: Long, key: String, encrypt_directory: Boolean): Long =
@@ -24,14 +25,4 @@ abstract class PCKPacker extends RefCounted {
   final def flush(verbose: Boolean): Long =
     Ptrcall.call1[Boolean, Long](MethodBind.get("PCKPacker", "flush", 1633102583L), hostObject.objectPtr, verbose)
 
-}
-
-object PCKPacker {
-  /** Class metadata for Gd[PCKPacker] lifetime management and casting. */
-  given GodotClass[PCKPacker] with {
-    def className = "PCKPacker"
-    def isRefCounted = true
-    def wrap(o: GodotObject): PCKPacker = new PCKPacker {}.withHost(o.objectPtr)
-    def unwrap(t: PCKPacker): GodotObject = t.hostObject
-  }
 }

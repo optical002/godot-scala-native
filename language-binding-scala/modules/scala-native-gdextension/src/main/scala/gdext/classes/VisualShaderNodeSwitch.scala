@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeSwitch`, extends `VisualShaderNode`. */
 abstract class VisualShaderNodeSwitch extends VisualShaderNode {
+  override def godotClassName: String = "VisualShaderNodeSwitch"
 
   /** VisualShaderNodeSwitch.set_op_type */
   final def setOpType(`type`: Long): Unit =
@@ -16,14 +17,4 @@ abstract class VisualShaderNodeSwitch extends VisualShaderNode {
   final def getOpType(): Long =
     Ptrcall.call0[Long](MethodBind.get("VisualShaderNodeSwitch", "get_op_type", 2517845071L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeSwitch {
-  /** Class metadata for Gd[VisualShaderNodeSwitch] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeSwitch] with {
-    def className = "VisualShaderNodeSwitch"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeSwitch = new VisualShaderNodeSwitch {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeSwitch): GodotObject = t.hostObject
-  }
 }

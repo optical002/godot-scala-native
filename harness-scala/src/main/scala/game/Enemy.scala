@@ -1,6 +1,5 @@
 package game
 
-import gdext.api.GodotPrint
 import gdext.classes.Node2D
 import gdext.api.Tscn
 import gdext.annotations.*
@@ -36,5 +35,5 @@ class Enemy(
   @signal def died(): Unit = ()
 
   override def _ready(): Unit =
-    GodotPrint.print(s"Enemy._ready (hp=$hp)")
+    Gd.print(s"Enemy._ready (hp=$hp)")
 }

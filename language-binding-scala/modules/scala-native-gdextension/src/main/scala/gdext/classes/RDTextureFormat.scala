@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RDTextureFormat`, extends `RefCounted`. */
 abstract class RDTextureFormat extends RefCounted {
+  override def godotClassName: String = "RDTextureFormat"
 
   /** RDTextureFormat.set_format */
   final def setFormat(p_member: Long): Unit =
@@ -104,14 +105,4 @@ abstract class RDTextureFormat extends RefCounted {
   final def removeShareableFormat(format: Long): Unit =
     Ptrcall.callVoid1(MethodBind.get("RDTextureFormat", "remove_shareable_format", 565531219L), hostObject.objectPtr, format)
 
-}
-
-object RDTextureFormat {
-  /** Class metadata for Gd[RDTextureFormat] lifetime management and casting. */
-  given GodotClass[RDTextureFormat] with {
-    def className = "RDTextureFormat"
-    def isRefCounted = true
-    def wrap(o: GodotObject): RDTextureFormat = new RDTextureFormat {}.withHost(o.objectPtr)
-    def unwrap(t: RDTextureFormat): GodotObject = t.hostObject
-  }
 }

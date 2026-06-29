@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `MeshInstance2D`, extends `Node2D`. */
 abstract class MeshInstance2D extends Node2D {
+  override def godotClassName: String = "MeshInstance2D"
 
   /** MeshInstance2D.set_mesh */
   final def setMesh(mesh: Mesh): Unit =
@@ -24,14 +25,4 @@ abstract class MeshInstance2D extends Node2D {
   final def getTexture(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("MeshInstance2D", "get_texture", 3635182373L), hostObject.objectPtr)
 
-}
-
-object MeshInstance2D {
-  /** Class metadata for Gd[MeshInstance2D] lifetime management and casting. */
-  given GodotClass[MeshInstance2D] with {
-    def className = "MeshInstance2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): MeshInstance2D = new MeshInstance2D {}.withHost(o.objectPtr)
-    def unwrap(t: MeshInstance2D): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `InputEventMagnifyGesture`, extends `InputEventGesture`. */
 abstract class InputEventMagnifyGesture extends InputEventGesture {
+  override def godotClassName: String = "InputEventMagnifyGesture"
 
   /** InputEventMagnifyGesture.set_factor */
   final def setFactor(factor: Double): Unit =
@@ -16,14 +17,4 @@ abstract class InputEventMagnifyGesture extends InputEventGesture {
   final def getFactor(): Double =
     Ptrcall.call0[Double](MethodBind.get("InputEventMagnifyGesture", "get_factor", 1740695150L), hostObject.objectPtr)
 
-}
-
-object InputEventMagnifyGesture {
-  /** Class metadata for Gd[InputEventMagnifyGesture] lifetime management and casting. */
-  given GodotClass[InputEventMagnifyGesture] with {
-    def className = "InputEventMagnifyGesture"
-    def isRefCounted = true
-    def wrap(o: GodotObject): InputEventMagnifyGesture = new InputEventMagnifyGesture {}.withHost(o.objectPtr)
-    def unwrap(t: InputEventMagnifyGesture): GodotObject = t.hostObject
-  }
 }

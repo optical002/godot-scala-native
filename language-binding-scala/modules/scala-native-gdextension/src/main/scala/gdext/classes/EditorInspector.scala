@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorInspector`, extends `ScrollContainer`. */
 abstract class EditorInspector extends ScrollContainer {
+  override def godotClassName: String = "EditorInspector"
 
   /** EditorInspector.edit */
   final def edit(`object`: Object): Unit =
@@ -20,14 +21,4 @@ abstract class EditorInspector extends ScrollContainer {
   final def getEditedObject(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("EditorInspector", "get_edited_object", 2050059866L), hostObject.objectPtr)
 
-}
-
-object EditorInspector {
-  /** Class metadata for Gd[EditorInspector] lifetime management and casting. */
-  given GodotClass[EditorInspector] with {
-    def className = "EditorInspector"
-    def isRefCounted = false
-    def wrap(o: GodotObject): EditorInspector = new EditorInspector {}.withHost(o.objectPtr)
-    def unwrap(t: EditorInspector): GodotObject = t.hostObject
-  }
 }

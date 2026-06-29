@@ -158,7 +158,7 @@ object ExportType {
  * A reference "leaf": how a node/resource/scene wrapper marshals to/from a raw
  * engine handle, plus its inspector hint metadata. `ExportType` derives the
  * Option/Required/bare variants from this. The givens live here (RefLeaf's
- * companion) so implicit search for `RefLeaf[Gd[T]]` etc. finds them.
+ * companion) so implicit search for `RefLeaf[Tres[T]]` etc. finds them.
  */
 trait RefLeaf[A] {
   def hint: Int
@@ -170,58 +170,57 @@ trait RefLeaf[A] {
 
 object RefLeaf {
   /**
-   * Bare node type as shorthand for `Gd[T]`: `@gdexport var p: Option[Projectile]`
-   * means `Option[Gd[Projectile]]`. The node-vs-resource hint is inferred from the
-   * class hierarchy, so no wrapper is needed. Marshals via `GodotClass.wrap/unwrap`.
+   * Bare node type: `@gdexport var p: Option[Projectile]` exports a node
+   * reference. The node-vs-resource hint is inferred from the class hierarchy.
+   * The reference is held as the plain wrapper `T`; marshals via the
+   * `ClassMeta[T]` factory.
    */
-  given bareNodeLeaf[T <: Node](using cls: GodotClass[T]): RefLeaf[T] =
+  given bareNodeLeaf[T <: Node](using meta: ClassMeta[T]): RefLeaf[T] =
     new RefLeaf[T] {
       def hint = PropertyHint.NodeType
-      def className = cls.className
-      def handleOf(a: T) = cls.unwrap(a).objectPtr
-      def fromHandle(p: GDExtensionObjectPtr) = cls.wrap(GodotObject.fromPtr(p))
+      def className = meta.className
+      def handleOf(a: T) = if (a == null) null else a.hostPtr
+      def fromHandle(p: GDExtensionObjectPtr) = meta.fromHandle(p)
     }
 
-  /** Bare resource type as shorthand for `Tres[T]` (see [[bareNodeLeaf]]). */
-  given bareResourceLeaf[T <: Resource](using cls: GodotClass[T]): RefLeaf[T] =
+  /** Bare resource type (see [[bareNodeLeaf]]). */
+  given bareResourceLeaf[T <: Resource](using meta: ClassMeta[T]): RefLeaf[T] =
     new RefLeaf[T] {
       def hint = PropertyHint.ResourceType
-      def className = cls.className
-      def handleOf(a: T) = cls.unwrap(a).objectPtr
+      def className = meta.className
+      def handleOf(a: T) = if (a == null) null else a.hostPtr
       // Take a reference: this handle is stored in an export field, so it must
-      // outlive Godot's temporary loader reference (see Gd.reference).
+      // outlive Godot's temporary loader reference (see GodotScriptClass.reference).
       def fromHandle(p: GDExtensionObjectPtr) = {
-        Gd.fromHandle[T](p).reference()
-        cls.wrap(GodotObject.fromPtr(p))
+        val wrapped = meta.fromHandle(p)
+        if (wrapped != null) wrapped.refInc()
+        wrapped
       }
     }
 
-  given gdLeaf[T](using cls: GodotClass[T]): RefLeaf[Gd[T]] = new RefLeaf[Gd[T]] {
-    def hint = PropertyHint.NodeType
-    def className = cls.className
-    def handleOf(a: Gd[T]) = a.objectPtr
-    // Reference (no-op for nodes) so a Gd[T] over a Resource keeps it alive.
-    def fromHandle(p: GDExtensionObjectPtr) = Gd.fromHandle[T](p).reference()
-  }
-
-  given tresLeaf[T](using cls: GodotClass[T]): RefLeaf[Tres[T]] =
+  given tresLeaf[T <: Resource](using meta: ClassMeta[T]): RefLeaf[Tres[T]] =
     new RefLeaf[Tres[T]] {
       def hint = PropertyHint.ResourceType
-      def className = cls.className
-      def handleOf(a: Tres[T]) = a.raw.objectPtr
+      def className = meta.className
+      def handleOf(a: Tres[T]) = if (a.raw == null) null else a.raw.hostPtr
       // Reference: the Tres is stored in an export field and must keep the
       // Resource alive past Godot's temporary loader reference.
-      def fromHandle(p: GDExtensionObjectPtr) = Tres(Gd.fromHandle[T](p).reference())
+      def fromHandle(p: GDExtensionObjectPtr) = {
+        val wrapped = meta.fromHandle(p)
+        if (wrapped != null) wrapped.refInc()
+        Tres(wrapped)
+      }
     }
 
-  given tscnLeaf[T](using
-    root: GodotClass[T],
-    ps: GodotClass[PackedScene]
+  given tscnLeaf[T <: GodotScriptClass](using
+    root: ClassMeta[T],
+    ps: ClassMeta[PackedScene]
   ): RefLeaf[Tscn[T]] = new RefLeaf[Tscn[T]] {
     def hint = PropertyHint.ResourceType
     def className = "PackedScene"
     override def sceneRootType = Some(root.className)
-    def handleOf(a: Tscn[T]) = a.raw.objectPtr
-    def fromHandle(p: GDExtensionObjectPtr) = Tscn[T](Gd.fromHandle[PackedScene](p))
+    def handleOf(a: Tscn[T]) = if (a.raw == null) null else a.raw.hostPtr
+    def fromHandle(p: GDExtensionObjectPtr) =
+      Tscn[T](ps.fromHandle(p).refInc())
   }
 }

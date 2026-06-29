@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRSpatialComponentPersistenceList`, extends `OpenXRSpatialComponentData`. */
 abstract class OpenXRSpatialComponentPersistenceList extends OpenXRSpatialComponentData {
+  override def godotClassName: String = "OpenXRSpatialComponentPersistenceList"
 
   /** OpenXRSpatialComponentPersistenceList.get_persistent_uuid */
   final def getPersistentUuid(index: Long): String =
@@ -16,14 +17,4 @@ abstract class OpenXRSpatialComponentPersistenceList extends OpenXRSpatialCompon
   final def getPersistentState(index: Long): Long =
     Ptrcall.call1[Long, Long](MethodBind.get("OpenXRSpatialComponentPersistenceList", "get_persistent_state", 923996154L), hostObject.objectPtr, index)
 
-}
-
-object OpenXRSpatialComponentPersistenceList {
-  /** Class metadata for Gd[OpenXRSpatialComponentPersistenceList] lifetime management and casting. */
-  given GodotClass[OpenXRSpatialComponentPersistenceList] with {
-    def className = "OpenXRSpatialComponentPersistenceList"
-    def isRefCounted = true
-    def wrap(o: GodotObject): OpenXRSpatialComponentPersistenceList = new OpenXRSpatialComponentPersistenceList {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRSpatialComponentPersistenceList): GodotObject = t.hostObject
-  }
 }

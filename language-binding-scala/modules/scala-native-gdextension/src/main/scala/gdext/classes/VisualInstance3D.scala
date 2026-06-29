@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualInstance3D`, extends `Node3D`. */
 abstract class VisualInstance3D extends Node3D {
+  override def godotClassName: String = "VisualInstance3D"
 
   /** VisualInstance3D.set_layer_mask */
   final def setLayerMask(mask: Long): Unit =
@@ -44,14 +45,4 @@ abstract class VisualInstance3D extends Node3D {
   final def getAabb(): gdext.builtin.AABB =
     Ptrcall.call0[gdext.builtin.AABB](MethodBind.get("VisualInstance3D", "get_aabb", 1068685055L), hostObject.objectPtr)
 
-}
-
-object VisualInstance3D {
-  /** Class metadata for Gd[VisualInstance3D] lifetime management and casting. */
-  given GodotClass[VisualInstance3D] with {
-    def className = "VisualInstance3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): VisualInstance3D = new VisualInstance3D {}.withHost(o.objectPtr)
-    def unwrap(t: VisualInstance3D): GodotObject = t.hostObject
-  }
 }

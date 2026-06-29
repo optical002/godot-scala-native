@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioStreamPlayback`, extends `RefCounted`. */
 abstract class AudioStreamPlayback extends RefCounted {
+  override def godotClassName: String = "AudioStreamPlayback"
 
   /** AudioStreamPlayback.set_sample_playback */
   final def setSamplePlayback(playback_sample: AudioSamplePlayback): Unit =
@@ -40,14 +41,4 @@ abstract class AudioStreamPlayback extends RefCounted {
   final def isPlaying(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("AudioStreamPlayback", "is_playing", 36873697L), hostObject.objectPtr)
 
-}
-
-object AudioStreamPlayback {
-  /** Class metadata for Gd[AudioStreamPlayback] lifetime management and casting. */
-  given GodotClass[AudioStreamPlayback] with {
-    def className = "AudioStreamPlayback"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioStreamPlayback = new AudioStreamPlayback {}.withHost(o.objectPtr)
-    def unwrap(t: AudioStreamPlayback): GodotObject = t.hostObject
-  }
 }

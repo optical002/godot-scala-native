@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `LookAtModifier3D`, extends `SkeletonModifier3D`. */
 abstract class LookAtModifier3D extends SkeletonModifier3D {
+  override def godotClassName: String = "LookAtModifier3D"
 
   /** LookAtModifier3D.set_bone_name */
   final def setBoneName(bone_name: String): Unit =
@@ -244,14 +245,4 @@ abstract class LookAtModifier3D extends SkeletonModifier3D {
   final def isTargetWithinLimitation(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("LookAtModifier3D", "is_target_within_limitation", 36873697L), hostObject.objectPtr)
 
-}
-
-object LookAtModifier3D {
-  /** Class metadata for Gd[LookAtModifier3D] lifetime management and casting. */
-  given GodotClass[LookAtModifier3D] with {
-    def className = "LookAtModifier3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): LookAtModifier3D = new LookAtModifier3D {}.withHost(o.objectPtr)
-    def unwrap(t: LookAtModifier3D): GodotObject = t.hostObject
-  }
 }

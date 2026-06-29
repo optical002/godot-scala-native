@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SphereShape3D`, extends `Shape3D`. */
 abstract class SphereShape3D extends Shape3D {
+  override def godotClassName: String = "SphereShape3D"
 
   /** SphereShape3D.set_radius */
   final def setRadius(radius: Double): Unit =
@@ -16,14 +17,4 @@ abstract class SphereShape3D extends Shape3D {
   final def getRadius(): Double =
     Ptrcall.call0[Double](MethodBind.get("SphereShape3D", "get_radius", 1740695150L), hostObject.objectPtr)
 
-}
-
-object SphereShape3D {
-  /** Class metadata for Gd[SphereShape3D] lifetime management and casting. */
-  given GodotClass[SphereShape3D] with {
-    def className = "SphereShape3D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): SphereShape3D = new SphereShape3D {}.withHost(o.objectPtr)
-    def unwrap(t: SphereShape3D): GodotObject = t.hostObject
-  }
 }

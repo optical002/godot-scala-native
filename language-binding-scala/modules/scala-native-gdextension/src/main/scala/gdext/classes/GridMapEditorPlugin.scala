@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GridMapEditorPlugin`, extends `EditorPlugin`. */
 abstract class GridMapEditorPlugin extends EditorPlugin {
+  override def godotClassName: String = "GridMapEditorPlugin"
 
   /** GridMapEditorPlugin.get_current_grid_map */
   final def getCurrentGridMap(): GodotObject =
@@ -36,14 +37,4 @@ abstract class GridMapEditorPlugin extends EditorPlugin {
   final def getSelectedPaletteItem(): Long =
     Ptrcall.call0[Long](MethodBind.get("GridMapEditorPlugin", "get_selected_palette_item", 3905245786L), hostObject.objectPtr)
 
-}
-
-object GridMapEditorPlugin {
-  /** Class metadata for Gd[GridMapEditorPlugin] lifetime management and casting. */
-  given GodotClass[GridMapEditorPlugin] with {
-    def className = "GridMapEditorPlugin"
-    def isRefCounted = false
-    def wrap(o: GodotObject): GridMapEditorPlugin = new GridMapEditorPlugin {}.withHost(o.objectPtr)
-    def unwrap(t: GridMapEditorPlugin): GodotObject = t.hostObject
-  }
 }

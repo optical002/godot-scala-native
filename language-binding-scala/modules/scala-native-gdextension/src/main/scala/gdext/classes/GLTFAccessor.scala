@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GLTFAccessor`, extends `Resource`. */
 abstract class GLTFAccessor extends Resource {
+  override def godotClassName: String = "GLTFAccessor"
 
   /** GLTFAccessor.get_buffer_view */
   final def getBufferView(): Long =
@@ -112,14 +113,4 @@ abstract class GLTFAccessor extends Resource {
   final def setSparseValuesByteOffset(sparse_values_byte_offset: Long): Unit =
     Ptrcall.callVoid1(MethodBind.get("GLTFAccessor", "set_sparse_values_byte_offset", 1286410249L), hostObject.objectPtr, sparse_values_byte_offset)
 
-}
-
-object GLTFAccessor {
-  /** Class metadata for Gd[GLTFAccessor] lifetime management and casting. */
-  given GodotClass[GLTFAccessor] with {
-    def className = "GLTFAccessor"
-    def isRefCounted = true
-    def wrap(o: GodotObject): GLTFAccessor = new GLTFAccessor {}.withHost(o.objectPtr)
-    def unwrap(t: GLTFAccessor): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PhysicalBone2D`, extends `RigidBody2D`. */
 abstract class PhysicalBone2D extends RigidBody2D {
+  override def godotClassName: String = "PhysicalBone2D"
 
   /** PhysicalBone2D.get_joint */
   final def getJoint(): GodotObject =
@@ -48,14 +49,4 @@ abstract class PhysicalBone2D extends RigidBody2D {
   final def getFollowBoneWhenSimulating(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("PhysicalBone2D", "get_follow_bone_when_simulating", 36873697L), hostObject.objectPtr)
 
-}
-
-object PhysicalBone2D {
-  /** Class metadata for Gd[PhysicalBone2D] lifetime management and casting. */
-  given GodotClass[PhysicalBone2D] with {
-    def className = "PhysicalBone2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): PhysicalBone2D = new PhysicalBone2D {}.withHost(o.objectPtr)
-    def unwrap(t: PhysicalBone2D): GodotObject = t.hostObject
-  }
 }

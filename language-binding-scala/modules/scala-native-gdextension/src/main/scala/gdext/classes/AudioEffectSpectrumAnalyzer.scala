@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioEffectSpectrumAnalyzer`, extends `AudioEffect`. */
 abstract class AudioEffectSpectrumAnalyzer extends AudioEffect {
+  override def godotClassName: String = "AudioEffectSpectrumAnalyzer"
 
   /** AudioEffectSpectrumAnalyzer.set_buffer_length */
   final def setBufferLength(seconds: Double): Unit =
@@ -32,14 +33,4 @@ abstract class AudioEffectSpectrumAnalyzer extends AudioEffect {
   final def getFftSize(): Long =
     Ptrcall.call0[Long](MethodBind.get("AudioEffectSpectrumAnalyzer", "get_fft_size", 3925405343L), hostObject.objectPtr)
 
-}
-
-object AudioEffectSpectrumAnalyzer {
-  /** Class metadata for Gd[AudioEffectSpectrumAnalyzer] lifetime management and casting. */
-  given GodotClass[AudioEffectSpectrumAnalyzer] with {
-    def className = "AudioEffectSpectrumAnalyzer"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioEffectSpectrumAnalyzer = new AudioEffectSpectrumAnalyzer {}.withHost(o.objectPtr)
-    def unwrap(t: AudioEffectSpectrumAnalyzer): GodotObject = t.hostObject
-  }
 }

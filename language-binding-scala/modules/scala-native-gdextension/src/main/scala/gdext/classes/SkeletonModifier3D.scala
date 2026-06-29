@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SkeletonModifier3D`, extends `Node3D`. */
 abstract class SkeletonModifier3D extends Node3D {
+  override def godotClassName: String = "SkeletonModifier3D"
 
   /** SkeletonModifier3D.get_skeleton */
   final def getSkeleton(): GodotObject =
@@ -28,14 +29,4 @@ abstract class SkeletonModifier3D extends Node3D {
   final def getInfluence(): Double =
     Ptrcall.call0[Double](MethodBind.get("SkeletonModifier3D", "get_influence", 1740695150L), hostObject.objectPtr)
 
-}
-
-object SkeletonModifier3D {
-  /** Class metadata for Gd[SkeletonModifier3D] lifetime management and casting. */
-  given GodotClass[SkeletonModifier3D] with {
-    def className = "SkeletonModifier3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): SkeletonModifier3D = new SkeletonModifier3D {}.withHost(o.objectPtr)
-    def unwrap(t: SkeletonModifier3D): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GPUParticlesCollisionSDF3D`, extends `GPUParticlesCollision3D`. */
 abstract class GPUParticlesCollisionSDF3D extends GPUParticlesCollision3D {
+  override def godotClassName: String = "GPUParticlesCollisionSDF3D"
 
   /** GPUParticlesCollisionSDF3D.set_size */
   final def setSize(size: gdext.builtin.Vector3): Unit =
@@ -56,14 +57,4 @@ abstract class GPUParticlesCollisionSDF3D extends GPUParticlesCollision3D {
   final def getBakeMaskValue(layer_number: Long): Boolean =
     Ptrcall.call1[Long, Boolean](MethodBind.get("GPUParticlesCollisionSDF3D", "get_bake_mask_value", 1116898809L), hostObject.objectPtr, layer_number)
 
-}
-
-object GPUParticlesCollisionSDF3D {
-  /** Class metadata for Gd[GPUParticlesCollisionSDF3D] lifetime management and casting. */
-  given GodotClass[GPUParticlesCollisionSDF3D] with {
-    def className = "GPUParticlesCollisionSDF3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): GPUParticlesCollisionSDF3D = new GPUParticlesCollisionSDF3D {}.withHost(o.objectPtr)
-    def unwrap(t: GPUParticlesCollisionSDF3D): GodotObject = t.hostObject
-  }
 }

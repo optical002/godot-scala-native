@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RichTextLabel`, extends `Control`. */
 abstract class RichTextLabel extends Control {
+  override def godotClassName: String = "RichTextLabel"
 
   /** RichTextLabel.get_parsed_text */
   final def getParsedText(): String =
@@ -504,14 +505,4 @@ abstract class RichTextLabel extends Control {
   final def menuOption(option: Long): Unit =
     Ptrcall.callVoid1(MethodBind.get("RichTextLabel", "menu_option", 1286410249L), hostObject.objectPtr, option)
 
-}
-
-object RichTextLabel {
-  /** Class metadata for Gd[RichTextLabel] lifetime management and casting. */
-  given GodotClass[RichTextLabel] with {
-    def className = "RichTextLabel"
-    def isRefCounted = false
-    def wrap(o: GodotObject): RichTextLabel = new RichTextLabel {}.withHost(o.objectPtr)
-    def unwrap(t: RichTextLabel): GodotObject = t.hostObject
-  }
 }

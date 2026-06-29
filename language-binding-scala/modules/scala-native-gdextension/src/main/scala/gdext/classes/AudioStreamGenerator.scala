@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioStreamGenerator`, extends `AudioStream`. */
 abstract class AudioStreamGenerator extends AudioStream {
+  override def godotClassName: String = "AudioStreamGenerator"
 
   /** AudioStreamGenerator.set_mix_rate */
   final def setMixRate(hz: Double): Unit =
@@ -32,14 +33,4 @@ abstract class AudioStreamGenerator extends AudioStream {
   final def getBufferLength(): Double =
     Ptrcall.call0[Double](MethodBind.get("AudioStreamGenerator", "get_buffer_length", 1740695150L), hostObject.objectPtr)
 
-}
-
-object AudioStreamGenerator {
-  /** Class metadata for Gd[AudioStreamGenerator] lifetime management and casting. */
-  given GodotClass[AudioStreamGenerator] with {
-    def className = "AudioStreamGenerator"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioStreamGenerator = new AudioStreamGenerator {}.withHost(o.objectPtr)
-    def unwrap(t: AudioStreamGenerator): GodotObject = t.hostObject
-  }
 }

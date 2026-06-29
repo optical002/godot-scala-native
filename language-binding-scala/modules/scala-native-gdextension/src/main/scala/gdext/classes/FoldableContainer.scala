@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `FoldableContainer`, extends `Container`. */
 abstract class FoldableContainer extends Container {
+  override def godotClassName: String = "FoldableContainer"
 
   /** FoldableContainer.fold */
   final def fold(): Unit =
@@ -88,14 +89,4 @@ abstract class FoldableContainer extends Container {
   final def removeTitleBarControl(control: Control): Unit =
     Ptrcall.callVoid1(MethodBind.get("FoldableContainer", "remove_title_bar_control", 1496901182L), hostObject.objectPtr, control.hostObject)
 
-}
-
-object FoldableContainer {
-  /** Class metadata for Gd[FoldableContainer] lifetime management and casting. */
-  given GodotClass[FoldableContainer] with {
-    def className = "FoldableContainer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): FoldableContainer = new FoldableContainer {}.withHost(o.objectPtr)
-    def unwrap(t: FoldableContainer): GodotObject = t.hostObject
-  }
 }

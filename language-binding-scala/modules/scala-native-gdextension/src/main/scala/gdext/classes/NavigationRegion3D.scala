@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `NavigationRegion3D`, extends `Node3D`. */
 abstract class NavigationRegion3D extends Node3D {
+  override def godotClassName: String = "NavigationRegion3D"
 
   /** NavigationRegion3D.set_navigation_mesh */
   final def setNavigationMesh(navigation_mesh: NavigationMesh): Unit =
@@ -76,14 +77,4 @@ abstract class NavigationRegion3D extends Node3D {
   final def getBounds(): gdext.builtin.AABB =
     Ptrcall.call0[gdext.builtin.AABB](MethodBind.get("NavigationRegion3D", "get_bounds", 1068685055L), hostObject.objectPtr)
 
-}
-
-object NavigationRegion3D {
-  /** Class metadata for Gd[NavigationRegion3D] lifetime management and casting. */
-  given GodotClass[NavigationRegion3D] with {
-    def className = "NavigationRegion3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): NavigationRegion3D = new NavigationRegion3D {}.withHost(o.objectPtr)
-    def unwrap(t: NavigationRegion3D): GodotObject = t.hostObject
-  }
 }

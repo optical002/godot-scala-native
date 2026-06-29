@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorFeatureProfile`, extends `RefCounted`. */
 abstract class EditorFeatureProfile extends RefCounted {
+  override def godotClassName: String = "EditorFeatureProfile"
 
   /** EditorFeatureProfile.set_disable_class */
   final def setDisableClass(class_name: gdext.builtin.StringName, disable: Boolean): Unit =
@@ -52,14 +53,4 @@ abstract class EditorFeatureProfile extends RefCounted {
   final def loadFromFile(path: String): Long =
     Ptrcall.call1[String, Long](MethodBind.get("EditorFeatureProfile", "load_from_file", 166001499L), hostObject.objectPtr, path)
 
-}
-
-object EditorFeatureProfile {
-  /** Class metadata for Gd[EditorFeatureProfile] lifetime management and casting. */
-  given GodotClass[EditorFeatureProfile] with {
-    def className = "EditorFeatureProfile"
-    def isRefCounted = true
-    def wrap(o: GodotObject): EditorFeatureProfile = new EditorFeatureProfile {}.withHost(o.objectPtr)
-    def unwrap(t: EditorFeatureProfile): GodotObject = t.hostObject
-  }
 }

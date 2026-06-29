@@ -11,9 +11,9 @@ import gdext.classes.{Node, PackedScene, Resource}
  * primary-ctor param needs *some* value; this typeclass supplies the natural
  * empty/null one per type, so a game class can declare
  *
- * {{{ final class Player(var projectile: Gd[Projectile]) extends Node2D }}}
+ * {{{ final class Player(var projectile: Projectile) extends Node2D }}}
  *
- * with no `= Gd.nullOf`. The `@gdexport` macro's instance factory summons a
+ * with no `= null`. The `@gdexport` macro's instance factory summons a
  * `DefaultValue[A]` for any param lacking a user default (see Register.scala);
  * an explicit `= ...` always takes precedence. Mirrors the supported export
  * types in [[ExportType]] / [[RefLeaf]].
@@ -68,18 +68,19 @@ object DefaultValue {
   given reqDefault[A]: DefaultValue[Required[A]] = of(Required.unassigned[A])
 
   // --- wrapped references -------------------------------------------------
-  given gdDefault[T](using GodotClass[T]): DefaultValue[Gd[T]] =
-    of(Gd.nullOf[T])
-  given tresDefault[T](using GodotClass[T]): DefaultValue[Tres[T]] =
+  given tresDefault[T <: Resource](using ClassMeta[T]): DefaultValue[Tres[T]] =
     of(Tres.unassigned[T])
-  given tscnDefault[T](using GodotClass[T], GodotClass[PackedScene]): DefaultValue[Tscn[T]] =
+  given tscnDefault[T <: GodotScriptClass](using
+    ClassMeta[T], ClassMeta[PackedScene]
+  ): DefaultValue[Tscn[T]] =
     of(Tscn.unassigned[T])
 
   // --- bare node/resource shorthand (== Required, null at runtime) --------
-  given bareNodeDefault[T <: Node](using cls: GodotClass[T]): DefaultValue[T] =
-    of(cls.wrap(GodotObject.fromPtr(null)))
-  given bareResourceDefault[T <: Resource](using cls: GodotClass[T]): DefaultValue[T] =
-    of(cls.wrap(GodotObject.fromPtr(null)))
+  // An engine reference is held as its plain wrapper type, so the absent default
+  // is simply `null`.
+  given bareNodeDefault[T <: Node]: DefaultValue[T] = of(null.asInstanceOf[T])
+  given bareResourceDefault[T <: Resource]: DefaultValue[T] =
+    of(null.asInstanceOf[T])
 
   // --- typed dictionary ---------------------------------------------------
   given dictDefault[K, V](using

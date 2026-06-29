@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GrooveJoint2D`, extends `Joint2D`. */
 abstract class GrooveJoint2D extends Joint2D {
+  override def godotClassName: String = "GrooveJoint2D"
 
   /** GrooveJoint2D.set_length */
   final def setLength(length: Double): Unit =
@@ -24,14 +25,4 @@ abstract class GrooveJoint2D extends Joint2D {
   final def getInitialOffset(): Double =
     Ptrcall.call0[Double](MethodBind.get("GrooveJoint2D", "get_initial_offset", 1740695150L), hostObject.objectPtr)
 
-}
-
-object GrooveJoint2D {
-  /** Class metadata for Gd[GrooveJoint2D] lifetime management and casting. */
-  given GodotClass[GrooveJoint2D] with {
-    def className = "GrooveJoint2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): GrooveJoint2D = new GrooveJoint2D {}.withHost(o.objectPtr)
-    def unwrap(t: GrooveJoint2D): GodotObject = t.hostObject
-  }
 }

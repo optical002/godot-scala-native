@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `FogVolume`, extends `VisualInstance3D`. */
 abstract class FogVolume extends VisualInstance3D {
+  override def godotClassName: String = "FogVolume"
 
   /** FogVolume.set_size */
   final def setSize(size: gdext.builtin.Vector3): Unit =
@@ -32,14 +33,4 @@ abstract class FogVolume extends VisualInstance3D {
   final def getMaterial(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("FogVolume", "get_material", 5934680L), hostObject.objectPtr)
 
-}
-
-object FogVolume {
-  /** Class metadata for Gd[FogVolume] lifetime management and casting. */
-  given GodotClass[FogVolume] with {
-    def className = "FogVolume"
-    def isRefCounted = false
-    def wrap(o: GodotObject): FogVolume = new FogVolume {}.withHost(o.objectPtr)
-    def unwrap(t: FogVolume): GodotObject = t.hostObject
-  }
 }

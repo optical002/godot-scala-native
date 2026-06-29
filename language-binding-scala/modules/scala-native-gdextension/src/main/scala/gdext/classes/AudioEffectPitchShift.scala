@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioEffectPitchShift`, extends `AudioEffect`. */
 abstract class AudioEffectPitchShift extends AudioEffect {
+  override def godotClassName: String = "AudioEffectPitchShift"
 
   /** AudioEffectPitchShift.set_pitch_scale */
   final def setPitchScale(rate: Double): Unit =
@@ -32,14 +33,4 @@ abstract class AudioEffectPitchShift extends AudioEffect {
   final def getFftSize(): Long =
     Ptrcall.call0[Long](MethodBind.get("AudioEffectPitchShift", "get_fft_size", 2361246789L), hostObject.objectPtr)
 
-}
-
-object AudioEffectPitchShift {
-  /** Class metadata for Gd[AudioEffectPitchShift] lifetime management and casting. */
-  given GodotClass[AudioEffectPitchShift] with {
-    def className = "AudioEffectPitchShift"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioEffectPitchShift = new AudioEffectPitchShift {}.withHost(o.objectPtr)
-    def unwrap(t: AudioEffectPitchShift): GodotObject = t.hostObject
-  }
 }

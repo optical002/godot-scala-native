@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `World3D`, extends `Resource`. */
 abstract class World3D extends Resource {
+  override def godotClassName: String = "World3D"
 
   /** World3D.set_environment */
   final def setEnvironment(env: Environment): Unit =
@@ -36,14 +37,4 @@ abstract class World3D extends Resource {
   final def getDirectSpaceState(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("World3D", "get_direct_space_state", 2069328350L), hostObject.objectPtr)
 
-}
-
-object World3D {
-  /** Class metadata for Gd[World3D] lifetime management and casting. */
-  given GodotClass[World3D] with {
-    def className = "World3D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): World3D = new World3D {}.withHost(o.objectPtr)
-    def unwrap(t: World3D): GodotObject = t.hostObject
-  }
 }

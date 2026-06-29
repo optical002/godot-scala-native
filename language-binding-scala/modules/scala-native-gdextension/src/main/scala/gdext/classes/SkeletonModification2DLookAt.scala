@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SkeletonModification2DLookAt`, extends `SkeletonModification2D`. */
 abstract class SkeletonModification2DLookAt extends SkeletonModification2D {
+  override def godotClassName: String = "SkeletonModification2DLookAt"
 
   /** SkeletonModification2DLookAt.set_bone_index */
   final def setBoneIndex(bone_idx: Long): Unit =
@@ -56,14 +57,4 @@ abstract class SkeletonModification2DLookAt extends SkeletonModification2D {
   final def getConstraintAngleInvert(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("SkeletonModification2DLookAt", "get_constraint_angle_invert", 36873697L), hostObject.objectPtr)
 
-}
-
-object SkeletonModification2DLookAt {
-  /** Class metadata for Gd[SkeletonModification2DLookAt] lifetime management and casting. */
-  given GodotClass[SkeletonModification2DLookAt] with {
-    def className = "SkeletonModification2DLookAt"
-    def isRefCounted = true
-    def wrap(o: GodotObject): SkeletonModification2DLookAt = new SkeletonModification2DLookAt {}.withHost(o.objectPtr)
-    def unwrap(t: SkeletonModification2DLookAt): GodotObject = t.hostObject
-  }
 }

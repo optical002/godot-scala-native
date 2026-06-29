@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Skeleton2D`, extends `Node2D`. */
 abstract class Skeleton2D extends Node2D {
+  override def godotClassName: String = "Skeleton2D"
 
   /** Skeleton2D.get_bone_count */
   final def getBoneCount(): Long =
@@ -36,14 +37,4 @@ abstract class Skeleton2D extends Node2D {
   final def getBoneLocalPoseOverride(bone_idx: Long): gdext.builtin.Transform2D =
     Ptrcall.call1[Long, gdext.builtin.Transform2D](MethodBind.get("Skeleton2D", "get_bone_local_pose_override", 2995540667L), hostObject.objectPtr, bone_idx)
 
-}
-
-object Skeleton2D {
-  /** Class metadata for Gd[Skeleton2D] lifetime management and casting. */
-  given GodotClass[Skeleton2D] with {
-    def className = "Skeleton2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Skeleton2D = new Skeleton2D {}.withHost(o.objectPtr)
-    def unwrap(t: Skeleton2D): GodotObject = t.hostObject
-  }
 }

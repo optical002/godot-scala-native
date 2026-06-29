@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OccluderInstance3D`, extends `VisualInstance3D`. */
 abstract class OccluderInstance3D extends VisualInstance3D {
+  override def godotClassName: String = "OccluderInstance3D"
 
   /** OccluderInstance3D.set_bake_mask */
   final def setBakeMask(mask: Long): Unit =
@@ -40,14 +41,4 @@ abstract class OccluderInstance3D extends VisualInstance3D {
   final def getOccluder(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("OccluderInstance3D", "get_occluder", 1696836198L), hostObject.objectPtr)
 
-}
-
-object OccluderInstance3D {
-  /** Class metadata for Gd[OccluderInstance3D] lifetime management and casting. */
-  given GodotClass[OccluderInstance3D] with {
-    def className = "OccluderInstance3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): OccluderInstance3D = new OccluderInstance3D {}.withHost(o.objectPtr)
-    def unwrap(t: OccluderInstance3D): GodotObject = t.hostObject
-  }
 }

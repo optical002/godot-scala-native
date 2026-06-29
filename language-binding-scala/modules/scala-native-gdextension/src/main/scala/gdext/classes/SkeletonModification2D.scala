@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SkeletonModification2D`, extends `Resource`. */
 abstract class SkeletonModification2D extends Resource {
+  override def godotClassName: String = "SkeletonModification2D"
 
   /** SkeletonModification2D.set_enabled */
   final def setEnabled(enabled: Boolean): Unit =
@@ -48,14 +49,4 @@ abstract class SkeletonModification2D extends Resource {
   final def getEditorDrawGizmo(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("SkeletonModification2D", "get_editor_draw_gizmo", 36873697L), hostObject.objectPtr)
 
-}
-
-object SkeletonModification2D {
-  /** Class metadata for Gd[SkeletonModification2D] lifetime management and casting. */
-  given GodotClass[SkeletonModification2D] with {
-    def className = "SkeletonModification2D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): SkeletonModification2D = new SkeletonModification2D {}.withHost(o.objectPtr)
-    def unwrap(t: SkeletonModification2D): GodotObject = t.hostObject
-  }
 }

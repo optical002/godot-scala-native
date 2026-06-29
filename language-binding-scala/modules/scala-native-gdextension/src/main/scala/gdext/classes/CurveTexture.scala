@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CurveTexture`, extends `Texture2D`. */
 abstract class CurveTexture extends Texture2D {
+  override def godotClassName: String = "CurveTexture"
 
   /** CurveTexture.set_width */
   final def setWidth(width: Long): Unit =
@@ -28,14 +29,4 @@ abstract class CurveTexture extends Texture2D {
   final def getTextureMode(): Long =
     Ptrcall.call0[Long](MethodBind.get("CurveTexture", "get_texture_mode", 715756376L), hostObject.objectPtr)
 
-}
-
-object CurveTexture {
-  /** Class metadata for Gd[CurveTexture] lifetime management and casting. */
-  given GodotClass[CurveTexture] with {
-    def className = "CurveTexture"
-    def isRefCounted = true
-    def wrap(o: GodotObject): CurveTexture = new CurveTexture {}.withHost(o.objectPtr)
-    def unwrap(t: CurveTexture): GodotObject = t.hostObject
-  }
 }

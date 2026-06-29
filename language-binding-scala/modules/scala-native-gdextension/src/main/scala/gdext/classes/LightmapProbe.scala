@@ -7,15 +7,6 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `LightmapProbe`, extends `Node3D`. */
 abstract class LightmapProbe extends Node3D {
+  override def godotClassName: String = "LightmapProbe"
 
-}
-
-object LightmapProbe {
-  /** Class metadata for Gd[LightmapProbe] lifetime management and casting. */
-  given GodotClass[LightmapProbe] with {
-    def className = "LightmapProbe"
-    def isRefCounted = false
-    def wrap(o: GodotObject): LightmapProbe = new LightmapProbe {}.withHost(o.objectPtr)
-    def unwrap(t: LightmapProbe): GodotObject = t.hostObject
-  }
 }

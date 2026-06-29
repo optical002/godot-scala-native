@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioEffectCapture`, extends `AudioEffect`. */
 abstract class AudioEffectCapture extends AudioEffect {
+  override def godotClassName: String = "AudioEffectCapture"
 
   /** AudioEffectCapture.can_get_buffer */
   final def canGetBuffer(frames: Long): Boolean =
@@ -40,14 +41,4 @@ abstract class AudioEffectCapture extends AudioEffect {
   final def getPushedFrames(): Long =
     Ptrcall.call0[Long](MethodBind.get("AudioEffectCapture", "get_pushed_frames", 3905245786L), hostObject.objectPtr)
 
-}
-
-object AudioEffectCapture {
-  /** Class metadata for Gd[AudioEffectCapture] lifetime management and casting. */
-  given GodotClass[AudioEffectCapture] with {
-    def className = "AudioEffectCapture"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioEffectCapture = new AudioEffectCapture {}.withHost(o.objectPtr)
-    def unwrap(t: AudioEffectCapture): GodotObject = t.hostObject
-  }
 }

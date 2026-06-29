@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AnimatableBody3D`, extends `StaticBody3D`. */
 abstract class AnimatableBody3D extends StaticBody3D {
+  override def godotClassName: String = "AnimatableBody3D"
 
   /** AnimatableBody3D.set_sync_to_physics */
   final def setSyncToPhysics(enable: Boolean): Unit =
@@ -16,14 +17,4 @@ abstract class AnimatableBody3D extends StaticBody3D {
   final def isSyncToPhysicsEnabled(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("AnimatableBody3D", "is_sync_to_physics_enabled", 36873697L), hostObject.objectPtr)
 
-}
-
-object AnimatableBody3D {
-  /** Class metadata for Gd[AnimatableBody3D] lifetime management and casting. */
-  given GodotClass[AnimatableBody3D] with {
-    def className = "AnimatableBody3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): AnimatableBody3D = new AnimatableBody3D {}.withHost(o.objectPtr)
-    def unwrap(t: AnimatableBody3D): GodotObject = t.hostObject
-  }
 }

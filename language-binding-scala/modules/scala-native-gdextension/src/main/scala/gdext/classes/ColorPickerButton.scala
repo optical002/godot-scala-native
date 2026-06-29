@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ColorPickerButton`, extends `Button`. */
 abstract class ColorPickerButton extends Button {
+  override def godotClassName: String = "ColorPickerButton"
 
   /** ColorPickerButton.set_pick_color */
   final def setPickColor(color: gdext.builtin.Color): Unit =
@@ -40,14 +41,4 @@ abstract class ColorPickerButton extends Button {
   final def isEditingIntensity(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("ColorPickerButton", "is_editing_intensity", 36873697L), hostObject.objectPtr)
 
-}
-
-object ColorPickerButton {
-  /** Class metadata for Gd[ColorPickerButton] lifetime management and casting. */
-  given GodotClass[ColorPickerButton] with {
-    def className = "ColorPickerButton"
-    def isRefCounted = false
-    def wrap(o: GodotObject): ColorPickerButton = new ColorPickerButton {}.withHost(o.objectPtr)
-    def unwrap(t: ColorPickerButton): GodotObject = t.hostObject
-  }
 }

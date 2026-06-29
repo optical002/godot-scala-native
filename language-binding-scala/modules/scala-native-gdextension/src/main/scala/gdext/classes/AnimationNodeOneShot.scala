@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AnimationNodeOneShot`, extends `AnimationNodeSync`. */
 abstract class AnimationNodeOneShot extends AnimationNodeSync {
+  override def godotClassName: String = "AnimationNodeOneShot"
 
   /** AnimationNodeOneShot.set_fadein_time */
   final def setFadeinTime(time: Double): Unit =
@@ -88,14 +89,4 @@ abstract class AnimationNodeOneShot extends AnimationNodeSync {
   final def getMixMode(): Long =
     Ptrcall.call0[Long](MethodBind.get("AnimationNodeOneShot", "get_mix_mode", 3076550526L), hostObject.objectPtr)
 
-}
-
-object AnimationNodeOneShot {
-  /** Class metadata for Gd[AnimationNodeOneShot] lifetime management and casting. */
-  given GodotClass[AnimationNodeOneShot] with {
-    def className = "AnimationNodeOneShot"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AnimationNodeOneShot = new AnimationNodeOneShot {}.withHost(o.objectPtr)
-    def unwrap(t: AnimationNodeOneShot): GodotObject = t.hostObject
-  }
 }

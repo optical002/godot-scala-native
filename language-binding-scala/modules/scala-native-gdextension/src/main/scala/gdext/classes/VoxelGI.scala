@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VoxelGI`, extends `VisualInstance3D`. */
 abstract class VoxelGI extends VisualInstance3D {
+  override def godotClassName: String = "VoxelGI"
 
   /** VoxelGI.set_probe_data */
   final def setProbeData(data: VoxelGIData): Unit =
@@ -48,14 +49,4 @@ abstract class VoxelGI extends VisualInstance3D {
   final def debugBake(): Unit =
     Ptrcall.callVoid0(MethodBind.get("VoxelGI", "debug_bake", 3218959716L), hostObject.objectPtr)
 
-}
-
-object VoxelGI {
-  /** Class metadata for Gd[VoxelGI] lifetime management and casting. */
-  given GodotClass[VoxelGI] with {
-    def className = "VoxelGI"
-    def isRefCounted = false
-    def wrap(o: GodotObject): VoxelGI = new VoxelGI {}.withHost(o.objectPtr)
-    def unwrap(t: VoxelGI): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeParticleAccelerator`, extends `VisualShaderNode`. */
 abstract class VisualShaderNodeParticleAccelerator extends VisualShaderNode {
+  override def godotClassName: String = "VisualShaderNodeParticleAccelerator"
 
   /** VisualShaderNodeParticleAccelerator.set_mode */
   final def setMode(mode: Long): Unit =
@@ -16,14 +17,4 @@ abstract class VisualShaderNodeParticleAccelerator extends VisualShaderNode {
   final def getMode(): Long =
     Ptrcall.call0[Long](MethodBind.get("VisualShaderNodeParticleAccelerator", "get_mode", 2660365633L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeParticleAccelerator {
-  /** Class metadata for Gd[VisualShaderNodeParticleAccelerator] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeParticleAccelerator] with {
-    def className = "VisualShaderNodeParticleAccelerator"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeParticleAccelerator = new VisualShaderNodeParticleAccelerator {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeParticleAccelerator): GodotObject = t.hostObject
-  }
 }

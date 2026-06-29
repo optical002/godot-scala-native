@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioEffectDistortion`, extends `AudioEffect`. */
 abstract class AudioEffectDistortion extends AudioEffect {
+  override def godotClassName: String = "AudioEffectDistortion"
 
   /** AudioEffectDistortion.set_mode */
   final def setMode(mode: Long): Unit =
@@ -48,14 +49,4 @@ abstract class AudioEffectDistortion extends AudioEffect {
   final def getPostGain(): Double =
     Ptrcall.call0[Double](MethodBind.get("AudioEffectDistortion", "get_post_gain", 1740695150L), hostObject.objectPtr)
 
-}
-
-object AudioEffectDistortion {
-  /** Class metadata for Gd[AudioEffectDistortion] lifetime management and casting. */
-  given GodotClass[AudioEffectDistortion] with {
-    def className = "AudioEffectDistortion"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioEffectDistortion = new AudioEffectDistortion {}.withHost(o.objectPtr)
-    def unwrap(t: AudioEffectDistortion): GodotObject = t.hostObject
-  }
 }

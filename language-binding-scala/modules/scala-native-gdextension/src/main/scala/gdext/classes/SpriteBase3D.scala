@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SpriteBase3D`, extends `GeometryInstance3D`. */
 abstract class SpriteBase3D extends GeometryInstance3D {
+  override def godotClassName: String = "SpriteBase3D"
 
   /** SpriteBase3D.set_centered */
   final def setCentered(centered: Boolean): Unit =
@@ -144,14 +145,4 @@ abstract class SpriteBase3D extends GeometryInstance3D {
   final def generateTriangleMesh(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("SpriteBase3D", "generate_triangle_mesh", 3476533166L), hostObject.objectPtr)
 
-}
-
-object SpriteBase3D {
-  /** Class metadata for Gd[SpriteBase3D] lifetime management and casting. */
-  given GodotClass[SpriteBase3D] with {
-    def className = "SpriteBase3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): SpriteBase3D = new SpriteBase3D {}.withHost(o.objectPtr)
-    def unwrap(t: SpriteBase3D): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GLTFMesh`, extends `Resource`. */
 abstract class GLTFMesh extends Resource {
+  override def godotClassName: String = "GLTFMesh"
 
   /** GLTFMesh.get_original_name */
   final def getOriginalName(): String =
@@ -24,14 +25,4 @@ abstract class GLTFMesh extends Resource {
   final def setMesh(mesh: ImporterMesh): Unit =
     Ptrcall.callVoid1(MethodBind.get("GLTFMesh", "set_mesh", 2255166972L), hostObject.objectPtr, mesh.hostObject)
 
-}
-
-object GLTFMesh {
-  /** Class metadata for Gd[GLTFMesh] lifetime management and casting. */
-  given GodotClass[GLTFMesh] with {
-    def className = "GLTFMesh"
-    def isRefCounted = true
-    def wrap(o: GodotObject): GLTFMesh = new GLTFMesh {}.withHost(o.objectPtr)
-    def unwrap(t: GLTFMesh): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RenderingDevice`, extends `Object`. */
 abstract class RenderingDevice extends Object {
+  override def godotClassName: String = "RenderingDevice"
 
   /** RenderingDevice.texture_is_format_supported_for_usage */
   final def textureIsFormatSupportedForUsage(format: Long, usage_flags: Long): Boolean =
@@ -216,14 +217,4 @@ abstract class RenderingDevice extends Object {
   final def getDeviceAllocsByObjectType(`type`: Long): Long =
     Ptrcall.call1[Long, Long](MethodBind.get("RenderingDevice", "get_device_allocs_by_object_type", 923996154L), hostObject.objectPtr, `type`)
 
-}
-
-object RenderingDevice {
-  /** Class metadata for Gd[RenderingDevice] lifetime management and casting. */
-  given GodotClass[RenderingDevice] with {
-    def className = "RenderingDevice"
-    def isRefCounted = false
-    def wrap(o: GodotObject): RenderingDevice = new RenderingDevice {}.withHost(o.objectPtr)
-    def unwrap(t: RenderingDevice): GodotObject = t.hostObject
-  }
 }

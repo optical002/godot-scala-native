@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TextServer`, extends `RefCounted`. */
 abstract class TextServer extends RefCounted {
+  override def godotClassName: String = "TextServer"
 
   /** TextServer.has_feature */
   final def hasFeature(feature: Long): Boolean =
@@ -108,14 +109,4 @@ abstract class TextServer extends RefCounted {
   final def stringToTitle(string: String, language: String): String =
     Ptrcall.call2[String, String, String](MethodBind.get("TextServer", "string_to_title", 2664628024L), hostObject.objectPtr, string, language)
 
-}
-
-object TextServer {
-  /** Class metadata for Gd[TextServer] lifetime management and casting. */
-  given GodotClass[TextServer] with {
-    def className = "TextServer"
-    def isRefCounted = true
-    def wrap(o: GodotObject): TextServer = new TextServer {}.withHost(o.objectPtr)
-    def unwrap(t: TextServer): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `NavigationRegion2D`, extends `Node2D`. */
 abstract class NavigationRegion2D extends Node2D {
+  override def godotClassName: String = "NavigationRegion2D"
 
   /** NavigationRegion2D.set_navigation_polygon */
   final def setNavigationPolygon(navigation_polygon: NavigationPolygon): Unit =
@@ -76,14 +77,4 @@ abstract class NavigationRegion2D extends Node2D {
   final def getBounds(): gdext.builtin.Rect2 =
     Ptrcall.call0[gdext.builtin.Rect2](MethodBind.get("NavigationRegion2D", "get_bounds", 1639390495L), hostObject.objectPtr)
 
-}
-
-object NavigationRegion2D {
-  /** Class metadata for Gd[NavigationRegion2D] lifetime management and casting. */
-  given GodotClass[NavigationRegion2D] with {
-    def className = "NavigationRegion2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): NavigationRegion2D = new NavigationRegion2D {}.withHost(o.objectPtr)
-    def unwrap(t: NavigationRegion2D): GodotObject = t.hostObject
-  }
 }

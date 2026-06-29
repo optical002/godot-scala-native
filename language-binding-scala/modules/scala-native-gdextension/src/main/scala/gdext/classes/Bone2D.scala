@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Bone2D`, extends `Node2D`. */
 abstract class Bone2D extends Node2D {
+  override def godotClassName: String = "Bone2D"
 
   /** Bone2D.set_rest */
   final def setRest(rest: gdext.builtin.Transform2D): Unit =
@@ -52,14 +53,4 @@ abstract class Bone2D extends Node2D {
   final def getBoneAngle(): Double =
     Ptrcall.call0[Double](MethodBind.get("Bone2D", "get_bone_angle", 1740695150L), hostObject.objectPtr)
 
-}
-
-object Bone2D {
-  /** Class metadata for Gd[Bone2D] lifetime management and casting. */
-  given GodotClass[Bone2D] with {
-    def className = "Bone2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Bone2D = new Bone2D {}.withHost(o.objectPtr)
-    def unwrap(t: Bone2D): GodotObject = t.hostObject
-  }
 }

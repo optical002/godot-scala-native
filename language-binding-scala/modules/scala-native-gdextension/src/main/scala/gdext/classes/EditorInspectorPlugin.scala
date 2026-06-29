@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorInspectorPlugin`, extends `RefCounted`. */
 abstract class EditorInspectorPlugin extends RefCounted {
+  override def godotClassName: String = "EditorInspectorPlugin"
 
   /** EditorInspectorPlugin.add_custom_control */
   final def addCustomControl(control: Control): Unit =
@@ -16,14 +17,4 @@ abstract class EditorInspectorPlugin extends RefCounted {
   final def addPropertyEditor(property: String, editor: Control, add_to_end: Boolean, label: String): Unit =
     Ptrcall.callVoid4(MethodBind.get("EditorInspectorPlugin", "add_property_editor", 2042698479L), hostObject.objectPtr, property, editor.hostObject, add_to_end, label)
 
-}
-
-object EditorInspectorPlugin {
-  /** Class metadata for Gd[EditorInspectorPlugin] lifetime management and casting. */
-  given GodotClass[EditorInspectorPlugin] with {
-    def className = "EditorInspectorPlugin"
-    def isRefCounted = true
-    def wrap(o: GodotObject): EditorInspectorPlugin = new EditorInspectorPlugin {}.withHost(o.objectPtr)
-    def unwrap(t: EditorInspectorPlugin): GodotObject = t.hostObject
-  }
 }

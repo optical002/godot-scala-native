@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Animation`, extends `Resource`. */
 abstract class Animation extends Resource {
+  override def godotClassName: String = "Animation"
 
   /** Animation.add_track */
   final def addTrack(`type`: Long, at_position: Long): Long =
@@ -312,14 +313,4 @@ abstract class Animation extends Resource {
   final def isCaptureIncluded(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("Animation", "is_capture_included", 36873697L), hostObject.objectPtr)
 
-}
-
-object Animation {
-  /** Class metadata for Gd[Animation] lifetime management and casting. */
-  given GodotClass[Animation] with {
-    def className = "Animation"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Animation = new Animation {}.withHost(o.objectPtr)
-    def unwrap(t: Animation): GodotObject = t.hostObject
-  }
 }

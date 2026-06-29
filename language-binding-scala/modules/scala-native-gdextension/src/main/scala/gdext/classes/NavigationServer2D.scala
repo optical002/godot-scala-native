@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `NavigationServer2D`, extends `Object`. */
 abstract class NavigationServer2D extends Object {
+  override def godotClassName: String = "NavigationServer2D"
 
   /** NavigationServer2D.is_baking_navigation_polygon */
   final def isBakingNavigationPolygon(navigation_polygon: NavigationPolygon): Boolean =
@@ -31,14 +32,6 @@ abstract class NavigationServer2D extends Object {
 }
 
 object NavigationServer2D {
-  /** Class metadata for Gd[NavigationServer2D] lifetime management and casting. */
-  given GodotClass[NavigationServer2D] with {
-    def className = "NavigationServer2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): NavigationServer2D = new NavigationServer2D {}.withHost(o.objectPtr)
-    def unwrap(t: NavigationServer2D): GodotObject = t.hostObject
-  }
-
   /** The process-global NavigationServer2D singleton instance. */
   def singleton: NavigationServer2D = new NavigationServer2D {}
     .withHost(Godot.interface.global_get_singleton(

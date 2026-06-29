@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TextEdit`, extends `Control`. */
 abstract class TextEdit extends Control {
+  override def godotClassName: String = "TextEdit"
 
   /** TextEdit.has_ime_text */
   final def hasImeText(): Boolean =
@@ -960,14 +961,4 @@ abstract class TextEdit extends Control {
   final def getSelectionColumn(caret_index: Long): Long =
     Ptrcall.call1[Long, Long](MethodBind.get("TextEdit", "get_selection_column", 1591665591L), hostObject.objectPtr, caret_index)
 
-}
-
-object TextEdit {
-  /** Class metadata for Gd[TextEdit] lifetime management and casting. */
-  given GodotClass[TextEdit] with {
-    def className = "TextEdit"
-    def isRefCounted = false
-    def wrap(o: GodotObject): TextEdit = new TextEdit {}.withHost(o.objectPtr)
-    def unwrap(t: TextEdit): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `NavigationServer3D`, extends `Object`. */
 abstract class NavigationServer3D extends Object {
+  override def godotClassName: String = "NavigationServer3D"
 
   /** NavigationServer3D.region_bake_navigation_mesh */
   final def regionBakeNavigationMesh(navigation_mesh: NavigationMesh, root_node: Node): Unit =
@@ -35,14 +36,6 @@ abstract class NavigationServer3D extends Object {
 }
 
 object NavigationServer3D {
-  /** Class metadata for Gd[NavigationServer3D] lifetime management and casting. */
-  given GodotClass[NavigationServer3D] with {
-    def className = "NavigationServer3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): NavigationServer3D = new NavigationServer3D {}.withHost(o.objectPtr)
-    def unwrap(t: NavigationServer3D): GodotObject = t.hostObject
-  }
-
   /** The process-global NavigationServer3D singleton instance. */
   def singleton: NavigationServer3D = new NavigationServer3D {}
     .withHost(Godot.interface.global_get_singleton(

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SceneTreeTimer`, extends `RefCounted`. */
 abstract class SceneTreeTimer extends RefCounted {
+  override def godotClassName: String = "SceneTreeTimer"
 
   /** SceneTreeTimer.set_time_left */
   final def setTimeLeft(time: Double): Unit =
@@ -16,14 +17,4 @@ abstract class SceneTreeTimer extends RefCounted {
   final def getTimeLeft(): Double =
     Ptrcall.call0[Double](MethodBind.get("SceneTreeTimer", "get_time_left", 1740695150L), hostObject.objectPtr)
 
-}
-
-object SceneTreeTimer {
-  /** Class metadata for Gd[SceneTreeTimer] lifetime management and casting. */
-  given GodotClass[SceneTreeTimer] with {
-    def className = "SceneTreeTimer"
-    def isRefCounted = true
-    def wrap(o: GodotObject): SceneTreeTimer = new SceneTreeTimer {}.withHost(o.objectPtr)
-    def unwrap(t: SceneTreeTimer): GodotObject = t.hostObject
-  }
 }

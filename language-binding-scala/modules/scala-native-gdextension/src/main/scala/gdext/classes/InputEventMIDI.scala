@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `InputEventMIDI`, extends `InputEvent`. */
 abstract class InputEventMIDI extends InputEvent {
+  override def godotClassName: String = "InputEventMIDI"
 
   /** InputEventMIDI.set_channel */
   final def setChannel(channel: Long): Unit =
@@ -72,14 +73,4 @@ abstract class InputEventMIDI extends InputEvent {
   final def getControllerValue(): Long =
     Ptrcall.call0[Long](MethodBind.get("InputEventMIDI", "get_controller_value", 3905245786L), hostObject.objectPtr)
 
-}
-
-object InputEventMIDI {
-  /** Class metadata for Gd[InputEventMIDI] lifetime management and casting. */
-  given GodotClass[InputEventMIDI] with {
-    def className = "InputEventMIDI"
-    def isRefCounted = true
-    def wrap(o: GodotObject): InputEventMIDI = new InputEventMIDI {}.withHost(o.objectPtr)
-    def unwrap(t: InputEventMIDI): GodotObject = t.hostObject
-  }
 }

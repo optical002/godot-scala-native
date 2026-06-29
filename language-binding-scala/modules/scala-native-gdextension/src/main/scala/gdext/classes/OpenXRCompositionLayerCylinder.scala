@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRCompositionLayerCylinder`, extends `OpenXRCompositionLayer`. */
 abstract class OpenXRCompositionLayerCylinder extends OpenXRCompositionLayer {
+  override def godotClassName: String = "OpenXRCompositionLayerCylinder"
 
   /** OpenXRCompositionLayerCylinder.set_radius */
   final def setRadius(radius: Double): Unit =
@@ -40,14 +41,4 @@ abstract class OpenXRCompositionLayerCylinder extends OpenXRCompositionLayer {
   final def getFallbackSegments(): Long =
     Ptrcall.call0[Long](MethodBind.get("OpenXRCompositionLayerCylinder", "get_fallback_segments", 3905245786L), hostObject.objectPtr)
 
-}
-
-object OpenXRCompositionLayerCylinder {
-  /** Class metadata for Gd[OpenXRCompositionLayerCylinder] lifetime management and casting. */
-  given GodotClass[OpenXRCompositionLayerCylinder] with {
-    def className = "OpenXRCompositionLayerCylinder"
-    def isRefCounted = false
-    def wrap(o: GodotObject): OpenXRCompositionLayerCylinder = new OpenXRCompositionLayerCylinder {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRCompositionLayerCylinder): GodotObject = t.hostObject
-  }
 }

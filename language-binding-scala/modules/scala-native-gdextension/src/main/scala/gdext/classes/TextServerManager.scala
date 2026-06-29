@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TextServerManager`, extends `Object`. */
 abstract class TextServerManager extends Object {
+  override def godotClassName: String = "TextServerManager"
 
   /** TextServerManager.add_interface */
   final def addInterface(interface: TextServer): Unit =
@@ -39,14 +40,6 @@ abstract class TextServerManager extends Object {
 }
 
 object TextServerManager {
-  /** Class metadata for Gd[TextServerManager] lifetime management and casting. */
-  given GodotClass[TextServerManager] with {
-    def className = "TextServerManager"
-    def isRefCounted = false
-    def wrap(o: GodotObject): TextServerManager = new TextServerManager {}.withHost(o.objectPtr)
-    def unwrap(t: TextServerManager): GodotObject = t.hostObject
-  }
-
   /** The process-global TextServerManager singleton instance. */
   def singleton: TextServerManager = new TextServerManager {}
     .withHost(Godot.interface.global_get_singleton(

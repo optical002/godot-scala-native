@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `MenuButton`, extends `Button`. */
 abstract class MenuButton extends Button {
+  override def godotClassName: String = "MenuButton"
 
   /** MenuButton.get_popup */
   final def getPopup(): GodotObject =
@@ -36,14 +37,4 @@ abstract class MenuButton extends Button {
   final def getItemCount(): Long =
     Ptrcall.call0[Long](MethodBind.get("MenuButton", "get_item_count", 3905245786L), hostObject.objectPtr)
 
-}
-
-object MenuButton {
-  /** Class metadata for Gd[MenuButton] lifetime management and casting. */
-  given GodotClass[MenuButton] with {
-    def className = "MenuButton"
-    def isRefCounted = false
-    def wrap(o: GodotObject): MenuButton = new MenuButton {}.withHost(o.objectPtr)
-    def unwrap(t: MenuButton): GodotObject = t.hostObject
-  }
 }

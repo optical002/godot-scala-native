@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TextLine`, extends `RefCounted`. */
 abstract class TextLine extends RefCounted {
+  override def godotClassName: String = "TextLine"
 
   /** TextLine.clear */
   final def clear(): Unit =
@@ -120,14 +121,4 @@ abstract class TextLine extends RefCounted {
   final def hitTest(coords: Double): Long =
     Ptrcall.call1[Double, Long](MethodBind.get("TextLine", "hit_test", 2401831903L), hostObject.objectPtr, coords)
 
-}
-
-object TextLine {
-  /** Class metadata for Gd[TextLine] lifetime management and casting. */
-  given GodotClass[TextLine] with {
-    def className = "TextLine"
-    def isRefCounted = true
-    def wrap(o: GodotObject): TextLine = new TextLine {}.withHost(o.objectPtr)
-    def unwrap(t: TextLine): GodotObject = t.hostObject
-  }
 }

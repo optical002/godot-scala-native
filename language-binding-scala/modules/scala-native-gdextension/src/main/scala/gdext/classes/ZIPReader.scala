@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ZIPReader`, extends `RefCounted`. */
 abstract class ZIPReader extends RefCounted {
+  override def godotClassName: String = "ZIPReader"
 
   /** ZIPReader.open */
   final def open(path: String): Long =
@@ -24,14 +25,4 @@ abstract class ZIPReader extends RefCounted {
   final def getCompressionLevel(path: String, case_sensitive: Boolean): Long =
     Ptrcall.call2[String, Boolean, Long](MethodBind.get("ZIPReader", "get_compression_level", 3694577386L), hostObject.objectPtr, path, case_sensitive)
 
-}
-
-object ZIPReader {
-  /** Class metadata for Gd[ZIPReader] lifetime management and casting. */
-  given GodotClass[ZIPReader] with {
-    def className = "ZIPReader"
-    def isRefCounted = true
-    def wrap(o: GodotObject): ZIPReader = new ZIPReader {}.withHost(o.objectPtr)
-    def unwrap(t: ZIPReader): GodotObject = t.hostObject
-  }
 }

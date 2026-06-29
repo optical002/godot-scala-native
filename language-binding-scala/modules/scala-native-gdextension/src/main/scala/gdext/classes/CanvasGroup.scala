@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CanvasGroup`, extends `Node2D`. */
 abstract class CanvasGroup extends Node2D {
+  override def godotClassName: String = "CanvasGroup"
 
   /** CanvasGroup.set_fit_margin */
   final def setFitMargin(fit_margin: Double): Unit =
@@ -32,14 +33,4 @@ abstract class CanvasGroup extends Node2D {
   final def isUsingMipmaps(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("CanvasGroup", "is_using_mipmaps", 36873697L), hostObject.objectPtr)
 
-}
-
-object CanvasGroup {
-  /** Class metadata for Gd[CanvasGroup] lifetime management and casting. */
-  given GodotClass[CanvasGroup] with {
-    def className = "CanvasGroup"
-    def isRefCounted = false
-    def wrap(o: GodotObject): CanvasGroup = new CanvasGroup {}.withHost(o.objectPtr)
-    def unwrap(t: CanvasGroup): GodotObject = t.hostObject
-  }
 }

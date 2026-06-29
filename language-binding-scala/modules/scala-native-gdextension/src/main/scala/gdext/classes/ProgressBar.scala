@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ProgressBar`, extends `Range`. */
 abstract class ProgressBar extends Range {
+  override def godotClassName: String = "ProgressBar"
 
   /** ProgressBar.set_fill_mode */
   final def setFillMode(mode: Long): Unit =
@@ -40,14 +41,4 @@ abstract class ProgressBar extends Range {
   final def isEditorPreviewIndeterminateEnabled(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("ProgressBar", "is_editor_preview_indeterminate_enabled", 36873697L), hostObject.objectPtr)
 
-}
-
-object ProgressBar {
-  /** Class metadata for Gd[ProgressBar] lifetime management and casting. */
-  given GodotClass[ProgressBar] with {
-    def className = "ProgressBar"
-    def isRefCounted = false
-    def wrap(o: GodotObject): ProgressBar = new ProgressBar {}.withHost(o.objectPtr)
-    def unwrap(t: ProgressBar): GodotObject = t.hostObject
-  }
 }

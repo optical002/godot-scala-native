@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `BoneConstraint3D`, extends `SkeletonModifier3D`. */
 abstract class BoneConstraint3D extends SkeletonModifier3D {
+  override def godotClassName: String = "BoneConstraint3D"
 
   /** BoneConstraint3D.set_amount */
   final def setAmount(index: Long, amount: Double): Unit =
@@ -68,14 +69,4 @@ abstract class BoneConstraint3D extends SkeletonModifier3D {
   final def clearSetting(): Unit =
     Ptrcall.callVoid0(MethodBind.get("BoneConstraint3D", "clear_setting", 3218959716L), hostObject.objectPtr)
 
-}
-
-object BoneConstraint3D {
-  /** Class metadata for Gd[BoneConstraint3D] lifetime management and casting. */
-  given GodotClass[BoneConstraint3D] with {
-    def className = "BoneConstraint3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): BoneConstraint3D = new BoneConstraint3D {}.withHost(o.objectPtr)
-    def unwrap(t: BoneConstraint3D): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CanvasLayer`, extends `Node`. */
 abstract class CanvasLayer extends Node {
+  override def godotClassName: String = "CanvasLayer"
 
   /** CanvasLayer.set_layer */
   final def setLayer(layer: Long): Unit =
@@ -92,14 +93,4 @@ abstract class CanvasLayer extends Node {
   final def getCustomViewport(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("CanvasLayer", "get_custom_viewport", 3160264692L), hostObject.objectPtr)
 
-}
-
-object CanvasLayer {
-  /** Class metadata for Gd[CanvasLayer] lifetime management and casting. */
-  given GodotClass[CanvasLayer] with {
-    def className = "CanvasLayer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): CanvasLayer = new CanvasLayer {}.withHost(o.objectPtr)
-    def unwrap(t: CanvasLayer): GodotObject = t.hostObject
-  }
 }

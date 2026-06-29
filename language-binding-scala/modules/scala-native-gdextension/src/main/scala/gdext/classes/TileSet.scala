@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TileSet`, extends `Resource`. */
 abstract class TileSet extends Resource {
+  override def godotClassName: String = "TileSet"
 
   /** TileSet.get_next_source_id */
   final def getNextSourceId(): Long =
@@ -352,14 +353,4 @@ abstract class TileSet extends Resource {
   final def getPatternsCount(): Long =
     Ptrcall.call0[Long](MethodBind.get("TileSet", "get_patterns_count", 2455072627L), hostObject.objectPtr)
 
-}
-
-object TileSet {
-  /** Class metadata for Gd[TileSet] lifetime management and casting. */
-  given GodotClass[TileSet] with {
-    def className = "TileSet"
-    def isRefCounted = true
-    def wrap(o: GodotObject): TileSet = new TileSet {}.withHost(o.objectPtr)
-    def unwrap(t: TileSet): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TCPServer`, extends `SocketServer`. */
 abstract class TCPServer extends SocketServer {
+  override def godotClassName: String = "TCPServer"
 
   /** TCPServer.listen */
   final def listen(port: Long, bind_address: String): Long =
@@ -20,14 +21,4 @@ abstract class TCPServer extends SocketServer {
   final def takeConnection(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("TCPServer", "take_connection", 30545006L), hostObject.objectPtr)
 
-}
-
-object TCPServer {
-  /** Class metadata for Gd[TCPServer] lifetime management and casting. */
-  given GodotClass[TCPServer] with {
-    def className = "TCPServer"
-    def isRefCounted = true
-    def wrap(o: GodotObject): TCPServer = new TCPServer {}.withHost(o.objectPtr)
-    def unwrap(t: TCPServer): GodotObject = t.hostObject
-  }
 }

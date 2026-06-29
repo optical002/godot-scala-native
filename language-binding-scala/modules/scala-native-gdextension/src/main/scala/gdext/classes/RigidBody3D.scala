@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RigidBody3D`, extends `PhysicsBody3D`. */
 abstract class RigidBody3D extends PhysicsBody3D {
+  override def godotClassName: String = "RigidBody3D"
 
   /** RigidBody3D.set_mass */
   final def setMass(mass: Double): Unit =
@@ -240,14 +241,4 @@ abstract class RigidBody3D extends PhysicsBody3D {
   final def getFreezeMode(): Long =
     Ptrcall.call0[Long](MethodBind.get("RigidBody3D", "get_freeze_mode", 2008423905L), hostObject.objectPtr)
 
-}
-
-object RigidBody3D {
-  /** Class metadata for Gd[RigidBody3D] lifetime management and casting. */
-  given GodotClass[RigidBody3D] with {
-    def className = "RigidBody3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): RigidBody3D = new RigidBody3D {}.withHost(o.objectPtr)
-    def unwrap(t: RigidBody3D): GodotObject = t.hostObject
-  }
 }

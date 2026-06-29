@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioEffectEQ`, extends `AudioEffect`. */
 abstract class AudioEffectEQ extends AudioEffect {
+  override def godotClassName: String = "AudioEffectEQ"
 
   /** AudioEffectEQ.set_band_gain_db */
   final def setBandGainDb(band_idx: Long, volume_db: Double): Unit =
@@ -20,14 +21,4 @@ abstract class AudioEffectEQ extends AudioEffect {
   final def getBandCount(): Long =
     Ptrcall.call0[Long](MethodBind.get("AudioEffectEQ", "get_band_count", 3905245786L), hostObject.objectPtr)
 
-}
-
-object AudioEffectEQ {
-  /** Class metadata for Gd[AudioEffectEQ] lifetime management and casting. */
-  given GodotClass[AudioEffectEQ] with {
-    def className = "AudioEffectEQ"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioEffectEQ = new AudioEffectEQ {}.withHost(o.objectPtr)
-    def unwrap(t: AudioEffectEQ): GodotObject = t.hostObject
-  }
 }

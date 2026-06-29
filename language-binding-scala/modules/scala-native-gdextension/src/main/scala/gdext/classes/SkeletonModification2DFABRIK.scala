@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SkeletonModification2DFABRIK`, extends `SkeletonModification2D`. */
 abstract class SkeletonModification2DFABRIK extends SkeletonModification2D {
+  override def godotClassName: String = "SkeletonModification2DFABRIK"
 
   /** SkeletonModification2DFABRIK.set_fabrik_data_chain_length */
   final def setFabrikDataChainLength(length: Long): Unit =
@@ -40,14 +41,4 @@ abstract class SkeletonModification2DFABRIK extends SkeletonModification2D {
   final def getFabrikJointUseTargetRotation(joint_idx: Long): Boolean =
     Ptrcall.call1[Long, Boolean](MethodBind.get("SkeletonModification2DFABRIK", "get_fabrik_joint_use_target_rotation", 1116898809L), hostObject.objectPtr, joint_idx)
 
-}
-
-object SkeletonModification2DFABRIK {
-  /** Class metadata for Gd[SkeletonModification2DFABRIK] lifetime management and casting. */
-  given GodotClass[SkeletonModification2DFABRIK] with {
-    def className = "SkeletonModification2DFABRIK"
-    def isRefCounted = true
-    def wrap(o: GodotObject): SkeletonModification2DFABRIK = new SkeletonModification2DFABRIK {}.withHost(o.objectPtr)
-    def unwrap(t: SkeletonModification2DFABRIK): GodotObject = t.hostObject
-  }
 }

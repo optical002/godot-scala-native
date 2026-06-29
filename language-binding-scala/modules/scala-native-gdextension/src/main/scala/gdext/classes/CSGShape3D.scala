@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CSGShape3D`, extends `GeometryInstance3D`. */
 abstract class CSGShape3D extends GeometryInstance3D {
+  override def godotClassName: String = "CSGShape3D"
 
   /** CSGShape3D.is_root_shape */
   final def isRootShape(): Boolean =
@@ -92,14 +93,4 @@ abstract class CSGShape3D extends GeometryInstance3D {
   final def bakeStaticMesh(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("CSGShape3D", "bake_static_mesh", 1605880883L), hostObject.objectPtr)
 
-}
-
-object CSGShape3D {
-  /** Class metadata for Gd[CSGShape3D] lifetime management and casting. */
-  given GodotClass[CSGShape3D] with {
-    def className = "CSGShape3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): CSGShape3D = new CSGShape3D {}.withHost(o.objectPtr)
-    def unwrap(t: CSGShape3D): GodotObject = t.hostObject
-  }
 }

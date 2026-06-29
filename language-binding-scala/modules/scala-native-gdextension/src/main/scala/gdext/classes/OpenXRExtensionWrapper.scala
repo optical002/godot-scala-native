@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRExtensionWrapper`, extends `Object`. */
 abstract class OpenXRExtensionWrapper extends Object {
+  override def godotClassName: String = "OpenXRExtensionWrapper"
 
   /** OpenXRExtensionWrapper.get_openxr_api */
   final def getOpenxrApi(): GodotObject =
@@ -16,14 +17,4 @@ abstract class OpenXRExtensionWrapper extends Object {
   final def registerExtensionWrapper(): Unit =
     Ptrcall.callVoid0(MethodBind.get("OpenXRExtensionWrapper", "register_extension_wrapper", 3218959716L), hostObject.objectPtr)
 
-}
-
-object OpenXRExtensionWrapper {
-  /** Class metadata for Gd[OpenXRExtensionWrapper] lifetime management and casting. */
-  given GodotClass[OpenXRExtensionWrapper] with {
-    def className = "OpenXRExtensionWrapper"
-    def isRefCounted = false
-    def wrap(o: GodotObject): OpenXRExtensionWrapper = new OpenXRExtensionWrapper {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRExtensionWrapper): GodotObject = t.hostObject
-  }
 }

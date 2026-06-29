@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CSGPolygon3D`, extends `CSGPrimitive3D`. */
 abstract class CSGPolygon3D extends CSGPrimitive3D {
+  override def godotClassName: String = "CSGPolygon3D"
 
   /** CSGPolygon3D.set_mode */
   final def setMode(mode: Long): Unit =
@@ -128,14 +129,4 @@ abstract class CSGPolygon3D extends CSGPrimitive3D {
   final def getSmoothFaces(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("CSGPolygon3D", "get_smooth_faces", 36873697L), hostObject.objectPtr)
 
-}
-
-object CSGPolygon3D {
-  /** Class metadata for Gd[CSGPolygon3D] lifetime management and casting. */
-  given GodotClass[CSGPolygon3D] with {
-    def className = "CSGPolygon3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): CSGPolygon3D = new CSGPolygon3D {}.withHost(o.objectPtr)
-    def unwrap(t: CSGPolygon3D): GodotObject = t.hostObject
-  }
 }

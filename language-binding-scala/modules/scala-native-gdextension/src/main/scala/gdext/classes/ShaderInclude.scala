@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ShaderInclude`, extends `Resource`. */
 abstract class ShaderInclude extends Resource {
+  override def godotClassName: String = "ShaderInclude"
 
   /** ShaderInclude.set_code */
   final def setCode(code: String): Unit =
@@ -16,14 +17,4 @@ abstract class ShaderInclude extends Resource {
   final def getCode(): String =
     Ptrcall.call0[String](MethodBind.get("ShaderInclude", "get_code", 201670096L), hostObject.objectPtr)
 
-}
-
-object ShaderInclude {
-  /** Class metadata for Gd[ShaderInclude] lifetime management and casting. */
-  given GodotClass[ShaderInclude] with {
-    def className = "ShaderInclude"
-    def isRefCounted = true
-    def wrap(o: GodotObject): ShaderInclude = new ShaderInclude {}.withHost(o.objectPtr)
-    def unwrap(t: ShaderInclude): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `InputEventJoypadMotion`, extends `InputEvent`. */
 abstract class InputEventJoypadMotion extends InputEvent {
+  override def godotClassName: String = "InputEventJoypadMotion"
 
   /** InputEventJoypadMotion.set_axis */
   final def setAxis(axis: Long): Unit =
@@ -24,14 +25,4 @@ abstract class InputEventJoypadMotion extends InputEvent {
   final def getAxisValue(): Double =
     Ptrcall.call0[Double](MethodBind.get("InputEventJoypadMotion", "get_axis_value", 1740695150L), hostObject.objectPtr)
 
-}
-
-object InputEventJoypadMotion {
-  /** Class metadata for Gd[InputEventJoypadMotion] lifetime management and casting. */
-  given GodotClass[InputEventJoypadMotion] with {
-    def className = "InputEventJoypadMotion"
-    def isRefCounted = true
-    def wrap(o: GodotObject): InputEventJoypadMotion = new InputEventJoypadMotion {}.withHost(o.objectPtr)
-    def unwrap(t: InputEventJoypadMotion): GodotObject = t.hostObject
-  }
 }

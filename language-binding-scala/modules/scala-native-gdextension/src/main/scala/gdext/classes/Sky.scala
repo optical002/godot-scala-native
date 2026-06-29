@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Sky`, extends `Resource`. */
 abstract class Sky extends Resource {
+  override def godotClassName: String = "Sky"
 
   /** Sky.set_radiance_size */
   final def setRadianceSize(size: Long): Unit =
@@ -32,14 +33,4 @@ abstract class Sky extends Resource {
   final def getMaterial(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("Sky", "get_material", 5934680L), hostObject.objectPtr)
 
-}
-
-object Sky {
-  /** Class metadata for Gd[Sky] lifetime management and casting. */
-  given GodotClass[Sky] with {
-    def className = "Sky"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Sky = new Sky {}.withHost(o.objectPtr)
-    def unwrap(t: Sky): GodotObject = t.hostObject
-  }
 }

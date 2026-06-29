@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SkeletonModification2DStackHolder`, extends `SkeletonModification2D`. */
 abstract class SkeletonModification2DStackHolder extends SkeletonModification2D {
+  override def godotClassName: String = "SkeletonModification2DStackHolder"
 
   /** SkeletonModification2DStackHolder.set_held_modification_stack */
   final def setHeldModificationStack(held_modification_stack: SkeletonModificationStack2D): Unit =
@@ -16,14 +17,4 @@ abstract class SkeletonModification2DStackHolder extends SkeletonModification2D 
   final def getHeldModificationStack(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("SkeletonModification2DStackHolder", "get_held_modification_stack", 2107508396L), hostObject.objectPtr)
 
-}
-
-object SkeletonModification2DStackHolder {
-  /** Class metadata for Gd[SkeletonModification2DStackHolder] lifetime management and casting. */
-  given GodotClass[SkeletonModification2DStackHolder] with {
-    def className = "SkeletonModification2DStackHolder"
-    def isRefCounted = true
-    def wrap(o: GodotObject): SkeletonModification2DStackHolder = new SkeletonModification2DStackHolder {}.withHost(o.objectPtr)
-    def unwrap(t: SkeletonModification2DStackHolder): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CameraAttributes`, extends `Resource`. */
 abstract class CameraAttributes extends Resource {
+  override def godotClassName: String = "CameraAttributes"
 
   /** CameraAttributes.set_exposure_multiplier */
   final def setExposureMultiplier(multiplier: Double): Unit =
@@ -48,14 +49,4 @@ abstract class CameraAttributes extends Resource {
   final def getAutoExposureScale(): Double =
     Ptrcall.call0[Double](MethodBind.get("CameraAttributes", "get_auto_exposure_scale", 1740695150L), hostObject.objectPtr)
 
-}
-
-object CameraAttributes {
-  /** Class metadata for Gd[CameraAttributes] lifetime management and casting. */
-  given GodotClass[CameraAttributes] with {
-    def className = "CameraAttributes"
-    def isRefCounted = true
-    def wrap(o: GodotObject): CameraAttributes = new CameraAttributes {}.withHost(o.objectPtr)
-    def unwrap(t: CameraAttributes): GodotObject = t.hostObject
-  }
 }

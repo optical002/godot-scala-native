@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Input`, extends `Object`. */
 abstract class Input extends Object {
+  override def godotClassName: String = "Input"
 
   /** Input.is_anything_pressed */
   final def isAnythingPressed(): Boolean =
@@ -235,14 +236,6 @@ abstract class Input extends Object {
 }
 
 object Input {
-  /** Class metadata for Gd[Input] lifetime management and casting. */
-  given GodotClass[Input] with {
-    def className = "Input"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Input = new Input {}.withHost(o.objectPtr)
-    def unwrap(t: Input): GodotObject = t.hostObject
-  }
-
   /** The process-global Input singleton instance. */
   def singleton: Input = new Input {}
     .withHost(Godot.interface.global_get_singleton(

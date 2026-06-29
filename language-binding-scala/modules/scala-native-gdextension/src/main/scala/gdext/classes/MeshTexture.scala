@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `MeshTexture`, extends `Texture2D`. */
 abstract class MeshTexture extends Texture2D {
+  override def godotClassName: String = "MeshTexture"
 
   /** MeshTexture.set_mesh */
   final def setMesh(mesh: Mesh): Unit =
@@ -32,14 +33,4 @@ abstract class MeshTexture extends Texture2D {
   final def getBaseTexture(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("MeshTexture", "get_base_texture", 3635182373L), hostObject.objectPtr)
 
-}
-
-object MeshTexture {
-  /** Class metadata for Gd[MeshTexture] lifetime management and casting. */
-  given GodotClass[MeshTexture] with {
-    def className = "MeshTexture"
-    def isRefCounted = true
-    def wrap(o: GodotObject): MeshTexture = new MeshTexture {}.withHost(o.objectPtr)
-    def unwrap(t: MeshTexture): GodotObject = t.hostObject
-  }
 }

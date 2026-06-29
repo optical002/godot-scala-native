@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `NoiseTexture3D`, extends `Texture3D`. */
 abstract class NoiseTexture3D extends Texture3D {
+  override def godotClassName: String = "NoiseTexture3D"
 
   /** NoiseTexture3D.set_width */
   final def setWidth(width: Long): Unit =
@@ -68,14 +69,4 @@ abstract class NoiseTexture3D extends Texture3D {
   final def getSeamlessBlendSkirt(): Double =
     Ptrcall.call0[Double](MethodBind.get("NoiseTexture3D", "get_seamless_blend_skirt", 191475506L), hostObject.objectPtr)
 
-}
-
-object NoiseTexture3D {
-  /** Class metadata for Gd[NoiseTexture3D] lifetime management and casting. */
-  given GodotClass[NoiseTexture3D] with {
-    def className = "NoiseTexture3D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): NoiseTexture3D = new NoiseTexture3D {}.withHost(o.objectPtr)
-    def unwrap(t: NoiseTexture3D): GodotObject = t.hostObject
-  }
 }

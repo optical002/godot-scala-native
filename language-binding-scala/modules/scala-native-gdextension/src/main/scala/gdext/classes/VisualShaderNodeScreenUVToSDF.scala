@@ -7,15 +7,6 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeScreenUVToSDF`, extends `VisualShaderNode`. */
 abstract class VisualShaderNodeScreenUVToSDF extends VisualShaderNode {
+  override def godotClassName: String = "VisualShaderNodeScreenUVToSDF"
 
-}
-
-object VisualShaderNodeScreenUVToSDF {
-  /** Class metadata for Gd[VisualShaderNodeScreenUVToSDF] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeScreenUVToSDF] with {
-    def className = "VisualShaderNodeScreenUVToSDF"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeScreenUVToSDF = new VisualShaderNodeScreenUVToSDF {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeScreenUVToSDF): GodotObject = t.hostObject
-  }
 }

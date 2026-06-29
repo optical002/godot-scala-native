@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TranslationDomain`, extends `RefCounted`. */
 abstract class TranslationDomain extends RefCounted {
+  override def godotClassName: String = "TranslationDomain"
 
   /** TranslationDomain.get_translation_object */
   final def getTranslationObject(locale: String): GodotObject =
@@ -132,14 +133,4 @@ abstract class TranslationDomain extends RefCounted {
   final def pseudolocalize(message: gdext.builtin.StringName): gdext.builtin.StringName =
     Ptrcall.call1[gdext.builtin.StringName, gdext.builtin.StringName](MethodBind.get("TranslationDomain", "pseudolocalize", 1965194235L), hostObject.objectPtr, message)
 
-}
-
-object TranslationDomain {
-  /** Class metadata for Gd[TranslationDomain] lifetime management and casting. */
-  given GodotClass[TranslationDomain] with {
-    def className = "TranslationDomain"
-    def isRefCounted = true
-    def wrap(o: GodotObject): TranslationDomain = new TranslationDomain {}.withHost(o.objectPtr)
-    def unwrap(t: TranslationDomain): GodotObject = t.hostObject
-  }
 }

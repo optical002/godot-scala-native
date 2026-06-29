@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorPlugin`, extends `Node`. */
 abstract class EditorPlugin extends Node {
+  override def godotClassName: String = "EditorPlugin"
 
   /** EditorPlugin.add_dock */
   final def addDock(dock: EditorDock): Unit =
@@ -200,14 +201,4 @@ abstract class EditorPlugin extends Node {
   final def getPluginVersion(): String =
     Ptrcall.call0[String](MethodBind.get("EditorPlugin", "get_plugin_version", 201670096L), hostObject.objectPtr)
 
-}
-
-object EditorPlugin {
-  /** Class metadata for Gd[EditorPlugin] lifetime management and casting. */
-  given GodotClass[EditorPlugin] with {
-    def className = "EditorPlugin"
-    def isRefCounted = false
-    def wrap(o: GodotObject): EditorPlugin = new EditorPlugin {}.withHost(o.objectPtr)
-    def unwrap(t: EditorPlugin): GodotObject = t.hostObject
-  }
 }

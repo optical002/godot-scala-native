@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `MeshDataTool`, extends `RefCounted`. */
 abstract class MeshDataTool extends RefCounted {
+  override def godotClassName: String = "MeshDataTool"
 
   /** MeshDataTool.clear */
   final def clear(): Unit =
@@ -108,14 +109,4 @@ abstract class MeshDataTool extends RefCounted {
   final def getMaterial(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("MeshDataTool", "get_material", 5934680L), hostObject.objectPtr)
 
-}
-
-object MeshDataTool {
-  /** Class metadata for Gd[MeshDataTool] lifetime management and casting. */
-  given GodotClass[MeshDataTool] with {
-    def className = "MeshDataTool"
-    def isRefCounted = true
-    def wrap(o: GodotObject): MeshDataTool = new MeshDataTool {}.withHost(o.objectPtr)
-    def unwrap(t: MeshDataTool): GodotObject = t.hostObject
-  }
 }

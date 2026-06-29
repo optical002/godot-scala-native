@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `BoxOccluder3D`, extends `Occluder3D`. */
 abstract class BoxOccluder3D extends Occluder3D {
+  override def godotClassName: String = "BoxOccluder3D"
 
   /** BoxOccluder3D.set_size */
   final def setSize(size: gdext.builtin.Vector3): Unit =
@@ -16,14 +17,4 @@ abstract class BoxOccluder3D extends Occluder3D {
   final def getSize(): gdext.builtin.Vector3 =
     Ptrcall.call0[gdext.builtin.Vector3](MethodBind.get("BoxOccluder3D", "get_size", 3360562783L), hostObject.objectPtr)
 
-}
-
-object BoxOccluder3D {
-  /** Class metadata for Gd[BoxOccluder3D] lifetime management and casting. */
-  given GodotClass[BoxOccluder3D] with {
-    def className = "BoxOccluder3D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): BoxOccluder3D = new BoxOccluder3D {}.withHost(o.objectPtr)
-    def unwrap(t: BoxOccluder3D): GodotObject = t.hostObject
-  }
 }

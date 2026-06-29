@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ImporterMesh`, extends `Resource`. */
 abstract class ImporterMesh extends Resource {
+  override def godotClassName: String = "ImporterMesh"
 
   /** ImporterMesh.add_blend_shape */
   final def addBlendShape(name: String): Unit =
@@ -80,14 +81,4 @@ abstract class ImporterMesh extends Resource {
   final def getLightmapSizeHint(): gdext.builtin.Vector2i =
     Ptrcall.call0[gdext.builtin.Vector2i](MethodBind.get("ImporterMesh", "get_lightmap_size_hint", 3690982128L), hostObject.objectPtr)
 
-}
-
-object ImporterMesh {
-  /** Class metadata for Gd[ImporterMesh] lifetime management and casting. */
-  given GodotClass[ImporterMesh] with {
-    def className = "ImporterMesh"
-    def isRefCounted = true
-    def wrap(o: GodotObject): ImporterMesh = new ImporterMesh {}.withHost(o.objectPtr)
-    def unwrap(t: ImporterMesh): GodotObject = t.hostObject
-  }
 }

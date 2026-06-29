@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Parallax2D`, extends `Node2D`. */
 abstract class Parallax2D extends Node2D {
+  override def godotClassName: String = "Parallax2D"
 
   /** Parallax2D.set_scroll_scale */
   final def setScrollScale(scale: gdext.builtin.Vector2): Unit =
@@ -88,14 +89,4 @@ abstract class Parallax2D extends Node2D {
   final def isIgnoreCameraScroll(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("Parallax2D", "is_ignore_camera_scroll", 2240911060L), hostObject.objectPtr)
 
-}
-
-object Parallax2D {
-  /** Class metadata for Gd[Parallax2D] lifetime management and casting. */
-  given GodotClass[Parallax2D] with {
-    def className = "Parallax2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Parallax2D = new Parallax2D {}.withHost(o.objectPtr)
-    def unwrap(t: Parallax2D): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRPlaneTracker`, extends `OpenXRSpatialEntityTracker`. */
 abstract class OpenXRPlaneTracker extends OpenXRSpatialEntityTracker {
+  override def godotClassName: String = "OpenXRPlaneTracker"
 
   /** OpenXRPlaneTracker.set_bounds_size */
   final def setBoundsSize(bounds_size: gdext.builtin.Vector2): Unit =
@@ -48,14 +49,4 @@ abstract class OpenXRPlaneTracker extends OpenXRSpatialEntityTracker {
   final def getShape(thickness: Double): GodotObject =
     Ptrcall.call1[Double, GodotObject](MethodBind.get("OpenXRPlaneTracker", "get_shape", 3358509884L), hostObject.objectPtr, thickness)
 
-}
-
-object OpenXRPlaneTracker {
-  /** Class metadata for Gd[OpenXRPlaneTracker] lifetime management and casting. */
-  given GodotClass[OpenXRPlaneTracker] with {
-    def className = "OpenXRPlaneTracker"
-    def isRefCounted = true
-    def wrap(o: GodotObject): OpenXRPlaneTracker = new OpenXRPlaneTracker {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRPlaneTracker): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `XRVRS`, extends `Object`. */
 abstract class XRVRS extends Object {
+  override def godotClassName: String = "XRVRS"
 
   /** XRVRS.get_vrs_min_radius */
   final def getVrsMinRadius(): Double =
@@ -32,14 +33,4 @@ abstract class XRVRS extends Object {
   final def setVrsRenderRegion(render_region: gdext.builtin.Rect2i): Unit =
     Ptrcall.callVoid1(MethodBind.get("XRVRS", "set_vrs_render_region", 1763793166L), hostObject.objectPtr, render_region)
 
-}
-
-object XRVRS {
-  /** Class metadata for Gd[XRVRS] lifetime management and casting. */
-  given GodotClass[XRVRS] with {
-    def className = "XRVRS"
-    def isRefCounted = false
-    def wrap(o: GodotObject): XRVRS = new XRVRS {}.withHost(o.objectPtr)
-    def unwrap(t: XRVRS): GodotObject = t.hostObject
-  }
 }

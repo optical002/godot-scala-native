@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeTextureParameter`, extends `VisualShaderNodeParameter`. */
 abstract class VisualShaderNodeTextureParameter extends VisualShaderNodeParameter {
+  override def godotClassName: String = "VisualShaderNodeTextureParameter"
 
   /** VisualShaderNodeTextureParameter.set_texture_type */
   final def setTextureType(`type`: Long): Unit =
@@ -48,14 +49,4 @@ abstract class VisualShaderNodeTextureParameter extends VisualShaderNodeParamete
   final def getTextureSource(): Long =
     Ptrcall.call0[Long](MethodBind.get("VisualShaderNodeTextureParameter", "get_texture_source", 2039092262L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeTextureParameter {
-  /** Class metadata for Gd[VisualShaderNodeTextureParameter] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeTextureParameter] with {
-    def className = "VisualShaderNodeTextureParameter"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeTextureParameter = new VisualShaderNodeTextureParameter {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeTextureParameter): GodotObject = t.hostObject
-  }
 }

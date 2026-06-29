@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TileData`, extends `Object`. */
 abstract class TileData extends Object {
+  override def godotClassName: String = "TileData"
 
   /** TileData.set_flip_h */
   final def setFlipH(flip_h: Boolean): Unit =
@@ -200,14 +201,4 @@ abstract class TileData extends Object {
   final def hasCustomData(layer_name: String): Boolean =
     Ptrcall.call1[String, Boolean](MethodBind.get("TileData", "has_custom_data", 3927539163L), hostObject.objectPtr, layer_name)
 
-}
-
-object TileData {
-  /** Class metadata for Gd[TileData] lifetime management and casting. */
-  given GodotClass[TileData] with {
-    def className = "TileData"
-    def isRefCounted = false
-    def wrap(o: GodotObject): TileData = new TileData {}.withHost(o.objectPtr)
-    def unwrap(t: TileData): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AStar2D`, extends `RefCounted`. */
 abstract class AStar2D extends RefCounted {
+  override def godotClassName: String = "AStar2D"
 
   /** AStar2D.get_available_point_id */
   final def getAvailablePointId(): Long =
@@ -92,14 +93,4 @@ abstract class AStar2D extends RefCounted {
   final def getClosestPositionInSegment(to_position: gdext.builtin.Vector2): gdext.builtin.Vector2 =
     Ptrcall.call1[gdext.builtin.Vector2, gdext.builtin.Vector2](MethodBind.get("AStar2D", "get_closest_position_in_segment", 2656412154L), hostObject.objectPtr, to_position)
 
-}
-
-object AStar2D {
-  /** Class metadata for Gd[AStar2D] lifetime management and casting. */
-  given GodotClass[AStar2D] with {
-    def className = "AStar2D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AStar2D = new AStar2D {}.withHost(o.objectPtr)
-    def unwrap(t: AStar2D): GodotObject = t.hostObject
-  }
 }

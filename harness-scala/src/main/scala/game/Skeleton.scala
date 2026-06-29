@@ -1,6 +1,5 @@
 package game
 
-import gdext.api.GodotPrint
 import gdext.api.Tscn
 import gdext.annotations.*
 import gdext.api.*
@@ -31,6 +30,6 @@ class Skeleton(
 
   override def _ready(): Unit = {
     super._ready() // inherited Enemy._ready still runs
-    GodotPrint.print(s"Skeleton._ready (skeletonName=$skeletonName, hp=$hp)")
+    Gd.print(s"Skeleton._ready (skeletonName=$skeletonName, hp=$hp)")
   }
 }

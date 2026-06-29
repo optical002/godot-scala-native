@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GDExtensionManager`, extends `Object`. */
 abstract class GDExtensionManager extends Object {
+  override def godotClassName: String = "GDExtensionManager"
 
   /** GDExtensionManager.load_extension */
   final def loadExtension(path: String): Long =
@@ -31,14 +32,6 @@ abstract class GDExtensionManager extends Object {
 }
 
 object GDExtensionManager {
-  /** Class metadata for Gd[GDExtensionManager] lifetime management and casting. */
-  given GodotClass[GDExtensionManager] with {
-    def className = "GDExtensionManager"
-    def isRefCounted = false
-    def wrap(o: GodotObject): GDExtensionManager = new GDExtensionManager {}.withHost(o.objectPtr)
-    def unwrap(t: GDExtensionManager): GodotObject = t.hostObject
-  }
-
   /** The process-global GDExtensionManager singleton instance. */
   def singleton: GDExtensionManager = new GDExtensionManager {}
     .withHost(Godot.interface.global_get_singleton(

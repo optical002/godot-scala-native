@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TextureProgressBar`, extends `Range`. */
 abstract class TextureProgressBar extends Range {
+  override def godotClassName: String = "TextureProgressBar"
 
   /** TextureProgressBar.set_under_texture */
   final def setUnderTexture(tex: Texture2D): Unit =
@@ -112,14 +113,4 @@ abstract class TextureProgressBar extends Range {
   final def getNinePatchStretch(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("TextureProgressBar", "get_nine_patch_stretch", 36873697L), hostObject.objectPtr)
 
-}
-
-object TextureProgressBar {
-  /** Class metadata for Gd[TextureProgressBar] lifetime management and casting. */
-  given GodotClass[TextureProgressBar] with {
-    def className = "TextureProgressBar"
-    def isRefCounted = false
-    def wrap(o: GodotObject): TextureProgressBar = new TextureProgressBar {}.withHost(o.objectPtr)
-    def unwrap(t: TextureProgressBar): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ImporterMeshInstance3D`, extends `Node3D`. */
 abstract class ImporterMeshInstance3D extends Node3D {
+  override def godotClassName: String = "ImporterMeshInstance3D"
 
   /** ImporterMeshInstance3D.set_mesh */
   final def setMesh(mesh: ImporterMesh): Unit =
@@ -80,14 +81,4 @@ abstract class ImporterMeshInstance3D extends Node3D {
   final def getVisibilityRangeFadeMode(): Long =
     Ptrcall.call0[Long](MethodBind.get("ImporterMeshInstance3D", "get_visibility_range_fade_mode", 2067221882L), hostObject.objectPtr)
 
-}
-
-object ImporterMeshInstance3D {
-  /** Class metadata for Gd[ImporterMeshInstance3D] lifetime management and casting. */
-  given GodotClass[ImporterMeshInstance3D] with {
-    def className = "ImporterMeshInstance3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): ImporterMeshInstance3D = new ImporterMeshInstance3D {}.withHost(o.objectPtr)
-    def unwrap(t: ImporterMeshInstance3D): GodotObject = t.hostObject
-  }
 }

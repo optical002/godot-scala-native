@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RDPipelineColorBlendStateAttachment`, extends `RefCounted`. */
 abstract class RDPipelineColorBlendStateAttachment extends RefCounted {
+  override def godotClassName: String = "RDPipelineColorBlendStateAttachment"
 
   /** RDPipelineColorBlendStateAttachment.set_as_mix */
   final def setAsMix(): Unit =
@@ -100,14 +101,4 @@ abstract class RDPipelineColorBlendStateAttachment extends RefCounted {
   final def getWriteA(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("RDPipelineColorBlendStateAttachment", "get_write_a", 36873697L), hostObject.objectPtr)
 
-}
-
-object RDPipelineColorBlendStateAttachment {
-  /** Class metadata for Gd[RDPipelineColorBlendStateAttachment] lifetime management and casting. */
-  given GodotClass[RDPipelineColorBlendStateAttachment] with {
-    def className = "RDPipelineColorBlendStateAttachment"
-    def isRefCounted = true
-    def wrap(o: GodotObject): RDPipelineColorBlendStateAttachment = new RDPipelineColorBlendStateAttachment {}.withHost(o.objectPtr)
-    def unwrap(t: RDPipelineColorBlendStateAttachment): GodotObject = t.hostObject
-  }
 }

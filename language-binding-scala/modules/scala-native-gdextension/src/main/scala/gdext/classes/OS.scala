@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OS`, extends `Object`. */
 abstract class OS extends Object {
+  override def godotClassName: String = "OS"
 
   /** OS.get_system_ca_certificates */
   final def getSystemCaCertificates(): String =
@@ -275,14 +276,6 @@ abstract class OS extends Object {
 }
 
 object OS {
-  /** Class metadata for Gd[OS] lifetime management and casting. */
-  given GodotClass[OS] with {
-    def className = "OS"
-    def isRefCounted = false
-    def wrap(o: GodotObject): OS = new OS {}.withHost(o.objectPtr)
-    def unwrap(t: OS): GodotObject = t.hostObject
-  }
-
   /** The process-global OS singleton instance. */
   def singleton: OS = new OS {}
     .withHost(Godot.interface.global_get_singleton(

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorNode3DGizmoPlugin`, extends `Resource`. */
 abstract class EditorNode3DGizmoPlugin extends Resource {
+  override def godotClassName: String = "EditorNode3DGizmoPlugin"
 
   /** EditorNode3DGizmoPlugin.create_material */
   final def createMaterial(name: String, color: gdext.builtin.Color, billboard: Boolean, on_top: Boolean, use_vertex_color: Boolean): Unit =
@@ -28,14 +29,4 @@ abstract class EditorNode3DGizmoPlugin extends Resource {
   final def getMaterial(name: String, gizmo: EditorNode3DGizmo): GodotObject =
     Ptrcall.call2[String, GodotObject, GodotObject](MethodBind.get("EditorNode3DGizmoPlugin", "get_material", 974464017L), hostObject.objectPtr, name, gizmo.hostObject)
 
-}
-
-object EditorNode3DGizmoPlugin {
-  /** Class metadata for Gd[EditorNode3DGizmoPlugin] lifetime management and casting. */
-  given GodotClass[EditorNode3DGizmoPlugin] with {
-    def className = "EditorNode3DGizmoPlugin"
-    def isRefCounted = true
-    def wrap(o: GodotObject): EditorNode3DGizmoPlugin = new EditorNode3DGizmoPlugin {}.withHost(o.objectPtr)
-    def unwrap(t: EditorNode3DGizmoPlugin): GodotObject = t.hostObject
-  }
 }

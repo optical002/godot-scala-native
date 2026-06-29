@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorResourcePicker`, extends `HBoxContainer`. */
 abstract class EditorResourcePicker extends HBoxContainer {
+  override def godotClassName: String = "EditorResourcePicker"
 
   /** EditorResourcePicker.set_base_type */
   final def setBaseType(base_type: String): Unit =
@@ -44,14 +45,4 @@ abstract class EditorResourcePicker extends HBoxContainer {
   final def isEditable(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("EditorResourcePicker", "is_editable", 36873697L), hostObject.objectPtr)
 
-}
-
-object EditorResourcePicker {
-  /** Class metadata for Gd[EditorResourcePicker] lifetime management and casting. */
-  given GodotClass[EditorResourcePicker] with {
-    def className = "EditorResourcePicker"
-    def isRefCounted = false
-    def wrap(o: GodotObject): EditorResourcePicker = new EditorResourcePicker {}.withHost(o.objectPtr)
-    def unwrap(t: EditorResourcePicker): GodotObject = t.hostObject
-  }
 }

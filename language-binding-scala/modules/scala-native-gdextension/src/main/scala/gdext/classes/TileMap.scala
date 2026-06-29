@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TileMap`, extends `Node2D`. */
 abstract class TileMap extends Node2D {
+  override def godotClassName: String = "TileMap"
 
   /** TileMap.force_update */
   final def forceUpdate(layer: Long): Unit =
@@ -204,14 +205,4 @@ abstract class TileMap extends Node2D {
   final def getNeighborCell(coords: gdext.builtin.Vector2i, neighbor: Long): gdext.builtin.Vector2i =
     Ptrcall.call2[gdext.builtin.Vector2i, Long, gdext.builtin.Vector2i](MethodBind.get("TileMap", "get_neighbor_cell", 986575103L), hostObject.objectPtr, coords, neighbor)
 
-}
-
-object TileMap {
-  /** Class metadata for Gd[TileMap] lifetime management and casting. */
-  given GodotClass[TileMap] with {
-    def className = "TileMap"
-    def isRefCounted = false
-    def wrap(o: GodotObject): TileMap = new TileMap {}.withHost(o.objectPtr)
-    def unwrap(t: TileMap): GodotObject = t.hostObject
-  }
 }

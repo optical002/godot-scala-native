@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RDAttachmentFormat`, extends `RefCounted`. */
 abstract class RDAttachmentFormat extends RefCounted {
+  override def godotClassName: String = "RDAttachmentFormat"
 
   /** RDAttachmentFormat.set_format */
   final def setFormat(p_member: Long): Unit =
@@ -32,14 +33,4 @@ abstract class RDAttachmentFormat extends RefCounted {
   final def getUsageFlags(): Long =
     Ptrcall.call0[Long](MethodBind.get("RDAttachmentFormat", "get_usage_flags", 3905245786L), hostObject.objectPtr)
 
-}
-
-object RDAttachmentFormat {
-  /** Class metadata for Gd[RDAttachmentFormat] lifetime management and casting. */
-  given GodotClass[RDAttachmentFormat] with {
-    def className = "RDAttachmentFormat"
-    def isRefCounted = true
-    def wrap(o: GodotObject): RDAttachmentFormat = new RDAttachmentFormat {}.withHost(o.objectPtr)
-    def unwrap(t: RDAttachmentFormat): GodotObject = t.hostObject
-  }
 }

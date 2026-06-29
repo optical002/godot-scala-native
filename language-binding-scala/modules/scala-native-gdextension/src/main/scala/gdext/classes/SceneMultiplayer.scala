@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SceneMultiplayer`, extends `MultiplayerAPI`. */
 abstract class SceneMultiplayer extends MultiplayerAPI {
+  override def godotClassName: String = "SceneMultiplayer"
 
   /** SceneMultiplayer.clear */
   final def clear(): Unit =
@@ -68,14 +69,4 @@ abstract class SceneMultiplayer extends MultiplayerAPI {
   final def setMaxDeltaPacketSize(size: Long): Unit =
     Ptrcall.callVoid1(MethodBind.get("SceneMultiplayer", "set_max_delta_packet_size", 1286410249L), hostObject.objectPtr, size)
 
-}
-
-object SceneMultiplayer {
-  /** Class metadata for Gd[SceneMultiplayer] lifetime management and casting. */
-  given GodotClass[SceneMultiplayer] with {
-    def className = "SceneMultiplayer"
-    def isRefCounted = true
-    def wrap(o: GodotObject): SceneMultiplayer = new SceneMultiplayer {}.withHost(o.objectPtr)
-    def unwrap(t: SceneMultiplayer): GodotObject = t.hostObject
-  }
 }

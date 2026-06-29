@@ -1,6 +1,6 @@
 package game
 
-import gdext.api.{Gd, Tres}
+import gdext.api.Tres
 import gdext.classes.{Node, Skeleton3D, AnimationPlayer, SpriteFrames, AnimationTree}
 import gdext.annotations.*
 import gdext.api.*
@@ -26,11 +26,11 @@ import gdext.api.*
  */
 final class ExportCompProperties extends Node {
   // Bones of the referenced skeleton.
-  @gdexport var skeleton: Gd[Skeleton3D] = Gd.nullOf[Skeleton3D]
+  @gdexport var skeleton: Skeleton3D = null
   @exportBoneName("skeleton") @gdexport var boneName: String = ""
 
   // Animations of the referenced animation player.
-  @gdexport var player: Gd[AnimationPlayer] = Gd.nullOf[AnimationPlayer]
+  @gdexport var player: AnimationPlayer = null
   @exportAnimation("player") @gdexport var anim: String = ""
 
   // Animation names of the referenced sprite-frames resource.
@@ -38,6 +38,6 @@ final class ExportCompProperties extends Node {
   @exportSpriteAnimation("frames") @gdexport var spriteAnim: String = ""
 
   // "parameters/..." paths of the referenced animation tree.
-  @gdexport var tree: Gd[AnimationTree] = Gd.nullOf[AnimationTree]
+  @gdexport var tree: AnimationTree = null
   @exportAnimationProperty("tree") @gdexport var treeParam: String = ""
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorExportPlatform`, extends `RefCounted`. */
 abstract class EditorExportPlatform extends RefCounted {
+  override def godotClassName: String = "EditorExportPlatform"
 
   /** EditorExportPlatform.get_os_name */
   final def getOsName(): String =
@@ -56,14 +57,4 @@ abstract class EditorExportPlatform extends RefCounted {
   final def getWorstMessageType(): Long =
     Ptrcall.call0[Long](MethodBind.get("EditorExportPlatform", "get_worst_message_type", 2580557466L), hostObject.objectPtr)
 
-}
-
-object EditorExportPlatform {
-  /** Class metadata for Gd[EditorExportPlatform] lifetime management and casting. */
-  given GodotClass[EditorExportPlatform] with {
-    def className = "EditorExportPlatform"
-    def isRefCounted = true
-    def wrap(o: GodotObject): EditorExportPlatform = new EditorExportPlatform {}.withHost(o.objectPtr)
-    def unwrap(t: EditorExportPlatform): GodotObject = t.hostObject
-  }
 }

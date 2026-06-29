@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Area3D`, extends `CollisionObject3D`. */
 abstract class Area3D extends CollisionObject3D {
+  override def godotClassName: String = "Area3D"
 
   /** Area3D.set_gravity_space_override_mode */
   final def setGravitySpaceOverrideMode(space_override_mode: Long): Unit =
@@ -192,14 +193,4 @@ abstract class Area3D extends CollisionObject3D {
   final def getReverbUniformity(): Double =
     Ptrcall.call0[Double](MethodBind.get("Area3D", "get_reverb_uniformity", 1740695150L), hostObject.objectPtr)
 
-}
-
-object Area3D {
-  /** Class metadata for Gd[Area3D] lifetime management and casting. */
-  given GodotClass[Area3D] with {
-    def className = "Area3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Area3D = new Area3D {}.withHost(o.objectPtr)
-    def unwrap(t: Area3D): GodotObject = t.hostObject
-  }
 }

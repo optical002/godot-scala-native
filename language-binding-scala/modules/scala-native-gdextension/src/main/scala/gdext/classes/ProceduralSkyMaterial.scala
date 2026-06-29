@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ProceduralSkyMaterial`, extends `Material`. */
 abstract class ProceduralSkyMaterial extends Material {
+  override def godotClassName: String = "ProceduralSkyMaterial"
 
   /** ProceduralSkyMaterial.set_sky_top_color */
   final def setSkyTopColor(color: gdext.builtin.Color): Unit =
@@ -120,14 +121,4 @@ abstract class ProceduralSkyMaterial extends Material {
   final def getEnergyMultiplier(): Double =
     Ptrcall.call0[Double](MethodBind.get("ProceduralSkyMaterial", "get_energy_multiplier", 1740695150L), hostObject.objectPtr)
 
-}
-
-object ProceduralSkyMaterial {
-  /** Class metadata for Gd[ProceduralSkyMaterial] lifetime management and casting. */
-  given GodotClass[ProceduralSkyMaterial] with {
-    def className = "ProceduralSkyMaterial"
-    def isRefCounted = true
-    def wrap(o: GodotObject): ProceduralSkyMaterial = new ProceduralSkyMaterial {}.withHost(o.objectPtr)
-    def unwrap(t: ProceduralSkyMaterial): GodotObject = t.hostObject
-  }
 }

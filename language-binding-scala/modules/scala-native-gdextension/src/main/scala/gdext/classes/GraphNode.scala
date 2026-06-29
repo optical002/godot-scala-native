@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GraphNode`, extends `GraphElement`. */
 abstract class GraphNode extends GraphElement {
+  override def godotClassName: String = "GraphNode"
 
   /** GraphNode.set_title */
   final def setTitle(title: String): Unit =
@@ -156,14 +157,4 @@ abstract class GraphNode extends GraphElement {
   final def getOutputPortSlot(port_idx: Long): Long =
     Ptrcall.call1[Long, Long](MethodBind.get("GraphNode", "get_output_port_slot", 3744713108L), hostObject.objectPtr, port_idx)
 
-}
-
-object GraphNode {
-  /** Class metadata for Gd[GraphNode] lifetime management and casting. */
-  given GodotClass[GraphNode] with {
-    def className = "GraphNode"
-    def isRefCounted = false
-    def wrap(o: GodotObject): GraphNode = new GraphNode {}.withHost(o.objectPtr)
-    def unwrap(t: GraphNode): GodotObject = t.hostObject
-  }
 }

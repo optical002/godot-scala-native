@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GLTFSpecGloss`, extends `Resource`. */
 abstract class GLTFSpecGloss extends Resource {
+  override def godotClassName: String = "GLTFSpecGloss"
 
   /** GLTFSpecGloss.get_diffuse_img */
   final def getDiffuseImg(): GodotObject =
@@ -48,14 +49,4 @@ abstract class GLTFSpecGloss extends Resource {
   final def setSpecGlossImg(spec_gloss_img: Image): Unit =
     Ptrcall.callVoid1(MethodBind.get("GLTFSpecGloss", "set_spec_gloss_img", 532598488L), hostObject.objectPtr, spec_gloss_img.hostObject)
 
-}
-
-object GLTFSpecGloss {
-  /** Class metadata for Gd[GLTFSpecGloss] lifetime management and casting. */
-  given GodotClass[GLTFSpecGloss] with {
-    def className = "GLTFSpecGloss"
-    def isRefCounted = true
-    def wrap(o: GodotObject): GLTFSpecGloss = new GLTFSpecGloss {}.withHost(o.objectPtr)
-    def unwrap(t: GLTFSpecGloss): GodotObject = t.hostObject
-  }
 }

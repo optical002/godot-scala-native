@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioEffectReverb`, extends `AudioEffect`. */
 abstract class AudioEffectReverb extends AudioEffect {
+  override def godotClassName: String = "AudioEffectReverb"
 
   /** AudioEffectReverb.set_predelay_msec */
   final def setPredelayMsec(msec: Double): Unit =
@@ -72,14 +73,4 @@ abstract class AudioEffectReverb extends AudioEffect {
   final def getHpf(): Double =
     Ptrcall.call0[Double](MethodBind.get("AudioEffectReverb", "get_hpf", 1740695150L), hostObject.objectPtr)
 
-}
-
-object AudioEffectReverb {
-  /** Class metadata for Gd[AudioEffectReverb] lifetime management and casting. */
-  given GodotClass[AudioEffectReverb] with {
-    def className = "AudioEffectReverb"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioEffectReverb = new AudioEffectReverb {}.withHost(o.objectPtr)
-    def unwrap(t: AudioEffectReverb): GodotObject = t.hostObject
-  }
 }

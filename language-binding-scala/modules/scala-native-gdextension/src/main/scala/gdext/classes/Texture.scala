@@ -7,15 +7,6 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Texture`, extends `Resource`. */
 abstract class Texture extends Resource {
+  override def godotClassName: String = "Texture"
 
-}
-
-object Texture {
-  /** Class metadata for Gd[Texture] lifetime management and casting. */
-  given GodotClass[Texture] with {
-    def className = "Texture"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Texture = new Texture {}.withHost(o.objectPtr)
-    def unwrap(t: Texture): GodotObject = t.hostObject
-  }
 }

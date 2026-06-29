@@ -21,13 +21,13 @@ object EngineSelfTest {
       catch { case e: Throwable => failed += 1; log(s"FAIL $name (threw $e)") }
 
     // Construct a fresh engine object of class T as a typed wrapper, using the
-    // generated GodotClass[T] evidence.
-    def construct[T](using cls: GodotClass[T]): T =
-      cls.wrap(
-        GodotObject.fromPtr(
-          Godot.interface.classdb_construct_object2(
-            StringNames.cached(cls.className).ptr
-          )
+    // macro-derived ClassMeta[T] evidence.
+    def construct[T <: gdext.internal.register.GodotScriptClass](using
+      meta: ClassMeta[T]
+    ): T =
+      meta.fromHandle(
+        Godot.interface.classdb_construct_object2(
+          StringNames.cached(meta.className).ptr
         )
       )
 

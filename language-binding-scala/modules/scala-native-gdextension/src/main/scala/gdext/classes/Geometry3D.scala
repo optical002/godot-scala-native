@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Geometry3D`, extends `Object`. */
 abstract class Geometry3D extends Object {
+  override def godotClassName: String = "Geometry3D"
 
   /** Geometry3D.get_closest_point_to_segment */
   final def getClosestPointToSegment(point: gdext.builtin.Vector3, s1: gdext.builtin.Vector3, s2: gdext.builtin.Vector3): gdext.builtin.Vector3 =
@@ -23,14 +24,6 @@ abstract class Geometry3D extends Object {
 }
 
 object Geometry3D {
-  /** Class metadata for Gd[Geometry3D] lifetime management and casting. */
-  given GodotClass[Geometry3D] with {
-    def className = "Geometry3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Geometry3D = new Geometry3D {}.withHost(o.objectPtr)
-    def unwrap(t: Geometry3D): GodotObject = t.hostObject
-  }
-
   /** The process-global Geometry3D singleton instance. */
   def singleton: Geometry3D = new Geometry3D {}
     .withHost(Godot.interface.global_get_singleton(

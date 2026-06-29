@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GLTFPhysicsBody`, extends `Resource`. */
 abstract class GLTFPhysicsBody extends Resource {
+  override def godotClassName: String = "GLTFPhysicsBody"
 
   /** GLTFPhysicsBody.to_node */
   final def toNode(): GodotObject =
@@ -76,14 +77,4 @@ abstract class GLTFPhysicsBody extends Resource {
   final def setInertiaTensor(inertia_tensor: gdext.builtin.Basis): Unit =
     Ptrcall.callVoid1(MethodBind.get("GLTFPhysicsBody", "set_inertia_tensor", 1055510324L), hostObject.objectPtr, inertia_tensor)
 
-}
-
-object GLTFPhysicsBody {
-  /** Class metadata for Gd[GLTFPhysicsBody] lifetime management and casting. */
-  given GodotClass[GLTFPhysicsBody] with {
-    def className = "GLTFPhysicsBody"
-    def isRefCounted = true
-    def wrap(o: GodotObject): GLTFPhysicsBody = new GLTFPhysicsBody {}.withHost(o.objectPtr)
-    def unwrap(t: GLTFPhysicsBody): GodotObject = t.hostObject
-  }
 }

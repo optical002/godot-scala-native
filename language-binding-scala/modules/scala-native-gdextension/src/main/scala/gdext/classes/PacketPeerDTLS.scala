@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PacketPeerDTLS`, extends `PacketPeer`. */
 abstract class PacketPeerDTLS extends PacketPeer {
+  override def godotClassName: String = "PacketPeerDTLS"
 
   /** PacketPeerDTLS.poll */
   final def poll(): Unit =
@@ -24,14 +25,4 @@ abstract class PacketPeerDTLS extends PacketPeer {
   final def disconnectFromPeer(): Unit =
     Ptrcall.callVoid0(MethodBind.get("PacketPeerDTLS", "disconnect_from_peer", 3218959716L), hostObject.objectPtr)
 
-}
-
-object PacketPeerDTLS {
-  /** Class metadata for Gd[PacketPeerDTLS] lifetime management and casting. */
-  given GodotClass[PacketPeerDTLS] with {
-    def className = "PacketPeerDTLS"
-    def isRefCounted = true
-    def wrap(o: GodotObject): PacketPeerDTLS = new PacketPeerDTLS {}.withHost(o.objectPtr)
-    def unwrap(t: PacketPeerDTLS): GodotObject = t.hostObject
-  }
 }

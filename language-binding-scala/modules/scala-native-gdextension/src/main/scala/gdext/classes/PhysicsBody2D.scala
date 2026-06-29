@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PhysicsBody2D`, extends `CollisionObject2D`. */
 abstract class PhysicsBody2D extends CollisionObject2D {
+  override def godotClassName: String = "PhysicsBody2D"
 
   /** PhysicsBody2D.move_and_collide */
   final def moveAndCollide(motion: gdext.builtin.Vector2, test_only: Boolean, safe_margin: Double, recovery_as_collision: Boolean): GodotObject =
@@ -28,14 +29,4 @@ abstract class PhysicsBody2D extends CollisionObject2D {
   final def removeCollisionExceptionWith(body: Node): Unit =
     Ptrcall.callVoid1(MethodBind.get("PhysicsBody2D", "remove_collision_exception_with", 1078189570L), hostObject.objectPtr, body.hostObject)
 
-}
-
-object PhysicsBody2D {
-  /** Class metadata for Gd[PhysicsBody2D] lifetime management and casting. */
-  given GodotClass[PhysicsBody2D] with {
-    def className = "PhysicsBody2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): PhysicsBody2D = new PhysicsBody2D {}.withHost(o.objectPtr)
-    def unwrap(t: PhysicsBody2D): GodotObject = t.hostObject
-  }
 }

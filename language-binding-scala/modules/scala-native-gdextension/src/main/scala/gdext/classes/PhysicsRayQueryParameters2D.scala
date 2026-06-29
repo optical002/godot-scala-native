@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PhysicsRayQueryParameters2D`, extends `RefCounted`. */
 abstract class PhysicsRayQueryParameters2D extends RefCounted {
+  override def godotClassName: String = "PhysicsRayQueryParameters2D"
 
   /** PhysicsRayQueryParameters2D.set_from */
   final def setFrom(from: gdext.builtin.Vector2): Unit =
@@ -56,14 +57,4 @@ abstract class PhysicsRayQueryParameters2D extends RefCounted {
   final def isHitFromInsideEnabled(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("PhysicsRayQueryParameters2D", "is_hit_from_inside_enabled", 36873697L), hostObject.objectPtr)
 
-}
-
-object PhysicsRayQueryParameters2D {
-  /** Class metadata for Gd[PhysicsRayQueryParameters2D] lifetime management and casting. */
-  given GodotClass[PhysicsRayQueryParameters2D] with {
-    def className = "PhysicsRayQueryParameters2D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): PhysicsRayQueryParameters2D = new PhysicsRayQueryParameters2D {}.withHost(o.objectPtr)
-    def unwrap(t: PhysicsRayQueryParameters2D): GodotObject = t.hostObject
-  }
 }

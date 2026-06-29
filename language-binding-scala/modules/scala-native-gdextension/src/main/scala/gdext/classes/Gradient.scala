@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Gradient`, extends `Resource`. */
 abstract class Gradient extends Resource {
+  override def godotClassName: String = "Gradient"
 
   /** Gradient.add_point */
   final def addPoint(offset: Double, color: gdext.builtin.Color): Unit =
@@ -60,14 +61,4 @@ abstract class Gradient extends Resource {
   final def getInterpolationColorSpace(): Long =
     Ptrcall.call0[Long](MethodBind.get("Gradient", "get_interpolation_color_space", 1538296000L), hostObject.objectPtr)
 
-}
-
-object Gradient {
-  /** Class metadata for Gd[Gradient] lifetime management and casting. */
-  given GodotClass[Gradient] with {
-    def className = "Gradient"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Gradient = new Gradient {}.withHost(o.objectPtr)
-    def unwrap(t: Gradient): GodotObject = t.hostObject
-  }
 }

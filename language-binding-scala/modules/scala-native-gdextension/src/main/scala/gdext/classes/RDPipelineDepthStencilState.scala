@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RDPipelineDepthStencilState`, extends `RefCounted`. */
 abstract class RDPipelineDepthStencilState extends RefCounted {
+  override def godotClassName: String = "RDPipelineDepthStencilState"
 
   /** RDPipelineDepthStencilState.set_enable_depth_test */
   final def setEnableDepthTest(p_member: Boolean): Unit =
@@ -176,14 +177,4 @@ abstract class RDPipelineDepthStencilState extends RefCounted {
   final def getBackOpReference(): Long =
     Ptrcall.call0[Long](MethodBind.get("RDPipelineDepthStencilState", "get_back_op_reference", 3905245786L), hostObject.objectPtr)
 
-}
-
-object RDPipelineDepthStencilState {
-  /** Class metadata for Gd[RDPipelineDepthStencilState] lifetime management and casting. */
-  given GodotClass[RDPipelineDepthStencilState] with {
-    def className = "RDPipelineDepthStencilState"
-    def isRefCounted = true
-    def wrap(o: GodotObject): RDPipelineDepthStencilState = new RDPipelineDepthStencilState {}.withHost(o.objectPtr)
-    def unwrap(t: RDPipelineDepthStencilState): GodotObject = t.hostObject
-  }
 }

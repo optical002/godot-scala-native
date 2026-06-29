@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `HTTPClient`, extends `RefCounted`. */
 abstract class HTTPClient extends RefCounted {
+  override def godotClassName: String = "HTTPClient"
 
   /** HTTPClient.connect_to_host */
   final def connectToHost(host: String, port: Long, tls_options: TLSOptions): Long =
@@ -72,14 +73,4 @@ abstract class HTTPClient extends RefCounted {
   final def setHttpsProxy(host: String, port: Long): Unit =
     Ptrcall.callVoid2(MethodBind.get("HTTPClient", "set_https_proxy", 2956805083L), hostObject.objectPtr, host, port)
 
-}
-
-object HTTPClient {
-  /** Class metadata for Gd[HTTPClient] lifetime management and casting. */
-  given GodotClass[HTTPClient] with {
-    def className = "HTTPClient"
-    def isRefCounted = true
-    def wrap(o: GodotObject): HTTPClient = new HTTPClient {}.withHost(o.objectPtr)
-    def unwrap(t: HTTPClient): GodotObject = t.hostObject
-  }
 }

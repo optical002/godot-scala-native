@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SystemFont`, extends `Font`. */
 abstract class SystemFont extends Font {
+  override def godotClassName: String = "SystemFont"
 
   /** SystemFont.set_antialiasing */
   final def setAntialiasing(antialiasing: Long): Unit =
@@ -128,14 +129,4 @@ abstract class SystemFont extends Font {
   final def setFontStretch(stretch: Long): Unit =
     Ptrcall.callVoid1(MethodBind.get("SystemFont", "set_font_stretch", 1286410249L), hostObject.objectPtr, stretch)
 
-}
-
-object SystemFont {
-  /** Class metadata for Gd[SystemFont] lifetime management and casting. */
-  given GodotClass[SystemFont] with {
-    def className = "SystemFont"
-    def isRefCounted = true
-    def wrap(o: GodotObject): SystemFont = new SystemFont {}.withHost(o.objectPtr)
-    def unwrap(t: SystemFont): GodotObject = t.hostObject
-  }
 }

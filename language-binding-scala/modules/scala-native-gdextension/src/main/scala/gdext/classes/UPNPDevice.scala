@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `UPNPDevice`, extends `RefCounted`. */
 abstract class UPNPDevice extends RefCounted {
+  override def godotClassName: String = "UPNPDevice"
 
   /** UPNPDevice.is_valid_gateway */
   final def isValidGateway(): Boolean =
@@ -72,14 +73,4 @@ abstract class UPNPDevice extends RefCounted {
   final def getIgdStatus(): Long =
     Ptrcall.call0[Long](MethodBind.get("UPNPDevice", "get_igd_status", 180887011L), hostObject.objectPtr)
 
-}
-
-object UPNPDevice {
-  /** Class metadata for Gd[UPNPDevice] lifetime management and casting. */
-  given GodotClass[UPNPDevice] with {
-    def className = "UPNPDevice"
-    def isRefCounted = true
-    def wrap(o: GodotObject): UPNPDevice = new UPNPDevice {}.withHost(o.objectPtr)
-    def unwrap(t: UPNPDevice): GodotObject = t.hostObject
-  }
 }

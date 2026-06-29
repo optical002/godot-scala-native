@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `XRHandTracker`, extends `XRPositionalTracker`. */
 abstract class XRHandTracker extends XRPositionalTracker {
+  override def godotClassName: String = "XRHandTracker"
 
   /** XRHandTracker.set_has_tracking_data */
   final def setHasTrackingData(has_data: Boolean): Unit =
@@ -64,14 +65,4 @@ abstract class XRHandTracker extends XRPositionalTracker {
   final def getHandJointAngularVelocity(joint: Long): gdext.builtin.Vector3 =
     Ptrcall.call1[Long, gdext.builtin.Vector3](MethodBind.get("XRHandTracker", "get_hand_joint_angular_velocity", 547240792L), hostObject.objectPtr, joint)
 
-}
-
-object XRHandTracker {
-  /** Class metadata for Gd[XRHandTracker] lifetime management and casting. */
-  given GodotClass[XRHandTracker] with {
-    def className = "XRHandTracker"
-    def isRefCounted = true
-    def wrap(o: GodotObject): XRHandTracker = new XRHandTracker {}.withHost(o.objectPtr)
-    def unwrap(t: XRHandTracker): GodotObject = t.hostObject
-  }
 }

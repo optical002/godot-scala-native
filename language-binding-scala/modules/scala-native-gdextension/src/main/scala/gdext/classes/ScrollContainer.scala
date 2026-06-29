@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ScrollContainer`, extends `Container`. */
 abstract class ScrollContainer extends Container {
+  override def godotClassName: String = "ScrollContainer"
 
   /** ScrollContainer.set_h_scroll */
   final def setHScroll(value: Long): Unit =
@@ -108,14 +109,4 @@ abstract class ScrollContainer extends Container {
   final def getDrawFocusBorder(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("ScrollContainer", "get_draw_focus_border", 2240911060L), hostObject.objectPtr)
 
-}
-
-object ScrollContainer {
-  /** Class metadata for Gd[ScrollContainer] lifetime management and casting. */
-  given GodotClass[ScrollContainer] with {
-    def className = "ScrollContainer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): ScrollContainer = new ScrollContainer {}.withHost(o.objectPtr)
-    def unwrap(t: ScrollContainer): GodotObject = t.hostObject
-  }
 }

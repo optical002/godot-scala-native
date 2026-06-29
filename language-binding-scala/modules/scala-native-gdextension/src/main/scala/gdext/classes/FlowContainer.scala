@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `FlowContainer`, extends `Container`. */
 abstract class FlowContainer extends Container {
+  override def godotClassName: String = "FlowContainer"
 
   /** FlowContainer.get_line_count */
   final def getLineCount(): Long =
@@ -44,14 +45,4 @@ abstract class FlowContainer extends Container {
   final def isReverseFill(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("FlowContainer", "is_reverse_fill", 36873697L), hostObject.objectPtr)
 
-}
-
-object FlowContainer {
-  /** Class metadata for Gd[FlowContainer] lifetime management and casting. */
-  given GodotClass[FlowContainer] with {
-    def className = "FlowContainer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): FlowContainer = new FlowContainer {}.withHost(o.objectPtr)
-    def unwrap(t: FlowContainer): GodotObject = t.hostObject
-  }
 }

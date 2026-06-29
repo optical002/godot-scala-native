@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRSpatialQueryResultData`, extends `OpenXRSpatialComponentData`. */
 abstract class OpenXRSpatialQueryResultData extends OpenXRSpatialComponentData {
+  override def godotClassName: String = "OpenXRSpatialQueryResultData"
 
   /** OpenXRSpatialQueryResultData.get_capacity */
   final def getCapacity(): Long =
@@ -20,14 +21,4 @@ abstract class OpenXRSpatialQueryResultData extends OpenXRSpatialComponentData {
   final def getEntityState(index: Long): Long =
     Ptrcall.call1[Long, Long](MethodBind.get("OpenXRSpatialQueryResultData", "get_entity_state", 1411962015L), hostObject.objectPtr, index)
 
-}
-
-object OpenXRSpatialQueryResultData {
-  /** Class metadata for Gd[OpenXRSpatialQueryResultData] lifetime management and casting. */
-  given GodotClass[OpenXRSpatialQueryResultData] with {
-    def className = "OpenXRSpatialQueryResultData"
-    def isRefCounted = true
-    def wrap(o: GodotObject): OpenXRSpatialQueryResultData = new OpenXRSpatialQueryResultData {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRSpatialQueryResultData): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TileMapPattern`, extends `Resource`. */
 abstract class TileMapPattern extends Resource {
+  override def godotClassName: String = "TileMapPattern"
 
   /** TileMapPattern.set_cell */
   final def setCell(coords: gdext.builtin.Vector2i, source_id: Long, atlas_coords: gdext.builtin.Vector2i, alternative_tile: Long): Unit =
@@ -44,14 +45,4 @@ abstract class TileMapPattern extends Resource {
   final def isEmpty(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("TileMapPattern", "is_empty", 36873697L), hostObject.objectPtr)
 
-}
-
-object TileMapPattern {
-  /** Class metadata for Gd[TileMapPattern] lifetime management and casting. */
-  given GodotClass[TileMapPattern] with {
-    def className = "TileMapPattern"
-    def isRefCounted = true
-    def wrap(o: GodotObject): TileMapPattern = new TileMapPattern {}.withHost(o.objectPtr)
-    def unwrap(t: TileMapPattern): GodotObject = t.hostObject
-  }
 }

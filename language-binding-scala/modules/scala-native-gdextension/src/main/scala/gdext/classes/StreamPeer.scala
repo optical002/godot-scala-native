@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `StreamPeer`, extends `RefCounted`. */
 abstract class StreamPeer extends RefCounted {
+  override def godotClassName: String = "StreamPeer"
 
   /** StreamPeer.get_available_bytes */
   final def getAvailableBytes(): Long =
@@ -124,14 +125,4 @@ abstract class StreamPeer extends RefCounted {
   final def getUtf8String(bytes: Long): String =
     Ptrcall.call1[Long, String](MethodBind.get("StreamPeer", "get_utf8_string", 2309358862L), hostObject.objectPtr, bytes)
 
-}
-
-object StreamPeer {
-  /** Class metadata for Gd[StreamPeer] lifetime management and casting. */
-  given GodotClass[StreamPeer] with {
-    def className = "StreamPeer"
-    def isRefCounted = true
-    def wrap(o: GodotObject): StreamPeer = new StreamPeer {}.withHost(o.objectPtr)
-    def unwrap(t: StreamPeer): GodotObject = t.hostObject
-  }
 }

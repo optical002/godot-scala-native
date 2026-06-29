@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `BoxContainer`, extends `Container`. */
 abstract class BoxContainer extends Container {
+  override def godotClassName: String = "BoxContainer"
 
   /** BoxContainer.add_spacer */
   final def addSpacer(begin: Boolean): GodotObject =
@@ -28,14 +29,4 @@ abstract class BoxContainer extends Container {
   final def isVertical(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("BoxContainer", "is_vertical", 36873697L), hostObject.objectPtr)
 
-}
-
-object BoxContainer {
-  /** Class metadata for Gd[BoxContainer] lifetime management and casting. */
-  given GodotClass[BoxContainer] with {
-    def className = "BoxContainer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): BoxContainer = new BoxContainer {}.withHost(o.objectPtr)
-    def unwrap(t: BoxContainer): GodotObject = t.hostObject
-  }
 }

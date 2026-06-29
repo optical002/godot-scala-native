@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SpinBox`, extends `Range`. */
 abstract class SpinBox extends Range {
+  override def godotClassName: String = "SpinBox"
 
   /** SpinBox.set_horizontal_alignment */
   final def setHorizontalAlignment(alignment: Long): Unit =
@@ -80,14 +81,4 @@ abstract class SpinBox extends Range {
   final def getLineEdit(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("SpinBox", "get_line_edit", 4071694264L), hostObject.objectPtr)
 
-}
-
-object SpinBox {
-  /** Class metadata for Gd[SpinBox] lifetime management and casting. */
-  given GodotClass[SpinBox] with {
-    def className = "SpinBox"
-    def isRefCounted = false
-    def wrap(o: GodotObject): SpinBox = new SpinBox {}.withHost(o.objectPtr)
-    def unwrap(t: SpinBox): GodotObject = t.hostObject
-  }
 }

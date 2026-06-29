@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Marshalls`, extends `Object`. */
 abstract class Marshalls extends Object {
+  override def godotClassName: String = "Marshalls"
 
   /** Marshalls.utf8_to_base64 */
   final def utf8ToBase64(utf8_str: String): String =
@@ -19,14 +20,6 @@ abstract class Marshalls extends Object {
 }
 
 object Marshalls {
-  /** Class metadata for Gd[Marshalls] lifetime management and casting. */
-  given GodotClass[Marshalls] with {
-    def className = "Marshalls"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Marshalls = new Marshalls {}.withHost(o.objectPtr)
-    def unwrap(t: Marshalls): GodotObject = t.hostObject
-  }
-
   /** The process-global Marshalls singleton instance. */
   def singleton: Marshalls = new Marshalls {}
     .withHost(Godot.interface.global_get_singleton(

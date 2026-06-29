@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GraphEdit`, extends `Control`. */
 abstract class GraphEdit extends Control {
+  override def godotClassName: String = "GraphEdit"
 
   /** GraphEdit.connect_node */
   final def connectNode(from_node: gdext.builtin.StringName, from_port: Long, to_node: gdext.builtin.StringName, to_port: Long, keep_alive: Boolean): Long =
@@ -272,14 +273,4 @@ abstract class GraphEdit extends Control {
   final def setSelected(node: Node): Unit =
     Ptrcall.callVoid1(MethodBind.get("GraphEdit", "set_selected", 1078189570L), hostObject.objectPtr, node.hostObject)
 
-}
-
-object GraphEdit {
-  /** Class metadata for Gd[GraphEdit] lifetime management and casting. */
-  given GodotClass[GraphEdit] with {
-    def className = "GraphEdit"
-    def isRefCounted = false
-    def wrap(o: GodotObject): GraphEdit = new GraphEdit {}.withHost(o.objectPtr)
-    def unwrap(t: GraphEdit): GodotObject = t.hostObject
-  }
 }

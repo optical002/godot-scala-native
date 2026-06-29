@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `XRServer`, extends `Object`. */
 abstract class XRServer extends Object {
+  override def godotClassName: String = "XRServer"
 
   /** XRServer.get_world_scale */
   final def getWorldScale(): Double =
@@ -91,14 +92,6 @@ abstract class XRServer extends Object {
 }
 
 object XRServer {
-  /** Class metadata for Gd[XRServer] lifetime management and casting. */
-  given GodotClass[XRServer] with {
-    def className = "XRServer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): XRServer = new XRServer {}.withHost(o.objectPtr)
-    def unwrap(t: XRServer): GodotObject = t.hostObject
-  }
-
   /** The process-global XRServer singleton instance. */
   def singleton: XRServer = new XRServer {}
     .withHost(Godot.interface.global_get_singleton(

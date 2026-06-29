@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRFutureExtension`, extends `OpenXRExtensionWrapper`. */
 abstract class OpenXRFutureExtension extends OpenXRExtensionWrapper {
+  override def godotClassName: String = "OpenXRFutureExtension"
 
   /** OpenXRFutureExtension.is_active */
   final def isActive(): Boolean =
@@ -16,14 +17,4 @@ abstract class OpenXRFutureExtension extends OpenXRExtensionWrapper {
   final def cancelFuture(future: Long): Unit =
     Ptrcall.callVoid1(MethodBind.get("OpenXRFutureExtension", "cancel_future", 1286410249L), hostObject.objectPtr, future)
 
-}
-
-object OpenXRFutureExtension {
-  /** Class metadata for Gd[OpenXRFutureExtension] lifetime management and casting. */
-  given GodotClass[OpenXRFutureExtension] with {
-    def className = "OpenXRFutureExtension"
-    def isRefCounted = false
-    def wrap(o: GodotObject): OpenXRFutureExtension = new OpenXRFutureExtension {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRFutureExtension): GodotObject = t.hostObject
-  }
 }

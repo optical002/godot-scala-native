@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioEffectLimiter`, extends `AudioEffect`. */
 abstract class AudioEffectLimiter extends AudioEffect {
+  override def godotClassName: String = "AudioEffectLimiter"
 
   /** AudioEffectLimiter.set_ceiling_db */
   final def setCeilingDb(ceiling: Double): Unit =
@@ -40,14 +41,4 @@ abstract class AudioEffectLimiter extends AudioEffect {
   final def getSoftClipRatio(): Double =
     Ptrcall.call0[Double](MethodBind.get("AudioEffectLimiter", "get_soft_clip_ratio", 1740695150L), hostObject.objectPtr)
 
-}
-
-object AudioEffectLimiter {
-  /** Class metadata for Gd[AudioEffectLimiter] lifetime management and casting. */
-  given GodotClass[AudioEffectLimiter] with {
-    def className = "AudioEffectLimiter"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioEffectLimiter = new AudioEffectLimiter {}.withHost(o.objectPtr)
-    def unwrap(t: AudioEffectLimiter): GodotObject = t.hostObject
-  }
 }

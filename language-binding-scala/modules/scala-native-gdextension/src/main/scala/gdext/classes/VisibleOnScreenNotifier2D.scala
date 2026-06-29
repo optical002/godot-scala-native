@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisibleOnScreenNotifier2D`, extends `Node2D`. */
 abstract class VisibleOnScreenNotifier2D extends Node2D {
+  override def godotClassName: String = "VisibleOnScreenNotifier2D"
 
   /** VisibleOnScreenNotifier2D.set_rect */
   final def setRect(rect: gdext.builtin.Rect2): Unit =
@@ -28,14 +29,4 @@ abstract class VisibleOnScreenNotifier2D extends Node2D {
   final def isOnScreen(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("VisibleOnScreenNotifier2D", "is_on_screen", 36873697L), hostObject.objectPtr)
 
-}
-
-object VisibleOnScreenNotifier2D {
-  /** Class metadata for Gd[VisibleOnScreenNotifier2D] lifetime management and casting. */
-  given GodotClass[VisibleOnScreenNotifier2D] with {
-    def className = "VisibleOnScreenNotifier2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): VisibleOnScreenNotifier2D = new VisibleOnScreenNotifier2D {}.withHost(o.objectPtr)
-    def unwrap(t: VisibleOnScreenNotifier2D): GodotObject = t.hostObject
-  }
 }

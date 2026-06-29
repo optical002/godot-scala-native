@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `JointLimitationCone3D`, extends `JointLimitation3D`. */
 abstract class JointLimitationCone3D extends JointLimitation3D {
+  override def godotClassName: String = "JointLimitationCone3D"
 
   /** JointLimitationCone3D.set_angle */
   final def setAngle(angle: Double): Unit =
@@ -16,14 +17,4 @@ abstract class JointLimitationCone3D extends JointLimitation3D {
   final def getAngle(): Double =
     Ptrcall.call0[Double](MethodBind.get("JointLimitationCone3D", "get_angle", 1740695150L), hostObject.objectPtr)
 
-}
-
-object JointLimitationCone3D {
-  /** Class metadata for Gd[JointLimitationCone3D] lifetime management and casting. */
-  given GodotClass[JointLimitationCone3D] with {
-    def className = "JointLimitationCone3D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): JointLimitationCone3D = new JointLimitationCone3D {}.withHost(o.objectPtr)
-    def unwrap(t: JointLimitationCone3D): GodotObject = t.hostObject
-  }
 }

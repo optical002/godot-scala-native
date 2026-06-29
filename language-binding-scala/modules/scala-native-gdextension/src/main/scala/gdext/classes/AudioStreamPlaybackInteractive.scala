@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioStreamPlaybackInteractive`, extends `AudioStreamPlayback`. */
 abstract class AudioStreamPlaybackInteractive extends AudioStreamPlayback {
+  override def godotClassName: String = "AudioStreamPlaybackInteractive"
 
   /** AudioStreamPlaybackInteractive.switch_to_clip_by_name */
   final def switchToClipByName(clip_name: gdext.builtin.StringName): Unit =
@@ -20,14 +21,4 @@ abstract class AudioStreamPlaybackInteractive extends AudioStreamPlayback {
   final def getCurrentClipIndex(): Long =
     Ptrcall.call0[Long](MethodBind.get("AudioStreamPlaybackInteractive", "get_current_clip_index", 3905245786L), hostObject.objectPtr)
 
-}
-
-object AudioStreamPlaybackInteractive {
-  /** Class metadata for Gd[AudioStreamPlaybackInteractive] lifetime management and casting. */
-  given GodotClass[AudioStreamPlaybackInteractive] with {
-    def className = "AudioStreamPlaybackInteractive"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioStreamPlaybackInteractive = new AudioStreamPlaybackInteractive {}.withHost(o.objectPtr)
-    def unwrap(t: AudioStreamPlaybackInteractive): GodotObject = t.hostObject
-  }
 }

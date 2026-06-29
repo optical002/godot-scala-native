@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RibbonTrailMesh`, extends `PrimitiveMesh`. */
 abstract class RibbonTrailMesh extends PrimitiveMesh {
+  override def godotClassName: String = "RibbonTrailMesh"
 
   /** RibbonTrailMesh.set_size */
   final def setSize(size: Double): Unit =
@@ -56,14 +57,4 @@ abstract class RibbonTrailMesh extends PrimitiveMesh {
   final def getShape(): Long =
     Ptrcall.call0[Long](MethodBind.get("RibbonTrailMesh", "get_shape", 1317484155L), hostObject.objectPtr)
 
-}
-
-object RibbonTrailMesh {
-  /** Class metadata for Gd[RibbonTrailMesh] lifetime management and casting. */
-  given GodotClass[RibbonTrailMesh] with {
-    def className = "RibbonTrailMesh"
-    def isRefCounted = true
-    def wrap(o: GodotObject): RibbonTrailMesh = new RibbonTrailMesh {}.withHost(o.objectPtr)
-    def unwrap(t: RibbonTrailMesh): GodotObject = t.hostObject
-  }
 }

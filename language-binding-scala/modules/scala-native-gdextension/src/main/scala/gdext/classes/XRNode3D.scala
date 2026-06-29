@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `XRNode3D`, extends `Node3D`. */
 abstract class XRNode3D extends Node3D {
+  override def godotClassName: String = "XRNode3D"
 
   /** XRNode3D.set_tracker */
   final def setTracker(tracker_name: gdext.builtin.StringName): Unit =
@@ -48,14 +49,4 @@ abstract class XRNode3D extends Node3D {
   final def triggerHapticPulse(action_name: String, frequency: Double, amplitude: Double, duration_sec: Double, delay_sec: Double): Unit =
     Ptrcall.callVoid5(MethodBind.get("XRNode3D", "trigger_haptic_pulse", 508576839L), hostObject.objectPtr, action_name, frequency, amplitude, duration_sec, delay_sec)
 
-}
-
-object XRNode3D {
-  /** Class metadata for Gd[XRNode3D] lifetime management and casting. */
-  given GodotClass[XRNode3D] with {
-    def className = "XRNode3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): XRNode3D = new XRNode3D {}.withHost(o.objectPtr)
-    def unwrap(t: XRNode3D): GodotObject = t.hostObject
-  }
 }

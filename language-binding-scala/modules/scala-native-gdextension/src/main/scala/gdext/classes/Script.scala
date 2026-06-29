@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Script`, extends `Resource`. */
 abstract class Script extends Resource {
+  override def godotClassName: String = "Script"
 
   /** Script.can_instantiate */
   final def canInstantiate(): Boolean =
@@ -56,14 +57,4 @@ abstract class Script extends Resource {
   final def isAbstract(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("Script", "is_abstract", 36873697L), hostObject.objectPtr)
 
-}
-
-object Script {
-  /** Class metadata for Gd[Script] lifetime management and casting. */
-  given GodotClass[Script] with {
-    def className = "Script"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Script = new Script {}.withHost(o.objectPtr)
-    def unwrap(t: Script): GodotObject = t.hostObject
-  }
 }

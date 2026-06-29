@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GLTFCamera`, extends `Resource`. */
 abstract class GLTFCamera extends Resource {
+  override def godotClassName: String = "GLTFCamera"
 
   /** GLTFCamera.to_node */
   final def toNode(): GodotObject =
@@ -52,14 +53,4 @@ abstract class GLTFCamera extends Resource {
   final def setDepthNear(zdepth_near: Double): Unit =
     Ptrcall.callVoid1(MethodBind.get("GLTFCamera", "set_depth_near", 373806689L), hostObject.objectPtr, zdepth_near)
 
-}
-
-object GLTFCamera {
-  /** Class metadata for Gd[GLTFCamera] lifetime management and casting. */
-  given GodotClass[GLTFCamera] with {
-    def className = "GLTFCamera"
-    def isRefCounted = true
-    def wrap(o: GodotObject): GLTFCamera = new GLTFCamera {}.withHost(o.objectPtr)
-    def unwrap(t: GLTFCamera): GodotObject = t.hostObject
-  }
 }

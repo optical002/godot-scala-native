@@ -98,7 +98,6 @@ object EngineClassGenerator {
   ): Option[String] = byName.get(name).map { cls =>
     val parent = cls.obj.get("inherits").map(_.str)
     val isSingleton = singletonLookup.contains(name)
-    val isRefCounted = cls.obj.get("is_refcounted").exists(_.bool)
 
     // Only this class's own methods (inheritance provides the rest).
     val methods =
@@ -126,6 +125,17 @@ object EngineClassGenerator {
            |""".stripMargin
       } else ""
 
+    // The class name is baked into an override so it survives DCE without any
+    // typeclass; the macro-derived `ClassMeta[$name]` covers wrap/cast/construct,
+    // and `isRefCounted` is now a runtime `isInstanceOf[RefCounted]` check, so no
+    // per-class given is emitted. A companion object is emitted only when there is
+    // a singleton accessor to hold.
+    val companionDef =
+      if (singletonDef.nonEmpty) s"""
+         |object $name {$singletonDef}
+         |""".stripMargin
+      else ""
+
     s"""package gdext.classes
        |
        |import gdext.Godot
@@ -135,19 +145,10 @@ object EngineClassGenerator {
        |
        |/** Generated wrapper for Godot's `$name`${parent.map(p => s", extends `$p`").getOrElse("")}. */
        |abstract class $name extends $extendsClause {
+       |  override def godotClassName: String = "$name"
        |$methodDefs
        |}
-       |
-       |object $name {
-       |  /** Class metadata for Gd[$name] lifetime management and casting. */
-       |  given GodotClass[$name] with {
-       |    def className = "$name"
-       |    def isRefCounted = $isRefCounted
-       |    def wrap(o: GodotObject): $name = new $name {}.withHost(o.objectPtr)
-       |    def unwrap(t: $name): GodotObject = t.hostObject
-       |  }
-       |$singletonDef}
-       |""".stripMargin
+       |$companionDef""".stripMargin
   }
 
   /** Emit one method, or None if any arg/return type is unsupported. */

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RenderingServer`, extends `Object`. */
 abstract class RenderingServer extends Object {
+  override def godotClassName: String = "RenderingServer"
 
   /** RenderingServer.material_set_use_debanding */
   final def materialSetUseDebanding(enable: Boolean): Unit =
@@ -251,14 +252,6 @@ abstract class RenderingServer extends Object {
 }
 
 object RenderingServer {
-  /** Class metadata for Gd[RenderingServer] lifetime management and casting. */
-  given GodotClass[RenderingServer] with {
-    def className = "RenderingServer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): RenderingServer = new RenderingServer {}.withHost(o.objectPtr)
-    def unwrap(t: RenderingServer): GodotObject = t.hostObject
-  }
-
   /** The process-global RenderingServer singleton instance. */
   def singleton: RenderingServer = new RenderingServer {}
     .withHost(Godot.interface.global_get_singleton(

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CanvasTexture`, extends `Texture2D`. */
 abstract class CanvasTexture extends Texture2D {
+  override def godotClassName: String = "CanvasTexture"
 
   /** CanvasTexture.set_diffuse_texture */
   final def setDiffuseTexture(texture: Texture2D): Unit =
@@ -64,14 +65,4 @@ abstract class CanvasTexture extends Texture2D {
   final def getTextureRepeat(): Long =
     Ptrcall.call0[Long](MethodBind.get("CanvasTexture", "get_texture_repeat", 2667158319L), hostObject.objectPtr)
 
-}
-
-object CanvasTexture {
-  /** Class metadata for Gd[CanvasTexture] lifetime management and casting. */
-  given GodotClass[CanvasTexture] with {
-    def className = "CanvasTexture"
-    def isRefCounted = true
-    def wrap(o: GodotObject): CanvasTexture = new CanvasTexture {}.withHost(o.objectPtr)
-    def unwrap(t: CanvasTexture): GodotObject = t.hostObject
-  }
 }

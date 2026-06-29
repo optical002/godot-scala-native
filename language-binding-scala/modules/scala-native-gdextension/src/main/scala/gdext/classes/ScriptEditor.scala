@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ScriptEditor`, extends `PanelContainer`. */
 abstract class ScriptEditor extends PanelContainer {
+  override def godotClassName: String = "ScriptEditor"
 
   /** ScriptEditor.get_current_editor */
   final def getCurrentEditor(): GodotObject =
@@ -44,14 +45,4 @@ abstract class ScriptEditor extends PanelContainer {
   final def clearDocsFromScript(script: Script): Unit =
     Ptrcall.callVoid1(MethodBind.get("ScriptEditor", "clear_docs_from_script", 3657522847L), hostObject.objectPtr, script.hostObject)
 
-}
-
-object ScriptEditor {
-  /** Class metadata for Gd[ScriptEditor] lifetime management and casting. */
-  given GodotClass[ScriptEditor] with {
-    def className = "ScriptEditor"
-    def isRefCounted = false
-    def wrap(o: GodotObject): ScriptEditor = new ScriptEditor {}.withHost(o.objectPtr)
-    def unwrap(t: ScriptEditor): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `HTTPRequest`, extends `Node`. */
 abstract class HTTPRequest extends Node {
+  override def godotClassName: String = "HTTPRequest"
 
   /** HTTPRequest.cancel_request */
   final def cancelRequest(): Unit =
@@ -92,14 +93,4 @@ abstract class HTTPRequest extends Node {
   final def setHttpsProxy(host: String, port: Long): Unit =
     Ptrcall.callVoid2(MethodBind.get("HTTPRequest", "set_https_proxy", 2956805083L), hostObject.objectPtr, host, port)
 
-}
-
-object HTTPRequest {
-  /** Class metadata for Gd[HTTPRequest] lifetime management and casting. */
-  given GodotClass[HTTPRequest] with {
-    def className = "HTTPRequest"
-    def isRefCounted = false
-    def wrap(o: GodotObject): HTTPRequest = new HTTPRequest {}.withHost(o.objectPtr)
-    def unwrap(t: HTTPRequest): GodotObject = t.hostObject
-  }
 }

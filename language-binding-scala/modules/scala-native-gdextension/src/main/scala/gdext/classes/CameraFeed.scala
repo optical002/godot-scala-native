@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CameraFeed`, extends `RefCounted`. */
 abstract class CameraFeed extends RefCounted {
+  override def godotClassName: String = "CameraFeed"
 
   /** CameraFeed.get_id */
   final def getId(): Long =
@@ -68,14 +69,4 @@ abstract class CameraFeed extends RefCounted {
   final def getDatatype(): Long =
     Ptrcall.call0[Long](MethodBind.get("CameraFeed", "get_datatype", 1477782850L), hostObject.objectPtr)
 
-}
-
-object CameraFeed {
-  /** Class metadata for Gd[CameraFeed] lifetime management and casting. */
-  given GodotClass[CameraFeed] with {
-    def className = "CameraFeed"
-    def isRefCounted = true
-    def wrap(o: GodotObject): CameraFeed = new CameraFeed {}.withHost(o.objectPtr)
-    def unwrap(t: CameraFeed): GodotObject = t.hostObject
-  }
 }

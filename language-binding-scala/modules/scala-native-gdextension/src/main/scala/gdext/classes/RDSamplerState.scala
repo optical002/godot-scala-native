@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RDSamplerState`, extends `RefCounted`. */
 abstract class RDSamplerState extends RefCounted {
+  override def godotClassName: String = "RDSamplerState"
 
   /** RDSamplerState.set_mag_filter */
   final def setMagFilter(p_member: Long): Unit =
@@ -128,14 +129,4 @@ abstract class RDSamplerState extends RefCounted {
   final def getUnnormalizedUvw(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("RDSamplerState", "get_unnormalized_uvw", 36873697L), hostObject.objectPtr)
 
-}
-
-object RDSamplerState {
-  /** Class metadata for Gd[RDSamplerState] lifetime management and casting. */
-  given GodotClass[RDSamplerState] with {
-    def className = "RDSamplerState"
-    def isRefCounted = true
-    def wrap(o: GodotObject): RDSamplerState = new RDSamplerState {}.withHost(o.objectPtr)
-    def unwrap(t: RDSamplerState): GodotObject = t.hostObject
-  }
 }

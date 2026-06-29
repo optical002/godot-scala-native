@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `InputEventScreenDrag`, extends `InputEventFromWindow`. */
 abstract class InputEventScreenDrag extends InputEventFromWindow {
+  override def godotClassName: String = "InputEventScreenDrag"
 
   /** InputEventScreenDrag.set_index */
   final def setIndex(index: Long): Unit =
@@ -80,14 +81,4 @@ abstract class InputEventScreenDrag extends InputEventFromWindow {
   final def getScreenVelocity(): gdext.builtin.Vector2 =
     Ptrcall.call0[gdext.builtin.Vector2](MethodBind.get("InputEventScreenDrag", "get_screen_velocity", 3341600327L), hostObject.objectPtr)
 
-}
-
-object InputEventScreenDrag {
-  /** Class metadata for Gd[InputEventScreenDrag] lifetime management and casting. */
-  given GodotClass[InputEventScreenDrag] with {
-    def className = "InputEventScreenDrag"
-    def isRefCounted = true
-    def wrap(o: GodotObject): InputEventScreenDrag = new InputEventScreenDrag {}.withHost(o.objectPtr)
-    def unwrap(t: InputEventScreenDrag): GodotObject = t.hostObject
-  }
 }

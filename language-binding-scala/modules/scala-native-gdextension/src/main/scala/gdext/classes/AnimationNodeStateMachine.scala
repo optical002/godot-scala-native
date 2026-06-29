@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AnimationNodeStateMachine`, extends `AnimationRootNode`. */
 abstract class AnimationNodeStateMachine extends AnimationRootNode {
+  override def godotClassName: String = "AnimationNodeStateMachine"
 
   /** AnimationNodeStateMachine.add_node */
   final def addNode(name: gdext.builtin.StringName, node: AnimationNode, position: gdext.builtin.Vector2): Unit =
@@ -108,14 +109,4 @@ abstract class AnimationNodeStateMachine extends AnimationRootNode {
   final def areEndsReset(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("AnimationNodeStateMachine", "are_ends_reset", 36873697L), hostObject.objectPtr)
 
-}
-
-object AnimationNodeStateMachine {
-  /** Class metadata for Gd[AnimationNodeStateMachine] lifetime management and casting. */
-  given GodotClass[AnimationNodeStateMachine] with {
-    def className = "AnimationNodeStateMachine"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AnimationNodeStateMachine = new AnimationNodeStateMachine {}.withHost(o.objectPtr)
-    def unwrap(t: AnimationNodeStateMachine): GodotObject = t.hostObject
-  }
 }

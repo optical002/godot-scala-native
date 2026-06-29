@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `BaseButton`, extends `Control`. */
 abstract class BaseButton extends Control {
+  override def godotClassName: String = "BaseButton"
 
   /** BaseButton.set_pressed */
   final def setPressed(pressed: Boolean): Unit =
@@ -100,14 +101,4 @@ abstract class BaseButton extends Control {
   final def getButtonGroup(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("BaseButton", "get_button_group", 281644053L), hostObject.objectPtr)
 
-}
-
-object BaseButton {
-  /** Class metadata for Gd[BaseButton] lifetime management and casting. */
-  given GodotClass[BaseButton] with {
-    def className = "BaseButton"
-    def isRefCounted = false
-    def wrap(o: GodotObject): BaseButton = new BaseButton {}.withHost(o.objectPtr)
-    def unwrap(t: BaseButton): GodotObject = t.hostObject
-  }
 }

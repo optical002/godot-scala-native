@@ -1,12 +1,14 @@
 package gdext
 
+import gdext.api.Gd
+
 /**
  * The language binding's logging facade. Lives in the binding (not in any game
  * project) so all binding internals — and game code that wants it — share one
  * definition.
  *
  * The two output channels are deliberately split:
- *  - [[godot]]  → Godot's Output panel only (via [[GodotPrint]])
+ *  - [[godot]]  → Godot's Output panel only (via `gdext.api.Gd` printing)
  *  - [[file]]   → the binding's `godot-init` side log file only (via
  *    [[FileLogger]])
  *  - [[both]]   → both of the above
@@ -29,13 +31,13 @@ private[gdext] object Log {
   }
 
   /** Print to Godot's Output panel. */
-  def godot(msg: String): Unit = GodotPrint.print(msg)
+  def godot(msg: String): Unit = Gd.print(msg)
 
   /** Report a warning to Godot's error console. */
-  def warning(msg: String): Unit = GodotPrint.printWarning(msg)
+  def warning(msg: String): Unit = Gd.printWarning(msg)
 
   /** Report an error to Godot's error console. */
-  def error(msg: String): Unit = GodotPrint.printError(msg)
+  def error(msg: String): Unit = Gd.printError(msg)
 
   /** Append a line to the binding's side log file. */
   def file(msg: String): Unit = {

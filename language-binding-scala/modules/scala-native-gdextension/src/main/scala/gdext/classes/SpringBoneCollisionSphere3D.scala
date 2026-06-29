@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SpringBoneCollisionSphere3D`, extends `SpringBoneCollision3D`. */
 abstract class SpringBoneCollisionSphere3D extends SpringBoneCollision3D {
+  override def godotClassName: String = "SpringBoneCollisionSphere3D"
 
   /** SpringBoneCollisionSphere3D.set_radius */
   final def setRadius(radius: Double): Unit =
@@ -24,14 +25,4 @@ abstract class SpringBoneCollisionSphere3D extends SpringBoneCollision3D {
   final def isInside(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("SpringBoneCollisionSphere3D", "is_inside", 36873697L), hostObject.objectPtr)
 
-}
-
-object SpringBoneCollisionSphere3D {
-  /** Class metadata for Gd[SpringBoneCollisionSphere3D] lifetime management and casting. */
-  given GodotClass[SpringBoneCollisionSphere3D] with {
-    def className = "SpringBoneCollisionSphere3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): SpringBoneCollisionSphere3D = new SpringBoneCollisionSphere3D {}.withHost(o.objectPtr)
-    def unwrap(t: SpringBoneCollisionSphere3D): GodotObject = t.hostObject
-  }
 }

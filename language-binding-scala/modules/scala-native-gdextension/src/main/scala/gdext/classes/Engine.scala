@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Engine`, extends `Object`. */
 abstract class Engine extends Object {
+  override def godotClassName: String = "Engine"
 
   /** Engine.set_physics_ticks_per_second */
   final def setPhysicsTicksPerSecond(physics_ticks_per_second: Long): Unit =
@@ -147,14 +148,6 @@ abstract class Engine extends Object {
 }
 
 object Engine {
-  /** Class metadata for Gd[Engine] lifetime management and casting. */
-  given GodotClass[Engine] with {
-    def className = "Engine"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Engine = new Engine {}.withHost(o.objectPtr)
-    def unwrap(t: Engine): GodotObject = t.hostObject
-  }
-
   /** The process-global Engine singleton instance. */
   def singleton: Engine = new Engine {}
     .withHost(Godot.interface.global_get_singleton(

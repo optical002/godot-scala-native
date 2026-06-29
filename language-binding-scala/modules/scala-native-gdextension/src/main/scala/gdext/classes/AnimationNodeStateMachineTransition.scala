@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AnimationNodeStateMachineTransition`, extends `Resource`. */
 abstract class AnimationNodeStateMachineTransition extends Resource {
+  override def godotClassName: String = "AnimationNodeStateMachineTransition"
 
   /** AnimationNodeStateMachineTransition.set_switch_mode */
   final def setSwitchMode(mode: Long): Unit =
@@ -80,14 +81,4 @@ abstract class AnimationNodeStateMachineTransition extends Resource {
   final def getAdvanceExpression(): String =
     Ptrcall.call0[String](MethodBind.get("AnimationNodeStateMachineTransition", "get_advance_expression", 201670096L), hostObject.objectPtr)
 
-}
-
-object AnimationNodeStateMachineTransition {
-  /** Class metadata for Gd[AnimationNodeStateMachineTransition] lifetime management and casting. */
-  given GodotClass[AnimationNodeStateMachineTransition] with {
-    def className = "AnimationNodeStateMachineTransition"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AnimationNodeStateMachineTransition = new AnimationNodeStateMachineTransition {}.withHost(o.objectPtr)
-    def unwrap(t: AnimationNodeStateMachineTransition): GodotObject = t.hostObject
-  }
 }

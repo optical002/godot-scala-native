@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GPUParticlesAttractorVectorField3D`, extends `GPUParticlesAttractor3D`. */
 abstract class GPUParticlesAttractorVectorField3D extends GPUParticlesAttractor3D {
+  override def godotClassName: String = "GPUParticlesAttractorVectorField3D"
 
   /** GPUParticlesAttractorVectorField3D.set_size */
   final def setSize(size: gdext.builtin.Vector3): Unit =
@@ -24,14 +25,4 @@ abstract class GPUParticlesAttractorVectorField3D extends GPUParticlesAttractor3
   final def getTexture(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("GPUParticlesAttractorVectorField3D", "get_texture", 373985333L), hostObject.objectPtr)
 
-}
-
-object GPUParticlesAttractorVectorField3D {
-  /** Class metadata for Gd[GPUParticlesAttractorVectorField3D] lifetime management and casting. */
-  given GodotClass[GPUParticlesAttractorVectorField3D] with {
-    def className = "GPUParticlesAttractorVectorField3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): GPUParticlesAttractorVectorField3D = new GPUParticlesAttractorVectorField3D {}.withHost(o.objectPtr)
-    def unwrap(t: GPUParticlesAttractorVectorField3D): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `DirAccess`, extends `RefCounted`. */
 abstract class DirAccess extends RefCounted {
+  override def godotClassName: String = "DirAccess"
 
   /** DirAccess.list_dir_begin */
   final def listDirBegin(): Long =
@@ -112,14 +113,4 @@ abstract class DirAccess extends RefCounted {
   final def isEquivalent(path_a: String, path_b: String): Boolean =
     Ptrcall.call2[String, String, Boolean](MethodBind.get("DirAccess", "is_equivalent", 820780508L), hostObject.objectPtr, path_a, path_b)
 
-}
-
-object DirAccess {
-  /** Class metadata for Gd[DirAccess] lifetime management and casting. */
-  given GodotClass[DirAccess] with {
-    def className = "DirAccess"
-    def isRefCounted = true
-    def wrap(o: GodotObject): DirAccess = new DirAccess {}.withHost(o.objectPtr)
-    def unwrap(t: DirAccess): GodotObject = t.hostObject
-  }
 }

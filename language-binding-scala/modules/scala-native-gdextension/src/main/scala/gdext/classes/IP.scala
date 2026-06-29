@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `IP`, extends `Object`. */
 abstract class IP extends Object {
+  override def godotClassName: String = "IP"
 
   /** IP.resolve_hostname */
   final def resolveHostname(host: String, ip_type: Long): String =
@@ -35,14 +36,6 @@ abstract class IP extends Object {
 }
 
 object IP {
-  /** Class metadata for Gd[IP] lifetime management and casting. */
-  given GodotClass[IP] with {
-    def className = "IP"
-    def isRefCounted = false
-    def wrap(o: GodotObject): IP = new IP {}.withHost(o.objectPtr)
-    def unwrap(t: IP): GodotObject = t.hostObject
-  }
-
   /** The process-global IP singleton instance. */
   def singleton: IP = new IP {}
     .withHost(Godot.interface.global_get_singleton(

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `InputEvent`, extends `Resource`. */
 abstract class InputEvent extends Resource {
+  override def godotClassName: String = "InputEvent"
 
   /** InputEvent.set_device */
   final def setDevice(device: Long): Unit =
@@ -68,14 +69,4 @@ abstract class InputEvent extends Resource {
   final def xformedBy(xform: gdext.builtin.Transform2D, local_ofs: gdext.builtin.Vector2): GodotObject =
     Ptrcall.call2[gdext.builtin.Transform2D, gdext.builtin.Vector2, GodotObject](MethodBind.get("InputEvent", "xformed_by", 1282766827L), hostObject.objectPtr, xform, local_ofs)
 
-}
-
-object InputEvent {
-  /** Class metadata for Gd[InputEvent] lifetime management and casting. */
-  given GodotClass[InputEvent] with {
-    def className = "InputEvent"
-    def isRefCounted = true
-    def wrap(o: GodotObject): InputEvent = new InputEvent {}.withHost(o.objectPtr)
-    def unwrap(t: InputEvent): GodotObject = t.hostObject
-  }
 }

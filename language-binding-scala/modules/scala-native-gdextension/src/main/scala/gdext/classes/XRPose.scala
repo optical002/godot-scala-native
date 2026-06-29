@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `XRPose`, extends `RefCounted`. */
 abstract class XRPose extends RefCounted {
+  override def godotClassName: String = "XRPose"
 
   /** XRPose.set_has_tracking_data */
   final def setHasTrackingData(has_tracking_data: Boolean): Unit =
@@ -60,14 +61,4 @@ abstract class XRPose extends RefCounted {
   final def getTrackingConfidence(): Long =
     Ptrcall.call0[Long](MethodBind.get("XRPose", "get_tracking_confidence", 2064923680L), hostObject.objectPtr)
 
-}
-
-object XRPose {
-  /** Class metadata for Gd[XRPose] lifetime management and casting. */
-  given GodotClass[XRPose] with {
-    def className = "XRPose"
-    def isRefCounted = true
-    def wrap(o: GodotObject): XRPose = new XRPose {}.withHost(o.objectPtr)
-    def unwrap(t: XRPose): GodotObject = t.hostObject
-  }
 }

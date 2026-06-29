@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ResourceSaver`, extends `Object`. */
 abstract class ResourceSaver extends Object {
+  override def godotClassName: String = "ResourceSaver"
 
   /** ResourceSaver.save */
   final def save(resource: Resource, path: String, flags: Long): Long =
@@ -31,14 +32,6 @@ abstract class ResourceSaver extends Object {
 }
 
 object ResourceSaver {
-  /** Class metadata for Gd[ResourceSaver] lifetime management and casting. */
-  given GodotClass[ResourceSaver] with {
-    def className = "ResourceSaver"
-    def isRefCounted = false
-    def wrap(o: GodotObject): ResourceSaver = new ResourceSaver {}.withHost(o.objectPtr)
-    def unwrap(t: ResourceSaver): GodotObject = t.hostObject
-  }
-
   /** The process-global ResourceSaver singleton instance. */
   def singleton: ResourceSaver = new ResourceSaver {}
     .withHost(Godot.interface.global_get_singleton(

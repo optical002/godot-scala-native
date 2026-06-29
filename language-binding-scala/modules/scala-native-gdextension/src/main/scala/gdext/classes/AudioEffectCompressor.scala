@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioEffectCompressor`, extends `AudioEffect`. */
 abstract class AudioEffectCompressor extends AudioEffect {
+  override def godotClassName: String = "AudioEffectCompressor"
 
   /** AudioEffectCompressor.set_threshold */
   final def setThreshold(threshold: Double): Unit =
@@ -64,14 +65,4 @@ abstract class AudioEffectCompressor extends AudioEffect {
   final def getSidechain(): gdext.builtin.StringName =
     Ptrcall.call0[gdext.builtin.StringName](MethodBind.get("AudioEffectCompressor", "get_sidechain", 2002593661L), hostObject.objectPtr)
 
-}
-
-object AudioEffectCompressor {
-  /** Class metadata for Gd[AudioEffectCompressor] lifetime management and casting. */
-  given GodotClass[AudioEffectCompressor] with {
-    def className = "AudioEffectCompressor"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioEffectCompressor = new AudioEffectCompressor {}.withHost(o.objectPtr)
-    def unwrap(t: AudioEffectCompressor): GodotObject = t.hostObject
-  }
 }

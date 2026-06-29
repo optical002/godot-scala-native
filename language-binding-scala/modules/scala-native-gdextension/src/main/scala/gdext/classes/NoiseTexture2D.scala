@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `NoiseTexture2D`, extends `Texture2D`. */
 abstract class NoiseTexture2D extends Texture2D {
+  override def godotClassName: String = "NoiseTexture2D"
 
   /** NoiseTexture2D.set_width */
   final def setWidth(width: Long): Unit =
@@ -96,14 +97,4 @@ abstract class NoiseTexture2D extends Texture2D {
   final def getBumpStrength(): Double =
     Ptrcall.call0[Double](MethodBind.get("NoiseTexture2D", "get_bump_strength", 191475506L), hostObject.objectPtr)
 
-}
-
-object NoiseTexture2D {
-  /** Class metadata for Gd[NoiseTexture2D] lifetime management and casting. */
-  given GodotClass[NoiseTexture2D] with {
-    def className = "NoiseTexture2D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): NoiseTexture2D = new NoiseTexture2D {}.withHost(o.objectPtr)
-    def unwrap(t: NoiseTexture2D): GodotObject = t.hostObject
-  }
 }

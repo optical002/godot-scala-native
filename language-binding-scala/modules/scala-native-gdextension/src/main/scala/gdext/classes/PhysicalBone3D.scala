@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PhysicalBone3D`, extends `PhysicsBody3D`. */
 abstract class PhysicalBone3D extends PhysicsBody3D {
+  override def godotClassName: String = "PhysicalBone3D"
 
   /** PhysicalBone3D.apply_central_impulse */
   final def applyCentralImpulse(impulse: gdext.builtin.Vector3): Unit =
@@ -156,14 +157,4 @@ abstract class PhysicalBone3D extends PhysicsBody3D {
   final def isAbleToSleep(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("PhysicalBone3D", "is_able_to_sleep", 36873697L), hostObject.objectPtr)
 
-}
-
-object PhysicalBone3D {
-  /** Class metadata for Gd[PhysicalBone3D] lifetime management and casting. */
-  given GodotClass[PhysicalBone3D] with {
-    def className = "PhysicalBone3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): PhysicalBone3D = new PhysicalBone3D {}.withHost(o.objectPtr)
-    def unwrap(t: PhysicalBone3D): GodotObject = t.hostObject
-  }
 }

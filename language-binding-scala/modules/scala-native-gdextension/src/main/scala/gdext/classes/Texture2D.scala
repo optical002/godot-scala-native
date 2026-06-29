@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Texture2D`, extends `Texture`. */
 abstract class Texture2D extends Texture {
+  override def godotClassName: String = "Texture2D"
 
   /** Texture2D.get_width */
   final def getWidth(): Long =
@@ -32,14 +33,4 @@ abstract class Texture2D extends Texture {
   final def createPlaceholder(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("Texture2D", "create_placeholder", 121922552L), hostObject.objectPtr)
 
-}
-
-object Texture2D {
-  /** Class metadata for Gd[Texture2D] lifetime management and casting. */
-  given GodotClass[Texture2D] with {
-    def className = "Texture2D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Texture2D = new Texture2D {}.withHost(o.objectPtr)
-    def unwrap(t: Texture2D): GodotObject = t.hostObject
-  }
 }

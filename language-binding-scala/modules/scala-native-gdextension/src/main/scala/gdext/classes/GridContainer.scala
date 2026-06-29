@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GridContainer`, extends `Container`. */
 abstract class GridContainer extends Container {
+  override def godotClassName: String = "GridContainer"
 
   /** GridContainer.set_columns */
   final def setColumns(columns: Long): Unit =
@@ -16,14 +17,4 @@ abstract class GridContainer extends Container {
   final def getColumns(): Long =
     Ptrcall.call0[Long](MethodBind.get("GridContainer", "get_columns", 3905245786L), hostObject.objectPtr)
 
-}
-
-object GridContainer {
-  /** Class metadata for Gd[GridContainer] lifetime management and casting. */
-  given GodotClass[GridContainer] with {
-    def className = "GridContainer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): GridContainer = new GridContainer {}.withHost(o.objectPtr)
-    def unwrap(t: GridContainer): GodotObject = t.hostObject
-  }
 }

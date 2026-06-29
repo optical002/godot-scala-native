@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ResourcePreloader`, extends `Node`. */
 abstract class ResourcePreloader extends Node {
+  override def godotClassName: String = "ResourcePreloader"
 
   /** ResourcePreloader.add_resource */
   final def addResource(name: gdext.builtin.StringName, resource: Resource): Unit =
@@ -28,14 +29,4 @@ abstract class ResourcePreloader extends Node {
   final def getResource(name: gdext.builtin.StringName): GodotObject =
     Ptrcall.call1[gdext.builtin.StringName, GodotObject](MethodBind.get("ResourcePreloader", "get_resource", 3742749261L), hostObject.objectPtr, name)
 
-}
-
-object ResourcePreloader {
-  /** Class metadata for Gd[ResourcePreloader] lifetime management and casting. */
-  given GodotClass[ResourcePreloader] with {
-    def className = "ResourcePreloader"
-    def isRefCounted = false
-    def wrap(o: GodotObject): ResourcePreloader = new ResourcePreloader {}.withHost(o.objectPtr)
-    def unwrap(t: ResourcePreloader): GodotObject = t.hostObject
-  }
 }

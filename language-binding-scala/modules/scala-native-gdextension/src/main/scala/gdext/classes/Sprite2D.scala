@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Sprite2D`, extends `Node2D`. */
 abstract class Sprite2D extends Node2D {
+  override def godotClassName: String = "Sprite2D"
 
   /** Sprite2D.set_texture */
   final def setTexture(texture: Texture2D): Unit =
@@ -112,14 +113,4 @@ abstract class Sprite2D extends Node2D {
   final def getRect(): gdext.builtin.Rect2 =
     Ptrcall.call0[gdext.builtin.Rect2](MethodBind.get("Sprite2D", "get_rect", 1639390495L), hostObject.objectPtr)
 
-}
-
-object Sprite2D {
-  /** Class metadata for Gd[Sprite2D] lifetime management and casting. */
-  given GodotClass[Sprite2D] with {
-    def className = "Sprite2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Sprite2D = new Sprite2D {}.withHost(o.objectPtr)
-    def unwrap(t: Sprite2D): GodotObject = t.hostObject
-  }
 }

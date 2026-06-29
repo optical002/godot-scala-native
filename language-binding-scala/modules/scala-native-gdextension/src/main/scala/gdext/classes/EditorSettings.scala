@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorSettings`, extends `Resource`. */
 abstract class EditorSettings extends Resource {
+  override def godotClassName: String = "EditorSettings"
 
   /** EditorSettings.has_setting */
   final def hasSetting(name: String): Boolean =
@@ -44,14 +45,4 @@ abstract class EditorSettings extends Resource {
   final def markSettingChanged(setting: String): Unit =
     Ptrcall.callVoid1(MethodBind.get("EditorSettings", "mark_setting_changed", 83702148L), hostObject.objectPtr, setting)
 
-}
-
-object EditorSettings {
-  /** Class metadata for Gd[EditorSettings] lifetime management and casting. */
-  given GodotClass[EditorSettings] with {
-    def className = "EditorSettings"
-    def isRefCounted = true
-    def wrap(o: GodotObject): EditorSettings = new EditorSettings {}.withHost(o.objectPtr)
-    def unwrap(t: EditorSettings): GodotObject = t.hostObject
-  }
 }

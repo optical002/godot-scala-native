@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Line2D`, extends `Node2D`. */
 abstract class Line2D extends Node2D {
+  override def godotClassName: String = "Line2D"
 
   /** Line2D.set_point_position */
   final def setPointPosition(index: Long, position: gdext.builtin.Vector2): Unit =
@@ -136,14 +137,4 @@ abstract class Line2D extends Node2D {
   final def getAntialiased(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("Line2D", "get_antialiased", 36873697L), hostObject.objectPtr)
 
-}
-
-object Line2D {
-  /** Class metadata for Gd[Line2D] lifetime management and casting. */
-  given GodotClass[Line2D] with {
-    def className = "Line2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Line2D = new Line2D {}.withHost(o.objectPtr)
-    def unwrap(t: Line2D): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Polygon2D`, extends `Node2D`. */
 abstract class Polygon2D extends Node2D {
+  override def godotClassName: String = "Polygon2D"
 
   /** Polygon2D.set_color */
   final def setColor(color: gdext.builtin.Color): Unit =
@@ -100,14 +101,4 @@ abstract class Polygon2D extends Node2D {
   final def getInternalVertexCount(): Long =
     Ptrcall.call0[Long](MethodBind.get("Polygon2D", "get_internal_vertex_count", 3905245786L), hostObject.objectPtr)
 
-}
-
-object Polygon2D {
-  /** Class metadata for Gd[Polygon2D] lifetime management and casting. */
-  given GodotClass[Polygon2D] with {
-    def className = "Polygon2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Polygon2D = new Polygon2D {}.withHost(o.objectPtr)
-    def unwrap(t: Polygon2D): GodotObject = t.hostObject
-  }
 }

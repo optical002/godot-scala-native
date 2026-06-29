@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TileMapLayer`, extends `Node2D`. */
 abstract class TileMapLayer extends Node2D {
+  override def godotClassName: String = "TileMapLayer"
 
   /** TileMapLayer.set_cell */
   final def setCell(coords: gdext.builtin.Vector2i, source_id: Long, atlas_coords: gdext.builtin.Vector2i, alternative_tile: Long): Unit =
@@ -180,14 +181,4 @@ abstract class TileMapLayer extends Node2D {
   final def getNavigationVisibilityMode(): Long =
     Ptrcall.call0[Long](MethodBind.get("TileMapLayer", "get_navigation_visibility_mode", 338220793L), hostObject.objectPtr)
 
-}
-
-object TileMapLayer {
-  /** Class metadata for Gd[TileMapLayer] lifetime management and casting. */
-  given GodotClass[TileMapLayer] with {
-    def className = "TileMapLayer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): TileMapLayer = new TileMapLayer {}.withHost(o.objectPtr)
-    def unwrap(t: TileMapLayer): GodotObject = t.hostObject
-  }
 }

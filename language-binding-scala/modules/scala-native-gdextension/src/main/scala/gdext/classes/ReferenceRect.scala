@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ReferenceRect`, extends `Control`. */
 abstract class ReferenceRect extends Control {
+  override def godotClassName: String = "ReferenceRect"
 
   /** ReferenceRect.get_border_color */
   final def getBorderColor(): gdext.builtin.Color =
@@ -32,14 +33,4 @@ abstract class ReferenceRect extends Control {
   final def setEditorOnly(enabled: Boolean): Unit =
     Ptrcall.callVoid1(MethodBind.get("ReferenceRect", "set_editor_only", 2586408642L), hostObject.objectPtr, enabled)
 
-}
-
-object ReferenceRect {
-  /** Class metadata for Gd[ReferenceRect] lifetime management and casting. */
-  given GodotClass[ReferenceRect] with {
-    def className = "ReferenceRect"
-    def isRefCounted = false
-    def wrap(o: GodotObject): ReferenceRect = new ReferenceRect {}.withHost(o.objectPtr)
-    def unwrap(t: ReferenceRect): GodotObject = t.hostObject
-  }
 }

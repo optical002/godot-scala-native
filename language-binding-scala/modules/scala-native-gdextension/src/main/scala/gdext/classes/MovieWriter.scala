@@ -7,15 +7,6 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `MovieWriter`, extends `Object`. */
 abstract class MovieWriter extends Object {
+  override def godotClassName: String = "MovieWriter"
 
-}
-
-object MovieWriter {
-  /** Class metadata for Gd[MovieWriter] lifetime management and casting. */
-  given GodotClass[MovieWriter] with {
-    def className = "MovieWriter"
-    def isRefCounted = false
-    def wrap(o: GodotObject): MovieWriter = new MovieWriter {}.withHost(o.objectPtr)
-    def unwrap(t: MovieWriter): GodotObject = t.hostObject
-  }
 }

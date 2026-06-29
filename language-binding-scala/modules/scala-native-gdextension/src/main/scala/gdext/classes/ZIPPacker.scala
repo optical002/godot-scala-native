@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ZIPPacker`, extends `RefCounted`. */
 abstract class ZIPPacker extends RefCounted {
+  override def godotClassName: String = "ZIPPacker"
 
   /** ZIPPacker.open */
   final def open(path: String, append: Long): Long =
@@ -32,14 +33,4 @@ abstract class ZIPPacker extends RefCounted {
   final def close(): Long =
     Ptrcall.call0[Long](MethodBind.get("ZIPPacker", "close", 166280745L), hostObject.objectPtr)
 
-}
-
-object ZIPPacker {
-  /** Class metadata for Gd[ZIPPacker] lifetime management and casting. */
-  given GodotClass[ZIPPacker] with {
-    def className = "ZIPPacker"
-    def isRefCounted = true
-    def wrap(o: GodotObject): ZIPPacker = new ZIPPacker {}.withHost(o.objectPtr)
-    def unwrap(t: ZIPPacker): GodotObject = t.hostObject
-  }
 }

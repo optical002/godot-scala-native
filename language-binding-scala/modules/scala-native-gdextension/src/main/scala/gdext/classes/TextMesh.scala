@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TextMesh`, extends `PrimitiveMesh`. */
 abstract class TextMesh extends PrimitiveMesh {
+  override def godotClassName: String = "TextMesh"
 
   /** TextMesh.set_horizontal_alignment */
   final def setHorizontalAlignment(alignment: Long): Unit =
@@ -144,14 +145,4 @@ abstract class TextMesh extends PrimitiveMesh {
   final def isUppercase(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("TextMesh", "is_uppercase", 36873697L), hostObject.objectPtr)
 
-}
-
-object TextMesh {
-  /** Class metadata for Gd[TextMesh] lifetime management and casting. */
-  given GodotClass[TextMesh] with {
-    def className = "TextMesh"
-    def isRefCounted = true
-    def wrap(o: GodotObject): TextMesh = new TextMesh {}.withHost(o.objectPtr)
-    def unwrap(t: TextMesh): GodotObject = t.hostObject
-  }
 }

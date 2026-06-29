@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioEffectDelay`, extends `AudioEffect`. */
 abstract class AudioEffectDelay extends AudioEffect {
+  override def godotClassName: String = "AudioEffectDelay"
 
   /** AudioEffectDelay.set_dry */
   final def setDry(amount: Double): Unit =
@@ -112,14 +113,4 @@ abstract class AudioEffectDelay extends AudioEffect {
   final def getFeedbackLowpass(): Double =
     Ptrcall.call0[Double](MethodBind.get("AudioEffectDelay", "get_feedback_lowpass", 1740695150L), hostObject.objectPtr)
 
-}
-
-object AudioEffectDelay {
-  /** Class metadata for Gd[AudioEffectDelay] lifetime management and casting. */
-  given GodotClass[AudioEffectDelay] with {
-    def className = "AudioEffectDelay"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioEffectDelay = new AudioEffectDelay {}.withHost(o.objectPtr)
-    def unwrap(t: AudioEffectDelay): GodotObject = t.hostObject
-  }
 }

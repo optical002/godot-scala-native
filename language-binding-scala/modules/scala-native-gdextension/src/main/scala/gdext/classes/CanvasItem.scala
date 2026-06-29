@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CanvasItem`, extends `Node`. */
 abstract class CanvasItem extends Node {
+  override def godotClassName: String = "CanvasItem"
 
   /** CanvasItem.set_visible */
   final def setVisible(visible: Boolean): Unit =
@@ -288,14 +289,4 @@ abstract class CanvasItem extends Node {
   final def getClipChildrenMode(): Long =
     Ptrcall.call0[Long](MethodBind.get("CanvasItem", "get_clip_children_mode", 3581808349L), hostObject.objectPtr)
 
-}
-
-object CanvasItem {
-  /** Class metadata for Gd[CanvasItem] lifetime management and casting. */
-  given GodotClass[CanvasItem] with {
-    def className = "CanvasItem"
-    def isRefCounted = false
-    def wrap(o: GodotObject): CanvasItem = new CanvasItem {}.withHost(o.objectPtr)
-    def unwrap(t: CanvasItem): GodotObject = t.hostObject
-  }
 }

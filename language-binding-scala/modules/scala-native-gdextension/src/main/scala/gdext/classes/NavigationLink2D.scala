@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `NavigationLink2D`, extends `Node2D`. */
 abstract class NavigationLink2D extends Node2D {
+  override def godotClassName: String = "NavigationLink2D"
 
   /** NavigationLink2D.set_enabled */
   final def setEnabled(enabled: Boolean): Unit =
@@ -88,14 +89,4 @@ abstract class NavigationLink2D extends Node2D {
   final def getTravelCost(): Double =
     Ptrcall.call0[Double](MethodBind.get("NavigationLink2D", "get_travel_cost", 1740695150L), hostObject.objectPtr)
 
-}
-
-object NavigationLink2D {
-  /** Class metadata for Gd[NavigationLink2D] lifetime management and casting. */
-  given GodotClass[NavigationLink2D] with {
-    def className = "NavigationLink2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): NavigationLink2D = new NavigationLink2D {}.withHost(o.objectPtr)
-    def unwrap(t: NavigationLink2D): GodotObject = t.hostObject
-  }
 }

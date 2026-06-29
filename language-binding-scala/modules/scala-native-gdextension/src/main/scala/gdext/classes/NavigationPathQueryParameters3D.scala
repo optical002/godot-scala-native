@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `NavigationPathQueryParameters3D`, extends `RefCounted`. */
 abstract class NavigationPathQueryParameters3D extends RefCounted {
+  override def godotClassName: String = "NavigationPathQueryParameters3D"
 
   /** NavigationPathQueryParameters3D.set_pathfinding_algorithm */
   final def setPathfindingAlgorithm(pathfinding_algorithm: Long): Unit =
@@ -104,14 +105,4 @@ abstract class NavigationPathQueryParameters3D extends RefCounted {
   final def getPathSearchMaxDistance(): Double =
     Ptrcall.call0[Double](MethodBind.get("NavigationPathQueryParameters3D", "get_path_search_max_distance", 1740695150L), hostObject.objectPtr)
 
-}
-
-object NavigationPathQueryParameters3D {
-  /** Class metadata for Gd[NavigationPathQueryParameters3D] lifetime management and casting. */
-  given GodotClass[NavigationPathQueryParameters3D] with {
-    def className = "NavigationPathQueryParameters3D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): NavigationPathQueryParameters3D = new NavigationPathQueryParameters3D {}.withHost(o.objectPtr)
-    def unwrap(t: NavigationPathQueryParameters3D): GodotObject = t.hostObject
-  }
 }

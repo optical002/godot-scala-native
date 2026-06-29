@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CopyTransformModifier3D`, extends `BoneConstraint3D`. */
 abstract class CopyTransformModifier3D extends BoneConstraint3D {
+  override def godotClassName: String = "CopyTransformModifier3D"
 
   /** CopyTransformModifier3D.set_copy_flags */
   final def setCopyFlags(index: Long, copy_flags: Long): Unit =
@@ -120,14 +121,4 @@ abstract class CopyTransformModifier3D extends BoneConstraint3D {
   final def isAdditive(index: Long): Boolean =
     Ptrcall.call1[Long, Boolean](MethodBind.get("CopyTransformModifier3D", "is_additive", 1116898809L), hostObject.objectPtr, index)
 
-}
-
-object CopyTransformModifier3D {
-  /** Class metadata for Gd[CopyTransformModifier3D] lifetime management and casting. */
-  given GodotClass[CopyTransformModifier3D] with {
-    def className = "CopyTransformModifier3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): CopyTransformModifier3D = new CopyTransformModifier3D {}.withHost(o.objectPtr)
-    def unwrap(t: CopyTransformModifier3D): GodotObject = t.hostObject
-  }
 }

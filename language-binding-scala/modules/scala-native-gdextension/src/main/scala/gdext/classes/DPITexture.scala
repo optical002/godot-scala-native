@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `DPITexture`, extends `Texture2D`. */
 abstract class DPITexture extends Texture2D {
+  override def godotClassName: String = "DPITexture"
 
   /** DPITexture.set_source */
   final def setSource(source: String): Unit =
@@ -36,14 +37,4 @@ abstract class DPITexture extends Texture2D {
   final def setSizeOverride(size: gdext.builtin.Vector2i): Unit =
     Ptrcall.callVoid1(MethodBind.get("DPITexture", "set_size_override", 1130785943L), hostObject.objectPtr, size)
 
-}
-
-object DPITexture {
-  /** Class metadata for Gd[DPITexture] lifetime management and casting. */
-  given GodotClass[DPITexture] with {
-    def className = "DPITexture"
-    def isRefCounted = true
-    def wrap(o: GodotObject): DPITexture = new DPITexture {}.withHost(o.objectPtr)
-    def unwrap(t: DPITexture): GodotObject = t.hostObject
-  }
 }

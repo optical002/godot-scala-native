@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Shape3D`, extends `Resource`. */
 abstract class Shape3D extends Resource {
+  override def godotClassName: String = "Shape3D"
 
   /** Shape3D.set_custom_solver_bias */
   final def setCustomSolverBias(bias: Double): Unit =
@@ -28,14 +29,4 @@ abstract class Shape3D extends Resource {
   final def getDebugMesh(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("Shape3D", "get_debug_mesh", 1605880883L), hostObject.objectPtr)
 
-}
-
-object Shape3D {
-  /** Class metadata for Gd[Shape3D] lifetime management and casting. */
-  given GodotClass[Shape3D] with {
-    def className = "Shape3D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Shape3D = new Shape3D {}.withHost(o.objectPtr)
-    def unwrap(t: Shape3D): GodotObject = t.hostObject
-  }
 }

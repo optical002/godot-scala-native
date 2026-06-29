@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VideoStreamPlayer`, extends `Control`. */
 abstract class VideoStreamPlayer extends Control {
+  override def godotClassName: String = "VideoStreamPlayer"
 
   /** VideoStreamPlayer.set_stream */
   final def setStream(stream: VideoStream): Unit =
@@ -128,14 +129,4 @@ abstract class VideoStreamPlayer extends Control {
   final def getVideoTexture(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("VideoStreamPlayer", "get_video_texture", 3635182373L), hostObject.objectPtr)
 
-}
-
-object VideoStreamPlayer {
-  /** Class metadata for Gd[VideoStreamPlayer] lifetime management and casting. */
-  given GodotClass[VideoStreamPlayer] with {
-    def className = "VideoStreamPlayer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): VideoStreamPlayer = new VideoStreamPlayer {}.withHost(o.objectPtr)
-    def unwrap(t: VideoStreamPlayer): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GraphFrame`, extends `GraphElement`. */
 abstract class GraphFrame extends GraphElement {
+  override def godotClassName: String = "GraphFrame"
 
   /** GraphFrame.set_title */
   final def setTitle(title: String): Unit =
@@ -60,14 +61,4 @@ abstract class GraphFrame extends GraphElement {
   final def getTintColor(): gdext.builtin.Color =
     Ptrcall.call0[gdext.builtin.Color](MethodBind.get("GraphFrame", "get_tint_color", 3444240500L), hostObject.objectPtr)
 
-}
-
-object GraphFrame {
-  /** Class metadata for Gd[GraphFrame] lifetime management and casting. */
-  given GodotClass[GraphFrame] with {
-    def className = "GraphFrame"
-    def isRefCounted = false
-    def wrap(o: GodotObject): GraphFrame = new GraphFrame {}.withHost(o.objectPtr)
-    def unwrap(t: GraphFrame): GodotObject = t.hostObject
-  }
 }

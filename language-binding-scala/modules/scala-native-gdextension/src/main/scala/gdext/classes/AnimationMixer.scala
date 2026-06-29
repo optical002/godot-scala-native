@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AnimationMixer`, extends `Node`. */
 abstract class AnimationMixer extends Node {
+  override def godotClassName: String = "AnimationMixer"
 
   /** AnimationMixer.add_animation_library */
   final def addAnimationLibrary(name: gdext.builtin.StringName, library: AnimationLibrary): Long =
@@ -144,14 +145,4 @@ abstract class AnimationMixer extends Node {
   final def findAnimationLibrary(animation: Animation): gdext.builtin.StringName =
     Ptrcall.call1[GodotObject, gdext.builtin.StringName](MethodBind.get("AnimationMixer", "find_animation_library", 1559484580L), hostObject.objectPtr, animation.hostObject)
 
-}
-
-object AnimationMixer {
-  /** Class metadata for Gd[AnimationMixer] lifetime management and casting. */
-  given GodotClass[AnimationMixer] with {
-    def className = "AnimationMixer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): AnimationMixer = new AnimationMixer {}.withHost(o.objectPtr)
-    def unwrap(t: AnimationMixer): GodotObject = t.hostObject
-  }
 }

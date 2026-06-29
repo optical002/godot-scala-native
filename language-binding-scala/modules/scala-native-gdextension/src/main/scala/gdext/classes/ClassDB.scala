@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ClassDB`, extends `Object`. */
 abstract class ClassDB extends Object {
+  override def godotClassName: String = "ClassDB"
 
   /** ClassDB.get_parent_class */
   final def getParentClass(`class`: gdext.builtin.StringName): gdext.builtin.StringName =
@@ -75,14 +76,6 @@ abstract class ClassDB extends Object {
 }
 
 object ClassDB {
-  /** Class metadata for Gd[ClassDB] lifetime management and casting. */
-  given GodotClass[ClassDB] with {
-    def className = "ClassDB"
-    def isRefCounted = false
-    def wrap(o: GodotObject): ClassDB = new ClassDB {}.withHost(o.objectPtr)
-    def unwrap(t: ClassDB): GodotObject = t.hostObject
-  }
-
   /** The process-global ClassDB singleton instance. */
   def singleton: ClassDB = new ClassDB {}
     .withHost(Godot.interface.global_get_singleton(

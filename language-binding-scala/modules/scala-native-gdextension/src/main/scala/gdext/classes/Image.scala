@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Image`, extends `Resource`. */
 abstract class Image extends Resource {
+  override def godotClassName: String = "Image"
 
   /** Image.get_width */
   final def getWidth(): Long =
@@ -228,14 +229,4 @@ abstract class Image extends Resource {
   final def loadSvgFromString(svg_str: String, scale: Double): Long =
     Ptrcall.call2[String, Double, Long](MethodBind.get("Image", "load_svg_from_string", 3254053600L), hostObject.objectPtr, svg_str, scale)
 
-}
-
-object Image {
-  /** Class metadata for Gd[Image] lifetime management and casting. */
-  given GodotClass[Image] with {
-    def className = "Image"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Image = new Image {}.withHost(o.objectPtr)
-    def unwrap(t: Image): GodotObject = t.hostObject
-  }
 }

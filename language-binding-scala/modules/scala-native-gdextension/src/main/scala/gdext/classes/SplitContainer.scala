@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SplitContainer`, extends `Container`. */
 abstract class SplitContainer extends Container {
+  override def godotClassName: String = "SplitContainer"
 
   /** SplitContainer.clamp_split_offset */
   final def clampSplitOffset(priority_index: Long): Unit =
@@ -96,14 +97,4 @@ abstract class SplitContainer extends Container {
   final def getSplitOffset(): Long =
     Ptrcall.call0[Long](MethodBind.get("SplitContainer", "get_split_offset", 3905245786L), hostObject.objectPtr)
 
-}
-
-object SplitContainer {
-  /** Class metadata for Gd[SplitContainer] lifetime management and casting. */
-  given GodotClass[SplitContainer] with {
-    def className = "SplitContainer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): SplitContainer = new SplitContainer {}.withHost(o.objectPtr)
-    def unwrap(t: SplitContainer): GodotObject = t.hostObject
-  }
 }

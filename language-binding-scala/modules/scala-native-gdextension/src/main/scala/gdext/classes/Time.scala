@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Time`, extends `Object`. */
 abstract class Time extends Object {
+  override def godotClassName: String = "Time"
 
   /** Time.get_datetime_string_from_unix_time */
   final def getDatetimeStringFromUnixTime(unix_time_val: Long, use_space: Boolean): String =
@@ -55,14 +56,6 @@ abstract class Time extends Object {
 }
 
 object Time {
-  /** Class metadata for Gd[Time] lifetime management and casting. */
-  given GodotClass[Time] with {
-    def className = "Time"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Time = new Time {}.withHost(o.objectPtr)
-    def unwrap(t: Time): GodotObject = t.hostObject
-  }
-
   /** The process-global Time singleton instance. */
   def singleton: Time = new Time {}
     .withHost(Godot.interface.global_get_singleton(

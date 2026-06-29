@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRSpatialMarkerTrackingCapability`, extends `OpenXRExtensionWrapper`. */
 abstract class OpenXRSpatialMarkerTrackingCapability extends OpenXRExtensionWrapper {
+  override def godotClassName: String = "OpenXRSpatialMarkerTrackingCapability"
 
   /** OpenXRSpatialMarkerTrackingCapability.is_qrcode_supported */
   final def isQrcodeSupported(): Boolean =
@@ -24,14 +25,4 @@ abstract class OpenXRSpatialMarkerTrackingCapability extends OpenXRExtensionWrap
   final def isAprilTagSupported(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("OpenXRSpatialMarkerTrackingCapability", "is_april_tag_supported", 2240911060L), hostObject.objectPtr)
 
-}
-
-object OpenXRSpatialMarkerTrackingCapability {
-  /** Class metadata for Gd[OpenXRSpatialMarkerTrackingCapability] lifetime management and casting. */
-  given GodotClass[OpenXRSpatialMarkerTrackingCapability] with {
-    def className = "OpenXRSpatialMarkerTrackingCapability"
-    def isRefCounted = false
-    def wrap(o: GodotObject): OpenXRSpatialMarkerTrackingCapability = new OpenXRSpatialMarkerTrackingCapability {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRSpatialMarkerTrackingCapability): GodotObject = t.hostObject
-  }
 }

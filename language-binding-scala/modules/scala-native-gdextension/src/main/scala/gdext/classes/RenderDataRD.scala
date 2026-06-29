@@ -7,15 +7,6 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RenderDataRD`, extends `RenderData`. */
 abstract class RenderDataRD extends RenderData {
+  override def godotClassName: String = "RenderDataRD"
 
-}
-
-object RenderDataRD {
-  /** Class metadata for Gd[RenderDataRD] lifetime management and casting. */
-  given GodotClass[RenderDataRD] with {
-    def className = "RenderDataRD"
-    def isRefCounted = false
-    def wrap(o: GodotObject): RenderDataRD = new RenderDataRD {}.withHost(o.objectPtr)
-    def unwrap(t: RenderDataRD): GodotObject = t.hostObject
-  }
 }

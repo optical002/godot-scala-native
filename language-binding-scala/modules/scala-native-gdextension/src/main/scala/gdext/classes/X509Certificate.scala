@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `X509Certificate`, extends `Resource`. */
 abstract class X509Certificate extends Resource {
+  override def godotClassName: String = "X509Certificate"
 
   /** X509Certificate.save */
   final def save(path: String): Long =
@@ -24,14 +25,4 @@ abstract class X509Certificate extends Resource {
   final def loadFromString(string: String): Long =
     Ptrcall.call1[String, Long](MethodBind.get("X509Certificate", "load_from_string", 166001499L), hostObject.objectPtr, string)
 
-}
-
-object X509Certificate {
-  /** Class metadata for Gd[X509Certificate] lifetime management and casting. */
-  given GodotClass[X509Certificate] with {
-    def className = "X509Certificate"
-    def isRefCounted = true
-    def wrap(o: GodotObject): X509Certificate = new X509Certificate {}.withHost(o.objectPtr)
-    def unwrap(t: X509Certificate): GodotObject = t.hostObject
-  }
 }

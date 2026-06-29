@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ConfigFile`, extends `RefCounted`. */
 abstract class ConfigFile extends RefCounted {
+  override def godotClassName: String = "ConfigFile"
 
   /** ConfigFile.has_section */
   final def hasSection(section: String): Boolean =
@@ -52,14 +53,4 @@ abstract class ConfigFile extends RefCounted {
   final def clear(): Unit =
     Ptrcall.callVoid0(MethodBind.get("ConfigFile", "clear", 3218959716L), hostObject.objectPtr)
 
-}
-
-object ConfigFile {
-  /** Class metadata for Gd[ConfigFile] lifetime management and casting. */
-  given GodotClass[ConfigFile] with {
-    def className = "ConfigFile"
-    def isRefCounted = true
-    def wrap(o: GodotObject): ConfigFile = new ConfigFile {}.withHost(o.objectPtr)
-    def unwrap(t: ConfigFile): GodotObject = t.hostObject
-  }
 }

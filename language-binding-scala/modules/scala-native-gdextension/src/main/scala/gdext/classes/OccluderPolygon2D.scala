@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OccluderPolygon2D`, extends `Resource`. */
 abstract class OccluderPolygon2D extends Resource {
+  override def godotClassName: String = "OccluderPolygon2D"
 
   /** OccluderPolygon2D.set_closed */
   final def setClosed(closed: Boolean): Unit =
@@ -24,14 +25,4 @@ abstract class OccluderPolygon2D extends Resource {
   final def getCullMode(): Long =
     Ptrcall.call0[Long](MethodBind.get("OccluderPolygon2D", "get_cull_mode", 33931036L), hostObject.objectPtr)
 
-}
-
-object OccluderPolygon2D {
-  /** Class metadata for Gd[OccluderPolygon2D] lifetime management and casting. */
-  given GodotClass[OccluderPolygon2D] with {
-    def className = "OccluderPolygon2D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): OccluderPolygon2D = new OccluderPolygon2D {}.withHost(o.objectPtr)
-    def unwrap(t: OccluderPolygon2D): GodotObject = t.hostObject
-  }
 }

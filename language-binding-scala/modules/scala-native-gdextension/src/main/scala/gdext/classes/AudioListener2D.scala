@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioListener2D`, extends `Node2D`. */
 abstract class AudioListener2D extends Node2D {
+  override def godotClassName: String = "AudioListener2D"
 
   /** AudioListener2D.make_current */
   final def makeCurrent(): Unit =
@@ -20,14 +21,4 @@ abstract class AudioListener2D extends Node2D {
   final def isCurrent(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("AudioListener2D", "is_current", 36873697L), hostObject.objectPtr)
 
-}
-
-object AudioListener2D {
-  /** Class metadata for Gd[AudioListener2D] lifetime management and casting. */
-  given GodotClass[AudioListener2D] with {
-    def className = "AudioListener2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): AudioListener2D = new AudioListener2D {}.withHost(o.objectPtr)
-    def unwrap(t: AudioListener2D): GodotObject = t.hostObject
-  }
 }

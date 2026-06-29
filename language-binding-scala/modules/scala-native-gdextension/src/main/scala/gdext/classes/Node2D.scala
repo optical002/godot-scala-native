@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Node2D`, extends `CanvasItem`. */
 abstract class Node2D extends CanvasItem {
+  override def godotClassName: String = "Node2D"
 
   /** Node2D.set_position */
   final def setPosition(position: gdext.builtin.Vector2): Unit =
@@ -140,14 +141,4 @@ abstract class Node2D extends CanvasItem {
   final def getRelativeTransformToParent(parent: Node): gdext.builtin.Transform2D =
     Ptrcall.call1[GodotObject, gdext.builtin.Transform2D](MethodBind.get("Node2D", "get_relative_transform_to_parent", 904556875L), hostObject.objectPtr, parent.hostObject)
 
-}
-
-object Node2D {
-  /** Class metadata for Gd[Node2D] lifetime management and casting. */
-  given GodotClass[Node2D] with {
-    def className = "Node2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Node2D = new Node2D {}.withHost(o.objectPtr)
-    def unwrap(t: Node2D): GodotObject = t.hostObject
-  }
 }

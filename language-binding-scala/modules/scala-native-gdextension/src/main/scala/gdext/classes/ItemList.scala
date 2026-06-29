@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ItemList`, extends `Control`. */
 abstract class ItemList extends Control {
+  override def godotClassName: String = "ItemList"
 
   /** ItemList.add_item */
   final def addItem(text: String, icon: Texture2D, selectable: Boolean): Long =
@@ -332,14 +333,4 @@ abstract class ItemList extends Control {
   final def forceUpdateListSize(): Unit =
     Ptrcall.callVoid0(MethodBind.get("ItemList", "force_update_list_size", 3218959716L), hostObject.objectPtr)
 
-}
-
-object ItemList {
-  /** Class metadata for Gd[ItemList] lifetime management and casting. */
-  given GodotClass[ItemList] with {
-    def className = "ItemList"
-    def isRefCounted = false
-    def wrap(o: GodotObject): ItemList = new ItemList {}.withHost(o.objectPtr)
-    def unwrap(t: ItemList): GodotObject = t.hostObject
-  }
 }

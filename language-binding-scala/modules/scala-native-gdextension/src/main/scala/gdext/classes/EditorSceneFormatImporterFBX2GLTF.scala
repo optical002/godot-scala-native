@@ -7,15 +7,6 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorSceneFormatImporterFBX2GLTF`, extends `EditorSceneFormatImporter`. */
 abstract class EditorSceneFormatImporterFBX2GLTF extends EditorSceneFormatImporter {
+  override def godotClassName: String = "EditorSceneFormatImporterFBX2GLTF"
 
-}
-
-object EditorSceneFormatImporterFBX2GLTF {
-  /** Class metadata for Gd[EditorSceneFormatImporterFBX2GLTF] lifetime management and casting. */
-  given GodotClass[EditorSceneFormatImporterFBX2GLTF] with {
-    def className = "EditorSceneFormatImporterFBX2GLTF"
-    def isRefCounted = true
-    def wrap(o: GodotObject): EditorSceneFormatImporterFBX2GLTF = new EditorSceneFormatImporterFBX2GLTF {}.withHost(o.objectPtr)
-    def unwrap(t: EditorSceneFormatImporterFBX2GLTF): GodotObject = t.hostObject
-  }
 }

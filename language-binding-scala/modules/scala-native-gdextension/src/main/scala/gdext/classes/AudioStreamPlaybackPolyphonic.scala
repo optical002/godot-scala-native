@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioStreamPlaybackPolyphonic`, extends `AudioStreamPlayback`. */
 abstract class AudioStreamPlaybackPolyphonic extends AudioStreamPlayback {
+  override def godotClassName: String = "AudioStreamPlaybackPolyphonic"
 
   /** AudioStreamPlaybackPolyphonic.play_stream */
   final def playStream(stream: AudioStream, from_offset: Double, volume_db: Double, pitch_scale: Double, playback_type: Long, bus: gdext.builtin.StringName): Long =
@@ -28,14 +29,4 @@ abstract class AudioStreamPlaybackPolyphonic extends AudioStreamPlayback {
   final def stopStream(stream: Long): Unit =
     Ptrcall.callVoid1(MethodBind.get("AudioStreamPlaybackPolyphonic", "stop_stream", 1286410249L), hostObject.objectPtr, stream)
 
-}
-
-object AudioStreamPlaybackPolyphonic {
-  /** Class metadata for Gd[AudioStreamPlaybackPolyphonic] lifetime management and casting. */
-  given GodotClass[AudioStreamPlaybackPolyphonic] with {
-    def className = "AudioStreamPlaybackPolyphonic"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioStreamPlaybackPolyphonic = new AudioStreamPlaybackPolyphonic {}.withHost(o.objectPtr)
-    def unwrap(t: AudioStreamPlaybackPolyphonic): GodotObject = t.hostObject
-  }
 }

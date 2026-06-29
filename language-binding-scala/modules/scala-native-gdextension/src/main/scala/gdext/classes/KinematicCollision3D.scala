@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `KinematicCollision3D`, extends `RefCounted`. */
 abstract class KinematicCollision3D extends RefCounted {
+  override def godotClassName: String = "KinematicCollision3D"
 
   /** KinematicCollision3D.get_travel */
   final def getTravel(): gdext.builtin.Vector3 =
@@ -60,14 +61,4 @@ abstract class KinematicCollision3D extends RefCounted {
   final def getColliderVelocity(collision_index: Long): gdext.builtin.Vector3 =
     Ptrcall.call1[Long, gdext.builtin.Vector3](MethodBind.get("KinematicCollision3D", "get_collider_velocity", 1914908202L), hostObject.objectPtr, collision_index)
 
-}
-
-object KinematicCollision3D {
-  /** Class metadata for Gd[KinematicCollision3D] lifetime management and casting. */
-  given GodotClass[KinematicCollision3D] with {
-    def className = "KinematicCollision3D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): KinematicCollision3D = new KinematicCollision3D {}.withHost(o.objectPtr)
-    def unwrap(t: KinematicCollision3D): GodotObject = t.hostObject
-  }
 }

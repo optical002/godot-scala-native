@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `InputEventMouseMotion`, extends `InputEventMouse`. */
 abstract class InputEventMouseMotion extends InputEventMouse {
+  override def godotClassName: String = "InputEventMouseMotion"
 
   /** InputEventMouseMotion.set_tilt */
   final def setTilt(tilt: gdext.builtin.Vector2): Unit =
@@ -64,14 +65,4 @@ abstract class InputEventMouseMotion extends InputEventMouse {
   final def getScreenVelocity(): gdext.builtin.Vector2 =
     Ptrcall.call0[gdext.builtin.Vector2](MethodBind.get("InputEventMouseMotion", "get_screen_velocity", 3341600327L), hostObject.objectPtr)
 
-}
-
-object InputEventMouseMotion {
-  /** Class metadata for Gd[InputEventMouseMotion] lifetime management and casting. */
-  given GodotClass[InputEventMouseMotion] with {
-    def className = "InputEventMouseMotion"
-    def isRefCounted = true
-    def wrap(o: GodotObject): InputEventMouseMotion = new InputEventMouseMotion {}.withHost(o.objectPtr)
-    def unwrap(t: InputEventMouseMotion): GodotObject = t.hostObject
-  }
 }

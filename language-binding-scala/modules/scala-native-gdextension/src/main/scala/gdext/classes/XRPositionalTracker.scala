@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `XRPositionalTracker`, extends `XRTracker`. */
 abstract class XRPositionalTracker extends XRTracker {
+  override def godotClassName: String = "XRPositionalTracker"
 
   /** XRPositionalTracker.get_tracker_profile */
   final def getTrackerProfile(): String =
@@ -40,14 +41,4 @@ abstract class XRPositionalTracker extends XRTracker {
   final def setPose(name: gdext.builtin.StringName, transform: gdext.builtin.Transform3D, linear_velocity: gdext.builtin.Vector3, angular_velocity: gdext.builtin.Vector3, tracking_confidence: Long): Unit =
     Ptrcall.callVoid5(MethodBind.get("XRPositionalTracker", "set_pose", 3451230163L), hostObject.objectPtr, name, transform, linear_velocity, angular_velocity, tracking_confidence)
 
-}
-
-object XRPositionalTracker {
-  /** Class metadata for Gd[XRPositionalTracker] lifetime management and casting. */
-  given GodotClass[XRPositionalTracker] with {
-    def className = "XRPositionalTracker"
-    def isRefCounted = true
-    def wrap(o: GodotObject): XRPositionalTracker = new XRPositionalTracker {}.withHost(o.objectPtr)
-    def unwrap(t: XRPositionalTracker): GodotObject = t.hostObject
-  }
 }

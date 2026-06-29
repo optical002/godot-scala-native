@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GLTFPhysicsShape`, extends `Resource`. */
 abstract class GLTFPhysicsShape extends Resource {
+  override def godotClassName: String = "GLTFPhysicsShape"
 
   /** GLTFPhysicsShape.to_node */
   final def toNode(cache_shapes: Boolean): GodotObject =
@@ -72,14 +73,4 @@ abstract class GLTFPhysicsShape extends Resource {
   final def setImporterMesh(importer_mesh: ImporterMesh): Unit =
     Ptrcall.callVoid1(MethodBind.get("GLTFPhysicsShape", "set_importer_mesh", 2255166972L), hostObject.objectPtr, importer_mesh.hostObject)
 
-}
-
-object GLTFPhysicsShape {
-  /** Class metadata for Gd[GLTFPhysicsShape] lifetime management and casting. */
-  given GodotClass[GLTFPhysicsShape] with {
-    def className = "GLTFPhysicsShape"
-    def isRefCounted = true
-    def wrap(o: GodotObject): GLTFPhysicsShape = new GLTFPhysicsShape {}.withHost(o.objectPtr)
-    def unwrap(t: GLTFPhysicsShape): GodotObject = t.hostObject
-  }
 }

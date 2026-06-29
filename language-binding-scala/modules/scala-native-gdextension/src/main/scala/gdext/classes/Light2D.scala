@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Light2D`, extends `Node2D`. */
 abstract class Light2D extends Node2D {
+  override def godotClassName: String = "Light2D"
 
   /** Light2D.set_enabled */
   final def setEnabled(enabled: Boolean): Unit =
@@ -136,14 +137,4 @@ abstract class Light2D extends Node2D {
   final def getHeight(): Double =
     Ptrcall.call0[Double](MethodBind.get("Light2D", "get_height", 1740695150L), hostObject.objectPtr)
 
-}
-
-object Light2D {
-  /** Class metadata for Gd[Light2D] lifetime management and casting. */
-  given GodotClass[Light2D] with {
-    def className = "Light2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Light2D = new Light2D {}.withHost(o.objectPtr)
-    def unwrap(t: Light2D): GodotObject = t.hostObject
-  }
 }

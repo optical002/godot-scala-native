@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorProperty`, extends `Container`. */
 abstract class EditorProperty extends Container {
+  override def godotClassName: String = "EditorProperty"
 
   /** EditorProperty.set_label */
   final def setLabel(text: String): Unit =
@@ -144,14 +145,4 @@ abstract class EditorProperty extends Container {
   final def setLabelReference(control: Control): Unit =
     Ptrcall.callVoid1(MethodBind.get("EditorProperty", "set_label_reference", 1496901182L), hostObject.objectPtr, control.hostObject)
 
-}
-
-object EditorProperty {
-  /** Class metadata for Gd[EditorProperty] lifetime management and casting. */
-  given GodotClass[EditorProperty] with {
-    def className = "EditorProperty"
-    def isRefCounted = false
-    def wrap(o: GodotObject): EditorProperty = new EditorProperty {}.withHost(o.objectPtr)
-    def unwrap(t: EditorProperty): GodotObject = t.hostObject
-  }
 }

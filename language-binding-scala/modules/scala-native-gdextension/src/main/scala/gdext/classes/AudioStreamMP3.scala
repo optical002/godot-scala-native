@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioStreamMP3`, extends `AudioStream`. */
 abstract class AudioStreamMP3 extends AudioStream {
+  override def godotClassName: String = "AudioStreamMP3"
 
   /** AudioStreamMP3.set_loop */
   final def setLoop(enable: Boolean): Unit =
@@ -48,14 +49,4 @@ abstract class AudioStreamMP3 extends AudioStream {
   final def getBarBeats(): Long =
     Ptrcall.call0[Long](MethodBind.get("AudioStreamMP3", "get_bar_beats", 3905245786L), hostObject.objectPtr)
 
-}
-
-object AudioStreamMP3 {
-  /** Class metadata for Gd[AudioStreamMP3] lifetime management and casting. */
-  given GodotClass[AudioStreamMP3] with {
-    def className = "AudioStreamMP3"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioStreamMP3 = new AudioStreamMP3 {}.withHost(o.objectPtr)
-    def unwrap(t: AudioStreamMP3): GodotObject = t.hostObject
-  }
 }

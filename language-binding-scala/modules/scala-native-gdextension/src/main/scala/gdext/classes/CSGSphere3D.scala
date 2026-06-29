@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CSGSphere3D`, extends `CSGPrimitive3D`. */
 abstract class CSGSphere3D extends CSGPrimitive3D {
+  override def godotClassName: String = "CSGSphere3D"
 
   /** CSGSphere3D.set_radius */
   final def setRadius(radius: Double): Unit =
@@ -48,14 +49,4 @@ abstract class CSGSphere3D extends CSGPrimitive3D {
   final def getMaterial(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("CSGSphere3D", "get_material", 5934680L), hostObject.objectPtr)
 
-}
-
-object CSGSphere3D {
-  /** Class metadata for Gd[CSGSphere3D] lifetime management and casting. */
-  given GodotClass[CSGSphere3D] with {
-    def className = "CSGSphere3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): CSGSphere3D = new CSGSphere3D {}.withHost(o.objectPtr)
-    def unwrap(t: CSGSphere3D): GodotObject = t.hostObject
-  }
 }

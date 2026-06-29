@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `MeshConvexDecompositionSettings`, extends `RefCounted`. */
 abstract class MeshConvexDecompositionSettings extends RefCounted {
+  override def godotClassName: String = "MeshConvexDecompositionSettings"
 
   /** MeshConvexDecompositionSettings.set_max_concavity */
   final def setMaxConcavity(max_concavity: Double): Unit =
@@ -112,14 +113,4 @@ abstract class MeshConvexDecompositionSettings extends RefCounted {
   final def getProjectHullVertices(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("MeshConvexDecompositionSettings", "get_project_hull_vertices", 36873697L), hostObject.objectPtr)
 
-}
-
-object MeshConvexDecompositionSettings {
-  /** Class metadata for Gd[MeshConvexDecompositionSettings] lifetime management and casting. */
-  given GodotClass[MeshConvexDecompositionSettings] with {
-    def className = "MeshConvexDecompositionSettings"
-    def isRefCounted = true
-    def wrap(o: GodotObject): MeshConvexDecompositionSettings = new MeshConvexDecompositionSettings {}.withHost(o.objectPtr)
-    def unwrap(t: MeshConvexDecompositionSettings): GodotObject = t.hostObject
-  }
 }

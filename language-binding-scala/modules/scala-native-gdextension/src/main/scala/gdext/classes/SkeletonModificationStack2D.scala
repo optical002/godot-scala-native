@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SkeletonModificationStack2D`, extends `Resource`. */
 abstract class SkeletonModificationStack2D extends Resource {
+  override def godotClassName: String = "SkeletonModificationStack2D"
 
   /** SkeletonModificationStack2D.setup */
   final def setup(): Unit =
@@ -68,14 +69,4 @@ abstract class SkeletonModificationStack2D extends Resource {
   final def getSkeleton(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("SkeletonModificationStack2D", "get_skeleton", 1697361217L), hostObject.objectPtr)
 
-}
-
-object SkeletonModificationStack2D {
-  /** Class metadata for Gd[SkeletonModificationStack2D] lifetime management and casting. */
-  given GodotClass[SkeletonModificationStack2D] with {
-    def className = "SkeletonModificationStack2D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): SkeletonModificationStack2D = new SkeletonModificationStack2D {}.withHost(o.objectPtr)
-    def unwrap(t: SkeletonModificationStack2D): GodotObject = t.hostObject
-  }
 }

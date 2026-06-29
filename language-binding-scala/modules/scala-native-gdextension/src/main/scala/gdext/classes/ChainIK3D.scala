@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ChainIK3D`, extends `IKModifier3D`. */
 abstract class ChainIK3D extends IKModifier3D {
+  override def godotClassName: String = "ChainIK3D"
 
   /** ChainIK3D.set_root_bone_name */
   final def setRootBoneName(index: Long, bone_name: String): Unit =
@@ -76,14 +77,4 @@ abstract class ChainIK3D extends IKModifier3D {
   final def getJointCount(index: Long): Long =
     Ptrcall.call1[Long, Long](MethodBind.get("ChainIK3D", "get_joint_count", 923996154L), hostObject.objectPtr, index)
 
-}
-
-object ChainIK3D {
-  /** Class metadata for Gd[ChainIK3D] lifetime management and casting. */
-  given GodotClass[ChainIK3D] with {
-    def className = "ChainIK3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): ChainIK3D = new ChainIK3D {}.withHost(o.objectPtr)
-    def unwrap(t: ChainIK3D): GodotObject = t.hostObject
-  }
 }

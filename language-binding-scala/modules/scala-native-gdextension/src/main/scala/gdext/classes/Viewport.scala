@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Viewport`, extends `Node`. */
 abstract class Viewport extends Node {
+  override def godotClassName: String = "Viewport"
 
   /** Viewport.set_world_2d */
   final def setWorld2d(world_2d: World2D): Unit =
@@ -516,14 +517,4 @@ abstract class Viewport extends Node {
   final def getVrsTexture(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("Viewport", "get_vrs_texture", 3635182373L), hostObject.objectPtr)
 
-}
-
-object Viewport {
-  /** Class metadata for Gd[Viewport] lifetime management and casting. */
-  given GodotClass[Viewport] with {
-    def className = "Viewport"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Viewport = new Viewport {}.withHost(o.objectPtr)
-    def unwrap(t: Viewport): GodotObject = t.hostObject
-  }
 }

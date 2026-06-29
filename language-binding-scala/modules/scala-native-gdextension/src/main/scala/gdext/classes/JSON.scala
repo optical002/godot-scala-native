@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `JSON`, extends `Resource`. */
 abstract class JSON extends Resource {
+  override def godotClassName: String = "JSON"
 
   /** JSON.parse */
   final def parse(json_text: String, keep_text: Boolean): Long =
@@ -24,14 +25,4 @@ abstract class JSON extends Resource {
   final def getErrorMessage(): String =
     Ptrcall.call0[String](MethodBind.get("JSON", "get_error_message", 201670096L), hostObject.objectPtr)
 
-}
-
-object JSON {
-  /** Class metadata for Gd[JSON] lifetime management and casting. */
-  given GodotClass[JSON] with {
-    def className = "JSON"
-    def isRefCounted = true
-    def wrap(o: GodotObject): JSON = new JSON {}.withHost(o.objectPtr)
-    def unwrap(t: JSON): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `XRTracker`, extends `RefCounted`. */
 abstract class XRTracker extends RefCounted {
+  override def godotClassName: String = "XRTracker"
 
   /** XRTracker.get_tracker_type */
   final def getTrackerType(): Long =
@@ -32,14 +33,4 @@ abstract class XRTracker extends RefCounted {
   final def setTrackerDesc(description: String): Unit =
     Ptrcall.callVoid1(MethodBind.get("XRTracker", "set_tracker_desc", 83702148L), hostObject.objectPtr, description)
 
-}
-
-object XRTracker {
-  /** Class metadata for Gd[XRTracker] lifetime management and casting. */
-  given GodotClass[XRTracker] with {
-    def className = "XRTracker"
-    def isRefCounted = true
-    def wrap(o: GodotObject): XRTracker = new XRTracker {}.withHost(o.objectPtr)
-    def unwrap(t: XRTracker): GodotObject = t.hostObject
-  }
 }

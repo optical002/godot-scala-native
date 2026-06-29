@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PointLight2D`, extends `Light2D`. */
 abstract class PointLight2D extends Light2D {
+  override def godotClassName: String = "PointLight2D"
 
   /** PointLight2D.set_texture */
   final def setTexture(texture: Texture2D): Unit =
@@ -32,14 +33,4 @@ abstract class PointLight2D extends Light2D {
   final def getTextureScale(): Double =
     Ptrcall.call0[Double](MethodBind.get("PointLight2D", "get_texture_scale", 1740695150L), hostObject.objectPtr)
 
-}
-
-object PointLight2D {
-  /** Class metadata for Gd[PointLight2D] lifetime management and casting. */
-  given GodotClass[PointLight2D] with {
-    def className = "PointLight2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): PointLight2D = new PointLight2D {}.withHost(o.objectPtr)
-    def unwrap(t: PointLight2D): GodotObject = t.hostObject
-  }
 }

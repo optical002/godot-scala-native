@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `XRInterface`, extends `RefCounted`. */
 abstract class XRInterface extends RefCounted {
+  override def godotClassName: String = "XRInterface"
 
   /** XRInterface.get_name */
   final def getName(): gdext.builtin.StringName =
@@ -108,14 +109,4 @@ abstract class XRInterface extends RefCounted {
   final def getEnvironmentBlendMode(): Long =
     Ptrcall.call0[Long](MethodBind.get("XRInterface", "get_environment_blend_mode", 1984334071L), hostObject.objectPtr)
 
-}
-
-object XRInterface {
-  /** Class metadata for Gd[XRInterface] lifetime management and casting. */
-  given GodotClass[XRInterface] with {
-    def className = "XRInterface"
-    def isRefCounted = true
-    def wrap(o: GodotObject): XRInterface = new XRInterface {}.withHost(o.objectPtr)
-    def unwrap(t: XRInterface): GodotObject = t.hostObject
-  }
 }

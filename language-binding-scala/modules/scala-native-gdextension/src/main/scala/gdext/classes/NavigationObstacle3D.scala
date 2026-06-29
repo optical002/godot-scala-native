@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `NavigationObstacle3D`, extends `Node3D`. */
 abstract class NavigationObstacle3D extends Node3D {
+  override def godotClassName: String = "NavigationObstacle3D"
 
   /** NavigationObstacle3D.set_avoidance_enabled */
   final def setAvoidanceEnabled(enabled: Boolean): Unit =
@@ -80,14 +81,4 @@ abstract class NavigationObstacle3D extends Node3D {
   final def getCarveNavigationMesh(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("NavigationObstacle3D", "get_carve_navigation_mesh", 36873697L), hostObject.objectPtr)
 
-}
-
-object NavigationObstacle3D {
-  /** Class metadata for Gd[NavigationObstacle3D] lifetime management and casting. */
-  given GodotClass[NavigationObstacle3D] with {
-    def className = "NavigationObstacle3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): NavigationObstacle3D = new NavigationObstacle3D {}.withHost(o.objectPtr)
-    def unwrap(t: NavigationObstacle3D): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorFileDialog`, extends `FileDialog`. */
 abstract class EditorFileDialog extends FileDialog {
+  override def godotClassName: String = "EditorFileDialog"
 
   /** EditorFileDialog.add_side_menu */
   final def addSideMenu(menu: Control, title: String): Unit =
@@ -20,14 +21,4 @@ abstract class EditorFileDialog extends FileDialog {
   final def isOverwriteWarningDisabled(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("EditorFileDialog", "is_overwrite_warning_disabled", 36873697L), hostObject.objectPtr)
 
-}
-
-object EditorFileDialog {
-  /** Class metadata for Gd[EditorFileDialog] lifetime management and casting. */
-  given GodotClass[EditorFileDialog] with {
-    def className = "EditorFileDialog"
-    def isRefCounted = false
-    def wrap(o: GodotObject): EditorFileDialog = new EditorFileDialog {}.withHost(o.objectPtr)
-    def unwrap(t: EditorFileDialog): GodotObject = t.hostObject
-  }
 }

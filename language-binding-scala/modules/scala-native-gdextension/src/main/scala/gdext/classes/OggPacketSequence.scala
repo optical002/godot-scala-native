@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OggPacketSequence`, extends `Resource`. */
 abstract class OggPacketSequence extends Resource {
+  override def godotClassName: String = "OggPacketSequence"
 
   /** OggPacketSequence.set_sampling_rate */
   final def setSamplingRate(sampling_rate: Double): Unit =
@@ -20,14 +21,4 @@ abstract class OggPacketSequence extends Resource {
   final def getLength(): Double =
     Ptrcall.call0[Double](MethodBind.get("OggPacketSequence", "get_length", 1740695150L), hostObject.objectPtr)
 
-}
-
-object OggPacketSequence {
-  /** Class metadata for Gd[OggPacketSequence] lifetime management and casting. */
-  given GodotClass[OggPacketSequence] with {
-    def className = "OggPacketSequence"
-    def isRefCounted = true
-    def wrap(o: GodotObject): OggPacketSequence = new OggPacketSequence {}.withHost(o.objectPtr)
-    def unwrap(t: OggPacketSequence): GodotObject = t.hostObject
-  }
 }

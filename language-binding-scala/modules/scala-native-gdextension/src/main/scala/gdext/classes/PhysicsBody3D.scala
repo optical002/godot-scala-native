@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PhysicsBody3D`, extends `CollisionObject3D`. */
 abstract class PhysicsBody3D extends CollisionObject3D {
+  override def godotClassName: String = "PhysicsBody3D"
 
   /** PhysicsBody3D.move_and_collide */
   final def moveAndCollide(motion: gdext.builtin.Vector3, test_only: Boolean, safe_margin: Double, recovery_as_collision: Boolean, max_collisions: Long): GodotObject =
@@ -36,14 +37,4 @@ abstract class PhysicsBody3D extends CollisionObject3D {
   final def removeCollisionExceptionWith(body: Node): Unit =
     Ptrcall.callVoid1(MethodBind.get("PhysicsBody3D", "remove_collision_exception_with", 1078189570L), hostObject.objectPtr, body.hostObject)
 
-}
-
-object PhysicsBody3D {
-  /** Class metadata for Gd[PhysicsBody3D] lifetime management and casting. */
-  given GodotClass[PhysicsBody3D] with {
-    def className = "PhysicsBody3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): PhysicsBody3D = new PhysicsBody3D {}.withHost(o.objectPtr)
-    def unwrap(t: PhysicsBody3D): GodotObject = t.hostObject
-  }
 }

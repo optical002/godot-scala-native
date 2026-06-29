@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeGroupBase`, extends `VisualShaderNodeResizableBase`. */
 abstract class VisualShaderNodeGroupBase extends VisualShaderNodeResizableBase {
+  override def godotClassName: String = "VisualShaderNodeGroupBase"
 
   /** VisualShaderNodeGroupBase.set_inputs */
   final def setInputs(inputs: String): Unit =
@@ -92,14 +93,4 @@ abstract class VisualShaderNodeGroupBase extends VisualShaderNodeResizableBase {
   final def getFreeOutputPortId(): Long =
     Ptrcall.call0[Long](MethodBind.get("VisualShaderNodeGroupBase", "get_free_output_port_id", 3905245786L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeGroupBase {
-  /** Class metadata for Gd[VisualShaderNodeGroupBase] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeGroupBase] with {
-    def className = "VisualShaderNodeGroupBase"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeGroupBase = new VisualShaderNodeGroupBase {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeGroupBase): GodotObject = t.hostObject
-  }
 }

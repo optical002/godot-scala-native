@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `BackBufferCopy`, extends `Node2D`. */
 abstract class BackBufferCopy extends Node2D {
+  override def godotClassName: String = "BackBufferCopy"
 
   /** BackBufferCopy.set_rect */
   final def setRect(rect: gdext.builtin.Rect2): Unit =
@@ -24,14 +25,4 @@ abstract class BackBufferCopy extends Node2D {
   final def getCopyMode(): Long =
     Ptrcall.call0[Long](MethodBind.get("BackBufferCopy", "get_copy_mode", 3271169440L), hostObject.objectPtr)
 
-}
-
-object BackBufferCopy {
-  /** Class metadata for Gd[BackBufferCopy] lifetime management and casting. */
-  given GodotClass[BackBufferCopy] with {
-    def className = "BackBufferCopy"
-    def isRefCounted = false
-    def wrap(o: GodotObject): BackBufferCopy = new BackBufferCopy {}.withHost(o.objectPtr)
-    def unwrap(t: BackBufferCopy): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeBooleanParameter`, extends `VisualShaderNodeParameter`. */
 abstract class VisualShaderNodeBooleanParameter extends VisualShaderNodeParameter {
+  override def godotClassName: String = "VisualShaderNodeBooleanParameter"
 
   /** VisualShaderNodeBooleanParameter.set_default_value_enabled */
   final def setDefaultValueEnabled(enabled: Boolean): Unit =
@@ -24,14 +25,4 @@ abstract class VisualShaderNodeBooleanParameter extends VisualShaderNodeParamete
   final def getDefaultValue(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("VisualShaderNodeBooleanParameter", "get_default_value", 36873697L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeBooleanParameter {
-  /** Class metadata for Gd[VisualShaderNodeBooleanParameter] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeBooleanParameter] with {
-    def className = "VisualShaderNodeBooleanParameter"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeBooleanParameter = new VisualShaderNodeBooleanParameter {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeBooleanParameter): GodotObject = t.hostObject
-  }
 }

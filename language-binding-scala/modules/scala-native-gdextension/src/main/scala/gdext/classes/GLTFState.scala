@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GLTFState`, extends `Resource`. */
 abstract class GLTFState extends Resource {
+  override def godotClassName: String = "GLTFState"
 
   /** GLTFState.add_used_extension */
   final def addUsedExtension(extension_name: String, required: Boolean): Unit =
@@ -128,14 +129,4 @@ abstract class GLTFState extends Resource {
   final def setHandleBinaryImage(method: Long): Unit =
     Ptrcall.callVoid1(MethodBind.get("GLTFState", "set_handle_binary_image", 1286410249L), hostObject.objectPtr, method)
 
-}
-
-object GLTFState {
-  /** Class metadata for Gd[GLTFState] lifetime management and casting. */
-  given GodotClass[GLTFState] with {
-    def className = "GLTFState"
-    def isRefCounted = true
-    def wrap(o: GodotObject): GLTFState = new GLTFState {}.withHost(o.objectPtr)
-    def unwrap(t: GLTFState): GodotObject = t.hostObject
-  }
 }

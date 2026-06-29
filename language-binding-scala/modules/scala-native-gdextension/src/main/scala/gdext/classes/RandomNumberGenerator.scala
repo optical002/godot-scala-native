@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RandomNumberGenerator`, extends `RefCounted`. */
 abstract class RandomNumberGenerator extends RefCounted {
+  override def godotClassName: String = "RandomNumberGenerator"
 
   /** RandomNumberGenerator.set_seed */
   final def setSeed(seed: Long): Unit =
@@ -48,14 +49,4 @@ abstract class RandomNumberGenerator extends RefCounted {
   final def randomize(): Unit =
     Ptrcall.callVoid0(MethodBind.get("RandomNumberGenerator", "randomize", 3218959716L), hostObject.objectPtr)
 
-}
-
-object RandomNumberGenerator {
-  /** Class metadata for Gd[RandomNumberGenerator] lifetime management and casting. */
-  given GodotClass[RandomNumberGenerator] with {
-    def className = "RandomNumberGenerator"
-    def isRefCounted = true
-    def wrap(o: GodotObject): RandomNumberGenerator = new RandomNumberGenerator {}.withHost(o.objectPtr)
-    def unwrap(t: RandomNumberGenerator): GodotObject = t.hostObject
-  }
 }

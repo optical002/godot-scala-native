@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SkeletonModification2DTwoBoneIK`, extends `SkeletonModification2D`. */
 abstract class SkeletonModification2DTwoBoneIK extends SkeletonModification2D {
+  override def godotClassName: String = "SkeletonModification2DTwoBoneIK"
 
   /** SkeletonModification2DTwoBoneIK.set_target_minimum_distance */
   final def setTargetMinimumDistance(minimum_distance: Double): Unit =
@@ -48,14 +49,4 @@ abstract class SkeletonModification2DTwoBoneIK extends SkeletonModification2D {
   final def getJointTwoBoneIdx(): Long =
     Ptrcall.call0[Long](MethodBind.get("SkeletonModification2DTwoBoneIK", "get_joint_two_bone_idx", 3905245786L), hostObject.objectPtr)
 
-}
-
-object SkeletonModification2DTwoBoneIK {
-  /** Class metadata for Gd[SkeletonModification2DTwoBoneIK] lifetime management and casting. */
-  given GodotClass[SkeletonModification2DTwoBoneIK] with {
-    def className = "SkeletonModification2DTwoBoneIK"
-    def isRefCounted = true
-    def wrap(o: GodotObject): SkeletonModification2DTwoBoneIK = new SkeletonModification2DTwoBoneIK {}.withHost(o.objectPtr)
-    def unwrap(t: SkeletonModification2DTwoBoneIK): GodotObject = t.hostObject
-  }
 }

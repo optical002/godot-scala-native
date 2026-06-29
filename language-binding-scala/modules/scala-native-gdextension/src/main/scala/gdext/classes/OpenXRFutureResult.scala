@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRFutureResult`, extends `RefCounted`. */
 abstract class OpenXRFutureResult extends RefCounted {
+  override def godotClassName: String = "OpenXRFutureResult"
 
   /** OpenXRFutureResult.get_status */
   final def getStatus(): Long =
@@ -20,14 +21,4 @@ abstract class OpenXRFutureResult extends RefCounted {
   final def cancelFuture(): Unit =
     Ptrcall.callVoid0(MethodBind.get("OpenXRFutureResult", "cancel_future", 3218959716L), hostObject.objectPtr)
 
-}
-
-object OpenXRFutureResult {
-  /** Class metadata for Gd[OpenXRFutureResult] lifetime management and casting. */
-  given GodotClass[OpenXRFutureResult] with {
-    def className = "OpenXRFutureResult"
-    def isRefCounted = true
-    def wrap(o: GodotObject): OpenXRFutureResult = new OpenXRFutureResult {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRFutureResult): GodotObject = t.hostObject
-  }
 }

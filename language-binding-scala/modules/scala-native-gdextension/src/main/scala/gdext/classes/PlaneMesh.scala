@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PlaneMesh`, extends `PrimitiveMesh`. */
 abstract class PlaneMesh extends PrimitiveMesh {
+  override def godotClassName: String = "PlaneMesh"
 
   /** PlaneMesh.set_size */
   final def setSize(size: gdext.builtin.Vector2): Unit =
@@ -48,14 +49,4 @@ abstract class PlaneMesh extends PrimitiveMesh {
   final def getOrientation(): Long =
     Ptrcall.call0[Long](MethodBind.get("PlaneMesh", "get_orientation", 3227599250L), hostObject.objectPtr)
 
-}
-
-object PlaneMesh {
-  /** Class metadata for Gd[PlaneMesh] lifetime management and casting. */
-  given GodotClass[PlaneMesh] with {
-    def className = "PlaneMesh"
-    def isRefCounted = true
-    def wrap(o: GodotObject): PlaneMesh = new PlaneMesh {}.withHost(o.objectPtr)
-    def unwrap(t: PlaneMesh): GodotObject = t.hostObject
-  }
 }

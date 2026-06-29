@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRHapticVibration`, extends `OpenXRHapticBase`. */
 abstract class OpenXRHapticVibration extends OpenXRHapticBase {
+  override def godotClassName: String = "OpenXRHapticVibration"
 
   /** OpenXRHapticVibration.set_duration */
   final def setDuration(duration: Long): Unit =
@@ -32,14 +33,4 @@ abstract class OpenXRHapticVibration extends OpenXRHapticBase {
   final def getAmplitude(): Double =
     Ptrcall.call0[Double](MethodBind.get("OpenXRHapticVibration", "get_amplitude", 1740695150L), hostObject.objectPtr)
 
-}
-
-object OpenXRHapticVibration {
-  /** Class metadata for Gd[OpenXRHapticVibration] lifetime management and casting. */
-  given GodotClass[OpenXRHapticVibration] with {
-    def className = "OpenXRHapticVibration"
-    def isRefCounted = true
-    def wrap(o: GodotObject): OpenXRHapticVibration = new OpenXRHapticVibration {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRHapticVibration): GodotObject = t.hostObject
-  }
 }

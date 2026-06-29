@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `JavaScriptBridge`, extends `Object`. */
 abstract class JavaScriptBridge extends Object {
+  override def godotClassName: String = "JavaScriptBridge"
 
   /** JavaScriptBridge.get_interface */
   final def getInterface(interface: String): GodotObject =
@@ -31,14 +32,6 @@ abstract class JavaScriptBridge extends Object {
 }
 
 object JavaScriptBridge {
-  /** Class metadata for Gd[JavaScriptBridge] lifetime management and casting. */
-  given GodotClass[JavaScriptBridge] with {
-    def className = "JavaScriptBridge"
-    def isRefCounted = false
-    def wrap(o: GodotObject): JavaScriptBridge = new JavaScriptBridge {}.withHost(o.objectPtr)
-    def unwrap(t: JavaScriptBridge): GodotObject = t.hostObject
-  }
-
   /** The process-global JavaScriptBridge singleton instance. */
   def singleton: JavaScriptBridge = new JavaScriptBridge {}
     .withHost(Godot.interface.global_get_singleton(

@@ -56,7 +56,7 @@ final class signal extends StaticAnnotation
  * callback — see [[CompEnumRegistry]] / [[CompEnum]].
  *
  * {{{
- * @gdexport var skeleton: Gd[Skeleton3D] = Gd.nullOf[Skeleton3D]
+ * @gdexport var skeleton: Skeleton3D = null
  * @exportBoneName("skeleton") @gdexport var boneName: String = ""
  * }}}
  *

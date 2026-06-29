@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRInterface`, extends `XRInterface`. */
 abstract class OpenXRInterface extends XRInterface {
+  override def godotClassName: String = "OpenXRInterface"
 
   /** OpenXRInterface.get_session_state */
   final def getSessionState(): Long =
@@ -128,14 +129,4 @@ abstract class OpenXRInterface extends XRInterface {
   final def setGpuLevel(level: Long): Unit =
     Ptrcall.callVoid1(MethodBind.get("OpenXRInterface", "set_gpu_level", 2940842095L), hostObject.objectPtr, level)
 
-}
-
-object OpenXRInterface {
-  /** Class metadata for Gd[OpenXRInterface] lifetime management and casting. */
-  given GodotClass[OpenXRInterface] with {
-    def className = "OpenXRInterface"
-    def isRefCounted = true
-    def wrap(o: GodotObject): OpenXRInterface = new OpenXRInterface {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRInterface): GodotObject = t.hostObject
-  }
 }

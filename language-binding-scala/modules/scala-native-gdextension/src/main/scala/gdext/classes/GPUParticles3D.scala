@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GPUParticles3D`, extends `GeometryInstance3D`. */
 abstract class GPUParticles3D extends GeometryInstance3D {
+  override def godotClassName: String = "GPUParticles3D"
 
   /** GPUParticles3D.set_emitting */
   final def setEmitting(emitting: Boolean): Unit =
@@ -236,14 +237,4 @@ abstract class GPUParticles3D extends GeometryInstance3D {
   final def requestParticlesProcess(process_time: Double): Unit =
     Ptrcall.callVoid1(MethodBind.get("GPUParticles3D", "request_particles_process", 373806689L), hostObject.objectPtr, process_time)
 
-}
-
-object GPUParticles3D {
-  /** Class metadata for Gd[GPUParticles3D] lifetime management and casting. */
-  given GodotClass[GPUParticles3D] with {
-    def className = "GPUParticles3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): GPUParticles3D = new GPUParticles3D {}.withHost(o.objectPtr)
-    def unwrap(t: GPUParticles3D): GodotObject = t.hostObject
-  }
 }

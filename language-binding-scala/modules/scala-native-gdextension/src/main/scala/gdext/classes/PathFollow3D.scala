@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PathFollow3D`, extends `Node3D`. */
 abstract class PathFollow3D extends Node3D {
+  override def godotClassName: String = "PathFollow3D"
 
   /** PathFollow3D.set_progress */
   final def setProgress(progress: Double): Unit =
@@ -80,14 +81,4 @@ abstract class PathFollow3D extends Node3D {
   final def isTiltEnabled(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("PathFollow3D", "is_tilt_enabled", 36873697L), hostObject.objectPtr)
 
-}
-
-object PathFollow3D {
-  /** Class metadata for Gd[PathFollow3D] lifetime management and casting. */
-  given GodotClass[PathFollow3D] with {
-    def className = "PathFollow3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): PathFollow3D = new PathFollow3D {}.withHost(o.objectPtr)
-    def unwrap(t: PathFollow3D): GodotObject = t.hostObject
-  }
 }

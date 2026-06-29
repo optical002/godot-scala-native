@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Skeleton3D`, extends `Node3D`. */
 abstract class Skeleton3D extends Node3D {
+  override def godotClassName: String = "Skeleton3D"
 
   /** Skeleton3D.add_bone */
   final def addBone(name: String): Long =
@@ -200,14 +201,4 @@ abstract class Skeleton3D extends Node3D {
   final def physicalBonesStopSimulation(): Unit =
     Ptrcall.callVoid0(MethodBind.get("Skeleton3D", "physical_bones_stop_simulation", 3218959716L), hostObject.objectPtr)
 
-}
-
-object Skeleton3D {
-  /** Class metadata for Gd[Skeleton3D] lifetime management and casting. */
-  given GodotClass[Skeleton3D] with {
-    def className = "Skeleton3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Skeleton3D = new Skeleton3D {}.withHost(o.objectPtr)
-    def unwrap(t: Skeleton3D): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PacketPeer`, extends `RefCounted`. */
 abstract class PacketPeer extends RefCounted {
+  override def godotClassName: String = "PacketPeer"
 
   /** PacketPeer.get_packet_error */
   final def getPacketError(): Long =
@@ -24,14 +25,4 @@ abstract class PacketPeer extends RefCounted {
   final def setEncodeBufferMaxSize(max_size: Long): Unit =
     Ptrcall.callVoid1(MethodBind.get("PacketPeer", "set_encode_buffer_max_size", 1286410249L), hostObject.objectPtr, max_size)
 
-}
-
-object PacketPeer {
-  /** Class metadata for Gd[PacketPeer] lifetime management and casting. */
-  given GodotClass[PacketPeer] with {
-    def className = "PacketPeer"
-    def isRefCounted = true
-    def wrap(o: GodotObject): PacketPeer = new PacketPeer {}.withHost(o.objectPtr)
-    def unwrap(t: PacketPeer): GodotObject = t.hostObject
-  }
 }

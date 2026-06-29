@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRMarkerTracker`, extends `OpenXRSpatialEntityTracker`. */
 abstract class OpenXRMarkerTracker extends OpenXRSpatialEntityTracker {
+  override def godotClassName: String = "OpenXRMarkerTracker"
 
   /** OpenXRMarkerTracker.set_bounds_size */
   final def setBoundsSize(bounds_size: gdext.builtin.Vector2): Unit =
@@ -32,14 +33,4 @@ abstract class OpenXRMarkerTracker extends OpenXRSpatialEntityTracker {
   final def getMarkerId(): Long =
     Ptrcall.call0[Long](MethodBind.get("OpenXRMarkerTracker", "get_marker_id", 3905245786L), hostObject.objectPtr)
 
-}
-
-object OpenXRMarkerTracker {
-  /** Class metadata for Gd[OpenXRMarkerTracker] lifetime management and casting. */
-  given GodotClass[OpenXRMarkerTracker] with {
-    def className = "OpenXRMarkerTracker"
-    def isRefCounted = true
-    def wrap(o: GodotObject): OpenXRMarkerTracker = new OpenXRMarkerTracker {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRMarkerTracker): GodotObject = t.hostObject
-  }
 }

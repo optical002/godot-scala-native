@@ -7,15 +7,6 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GLTFDocumentExtensionConvertImporterMesh`, extends `GLTFDocumentExtension`. */
 abstract class GLTFDocumentExtensionConvertImporterMesh extends GLTFDocumentExtension {
+  override def godotClassName: String = "GLTFDocumentExtensionConvertImporterMesh"
 
-}
-
-object GLTFDocumentExtensionConvertImporterMesh {
-  /** Class metadata for Gd[GLTFDocumentExtensionConvertImporterMesh] lifetime management and casting. */
-  given GodotClass[GLTFDocumentExtensionConvertImporterMesh] with {
-    def className = "GLTFDocumentExtensionConvertImporterMesh"
-    def isRefCounted = true
-    def wrap(o: GodotObject): GLTFDocumentExtensionConvertImporterMesh = new GLTFDocumentExtensionConvertImporterMesh {}.withHost(o.objectPtr)
-    def unwrap(t: GLTFDocumentExtensionConvertImporterMesh): GodotObject = t.hostObject
-  }
 }

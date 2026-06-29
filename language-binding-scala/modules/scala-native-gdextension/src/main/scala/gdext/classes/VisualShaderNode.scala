@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNode`, extends `Resource`. */
 abstract class VisualShaderNode extends Resource {
+  override def godotClassName: String = "VisualShaderNode"
 
   /** VisualShaderNode.get_default_input_port */
   final def getDefaultInputPort(`type`: Long): Long =
@@ -36,14 +37,4 @@ abstract class VisualShaderNode extends Resource {
   final def getFrame(): Long =
     Ptrcall.call0[Long](MethodBind.get("VisualShaderNode", "get_frame", 3905245786L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNode {
-  /** Class metadata for Gd[VisualShaderNode] lifetime management and casting. */
-  given GodotClass[VisualShaderNode] with {
-    def className = "VisualShaderNode"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNode = new VisualShaderNode {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNode): GodotObject = t.hostObject
-  }
 }

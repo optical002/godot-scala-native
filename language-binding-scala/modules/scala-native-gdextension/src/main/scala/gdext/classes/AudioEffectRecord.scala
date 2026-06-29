@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioEffectRecord`, extends `AudioEffect`. */
 abstract class AudioEffectRecord extends AudioEffect {
+  override def godotClassName: String = "AudioEffectRecord"
 
   /** AudioEffectRecord.set_recording_active */
   final def setRecordingActive(record: Boolean): Unit =
@@ -28,14 +29,4 @@ abstract class AudioEffectRecord extends AudioEffect {
   final def getRecording(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("AudioEffectRecord", "get_recording", 2964110865L), hostObject.objectPtr)
 
-}
-
-object AudioEffectRecord {
-  /** Class metadata for Gd[AudioEffectRecord] lifetime management and casting. */
-  given GodotClass[AudioEffectRecord] with {
-    def className = "AudioEffectRecord"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioEffectRecord = new AudioEffectRecord {}.withHost(o.objectPtr)
-    def unwrap(t: AudioEffectRecord): GodotObject = t.hostObject
-  }
 }

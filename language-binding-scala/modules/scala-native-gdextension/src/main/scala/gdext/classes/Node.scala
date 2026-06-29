@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Node`, extends `Object`. */
 abstract class Node extends Object {
+  override def godotClassName: String = "Node"
 
   /** Node.add_sibling */
   final def addSibling(sibling: Node, force_readable_name: Boolean): Unit =
@@ -404,14 +405,4 @@ abstract class Node extends Object {
   final def notifyThreadSafe(what: Long): Unit =
     Ptrcall.callVoid1(MethodBind.get("Node", "notify_thread_safe", 1286410249L), hostObject.objectPtr, what)
 
-}
-
-object Node {
-  /** Class metadata for Gd[Node] lifetime management and casting. */
-  given GodotClass[Node] with {
-    def className = "Node"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Node = new Node {}.withHost(o.objectPtr)
-    def unwrap(t: Node): GodotObject = t.hostObject
-  }
 }

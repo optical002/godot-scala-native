@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ArrayMesh`, extends `Mesh`. */
 abstract class ArrayMesh extends Mesh {
+  override def godotClassName: String = "ArrayMesh"
 
   /** ArrayMesh.add_blend_shape */
   final def addBlendShape(name: gdext.builtin.StringName): Unit =
@@ -96,14 +97,4 @@ abstract class ArrayMesh extends Mesh {
   final def getShadowMesh(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("ArrayMesh", "get_shadow_mesh", 3206942465L), hostObject.objectPtr)
 
-}
-
-object ArrayMesh {
-  /** Class metadata for Gd[ArrayMesh] lifetime management and casting. */
-  given GodotClass[ArrayMesh] with {
-    def className = "ArrayMesh"
-    def isRefCounted = true
-    def wrap(o: GodotObject): ArrayMesh = new ArrayMesh {}.withHost(o.objectPtr)
-    def unwrap(t: ArrayMesh): GodotObject = t.hostObject
-  }
 }

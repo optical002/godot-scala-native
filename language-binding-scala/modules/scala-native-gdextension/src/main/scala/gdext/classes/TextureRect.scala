@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TextureRect`, extends `Control`. */
 abstract class TextureRect extends Control {
+  override def godotClassName: String = "TextureRect"
 
   /** TextureRect.set_texture */
   final def setTexture(texture: Texture2D): Unit =
@@ -48,14 +49,4 @@ abstract class TextureRect extends Control {
   final def getStretchMode(): Long =
     Ptrcall.call0[Long](MethodBind.get("TextureRect", "get_stretch_mode", 346396079L), hostObject.objectPtr)
 
-}
-
-object TextureRect {
-  /** Class metadata for Gd[TextureRect] lifetime management and casting. */
-  given GodotClass[TextureRect] with {
-    def className = "TextureRect"
-    def isRefCounted = false
-    def wrap(o: GodotObject): TextureRect = new TextureRect {}.withHost(o.objectPtr)
-    def unwrap(t: TextureRect): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RDPipelineColorBlendState`, extends `RefCounted`. */
 abstract class RDPipelineColorBlendState extends RefCounted {
+  override def godotClassName: String = "RDPipelineColorBlendState"
 
   /** RDPipelineColorBlendState.set_enable_logic_op */
   final def setEnableLogicOp(p_member: Boolean): Unit =
@@ -32,14 +33,4 @@ abstract class RDPipelineColorBlendState extends RefCounted {
   final def getBlendConstant(): gdext.builtin.Color =
     Ptrcall.call0[gdext.builtin.Color](MethodBind.get("RDPipelineColorBlendState", "get_blend_constant", 3444240500L), hostObject.objectPtr)
 
-}
-
-object RDPipelineColorBlendState {
-  /** Class metadata for Gd[RDPipelineColorBlendState] lifetime management and casting. */
-  given GodotClass[RDPipelineColorBlendState] with {
-    def className = "RDPipelineColorBlendState"
-    def isRefCounted = true
-    def wrap(o: GodotObject): RDPipelineColorBlendState = new RDPipelineColorBlendState {}.withHost(o.objectPtr)
-    def unwrap(t: RDPipelineColorBlendState): GodotObject = t.hostObject
-  }
 }

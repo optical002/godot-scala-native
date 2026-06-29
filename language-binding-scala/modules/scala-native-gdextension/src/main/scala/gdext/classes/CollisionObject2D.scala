@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CollisionObject2D`, extends `Node2D`. */
 abstract class CollisionObject2D extends Node2D {
+  override def godotClassName: String = "CollisionObject2D"
 
   /** CollisionObject2D.set_collision_layer */
   final def setCollisionLayer(layer: Long): Unit =
@@ -136,14 +137,4 @@ abstract class CollisionObject2D extends Node2D {
   final def shapeFindOwner(shape_index: Long): Long =
     Ptrcall.call1[Long, Long](MethodBind.get("CollisionObject2D", "shape_find_owner", 923996154L), hostObject.objectPtr, shape_index)
 
-}
-
-object CollisionObject2D {
-  /** Class metadata for Gd[CollisionObject2D] lifetime management and casting. */
-  given GodotClass[CollisionObject2D] with {
-    def className = "CollisionObject2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): CollisionObject2D = new CollisionObject2D {}.withHost(o.objectPtr)
-    def unwrap(t: CollisionObject2D): GodotObject = t.hostObject
-  }
 }

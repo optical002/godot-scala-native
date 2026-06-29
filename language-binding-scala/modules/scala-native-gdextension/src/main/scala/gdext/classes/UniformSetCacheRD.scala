@@ -7,15 +7,6 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `UniformSetCacheRD`, extends `Object`. */
 abstract class UniformSetCacheRD extends Object {
+  override def godotClassName: String = "UniformSetCacheRD"
 
-}
-
-object UniformSetCacheRD {
-  /** Class metadata for Gd[UniformSetCacheRD] lifetime management and casting. */
-  given GodotClass[UniformSetCacheRD] with {
-    def className = "UniformSetCacheRD"
-    def isRefCounted = false
-    def wrap(o: GodotObject): UniformSetCacheRD = new UniformSetCacheRD {}.withHost(o.objectPtr)
-    def unwrap(t: UniformSetCacheRD): GodotObject = t.hostObject
-  }
 }

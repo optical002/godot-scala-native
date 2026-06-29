@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `WorldEnvironment`, extends `Node`. */
 abstract class WorldEnvironment extends Node {
+  override def godotClassName: String = "WorldEnvironment"
 
   /** WorldEnvironment.set_environment */
   final def setEnvironment(env: Environment): Unit =
@@ -32,14 +33,4 @@ abstract class WorldEnvironment extends Node {
   final def getCompositor(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("WorldEnvironment", "get_compositor", 3647707413L), hostObject.objectPtr)
 
-}
-
-object WorldEnvironment {
-  /** Class metadata for Gd[WorldEnvironment] lifetime management and casting. */
-  given GodotClass[WorldEnvironment] with {
-    def className = "WorldEnvironment"
-    def isRefCounted = false
-    def wrap(o: GodotObject): WorldEnvironment = new WorldEnvironment {}.withHost(o.objectPtr)
-    def unwrap(t: WorldEnvironment): GodotObject = t.hostObject
-  }
 }

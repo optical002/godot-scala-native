@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Control`, extends `CanvasItem`. */
 abstract class Control extends CanvasItem {
+  override def godotClassName: String = "Control"
 
   /** Control.accept_event */
   final def acceptEvent(): Unit =
@@ -564,14 +565,4 @@ abstract class Control extends CanvasItem {
   final def isLocalizingNumeralSystem(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("Control", "is_localizing_numeral_system", 36873697L), hostObject.objectPtr)
 
-}
-
-object Control {
-  /** Class metadata for Gd[Control] lifetime management and casting. */
-  given GodotClass[Control] with {
-    def className = "Control"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Control = new Control {}.withHost(o.objectPtr)
-    def unwrap(t: Control): GodotObject = t.hostObject
-  }
 }

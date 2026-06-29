@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Generic6DOFJoint3D`, extends `Joint3D`. */
 abstract class Generic6DOFJoint3D extends Joint3D {
+  override def godotClassName: String = "Generic6DOFJoint3D"
 
   /** Generic6DOFJoint3D.set_param_x */
   final def setParamX(param: Long, value: Double): Unit =
@@ -56,14 +57,4 @@ abstract class Generic6DOFJoint3D extends Joint3D {
   final def getFlagZ(flag: Long): Boolean =
     Ptrcall.call1[Long, Boolean](MethodBind.get("Generic6DOFJoint3D", "get_flag_z", 2122427807L), hostObject.objectPtr, flag)
 
-}
-
-object Generic6DOFJoint3D {
-  /** Class metadata for Gd[Generic6DOFJoint3D] lifetime management and casting. */
-  given GodotClass[Generic6DOFJoint3D] with {
-    def className = "Generic6DOFJoint3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Generic6DOFJoint3D = new Generic6DOFJoint3D {}.withHost(o.objectPtr)
-    def unwrap(t: Generic6DOFJoint3D): GodotObject = t.hostObject
-  }
 }

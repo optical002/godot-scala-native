@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Font`, extends `Resource`. */
 abstract class Font extends Resource {
+  override def godotClassName: String = "Font"
 
   /** Font.get_height */
   final def getHeight(font_size: Long): Double =
@@ -80,14 +81,4 @@ abstract class Font extends Resource {
   final def getFaceCount(): Long =
     Ptrcall.call0[Long](MethodBind.get("Font", "get_face_count", 3905245786L), hostObject.objectPtr)
 
-}
-
-object Font {
-  /** Class metadata for Gd[Font] lifetime management and casting. */
-  given GodotClass[Font] with {
-    def className = "Font"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Font = new Font {}.withHost(o.objectPtr)
-    def unwrap(t: Font): GodotObject = t.hostObject
-  }
 }

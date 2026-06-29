@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Thread`, extends `RefCounted`. */
 abstract class Thread extends RefCounted {
+  override def godotClassName: String = "Thread"
 
   /** Thread.get_id */
   final def getId(): String =
@@ -20,14 +21,4 @@ abstract class Thread extends RefCounted {
   final def isAlive(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("Thread", "is_alive", 36873697L), hostObject.objectPtr)
 
-}
-
-object Thread {
-  /** Class metadata for Gd[Thread] lifetime management and casting. */
-  given GodotClass[Thread] with {
-    def className = "Thread"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Thread = new Thread {}.withHost(o.objectPtr)
-    def unwrap(t: Thread): GodotObject = t.hostObject
-  }
 }

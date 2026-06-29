@@ -5,7 +5,7 @@ import scala.scalanative.unsigned.*
 
 import gdext.Godot
 import gdext.builtin.{Arr, BuiltinSizes, StringName, Variant}
-import gdext.internal.engine.{Gd, MethodBind, Ptrcall}
+import gdext.internal.engine.{MethodBind, Ptrcall}
 import gdext.internal.ffi.types.*
 
 /** Hand-written engine-method wrappers for methods the interface generator
@@ -58,9 +58,9 @@ extension (self: Object)
 
 extension (self: Area3D)
   /** `Area3D.get_overlapping_bodies()` — returns the `PhysicsBody3D`s currently
-    * overlapping this area (as `Arr[Gd[Node3D]]`). The generator skips it (typed
+    * overlapping this area (as `Arr[Node3D]`). The generator skips it (typed
     * Array return). */
-  def getOverlappingBodies(): Arr[Gd[Node3D]] = {
+  def getOverlappingBodies(): Arr[Node3D] = {
     val bind = MethodBind.get("Area3D", "get_overlapping_bodies", 3995934104L)
     // Array return: an 8-byte Array handle written into the buffer.
     val retBuf = stackalloc[Byte](BuiltinSizes.Array.toUInt)
@@ -70,5 +70,5 @@ extension (self: Area3D)
       null,
       retBuf
     )
-    Arr.fromHandle[Gd[Node3D]](retBuf.asInstanceOf[GDExtensionTypePtr])
+    Arr.fromHandle[Node3D](retBuf.asInstanceOf[GDExtensionTypePtr])
   }

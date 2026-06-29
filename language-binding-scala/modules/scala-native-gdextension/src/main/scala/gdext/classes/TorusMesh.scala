@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TorusMesh`, extends `PrimitiveMesh`. */
 abstract class TorusMesh extends PrimitiveMesh {
+  override def godotClassName: String = "TorusMesh"
 
   /** TorusMesh.set_inner_radius */
   final def setInnerRadius(radius: Double): Unit =
@@ -40,14 +41,4 @@ abstract class TorusMesh extends PrimitiveMesh {
   final def getRingSegments(): Long =
     Ptrcall.call0[Long](MethodBind.get("TorusMesh", "get_ring_segments", 3905245786L), hostObject.objectPtr)
 
-}
-
-object TorusMesh {
-  /** Class metadata for Gd[TorusMesh] lifetime management and casting. */
-  given GodotClass[TorusMesh] with {
-    def className = "TorusMesh"
-    def isRefCounted = true
-    def wrap(o: GodotObject): TorusMesh = new TorusMesh {}.withHost(o.objectPtr)
-    def unwrap(t: TorusMesh): GodotObject = t.hostObject
-  }
 }

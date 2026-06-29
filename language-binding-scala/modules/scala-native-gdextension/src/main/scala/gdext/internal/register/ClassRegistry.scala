@@ -28,10 +28,10 @@ object ClassRegistry {
 
   // Secondary index: Godot object instance id -> the canonical Scala instance
   // bound to it, plus instance token -> object id so free can evict both. This
-  // lets `GodotClass.wrap` return the SAME Scala object Godot drives the virtuals
-  // on (the one stored via `object_set_instance`) instead of a fresh wrapper with
-  // its own field state. Without it, fetching a user node through `Gd[T]` (e.g. an
-  // exported-node field) yields a second Scala object whose state diverges from
+  // lets `ClassMeta.fromHandle` return the SAME Scala object Godot drives the
+  // virtuals on (the one stored via `object_set_instance`) instead of a fresh
+  // wrapper with its own field state. Without it, fetching a user node through an
+  // exported-node field yields a second Scala object whose state diverges from
   // the processed one.
   private val instancesByObjectId = new ConcurrentHashMap[Long, GodotScriptClass]()
   private val objectIdByToken = new ConcurrentHashMap[Long, java.lang.Long]()

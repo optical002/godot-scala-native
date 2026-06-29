@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `FileDialog`, extends `ConfirmationDialog`. */
 abstract class FileDialog extends ConfirmationDialog {
+  override def godotClassName: String = "FileDialog"
 
   /** FileDialog.clear_filters */
   final def clearFilters(): Unit =
@@ -160,14 +161,4 @@ abstract class FileDialog extends ConfirmationDialog {
   final def invalidate(): Unit =
     Ptrcall.callVoid0(MethodBind.get("FileDialog", "invalidate", 3218959716L), hostObject.objectPtr)
 
-}
-
-object FileDialog {
-  /** Class metadata for Gd[FileDialog] lifetime management and casting. */
-  given GodotClass[FileDialog] with {
-    def className = "FileDialog"
-    def isRefCounted = false
-    def wrap(o: GodotObject): FileDialog = new FileDialog {}.withHost(o.objectPtr)
-    def unwrap(t: FileDialog): GodotObject = t.hostObject
-  }
 }

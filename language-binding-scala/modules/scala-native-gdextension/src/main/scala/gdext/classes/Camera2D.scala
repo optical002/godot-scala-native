@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Camera2D`, extends `Node2D`. */
 abstract class Camera2D extends Node2D {
+  override def godotClassName: String = "Camera2D"
 
   /** Camera2D.set_offset */
   final def setOffset(offset: gdext.builtin.Vector2): Unit =
@@ -216,14 +217,4 @@ abstract class Camera2D extends Node2D {
   final def isMarginDrawingEnabled(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("Camera2D", "is_margin_drawing_enabled", 36873697L), hostObject.objectPtr)
 
-}
-
-object Camera2D {
-  /** Class metadata for Gd[Camera2D] lifetime management and casting. */
-  given GodotClass[Camera2D] with {
-    def className = "Camera2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Camera2D = new Camera2D {}.withHost(o.objectPtr)
-    def unwrap(t: Camera2D): GodotObject = t.hostObject
-  }
 }

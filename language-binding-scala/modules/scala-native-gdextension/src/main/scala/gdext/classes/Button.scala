@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Button`, extends `BaseButton`. */
 abstract class Button extends BaseButton {
+  override def godotClassName: String = "Button"
 
   /** Button.set_text */
   final def setText(text: String): Unit =
@@ -112,14 +113,4 @@ abstract class Button extends BaseButton {
   final def isExpandIcon(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("Button", "is_expand_icon", 36873697L), hostObject.objectPtr)
 
-}
-
-object Button {
-  /** Class metadata for Gd[Button] lifetime management and casting. */
-  given GodotClass[Button] with {
-    def className = "Button"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Button = new Button {}.withHost(o.objectPtr)
-    def unwrap(t: Button): GodotObject = t.hostObject
-  }
 }

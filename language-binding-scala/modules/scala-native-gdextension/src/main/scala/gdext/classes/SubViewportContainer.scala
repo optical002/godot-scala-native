@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SubViewportContainer`, extends `Container`. */
 abstract class SubViewportContainer extends Container {
+  override def godotClassName: String = "SubViewportContainer"
 
   /** SubViewportContainer.set_stretch */
   final def setStretch(enable: Boolean): Unit =
@@ -32,14 +33,4 @@ abstract class SubViewportContainer extends Container {
   final def isMouseTargetEnabled(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("SubViewportContainer", "is_mouse_target_enabled", 2240911060L), hostObject.objectPtr)
 
-}
-
-object SubViewportContainer {
-  /** Class metadata for Gd[SubViewportContainer] lifetime management and casting. */
-  given GodotClass[SubViewportContainer] with {
-    def className = "SubViewportContainer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): SubViewportContainer = new SubViewportContainer {}.withHost(o.objectPtr)
-    def unwrap(t: SubViewportContainer): GodotObject = t.hostObject
-  }
 }

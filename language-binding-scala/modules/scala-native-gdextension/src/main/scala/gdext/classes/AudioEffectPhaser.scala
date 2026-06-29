@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioEffectPhaser`, extends `AudioEffect`. */
 abstract class AudioEffectPhaser extends AudioEffect {
+  override def godotClassName: String = "AudioEffectPhaser"
 
   /** AudioEffectPhaser.set_range_min_hz */
   final def setRangeMinHz(hz: Double): Unit =
@@ -48,14 +49,4 @@ abstract class AudioEffectPhaser extends AudioEffect {
   final def getDepth(): Double =
     Ptrcall.call0[Double](MethodBind.get("AudioEffectPhaser", "get_depth", 1740695150L), hostObject.objectPtr)
 
-}
-
-object AudioEffectPhaser {
-  /** Class metadata for Gd[AudioEffectPhaser] lifetime management and casting. */
-  given GodotClass[AudioEffectPhaser] with {
-    def className = "AudioEffectPhaser"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioEffectPhaser = new AudioEffectPhaser {}.withHost(o.objectPtr)
-    def unwrap(t: AudioEffectPhaser): GodotObject = t.hostObject
-  }
 }

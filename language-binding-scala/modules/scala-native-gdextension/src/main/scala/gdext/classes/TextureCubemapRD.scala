@@ -7,15 +7,6 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TextureCubemapRD`, extends `TextureLayeredRD`. */
 abstract class TextureCubemapRD extends TextureLayeredRD {
+  override def godotClassName: String = "TextureCubemapRD"
 
-}
-
-object TextureCubemapRD {
-  /** Class metadata for Gd[TextureCubemapRD] lifetime management and casting. */
-  given GodotClass[TextureCubemapRD] with {
-    def className = "TextureCubemapRD"
-    def isRefCounted = true
-    def wrap(o: GodotObject): TextureCubemapRD = new TextureCubemapRD {}.withHost(o.objectPtr)
-    def unwrap(t: TextureCubemapRD): GodotObject = t.hostObject
-  }
 }

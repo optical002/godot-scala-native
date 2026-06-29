@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Sprite3D`, extends `SpriteBase3D`. */
 abstract class Sprite3D extends SpriteBase3D {
+  override def godotClassName: String = "Sprite3D"
 
   /** Sprite3D.set_texture */
   final def setTexture(texture: Texture2D): Unit =
@@ -64,14 +65,4 @@ abstract class Sprite3D extends SpriteBase3D {
   final def getHframes(): Long =
     Ptrcall.call0[Long](MethodBind.get("Sprite3D", "get_hframes", 3905245786L), hostObject.objectPtr)
 
-}
-
-object Sprite3D {
-  /** Class metadata for Gd[Sprite3D] lifetime management and casting. */
-  given GodotClass[Sprite3D] with {
-    def className = "Sprite3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Sprite3D = new Sprite3D {}.withHost(o.objectPtr)
-    def unwrap(t: Sprite3D): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `WebSocketPeer`, extends `PacketPeer`. */
 abstract class WebSocketPeer extends PacketPeer {
+  override def godotClassName: String = "WebSocketPeer"
 
   /** WebSocketPeer.connect_to_url */
   final def connectToUrl(url: String, tls_client_options: TLSOptions): Long =
@@ -100,14 +101,4 @@ abstract class WebSocketPeer extends PacketPeer {
   final def getHeartbeatInterval(): Double =
     Ptrcall.call0[Double](MethodBind.get("WebSocketPeer", "get_heartbeat_interval", 1740695150L), hostObject.objectPtr)
 
-}
-
-object WebSocketPeer {
-  /** Class metadata for Gd[WebSocketPeer] lifetime management and casting. */
-  given GodotClass[WebSocketPeer] with {
-    def className = "WebSocketPeer"
-    def isRefCounted = true
-    def wrap(o: GodotObject): WebSocketPeer = new WebSocketPeer {}.withHost(o.objectPtr)
-    def unwrap(t: WebSocketPeer): GodotObject = t.hostObject
-  }
 }

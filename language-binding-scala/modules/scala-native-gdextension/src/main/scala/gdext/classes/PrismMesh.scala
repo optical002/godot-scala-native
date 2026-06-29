@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PrismMesh`, extends `PrimitiveMesh`. */
 abstract class PrismMesh extends PrimitiveMesh {
+  override def godotClassName: String = "PrismMesh"
 
   /** PrismMesh.set_left_to_right */
   final def setLeftToRight(left_to_right: Double): Unit =
@@ -48,14 +49,4 @@ abstract class PrismMesh extends PrimitiveMesh {
   final def getSubdivideDepth(): Long =
     Ptrcall.call0[Long](MethodBind.get("PrismMesh", "get_subdivide_depth", 3905245786L), hostObject.objectPtr)
 
-}
-
-object PrismMesh {
-  /** Class metadata for Gd[PrismMesh] lifetime management and casting. */
-  given GodotClass[PrismMesh] with {
-    def className = "PrismMesh"
-    def isRefCounted = true
-    def wrap(o: GodotObject): PrismMesh = new PrismMesh {}.withHost(o.objectPtr)
-    def unwrap(t: PrismMesh): GodotObject = t.hostObject
-  }
 }

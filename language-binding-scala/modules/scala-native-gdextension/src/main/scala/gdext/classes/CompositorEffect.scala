@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CompositorEffect`, extends `Resource`. */
 abstract class CompositorEffect extends Resource {
+  override def godotClassName: String = "CompositorEffect"
 
   /** CompositorEffect.set_enabled */
   final def setEnabled(enabled: Boolean): Unit =
@@ -64,14 +65,4 @@ abstract class CompositorEffect extends Resource {
   final def getNeedsSeparateSpecular(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("CompositorEffect", "get_needs_separate_specular", 36873697L), hostObject.objectPtr)
 
-}
-
-object CompositorEffect {
-  /** Class metadata for Gd[CompositorEffect] lifetime management and casting. */
-  given GodotClass[CompositorEffect] with {
-    def className = "CompositorEffect"
-    def isRefCounted = true
-    def wrap(o: GodotObject): CompositorEffect = new CompositorEffect {}.withHost(o.objectPtr)
-    def unwrap(t: CompositorEffect): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `NavigationLink3D`, extends `Node3D`. */
 abstract class NavigationLink3D extends Node3D {
+  override def godotClassName: String = "NavigationLink3D"
 
   /** NavigationLink3D.set_enabled */
   final def setEnabled(enabled: Boolean): Unit =
@@ -88,14 +89,4 @@ abstract class NavigationLink3D extends Node3D {
   final def getTravelCost(): Double =
     Ptrcall.call0[Double](MethodBind.get("NavigationLink3D", "get_travel_cost", 1740695150L), hostObject.objectPtr)
 
-}
-
-object NavigationLink3D {
-  /** Class metadata for Gd[NavigationLink3D] lifetime management and casting. */
-  given GodotClass[NavigationLink3D] with {
-    def className = "NavigationLink3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): NavigationLink3D = new NavigationLink3D {}.withHost(o.objectPtr)
-    def unwrap(t: NavigationLink3D): GodotObject = t.hostObject
-  }
 }

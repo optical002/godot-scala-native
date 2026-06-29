@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRSpatialCapabilityConfigurationPlaneTracking`, extends `OpenXRSpatialCapabilityConfigurationBaseHeader`. */
 abstract class OpenXRSpatialCapabilityConfigurationPlaneTracking extends OpenXRSpatialCapabilityConfigurationBaseHeader {
+  override def godotClassName: String = "OpenXRSpatialCapabilityConfigurationPlaneTracking"
 
   /** OpenXRSpatialCapabilityConfigurationPlaneTracking.supports_mesh_2d */
   final def supportsMesh2d(): Boolean =
@@ -20,14 +21,4 @@ abstract class OpenXRSpatialCapabilityConfigurationPlaneTracking extends OpenXRS
   final def supportsLabels(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("OpenXRSpatialCapabilityConfigurationPlaneTracking", "supports_labels", 2240911060L), hostObject.objectPtr)
 
-}
-
-object OpenXRSpatialCapabilityConfigurationPlaneTracking {
-  /** Class metadata for Gd[OpenXRSpatialCapabilityConfigurationPlaneTracking] lifetime management and casting. */
-  given GodotClass[OpenXRSpatialCapabilityConfigurationPlaneTracking] with {
-    def className = "OpenXRSpatialCapabilityConfigurationPlaneTracking"
-    def isRefCounted = true
-    def wrap(o: GodotObject): OpenXRSpatialCapabilityConfigurationPlaneTracking = new OpenXRSpatialCapabilityConfigurationPlaneTracking {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRSpatialCapabilityConfigurationPlaneTracking): GodotObject = t.hostObject
-  }
 }

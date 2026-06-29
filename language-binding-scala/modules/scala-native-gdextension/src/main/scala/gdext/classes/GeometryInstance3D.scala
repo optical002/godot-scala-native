@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GeometryInstance3D`, extends `VisualInstance3D`. */
 abstract class GeometryInstance3D extends VisualInstance3D {
+  override def godotClassName: String = "GeometryInstance3D"
 
   /** GeometryInstance3D.set_material_override */
   final def setMaterialOverride(material: Material): Unit =
@@ -136,14 +137,4 @@ abstract class GeometryInstance3D extends VisualInstance3D {
   final def getCustomAabb(): gdext.builtin.AABB =
     Ptrcall.call0[gdext.builtin.AABB](MethodBind.get("GeometryInstance3D", "get_custom_aabb", 1068685055L), hostObject.objectPtr)
 
-}
-
-object GeometryInstance3D {
-  /** Class metadata for Gd[GeometryInstance3D] lifetime management and casting. */
-  given GodotClass[GeometryInstance3D] with {
-    def className = "GeometryInstance3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): GeometryInstance3D = new GeometryInstance3D {}.withHost(o.objectPtr)
-    def unwrap(t: GeometryInstance3D): GodotObject = t.hostObject
-  }
 }

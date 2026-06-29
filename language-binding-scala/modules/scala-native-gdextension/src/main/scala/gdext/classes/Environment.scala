@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Environment`, extends `Resource`. */
 abstract class Environment extends Resource {
+  override def godotClassName: String = "Environment"
 
   /** Environment.set_background */
   final def setBackground(mode: Long): Unit =
@@ -760,14 +761,4 @@ abstract class Environment extends Resource {
   final def getAdjustmentColorCorrection(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("Environment", "get_adjustment_color_correction", 4037048985L), hostObject.objectPtr)
 
-}
-
-object Environment {
-  /** Class metadata for Gd[Environment] lifetime management and casting. */
-  given GodotClass[Environment] with {
-    def className = "Environment"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Environment = new Environment {}.withHost(o.objectPtr)
-    def unwrap(t: Environment): GodotObject = t.hostObject
-  }
 }

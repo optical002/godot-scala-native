@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeParameterRef`, extends `VisualShaderNode`. */
 abstract class VisualShaderNodeParameterRef extends VisualShaderNode {
+  override def godotClassName: String = "VisualShaderNodeParameterRef"
 
   /** VisualShaderNodeParameterRef.set_parameter_name */
   final def setParameterName(name: String): Unit =
@@ -16,14 +17,4 @@ abstract class VisualShaderNodeParameterRef extends VisualShaderNode {
   final def getParameterName(): String =
     Ptrcall.call0[String](MethodBind.get("VisualShaderNodeParameterRef", "get_parameter_name", 201670096L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeParameterRef {
-  /** Class metadata for Gd[VisualShaderNodeParameterRef] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeParameterRef] with {
-    def className = "VisualShaderNodeParameterRef"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeParameterRef = new VisualShaderNodeParameterRef {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeParameterRef): GodotObject = t.hostObject
-  }
 }

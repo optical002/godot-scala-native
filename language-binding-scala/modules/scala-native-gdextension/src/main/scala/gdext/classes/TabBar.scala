@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TabBar`, extends `Control`. */
 abstract class TabBar extends Control {
+  override def godotClassName: String = "TabBar"
 
   /** TabBar.set_tab_count */
   final def setTabCount(count: Long): Unit =
@@ -240,14 +241,4 @@ abstract class TabBar extends Control {
   final def clearTabs(): Unit =
     Ptrcall.callVoid0(MethodBind.get("TabBar", "clear_tabs", 3218959716L), hostObject.objectPtr)
 
-}
-
-object TabBar {
-  /** Class metadata for Gd[TabBar] lifetime management and casting. */
-  given GodotClass[TabBar] with {
-    def className = "TabBar"
-    def isRefCounted = false
-    def wrap(o: GodotObject): TabBar = new TabBar {}.withHost(o.objectPtr)
-    def unwrap(t: TabBar): GodotObject = t.hostObject
-  }
 }

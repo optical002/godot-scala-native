@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `MeshLibrary`, extends `Resource`. */
 abstract class MeshLibrary extends Resource {
+  override def godotClassName: String = "MeshLibrary"
 
   /** MeshLibrary.create_item */
   final def createItem(id: Long): Unit =
@@ -92,14 +93,4 @@ abstract class MeshLibrary extends Resource {
   final def getLastUnusedItemId(): Long =
     Ptrcall.call0[Long](MethodBind.get("MeshLibrary", "get_last_unused_item_id", 3905245786L), hostObject.objectPtr)
 
-}
-
-object MeshLibrary {
-  /** Class metadata for Gd[MeshLibrary] lifetime management and casting. */
-  given GodotClass[MeshLibrary] with {
-    def className = "MeshLibrary"
-    def isRefCounted = true
-    def wrap(o: GodotObject): MeshLibrary = new MeshLibrary {}.withHost(o.objectPtr)
-    def unwrap(t: MeshLibrary): GodotObject = t.hostObject
-  }
 }

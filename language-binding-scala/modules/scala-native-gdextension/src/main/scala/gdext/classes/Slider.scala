@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Slider`, extends `Range`. */
 abstract class Slider extends Range {
+  override def godotClassName: String = "Slider"
 
   /** Slider.set_ticks */
   final def setTicks(count: Long): Unit =
@@ -48,14 +49,4 @@ abstract class Slider extends Range {
   final def isScrollable(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("Slider", "is_scrollable", 36873697L), hostObject.objectPtr)
 
-}
-
-object Slider {
-  /** Class metadata for Gd[Slider] lifetime management and casting. */
-  given GodotClass[Slider] with {
-    def className = "Slider"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Slider = new Slider {}.withHost(o.objectPtr)
-    def unwrap(t: Slider): GodotObject = t.hostObject
-  }
 }

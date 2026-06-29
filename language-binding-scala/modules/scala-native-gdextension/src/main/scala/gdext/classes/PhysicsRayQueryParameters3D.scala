@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PhysicsRayQueryParameters3D`, extends `RefCounted`. */
 abstract class PhysicsRayQueryParameters3D extends RefCounted {
+  override def godotClassName: String = "PhysicsRayQueryParameters3D"
 
   /** PhysicsRayQueryParameters3D.set_from */
   final def setFrom(from: gdext.builtin.Vector3): Unit =
@@ -64,14 +65,4 @@ abstract class PhysicsRayQueryParameters3D extends RefCounted {
   final def isHitBackFacesEnabled(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("PhysicsRayQueryParameters3D", "is_hit_back_faces_enabled", 36873697L), hostObject.objectPtr)
 
-}
-
-object PhysicsRayQueryParameters3D {
-  /** Class metadata for Gd[PhysicsRayQueryParameters3D] lifetime management and casting. */
-  given GodotClass[PhysicsRayQueryParameters3D] with {
-    def className = "PhysicsRayQueryParameters3D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): PhysicsRayQueryParameters3D = new PhysicsRayQueryParameters3D {}.withHost(o.objectPtr)
-    def unwrap(t: PhysicsRayQueryParameters3D): GodotObject = t.hostObject
-  }
 }

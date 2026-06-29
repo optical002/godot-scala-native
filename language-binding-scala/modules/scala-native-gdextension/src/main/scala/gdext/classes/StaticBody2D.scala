@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `StaticBody2D`, extends `PhysicsBody2D`. */
 abstract class StaticBody2D extends PhysicsBody2D {
+  override def godotClassName: String = "StaticBody2D"
 
   /** StaticBody2D.set_constant_linear_velocity */
   final def setConstantLinearVelocity(vel: gdext.builtin.Vector2): Unit =
@@ -32,14 +33,4 @@ abstract class StaticBody2D extends PhysicsBody2D {
   final def getPhysicsMaterialOverride(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("StaticBody2D", "get_physics_material_override", 2521850424L), hostObject.objectPtr)
 
-}
-
-object StaticBody2D {
-  /** Class metadata for Gd[StaticBody2D] lifetime management and casting. */
-  given GodotClass[StaticBody2D] with {
-    def className = "StaticBody2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): StaticBody2D = new StaticBody2D {}.withHost(o.objectPtr)
-    def unwrap(t: StaticBody2D): GodotObject = t.hostObject
-  }
 }

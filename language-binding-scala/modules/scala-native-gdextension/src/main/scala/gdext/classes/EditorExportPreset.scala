@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorExportPreset`, extends `RefCounted`. */
 abstract class EditorExportPreset extends RefCounted {
+  override def godotClassName: String = "EditorExportPreset"
 
   /** EditorExportPreset.has */
   final def has(property: gdext.builtin.StringName): Boolean =
@@ -88,14 +89,4 @@ abstract class EditorExportPreset extends RefCounted {
   final def getVersion(name: gdext.builtin.StringName, windows_version: Boolean): String =
     Ptrcall.call2[gdext.builtin.StringName, Boolean, String](MethodBind.get("EditorExportPreset", "get_version", 1132184663L), hostObject.objectPtr, name, windows_version)
 
-}
-
-object EditorExportPreset {
-  /** Class metadata for Gd[EditorExportPreset] lifetime management and casting. */
-  given GodotClass[EditorExportPreset] with {
-    def className = "EditorExportPreset"
-    def isRefCounted = true
-    def wrap(o: GodotObject): EditorExportPreset = new EditorExportPreset {}.withHost(o.objectPtr)
-    def unwrap(t: EditorExportPreset): GodotObject = t.hostObject
-  }
 }

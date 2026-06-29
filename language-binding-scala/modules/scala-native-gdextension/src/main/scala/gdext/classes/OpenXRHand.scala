@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRHand`, extends `Node3D`. */
 abstract class OpenXRHand extends Node3D {
+  override def godotClassName: String = "OpenXRHand"
 
   /** OpenXRHand.set_hand */
   final def setHand(hand: Long): Unit =
@@ -40,14 +41,4 @@ abstract class OpenXRHand extends Node3D {
   final def getBoneUpdate(): Long =
     Ptrcall.call0[Long](MethodBind.get("OpenXRHand", "get_bone_update", 1310695248L), hostObject.objectPtr)
 
-}
-
-object OpenXRHand {
-  /** Class metadata for Gd[OpenXRHand] lifetime management and casting. */
-  given GodotClass[OpenXRHand] with {
-    def className = "OpenXRHand"
-    def isRefCounted = false
-    def wrap(o: GodotObject): OpenXRHand = new OpenXRHand {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRHand): GodotObject = t.hostObject
-  }
 }

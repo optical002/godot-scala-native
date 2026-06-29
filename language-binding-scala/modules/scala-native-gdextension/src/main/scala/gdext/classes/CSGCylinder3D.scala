@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CSGCylinder3D`, extends `CSGPrimitive3D`. */
 abstract class CSGCylinder3D extends CSGPrimitive3D {
+  override def godotClassName: String = "CSGCylinder3D"
 
   /** CSGCylinder3D.set_radius */
   final def setRadius(radius: Double): Unit =
@@ -56,14 +57,4 @@ abstract class CSGCylinder3D extends CSGPrimitive3D {
   final def getSmoothFaces(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("CSGCylinder3D", "get_smooth_faces", 36873697L), hostObject.objectPtr)
 
-}
-
-object CSGCylinder3D {
-  /** Class metadata for Gd[CSGCylinder3D] lifetime management and casting. */
-  given GodotClass[CSGCylinder3D] with {
-    def className = "CSGCylinder3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): CSGCylinder3D = new CSGCylinder3D {}.withHost(o.objectPtr)
-    def unwrap(t: CSGCylinder3D): GodotObject = t.hostObject
-  }
 }

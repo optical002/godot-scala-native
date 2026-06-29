@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AnimationNodeBlendTree`, extends `AnimationRootNode`. */
 abstract class AnimationNodeBlendTree extends AnimationRootNode {
+  override def godotClassName: String = "AnimationNodeBlendTree"
 
   /** AnimationNodeBlendTree.add_node */
   final def addNode(name: gdext.builtin.StringName, node: AnimationNode, position: gdext.builtin.Vector2): Unit =
@@ -52,14 +53,4 @@ abstract class AnimationNodeBlendTree extends AnimationRootNode {
   final def getGraphOffset(): gdext.builtin.Vector2 =
     Ptrcall.call0[gdext.builtin.Vector2](MethodBind.get("AnimationNodeBlendTree", "get_graph_offset", 3341600327L), hostObject.objectPtr)
 
-}
-
-object AnimationNodeBlendTree {
-  /** Class metadata for Gd[AnimationNodeBlendTree] lifetime management and casting. */
-  given GodotClass[AnimationNodeBlendTree] with {
-    def className = "AnimationNodeBlendTree"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AnimationNodeBlendTree = new AnimationNodeBlendTree {}.withHost(o.objectPtr)
-    def unwrap(t: AnimationNodeBlendTree): GodotObject = t.hostObject
-  }
 }

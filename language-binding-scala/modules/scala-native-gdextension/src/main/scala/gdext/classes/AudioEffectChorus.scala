@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioEffectChorus`, extends `AudioEffect`. */
 abstract class AudioEffectChorus extends AudioEffect {
+  override def godotClassName: String = "AudioEffectChorus"
 
   /** AudioEffectChorus.set_voice_count */
   final def setVoiceCount(voices: Long): Unit =
@@ -80,14 +81,4 @@ abstract class AudioEffectChorus extends AudioEffect {
   final def getDry(): Double =
     Ptrcall.call0[Double](MethodBind.get("AudioEffectChorus", "get_dry", 1740695150L), hostObject.objectPtr)
 
-}
-
-object AudioEffectChorus {
-  /** Class metadata for Gd[AudioEffectChorus] lifetime management and casting. */
-  given GodotClass[AudioEffectChorus] with {
-    def className = "AudioEffectChorus"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioEffectChorus = new AudioEffectChorus {}.withHost(o.objectPtr)
-    def unwrap(t: AudioEffectChorus): GodotObject = t.hostObject
-  }
 }

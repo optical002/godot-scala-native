@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CSGTorus3D`, extends `CSGPrimitive3D`. */
 abstract class CSGTorus3D extends CSGPrimitive3D {
+  override def godotClassName: String = "CSGTorus3D"
 
   /** CSGTorus3D.set_inner_radius */
   final def setInnerRadius(radius: Double): Unit =
@@ -56,14 +57,4 @@ abstract class CSGTorus3D extends CSGPrimitive3D {
   final def getSmoothFaces(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("CSGTorus3D", "get_smooth_faces", 36873697L), hostObject.objectPtr)
 
-}
-
-object CSGTorus3D {
-  /** Class metadata for Gd[CSGTorus3D] lifetime management and casting. */
-  given GodotClass[CSGTorus3D] with {
-    def className = "CSGTorus3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): CSGTorus3D = new CSGTorus3D {}.withHost(o.objectPtr)
-    def unwrap(t: CSGTorus3D): GodotObject = t.hostObject
-  }
 }

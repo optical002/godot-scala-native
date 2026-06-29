@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PanoramaSkyMaterial`, extends `Material`. */
 abstract class PanoramaSkyMaterial extends Material {
+  override def godotClassName: String = "PanoramaSkyMaterial"
 
   /** PanoramaSkyMaterial.set_panorama */
   final def setPanorama(texture: Texture2D): Unit =
@@ -32,14 +33,4 @@ abstract class PanoramaSkyMaterial extends Material {
   final def getEnergyMultiplier(): Double =
     Ptrcall.call0[Double](MethodBind.get("PanoramaSkyMaterial", "get_energy_multiplier", 1740695150L), hostObject.objectPtr)
 
-}
-
-object PanoramaSkyMaterial {
-  /** Class metadata for Gd[PanoramaSkyMaterial] lifetime management and casting. */
-  given GodotClass[PanoramaSkyMaterial] with {
-    def className = "PanoramaSkyMaterial"
-    def isRefCounted = true
-    def wrap(o: GodotObject): PanoramaSkyMaterial = new PanoramaSkyMaterial {}.withHost(o.objectPtr)
-    def unwrap(t: PanoramaSkyMaterial): GodotObject = t.hostObject
-  }
 }

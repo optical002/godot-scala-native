@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GPUParticlesAttractor3D`, extends `VisualInstance3D`. */
 abstract class GPUParticlesAttractor3D extends VisualInstance3D {
+  override def godotClassName: String = "GPUParticlesAttractor3D"
 
   /** GPUParticlesAttractor3D.set_cull_mask */
   final def setCullMask(mask: Long): Unit =
@@ -40,14 +41,4 @@ abstract class GPUParticlesAttractor3D extends VisualInstance3D {
   final def getDirectionality(): Double =
     Ptrcall.call0[Double](MethodBind.get("GPUParticlesAttractor3D", "get_directionality", 1740695150L), hostObject.objectPtr)
 
-}
-
-object GPUParticlesAttractor3D {
-  /** Class metadata for Gd[GPUParticlesAttractor3D] lifetime management and casting. */
-  given GodotClass[GPUParticlesAttractor3D] with {
-    def className = "GPUParticlesAttractor3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): GPUParticlesAttractor3D = new GPUParticlesAttractor3D {}.withHost(o.objectPtr)
-    def unwrap(t: GPUParticlesAttractor3D): GodotObject = t.hostObject
-  }
 }

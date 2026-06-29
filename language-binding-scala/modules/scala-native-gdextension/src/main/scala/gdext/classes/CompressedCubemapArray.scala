@@ -7,15 +7,6 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CompressedCubemapArray`, extends `CompressedTextureLayered`. */
 abstract class CompressedCubemapArray extends CompressedTextureLayered {
+  override def godotClassName: String = "CompressedCubemapArray"
 
-}
-
-object CompressedCubemapArray {
-  /** Class metadata for Gd[CompressedCubemapArray] lifetime management and casting. */
-  given GodotClass[CompressedCubemapArray] with {
-    def className = "CompressedCubemapArray"
-    def isRefCounted = true
-    def wrap(o: GodotObject): CompressedCubemapArray = new CompressedCubemapArray {}.withHost(o.objectPtr)
-    def unwrap(t: CompressedCubemapArray): GodotObject = t.hostObject
-  }
 }

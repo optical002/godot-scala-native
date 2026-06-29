@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PacketPeerUDP`, extends `PacketPeer`. */
 abstract class PacketPeerUDP extends PacketPeer {
+  override def godotClassName: String = "PacketPeerUDP"
 
   /** PacketPeerUDP.bind */
   final def bind(port: Long, bind_address: String, recv_buf_size: Long): Long =
@@ -56,14 +57,4 @@ abstract class PacketPeerUDP extends PacketPeer {
   final def leaveMulticastGroup(multicast_address: String, interface_name: String): Long =
     Ptrcall.call2[String, String, Long](MethodBind.get("PacketPeerUDP", "leave_multicast_group", 852856452L), hostObject.objectPtr, multicast_address, interface_name)
 
-}
-
-object PacketPeerUDP {
-  /** Class metadata for Gd[PacketPeerUDP] lifetime management and casting. */
-  given GodotClass[PacketPeerUDP] with {
-    def className = "PacketPeerUDP"
-    def isRefCounted = true
-    def wrap(o: GodotObject): PacketPeerUDP = new PacketPeerUDP {}.withHost(o.objectPtr)
-    def unwrap(t: PacketPeerUDP): GodotObject = t.hostObject
-  }
 }

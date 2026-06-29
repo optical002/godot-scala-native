@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Shape2D`, extends `Resource`. */
 abstract class Shape2D extends Resource {
+  override def godotClassName: String = "Shape2D"
 
   /** Shape2D.set_custom_solver_bias */
   final def setCustomSolverBias(bias: Double): Unit =
@@ -28,14 +29,4 @@ abstract class Shape2D extends Resource {
   final def getRect(): gdext.builtin.Rect2 =
     Ptrcall.call0[gdext.builtin.Rect2](MethodBind.get("Shape2D", "get_rect", 1639390495L), hostObject.objectPtr)
 
-}
-
-object Shape2D {
-  /** Class metadata for Gd[Shape2D] lifetime management and casting. */
-  given GodotClass[Shape2D] with {
-    def className = "Shape2D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Shape2D = new Shape2D {}.withHost(o.objectPtr)
-    def unwrap(t: Shape2D): GodotObject = t.hostObject
-  }
 }

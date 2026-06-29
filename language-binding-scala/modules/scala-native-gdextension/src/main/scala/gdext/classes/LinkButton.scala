@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `LinkButton`, extends `BaseButton`. */
 abstract class LinkButton extends BaseButton {
+  override def godotClassName: String = "LinkButton"
 
   /** LinkButton.set_text */
   final def setText(text: String): Unit =
@@ -72,14 +73,4 @@ abstract class LinkButton extends BaseButton {
   final def getStructuredTextBidiOverride(): Long =
     Ptrcall.call0[Long](MethodBind.get("LinkButton", "get_structured_text_bidi_override", 3385126229L), hostObject.objectPtr)
 
-}
-
-object LinkButton {
-  /** Class metadata for Gd[LinkButton] lifetime management and casting. */
-  given GodotClass[LinkButton] with {
-    def className = "LinkButton"
-    def isRefCounted = false
-    def wrap(o: GodotObject): LinkButton = new LinkButton {}.withHost(o.objectPtr)
-    def unwrap(t: LinkButton): GodotObject = t.hostObject
-  }
 }

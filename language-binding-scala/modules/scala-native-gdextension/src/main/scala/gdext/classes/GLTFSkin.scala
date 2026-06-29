@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GLTFSkin`, extends `Resource`. */
 abstract class GLTFSkin extends Resource {
+  override def godotClassName: String = "GLTFSkin"
 
   /** GLTFSkin.get_skin_root */
   final def getSkinRoot(): Long =
@@ -32,14 +33,4 @@ abstract class GLTFSkin extends Resource {
   final def setGodotSkin(godot_skin: Skin): Unit =
     Ptrcall.callVoid1(MethodBind.get("GLTFSkin", "set_godot_skin", 3971435618L), hostObject.objectPtr, godot_skin.hostObject)
 
-}
-
-object GLTFSkin {
-  /** Class metadata for Gd[GLTFSkin] lifetime management and casting. */
-  given GodotClass[GLTFSkin] with {
-    def className = "GLTFSkin"
-    def isRefCounted = true
-    def wrap(o: GodotObject): GLTFSkin = new GLTFSkin {}.withHost(o.objectPtr)
-    def unwrap(t: GLTFSkin): GodotObject = t.hostObject
-  }
 }

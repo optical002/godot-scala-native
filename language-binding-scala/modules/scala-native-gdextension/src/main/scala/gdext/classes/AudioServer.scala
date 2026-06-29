@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioServer`, extends `Object`. */
 abstract class AudioServer extends Object {
+  override def godotClassName: String = "AudioServer"
 
   /** AudioServer.set_bus_count */
   final def setBusCount(amount: Long): Unit =
@@ -227,14 +228,6 @@ abstract class AudioServer extends Object {
 }
 
 object AudioServer {
-  /** Class metadata for Gd[AudioServer] lifetime management and casting. */
-  given GodotClass[AudioServer] with {
-    def className = "AudioServer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): AudioServer = new AudioServer {}.withHost(o.objectPtr)
-    def unwrap(t: AudioServer): GodotObject = t.hostObject
-  }
-
   /** The process-global AudioServer singleton instance. */
   def singleton: AudioServer = new AudioServer {}
     .withHost(Godot.interface.global_get_singleton(

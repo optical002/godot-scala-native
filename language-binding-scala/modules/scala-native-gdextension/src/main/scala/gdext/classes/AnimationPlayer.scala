@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AnimationPlayer`, extends `AnimationMixer`. */
 abstract class AnimationPlayer extends AnimationMixer {
+  override def godotClassName: String = "AnimationPlayer"
 
   /** AnimationPlayer.animation_set_next */
   final def animationSetNext(animation_from: gdext.builtin.StringName, animation_to: gdext.builtin.StringName): Unit =
@@ -208,14 +209,4 @@ abstract class AnimationPlayer extends AnimationMixer {
   final def getMethodCallMode(): Long =
     Ptrcall.call0[Long](MethodBind.get("AnimationPlayer", "get_method_call_mode", 3583380054L), hostObject.objectPtr)
 
-}
-
-object AnimationPlayer {
-  /** Class metadata for Gd[AnimationPlayer] lifetime management and casting. */
-  given GodotClass[AnimationPlayer] with {
-    def className = "AnimationPlayer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): AnimationPlayer = new AnimationPlayer {}.withHost(o.objectPtr)
-    def unwrap(t: AnimationPlayer): GodotObject = t.hostObject
-  }
 }

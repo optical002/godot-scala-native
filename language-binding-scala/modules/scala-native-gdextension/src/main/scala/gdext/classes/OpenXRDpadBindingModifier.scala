@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRDpadBindingModifier`, extends `OpenXRIPBindingModifier`. */
 abstract class OpenXRDpadBindingModifier extends OpenXRIPBindingModifier {
+  override def godotClassName: String = "OpenXRDpadBindingModifier"
 
   /** OpenXRDpadBindingModifier.set_action_set */
   final def setActionSet(action_set: OpenXRActionSet): Unit =
@@ -80,14 +81,4 @@ abstract class OpenXRDpadBindingModifier extends OpenXRIPBindingModifier {
   final def getOffHaptic(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("OpenXRDpadBindingModifier", "get_off_haptic", 922310751L), hostObject.objectPtr)
 
-}
-
-object OpenXRDpadBindingModifier {
-  /** Class metadata for Gd[OpenXRDpadBindingModifier] lifetime management and casting. */
-  given GodotClass[OpenXRDpadBindingModifier] with {
-    def className = "OpenXRDpadBindingModifier"
-    def isRefCounted = true
-    def wrap(o: GodotObject): OpenXRDpadBindingModifier = new OpenXRDpadBindingModifier {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRDpadBindingModifier): GodotObject = t.hostObject
-  }
 }

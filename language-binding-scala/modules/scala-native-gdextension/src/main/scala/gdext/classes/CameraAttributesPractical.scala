@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CameraAttributesPractical`, extends `CameraAttributes`. */
 abstract class CameraAttributesPractical extends CameraAttributes {
+  override def godotClassName: String = "CameraAttributesPractical"
 
   /** CameraAttributesPractical.set_dof_blur_far_enabled */
   final def setDofBlurFarEnabled(enabled: Boolean): Unit =
@@ -80,14 +81,4 @@ abstract class CameraAttributesPractical extends CameraAttributes {
   final def getAutoExposureMinSensitivity(): Double =
     Ptrcall.call0[Double](MethodBind.get("CameraAttributesPractical", "get_auto_exposure_min_sensitivity", 1740695150L), hostObject.objectPtr)
 
-}
-
-object CameraAttributesPractical {
-  /** Class metadata for Gd[CameraAttributesPractical] lifetime management and casting. */
-  given GodotClass[CameraAttributesPractical] with {
-    def className = "CameraAttributesPractical"
-    def isRefCounted = true
-    def wrap(o: GodotObject): CameraAttributesPractical = new CameraAttributesPractical {}.withHost(o.objectPtr)
-    def unwrap(t: CameraAttributesPractical): GodotObject = t.hostObject
-  }
 }

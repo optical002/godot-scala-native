@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorSelection`, extends `Object`. */
 abstract class EditorSelection extends Object {
+  override def godotClassName: String = "EditorSelection"
 
   /** EditorSelection.clear */
   final def clear(): Unit =
@@ -20,14 +21,4 @@ abstract class EditorSelection extends Object {
   final def removeNode(node: Node): Unit =
     Ptrcall.callVoid1(MethodBind.get("EditorSelection", "remove_node", 1078189570L), hostObject.objectPtr, node.hostObject)
 
-}
-
-object EditorSelection {
-  /** Class metadata for Gd[EditorSelection] lifetime management and casting. */
-  given GodotClass[EditorSelection] with {
-    def className = "EditorSelection"
-    def isRefCounted = false
-    def wrap(o: GodotObject): EditorSelection = new EditorSelection {}.withHost(o.objectPtr)
-    def unwrap(t: EditorSelection): GodotObject = t.hostObject
-  }
 }

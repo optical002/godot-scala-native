@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioEffectHardLimiter`, extends `AudioEffect`. */
 abstract class AudioEffectHardLimiter extends AudioEffect {
+  override def godotClassName: String = "AudioEffectHardLimiter"
 
   /** AudioEffectHardLimiter.set_ceiling_db */
   final def setCeilingDb(ceiling: Double): Unit =
@@ -32,14 +33,4 @@ abstract class AudioEffectHardLimiter extends AudioEffect {
   final def getRelease(): Double =
     Ptrcall.call0[Double](MethodBind.get("AudioEffectHardLimiter", "get_release", 1740695150L), hostObject.objectPtr)
 
-}
-
-object AudioEffectHardLimiter {
-  /** Class metadata for Gd[AudioEffectHardLimiter] lifetime management and casting. */
-  given GodotClass[AudioEffectHardLimiter] with {
-    def className = "AudioEffectHardLimiter"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioEffectHardLimiter = new AudioEffectHardLimiter {}.withHost(o.objectPtr)
-    def unwrap(t: AudioEffectHardLimiter): GodotObject = t.hostObject
-  }
 }

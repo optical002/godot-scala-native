@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TileSetAtlasSource`, extends `TileSetSource`. */
 abstract class TileSetAtlasSource extends TileSetSource {
+  override def godotClassName: String = "TileSetAtlasSource"
 
   /** TileSetAtlasSource.set_texture */
   final def setTexture(texture: Texture2D): Unit =
@@ -168,14 +169,4 @@ abstract class TileSetAtlasSource extends TileSetSource {
   final def getRuntimeTileTextureRegion(atlas_coords: gdext.builtin.Vector2i, frame: Long): gdext.builtin.Rect2i =
     Ptrcall.call2[gdext.builtin.Vector2i, Long, gdext.builtin.Rect2i](MethodBind.get("TileSetAtlasSource", "get_runtime_tile_texture_region", 104874263L), hostObject.objectPtr, atlas_coords, frame)
 
-}
-
-object TileSetAtlasSource {
-  /** Class metadata for Gd[TileSetAtlasSource] lifetime management and casting. */
-  given GodotClass[TileSetAtlasSource] with {
-    def className = "TileSetAtlasSource"
-    def isRefCounted = true
-    def wrap(o: GodotObject): TileSetAtlasSource = new TileSetAtlasSource {}.withHost(o.objectPtr)
-    def unwrap(t: TileSetAtlasSource): GodotObject = t.hostObject
-  }
 }

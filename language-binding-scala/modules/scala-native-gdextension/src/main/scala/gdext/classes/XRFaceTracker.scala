@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `XRFaceTracker`, extends `XRTracker`. */
 abstract class XRFaceTracker extends XRTracker {
+  override def godotClassName: String = "XRFaceTracker"
 
   /** XRFaceTracker.get_blend_shape */
   final def getBlendShape(blend_shape: Long): Double =
@@ -16,14 +17,4 @@ abstract class XRFaceTracker extends XRTracker {
   final def setBlendShape(blend_shape: Long, weight: Double): Unit =
     Ptrcall.callVoid2(MethodBind.get("XRFaceTracker", "set_blend_shape", 2352588791L), hostObject.objectPtr, blend_shape, weight)
 
-}
-
-object XRFaceTracker {
-  /** Class metadata for Gd[XRFaceTracker] lifetime management and casting. */
-  given GodotClass[XRFaceTracker] with {
-    def className = "XRFaceTracker"
-    def isRefCounted = true
-    def wrap(o: GodotObject): XRFaceTracker = new XRFaceTracker {}.withHost(o.objectPtr)
-    def unwrap(t: XRFaceTracker): GodotObject = t.hostObject
-  }
 }

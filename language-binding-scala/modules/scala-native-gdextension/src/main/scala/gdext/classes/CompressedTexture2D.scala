@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CompressedTexture2D`, extends `Texture2D`. */
 abstract class CompressedTexture2D extends Texture2D {
+  override def godotClassName: String = "CompressedTexture2D"
 
   /** CompressedTexture2D.load */
   final def load(path: String): Long =
@@ -16,14 +17,4 @@ abstract class CompressedTexture2D extends Texture2D {
   final def getLoadPath(): String =
     Ptrcall.call0[String](MethodBind.get("CompressedTexture2D", "get_load_path", 201670096L), hostObject.objectPtr)
 
-}
-
-object CompressedTexture2D {
-  /** Class metadata for Gd[CompressedTexture2D] lifetime management and casting. */
-  given GodotClass[CompressedTexture2D] with {
-    def className = "CompressedTexture2D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): CompressedTexture2D = new CompressedTexture2D {}.withHost(o.objectPtr)
-    def unwrap(t: CompressedTexture2D): GodotObject = t.hostObject
-  }
 }

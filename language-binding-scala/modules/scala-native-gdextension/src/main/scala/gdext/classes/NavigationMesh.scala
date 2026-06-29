@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `NavigationMesh`, extends `Resource`. */
 abstract class NavigationMesh extends Resource {
+  override def godotClassName: String = "NavigationMesh"
 
   /** NavigationMesh.set_sample_partition_type */
   final def setSamplePartitionType(sample_partition_type: Long): Unit =
@@ -224,14 +225,4 @@ abstract class NavigationMesh extends Resource {
   final def clear(): Unit =
     Ptrcall.callVoid0(MethodBind.get("NavigationMesh", "clear", 3218959716L), hostObject.objectPtr)
 
-}
-
-object NavigationMesh {
-  /** Class metadata for Gd[NavigationMesh] lifetime management and casting. */
-  given GodotClass[NavigationMesh] with {
-    def className = "NavigationMesh"
-    def isRefCounted = true
-    def wrap(o: GodotObject): NavigationMesh = new NavigationMesh {}.withHost(o.objectPtr)
-    def unwrap(t: NavigationMesh): GodotObject = t.hostObject
-  }
 }

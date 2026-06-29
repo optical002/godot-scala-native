@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShader`, extends `Shader`. */
 abstract class VisualShader extends Shader {
+  override def godotClassName: String = "VisualShader"
 
   /** VisualShader.set_mode */
   final def setMode(mode: Long): Unit =
@@ -88,14 +89,4 @@ abstract class VisualShader extends Shader {
   final def getGraphOffset(): gdext.builtin.Vector2 =
     Ptrcall.call0[gdext.builtin.Vector2](MethodBind.get("VisualShader", "get_graph_offset", 3341600327L), hostObject.objectPtr)
 
-}
-
-object VisualShader {
-  /** Class metadata for Gd[VisualShader] lifetime management and casting. */
-  given GodotClass[VisualShader] with {
-    def className = "VisualShader"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShader = new VisualShader {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShader): GodotObject = t.hostObject
-  }
 }

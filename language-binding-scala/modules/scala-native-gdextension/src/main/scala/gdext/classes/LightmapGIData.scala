@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `LightmapGIData`, extends `Resource`. */
 abstract class LightmapGIData extends Resource {
+  override def godotClassName: String = "LightmapGIData"
 
   /** LightmapGIData.set_uses_spherical_harmonics */
   final def setUsesSphericalHarmonics(uses_spherical_harmonics: Boolean): Unit =
@@ -32,14 +33,4 @@ abstract class LightmapGIData extends Resource {
   final def getLightTexture(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("LightmapGIData", "get_light_texture", 3984243839L), hostObject.objectPtr)
 
-}
-
-object LightmapGIData {
-  /** Class metadata for Gd[LightmapGIData] lifetime management and casting. */
-  given GodotClass[LightmapGIData] with {
-    def className = "LightmapGIData"
-    def isRefCounted = true
-    def wrap(o: GodotObject): LightmapGIData = new LightmapGIData {}.withHost(o.objectPtr)
-    def unwrap(t: LightmapGIData): GodotObject = t.hostObject
-  }
 }

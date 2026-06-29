@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Geometry2D`, extends `Object`. */
 abstract class Geometry2D extends Object {
+  override def godotClassName: String = "Geometry2D"
 
   /** Geometry2D.is_point_in_circle */
   final def isPointInCircle(point: gdext.builtin.Vector2, circle_position: gdext.builtin.Vector2, circle_radius: Double): Boolean =
@@ -31,14 +32,6 @@ abstract class Geometry2D extends Object {
 }
 
 object Geometry2D {
-  /** Class metadata for Gd[Geometry2D] lifetime management and casting. */
-  given GodotClass[Geometry2D] with {
-    def className = "Geometry2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Geometry2D = new Geometry2D {}.withHost(o.objectPtr)
-    def unwrap(t: Geometry2D): GodotObject = t.hostObject
-  }
-
   /** The process-global Geometry2D singleton instance. */
   def singleton: Geometry2D = new Geometry2D {}
     .withHost(Godot.interface.global_get_singleton(

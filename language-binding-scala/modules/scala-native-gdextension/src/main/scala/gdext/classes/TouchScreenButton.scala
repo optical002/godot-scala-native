@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TouchScreenButton`, extends `Node2D`. */
 abstract class TouchScreenButton extends Node2D {
+  override def godotClassName: String = "TouchScreenButton"
 
   /** TouchScreenButton.set_texture_normal */
   final def setTextureNormal(texture: Texture2D): Unit =
@@ -84,14 +85,4 @@ abstract class TouchScreenButton extends Node2D {
   final def isPressed(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("TouchScreenButton", "is_pressed", 36873697L), hostObject.objectPtr)
 
-}
-
-object TouchScreenButton {
-  /** Class metadata for Gd[TouchScreenButton] lifetime management and casting. */
-  given GodotClass[TouchScreenButton] with {
-    def className = "TouchScreenButton"
-    def isRefCounted = false
-    def wrap(o: GodotObject): TouchScreenButton = new TouchScreenButton {}.withHost(o.objectPtr)
-    def unwrap(t: TouchScreenButton): GodotObject = t.hostObject
-  }
 }

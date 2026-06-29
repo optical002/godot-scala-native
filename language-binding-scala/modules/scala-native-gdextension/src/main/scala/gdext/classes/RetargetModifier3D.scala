@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RetargetModifier3D`, extends `SkeletonModifier3D`. */
 abstract class RetargetModifier3D extends SkeletonModifier3D {
+  override def godotClassName: String = "RetargetModifier3D"
 
   /** RetargetModifier3D.set_profile */
   final def setProfile(profile: SkeletonProfile): Unit =
@@ -56,14 +57,4 @@ abstract class RetargetModifier3D extends SkeletonModifier3D {
   final def isScaleEnabled(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("RetargetModifier3D", "is_scale_enabled", 36873697L), hostObject.objectPtr)
 
-}
-
-object RetargetModifier3D {
-  /** Class metadata for Gd[RetargetModifier3D] lifetime management and casting. */
-  given GodotClass[RetargetModifier3D] with {
-    def className = "RetargetModifier3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): RetargetModifier3D = new RetargetModifier3D {}.withHost(o.objectPtr)
-    def unwrap(t: RetargetModifier3D): GodotObject = t.hostObject
-  }
 }

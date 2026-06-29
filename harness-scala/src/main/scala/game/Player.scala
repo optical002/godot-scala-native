@@ -1,6 +1,5 @@
 package game
 
-import gdext.api.GodotPrint
 import gdext.builtin.{Arr, Dict, Vector2, Vector3, Color, Rect2}
 import gdext.classes.Node2D
 import gdext.api.{Gd, Tres, Tscn}
@@ -20,10 +19,11 @@ enum CharacterState {
  * Node2D's methods and the engine virtuals. The exported properties are written
  * as `var` **constructor params** — every `var` param auto-exports (no
  * `@gdexport` needed) and needs **no default**: the macro factory fills each one
- * from its type's `DefaultValue`. A bare game class also needs no `Gd`/`Tres`
- * wrapper: a node type stands in for `Gd[T]` and a resource type for `Tres[T]`,
- * with the matching default (null / unassigned). So `var projectile: Projectile`
- * is a Required node reference, defaulting to null — no wrapper, no `= ...`.
+ * from its type's `DefaultValue`. An engine reference is held as its plain
+ * wrapper type — a node type is a Required node reference and a resource type a
+ * Required resource reference (use `Tres[T]` only for resource collection
+ * elements), with the matching default (null / unassigned). So `var projectile:
+ * Projectile` is a Required node reference, defaulting to null — no `= ...`.
  * `Option[T]` → `None`, `Tscn[T]` → unassigned, `Dict` → empty, enum → first
  * case. Write an explicit `= ...` only to override, as `speed` does.
  * `Register.auto[Player]()` derives the Godot base (`Node2D`) from the
@@ -33,13 +33,13 @@ final class Player(
   /** Editable in the inspector and from GDScript (explicit non-zero default). */
   var speed: Double = 120.0,
   /**
-   * Optional projectile reference — the editor allows leaving it empty. Bare
-   * node type: `Option[Projectile]` is shorthand for `Option[Gd[Projectile]]`.
+   * Optional projectile reference — the editor allows leaving it empty.
+   * `Option[Projectile]` is a nullable node reference.
    */
   var maybeProjectile: Option[Projectile],
   /**
-   * Required projectile reference. Bare node type: `Projectile` stands in for
-   * `Gd[Projectile]` (== Required), defaulting to null — no wrapper, no default.
+   * Required projectile reference. A bare node type `Projectile` is a Required
+   * node reference, defaulting to null — no `= ...` needed.
    */
   var projectile: Projectile,
   /**
@@ -62,11 +62,11 @@ final class Player(
   /** Typed array of ints — inspector shows an editable Array[int]. */
   var scores: Arr[Int],
   /**
-   * Typed array of enemy nodes. Container elements take the `Gd`/`Tres` wrapper
-   * (like `Dict`'s `Tres[PlayerStats]` value) — the bare shorthand is only for
-   * direct fields/params, not collection elements.
+   * Typed array of enemy nodes. Engine references are held as their plain wrapper
+   * type, so a node element is just `Enemy` (no wrapper) — and `Tres[T]` is still
+   * used for resource elements, e.g. `Dict`'s `Tres[PlayerStats]` value.
    */
-  var enemies: Arr[Gd[Enemy]],
+  var enemies: Arr[Enemy],
   /** Typed array of strings — inspector shows an editable Array[String]. */
   var tags: Arr[String],
   /** Current high-level state, shown as an enum dropdown in the inspector. */
@@ -102,7 +102,7 @@ final class Player(
   @signal def pinged(): Unit = ()
 
   override def _ready(): Unit =
-    GodotPrint.print("Player._ready (extends Node2D)")
+    Gd.print("Player._ready (extends Node2D)")
 
   override def _process(delta: Double): Unit = {
     elapsed += delta
@@ -112,7 +112,7 @@ final class Player(
     )
     if (frame == 1)
       emitSignal(hostObject, "pinged") // fire once, observable
-    GodotPrint.print(
+    Gd.print(
       f"Player._process frame=$frame delta=$delta%.4f pos.x=${elapsed * speed}%.1f"
     )
     frame += 1

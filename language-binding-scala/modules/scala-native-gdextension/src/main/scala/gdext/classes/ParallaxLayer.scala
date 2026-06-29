@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ParallaxLayer`, extends `Node2D`. */
 abstract class ParallaxLayer extends Node2D {
+  override def godotClassName: String = "ParallaxLayer"
 
   /** ParallaxLayer.set_motion_scale */
   final def setMotionScale(scale: gdext.builtin.Vector2): Unit =
@@ -32,14 +33,4 @@ abstract class ParallaxLayer extends Node2D {
   final def getMirroring(): gdext.builtin.Vector2 =
     Ptrcall.call0[gdext.builtin.Vector2](MethodBind.get("ParallaxLayer", "get_mirroring", 3341600327L), hostObject.objectPtr)
 
-}
-
-object ParallaxLayer {
-  /** Class metadata for Gd[ParallaxLayer] lifetime management and casting. */
-  given GodotClass[ParallaxLayer] with {
-    def className = "ParallaxLayer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): ParallaxLayer = new ParallaxLayer {}.withHost(o.objectPtr)
-    def unwrap(t: ParallaxLayer): GodotObject = t.hostObject
-  }
 }

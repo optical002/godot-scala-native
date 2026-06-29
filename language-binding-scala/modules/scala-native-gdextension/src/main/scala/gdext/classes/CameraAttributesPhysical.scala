@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CameraAttributesPhysical`, extends `CameraAttributes`. */
 abstract class CameraAttributesPhysical extends CameraAttributes {
+  override def godotClassName: String = "CameraAttributesPhysical"
 
   /** CameraAttributesPhysical.set_aperture */
   final def setAperture(aperture: Double): Unit =
@@ -76,14 +77,4 @@ abstract class CameraAttributesPhysical extends CameraAttributes {
   final def getAutoExposureMinExposureValue(): Double =
     Ptrcall.call0[Double](MethodBind.get("CameraAttributesPhysical", "get_auto_exposure_min_exposure_value", 1740695150L), hostObject.objectPtr)
 
-}
-
-object CameraAttributesPhysical {
-  /** Class metadata for Gd[CameraAttributesPhysical] lifetime management and casting. */
-  given GodotClass[CameraAttributesPhysical] with {
-    def className = "CameraAttributesPhysical"
-    def isRefCounted = true
-    def wrap(o: GodotObject): CameraAttributesPhysical = new CameraAttributesPhysical {}.withHost(o.objectPtr)
-    def unwrap(t: CameraAttributesPhysical): GodotObject = t.hostObject
-  }
 }

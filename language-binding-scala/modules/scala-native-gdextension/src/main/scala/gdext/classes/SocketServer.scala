@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SocketServer`, extends `RefCounted`. */
 abstract class SocketServer extends RefCounted {
+  override def godotClassName: String = "SocketServer"
 
   /** SocketServer.is_connection_available */
   final def isConnectionAvailable(): Boolean =
@@ -24,14 +25,4 @@ abstract class SocketServer extends RefCounted {
   final def takeSocketConnection(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("SocketServer", "take_socket_connection", 1883962599L), hostObject.objectPtr)
 
-}
-
-object SocketServer {
-  /** Class metadata for Gd[SocketServer] lifetime management and casting. */
-  given GodotClass[SocketServer] with {
-    def className = "SocketServer"
-    def isRefCounted = true
-    def wrap(o: GodotObject): SocketServer = new SocketServer {}.withHost(o.objectPtr)
-    def unwrap(t: SocketServer): GodotObject = t.hostObject
-  }
 }

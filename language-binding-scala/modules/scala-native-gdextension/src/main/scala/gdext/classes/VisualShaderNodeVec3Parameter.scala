@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeVec3Parameter`, extends `VisualShaderNodeParameter`. */
 abstract class VisualShaderNodeVec3Parameter extends VisualShaderNodeParameter {
+  override def godotClassName: String = "VisualShaderNodeVec3Parameter"
 
   /** VisualShaderNodeVec3Parameter.set_default_value_enabled */
   final def setDefaultValueEnabled(enabled: Boolean): Unit =
@@ -24,14 +25,4 @@ abstract class VisualShaderNodeVec3Parameter extends VisualShaderNodeParameter {
   final def getDefaultValue(): gdext.builtin.Vector3 =
     Ptrcall.call0[gdext.builtin.Vector3](MethodBind.get("VisualShaderNodeVec3Parameter", "get_default_value", 3360562783L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeVec3Parameter {
-  /** Class metadata for Gd[VisualShaderNodeVec3Parameter] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeVec3Parameter] with {
-    def className = "VisualShaderNodeVec3Parameter"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeVec3Parameter = new VisualShaderNodeVec3Parameter {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeVec3Parameter): GodotObject = t.hostObject
-  }
 }

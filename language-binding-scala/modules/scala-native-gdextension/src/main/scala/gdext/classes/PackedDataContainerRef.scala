@@ -7,19 +7,10 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PackedDataContainerRef`, extends `RefCounted`. */
 abstract class PackedDataContainerRef extends RefCounted {
+  override def godotClassName: String = "PackedDataContainerRef"
 
   /** PackedDataContainerRef.size */
   final def size(): Long =
     Ptrcall.call0[Long](MethodBind.get("PackedDataContainerRef", "size", 3905245786L), hostObject.objectPtr)
 
-}
-
-object PackedDataContainerRef {
-  /** Class metadata for Gd[PackedDataContainerRef] lifetime management and casting. */
-  given GodotClass[PackedDataContainerRef] with {
-    def className = "PackedDataContainerRef"
-    def isRefCounted = true
-    def wrap(o: GodotObject): PackedDataContainerRef = new PackedDataContainerRef {}.withHost(o.objectPtr)
-    def unwrap(t: PackedDataContainerRef): GodotObject = t.hostObject
-  }
 }

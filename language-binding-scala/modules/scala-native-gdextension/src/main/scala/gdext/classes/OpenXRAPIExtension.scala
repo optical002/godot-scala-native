@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRAPIExtension`, extends `RefCounted`. */
 abstract class OpenXRAPIExtension extends RefCounted {
+  override def godotClassName: String = "OpenXRAPIExtension"
 
   /** OpenXRAPIExtension.get_openxr_version */
   final def getOpenxrVersion(): Long =
@@ -152,14 +153,4 @@ abstract class OpenXRAPIExtension extends RefCounted {
   final def updateMainSwapchainSize(): Unit =
     Ptrcall.callVoid0(MethodBind.get("OpenXRAPIExtension", "update_main_swapchain_size", 3218959716L), hostObject.objectPtr)
 
-}
-
-object OpenXRAPIExtension {
-  /** Class metadata for Gd[OpenXRAPIExtension] lifetime management and casting. */
-  given GodotClass[OpenXRAPIExtension] with {
-    def className = "OpenXRAPIExtension"
-    def isRefCounted = true
-    def wrap(o: GodotObject): OpenXRAPIExtension = new OpenXRAPIExtension {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRAPIExtension): GodotObject = t.hostObject
-  }
 }

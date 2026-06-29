@@ -7,15 +7,6 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SpotLight3D`, extends `Light3D`. */
 abstract class SpotLight3D extends Light3D {
+  override def godotClassName: String = "SpotLight3D"
 
-}
-
-object SpotLight3D {
-  /** Class metadata for Gd[SpotLight3D] lifetime management and casting. */
-  given GodotClass[SpotLight3D] with {
-    def className = "SpotLight3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): SpotLight3D = new SpotLight3D {}.withHost(o.objectPtr)
-    def unwrap(t: SpotLight3D): GodotObject = t.hostObject
-  }
 }

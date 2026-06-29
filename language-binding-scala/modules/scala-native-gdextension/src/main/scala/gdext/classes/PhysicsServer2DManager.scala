@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PhysicsServer2DManager`, extends `Object`. */
 abstract class PhysicsServer2DManager extends Object {
+  override def godotClassName: String = "PhysicsServer2DManager"
 
   /** PhysicsServer2DManager.set_default_server */
   final def setDefaultServer(name: String, priority: Long): Unit =
@@ -15,14 +16,6 @@ abstract class PhysicsServer2DManager extends Object {
 }
 
 object PhysicsServer2DManager {
-  /** Class metadata for Gd[PhysicsServer2DManager] lifetime management and casting. */
-  given GodotClass[PhysicsServer2DManager] with {
-    def className = "PhysicsServer2DManager"
-    def isRefCounted = false
-    def wrap(o: GodotObject): PhysicsServer2DManager = new PhysicsServer2DManager {}.withHost(o.objectPtr)
-    def unwrap(t: PhysicsServer2DManager): GodotObject = t.hostObject
-  }
-
   /** The process-global PhysicsServer2DManager singleton instance. */
   def singleton: PhysicsServer2DManager = new PhysicsServer2DManager {}
     .withHost(Godot.interface.global_get_singleton(

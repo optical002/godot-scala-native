@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `StreamPeerGZIP`, extends `StreamPeer`. */
 abstract class StreamPeerGZIP extends StreamPeer {
+  override def godotClassName: String = "StreamPeerGZIP"
 
   /** StreamPeerGZIP.start_compression */
   final def startCompression(use_deflate: Boolean, buffer_size: Long): Long =
@@ -24,14 +25,4 @@ abstract class StreamPeerGZIP extends StreamPeer {
   final def clear(): Unit =
     Ptrcall.callVoid0(MethodBind.get("StreamPeerGZIP", "clear", 3218959716L), hostObject.objectPtr)
 
-}
-
-object StreamPeerGZIP {
-  /** Class metadata for Gd[StreamPeerGZIP] lifetime management and casting. */
-  given GodotClass[StreamPeerGZIP] with {
-    def className = "StreamPeerGZIP"
-    def isRefCounted = true
-    def wrap(o: GodotObject): StreamPeerGZIP = new StreamPeerGZIP {}.withHost(o.objectPtr)
-    def unwrap(t: StreamPeerGZIP): GodotObject = t.hostObject
-  }
 }

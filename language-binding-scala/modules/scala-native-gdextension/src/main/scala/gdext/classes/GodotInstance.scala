@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GodotInstance`, extends `Object`. */
 abstract class GodotInstance extends Object {
+  override def godotClassName: String = "GodotInstance"
 
   /** GodotInstance.start */
   final def start(): Boolean =
@@ -36,14 +37,4 @@ abstract class GodotInstance extends Object {
   final def resume(): Unit =
     Ptrcall.callVoid0(MethodBind.get("GodotInstance", "resume", 3218959716L), hostObject.objectPtr)
 
-}
-
-object GodotInstance {
-  /** Class metadata for Gd[GodotInstance] lifetime management and casting. */
-  given GodotClass[GodotInstance] with {
-    def className = "GodotInstance"
-    def isRefCounted = false
-    def wrap(o: GodotObject): GodotInstance = new GodotInstance {}.withHost(o.objectPtr)
-    def unwrap(t: GodotInstance): GodotObject = t.hostObject
-  }
 }

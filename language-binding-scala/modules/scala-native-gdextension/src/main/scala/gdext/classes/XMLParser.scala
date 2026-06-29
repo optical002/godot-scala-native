@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `XMLParser`, extends `RefCounted`. */
 abstract class XMLParser extends RefCounted {
+  override def godotClassName: String = "XMLParser"
 
   /** XMLParser.read */
   final def read(): Long =
@@ -72,14 +73,4 @@ abstract class XMLParser extends RefCounted {
   final def open(file: String): Long =
     Ptrcall.call1[String, Long](MethodBind.get("XMLParser", "open", 166001499L), hostObject.objectPtr, file)
 
-}
-
-object XMLParser {
-  /** Class metadata for Gd[XMLParser] lifetime management and casting. */
-  given GodotClass[XMLParser] with {
-    def className = "XMLParser"
-    def isRefCounted = true
-    def wrap(o: GodotObject): XMLParser = new XMLParser {}.withHost(o.objectPtr)
-    def unwrap(t: XMLParser): GodotObject = t.hostObject
-  }
 }

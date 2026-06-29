@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Resource`, extends `RefCounted`. */
 abstract class Resource extends RefCounted {
+  override def godotClassName: String = "Resource"
 
   /** Resource.set_path */
   final def setPath(path: String): Unit =
@@ -84,14 +85,4 @@ abstract class Resource extends RefCounted {
   final def duplicateDeep(deep_subresources_mode: Long): GodotObject =
     Ptrcall.call1[Long, GodotObject](MethodBind.get("Resource", "duplicate_deep", 905779109L), hostObject.objectPtr, deep_subresources_mode)
 
-}
-
-object Resource {
-  /** Class metadata for Gd[Resource] lifetime management and casting. */
-  given GodotClass[Resource] with {
-    def className = "Resource"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Resource = new Resource {}.withHost(o.objectPtr)
-    def unwrap(t: Resource): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `InputEventMouse`, extends `InputEventWithModifiers`. */
 abstract class InputEventMouse extends InputEventWithModifiers {
+  override def godotClassName: String = "InputEventMouse"
 
   /** InputEventMouse.set_button_mask */
   final def setButtonMask(button_mask: Long): Unit =
@@ -32,14 +33,4 @@ abstract class InputEventMouse extends InputEventWithModifiers {
   final def getGlobalPosition(): gdext.builtin.Vector2 =
     Ptrcall.call0[gdext.builtin.Vector2](MethodBind.get("InputEventMouse", "get_global_position", 3341600327L), hostObject.objectPtr)
 
-}
-
-object InputEventMouse {
-  /** Class metadata for Gd[InputEventMouse] lifetime management and casting. */
-  given GodotClass[InputEventMouse] with {
-    def className = "InputEventMouse"
-    def isRefCounted = true
-    def wrap(o: GodotObject): InputEventMouse = new InputEventMouse {}.withHost(o.objectPtr)
-    def unwrap(t: InputEventMouse): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorFileSystem`, extends `Node`. */
 abstract class EditorFileSystem extends Node {
+  override def godotClassName: String = "EditorFileSystem"
 
   /** EditorFileSystem.get_filesystem */
   final def getFilesystem(): GodotObject =
@@ -40,14 +41,4 @@ abstract class EditorFileSystem extends Node {
   final def getFileType(path: String): String =
     Ptrcall.call1[String, String](MethodBind.get("EditorFileSystem", "get_file_type", 3135753539L), hostObject.objectPtr, path)
 
-}
-
-object EditorFileSystem {
-  /** Class metadata for Gd[EditorFileSystem] lifetime management and casting. */
-  given GodotClass[EditorFileSystem] with {
-    def className = "EditorFileSystem"
-    def isRefCounted = false
-    def wrap(o: GodotObject): EditorFileSystem = new EditorFileSystem {}.withHost(o.objectPtr)
-    def unwrap(t: EditorFileSystem): GodotObject = t.hostObject
-  }
 }

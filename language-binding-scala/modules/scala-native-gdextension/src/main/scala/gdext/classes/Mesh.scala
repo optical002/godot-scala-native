@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Mesh`, extends `Resource`. */
 abstract class Mesh extends Resource {
+  override def godotClassName: String = "Mesh"
 
   /** Mesh.set_lightmap_size_hint */
   final def setLightmapSizeHint(size: gdext.builtin.Vector2i): Unit =
@@ -52,14 +53,4 @@ abstract class Mesh extends Resource {
   final def generateTriangleMesh(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("Mesh", "generate_triangle_mesh", 3476533166L), hostObject.objectPtr)
 
-}
-
-object Mesh {
-  /** Class metadata for Gd[Mesh] lifetime management and casting. */
-  given GodotClass[Mesh] with {
-    def className = "Mesh"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Mesh = new Mesh {}.withHost(o.objectPtr)
-    def unwrap(t: Mesh): GodotObject = t.hostObject
-  }
 }

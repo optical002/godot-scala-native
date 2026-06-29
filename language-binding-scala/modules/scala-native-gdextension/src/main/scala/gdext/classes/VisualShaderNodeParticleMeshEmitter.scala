@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeParticleMeshEmitter`, extends `VisualShaderNodeParticleEmitter`. */
 abstract class VisualShaderNodeParticleMeshEmitter extends VisualShaderNodeParticleEmitter {
+  override def godotClassName: String = "VisualShaderNodeParticleMeshEmitter"
 
   /** VisualShaderNodeParticleMeshEmitter.set_mesh */
   final def setMesh(mesh: Mesh): Unit =
@@ -32,14 +33,4 @@ abstract class VisualShaderNodeParticleMeshEmitter extends VisualShaderNodeParti
   final def getSurfaceIndex(): Long =
     Ptrcall.call0[Long](MethodBind.get("VisualShaderNodeParticleMeshEmitter", "get_surface_index", 3905245786L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeParticleMeshEmitter {
-  /** Class metadata for Gd[VisualShaderNodeParticleMeshEmitter] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeParticleMeshEmitter] with {
-    def className = "VisualShaderNodeParticleMeshEmitter"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeParticleMeshEmitter = new VisualShaderNodeParticleMeshEmitter {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeParticleMeshEmitter): GodotObject = t.hostObject
-  }
 }

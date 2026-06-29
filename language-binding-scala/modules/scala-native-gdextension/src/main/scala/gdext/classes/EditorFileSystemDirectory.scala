@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorFileSystemDirectory`, extends `Object`. */
 abstract class EditorFileSystemDirectory extends Object {
+  override def godotClassName: String = "EditorFileSystemDirectory"
 
   /** EditorFileSystemDirectory.get_subdir_count */
   final def getSubdirCount(): Long =
@@ -64,14 +65,4 @@ abstract class EditorFileSystemDirectory extends Object {
   final def findDirIndex(name: String): Long =
     Ptrcall.call1[String, Long](MethodBind.get("EditorFileSystemDirectory", "find_dir_index", 1321353865L), hostObject.objectPtr, name)
 
-}
-
-object EditorFileSystemDirectory {
-  /** Class metadata for Gd[EditorFileSystemDirectory] lifetime management and casting. */
-  given GodotClass[EditorFileSystemDirectory] with {
-    def className = "EditorFileSystemDirectory"
-    def isRefCounted = false
-    def wrap(o: GodotObject): EditorFileSystemDirectory = new EditorFileSystemDirectory {}.withHost(o.objectPtr)
-    def unwrap(t: EditorFileSystemDirectory): GodotObject = t.hostObject
-  }
 }

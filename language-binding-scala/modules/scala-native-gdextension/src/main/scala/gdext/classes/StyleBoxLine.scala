@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `StyleBoxLine`, extends `StyleBox`. */
 abstract class StyleBoxLine extends StyleBox {
+  override def godotClassName: String = "StyleBoxLine"
 
   /** StyleBoxLine.set_color */
   final def setColor(color: gdext.builtin.Color): Unit =
@@ -48,14 +49,4 @@ abstract class StyleBoxLine extends StyleBox {
   final def isVertical(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("StyleBoxLine", "is_vertical", 36873697L), hostObject.objectPtr)
 
-}
-
-object StyleBoxLine {
-  /** Class metadata for Gd[StyleBoxLine] lifetime management and casting. */
-  given GodotClass[StyleBoxLine] with {
-    def className = "StyleBoxLine"
-    def isRefCounted = true
-    def wrap(o: GodotObject): StyleBoxLine = new StyleBoxLine {}.withHost(o.objectPtr)
-    def unwrap(t: StyleBoxLine): GodotObject = t.hostObject
-  }
 }

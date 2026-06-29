@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioStream`, extends `Resource`. */
 abstract class AudioStream extends Resource {
+  override def godotClassName: String = "AudioStream"
 
   /** AudioStream.get_length */
   final def getLength(): Double =
@@ -32,14 +33,4 @@ abstract class AudioStream extends Resource {
   final def isMetaStream(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("AudioStream", "is_meta_stream", 36873697L), hostObject.objectPtr)
 
-}
-
-object AudioStream {
-  /** Class metadata for Gd[AudioStream] lifetime management and casting. */
-  given GodotClass[AudioStream] with {
-    def className = "AudioStream"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioStream = new AudioStream {}.withHost(o.objectPtr)
-    def unwrap(t: AudioStream): GodotObject = t.hostObject
-  }
 }

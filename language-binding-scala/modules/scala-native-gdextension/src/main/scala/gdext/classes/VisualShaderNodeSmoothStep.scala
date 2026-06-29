@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeSmoothStep`, extends `VisualShaderNode`. */
 abstract class VisualShaderNodeSmoothStep extends VisualShaderNode {
+  override def godotClassName: String = "VisualShaderNodeSmoothStep"
 
   /** VisualShaderNodeSmoothStep.set_op_type */
   final def setOpType(op_type: Long): Unit =
@@ -16,14 +17,4 @@ abstract class VisualShaderNodeSmoothStep extends VisualShaderNode {
   final def getOpType(): Long =
     Ptrcall.call0[Long](MethodBind.get("VisualShaderNodeSmoothStep", "get_op_type", 359640855L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeSmoothStep {
-  /** Class metadata for Gd[VisualShaderNodeSmoothStep] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeSmoothStep] with {
-    def className = "VisualShaderNodeSmoothStep"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeSmoothStep = new VisualShaderNodeSmoothStep {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeSmoothStep): GodotObject = t.hostObject
-  }
 }

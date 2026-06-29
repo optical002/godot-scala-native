@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `MeshInstance3D`, extends `GeometryInstance3D`. */
 abstract class MeshInstance3D extends GeometryInstance3D {
+  override def godotClassName: String = "MeshInstance3D"
 
   /** MeshInstance3D.set_mesh */
   final def setMesh(mesh: Mesh): Unit =
@@ -84,14 +85,4 @@ abstract class MeshInstance3D extends GeometryInstance3D {
   final def bakeMeshFromCurrentSkeletonPose(existing: ArrayMesh): GodotObject =
     Ptrcall.call1[GodotObject, GodotObject](MethodBind.get("MeshInstance3D", "bake_mesh_from_current_skeleton_pose", 1457573577L), hostObject.objectPtr, existing.hostObject)
 
-}
-
-object MeshInstance3D {
-  /** Class metadata for Gd[MeshInstance3D] lifetime management and casting. */
-  given GodotClass[MeshInstance3D] with {
-    def className = "MeshInstance3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): MeshInstance3D = new MeshInstance3D {}.withHost(o.objectPtr)
-    def unwrap(t: MeshInstance3D): GodotObject = t.hostObject
-  }
 }

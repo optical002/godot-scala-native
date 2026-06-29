@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRInteractionProfile`, extends `Resource`. */
 abstract class OpenXRInteractionProfile extends Resource {
+  override def godotClassName: String = "OpenXRInteractionProfile"
 
   /** OpenXRInteractionProfile.set_interaction_profile_path */
   final def setInteractionProfilePath(interaction_profile_path: String): Unit =
@@ -32,14 +33,4 @@ abstract class OpenXRInteractionProfile extends Resource {
   final def getBindingModifier(index: Long): GodotObject =
     Ptrcall.call1[Long, GodotObject](MethodBind.get("OpenXRInteractionProfile", "get_binding_modifier", 2419896583L), hostObject.objectPtr, index)
 
-}
-
-object OpenXRInteractionProfile {
-  /** Class metadata for Gd[OpenXRInteractionProfile] lifetime management and casting. */
-  given GodotClass[OpenXRInteractionProfile] with {
-    def className = "OpenXRInteractionProfile"
-    def isRefCounted = true
-    def wrap(o: GodotObject): OpenXRInteractionProfile = new OpenXRInteractionProfile {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRInteractionProfile): GodotObject = t.hostObject
-  }
 }

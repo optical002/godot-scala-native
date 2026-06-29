@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `XRBodyTracker`, extends `XRPositionalTracker`. */
 abstract class XRBodyTracker extends XRPositionalTracker {
+  override def godotClassName: String = "XRBodyTracker"
 
   /** XRBodyTracker.set_has_tracking_data */
   final def setHasTrackingData(has_data: Boolean): Unit =
@@ -40,14 +41,4 @@ abstract class XRBodyTracker extends XRPositionalTracker {
   final def getJointTransform(joint: Long): gdext.builtin.Transform3D =
     Ptrcall.call1[Long, gdext.builtin.Transform3D](MethodBind.get("XRBodyTracker", "get_joint_transform", 3474811534L), hostObject.objectPtr, joint)
 
-}
-
-object XRBodyTracker {
-  /** Class metadata for Gd[XRBodyTracker] lifetime management and casting. */
-  given GodotClass[XRBodyTracker] with {
-    def className = "XRBodyTracker"
-    def isRefCounted = true
-    def wrap(o: GodotObject): XRBodyTracker = new XRBodyTracker {}.withHost(o.objectPtr)
-    def unwrap(t: XRBodyTracker): GodotObject = t.hostObject
-  }
 }

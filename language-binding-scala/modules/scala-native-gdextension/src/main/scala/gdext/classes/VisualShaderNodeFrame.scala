@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeFrame`, extends `VisualShaderNodeResizableBase`. */
 abstract class VisualShaderNodeFrame extends VisualShaderNodeResizableBase {
+  override def godotClassName: String = "VisualShaderNodeFrame"
 
   /** VisualShaderNodeFrame.set_title */
   final def setTitle(title: String): Unit =
@@ -48,14 +49,4 @@ abstract class VisualShaderNodeFrame extends VisualShaderNodeResizableBase {
   final def removeAttachedNode(node: Long): Unit =
     Ptrcall.callVoid1(MethodBind.get("VisualShaderNodeFrame", "remove_attached_node", 1286410249L), hostObject.objectPtr, node)
 
-}
-
-object VisualShaderNodeFrame {
-  /** Class metadata for Gd[VisualShaderNodeFrame] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeFrame] with {
-    def className = "VisualShaderNodeFrame"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeFrame = new VisualShaderNodeFrame {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeFrame): GodotObject = t.hostObject
-  }
 }

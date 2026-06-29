@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SphereMesh`, extends `PrimitiveMesh`. */
 abstract class SphereMesh extends PrimitiveMesh {
+  override def godotClassName: String = "SphereMesh"
 
   /** SphereMesh.set_radius */
   final def setRadius(radius: Double): Unit =
@@ -48,14 +49,4 @@ abstract class SphereMesh extends PrimitiveMesh {
   final def getIsHemisphere(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("SphereMesh", "get_is_hemisphere", 36873697L), hostObject.objectPtr)
 
-}
-
-object SphereMesh {
-  /** Class metadata for Gd[SphereMesh] lifetime management and casting. */
-  given GodotClass[SphereMesh] with {
-    def className = "SphereMesh"
-    def isRefCounted = true
-    def wrap(o: GodotObject): SphereMesh = new SphereMesh {}.withHost(o.objectPtr)
-    def unwrap(t: SphereMesh): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TileSetSource`, extends `Resource`. */
 abstract class TileSetSource extends Resource {
+  override def godotClassName: String = "TileSetSource"
 
   /** TileSetSource.get_tiles_count */
   final def getTilesCount(): Long =
@@ -32,14 +33,4 @@ abstract class TileSetSource extends Resource {
   final def hasAlternativeTile(atlas_coords: gdext.builtin.Vector2i, alternative_tile: Long): Boolean =
     Ptrcall.call2[gdext.builtin.Vector2i, Long, Boolean](MethodBind.get("TileSetSource", "has_alternative_tile", 1073731340L), hostObject.objectPtr, atlas_coords, alternative_tile)
 
-}
-
-object TileSetSource {
-  /** Class metadata for Gd[TileSetSource] lifetime management and casting. */
-  given GodotClass[TileSetSource] with {
-    def className = "TileSetSource"
-    def isRefCounted = true
-    def wrap(o: GodotObject): TileSetSource = new TileSetSource {}.withHost(o.objectPtr)
-    def unwrap(t: TileSetSource): GodotObject = t.hostObject
-  }
 }

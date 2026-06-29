@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `UndoRedo`, extends `Object`. */
 abstract class UndoRedo extends Object {
+  override def godotClassName: String = "UndoRedo"
 
   /** UndoRedo.create_action */
   final def createAction(name: String, merge_mode: Long, backward_undo_ops: Boolean): Unit =
@@ -84,14 +85,4 @@ abstract class UndoRedo extends Object {
   final def undo(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("UndoRedo", "undo", 2240911060L), hostObject.objectPtr)
 
-}
-
-object UndoRedo {
-  /** Class metadata for Gd[UndoRedo] lifetime management and casting. */
-  given GodotClass[UndoRedo] with {
-    def className = "UndoRedo"
-    def isRefCounted = false
-    def wrap(o: GodotObject): UndoRedo = new UndoRedo {}.withHost(o.objectPtr)
-    def unwrap(t: UndoRedo): GodotObject = t.hostObject
-  }
 }

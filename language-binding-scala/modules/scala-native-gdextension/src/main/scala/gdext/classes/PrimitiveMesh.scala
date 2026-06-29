@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PrimitiveMesh`, extends `Mesh`. */
 abstract class PrimitiveMesh extends Mesh {
+  override def godotClassName: String = "PrimitiveMesh"
 
   /** PrimitiveMesh.set_material */
   final def setMaterial(material: Material): Unit =
@@ -52,14 +53,4 @@ abstract class PrimitiveMesh extends Mesh {
   final def requestUpdate(): Unit =
     Ptrcall.callVoid0(MethodBind.get("PrimitiveMesh", "request_update", 3218959716L), hostObject.objectPtr)
 
-}
-
-object PrimitiveMesh {
-  /** Class metadata for Gd[PrimitiveMesh] lifetime management and casting. */
-  given GodotClass[PrimitiveMesh] with {
-    def className = "PrimitiveMesh"
-    def isRefCounted = true
-    def wrap(o: GodotObject): PrimitiveMesh = new PrimitiveMesh {}.withHost(o.objectPtr)
-    def unwrap(t: PrimitiveMesh): GodotObject = t.hostObject
-  }
 }

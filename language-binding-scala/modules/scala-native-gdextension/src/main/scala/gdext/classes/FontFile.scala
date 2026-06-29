@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `FontFile`, extends `Font`. */
 abstract class FontFile extends Font {
+  override def godotClassName: String = "FontFile"
 
   /** FontFile.load_bitmap_font */
   final def loadBitmapFont(path: String): Long =
@@ -380,14 +381,4 @@ abstract class FontFile extends Font {
   final def getCharFromGlyphIndex(size: Long, glyph_index: Long): Long =
     Ptrcall.call2[Long, Long, Long](MethodBind.get("FontFile", "get_char_from_glyph_index", 3175239445L), hostObject.objectPtr, size, glyph_index)
 
-}
-
-object FontFile {
-  /** Class metadata for Gd[FontFile] lifetime management and casting. */
-  given GodotClass[FontFile] with {
-    def className = "FontFile"
-    def isRefCounted = true
-    def wrap(o: GodotObject): FontFile = new FontFile {}.withHost(o.objectPtr)
-    def unwrap(t: FontFile): GodotObject = t.hostObject
-  }
 }

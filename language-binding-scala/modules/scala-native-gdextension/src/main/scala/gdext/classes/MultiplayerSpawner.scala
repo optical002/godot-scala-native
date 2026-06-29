@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `MultiplayerSpawner`, extends `Node`. */
 abstract class MultiplayerSpawner extends Node {
+  override def godotClassName: String = "MultiplayerSpawner"
 
   /** MultiplayerSpawner.add_spawnable_scene */
   final def addSpawnableScene(path: String): Unit =
@@ -32,14 +33,4 @@ abstract class MultiplayerSpawner extends Node {
   final def setSpawnLimit(limit: Long): Unit =
     Ptrcall.callVoid1(MethodBind.get("MultiplayerSpawner", "set_spawn_limit", 1286410249L), hostObject.objectPtr, limit)
 
-}
-
-object MultiplayerSpawner {
-  /** Class metadata for Gd[MultiplayerSpawner] lifetime management and casting. */
-  given GodotClass[MultiplayerSpawner] with {
-    def className = "MultiplayerSpawner"
-    def isRefCounted = false
-    def wrap(o: GodotObject): MultiplayerSpawner = new MultiplayerSpawner {}.withHost(o.objectPtr)
-    def unwrap(t: MultiplayerSpawner): GodotObject = t.hostObject
-  }
 }

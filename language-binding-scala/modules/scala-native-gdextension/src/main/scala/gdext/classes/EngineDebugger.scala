@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EngineDebugger`, extends `Object`. */
 abstract class EngineDebugger extends Object {
+  override def godotClassName: String = "EngineDebugger"
 
   /** EngineDebugger.is_active */
   final def isActive(): Boolean =
@@ -87,14 +88,6 @@ abstract class EngineDebugger extends Object {
 }
 
 object EngineDebugger {
-  /** Class metadata for Gd[EngineDebugger] lifetime management and casting. */
-  given GodotClass[EngineDebugger] with {
-    def className = "EngineDebugger"
-    def isRefCounted = false
-    def wrap(o: GodotObject): EngineDebugger = new EngineDebugger {}.withHost(o.objectPtr)
-    def unwrap(t: EngineDebugger): GodotObject = t.hostObject
-  }
-
   /** The process-global EngineDebugger singleton instance. */
   def singleton: EngineDebugger = new EngineDebugger {}
     .withHost(Godot.interface.global_get_singleton(

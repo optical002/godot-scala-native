@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SurfaceTool`, extends `RefCounted`. */
 abstract class SurfaceTool extends RefCounted {
+  override def godotClassName: String = "SurfaceTool"
 
   /** SurfaceTool.set_skin_weight_count */
   final def setSkinWeightCount(count: Long): Unit =
@@ -116,14 +117,4 @@ abstract class SurfaceTool extends RefCounted {
   final def commit(existing: ArrayMesh, flags: Long): GodotObject =
     Ptrcall.call2[GodotObject, Long, GodotObject](MethodBind.get("SurfaceTool", "commit", 4107864055L), hostObject.objectPtr, existing.hostObject, flags)
 
-}
-
-object SurfaceTool {
-  /** Class metadata for Gd[SurfaceTool] lifetime management and casting. */
-  given GodotClass[SurfaceTool] with {
-    def className = "SurfaceTool"
-    def isRefCounted = true
-    def wrap(o: GodotObject): SurfaceTool = new SurfaceTool {}.withHost(o.objectPtr)
-    def unwrap(t: SurfaceTool): GodotObject = t.hostObject
-  }
 }

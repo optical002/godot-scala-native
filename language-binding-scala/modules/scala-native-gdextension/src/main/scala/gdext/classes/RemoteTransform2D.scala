@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RemoteTransform2D`, extends `Node2D`. */
 abstract class RemoteTransform2D extends Node2D {
+  override def godotClassName: String = "RemoteTransform2D"
 
   /** RemoteTransform2D.force_update_cache */
   final def forceUpdateCache(): Unit =
@@ -44,14 +45,4 @@ abstract class RemoteTransform2D extends Node2D {
   final def getUpdateScale(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("RemoteTransform2D", "get_update_scale", 36873697L), hostObject.objectPtr)
 
-}
-
-object RemoteTransform2D {
-  /** Class metadata for Gd[RemoteTransform2D] lifetime management and casting. */
-  given GodotClass[RemoteTransform2D] with {
-    def className = "RemoteTransform2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): RemoteTransform2D = new RemoteTransform2D {}.withHost(o.objectPtr)
-    def unwrap(t: RemoteTransform2D): GodotObject = t.hostObject
-  }
 }

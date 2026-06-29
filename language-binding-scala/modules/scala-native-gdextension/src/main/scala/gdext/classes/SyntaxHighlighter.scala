@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SyntaxHighlighter`, extends `Resource`. */
 abstract class SyntaxHighlighter extends Resource {
+  override def godotClassName: String = "SyntaxHighlighter"
 
   /** SyntaxHighlighter.update_cache */
   final def updateCache(): Unit =
@@ -20,14 +21,4 @@ abstract class SyntaxHighlighter extends Resource {
   final def getTextEdit(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("SyntaxHighlighter", "get_text_edit", 1893027089L), hostObject.objectPtr)
 
-}
-
-object SyntaxHighlighter {
-  /** Class metadata for Gd[SyntaxHighlighter] lifetime management and casting. */
-  given GodotClass[SyntaxHighlighter] with {
-    def className = "SyntaxHighlighter"
-    def isRefCounted = true
-    def wrap(o: GodotObject): SyntaxHighlighter = new SyntaxHighlighter {}.withHost(o.objectPtr)
-    def unwrap(t: SyntaxHighlighter): GodotObject = t.hostObject
-  }
 }

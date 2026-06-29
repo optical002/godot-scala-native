@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PhysicsTestMotionResult2D`, extends `RefCounted`. */
 abstract class PhysicsTestMotionResult2D extends RefCounted {
+  override def godotClassName: String = "PhysicsTestMotionResult2D"
 
   /** PhysicsTestMotionResult2D.get_travel */
   final def getTravel(): gdext.builtin.Vector2 =
@@ -56,14 +57,4 @@ abstract class PhysicsTestMotionResult2D extends RefCounted {
   final def getCollisionUnsafeFraction(): Double =
     Ptrcall.call0[Double](MethodBind.get("PhysicsTestMotionResult2D", "get_collision_unsafe_fraction", 1740695150L), hostObject.objectPtr)
 
-}
-
-object PhysicsTestMotionResult2D {
-  /** Class metadata for Gd[PhysicsTestMotionResult2D] lifetime management and casting. */
-  given GodotClass[PhysicsTestMotionResult2D] with {
-    def className = "PhysicsTestMotionResult2D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): PhysicsTestMotionResult2D = new PhysicsTestMotionResult2D {}.withHost(o.objectPtr)
-    def unwrap(t: PhysicsTestMotionResult2D): GodotObject = t.hostObject
-  }
 }

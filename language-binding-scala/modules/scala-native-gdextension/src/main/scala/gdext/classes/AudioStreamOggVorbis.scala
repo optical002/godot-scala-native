@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioStreamOggVorbis`, extends `AudioStream`. */
 abstract class AudioStreamOggVorbis extends AudioStream {
+  override def godotClassName: String = "AudioStreamOggVorbis"
 
   /** AudioStreamOggVorbis.set_packet_sequence */
   final def setPacketSequence(packet_sequence: OggPacketSequence): Unit =
@@ -56,14 +57,4 @@ abstract class AudioStreamOggVorbis extends AudioStream {
   final def getBarBeats(): Long =
     Ptrcall.call0[Long](MethodBind.get("AudioStreamOggVorbis", "get_bar_beats", 3905245786L), hostObject.objectPtr)
 
-}
-
-object AudioStreamOggVorbis {
-  /** Class metadata for Gd[AudioStreamOggVorbis] lifetime management and casting. */
-  given GodotClass[AudioStreamOggVorbis] with {
-    def className = "AudioStreamOggVorbis"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioStreamOggVorbis = new AudioStreamOggVorbis {}.withHost(o.objectPtr)
-    def unwrap(t: AudioStreamOggVorbis): GodotObject = t.hostObject
-  }
 }

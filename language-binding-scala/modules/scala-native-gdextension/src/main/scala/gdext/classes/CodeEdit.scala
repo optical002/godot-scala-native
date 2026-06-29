@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CodeEdit`, extends `TextEdit`. */
 abstract class CodeEdit extends TextEdit {
+  override def godotClassName: String = "CodeEdit"
 
   /** CodeEdit.set_indent_size */
   final def setIndentSize(size: Long): Unit =
@@ -384,14 +385,4 @@ abstract class CodeEdit extends TextEdit {
   final def duplicateLines(): Unit =
     Ptrcall.callVoid0(MethodBind.get("CodeEdit", "duplicate_lines", 3218959716L), hostObject.objectPtr)
 
-}
-
-object CodeEdit {
-  /** Class metadata for Gd[CodeEdit] lifetime management and casting. */
-  given GodotClass[CodeEdit] with {
-    def className = "CodeEdit"
-    def isRefCounted = false
-    def wrap(o: GodotObject): CodeEdit = new CodeEdit {}.withHost(o.objectPtr)
-    def unwrap(t: CodeEdit): GodotObject = t.hostObject
-  }
 }

@@ -7,15 +7,6 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `JavaScriptObject`, extends `RefCounted`. */
 abstract class JavaScriptObject extends RefCounted {
+  override def godotClassName: String = "JavaScriptObject"
 
-}
-
-object JavaScriptObject {
-  /** Class metadata for Gd[JavaScriptObject] lifetime management and casting. */
-  given GodotClass[JavaScriptObject] with {
-    def className = "JavaScriptObject"
-    def isRefCounted = true
-    def wrap(o: GodotObject): JavaScriptObject = new JavaScriptObject {}.withHost(o.objectPtr)
-    def unwrap(t: JavaScriptObject): GodotObject = t.hostObject
-  }
 }

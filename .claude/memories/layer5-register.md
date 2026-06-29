@@ -4,13 +4,14 @@ How a `game` class becomes a real Godot class. **Zero registration code in the
 game** — only `extends` + annotations.
 
 ## User-facing (game)
-Imports a game file uses: `import gdext.api.*` (Gd/Tres/Tscn/Required/GodotPrint/
-ExportHint/emitSignal), `import gdext.classes.<Engine>`, `import gdext.builtin.*`,
-`import gdext.annotations.*` (the `@func`/`@gdexport`/`@signal`/… annotations).
+Imports a game file uses: `import gdext.api.*` (Gd facade for `Gd.create`/
+`Gd.print`; Tres/Tscn/Required/ExportHint/emitSignal), `import gdext.classes.
+<Engine>`, `import gdext.builtin.*`, `import gdext.annotations.*` (the `@func`/
+`@gdexport`/`@signal`/… annotations). No `Gd[T]` type — engine refs are bare.
 ```scala
 final class Player(                           // base derived from superclass
   var speed: Double = 120.0,                  // var ctor param = auto-export
-  var projectile: Gd[Projectile]             // no default needed (see below)
+  var projectile: Projectile                 // bare node ref; no default needed
 ) extends Node2D {
   @gdexport var hp: Int = 100                 // body @gdexport still works too
   @func def getScore(): Long = ...           // callable from GDScript
@@ -46,8 +47,8 @@ Scans `T` at compile time and emits all registration calls:
   in order: (1) the user's explicit default via the companion's nullary
   `$lessinit$greater$default$N` getter (Select, not Apply — no params); else
   (2) `DefaultValue[A].default` summoned from the param type (primitives→0/""/false,
-  `Option`→None, `Required`/`Gd`/`Tres`/`Tscn`→unassigned/null, `Dict`→empty, bare
-  node/resource→null wrapper); else (3) parameterless enum→`fromOrdinal(0)`; else
+  `Option`→None, `Required`/`Tres`/`Tscn`→unassigned, `Dict`→empty, bare
+  node/resource→literal `null`); else (3) parameterless enum→`fromOrdinal(0)`; else
   compile error. So a param needs `= ...` only to override the type's default.
   GOTCHA: a `@func` must not snake_case onto a property accessor — `getHp`
   collides with exported `hp`'s `get_hp` ("Method already bound").
@@ -60,22 +61,19 @@ Per-type logic is in givens, NOT the macro. Supported field types:
 - primitives Long/Int/Double/Boolean/Float/String;
 - **references** via `RefLeaf[A]` givens (in `object RefLeaf` — must be there for
   implicit search) × optionality: `Option[X]` (nullable), `Required[X]` (`.get`
-  throws if unassigned), bare `X` (= Required). `X` ∈ `Gd[T]` (node, hint
-  NODE_TYPE), `Tres[T]` (resource, RESOURCE_TYPE), `Tscn[T]` (scene,
-  RESOURCE_TYPE="PackedScene" + `sceneRootType=T`). Wrappers in
-  `engine/ExportWrappers.scala`; object Variant marshalling in
-  `engine/ObjectVariant.scala`.
-  **Wrapper-free shorthand**: a bare game/engine type may stand in for `Gd`/`Tres`
-  — `bareNodeLeaf[T <: Node]`/`bareResourceLeaf[T <: Resource]` give `RefLeaf[T]`,
-  so `Option[Projectile]` ≡ `Option[Gd[Projectile]]` (NODE_TYPE) and
-  `Option[PlayerStats]` ≡ `Option[Tres[PlayerStats]]` (RESOURCE_TYPE); node-vs-
-  resource hint inferred by the type bound. Marshals via `GodotClass.wrap/unwrap`.
-  Bare also works as a Required ctor param with NO default: `var projectile:
-  Projectile` ≡ `Gd[Projectile]` (null default), `var stats: PlayerStats` ≡
-  `Tres[PlayerStats]` (unassigned) — the matching `DefaultValue.bareNodeDefault`/
-  `bareResourceDefault` supply the null-handle wrapper (see DefaultValue.scala).
-  `Tscn[T]` has no bare form (root type can't be inferred). Additive — existing
-  `Gd`/`Tres` exports unchanged.
+  throws if unassigned), bare `X` (= Required). An engine ref is held as its
+  **plain wrapper type** (no `Gd[T]`): `X` is a bare node type `T <: Node` (hint
+  NODE_TYPE, via `bareNodeLeaf`), a bare resource `T <: Resource` (RESOURCE_TYPE,
+  `bareResourceLeaf`), `Tres[T]` (resource wrapper, for collection elements), or
+  `Tscn[T]` (scene, RESOURCE_TYPE="PackedScene" + `sceneRootType=T`). So
+  `Option[Projectile]` is a nullable node ref and `Projectile` a Required one;
+  `Option[PlayerStats]`/`PlayerStats` resource refs. Marshals via
+  `ClassMeta.fromHandle` / `wrapper.hostPtr`; resource reads `refInc()` to outlive
+  the loader's temp ref. Default for a bare `var` ref param is literal `null`
+  (`DefaultValue.bareNodeDefault`/`bareResourceDefault`); `Tres`/`Tscn` →
+  unassigned. Wrappers in `engine/ExportWrappers.scala`; object Variant
+  marshalling in `engine/ObjectVariant.scala`. `Tscn[T]` has no bare form (root
+  type can't be inferred).
 - **enums**: parameterless Scala 3 enums, synthesized inline by the macro
   (hint ENUM, ordinal⇄`fromOrdinal`).
 - **Color** (`builtin/Color.scala`): variant COLOR, color-picker widget.
@@ -93,9 +91,11 @@ Per-type logic is in givens, NOT the macro. Supported field types:
 - **typed array** `Arr[A]` (`builtin/Arr.scala`): variant ARRAY(28), hint
   TYPE_STRING(23), `hint_string` = ONE elemPart `<type>[/<hint>]:<hintstr>`
   (e.g. `"2:"` Int, `"4:"` String, `"24/34:Enemy"` node). `arrExport`/`arrDefault`
-  givens summon `ExportType[A]`. Object elements need `Gd`/`Tres` wrapper
-  (`Arr[Gd[Enemy]]`) — `Arr.fromVariant[A]` needs `To`/`FromVariant[A]`, which bare
-  nodes lack. Verified vs live engine (`export_verify.gd` `_check_player`).
+  givens summon `ExportType[A]`. Object elements are now **bare** (`Arr[Enemy]`,
+  `Dict[Int, Tres[Stats]]`) — the `to/fromVariant[T <: GodotScriptClass]` givens
+  live in `object GodotScriptClass` so `Arr.fromVariant[A]` finds them with no
+  import (resource elements still use `Tres[T]`). Verified vs live engine
+  (`export_verify.gd` `_check_player`).
 Hints/usage constants in `PropertyHints.scala`. `MethodRegistration.fillPropertyInfo`
 now writes hint/hint_string/class_name/usage (was all-zero before).
 
@@ -129,7 +129,7 @@ class. Four annotations (each `class X(comp: String)`, `comp` = sibling Scala
 field name): `@exportBoneName` (Skeleton3D bones), `@exportAnimation`
 (AnimationPlayer/Mixer animations), `@exportSpriteAnimation` (SpriteFrames anims),
 `@exportAnimationProperty` (AnimationTree `parameters/...` paths). Usage:
-`@gdexport var skeleton: Gd[Skeleton3D] = …; @exportBoneName("skeleton") @gdexport
+`@gdexport var skeleton: Skeleton3D = null; @exportBoneName("skeleton") @gdexport
 var boneName: String = ""`.
 - **Mechanism = Godot `validate_property`** (NOT a custom editor widget, so no
   theme crash). `ClassRegistration` now also sets `at_validate_property_func`
@@ -141,10 +141,11 @@ var boneName: String = ""`.
   plain headless `get_property_list()` (the instance is real).
 - **Macro** (`Register.scala`): `compAnnotationOf`/`compEnumRegFor` — finds the
   sibling comp field, gets its type `C`, builds a typed getter via `fieldLambdas`,
-  summons `CompEnum.AsGd[C,E]` (E fixed by the annotation; `<:<`-based givens so
-  `Gd[AnimationPlayer]` projects to `Gd[AnimationMixer]`, plus `Tres`/`Option`/
+  summons `CompEnum.AsRef[C,E]` (E fixed by the annotation; `<:<`-based givens so
+  a bare `AnimationPlayer` projects to `AnimationMixer`, plus `Tres`/`Option`/
   `Required`), and emits `CompEnumRegistry.register(class, prop, builder)`. Comp
-  annotation is only valid on a `String` field.
+  annotation is only valid on a `String` field. `CompEnum` helpers take bare
+  wrappers (`Skeleton3D`, …) and read via methods / `.hostObject.objectPtr`.
 - **Enumeration** (`CompEnum`): boneNames iterates `getBoneCount`/`getBoneName`
   (NOT `getConcatenatedBoneNames` — StringName ptrcall **return** is a known-buggy
   Phase-2 caveat in `Ptrcall.PtrRet`, segfaults `toScala`). Animation/sprite use
@@ -171,7 +172,10 @@ that *rejects* wrong-root scenes needs a Callable→Scala primitive (to react to
 picker's selection signal); currently `_parse_property` only detects + logs.
 
 ## Registration substrate
-- `GodotScriptClass.scala` — root base: `hostObject`, `withHost`, virtuals.
+- `GodotScriptClass.scala` — root base: `hostObject`/`hostPtr`, `withHost`,
+  lifetime (`free`/`unref`/`refInc`/`cast`), object-Variant givens, virtuals
+  (`_input` etc. now take a bare `InputEvent`, not `Gd[InputEvent]`). See
+  [layer4-obj](layer4-obj.md).
 - `ClassRegistration.scala` — fills `GDExtensionClassCreationInfo4` with static
   trampolines (create/free/recreate/get_virtual + `validate_property` for the
   comp-reference dropdowns above). **`is_runtime=1`** (runtime-only,

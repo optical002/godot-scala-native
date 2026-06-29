@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `MultiplayerSynchronizer`, extends `Node`. */
 abstract class MultiplayerSynchronizer extends Node {
+  override def godotClassName: String = "MultiplayerSynchronizer"
 
   /** MultiplayerSynchronizer.set_replication_interval */
   final def setReplicationInterval(milliseconds: Double): Unit =
@@ -60,14 +61,4 @@ abstract class MultiplayerSynchronizer extends Node {
   final def getVisibilityFor(peer: Long): Boolean =
     Ptrcall.call1[Long, Boolean](MethodBind.get("MultiplayerSynchronizer", "get_visibility_for", 1116898809L), hostObject.objectPtr, peer)
 
-}
-
-object MultiplayerSynchronizer {
-  /** Class metadata for Gd[MultiplayerSynchronizer] lifetime management and casting. */
-  given GodotClass[MultiplayerSynchronizer] with {
-    def className = "MultiplayerSynchronizer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): MultiplayerSynchronizer = new MultiplayerSynchronizer {}.withHost(o.objectPtr)
-    def unwrap(t: MultiplayerSynchronizer): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `InputEventKey`, extends `InputEventWithModifiers`. */
 abstract class InputEventKey extends InputEventWithModifiers {
+  override def godotClassName: String = "InputEventKey"
 
   /** InputEventKey.set_pressed */
   final def setPressed(pressed: Boolean): Unit =
@@ -84,14 +85,4 @@ abstract class InputEventKey extends InputEventWithModifiers {
   final def asTextLocation(): String =
     Ptrcall.call0[String](MethodBind.get("InputEventKey", "as_text_location", 201670096L), hostObject.objectPtr)
 
-}
-
-object InputEventKey {
-  /** Class metadata for Gd[InputEventKey] lifetime management and casting. */
-  given GodotClass[InputEventKey] with {
-    def className = "InputEventKey"
-    def isRefCounted = true
-    def wrap(o: GodotObject): InputEventKey = new InputEventKey {}.withHost(o.objectPtr)
-    def unwrap(t: InputEventKey): GodotObject = t.hostObject
-  }
 }

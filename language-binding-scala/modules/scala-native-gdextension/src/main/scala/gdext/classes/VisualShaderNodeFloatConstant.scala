@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeFloatConstant`, extends `VisualShaderNodeConstant`. */
 abstract class VisualShaderNodeFloatConstant extends VisualShaderNodeConstant {
+  override def godotClassName: String = "VisualShaderNodeFloatConstant"
 
   /** VisualShaderNodeFloatConstant.set_constant */
   final def setConstant(constant: Double): Unit =
@@ -16,14 +17,4 @@ abstract class VisualShaderNodeFloatConstant extends VisualShaderNodeConstant {
   final def getConstant(): Double =
     Ptrcall.call0[Double](MethodBind.get("VisualShaderNodeFloatConstant", "get_constant", 1740695150L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeFloatConstant {
-  /** Class metadata for Gd[VisualShaderNodeFloatConstant] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeFloatConstant] with {
-    def className = "VisualShaderNodeFloatConstant"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeFloatConstant = new VisualShaderNodeFloatConstant {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeFloatConstant): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AnimationLibrary`, extends `Resource`. */
 abstract class AnimationLibrary extends Resource {
+  override def godotClassName: String = "AnimationLibrary"
 
   /** AnimationLibrary.add_animation */
   final def addAnimation(name: gdext.builtin.StringName, animation: Animation): Long =
@@ -32,14 +33,4 @@ abstract class AnimationLibrary extends Resource {
   final def getAnimationListSize(): Long =
     Ptrcall.call0[Long](MethodBind.get("AnimationLibrary", "get_animation_list_size", 3905245786L), hostObject.objectPtr)
 
-}
-
-object AnimationLibrary {
-  /** Class metadata for Gd[AnimationLibrary] lifetime management and casting. */
-  given GodotClass[AnimationLibrary] with {
-    def className = "AnimationLibrary"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AnimationLibrary = new AnimationLibrary {}.withHost(o.objectPtr)
-    def unwrap(t: AnimationLibrary): GodotObject = t.hostObject
-  }
 }

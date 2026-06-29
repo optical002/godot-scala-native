@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ParallaxBackground`, extends `CanvasLayer`. */
 abstract class ParallaxBackground extends CanvasLayer {
+  override def godotClassName: String = "ParallaxBackground"
 
   /** ParallaxBackground.set_scroll_offset */
   final def setScrollOffset(offset: gdext.builtin.Vector2): Unit =
@@ -56,14 +57,4 @@ abstract class ParallaxBackground extends CanvasLayer {
   final def isIgnoreCameraZoom(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("ParallaxBackground", "is_ignore_camera_zoom", 2240911060L), hostObject.objectPtr)
 
-}
-
-object ParallaxBackground {
-  /** Class metadata for Gd[ParallaxBackground] lifetime management and casting. */
-  given GodotClass[ParallaxBackground] with {
-    def className = "ParallaxBackground"
-    def isRefCounted = false
-    def wrap(o: GodotObject): ParallaxBackground = new ParallaxBackground {}.withHost(o.objectPtr)
-    def unwrap(t: ParallaxBackground): GodotObject = t.hostObject
-  }
 }

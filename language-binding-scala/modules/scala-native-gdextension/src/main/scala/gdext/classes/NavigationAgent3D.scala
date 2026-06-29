@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `NavigationAgent3D`, extends `Node`. */
 abstract class NavigationAgent3D extends Node {
+  override def godotClassName: String = "NavigationAgent3D"
 
   /** NavigationAgent3D.set_avoidance_enabled */
   final def setAvoidanceEnabled(enabled: Boolean): Unit =
@@ -336,14 +337,4 @@ abstract class NavigationAgent3D extends Node {
   final def getDebugPathCustomPointSize(): Double =
     Ptrcall.call0[Double](MethodBind.get("NavigationAgent3D", "get_debug_path_custom_point_size", 1740695150L), hostObject.objectPtr)
 
-}
-
-object NavigationAgent3D {
-  /** Class metadata for Gd[NavigationAgent3D] lifetime management and casting. */
-  given GodotClass[NavigationAgent3D] with {
-    def className = "NavigationAgent3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): NavigationAgent3D = new NavigationAgent3D {}.withHost(o.objectPtr)
-    def unwrap(t: NavigationAgent3D): GodotObject = t.hostObject
-  }
 }

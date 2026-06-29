@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `StatusIndicator`, extends `Node`. */
 abstract class StatusIndicator extends Node {
+  override def godotClassName: String = "StatusIndicator"
 
   /** StatusIndicator.set_tooltip */
   final def setTooltip(tooltip: String): Unit =
@@ -36,14 +37,4 @@ abstract class StatusIndicator extends Node {
   final def getRect(): gdext.builtin.Rect2 =
     Ptrcall.call0[gdext.builtin.Rect2](MethodBind.get("StatusIndicator", "get_rect", 1639390495L), hostObject.objectPtr)
 
-}
-
-object StatusIndicator {
-  /** Class metadata for Gd[StatusIndicator] lifetime management and casting. */
-  given GodotClass[StatusIndicator] with {
-    def className = "StatusIndicator"
-    def isRefCounted = false
-    def wrap(o: GodotObject): StatusIndicator = new StatusIndicator {}.withHost(o.objectPtr)
-    def unwrap(t: StatusIndicator): GodotObject = t.hostObject
-  }
 }

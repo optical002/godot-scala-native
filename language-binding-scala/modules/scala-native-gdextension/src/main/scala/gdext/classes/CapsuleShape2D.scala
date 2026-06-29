@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CapsuleShape2D`, extends `Shape2D`. */
 abstract class CapsuleShape2D extends Shape2D {
+  override def godotClassName: String = "CapsuleShape2D"
 
   /** CapsuleShape2D.set_radius */
   final def setRadius(radius: Double): Unit =
@@ -32,14 +33,4 @@ abstract class CapsuleShape2D extends Shape2D {
   final def getMidHeight(): Double =
     Ptrcall.call0[Double](MethodBind.get("CapsuleShape2D", "get_mid_height", 1740695150L), hostObject.objectPtr)
 
-}
-
-object CapsuleShape2D {
-  /** Class metadata for Gd[CapsuleShape2D] lifetime management and casting. */
-  given GodotClass[CapsuleShape2D] with {
-    def className = "CapsuleShape2D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): CapsuleShape2D = new CapsuleShape2D {}.withHost(o.objectPtr)
-    def unwrap(t: CapsuleShape2D): GodotObject = t.hostObject
-  }
 }

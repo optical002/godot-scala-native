@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GraphElement`, extends `Container`. */
 abstract class GraphElement extends Container {
+  override def godotClassName: String = "GraphElement"
 
   /** GraphElement.set_resizable */
   final def setResizable(resizable: Boolean): Unit =
@@ -56,14 +57,4 @@ abstract class GraphElement extends Container {
   final def getPositionOffset(): gdext.builtin.Vector2 =
     Ptrcall.call0[gdext.builtin.Vector2](MethodBind.get("GraphElement", "get_position_offset", 3341600327L), hostObject.objectPtr)
 
-}
-
-object GraphElement {
-  /** Class metadata for Gd[GraphElement] lifetime management and casting. */
-  given GodotClass[GraphElement] with {
-    def className = "GraphElement"
-    def isRefCounted = false
-    def wrap(o: GodotObject): GraphElement = new GraphElement {}.withHost(o.objectPtr)
-    def unwrap(t: GraphElement): GodotObject = t.hostObject
-  }
 }

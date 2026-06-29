@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ColorPicker`, extends `VBoxContainer`. */
 abstract class ColorPicker extends VBoxContainer {
+  override def godotClassName: String = "ColorPicker"
 
   /** ColorPicker.set_pick_color */
   final def setPickColor(color: gdext.builtin.Color): Unit =
@@ -120,14 +121,4 @@ abstract class ColorPicker extends VBoxContainer {
   final def getPickerShape(): Long =
     Ptrcall.call0[Long](MethodBind.get("ColorPicker", "get_picker_shape", 1143229889L), hostObject.objectPtr)
 
-}
-
-object ColorPicker {
-  /** Class metadata for Gd[ColorPicker] lifetime management and casting. */
-  given GodotClass[ColorPicker] with {
-    def className = "ColorPicker"
-    def isRefCounted = false
-    def wrap(o: GodotObject): ColorPicker = new ColorPicker {}.withHost(o.objectPtr)
-    def unwrap(t: ColorPicker): GodotObject = t.hostObject
-  }
 }

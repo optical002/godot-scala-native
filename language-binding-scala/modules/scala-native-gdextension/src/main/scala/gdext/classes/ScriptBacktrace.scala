@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ScriptBacktrace`, extends `RefCounted`. */
 abstract class ScriptBacktrace extends RefCounted {
+  override def godotClassName: String = "ScriptBacktrace"
 
   /** ScriptBacktrace.get_language_name */
   final def getLanguageName(): String =
@@ -60,14 +61,4 @@ abstract class ScriptBacktrace extends RefCounted {
   final def format(indent_all: Long, indent_frames: Long): String =
     Ptrcall.call2[Long, Long, String](MethodBind.get("ScriptBacktrace", "format", 3464456933L), hostObject.objectPtr, indent_all, indent_frames)
 
-}
-
-object ScriptBacktrace {
-  /** Class metadata for Gd[ScriptBacktrace] lifetime management and casting. */
-  given GodotClass[ScriptBacktrace] with {
-    def className = "ScriptBacktrace"
-    def isRefCounted = true
-    def wrap(o: GodotObject): ScriptBacktrace = new ScriptBacktrace {}.withHost(o.objectPtr)
-    def unwrap(t: ScriptBacktrace): GodotObject = t.hostObject
-  }
 }

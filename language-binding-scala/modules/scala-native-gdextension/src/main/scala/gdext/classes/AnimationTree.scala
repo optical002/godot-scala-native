@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AnimationTree`, extends `AnimationMixer`. */
 abstract class AnimationTree extends AnimationMixer {
+  override def godotClassName: String = "AnimationTree"
 
   /** AnimationTree.set_tree_root */
   final def setTreeRoot(animation_node: AnimationRootNode): Unit =
@@ -24,14 +25,4 @@ abstract class AnimationTree extends AnimationMixer {
   final def getProcessCallback(): Long =
     Ptrcall.call0[Long](MethodBind.get("AnimationTree", "get_process_callback", 891317132L), hostObject.objectPtr)
 
-}
-
-object AnimationTree {
-  /** Class metadata for Gd[AnimationTree] lifetime management and casting. */
-  given GodotClass[AnimationTree] with {
-    def className = "AnimationTree"
-    def isRefCounted = false
-    def wrap(o: GodotObject): AnimationTree = new AnimationTree {}.withHost(o.objectPtr)
-    def unwrap(t: AnimationTree): GodotObject = t.hostObject
-  }
 }

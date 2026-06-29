@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RDPipelineRasterizationState`, extends `RefCounted`. */
 abstract class RDPipelineRasterizationState extends RefCounted {
+  override def godotClassName: String = "RDPipelineRasterizationState"
 
   /** RDPipelineRasterizationState.set_enable_depth_clamp */
   final def setEnableDepthClamp(p_member: Boolean): Unit =
@@ -96,14 +97,4 @@ abstract class RDPipelineRasterizationState extends RefCounted {
   final def getPatchControlPoints(): Long =
     Ptrcall.call0[Long](MethodBind.get("RDPipelineRasterizationState", "get_patch_control_points", 3905245786L), hostObject.objectPtr)
 
-}
-
-object RDPipelineRasterizationState {
-  /** Class metadata for Gd[RDPipelineRasterizationState] lifetime management and casting. */
-  given GodotClass[RDPipelineRasterizationState] with {
-    def className = "RDPipelineRasterizationState"
-    def isRefCounted = true
-    def wrap(o: GodotObject): RDPipelineRasterizationState = new RDPipelineRasterizationState {}.withHost(o.objectPtr)
-    def unwrap(t: RDPipelineRasterizationState): GodotObject = t.hostObject
-  }
 }

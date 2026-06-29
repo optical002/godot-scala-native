@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GLTFNode`, extends `Resource`. */
 abstract class GLTFNode extends Resource {
+  override def godotClassName: String = "GLTFNode"
 
   /** GLTFNode.get_original_name */
   final def getOriginalName(): String =
@@ -116,14 +117,4 @@ abstract class GLTFNode extends Resource {
   final def setVisible(visible: Boolean): Unit =
     Ptrcall.callVoid1(MethodBind.get("GLTFNode", "set_visible", 2586408642L), hostObject.objectPtr, visible)
 
-}
-
-object GLTFNode {
-  /** Class metadata for Gd[GLTFNode] lifetime management and casting. */
-  given GodotClass[GLTFNode] with {
-    def className = "GLTFNode"
-    def isRefCounted = true
-    def wrap(o: GodotObject): GLTFNode = new GLTFNode {}.withHost(o.objectPtr)
-    def unwrap(t: GLTFNode): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AnimationNodeBlendSpace1D`, extends `AnimationRootNode`. */
 abstract class AnimationNodeBlendSpace1D extends AnimationRootNode {
+  override def godotClassName: String = "AnimationNodeBlendSpace1D"
 
   /** AnimationNodeBlendSpace1D.add_blend_point */
   final def addBlendPoint(node: AnimationRootNode, pos: Double, at_index: Long): Unit =
@@ -84,14 +85,4 @@ abstract class AnimationNodeBlendSpace1D extends AnimationRootNode {
   final def isUsingSync(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("AnimationNodeBlendSpace1D", "is_using_sync", 36873697L), hostObject.objectPtr)
 
-}
-
-object AnimationNodeBlendSpace1D {
-  /** Class metadata for Gd[AnimationNodeBlendSpace1D] lifetime management and casting. */
-  given GodotClass[AnimationNodeBlendSpace1D] with {
-    def className = "AnimationNodeBlendSpace1D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AnimationNodeBlendSpace1D = new AnimationNodeBlendSpace1D {}.withHost(o.objectPtr)
-    def unwrap(t: AnimationNodeBlendSpace1D): GodotObject = t.hostObject
-  }
 }

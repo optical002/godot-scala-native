@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TextureButton`, extends `BaseButton`. */
 abstract class TextureButton extends BaseButton {
+  override def godotClassName: String = "TextureButton"
 
   /** TextureButton.set_texture_normal */
   final def setTextureNormal(texture: Texture2D): Unit =
@@ -88,14 +89,4 @@ abstract class TextureButton extends BaseButton {
   final def getStretchMode(): Long =
     Ptrcall.call0[Long](MethodBind.get("TextureButton", "get_stretch_mode", 33815122L), hostObject.objectPtr)
 
-}
-
-object TextureButton {
-  /** Class metadata for Gd[TextureButton] lifetime management and casting. */
-  given GodotClass[TextureButton] with {
-    def className = "TextureButton"
-    def isRefCounted = false
-    def wrap(o: GodotObject): TextureButton = new TextureButton {}.withHost(o.objectPtr)
-    def unwrap(t: TextureButton): GodotObject = t.hostObject
-  }
 }

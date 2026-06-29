@@ -7,15 +7,6 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `WeakRef`, extends `RefCounted`. */
 abstract class WeakRef extends RefCounted {
+  override def godotClassName: String = "WeakRef"
 
-}
-
-object WeakRef {
-  /** Class metadata for Gd[WeakRef] lifetime management and casting. */
-  given GodotClass[WeakRef] with {
-    def className = "WeakRef"
-    def isRefCounted = true
-    def wrap(o: GodotObject): WeakRef = new WeakRef {}.withHost(o.objectPtr)
-    def unwrap(t: WeakRef): GodotObject = t.hostObject
-  }
 }

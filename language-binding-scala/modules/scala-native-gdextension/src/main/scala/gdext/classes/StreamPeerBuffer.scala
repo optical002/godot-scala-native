@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `StreamPeerBuffer`, extends `StreamPeer`. */
 abstract class StreamPeerBuffer extends StreamPeer {
+  override def godotClassName: String = "StreamPeerBuffer"
 
   /** StreamPeerBuffer.seek */
   final def seek(position: Long): Unit =
@@ -32,14 +33,4 @@ abstract class StreamPeerBuffer extends StreamPeer {
   final def duplicate(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("StreamPeerBuffer", "duplicate", 2474064677L), hostObject.objectPtr)
 
-}
-
-object StreamPeerBuffer {
-  /** Class metadata for Gd[StreamPeerBuffer] lifetime management and casting. */
-  given GodotClass[StreamPeerBuffer] with {
-    def className = "StreamPeerBuffer"
-    def isRefCounted = true
-    def wrap(o: GodotObject): StreamPeerBuffer = new StreamPeerBuffer {}.withHost(o.objectPtr)
-    def unwrap(t: StreamPeerBuffer): GodotObject = t.hostObject
-  }
 }

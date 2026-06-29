@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `BaseMaterial3D`, extends `Material`. */
 abstract class BaseMaterial3D extends Material {
+  override def godotClassName: String = "BaseMaterial3D"
 
   /** BaseMaterial3D.set_albedo */
   final def setAlbedo(albedo: gdext.builtin.Color): Unit =
@@ -624,14 +625,4 @@ abstract class BaseMaterial3D extends Material {
   final def getStencilEffectOutlineThickness(): Double =
     Ptrcall.call0[Double](MethodBind.get("BaseMaterial3D", "get_stencil_effect_outline_thickness", 1740695150L), hostObject.objectPtr)
 
-}
-
-object BaseMaterial3D {
-  /** Class metadata for Gd[BaseMaterial3D] lifetime management and casting. */
-  given GodotClass[BaseMaterial3D] with {
-    def className = "BaseMaterial3D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): BaseMaterial3D = new BaseMaterial3D {}.withHost(o.objectPtr)
-    def unwrap(t: BaseMaterial3D): GodotObject = t.hostObject
-  }
 }

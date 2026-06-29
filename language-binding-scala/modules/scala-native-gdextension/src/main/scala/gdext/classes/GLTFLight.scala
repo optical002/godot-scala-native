@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GLTFLight`, extends `Resource`. */
 abstract class GLTFLight extends Resource {
+  override def godotClassName: String = "GLTFLight"
 
   /** GLTFLight.to_node */
   final def toNode(): GodotObject =
@@ -60,14 +61,4 @@ abstract class GLTFLight extends Resource {
   final def setOuterConeAngle(outer_cone_angle: Double): Unit =
     Ptrcall.callVoid1(MethodBind.get("GLTFLight", "set_outer_cone_angle", 373806689L), hostObject.objectPtr, outer_cone_angle)
 
-}
-
-object GLTFLight {
-  /** Class metadata for Gd[GLTFLight] lifetime management and casting. */
-  given GodotClass[GLTFLight] with {
-    def className = "GLTFLight"
-    def isRefCounted = true
-    def wrap(o: GodotObject): GLTFLight = new GLTFLight {}.withHost(o.objectPtr)
-    def unwrap(t: GLTFLight): GodotObject = t.hostObject
-  }
 }

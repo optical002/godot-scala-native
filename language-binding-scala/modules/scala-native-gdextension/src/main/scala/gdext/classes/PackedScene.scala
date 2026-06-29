@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PackedScene`, extends `Resource`. */
 abstract class PackedScene extends Resource {
+  override def godotClassName: String = "PackedScene"
 
   /** PackedScene.pack */
   final def pack(path: Node): Long =
@@ -24,14 +25,4 @@ abstract class PackedScene extends Resource {
   final def getState(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("PackedScene", "get_state", 3479783971L), hostObject.objectPtr)
 
-}
-
-object PackedScene {
-  /** Class metadata for Gd[PackedScene] lifetime management and casting. */
-  given GodotClass[PackedScene] with {
-    def className = "PackedScene"
-    def isRefCounted = true
-    def wrap(o: GodotObject): PackedScene = new PackedScene {}.withHost(o.objectPtr)
-    def unwrap(t: PackedScene): GodotObject = t.hostObject
-  }
 }

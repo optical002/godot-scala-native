@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AnimationNodeTransition`, extends `AnimationNodeSync`. */
 abstract class AnimationNodeTransition extends AnimationNodeSync {
+  override def godotClassName: String = "AnimationNodeTransition"
 
   /** AnimationNodeTransition.set_input_count */
   final def setInputCount(input_count: Long): Unit =
@@ -60,14 +61,4 @@ abstract class AnimationNodeTransition extends AnimationNodeSync {
   final def isAllowTransitionToSelf(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("AnimationNodeTransition", "is_allow_transition_to_self", 36873697L), hostObject.objectPtr)
 
-}
-
-object AnimationNodeTransition {
-  /** Class metadata for Gd[AnimationNodeTransition] lifetime management and casting. */
-  given GodotClass[AnimationNodeTransition] with {
-    def className = "AnimationNodeTransition"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AnimationNodeTransition = new AnimationNodeTransition {}.withHost(o.objectPtr)
-    def unwrap(t: AnimationNodeTransition): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `XRBodyModifier3D`, extends `SkeletonModifier3D`. */
 abstract class XRBodyModifier3D extends SkeletonModifier3D {
+  override def godotClassName: String = "XRBodyModifier3D"
 
   /** XRBodyModifier3D.set_body_tracker */
   final def setBodyTracker(tracker_name: gdext.builtin.StringName): Unit =
@@ -32,14 +33,4 @@ abstract class XRBodyModifier3D extends SkeletonModifier3D {
   final def getBoneUpdate(): Long =
     Ptrcall.call0[Long](MethodBind.get("XRBodyModifier3D", "get_bone_update", 1309305964L), hostObject.objectPtr)
 
-}
-
-object XRBodyModifier3D {
-  /** Class metadata for Gd[XRBodyModifier3D] lifetime management and casting. */
-  given GodotClass[XRBodyModifier3D] with {
-    def className = "XRBodyModifier3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): XRBodyModifier3D = new XRBodyModifier3D {}.withHost(o.objectPtr)
-    def unwrap(t: XRBodyModifier3D): GodotObject = t.hostObject
-  }
 }

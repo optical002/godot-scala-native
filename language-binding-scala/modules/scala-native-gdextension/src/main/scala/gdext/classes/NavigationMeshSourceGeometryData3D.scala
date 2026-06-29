@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `NavigationMeshSourceGeometryData3D`, extends `Resource`. */
 abstract class NavigationMeshSourceGeometryData3D extends Resource {
+  override def godotClassName: String = "NavigationMeshSourceGeometryData3D"
 
   /** NavigationMeshSourceGeometryData3D.clear */
   final def clear(): Unit =
@@ -32,14 +33,4 @@ abstract class NavigationMeshSourceGeometryData3D extends Resource {
   final def getBounds(): gdext.builtin.AABB =
     Ptrcall.call0[gdext.builtin.AABB](MethodBind.get("NavigationMeshSourceGeometryData3D", "get_bounds", 1021181044L), hostObject.objectPtr)
 
-}
-
-object NavigationMeshSourceGeometryData3D {
-  /** Class metadata for Gd[NavigationMeshSourceGeometryData3D] lifetime management and casting. */
-  given GodotClass[NavigationMeshSourceGeometryData3D] with {
-    def className = "NavigationMeshSourceGeometryData3D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): NavigationMeshSourceGeometryData3D = new NavigationMeshSourceGeometryData3D {}.withHost(o.objectPtr)
-    def unwrap(t: NavigationMeshSourceGeometryData3D): GodotObject = t.hostObject
-  }
 }

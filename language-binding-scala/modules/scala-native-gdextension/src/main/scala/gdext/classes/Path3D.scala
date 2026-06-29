@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Path3D`, extends `Node3D`. */
 abstract class Path3D extends Node3D {
+  override def godotClassName: String = "Path3D"
 
   /** Path3D.set_curve */
   final def setCurve(curve: Curve3D): Unit =
@@ -24,14 +25,4 @@ abstract class Path3D extends Node3D {
   final def getDebugCustomColor(): gdext.builtin.Color =
     Ptrcall.call0[gdext.builtin.Color](MethodBind.get("Path3D", "get_debug_custom_color", 3444240500L), hostObject.objectPtr)
 
-}
-
-object Path3D {
-  /** Class metadata for Gd[Path3D] lifetime management and casting. */
-  given GodotClass[Path3D] with {
-    def className = "Path3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Path3D = new Path3D {}.withHost(o.objectPtr)
-    def unwrap(t: Path3D): GodotObject = t.hostObject
-  }
 }

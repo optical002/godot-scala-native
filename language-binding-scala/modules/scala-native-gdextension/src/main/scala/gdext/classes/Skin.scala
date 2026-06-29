@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Skin`, extends `Resource`. */
 abstract class Skin extends Resource {
+  override def godotClassName: String = "Skin"
 
   /** Skin.set_bind_count */
   final def setBindCount(bind_count: Long): Unit =
@@ -52,14 +53,4 @@ abstract class Skin extends Resource {
   final def clearBinds(): Unit =
     Ptrcall.callVoid0(MethodBind.get("Skin", "clear_binds", 3218959716L), hostObject.objectPtr)
 
-}
-
-object Skin {
-  /** Class metadata for Gd[Skin] lifetime management and casting. */
-  given GodotClass[Skin] with {
-    def className = "Skin"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Skin = new Skin {}.withHost(o.objectPtr)
-    def unwrap(t: Skin): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `MultiplayerPeer`, extends `PacketPeer`. */
 abstract class MultiplayerPeer extends PacketPeer {
+  override def godotClassName: String = "MultiplayerPeer"
 
   /** MultiplayerPeer.set_transfer_channel */
   final def setTransferChannel(channel: Long): Unit =
@@ -76,14 +77,4 @@ abstract class MultiplayerPeer extends PacketPeer {
   final def isServerRelaySupported(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("MultiplayerPeer", "is_server_relay_supported", 36873697L), hostObject.objectPtr)
 
-}
-
-object MultiplayerPeer {
-  /** Class metadata for Gd[MultiplayerPeer] lifetime management and casting. */
-  given GodotClass[MultiplayerPeer] with {
-    def className = "MultiplayerPeer"
-    def isRefCounted = true
-    def wrap(o: GodotObject): MultiplayerPeer = new MultiplayerPeer {}.withHost(o.objectPtr)
-    def unwrap(t: MultiplayerPeer): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `FontVariation`, extends `Font`. */
 abstract class FontVariation extends Font {
+  override def godotClassName: String = "FontVariation"
 
   /** FontVariation.set_base_font */
   final def setBaseFont(font: Font): Unit =
@@ -52,14 +53,4 @@ abstract class FontVariation extends Font {
   final def getBaselineOffset(): Double =
     Ptrcall.call0[Double](MethodBind.get("FontVariation", "get_baseline_offset", 1740695150L), hostObject.objectPtr)
 
-}
-
-object FontVariation {
-  /** Class metadata for Gd[FontVariation] lifetime management and casting. */
-  given GodotClass[FontVariation] with {
-    def className = "FontVariation"
-    def isRefCounted = true
-    def wrap(o: GodotObject): FontVariation = new FontVariation {}.withHost(o.objectPtr)
-    def unwrap(t: FontVariation): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ConvertTransformModifier3D`, extends `BoneConstraint3D`. */
 abstract class ConvertTransformModifier3D extends BoneConstraint3D {
+  override def godotClassName: String = "ConvertTransformModifier3D"
 
   /** ConvertTransformModifier3D.set_apply_transform_mode */
   final def setApplyTransformMode(index: Long, transform_mode: Long): Unit =
@@ -88,14 +89,4 @@ abstract class ConvertTransformModifier3D extends BoneConstraint3D {
   final def isAdditive(index: Long): Boolean =
     Ptrcall.call1[Long, Boolean](MethodBind.get("ConvertTransformModifier3D", "is_additive", 1116898809L), hostObject.objectPtr, index)
 
-}
-
-object ConvertTransformModifier3D {
-  /** Class metadata for Gd[ConvertTransformModifier3D] lifetime management and casting. */
-  given GodotClass[ConvertTransformModifier3D] with {
-    def className = "ConvertTransformModifier3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): ConvertTransformModifier3D = new ConvertTransformModifier3D {}.withHost(o.objectPtr)
-    def unwrap(t: ConvertTransformModifier3D): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Texture3D`, extends `Texture`. */
 abstract class Texture3D extends Texture {
+  override def godotClassName: String = "Texture3D"
 
   /** Texture3D.get_format */
   final def getFormat(): Long =
@@ -32,14 +33,4 @@ abstract class Texture3D extends Texture {
   final def createPlaceholder(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("Texture3D", "create_placeholder", 121922552L), hostObject.objectPtr)
 
-}
-
-object Texture3D {
-  /** Class metadata for Gd[Texture3D] lifetime management and casting. */
-  given GodotClass[Texture3D] with {
-    def className = "Texture3D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Texture3D = new Texture3D {}.withHost(o.objectPtr)
-    def unwrap(t: Texture3D): GodotObject = t.hostObject
-  }
 }

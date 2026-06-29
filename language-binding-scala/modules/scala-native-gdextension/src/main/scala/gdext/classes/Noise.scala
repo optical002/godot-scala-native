@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Noise`, extends `Resource`. */
 abstract class Noise extends Resource {
+  override def godotClassName: String = "Noise"
 
   /** Noise.get_noise_1d */
   final def getNoise1d(x: Double): Double =
@@ -36,14 +37,4 @@ abstract class Noise extends Resource {
   final def getSeamlessImage(width: Long, height: Long, invert: Boolean, in_3d_space: Boolean, skirt: Double, normalize: Boolean): GodotObject =
     Ptrcall.call6[Long, Long, Boolean, Boolean, Double, Boolean, GodotObject](MethodBind.get("Noise", "get_seamless_image", 2770743602L), hostObject.objectPtr, width, height, invert, in_3d_space, skirt, normalize)
 
-}
-
-object Noise {
-  /** Class metadata for Gd[Noise] lifetime management and casting. */
-  given GodotClass[Noise] with {
-    def className = "Noise"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Noise = new Noise {}.withHost(o.objectPtr)
-    def unwrap(t: Noise): GodotObject = t.hostObject
-  }
 }

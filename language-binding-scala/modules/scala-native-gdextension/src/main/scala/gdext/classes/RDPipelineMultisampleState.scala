@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RDPipelineMultisampleState`, extends `RefCounted`. */
 abstract class RDPipelineMultisampleState extends RefCounted {
+  override def godotClassName: String = "RDPipelineMultisampleState"
 
   /** RDPipelineMultisampleState.set_sample_count */
   final def setSampleCount(p_member: Long): Unit =
@@ -48,14 +49,4 @@ abstract class RDPipelineMultisampleState extends RefCounted {
   final def getEnableAlphaToOne(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("RDPipelineMultisampleState", "get_enable_alpha_to_one", 36873697L), hostObject.objectPtr)
 
-}
-
-object RDPipelineMultisampleState {
-  /** Class metadata for Gd[RDPipelineMultisampleState] lifetime management and casting. */
-  given GodotClass[RDPipelineMultisampleState] with {
-    def className = "RDPipelineMultisampleState"
-    def isRefCounted = true
-    def wrap(o: GodotObject): RDPipelineMultisampleState = new RDPipelineMultisampleState {}.withHost(o.objectPtr)
-    def unwrap(t: RDPipelineMultisampleState): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SoftBody3D`, extends `MeshInstance3D`. */
 abstract class SoftBody3D extends MeshInstance3D {
+  override def godotClassName: String = "SoftBody3D"
 
   /** SoftBody3D.set_collision_mask */
   final def setCollisionMask(collision_mask: Long): Unit =
@@ -144,14 +145,4 @@ abstract class SoftBody3D extends MeshInstance3D {
   final def isRayPickable(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("SoftBody3D", "is_ray_pickable", 36873697L), hostObject.objectPtr)
 
-}
-
-object SoftBody3D {
-  /** Class metadata for Gd[SoftBody3D] lifetime management and casting. */
-  given GodotClass[SoftBody3D] with {
-    def className = "SoftBody3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): SoftBody3D = new SoftBody3D {}.withHost(o.objectPtr)
-    def unwrap(t: SoftBody3D): GodotObject = t.hostObject
-  }
 }

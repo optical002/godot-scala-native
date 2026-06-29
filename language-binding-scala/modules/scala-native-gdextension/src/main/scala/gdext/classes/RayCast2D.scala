@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RayCast2D`, extends `Node2D`. */
 abstract class RayCast2D extends Node2D {
+  override def godotClassName: String = "RayCast2D"
 
   /** RayCast2D.set_enabled */
   final def setEnabled(enabled: Boolean): Unit =
@@ -108,14 +109,4 @@ abstract class RayCast2D extends Node2D {
   final def isHitFromInsideEnabled(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("RayCast2D", "is_hit_from_inside_enabled", 36873697L), hostObject.objectPtr)
 
-}
-
-object RayCast2D {
-  /** Class metadata for Gd[RayCast2D] lifetime management and casting. */
-  given GodotClass[RayCast2D] with {
-    def className = "RayCast2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): RayCast2D = new RayCast2D {}.withHost(o.objectPtr)
-    def unwrap(t: RayCast2D): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorDebuggerSession`, extends `RefCounted`. */
 abstract class EditorDebuggerSession extends RefCounted {
+  override def godotClassName: String = "EditorDebuggerSession"
 
   /** EditorDebuggerSession.is_breaked */
   final def isBreaked(): Boolean =
@@ -32,14 +33,4 @@ abstract class EditorDebuggerSession extends RefCounted {
   final def setBreakpoint(path: String, line: Long, enabled: Boolean): Unit =
     Ptrcall.callVoid3(MethodBind.get("EditorDebuggerSession", "set_breakpoint", 4108344793L), hostObject.objectPtr, path, line, enabled)
 
-}
-
-object EditorDebuggerSession {
-  /** Class metadata for Gd[EditorDebuggerSession] lifetime management and casting. */
-  given GodotClass[EditorDebuggerSession] with {
-    def className = "EditorDebuggerSession"
-    def isRefCounted = true
-    def wrap(o: GodotObject): EditorDebuggerSession = new EditorDebuggerSession {}.withHost(o.objectPtr)
-    def unwrap(t: EditorDebuggerSession): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `TextureLayered`, extends `Texture`. */
 abstract class TextureLayered extends Texture {
+  override def godotClassName: String = "TextureLayered"
 
   /** TextureLayered.get_format */
   final def getFormat(): Long =
@@ -36,14 +37,4 @@ abstract class TextureLayered extends Texture {
   final def getLayerData(layer: Long): GodotObject =
     Ptrcall.call1[Long, GodotObject](MethodBind.get("TextureLayered", "get_layer_data", 3655284255L), hostObject.objectPtr, layer)
 
-}
-
-object TextureLayered {
-  /** Class metadata for Gd[TextureLayered] lifetime management and casting. */
-  given GodotClass[TextureLayered] with {
-    def className = "TextureLayered"
-    def isRefCounted = true
-    def wrap(o: GodotObject): TextureLayered = new TextureLayered {}.withHost(o.objectPtr)
-    def unwrap(t: TextureLayered): GodotObject = t.hostObject
-  }
 }

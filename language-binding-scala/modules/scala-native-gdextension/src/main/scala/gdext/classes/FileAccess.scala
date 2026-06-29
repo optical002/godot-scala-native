@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `FileAccess`, extends `RefCounted`. */
 abstract class FileAccess extends RefCounted {
+  override def godotClassName: String = "FileAccess"
 
   /** FileAccess.resize */
   final def resize(length: Long): Long =
@@ -152,14 +153,4 @@ abstract class FileAccess extends RefCounted {
   final def close(): Unit =
     Ptrcall.callVoid0(MethodBind.get("FileAccess", "close", 3218959716L), hostObject.objectPtr)
 
-}
-
-object FileAccess {
-  /** Class metadata for Gd[FileAccess] lifetime management and casting. */
-  given GodotClass[FileAccess] with {
-    def className = "FileAccess"
-    def isRefCounted = true
-    def wrap(o: GodotObject): FileAccess = new FileAccess {}.withHost(o.objectPtr)
-    def unwrap(t: FileAccess): GodotObject = t.hostObject
-  }
 }

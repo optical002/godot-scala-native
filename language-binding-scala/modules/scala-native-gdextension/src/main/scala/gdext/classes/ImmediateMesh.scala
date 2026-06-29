@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ImmediateMesh`, extends `Mesh`. */
 abstract class ImmediateMesh extends Mesh {
+  override def godotClassName: String = "ImmediateMesh"
 
   /** ImmediateMesh.surface_begin */
   final def surfaceBegin(primitive: Long, material: Material): Unit =
@@ -48,14 +49,4 @@ abstract class ImmediateMesh extends Mesh {
   final def clearSurfaces(): Unit =
     Ptrcall.callVoid0(MethodBind.get("ImmediateMesh", "clear_surfaces", 3218959716L), hostObject.objectPtr)
 
-}
-
-object ImmediateMesh {
-  /** Class metadata for Gd[ImmediateMesh] lifetime management and casting. */
-  given GodotClass[ImmediateMesh] with {
-    def className = "ImmediateMesh"
-    def isRefCounted = true
-    def wrap(o: GodotObject): ImmediateMesh = new ImmediateMesh {}.withHost(o.objectPtr)
-    def unwrap(t: ImmediateMesh): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Area2D`, extends `CollisionObject2D`. */
 abstract class Area2D extends CollisionObject2D {
+  override def godotClassName: String = "Area2D"
 
   /** Area2D.set_gravity_space_override_mode */
   final def setGravitySpaceOverrideMode(space_override_mode: Long): Unit =
@@ -144,14 +145,4 @@ abstract class Area2D extends CollisionObject2D {
   final def isOverridingAudioBus(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("Area2D", "is_overriding_audio_bus", 36873697L), hostObject.objectPtr)
 
-}
-
-object Area2D {
-  /** Class metadata for Gd[Area2D] lifetime management and casting. */
-  given GodotClass[Area2D] with {
-    def className = "Area2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Area2D = new Area2D {}.withHost(o.objectPtr)
-    def unwrap(t: Area2D): GodotObject = t.hostObject
-  }
 }

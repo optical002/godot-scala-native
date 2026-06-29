@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SeparationRayShape3D`, extends `Shape3D`. */
 abstract class SeparationRayShape3D extends Shape3D {
+  override def godotClassName: String = "SeparationRayShape3D"
 
   /** SeparationRayShape3D.set_length */
   final def setLength(length: Double): Unit =
@@ -24,14 +25,4 @@ abstract class SeparationRayShape3D extends Shape3D {
   final def getSlideOnSlope(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("SeparationRayShape3D", "get_slide_on_slope", 36873697L), hostObject.objectPtr)
 
-}
-
-object SeparationRayShape3D {
-  /** Class metadata for Gd[SeparationRayShape3D] lifetime management and casting. */
-  given GodotClass[SeparationRayShape3D] with {
-    def className = "SeparationRayShape3D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): SeparationRayShape3D = new SeparationRayShape3D {}.withHost(o.objectPtr)
-    def unwrap(t: SeparationRayShape3D): GodotObject = t.hostObject
-  }
 }

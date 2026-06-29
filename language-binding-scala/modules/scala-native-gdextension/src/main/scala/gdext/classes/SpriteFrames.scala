@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SpriteFrames`, extends `Resource`. */
 abstract class SpriteFrames extends Resource {
+  override def godotClassName: String = "SpriteFrames"
 
   /** SpriteFrames.add_animation */
   final def addAnimation(anim: gdext.builtin.StringName): Unit =
@@ -76,14 +77,4 @@ abstract class SpriteFrames extends Resource {
   final def clearAll(): Unit =
     Ptrcall.callVoid0(MethodBind.get("SpriteFrames", "clear_all", 3218959716L), hostObject.objectPtr)
 
-}
-
-object SpriteFrames {
-  /** Class metadata for Gd[SpriteFrames] lifetime management and casting. */
-  given GodotClass[SpriteFrames] with {
-    def className = "SpriteFrames"
-    def isRefCounted = true
-    def wrap(o: GodotObject): SpriteFrames = new SpriteFrames {}.withHost(o.objectPtr)
-    def unwrap(t: SpriteFrames): GodotObject = t.hostObject
-  }
 }

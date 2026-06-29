@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `StyleBox`, extends `Resource`. */
 abstract class StyleBox extends Resource {
+  override def godotClassName: String = "StyleBox"
 
   /** StyleBox.get_minimum_size */
   final def getMinimumSize(): gdext.builtin.Vector2 =
@@ -40,14 +41,4 @@ abstract class StyleBox extends Resource {
   final def testMask(point: gdext.builtin.Vector2, rect: gdext.builtin.Rect2): Boolean =
     Ptrcall.call2[gdext.builtin.Vector2, gdext.builtin.Rect2, Boolean](MethodBind.get("StyleBox", "test_mask", 3735564539L), hostObject.objectPtr, point, rect)
 
-}
-
-object StyleBox {
-  /** Class metadata for Gd[StyleBox] lifetime management and casting. */
-  given GodotClass[StyleBox] with {
-    def className = "StyleBox"
-    def isRefCounted = true
-    def wrap(o: GodotObject): StyleBox = new StyleBox {}.withHost(o.objectPtr)
-    def unwrap(t: StyleBox): GodotObject = t.hostObject
-  }
 }

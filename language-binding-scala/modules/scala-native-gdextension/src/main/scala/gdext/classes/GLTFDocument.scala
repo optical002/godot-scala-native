@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GLTFDocument`, extends `Resource`. */
 abstract class GLTFDocument extends Resource {
+  override def godotClassName: String = "GLTFDocument"
 
   /** GLTFDocument.set_image_format */
   final def setImageFormat(image_format: String): Unit =
@@ -72,14 +73,4 @@ abstract class GLTFDocument extends Resource {
   final def writeToFilesystem(state: GLTFState, path: String): Long =
     Ptrcall.call2[GodotObject, String, Long](MethodBind.get("GLTFDocument", "write_to_filesystem", 1784551478L), hostObject.objectPtr, state.hostObject, path)
 
-}
-
-object GLTFDocument {
-  /** Class metadata for Gd[GLTFDocument] lifetime management and casting. */
-  given GodotClass[GLTFDocument] with {
-    def className = "GLTFDocument"
-    def isRefCounted = true
-    def wrap(o: GodotObject): GLTFDocument = new GLTFDocument {}.withHost(o.objectPtr)
-    def unwrap(t: GLTFDocument): GodotObject = t.hostObject
-  }
 }

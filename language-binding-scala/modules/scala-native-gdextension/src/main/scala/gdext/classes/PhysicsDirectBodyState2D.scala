@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PhysicsDirectBodyState2D`, extends `Object`. */
 abstract class PhysicsDirectBodyState2D extends Object {
+  override def godotClassName: String = "PhysicsDirectBodyState2D"
 
   /** PhysicsDirectBodyState2D.get_total_gravity */
   final def getTotalGravity(): gdext.builtin.Vector2 =
@@ -196,14 +197,4 @@ abstract class PhysicsDirectBodyState2D extends Object {
   final def getSpaceState(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("PhysicsDirectBodyState2D", "get_space_state", 2506717822L), hostObject.objectPtr)
 
-}
-
-object PhysicsDirectBodyState2D {
-  /** Class metadata for Gd[PhysicsDirectBodyState2D] lifetime management and casting. */
-  given GodotClass[PhysicsDirectBodyState2D] with {
-    def className = "PhysicsDirectBodyState2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): PhysicsDirectBodyState2D = new PhysicsDirectBodyState2D {}.withHost(o.objectPtr)
-    def unwrap(t: PhysicsDirectBodyState2D): GodotObject = t.hostObject
-  }
 }

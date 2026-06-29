@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRActionSet`, extends `Resource`. */
 abstract class OpenXRActionSet extends Resource {
+  override def godotClassName: String = "OpenXRActionSet"
 
   /** OpenXRActionSet.set_localized_name */
   final def setLocalizedName(localized_name: String): Unit =
@@ -36,14 +37,4 @@ abstract class OpenXRActionSet extends Resource {
   final def removeAction(action: OpenXRAction): Unit =
     Ptrcall.callVoid1(MethodBind.get("OpenXRActionSet", "remove_action", 349361333L), hostObject.objectPtr, action.hostObject)
 
-}
-
-object OpenXRActionSet {
-  /** Class metadata for Gd[OpenXRActionSet] lifetime management and casting. */
-  given GodotClass[OpenXRActionSet] with {
-    def className = "OpenXRActionSet"
-    def isRefCounted = true
-    def wrap(o: GodotObject): OpenXRActionSet = new OpenXRActionSet {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRActionSet): GodotObject = t.hostObject
-  }
 }

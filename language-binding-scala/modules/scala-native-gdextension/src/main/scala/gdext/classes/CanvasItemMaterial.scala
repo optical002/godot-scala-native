@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CanvasItemMaterial`, extends `Material`. */
 abstract class CanvasItemMaterial extends Material {
+  override def godotClassName: String = "CanvasItemMaterial"
 
   /** CanvasItemMaterial.set_blend_mode */
   final def setBlendMode(blend_mode: Long): Unit =
@@ -56,14 +57,4 @@ abstract class CanvasItemMaterial extends Material {
   final def getParticlesAnimLoop(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("CanvasItemMaterial", "get_particles_anim_loop", 36873697L), hostObject.objectPtr)
 
-}
-
-object CanvasItemMaterial {
-  /** Class metadata for Gd[CanvasItemMaterial] lifetime management and casting. */
-  given GodotClass[CanvasItemMaterial] with {
-    def className = "CanvasItemMaterial"
-    def isRefCounted = true
-    def wrap(o: GodotObject): CanvasItemMaterial = new CanvasItemMaterial {}.withHost(o.objectPtr)
-    def unwrap(t: CanvasItemMaterial): GodotObject = t.hostObject
-  }
 }

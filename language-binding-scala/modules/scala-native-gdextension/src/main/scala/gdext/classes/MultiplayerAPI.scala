@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `MultiplayerAPI`, extends `RefCounted`. */
 abstract class MultiplayerAPI extends RefCounted {
+  override def godotClassName: String = "MultiplayerAPI"
 
   /** MultiplayerAPI.has_multiplayer_peer */
   final def hasMultiplayerPeer(): Boolean =
@@ -36,14 +37,4 @@ abstract class MultiplayerAPI extends RefCounted {
   final def poll(): Long =
     Ptrcall.call0[Long](MethodBind.get("MultiplayerAPI", "poll", 166280745L), hostObject.objectPtr)
 
-}
-
-object MultiplayerAPI {
-  /** Class metadata for Gd[MultiplayerAPI] lifetime management and casting. */
-  given GodotClass[MultiplayerAPI] with {
-    def className = "MultiplayerAPI"
-    def isRefCounted = true
-    def wrap(o: GodotObject): MultiplayerAPI = new MultiplayerAPI {}.withHost(o.objectPtr)
-    def unwrap(t: MultiplayerAPI): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PhysicsShapeQueryParameters3D`, extends `RefCounted`. */
 abstract class PhysicsShapeQueryParameters3D extends RefCounted {
+  override def godotClassName: String = "PhysicsShapeQueryParameters3D"
 
   /** PhysicsShapeQueryParameters3D.set_shape */
   final def setShape(shape: Resource): Unit =
@@ -64,14 +65,4 @@ abstract class PhysicsShapeQueryParameters3D extends RefCounted {
   final def isCollideWithAreasEnabled(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("PhysicsShapeQueryParameters3D", "is_collide_with_areas_enabled", 36873697L), hostObject.objectPtr)
 
-}
-
-object PhysicsShapeQueryParameters3D {
-  /** Class metadata for Gd[PhysicsShapeQueryParameters3D] lifetime management and casting. */
-  given GodotClass[PhysicsShapeQueryParameters3D] with {
-    def className = "PhysicsShapeQueryParameters3D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): PhysicsShapeQueryParameters3D = new PhysicsShapeQueryParameters3D {}.withHost(o.objectPtr)
-    def unwrap(t: PhysicsShapeQueryParameters3D): GodotObject = t.hostObject
-  }
 }

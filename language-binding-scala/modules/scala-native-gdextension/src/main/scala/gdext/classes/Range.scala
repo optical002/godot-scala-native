@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Range`, extends `Control`. */
 abstract class Range extends Control {
+  override def godotClassName: String = "Range"
 
   /** Range.get_value */
   final def getValue(): Double =
@@ -100,14 +101,4 @@ abstract class Range extends Control {
   final def unshare(): Unit =
     Ptrcall.callVoid0(MethodBind.get("Range", "unshare", 3218959716L), hostObject.objectPtr)
 
-}
-
-object Range {
-  /** Class metadata for Gd[Range] lifetime management and casting. */
-  given GodotClass[Range] with {
-    def className = "Range"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Range = new Range {}.withHost(o.objectPtr)
-    def unwrap(t: Range): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Translation`, extends `Resource`. */
 abstract class Translation extends Resource {
+  override def godotClassName: String = "Translation"
 
   /** Translation.set_locale */
   final def setLocale(locale: String): Unit =
@@ -44,14 +45,4 @@ abstract class Translation extends Resource {
   final def getPluralRulesOverride(): String =
     Ptrcall.call0[String](MethodBind.get("Translation", "get_plural_rules_override", 201670096L), hostObject.objectPtr)
 
-}
-
-object Translation {
-  /** Class metadata for Gd[Translation] lifetime management and casting. */
-  given GodotClass[Translation] with {
-    def className = "Translation"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Translation = new Translation {}.withHost(o.objectPtr)
-    def unwrap(t: Translation): GodotObject = t.hostObject
-  }
 }

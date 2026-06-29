@@ -7,19 +7,10 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorScenePostImport`, extends `RefCounted`. */
 abstract class EditorScenePostImport extends RefCounted {
+  override def godotClassName: String = "EditorScenePostImport"
 
   /** EditorScenePostImport.get_source_file */
   final def getSourceFile(): String =
     Ptrcall.call0[String](MethodBind.get("EditorScenePostImport", "get_source_file", 201670096L), hostObject.objectPtr)
 
-}
-
-object EditorScenePostImport {
-  /** Class metadata for Gd[EditorScenePostImport] lifetime management and casting. */
-  given GodotClass[EditorScenePostImport] with {
-    def className = "EditorScenePostImport"
-    def isRefCounted = true
-    def wrap(o: GodotObject): EditorScenePostImport = new EditorScenePostImport {}.withHost(o.objectPtr)
-    def unwrap(t: EditorScenePostImport): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Curve2D`, extends `Resource`. */
 abstract class Curve2D extends Resource {
+  override def godotClassName: String = "Curve2D"
 
   /** Curve2D.get_point_count */
   final def getPointCount(): Long =
@@ -88,14 +89,4 @@ abstract class Curve2D extends Resource {
   final def getClosestOffset(to_point: gdext.builtin.Vector2): Double =
     Ptrcall.call1[gdext.builtin.Vector2, Double](MethodBind.get("Curve2D", "get_closest_offset", 2276447920L), hostObject.objectPtr, to_point)
 
-}
-
-object Curve2D {
-  /** Class metadata for Gd[Curve2D] lifetime management and casting. */
-  given GodotClass[Curve2D] with {
-    def className = "Curve2D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Curve2D = new Curve2D {}.withHost(o.objectPtr)
-    def unwrap(t: Curve2D): GodotObject = t.hostObject
-  }
 }

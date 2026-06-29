@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GLTFAnimation`, extends `Resource`. */
 abstract class GLTFAnimation extends Resource {
+  override def godotClassName: String = "GLTFAnimation"
 
   /** GLTFAnimation.get_original_name */
   final def getOriginalName(): String =
@@ -24,14 +25,4 @@ abstract class GLTFAnimation extends Resource {
   final def setLoop(loop: Boolean): Unit =
     Ptrcall.callVoid1(MethodBind.get("GLTFAnimation", "set_loop", 2586408642L), hostObject.objectPtr, loop)
 
-}
-
-object GLTFAnimation {
-  /** Class metadata for Gd[GLTFAnimation] lifetime management and casting. */
-  given GodotClass[GLTFAnimation] with {
-    def className = "GLTFAnimation"
-    def isRefCounted = true
-    def wrap(o: GodotObject): GLTFAnimation = new GLTFAnimation {}.withHost(o.objectPtr)
-    def unwrap(t: GLTFAnimation): GodotObject = t.hostObject
-  }
 }

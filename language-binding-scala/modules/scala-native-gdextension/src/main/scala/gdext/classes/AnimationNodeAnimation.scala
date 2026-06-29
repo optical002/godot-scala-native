@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AnimationNodeAnimation`, extends `AnimationRootNode`. */
 abstract class AnimationNodeAnimation extends AnimationRootNode {
+  override def godotClassName: String = "AnimationNodeAnimation"
 
   /** AnimationNodeAnimation.set_animation */
   final def setAnimation(name: gdext.builtin.StringName): Unit =
@@ -72,14 +73,4 @@ abstract class AnimationNodeAnimation extends AnimationRootNode {
   final def getLoopMode(): Long =
     Ptrcall.call0[Long](MethodBind.get("AnimationNodeAnimation", "get_loop_mode", 1988889481L), hostObject.objectPtr)
 
-}
-
-object AnimationNodeAnimation {
-  /** Class metadata for Gd[AnimationNodeAnimation] lifetime management and casting. */
-  given GodotClass[AnimationNodeAnimation] with {
-    def className = "AnimationNodeAnimation"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AnimationNodeAnimation = new AnimationNodeAnimation {}.withHost(o.objectPtr)
-    def unwrap(t: AnimationNodeAnimation): GodotObject = t.hostObject
-  }
 }

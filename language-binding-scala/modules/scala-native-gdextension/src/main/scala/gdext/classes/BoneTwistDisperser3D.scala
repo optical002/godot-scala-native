@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `BoneTwistDisperser3D`, extends `SkeletonModifier3D`. */
 abstract class BoneTwistDisperser3D extends SkeletonModifier3D {
+  override def godotClassName: String = "BoneTwistDisperser3D"
 
   /** BoneTwistDisperser3D.set_setting_count */
   final def setSettingCount(count: Long): Unit =
@@ -144,14 +145,4 @@ abstract class BoneTwistDisperser3D extends SkeletonModifier3D {
   final def getJointCount(index: Long): Long =
     Ptrcall.call1[Long, Long](MethodBind.get("BoneTwistDisperser3D", "get_joint_count", 923996154L), hostObject.objectPtr, index)
 
-}
-
-object BoneTwistDisperser3D {
-  /** Class metadata for Gd[BoneTwistDisperser3D] lifetime management and casting. */
-  given GodotClass[BoneTwistDisperser3D] with {
-    def className = "BoneTwistDisperser3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): BoneTwistDisperser3D = new BoneTwistDisperser3D {}.withHost(o.objectPtr)
-    def unwrap(t: BoneTwistDisperser3D): GodotObject = t.hostObject
-  }
 }

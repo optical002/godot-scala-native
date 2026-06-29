@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CollisionShape3D`, extends `Node3D`. */
 abstract class CollisionShape3D extends Node3D {
+  override def godotClassName: String = "CollisionShape3D"
 
   /** CollisionShape3D.resource_changed */
   final def resourceChanged(resource: Resource): Unit =
@@ -48,14 +49,4 @@ abstract class CollisionShape3D extends Node3D {
   final def getEnableDebugFill(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("CollisionShape3D", "get_enable_debug_fill", 36873697L), hostObject.objectPtr)
 
-}
-
-object CollisionShape3D {
-  /** Class metadata for Gd[CollisionShape3D] lifetime management and casting. */
-  given GodotClass[CollisionShape3D] with {
-    def className = "CollisionShape3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): CollisionShape3D = new CollisionShape3D {}.withHost(o.objectPtr)
-    def unwrap(t: CollisionShape3D): GodotObject = t.hostObject
-  }
 }

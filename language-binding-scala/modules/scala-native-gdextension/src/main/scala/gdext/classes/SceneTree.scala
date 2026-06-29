@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SceneTree`, extends `MainLoop`. */
 abstract class SceneTree extends MainLoop {
+  override def godotClassName: String = "SceneTree"
 
   /** SceneTree.get_root */
   final def getRoot(): GodotObject =
@@ -164,14 +165,4 @@ abstract class SceneTree extends MainLoop {
   final def isMultiplayerPollEnabled(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("SceneTree", "is_multiplayer_poll_enabled", 36873697L), hostObject.objectPtr)
 
-}
-
-object SceneTree {
-  /** Class metadata for Gd[SceneTree] lifetime management and casting. */
-  given GodotClass[SceneTree] with {
-    def className = "SceneTree"
-    def isRefCounted = false
-    def wrap(o: GodotObject): SceneTree = new SceneTree {}.withHost(o.objectPtr)
-    def unwrap(t: SceneTree): GodotObject = t.hostObject
-  }
 }

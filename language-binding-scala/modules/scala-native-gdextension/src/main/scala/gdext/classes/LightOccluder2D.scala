@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `LightOccluder2D`, extends `Node2D`. */
 abstract class LightOccluder2D extends Node2D {
+  override def godotClassName: String = "LightOccluder2D"
 
   /** LightOccluder2D.set_occluder_polygon */
   final def setOccluderPolygon(polygon: OccluderPolygon2D): Unit =
@@ -32,14 +33,4 @@ abstract class LightOccluder2D extends Node2D {
   final def isSetAsSdfCollision(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("LightOccluder2D", "is_set_as_sdf_collision", 36873697L), hostObject.objectPtr)
 
-}
-
-object LightOccluder2D {
-  /** Class metadata for Gd[LightOccluder2D] lifetime management and casting. */
-  given GodotClass[LightOccluder2D] with {
-    def className = "LightOccluder2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): LightOccluder2D = new LightOccluder2D {}.withHost(o.objectPtr)
-    def unwrap(t: LightOccluder2D): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `WorkerThreadPool`, extends `Object`. */
 abstract class WorkerThreadPool extends Object {
+  override def godotClassName: String = "WorkerThreadPool"
 
   /** WorkerThreadPool.is_task_completed */
   final def isTaskCompleted(task_id: Long): Boolean =
@@ -39,14 +40,6 @@ abstract class WorkerThreadPool extends Object {
 }
 
 object WorkerThreadPool {
-  /** Class metadata for Gd[WorkerThreadPool] lifetime management and casting. */
-  given GodotClass[WorkerThreadPool] with {
-    def className = "WorkerThreadPool"
-    def isRefCounted = false
-    def wrap(o: GodotObject): WorkerThreadPool = new WorkerThreadPool {}.withHost(o.objectPtr)
-    def unwrap(t: WorkerThreadPool): GodotObject = t.hostObject
-  }
-
   /** The process-global WorkerThreadPool singleton instance. */
   def singleton: WorkerThreadPool = new WorkerThreadPool {}
     .withHost(Godot.interface.global_get_singleton(

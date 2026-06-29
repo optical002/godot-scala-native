@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `RDShaderSource`, extends `RefCounted`. */
 abstract class RDShaderSource extends RefCounted {
+  override def godotClassName: String = "RDShaderSource"
 
   /** RDShaderSource.set_stage_source */
   final def setStageSource(stage: Long, source: String): Unit =
@@ -24,14 +25,4 @@ abstract class RDShaderSource extends RefCounted {
   final def getLanguage(): Long =
     Ptrcall.call0[Long](MethodBind.get("RDShaderSource", "get_language", 1063538261L), hostObject.objectPtr)
 
-}
-
-object RDShaderSource {
-  /** Class metadata for Gd[RDShaderSource] lifetime management and casting. */
-  given GodotClass[RDShaderSource] with {
-    def className = "RDShaderSource"
-    def isRefCounted = true
-    def wrap(o: GodotObject): RDShaderSource = new RDShaderSource {}.withHost(o.objectPtr)
-    def unwrap(t: RDShaderSource): GodotObject = t.hostObject
-  }
 }

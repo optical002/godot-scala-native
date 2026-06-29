@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioEffectStereoEnhance`, extends `AudioEffect`. */
 abstract class AudioEffectStereoEnhance extends AudioEffect {
+  override def godotClassName: String = "AudioEffectStereoEnhance"
 
   /** AudioEffectStereoEnhance.set_pan_pullout */
   final def setPanPullout(amount: Double): Unit =
@@ -32,14 +33,4 @@ abstract class AudioEffectStereoEnhance extends AudioEffect {
   final def getSurround(): Double =
     Ptrcall.call0[Double](MethodBind.get("AudioEffectStereoEnhance", "get_surround", 1740695150L), hostObject.objectPtr)
 
-}
-
-object AudioEffectStereoEnhance {
-  /** Class metadata for Gd[AudioEffectStereoEnhance] lifetime management and casting. */
-  given GodotClass[AudioEffectStereoEnhance] with {
-    def className = "AudioEffectStereoEnhance"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioEffectStereoEnhance = new AudioEffectStereoEnhance {}.withHost(o.objectPtr)
-    def unwrap(t: AudioEffectStereoEnhance): GodotObject = t.hostObject
-  }
 }

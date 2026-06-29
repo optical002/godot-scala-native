@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PinJoint2D`, extends `Joint2D`. */
 abstract class PinJoint2D extends Joint2D {
+  override def godotClassName: String = "PinJoint2D"
 
   /** PinJoint2D.set_softness */
   final def setSoftness(softness: Double): Unit =
@@ -56,14 +57,4 @@ abstract class PinJoint2D extends Joint2D {
   final def isAngularLimitEnabled(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("PinJoint2D", "is_angular_limit_enabled", 36873697L), hostObject.objectPtr)
 
-}
-
-object PinJoint2D {
-  /** Class metadata for Gd[PinJoint2D] lifetime management and casting. */
-  given GodotClass[PinJoint2D] with {
-    def className = "PinJoint2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): PinJoint2D = new PinJoint2D {}.withHost(o.objectPtr)
-    def unwrap(t: PinJoint2D): GodotObject = t.hostObject
-  }
 }

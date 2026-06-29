@@ -5,7 +5,7 @@ import scala.scalanative.unsigned.*
 import scala.scalanative.libc.stdlib
 import gdext.Godot
 import gdext.builtin.StringNames
-import gdext.internal.engine.Gd
+import gdext.internal.engine.ClassMeta
 import gdext.internal.ffi.types.*
 
 /**
@@ -274,11 +274,11 @@ object ClassRegistration {
 
   // --- input virtual dispatchers -----------------------------------------
   // All four share the same shape: arg0 is the InputEvent object handle. We wrap
-  // it as a borrowed `Gd[InputEvent]` (no ownership taken — the engine owns the
-  // event for the duration of the callback) and forward to the Scala override.
-  private def inputEventArg(args: Ptr[GDExtensionConstTypePtr]): Gd[gdext.classes.InputEvent] = {
+  // it as a borrowed `InputEvent` (no ownership taken — the engine owns the event
+  // for the duration of the callback) and forward to the Scala override.
+  private def inputEventArg(args: Ptr[GDExtensionConstTypePtr]): gdext.classes.InputEvent = {
     val objPtr = !args(0).asInstanceOf[Ptr[GDExtensionObjectPtr]]
-    Gd.fromHandle[gdext.classes.InputEvent](objPtr)
+    summon[ClassMeta[gdext.classes.InputEvent]].fromHandle(objPtr)
   }
 
   private val inputDispatch: GDExtensionClassCallVirtual =

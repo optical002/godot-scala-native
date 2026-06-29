@@ -1,6 +1,6 @@
 package gdext.internal.register
 
-import gdext.internal.engine.{Gd, Tres, Required}
+import gdext.internal.engine.{Tres, Required}
 import gdext.builtin.{PackedStringArrayRead, ObjectPropertyList}
 import gdext.classes.{Skeleton3D, AnimationMixer, SpriteFrames, AnimationTree}
 
@@ -57,48 +57,47 @@ object CompEnumRegistry {
 }
 
 /**
- * Enumeration helpers + the [[AsGd]] projection. Each helper takes the comp
- * already projected to a `Gd[E]` and returns the option names; a null/unassigned
- * comp yields `Seq("")` so the resulting ENUM has a single valid empty entry
- * rather than a malformed empty hint string.
+ * Enumeration helpers + the [[AsRef]] projection. Each helper takes the comp
+ * already projected to its bare wrapper type `E` and returns the option names; a
+ * null/unassigned comp yields `Seq("")` so the resulting ENUM has a single valid
+ * empty entry rather than a malformed empty hint string.
  */
 object CompEnum {
 
-  def boneNames(g: Gd[Skeleton3D]): Seq[String] =
-    if (g == null || g.isNull) Seq("")
+  def boneNames(sk: Skeleton3D): Seq[String] =
+    if (sk == null) Seq("")
     else {
       // Iterate getBoneName(i) (a String return) rather than the comma-joined
       // getConcatenatedBoneNames (a StringName return) — the StringName ptrcall
       // return path is a known-buggy Phase-2 caveat (see Ptrcall.PtrRet).
-      val sk = g.get
       val n = sk.getBoneCount().toInt
       if (n <= 0) Seq("")
       else (0 until n).map(i => sk.getBoneName(i.toLong))
     }
 
-  def animationNames(g: Gd[AnimationMixer]): Seq[String] =
-    if (g == null || g.isNull) Seq("")
+  def animationNames(m: AnimationMixer): Seq[String] =
+    if (m == null) Seq("")
     else {
       val names = PackedStringArrayRead.call0(
-        "AnimationMixer", "get_animation_list", 1139954409L, g.objectPtr
+        "AnimationMixer", "get_animation_list", 1139954409L, m.hostObject.objectPtr
       )
       if (names.isEmpty) Seq("") else names
     }
 
-  def spriteAnimationNames(g: Gd[SpriteFrames]): Seq[String] =
-    if (g == null || g.isNull) Seq("")
+  def spriteAnimationNames(f: SpriteFrames): Seq[String] =
+    if (f == null) Seq("")
     else {
       val names = PackedStringArrayRead.call0(
-        "SpriteFrames", "get_animation_names", 1139954409L, g.objectPtr
+        "SpriteFrames", "get_animation_names", 1139954409L, f.hostObject.objectPtr
       )
       if (names.isEmpty) Seq("") else names
     }
 
-  def animationTreeParams(g: Gd[AnimationTree]): Seq[String] =
-    if (g == null || g.isNull) Seq("")
+  def animationTreeParams(t: AnimationTree): Seq[String] =
+    if (t == null) Seq("")
     else {
       val params = ObjectPropertyList
-        .names(g.objectPtr)
+        .names(t.hostObject.objectPtr)
         .filter(_.startsWith("parameters/"))
         .map(_.stripPrefix("parameters/"))
         .distinct
@@ -106,27 +105,28 @@ object CompEnum {
     }
 
   /**
-   * Projects a comp field's declared type `C` to the `Gd[E]` the enumeration
-   * expects. Summoned at the macro site; the annotation fixes `E`, so a comp of
-   * an incompatible type fails to summon with a clear compile error. An
-   * unassigned/empty reference projects to a null `Gd[E]` (the helpers guard it).
+   * Projects a comp field's declared type `C` to the bare wrapper `E` the
+   * enumeration expects. Summoned at the macro site; the annotation fixes `E`, so
+   * a comp of an incompatible type fails to summon with a clear compile error. An
+   * unassigned/empty reference projects to a null `E` (the helpers guard it).
    */
-  trait AsGd[C, E] {
-    def gd(c: C): Gd[E]
+  trait AsRef[C, E] {
+    def ref(c: C): E
   }
-  object AsGd {
-    // A comp declared as `Gd[Sub]` satisfies an enumeration expecting `Gd[Super]`
-    // (e.g. an `AnimationPlayer` comp enumerated as an `AnimationMixer`). `Gd` is
-    // invariant, but it only wraps an opaque handle and enumeration reads it
-    // through the supertype, so the cast is sound. `<:<` is reflexive, so this
-    // also covers the exact-type case.
-    given gd[E, F](using E <:< F): AsGd[Gd[E], F] =
-      c => if (c == null) null.asInstanceOf[Gd[F]] else c.asInstanceOf[Gd[F]]
-    given tres[E, F](using E <:< F): AsGd[Tres[E], F] =
-      c => if (c == null) null.asInstanceOf[Gd[F]] else c.raw.asInstanceOf[Gd[F]]
-    given opt[C, F](using inner: AsGd[C, F]): AsGd[Option[C], F] =
-      c => c.fold(null.asInstanceOf[Gd[F]])(inner.gd)
-    given req[C, F](using inner: AsGd[C, F]): AsGd[Required[C], F] =
-      c => c.toOption.fold(null.asInstanceOf[Gd[F]])(inner.gd)
+  object AsRef {
+    import gdext.internal.register.GodotScriptClass
+    // A comp declared as a `Sub` reference satisfies an enumeration expecting a
+    // `Super` reference (e.g. an `AnimationPlayer` comp enumerated as an
+    // `AnimationMixer`). The wrapper only holds an opaque handle and enumeration
+    // reads it through the supertype, so the upcast is sound. `<:<` is reflexive,
+    // so this also covers the exact-type case.
+    given bare[E <: GodotScriptClass, F](using E <:< F): AsRef[E, F] =
+      c => if (c == null) null.asInstanceOf[F] else c.asInstanceOf[F]
+    given tres[E <: GodotScriptClass, F](using E <:< F): AsRef[Tres[E], F] =
+      c => if (c == null || c.raw == null) null.asInstanceOf[F] else c.raw.asInstanceOf[F]
+    given opt[C, F](using inner: AsRef[C, F]): AsRef[Option[C], F] =
+      c => c.fold(null.asInstanceOf[F])(inner.ref)
+    given req[C, F](using inner: AsRef[C, F]): AsRef[Required[C], F] =
+      c => c.toOption.fold(null.asInstanceOf[F])(inner.ref)
   }
 }

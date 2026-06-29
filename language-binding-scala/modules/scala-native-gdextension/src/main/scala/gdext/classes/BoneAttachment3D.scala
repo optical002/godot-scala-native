@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `BoneAttachment3D`, extends `Node3D`. */
 abstract class BoneAttachment3D extends Node3D {
+  override def godotClassName: String = "BoneAttachment3D"
 
   /** BoneAttachment3D.get_skeleton */
   final def getSkeleton(): GodotObject =
@@ -48,14 +49,4 @@ abstract class BoneAttachment3D extends Node3D {
   final def getUseExternalSkeleton(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("BoneAttachment3D", "get_use_external_skeleton", 36873697L), hostObject.objectPtr)
 
-}
-
-object BoneAttachment3D {
-  /** Class metadata for Gd[BoneAttachment3D] lifetime management and casting. */
-  given GodotClass[BoneAttachment3D] with {
-    def className = "BoneAttachment3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): BoneAttachment3D = new BoneAttachment3D {}.withHost(o.objectPtr)
-    def unwrap(t: BoneAttachment3D): GodotObject = t.hostObject
-  }
 }

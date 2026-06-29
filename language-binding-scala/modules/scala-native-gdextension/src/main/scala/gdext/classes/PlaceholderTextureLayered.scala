@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PlaceholderTextureLayered`, extends `TextureLayered`. */
 abstract class PlaceholderTextureLayered extends TextureLayered {
+  override def godotClassName: String = "PlaceholderTextureLayered"
 
   /** PlaceholderTextureLayered.set_size */
   final def setSize(size: gdext.builtin.Vector2i): Unit =
@@ -20,14 +21,4 @@ abstract class PlaceholderTextureLayered extends TextureLayered {
   final def setLayers(layers: Long): Unit =
     Ptrcall.callVoid1(MethodBind.get("PlaceholderTextureLayered", "set_layers", 1286410249L), hostObject.objectPtr, layers)
 
-}
-
-object PlaceholderTextureLayered {
-  /** Class metadata for Gd[PlaceholderTextureLayered] lifetime management and casting. */
-  given GodotClass[PlaceholderTextureLayered] with {
-    def className = "PlaceholderTextureLayered"
-    def isRefCounted = true
-    def wrap(o: GodotObject): PlaceholderTextureLayered = new PlaceholderTextureLayered {}.withHost(o.objectPtr)
-    def unwrap(t: PlaceholderTextureLayered): GodotObject = t.hostObject
-  }
 }

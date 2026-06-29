@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AnimationNode`, extends `Resource`. */
 abstract class AnimationNode extends Resource {
+  override def godotClassName: String = "AnimationNode"
 
   /** AnimationNode.add_input */
   final def addInput(name: String): Boolean =
@@ -48,14 +49,4 @@ abstract class AnimationNode extends Resource {
   final def isProcessTesting(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("AnimationNode", "is_process_testing", 36873697L), hostObject.objectPtr)
 
-}
-
-object AnimationNode {
-  /** Class metadata for Gd[AnimationNode] lifetime management and casting. */
-  given GodotClass[AnimationNode] with {
-    def className = "AnimationNode"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AnimationNode = new AnimationNode {}.withHost(o.objectPtr)
-    def unwrap(t: AnimationNode): GodotObject = t.hostObject
-  }
 }

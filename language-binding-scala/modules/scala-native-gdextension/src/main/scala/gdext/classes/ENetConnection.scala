@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ENetConnection`, extends `RefCounted`. */
 abstract class ENetConnection extends RefCounted {
+  override def godotClassName: String = "ENetConnection"
 
   /** ENetConnection.create_host_bound */
   final def createHostBound(bind_address: String, bind_port: Long, max_peers: Long, max_channels: Long, in_bandwidth: Long, out_bandwidth: Long): Long =
@@ -64,14 +65,4 @@ abstract class ENetConnection extends RefCounted {
   final def getLocalPort(): Long =
     Ptrcall.call0[Long](MethodBind.get("ENetConnection", "get_local_port", 3905245786L), hostObject.objectPtr)
 
-}
-
-object ENetConnection {
-  /** Class metadata for Gd[ENetConnection] lifetime management and casting. */
-  given GodotClass[ENetConnection] with {
-    def className = "ENetConnection"
-    def isRefCounted = true
-    def wrap(o: GodotObject): ENetConnection = new ENetConnection {}.withHost(o.objectPtr)
-    def unwrap(t: ENetConnection): GodotObject = t.hostObject
-  }
 }

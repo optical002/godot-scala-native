@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Shader`, extends `Resource`. */
 abstract class Shader extends Resource {
+  override def godotClassName: String = "Shader"
 
   /** Shader.get_mode */
   final def getMode(): Long =
@@ -32,14 +33,4 @@ abstract class Shader extends Resource {
   final def inspectNativeShaderCode(): Unit =
     Ptrcall.callVoid0(MethodBind.get("Shader", "inspect_native_shader_code", 3218959716L), hostObject.objectPtr)
 
-}
-
-object Shader {
-  /** Class metadata for Gd[Shader] lifetime management and casting. */
-  given GodotClass[Shader] with {
-    def className = "Shader"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Shader = new Shader {}.withHost(o.objectPtr)
-    def unwrap(t: Shader): GodotObject = t.hostObject
-  }
 }

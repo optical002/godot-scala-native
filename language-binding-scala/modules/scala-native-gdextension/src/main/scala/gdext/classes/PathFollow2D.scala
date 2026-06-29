@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PathFollow2D`, extends `Node2D`. */
 abstract class PathFollow2D extends Node2D {
+  override def godotClassName: String = "PathFollow2D"
 
   /** PathFollow2D.set_progress */
   final def setProgress(progress: Double): Unit =
@@ -64,14 +65,4 @@ abstract class PathFollow2D extends Node2D {
   final def hasLoop(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("PathFollow2D", "has_loop", 36873697L), hostObject.objectPtr)
 
-}
-
-object PathFollow2D {
-  /** Class metadata for Gd[PathFollow2D] lifetime management and casting. */
-  given GodotClass[PathFollow2D] with {
-    def className = "PathFollow2D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): PathFollow2D = new PathFollow2D {}.withHost(o.objectPtr)
-    def unwrap(t: PathFollow2D): GodotObject = t.hostObject
-  }
 }

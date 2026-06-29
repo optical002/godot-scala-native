@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Label3D`, extends `GeometryInstance3D`. */
 abstract class Label3D extends GeometryInstance3D {
+  override def godotClassName: String = "Label3D"
 
   /** Label3D.set_horizontal_alignment */
   final def setHorizontalAlignment(alignment: Long): Unit =
@@ -244,14 +245,4 @@ abstract class Label3D extends GeometryInstance3D {
   final def generateTriangleMesh(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("Label3D", "generate_triangle_mesh", 3476533166L), hostObject.objectPtr)
 
-}
-
-object Label3D {
-  /** Class metadata for Gd[Label3D] lifetime management and casting. */
-  given GodotClass[Label3D] with {
-    def className = "Label3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Label3D = new Label3D {}.withHost(o.objectPtr)
-    def unwrap(t: Label3D): GodotObject = t.hostObject
-  }
 }

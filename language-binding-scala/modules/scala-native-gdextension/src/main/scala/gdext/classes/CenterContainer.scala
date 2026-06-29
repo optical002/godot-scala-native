@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CenterContainer`, extends `Container`. */
 abstract class CenterContainer extends Container {
+  override def godotClassName: String = "CenterContainer"
 
   /** CenterContainer.set_use_top_left */
   final def setUseTopLeft(enable: Boolean): Unit =
@@ -16,14 +17,4 @@ abstract class CenterContainer extends Container {
   final def isUsingTopLeft(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("CenterContainer", "is_using_top_left", 36873697L), hostObject.objectPtr)
 
-}
-
-object CenterContainer {
-  /** Class metadata for Gd[CenterContainer] lifetime management and casting. */
-  given GodotClass[CenterContainer] with {
-    def className = "CenterContainer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): CenterContainer = new CenterContainer {}.withHost(o.objectPtr)
-    def unwrap(t: CenterContainer): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ExternalTexture`, extends `Texture2D`. */
 abstract class ExternalTexture extends Texture2D {
+  override def godotClassName: String = "ExternalTexture"
 
   /** ExternalTexture.set_size */
   final def setSize(size: gdext.builtin.Vector2): Unit =
@@ -20,14 +21,4 @@ abstract class ExternalTexture extends Texture2D {
   final def setExternalBufferId(external_buffer_id: Long): Unit =
     Ptrcall.callVoid1(MethodBind.get("ExternalTexture", "set_external_buffer_id", 1286410249L), hostObject.objectPtr, external_buffer_id)
 
-}
-
-object ExternalTexture {
-  /** Class metadata for Gd[ExternalTexture] lifetime management and casting. */
-  given GodotClass[ExternalTexture] with {
-    def className = "ExternalTexture"
-    def isRefCounted = true
-    def wrap(o: GodotObject): ExternalTexture = new ExternalTexture {}.withHost(o.objectPtr)
-    def unwrap(t: ExternalTexture): GodotObject = t.hostObject
-  }
 }

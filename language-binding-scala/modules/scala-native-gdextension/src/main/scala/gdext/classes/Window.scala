@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Window`, extends `Viewport`. */
 abstract class Window extends Viewport {
+  override def godotClassName: String = "Window"
 
   /** Window.set_title */
   final def setTitle(title: String): Unit =
@@ -508,14 +509,4 @@ abstract class Window extends Viewport {
   final def popupExclusiveCenteredClamped(from_node: Node, minsize: gdext.builtin.Vector2i, fallback_ratio: Double): Unit =
     Ptrcall.callVoid3(MethodBind.get("Window", "popup_exclusive_centered_clamped", 2612708785L), hostObject.objectPtr, from_node.hostObject, minsize, fallback_ratio)
 
-}
-
-object Window {
-  /** Class metadata for Gd[Window] lifetime management and casting. */
-  given GodotClass[Window] with {
-    def className = "Window"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Window = new Window {}.withHost(o.objectPtr)
-    def unwrap(t: Window): GodotObject = t.hostObject
-  }
 }

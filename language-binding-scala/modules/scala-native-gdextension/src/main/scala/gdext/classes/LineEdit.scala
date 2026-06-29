@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `LineEdit`, extends `Control`. */
 abstract class LineEdit extends Control {
+  override def godotClassName: String = "LineEdit"
 
   /** LineEdit.has_ime_text */
   final def hasImeText(): Boolean =
@@ -388,14 +389,4 @@ abstract class LineEdit extends Control {
   final def isSelectAllOnFocus(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("LineEdit", "is_select_all_on_focus", 36873697L), hostObject.objectPtr)
 
-}
-
-object LineEdit {
-  /** Class metadata for Gd[LineEdit] lifetime management and casting. */
-  given GodotClass[LineEdit] with {
-    def className = "LineEdit"
-    def isRefCounted = false
-    def wrap(o: GodotObject): LineEdit = new LineEdit {}.withHost(o.objectPtr)
-    def unwrap(t: LineEdit): GodotObject = t.hostObject
-  }
 }

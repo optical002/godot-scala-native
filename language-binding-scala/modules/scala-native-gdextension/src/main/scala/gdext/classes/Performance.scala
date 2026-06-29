@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Performance`, extends `Object`. */
 abstract class Performance extends Object {
+  override def godotClassName: String = "Performance"
 
   /** Performance.get_monitor */
   final def getMonitor(monitor: Long): Double =
@@ -27,14 +28,6 @@ abstract class Performance extends Object {
 }
 
 object Performance {
-  /** Class metadata for Gd[Performance] lifetime management and casting. */
-  given GodotClass[Performance] with {
-    def className = "Performance"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Performance = new Performance {}.withHost(o.objectPtr)
-    def unwrap(t: Performance): GodotObject = t.hostObject
-  }
-
   /** The process-global Performance singleton instance. */
   def singleton: Performance = new Performance {}
     .withHost(Godot.interface.global_get_singleton(

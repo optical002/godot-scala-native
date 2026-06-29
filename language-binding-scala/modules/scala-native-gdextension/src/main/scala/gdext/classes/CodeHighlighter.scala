@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CodeHighlighter`, extends `SyntaxHighlighter`. */
 abstract class CodeHighlighter extends SyntaxHighlighter {
+  override def godotClassName: String = "CodeHighlighter"
 
   /** CodeHighlighter.add_keyword_color */
   final def addKeywordColor(keyword: String, color: gdext.builtin.Color): Unit =
@@ -96,14 +97,4 @@ abstract class CodeHighlighter extends SyntaxHighlighter {
   final def getMemberVariableColor(): gdext.builtin.Color =
     Ptrcall.call0[gdext.builtin.Color](MethodBind.get("CodeHighlighter", "get_member_variable_color", 3444240500L), hostObject.objectPtr)
 
-}
-
-object CodeHighlighter {
-  /** Class metadata for Gd[CodeHighlighter] lifetime management and casting. */
-  given GodotClass[CodeHighlighter] with {
-    def className = "CodeHighlighter"
-    def isRefCounted = true
-    def wrap(o: GodotObject): CodeHighlighter = new CodeHighlighter {}.withHost(o.objectPtr)
-    def unwrap(t: CodeHighlighter): GodotObject = t.hostObject
-  }
 }

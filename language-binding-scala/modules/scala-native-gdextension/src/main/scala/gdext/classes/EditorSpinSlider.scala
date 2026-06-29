@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorSpinSlider`, extends `Range`. */
 abstract class EditorSpinSlider extends Range {
+  override def godotClassName: String = "EditorSpinSlider"
 
   /** EditorSpinSlider.set_label */
   final def setLabel(label: String): Unit =
@@ -64,14 +65,4 @@ abstract class EditorSpinSlider extends Range {
   final def isEditingInteger(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("EditorSpinSlider", "is_editing_integer", 36873697L), hostObject.objectPtr)
 
-}
-
-object EditorSpinSlider {
-  /** Class metadata for Gd[EditorSpinSlider] lifetime management and casting. */
-  given GodotClass[EditorSpinSlider] with {
-    def className = "EditorSpinSlider"
-    def isRefCounted = false
-    def wrap(o: GodotObject): EditorSpinSlider = new EditorSpinSlider {}.withHost(o.objectPtr)
-    def unwrap(t: EditorSpinSlider): GodotObject = t.hostObject
-  }
 }

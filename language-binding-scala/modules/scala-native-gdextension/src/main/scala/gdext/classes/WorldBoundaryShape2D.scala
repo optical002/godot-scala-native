@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `WorldBoundaryShape2D`, extends `Shape2D`. */
 abstract class WorldBoundaryShape2D extends Shape2D {
+  override def godotClassName: String = "WorldBoundaryShape2D"
 
   /** WorldBoundaryShape2D.set_normal */
   final def setNormal(normal: gdext.builtin.Vector2): Unit =
@@ -24,14 +25,4 @@ abstract class WorldBoundaryShape2D extends Shape2D {
   final def getDistance(): Double =
     Ptrcall.call0[Double](MethodBind.get("WorldBoundaryShape2D", "get_distance", 1740695150L), hostObject.objectPtr)
 
-}
-
-object WorldBoundaryShape2D {
-  /** Class metadata for Gd[WorldBoundaryShape2D] lifetime management and casting. */
-  given GodotClass[WorldBoundaryShape2D] with {
-    def className = "WorldBoundaryShape2D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): WorldBoundaryShape2D = new WorldBoundaryShape2D {}.withHost(o.objectPtr)
-    def unwrap(t: WorldBoundaryShape2D): GodotObject = t.hostObject
-  }
 }

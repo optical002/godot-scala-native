@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VoxelGIData`, extends `Resource`. */
 abstract class VoxelGIData extends Resource {
+  override def godotClassName: String = "VoxelGIData"
 
   /** VoxelGIData.get_bounds */
   final def getBounds(): gdext.builtin.AABB =
@@ -76,14 +77,4 @@ abstract class VoxelGIData extends Resource {
   final def isUsingTwoBounces(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("VoxelGIData", "is_using_two_bounces", 36873697L), hostObject.objectPtr)
 
-}
-
-object VoxelGIData {
-  /** Class metadata for Gd[VoxelGIData] lifetime management and casting. */
-  given GodotClass[VoxelGIData] with {
-    def className = "VoxelGIData"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VoxelGIData = new VoxelGIData {}.withHost(o.objectPtr)
-    def unwrap(t: VoxelGIData): GodotObject = t.hostObject
-  }
 }

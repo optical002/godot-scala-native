@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `InputEventScreenTouch`, extends `InputEventFromWindow`. */
 abstract class InputEventScreenTouch extends InputEventFromWindow {
+  override def godotClassName: String = "InputEventScreenTouch"
 
   /** InputEventScreenTouch.set_index */
   final def setIndex(index: Long): Unit =
@@ -40,14 +41,4 @@ abstract class InputEventScreenTouch extends InputEventFromWindow {
   final def isDoubleTap(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("InputEventScreenTouch", "is_double_tap", 36873697L), hostObject.objectPtr)
 
-}
-
-object InputEventScreenTouch {
-  /** Class metadata for Gd[InputEventScreenTouch] lifetime management and casting. */
-  given GodotClass[InputEventScreenTouch] with {
-    def className = "InputEventScreenTouch"
-    def isRefCounted = true
-    def wrap(o: GodotObject): InputEventScreenTouch = new InputEventScreenTouch {}.withHost(o.objectPtr)
-    def unwrap(t: InputEventScreenTouch): GodotObject = t.hostObject
-  }
 }

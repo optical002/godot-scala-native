@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CameraServer`, extends `Object`. */
 abstract class CameraServer extends Object {
+  override def godotClassName: String = "CameraServer"
 
   /** CameraServer.set_monitoring_feeds */
   final def setMonitoringFeeds(is_monitoring_feeds: Boolean): Unit =
@@ -35,14 +36,6 @@ abstract class CameraServer extends Object {
 }
 
 object CameraServer {
-  /** Class metadata for Gd[CameraServer] lifetime management and casting. */
-  given GodotClass[CameraServer] with {
-    def className = "CameraServer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): CameraServer = new CameraServer {}.withHost(o.objectPtr)
-    def unwrap(t: CameraServer): GodotObject = t.hostObject
-  }
-
   /** The process-global CameraServer singleton instance. */
   def singleton: CameraServer = new CameraServer {}
     .withHost(Godot.interface.global_get_singleton(

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRAnchorTracker`, extends `OpenXRSpatialEntityTracker`. */
 abstract class OpenXRAnchorTracker extends OpenXRSpatialEntityTracker {
+  override def godotClassName: String = "OpenXRAnchorTracker"
 
   /** OpenXRAnchorTracker.has_uuid */
   final def hasUuid(): Boolean =
@@ -20,14 +21,4 @@ abstract class OpenXRAnchorTracker extends OpenXRSpatialEntityTracker {
   final def getUuid(): String =
     Ptrcall.call0[String](MethodBind.get("OpenXRAnchorTracker", "get_uuid", 201670096L), hostObject.objectPtr)
 
-}
-
-object OpenXRAnchorTracker {
-  /** Class metadata for Gd[OpenXRAnchorTracker] lifetime management and casting. */
-  given GodotClass[OpenXRAnchorTracker] with {
-    def className = "OpenXRAnchorTracker"
-    def isRefCounted = true
-    def wrap(o: GodotObject): OpenXRAnchorTracker = new OpenXRAnchorTracker {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRAnchorTracker): GodotObject = t.hostObject
-  }
 }

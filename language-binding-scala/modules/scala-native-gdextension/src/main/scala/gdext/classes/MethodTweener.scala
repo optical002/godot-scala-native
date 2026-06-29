@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `MethodTweener`, extends `Tweener`. */
 abstract class MethodTweener extends Tweener {
+  override def godotClassName: String = "MethodTweener"
 
   /** MethodTweener.set_delay */
   final def setDelay(delay: Double): GodotObject =
@@ -20,14 +21,4 @@ abstract class MethodTweener extends Tweener {
   final def setEase(ease: Long): GodotObject =
     Ptrcall.call1[Long, GodotObject](MethodBind.get("MethodTweener", "set_ease", 315540545L), hostObject.objectPtr, ease)
 
-}
-
-object MethodTweener {
-  /** Class metadata for Gd[MethodTweener] lifetime management and casting. */
-  given GodotClass[MethodTweener] with {
-    def className = "MethodTweener"
-    def isRefCounted = true
-    def wrap(o: GodotObject): MethodTweener = new MethodTweener {}.withHost(o.objectPtr)
-    def unwrap(t: MethodTweener): GodotObject = t.hostObject
-  }
 }

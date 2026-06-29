@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ThemeDB`, extends `Object`. */
 abstract class ThemeDB extends Object {
+  override def godotClassName: String = "ThemeDB"
 
   /** ThemeDB.get_default_theme */
   final def getDefaultTheme(): GodotObject =
@@ -59,14 +60,6 @@ abstract class ThemeDB extends Object {
 }
 
 object ThemeDB {
-  /** Class metadata for Gd[ThemeDB] lifetime management and casting. */
-  given GodotClass[ThemeDB] with {
-    def className = "ThemeDB"
-    def isRefCounted = false
-    def wrap(o: GodotObject): ThemeDB = new ThemeDB {}.withHost(o.objectPtr)
-    def unwrap(t: ThemeDB): GodotObject = t.hostObject
-  }
-
   /** The process-global ThemeDB singleton instance. */
   def singleton: ThemeDB = new ThemeDB {}
     .withHost(Godot.interface.global_get_singleton(

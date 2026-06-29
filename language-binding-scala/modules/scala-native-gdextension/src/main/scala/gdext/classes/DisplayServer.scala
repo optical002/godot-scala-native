@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `DisplayServer`, extends `Object`. */
 abstract class DisplayServer extends Object {
+  override def godotClassName: String = "DisplayServer"
 
   /** DisplayServer.has_feature */
   final def hasFeature(feature: Long): Boolean =
@@ -647,14 +648,6 @@ abstract class DisplayServer extends Object {
 }
 
 object DisplayServer {
-  /** Class metadata for Gd[DisplayServer] lifetime management and casting. */
-  given GodotClass[DisplayServer] with {
-    def className = "DisplayServer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): DisplayServer = new DisplayServer {}.withHost(o.objectPtr)
-    def unwrap(t: DisplayServer): GodotObject = t.hostObject
-  }
-
   /** The process-global DisplayServer singleton instance. */
   def singleton: DisplayServer = new DisplayServer {}
     .withHost(Godot.interface.global_get_singleton(

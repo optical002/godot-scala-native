@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRAnalogThresholdModifier`, extends `OpenXRActionBindingModifier`. */
 abstract class OpenXRAnalogThresholdModifier extends OpenXRActionBindingModifier {
+  override def godotClassName: String = "OpenXRAnalogThresholdModifier"
 
   /** OpenXRAnalogThresholdModifier.set_on_threshold */
   final def setOnThreshold(on_threshold: Double): Unit =
@@ -40,14 +41,4 @@ abstract class OpenXRAnalogThresholdModifier extends OpenXRActionBindingModifier
   final def getOffHaptic(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("OpenXRAnalogThresholdModifier", "get_off_haptic", 922310751L), hostObject.objectPtr)
 
-}
-
-object OpenXRAnalogThresholdModifier {
-  /** Class metadata for Gd[OpenXRAnalogThresholdModifier] lifetime management and casting. */
-  given GodotClass[OpenXRAnalogThresholdModifier] with {
-    def className = "OpenXRAnalogThresholdModifier"
-    def isRefCounted = true
-    def wrap(o: GodotObject): OpenXRAnalogThresholdModifier = new OpenXRAnalogThresholdModifier {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRAnalogThresholdModifier): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ParticleProcessMaterial`, extends `Material`. */
 abstract class ParticleProcessMaterial extends Material {
+  override def godotClassName: String = "ParticleProcessMaterial"
 
   /** ParticleProcessMaterial.set_direction */
   final def setDirection(degrees: gdext.builtin.Vector3): Unit =
@@ -392,14 +393,4 @@ abstract class ParticleProcessMaterial extends Material {
   final def getCollisionBounce(): Double =
     Ptrcall.call0[Double](MethodBind.get("ParticleProcessMaterial", "get_collision_bounce", 1740695150L), hostObject.objectPtr)
 
-}
-
-object ParticleProcessMaterial {
-  /** Class metadata for Gd[ParticleProcessMaterial] lifetime management and casting. */
-  given GodotClass[ParticleProcessMaterial] with {
-    def className = "ParticleProcessMaterial"
-    def isRefCounted = true
-    def wrap(o: GodotObject): ParticleProcessMaterial = new ParticleProcessMaterial {}.withHost(o.objectPtr)
-    def unwrap(t: ParticleProcessMaterial): GodotObject = t.hostObject
-  }
 }

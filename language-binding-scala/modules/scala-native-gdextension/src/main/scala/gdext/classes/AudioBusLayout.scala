@@ -7,15 +7,6 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AudioBusLayout`, extends `Resource`. */
 abstract class AudioBusLayout extends Resource {
+  override def godotClassName: String = "AudioBusLayout"
 
-}
-
-object AudioBusLayout {
-  /** Class metadata for Gd[AudioBusLayout] lifetime management and casting. */
-  given GodotClass[AudioBusLayout] with {
-    def className = "AudioBusLayout"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AudioBusLayout = new AudioBusLayout {}.withHost(o.objectPtr)
-    def unwrap(t: AudioBusLayout): GodotObject = t.hostObject
-  }
 }

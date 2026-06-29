@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `StreamPeerUDS`, extends `StreamPeerSocket`. */
 abstract class StreamPeerUDS extends StreamPeerSocket {
+  override def godotClassName: String = "StreamPeerUDS"
 
   /** StreamPeerUDS.bind */
   final def bind(path: String): Long =
@@ -20,14 +21,4 @@ abstract class StreamPeerUDS extends StreamPeerSocket {
   final def getConnectedPath(): String =
     Ptrcall.call0[String](MethodBind.get("StreamPeerUDS", "get_connected_path", 201670096L), hostObject.objectPtr)
 
-}
-
-object StreamPeerUDS {
-  /** Class metadata for Gd[StreamPeerUDS] lifetime management and casting. */
-  given GodotClass[StreamPeerUDS] with {
-    def className = "StreamPeerUDS"
-    def isRefCounted = true
-    def wrap(o: GodotObject): StreamPeerUDS = new StreamPeerUDS {}.withHost(o.objectPtr)
-    def unwrap(t: StreamPeerUDS): GodotObject = t.hostObject
-  }
 }

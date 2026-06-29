@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GPUParticlesCollisionHeightField3D`, extends `GPUParticlesCollision3D`. */
 abstract class GPUParticlesCollisionHeightField3D extends GPUParticlesCollision3D {
+  override def godotClassName: String = "GPUParticlesCollisionHeightField3D"
 
   /** GPUParticlesCollisionHeightField3D.set_size */
   final def setSize(size: gdext.builtin.Vector3): Unit =
@@ -56,14 +57,4 @@ abstract class GPUParticlesCollisionHeightField3D extends GPUParticlesCollision3
   final def isFollowCameraEnabled(): Boolean =
     Ptrcall.call0[Boolean](MethodBind.get("GPUParticlesCollisionHeightField3D", "is_follow_camera_enabled", 36873697L), hostObject.objectPtr)
 
-}
-
-object GPUParticlesCollisionHeightField3D {
-  /** Class metadata for Gd[GPUParticlesCollisionHeightField3D] lifetime management and casting. */
-  given GodotClass[GPUParticlesCollisionHeightField3D] with {
-    def className = "GPUParticlesCollisionHeightField3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): GPUParticlesCollisionHeightField3D = new GPUParticlesCollisionHeightField3D {}.withHost(o.objectPtr)
-    def unwrap(t: GPUParticlesCollisionHeightField3D): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `MultiMesh`, extends `Resource`. */
 abstract class MultiMesh extends Resource {
+  override def godotClassName: String = "MultiMesh"
 
   /** MultiMesh.set_mesh */
   final def setMesh(mesh: Mesh): Unit =
@@ -116,14 +117,4 @@ abstract class MultiMesh extends Resource {
   final def getAabb(): gdext.builtin.AABB =
     Ptrcall.call0[gdext.builtin.AABB](MethodBind.get("MultiMesh", "get_aabb", 1068685055L), hostObject.objectPtr)
 
-}
-
-object MultiMesh {
-  /** Class metadata for Gd[MultiMesh] lifetime management and casting. */
-  given GodotClass[MultiMesh] with {
-    def className = "MultiMesh"
-    def isRefCounted = true
-    def wrap(o: GodotObject): MultiMesh = new MultiMesh {}.withHost(o.objectPtr)
-    def unwrap(t: MultiMesh): GodotObject = t.hostObject
-  }
 }

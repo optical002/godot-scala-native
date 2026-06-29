@@ -1,7 +1,7 @@
 package game
 
 import gdext.builtin.Dict
-import gdext.api.{Gd, Required, Tres, Tscn}
+import gdext.api.{Required, Tres, Tscn}
 import gdext.classes.{Area2D, Node, Node2D, Resource}
 import gdext.annotations.*
 import gdext.api.*
@@ -18,9 +18,9 @@ enum Team {
  */
 final class ExportsDemo extends Node2D {
   // Node references: optional vs required vs bare (bare == required).
-  @gdexport var optNode: Option[Gd[Node2D]] = None
-  @gdexport var reqNode: Required[Gd[Node2D]] = Required.unassigned
-  @gdexport var bareNode: Gd[Node] = Gd.nullOf
+  @gdexport var optNode: Option[Node2D] = None
+  @gdexport var reqNode: Required[Node2D] = Required.unassigned
+  @gdexport var bareNode: Node = null
 
   // Typed resource reference.
   @gdexport var optRes: Option[Tres[Resource]] = None

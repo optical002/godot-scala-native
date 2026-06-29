@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `SpringBoneSimulator3D`, extends `SkeletonModifier3D`. */
 abstract class SpringBoneSimulator3D extends SkeletonModifier3D {
+  override def godotClassName: String = "SpringBoneSimulator3D"
 
   /** SpringBoneSimulator3D.set_root_bone_name */
   final def setRootBoneName(index: Long, bone_name: String): Unit =
@@ -316,14 +317,4 @@ abstract class SpringBoneSimulator3D extends SkeletonModifier3D {
   final def reset(): Unit =
     Ptrcall.callVoid0(MethodBind.get("SpringBoneSimulator3D", "reset", 3218959716L), hostObject.objectPtr)
 
-}
-
-object SpringBoneSimulator3D {
-  /** Class metadata for Gd[SpringBoneSimulator3D] lifetime management and casting. */
-  given GodotClass[SpringBoneSimulator3D] with {
-    def className = "SpringBoneSimulator3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): SpringBoneSimulator3D = new SpringBoneSimulator3D {}.withHost(o.objectPtr)
-    def unwrap(t: SpringBoneSimulator3D): GodotObject = t.hostObject
-  }
 }

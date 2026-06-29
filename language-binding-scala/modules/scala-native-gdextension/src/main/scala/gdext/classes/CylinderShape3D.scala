@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `CylinderShape3D`, extends `Shape3D`. */
 abstract class CylinderShape3D extends Shape3D {
+  override def godotClassName: String = "CylinderShape3D"
 
   /** CylinderShape3D.set_radius */
   final def setRadius(radius: Double): Unit =
@@ -24,14 +25,4 @@ abstract class CylinderShape3D extends Shape3D {
   final def getHeight(): Double =
     Ptrcall.call0[Double](MethodBind.get("CylinderShape3D", "get_height", 1740695150L), hostObject.objectPtr)
 
-}
-
-object CylinderShape3D {
-  /** Class metadata for Gd[CylinderShape3D] lifetime management and casting. */
-  given GodotClass[CylinderShape3D] with {
-    def className = "CylinderShape3D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): CylinderShape3D = new CylinderShape3D {}.withHost(o.objectPtr)
-    def unwrap(t: CylinderShape3D): GodotObject = t.hostObject
-  }
 }

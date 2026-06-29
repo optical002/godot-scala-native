@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Camera3D`, extends `Node3D`. */
 abstract class Camera3D extends Node3D {
+  override def godotClassName: String = "Camera3D"
 
   /** Camera3D.project_ray_normal */
   final def projectRayNormal(screen_point: gdext.builtin.Vector2): gdext.builtin.Vector3 =
@@ -192,14 +193,4 @@ abstract class Camera3D extends Node3D {
   final def getCullMaskValue(layer_number: Long): Boolean =
     Ptrcall.call1[Long, Boolean](MethodBind.get("Camera3D", "get_cull_mask_value", 1116898809L), hostObject.objectPtr, layer_number)
 
-}
-
-object Camera3D {
-  /** Class metadata for Gd[Camera3D] lifetime management and casting. */
-  given GodotClass[Camera3D] with {
-    def className = "Camera3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): Camera3D = new Camera3D {}.withHost(o.objectPtr)
-    def unwrap(t: Camera3D): GodotObject = t.hostObject
-  }
 }

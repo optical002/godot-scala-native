@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `GLTFObjectModelProperty`, extends `RefCounted`. */
 abstract class GLTFObjectModelProperty extends RefCounted {
+  override def godotClassName: String = "GLTFObjectModelProperty"
 
   /** GLTFObjectModelProperty.get_accessor_type */
   final def getAccessorType(): Long =
@@ -56,14 +57,4 @@ abstract class GLTFObjectModelProperty extends RefCounted {
   final def setTypes(variant_type: Long, obj_model_type: Long): Unit =
     Ptrcall.callVoid2(MethodBind.get("GLTFObjectModelProperty", "set_types", 4150728237L), hostObject.objectPtr, variant_type, obj_model_type)
 
-}
-
-object GLTFObjectModelProperty {
-  /** Class metadata for Gd[GLTFObjectModelProperty] lifetime management and casting. */
-  given GodotClass[GLTFObjectModelProperty] with {
-    def className = "GLTFObjectModelProperty"
-    def isRefCounted = true
-    def wrap(o: GodotObject): GLTFObjectModelProperty = new GLTFObjectModelProperty {}.withHost(o.objectPtr)
-    def unwrap(t: GLTFObjectModelProperty): GodotObject = t.hostObject
-  }
 }

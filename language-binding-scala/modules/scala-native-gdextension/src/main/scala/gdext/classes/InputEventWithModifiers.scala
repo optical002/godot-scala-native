@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `InputEventWithModifiers`, extends `InputEventFromWindow`. */
 abstract class InputEventWithModifiers extends InputEventFromWindow {
+  override def godotClassName: String = "InputEventWithModifiers"
 
   /** InputEventWithModifiers.set_command_or_control_autoremap */
   final def setCommandOrControlAutoremap(enable: Boolean): Unit =
@@ -56,14 +57,4 @@ abstract class InputEventWithModifiers extends InputEventFromWindow {
   final def getModifiersMask(): Long =
     Ptrcall.call0[Long](MethodBind.get("InputEventWithModifiers", "get_modifiers_mask", 1258259499L), hostObject.objectPtr)
 
-}
-
-object InputEventWithModifiers {
-  /** Class metadata for Gd[InputEventWithModifiers] lifetime management and casting. */
-  given GodotClass[InputEventWithModifiers] with {
-    def className = "InputEventWithModifiers"
-    def isRefCounted = true
-    def wrap(o: GodotObject): InputEventWithModifiers = new InputEventWithModifiers {}.withHost(o.objectPtr)
-    def unwrap(t: InputEventWithModifiers): GodotObject = t.hostObject
-  }
 }

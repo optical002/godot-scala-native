@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `ResourceUID`, extends `Object`. */
 abstract class ResourceUID extends Object {
+  override def godotClassName: String = "ResourceUID"
 
   /** ResourceUID.id_to_text */
   final def idToText(id: Long): String =
@@ -47,14 +48,6 @@ abstract class ResourceUID extends Object {
 }
 
 object ResourceUID {
-  /** Class metadata for Gd[ResourceUID] lifetime management and casting. */
-  given GodotClass[ResourceUID] with {
-    def className = "ResourceUID"
-    def isRefCounted = false
-    def wrap(o: GodotObject): ResourceUID = new ResourceUID {}.withHost(o.objectPtr)
-    def unwrap(t: ResourceUID): GodotObject = t.hostObject
-  }
-
   /** The process-global ResourceUID singleton instance. */
   def singleton: ResourceUID = new ResourceUID {}
     .withHost(Godot.interface.global_get_singleton(

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VehicleWheel3D`, extends `Node3D`. */
 abstract class VehicleWheel3D extends Node3D {
+  override def godotClassName: String = "VehicleWheel3D"
 
   /** VehicleWheel3D.set_radius */
   final def setRadius(length: Double): Unit =
@@ -144,14 +145,4 @@ abstract class VehicleWheel3D extends Node3D {
   final def getSteering(): Double =
     Ptrcall.call0[Double](MethodBind.get("VehicleWheel3D", "get_steering", 1740695150L), hostObject.objectPtr)
 
-}
-
-object VehicleWheel3D {
-  /** Class metadata for Gd[VehicleWheel3D] lifetime management and casting. */
-  given GodotClass[VehicleWheel3D] with {
-    def className = "VehicleWheel3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): VehicleWheel3D = new VehicleWheel3D {}.withHost(o.objectPtr)
-    def unwrap(t: VehicleWheel3D): GodotObject = t.hostObject
-  }
 }

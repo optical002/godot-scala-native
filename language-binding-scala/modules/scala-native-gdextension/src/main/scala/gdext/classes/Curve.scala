@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Curve`, extends `Resource`. */
 abstract class Curve extends Resource {
+  override def godotClassName: String = "Curve"
 
   /** Curve.get_point_count */
   final def getPointCount(): Long =
@@ -136,14 +137,4 @@ abstract class Curve extends Resource {
   final def setBakeResolution(resolution: Long): Unit =
     Ptrcall.callVoid1(MethodBind.get("Curve", "set_bake_resolution", 1286410249L), hostObject.objectPtr, resolution)
 
-}
-
-object Curve {
-  /** Class metadata for Gd[Curve] lifetime management and casting. */
-  given GodotClass[Curve] with {
-    def className = "Curve"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Curve = new Curve {}.withHost(o.objectPtr)
-    def unwrap(t: Curve): GodotObject = t.hostObject
-  }
 }

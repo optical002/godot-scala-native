@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeFloatParameter`, extends `VisualShaderNodeParameter`. */
 abstract class VisualShaderNodeFloatParameter extends VisualShaderNodeParameter {
+  override def godotClassName: String = "VisualShaderNodeFloatParameter"
 
   /** VisualShaderNodeFloatParameter.set_hint */
   final def setHint(hint: Long): Unit =
@@ -56,14 +57,4 @@ abstract class VisualShaderNodeFloatParameter extends VisualShaderNodeParameter 
   final def getDefaultValue(): Double =
     Ptrcall.call0[Double](MethodBind.get("VisualShaderNodeFloatParameter", "get_default_value", 1740695150L), hostObject.objectPtr)
 
-}
-
-object VisualShaderNodeFloatParameter {
-  /** Class metadata for Gd[VisualShaderNodeFloatParameter] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeFloatParameter] with {
-    def className = "VisualShaderNodeFloatParameter"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeFloatParameter = new VisualShaderNodeFloatParameter {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeFloatParameter): GodotObject = t.hostObject
-  }
 }

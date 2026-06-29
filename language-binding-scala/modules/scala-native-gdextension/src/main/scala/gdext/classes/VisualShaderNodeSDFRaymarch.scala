@@ -7,15 +7,6 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `VisualShaderNodeSDFRaymarch`, extends `VisualShaderNode`. */
 abstract class VisualShaderNodeSDFRaymarch extends VisualShaderNode {
+  override def godotClassName: String = "VisualShaderNodeSDFRaymarch"
 
-}
-
-object VisualShaderNodeSDFRaymarch {
-  /** Class metadata for Gd[VisualShaderNodeSDFRaymarch] lifetime management and casting. */
-  given GodotClass[VisualShaderNodeSDFRaymarch] with {
-    def className = "VisualShaderNodeSDFRaymarch"
-    def isRefCounted = true
-    def wrap(o: GodotObject): VisualShaderNodeSDFRaymarch = new VisualShaderNodeSDFRaymarch {}.withHost(o.objectPtr)
-    def unwrap(t: VisualShaderNodeSDFRaymarch): GodotObject = t.hostObject
-  }
 }

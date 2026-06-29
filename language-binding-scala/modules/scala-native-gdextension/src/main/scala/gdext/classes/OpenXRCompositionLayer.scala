@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `OpenXRCompositionLayer`, extends `Node3D`. */
 abstract class OpenXRCompositionLayer extends Node3D {
+  override def godotClassName: String = "OpenXRCompositionLayer"
 
   /** OpenXRCompositionLayer.set_layer_viewport */
   final def setLayerViewport(viewport: SubViewport): Unit =
@@ -164,14 +165,4 @@ abstract class OpenXRCompositionLayer extends Node3D {
   final def intersectsRay(origin: gdext.builtin.Vector3, direction: gdext.builtin.Vector3): gdext.builtin.Vector2 =
     Ptrcall.call2[gdext.builtin.Vector3, gdext.builtin.Vector3, gdext.builtin.Vector2](MethodBind.get("OpenXRCompositionLayer", "intersects_ray", 1091262597L), hostObject.objectPtr, origin, direction)
 
-}
-
-object OpenXRCompositionLayer {
-  /** Class metadata for Gd[OpenXRCompositionLayer] lifetime management and casting. */
-  given GodotClass[OpenXRCompositionLayer] with {
-    def className = "OpenXRCompositionLayer"
-    def isRefCounted = false
-    def wrap(o: GodotObject): OpenXRCompositionLayer = new OpenXRCompositionLayer {}.withHost(o.objectPtr)
-    def unwrap(t: OpenXRCompositionLayer): GodotObject = t.hostObject
-  }
 }

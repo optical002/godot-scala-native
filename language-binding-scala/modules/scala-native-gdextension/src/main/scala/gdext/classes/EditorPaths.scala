@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `EditorPaths`, extends `Object`. */
 abstract class EditorPaths extends Object {
+  override def godotClassName: String = "EditorPaths"
 
   /** EditorPaths.get_data_dir */
   final def getDataDir(): String =
@@ -32,14 +33,4 @@ abstract class EditorPaths extends Object {
   final def getProjectSettingsDir(): String =
     Ptrcall.call0[String](MethodBind.get("EditorPaths", "get_project_settings_dir", 201670096L), hostObject.objectPtr)
 
-}
-
-object EditorPaths {
-  /** Class metadata for Gd[EditorPaths] lifetime management and casting. */
-  given GodotClass[EditorPaths] with {
-    def className = "EditorPaths"
-    def isRefCounted = false
-    def wrap(o: GodotObject): EditorPaths = new EditorPaths {}.withHost(o.objectPtr)
-    def unwrap(t: EditorPaths): GodotObject = t.hostObject
-  }
 }

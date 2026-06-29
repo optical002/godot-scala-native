@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `StyleBoxFlat`, extends `StyleBox`. */
 abstract class StyleBoxFlat extends StyleBox {
+  override def godotClassName: String = "StyleBoxFlat"
 
   /** StyleBoxFlat.set_bg_color */
   final def setBgColor(color: gdext.builtin.Color): Unit =
@@ -136,14 +137,4 @@ abstract class StyleBoxFlat extends StyleBox {
   final def getCornerDetail(): Long =
     Ptrcall.call0[Long](MethodBind.get("StyleBoxFlat", "get_corner_detail", 3905245786L), hostObject.objectPtr)
 
-}
-
-object StyleBoxFlat {
-  /** Class metadata for Gd[StyleBoxFlat] lifetime management and casting. */
-  given GodotClass[StyleBoxFlat] with {
-    def className = "StyleBoxFlat"
-    def isRefCounted = true
-    def wrap(o: GodotObject): StyleBoxFlat = new StyleBoxFlat {}.withHost(o.objectPtr)
-    def unwrap(t: StyleBoxFlat): GodotObject = t.hostObject
-  }
 }

@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PhysicalSkyMaterial`, extends `Material`. */
 abstract class PhysicalSkyMaterial extends Material {
+  override def godotClassName: String = "PhysicalSkyMaterial"
 
   /** PhysicalSkyMaterial.set_rayleigh_coefficient */
   final def setRayleighCoefficient(rayleigh: Double): Unit =
@@ -96,14 +97,4 @@ abstract class PhysicalSkyMaterial extends Material {
   final def getNightSky(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("PhysicalSkyMaterial", "get_night_sky", 3635182373L), hostObject.objectPtr)
 
-}
-
-object PhysicalSkyMaterial {
-  /** Class metadata for Gd[PhysicalSkyMaterial] lifetime management and casting. */
-  given GodotClass[PhysicalSkyMaterial] with {
-    def className = "PhysicalSkyMaterial"
-    def isRefCounted = true
-    def wrap(o: GodotObject): PhysicalSkyMaterial = new PhysicalSkyMaterial {}.withHost(o.objectPtr)
-    def unwrap(t: PhysicalSkyMaterial): GodotObject = t.hostObject
-  }
 }

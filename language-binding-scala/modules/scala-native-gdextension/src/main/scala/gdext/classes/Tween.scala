@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `Tween`, extends `RefCounted`. */
 abstract class Tween extends RefCounted {
+  override def godotClassName: String = "Tween"
 
   /** Tween.tween_interval */
   final def tweenInterval(time: Double): GodotObject =
@@ -96,14 +97,4 @@ abstract class Tween extends RefCounted {
   final def chain(): GodotObject =
     Ptrcall.call0[GodotObject](MethodBind.get("Tween", "chain", 3426978995L), hostObject.objectPtr)
 
-}
-
-object Tween {
-  /** Class metadata for Gd[Tween] lifetime management and casting. */
-  given GodotClass[Tween] with {
-    def className = "Tween"
-    def isRefCounted = true
-    def wrap(o: GodotObject): Tween = new Tween {}.withHost(o.objectPtr)
-    def unwrap(t: Tween): GodotObject = t.hostObject
-  }
 }

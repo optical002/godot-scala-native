@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `PolygonPathFinder`, extends `Resource`. */
 abstract class PolygonPathFinder extends Resource {
+  override def godotClassName: String = "PolygonPathFinder"
 
   /** PolygonPathFinder.get_closest_point */
   final def getClosestPoint(point: gdext.builtin.Vector2): gdext.builtin.Vector2 =
@@ -28,14 +29,4 @@ abstract class PolygonPathFinder extends Resource {
   final def getBounds(): gdext.builtin.Rect2 =
     Ptrcall.call0[gdext.builtin.Rect2](MethodBind.get("PolygonPathFinder", "get_bounds", 1639390495L), hostObject.objectPtr)
 
-}
-
-object PolygonPathFinder {
-  /** Class metadata for Gd[PolygonPathFinder] lifetime management and casting. */
-  given GodotClass[PolygonPathFinder] with {
-    def className = "PolygonPathFinder"
-    def isRefCounted = true
-    def wrap(o: GodotObject): PolygonPathFinder = new PolygonPathFinder {}.withHost(o.objectPtr)
-    def unwrap(t: PolygonPathFinder): GodotObject = t.hostObject
-  }
 }

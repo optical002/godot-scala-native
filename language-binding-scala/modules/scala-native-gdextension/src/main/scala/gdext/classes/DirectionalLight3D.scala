@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `DirectionalLight3D`, extends `Light3D`. */
 abstract class DirectionalLight3D extends Light3D {
+  override def godotClassName: String = "DirectionalLight3D"
 
   /** DirectionalLight3D.set_shadow_mode */
   final def setShadowMode(mode: Long): Unit =
@@ -32,14 +33,4 @@ abstract class DirectionalLight3D extends Light3D {
   final def getSkyMode(): Long =
     Ptrcall.call0[Long](MethodBind.get("DirectionalLight3D", "get_sky_mode", 3819982774L), hostObject.objectPtr)
 
-}
-
-object DirectionalLight3D {
-  /** Class metadata for Gd[DirectionalLight3D] lifetime management and casting. */
-  given GodotClass[DirectionalLight3D] with {
-    def className = "DirectionalLight3D"
-    def isRefCounted = false
-    def wrap(o: GodotObject): DirectionalLight3D = new DirectionalLight3D {}.withHost(o.objectPtr)
-    def unwrap(t: DirectionalLight3D): GodotObject = t.hostObject
-  }
 }

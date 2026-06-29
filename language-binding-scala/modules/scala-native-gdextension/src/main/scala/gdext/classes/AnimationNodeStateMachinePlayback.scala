@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AnimationNodeStateMachinePlayback`, extends `Resource`. */
 abstract class AnimationNodeStateMachinePlayback extends Resource {
+  override def godotClassName: String = "AnimationNodeStateMachinePlayback"
 
   /** AnimationNodeStateMachinePlayback.travel */
   final def travel(to_node: gdext.builtin.StringName, reset_on_teleport: Boolean): Unit =
@@ -60,14 +61,4 @@ abstract class AnimationNodeStateMachinePlayback extends Resource {
   final def getFadingLength(): Double =
     Ptrcall.call0[Double](MethodBind.get("AnimationNodeStateMachinePlayback", "get_fading_length", 1740695150L), hostObject.objectPtr)
 
-}
-
-object AnimationNodeStateMachinePlayback {
-  /** Class metadata for Gd[AnimationNodeStateMachinePlayback] lifetime management and casting. */
-  given GodotClass[AnimationNodeStateMachinePlayback] with {
-    def className = "AnimationNodeStateMachinePlayback"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AnimationNodeStateMachinePlayback = new AnimationNodeStateMachinePlayback {}.withHost(o.objectPtr)
-    def unwrap(t: AnimationNodeStateMachinePlayback): GodotObject = t.hostObject
-  }
 }

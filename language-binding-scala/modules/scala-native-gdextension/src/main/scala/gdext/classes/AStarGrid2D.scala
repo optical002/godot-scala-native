@@ -7,6 +7,7 @@ import gdext.internal.engine.GodotObject.*
 
 /** Generated wrapper for Godot's `AStarGrid2D`, extends `RefCounted`. */
 abstract class AStarGrid2D extends RefCounted {
+  override def godotClassName: String = "AStarGrid2D"
 
   /** AStarGrid2D.set_region */
   final def setRegion(region: gdext.builtin.Rect2i): Unit =
@@ -128,14 +129,4 @@ abstract class AStarGrid2D extends RefCounted {
   final def getPointPosition(id: gdext.builtin.Vector2i): gdext.builtin.Vector2 =
     Ptrcall.call1[gdext.builtin.Vector2i, gdext.builtin.Vector2](MethodBind.get("AStarGrid2D", "get_point_position", 108438297L), hostObject.objectPtr, id)
 
-}
-
-object AStarGrid2D {
-  /** Class metadata for Gd[AStarGrid2D] lifetime management and casting. */
-  given GodotClass[AStarGrid2D] with {
-    def className = "AStarGrid2D"
-    def isRefCounted = true
-    def wrap(o: GodotObject): AStarGrid2D = new AStarGrid2D {}.withHost(o.objectPtr)
-    def unwrap(t: AStarGrid2D): GodotObject = t.hostObject
-  }
 }
