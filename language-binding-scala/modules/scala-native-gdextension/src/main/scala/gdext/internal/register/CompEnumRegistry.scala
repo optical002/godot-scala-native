@@ -19,6 +19,12 @@ object CompEnumRegistry {
   private val builders =
     new java.util.concurrent.ConcurrentHashMap[String, GodotScriptClass => Seq[String]]()
 
+  /** True when no comp-enum builder is registered for ANY property. Lets the
+    * `validate_property` trampoline early-out before allocating per-call strings
+    * — the common case (a project using no comp-reference dropdowns), where the
+    * editor still calls `validate_property` for every property of every node. */
+  def isEmpty: Boolean = builders.isEmpty
+
   private def key(className: String, propName: String): String =
     s"$className::$propName"
 

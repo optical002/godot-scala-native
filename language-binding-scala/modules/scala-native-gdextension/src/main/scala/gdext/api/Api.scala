@@ -147,6 +147,27 @@ object api {
     export Printing.*
   }
 
+  /**
+   * Numeric helpers mirroring Godot's `@GlobalScope` math utilities, for game
+   * code that wants the engine's exact semantics without an engine call.
+   * Reached as `gdext.api.Math`.
+   */
+  object Math {
+
+    /**
+     * Godot's `move_toward`: step `from` toward `to` by at most `delta` (never
+     * overshooting). Matches the engine's scalar `move_toward`.
+     */
+    def moveToward(from: Double, to: Double, delta: Double): Double =
+      if (scala.math.abs(to - from) <= delta) to
+      else from + scala.math.signum(to - from) * delta
+
+    /** `Float` overload of [[moveToward]]. */
+    def moveToward(from: Float, to: Float, delta: Float): Float =
+      if (scala.math.abs(to - from) <= delta) to
+      else from + scala.math.signum(to - from) * delta
+  }
+
   // ---- Generated-glue surface (used by the auto-generated entry/registration)
   export gdext.internal.register.Register
 

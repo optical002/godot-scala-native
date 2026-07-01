@@ -5,19 +5,18 @@ import scala.scalanative.unsigned.*
 import gdext.internal.ffi.types.*
 import gdext.internal.ffi.types.GDExtensionVariantType.*
 
-/**
- * The fixed-layout math builtins beyond [[Vector2]]/[[Color]] (which keep their
- * own files as the representative pattern). Each is a Scala value type that
- * marshals to/from its raw native blob via `writeType`/`readType` (used by
- * `Ptrcall` for engine method calls) and to/from a Variant via the cached
- * per-type constructors (used by property/method registration).
- *
- * Sizes are pinned in [[BuiltinSizes]]. Components are single precision
- * (`CFloat`) in the default `float_64` build — the `_64` is integer/pointer
- * width, not `real_t` — except the `*i` integer vectors, which are `CInt`.
- * Grouped here because they are mechanical and small; a later codegen pass is
- * expected to generate them from `extension_api.json`.
- */
+/** The fixed-layout math builtins beyond [[Vector2]]/[[Color]] (which keep
+  * their own files as the representative pattern). Each is a Scala value type
+  * that marshals to/from its raw native blob via `writeType`/`readType` (used
+  * by `Ptrcall` for engine method calls) and to/from a Variant via the cached
+  * per-type constructors (used by property/method registration).
+  *
+  * Sizes are pinned in [[BuiltinSizes]]. Components are single precision
+  * (`CFloat`) in the default `float_64` build — the `_64` is integer/pointer
+  * width, not `real_t` — except the `*i` integer vectors, which are `CInt`.
+  * Grouped here because they are mechanical and small; a later codegen pass is
+  * expected to generate them from `extension_api.json`.
+  */
 
 // --- integer vectors --------------------------------------------------------
 
@@ -84,8 +83,27 @@ object Vector4i {
 
 // --- float vectors ----------------------------------------------------------
 
-final case class Vector3(x: Float, y: Float, z: Float)
+final case class Vector3(x: Float, y: Float, z: Float) {
+  def lengthSquared: Float = x * x + y * y + z * z
+  def length: Float = math.sqrt(lengthSquared.toDouble).toFloat
+  def +(o: Vector3): Vector3 = Vector3(x + o.x, y + o.y, z + o.z)
+  def -(o: Vector3): Vector3 = Vector3(x - o.x, y - o.y, z - o.z)
+
+  def normalized: Vector3 =
+    val len = length
+    if len <= 0.0f then Vector3(0.0f, 0.0f, 0.0f)
+    else Vector3(x / len, y / len, z / len)
+
+  def limitLength(maxLen: Float): Vector3 =
+    val len = length
+    if len > 0.0f && len > maxLen then
+      val s = maxLen / len
+      Vector3(x * s, y * s, z * s)
+    else this
+}
 object Vector3 {
+  val zero: Vector3 = Vector3(0.0f, 0.0f, 0.0f)
+
   private[gdext] def writeType(v: Vector3, p: GDExtensionTypePtr): Unit = {
     val f = p.asInstanceOf[Ptr[CFloat]]; f(0) = v.x; f(1) = v.y; f(2) = v.z
   }
@@ -189,7 +207,10 @@ object Quaternion {
   }
   given FromVariant[Quaternion] = (variant) => {
     val buf = stackalloc[Byte](BuiltinSizes.Quaternion.toCSize)
-    VariantConstructors.toType(GDEXTENSION_VARIANT_TYPE_QUATERNION)(buf, variant)
+    VariantConstructors.toType(GDEXTENSION_VARIANT_TYPE_QUATERNION)(
+      buf,
+      variant
+    )
     readType(buf)
   }
 }
@@ -287,11 +308,17 @@ object Transform2D {
   given ToVariant[Transform2D] = (value, dest) => {
     val buf = stackalloc[Byte](BuiltinSizes.Transform2D.toCSize)
     writeType(value, buf)
-    VariantConstructors.fromType(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D)(dest, buf)
+    VariantConstructors.fromType(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D)(
+      dest,
+      buf
+    )
   }
   given FromVariant[Transform2D] = (variant) => {
     val buf = stackalloc[Byte](BuiltinSizes.Transform2D.toCSize)
-    VariantConstructors.toType(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D)(buf, variant)
+    VariantConstructors.toType(GDEXTENSION_VARIANT_TYPE_TRANSFORM2D)(
+      buf,
+      variant
+    )
     readType(buf)
   }
 }
@@ -312,11 +339,17 @@ object Transform3D {
   given ToVariant[Transform3D] = (value, dest) => {
     val buf = stackalloc[Byte](BuiltinSizes.Transform3D.toCSize)
     writeType(value, buf)
-    VariantConstructors.fromType(GDEXTENSION_VARIANT_TYPE_TRANSFORM3D)(dest, buf)
+    VariantConstructors.fromType(GDEXTENSION_VARIANT_TYPE_TRANSFORM3D)(
+      dest,
+      buf
+    )
   }
   given FromVariant[Transform3D] = (variant) => {
     val buf = stackalloc[Byte](BuiltinSizes.Transform3D.toCSize)
-    VariantConstructors.toType(GDEXTENSION_VARIANT_TYPE_TRANSFORM3D)(buf, variant)
+    VariantConstructors.toType(GDEXTENSION_VARIANT_TYPE_TRANSFORM3D)(
+      buf,
+      variant
+    )
     readType(buf)
   }
 }
@@ -347,7 +380,10 @@ object Projection {
   }
   given FromVariant[Projection] = (variant) => {
     val buf = stackalloc[Byte](BuiltinSizes.Projection.toCSize)
-    VariantConstructors.toType(GDEXTENSION_VARIANT_TYPE_PROJECTION)(buf, variant)
+    VariantConstructors.toType(GDEXTENSION_VARIANT_TYPE_PROJECTION)(
+      buf,
+      variant
+    )
     readType(buf)
   }
 }

@@ -4,7 +4,7 @@ import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
 
 import gdext.Godot
-import gdext.builtin.{Arr, BuiltinSizes, StringName, Variant}
+import gdext.builtin.{Arr, BuiltinSizes, StringName, StringNames, Variant}
 import gdext.internal.engine.{MethodBind, Ptrcall}
 import gdext.internal.ffi.types.*
 
@@ -56,6 +56,24 @@ extension (self: Object)
     self.connect(signal, callable, 0L)
   }
 
+  /** Connect a named built-in [[SignalName]] to `target.method`. */
+  def connectMethod(signal: SignalName, target: Object, method: StringName): Long =
+    self.connectMethod(StringNames.cached(signal.godotName), target, method)
+
+  /** Connect `signal` on this object directly to a Scala closure — no registered
+    * `@func` method needed. The closure is held alive (via a custom
+    * [[gdext.internal.engine.CustomCallable]]) for as long as the connection
+    * exists, and dropped when Godot frees the Callable on disconnect. */
+  def connect(signal: StringName, handler: () => Unit): Long = {
+    val buf = stackalloc[Byte](gdext.builtin.BuiltinSizes.Callable.toUInt)
+    val callable = gdext.internal.engine.CustomCallable.of(handler, buf)
+    self.connect(signal, callable, 0L)
+  }
+
+  /** Connect a named built-in [[SignalName]] directly to a Scala closure. */
+  def connect(signal: SignalName, handler: () => Unit): Long =
+    self.connect(StringNames.cached(signal.godotName), handler)
+
 extension (self: Area3D)
   /** `Area3D.get_overlapping_bodies()` — returns the `PhysicsBody3D`s currently
     * overlapping this area (as `Arr[Node3D]`). The generator skips it (typed
@@ -72,3 +90,14 @@ extension (self: Area3D)
     )
     Arr.fromHandle[Node3D](retBuf.asInstanceOf[GDExtensionTypePtr])
   }
+
+extension (self: PackedScene)
+  /** Instantiate this scene and add its root (typed as `T`) as a child of
+    * `parent`, returning the root. Equivalent to wrapping the scene in a
+    * `Tscn[T]` and calling its parenting `instantiate`; the typed convenience a
+    * `@export var scene: Tscn[T]` already gives, but for a `PackedScene` value
+    * resolved at runtime (e.g. from a prefab lookup). */
+  def instantiateAsChild[T <: gdext.internal.register.GodotScriptClass](
+    parent: Node
+  )(using gdext.internal.engine.ClassMeta[T]): T =
+    gdext.internal.engine.Tscn[T](self).instantiate(parent)

@@ -394,6 +394,14 @@ object ClassRegistration {
   // enumerated from the comp's current value, and return true (handled).
   private val validateProperty: GDExtensionClassValidateProperty =
     (instance: GDExtensionClassInstancePtr, pi: Ptr[GDExtensionPropertyInfo]) => {
+      // The editor calls this for EVERY property of EVERY node, continuously,
+      // while the inspector is shown. When no class uses a comp-reference
+      // dropdown (the common case) there is nothing to rewrite, so return "not
+      // handled" immediately — BEFORE the `getSimpleName` / `StringName.toScala`
+      // allocations below. This removes the binding's dominant per-frame editor
+      // allocation when comp-enums are unused.
+      if (CompEnumRegistry.isEmpty) 0.toUByte
+      else {
       val scala = ClassRegistry.instanceFor(Tokens.fromPtr(instance))
       if (scala == null) 0.toUByte
       else {
@@ -411,6 +419,7 @@ object ClassRegistration {
             1.toUByte
           case None => 0.toUByte
         }
+      }
       }
     }
 }

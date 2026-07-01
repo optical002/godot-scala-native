@@ -306,8 +306,8 @@ abstract class Node extends Object {
     Ptrcall.call0[GodotObject](MethodBind.get("Node", "get_last_exclusive_window", 1757182445L), hostObject.objectPtr)
 
   /** Node.get_tree */
-  final def getTree(): GodotObject =
-    Ptrcall.call0[GodotObject](MethodBind.get("Node", "get_tree", 2958820483L), hostObject.objectPtr)
+  final def getTree(): SceneTree =
+    summon[gdext.internal.engine.ClassMeta[SceneTree]].fromHandle((Ptrcall.call0[GodotObject](MethodBind.get("Node", "get_tree", 2958820483L), hostObject.objectPtr)).objectPtr)
 
   /** Node.create_tween */
   final def createTween(): GodotObject =

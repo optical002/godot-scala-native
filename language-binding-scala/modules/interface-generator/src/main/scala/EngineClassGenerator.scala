@@ -78,6 +78,21 @@ object EngineClassGenerator {
     "Projection"  -> s"$bp.Projection"
   )
 
+  /** Per-method typed-return overrides, keyed by `(declaringClass, godotMethod)`.
+    *
+    * Object-typed returns default to the raw `GodotObject` handle (see the file
+    * header) because a wrapper can't be instantiated for an abstract class in
+    * general. But a handful of methods have a single, stable concrete return
+    * type that callers always re-wrap by hand — `Node.get_tree` always yields a
+    * `SceneTree`. For those we emit the typed wrapper directly (via the
+    * macro-derived `ClassMeta`), so call sites need no `Gd.wrap`.
+    *
+    * The value must be a generated engine class (it is wrapped through
+    * `ClassMeta.fromHandle`); a null handle wraps to a null `T`. */
+  val returnOverrides: Map[(String, String), String] = Map(
+    ("Node", "get_tree") -> "SceneTree"
+  )
+
   /** Enums and bitfields cross the ptrcall boundary as int64. */
   def isEnumLike(t: String): Boolean =
     t.startsWith("enum::") || t.startsWith("bitfield::")
@@ -197,12 +212,22 @@ object EngineClassGenerator {
       s"""MethodBind.get("$declClass", "$mname", ${hash.get}L)"""
     val instance = "hostObject.objectPtr"
 
-    // Object returns become GodotObject in the signature.
+    // A curated typed-return override wins over the raw-handle default, but only
+    // when the raw return is actually a generated object (so it has a handle to
+    // wrap and a derivable `ClassMeta`).
+    val overrideType =
+      returnOverrides.get((declClass, mname)).filter(_ =>
+        retTypeRaw.exists(isGeneratedObject))
+
+    // Object returns become GodotObject in the signature, unless overridden to a
+    // concrete wrapper type.
     val retSig =
-      retTypeRaw match {
-        case Some(rt) if isGeneratedObject(rt) => "GodotObject"
-        case _                                 => retType.getOrElse("Unit")
-      }
+      overrideType.getOrElse(
+        retTypeRaw match {
+          case Some(rt) if isGeneratedObject(rt) => "GodotObject"
+          case _                                 => retType.getOrElse("Unit")
+        }
+      )
 
     // Build the dispatch call uniformly for arity 0..6. Void calls let arg types
     // infer; value-returning calls pass explicit [argTypes..., R] type params.
@@ -217,11 +242,19 @@ object EngineClassGenerator {
         s"Ptrcall.call$n[$typeParams]($bindExpr, $instance$argTail)"
     }
 
+    // For a typed-return override, wrap the raw `GodotObject` handle into the
+    // concrete wrapper via the macro-derived `ClassMeta` (null handle -> null T).
+    val bodyExpr = overrideType match {
+      case Some(t) =>
+        s"summon[gdext.internal.engine.ClassMeta[$t]].fromHandle(($callExpr).objectPtr)"
+      case None => callExpr
+    }
+
     Some(
       s"""
          |  /** ${declClass}.$mname */
          |  final def $scalaName($paramList): $retSig =
-         |    $callExpr
+         |    $bodyExpr
          |""".stripMargin
     )
   }

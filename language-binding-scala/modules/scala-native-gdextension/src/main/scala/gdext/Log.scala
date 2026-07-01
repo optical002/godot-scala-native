@@ -1,6 +1,14 @@
 package gdext
 
+import scala.scalanative.unsafe.*
 import gdext.api.Gd
+
+@extern
+private[gdext] object LinuxThread:
+  // Real OS thread id (gettid syscall wrapper). Unlike Thread.currentThread().getId,
+  // this distinguishes a foreign (engine-created) thread from the SN main thread.
+  @name("scalanative_gdext_gettid")
+  def gettid(): Long = extern
 
 /**
  * The language binding's logging facade. Lives in the binding (not in any game
@@ -61,7 +69,7 @@ private[gdext] object Log {
   def trace(msg: String): Unit =
     if (traceEnabled) {
       val t = Thread.currentThread()
-      file(s"[${System.nanoTime() / 1000000L}ms t=${t.getId}/${t.getName}] $msg")
+      file(s"[${System.nanoTime() / 1000000L}ms t=${t.getId}/${t.getName} tid=${LinuxThread.gettid()}] $msg")
     }
 
   /** Truncate the side log file and write the first line (start-of-run). */

@@ -22,6 +22,8 @@ import gdext.internal.ffi.types.GDExtensionVariantType.*
 final case class Vector2(x: Float, y: Float)
 
 object Vector2 {
+  val zero: Vector2 = Vector2(0.0f, 0.0f)
+
   /** Write the raw 8-byte layout into a type buffer. */
   private[gdext] def writeType(v: Vector2, p: GDExtensionTypePtr): Unit = {
     val f = p.asInstanceOf[Ptr[CFloat]]

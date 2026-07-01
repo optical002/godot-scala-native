@@ -52,7 +52,17 @@ object ClassRegistry {
     id
   }
 
-  def classFor(token: Long): ClassDescriptor = classes.get(token)
+  // Engine callbacks (instance create/free, method/property calls, virtuals)
+  // all enter through one of these lookups before they allocate anything. Godot
+  // may invoke them from ITS OWN threads (e.g. the editor's import/inspector
+  // workers), which Scala Native's GC has never registered — so we register the
+  // calling thread here, at that boundary, before any allocation. Idempotent and
+  // ~free once a thread is registered (main-thread callers included). See
+  // [[gdext.internal.GcThread]].
+  def classFor(token: Long): ClassDescriptor = {
+    gdext.internal.GcThread.ensureRegistered()
+    classes.get(token)
+  }
 
   /** True if a class with this Godot name is already registered. */
   def isClassRegistered(className: String): Boolean =
@@ -99,14 +109,20 @@ object ClassRegistry {
     id
   }
 
-  def instanceFor(token: Long): GodotScriptClass = instances.get(token)
+  def instanceFor(token: Long): GodotScriptClass = {
+    gdext.internal.GcThread.ensureRegistered()
+    instances.get(token)
+  }
 
   /** The canonical Scala instance bound to the engine object with this instance
     * id, or null if none is bound (e.g. a pure engine object). */
-  def instanceForObjectId(objectId: Long): GodotScriptClass =
+  def instanceForObjectId(objectId: Long): GodotScriptClass = {
+    gdext.internal.GcThread.ensureRegistered()
     instancesByObjectId.get(objectId)
+  }
 
   def removeInstance(token: Long): GodotScriptClass = {
+    gdext.internal.GcThread.ensureRegistered()
     val r = instances.remove(token)
     val objectId: java.lang.Long = objectIdByToken.remove(token)
     if (objectId != null) instancesByObjectId.remove(objectId.longValue)
