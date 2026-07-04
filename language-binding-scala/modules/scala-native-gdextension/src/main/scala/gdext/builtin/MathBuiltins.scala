@@ -88,6 +88,17 @@ final case class Vector3(x: Float, y: Float, z: Float) {
   def length: Float = math.sqrt(lengthSquared.toDouble).toFloat
   def +(o: Vector3): Vector3 = Vector3(x + o.x, y + o.y, z + o.z)
   def -(o: Vector3): Vector3 = Vector3(x - o.x, y - o.y, z - o.z)
+  def unary_- : Vector3 = Vector3(-x, -y, -z)
+  def *(s: Float): Vector3 = Vector3(x * s, y * s, z * s)
+  def /(s: Float): Vector3 = Vector3(x / s, y / s, z / s)
+
+  def dot(o: Vector3): Float = x * o.x + y * o.y + z * o.z
+
+  def cross(o: Vector3): Vector3 =
+    Vector3(y * o.z - z * o.y, z * o.x - x * o.z, x * o.y - y * o.x)
+
+  def distanceSquaredTo(o: Vector3): Float = (o - this).lengthSquared
+  def distanceTo(o: Vector3): Float = (o - this).length
 
   def normalized: Vector3 =
     val len = length
@@ -100,6 +111,17 @@ final case class Vector3(x: Float, y: Float, z: Float) {
       val s = maxLen / len
       Vector3(x * s, y * s, z * s)
     else this
+
+  def rotatedY(angle: Float): Vector3 =
+    val cos = math.cos(angle.toDouble).toFloat
+    val sin = math.sin(angle.toDouble).toFloat
+    Vector3(x * cos + z * sin, y, -x * sin + z * cos)
+
+  def moveToward(to: Vector3, delta: Float): Vector3 =
+    val diff = to - this
+    val len = diff.length
+    if len <= delta || len < 1e-6f then to
+    else this + diff * (delta / len)
 }
 object Vector3 {
   val zero: Vector3 = Vector3(0.0f, 0.0f, 0.0f)
