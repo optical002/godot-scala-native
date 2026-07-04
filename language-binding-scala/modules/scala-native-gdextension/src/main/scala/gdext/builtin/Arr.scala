@@ -26,6 +26,9 @@ final class Arr[A] private[builtin] (
   def append(value: A): Unit = array.pushBack(value)
   def apply(i: Int): A = array.get[A](i)
   def size: Int = array.size
+  def isEmpty: Boolean = size == 0
+  def iterator: Iterator[A] = Iterator.tabulate(size)(apply)
+  def foreach(f: A => Unit): Unit = iterator.foreach(f)
 }
 
 object Arr {
