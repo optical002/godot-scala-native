@@ -15,7 +15,8 @@ import scala.scalanative.build.{BuildTarget, Mode}
  *
  * {{{
  *   // project/plugins.sbt
- *   addSbtPlugin("io.github.optical002" % "sbt-godot-scala-native" % "<version>")
+ *   resolvers += "jitpack" at "https://jitpack.io"
+ *   addSbtPlugin("com.github.optical002.godot-scala-native" % "sbt-godot-scala-native" % "<version>")
  *
  *   // build.sbt
  *   enablePlugins(GodotScalaNativePlugin)
@@ -146,8 +147,12 @@ object GodotScalaNativePlugin extends AutoPlugin {
     // classpath. The version is the plugin's own version, embedded at
     // plugin-build time (see GodotScalaNativeBuildInfo), so the plugin and the
     // binding it pulls in are always released together.
+    // Released binding artifacts are served by JitPack; -SNAPSHOT versions come
+    // from the local ivy repo (publishLocal), so the extra resolver is inert
+    // during local co-development.
+    resolvers += "jitpack" at "https://jitpack.io",
     libraryDependencies +=
-      ("io.github.optical002" % "scala-native-gdextension" % GodotScalaNativeBuildInfo.version)
+      ("com.github.optical002.godot-scala-native" % "scala-native-gdextension" % GodotScalaNativeBuildInfo.version)
         .cross(ScalaNativeCrossVersion.binary),
 
     // Produce a dynamic library (.so/.dylib/.dll) Godot can dlopen, using the
@@ -334,6 +339,7 @@ object GodotScalaNativePlugin extends AutoPlugin {
     IO.createDirectory(addonDir)
     IO.write(addonDir / "plugin.cfg", resource("plugin.cfg"))
     IO.write(addonDir / "icon.svg", resource("icon.svg"))
+    IO.write(addonDir / "godot.svg", resource("godot.svg"))
     IO.write(
       addonDir / "scala_build.gd",
       resource("scala_build.gd").replace("@SBT_PROJECT_DIR@", rel)

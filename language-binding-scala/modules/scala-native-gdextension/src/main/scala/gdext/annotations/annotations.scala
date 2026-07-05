@@ -62,6 +62,13 @@ final class signal extends StaticAnnotation
  *
  * The annotated field must be a `String` with `@gdexport`, and `comp` must name a
  * sibling field whose type can be projected to the expected engine class.
+ *
+ * A Node class using any of these registers as a TOOL (non-runtime) class: the
+ * editor swaps runtime-class nodes for native-parent placeholders that never
+ * call `validate_property`, which would leave the dropdowns as plain strings.
+ * Only overridden virtuals are registered, so nothing ticks in the editor
+ * unless the class overrides e.g. `_process` — guard those with
+ * `Engine.isEditorHint` if it does.
  */
 
 /** Dropdown of the bones of the referenced `Skeleton3D` comp. */
@@ -75,3 +82,37 @@ final class exportSpriteAnimation(comp: String) extends StaticAnnotation
 
 /** Dropdown of the `parameters/...` paths of the referenced `AnimationTree` comp. */
 final class exportAnimationProperty(comp: String) extends StaticAnnotation
+
+/**
+ * Dropdown of the state names of the referenced `AnimationTree` comp's root
+ * state machine (the names `AnimationNodeStateMachinePlayback.travel` accepts).
+ */
+final class exportAnimationStateName(comp: String) extends StaticAnnotation
+
+/**
+ * Dropdown of the parameter names under one state of the referenced
+ * `AnimationTree` comp — the `<param>` in `parameters/<state>/<param>`. `state`
+ * names a sibling `String` field (typically an [[exportAnimationStateName]]
+ * one) whose CURRENT value selects the state, so the options follow it.
+ */
+final class exportAnimationStateProperty(comp: String, state: String) extends StaticAnnotation
+
+/**
+ * Dropdown of the sub-node names inside one state's `AnimationNodeBlendTree`
+ * (e.g. a OneShot node to fire via `parameters/<state>/<node>/request`).
+ * `state` selects the state exactly as in [[exportAnimationStateProperty]].
+ */
+final class exportAnimationStateNode(comp: String, state: String) extends StaticAnnotation
+
+/**
+ * Compile-time field-name reference for the annotation arguments above:
+ * `@exportAnimationStateName(nameOf(animationTree))` means "animationTree" but
+ * follows the field through renames. Only usable on CLASS-BODY fields — an
+ * annotation argument on a constructor param is typed outside the class scope
+ * and cannot see sibling params, so ctor-param dropdowns must keep string
+ * arguments. Only meaningful inside these annotations (the registration macro
+ * reads the referenced field's name from the tree); calling it at runtime
+ * throws.
+ */
+def nameOf(field: Any): String =
+  throw new UnsupportedOperationException("nameOf is a compile-time annotation argument")

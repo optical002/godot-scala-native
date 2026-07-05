@@ -64,17 +64,6 @@ object Register {
     }
     val baseNameExpr = Expr(baseName)
 
-    // --- runtime vs. tool class ------------------------------------------
-    // `is_runtime` is only meaningful for Nodes: it keeps the editor from
-    // ticking their _process/_ready while merely editing a scene. Resources
-    // (and any other non-Node Object) are never ticked, and they must be REAL
-    // instances in the editor because you edit and save them there. Registering
-    // a Resource as runtime sends the editor down its placeholder/recreate path,
-    // which hangs the editor on hot-reload when the resource is referenced by an
-    // open scene. So: Node subtree -> runtime; everything else -> tool/non-runtime.
-    val isRuntimeExpr =
-      Expr(tpe <:< TypeRepr.of[gdext.classes.Node])
-
     // --- overridden virtuals ---------------------------------------------
     val baseSym = TypeRepr.of[GodotScriptClass].typeSymbol
     def declaresOverride(name: String): Boolean = {
@@ -84,8 +73,21 @@ object Register {
     val overridden = Expr(knownVirtuals.filter(declaresOverride).toSet)
 
     // --- helpers ----------------------------------------------------------
+    // Annotations written on a primary-ctor `var` param can attach to the ctor
+    // parameter symbol rather than the generated field, so every annotation
+    // lookup falls back to the same-named ctor param.
+    val ctorParamByName: Map[String, Symbol] =
+      sym.primaryConstructor.paramSymss.flatten.iterator
+        .filter(_.isTerm)
+        .map(p => p.name -> p)
+        .toMap
+
+    def annotationOf(s: Symbol, annTpe: TypeRepr): Option[Term] =
+      s.getAnnotation(annTpe.typeSymbol)
+        .orElse(ctorParamByName.get(s.name).flatMap(_.getAnnotation(annTpe.typeSymbol)))
+
     def hasAnn(s: Symbol, annTpe: TypeRepr): Boolean =
-      s.hasAnnotation(annTpe.typeSymbol)
+      annotationOf(s, annTpe).isDefined
 
     val funcAnn = TypeRepr.of[func]
     val exportAnn = TypeRepr.of[gdexport]
@@ -97,7 +99,33 @@ object Register {
     val animationAnn = TypeRepr.of[exportAnimation]
     val spriteAnimAnn = TypeRepr.of[exportSpriteAnimation]
     val animPropertyAnn = TypeRepr.of[exportAnimationProperty]
-    val compAnns = List(boneNameAnn, animationAnn, spriteAnimAnn, animPropertyAnn)
+    val animStateNameAnn = TypeRepr.of[exportAnimationStateName]
+    val animStatePropAnn = TypeRepr.of[exportAnimationStateProperty]
+    val animStateNodeAnn = TypeRepr.of[exportAnimationStateNode]
+    val compAnns =
+      List(
+        boneNameAnn, animationAnn, spriteAnimAnn, animPropertyAnn,
+        animStateNameAnn, animStatePropAnn, animStateNodeAnn
+      )
+
+    // --- runtime vs. tool class ------------------------------------------
+    // `is_runtime` is only meaningful for Nodes: it keeps the editor from
+    // ticking their _process/_ready while merely editing a scene. Resources
+    // (and any other non-Node Object) are never ticked, and they must be REAL
+    // instances in the editor because you edit and save them there. Registering
+    // a Resource as runtime sends the editor down its placeholder/recreate path,
+    // which hangs the editor on hot-reload when the resource is referenced by an
+    // open scene. So: Node subtree -> runtime; everything else -> tool/non-runtime.
+    // EXCEPTION: a Node with comp-reference dropdown annotations must also be a
+    // REAL instance in the editor — the editor replaces a runtime-class node
+    // with a native-parent placeholder that never calls `validate_property`, so
+    // the dropdowns would silently stay plain strings. Such a class only ticks
+    // in the editor if it also overrides a virtual (only overridden virtuals
+    // are registered); guard those with Engine.isEditorHint if needed.
+    val isRuntimeExpr = Expr(
+      tpe <:< TypeRepr.of[gdext.classes.Node] &&
+        !sym.declaredFields.exists(f => compAnns.exists(a => hasAnn(f, a)))
+    )
 
     // snake_case Godot name from a camelCase Scala name.
     def snake(n: String): String =
@@ -241,7 +269,7 @@ object Register {
     // The annotation tree is `new gdexport(<hintExpr>)`; a bare `@gdexport` has no
     // arg (the default applies), so we fall back to `ExportHint.none`.
     def hintExpr(f: Symbol): Expr[ExportHint] =
-      f.getAnnotation(exportAnn.typeSymbol) match {
+      annotationOf(f, exportAnn) match {
         case Some(Apply(_, arg :: _)) => arg.asExprOf[ExportHint]
         case _                        => '{ ExportHint.none }
       }
@@ -251,16 +279,16 @@ object Register {
     // field's property, in category→group→subgroup order.
     def markerExprs(f: Symbol): List[Expr[Unit]] = {
       def strArg(t: Term): Expr[String] = t.asExprOf[String]
-      val cat = f.getAnnotation(categoryAnn.typeSymbol).collect {
+      val cat = annotationOf(f, categoryAnn).collect {
         case Apply(_, name :: _) =>
           '{ PropertyRegistration.registerCategory($classNameExpr, ${ strArg(name) }) }
       }
-      val grp = f.getAnnotation(groupAnn.typeSymbol).collect {
+      val grp = annotationOf(f, groupAnn).collect {
         case Apply(_, args) if args.nonEmpty =>
           val prefix = args.lift(1).map(strArg).getOrElse('{ "" })
           '{ PropertyRegistration.registerGroup($classNameExpr, ${ strArg(args.head) }, $prefix) }
       }
-      val sub = f.getAnnotation(subgroupAnn.typeSymbol).collect {
+      val sub = annotationOf(f, subgroupAnn).collect {
         case Apply(_, args) if args.nonEmpty =>
           val prefix = args.lift(1).map(strArg).getOrElse('{ "" })
           '{ PropertyRegistration.registerSubgroup($classNameExpr, ${ strArg(args.head) }, $prefix) }
@@ -268,13 +296,32 @@ object Register {
       List(cat, grp, sub).flatten
     }
 
-    // The comp-reference annotation on a field (if any) plus its comp arg — the
-    // Scala name of the sibling field to enumerate from. Comp annotations take a
-    // single `String` literal, read directly like the marker args.
-    def compAnnotationOf(f: Symbol): Option[(TypeRepr, String)] =
+    // The comp-reference annotation on a field (if any) plus its String-literal
+    // args — the Scala names of the sibling fields to enumerate from (a comp,
+    // plus a state selector for the two-ref annotations).
+    // An annotation argument is either a plain string literal or a
+    // `nameOf(<field>)` call, which resolves to the referenced field's name (so
+    // the reference survives renames). The reference may come through the
+    // field's accessor, hence the nested Apply/Select/Ident shapes.
+    def compAnnArg(t: Term): Option[String] = t match {
+      case Literal(StringConstant(s)) => Some(s)
+      case NamedArg(_, inner) => compAnnArg(inner)
+      case Inlined(_, _, inner) => compAnnArg(inner)
+      case Apply(fn, List(arg)) if fn.symbol.name == "nameOf" => referencedName(arg)
+      case _ => None
+    }
+
+    def referencedName(t: Tree): Option[String] = t match {
+      case Select(_, name) => Some(name)
+      case Apply(inner, Nil) => referencedName(inner)
+      case Ident(name) => Some(name)
+      case _ => None
+    }
+
+    def compAnnotationOf(f: Symbol): Option[(TypeRepr, List[String])] =
       compAnns.iterator.flatMap { ann =>
-        f.getAnnotation(ann.typeSymbol).collect {
-          case Apply(_, Literal(StringConstant(comp)) :: _) => (ann, comp)
+        annotationOf(f, ann).collect {
+          case Apply(_, args) => (ann, args.flatMap(compAnnArg))
         }
       }.nextOption()
 
@@ -282,40 +329,74 @@ object Register {
     // locate the sibling comp field by Scala name to get its declared type, build
     // a typed getter for it, project it to the engine type the annotation expects
     // (via CompEnum.AsRef), and pair that with the matching enumeration function.
-    def compEnumRegFor(f: Symbol, ann: TypeRepr, compScalaName: String): Expr[Unit] = {
+    def compEnumRegFor(f: Symbol, ann: TypeRepr, args: List[String]): Expr[Unit] = {
       val propName = snake(f.name)
       val annName = ann.typeSymbol.name
-      val compField = fields.find(_.name == compScalaName).getOrElse(
+      def fieldTpe(name: String): TypeRepr = {
+        val fld = fields.find(_.name == name).getOrElse(
+          report.errorAndAbort(
+            s"@$annName $className.${f.name}: no sibling field named '$name'"
+          )
+        )
+        fld.tree match {
+          case v: ValDef => v.tpt.tpe
+          case _ =>
+            report.errorAndAbort(
+              s"@$annName $className.$name: cannot determine field type"
+            )
+        }
+      }
+      val compScalaName = args.headOption.getOrElse(
         report.errorAndAbort(
-          s"@$annName $className.${f.name}: no sibling field named '$compScalaName'"
+          s"@$annName $className.${f.name}: comp must be a String literal"
         )
       )
-      val compTpe = compField.tree match {
-        case v: ValDef => v.tpt.tpe
-        case _ =>
-          report.errorAndAbort(
-            s"@$annName $className.$compScalaName: cannot determine field type"
-          )
-      }
+      val compTpe = fieldTpe(compScalaName)
       compTpe.asType match {
         case '[c] =>
           val (getC, _) = fieldLambdas[c](compScalaName)
-          def build[E <: GodotScriptClass: Type](
-            enumerate: Expr[E => Seq[String]]
-          ): Expr[Unit] = {
-            val asRef = Expr.summon[CompEnum.AsRef[c, E]].getOrElse(
+          def asRefTo[E <: GodotScriptClass: Type]: Expr[CompEnum.AsRef[c, E]] =
+            Expr.summon[CompEnum.AsRef[c, E]].getOrElse(
               report.errorAndAbort(
                 s"@$annName $className.$compScalaName: type '${typeName(compTpe)}' " +
                   s"cannot be projected to ${TypeRepr.of[E].typeSymbol.name}"
               )
             )
+          def build[E <: GodotScriptClass: Type](
+            enumerate: Expr[E => Seq[String]]
+          ): Expr[Unit] = {
+            val asRef = asRefTo[E]
             val builder: Expr[GodotScriptClass => Seq[String]] =
               '{ (inst: GodotScriptClass) => $enumerate($asRef.ref($getC(inst))) }
+            '{ CompEnumRegistry.register($classNameExpr, ${ Expr(propName) }, $builder) }
+          }
+          // Two-ref variant: the enumeration also reads a sibling String field
+          // (the state selector, the annotation's second arg) off the live
+          // instance, so the options track that field's current value.
+          def buildWithState(
+            enumerate: Expr[(AnimationTree, String) => Seq[String]]
+          ): Expr[Unit] = {
+            val stateScalaName = args.lift(1).getOrElse(
+              report.errorAndAbort(
+                s"@$annName $className.${f.name}: state must be a String literal"
+              )
+            )
+            if (typeName(fieldTpe(stateScalaName)) != "java.lang.String")
+              report.errorAndAbort(
+                s"@$annName $className.${f.name}: state field '$stateScalaName' must be a String"
+              )
+            val asRef = asRefTo[AnimationTree]
+            val (getS, _) = fieldLambdas[String](stateScalaName)
+            val builder: Expr[GodotScriptClass => Seq[String]] =
+              '{ (inst: GodotScriptClass) => $enumerate($asRef.ref($getC(inst)), $getS(inst)) }
             '{ CompEnumRegistry.register($classNameExpr, ${ Expr(propName) }, $builder) }
           }
           if (ann =:= boneNameAnn) build[Skeleton3D]('{ CompEnum.boneNames })
           else if (ann =:= animationAnn) build[AnimationMixer]('{ CompEnum.animationNames })
           else if (ann =:= spriteAnimAnn) build[SpriteFrames]('{ CompEnum.spriteAnimationNames })
+          else if (ann =:= animStateNameAnn) build[AnimationTree]('{ CompEnum.animationStateNames })
+          else if (ann =:= animStatePropAnn) buildWithState('{ CompEnum.animationStateParams })
+          else if (ann =:= animStateNodeAnn) buildWithState('{ CompEnum.animationStateNodeNames })
           else build[AnimationTree]('{ CompEnum.animationTreeParams })
       }
     }
@@ -328,12 +409,12 @@ object Register {
         case _         => TypeRepr.of[Any]
       }
       val hint = hintExpr(f)
-      val compReg = compAnnotationOf(f).map { case (ann, comp) =>
+      val compReg = compAnnotationOf(f).map { case (ann, args) =>
         if (typeName(fTpe) != "java.lang.String")
           report.errorAndAbort(
             s"@${ann.typeSymbol.name} $className.$fName: only valid on a String @gdexport field"
           )
-        compEnumRegFor(f, ann, comp)
+        compEnumRegFor(f, ann, args)
       }.toList
       val prop = fTpe.asType match {
         case '[a] =>

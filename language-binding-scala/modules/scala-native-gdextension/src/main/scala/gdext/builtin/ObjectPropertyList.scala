@@ -22,7 +22,11 @@ object ObjectPropertyList {
   private final val HashGetPropertyList = 3995934104L
 
   /** All property names reported by `instance.get_property_list()`. */
-  def names(instance: GDExtensionObjectPtr): Seq[String] = {
+  def names(instance: GDExtensionObjectPtr): Seq[String] =
+    namesWithUsage(instance).map(_._1)
+
+  /** `(name, usage)` pairs reported by `instance.get_property_list()`. */
+  def namesWithUsage(instance: GDExtensionObjectPtr): Seq[(String, Long)] = {
     val bind = MethodBind.get("Object", "get_property_list", HashGetPropertyList)
     if (bind == null) return Seq.empty
     val arrBuf = stackalloc[Byte](BuiltinSizes.Array.toCSize)
@@ -30,7 +34,7 @@ object ObjectPropertyList {
     val arr = GArray.fromPtr(arrBuf)
     try {
       val n = arr.size
-      val b = Seq.newBuilder[String]
+      val b = Seq.newBuilder[(String, Long)]
       var i = 0
       while (i < n) {
         // Each element is a Dictionary Variant; pull it out into a Dictionary
@@ -40,7 +44,7 @@ object ObjectPropertyList {
         VariantConstructors
           .toType(GDEXTENSION_VARIANT_TYPE_DICTIONARY)(dictBuf, slot)
         val dict = Dictionary.fromPtr(dictBuf)
-        try b += dict.get[String, String]("name")
+        try b += ((dict.get[String, String]("name"), dict.get[String, Long]("usage")))
         finally dict.destroy()
         i += 1
       }

@@ -2,12 +2,16 @@ lazy val scalaVersionStr = "3.8.1"
 lazy val regenerate =
   taskKey[Unit]("Regenerates the GDExtension bindings from the JSON API")
 
-// Publishing metadata (Maven Central via the Sonatype Central Portal). The
-// `version` is intentionally NOT set: sbt-dynver (bundled with sbt-ci-release)
-// derives it from git tags (`vX.Y.Z`); untagged builds get a `-SNAPSHOT`.
+// Publishing (JitPack). Releases are cut by pushing a plain semver git tag
+// (e.g. `0.1.1`); JitPack then builds on demand via the repo-root `jitpack.yml`
+// (which runs `sbt publishM2`) and serves the artifacts from
+// https://jitpack.io under the group `com.github.optical002.godot-scala-native`.
+// The `organization` is set to exactly that JitPack group so `publishLocal`
+// (local co-development, ../harness-scala) yields the SAME coordinates as the
+// released artifacts — only the version differs (-SNAPSHOT locally).
 inThisBuild(
   Seq(
-    organization := "io.github.optical002",
+    organization := "com.github.optical002.godot-scala-native",
     homepage := Some(url("https://github.com/optical002/godot-scala-native")),
     licenses := Seq(
       "MIT" -> url("https://opensource.org/licenses/MIT")
@@ -26,20 +30,15 @@ inThisBuild(
         "scm:git:git@github.com:optical002/godot-scala-native.git"
       )
     ),
-    versionScheme := Some("early-semver"),
-    // Target the Sonatype Central Portal (central.sonatype.com), not the legacy
-    // OSSRH host that sbt-ci-release defaults to. Required for namespaces
-    // registered on the new portal.
-    sonatypeCredentialHost := xerial.sbt.Sonatype.sonatypeCentralHost
+    versionScheme := Some("early-semver")
   )
 )
 
-ThisBuild / version := {
-  dynverGitDescribeOutput.value match {
-    case Some(out) if out.isCleanAfterTag => out.version
-    case _                                => "0.1.1-SNAPSHOT"
-  }
-}
+// JitPack exports the requested tag as the VERSION env var (tags are plain
+// semver, e.g. `0.1.1`). Local builds (`sbt publishLocal`) have no VERSION and
+// stay on the pinned -SNAPSHOT, which harness-scala/godot-scala-native-utilities
+// reference for the co-development loop.
+ThisBuild / version := sys.env.getOrElse("VERSION", "0.1.1-SNAPSHOT")
 
 // Aggregating root. It exists only to group the modules; it is never published
 // (only `gdext` and the sbt plugin are).
@@ -79,6 +78,13 @@ lazy val gdext =
       description :=
         "Scala Native language binding for Godot (a GDExtension).",
       scalaVersion := scalaVersionStr,
+      // JitPack release builds (VERSION set) skip scaladoc: it needs a ~6 GB
+      // heap over the large codegen/ sources (see .sbtopts) and JitPack serves
+      // no docs. Local publishing is unaffected.
+      Compile / doc / sources := {
+        val s = (Compile / doc / sources).value
+        if (sys.env.contains("VERSION")) Nil else s
+      },
       // Package the authoritative list of generated engine base-class names into
       // the jar as `gdext/engine-classes.txt`. Downstream projects' build-time
       // auto-registration (RegistrationScan) reads this off the classpath, so a
@@ -117,10 +123,10 @@ lazy val sbtGodotPlugin =
       // Publish with the fully cross-versioned artifact filename
       // (`sbt-godot-scala-native_2.12_1.0-<ver>.jar`) so it matches the Maven
       // coordinate path. The legacy (default) style names the file with the bare
-      // module name (`sbt-godot-scala-native-<ver>.jar`) while the path carries
-      // the `_2.12_1.0` suffix; Maven Central's Central Portal validator rejects
-      // that mismatch ("Filename ... is not valid"). Required to publish an sbt
-      // plugin to Central.
+      // module name while the path carries the `_2.12_1.0` suffix; JitPack
+      // serves files verbatim from the `publishM2` output, so the layout must be
+      // proper Maven style for sbt (>= 1.4, which tries the Maven-style plugin
+      // pattern) to resolve the plugin from https://jitpack.io.
       sbtPluginPublishLegacyMavenStyle := false,
       // Depend on sbt-scala-native so `ScalaNativePlugin` / `nativeConfig` /
       // `%%%` are available to compile this plugin and, transitively, to the

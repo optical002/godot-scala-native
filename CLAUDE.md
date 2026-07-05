@@ -39,7 +39,10 @@ Quick map:
   (binding code, the generator, or the plugin), run
   `cd language-binding-scala && sbt publishLocal` **before** `sbt godotBuild` in
   harness — otherwise harness links the stale artifact. Both publish under
-  `0.1.0-SNAPSHOT` (pinned in `harness-scala/project/plugins.sbt`).
+  `com.github.optical002.godot-scala-native % <module> % 0.1.1-SNAPSHOT` (pinned
+  in `harness-scala/project/plugins.sbt`). Releases go through **JitPack**: push
+  a plain semver tag (e.g. `0.1.1`) and JitPack builds via `jitpack.yml` — same
+  group, tag as version.
 - **After changing how the language binding works, actually test it.** Build the
   lib and open the godot project in headless mode yourself (`cd godot && godot
   --headless --path . --quit-after N`), then read the output and check for errors —

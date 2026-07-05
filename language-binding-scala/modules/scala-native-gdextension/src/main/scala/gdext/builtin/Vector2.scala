@@ -19,7 +19,20 @@ import gdext.internal.ffi.types.GDExtensionVariantType.*
  * types are mechanical and intended to be generated from `extension_api.json`
  * in a later codegen pass.
  */
-final case class Vector2(x: Float, y: Float)
+final case class Vector2(x: Float, y: Float) {
+  def +(o: Vector2): Vector2 = Vector2(x + o.x, y + o.y)
+  def -(o: Vector2): Vector2 = Vector2(x - o.x, y - o.y)
+  def *(s: Float): Vector2 = Vector2(x * s, y * s)
+  def lengthSquared: Float = x * x + y * y
+  def length: Float = math.sqrt(lengthSquared.toDouble).toFloat
+
+  def moveToward(to: Vector2, delta: Float): Vector2 = {
+    val diff = to - this
+    val len = diff.length
+    if (len <= delta || len < 1e-6f) to
+    else this + diff * (delta / len)
+  }
+}
 
 object Vector2 {
   val zero: Vector2 = Vector2(0.0f, 0.0f)

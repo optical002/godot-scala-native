@@ -25,6 +25,24 @@ decoding (`StringName.toScala`), e.g. in `get_virtual` dispatch.
   (`godotLibName`, `godotCompatibilityMinimum`, …) instead. It has
   `reloadable = true`; `godotBuild` atomically renames the `.so` (no in-place
   overwrite — that freezes the editor).
+- **Who triggers the reload**: Godot itself only reloads GDExtensions from the
+  editor's window-focus-in handler (`EditorNode`: deferred
+  `GDExtensionManager::reload_extensions`) — never from a filesystem scan. The
+  `godot_scala` addon therefore drives it after each swap:
+  `GDExtensionManager.reload_extension(manifest)` **plus**
+  `emit_signal("extensions_reloaded")` (the singular call doesn't emit it, and
+  without the signal `EditorNode` never refreshes the InspectorDock — new
+  `@gdexport` properties stay invisible). E2E-verified: property change →
+  visible in ClassDB/inspector ≈10.6 s (sbt incremental build ≈10.5 s of that,
+  the reload itself ≈35 ms).
+- **E2E reload test**: `cd godot && godot --headless -e -- verify-hot-reload`
+  (addon `godot/addons/hot_reload_verify/`, inert without the arg). Pre-warm
+  with `cd harness-scala && sbt godotBuild` first or the cold-server build
+  blows the timeout. It injects an all-lowercase `@gdexport` probe into
+  `ExportTest.scala` (the binding snake_cases camelCase names!), waits for
+  watch-rebuild + reload, asserts the property in
+  `ClassDB.class_get_property_list("ExportTest")`, restores the file, exits
+  0/1.
 - **Reload protocol (critical, hard-won)**: the old image **must** unregister its
   classes in `deinitialize(SCENE)` (`ClassRegistration.unregisterAll()`), and the
   register side must **NOT** unregister-stale. Timestamped logs prove the order is

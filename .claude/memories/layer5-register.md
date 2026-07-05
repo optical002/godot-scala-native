@@ -125,12 +125,21 @@ Node, every hint+section); verified by `godot/export_hints_verify.gd`.
 ## Component-reference dropdowns (`CompEnumRegistry.scala`, `annotations.scala`)
 Turn a `String` `@gdexport` into an inspector **ENUM dropdown** whose options are
 enumerated, at inspect time, from another exported "comp" property on the same
-class. Four annotations (each `class X(comp: String)`, `comp` = sibling Scala
-field name): `@exportBoneName` (Skeleton3D bones), `@exportAnimation`
-(AnimationPlayer/Mixer animations), `@exportSpriteAnimation` (SpriteFrames anims),
-`@exportAnimationProperty` (AnimationTree `parameters/...` paths). Usage:
+class. Six annotations (`comp` = sibling Scala field name): `@exportBoneName`
+(Skeleton3D bones), `@exportAnimation` (AnimationPlayer/Mixer animations),
+`@exportSpriteAnimation` (SpriteFrames anims), `@exportAnimationProperty`
+(AnimationTree `parameters/...` paths), `@exportAnimationStateName` (state names
+of the tree root's AnimationNodeStateMachine — enumerated from the ROOT's
+`states/<name>/node` storage props, because param-less states like a plain
+AnimationNodeAnimation never appear under `parameters/...`; includes built-in
+Start/End), and the two-arg `@exportAnimationStateProperty(comp, state)` (param
+names under one state — `state` names a sibling String field whose CURRENT value
+selects the state; options = `parameters/<stateValue>/...` stripped). Usage:
 `@gdexport var skeleton: Skeleton3D = null; @exportBoneName("skeleton") @gdexport
-var boneName: String = ""`.
+var boneName: String = ""`. Comp annotations also work on primary-ctor `var`
+params (annotation lookup falls back to the same-named ctor param symbol via
+`annotationOf`, which also covers `@gdexport` hints and section markers there) —
+demo `game/ExportCompCtorParams.scala`.
 - **Mechanism = Godot `validate_property`** (NOT a custom editor widget, so no
   theme crash). `ClassRegistration` now also sets `at_validate_property_func`
   (struct field 12 of `GDExtensionClassCreationInfo4`) to a static trampoline
@@ -155,9 +164,18 @@ var boneName: String = ""`.
   `builtin/ObjectPropertyList.names` (raw `Object.get_property_list` hash
   `3995934104`, reads each Dictionary's `"name"`, filters `parameters/`). Null comp
   → `Seq("")`. Hashes from `gdextension/extension_api.json` (4.6.1, matches runtime).
+- **Runtime-class GOTCHA (editor)**: the editor swaps `is_runtime` nodes for
+  native-parent placeholders that NEVER call `validate_property` — dropdowns
+  silently degrade to plain strings in the inspector (headless runtime tests
+  can't catch this; they use real instances). So the macro registers any Node
+  declaring a comp annotation as **tool (non-runtime)**; harmless unless the
+  class also overrides a runtime virtual (only overridden virtuals register).
+  Editor-context regression test: `godot/addons/comp_enum_verify/` (EditorPlugin,
+  inert without the `verify-comp-enum` user arg) — run
+  `godot --headless --editor --path . -- verify-comp-enum`.
 - Hot-reload: `GodotEngine` deinit(SCENE) calls `CompEnumRegistry.clear()` beside
   `unregisterAll`. Demo: `harness/game/ExportCompProperties.scala`; verified by
-  `godot/export_comp_verify.gd`.
+  `godot/export_comp_verify.gd` (runtime) + the editor addon above.
 
 ## Editor integration (Tscn filtering) — `register/editor/EditorIntegration.scala`
 `Tscn[T]` exports record `(class,prop)->rootType` in `SceneExportRegistry`. At the

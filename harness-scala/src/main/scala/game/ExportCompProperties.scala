@@ -20,6 +20,10 @@ import gdext.api.*
  *    (via `get_animation_names`).
  *  - `@exportAnimationProperty("tree")` — `parameters/...` paths of an
  *    `AnimationTree` (via `get_property_list` introspection).
+ *  - `@exportAnimationStateName("stateTree")` — state names of an
+ *    `AnimationTree`'s root state machine.
+ *  - `@exportAnimationStateProperty("stateTree", "stateName")` — parameter
+ *    names under the state currently picked by the `stateName` field.
  *
  * Auto-registered like any other `game` class; add an `ExportCompProperties`
  * node to a scene, assign a comp, and the partner field turns into a dropdown.
@@ -40,4 +44,14 @@ final class ExportCompProperties extends Node {
   // "parameters/..." paths of the referenced animation tree.
   @gdexport var tree: AnimationTree = null
   @exportAnimationProperty("tree") @gdexport var treeParam: String = ""
+
+  // State names of the referenced tree's root state machine, the parameter
+  // names under whichever state `stateName` currently holds, and the sub-node
+  // names of that state's blend tree. Comp references via `nameOf(field)`
+  // instead of raw strings (body-field annotations are typed in class scope,
+  // so the references resolve and survive renames).
+  @gdexport var stateTree: AnimationTree = null
+  @exportAnimationStateName(nameOf(stateTree)) @gdexport var stateName: String = ""
+  @exportAnimationStateProperty(nameOf(stateTree), nameOf(stateName)) @gdexport var stateParam: String = ""
+  @exportAnimationStateNode(nameOf(stateTree), nameOf(stateName)) @gdexport var stateNode: String = ""
 }

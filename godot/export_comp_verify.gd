@@ -43,13 +43,22 @@ func _initialize() -> void:
 	var at := AnimationTree.new()
 	o.set("tree", at)
 
+	# State machine: a tree whose root has two states — `state_name` lists the
+	# states; `state_param` lists the params under the state `state_name` holds.
+	var sm := AnimationNodeStateMachine.new()
+	sm.add_node("MoveSpace", AnimationNodeBlendSpace1D.new())
+	sm.add_node("Death", AnimationNodeAnimation.new())
+	var smt := AnimationTree.new()
+	smt.tree_root = sm
+	o.set("state_tree", smt)
+
 	var props := {}
 	for p in o.get_property_list():
 		props[p.name] = p
 
 	# Dump the dropdown properties for visibility.
 	print("--- ExportCompProperties dropdowns ---")
-	for name in ["bone_name", "anim", "sprite_anim", "tree_param"]:
+	for name in ["bone_name", "anim", "sprite_anim", "tree_param", "state_name", "state_param"]:
 		if props.has(name):
 			var p = props[name]
 			print("  %-12s hint=%-2d hint_string='%s'" % [name, p.hint, p.hint_string])
@@ -63,6 +72,40 @@ func _initialize() -> void:
 	# Tree has no configured params; just confirm it became an ENUM.
 	_expect_enum_kind(props, "tree_param")
 
+	# State names come from the root state machine (built-ins like Start/End may
+	# also be listed — assert membership only).
+	_expect_enum_contains(props, "state_name", "MoveSpace")
+	_expect_enum_contains(props, "state_name", "Death")
+
+	# state_param follows state_name's current value: empty selector first, then
+	# pick MoveSpace and expect the blend space's blend_position to appear.
+	_expect_enum_kind(props, "state_param")
+	o.set("state_name", "MoveSpace")
+	var props2 := {}
+	for p in o.get_property_list():
+		props2[p.name] = p
+	print("  after state_name=MoveSpace: state_param hint_string='%s'" % [props2["state_param"].hint_string])
+	_expect_enum_contains(props2, "state_param", "blend_position")
+
+	# Same dropdowns declared on ctor `var` params (CharacterRig-style).
+	if not ClassDB.class_exists("ExportCompCtorParams"):
+		_fail("ExportCompCtorParams class not registered")
+	else:
+		var c = ClassDB.instantiate("ExportCompCtorParams")
+		c.set("tree", smt)
+		c.set("state", "MoveSpace")
+		var cprops := {}
+		for p in c.get_property_list():
+			cprops[p.name] = p
+		print("--- ExportCompCtorParams dropdowns ---")
+		for name in ["state", "state_param"]:
+			if cprops.has(name):
+				print("  %-12s hint=%-2d hint_string='%s'" % [name, cprops[name].hint, cprops[name].hint_string])
+		_expect_enum_contains(cprops, "state", "MoveSpace")
+		_expect_enum_contains(cprops, "state_param", "blend_position")
+		c.free()
+
+	smt.free()
 	at.free()
 	ap.free()
 	sk.free()

@@ -4,7 +4,7 @@ import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
 
 import gdext.Godot
-import gdext.builtin.{Arr, BuiltinSizes, StringName, StringNames, Variant}
+import gdext.builtin.{Arr, BuiltinSizes, FromVariant, StringName, StringNames, ToVariant, Variant}
 import gdext.internal.engine.{MethodBind, Ptrcall}
 import gdext.internal.ffi.types.*
 
@@ -34,6 +34,19 @@ extension (self: Object)
       self.hostObject.objectPtr,
       property
     )
+
+  /** [[get]] decoded straight to `A`; the intermediate Variant is destroyed
+    * here, so no manual `get -> to -> destroy` dance at the call site. */
+  def getAs[A](property: StringName)(using FromVariant[A]): A = {
+    val v = self.get(property)
+    try v.to[A]
+    finally v.destroy()
+  }
+
+  /** [[set]] from a plain Scala value; the Variant round-trip (build, write,
+    * destroy) is handled here. */
+  def set[A](property: StringName, value: A)(using ToVariant[A]): Unit =
+    Variant.scope(value)(v => self.set(property, v))
 
   /** `Object.connect(signal, callable, flags)` — connect a built-in (or
     * `@signal`) signal to a `Callable` (typically `Callable(self, "method")`).
@@ -73,6 +86,46 @@ extension (self: Object)
   /** Connect a named built-in [[SignalName]] directly to a Scala closure. */
   def connect(signal: SignalName, handler: () => Unit): Long =
     self.connect(StringNames.cached(signal.godotName), handler)
+
+extension (self: AnimationTree)
+  /** The root state machine's playback object (the tree's `parameters/playback`
+    * property), typed — no hardcoded property string or Variant handling at the
+    * call site. */
+  def stateMachinePlayback: AnimationNodeStateMachinePlayback =
+    self.getAs[AnimationNodeStateMachinePlayback](StringNames.cached("parameters/playback"))
+
+  /** Cached `parameters/<part>/<part>/...` property path for [[get]]/[[set]] on
+    * this tree (e.g. `tree.paramPath(state, "Blend2/blend_amount")`). */
+  def paramPath(parts: String*): StringName =
+    StringNames.cached(parts.mkString("parameters/", "/", ""))
+
+  /** [[paramPath]] to one of a OneShot node's [[OneShotParam]] parameters. */
+  def paramPath(state: String, node: String, param: OneShotParam): StringName =
+    self.paramPath(state, node, param.godotName)
+
+/** `AnimationNodeOneShot.OneShotRequest` values, for driving a OneShot node's
+  * `request` parameter through [[set]] (the enum isn't surfaced by the
+  * generated wrappers). */
+object OneShotRequest {
+  final val None = 0L
+  final val Fire = 1L
+  final val Abort = 2L
+  final val FadeOut = 3L
+}
+
+/** The runtime parameters an `AnimationNodeOneShot` exposes under
+  * `parameters/<state>/<node>/`, so OneShot property paths can be built without
+  * hardcoded strings (see the [[paramPath]] overload taking one of these).
+  * `Request` is written with an [[OneShotRequest]] value; `Active` reads the
+  * one-shot's playing state. */
+enum OneShotParam(val godotName: String) {
+  case Request extends OneShotParam("request")
+  case Active extends OneShotParam("active")
+  case InternalActive extends OneShotParam("internal_active")
+  case FadeInRemaining extends OneShotParam("fade_in_remaining")
+  case FadeOutRemaining extends OneShotParam("fade_out_remaining")
+  case TimeToRestart extends OneShotParam("time_to_restart")
+}
 
 extension (self: Area3D)
   /** `Area3D.get_overlapping_bodies()` — returns the `PhysicsBody3D`s currently

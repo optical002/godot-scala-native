@@ -1,6 +1,7 @@
 package gdext.internal.register
 
 import gdext.internal.engine.{Tres, Required}
+import gdext.internal.engine.GodotObject.*
 import gdext.builtin.{PackedStringArrayRead, ObjectPropertyList}
 import gdext.classes.{Skeleton3D, AnimationMixer, SpriteFrames, AnimationTree}
 
@@ -99,15 +100,73 @@ object CompEnum {
       if (names.isEmpty) Seq("") else names
     }
 
+  // PROPERTY_USAGE_* flags relevant to filtering an AnimationTree's parameters:
+  // a tree reports every nested node's internals (current_length/position/delta,
+  // per-blend-point backward, ...) alongside the few genuinely settable params.
+  // Keep only entries the inspector itself would show as editable.
+  private final val UsageStorage = 2L
+  private final val UsageEditor = 4L
+  private final val UsageReadOnly = 1L << 28
+
+  private def editableParams(t: AnimationTree, prefix: String): Seq[String] =
+    ObjectPropertyList
+      .namesWithUsage(t.hostObject.objectPtr)
+      .collect {
+        case (name, usage)
+            if name.startsWith(prefix) &&
+              (usage & UsageReadOnly) == 0L &&
+              (usage & (UsageStorage | UsageEditor)) != 0L =>
+          name.stripPrefix(prefix)
+      }
+      .distinct
+
   def animationTreeParams(t: AnimationTree): Seq[String] =
     if (t == null) Seq("")
     else {
-      val params = ObjectPropertyList
-        .names(t.hostObject.objectPtr)
-        .filter(_.startsWith("parameters/"))
-        .map(_.stripPrefix("parameters/"))
-        .distinct
+      val params = editableParams(t, "parameters/")
       if (params.isEmpty) Seq("") else params
+    }
+
+  def animationStateNames(t: AnimationTree): Seq[String] =
+    if (t == null) Seq("")
+    else {
+      // The root AnimationNodeStateMachine stores one `states/<name>/node`
+      // property per state (including the built-in Start/End); the tree's own
+      // `parameters/...` list can't be used because states whose node has no
+      // parameters (e.g. a plain AnimationNodeAnimation) don't appear there.
+      val root = t.getTreeRoot()
+      val names =
+        if (root.isNull) Seq.empty[String]
+        else
+          ObjectPropertyList
+            .names(root.objectPtr)
+            .collect {
+              case p if p.startsWith("states/") && p.endsWith("/node") =>
+                p.stripPrefix("states/").stripSuffix("/node")
+            }
+            .distinct
+      if (names.isEmpty) Seq("") else names
+    }
+
+  def animationStateParams(t: AnimationTree, state: String): Seq[String] =
+    if (t == null || state.isEmpty) Seq("")
+    else {
+      val params = editableParams(t, s"parameters/$state/")
+      if (params.isEmpty) Seq("") else params
+    }
+
+  /** Names of the sub-nodes inside one state's `AnimationNodeBlendTree` (e.g. a
+    * OneShot to fire). A blend tree exposes no `nodes/...` properties, so the
+    * names are recovered from the tree's own editable `parameters/<state>/<node>/...`
+    * paths — a sub-node with no editable parameter can't be enumerated (nothing
+    * could be driven on it anyway). */
+  def animationStateNodeNames(t: AnimationTree, state: String): Seq[String] =
+    if (t == null || state.isEmpty) Seq("")
+    else {
+      val nodes = editableParams(t, s"parameters/$state/")
+        .collect { case p if p.contains('/') => p.take(p.indexOf('/')) }
+        .distinct
+      if (nodes.isEmpty) Seq("") else nodes
     }
 
   /**

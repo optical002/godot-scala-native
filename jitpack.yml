@@ -1,0 +1,14 @@
+# JitPack build (https://jitpack.io/#optical002/godot-scala-native).
+#
+# Publishing model: push a plain semver tag (e.g. `0.1.1`); JitPack builds it on
+# demand and serves the artifacts under the group
+# `com.github.optical002.godot-scala-native`:
+#   * scala-native-gdextension_native0.5_3  (the binding, `gdext`)
+#   * sbt-godot-scala-native_2.12_1.0       (the sbt plugin)
+# The sbt build sets `organization` to that exact group and reads the version
+# from JitPack's VERSION env var, so `sbt publishM2` drops the artifacts where
+# JitPack expects them. `igen` and the aggregating root are not published.
+jdk:
+  - openjdk17
+install:
+  - cd language-binding-scala && sbt gdext/publishM2 sbtGodotPlugin/publishM2

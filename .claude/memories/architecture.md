@@ -12,8 +12,8 @@ The repo root is a workspace, **not** an sbt build. Top level:
 - **`gdext`** — `language-binding-scala/modules/scala-native-gdextension`. The
   binding **library**. No exported entry symbol, not the `.so` target. Package
   root `gdext`. **The only published artifact**
-  (`io.github.optical002:scala-native-gdextension`, Maven Central — see
-  Publishing below).
+  (`com.github.optical002.godot-scala-native:scala-native-gdextension`, JitPack —
+  see Publishing below).
 - **`igen`** — `language-binding-scala/modules/interface-generator`. Code
   generators (run via `sbt igen/regenerate` from `language-binding-scala/`).
   `publish / skip := true`.
@@ -27,16 +27,17 @@ The repo root is a workspace, **not** an sbt build. Top level:
   `name := "godot-scala-native"`) in `language-binding-scala/build.sbt`,
   aggregates `igen` + `gdext` + `sbtGodotPlugin`, `publish / skip := true`.
   Exists only to group the modules. Invoke tasks as `sbt gdext/<task>` /
-  `sbt igen/<task>`. `ThisBuild / version` is pinned to `0.1.0-SNAPSHOT` (stable,
-  pinnable for `publishLocal`; overrides dynver — guard on a git tag when cutting
-  a real release).
+  `sbt igen/<task>`. `ThisBuild / version` is
+  `sys.env.getOrElse("VERSION", "0.1.1-SNAPSHOT")` — pinned -SNAPSHOT for
+  `publishLocal`; JitPack sets `VERSION` to the requested tag when building a
+  release.
 - **`harness`** — its **own** sbt build at `harness-scala/` (flat root project,
   sources at `harness-scala/src/main/scala`). The **game project**, base package
   **`game`**. Holds **only** `game` classes. It carries no build machinery:
   `build.sbt` is `enablePlugins(GodotScalaNativePlugin)` + name/scalaVersion +
   the **mandatory** `godotProjectDir` (+ optional `godotEntrySelfTest`);
   `project/plugins.sbt` is one
-  `addSbtPlugin("io.github.optical002" % "sbt-godot-scala-native" % "<v>")`.
+  `addSbtPlugin("com.github.optical002.godot-scala-native" % "sbt-godot-scala-native" % "<v>")`.
   The plugin adds the published `gdext` dependency, `nativeConfig`, the
   auto-registration source generator, and the `godotBuild` task. **No source
   `ProjectRef`** — co-development uses `sbt publishLocal` (see Build / run).
@@ -93,7 +94,7 @@ interface table + library handle.
 - **publishLocal first**: harness consumes the binding + plugin as published
   artifacts. After any change in `language-binding-scala`,
   `cd language-binding-scala && sbt publishLocal` (publishes `gdext` + the sbt
-  plugin under `0.1.0-SNAPSHOT`) **before** building harness.
+  plugin under `0.1.1-SNAPSHOT`) **before** building harness.
 - `cd harness-scala && sbt godotBuild` → (task from the plugin) runs the
   auto-registration source generator, compiles (linking the published binding),
   native-links, atomically swaps the `.so` into `godot/.scala/`, **generates the
@@ -101,12 +102,32 @@ interface table + library handle.
   `godotManifest`), **and installs the GDScript editor addon** into
   `godot/addons/godot_scala/` if absent. The addon source lives in the plugin jar
   (`modules/sbt-godot-scala-native/src/main/resources/godot-addon/{plugin.cfg,
-  scala_build.gd,icon.svg}`); on install, `scala_build.gd`'s `@SBT_PROJECT_DIR@`
-  is templated to the godot→sbt relative path, and it's enabled in `project.godot`
-  when that file has no `[editor_plugins]` section yet. It's install-if-absent
-  (per the addon dir), so user edits are never clobbered — delete the dir to
-  reinstall. The addon runs `sbt --client "~godotBuild"` and shows build status in
-  the editor (top-bar "Scala" group + "SBT Output" dock). The manifest is
+  scala_build.gd,icon.svg,godot.svg}`); on install, `scala_build.gd`'s
+  `@SBT_PROJECT_DIR@` is templated to the godot→sbt relative path, and it's
+  enabled in `project.godot` when that file has no `[editor_plugins]` section
+  yet. It's install-if-absent (per the addon dir), so user edits are never
+  clobbered — delete the dir to reinstall; **when editing the addon, edit BOTH
+  the template resource and the installed copy** (they differ only in
+  `SBT_PROJECT_DIR`). The addon runs `sbt --client "~godotBuild"` and shows in
+  the editor: a top-bar status group `[sbt status · scala logo · hot-reload
+  status · godot logo]` (sbt spinner cyan, godot-reload spinner Godot-blue) and
+  two bottom docks built from a shared `LogDock` inner class — "SBT Output"
+  (sbt log, tailed from `res://.scala/sbt.log`) and "Scala Hot Reload" (verbose
+  reload pipeline: swap/lib/reload.stamp info, `EditorFileSystem` signals +
+  scan %, `GDExtensionManager.extensions_reloaded` timing, plus hot-reload-
+  related lines from the editor's print stream captured via a custom `Logger`
+  + `OS.add_logger` — **editor sessions do NOT write `user://logs/godot.log`**
+  (only game runs do; the addon tails that file too as a secondary source).
+  Godot core's reload messages are `print_verbose`; `verbose_stdout` is
+  deliberately NOT enabled (it floods the editor's Output panel), and the
+  addon itself never `print()`s — all its messaging stays inside its two
+  docks. The addon DRIVES the reload after each swap (see
+  [conventions](conventions.md) "Editor hot-reload" for the mechanism and its
+  gotchas: focus-in-only reloads, reload_extension + emit signal, sbt.log
+  truncated synchronously at spawn, `_classify` checks independent — one poll
+  chunk can carry swap + success + Monitoring together, trigger only on
+  `[godot] swapped`). E2E test addon: `godot/addons/hot_reload_verify/`
+  (`godot --headless -e -- verify-hot-reload`). The manifest is
   GENERATED — don't hand-edit; tune it via the
   plugin settings `godotProjectDir` (Godot root — **mandatory, no default**;
   tasks fail with a clear message if unset), `godotLibName` (library base name),
@@ -123,22 +144,25 @@ interface table + library handle.
   `--script verify.gd` (GDScript checks). Binding logs to file `.scala/log`;
   game logs to Godot Output. See `BUILD.md`, `godot/scala.gdextension`.
 
-## Publishing (gdext → Maven Central)
-`gdext` publishes to the Sonatype **Central Portal** as a normal Scala Native
-library (NIR JAR; cross-suffix `_native0.5_3` — no per-OS binaries; consumers
-link native code at their own build via `%%%`). Wired with **`sbt-ci-release`**
-(plugins.sbt): version from git tags via sbt-dynver (no hardcoded `version`;
-untagged → `-SNAPSHOT`). POM metadata (org `io.github.optical002`, MIT, scm,
-developers) is set in `inThisBuild(...)` in `build.sbt`;
-`sonatypeCredentialHost := xerial.sbt.Sonatype.sonatypeCentralHost` targets the
-new portal. `language-binding-scala/.sbtopts` sets `-mem 6144` because scaladoc
-over the large `codegen/` sources OOMs at the default heap (the javadoc jar is
-required by Central). Release: push a `vX.Y.Z` tag → `.github/workflows/release.yml`
-runs `sbt ci-release` (needs secrets `PGP_SECRET`, `PGP_PASSPHRASE`,
-`SONATYPE_USERNAME`, `SONATYPE_PASSWORD`). Verify packaging locally with
-`sbt gdext/publishM2` (or `publishLocalSigned` once a GPG key exists). One-time
-manual setup (namespace verification, GPG key, portal token, GH secrets) is in
-the root README.
+## Publishing (JitPack)
+Both artifacts (`gdext` = a normal Scala Native NIR jar, cross-suffix
+`_native0.5_3`, no per-OS binaries — consumers link native code at their own
+build via `%%%`; and the sbt plugin, `_2.12_1.0` Maven-style layout via
+`sbtPluginPublishLegacyMavenStyle := false`) are served by **JitPack** under
+group **`com.github.optical002.godot-scala-native`**. `organization` in
+`build.sbt` is set to exactly that group so `publishLocal` yields the same
+coordinates (version `0.1.1-SNAPSHOT`).
+Release flow: push a **plain semver tag** (`0.1.1`, no `v` prefix — the tag IS
+the version) → JitPack builds on demand via repo-root `jitpack.yml`
+(`cd language-binding-scala && sbt gdext/publishM2 sbtGodotPlugin/publishM2`;
+JitPack exports `VERSION=<tag>`, which `ThisBuild / version` reads). No CI
+workflow, no signing, no secrets. Trigger/inspect a build:
+`https://jitpack.io/#optical002/godot-scala-native` or
+`curl https://jitpack.io/api/builds/com.github.optical002/godot-scala-native/<tag>`.
+Consumers add `resolvers += "jitpack" at "https://jitpack.io"` in
+project/plugins.sbt for the plugin; the plugin injects the same resolver into
+the project for `gdext`. `language-binding-scala/.sbtopts` sets `-mem 6144`
+(scaladoc over the large `codegen/` OOMs at default heap).
 
 ## Node validation harness (igen `HarnessClassGenerator`)
 Proves every base node type is generated + subclassable + registerable.
@@ -158,5 +182,5 @@ Phases 0–5 done and verified (41 self-tests + GDScript checks pass). Engine
 codegen now covers ALL ~1023 classes; all 238 instantiable node types validated
 from Godot (node_harness_verify.gd). Remaining: best-effort method coverage
 (NodePath/typed-arrays/Variant/packed arrays still skipped), release build,
-GC×threads, docs. Publishing wired (gdext → Maven Central, release CI); only
-manual portal/GPG setup + a `vX.Y.Z` tag remain to cut a release.
+GC×threads, docs. Publishing wired (JitPack via `jitpack.yml`; release = push a
+plain semver tag like `0.1.1`).
