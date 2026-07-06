@@ -1,6 +1,6 @@
 # godot-scala-native
 
-[![Release](https://jitpack.io/v/optical002/godot-scala-native.svg)](https://jitpack.io/#optical002/godot-scala-native)
+[![Release](https://img.shields.io/jitpack/version/com.github.optical002/godot-scala-native?label=release&color=brightgreen)](https://jitpack.io/#optical002/godot-scala-native)
 
 A Scala Native language binding for [Godot](https://godotengine.org/) (a
 GDExtension), targeting gdext-level sophistication. Write your game classes in
