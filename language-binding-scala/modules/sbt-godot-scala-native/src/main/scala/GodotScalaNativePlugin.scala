@@ -62,30 +62,6 @@ object GodotScalaNativePlugin extends AutoPlugin {
     val godotBuild = taskKey[Unit](
       "Builds the GDExtension library, swaps it into the Godot project, and writes the manifest"
     )
-
-    // --- prefab/id config generation (consumed by the `prefabs` runtime module) -
-    val godotPrefabsTres = settingKey[Option[File]](
-      "Godot `prefabs.tres` resource to generate `prefabs.conf` from (None disables prefab codegen)"
-    )
-    val godotPrefabsDir = settingKey[File](
-      "Root dir holding the prefab .tscn files referenced by prefabs.tres (the res://prefabs/ mount)"
-    )
-    val godotGeneratedDir = settingKey[File](
-      "Output dir for the generated prefabs.conf + id confs (e.g. config/generated)"
-    )
-    val godotConfigDir = settingKey[File](
-      "Base config dir the id-conf subdirs are resolved against (e.g. config)"
-    )
-    val godotIdConfs = settingKey[Seq[PrefabsCodegen.IdConf]](
-      "Id-bearing config dirs to emit `<name>-ids.conf` for (subdir, outFile, hocon section)"
-    )
-    val genConfig = taskKey[Unit](
-      "Regenerate the prefab/id config (prefabs.conf + *-ids.conf) from prefabs.tres and asset dirs"
-    )
-
-    /** Re-export so a consuming `build.sbt` can write `PrefabsCodegen.IdConf(...)`
-      * without importing `godotscala`. */
-    val PrefabsCodegen = godotscala.PrefabsCodegen
   }
 
   import autoImport._
@@ -112,44 +88,15 @@ object GodotScalaNativePlugin extends AutoPlugin {
     godotManifestName         := "scala.gdextension",
     godotCompatibilityMinimum := "4.2",
 
-    // Prefab/id codegen is opt-in: a game points `godotPrefabsTres` at its
-    // `prefabs.tres` and lists its id dirs in `godotIdConfs`. Left unset, the
-    // `genConfig` task is a no-op (a project may have no prefabs).
-    godotPrefabsTres  := None,
-    godotPrefabsDir   := baseDirectory.value / ".." / "godot" / "prefabs",
-    godotGeneratedDir := baseDirectory.value / ".." / "config" / "generated",
-    godotConfigDir    := baseDirectory.value / ".." / "config",
-    godotIdConfs      := Seq.empty,
-
-    genConfig := {
-      val log = streams.value.log
-      godotPrefabsTres.value match {
-        case None => () // codegen disabled for this project
-        case Some(tres) =>
-          PrefabsCodegen.run(
-            prefabsTres  = tres,
-            prefabsDir   = godotPrefabsDir.value,
-            generatedDir = godotGeneratedDir.value,
-            configDir    = godotConfigDir.value,
-            idConfs      = godotIdConfs.value,
-            log          = msg => log.info(msg)
-          )
-      }
-    },
-
-    // Keep the generated config in sync on every compile (the prefab module
-    // reads it at runtime), mirroring the old per-game build.sbt wiring.
-    Compile / compile := (Compile / compile).dependsOn(genConfig).value,
-
     // The binding artifact. `.cross(ScalaNativeCrossVersion.binary)` applies the
     // Scala Native platform suffix (e.g. `_native0.5_3`) — this is exactly what
     // `%%%` expands to, without needing sbt-platform-deps on the plugin's
     // classpath. The version is the plugin's own version, embedded at
     // plugin-build time (see GodotScalaNativeBuildInfo), so the plugin and the
     // binding it pulls in are always released together.
-    // Released binding artifacts are served by JitPack; -SNAPSHOT versions come
-    // from the local ivy repo (publishLocal), so the extra resolver is inert
-    // during local co-development.
+    // Released binding artifacts are served by JitPack; during local
+    // co-development the version is instead found in the local ivy repo
+    // (publishLocal), which is consulted first, so this resolver is inert then.
     resolvers += "jitpack" at "https://jitpack.io",
     libraryDependencies +=
       ("com.github.optical002.godot-scala-native" % "scala-native-gdextension" % GodotScalaNativeBuildInfo.version)
@@ -157,10 +104,10 @@ object GodotScalaNativePlugin extends AutoPlugin {
 
     // Produce a dynamic library (.so/.dylib/.dll) Godot can dlopen, using the
     // Boehm GC. Required because the build runs in Scala Native's
-    // multithreaded mode (any consumer referencing a Thread — e.g.
-    // shocon's deep-recursion parser run on a big-stack Thread to avoid
-    // overflowing Godot main thread's ~8 MiB stack — flips SN to MT mode for
-    // the whole binary). The default IMMIX GC's MT stop-the-world corrupts
+    // multithreaded mode (any consumer referencing a Thread — e.g. a
+    // deep-recursion parser run on a big-stack Thread to avoid overflowing
+    // Godot main thread's ~8 MiB stack — flips SN to MT mode for the whole
+    // binary). The default IMMIX GC's MT stop-the-world corrupts
     // the heap during Godot's `_process` (signal-11 a few seconds into
     // gameplay); `boehm` collects safely under MT and runs cleanly (verified
     // 0 crashes / 35s of real gameplay) while still collecting (no leak).
