@@ -1,9 +1,10 @@
 package gdext.internal.register
 
-import gdext.internal.engine.{Tres, Required}
+import gdext.internal.engine.{Tres, Required, ClassMeta}
 import gdext.internal.engine.GodotObject.*
-import gdext.builtin.{PackedStringArrayRead, ObjectPropertyList}
-import gdext.classes.{Skeleton3D, AnimationMixer, SpriteFrames, AnimationTree}
+import gdext.builtin.{PackedStringArrayRead, ObjectPropertyList, StringNames}
+import gdext.classes.{Skeleton3D, AnimationMixer, SpriteFrames, AnimationTree,
+  AnimationNodeStateMachine}
 
 /**
  * Runtime backing for the component-reference dropdown annotations
@@ -156,17 +157,31 @@ object CompEnum {
     }
 
   /** Names of the sub-nodes inside one state's `AnimationNodeBlendTree` (e.g. a
-    * OneShot to fire). A blend tree exposes no `nodes/...` properties, so the
-    * names are recovered from the tree's own editable `parameters/<state>/<node>/...`
-    * paths — a sub-node with no editable parameter can't be enumerated (nothing
-    * could be driven on it anyway). */
+    * OneShot to fire, or a plain AnimationNodeAnimation whose clip is swapped at
+    * runtime). Read from the blend tree's own `nodes/<name>/node` properties, so
+    * every sub-node is listed — NOT from the tree's `parameters/...` paths, which
+    * omit sub-nodes that expose no editable parameter (e.g. AnimationNodeAnimation). */
   def animationStateNodeNames(t: AnimationTree, state: String): Seq[String] =
     if (t == null || state.isEmpty) Seq("")
     else {
-      val nodes = editableParams(t, s"parameters/$state/")
-        .collect { case p if p.contains('/') => p.take(p.indexOf('/')) }
-        .distinct
-      if (nodes.isEmpty) Seq("") else nodes
+      val root = t.getTreeRoot()
+      val names =
+        if (root.isNull) Seq.empty[String]
+        else {
+          val stateMachine =
+            summon[ClassMeta[AnimationNodeStateMachine]].fromHandle(root.objectPtr)
+          val stateNode = stateMachine.getNode(StringNames.cached(state))
+          if (stateNode.isNull) Seq.empty[String]
+          else
+            ObjectPropertyList
+              .names(stateNode.objectPtr)
+              .collect {
+                case p if p.startsWith("nodes/") && p.endsWith("/node") =>
+                  p.stripPrefix("nodes/").stripSuffix("/node")
+              }
+              .distinct
+        }
+      if (names.isEmpty) Seq("") else names
     }
 
   /**
