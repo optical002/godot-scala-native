@@ -8,7 +8,7 @@ lazy val regenerate =
 // https://jitpack.io under the group `com.github.optical002.godot-scala-native`.
 // The `organization` is set to exactly that JitPack group so `publishLocal`
 // (local co-development, ../harness-scala) yields the SAME coordinates as the
-// released artifacts — only the version differs (-SNAPSHOT locally).
+// released artifacts.
 inThisBuild(
   Seq(
     organization := "com.github.optical002.godot-scala-native",
@@ -36,9 +36,11 @@ inThisBuild(
 
 // JitPack exports the requested tag as the VERSION env var (tags are plain
 // semver, e.g. `0.1.1`). Local builds (`sbt publishLocal`) have no VERSION and
-// stay on the pinned -SNAPSHOT, which harness-scala/godot-scala-native-utilities
-// reference for the co-development loop.
-ThisBuild / version := sys.env.getOrElse("VERSION", "0.1.1-SNAPSHOT")
+// use the pinned NEXT release version, which harness-scala /
+// godot-scala-native-utilities reference for the co-development loop; it does
+// not exist on JitPack until the matching tag is pushed, and locally-published
+// artifacts win over JitPack (the local ivy repo is consulted first).
+ThisBuild / version := sys.env.getOrElse("VERSION", "0.1.2")
 
 // Aggregating root. It exists only to group the modules; it is never published
 // (only `gdext` and the sbt plugin are).

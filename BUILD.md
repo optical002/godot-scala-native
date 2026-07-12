@@ -4,6 +4,12 @@
 
 - **JDK 17+** and **sbt 1.9.7** (the repo pins it via `project/build.properties`).
 - A **Clang** toolchain — Scala Native compiles through LLVM/Clang.
+- **Boehm GC** (`libgc` + `gc.h`, e.g. `bdw-gc` / `libgc-dev`). The extension is
+  built with the Boehm GC (`GC.boehm`), so the linker needs `-lgc`. The build no
+  longer hard-codes an install prefix — Boehm must be on clang/ld's standard
+  search paths. If it lives in a non-standard prefix (e.g. a Nix store path),
+  export `LIBRARY_PATH` (to the dir holding `libgc.*`) and `C_INCLUDE_PATH` (to
+  the dir holding `gc.h`) before building.
 - **Godot 4.5** (the bundled `gdextension/extension_api.json` is the 4.5 API;
   `compatibility_minimum` in the manifest is 4.2).
 

@@ -111,18 +111,16 @@ object GodotScalaNativePlugin extends AutoPlugin {
     // the heap during Godot's `_process` (signal-11 a few seconds into
     // gameplay); `boehm` collects safely under MT and runs cleanly (verified
     // 0 crashes / 35s of real gameplay) while still collecting (no leak).
+    //
+    // Boehm (`libgc`) must be installed on the build host — Scala Native's
+    // `GC.boehm` emits `-lgc` and finds the library/headers in the toolchain's
+    // standard search paths (system packages, or `pkg-config`/`CPATH`/
+    // `LIBRARY_PATH`). We deliberately add NO explicit `-I`/`-L`/`-rpath`: those
+    // would hard-code one machine's install prefix and break every other host.
     nativeConfig ~= { c =>
-      val boehmDev = "/nix/store/a79s6fv1hiwjxdb8g3ps8r6m51y6g6yg-boehm-gc-8.2.8-dev"
-      val boehmLib = "/nix/store/20sg3mav9lz8vd8lvmpvbyw1q2birbb2-boehm-gc-8.2.8/lib"
       c.withMode(Mode.debug)
         .withBuildTarget(BuildTarget.libraryDynamic)
         .withGC(scala.scalanative.build.GC.boehm)
-        .withCompileOptions(c.compileOptions ++ Seq(s"-I$boehmDev/include"))
-        .withLinkingOptions(c.linkingOptions ++ Seq(
-          s"-L$boehmLib",
-          "-lgc",
-          s"-Wl,-rpath,$boehmLib"
-        ))
     },
 
     // Auto-registration: scan this project's sources every compile and generate
