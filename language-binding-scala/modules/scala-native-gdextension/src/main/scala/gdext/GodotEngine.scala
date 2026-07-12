@@ -77,9 +77,15 @@ private[gdext] object GodotEngine {
     } catch {
       case e: Throwable =>
         // Never let an exception unwind across the C ABI boundary back into
-        // Godot. Report it to Godot's error console and the binding log file.
+        // Godot. Report it to Godot's error console and the binding log file,
+        // including a full stack trace so the failing call site is diagnosable.
         if (Godot.isReady) Log.error(s"Initialization failed: $e")
-        Log.fileReset(s"[ERROR] Initialization failed: $e")
+        Log.file(s"[ERROR] Initialization failed: $e")
+        try {
+          val sw = new java.io.StringWriter()
+          e.printStackTrace(new java.io.PrintWriter(sw))
+          Log.file(s"[ERROR] stack trace:\n${sw.toString}")
+        } catch { case _: Throwable => () }
         0.toUByte // Failure
     }
   }
