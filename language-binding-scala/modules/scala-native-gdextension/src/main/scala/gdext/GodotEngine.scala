@@ -51,13 +51,17 @@ private[gdext] object GodotEngine {
     selfTest: Boolean = false
   ): CUnsignedChar = {
     try {
+      Log.file("run: ENTER")
       Log.trace(s"GodotEngine.run: ENTER (selfTest=$selfTest)")
       registerClasses = register
       runSelfTests = selfTest
 
+      Log.file("run: before Interface.load")
       val interface = Interface.load(getProcAddress)
+      Log.file("run: after Interface.load")
       Log.trace("GodotEngine.run: interface loaded")
       Godot.initialize(interface, library)
+      Log.file("run: after Godot.initialize")
       Log.trace("GodotEngine.run: Godot.initialize done")
 
       // Write through the field-pointer accessors so the assignments target
@@ -79,7 +83,10 @@ private[gdext] object GodotEngine {
         // Never let an exception unwind across the C ABI boundary back into
         // Godot. Report it to Godot's error console and the binding log file.
         if (Godot.isReady) Log.error(s"Initialization failed: $e")
-        Log.fileReset(s"[ERROR] Initialization failed: $e")
+        Log.file(s"[ERROR] Initialization failed: $e")
+        val sw = new java.io.StringWriter()
+        e.printStackTrace(new java.io.PrintWriter(sw))
+        Log.file(s"[ERROR] stack trace:\n${sw.toString}")
         0.toUByte // Failure
     }
   }
