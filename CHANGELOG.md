@@ -5,8 +5,13 @@ Covers both published artifacts of this repo — the language binding
 they are always released together under one version. Versions are plain-semver
 git tags built on demand by [JitPack](https://jitpack.io/#optical002/godot-scala-native)
 under the group `com.github.optical002.godot-scala-native`. The topmost
-*Unreleased* section is the current dev version (what `sbt publishLocal`
-produces); it appears on JitPack only once its tag is pushed.
+*Unreleased* section is the current dev version — a `-SNAPSHOT` (what
+`sbt publishLocal` produces); the plain release version appears on JitPack only
+once its tag is pushed.
+
+## [0.1.3-SNAPSHOT] — Unreleased
+
+_No changes yet._
 
 ## [0.1.2] — 2026-07-12
 

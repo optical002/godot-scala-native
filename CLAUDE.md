@@ -39,9 +39,9 @@ Quick map:
   (binding code, the generator, or the plugin), run
   `cd language-binding-scala && sbt publishLocal` **before** `sbt godotBuild` in
   harness — otherwise harness links the stale artifact. Both publish under
-  `com.github.optical002.godot-scala-native % <module> % 0.1.2` (pinned
+  `com.github.optical002.godot-scala-native % <module> % 0.1.3-SNAPSHOT` (pinned
   in `harness-scala/project/plugins.sbt`; the dev version is the NEXT release
-  version — it doesn't exist on JitPack until tagged, and local ivy wins over
+  version as a `-SNAPSHOT` — it doesn't exist on JitPack until tagged, and local ivy wins over
   JitPack). Releases go through **JitPack**: push a plain semver tag (e.g.
   `0.1.2`) and JitPack builds via `jitpack.yml` — same group, tag as version.
   Bump the fallback version everywhere after tagging.
