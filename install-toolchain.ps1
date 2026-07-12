@@ -151,25 +151,41 @@ function Ensure-BoehmGc {
   Write-Head 'Boehm GC (bdwgc) via vcpkg  [GC.boehm links -lgc + gc.h]'
   $triplet = 'x64-windows'
 
-  # locate or bootstrap vcpkg
+  # Base dir for a fresh vcpkg checkout. USERPROFILE is normally set, but guard
+  # against it being empty (which is what produces "Cannot bind ... 'Path' ...
+  # empty string" from Join-Path).
+  $userDir = $env:USERPROFILE
+  if (-not $userDir) { $userDir = [Environment]::GetFolderPath('UserProfile') }
+  if (-not $userDir) { throw 'Could not determine the user profile directory (USERPROFILE is empty).' }
+  $defaultRoot = Join-Path $userDir 'vcpkg'
+
+  # locate an existing vcpkg
   $root = $null
-  if ($env:VCPKG_ROOT -and (Test-Path (Join-Path $env:VCPKG_ROOT 'vcpkg.exe'))) { $root = $env:VCPKG_ROOT }
-  elseif (Test-Path (Join-Path $env:USERPROFILE 'vcpkg\vcpkg.exe')) { $root = Join-Path $env:USERPROFILE 'vcpkg' }
+  if ($env:VCPKG_ROOT -and (Test-Path (Join-Path $env:VCPKG_ROOT 'vcpkg.exe'))) {
+    $root = $env:VCPKG_ROOT
+  } elseif (Test-Path (Join-Path $defaultRoot 'vcpkg.exe')) {
+    $root = $defaultRoot
+  }
 
   if (-not $root) {
-    $root = Join-Path $env:USERPROFILE 'vcpkg'
+    $root = $defaultRoot
     Write-Add "bootstrapping vcpkg into $root ..."
+    if (-not (Test-Cmd git)) { throw 'git is required to bootstrap vcpkg but was not found on PATH; open a new terminal and re-run.' }
     if (-not (Test-Path $root)) {
       & git clone --depth 1 https://github.com/microsoft/vcpkg.git $root
       if ($LASTEXITCODE -ne 0) { throw 'git clone of vcpkg failed' }
     }
-    & (Join-Path $root 'bootstrap-vcpkg.bat') -disableMetrics
+    $bootstrap = Join-Path $root 'bootstrap-vcpkg.bat'
+    if (-not (Test-Path $bootstrap)) { throw "vcpkg bootstrap script not found at $bootstrap" }
+    & $bootstrap -disableMetrics
     if ($LASTEXITCODE -ne 0) { throw 'vcpkg bootstrap failed' }
     [Environment]::SetEnvironmentVariable('VCPKG_ROOT', $root, 'User')
     $env:VCPKG_ROOT = $root
   } else {
     Write-Info "vcpkg: $root"
   }
+
+  if (-not $root) { throw 'vcpkg root could not be resolved.' }
 
   $installed = (Test-Path (Join-Path $root "installed\$triplet\include\gc\gc.h")) -or
                (Test-Path (Join-Path $root "installed\$triplet\include\gc.h"))
