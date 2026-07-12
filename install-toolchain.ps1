@@ -237,7 +237,19 @@ Ensure-Sbt
 Ensure-Clang
 Ensure-VcBuildTools
 Ensure-Git
-Ensure-BoehmGc
+
+# KNOWN LIMITATION: the automated Boehm GC (vcpkg / bdwgc) install does not work
+# reliably on Windows yet. Everything above is installed; if this step fails we
+# report it and print manual instructions instead of aborting.
+try {
+  Ensure-BoehmGc
+} catch {
+  Write-Miss "Boehm GC step failed: $($_.Exception.Message)"
+  Write-Miss 'This step is a known limitation and must be done manually:'
+  Write-Info '  1) Install bdwgc, e.g. via vcpkg:  vcpkg install bdwgc:x64-windows'
+  Write-Info '  2) Set C_INCLUDE_PATH to the dir containing gc.h, and LIBRARY_PATH'
+  Write-Info '     to the dir containing the lib, so clang can find them at build time.'
+}
 
 Write-Host ''
-Write-Ok 'Toolchain step complete.'
+Write-Ok 'Toolchain step complete (except Boehm GC — see above if it failed).'

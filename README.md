@@ -43,14 +43,20 @@ irm https://raw.githubusercontent.com/optical002/godot-scala-native/main/install
 
 It detects what's already present, skips it, and installs the rest via `winget`
 (falling back to Scoop when winget is unavailable). Installs are idempotent, so
-the command is safe to re-run. VS C++ Build Tools may prompt for admin. Boehm GC
-is wired onto clang's search path automatically (persistent `C_INCLUDE_PATH` /
-`LIBRARY_PATH`), so the build needs no manual environment setup — open a new
-terminal afterwards so the updated variables take effect.
+the command is safe to re-run. VS C++ Build Tools may prompt for admin.
 
-> **Note:** Boehm GC on Windows in Scala Native's multithreaded mode is a known
-> upstream rough edge — the first `sbt godotBuild` is where the `.dll` link is
-> confirmed.
+> ⚠️ **Known limitation — the script fails at the Boehm GC step on Windows.**
+> The automated vcpkg / `bdwgc` install does not currently work; the script
+> installs everything else (JDK 17, sbt, LLVM/Clang, VS C++ Build Tools, Git)
+> and then errors when it reaches Boehm GC. **You must install and wire up Boehm
+> GC manually** — install `bdwgc` (e.g. via [vcpkg](https://vcpkg.io):
+> `vcpkg install bdwgc:x64-windows`) and set `C_INCLUDE_PATH` (to the dir with
+> `gc.h`) and `LIBRARY_PATH` (to the dir with the lib) so clang can find them
+> before building. This is unresolved; contributions welcome.
+
+> **Note:** Boehm GC on Windows in Scala Native's multithreaded mode is also a
+> known upstream rough edge — even once it links, the first `sbt godotBuild` is
+> where the `.dll` build is confirmed.
 
 On **Linux/macOS**, install the toolchain from the table via your package
 manager (see [`BUILD.md`](BUILD.md) and the Scala Native
