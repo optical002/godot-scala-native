@@ -8,7 +8,7 @@ under the group `com.github.optical002.godot-scala-native`. The topmost
 *Unreleased* section is the current dev version (what `sbt publishLocal`
 produces); it appears on JitPack only once its tag is pushed.
 
-## [0.1.2] — Unreleased
+## [0.1.2] — 2026-07-12
 
 ### Added
 - The sbt watch (`~godotBuild`) now also fires on the prefab/id config inputs:
