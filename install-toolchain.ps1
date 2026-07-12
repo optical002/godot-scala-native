@@ -182,11 +182,33 @@ function Ensure-BoehmGc {
     Write-Ok 'bdwgc installed.'
   }
 
+  # Make Boehm GC discoverable to clang for every future shell, so the build
+  # just works with no manual env setup. Append (don't clobber) the vcpkg dirs
+  # to the persistent user-level C_INCLUDE_PATH / LIBRARY_PATH, and mirror them
+  # into this process so a build in the same session works too.
   $inc = Join-Path $root "installed\$triplet\include"
   $lib = Join-Path $root "installed\$triplet\lib"
-  Write-Info 'Before building, point clang at Boehm GC (this shell only):'
-  Write-Host  "      `$env:C_INCLUDE_PATH = '$inc'" -ForegroundColor White
-  Write-Host  "      `$env:LIBRARY_PATH   = '$lib'" -ForegroundColor White
+  Add-UserPathVar 'C_INCLUDE_PATH' $inc
+  Add-UserPathVar 'LIBRARY_PATH'   $lib
+  Write-Ok 'Boehm GC set on C_INCLUDE_PATH / LIBRARY_PATH (persisted for future shells).'
+}
+
+# Append $dir to a ';'-separated env var at User scope (idempotent), and mirror
+# it into the current process so a build in the same session sees it too.
+function Add-UserPathVar {
+  param([Parameter(Mandatory)][string]$Name, [Parameter(Mandatory)][string]$Dir)
+  # persistent user scope
+  $cur   = [Environment]::GetEnvironmentVariable($Name, 'User')
+  $parts = if ($cur) { $cur -split ';' | Where-Object { $_ } } else { @() }
+  if ($parts -notcontains $Dir) {
+    [Environment]::SetEnvironmentVariable($Name, (($parts + $Dir) -join ';'), 'User')
+  }
+  # current process
+  $procCur   = (Get-Item "Env:$Name" -ErrorAction SilentlyContinue).Value
+  $procParts = if ($procCur) { $procCur -split ';' | Where-Object { $_ } } else { @() }
+  if ($procParts -notcontains $Dir) {
+    Set-Item "Env:$Name" (($procParts + $Dir) -join ';')
+  }
 }
 
 # --- main --------------------------------------------------------------------

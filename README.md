@@ -43,7 +43,10 @@ irm https://raw.githubusercontent.com/optical002/godot-scala-native/main/install
 
 It detects what's already present, skips it, and installs the rest via `winget`
 (falling back to Scoop when winget is unavailable). Installs are idempotent, so
-the command is safe to re-run. VS C++ Build Tools may prompt for admin.
+the command is safe to re-run. VS C++ Build Tools may prompt for admin. Boehm GC
+is wired onto clang's search path automatically (persistent `C_INCLUDE_PATH` /
+`LIBRARY_PATH`), so the build needs no manual environment setup — open a new
+terminal afterwards so the updated variables take effect.
 
 > **Note:** Boehm GC on Windows in Scala Native's multithreaded mode is a known
 > upstream rough edge — the first `sbt godotBuild` is where the `.dll` link is
