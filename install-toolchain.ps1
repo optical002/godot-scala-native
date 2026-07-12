@@ -124,12 +124,12 @@ function Install-Package {
   )
   $mgr = Get-PackageManager
   if ($mgr -eq 'winget') {
-    $args = @('install', '--id', $WingetId, '--exact',
-              '--accept-source-agreements', '--accept-package-agreements',
-              '--silent')
-    if ($WingetExtraArgs) { $args += $WingetExtraArgs }
-    Write-Info "winget $($args -join ' ')"
-    & winget @args
+    $wingetArgs = @('install', '--id', $WingetId, '--exact',
+                    '--accept-source-agreements', '--accept-package-agreements',
+                    '--silent')
+    if ($WingetExtraArgs) { $wingetArgs += $WingetExtraArgs }
+    Write-Info "winget $($wingetArgs -join ' ')"
+    & winget @wingetArgs
     if ($LASTEXITCODE -ne 0 -and $LASTEXITCODE -ne -1978335189) {
       # -1978335189 == "no applicable upgrade / already installed"
       throw "winget failed for $WingetId (exit $LASTEXITCODE)"
@@ -206,8 +206,8 @@ function Find-Jdk17Home {
              Where-Object { $_.Name -match 'jdk-?17' } |
              Sort-Object Name -Descending | Select-Object -First 1
       if ($hit) {
-        $home = $hit.FullName
-        if (Test-Path (Join-Path $home 'bin\java.exe')) { return $home }
+        $jdkDir = $hit.FullName
+        if (Test-Path (Join-Path $jdkDir 'bin\java.exe')) { return $jdkDir }
       }
       # scoop 'current' is itself the JDK home
       if ((Split-Path $r -Leaf) -eq 'current' -and
