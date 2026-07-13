@@ -117,10 +117,17 @@ object GodotScalaNativePlugin extends AutoPlugin {
     // standard search paths (system packages, or `pkg-config`/`CPATH`/
     // `LIBRARY_PATH`). We deliberately add NO explicit `-I`/`-L`/`-rpath`: those
     // would hard-code one machine's install prefix and break every other host.
+    // Force single-threaded mode for every consumer. Scala Native enables
+    // multithreading by auto-detecting `java.lang.Thread` usage; in MT mode the
+    // Boehm GC crashes on Windows at extension load (unhandled C++ exception),
+    // and the IMMIX GC corrupts the heap under Godot's `_process`. Disabling MT
+    // here keeps the binding stable on every platform, so game projects must not
+    // rely on system threads (do config parsing etc. on the main thread).
     nativeConfig ~= { c =>
       c.withMode(Mode.debug)
         .withBuildTarget(BuildTarget.libraryDynamic)
         .withGC(scala.scalanative.build.GC.boehm)
+        .withMultithreading(false)
     },
 
     // Auto-registration: scan this project's sources every compile and generate

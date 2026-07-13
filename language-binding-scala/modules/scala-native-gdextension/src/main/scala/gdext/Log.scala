@@ -64,13 +64,13 @@ private[gdext] object Log {
 
   def trace(msg: String): Unit =
     if (traceEnabled) {
-      // Tracing must never break init/callbacks: swallow any error from the
-      // thread/tid probes (e.g. platform-specific null) and still log the line.
+      // Do NOT touch Thread.currentThread() here: on Scala Native/Windows the
+      // first thread-local access during godot_scala_init triggers main-thread
+      // setup -> System.getenv -> NPE (EnvVars not yet initialized). Keep the
+      // prefix thread-free (timestamp only) so logging never forces that path.
       val prefix =
-        try {
-          val t = Thread.currentThread()
-          s"[${System.nanoTime() / 1000000L}ms t=${t.getId}/${t.getName}] "
-        } catch { case _: Throwable => "[trace] " }
+        try s"[${System.nanoTime() / 1000000L}ms] "
+        catch { case _: Throwable => "[trace] " }
       file(s"$prefix$msg")
     }
 
