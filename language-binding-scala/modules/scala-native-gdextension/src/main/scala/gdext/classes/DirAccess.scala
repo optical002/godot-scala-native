@@ -114,3 +114,21 @@ abstract class DirAccess extends RefCounted {
     Ptrcall.call2[String, String, Boolean](MethodBind.get("DirAccess", "is_equivalent", 820780508L), hostObject.objectPtr, path_a, path_b)
 
 }
+
+/** Static (class-level) `DirAccess` methods. `open` is `is_static` in Godot, so
+ *  it is invoked through the method-bind ptrcall with a NULL instance pointer.
+ *  Lets you list directories bundled in the exported PCK via `res://`. */
+object DirAccess {
+
+  private inline def nullInstance: gdext.internal.ffi.types.GDExtensionObjectPtr =
+    null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr]
+
+  /** DirAccess.open (static): open a directory for listing. `path` may be
+   *  `res://`, `user://`, or an absolute OS path. Returns a null wrapper if the
+   *  directory can't be opened. Use listDirBegin/getNext/currentIsDir to walk it. */
+  def open(path: String): DirAccess =
+    val handle = Ptrcall.call1[String, gdext.internal.engine.GodotObject](
+      MethodBind.get("DirAccess", "open", 1923528528L), nullInstance, path
+    )
+    gdext.api.Gd.wrap[DirAccess](handle)
+}

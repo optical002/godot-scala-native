@@ -77,6 +77,32 @@ object GdSelfTest {
       stillAlive
     }
 
+    // --- static FileAccess: read + existence, incl. res:// (PCK-capable) ---
+    check("FileAccess.fileExists true for res://project.godot") {
+      FileAccess.fileExists("res://project.godot")
+    }
+    check("FileAccess.fileExists false for a missing path") {
+      !FileAccess.fileExists("res://does_not_exist_12345.txt")
+    }
+    check("FileAccess.getFileAsString reads res://project.godot") {
+      val text = FileAccess.getFileAsString("res://project.godot")
+      text != null && text.contains("[application]")
+    }
+
+    // --- static DirAccess: open + list a res:// directory ---
+    check("DirAccess.open + list finds project.godot at res://") {
+      val da = DirAccess.open("res://")
+      if (da == null) false
+      else {
+        da.listDirBegin()
+        val names = scala.collection.mutable.ListBuffer.empty[String]
+        var n = da.getNext()
+        while (n != null && n.nonEmpty) { names += n; n = da.getNext() }
+        da.listDirEnd()
+        names.contains("project.godot")
+      }
+    }
+
     log(s"GdSelfTest: $passed passed, $failed failed")
   }
 }

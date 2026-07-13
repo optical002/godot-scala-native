@@ -154,3 +154,26 @@ abstract class FileAccess extends RefCounted {
     Ptrcall.callVoid0(MethodBind.get("FileAccess", "close", 3218959716L), hostObject.objectPtr)
 
 }
+
+/** Static (class-level) `FileAccess` methods. Godot marks these `is_static`, so
+ *  they are invoked through the same method-bind ptrcall with a NULL instance
+ *  pointer. Useful for reading files bundled in the exported PCK via `res://`. */
+object FileAccess {
+
+  private inline def nullInstance: gdext.internal.ffi.types.GDExtensionObjectPtr =
+    null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr]
+
+  /** FileAccess.file_exists (static): true if a file exists at `path`
+   *  (accepts `res://`, `user://`, or an absolute OS path). */
+  def fileExists(path: String): Boolean =
+    Ptrcall.call1[String, Boolean](
+      MethodBind.get("FileAccess", "file_exists", 2323990056L), nullInstance, path
+    )
+
+  /** FileAccess.get_file_as_string (static): read the whole file at `path` as a
+   *  UTF-8 String (empty string on failure). Reads from the PCK for `res://`. */
+  def getFileAsString(path: String): String =
+    Ptrcall.call1[String, String](
+      MethodBind.get("FileAccess", "get_file_as_string", 1703090593L), nullInstance, path
+    )
+}
