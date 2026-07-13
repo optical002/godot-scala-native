@@ -52,21 +52,18 @@ private[gdext] object GodotEngine {
   ): CUnsignedChar = {
     // NOTE on Scala Native/Windows: System.getenv throws during
     // godot_scala_init (its EnvVars table can't initialize this early). The
-    // binding therefore avoids getenv on the init path — Log.traceEnabled reads
-    // it defensively, and the trace prefix no longer touches Thread — so init
-    // never trips the runtime's env/thread bootstrap.
+    // binding therefore makes no getenv/Thread call on the init path — tracing
+    // is gated by a marker file (see Log.traceEnabled) and the trace prefix no
+    // longer touches Thread — so init never trips the runtime's env/thread
+    // bootstrap.
     try {
-      Log.file("run: ENTER")
       Log.trace(s"GodotEngine.run: ENTER (selfTest=$selfTest)")
       registerClasses = register
       runSelfTests = selfTest
 
-      Log.file("run: before Interface.load")
       val interface = Interface.load(getProcAddress)
-      Log.file("run: after Interface.load")
       Log.trace("GodotEngine.run: interface loaded")
       Godot.initialize(interface, library)
-      Log.file("run: after Godot.initialize")
       Log.trace("GodotEngine.run: Godot.initialize done")
 
       // Write through the field-pointer accessors so the assignments target

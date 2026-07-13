@@ -48,25 +48,19 @@ private[gdext] object Log {
   }
 
   /**
-   * Verbose hot-reload/editor tracing, ON by default so `.scala/log` captures
-   * the full binding lifecycle out of the box. Opt out by setting the
-   * `GODOT_SCALA_TRACE` environment variable to `0`/`off`/`false`/`no`. Each
-   * line is prefixed with a millisecond timestamp and the current thread
-   * (id/name) so cross-thread ordering — e.g. an editor worker contending with
-   * the main thread — is visible, and flushes per line (via [[file]]) so the
-   * last line before a freeze always survives.
+   * Verbose lifecycle tracing, OFF by default. Enabling it floods `.scala/log`
+   * (a line per binding call) which noticeably slows scene-heavy runs like a
+   * headless export, so it is opt-in.
+   *
+   * Enabled by the presence of a `.scala/trace` marker file next to the log —
+   * NOT an env var: on Scala Native/Windows `System.getenv` throws during
+   * `godot_scala_init` (its EnvVars table can't initialize that early), which
+   * would abort init. The file check has no such constraint. Create the file
+   * (`touch godot/.scala/trace`) to turn tracing on; delete it to turn it off.
    */
   val traceEnabled: Boolean =
-    // NOTE: read the env var defensively. On Scala Native/Windows, System.getenv
-    // throws (EnvVars can't initialize this early during godot_scala_init) — that
-    // must NOT abort init, and tracing is ON by default anyway, so treat any
-    // failure/absence as enabled. Opt out with GODOT_SCALA_TRACE=0/off/false/no.
-    try {
-      Option(System.getenv("GODOT_SCALA_TRACE")).map(_.trim.toLowerCase) match {
-        case Some("0") | Some("off") | Some("false") | Some("no") => false
-        case _                                                    => true
-      }
-    } catch { case _: Throwable => true }
+    try new java.io.File(".scala/trace").exists()
+    catch { case _: Throwable => false }
 
   def trace(msg: String): Unit =
     if (traceEnabled) {
