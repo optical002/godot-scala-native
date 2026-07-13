@@ -57,10 +57,16 @@ private[gdext] object Log {
    * last line before a freeze always survives.
    */
   val traceEnabled: Boolean =
-    Option(System.getenv("GODOT_SCALA_TRACE")).map(_.trim.toLowerCase) match {
-      case Some("0") | Some("off") | Some("false") | Some("no") => false
-      case _                                                    => true
-    }
+    // NOTE: read the env var defensively. On Scala Native/Windows, System.getenv
+    // throws (EnvVars can't initialize this early during godot_scala_init) — that
+    // must NOT abort init, and tracing is ON by default anyway, so treat any
+    // failure/absence as enabled. Opt out with GODOT_SCALA_TRACE=0/off/false/no.
+    try {
+      Option(System.getenv("GODOT_SCALA_TRACE")).map(_.trim.toLowerCase) match {
+        case Some("0") | Some("off") | Some("false") | Some("no") => false
+        case _                                                    => true
+      }
+    } catch { case _: Throwable => true }
 
   def trace(msg: String): Unit =
     if (traceEnabled) {

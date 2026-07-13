@@ -50,14 +50,11 @@ private[gdext] object GodotEngine {
     register: () => Unit,
     selfTest: Boolean = false
   ): CUnsignedChar = {
-    // Scala Native 0.5 on Windows has an init-ordering bug: the first access to
-    // the thread subsystem (Thread.currentThread / any ThreadLocal.get) forces
-    // main-thread setup, which calls NativeThread.calculateStackSize ->
-    // System.getenv("SCALANATIVE_THREAD_STACK_SIZE") while `EnvVars.envVars` is
-    // still null, throwing an NPE that aborts godot_scala_init. Touch the env
-    // table FIRST (this path does not go through Thread setup) so it initializes
-    // before anything reads a thread-local. Guarded: never let it abort init.
-    try { System.getenv("PATH"); () } catch { case _: Throwable => () }
+    // NOTE on Scala Native/Windows: System.getenv throws during
+    // godot_scala_init (its EnvVars table can't initialize this early). The
+    // binding therefore avoids getenv on the init path — Log.traceEnabled reads
+    // it defensively, and the trace prefix no longer touches Thread — so init
+    // never trips the runtime's env/thread bootstrap.
     try {
       Log.file("run: ENTER")
       Log.trace(s"GodotEngine.run: ENTER (selfTest=$selfTest)")
