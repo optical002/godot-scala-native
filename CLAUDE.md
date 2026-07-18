@@ -16,7 +16,7 @@ The repo root is a **workspace, not an sbt build**. Three siblings:
 - `godot/` — the Godot project the built `.so` is loaded into.
 
 Harness consumes the binding and plugin as **published artifacts** — there is no
-source `ProjectRef`. Dev version `0.1.3-SNAPSHOT`, group
+source `ProjectRef`. Dev version `0.1.6`, group
 `com.github.optical002.godot-scala-native`.
 
 ## Build & verify

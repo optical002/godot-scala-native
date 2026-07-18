@@ -4,18 +4,39 @@ Covers both published artifacts of this repo — the language binding
 (`scala-native-gdextension`) and the sbt plugin (`sbt-godot-scala-native`);
 they are always released together under one version. Versions are plain-semver
 git tags built on demand by [JitPack](https://jitpack.io/#optical002/godot-scala-native)
-under the group `com.github.optical002.godot-scala-native`. The topmost
-*Unreleased* section is the current dev version — a `-SNAPSHOT` (what
-`sbt publishLocal` produces); the plain release version appears on JitPack only
-once its tag is pushed.
+under the group `com.github.optical002.godot-scala-native`. Versions are plain
+semver — the topmost *Unreleased* section is the version being worked toward,
+which `sbt publishLocal` produces locally and which appears on JitPack only once
+its tag is pushed.
 
-## [0.1.3-SNAPSHOT] — Unreleased
+## [0.1.6] — Unreleased
 
 ### Changed
 - `RegistrationScan` no longer emits a repo-local documentation path into the
   generated `GeneratedRegistrations.scala` header. The comment pointed at a file
   under this repo's `.claude/` directory, which does not exist in consumer
   projects that receive the generated code.
+- Version scheme is now plain semver, matching `godot-scala-native-utilities`.
+  The dev version was previously a `-SNAPSHOT` pinned at `0.1.3-SNAPSHOT`, which
+  had drifted behind the released tags.
+
+## [0.1.5] — 2026-07-12
+
+Re-tag of `0.1.4` with no code changes (same commit), cut to rebuild on JitPack.
+
+## [0.1.4] — 2026-07-12
+
+Released without a changelog entry at the time; reconstructed from git history.
+
+### Added
+- Static `FileAccess`/`DirAccess` methods for reading `res://` (PCK) files.
+
+### Fixed
+- Guard `System.getenv` in `Log` init so Windows `godot_scala_init` survives.
+- Scala Native Windows init NPE; multithreading-off moved into the binding.
+
+### Changed
+- Verbose tracing is gated behind a `.scala/trace` file (default off).
 
 ## [0.1.2] — 2026-07-12
 

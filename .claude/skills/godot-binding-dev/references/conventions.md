@@ -130,6 +130,6 @@ Consumers import only `gdext.api.*`, `gdext.classes`, `gdext.builtin`,
 `harness-scala` consumes the binding + plugin as **published** artifacts (no
 source `ProjectRef`), so any change in `language-binding-scala` needs
 `sbt publishLocal` before `sbt godotBuild` — see the skill body, which the
-`check-publish-local` hook enforces. Both publish under `0.1.3-SNAPSHOT`.
+`check-publish-local` hook enforces. Both publish under `0.1.6`.
 Changing the plugin's task/setting keys or the embedded `gdext` version requires
 a republish to take effect downstream.
