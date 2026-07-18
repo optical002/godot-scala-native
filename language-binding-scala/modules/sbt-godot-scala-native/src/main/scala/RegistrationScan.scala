@@ -217,7 +217,7 @@ object RegistrationScan {
        |// extends a Godot engine class is discovered automatically: add a class and
        |// it registers, with no entry edits or any list. The GDExtension entry point
        |// below is generated too — the exported symbol is fixed
-       |// ("$EntrySymbol"). See .claude/memories/layer5-register.md.
+       |// ("$EntrySymbol").
        |// source-fingerprint: $srcFingerprint
        |package game
        |

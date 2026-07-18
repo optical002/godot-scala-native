@@ -11,7 +11,11 @@ once its tag is pushed.
 
 ## [0.1.3-SNAPSHOT] — Unreleased
 
-_No changes yet._
+### Changed
+- `RegistrationScan` no longer emits a repo-local documentation path into the
+  generated `GeneratedRegistrations.scala` header. The comment pointed at a file
+  under this repo's `.claude/` directory, which does not exist in consumer
+  projects that receive the generated code.
 
 ## [0.1.2] — 2026-07-12
 

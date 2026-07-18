@@ -28,10 +28,10 @@ The repo root is a workspace, **not** an sbt build. Top level:
   aggregates `igen` + `gdext` + `sbtGodotPlugin`, `publish / skip := true`.
   Exists only to group the modules. Invoke tasks as `sbt gdext/<task>` /
   `sbt igen/<task>`. `ThisBuild / version` is
-  `sys.env.getOrElse("VERSION", "0.1.2")` — the fallback is the NEXT release
-  version, used by `publishLocal` (it doesn't exist on JitPack until tagged;
-  local ivy wins over JitPack); JitPack sets `VERSION` to the requested tag
-  when building a release.
+  `sys.env.getOrElse("VERSION", "0.1.3-SNAPSHOT")` — the fallback is the NEXT
+  release version as a `-SNAPSHOT`, used by `publishLocal` (it doesn't exist on
+  JitPack until tagged; local ivy wins over JitPack); JitPack sets `VERSION` to
+  the requested tag when building a release.
 - **`harness`** — its **own** sbt build at `harness-scala/` (flat root project,
   sources at `harness-scala/src/main/scala`). The **game project**, base package
   **`game`**. Holds **only** `game` classes. It carries no build machinery:
@@ -50,7 +50,9 @@ The repo root is a workspace, **not** an sbt build. Top level:
 2. **builtin** (`builtin/`) — Variant + GString/StringName/Vector2/Array/Dictionary.
 3. **engine** (`classes/`, generated) — typed engine classes as
    `abstract class Node2D extends CanvasItem`, package **`gdext.classes`**.
-4. **obj** (`internal/engine/Gd.scala`, `GodotClass`, `ClassTags`) — `Gd[T]`, casts, refcount.
+4. **obj** (`internal/engine/`, `GodotScriptClass`, `ClassMeta`, `ClassTags`) —
+   plain wrapper types (there is **no** `Gd[T]` smart pointer), casts, refcount.
+   `Gd` survives only as a facade object in `gdext.api`. See [layer4-obj](layer4-obj.md).
 5. **register** (`internal/register/`) — register user `game` classes via macros/annotations.
 
 ## Package layout — public surface vs internal
@@ -95,7 +97,7 @@ interface table + library handle.
 - **publishLocal first**: harness consumes the binding + plugin as published
   artifacts. After any change in `language-binding-scala`,
   `cd language-binding-scala && sbt publishLocal` (publishes `gdext` + the sbt
-  plugin under `0.1.2`) **before** building harness.
+  plugin under `0.1.3-SNAPSHOT`) **before** building harness.
 - `cd harness-scala && sbt godotBuild` → (task from the plugin) runs the
   auto-registration source generator, compiles (linking the published binding),
   native-links, atomically swaps the `.so` into `godot/.scala/`, **generates the
@@ -152,7 +154,7 @@ build via `%%%`; and the sbt plugin, `_2.12_1.0` Maven-style layout via
 `sbtPluginPublishLegacyMavenStyle := false`) are served by **JitPack** under
 group **`com.github.optical002.godot-scala-native`**. `organization` in
 `build.sbt` is set to exactly that group so `publishLocal` yields the same
-coordinates (version `0.1.2`).
+coordinates (dev version `0.1.3-SNAPSHOT`; last release tag `0.1.2`).
 Release flow: push a **plain semver tag** (`0.1.1`, no `v` prefix — the tag IS
 the version) → JitPack builds on demand via repo-root `jitpack.yml`
 (`cd language-binding-scala && sbt gdext/publishM2 sbtGodotPlugin/publishM2`;
@@ -177,11 +179,3 @@ Node-derived classes:
 Validate: `cd godot && godot --headless --path . --script node_harness_verify.gd`
 → checks class_exists/parent/instantiate/get_class/is_class for all 238 + scene
 load; prints `HARNESS VALIDATION: PASS …` and exits 0/1.
-
-## Status
-Phases 0–5 done and verified (41 self-tests + GDScript checks pass). Engine
-codegen now covers ALL ~1023 classes; all 238 instantiable node types validated
-from Godot (node_harness_verify.gd). Remaining: best-effort method coverage
-(NodePath/typed-arrays/Variant/packed arrays still skipped), release build,
-GC×threads, docs. Publishing wired (JitPack via `jitpack.yml`; release = push a
-plain semver tag like `0.1.1`).

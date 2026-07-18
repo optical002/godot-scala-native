@@ -127,11 +127,9 @@ Consumers import only `gdext.api.*`, `gdext.classes`, `gdext.builtin`,
 [architecture](index.md) "Package layout".
 
 ## Decoupled consumer / publishLocal
-`harness-scala` no longer source-references the binding; it applies the published
-`sbt-godot-scala-native` plugin and consumes the published `gdext`. So **any**
-change in `language-binding-scala` (binding, generator, or plugin) needs
-`cd language-binding-scala && sbt publishLocal` **before** `cd harness-scala &&
-sbt godotBuild`, or harness links the stale artifact. Both publish under
-`0.1.0-SNAPSHOT` (`ThisBuild / version` in the binding build; pinned in
-`harness-scala/project/plugins.sbt`). Changing the plugin's task/setting keys or
-the embedded `gdext` version requires a republish to take effect downstream.
+`harness-scala` consumes the binding + plugin as **published** artifacts (no
+source `ProjectRef`), so any change in `language-binding-scala` needs
+`sbt publishLocal` before `sbt godotBuild` — see the skill body, which the
+`check-publish-local` hook enforces. Both publish under `0.1.3-SNAPSHOT`.
+Changing the plugin's task/setting keys or the embedded `gdext` version requires
+a republish to take effect downstream.
