@@ -3,6 +3,7 @@ package gdext.builtin
 import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
 import scala.scalanative.libc.string.memset
+import scala.scalanative.libc.stdlib
 import gdext.Godot
 import gdext.internal.ffi.types.*
 import gdext.internal.ffi.types.GDExtensionVariantType.*
@@ -23,6 +24,7 @@ object GArray {
   // Method hashes from extension_api.json (Array, Godot 4.5).
   private final val HashSize = 3173160232L
   private final val HashPushBack = 3316032543L
+  private final val HashSet = 3798478031L
 
   extension (a: GArray) {
     def ptr: GDExtensionTypePtr = a
@@ -54,10 +56,49 @@ object GArray {
 
     /** Read element `i` as a Scala value. */
     def get[A](i: Int)(using fv: FromVariant[A]): A = {
+      checkIndex(i)
       val slot = Godot.interface.array_operator_index(a, i.toLong)
       fv.fromVariant(slot)
     }
+
+    def set[A](i: Int, value: A)(using tv: ToVariant[A]): Unit = {
+      checkIndex(i)
+      val idx = stackalloc[GDExtensionInt]()
+      !idx = i.toLong
+      val varBuf = stackalloc[Byte](BuiltinSizes.Variant.toCSize)
+      val v = Variant.from(value, varBuf)
+      val args = stackalloc[GDExtensionConstTypePtr](2)
+      args(0) = idx.asInstanceOf[GDExtensionConstTypePtr]
+      args(1) = v.ptr
+      try
+        BuiltinMethods
+          .method(GDEXTENSION_VARIANT_TYPE_ARRAY, "set", HashSet)
+          .apply(a, args, null, 2)
+      finally v.destroy()
+    }
+
+    def variantTypeAt(i: Int): GDExtensionVariantType = {
+      checkIndex(i)
+      Godot.interface.variant_get_type(Godot.interface.array_operator_index(a, i.toLong))
+    }
+
+    def isNilAt(i: Int): Boolean = variantTypeAt(i) == GDEXTENSION_VARIANT_TYPE_NIL
+
+    /** [[destroy]] plus releasing the malloc'd handle from [[allocate]]. */
+    def free(): Unit = {
+      destroy()
+      stdlib.free(a.asInstanceOf[Ptr[Byte]])
+    }
+
+    private def checkIndex(i: Int): Unit = {
+      val n = size
+      if (i < 0 || i >= n) throw new IndexOutOfBoundsException(s"index $i, size $n")
+    }
   }
+
+  /** An empty Array in heap storage; release with [[free]]. */
+  def allocate(): GArray =
+    empty(stdlib.malloc(BuiltinSizes.Array.toCSize).asInstanceOf[GDExtensionTypePtr])
 
   /** Reinterpret a raw handle as a `GArray` (the opaque type is its pointer). */
   def fromPtr(p: GDExtensionTypePtr): GArray = p

@@ -332,19 +332,30 @@ object PtrRet {
 /** Fixed-arity ptrcall dispatchers used by the generated engine wrappers. */
 object Ptrcall {
 
+  private[gdext] def invoke(
+    bind: GDExtensionMethodBindPtr,
+    instance: GDExtensionObjectPtr,
+    args: Ptr[GDExtensionConstTypePtr],
+    ret: GDExtensionTypePtr
+  ): Unit = {
+    if (bind == null)
+      throw new IllegalStateException("engine method bind not found (hash mismatch?)")
+    Godot.interface.object_method_bind_ptrcall(bind, instance, args, ret)
+  }
+
   /** A method with no return value (`r_ret = null`). */
   def callVoid0(
     bind: GDExtensionMethodBindPtr,
     instance: GDExtensionObjectPtr
   ): Unit =
-    Godot.interface.object_method_bind_ptrcall(bind, instance, null, null)
+    invoke(bind, instance, null, null)
 
   def call0[R](
     bind: GDExtensionMethodBindPtr,
     instance: GDExtensionObjectPtr
   )(using ret: PtrRet[R]): R = {
     val retBuf = stackalloc[Byte](ret.size.toCSize)
-    Godot.interface.object_method_bind_ptrcall(
+    invoke(
       bind,
       instance,
       null,
@@ -362,7 +373,7 @@ object Ptrcall {
     p1.write(a1, b1)
     val args = stackalloc[GDExtensionConstTypePtr](1)
     args(0) = b1
-    Godot.interface.object_method_bind_ptrcall(bind, instance, args, null)
+    invoke(bind, instance, args, null)
   }
 
   def call1[A1, R](
@@ -375,7 +386,7 @@ object Ptrcall {
     val args = stackalloc[GDExtensionConstTypePtr](1)
     args(0) = b1
     val retBuf = stackalloc[Byte](ret.size.toCSize)
-    Godot.interface.object_method_bind_ptrcall(bind, instance, args, retBuf)
+    invoke(bind, instance, args, retBuf)
     ret.read(retBuf)
   }
 
@@ -389,7 +400,7 @@ object Ptrcall {
     val b2 = stackalloc[Byte](p2.size.toCSize); p2.write(a2, b2)
     val args = stackalloc[GDExtensionConstTypePtr](2)
     args(0) = b1; args(1) = b2
-    Godot.interface.object_method_bind_ptrcall(bind, instance, args, null)
+    invoke(bind, instance, args, null)
   }
 
   def call2[A1, A2, R](
@@ -403,7 +414,7 @@ object Ptrcall {
     val args = stackalloc[GDExtensionConstTypePtr](2)
     args(0) = b1; args(1) = b2
     val retBuf = stackalloc[Byte](ret.size.toCSize)
-    Godot.interface.object_method_bind_ptrcall(bind, instance, args, retBuf)
+    invoke(bind, instance, args, retBuf)
     ret.read(retBuf)
   }
 
@@ -419,7 +430,7 @@ object Ptrcall {
     val b3 = stackalloc[Byte](p3.size.toCSize); p3.write(a3, b3)
     val args = stackalloc[GDExtensionConstTypePtr](3)
     args(0) = b1; args(1) = b2; args(2) = b3
-    Godot.interface.object_method_bind_ptrcall(bind, instance, args, null)
+    invoke(bind, instance, args, null)
   }
 
   def call3[A1, A2, A3, R](
@@ -435,7 +446,7 @@ object Ptrcall {
     val args = stackalloc[GDExtensionConstTypePtr](3)
     args(0) = b1; args(1) = b2; args(2) = b3
     val retBuf = stackalloc[Byte](ret.size.toCSize)
-    Godot.interface.object_method_bind_ptrcall(bind, instance, args, retBuf)
+    invoke(bind, instance, args, retBuf)
     ret.read(retBuf)
   }
 
@@ -453,7 +464,7 @@ object Ptrcall {
     val b4 = stackalloc[Byte](p4.size.toCSize); p4.write(a4, b4)
     val args = stackalloc[GDExtensionConstTypePtr](4)
     args(0) = b1; args(1) = b2; args(2) = b3; args(3) = b4
-    Godot.interface.object_method_bind_ptrcall(bind, instance, args, null)
+    invoke(bind, instance, args, null)
   }
 
   def call4[A1, A2, A3, A4, R](
@@ -477,7 +488,7 @@ object Ptrcall {
     val args = stackalloc[GDExtensionConstTypePtr](4)
     args(0) = b1; args(1) = b2; args(2) = b3; args(3) = b4
     val retBuf = stackalloc[Byte](ret.size.toCSize)
-    Godot.interface.object_method_bind_ptrcall(bind, instance, args, retBuf)
+    invoke(bind, instance, args, retBuf)
     ret.read(retBuf)
   }
 
@@ -503,7 +514,7 @@ object Ptrcall {
     val b5 = stackalloc[Byte](p5.size.toCSize); p5.write(a5, b5)
     val args = stackalloc[GDExtensionConstTypePtr](5)
     args(0) = b1; args(1) = b2; args(2) = b3; args(3) = b4; args(4) = b5
-    Godot.interface.object_method_bind_ptrcall(bind, instance, args, null)
+    invoke(bind, instance, args, null)
   }
 
   def call5[A1, A2, A3, A4, A5, R](
@@ -530,7 +541,7 @@ object Ptrcall {
     val args = stackalloc[GDExtensionConstTypePtr](5)
     args(0) = b1; args(1) = b2; args(2) = b3; args(3) = b4; args(4) = b5
     val retBuf = stackalloc[Byte](ret.size.toCSize)
-    Godot.interface.object_method_bind_ptrcall(bind, instance, args, retBuf)
+    invoke(bind, instance, args, retBuf)
     ret.read(retBuf)
   }
 
@@ -560,7 +571,7 @@ object Ptrcall {
     val args = stackalloc[GDExtensionConstTypePtr](6)
     args(0) = b1; args(1) = b2; args(2) = b3; args(3) = b4; args(4) = b5
     args(5) = b6
-    Godot.interface.object_method_bind_ptrcall(bind, instance, args, null)
+    invoke(bind, instance, args, null)
   }
 
   def call6[A1, A2, A3, A4, A5, A6, R](
@@ -591,7 +602,7 @@ object Ptrcall {
     args(0) = b1; args(1) = b2; args(2) = b3; args(3) = b4; args(4) = b5
     args(5) = b6
     val retBuf = stackalloc[Byte](ret.size.toCSize)
-    Godot.interface.object_method_bind_ptrcall(bind, instance, args, retBuf)
+    invoke(bind, instance, args, retBuf)
     ret.read(retBuf)
   }
 }

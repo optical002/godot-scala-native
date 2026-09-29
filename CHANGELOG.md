@@ -11,7 +11,32 @@ its tag is pushed.
 
 ## [0.1.6] — Unreleased
 
+### Added
+- `PackedFloat32Array`, `PackedInt32Array`, `PackedVector3Array` (`gdext.builtin`):
+  heap-owned packed arrays with `size`/`resize`/`apply`/`update`/`free` and
+  `ToVariant`/`FromVariant`. Element access uses the `packed_*_operator_index`
+  interface functions; indices are bounds-checked (`IndexOutOfBoundsException`),
+  use-after-`free()` throws, and decoding a Variant of the wrong type throws
+  `ClassCastException` instead of reading garbage.
+- `GArray.set`, `variantTypeAt`, `isNilAt`, `GArray.allocate()`/`free()`;
+  `GArray.get` is now bounds-checked.
+- `ToVariant[StringName]`.
+- `Basis`/`Transform3D` math: `xform`, `*`, `transposed`, `determinant`,
+  `inverse`, `affineInverse`, `identity`.
+- `EngineExtras`: `PhysicalBoneSimulator3D.physicalBonesStartSimulation()` (and a
+  bone-name subset overload), `Mesh.surfaceGetArrays`,
+  `ArrayMesh.addSurfaceFromArrays`, plus `MeshArray` slot/format constants. The
+  hand-written wrappers throw `NullPointerException` on a null-host wrapper
+  instead of segfaulting.
+- Harness: `SliceRagdollProbe` + `godot/slice_ragdoll_verify.gd` covering the
+  above (packed-array edge cases and stress, custom-channel mesh rebuilds that
+  keep skinning, Jolt ragdoll start/stop/subset/impulse, capturing the live
+  ragdoll pose via `modification_processed` and freezing it). The harness
+  project now runs on Jolt Physics.
+
 ### Changed
+- `Ptrcall` dispatchers throw `IllegalStateException` when a method bind is
+  null (wrong hash / missing method) instead of handing it to the engine.
 - `RegistrationScan` no longer emits a repo-local documentation path into the
   generated `GeneratedRegistrations.scala` header. The comment pointed at a file
   under this repo's `.claude/` directory, which does not exist in consumer

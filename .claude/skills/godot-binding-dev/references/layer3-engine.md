@@ -48,3 +48,18 @@ available to subclass. `toGenerate = byName.keySet` (allowlist removed).
   those methods are skipped. (Full GDScript API parity for a Harness subclass
   is still achieved engine-side: it's registered with the real base, so ClassDB
   exposes the base's whole method list.)
+
+## Engine gotchas found via slice_ragdoll_verify.gd (Godot 4.6.1)
+- `MeshInstance3D.bake_mesh_from_current_skeleton_pose` reads bone transforms
+  from the RenderingServer: under `--headless` (dummy renderer) the skeleton RID
+  is invalid, it errors and returns null. Skin on the CPU instead
+  (`Skin.getBindPose` x `Skeleton3D.getBoneGlobalPose`).
+- Since 4.3, SkeletonModifier3D results (incl. `PhysicalBoneSimulator3D`) are
+  transient: after the frame `get_bone_pose`/`get_bone_global_pose` return the
+  pre-modifier (animation) pose. Read the ragdoll pose inside the simulator's
+  `modification_processed` signal.
+- `physical_bones_start_simulation` with only unknown bone names simulates all.
+- Hand-written extras route through `Ptrcall.invoke` and `liveObject(self)`;
+  generated wrappers still segfault on a null-host wrapper (static
+  `FileAccess`/`DirAccess` calls rely on a null instance, so the guard can't
+  live in the shared dispatch).

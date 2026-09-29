@@ -28,6 +28,9 @@ object StringName {
       VariantConstructors.destructor(GDEXTENSION_VARIANT_TYPE_STRING_NAME)(sn)
   }
 
+  given ToVariant[StringName] = (value, dest) =>
+    VariantConstructors.fromType(GDEXTENSION_VARIANT_TYPE_STRING_NAME)(dest, value)
+
   /** Wrap an existing engine StringName pointer without copying. */
   def fromPtr(p: GDExtensionStringNamePtr): StringName = p
 

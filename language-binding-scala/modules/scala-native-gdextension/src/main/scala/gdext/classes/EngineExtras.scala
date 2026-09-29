@@ -4,7 +4,17 @@ import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
 
 import gdext.Godot
-import gdext.builtin.{Arr, BuiltinSizes, FromVariant, StringName, StringNames, ToVariant, Variant}
+import gdext.builtin.{
+  Arr,
+  BuiltinSizes,
+  Dictionary,
+  FromVariant,
+  GArray,
+  StringName,
+  StringNames,
+  ToVariant,
+  Variant
+}
 import gdext.internal.engine.{MethodBind, Ptrcall}
 import gdext.internal.ffi.types.*
 
@@ -135,14 +145,130 @@ extension (self: Area3D)
     val bind = MethodBind.get("Area3D", "get_overlapping_bodies", 3995934104L)
     // Array return: an 8-byte Array handle written into the buffer.
     val retBuf = stackalloc[Byte](BuiltinSizes.Array.toUInt)
-    Godot.interface.object_method_bind_ptrcall(
+    Ptrcall.invoke(
       bind,
-      self.hostObject.objectPtr,
+      liveObject(self),
       null,
       retBuf
     )
     Arr.fromHandle[Node3D](retBuf.asInstanceOf[GDExtensionTypePtr])
   }
+
+private def liveObject(self: Object): GDExtensionObjectPtr = {
+  val ptr = self.hostObject.objectPtr
+  if (ptr == null) throw new NullPointerException("engine method called on a null object")
+  ptr
+}
+
+extension (self: PhysicalBoneSimulator3D)
+
+  def physicalBonesStartSimulation(): Unit = self.physicalBonesStartSimulation(Seq.empty)
+
+  /** Simulate only the named bones; an empty list simulates every bone. */
+  def physicalBonesStartSimulation(boneNames: Seq[String]): Unit = {
+    val bind =
+      MethodBind.get("PhysicalBoneSimulator3D", "physical_bones_start_simulation", 2787316981L)
+    val buf = stackalloc[Byte](BuiltinSizes.Array.toUInt)
+    val bones = GArray.emptyTyped(
+      buf.asInstanceOf[GDExtensionTypePtr],
+      GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_STRING_NAME,
+      ""
+    )
+    try {
+      boneNames.foreach(name => bones.pushBack(StringNames.cached(name)))
+      val args = stackalloc[GDExtensionConstTypePtr](1)
+      args(0) = buf.asInstanceOf[GDExtensionConstTypePtr]
+      Ptrcall.invoke(bind, liveObject(self), args, null)
+    } finally bones.destroy()
+  }
+
+extension (self: Mesh)
+
+  /**
+   * `Mesh.surface_get_arrays(surface)` as a heap [[GArray]] indexed by
+   * `Mesh.ArrayType` (see [[MeshArray]]); the caller must `free()` it. Returns an
+   * empty array for an out-of-range surface.
+   */
+  def surfaceGetArrays(surface: Int): GArray = {
+    val ptr = liveObject(self)
+    val out = GArray.allocate()
+    if (surface >= 0 && surface < self.getSurfaceCount()) {
+      val bind = MethodBind.get("Mesh", "surface_get_arrays", 663333327L)
+      val idx = stackalloc[GDExtensionInt]()
+      !idx = surface.toLong
+      val args = stackalloc[GDExtensionConstTypePtr](1)
+      args(0) = idx.asInstanceOf[GDExtensionConstTypePtr]
+      Ptrcall.invoke(
+        bind,
+        ptr,
+        args,
+        out.ptr
+      )
+    }
+    out
+  }
+
+extension (self: ArrayMesh)
+
+  /**
+   * `ArrayMesh.add_surface_from_arrays(primitive, arrays, [], {}, flags)`: no
+   * blend shapes, no LODs. `arrays` must have [[MeshArray.Max]] entries.
+   */
+  def addSurfaceFromArrays(primitive: Long, arrays: GArray, flags: Long): Unit = {
+    val ptr = liveObject(self)
+    require(
+      arrays.size == MeshArray.Max,
+      s"mesh arrays need ${MeshArray.Max} entries, got ${arrays.size}"
+    )
+    val bind = MethodBind.get("ArrayMesh", "add_surface_from_arrays", 1796411378L)
+    val prim = stackalloc[GDExtensionInt]()
+    !prim = primitive
+    val blendBuf = stackalloc[Byte](BuiltinSizes.Array.toUInt)
+    val blend = GArray.emptyTyped(
+      blendBuf.asInstanceOf[GDExtensionTypePtr],
+      GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_ARRAY,
+      ""
+    )
+    val lodsBuf = stackalloc[Byte](BuiltinSizes.Dictionary.toUInt)
+    val lods = Dictionary.empty(lodsBuf.asInstanceOf[GDExtensionTypePtr])
+    val flagBuf = stackalloc[GDExtensionInt]()
+    !flagBuf = flags
+    try {
+      val args = stackalloc[GDExtensionConstTypePtr](5)
+      args(0) = prim.asInstanceOf[GDExtensionConstTypePtr]
+      args(1) = arrays.ptr
+      args(2) = blendBuf.asInstanceOf[GDExtensionConstTypePtr]
+      args(3) = lodsBuf.asInstanceOf[GDExtensionConstTypePtr]
+      args(4) = flagBuf.asInstanceOf[GDExtensionConstTypePtr]
+      Ptrcall.invoke(bind, ptr, args, null)
+    } finally {
+      blend.destroy()
+      lods.destroy()
+    }
+  }
+
+/** `Mesh.ArrayType` slot indices and the format/primitive constants used with them. */
+object MeshArray {
+  final val Vertex = 0
+  final val Normal = 1
+  final val Tangent = 2
+  final val Color = 3
+  final val TexUv = 4
+  final val TexUv2 = 5
+  final val Custom0 = 6
+  final val Custom1 = 7
+  final val Custom2 = 8
+  final val Custom3 = 9
+  final val Bones = 10
+  final val Weights = 11
+  final val Index = 12
+  final val Max = 13
+
+  final val PrimitiveTriangles = 3L
+  final val CustomRFloat = 4L
+  final val FormatCustom0Shift = 13
+  final val FlagUse8BoneWeights = 1L << 27
+}
 
 extension (self: PackedScene)
   /** Instantiate this scene and add its root (typed as `T`) as a child of

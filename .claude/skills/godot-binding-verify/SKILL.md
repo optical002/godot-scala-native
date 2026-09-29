@@ -31,6 +31,7 @@ Run from `godot/`. Scene runs use `--quit-after N`; script runs use `--script`.
 | Script | Proves | Invocation |
 |---|---|---|
 | `verify.gd` | core registration, methods, signals, properties | `godot --headless --path . --script verify.gd` |
+| `slice_ragdoll_verify.gd` | packed arrays, mesh arrays + CUSTOM0 rebuild keeping skinning, Jolt ragdoll start/stop/subset, live-pose capture + freeze; prints `SLICE RAGDOLL VERIFY: PASS` | `--script slice_ragdoll_verify.gd` |
 | `export_verify.gd` | `@gdexport` round-trips, typed `Arr`/`Dict` defaults | `--script export_verify.gd` |
 | `export_hints_verify.gd` | export hints / ranges / enum hints reach the inspector | `--script export_hints_verify.gd` |
 | `export_comp_verify.gd` | component-reference dropdown property lists | `--script export_comp_verify.gd` |

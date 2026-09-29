@@ -42,6 +42,13 @@ The Variant marshalling seam everything above depends on.
   the element default (`""`/`0`). `DefaultValue.arrDefault` builds it typed using
   `ExportType[A].variantType`/`className`. Verified via `export_verify.gd`
   (`is_typed()` + `resize`).
+- `PackedArrays.scala` — `PackedFloat32Array`/`PackedInt32Array`/
+  `PackedVector3Array`: malloc'd 16-byte handle, caller `free()`s. Elements via
+  `packed_*_operator_index` (non-const = COW first). GOTCHAS: the engine returns
+  null for an out-of-range index (deref = segfault), so indices are checked in
+  Scala; `variant_to_type` constructors do NOT type-check, so `FromVariant`
+  checks `variant_get_type` first (wrong type = garbage read otherwise).
+- `GArray.set/variantTypeAt/isNilAt/allocate/free`; `get` bounds-checked.
 - `BuiltinMethods.scala` — caches builtin-method ptrcall pointers.
 
 ## Variant marshalling notes

@@ -22,3 +22,7 @@ config/icon="res://icon.svg"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot_scala/plugin.cfg", "res://addons/comp_enum_verify/plugin.cfg", "res://addons/hot_reload_verify/plugin.cfg")
+
+[physics]
+
+3d/physics_engine="Jolt Physics"

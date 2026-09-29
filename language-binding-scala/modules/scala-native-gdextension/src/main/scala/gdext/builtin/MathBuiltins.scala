@@ -286,8 +286,38 @@ object AABB {
 }
 
 /** Basis: a 3x3 matrix stored as three Vector3 rows. */
-final case class Basis(row0: Vector3, row1: Vector3, row2: Vector3)
+final case class Basis(row0: Vector3, row1: Vector3, row2: Vector3) {
+  def xform(v: Vector3): Vector3 = Vector3(row0.dot(v), row1.dot(v), row2.dot(v))
+
+  def transposed: Basis =
+    Basis(
+      Vector3(row0.x, row1.x, row2.x),
+      Vector3(row0.y, row1.y, row2.y),
+      Vector3(row0.z, row1.z, row2.z)
+    )
+
+  def *(o: Basis): Basis = {
+    val t = o.transposed
+    Basis(
+      Vector3(row0.dot(t.row0), row0.dot(t.row1), row0.dot(t.row2)),
+      Vector3(row1.dot(t.row0), row1.dot(t.row1), row1.dot(t.row2)),
+      Vector3(row2.dot(t.row0), row2.dot(t.row1), row2.dot(t.row2))
+    )
+  }
+
+  def determinant: Float = row0.dot(row1.cross(row2))
+
+  def inverse: Basis = {
+    val det = determinant
+    val c0 = row1.cross(row2)
+    val c1 = row2.cross(row0)
+    val c2 = row0.cross(row1)
+    Basis(c0 / det, c1 / det, c2 / det).transposed
+  }
+}
 object Basis {
+  val identity: Basis = Basis(Vector3(1f, 0f, 0f), Vector3(0f, 1f, 0f), Vector3(0f, 0f, 1f))
+
   private[gdext] def writeType(b: Basis, p: GDExtensionTypePtr): Unit = {
     val f = p.asInstanceOf[Ptr[CFloat]]
     f(0) = b.row0.x; f(1) = b.row0.y; f(2) = b.row0.z
@@ -346,8 +376,18 @@ object Transform2D {
 }
 
 /** Transform3D: a [[Basis]] and a Vector3 origin. */
-final case class Transform3D(basis: Basis, origin: Vector3)
+final case class Transform3D(basis: Basis, origin: Vector3) {
+  def xform(v: Vector3): Vector3 = basis.xform(v) + origin
+  def *(o: Transform3D): Transform3D = Transform3D(basis * o.basis, xform(o.origin))
+
+  def affineInverse: Transform3D = {
+    val inv = basis.inverse
+    Transform3D(inv, -inv.xform(origin))
+  }
+}
 object Transform3D {
+  val identity: Transform3D = Transform3D(Basis.identity, Vector3.zero)
+
   private[gdext] def writeType(t: Transform3D, p: GDExtensionTypePtr): Unit = {
     Basis.writeType(t.basis, p)
     val f = p.asInstanceOf[Ptr[CFloat]]
