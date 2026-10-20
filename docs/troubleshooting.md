@@ -23,6 +23,12 @@ Godot cannot find or load the library.
 - On Linux, `ldd godot/.scala/libscala-native-gdextension.so` lists unresolved
   dependencies. A missing `libgc.so` means Boehm GC is not installed at runtime.
 
+## `Godot classes cannot be case classes`
+
+A class that extends a Godot engine class is declared as a `case class`. The
+error lists the file and line of each one. Remove `case` to make it a plain
+`class`. See [Game classes](guides/classes.md#what-gets-registered).
+
 ## Link error: `cannot find -lgc` or `gc.h: No such file`
 
 Boehm GC is not on Clang's search path. Install it (see

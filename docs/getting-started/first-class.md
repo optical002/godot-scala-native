@@ -8,7 +8,7 @@ package game
 import gdext.api.{Gd, Tscn}
 import gdext.classes.Node2D
 
-case class HelloWorld(
+final class HelloWorld(
   var speed: Double,
   var velocity: Tscn[Node2D],
 ) extends Node2D:

@@ -29,7 +29,10 @@ file is hand-written or edited to add/remove classes. No `@godotClass` annotatio
 ## Macro: `Register.scala` (`Register.auto[T]`)
 Scans `T` at compile time and emits all registration calls:
 - Godot **base** = `T`'s first **non-trait** superclass symbol name (filter traits:
-  a `case class` also mixes in `Product`/`Serializable`, which can sort ahead).
+  mixins can sort ahead of the superclass in the linearization).
+- **No case classes**: `Flags.Case` on `T` → `errorAndAbort` (backstop; the scan
+  rejects them first). Godot objects have identity, so structural
+  `equals`/`hashCode`/`copy` are wrong. Removed in 0.1.8.
 - **virtuals** auto-detected from overrides; `knownVirtuals` = `_ready`/`_process`/
   `_physics_process` + editor ones (`_enter_tree`/`_exit_tree`/`_update_property`/
   `_can_handle`/`_parse_property`).
@@ -234,11 +237,14 @@ changes, so this recompiles the one generated file exactly when needed.)
 Registers iff: concrete `class` (not abstract/trait/object) **and** every
 primary-ctor param is constructible with no caller args — has a default **OR** is
 a `var` (the macro factory fills an un-defaulted `var` from its `DefaultValue`);
-zero-param is vacuously fine, so a class/`case class` with all-`var` params
+zero-param is vacuously fine, so a class with all-`var` params
 qualifies **and** parent chain reaches a Godot engine class, directly or via
 another harness class (abstract bases relay). (Scalameta checks
 `p.default.isDefined || Mod.VarParam`.)
 Add a class → it registers; no edits to any entry file or list.
+A `case class` (`Mod.Case`) whose parent chain reaches an engine class fails
+the build (`sys.error` listing `path:line: case class X`) instead of silently
+not registering. Case classes outside the engine hierarchy are ignored.
 
 **Engine base-class names come from the binding jar, not its sources.** The
 `gdext` build (`language-binding-scala/build.sbt`, a `Compile / resourceGenerator`)
@@ -262,8 +268,7 @@ registers only its **own** declared members (no double-registration). Example:
 `harness-scala/src/main/scala/game/{Enemy,Skeleton}.scala`, verified by
 `godot/export_verify.gd` `_check_skeleton`.
 Requirements/gotchas:
-- The base must be an **open `class`** — not `final`, not a `case class` (Scala
-  forbids extending a case class). The child forwards the base's required ctor
+- The base must be an **open `class`** — not `final`. The child forwards the base's required ctor
   args in its `extends Base(...)` clause; its own primary-ctor params must still
   all be `var`-or-defaulted so the no-arg factory works.
 - **Ordering matters.** Godot needs a parent extension class registered *before*

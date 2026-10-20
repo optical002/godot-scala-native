@@ -43,12 +43,19 @@ object Register {
     val className = sym.name
     val classNameExpr = Expr(className)
 
+    // Godot objects have identity; a case class's structural equals/hashCode/
+    // copy would be wrong for them. RegistrationScan rejects these first with
+    // the source location; this guards any other path into the macro.
+    if (sym.flags.is(Flags.Case))
+      report.errorAndAbort(
+        s"$className is a case class; Godot classes must be a plain `class`"
+      )
+
     // --- engine base class from the direct superclass --------------------
     // `class Player extends Node2D` -> the Godot parent is `Node2D`. We take the
     // first non-trait base class above T; its simple name is the engine class.
-    // Filtering out traits matters for `case class`es, which the compiler also
-    // mixes with `Product`/`Serializable` — these can sort ahead of the real
-    // superclass in the linearization.
+    // Traits mixed in after the superclass can sort ahead of it in the
+    // linearization, so they are filtered out.
     val baseName: String = {
       val supers = sym.typeRef.baseClasses
       // baseClasses lists T then its ancestors most-derived first. The first

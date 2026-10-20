@@ -22,8 +22,13 @@ import scala.collection.JavaConverters._
  * — and its parent chain reaches a Godot engine class, either directly or
  * through other classes in this module (so an abstract base extending an engine
  * class still links its concrete subclasses). A zero-param class is vacuously
- * fine; a `case class` (or plain class) whose params are all `var` thus
- * qualifies, and the macro auto-exports those `var` params.
+ * fine; a class whose params are all `var` thus qualifies, and the macro
+ * auto-exports those `var` params.
+ *
+ * A `case class` whose parent chain reaches an engine class is rejected: the
+ * scan fails the build naming each one (Godot objects have identity, so
+ * structural `equals`/`hashCode`/`copy` are wrong for them). Case classes that
+ * do not extend an engine class are ordinary game data and are ignored.
  *
  * Moved out of the consuming project (`harness-scala/project/`) into this sbt
  * plugin so downstream game projects carry no build machinery — they apply
@@ -34,6 +39,8 @@ object RegistrationScan {
   private final case class ClassInfo(
     pkg: String,
     name: String,
+    location: String,
+    isCase: Boolean,
     isAbstract: Boolean,
     allParamsConstructible: Boolean,
     parent: Option[String]
@@ -174,6 +181,20 @@ object RegistrationScan {
         case _ => 0
       }
 
+    val caseClasses =
+      classes.filter(c => c.isCase && c.parent.exists(reachesEngine(_, Set(c.name))))
+    if (caseClasses.nonEmpty)
+      sys.error(
+        caseClasses
+          .map(c => s"  ${c.location}: case class ${c.name}")
+          .mkString(
+            "[auto-register] Godot classes cannot be case classes; " +
+              "declare them as a plain `class` instead:\n",
+            "\n",
+            ""
+          )
+      )
+
     val registerable = classes
       .filter { c =>
         !c.isAbstract &&
@@ -297,6 +318,8 @@ object RegistrationScan {
           ClassInfo(
             pkg = pkg,
             name = c.name.value,
+            location = s"${c.pos.input.syntax}:${c.pos.startLine + 1}",
+            isCase = c.mods.exists(_.is[Mod.Case]),
             isAbstract = c.mods.exists(_.is[Mod.Abstract]),
             allParamsConstructible = c.ctor.paramss.forall(_.forall { p =>
               p.default.isDefined || p.mods.exists(_.is[Mod.VarParam])

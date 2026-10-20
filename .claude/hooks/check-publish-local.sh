@@ -19,7 +19,7 @@ newest_src=$(find "$mods" \( -name '*.scala' -o -name '*.sbt' -o -name '*.gd' -o
   -not -path '*/target/*' -printf '%T@\n' 2>/dev/null | sort -rn | head -1)
 
 if [ ! -d "$ivy" ]; then
-  echo "NOTE: no local publish of com.github.optical002.godot-scala-native found. Run: cd language-binding-scala && sbt publishLocal (0.1.3-SNAPSHOT) before godotBuild." >&2
+  echo "NOTE: no local publish of com.github.optical002.godot-scala-native found. Run: cd language-binding-scala && sbt publishLocal before godotBuild." >&2
   exit 0
 fi
 

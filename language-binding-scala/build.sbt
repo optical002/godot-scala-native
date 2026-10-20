@@ -35,13 +35,13 @@ inThisBuild(
 )
 
 // JitPack exports the requested tag as the VERSION env var (tags are plain
-// semver, e.g. `0.1.6`). Local builds (`sbt publishLocal`) have no VERSION and
+// semver, e.g. `0.1.8`). Local builds (`sbt publishLocal`) have no VERSION and
 // use the pinned NEXT release version, which harness-scala /
 // godot-scala-native-utilities reference for the co-development loop; it does
 // not exist on JitPack until the matching release tag is pushed, and
 // locally-published artifacts win over JitPack (the local ivy repo is consulted
 // first). Plain semver, matching godot-scala-native-utilities.
-ThisBuild / version := sys.env.getOrElse("VERSION", "0.1.6")
+ThisBuild / version := sys.env.getOrElse("VERSION", "0.1.8")
 
 // Aggregating root. It exists only to group the modules; it is never published
 // (only `gdext` and the sbt plugin are).

@@ -22,8 +22,7 @@ is an implementation detail and can change without notice.
 The `sbt-godot-scala-native` plugin scans `src/main/scala` on every compile
 and registers a class when all of these hold:
 
-- It is a concrete `class` or `case class` (not a `trait`, `object`, or
-  `abstract class`).
+- It is a concrete `class` (not a `trait`, `object`, or `abstract class`).
 - Its parent chain reaches a Godot engine class, either directly or through
   another game class.
 - Godot can construct it with no arguments: every primary-constructor parameter
@@ -31,6 +30,14 @@ and registers a class when all of these hold:
 
 There is no registration list or entry-point file to edit. Adding a class
 registers it, and deleting one unregisters it.
+
+!!! warning "No case classes"
+    A Godot class cannot be a `case class`. Godot objects have identity, so the
+    structural `equals`, `hashCode`, and `copy` that a case class generates
+    would be wrong for them. If a case class extends an engine class, directly
+    or through another game class, the build fails and names its file and line.
+    Write a plain `class` instead. Case classes that do not extend an engine
+    class, such as ordinary game data, are fine.
 
 !!! note "Why discovery happens at build time"
     Scala Native removes unreferenced classes and never runs module
@@ -114,7 +121,7 @@ class Skeleton(
 }
 ```
 
-- The base must be an open `class`, not `final` and not a `case class`.
+- The base must be an open `class`, not `final`.
 - The child forwards the base's constructor arguments in its `extends` clause.
   Its own parameters must still all be `var` or defaulted.
 - Parents are registered before children automatically.

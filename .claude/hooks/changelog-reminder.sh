@@ -24,5 +24,5 @@ if git diff --name-only HEAD 2>/dev/null | grep -q '^CHANGELOG\.md$'; then
   exit 0   # already updated — stay quiet
 fi
 
-echo "REMINDER: binding/plugin change — add an entry under the topmost '## [0.1.3-SNAPSHOT] — Unreleased' section of CHANGELOG.md." >&2
+echo "REMINDER: binding/plugin change — add an entry under the topmost *Unreleased* section of CHANGELOG.md." >&2
 exit 0

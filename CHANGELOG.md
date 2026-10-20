@@ -9,12 +9,25 @@ semver — the topmost *Unreleased* section is the version being worked toward,
 which `sbt publishLocal` produces locally and which appears on JitPack only once
 its tag is pushed.
 
-## [0.1.6] — Unreleased
+## [0.1.8] — Unreleased
+
+### Removed
+- **Breaking:** a `case class` can no longer be a Godot class. Godot objects have
+  identity, so the structural `equals`/`hashCode`/`copy` a case class generates
+  are wrong for them. `RegistrationScan` now fails the build, naming the file
+  and line of every case class whose parent chain reaches an engine class, and
+  `Register.auto` rejects one with a compile error. Declare these as a plain
+  `class`. Case classes that do not extend an engine class (ordinary game data)
+  are unaffected.
 
 ### Added
 - Documentation site on GitHub Pages (MkDocs Material, `docs/`): getting
   started, guides, sbt plugin reference, troubleshooting, and the binding's
   Scaladoc under `/api/`. Deployed by `.github/workflows/docs.yml`.
+
+## [0.1.7] — 2026-09-29
+
+### Added
 - `PackedFloat32Array`, `PackedInt32Array`, `PackedVector3Array` (`gdext.builtin`):
   heap-owned packed arrays with `size`/`resize`/`apply`/`update`/`free` and
   `ToVariant`/`FromVariant`. Element access uses the `packed_*_operator_index`
@@ -40,6 +53,10 @@ its tag is pushed.
 ### Changed
 - `Ptrcall` dispatchers throw `IllegalStateException` when a method bind is
   null (wrong hash / missing method) instead of handing it to the engine.
+
+## [0.1.6] — 2026-07-18
+
+### Changed
 - `RegistrationScan` no longer emits a repo-local documentation path into the
   generated `GeneratedRegistrations.scala` header. The comment pointed at a file
   under this repo's `.claude/` directory, which does not exist in consumer
@@ -65,6 +82,20 @@ Released without a changelog entry at the time; reconstructed from git history.
 
 ### Changed
 - Verbose tracing is gated behind a `.scala/trace` file (default off).
+
+## [0.1.3] — 2026-07-12
+
+Diagnostic release for the Windows `godot_scala_init` crash, tagged without a
+changelog entry at the time; reconstructed from git history.
+
+### Changed
+- `.scala/log` is verbose by default and records the init stack trace on
+  failure (made opt-in again in `0.1.4`).
+- The trace prefix no longer calls the Linux-only `gettid`, so logging works the
+  same on Windows, macOS and Linux.
+- Unconditional log markers around each init call, to locate the crash.
+- `install-toolchain.ps1`: `Ensure-BoehmGc` tolerates empty-string `Path`
+  entries; the Boehm GC step is documented as a known Windows limitation.
 
 ## [0.1.2] — 2026-07-12
 
