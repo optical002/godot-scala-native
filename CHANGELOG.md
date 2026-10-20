@@ -9,7 +9,7 @@ semver — the topmost *Unreleased* section is the version being worked toward,
 which `sbt publishLocal` produces locally and which appears on JitPack only once
 its tag is pushed.
 
-## [0.1.8] — Unreleased
+## [0.1.8] — 2026-10-20
 
 ### Removed
 - **Breaking:** a `case class` can no longer be a Godot class. Godot objects have
