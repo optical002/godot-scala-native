@@ -1,21 +1,29 @@
 # godot-scala-native
 
 [![Release](https://img.shields.io/jitpack/version/com.github.optical002/godot-scala-native?label=release&color=brightgreen)](https://jitpack.io/#optical002/godot-scala-native)
+[![Docs](https://img.shields.io/badge/docs-github%20pages-blue)](https://optical002.github.io/godot-scala-native/)
 
 A Scala Native language binding for [Godot](https://godotengine.org/) (a
 GDExtension), targeting gdext-level sophistication. Write your game classes in
 Scala, extend Godot engine classes directly, and they are auto-registered —
 compiled to a native library via [Scala Native](https://scala-native.org/).
 
+## Documentation
+
+**[optical002.github.io/godot-scala-native](https://optical002.github.io/godot-scala-native/)**
+— getting started, guides (classes, exports, signals, hot reload), the sbt
+plugin reference, troubleshooting, and the Scaladoc API.
+
 ## Quick start
 
 Use the [giter8 template](https://github.com/optical002/godot-scala-native-template.g8)
-— it scaffolds a ready-to-run Godot 4 + Scala project and carries the full
-instructions:
+— it scaffolds a ready-to-run Godot 4 + Scala project:
 
 ```sh
 sbt new optical002/godot-scala-native-template.g8
 ```
+
+Then follow [Create a project](https://optical002.github.io/godot-scala-native/getting-started/new-project/).
 
 ## Build dependencies
 
@@ -59,8 +67,8 @@ the command is safe to re-run. VS C++ Build Tools may prompt for admin.
 > where the `.dll` build is confirmed.
 
 On **Linux/macOS**, install the toolchain from the table via your package
-manager (see [`BUILD.md`](BUILD.md) and the Scala Native
-[setup guide](https://scala-native.org/en/stable/user/setup.html)).
+manager (see [Install the toolchain](https://optical002.github.io/godot-scala-native/getting-started/install/)
+and the Scala Native [setup guide](https://scala-native.org/en/stable/user/setup.html)).
 
 ## Artifacts
 

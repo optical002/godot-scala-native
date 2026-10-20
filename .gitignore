@@ -48,3 +48,5 @@ out/
 godot/godot-init
 godot/godot-init-prev
 godot/reload.stamp
+# MkDocs build output
+site/

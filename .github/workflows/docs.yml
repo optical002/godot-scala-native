@@ -1,0 +1,70 @@
+name: docs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - "mkdocs.yml"
+      - "CHANGELOG.md"
+      - "language-binding-scala/**"
+      - ".github/workflows/docs.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: sbt
+
+      - uses: sbt/setup-sbt@v1
+
+      # Scaladoc for the binding. VERSION must stay unset: build.sbt empties the
+      # doc sources when it is present (the JitPack release path). .sbtopts in
+      # language-binding-scala supplies the 6 GB heap scaladoc needs.
+      - name: Scaladoc
+        working-directory: language-binding-scala
+        run: sbt gdext/doc
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: docs/requirements.txt
+
+      - name: Build site
+        run: |
+          pip install -r docs/requirements.txt
+          mkdocs build --strict
+          cp -r language-binding-scala/modules/scala-native-gdextension/target/scala-3.8.1/api site/api
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

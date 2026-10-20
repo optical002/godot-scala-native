@@ -12,6 +12,9 @@ its tag is pushed.
 ## [0.1.6] — Unreleased
 
 ### Added
+- Documentation site on GitHub Pages (MkDocs Material, `docs/`): getting
+  started, guides, sbt plugin reference, troubleshooting, and the binding's
+  Scaladoc under `/api/`. Deployed by `.github/workflows/docs.yml`.
 - `PackedFloat32Array`, `PackedInt32Array`, `PackedVector3Array` (`gdext.builtin`):
   heap-owned packed arrays with `size`/`resize`/`apply`/`update`/`free` and
   `ToVariant`/`FromVariant`. Element access uses the `packed_*_operator_index`
