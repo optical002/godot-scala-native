@@ -9,7 +9,7 @@ semver — the topmost *Unreleased* section is the version being worked toward,
 which `sbt publishLocal` produces locally and which appears on JitPack only once
 its tag is pushed.
 
-## [0.1.9] — Unreleased
+## [0.1.9] — 2026-10-21
 
 Memory and performance release. The Scala heap stays untouched on the engine
 call path, `RefCounted` lifetimes are deterministic and leak-checked, and the
