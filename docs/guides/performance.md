@@ -28,6 +28,15 @@ bytes and time per operation over 20 000 calls (Linux x86_64, Godot 4.6.1).
 A call that returns a math value allocates exactly that value (a `Vector3` is
 32 bytes, a `Transform3D` 64). Nothing else on these paths allocates.
 
+Not yet allocation-free:
+
+- Reading or writing an exported property from GDScript (`node.speed`,
+  `node.speed = 3`) allocates on each access: 64 bytes for a `Long`, about
+  200 bytes to set a `String`. `@func` methods called from GDScript allocate
+  nothing. Prefer a `@func` for values GDScript reads every frame.
+- Building a `String` returned from an engine call allocates the `String`.
+- `debug` builds box some pointers (see the table above).
+
 ## How
 
 - **Cached method binds.** Each engine method resolves its `MethodBind` once
@@ -45,9 +54,10 @@ A call that returns a math value allocates exactly that value (a `Vector3` is
   that take plain integers, not through closures that box each argument.
 - **Native math.** All 367 methods of the 16 math types, plus their operators
   and constants, are ported from Godot's `core/math`. A generated test
-  (`godot/math_parity_verify.gd`) checks every one against the engine on
-  random inputs. `Basis`, `Transform2D`, `Transform3D`, and `Projection` are
-  stored flat, so a value is one object rather than four to six.
+  (`godot/math_parity_verify.gd`, 604 checks over every method, member, and
+  operator) compares each one with the engine on 25 random inputs. `Basis`,
+  `Transform2D`, `Transform3D`, and `Projection` are stored flat, so a value
+  is one object rather than four to six.
 - **Optimized builds.** Projects build with Scala Native's optimizer
   (`releaseFast`) by default. The optimizer inlines the small operations and
   removes temporary objects, which is why `debug` builds allocate more.
