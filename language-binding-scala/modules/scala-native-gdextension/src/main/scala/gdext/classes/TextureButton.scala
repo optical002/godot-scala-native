@@ -4,89 +4,153 @@ import gdext.Godot
 import gdext.builtin.*
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
+import gdext.internal.ffi.types.GDExtensionMethodBindPtr
 
 /** Generated wrapper for Godot's `TextureButton`, extends `BaseButton`. */
 abstract class TextureButton extends BaseButton {
   override def godotClassName: String = "TextureButton"
 
   /** TextureButton.set_texture_normal */
-  final def setTextureNormal(texture: Texture2D): Unit =
-    Ptrcall.callVoid1(MethodBind.get("TextureButton", "set_texture_normal", 4051416890L), hostObject.objectPtr, texture.hostObject)
+  final def setTextureNormal(texture: Texture2D): Unit = {
+    if (gdext.classes.TextureButton.mb_set_texture_normal == null) gdext.classes.TextureButton.mb_set_texture_normal = MethodBind.get("TextureButton", "set_texture_normal", 4051416890L)
+    Ptrcall.callVoid1(gdext.classes.TextureButton.mb_set_texture_normal, livePtr, Wrappers.handle(texture))
+  }
 
   /** TextureButton.set_texture_pressed */
-  final def setTexturePressed(texture: Texture2D): Unit =
-    Ptrcall.callVoid1(MethodBind.get("TextureButton", "set_texture_pressed", 4051416890L), hostObject.objectPtr, texture.hostObject)
+  final def setTexturePressed(texture: Texture2D): Unit = {
+    if (gdext.classes.TextureButton.mb_set_texture_pressed == null) gdext.classes.TextureButton.mb_set_texture_pressed = MethodBind.get("TextureButton", "set_texture_pressed", 4051416890L)
+    Ptrcall.callVoid1(gdext.classes.TextureButton.mb_set_texture_pressed, livePtr, Wrappers.handle(texture))
+  }
 
   /** TextureButton.set_texture_hover */
-  final def setTextureHover(texture: Texture2D): Unit =
-    Ptrcall.callVoid1(MethodBind.get("TextureButton", "set_texture_hover", 4051416890L), hostObject.objectPtr, texture.hostObject)
+  final def setTextureHover(texture: Texture2D): Unit = {
+    if (gdext.classes.TextureButton.mb_set_texture_hover == null) gdext.classes.TextureButton.mb_set_texture_hover = MethodBind.get("TextureButton", "set_texture_hover", 4051416890L)
+    Ptrcall.callVoid1(gdext.classes.TextureButton.mb_set_texture_hover, livePtr, Wrappers.handle(texture))
+  }
 
   /** TextureButton.set_texture_disabled */
-  final def setTextureDisabled(texture: Texture2D): Unit =
-    Ptrcall.callVoid1(MethodBind.get("TextureButton", "set_texture_disabled", 4051416890L), hostObject.objectPtr, texture.hostObject)
+  final def setTextureDisabled(texture: Texture2D): Unit = {
+    if (gdext.classes.TextureButton.mb_set_texture_disabled == null) gdext.classes.TextureButton.mb_set_texture_disabled = MethodBind.get("TextureButton", "set_texture_disabled", 4051416890L)
+    Ptrcall.callVoid1(gdext.classes.TextureButton.mb_set_texture_disabled, livePtr, Wrappers.handle(texture))
+  }
 
   /** TextureButton.set_texture_focused */
-  final def setTextureFocused(texture: Texture2D): Unit =
-    Ptrcall.callVoid1(MethodBind.get("TextureButton", "set_texture_focused", 4051416890L), hostObject.objectPtr, texture.hostObject)
+  final def setTextureFocused(texture: Texture2D): Unit = {
+    if (gdext.classes.TextureButton.mb_set_texture_focused == null) gdext.classes.TextureButton.mb_set_texture_focused = MethodBind.get("TextureButton", "set_texture_focused", 4051416890L)
+    Ptrcall.callVoid1(gdext.classes.TextureButton.mb_set_texture_focused, livePtr, Wrappers.handle(texture))
+  }
 
   /** TextureButton.set_click_mask */
-  final def setClickMask(mask: BitMap): Unit =
-    Ptrcall.callVoid1(MethodBind.get("TextureButton", "set_click_mask", 698588216L), hostObject.objectPtr, mask.hostObject)
+  final def setClickMask(mask: BitMap): Unit = {
+    if (gdext.classes.TextureButton.mb_set_click_mask == null) gdext.classes.TextureButton.mb_set_click_mask = MethodBind.get("TextureButton", "set_click_mask", 698588216L)
+    Ptrcall.callVoid1(gdext.classes.TextureButton.mb_set_click_mask, livePtr, Wrappers.handle(mask))
+  }
 
   /** TextureButton.set_ignore_texture_size */
-  final def setIgnoreTextureSize(ignore: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("TextureButton", "set_ignore_texture_size", 2586408642L), hostObject.objectPtr, ignore)
+  final def setIgnoreTextureSize(ignore: Boolean): Unit = {
+    if (gdext.classes.TextureButton.mb_set_ignore_texture_size == null) gdext.classes.TextureButton.mb_set_ignore_texture_size = MethodBind.get("TextureButton", "set_ignore_texture_size", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.TextureButton.mb_set_ignore_texture_size, livePtr, ignore)
+  }
 
   /** TextureButton.set_stretch_mode */
-  final def setStretchMode(mode: Long): Unit =
-    Ptrcall.callVoid1(MethodBind.get("TextureButton", "set_stretch_mode", 252530840L), hostObject.objectPtr, mode)
+  final def setStretchMode(mode: Long): Unit = {
+    if (gdext.classes.TextureButton.mb_set_stretch_mode == null) gdext.classes.TextureButton.mb_set_stretch_mode = MethodBind.get("TextureButton", "set_stretch_mode", 252530840L)
+    Ptrcall.callVoid1(gdext.classes.TextureButton.mb_set_stretch_mode, livePtr, mode)
+  }
 
   /** TextureButton.set_flip_h */
-  final def setFlipH(enable: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("TextureButton", "set_flip_h", 2586408642L), hostObject.objectPtr, enable)
+  final def setFlipH(enable: Boolean): Unit = {
+    if (gdext.classes.TextureButton.mb_set_flip_h == null) gdext.classes.TextureButton.mb_set_flip_h = MethodBind.get("TextureButton", "set_flip_h", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.TextureButton.mb_set_flip_h, livePtr, enable)
+  }
 
   /** TextureButton.is_flipped_h */
-  final def isFlippedH(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("TextureButton", "is_flipped_h", 36873697L), hostObject.objectPtr)
+  final def isFlippedH(): Boolean = {
+    if (gdext.classes.TextureButton.mb_is_flipped_h == null) gdext.classes.TextureButton.mb_is_flipped_h = MethodBind.get("TextureButton", "is_flipped_h", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.TextureButton.mb_is_flipped_h, livePtr)
+  }
 
   /** TextureButton.set_flip_v */
-  final def setFlipV(enable: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("TextureButton", "set_flip_v", 2586408642L), hostObject.objectPtr, enable)
+  final def setFlipV(enable: Boolean): Unit = {
+    if (gdext.classes.TextureButton.mb_set_flip_v == null) gdext.classes.TextureButton.mb_set_flip_v = MethodBind.get("TextureButton", "set_flip_v", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.TextureButton.mb_set_flip_v, livePtr, enable)
+  }
 
   /** TextureButton.is_flipped_v */
-  final def isFlippedV(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("TextureButton", "is_flipped_v", 36873697L), hostObject.objectPtr)
+  final def isFlippedV(): Boolean = {
+    if (gdext.classes.TextureButton.mb_is_flipped_v == null) gdext.classes.TextureButton.mb_is_flipped_v = MethodBind.get("TextureButton", "is_flipped_v", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.TextureButton.mb_is_flipped_v, livePtr)
+  }
 
-  /** TextureButton.get_texture_normal */
-  final def getTextureNormal(): GodotObject =
-    Ptrcall.call0[GodotObject](MethodBind.get("TextureButton", "get_texture_normal", 3635182373L), hostObject.objectPtr)
+  /** TextureButton.get_texture_normal. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
+  final def getTextureNormal(): Texture2D = {
+    if (gdext.classes.TextureButton.mb_get_texture_normal == null) gdext.classes.TextureButton.mb_get_texture_normal = MethodBind.get("TextureButton", "get_texture_normal", 3635182373L)
+    Wrappers.owned[Texture2D](Ptrcall.call0[Long](gdext.classes.TextureButton.mb_get_texture_normal, livePtr))
+  }
 
-  /** TextureButton.get_texture_pressed */
-  final def getTexturePressed(): GodotObject =
-    Ptrcall.call0[GodotObject](MethodBind.get("TextureButton", "get_texture_pressed", 3635182373L), hostObject.objectPtr)
+  /** TextureButton.get_texture_pressed. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
+  final def getTexturePressed(): Texture2D = {
+    if (gdext.classes.TextureButton.mb_get_texture_pressed == null) gdext.classes.TextureButton.mb_get_texture_pressed = MethodBind.get("TextureButton", "get_texture_pressed", 3635182373L)
+    Wrappers.owned[Texture2D](Ptrcall.call0[Long](gdext.classes.TextureButton.mb_get_texture_pressed, livePtr))
+  }
 
-  /** TextureButton.get_texture_hover */
-  final def getTextureHover(): GodotObject =
-    Ptrcall.call0[GodotObject](MethodBind.get("TextureButton", "get_texture_hover", 3635182373L), hostObject.objectPtr)
+  /** TextureButton.get_texture_hover. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
+  final def getTextureHover(): Texture2D = {
+    if (gdext.classes.TextureButton.mb_get_texture_hover == null) gdext.classes.TextureButton.mb_get_texture_hover = MethodBind.get("TextureButton", "get_texture_hover", 3635182373L)
+    Wrappers.owned[Texture2D](Ptrcall.call0[Long](gdext.classes.TextureButton.mb_get_texture_hover, livePtr))
+  }
 
-  /** TextureButton.get_texture_disabled */
-  final def getTextureDisabled(): GodotObject =
-    Ptrcall.call0[GodotObject](MethodBind.get("TextureButton", "get_texture_disabled", 3635182373L), hostObject.objectPtr)
+  /** TextureButton.get_texture_disabled. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
+  final def getTextureDisabled(): Texture2D = {
+    if (gdext.classes.TextureButton.mb_get_texture_disabled == null) gdext.classes.TextureButton.mb_get_texture_disabled = MethodBind.get("TextureButton", "get_texture_disabled", 3635182373L)
+    Wrappers.owned[Texture2D](Ptrcall.call0[Long](gdext.classes.TextureButton.mb_get_texture_disabled, livePtr))
+  }
 
-  /** TextureButton.get_texture_focused */
-  final def getTextureFocused(): GodotObject =
-    Ptrcall.call0[GodotObject](MethodBind.get("TextureButton", "get_texture_focused", 3635182373L), hostObject.objectPtr)
+  /** TextureButton.get_texture_focused. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
+  final def getTextureFocused(): Texture2D = {
+    if (gdext.classes.TextureButton.mb_get_texture_focused == null) gdext.classes.TextureButton.mb_get_texture_focused = MethodBind.get("TextureButton", "get_texture_focused", 3635182373L)
+    Wrappers.owned[Texture2D](Ptrcall.call0[Long](gdext.classes.TextureButton.mb_get_texture_focused, livePtr))
+  }
 
-  /** TextureButton.get_click_mask */
-  final def getClickMask(): GodotObject =
-    Ptrcall.call0[GodotObject](MethodBind.get("TextureButton", "get_click_mask", 2459671998L), hostObject.objectPtr)
+  /** TextureButton.get_click_mask. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
+  final def getClickMask(): BitMap = {
+    if (gdext.classes.TextureButton.mb_get_click_mask == null) gdext.classes.TextureButton.mb_get_click_mask = MethodBind.get("TextureButton", "get_click_mask", 2459671998L)
+    Wrappers.owned[BitMap](Ptrcall.call0[Long](gdext.classes.TextureButton.mb_get_click_mask, livePtr))
+  }
 
   /** TextureButton.get_ignore_texture_size */
-  final def getIgnoreTextureSize(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("TextureButton", "get_ignore_texture_size", 36873697L), hostObject.objectPtr)
+  final def getIgnoreTextureSize(): Boolean = {
+    if (gdext.classes.TextureButton.mb_get_ignore_texture_size == null) gdext.classes.TextureButton.mb_get_ignore_texture_size = MethodBind.get("TextureButton", "get_ignore_texture_size", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.TextureButton.mb_get_ignore_texture_size, livePtr)
+  }
 
   /** TextureButton.get_stretch_mode */
-  final def getStretchMode(): Long =
-    Ptrcall.call0[Long](MethodBind.get("TextureButton", "get_stretch_mode", 33815122L), hostObject.objectPtr)
+  final def getStretchMode(): Long = {
+    if (gdext.classes.TextureButton.mb_get_stretch_mode == null) gdext.classes.TextureButton.mb_get_stretch_mode = MethodBind.get("TextureButton", "get_stretch_mode", 33815122L)
+    Ptrcall.call0[Long](gdext.classes.TextureButton.mb_get_stretch_mode, livePtr)
+  }
 
+}
+
+object TextureButton {
+  private[classes] var mb_set_texture_normal: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_texture_pressed: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_texture_hover: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_texture_disabled: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_texture_focused: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_click_mask: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_ignore_texture_size: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_stretch_mode: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_flip_h: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_flipped_h: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_flip_v: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_flipped_v: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_texture_normal: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_texture_pressed: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_texture_hover: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_texture_disabled: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_texture_focused: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_click_mask: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_ignore_texture_size: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_stretch_mode: GDExtensionMethodBindPtr = null
 }

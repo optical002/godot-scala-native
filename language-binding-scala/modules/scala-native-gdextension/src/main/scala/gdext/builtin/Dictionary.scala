@@ -67,7 +67,7 @@ object Dictionary {
 
   /** Construct an empty Dictionary into caller storage. */
   def empty(dest: GDExtensionTypePtr): Dictionary = {
-    val ctor = Godot.interface.variant_get_ptr_constructor(
+    val ctor = VariantConstructors.constructor(
       GDEXTENSION_VARIANT_TYPE_DICTIONARY,
       0
     )

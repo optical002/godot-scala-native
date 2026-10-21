@@ -13,14 +13,13 @@ import scala.io.Source
  * base [[gdext.register.GodotScriptClass]] that carries the
  * engine-object handle and the overridable virtuals.
  *
- * Methods dispatch through `Ptrcall` using `hostObject` (the instance's engine
- * handle). Object-typed returns yield the raw `GodotObject` handle (a concrete
- * typed wrapper cannot be instantiated for an abstract class); object-typed
- * arguments accept the abstract base and pass its handle.
- *
- * Scope: a curated allowlist (closure of a few gameplay classes + the Engine
- * singleton). Lifting [[allowlist]] generates more; unmappable methods are
- * skipped, never broken-emitted.
+ * Methods dispatch through the inline `Ptrcall` dispatchers with a method bind
+ * cached in a companion field, so a call allocates nothing. Object-typed
+ * returns yield the typed wrapper (via `Wrappers`, one wrapper per engine
+ * object); `Ref<T>` returns (classes under `RefCounted`) are owned by the
+ * caller. Static methods live in the companion. `ClassFactory` maps a class
+ * name to a fresh wrapper. Unmappable methods are skipped, never
+ * broken-emitted.
  */
 object EngineClassGenerator {
   def run(jsonPath: String, codeGenPath: String): Unit = {
@@ -40,12 +39,13 @@ object EngineClassGenerator {
       .toMap
 
     val toGenerate: Set[String] = byName.keySet
+    val refCounted = refCountedClasses(byName)
 
     val files = toGenerate.toVector.sorted.flatMap { name =>
-      generateClass(name, byName, toGenerate, singletonLookup).map(content =>
-        ScalaFile(name, content)
+      generateClass(name, byName, toGenerate, refCounted, singletonLookup).map(
+        content => ScalaFile(name, content)
       )
-    }
+    } :+ ScalaFile("ClassFactory", generateFactory(toGenerate.toVector.sorted))
     write(files, codeGenPath)
     println(s"Generated ${files.size} engine classes into $codeGenPath")
   }
@@ -78,21 +78,6 @@ object EngineClassGenerator {
     "Projection"  -> s"$bp.Projection"
   )
 
-  /** Per-method typed-return overrides, keyed by `(declaringClass, godotMethod)`.
-    *
-    * Object-typed returns default to the raw `GodotObject` handle (see the file
-    * header) because a wrapper can't be instantiated for an abstract class in
-    * general. But a handful of methods have a single, stable concrete return
-    * type that callers always re-wrap by hand — `Node.get_tree` always yields a
-    * `SceneTree`. For those we emit the typed wrapper directly (via the
-    * macro-derived `ClassMeta`), so call sites need no `Gd.wrap`.
-    *
-    * The value must be a generated engine class (it is wrapped through
-    * `ClassMeta.fromHandle`); a null handle wraps to a null `T`. */
-  val returnOverrides: Map[(String, String), String] = Map(
-    ("Node", "get_tree") -> "SceneTree"
-  )
-
   /** Enums and bitfields cross the ptrcall boundary as int64. */
   def isEnumLike(t: String): Boolean =
     t.startsWith("enum::") || t.startsWith("bitfield::")
@@ -103,12 +88,24 @@ object EngineClassGenerator {
     else if (generated.contains(godotType)) Some(godotType)
     else None
 
+  /** Classes at or below `RefCounted`: their returns are `Ref<T>` (owned). */
+  def refCountedClasses(byName: Map[String, ujson.Value]): Set[String] = {
+    def isRc(n: String): Boolean =
+      n == "RefCounted" ||
+        byName.get(n).flatMap(_.obj.get("inherits")).map(_.str).exists(isRc)
+    byName.keySet.filter(isRc)
+  }
+
   // --- emission -----------------------------------------------------------
+
+  /** One emitted method: its source, its bind-field name, whether static. */
+  case class Emitted(source: String, bindVar: String, isStatic: Boolean)
 
   def generateClass(
     name: String,
     byName: Map[String, ujson.Value],
     generated: Set[String],
+    refCounted: Set[String],
     singletonLookup: Map[String, String],
   ): Option[String] = byName.get(name).map { cls =>
     val parent = cls.obj.get("inherits").map(_.str)
@@ -118,8 +115,13 @@ object EngineClassGenerator {
     val methods =
       cls.obj.get("methods").map(_.arr.toVector).getOrElse(Vector.empty)
 
-    val methodDefs = methods.flatMap { m =>
-      emitMethod(name, m, generated)
+    val emitted = methods.flatMap(m => emitMethod(name, m, generated, refCounted))
+    val methodDefs = emitted.filterNot(_.isStatic).map(_.source).mkString
+    val staticDefs = emitted.filter(_.isStatic).map(_.source).mkString
+
+    // One cached MethodBind per emitted method, resolved on first call.
+    val bindVars = emitted.map { e =>
+      s"  private[classes] var ${e.bindVar}: GDExtensionMethodBindPtr = null\n"
     }.mkString
 
     // The superclass clause: extend the Godot parent, or (at the root) the
@@ -133,21 +135,22 @@ object EngineClassGenerator {
       if (isSingleton) {
         val lookup = singletonLookup(name)
         s"""
+           |  private var instance: $name = null
+           |
            |  /** The process-global $name singleton instance. */
-           |  def singleton: $name = new $name {}
-           |    .withHost(Godot.interface.global_get_singleton(
-           |      StringNames.cached("$lookup").ptr))
+           |  def singleton: $name = {
+           |    if (instance == null)
+           |      instance = Wrappers.borrowed[$name](GodotObject.fromPtr(
+           |        Godot.interface.global_get_singleton(StringNames.cached("$lookup").ptr)))
+           |    instance
+           |  }
            |""".stripMargin
       } else ""
 
-    // The class name is baked into an override so it survives DCE without any
-    // typeclass; the macro-derived `ClassMeta[$name]` covers wrap/cast/construct,
-    // and `isRefCounted` is now a runtime `isInstanceOf[RefCounted]` check, so no
-    // per-class given is emitted. A companion object is emitted only when there is
-    // a singleton accessor to hold.
     val companionDef =
-      if (singletonDef.nonEmpty) s"""
-         |object $name {$singletonDef}
+      if (singletonDef.nonEmpty || bindVars.nonEmpty) s"""
+         |object $name {
+         |$bindVars$singletonDef$staticDefs}
          |""".stripMargin
       else ""
 
@@ -157,6 +160,7 @@ object EngineClassGenerator {
        |import gdext.builtin.*
        |import gdext.internal.engine.*
        |import gdext.internal.engine.GodotObject.*
+       |import gdext.internal.ffi.types.GDExtensionMethodBindPtr
        |
        |/** Generated wrapper for Godot's `$name`${parent.map(p => s", extends `$p`").getOrElse("")}. */
        |abstract class $name extends $extendsClause {
@@ -166,12 +170,34 @@ object EngineClassGenerator {
        |$companionDef""".stripMargin
   }
 
+  /**
+   * The wrapper factory: Godot class name -> a fresh wrapper of that class.
+   * `Wrappers` uses it the first time it sees an engine object, so every
+   * wrapper is of the object's most-derived generated class.
+   */
+  def generateFactory(names: Vector[String]): String = {
+    val cases = names.map(n => s"""    case "$n" => new $n {}""").mkString("\n")
+    s"""package gdext.classes
+       |
+       |import gdext.internal.register.GodotScriptClass
+       |
+       |/** Generated: a wrapper of the named engine class, or null if unknown. */
+       |private[gdext] object ClassFactory {
+       |  def create(className: String): GodotScriptClass = className match {
+       |$cases
+       |    case _ => null
+       |  }
+       |}
+       |""".stripMargin
+  }
+
   /** Emit one method, or None if any arg/return type is unsupported. */
   def emitMethod(
     declClass: String,
     m: ujson.Value,
-    generated: Set[String]
-  ): Option[String] = {
+    generated: Set[String],
+    refCounted: Set[String]
+  ): Option[Emitted] = {
     val mname = m("name").str
     val universal =
       Set("getClass", "toString", "hashCode", "equals", "clone", "notify",
@@ -182,7 +208,7 @@ object EngineClassGenerator {
     val isVirtual = m.obj.get("is_virtual").exists(_.bool)
     val hash = m.obj.get("hash").map(_.num.toLong)
 
-    if (isVararg || isStatic || isVirtual || hash.isEmpty) return None
+    if (isVararg || isVirtual || hash.isEmpty) return None
 
     val args = m.obj.get("arguments").map(_.arr.toVector).getOrElse(Vector.empty)
     if (args.size > 6) return None // Ptrcall has fixed-arity dispatchers up to 6
@@ -203,34 +229,21 @@ object EngineClassGenerator {
     val scalaName = sanitize(methodName(mname))
     val paramList = mappedArgs.map { case (n, t, _) => s"$n: $t" }.mkString(", ")
 
-    // Object-typed args pass their engine handle; object-typed returns yield
-    // the raw GodotObject (abstract classes can't be instantiated here).
+    // Object-typed args pass their engine handle (null passes a null handle).
     def toPtrArg(n: String, godotT: String): String =
-      if (isGeneratedObject(godotT)) s"$n.hostObject" else n
+      if (isGeneratedObject(godotT)) s"Wrappers.handle($n)" else n
 
-    val bindExpr =
-      s"""MethodBind.get("$declClass", "$mname", ${hash.get}L)"""
-    val instance = "hostObject.objectPtr"
+    val bindVar = s"mb_$mname"
+    val bindExpr = s"gdext.classes.$declClass.$bindVar"
+    val bindInit =
+      s"""if ($bindExpr == null) $bindExpr = MethodBind.get("$declClass", "$mname", ${hash.get}L)"""
+    // A wrapper whose engine object was freed throws instead of crashing.
+    val instance =
+      if (isStatic) "null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr]"
+      else "livePtr"
 
-    // A curated typed-return override wins over the raw-handle default, but only
-    // when the raw return is actually a generated object (so it has a handle to
-    // wrap and a derivable `ClassMeta`).
-    val overrideType =
-      returnOverrides.get((declClass, mname)).filter(_ =>
-        retTypeRaw.exists(isGeneratedObject))
+    val retSig = retType.getOrElse("Unit")
 
-    // Object returns become GodotObject in the signature, unless overridden to a
-    // concrete wrapper type.
-    val retSig =
-      overrideType.getOrElse(
-        retTypeRaw match {
-          case Some(rt) if isGeneratedObject(rt) => "GodotObject"
-          case _                                 => retType.getOrElse("Unit")
-        }
-      )
-
-    // Build the dispatch call uniformly for arity 0..6. Void calls let arg types
-    // infer; value-returning calls pass explicit [argTypes..., R] type params.
     val n        = mappedArgs.size
     val argExprs = mappedArgs.map(a => toPtrArg(a._1, a._3))
     val argTail  = if (argExprs.isEmpty) "" else ", " + argExprs.mkString(", ")
@@ -242,26 +255,43 @@ object EngineClassGenerator {
         s"Ptrcall.call$n[$typeParams]($bindExpr, $instance$argTail)"
     }
 
-    // For a typed-return override, wrap the raw `GodotObject` handle into the
-    // concrete wrapper via the macro-derived `ClassMeta` (null handle -> null T).
-    val bodyExpr = overrideType match {
-      case Some(t) =>
-        s"summon[gdext.internal.engine.ClassMeta[$t]].fromHandle(($callExpr).objectPtr)"
-      case None => callExpr
+    // Object returns become the typed wrapper. A `Ref<T>` return carries a
+    // reference the caller now owns; a plain `Object*` return is borrowed.
+    val bodyExpr = retTypeRaw match {
+      case Some(rt) if isGeneratedObject(rt) && refCounted.contains(rt) =>
+        s"Wrappers.owned[$rt]($callExpr)"
+      case Some(rt) if isGeneratedObject(rt) =>
+        s"Wrappers.borrowed[$rt]($callExpr)"
+      case _ => callExpr
+    }
+
+    val doc = retTypeRaw match {
+      case Some(rt) if isGeneratedObject(rt) && refCounted.contains(rt) =>
+        s"${declClass}.$mname. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`."
+      case _ => s"${declClass}.$mname"
     }
 
     Some(
-      s"""
-         |  /** ${declClass}.$mname */
-         |  final def $scalaName($paramList): $retSig =
-         |    $bodyExpr
-         |""".stripMargin
+      Emitted(
+        s"""
+           |  /** $doc */
+           |  final def $scalaName($paramList): $retSig = {
+           |    $bindInit
+           |    $bodyExpr
+           |  }
+           |""".stripMargin,
+        bindVar,
+        isStatic
+      )
     )
   }
 
-  /** The Ptrcall return type param: object returns go through GodotObject. */
+  /**
+   * The Ptrcall return type param. Object returns are read as the pointer's
+   * address (`Long`), which `Wrappers` resolves without boxing a `Ptr`.
+   */
   def callRet(godotT: String): String =
-    if (isGeneratedObject(godotT)) "GodotObject" else mapScalar(godotT)
+    if (isGeneratedObject(godotT)) "Long" else mapScalar(godotT)
 
   /** The Ptrcall arg type param: object args go through GodotObject. */
   def ptrArgType(arg: (String, String, String)): String =

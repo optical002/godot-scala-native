@@ -71,7 +71,18 @@ object PropertyRegistration {
         s"hint=$effHint hintString='$effHintString' className='${et.className}' usage=$effUsage"
     )
     MethodRegistration.registerExportGetter(className, getter, get)
-    MethodRegistration.registerExportSetter(className, setter, set)
+    // A value that owns engine references (a resource, a scene, an Arr/Dict
+    // handle) is released when it is replaced and when the instance is freed.
+    val effSet: (GodotScriptClass, A) => Unit =
+      if (!et.holdsReferences) set
+      else { (inst, v) =>
+        val old = get(inst)
+        set(inst, v)
+        if (old.asInstanceOf[AnyRef] ne v.asInstanceOf[AnyRef]) et.release(old)
+      }
+    MethodRegistration.registerExportSetter(className, setter, effSet)
+    if (et.holdsReferences)
+      ClassRegistry.addExportReleaser(className, inst => et.release(get(inst)))
 
     val info = MethodRegistration.propertyInfo(
       et.variantType,

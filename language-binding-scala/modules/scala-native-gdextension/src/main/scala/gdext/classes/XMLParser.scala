@@ -4,73 +4,125 @@ import gdext.Godot
 import gdext.builtin.*
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
+import gdext.internal.ffi.types.GDExtensionMethodBindPtr
 
 /** Generated wrapper for Godot's `XMLParser`, extends `RefCounted`. */
 abstract class XMLParser extends RefCounted {
   override def godotClassName: String = "XMLParser"
 
   /** XMLParser.read */
-  final def read(): Long =
-    Ptrcall.call0[Long](MethodBind.get("XMLParser", "read", 166280745L), hostObject.objectPtr)
+  final def read(): Long = {
+    if (gdext.classes.XMLParser.mb_read == null) gdext.classes.XMLParser.mb_read = MethodBind.get("XMLParser", "read", 166280745L)
+    Ptrcall.call0[Long](gdext.classes.XMLParser.mb_read, livePtr)
+  }
 
   /** XMLParser.get_node_type */
-  final def getNodeType(): Long =
-    Ptrcall.call0[Long](MethodBind.get("XMLParser", "get_node_type", 2984359541L), hostObject.objectPtr)
+  final def getNodeType(): Long = {
+    if (gdext.classes.XMLParser.mb_get_node_type == null) gdext.classes.XMLParser.mb_get_node_type = MethodBind.get("XMLParser", "get_node_type", 2984359541L)
+    Ptrcall.call0[Long](gdext.classes.XMLParser.mb_get_node_type, livePtr)
+  }
 
   /** XMLParser.get_node_name */
-  final def getNodeName(): String =
-    Ptrcall.call0[String](MethodBind.get("XMLParser", "get_node_name", 201670096L), hostObject.objectPtr)
+  final def getNodeName(): String = {
+    if (gdext.classes.XMLParser.mb_get_node_name == null) gdext.classes.XMLParser.mb_get_node_name = MethodBind.get("XMLParser", "get_node_name", 201670096L)
+    Ptrcall.call0[String](gdext.classes.XMLParser.mb_get_node_name, livePtr)
+  }
 
   /** XMLParser.get_node_data */
-  final def getNodeData(): String =
-    Ptrcall.call0[String](MethodBind.get("XMLParser", "get_node_data", 201670096L), hostObject.objectPtr)
+  final def getNodeData(): String = {
+    if (gdext.classes.XMLParser.mb_get_node_data == null) gdext.classes.XMLParser.mb_get_node_data = MethodBind.get("XMLParser", "get_node_data", 201670096L)
+    Ptrcall.call0[String](gdext.classes.XMLParser.mb_get_node_data, livePtr)
+  }
 
   /** XMLParser.get_node_offset */
-  final def getNodeOffset(): Long =
-    Ptrcall.call0[Long](MethodBind.get("XMLParser", "get_node_offset", 3905245786L), hostObject.objectPtr)
+  final def getNodeOffset(): Long = {
+    if (gdext.classes.XMLParser.mb_get_node_offset == null) gdext.classes.XMLParser.mb_get_node_offset = MethodBind.get("XMLParser", "get_node_offset", 3905245786L)
+    Ptrcall.call0[Long](gdext.classes.XMLParser.mb_get_node_offset, livePtr)
+  }
 
   /** XMLParser.get_attribute_count */
-  final def getAttributeCount(): Long =
-    Ptrcall.call0[Long](MethodBind.get("XMLParser", "get_attribute_count", 3905245786L), hostObject.objectPtr)
+  final def getAttributeCount(): Long = {
+    if (gdext.classes.XMLParser.mb_get_attribute_count == null) gdext.classes.XMLParser.mb_get_attribute_count = MethodBind.get("XMLParser", "get_attribute_count", 3905245786L)
+    Ptrcall.call0[Long](gdext.classes.XMLParser.mb_get_attribute_count, livePtr)
+  }
 
   /** XMLParser.get_attribute_name */
-  final def getAttributeName(idx: Long): String =
-    Ptrcall.call1[Long, String](MethodBind.get("XMLParser", "get_attribute_name", 844755477L), hostObject.objectPtr, idx)
+  final def getAttributeName(idx: Long): String = {
+    if (gdext.classes.XMLParser.mb_get_attribute_name == null) gdext.classes.XMLParser.mb_get_attribute_name = MethodBind.get("XMLParser", "get_attribute_name", 844755477L)
+    Ptrcall.call1[Long, String](gdext.classes.XMLParser.mb_get_attribute_name, livePtr, idx)
+  }
 
   /** XMLParser.get_attribute_value */
-  final def getAttributeValue(idx: Long): String =
-    Ptrcall.call1[Long, String](MethodBind.get("XMLParser", "get_attribute_value", 844755477L), hostObject.objectPtr, idx)
+  final def getAttributeValue(idx: Long): String = {
+    if (gdext.classes.XMLParser.mb_get_attribute_value == null) gdext.classes.XMLParser.mb_get_attribute_value = MethodBind.get("XMLParser", "get_attribute_value", 844755477L)
+    Ptrcall.call1[Long, String](gdext.classes.XMLParser.mb_get_attribute_value, livePtr, idx)
+  }
 
   /** XMLParser.has_attribute */
-  final def hasAttribute(name: String): Boolean =
-    Ptrcall.call1[String, Boolean](MethodBind.get("XMLParser", "has_attribute", 3927539163L), hostObject.objectPtr, name)
+  final def hasAttribute(name: String): Boolean = {
+    if (gdext.classes.XMLParser.mb_has_attribute == null) gdext.classes.XMLParser.mb_has_attribute = MethodBind.get("XMLParser", "has_attribute", 3927539163L)
+    Ptrcall.call1[String, Boolean](gdext.classes.XMLParser.mb_has_attribute, livePtr, name)
+  }
 
   /** XMLParser.get_named_attribute_value */
-  final def getNamedAttributeValue(name: String): String =
-    Ptrcall.call1[String, String](MethodBind.get("XMLParser", "get_named_attribute_value", 3135753539L), hostObject.objectPtr, name)
+  final def getNamedAttributeValue(name: String): String = {
+    if (gdext.classes.XMLParser.mb_get_named_attribute_value == null) gdext.classes.XMLParser.mb_get_named_attribute_value = MethodBind.get("XMLParser", "get_named_attribute_value", 3135753539L)
+    Ptrcall.call1[String, String](gdext.classes.XMLParser.mb_get_named_attribute_value, livePtr, name)
+  }
 
   /** XMLParser.get_named_attribute_value_safe */
-  final def getNamedAttributeValueSafe(name: String): String =
-    Ptrcall.call1[String, String](MethodBind.get("XMLParser", "get_named_attribute_value_safe", 3135753539L), hostObject.objectPtr, name)
+  final def getNamedAttributeValueSafe(name: String): String = {
+    if (gdext.classes.XMLParser.mb_get_named_attribute_value_safe == null) gdext.classes.XMLParser.mb_get_named_attribute_value_safe = MethodBind.get("XMLParser", "get_named_attribute_value_safe", 3135753539L)
+    Ptrcall.call1[String, String](gdext.classes.XMLParser.mb_get_named_attribute_value_safe, livePtr, name)
+  }
 
   /** XMLParser.is_empty */
-  final def isEmpty(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("XMLParser", "is_empty", 36873697L), hostObject.objectPtr)
+  final def isEmpty(): Boolean = {
+    if (gdext.classes.XMLParser.mb_is_empty == null) gdext.classes.XMLParser.mb_is_empty = MethodBind.get("XMLParser", "is_empty", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.XMLParser.mb_is_empty, livePtr)
+  }
 
   /** XMLParser.get_current_line */
-  final def getCurrentLine(): Long =
-    Ptrcall.call0[Long](MethodBind.get("XMLParser", "get_current_line", 3905245786L), hostObject.objectPtr)
+  final def getCurrentLine(): Long = {
+    if (gdext.classes.XMLParser.mb_get_current_line == null) gdext.classes.XMLParser.mb_get_current_line = MethodBind.get("XMLParser", "get_current_line", 3905245786L)
+    Ptrcall.call0[Long](gdext.classes.XMLParser.mb_get_current_line, livePtr)
+  }
 
   /** XMLParser.skip_section */
-  final def skipSection(): Unit =
-    Ptrcall.callVoid0(MethodBind.get("XMLParser", "skip_section", 3218959716L), hostObject.objectPtr)
+  final def skipSection(): Unit = {
+    if (gdext.classes.XMLParser.mb_skip_section == null) gdext.classes.XMLParser.mb_skip_section = MethodBind.get("XMLParser", "skip_section", 3218959716L)
+    Ptrcall.callVoid0(gdext.classes.XMLParser.mb_skip_section, livePtr)
+  }
 
   /** XMLParser.seek */
-  final def seek(position: Long): Long =
-    Ptrcall.call1[Long, Long](MethodBind.get("XMLParser", "seek", 844576869L), hostObject.objectPtr, position)
+  final def seek(position: Long): Long = {
+    if (gdext.classes.XMLParser.mb_seek == null) gdext.classes.XMLParser.mb_seek = MethodBind.get("XMLParser", "seek", 844576869L)
+    Ptrcall.call1[Long, Long](gdext.classes.XMLParser.mb_seek, livePtr, position)
+  }
 
   /** XMLParser.open */
-  final def open(file: String): Long =
-    Ptrcall.call1[String, Long](MethodBind.get("XMLParser", "open", 166001499L), hostObject.objectPtr, file)
+  final def open(file: String): Long = {
+    if (gdext.classes.XMLParser.mb_open == null) gdext.classes.XMLParser.mb_open = MethodBind.get("XMLParser", "open", 166001499L)
+    Ptrcall.call1[String, Long](gdext.classes.XMLParser.mb_open, livePtr, file)
+  }
 
+}
+
+object XMLParser {
+  private[classes] var mb_read: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_node_type: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_node_name: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_node_data: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_node_offset: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_attribute_count: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_attribute_name: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_attribute_value: GDExtensionMethodBindPtr = null
+  private[classes] var mb_has_attribute: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_named_attribute_value: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_named_attribute_value_safe: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_empty: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_current_line: GDExtensionMethodBindPtr = null
+  private[classes] var mb_skip_section: GDExtensionMethodBindPtr = null
+  private[classes] var mb_seek: GDExtensionMethodBindPtr = null
+  private[classes] var mb_open: GDExtensionMethodBindPtr = null
 }

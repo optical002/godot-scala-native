@@ -58,7 +58,32 @@ if (FileAccess.fileExists("res://data/levels.json")) {
 }
 
 val dir = DirAccess.open("res://data")
+// ... use dir ...
+dir.unref()
 ```
+
+`DirAccess.open` returns a reference that you own, like every engine method
+that returns a `RefCounted`. Release it with `unref()`, or call it inside
+`Gd.scoped { ... }`. See
+[Memory and object lifetimes](memory.md#refcounted-references).
+
+## Loading resources at runtime
+
+`ResourceLoader.load` returns an owned reference too:
+
+```scala
+import gdext.api.Gd
+import gdext.classes.{ResourceLoader, PackedScene}
+
+Gd.scoped {
+  val scene = ResourceLoader.singleton.load("res://enemy.tscn", "", 1L).cast[PackedScene]
+  val enemy = scene.instantiate(0L)
+  addChild(enemy, false, 0L)     // the tree owns the node
+}                                // our reference to the PackedScene is released
+```
+
+Cache mode `1` (`CACHE_MODE_REUSE`) returns the already-loaded resource when
+there is one.
 
 Use `res://` paths rather than OS paths: `res://` works both in the editor and
 in exported builds.

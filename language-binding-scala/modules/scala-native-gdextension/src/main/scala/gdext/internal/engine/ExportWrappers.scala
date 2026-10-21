@@ -50,7 +50,8 @@ object Tres {
   /**
    * OBJECT-Variant marshalling for a typed resource reference, so a `Tres[T]`
    * can be a [[gdext.builtin.Dict]] key or value. A null `raw` round-trips as an
-   * empty (NIL) object Variant.
+   * empty (NIL) object Variant. Decoding borrows (the container holding the
+   * Variant keeps the resource alive); `refInc()` the value to hold it longer.
    */
   given toVariant[T <: GodotScriptClass]: ToVariant[Tres[T]] =
     (value, dest) =>
@@ -59,12 +60,7 @@ object Tres {
         dest
       )
   given fromVariant[T <: GodotScriptClass](using meta: ClassMeta[T]): FromVariant[Tres[T]] =
-    v => {
-      val handle = ObjectVariant.read(v)
-      val wrapped = meta.fromHandle(handle)
-      if (wrapped != null) wrapped.refInc()
-      Tres(wrapped)
-    }
+    v => Tres(meta.fromHandle(ObjectVariant.read(v)))
 }
 
 /**
@@ -88,8 +84,7 @@ final class Tscn[T <: GodotScriptClass] private[engine] (val raw: PackedScene)(u
     if (raw == null) null.asInstanceOf[T]
     else {
       val root = raw.instantiate(0L)
-      // `root` is a GodotObject handle; wrap then cast to the declared root type.
-      rootMeta.fromHandle(root.objectPtr).cast[T]
+      if (root == null) null.asInstanceOf[T] else root.cast[T]
     }
 
   /**

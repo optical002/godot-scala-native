@@ -15,10 +15,10 @@ import scala.scalanative.runtime.{fromRawPtr, toRawPtr}
  */
 object Tokens {
   /** Pack a token id into a void pointer slot. */
-  def toPtr(id: Long): CVoidPtr =
+  inline def toPtr(id: Long): CVoidPtr =
     fromRawPtr[Byte](Intrinsics.castLongToRawPtr(id))
 
   /** Unpack a token id from a void pointer slot. */
-  def fromPtr(p: CVoidPtr): Long =
+  inline def fromPtr(p: CVoidPtr): Long =
     Intrinsics.castRawPtrToLong(toRawPtr(p))
 }

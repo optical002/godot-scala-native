@@ -2,7 +2,7 @@ package gdext.internal.register
 
 import gdext.Godot
 import gdext.builtin.StringNames
-import gdext.internal.engine.{GodotObject, InstanceId, ClassMeta, ClassTags, MethodBind, Ptrcall}
+import gdext.internal.engine.{CachedBind, GodotObject, InstanceId, ClassMeta, ClassTags, MethodBind, Ptrcall}
 import gdext.classes.InputEvent
 import gdext.internal.ffi.types.*
 
@@ -41,8 +41,25 @@ abstract class GodotScriptClass {
   /** The raw handle, as the engine pointer type (used by generated methods). */
   private[gdext] def hostPtr: GDExtensionObjectPtr = _hostObject
 
-  private[register] def setHostObject(o: GDExtensionObjectPtr): Unit =
+  private[gdext] def setHostObject(o: GDExtensionObjectPtr): Unit =
     _hostObject = o
+
+  /**
+   * The engine handle for a method call. Throws `NullPointerException` when the
+   * wrapper has no live object (never bound, or the engine freed it), instead
+   * of handing a dangling pointer to the engine.
+   */
+  private[gdext] final def livePtr: GDExtensionObjectPtr = {
+    val p = _hostObject
+    if (p == null)
+      throw new NullPointerException(
+        s"${getClass.getName}: the engine object was freed or never bound"
+      )
+    p
+  }
+
+  /** RefCounted references this wrapper owns (see `unref`, `Gd.scoped`). */
+  private[gdext] var ownedRefs: Int = 0
 
   /** Set the handle and return `this` (fluent, for wrapping fetched objects). */
   final def withHost(o: GDExtensionObjectPtr): this.type = {
@@ -65,32 +82,47 @@ abstract class GodotScriptClass {
 
   /**
    * Free a manually-managed object via `object_destroy`. No-op for
-   * reference-counted objects — use [[unref]] for those.
+   * reference-counted objects — use [[unref]] for those. The wrapper is dead
+   * afterwards: calling an engine method on it throws.
    */
   def free(): Unit =
-    if (_hostObject != null && !isRefCounted)
-      Godot.interface.object_destroy(_hostObject)
-
-  /** Drop one reference on a reference-counted object (frees at zero). */
-  def unref(): Unit =
-    if (_hostObject != null && isRefCounted)
-      GodotScriptClass.callRefMethod(_hostObject, "unreference")
+    if (_hostObject != null && !isRefCounted) {
+      val p = _hostObject
+      Godot.interface.object_destroy(p)
+      _hostObject = null
+    }
 
   /**
-   * Take one strong reference on a reference-counted object, keeping it alive for
-   * as long as this wrapper is held. No-op for manually-managed objects (nodes).
-   * Returns `this` for fluent use. (Named `refInc` rather than `reference` to
-   * avoid clashing with the generated `RefCounted.reference(): Boolean` engine
-   * method.)
-   *
-   * The binding calls this when a Resource handle is read out of an OBJECT
-   * Variant to be stored in an export field — otherwise, once Godot drops the
-   * loader's temporary reference, the resource's refcount hits zero and it is
-   * freed, leaving the export pointing at a dangling/reused handle.
+   * Release one reference this wrapper owns (an engine `Ref<T>` return,
+   * `Gd.create`, or [[refInc]]), destroying the object if it was the last
+   * reference. Does nothing when the wrapper owns no reference, so a borrowed
+   * object can never be freed from under the engine.
+   */
+  def unref(): Unit =
+    if (_hostObject != null && isRefCounted)
+      if (!gdext.internal.engine.Ownership.unref(this))
+        gdext.Log.trace(s"unref() on a ${getClass.getName} that owns no reference: ignored")
+
+  /**
+   * Keep a reference adopted inside `Gd.scoped` past the end of the block:
+   * the caller now owns it and releases it with [[unref]]. Returns `this`.
+   */
+  def keep(): this.type = {
+    gdext.internal.engine.Ownership.keep(this)
+    this
+  }
+
+  /**
+   * Take one more reference on a reference-counted object, owned by this
+   * wrapper until a matching [[unref]]. No-op for manually-managed objects
+   * (nodes). Returns `this`. (Named `refInc` rather than `reference` to avoid
+   * clashing with the generated `RefCounted.reference(): Boolean` method.)
    */
   def refInc(): this.type = {
-    if (_hostObject != null && isRefCounted)
+    if (_hostObject != null && isRefCounted) {
       GodotScriptClass.callRefMethod(_hostObject, "reference")
+      gdext.internal.engine.Ownership.acquired(this)
+    }
     this
   }
 
@@ -175,11 +207,25 @@ object GodotScriptClass {
   // signature: () -> bool). Resolved by name, so the shared hash is fine.
   private final val RefMethodHash = 2240911060L
 
+  private val initRefBind = new CachedBind("RefCounted", "init_ref", RefMethodHash)
+  private val referenceBind = new CachedBind("RefCounted", "reference", RefMethodHash)
+  private val unreferenceBind =
+    new CachedBind("RefCounted", "unreference", RefMethodHash)
+
+  /** `RefCounted.unreference`: true when that was the last reference. */
+  private[gdext] def unreference(handle: GDExtensionObjectPtr): Boolean =
+    Ptrcall.call0[Boolean](unreferenceBind.ptr, handle)
+
   private[gdext] def callRefMethod(
     handle: GDExtensionObjectPtr,
     name: String
   ): Unit = {
-    val bind = MethodBind.get("RefCounted", name, RefMethodHash)
+    val bind = name match {
+      case "init_ref"    => initRefBind.ptr
+      case "reference"   => referenceBind.ptr
+      case "unreference" => unreferenceBind.ptr
+      case other         => MethodBind.get("RefCounted", other, RefMethodHash)
+    }
     if (bind != null) Ptrcall.call0[Boolean](bind, handle)
   }
 
@@ -189,17 +235,14 @@ object GodotScriptClass {
    * [[gdext.builtin.Arr]] element. A null reference round-trips as an empty (NIL)
    * object Variant. These givens live in this base companion so implicit search
    * finds them for any `T <: GodotScriptClass` (every engine/user class) without
-   * an import. The `from` side preserves instance identity and takes a reference
-   * for RefCounted payloads.
+   * an import. The `from` side preserves instance identity.
    */
   given toVariant[T <: GodotScriptClass]: ToVariant[T] =
     (value, dest) =>
       ObjectVariant.write(if (value == null) null else value.hostPtr, dest)
 
+  /** Decoding borrows: the Variant's container keeps the object alive. Call
+    * `refInc()` on the result to hold it longer. */
   given fromVariant[T <: GodotScriptClass](using meta: ClassMeta[T]): FromVariant[T] =
-    v => {
-      val handle = ObjectVariant.read(v)
-      val wrapped = meta.fromHandle(handle)
-      if (wrapped != null) wrapped.refInc() else wrapped
-    }
+    v => meta.fromHandle(ObjectVariant.read(v))
 }

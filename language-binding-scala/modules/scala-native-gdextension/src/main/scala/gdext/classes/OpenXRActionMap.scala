@@ -4,53 +4,90 @@ import gdext.Godot
 import gdext.builtin.*
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
+import gdext.internal.ffi.types.GDExtensionMethodBindPtr
 
 /** Generated wrapper for Godot's `OpenXRActionMap`, extends `Resource`. */
 abstract class OpenXRActionMap extends Resource {
   override def godotClassName: String = "OpenXRActionMap"
 
   /** OpenXRActionMap.get_action_set_count */
-  final def getActionSetCount(): Long =
-    Ptrcall.call0[Long](MethodBind.get("OpenXRActionMap", "get_action_set_count", 3905245786L), hostObject.objectPtr)
+  final def getActionSetCount(): Long = {
+    if (gdext.classes.OpenXRActionMap.mb_get_action_set_count == null) gdext.classes.OpenXRActionMap.mb_get_action_set_count = MethodBind.get("OpenXRActionMap", "get_action_set_count", 3905245786L)
+    Ptrcall.call0[Long](gdext.classes.OpenXRActionMap.mb_get_action_set_count, livePtr)
+  }
 
-  /** OpenXRActionMap.find_action_set */
-  final def findActionSet(name: String): GodotObject =
-    Ptrcall.call1[String, GodotObject](MethodBind.get("OpenXRActionMap", "find_action_set", 1888809267L), hostObject.objectPtr, name)
+  /** OpenXRActionMap.find_action_set. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
+  final def findActionSet(name: String): OpenXRActionSet = {
+    if (gdext.classes.OpenXRActionMap.mb_find_action_set == null) gdext.classes.OpenXRActionMap.mb_find_action_set = MethodBind.get("OpenXRActionMap", "find_action_set", 1888809267L)
+    Wrappers.owned[OpenXRActionSet](Ptrcall.call1[String, Long](gdext.classes.OpenXRActionMap.mb_find_action_set, livePtr, name))
+  }
 
-  /** OpenXRActionMap.get_action_set */
-  final def getActionSet(idx: Long): GodotObject =
-    Ptrcall.call1[Long, GodotObject](MethodBind.get("OpenXRActionMap", "get_action_set", 1789580336L), hostObject.objectPtr, idx)
+  /** OpenXRActionMap.get_action_set. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
+  final def getActionSet(idx: Long): OpenXRActionSet = {
+    if (gdext.classes.OpenXRActionMap.mb_get_action_set == null) gdext.classes.OpenXRActionMap.mb_get_action_set = MethodBind.get("OpenXRActionMap", "get_action_set", 1789580336L)
+    Wrappers.owned[OpenXRActionSet](Ptrcall.call1[Long, Long](gdext.classes.OpenXRActionMap.mb_get_action_set, livePtr, idx))
+  }
 
   /** OpenXRActionMap.add_action_set */
-  final def addActionSet(action_set: OpenXRActionSet): Unit =
-    Ptrcall.callVoid1(MethodBind.get("OpenXRActionMap", "add_action_set", 2093310581L), hostObject.objectPtr, action_set.hostObject)
+  final def addActionSet(action_set: OpenXRActionSet): Unit = {
+    if (gdext.classes.OpenXRActionMap.mb_add_action_set == null) gdext.classes.OpenXRActionMap.mb_add_action_set = MethodBind.get("OpenXRActionMap", "add_action_set", 2093310581L)
+    Ptrcall.callVoid1(gdext.classes.OpenXRActionMap.mb_add_action_set, livePtr, Wrappers.handle(action_set))
+  }
 
   /** OpenXRActionMap.remove_action_set */
-  final def removeActionSet(action_set: OpenXRActionSet): Unit =
-    Ptrcall.callVoid1(MethodBind.get("OpenXRActionMap", "remove_action_set", 2093310581L), hostObject.objectPtr, action_set.hostObject)
+  final def removeActionSet(action_set: OpenXRActionSet): Unit = {
+    if (gdext.classes.OpenXRActionMap.mb_remove_action_set == null) gdext.classes.OpenXRActionMap.mb_remove_action_set = MethodBind.get("OpenXRActionMap", "remove_action_set", 2093310581L)
+    Ptrcall.callVoid1(gdext.classes.OpenXRActionMap.mb_remove_action_set, livePtr, Wrappers.handle(action_set))
+  }
 
   /** OpenXRActionMap.get_interaction_profile_count */
-  final def getInteractionProfileCount(): Long =
-    Ptrcall.call0[Long](MethodBind.get("OpenXRActionMap", "get_interaction_profile_count", 3905245786L), hostObject.objectPtr)
+  final def getInteractionProfileCount(): Long = {
+    if (gdext.classes.OpenXRActionMap.mb_get_interaction_profile_count == null) gdext.classes.OpenXRActionMap.mb_get_interaction_profile_count = MethodBind.get("OpenXRActionMap", "get_interaction_profile_count", 3905245786L)
+    Ptrcall.call0[Long](gdext.classes.OpenXRActionMap.mb_get_interaction_profile_count, livePtr)
+  }
 
-  /** OpenXRActionMap.find_interaction_profile */
-  final def findInteractionProfile(name: String): GodotObject =
-    Ptrcall.call1[String, GodotObject](MethodBind.get("OpenXRActionMap", "find_interaction_profile", 3095875538L), hostObject.objectPtr, name)
+  /** OpenXRActionMap.find_interaction_profile. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
+  final def findInteractionProfile(name: String): OpenXRInteractionProfile = {
+    if (gdext.classes.OpenXRActionMap.mb_find_interaction_profile == null) gdext.classes.OpenXRActionMap.mb_find_interaction_profile = MethodBind.get("OpenXRActionMap", "find_interaction_profile", 3095875538L)
+    Wrappers.owned[OpenXRInteractionProfile](Ptrcall.call1[String, Long](gdext.classes.OpenXRActionMap.mb_find_interaction_profile, livePtr, name))
+  }
 
-  /** OpenXRActionMap.get_interaction_profile */
-  final def getInteractionProfile(idx: Long): GodotObject =
-    Ptrcall.call1[Long, GodotObject](MethodBind.get("OpenXRActionMap", "get_interaction_profile", 2546151210L), hostObject.objectPtr, idx)
+  /** OpenXRActionMap.get_interaction_profile. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
+  final def getInteractionProfile(idx: Long): OpenXRInteractionProfile = {
+    if (gdext.classes.OpenXRActionMap.mb_get_interaction_profile == null) gdext.classes.OpenXRActionMap.mb_get_interaction_profile = MethodBind.get("OpenXRActionMap", "get_interaction_profile", 2546151210L)
+    Wrappers.owned[OpenXRInteractionProfile](Ptrcall.call1[Long, Long](gdext.classes.OpenXRActionMap.mb_get_interaction_profile, livePtr, idx))
+  }
 
   /** OpenXRActionMap.add_interaction_profile */
-  final def addInteractionProfile(interaction_profile: OpenXRInteractionProfile): Unit =
-    Ptrcall.callVoid1(MethodBind.get("OpenXRActionMap", "add_interaction_profile", 2697953512L), hostObject.objectPtr, interaction_profile.hostObject)
+  final def addInteractionProfile(interaction_profile: OpenXRInteractionProfile): Unit = {
+    if (gdext.classes.OpenXRActionMap.mb_add_interaction_profile == null) gdext.classes.OpenXRActionMap.mb_add_interaction_profile = MethodBind.get("OpenXRActionMap", "add_interaction_profile", 2697953512L)
+    Ptrcall.callVoid1(gdext.classes.OpenXRActionMap.mb_add_interaction_profile, livePtr, Wrappers.handle(interaction_profile))
+  }
 
   /** OpenXRActionMap.remove_interaction_profile */
-  final def removeInteractionProfile(interaction_profile: OpenXRInteractionProfile): Unit =
-    Ptrcall.callVoid1(MethodBind.get("OpenXRActionMap", "remove_interaction_profile", 2697953512L), hostObject.objectPtr, interaction_profile.hostObject)
+  final def removeInteractionProfile(interaction_profile: OpenXRInteractionProfile): Unit = {
+    if (gdext.classes.OpenXRActionMap.mb_remove_interaction_profile == null) gdext.classes.OpenXRActionMap.mb_remove_interaction_profile = MethodBind.get("OpenXRActionMap", "remove_interaction_profile", 2697953512L)
+    Ptrcall.callVoid1(gdext.classes.OpenXRActionMap.mb_remove_interaction_profile, livePtr, Wrappers.handle(interaction_profile))
+  }
 
   /** OpenXRActionMap.create_default_action_sets */
-  final def createDefaultActionSets(): Unit =
-    Ptrcall.callVoid0(MethodBind.get("OpenXRActionMap", "create_default_action_sets", 3218959716L), hostObject.objectPtr)
+  final def createDefaultActionSets(): Unit = {
+    if (gdext.classes.OpenXRActionMap.mb_create_default_action_sets == null) gdext.classes.OpenXRActionMap.mb_create_default_action_sets = MethodBind.get("OpenXRActionMap", "create_default_action_sets", 3218959716L)
+    Ptrcall.callVoid0(gdext.classes.OpenXRActionMap.mb_create_default_action_sets, livePtr)
+  }
 
+}
+
+object OpenXRActionMap {
+  private[classes] var mb_get_action_set_count: GDExtensionMethodBindPtr = null
+  private[classes] var mb_find_action_set: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_action_set: GDExtensionMethodBindPtr = null
+  private[classes] var mb_add_action_set: GDExtensionMethodBindPtr = null
+  private[classes] var mb_remove_action_set: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_interaction_profile_count: GDExtensionMethodBindPtr = null
+  private[classes] var mb_find_interaction_profile: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_interaction_profile: GDExtensionMethodBindPtr = null
+  private[classes] var mb_add_interaction_profile: GDExtensionMethodBindPtr = null
+  private[classes] var mb_remove_interaction_profile: GDExtensionMethodBindPtr = null
+  private[classes] var mb_create_default_action_sets: GDExtensionMethodBindPtr = null
 }

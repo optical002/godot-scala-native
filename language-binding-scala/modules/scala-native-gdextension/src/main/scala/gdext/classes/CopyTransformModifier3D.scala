@@ -4,121 +4,209 @@ import gdext.Godot
 import gdext.builtin.*
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
+import gdext.internal.ffi.types.GDExtensionMethodBindPtr
 
 /** Generated wrapper for Godot's `CopyTransformModifier3D`, extends `BoneConstraint3D`. */
 abstract class CopyTransformModifier3D extends BoneConstraint3D {
   override def godotClassName: String = "CopyTransformModifier3D"
 
   /** CopyTransformModifier3D.set_copy_flags */
-  final def setCopyFlags(index: Long, copy_flags: Long): Unit =
-    Ptrcall.callVoid2(MethodBind.get("CopyTransformModifier3D", "set_copy_flags", 2252507859L), hostObject.objectPtr, index, copy_flags)
+  final def setCopyFlags(index: Long, copy_flags: Long): Unit = {
+    if (gdext.classes.CopyTransformModifier3D.mb_set_copy_flags == null) gdext.classes.CopyTransformModifier3D.mb_set_copy_flags = MethodBind.get("CopyTransformModifier3D", "set_copy_flags", 2252507859L)
+    Ptrcall.callVoid2(gdext.classes.CopyTransformModifier3D.mb_set_copy_flags, livePtr, index, copy_flags)
+  }
 
   /** CopyTransformModifier3D.get_copy_flags */
-  final def getCopyFlags(index: Long): Long =
-    Ptrcall.call1[Long, Long](MethodBind.get("CopyTransformModifier3D", "get_copy_flags", 1685185931L), hostObject.objectPtr, index)
+  final def getCopyFlags(index: Long): Long = {
+    if (gdext.classes.CopyTransformModifier3D.mb_get_copy_flags == null) gdext.classes.CopyTransformModifier3D.mb_get_copy_flags = MethodBind.get("CopyTransformModifier3D", "get_copy_flags", 1685185931L)
+    Ptrcall.call1[Long, Long](gdext.classes.CopyTransformModifier3D.mb_get_copy_flags, livePtr, index)
+  }
 
   /** CopyTransformModifier3D.set_axis_flags */
-  final def setAxisFlags(index: Long, axis_flags: Long): Unit =
-    Ptrcall.callVoid2(MethodBind.get("CopyTransformModifier3D", "set_axis_flags", 2044211897L), hostObject.objectPtr, index, axis_flags)
+  final def setAxisFlags(index: Long, axis_flags: Long): Unit = {
+    if (gdext.classes.CopyTransformModifier3D.mb_set_axis_flags == null) gdext.classes.CopyTransformModifier3D.mb_set_axis_flags = MethodBind.get("CopyTransformModifier3D", "set_axis_flags", 2044211897L)
+    Ptrcall.callVoid2(gdext.classes.CopyTransformModifier3D.mb_set_axis_flags, livePtr, index, axis_flags)
+  }
 
   /** CopyTransformModifier3D.get_axis_flags */
-  final def getAxisFlags(index: Long): Long =
-    Ptrcall.call1[Long, Long](MethodBind.get("CopyTransformModifier3D", "get_axis_flags", 992162046L), hostObject.objectPtr, index)
+  final def getAxisFlags(index: Long): Long = {
+    if (gdext.classes.CopyTransformModifier3D.mb_get_axis_flags == null) gdext.classes.CopyTransformModifier3D.mb_get_axis_flags = MethodBind.get("CopyTransformModifier3D", "get_axis_flags", 992162046L)
+    Ptrcall.call1[Long, Long](gdext.classes.CopyTransformModifier3D.mb_get_axis_flags, livePtr, index)
+  }
 
   /** CopyTransformModifier3D.set_invert_flags */
-  final def setInvertFlags(index: Long, axis_flags: Long): Unit =
-    Ptrcall.callVoid2(MethodBind.get("CopyTransformModifier3D", "set_invert_flags", 2044211897L), hostObject.objectPtr, index, axis_flags)
+  final def setInvertFlags(index: Long, axis_flags: Long): Unit = {
+    if (gdext.classes.CopyTransformModifier3D.mb_set_invert_flags == null) gdext.classes.CopyTransformModifier3D.mb_set_invert_flags = MethodBind.get("CopyTransformModifier3D", "set_invert_flags", 2044211897L)
+    Ptrcall.callVoid2(gdext.classes.CopyTransformModifier3D.mb_set_invert_flags, livePtr, index, axis_flags)
+  }
 
   /** CopyTransformModifier3D.get_invert_flags */
-  final def getInvertFlags(index: Long): Long =
-    Ptrcall.call1[Long, Long](MethodBind.get("CopyTransformModifier3D", "get_invert_flags", 992162046L), hostObject.objectPtr, index)
+  final def getInvertFlags(index: Long): Long = {
+    if (gdext.classes.CopyTransformModifier3D.mb_get_invert_flags == null) gdext.classes.CopyTransformModifier3D.mb_get_invert_flags = MethodBind.get("CopyTransformModifier3D", "get_invert_flags", 992162046L)
+    Ptrcall.call1[Long, Long](gdext.classes.CopyTransformModifier3D.mb_get_invert_flags, livePtr, index)
+  }
 
   /** CopyTransformModifier3D.set_copy_position */
-  final def setCopyPosition(index: Long, enabled: Boolean): Unit =
-    Ptrcall.callVoid2(MethodBind.get("CopyTransformModifier3D", "set_copy_position", 300928843L), hostObject.objectPtr, index, enabled)
+  final def setCopyPosition(index: Long, enabled: Boolean): Unit = {
+    if (gdext.classes.CopyTransformModifier3D.mb_set_copy_position == null) gdext.classes.CopyTransformModifier3D.mb_set_copy_position = MethodBind.get("CopyTransformModifier3D", "set_copy_position", 300928843L)
+    Ptrcall.callVoid2(gdext.classes.CopyTransformModifier3D.mb_set_copy_position, livePtr, index, enabled)
+  }
 
   /** CopyTransformModifier3D.is_position_copying */
-  final def isPositionCopying(index: Long): Boolean =
-    Ptrcall.call1[Long, Boolean](MethodBind.get("CopyTransformModifier3D", "is_position_copying", 1116898809L), hostObject.objectPtr, index)
+  final def isPositionCopying(index: Long): Boolean = {
+    if (gdext.classes.CopyTransformModifier3D.mb_is_position_copying == null) gdext.classes.CopyTransformModifier3D.mb_is_position_copying = MethodBind.get("CopyTransformModifier3D", "is_position_copying", 1116898809L)
+    Ptrcall.call1[Long, Boolean](gdext.classes.CopyTransformModifier3D.mb_is_position_copying, livePtr, index)
+  }
 
   /** CopyTransformModifier3D.set_copy_rotation */
-  final def setCopyRotation(index: Long, enabled: Boolean): Unit =
-    Ptrcall.callVoid2(MethodBind.get("CopyTransformModifier3D", "set_copy_rotation", 300928843L), hostObject.objectPtr, index, enabled)
+  final def setCopyRotation(index: Long, enabled: Boolean): Unit = {
+    if (gdext.classes.CopyTransformModifier3D.mb_set_copy_rotation == null) gdext.classes.CopyTransformModifier3D.mb_set_copy_rotation = MethodBind.get("CopyTransformModifier3D", "set_copy_rotation", 300928843L)
+    Ptrcall.callVoid2(gdext.classes.CopyTransformModifier3D.mb_set_copy_rotation, livePtr, index, enabled)
+  }
 
   /** CopyTransformModifier3D.is_rotation_copying */
-  final def isRotationCopying(index: Long): Boolean =
-    Ptrcall.call1[Long, Boolean](MethodBind.get("CopyTransformModifier3D", "is_rotation_copying", 1116898809L), hostObject.objectPtr, index)
+  final def isRotationCopying(index: Long): Boolean = {
+    if (gdext.classes.CopyTransformModifier3D.mb_is_rotation_copying == null) gdext.classes.CopyTransformModifier3D.mb_is_rotation_copying = MethodBind.get("CopyTransformModifier3D", "is_rotation_copying", 1116898809L)
+    Ptrcall.call1[Long, Boolean](gdext.classes.CopyTransformModifier3D.mb_is_rotation_copying, livePtr, index)
+  }
 
   /** CopyTransformModifier3D.set_copy_scale */
-  final def setCopyScale(index: Long, enabled: Boolean): Unit =
-    Ptrcall.callVoid2(MethodBind.get("CopyTransformModifier3D", "set_copy_scale", 300928843L), hostObject.objectPtr, index, enabled)
+  final def setCopyScale(index: Long, enabled: Boolean): Unit = {
+    if (gdext.classes.CopyTransformModifier3D.mb_set_copy_scale == null) gdext.classes.CopyTransformModifier3D.mb_set_copy_scale = MethodBind.get("CopyTransformModifier3D", "set_copy_scale", 300928843L)
+    Ptrcall.callVoid2(gdext.classes.CopyTransformModifier3D.mb_set_copy_scale, livePtr, index, enabled)
+  }
 
   /** CopyTransformModifier3D.is_scale_copying */
-  final def isScaleCopying(index: Long): Boolean =
-    Ptrcall.call1[Long, Boolean](MethodBind.get("CopyTransformModifier3D", "is_scale_copying", 1116898809L), hostObject.objectPtr, index)
+  final def isScaleCopying(index: Long): Boolean = {
+    if (gdext.classes.CopyTransformModifier3D.mb_is_scale_copying == null) gdext.classes.CopyTransformModifier3D.mb_is_scale_copying = MethodBind.get("CopyTransformModifier3D", "is_scale_copying", 1116898809L)
+    Ptrcall.call1[Long, Boolean](gdext.classes.CopyTransformModifier3D.mb_is_scale_copying, livePtr, index)
+  }
 
   /** CopyTransformModifier3D.set_axis_x_enabled */
-  final def setAxisXEnabled(index: Long, enabled: Boolean): Unit =
-    Ptrcall.callVoid2(MethodBind.get("CopyTransformModifier3D", "set_axis_x_enabled", 300928843L), hostObject.objectPtr, index, enabled)
+  final def setAxisXEnabled(index: Long, enabled: Boolean): Unit = {
+    if (gdext.classes.CopyTransformModifier3D.mb_set_axis_x_enabled == null) gdext.classes.CopyTransformModifier3D.mb_set_axis_x_enabled = MethodBind.get("CopyTransformModifier3D", "set_axis_x_enabled", 300928843L)
+    Ptrcall.callVoid2(gdext.classes.CopyTransformModifier3D.mb_set_axis_x_enabled, livePtr, index, enabled)
+  }
 
   /** CopyTransformModifier3D.is_axis_x_enabled */
-  final def isAxisXEnabled(index: Long): Boolean =
-    Ptrcall.call1[Long, Boolean](MethodBind.get("CopyTransformModifier3D", "is_axis_x_enabled", 1116898809L), hostObject.objectPtr, index)
+  final def isAxisXEnabled(index: Long): Boolean = {
+    if (gdext.classes.CopyTransformModifier3D.mb_is_axis_x_enabled == null) gdext.classes.CopyTransformModifier3D.mb_is_axis_x_enabled = MethodBind.get("CopyTransformModifier3D", "is_axis_x_enabled", 1116898809L)
+    Ptrcall.call1[Long, Boolean](gdext.classes.CopyTransformModifier3D.mb_is_axis_x_enabled, livePtr, index)
+  }
 
   /** CopyTransformModifier3D.set_axis_y_enabled */
-  final def setAxisYEnabled(index: Long, enabled: Boolean): Unit =
-    Ptrcall.callVoid2(MethodBind.get("CopyTransformModifier3D", "set_axis_y_enabled", 300928843L), hostObject.objectPtr, index, enabled)
+  final def setAxisYEnabled(index: Long, enabled: Boolean): Unit = {
+    if (gdext.classes.CopyTransformModifier3D.mb_set_axis_y_enabled == null) gdext.classes.CopyTransformModifier3D.mb_set_axis_y_enabled = MethodBind.get("CopyTransformModifier3D", "set_axis_y_enabled", 300928843L)
+    Ptrcall.callVoid2(gdext.classes.CopyTransformModifier3D.mb_set_axis_y_enabled, livePtr, index, enabled)
+  }
 
   /** CopyTransformModifier3D.is_axis_y_enabled */
-  final def isAxisYEnabled(index: Long): Boolean =
-    Ptrcall.call1[Long, Boolean](MethodBind.get("CopyTransformModifier3D", "is_axis_y_enabled", 1116898809L), hostObject.objectPtr, index)
+  final def isAxisYEnabled(index: Long): Boolean = {
+    if (gdext.classes.CopyTransformModifier3D.mb_is_axis_y_enabled == null) gdext.classes.CopyTransformModifier3D.mb_is_axis_y_enabled = MethodBind.get("CopyTransformModifier3D", "is_axis_y_enabled", 1116898809L)
+    Ptrcall.call1[Long, Boolean](gdext.classes.CopyTransformModifier3D.mb_is_axis_y_enabled, livePtr, index)
+  }
 
   /** CopyTransformModifier3D.set_axis_z_enabled */
-  final def setAxisZEnabled(index: Long, enabled: Boolean): Unit =
-    Ptrcall.callVoid2(MethodBind.get("CopyTransformModifier3D", "set_axis_z_enabled", 300928843L), hostObject.objectPtr, index, enabled)
+  final def setAxisZEnabled(index: Long, enabled: Boolean): Unit = {
+    if (gdext.classes.CopyTransformModifier3D.mb_set_axis_z_enabled == null) gdext.classes.CopyTransformModifier3D.mb_set_axis_z_enabled = MethodBind.get("CopyTransformModifier3D", "set_axis_z_enabled", 300928843L)
+    Ptrcall.callVoid2(gdext.classes.CopyTransformModifier3D.mb_set_axis_z_enabled, livePtr, index, enabled)
+  }
 
   /** CopyTransformModifier3D.is_axis_z_enabled */
-  final def isAxisZEnabled(index: Long): Boolean =
-    Ptrcall.call1[Long, Boolean](MethodBind.get("CopyTransformModifier3D", "is_axis_z_enabled", 1116898809L), hostObject.objectPtr, index)
+  final def isAxisZEnabled(index: Long): Boolean = {
+    if (gdext.classes.CopyTransformModifier3D.mb_is_axis_z_enabled == null) gdext.classes.CopyTransformModifier3D.mb_is_axis_z_enabled = MethodBind.get("CopyTransformModifier3D", "is_axis_z_enabled", 1116898809L)
+    Ptrcall.call1[Long, Boolean](gdext.classes.CopyTransformModifier3D.mb_is_axis_z_enabled, livePtr, index)
+  }
 
   /** CopyTransformModifier3D.set_axis_x_inverted */
-  final def setAxisXInverted(index: Long, enabled: Boolean): Unit =
-    Ptrcall.callVoid2(MethodBind.get("CopyTransformModifier3D", "set_axis_x_inverted", 300928843L), hostObject.objectPtr, index, enabled)
+  final def setAxisXInverted(index: Long, enabled: Boolean): Unit = {
+    if (gdext.classes.CopyTransformModifier3D.mb_set_axis_x_inverted == null) gdext.classes.CopyTransformModifier3D.mb_set_axis_x_inverted = MethodBind.get("CopyTransformModifier3D", "set_axis_x_inverted", 300928843L)
+    Ptrcall.callVoid2(gdext.classes.CopyTransformModifier3D.mb_set_axis_x_inverted, livePtr, index, enabled)
+  }
 
   /** CopyTransformModifier3D.is_axis_x_inverted */
-  final def isAxisXInverted(index: Long): Boolean =
-    Ptrcall.call1[Long, Boolean](MethodBind.get("CopyTransformModifier3D", "is_axis_x_inverted", 1116898809L), hostObject.objectPtr, index)
+  final def isAxisXInverted(index: Long): Boolean = {
+    if (gdext.classes.CopyTransformModifier3D.mb_is_axis_x_inverted == null) gdext.classes.CopyTransformModifier3D.mb_is_axis_x_inverted = MethodBind.get("CopyTransformModifier3D", "is_axis_x_inverted", 1116898809L)
+    Ptrcall.call1[Long, Boolean](gdext.classes.CopyTransformModifier3D.mb_is_axis_x_inverted, livePtr, index)
+  }
 
   /** CopyTransformModifier3D.set_axis_y_inverted */
-  final def setAxisYInverted(index: Long, enabled: Boolean): Unit =
-    Ptrcall.callVoid2(MethodBind.get("CopyTransformModifier3D", "set_axis_y_inverted", 300928843L), hostObject.objectPtr, index, enabled)
+  final def setAxisYInverted(index: Long, enabled: Boolean): Unit = {
+    if (gdext.classes.CopyTransformModifier3D.mb_set_axis_y_inverted == null) gdext.classes.CopyTransformModifier3D.mb_set_axis_y_inverted = MethodBind.get("CopyTransformModifier3D", "set_axis_y_inverted", 300928843L)
+    Ptrcall.callVoid2(gdext.classes.CopyTransformModifier3D.mb_set_axis_y_inverted, livePtr, index, enabled)
+  }
 
   /** CopyTransformModifier3D.is_axis_y_inverted */
-  final def isAxisYInverted(index: Long): Boolean =
-    Ptrcall.call1[Long, Boolean](MethodBind.get("CopyTransformModifier3D", "is_axis_y_inverted", 1116898809L), hostObject.objectPtr, index)
+  final def isAxisYInverted(index: Long): Boolean = {
+    if (gdext.classes.CopyTransformModifier3D.mb_is_axis_y_inverted == null) gdext.classes.CopyTransformModifier3D.mb_is_axis_y_inverted = MethodBind.get("CopyTransformModifier3D", "is_axis_y_inverted", 1116898809L)
+    Ptrcall.call1[Long, Boolean](gdext.classes.CopyTransformModifier3D.mb_is_axis_y_inverted, livePtr, index)
+  }
 
   /** CopyTransformModifier3D.set_axis_z_inverted */
-  final def setAxisZInverted(index: Long, enabled: Boolean): Unit =
-    Ptrcall.callVoid2(MethodBind.get("CopyTransformModifier3D", "set_axis_z_inverted", 300928843L), hostObject.objectPtr, index, enabled)
+  final def setAxisZInverted(index: Long, enabled: Boolean): Unit = {
+    if (gdext.classes.CopyTransformModifier3D.mb_set_axis_z_inverted == null) gdext.classes.CopyTransformModifier3D.mb_set_axis_z_inverted = MethodBind.get("CopyTransformModifier3D", "set_axis_z_inverted", 300928843L)
+    Ptrcall.callVoid2(gdext.classes.CopyTransformModifier3D.mb_set_axis_z_inverted, livePtr, index, enabled)
+  }
 
   /** CopyTransformModifier3D.is_axis_z_inverted */
-  final def isAxisZInverted(index: Long): Boolean =
-    Ptrcall.call1[Long, Boolean](MethodBind.get("CopyTransformModifier3D", "is_axis_z_inverted", 1116898809L), hostObject.objectPtr, index)
+  final def isAxisZInverted(index: Long): Boolean = {
+    if (gdext.classes.CopyTransformModifier3D.mb_is_axis_z_inverted == null) gdext.classes.CopyTransformModifier3D.mb_is_axis_z_inverted = MethodBind.get("CopyTransformModifier3D", "is_axis_z_inverted", 1116898809L)
+    Ptrcall.call1[Long, Boolean](gdext.classes.CopyTransformModifier3D.mb_is_axis_z_inverted, livePtr, index)
+  }
 
   /** CopyTransformModifier3D.set_relative */
-  final def setRelative(index: Long, enabled: Boolean): Unit =
-    Ptrcall.callVoid2(MethodBind.get("CopyTransformModifier3D", "set_relative", 300928843L), hostObject.objectPtr, index, enabled)
+  final def setRelative(index: Long, enabled: Boolean): Unit = {
+    if (gdext.classes.CopyTransformModifier3D.mb_set_relative == null) gdext.classes.CopyTransformModifier3D.mb_set_relative = MethodBind.get("CopyTransformModifier3D", "set_relative", 300928843L)
+    Ptrcall.callVoid2(gdext.classes.CopyTransformModifier3D.mb_set_relative, livePtr, index, enabled)
+  }
 
   /** CopyTransformModifier3D.is_relative */
-  final def isRelative(index: Long): Boolean =
-    Ptrcall.call1[Long, Boolean](MethodBind.get("CopyTransformModifier3D", "is_relative", 1116898809L), hostObject.objectPtr, index)
+  final def isRelative(index: Long): Boolean = {
+    if (gdext.classes.CopyTransformModifier3D.mb_is_relative == null) gdext.classes.CopyTransformModifier3D.mb_is_relative = MethodBind.get("CopyTransformModifier3D", "is_relative", 1116898809L)
+    Ptrcall.call1[Long, Boolean](gdext.classes.CopyTransformModifier3D.mb_is_relative, livePtr, index)
+  }
 
   /** CopyTransformModifier3D.set_additive */
-  final def setAdditive(index: Long, enabled: Boolean): Unit =
-    Ptrcall.callVoid2(MethodBind.get("CopyTransformModifier3D", "set_additive", 300928843L), hostObject.objectPtr, index, enabled)
+  final def setAdditive(index: Long, enabled: Boolean): Unit = {
+    if (gdext.classes.CopyTransformModifier3D.mb_set_additive == null) gdext.classes.CopyTransformModifier3D.mb_set_additive = MethodBind.get("CopyTransformModifier3D", "set_additive", 300928843L)
+    Ptrcall.callVoid2(gdext.classes.CopyTransformModifier3D.mb_set_additive, livePtr, index, enabled)
+  }
 
   /** CopyTransformModifier3D.is_additive */
-  final def isAdditive(index: Long): Boolean =
-    Ptrcall.call1[Long, Boolean](MethodBind.get("CopyTransformModifier3D", "is_additive", 1116898809L), hostObject.objectPtr, index)
+  final def isAdditive(index: Long): Boolean = {
+    if (gdext.classes.CopyTransformModifier3D.mb_is_additive == null) gdext.classes.CopyTransformModifier3D.mb_is_additive = MethodBind.get("CopyTransformModifier3D", "is_additive", 1116898809L)
+    Ptrcall.call1[Long, Boolean](gdext.classes.CopyTransformModifier3D.mb_is_additive, livePtr, index)
+  }
 
+}
+
+object CopyTransformModifier3D {
+  private[classes] var mb_set_copy_flags: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_copy_flags: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_axis_flags: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_axis_flags: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_invert_flags: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_invert_flags: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_copy_position: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_position_copying: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_copy_rotation: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_rotation_copying: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_copy_scale: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_scale_copying: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_axis_x_enabled: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_axis_x_enabled: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_axis_y_enabled: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_axis_y_enabled: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_axis_z_enabled: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_axis_z_enabled: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_axis_x_inverted: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_axis_x_inverted: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_axis_y_inverted: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_axis_y_inverted: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_axis_z_inverted: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_axis_z_inverted: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_relative: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_relative: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_additive: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_additive: GDExtensionMethodBindPtr = null
 }

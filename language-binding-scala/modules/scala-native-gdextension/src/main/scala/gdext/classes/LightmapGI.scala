@@ -4,185 +4,321 @@ import gdext.Godot
 import gdext.builtin.*
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
+import gdext.internal.ffi.types.GDExtensionMethodBindPtr
 
 /** Generated wrapper for Godot's `LightmapGI`, extends `VisualInstance3D`. */
 abstract class LightmapGI extends VisualInstance3D {
   override def godotClassName: String = "LightmapGI"
 
   /** LightmapGI.set_light_data */
-  final def setLightData(data: LightmapGIData): Unit =
-    Ptrcall.callVoid1(MethodBind.get("LightmapGI", "set_light_data", 1790597277L), hostObject.objectPtr, data.hostObject)
+  final def setLightData(data: LightmapGIData): Unit = {
+    if (gdext.classes.LightmapGI.mb_set_light_data == null) gdext.classes.LightmapGI.mb_set_light_data = MethodBind.get("LightmapGI", "set_light_data", 1790597277L)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_light_data, livePtr, Wrappers.handle(data))
+  }
 
-  /** LightmapGI.get_light_data */
-  final def getLightData(): GodotObject =
-    Ptrcall.call0[GodotObject](MethodBind.get("LightmapGI", "get_light_data", 290354153L), hostObject.objectPtr)
+  /** LightmapGI.get_light_data. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
+  final def getLightData(): LightmapGIData = {
+    if (gdext.classes.LightmapGI.mb_get_light_data == null) gdext.classes.LightmapGI.mb_get_light_data = MethodBind.get("LightmapGI", "get_light_data", 290354153L)
+    Wrappers.owned[LightmapGIData](Ptrcall.call0[Long](gdext.classes.LightmapGI.mb_get_light_data, livePtr))
+  }
 
   /** LightmapGI.set_bake_quality */
-  final def setBakeQuality(bake_quality: Long): Unit =
-    Ptrcall.callVoid1(MethodBind.get("LightmapGI", "set_bake_quality", 1192215803L), hostObject.objectPtr, bake_quality)
+  final def setBakeQuality(bake_quality: Long): Unit = {
+    if (gdext.classes.LightmapGI.mb_set_bake_quality == null) gdext.classes.LightmapGI.mb_set_bake_quality = MethodBind.get("LightmapGI", "set_bake_quality", 1192215803L)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_bake_quality, livePtr, bake_quality)
+  }
 
   /** LightmapGI.get_bake_quality */
-  final def getBakeQuality(): Long =
-    Ptrcall.call0[Long](MethodBind.get("LightmapGI", "get_bake_quality", 688832735L), hostObject.objectPtr)
+  final def getBakeQuality(): Long = {
+    if (gdext.classes.LightmapGI.mb_get_bake_quality == null) gdext.classes.LightmapGI.mb_get_bake_quality = MethodBind.get("LightmapGI", "get_bake_quality", 688832735L)
+    Ptrcall.call0[Long](gdext.classes.LightmapGI.mb_get_bake_quality, livePtr)
+  }
 
   /** LightmapGI.set_bounces */
-  final def setBounces(bounces: Long): Unit =
-    Ptrcall.callVoid1(MethodBind.get("LightmapGI", "set_bounces", 1286410249L), hostObject.objectPtr, bounces)
+  final def setBounces(bounces: Long): Unit = {
+    if (gdext.classes.LightmapGI.mb_set_bounces == null) gdext.classes.LightmapGI.mb_set_bounces = MethodBind.get("LightmapGI", "set_bounces", 1286410249L)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_bounces, livePtr, bounces)
+  }
 
   /** LightmapGI.get_bounces */
-  final def getBounces(): Long =
-    Ptrcall.call0[Long](MethodBind.get("LightmapGI", "get_bounces", 3905245786L), hostObject.objectPtr)
+  final def getBounces(): Long = {
+    if (gdext.classes.LightmapGI.mb_get_bounces == null) gdext.classes.LightmapGI.mb_get_bounces = MethodBind.get("LightmapGI", "get_bounces", 3905245786L)
+    Ptrcall.call0[Long](gdext.classes.LightmapGI.mb_get_bounces, livePtr)
+  }
 
   /** LightmapGI.set_bounce_indirect_energy */
-  final def setBounceIndirectEnergy(bounce_indirect_energy: Double): Unit =
-    Ptrcall.callVoid1(MethodBind.get("LightmapGI", "set_bounce_indirect_energy", 373806689L), hostObject.objectPtr, bounce_indirect_energy)
+  final def setBounceIndirectEnergy(bounce_indirect_energy: Double): Unit = {
+    if (gdext.classes.LightmapGI.mb_set_bounce_indirect_energy == null) gdext.classes.LightmapGI.mb_set_bounce_indirect_energy = MethodBind.get("LightmapGI", "set_bounce_indirect_energy", 373806689L)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_bounce_indirect_energy, livePtr, bounce_indirect_energy)
+  }
 
   /** LightmapGI.get_bounce_indirect_energy */
-  final def getBounceIndirectEnergy(): Double =
-    Ptrcall.call0[Double](MethodBind.get("LightmapGI", "get_bounce_indirect_energy", 1740695150L), hostObject.objectPtr)
+  final def getBounceIndirectEnergy(): Double = {
+    if (gdext.classes.LightmapGI.mb_get_bounce_indirect_energy == null) gdext.classes.LightmapGI.mb_get_bounce_indirect_energy = MethodBind.get("LightmapGI", "get_bounce_indirect_energy", 1740695150L)
+    Ptrcall.call0[Double](gdext.classes.LightmapGI.mb_get_bounce_indirect_energy, livePtr)
+  }
 
   /** LightmapGI.set_generate_probes */
-  final def setGenerateProbes(subdivision: Long): Unit =
-    Ptrcall.callVoid1(MethodBind.get("LightmapGI", "set_generate_probes", 549981046L), hostObject.objectPtr, subdivision)
+  final def setGenerateProbes(subdivision: Long): Unit = {
+    if (gdext.classes.LightmapGI.mb_set_generate_probes == null) gdext.classes.LightmapGI.mb_set_generate_probes = MethodBind.get("LightmapGI", "set_generate_probes", 549981046L)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_generate_probes, livePtr, subdivision)
+  }
 
   /** LightmapGI.get_generate_probes */
-  final def getGenerateProbes(): Long =
-    Ptrcall.call0[Long](MethodBind.get("LightmapGI", "get_generate_probes", 3930596226L), hostObject.objectPtr)
+  final def getGenerateProbes(): Long = {
+    if (gdext.classes.LightmapGI.mb_get_generate_probes == null) gdext.classes.LightmapGI.mb_get_generate_probes = MethodBind.get("LightmapGI", "get_generate_probes", 3930596226L)
+    Ptrcall.call0[Long](gdext.classes.LightmapGI.mb_get_generate_probes, livePtr)
+  }
 
   /** LightmapGI.set_bias */
-  final def setBias(bias: Double): Unit =
-    Ptrcall.callVoid1(MethodBind.get("LightmapGI", "set_bias", 373806689L), hostObject.objectPtr, bias)
+  final def setBias(bias: Double): Unit = {
+    if (gdext.classes.LightmapGI.mb_set_bias == null) gdext.classes.LightmapGI.mb_set_bias = MethodBind.get("LightmapGI", "set_bias", 373806689L)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_bias, livePtr, bias)
+  }
 
   /** LightmapGI.get_bias */
-  final def getBias(): Double =
-    Ptrcall.call0[Double](MethodBind.get("LightmapGI", "get_bias", 1740695150L), hostObject.objectPtr)
+  final def getBias(): Double = {
+    if (gdext.classes.LightmapGI.mb_get_bias == null) gdext.classes.LightmapGI.mb_get_bias = MethodBind.get("LightmapGI", "get_bias", 1740695150L)
+    Ptrcall.call0[Double](gdext.classes.LightmapGI.mb_get_bias, livePtr)
+  }
 
   /** LightmapGI.set_environment_mode */
-  final def setEnvironmentMode(mode: Long): Unit =
-    Ptrcall.callVoid1(MethodBind.get("LightmapGI", "set_environment_mode", 2282650285L), hostObject.objectPtr, mode)
+  final def setEnvironmentMode(mode: Long): Unit = {
+    if (gdext.classes.LightmapGI.mb_set_environment_mode == null) gdext.classes.LightmapGI.mb_set_environment_mode = MethodBind.get("LightmapGI", "set_environment_mode", 2282650285L)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_environment_mode, livePtr, mode)
+  }
 
   /** LightmapGI.get_environment_mode */
-  final def getEnvironmentMode(): Long =
-    Ptrcall.call0[Long](MethodBind.get("LightmapGI", "get_environment_mode", 4128646479L), hostObject.objectPtr)
+  final def getEnvironmentMode(): Long = {
+    if (gdext.classes.LightmapGI.mb_get_environment_mode == null) gdext.classes.LightmapGI.mb_get_environment_mode = MethodBind.get("LightmapGI", "get_environment_mode", 4128646479L)
+    Ptrcall.call0[Long](gdext.classes.LightmapGI.mb_get_environment_mode, livePtr)
+  }
 
   /** LightmapGI.set_environment_custom_sky */
-  final def setEnvironmentCustomSky(sky: Sky): Unit =
-    Ptrcall.callVoid1(MethodBind.get("LightmapGI", "set_environment_custom_sky", 3336722921L), hostObject.objectPtr, sky.hostObject)
+  final def setEnvironmentCustomSky(sky: Sky): Unit = {
+    if (gdext.classes.LightmapGI.mb_set_environment_custom_sky == null) gdext.classes.LightmapGI.mb_set_environment_custom_sky = MethodBind.get("LightmapGI", "set_environment_custom_sky", 3336722921L)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_environment_custom_sky, livePtr, Wrappers.handle(sky))
+  }
 
-  /** LightmapGI.get_environment_custom_sky */
-  final def getEnvironmentCustomSky(): GodotObject =
-    Ptrcall.call0[GodotObject](MethodBind.get("LightmapGI", "get_environment_custom_sky", 1177136966L), hostObject.objectPtr)
+  /** LightmapGI.get_environment_custom_sky. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
+  final def getEnvironmentCustomSky(): Sky = {
+    if (gdext.classes.LightmapGI.mb_get_environment_custom_sky == null) gdext.classes.LightmapGI.mb_get_environment_custom_sky = MethodBind.get("LightmapGI", "get_environment_custom_sky", 1177136966L)
+    Wrappers.owned[Sky](Ptrcall.call0[Long](gdext.classes.LightmapGI.mb_get_environment_custom_sky, livePtr))
+  }
 
   /** LightmapGI.set_environment_custom_color */
-  final def setEnvironmentCustomColor(color: gdext.builtin.Color): Unit =
-    Ptrcall.callVoid1(MethodBind.get("LightmapGI", "set_environment_custom_color", 2920490490L), hostObject.objectPtr, color)
+  final def setEnvironmentCustomColor(color: gdext.builtin.Color): Unit = {
+    if (gdext.classes.LightmapGI.mb_set_environment_custom_color == null) gdext.classes.LightmapGI.mb_set_environment_custom_color = MethodBind.get("LightmapGI", "set_environment_custom_color", 2920490490L)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_environment_custom_color, livePtr, color)
+  }
 
   /** LightmapGI.get_environment_custom_color */
-  final def getEnvironmentCustomColor(): gdext.builtin.Color =
-    Ptrcall.call0[gdext.builtin.Color](MethodBind.get("LightmapGI", "get_environment_custom_color", 3444240500L), hostObject.objectPtr)
+  final def getEnvironmentCustomColor(): gdext.builtin.Color = {
+    if (gdext.classes.LightmapGI.mb_get_environment_custom_color == null) gdext.classes.LightmapGI.mb_get_environment_custom_color = MethodBind.get("LightmapGI", "get_environment_custom_color", 3444240500L)
+    Ptrcall.call0[gdext.builtin.Color](gdext.classes.LightmapGI.mb_get_environment_custom_color, livePtr)
+  }
 
   /** LightmapGI.set_environment_custom_energy */
-  final def setEnvironmentCustomEnergy(energy: Double): Unit =
-    Ptrcall.callVoid1(MethodBind.get("LightmapGI", "set_environment_custom_energy", 373806689L), hostObject.objectPtr, energy)
+  final def setEnvironmentCustomEnergy(energy: Double): Unit = {
+    if (gdext.classes.LightmapGI.mb_set_environment_custom_energy == null) gdext.classes.LightmapGI.mb_set_environment_custom_energy = MethodBind.get("LightmapGI", "set_environment_custom_energy", 373806689L)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_environment_custom_energy, livePtr, energy)
+  }
 
   /** LightmapGI.get_environment_custom_energy */
-  final def getEnvironmentCustomEnergy(): Double =
-    Ptrcall.call0[Double](MethodBind.get("LightmapGI", "get_environment_custom_energy", 1740695150L), hostObject.objectPtr)
+  final def getEnvironmentCustomEnergy(): Double = {
+    if (gdext.classes.LightmapGI.mb_get_environment_custom_energy == null) gdext.classes.LightmapGI.mb_get_environment_custom_energy = MethodBind.get("LightmapGI", "get_environment_custom_energy", 1740695150L)
+    Ptrcall.call0[Double](gdext.classes.LightmapGI.mb_get_environment_custom_energy, livePtr)
+  }
 
   /** LightmapGI.set_texel_scale */
-  final def setTexelScale(texel_scale: Double): Unit =
-    Ptrcall.callVoid1(MethodBind.get("LightmapGI", "set_texel_scale", 373806689L), hostObject.objectPtr, texel_scale)
+  final def setTexelScale(texel_scale: Double): Unit = {
+    if (gdext.classes.LightmapGI.mb_set_texel_scale == null) gdext.classes.LightmapGI.mb_set_texel_scale = MethodBind.get("LightmapGI", "set_texel_scale", 373806689L)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_texel_scale, livePtr, texel_scale)
+  }
 
   /** LightmapGI.get_texel_scale */
-  final def getTexelScale(): Double =
-    Ptrcall.call0[Double](MethodBind.get("LightmapGI", "get_texel_scale", 1740695150L), hostObject.objectPtr)
+  final def getTexelScale(): Double = {
+    if (gdext.classes.LightmapGI.mb_get_texel_scale == null) gdext.classes.LightmapGI.mb_get_texel_scale = MethodBind.get("LightmapGI", "get_texel_scale", 1740695150L)
+    Ptrcall.call0[Double](gdext.classes.LightmapGI.mb_get_texel_scale, livePtr)
+  }
 
   /** LightmapGI.set_max_texture_size */
-  final def setMaxTextureSize(max_texture_size: Long): Unit =
-    Ptrcall.callVoid1(MethodBind.get("LightmapGI", "set_max_texture_size", 1286410249L), hostObject.objectPtr, max_texture_size)
+  final def setMaxTextureSize(max_texture_size: Long): Unit = {
+    if (gdext.classes.LightmapGI.mb_set_max_texture_size == null) gdext.classes.LightmapGI.mb_set_max_texture_size = MethodBind.get("LightmapGI", "set_max_texture_size", 1286410249L)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_max_texture_size, livePtr, max_texture_size)
+  }
 
   /** LightmapGI.get_max_texture_size */
-  final def getMaxTextureSize(): Long =
-    Ptrcall.call0[Long](MethodBind.get("LightmapGI", "get_max_texture_size", 3905245786L), hostObject.objectPtr)
+  final def getMaxTextureSize(): Long = {
+    if (gdext.classes.LightmapGI.mb_get_max_texture_size == null) gdext.classes.LightmapGI.mb_get_max_texture_size = MethodBind.get("LightmapGI", "get_max_texture_size", 3905245786L)
+    Ptrcall.call0[Long](gdext.classes.LightmapGI.mb_get_max_texture_size, livePtr)
+  }
 
   /** LightmapGI.set_supersampling_enabled */
-  final def setSupersamplingEnabled(enable: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("LightmapGI", "set_supersampling_enabled", 2586408642L), hostObject.objectPtr, enable)
+  final def setSupersamplingEnabled(enable: Boolean): Unit = {
+    if (gdext.classes.LightmapGI.mb_set_supersampling_enabled == null) gdext.classes.LightmapGI.mb_set_supersampling_enabled = MethodBind.get("LightmapGI", "set_supersampling_enabled", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_supersampling_enabled, livePtr, enable)
+  }
 
   /** LightmapGI.is_supersampling_enabled */
-  final def isSupersamplingEnabled(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("LightmapGI", "is_supersampling_enabled", 36873697L), hostObject.objectPtr)
+  final def isSupersamplingEnabled(): Boolean = {
+    if (gdext.classes.LightmapGI.mb_is_supersampling_enabled == null) gdext.classes.LightmapGI.mb_is_supersampling_enabled = MethodBind.get("LightmapGI", "is_supersampling_enabled", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.LightmapGI.mb_is_supersampling_enabled, livePtr)
+  }
 
   /** LightmapGI.set_supersampling_factor */
-  final def setSupersamplingFactor(factor: Double): Unit =
-    Ptrcall.callVoid1(MethodBind.get("LightmapGI", "set_supersampling_factor", 373806689L), hostObject.objectPtr, factor)
+  final def setSupersamplingFactor(factor: Double): Unit = {
+    if (gdext.classes.LightmapGI.mb_set_supersampling_factor == null) gdext.classes.LightmapGI.mb_set_supersampling_factor = MethodBind.get("LightmapGI", "set_supersampling_factor", 373806689L)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_supersampling_factor, livePtr, factor)
+  }
 
   /** LightmapGI.get_supersampling_factor */
-  final def getSupersamplingFactor(): Double =
-    Ptrcall.call0[Double](MethodBind.get("LightmapGI", "get_supersampling_factor", 1740695150L), hostObject.objectPtr)
+  final def getSupersamplingFactor(): Double = {
+    if (gdext.classes.LightmapGI.mb_get_supersampling_factor == null) gdext.classes.LightmapGI.mb_get_supersampling_factor = MethodBind.get("LightmapGI", "get_supersampling_factor", 1740695150L)
+    Ptrcall.call0[Double](gdext.classes.LightmapGI.mb_get_supersampling_factor, livePtr)
+  }
 
   /** LightmapGI.set_use_denoiser */
-  final def setUseDenoiser(use_denoiser: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("LightmapGI", "set_use_denoiser", 2586408642L), hostObject.objectPtr, use_denoiser)
+  final def setUseDenoiser(use_denoiser: Boolean): Unit = {
+    if (gdext.classes.LightmapGI.mb_set_use_denoiser == null) gdext.classes.LightmapGI.mb_set_use_denoiser = MethodBind.get("LightmapGI", "set_use_denoiser", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_use_denoiser, livePtr, use_denoiser)
+  }
 
   /** LightmapGI.is_using_denoiser */
-  final def isUsingDenoiser(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("LightmapGI", "is_using_denoiser", 36873697L), hostObject.objectPtr)
+  final def isUsingDenoiser(): Boolean = {
+    if (gdext.classes.LightmapGI.mb_is_using_denoiser == null) gdext.classes.LightmapGI.mb_is_using_denoiser = MethodBind.get("LightmapGI", "is_using_denoiser", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.LightmapGI.mb_is_using_denoiser, livePtr)
+  }
 
   /** LightmapGI.set_denoiser_strength */
-  final def setDenoiserStrength(denoiser_strength: Double): Unit =
-    Ptrcall.callVoid1(MethodBind.get("LightmapGI", "set_denoiser_strength", 373806689L), hostObject.objectPtr, denoiser_strength)
+  final def setDenoiserStrength(denoiser_strength: Double): Unit = {
+    if (gdext.classes.LightmapGI.mb_set_denoiser_strength == null) gdext.classes.LightmapGI.mb_set_denoiser_strength = MethodBind.get("LightmapGI", "set_denoiser_strength", 373806689L)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_denoiser_strength, livePtr, denoiser_strength)
+  }
 
   /** LightmapGI.get_denoiser_strength */
-  final def getDenoiserStrength(): Double =
-    Ptrcall.call0[Double](MethodBind.get("LightmapGI", "get_denoiser_strength", 1740695150L), hostObject.objectPtr)
+  final def getDenoiserStrength(): Double = {
+    if (gdext.classes.LightmapGI.mb_get_denoiser_strength == null) gdext.classes.LightmapGI.mb_get_denoiser_strength = MethodBind.get("LightmapGI", "get_denoiser_strength", 1740695150L)
+    Ptrcall.call0[Double](gdext.classes.LightmapGI.mb_get_denoiser_strength, livePtr)
+  }
 
   /** LightmapGI.set_denoiser_range */
-  final def setDenoiserRange(denoiser_range: Long): Unit =
-    Ptrcall.callVoid1(MethodBind.get("LightmapGI", "set_denoiser_range", 1286410249L), hostObject.objectPtr, denoiser_range)
+  final def setDenoiserRange(denoiser_range: Long): Unit = {
+    if (gdext.classes.LightmapGI.mb_set_denoiser_range == null) gdext.classes.LightmapGI.mb_set_denoiser_range = MethodBind.get("LightmapGI", "set_denoiser_range", 1286410249L)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_denoiser_range, livePtr, denoiser_range)
+  }
 
   /** LightmapGI.get_denoiser_range */
-  final def getDenoiserRange(): Long =
-    Ptrcall.call0[Long](MethodBind.get("LightmapGI", "get_denoiser_range", 3905245786L), hostObject.objectPtr)
+  final def getDenoiserRange(): Long = {
+    if (gdext.classes.LightmapGI.mb_get_denoiser_range == null) gdext.classes.LightmapGI.mb_get_denoiser_range = MethodBind.get("LightmapGI", "get_denoiser_range", 3905245786L)
+    Ptrcall.call0[Long](gdext.classes.LightmapGI.mb_get_denoiser_range, livePtr)
+  }
 
   /** LightmapGI.set_interior */
-  final def setInterior(enable: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("LightmapGI", "set_interior", 2586408642L), hostObject.objectPtr, enable)
+  final def setInterior(enable: Boolean): Unit = {
+    if (gdext.classes.LightmapGI.mb_set_interior == null) gdext.classes.LightmapGI.mb_set_interior = MethodBind.get("LightmapGI", "set_interior", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_interior, livePtr, enable)
+  }
 
   /** LightmapGI.is_interior */
-  final def isInterior(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("LightmapGI", "is_interior", 36873697L), hostObject.objectPtr)
+  final def isInterior(): Boolean = {
+    if (gdext.classes.LightmapGI.mb_is_interior == null) gdext.classes.LightmapGI.mb_is_interior = MethodBind.get("LightmapGI", "is_interior", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.LightmapGI.mb_is_interior, livePtr)
+  }
 
   /** LightmapGI.set_directional */
-  final def setDirectional(directional: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("LightmapGI", "set_directional", 2586408642L), hostObject.objectPtr, directional)
+  final def setDirectional(directional: Boolean): Unit = {
+    if (gdext.classes.LightmapGI.mb_set_directional == null) gdext.classes.LightmapGI.mb_set_directional = MethodBind.get("LightmapGI", "set_directional", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_directional, livePtr, directional)
+  }
 
   /** LightmapGI.is_directional */
-  final def isDirectional(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("LightmapGI", "is_directional", 36873697L), hostObject.objectPtr)
+  final def isDirectional(): Boolean = {
+    if (gdext.classes.LightmapGI.mb_is_directional == null) gdext.classes.LightmapGI.mb_is_directional = MethodBind.get("LightmapGI", "is_directional", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.LightmapGI.mb_is_directional, livePtr)
+  }
 
   /** LightmapGI.set_shadowmask_mode */
-  final def setShadowmaskMode(mode: Long): Unit =
-    Ptrcall.callVoid1(MethodBind.get("LightmapGI", "set_shadowmask_mode", 3451066572L), hostObject.objectPtr, mode)
+  final def setShadowmaskMode(mode: Long): Unit = {
+    if (gdext.classes.LightmapGI.mb_set_shadowmask_mode == null) gdext.classes.LightmapGI.mb_set_shadowmask_mode = MethodBind.get("LightmapGI", "set_shadowmask_mode", 3451066572L)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_shadowmask_mode, livePtr, mode)
+  }
 
   /** LightmapGI.get_shadowmask_mode */
-  final def getShadowmaskMode(): Long =
-    Ptrcall.call0[Long](MethodBind.get("LightmapGI", "get_shadowmask_mode", 785478560L), hostObject.objectPtr)
+  final def getShadowmaskMode(): Long = {
+    if (gdext.classes.LightmapGI.mb_get_shadowmask_mode == null) gdext.classes.LightmapGI.mb_get_shadowmask_mode = MethodBind.get("LightmapGI", "get_shadowmask_mode", 785478560L)
+    Ptrcall.call0[Long](gdext.classes.LightmapGI.mb_get_shadowmask_mode, livePtr)
+  }
 
   /** LightmapGI.set_use_texture_for_bounces */
-  final def setUseTextureForBounces(use_texture_for_bounces: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("LightmapGI", "set_use_texture_for_bounces", 2586408642L), hostObject.objectPtr, use_texture_for_bounces)
+  final def setUseTextureForBounces(use_texture_for_bounces: Boolean): Unit = {
+    if (gdext.classes.LightmapGI.mb_set_use_texture_for_bounces == null) gdext.classes.LightmapGI.mb_set_use_texture_for_bounces = MethodBind.get("LightmapGI", "set_use_texture_for_bounces", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_use_texture_for_bounces, livePtr, use_texture_for_bounces)
+  }
 
   /** LightmapGI.is_using_texture_for_bounces */
-  final def isUsingTextureForBounces(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("LightmapGI", "is_using_texture_for_bounces", 36873697L), hostObject.objectPtr)
+  final def isUsingTextureForBounces(): Boolean = {
+    if (gdext.classes.LightmapGI.mb_is_using_texture_for_bounces == null) gdext.classes.LightmapGI.mb_is_using_texture_for_bounces = MethodBind.get("LightmapGI", "is_using_texture_for_bounces", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.LightmapGI.mb_is_using_texture_for_bounces, livePtr)
+  }
 
   /** LightmapGI.set_camera_attributes */
-  final def setCameraAttributes(camera_attributes: CameraAttributes): Unit =
-    Ptrcall.callVoid1(MethodBind.get("LightmapGI", "set_camera_attributes", 2817810567L), hostObject.objectPtr, camera_attributes.hostObject)
+  final def setCameraAttributes(camera_attributes: CameraAttributes): Unit = {
+    if (gdext.classes.LightmapGI.mb_set_camera_attributes == null) gdext.classes.LightmapGI.mb_set_camera_attributes = MethodBind.get("LightmapGI", "set_camera_attributes", 2817810567L)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_camera_attributes, livePtr, Wrappers.handle(camera_attributes))
+  }
 
-  /** LightmapGI.get_camera_attributes */
-  final def getCameraAttributes(): GodotObject =
-    Ptrcall.call0[GodotObject](MethodBind.get("LightmapGI", "get_camera_attributes", 3921283215L), hostObject.objectPtr)
+  /** LightmapGI.get_camera_attributes. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
+  final def getCameraAttributes(): CameraAttributes = {
+    if (gdext.classes.LightmapGI.mb_get_camera_attributes == null) gdext.classes.LightmapGI.mb_get_camera_attributes = MethodBind.get("LightmapGI", "get_camera_attributes", 3921283215L)
+    Wrappers.owned[CameraAttributes](Ptrcall.call0[Long](gdext.classes.LightmapGI.mb_get_camera_attributes, livePtr))
+  }
 
+}
+
+object LightmapGI {
+  private[classes] var mb_set_light_data: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_light_data: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_bake_quality: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_bake_quality: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_bounces: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_bounces: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_bounce_indirect_energy: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_bounce_indirect_energy: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_generate_probes: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_generate_probes: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_bias: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_bias: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_environment_mode: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_environment_mode: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_environment_custom_sky: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_environment_custom_sky: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_environment_custom_color: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_environment_custom_color: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_environment_custom_energy: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_environment_custom_energy: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_texel_scale: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_texel_scale: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_max_texture_size: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_max_texture_size: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_supersampling_enabled: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_supersampling_enabled: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_supersampling_factor: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_supersampling_factor: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_use_denoiser: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_using_denoiser: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_denoiser_strength: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_denoiser_strength: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_denoiser_range: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_denoiser_range: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_interior: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_interior: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_directional: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_directional: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_shadowmask_mode: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_shadowmask_mode: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_use_texture_for_bounces: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_using_texture_for_bounces: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_camera_attributes: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_camera_attributes: GDExtensionMethodBindPtr = null
 }

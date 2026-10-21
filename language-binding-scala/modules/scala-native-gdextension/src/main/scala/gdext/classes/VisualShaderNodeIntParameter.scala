@@ -4,57 +4,97 @@ import gdext.Godot
 import gdext.builtin.*
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
+import gdext.internal.ffi.types.GDExtensionMethodBindPtr
 
 /** Generated wrapper for Godot's `VisualShaderNodeIntParameter`, extends `VisualShaderNodeParameter`. */
 abstract class VisualShaderNodeIntParameter extends VisualShaderNodeParameter {
   override def godotClassName: String = "VisualShaderNodeIntParameter"
 
   /** VisualShaderNodeIntParameter.set_hint */
-  final def setHint(hint: Long): Unit =
-    Ptrcall.callVoid1(MethodBind.get("VisualShaderNodeIntParameter", "set_hint", 2540512075L), hostObject.objectPtr, hint)
+  final def setHint(hint: Long): Unit = {
+    if (gdext.classes.VisualShaderNodeIntParameter.mb_set_hint == null) gdext.classes.VisualShaderNodeIntParameter.mb_set_hint = MethodBind.get("VisualShaderNodeIntParameter", "set_hint", 2540512075L)
+    Ptrcall.callVoid1(gdext.classes.VisualShaderNodeIntParameter.mb_set_hint, livePtr, hint)
+  }
 
   /** VisualShaderNodeIntParameter.get_hint */
-  final def getHint(): Long =
-    Ptrcall.call0[Long](MethodBind.get("VisualShaderNodeIntParameter", "get_hint", 4250814924L), hostObject.objectPtr)
+  final def getHint(): Long = {
+    if (gdext.classes.VisualShaderNodeIntParameter.mb_get_hint == null) gdext.classes.VisualShaderNodeIntParameter.mb_get_hint = MethodBind.get("VisualShaderNodeIntParameter", "get_hint", 4250814924L)
+    Ptrcall.call0[Long](gdext.classes.VisualShaderNodeIntParameter.mb_get_hint, livePtr)
+  }
 
   /** VisualShaderNodeIntParameter.set_min */
-  final def setMin(value: Long): Unit =
-    Ptrcall.callVoid1(MethodBind.get("VisualShaderNodeIntParameter", "set_min", 1286410249L), hostObject.objectPtr, value)
+  final def setMin(value: Long): Unit = {
+    if (gdext.classes.VisualShaderNodeIntParameter.mb_set_min == null) gdext.classes.VisualShaderNodeIntParameter.mb_set_min = MethodBind.get("VisualShaderNodeIntParameter", "set_min", 1286410249L)
+    Ptrcall.callVoid1(gdext.classes.VisualShaderNodeIntParameter.mb_set_min, livePtr, value)
+  }
 
   /** VisualShaderNodeIntParameter.get_min */
-  final def getMin(): Long =
-    Ptrcall.call0[Long](MethodBind.get("VisualShaderNodeIntParameter", "get_min", 3905245786L), hostObject.objectPtr)
+  final def getMin(): Long = {
+    if (gdext.classes.VisualShaderNodeIntParameter.mb_get_min == null) gdext.classes.VisualShaderNodeIntParameter.mb_get_min = MethodBind.get("VisualShaderNodeIntParameter", "get_min", 3905245786L)
+    Ptrcall.call0[Long](gdext.classes.VisualShaderNodeIntParameter.mb_get_min, livePtr)
+  }
 
   /** VisualShaderNodeIntParameter.set_max */
-  final def setMax(value: Long): Unit =
-    Ptrcall.callVoid1(MethodBind.get("VisualShaderNodeIntParameter", "set_max", 1286410249L), hostObject.objectPtr, value)
+  final def setMax(value: Long): Unit = {
+    if (gdext.classes.VisualShaderNodeIntParameter.mb_set_max == null) gdext.classes.VisualShaderNodeIntParameter.mb_set_max = MethodBind.get("VisualShaderNodeIntParameter", "set_max", 1286410249L)
+    Ptrcall.callVoid1(gdext.classes.VisualShaderNodeIntParameter.mb_set_max, livePtr, value)
+  }
 
   /** VisualShaderNodeIntParameter.get_max */
-  final def getMax(): Long =
-    Ptrcall.call0[Long](MethodBind.get("VisualShaderNodeIntParameter", "get_max", 3905245786L), hostObject.objectPtr)
+  final def getMax(): Long = {
+    if (gdext.classes.VisualShaderNodeIntParameter.mb_get_max == null) gdext.classes.VisualShaderNodeIntParameter.mb_get_max = MethodBind.get("VisualShaderNodeIntParameter", "get_max", 3905245786L)
+    Ptrcall.call0[Long](gdext.classes.VisualShaderNodeIntParameter.mb_get_max, livePtr)
+  }
 
   /** VisualShaderNodeIntParameter.set_step */
-  final def setStep(value: Long): Unit =
-    Ptrcall.callVoid1(MethodBind.get("VisualShaderNodeIntParameter", "set_step", 1286410249L), hostObject.objectPtr, value)
+  final def setStep(value: Long): Unit = {
+    if (gdext.classes.VisualShaderNodeIntParameter.mb_set_step == null) gdext.classes.VisualShaderNodeIntParameter.mb_set_step = MethodBind.get("VisualShaderNodeIntParameter", "set_step", 1286410249L)
+    Ptrcall.callVoid1(gdext.classes.VisualShaderNodeIntParameter.mb_set_step, livePtr, value)
+  }
 
   /** VisualShaderNodeIntParameter.get_step */
-  final def getStep(): Long =
-    Ptrcall.call0[Long](MethodBind.get("VisualShaderNodeIntParameter", "get_step", 3905245786L), hostObject.objectPtr)
+  final def getStep(): Long = {
+    if (gdext.classes.VisualShaderNodeIntParameter.mb_get_step == null) gdext.classes.VisualShaderNodeIntParameter.mb_get_step = MethodBind.get("VisualShaderNodeIntParameter", "get_step", 3905245786L)
+    Ptrcall.call0[Long](gdext.classes.VisualShaderNodeIntParameter.mb_get_step, livePtr)
+  }
 
   /** VisualShaderNodeIntParameter.set_default_value_enabled */
-  final def setDefaultValueEnabled(enabled: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("VisualShaderNodeIntParameter", "set_default_value_enabled", 2586408642L), hostObject.objectPtr, enabled)
+  final def setDefaultValueEnabled(enabled: Boolean): Unit = {
+    if (gdext.classes.VisualShaderNodeIntParameter.mb_set_default_value_enabled == null) gdext.classes.VisualShaderNodeIntParameter.mb_set_default_value_enabled = MethodBind.get("VisualShaderNodeIntParameter", "set_default_value_enabled", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.VisualShaderNodeIntParameter.mb_set_default_value_enabled, livePtr, enabled)
+  }
 
   /** VisualShaderNodeIntParameter.is_default_value_enabled */
-  final def isDefaultValueEnabled(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("VisualShaderNodeIntParameter", "is_default_value_enabled", 36873697L), hostObject.objectPtr)
+  final def isDefaultValueEnabled(): Boolean = {
+    if (gdext.classes.VisualShaderNodeIntParameter.mb_is_default_value_enabled == null) gdext.classes.VisualShaderNodeIntParameter.mb_is_default_value_enabled = MethodBind.get("VisualShaderNodeIntParameter", "is_default_value_enabled", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.VisualShaderNodeIntParameter.mb_is_default_value_enabled, livePtr)
+  }
 
   /** VisualShaderNodeIntParameter.set_default_value */
-  final def setDefaultValue(value: Long): Unit =
-    Ptrcall.callVoid1(MethodBind.get("VisualShaderNodeIntParameter", "set_default_value", 1286410249L), hostObject.objectPtr, value)
+  final def setDefaultValue(value: Long): Unit = {
+    if (gdext.classes.VisualShaderNodeIntParameter.mb_set_default_value == null) gdext.classes.VisualShaderNodeIntParameter.mb_set_default_value = MethodBind.get("VisualShaderNodeIntParameter", "set_default_value", 1286410249L)
+    Ptrcall.callVoid1(gdext.classes.VisualShaderNodeIntParameter.mb_set_default_value, livePtr, value)
+  }
 
   /** VisualShaderNodeIntParameter.get_default_value */
-  final def getDefaultValue(): Long =
-    Ptrcall.call0[Long](MethodBind.get("VisualShaderNodeIntParameter", "get_default_value", 3905245786L), hostObject.objectPtr)
+  final def getDefaultValue(): Long = {
+    if (gdext.classes.VisualShaderNodeIntParameter.mb_get_default_value == null) gdext.classes.VisualShaderNodeIntParameter.mb_get_default_value = MethodBind.get("VisualShaderNodeIntParameter", "get_default_value", 3905245786L)
+    Ptrcall.call0[Long](gdext.classes.VisualShaderNodeIntParameter.mb_get_default_value, livePtr)
+  }
 
+}
+
+object VisualShaderNodeIntParameter {
+  private[classes] var mb_set_hint: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_hint: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_min: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_min: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_max: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_max: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_step: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_step: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_default_value_enabled: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_default_value_enabled: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_default_value: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_default_value: GDExtensionMethodBindPtr = null
 }

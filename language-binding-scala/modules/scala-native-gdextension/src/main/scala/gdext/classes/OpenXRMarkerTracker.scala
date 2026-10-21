@@ -4,33 +4,55 @@ import gdext.Godot
 import gdext.builtin.*
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
+import gdext.internal.ffi.types.GDExtensionMethodBindPtr
 
 /** Generated wrapper for Godot's `OpenXRMarkerTracker`, extends `OpenXRSpatialEntityTracker`. */
 abstract class OpenXRMarkerTracker extends OpenXRSpatialEntityTracker {
   override def godotClassName: String = "OpenXRMarkerTracker"
 
   /** OpenXRMarkerTracker.set_bounds_size */
-  final def setBoundsSize(bounds_size: gdext.builtin.Vector2): Unit =
-    Ptrcall.callVoid1(MethodBind.get("OpenXRMarkerTracker", "set_bounds_size", 743155724L), hostObject.objectPtr, bounds_size)
+  final def setBoundsSize(bounds_size: gdext.builtin.Vector2): Unit = {
+    if (gdext.classes.OpenXRMarkerTracker.mb_set_bounds_size == null) gdext.classes.OpenXRMarkerTracker.mb_set_bounds_size = MethodBind.get("OpenXRMarkerTracker", "set_bounds_size", 743155724L)
+    Ptrcall.callVoid1(gdext.classes.OpenXRMarkerTracker.mb_set_bounds_size, livePtr, bounds_size)
+  }
 
   /** OpenXRMarkerTracker.get_bounds_size */
-  final def getBoundsSize(): gdext.builtin.Vector2 =
-    Ptrcall.call0[gdext.builtin.Vector2](MethodBind.get("OpenXRMarkerTracker", "get_bounds_size", 3341600327L), hostObject.objectPtr)
+  final def getBoundsSize(): gdext.builtin.Vector2 = {
+    if (gdext.classes.OpenXRMarkerTracker.mb_get_bounds_size == null) gdext.classes.OpenXRMarkerTracker.mb_get_bounds_size = MethodBind.get("OpenXRMarkerTracker", "get_bounds_size", 3341600327L)
+    Ptrcall.call0[gdext.builtin.Vector2](gdext.classes.OpenXRMarkerTracker.mb_get_bounds_size, livePtr)
+  }
 
   /** OpenXRMarkerTracker.set_marker_type */
-  final def setMarkerType(marker_type: Long): Unit =
-    Ptrcall.callVoid1(MethodBind.get("OpenXRMarkerTracker", "set_marker_type", 2156241362L), hostObject.objectPtr, marker_type)
+  final def setMarkerType(marker_type: Long): Unit = {
+    if (gdext.classes.OpenXRMarkerTracker.mb_set_marker_type == null) gdext.classes.OpenXRMarkerTracker.mb_set_marker_type = MethodBind.get("OpenXRMarkerTracker", "set_marker_type", 2156241362L)
+    Ptrcall.callVoid1(gdext.classes.OpenXRMarkerTracker.mb_set_marker_type, livePtr, marker_type)
+  }
 
   /** OpenXRMarkerTracker.get_marker_type */
-  final def getMarkerType(): Long =
-    Ptrcall.call0[Long](MethodBind.get("OpenXRMarkerTracker", "get_marker_type", 612702862L), hostObject.objectPtr)
+  final def getMarkerType(): Long = {
+    if (gdext.classes.OpenXRMarkerTracker.mb_get_marker_type == null) gdext.classes.OpenXRMarkerTracker.mb_get_marker_type = MethodBind.get("OpenXRMarkerTracker", "get_marker_type", 612702862L)
+    Ptrcall.call0[Long](gdext.classes.OpenXRMarkerTracker.mb_get_marker_type, livePtr)
+  }
 
   /** OpenXRMarkerTracker.set_marker_id */
-  final def setMarkerId(marker_id: Long): Unit =
-    Ptrcall.callVoid1(MethodBind.get("OpenXRMarkerTracker", "set_marker_id", 1286410249L), hostObject.objectPtr, marker_id)
+  final def setMarkerId(marker_id: Long): Unit = {
+    if (gdext.classes.OpenXRMarkerTracker.mb_set_marker_id == null) gdext.classes.OpenXRMarkerTracker.mb_set_marker_id = MethodBind.get("OpenXRMarkerTracker", "set_marker_id", 1286410249L)
+    Ptrcall.callVoid1(gdext.classes.OpenXRMarkerTracker.mb_set_marker_id, livePtr, marker_id)
+  }
 
   /** OpenXRMarkerTracker.get_marker_id */
-  final def getMarkerId(): Long =
-    Ptrcall.call0[Long](MethodBind.get("OpenXRMarkerTracker", "get_marker_id", 3905245786L), hostObject.objectPtr)
+  final def getMarkerId(): Long = {
+    if (gdext.classes.OpenXRMarkerTracker.mb_get_marker_id == null) gdext.classes.OpenXRMarkerTracker.mb_get_marker_id = MethodBind.get("OpenXRMarkerTracker", "get_marker_id", 3905245786L)
+    Ptrcall.call0[Long](gdext.classes.OpenXRMarkerTracker.mb_get_marker_id, livePtr)
+  }
 
+}
+
+object OpenXRMarkerTracker {
+  private[classes] var mb_set_bounds_size: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_bounds_size: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_marker_type: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_marker_type: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_marker_id: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_marker_id: GDExtensionMethodBindPtr = null
 }

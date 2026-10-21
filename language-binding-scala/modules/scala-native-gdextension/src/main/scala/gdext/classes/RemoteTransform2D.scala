@@ -4,45 +4,76 @@ import gdext.Godot
 import gdext.builtin.*
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
+import gdext.internal.ffi.types.GDExtensionMethodBindPtr
 
 /** Generated wrapper for Godot's `RemoteTransform2D`, extends `Node2D`. */
 abstract class RemoteTransform2D extends Node2D {
   override def godotClassName: String = "RemoteTransform2D"
 
   /** RemoteTransform2D.force_update_cache */
-  final def forceUpdateCache(): Unit =
-    Ptrcall.callVoid0(MethodBind.get("RemoteTransform2D", "force_update_cache", 3218959716L), hostObject.objectPtr)
+  final def forceUpdateCache(): Unit = {
+    if (gdext.classes.RemoteTransform2D.mb_force_update_cache == null) gdext.classes.RemoteTransform2D.mb_force_update_cache = MethodBind.get("RemoteTransform2D", "force_update_cache", 3218959716L)
+    Ptrcall.callVoid0(gdext.classes.RemoteTransform2D.mb_force_update_cache, livePtr)
+  }
 
   /** RemoteTransform2D.set_use_global_coordinates */
-  final def setUseGlobalCoordinates(use_global_coordinates: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("RemoteTransform2D", "set_use_global_coordinates", 2586408642L), hostObject.objectPtr, use_global_coordinates)
+  final def setUseGlobalCoordinates(use_global_coordinates: Boolean): Unit = {
+    if (gdext.classes.RemoteTransform2D.mb_set_use_global_coordinates == null) gdext.classes.RemoteTransform2D.mb_set_use_global_coordinates = MethodBind.get("RemoteTransform2D", "set_use_global_coordinates", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.RemoteTransform2D.mb_set_use_global_coordinates, livePtr, use_global_coordinates)
+  }
 
   /** RemoteTransform2D.get_use_global_coordinates */
-  final def getUseGlobalCoordinates(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("RemoteTransform2D", "get_use_global_coordinates", 36873697L), hostObject.objectPtr)
+  final def getUseGlobalCoordinates(): Boolean = {
+    if (gdext.classes.RemoteTransform2D.mb_get_use_global_coordinates == null) gdext.classes.RemoteTransform2D.mb_get_use_global_coordinates = MethodBind.get("RemoteTransform2D", "get_use_global_coordinates", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.RemoteTransform2D.mb_get_use_global_coordinates, livePtr)
+  }
 
   /** RemoteTransform2D.set_update_position */
-  final def setUpdatePosition(update_remote_position: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("RemoteTransform2D", "set_update_position", 2586408642L), hostObject.objectPtr, update_remote_position)
+  final def setUpdatePosition(update_remote_position: Boolean): Unit = {
+    if (gdext.classes.RemoteTransform2D.mb_set_update_position == null) gdext.classes.RemoteTransform2D.mb_set_update_position = MethodBind.get("RemoteTransform2D", "set_update_position", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.RemoteTransform2D.mb_set_update_position, livePtr, update_remote_position)
+  }
 
   /** RemoteTransform2D.get_update_position */
-  final def getUpdatePosition(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("RemoteTransform2D", "get_update_position", 36873697L), hostObject.objectPtr)
+  final def getUpdatePosition(): Boolean = {
+    if (gdext.classes.RemoteTransform2D.mb_get_update_position == null) gdext.classes.RemoteTransform2D.mb_get_update_position = MethodBind.get("RemoteTransform2D", "get_update_position", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.RemoteTransform2D.mb_get_update_position, livePtr)
+  }
 
   /** RemoteTransform2D.set_update_rotation */
-  final def setUpdateRotation(update_remote_rotation: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("RemoteTransform2D", "set_update_rotation", 2586408642L), hostObject.objectPtr, update_remote_rotation)
+  final def setUpdateRotation(update_remote_rotation: Boolean): Unit = {
+    if (gdext.classes.RemoteTransform2D.mb_set_update_rotation == null) gdext.classes.RemoteTransform2D.mb_set_update_rotation = MethodBind.get("RemoteTransform2D", "set_update_rotation", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.RemoteTransform2D.mb_set_update_rotation, livePtr, update_remote_rotation)
+  }
 
   /** RemoteTransform2D.get_update_rotation */
-  final def getUpdateRotation(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("RemoteTransform2D", "get_update_rotation", 36873697L), hostObject.objectPtr)
+  final def getUpdateRotation(): Boolean = {
+    if (gdext.classes.RemoteTransform2D.mb_get_update_rotation == null) gdext.classes.RemoteTransform2D.mb_get_update_rotation = MethodBind.get("RemoteTransform2D", "get_update_rotation", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.RemoteTransform2D.mb_get_update_rotation, livePtr)
+  }
 
   /** RemoteTransform2D.set_update_scale */
-  final def setUpdateScale(update_remote_scale: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("RemoteTransform2D", "set_update_scale", 2586408642L), hostObject.objectPtr, update_remote_scale)
+  final def setUpdateScale(update_remote_scale: Boolean): Unit = {
+    if (gdext.classes.RemoteTransform2D.mb_set_update_scale == null) gdext.classes.RemoteTransform2D.mb_set_update_scale = MethodBind.get("RemoteTransform2D", "set_update_scale", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.RemoteTransform2D.mb_set_update_scale, livePtr, update_remote_scale)
+  }
 
   /** RemoteTransform2D.get_update_scale */
-  final def getUpdateScale(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("RemoteTransform2D", "get_update_scale", 36873697L), hostObject.objectPtr)
+  final def getUpdateScale(): Boolean = {
+    if (gdext.classes.RemoteTransform2D.mb_get_update_scale == null) gdext.classes.RemoteTransform2D.mb_get_update_scale = MethodBind.get("RemoteTransform2D", "get_update_scale", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.RemoteTransform2D.mb_get_update_scale, livePtr)
+  }
 
+}
+
+object RemoteTransform2D {
+  private[classes] var mb_force_update_cache: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_use_global_coordinates: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_use_global_coordinates: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_update_position: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_update_position: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_update_rotation: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_update_rotation: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_update_scale: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_update_scale: GDExtensionMethodBindPtr = null
 }

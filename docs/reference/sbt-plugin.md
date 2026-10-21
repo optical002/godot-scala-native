@@ -28,6 +28,7 @@ The plugin must be enabled explicitly. It requires and enables Scala Native's
 | `godotLibName` | `String` | `scala-native-gdextension` | Library base name, without the `lib` prefix or extension. |
 | `godotManifestName` | `String` | `scala.gdextension` | File name of the generated manifest. |
 | `godotCompatibilityMinimum` | `String` | `4.2` | `compatibility_minimum` written into the manifest. |
+| `godotNativeMode` | `String` | `releaseFast` | Scala Native build mode: `releaseFast`, `releaseFull`, or `debug`. See [Performance](../guides/performance.md#build-modes). |
 
 ## Tasks
 
@@ -43,8 +44,9 @@ Use `sbt "~godotBuild"` to rebuild on every save.
 - **Binding dependency.** It adds `scala-native-gdextension` at the plugin's
   own version, plus the JitPack resolver. The plugin and the binding always
   move together.
-- **Scala Native settings.** It builds a dynamic library with the Boehm GC
-  and multithreading **disabled**.
+- **Scala Native settings.** It builds a dynamic library with the Boehm GC,
+  multithreading **disabled**, and the optimizer level from `godotNativeMode`
+  (`releaseFast` by default).
 - **Class scanner.** On every compile it generates `GeneratedRegistrations`
   and `GeneratedEntry` under `target/src_managed`. The GDExtension entry symbol
   is fixed as `godot_scala_init`.

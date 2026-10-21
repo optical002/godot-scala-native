@@ -4,7 +4,7 @@ import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
 import gdext.Godot
 import gdext.builtin.*
-import gdext.internal.engine.{GodotObject, MethodBind, Ptrcall}
+import gdext.internal.engine.{CachedBind, GodotObject, MethodBind, Ptrcall}
 import gdext.internal.ffi.types.*
 import gdext.internal.ffi.types.GDExtensionVariantType.*
 
@@ -38,9 +38,12 @@ object SignalRegistration {
     )
   }
 
+  private val emitSignalBind =
+    new CachedBind("Object", "emit_signal", EmitSignalHash)
+
   /** Emit a no-argument signal from `host`. */
   def emit(host: GodotObject, signalName: String): Unit = {
-    val bind = MethodBind.get("Object", "emit_signal", EmitSignalHash)
+    val bind = emitSignalBind.ptr
     if (bind == null) return
 
     // Build a Variant holding the signal name (as a StringName Variant) using
@@ -70,6 +73,9 @@ object SignalRegistration {
   // Object.call_deferred(method, ...) hash (Godot 4.6.1).
   private final val CallDeferredHash = 3400424181L
 
+  private val callDeferredBind =
+    new CachedBind("Object", "call_deferred", CallDeferredHash)
+
   /**
    * Defer a no-argument call to `methodName` on `host` to the next idle frame
    * (`Object.call_deferred`). Used to delay editor UI construction until a
@@ -77,7 +83,7 @@ object SignalRegistration {
    * accesses theme "too early" and crashes.
    */
   def callDeferred(host: GodotObject, methodName: String): Unit = {
-    val bind = MethodBind.get("Object", "call_deferred", CallDeferredHash)
+    val bind = callDeferredBind.ptr
     if (bind == null) return
 
     val nameVarBuf = stackalloc[Byte](BuiltinSizes.Variant.toCSize)

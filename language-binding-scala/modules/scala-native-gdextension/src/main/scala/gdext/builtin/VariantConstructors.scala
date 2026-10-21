@@ -67,4 +67,23 @@ object VariantConstructors {
       fn
     }
   }
+
+  private final val MaxCtors = 16
+  private val ctorCache =
+    new Array[GDExtensionPtrConstructor](TableSize * MaxCtors)
+
+  /** Builtin constructor number `index` of type `t` (as listed in the API). */
+  def constructor(
+    t: GDExtensionVariantType,
+    index: Int
+  ): GDExtensionPtrConstructor = {
+    val idx = t.toInt * MaxCtors + index
+    val cached = ctorCache(idx)
+    if (cached != null) cached
+    else {
+      val fn = Godot.interface.variant_get_ptr_constructor(t, index)
+      ctorCache(idx) = fn
+      fn
+    }
+  }
 }

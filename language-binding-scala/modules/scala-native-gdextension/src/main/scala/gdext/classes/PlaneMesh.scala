@@ -4,49 +4,83 @@ import gdext.Godot
 import gdext.builtin.*
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
+import gdext.internal.ffi.types.GDExtensionMethodBindPtr
 
 /** Generated wrapper for Godot's `PlaneMesh`, extends `PrimitiveMesh`. */
 abstract class PlaneMesh extends PrimitiveMesh {
   override def godotClassName: String = "PlaneMesh"
 
   /** PlaneMesh.set_size */
-  final def setSize(size: gdext.builtin.Vector2): Unit =
-    Ptrcall.callVoid1(MethodBind.get("PlaneMesh", "set_size", 743155724L), hostObject.objectPtr, size)
+  final def setSize(size: gdext.builtin.Vector2): Unit = {
+    if (gdext.classes.PlaneMesh.mb_set_size == null) gdext.classes.PlaneMesh.mb_set_size = MethodBind.get("PlaneMesh", "set_size", 743155724L)
+    Ptrcall.callVoid1(gdext.classes.PlaneMesh.mb_set_size, livePtr, size)
+  }
 
   /** PlaneMesh.get_size */
-  final def getSize(): gdext.builtin.Vector2 =
-    Ptrcall.call0[gdext.builtin.Vector2](MethodBind.get("PlaneMesh", "get_size", 3341600327L), hostObject.objectPtr)
+  final def getSize(): gdext.builtin.Vector2 = {
+    if (gdext.classes.PlaneMesh.mb_get_size == null) gdext.classes.PlaneMesh.mb_get_size = MethodBind.get("PlaneMesh", "get_size", 3341600327L)
+    Ptrcall.call0[gdext.builtin.Vector2](gdext.classes.PlaneMesh.mb_get_size, livePtr)
+  }
 
   /** PlaneMesh.set_subdivide_width */
-  final def setSubdivideWidth(subdivide: Long): Unit =
-    Ptrcall.callVoid1(MethodBind.get("PlaneMesh", "set_subdivide_width", 1286410249L), hostObject.objectPtr, subdivide)
+  final def setSubdivideWidth(subdivide: Long): Unit = {
+    if (gdext.classes.PlaneMesh.mb_set_subdivide_width == null) gdext.classes.PlaneMesh.mb_set_subdivide_width = MethodBind.get("PlaneMesh", "set_subdivide_width", 1286410249L)
+    Ptrcall.callVoid1(gdext.classes.PlaneMesh.mb_set_subdivide_width, livePtr, subdivide)
+  }
 
   /** PlaneMesh.get_subdivide_width */
-  final def getSubdivideWidth(): Long =
-    Ptrcall.call0[Long](MethodBind.get("PlaneMesh", "get_subdivide_width", 3905245786L), hostObject.objectPtr)
+  final def getSubdivideWidth(): Long = {
+    if (gdext.classes.PlaneMesh.mb_get_subdivide_width == null) gdext.classes.PlaneMesh.mb_get_subdivide_width = MethodBind.get("PlaneMesh", "get_subdivide_width", 3905245786L)
+    Ptrcall.call0[Long](gdext.classes.PlaneMesh.mb_get_subdivide_width, livePtr)
+  }
 
   /** PlaneMesh.set_subdivide_depth */
-  final def setSubdivideDepth(subdivide: Long): Unit =
-    Ptrcall.callVoid1(MethodBind.get("PlaneMesh", "set_subdivide_depth", 1286410249L), hostObject.objectPtr, subdivide)
+  final def setSubdivideDepth(subdivide: Long): Unit = {
+    if (gdext.classes.PlaneMesh.mb_set_subdivide_depth == null) gdext.classes.PlaneMesh.mb_set_subdivide_depth = MethodBind.get("PlaneMesh", "set_subdivide_depth", 1286410249L)
+    Ptrcall.callVoid1(gdext.classes.PlaneMesh.mb_set_subdivide_depth, livePtr, subdivide)
+  }
 
   /** PlaneMesh.get_subdivide_depth */
-  final def getSubdivideDepth(): Long =
-    Ptrcall.call0[Long](MethodBind.get("PlaneMesh", "get_subdivide_depth", 3905245786L), hostObject.objectPtr)
+  final def getSubdivideDepth(): Long = {
+    if (gdext.classes.PlaneMesh.mb_get_subdivide_depth == null) gdext.classes.PlaneMesh.mb_get_subdivide_depth = MethodBind.get("PlaneMesh", "get_subdivide_depth", 3905245786L)
+    Ptrcall.call0[Long](gdext.classes.PlaneMesh.mb_get_subdivide_depth, livePtr)
+  }
 
   /** PlaneMesh.set_center_offset */
-  final def setCenterOffset(offset: gdext.builtin.Vector3): Unit =
-    Ptrcall.callVoid1(MethodBind.get("PlaneMesh", "set_center_offset", 3460891852L), hostObject.objectPtr, offset)
+  final def setCenterOffset(offset: gdext.builtin.Vector3): Unit = {
+    if (gdext.classes.PlaneMesh.mb_set_center_offset == null) gdext.classes.PlaneMesh.mb_set_center_offset = MethodBind.get("PlaneMesh", "set_center_offset", 3460891852L)
+    Ptrcall.callVoid1(gdext.classes.PlaneMesh.mb_set_center_offset, livePtr, offset)
+  }
 
   /** PlaneMesh.get_center_offset */
-  final def getCenterOffset(): gdext.builtin.Vector3 =
-    Ptrcall.call0[gdext.builtin.Vector3](MethodBind.get("PlaneMesh", "get_center_offset", 3360562783L), hostObject.objectPtr)
+  final def getCenterOffset(): gdext.builtin.Vector3 = {
+    if (gdext.classes.PlaneMesh.mb_get_center_offset == null) gdext.classes.PlaneMesh.mb_get_center_offset = MethodBind.get("PlaneMesh", "get_center_offset", 3360562783L)
+    Ptrcall.call0[gdext.builtin.Vector3](gdext.classes.PlaneMesh.mb_get_center_offset, livePtr)
+  }
 
   /** PlaneMesh.set_orientation */
-  final def setOrientation(orientation: Long): Unit =
-    Ptrcall.callVoid1(MethodBind.get("PlaneMesh", "set_orientation", 2751399687L), hostObject.objectPtr, orientation)
+  final def setOrientation(orientation: Long): Unit = {
+    if (gdext.classes.PlaneMesh.mb_set_orientation == null) gdext.classes.PlaneMesh.mb_set_orientation = MethodBind.get("PlaneMesh", "set_orientation", 2751399687L)
+    Ptrcall.callVoid1(gdext.classes.PlaneMesh.mb_set_orientation, livePtr, orientation)
+  }
 
   /** PlaneMesh.get_orientation */
-  final def getOrientation(): Long =
-    Ptrcall.call0[Long](MethodBind.get("PlaneMesh", "get_orientation", 3227599250L), hostObject.objectPtr)
+  final def getOrientation(): Long = {
+    if (gdext.classes.PlaneMesh.mb_get_orientation == null) gdext.classes.PlaneMesh.mb_get_orientation = MethodBind.get("PlaneMesh", "get_orientation", 3227599250L)
+    Ptrcall.call0[Long](gdext.classes.PlaneMesh.mb_get_orientation, livePtr)
+  }
 
+}
+
+object PlaneMesh {
+  private[classes] var mb_set_size: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_size: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_subdivide_width: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_subdivide_width: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_subdivide_depth: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_subdivide_depth: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_center_offset: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_center_offset: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_orientation: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_orientation: GDExtensionMethodBindPtr = null
 }

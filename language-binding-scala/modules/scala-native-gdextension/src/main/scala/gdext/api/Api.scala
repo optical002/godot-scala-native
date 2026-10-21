@@ -24,6 +24,7 @@ object api {
   export gdext.internal.engine.InstanceId
   export gdext.internal.engine.{Tres, Tscn, Required}
   export gdext.internal.register.ExportHint
+  export gdext.internal.Gc
 
   /** Emit a (currently no-arg) signal previously declared with `@signal`. */
   export gdext.internal.register.SignalRegistration.{emit as emitSignal}
@@ -38,9 +39,11 @@ object api {
   object Gd {
 
     /**
-     * Construct a brand-new engine object of class `T` and take ownership.
-     * Reference-counted classes are reference-initialised. If `parent` is given,
-     * the new node is added as its child. Works for engine and user classes.
+     * Construct a brand-new engine object of class `T`. A reference-counted
+     * object (a `Resource`, a `RefCounted`) comes back owning its first
+     * reference: release it with `unref()`, or create it inside [[scoped]]. If
+     * `parent` is given, the new node is added as its child. Works for engine
+     * and user classes.
      */
     def create[T <: GodotScriptClass](parent: Option[gdext.classes.Node] = None)(using
       ClassMeta[T]
@@ -58,11 +61,30 @@ object api {
     }
 
     /**
+     * Run `body`, then release every `RefCounted` reference adopted inside it
+     * (engine methods returning a `Ref<T>`, such as `ResourceLoader.load` or
+     * `Resource.duplicate`, and `Gd.create` of a RefCounted class) that was not
+     * kept with `keep()`. Released even if `body` throws. Blocks nest; a
+     * reference belongs to the innermost one.
+     *
+     * {{{
+     *   Gd.scoped {
+     *     val tex = ResourceLoader.singleton.load(path, "", 0L)
+     *     sprite.setTexture(tex)      // the sprite takes its own reference
+     *   }                             // ours is released here
+     * }}}
+     */
+    def scoped[A](body: => A): A = {
+      val s = gdext.internal.engine.Ownership.enter()
+      try body
+      finally gdext.internal.engine.Ownership.exit(s)
+    }
+
+    /**
      * Wrap a raw engine-object handle (a [[gdext.internal.engine.GodotObject]],
-     * e.g. the value returned by object-typed engine methods like `getViewport()`
-     * / `getParent()` / `getTree()`) as the typed wrapper `T`. Identity-preserving
-     * (returns the canonical bound instance if one exists). Returns a `null` `T`
-     * for a null handle.
+     * e.g. one read from a Variant) as the typed wrapper `T`. Generated engine
+     * methods already return typed wrappers. Identity-preserving (one wrapper
+     * per engine object). Returns a `null` `T` for a null handle.
      */
     def wrap[T <: GodotScriptClass](o: gdext.internal.engine.GodotObject)(using
       meta: ClassMeta[T]

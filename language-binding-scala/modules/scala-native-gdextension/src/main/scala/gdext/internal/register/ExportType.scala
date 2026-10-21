@@ -23,6 +23,20 @@ trait ExportType[A] {
   def sceneRootType: Option[String] = None
   def toVariant(value: A, dest: GDExtensionVariantPtr): Unit
   def fromVariant(v: GDExtensionVariantPtr): A
+
+  /** [[toVariant]] into the Variant at address `dest` (see `Addr`). */
+  def toVariantAt(value: A, dest: Long): Unit =
+    toVariant(value, gdext.internal.Addr.ptr[Byte](dest))
+
+  /** [[fromVariant]] from the Variant at address `src`. */
+  def fromVariantAt(src: Long): A =
+    fromVariant(gdext.internal.Addr.ptr[Byte](src))
+
+  /** True when a decoded value owns engine resources that [[release]] frees. */
+  def holdsReferences: Boolean = false
+
+  /** Release what a value decoded by [[fromVariant]] owns (once it is replaced). */
+  def release(value: A): Unit = ()
 }
 
 object ExportType {
@@ -39,12 +53,31 @@ object ExportType {
       def fromVariant(v: GDExtensionVariantPtr) = fv.fromVariant(v)
     }
 
+  /** Primitive exports read and write the Variant at its address directly. */
+  private def primitive[A](vt: GDExtensionVariantType)(
+    write: (Long, A) => Unit,
+    read: Long => A
+  )(using tv: ToVariant[A], fv: FromVariant[A]): ExportType[A] =
+    new ExportType[A] {
+      def variantType = vt
+      def toVariant(value: A, dest: GDExtensionVariantPtr) =
+        tv.toVariant(value, dest)
+      def fromVariant(v: GDExtensionVariantPtr) = fv.fromVariant(v)
+      override def toVariantAt(value: A, dest: Long) = write(dest, value)
+      override def fromVariantAt(src: Long) = read(src)
+    }
+
   // --- primitives ---------------------------------------------------------
-  given ExportType[Long]    = fromSeam[Long](GDEXTENSION_VARIANT_TYPE_INT)
-  given ExportType[Int]     = fromSeam[Int](GDEXTENSION_VARIANT_TYPE_INT)
-  given ExportType[Double]  = fromSeam[Double](GDEXTENSION_VARIANT_TYPE_FLOAT)
-  given ExportType[Float]   = fromSeam[Float](GDEXTENSION_VARIANT_TYPE_FLOAT)
-  given ExportType[Boolean] = fromSeam[Boolean](GDEXTENSION_VARIANT_TYPE_BOOL)
+  given ExportType[Long] = primitive[Long](GDEXTENSION_VARIANT_TYPE_INT)(
+    VariantIO.writeLong, VariantIO.readLong)
+  given ExportType[Int] = primitive[Int](GDEXTENSION_VARIANT_TYPE_INT)(
+    (d, v) => VariantIO.writeLong(d, v.toLong), s => VariantIO.readLong(s).toInt)
+  given ExportType[Double] = primitive[Double](GDEXTENSION_VARIANT_TYPE_FLOAT)(
+    VariantIO.writeDouble, VariantIO.readDouble)
+  given ExportType[Float] = primitive[Float](GDEXTENSION_VARIANT_TYPE_FLOAT)(
+    (d, v) => VariantIO.writeDouble(d, v.toDouble), s => VariantIO.readDouble(s).toFloat)
+  given ExportType[Boolean] = primitive[Boolean](GDEXTENSION_VARIANT_TYPE_BOOL)(
+    VariantIO.writeBool, VariantIO.readBool)
   given ExportType[String]  = fromSeam[String](GDEXTENSION_VARIANT_TYPE_STRING)
 
   // --- color --------------------------------------------------------------
@@ -97,6 +130,8 @@ object ExportType {
     def toVariant(value: Arr[A], dest: GDExtensionVariantPtr) =
       ta.toVariant(value, dest)
     def fromVariant(v: GDExtensionVariantPtr) = fa.fromVariant(v)
+    override def holdsReferences = true
+    override def release(value: Arr[A]) = if (value != null) value.free()
   }
 
   given dictExport[K, V](using
@@ -111,13 +146,16 @@ object ExportType {
     def toVariant(value: Dict[K, V], dest: GDExtensionVariantPtr) =
       tdict.toVariant(value, dest)
     def fromVariant(v: GDExtensionVariantPtr) = fdict.fromVariant(v)
+    override def holdsReferences = true
+    override def release(value: Dict[K, V]) = if (value != null) value.free()
   }
 
   // --- optionality derivations over any RefLeaf ---------------------------
   /** Bare `X` (no wrapper) is treated as Required: stored, may be null at runtime. */
   given bareRef[A](using r: RefLeaf[A]): ExportType[A] = refExport(r)(
     toV = (a, dest) => ObjectVariant.write(r.handleOf(a), dest),
-    fromV = v => r.fromHandle(ObjectVariant.read(v))
+    fromV = v => r.fromHandle(ObjectVariant.read(v)),
+    rel = a => r.release(a)
   )
 
   given optRef[A](using r: RefLeaf[A]): ExportType[Option[A]] =
@@ -127,7 +165,8 @@ object ExportType {
       fromV = v => {
         val p = ObjectVariant.read(v)
         if (p == null) None else Some(r.fromHandle(p))
-      }
+      },
+      rel = a => if (a != null) a.foreach(r.release)
     )
 
   given reqRef[A](using r: RefLeaf[A]): ExportType[Required[A]] =
@@ -137,13 +176,17 @@ object ExportType {
       fromV = v => {
         val p = ObjectVariant.read(v)
         if (p == null) Required.unassigned[A] else Required(r.fromHandle(p))
-      }
+      },
+      rel = a => if (a != null) a.toOption.foreach(r.release)
     )
 
   private def refExport[W](leaf: RefLeaf[?])(
     toV: (W, GDExtensionVariantPtr) => Unit,
-    fromV: GDExtensionVariantPtr => W
+    fromV: GDExtensionVariantPtr => W,
+    rel: W => Unit
   ): ExportType[W] = new ExportType[W] {
+    override def holdsReferences = leaf.holdsReferences
+    override def release(value: W) = rel(value)
     def variantType = GDEXTENSION_VARIANT_TYPE_OBJECT
     override def hint = leaf.hint
     override def hintString = leaf.className
@@ -166,6 +209,10 @@ trait RefLeaf[A] {
   def sceneRootType: Option[String] = None
   def handleOf(a: A): GDExtensionObjectPtr
   def fromHandle(p: GDExtensionObjectPtr): A
+
+  /** True when [[fromHandle]] takes a reference that [[release]] drops. */
+  def holdsReferences: Boolean = false
+  def release(a: A): Unit = ()
 }
 
 object RefLeaf {
@@ -196,6 +243,8 @@ object RefLeaf {
         if (wrapped != null) wrapped.refInc()
         wrapped
       }
+      override def holdsReferences = true
+      override def release(a: T) = if (a != null) a.unref()
     }
 
   given tresLeaf[T <: Resource](using meta: ClassMeta[T]): RefLeaf[Tres[T]] =
@@ -210,6 +259,9 @@ object RefLeaf {
         if (wrapped != null) wrapped.refInc()
         Tres(wrapped)
       }
+      override def holdsReferences = true
+      override def release(a: Tres[T]) =
+        if (a != null && a.raw != null) a.raw.unref()
     }
 
   given tscnLeaf[T <: GodotScriptClass](using
@@ -220,7 +272,12 @@ object RefLeaf {
     def className = "PackedScene"
     override def sceneRootType = Some(root.className)
     def handleOf(a: Tscn[T]) = if (a.raw == null) null else a.raw.hostPtr
-    def fromHandle(p: GDExtensionObjectPtr) =
-      Tscn[T](ps.fromHandle(p).refInc())
+    def fromHandle(p: GDExtensionObjectPtr) = {
+      val scene = ps.fromHandle(p)
+      Tscn[T](if (scene == null) scene else scene.refInc())
+    }
+    override def holdsReferences = true
+    override def release(a: Tscn[T]) =
+      if (a != null && a.raw != null) a.raw.unref()
   }
 }

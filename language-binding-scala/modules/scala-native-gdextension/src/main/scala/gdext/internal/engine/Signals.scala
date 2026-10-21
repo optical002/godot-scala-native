@@ -12,6 +12,8 @@ object Signals {
   // Object.connect(signal: StringName, callable: Callable, flags: int) -> Error
   private final val ConnectHash = 1518946055L
 
+  private val connectBind = new CachedBind("Object", "connect", ConnectHash)
+
   /**
    * Connect `signal` on `host` to `callable`. Returns the engine `Error` code
    * (0 == OK). `connect` returns a value, so this uses the value ptrcall path
@@ -24,7 +26,7 @@ object Signals {
     flags: Long = 0L
   ): Long =
     Ptrcall.call3[StringName, Callable, Long, Long](
-      MethodBind.get("Object", "connect", ConnectHash),
+      connectBind.ptr,
       host.objectPtr,
       StringNames.cached(signal),
       callable,

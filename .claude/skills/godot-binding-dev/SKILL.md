@@ -12,7 +12,7 @@ is no source `ProjectRef`. So any change under `language-binding-scala/` (bindin
 code, generator, or plugin) must be republished before harness will see it:
 
 ```
-cd language-binding-scala && sbt publishLocal   # gdext + plugin @ 0.1.8
+cd language-binding-scala && sbt publishLocal   # gdext + plugin @ 0.1.9
 cd harness-scala          && sbt godotBuild     # generate, compile, link, swap .so
 ```
 
@@ -40,6 +40,7 @@ is not proof.
 | `godot/scala.gdextension` | plugin `godotManifest`; tune `godotLibName` / `godotCompatibilityMinimum` / `godotManifestName` |
 | `game/GeneratedRegistrations.scala`, `game/GeneratedEntry.scala` | `RegistrationScan` (runs every compile) |
 | `game/harness/Harness*.scala`, `godot/harness_manifest.json`, `godot/node_harness.tscn` | `igen/HarnessClassGenerator` → `sbt igen/regenerate` |
+| `gdext/builtin/BuiltinSizes.scala`, `gdext/builtin/ColorNames.scala`, `game/harness/MathParity*.scala` | `igen/BuiltinGenerator` → `sbt igen/regenerate` |
 
 A `PreToolUse` hook blocks edits to the first three. When editing the editor
 addon, change **both** the plugin's template resource and the installed copy in
@@ -52,11 +53,11 @@ Read only what the task needs.
 | Reference | Read when you need to… |
 |---|---|
 | [architecture.md](references/architecture.md) | understand modules, package layout, public-vs-internal surface, bootstrap, publishing |
-| [conventions.md](references/conventions.md) | recall hard-won gotchas: struct writes, `sizeof`, the C ABI exception boundary, hot-reload protocol, logging split |
+| [conventions.md](references/conventions.md) | recall hard-won gotchas: struct writes, `sizeof`, the C ABI exception boundary, **zero-allocation rules (Ptr boxing, exported trampolines)**, `Ref<T>` return semantics, hot-reload protocol, logging split |
 | [layer1-ffi.md](references/layer1-ffi.md) | touch the raw GDExtension FFI, interface loading, or `gdextension_interface.json` codegen |
-| [layer2-builtin.md](references/layer2-builtin.md) | work on Variant, GString/StringName, math types, Array/Dictionary marshalling |
+| [layer2-builtin.md](references/layer2-builtin.md) | work on Variant, GString/StringName, the math library (ported core/math + parity harness), Array/Dictionary marshalling |
 | [layer3-engine.md](references/layer3-engine.md) | work on generated engine classes or the engine-class generator |
-| [layer4-obj.md](references/layer4-obj.md) | work on casting, refcounting, instance lifetime, `ClassMeta` (note: there is no `Gd[T]` smart pointer) |
+| [layer4-obj.md](references/layer4-obj.md) | work on casting, the wrapper cache (`Wrappers`), owned refs / `Gd.scoped` (`Ownership`), instance lifetime, `ClassMeta` (no `Gd[T]` smart pointer) |
 | [layer5-register.md](references/layer5-register.md) | register user classes: macros, annotations, methods/properties/signals, export hints |
 
 ## Invariants worth restating
@@ -65,7 +66,7 @@ Read only what the task needs.
   `gdext.annotations`. Everything else is `gdext.internal.*`, much of it
   `private[gdext]` and compiler-enforced.
 - Never let exceptions unwind across the C ABI — catch at the boundary.
-- Dev version is `0.1.8`; releases are plain semver tags built by JitPack.
+- Dev version is `0.1.9`; releases are plain semver tags built by JitPack.
 
 ## Maintenance
 

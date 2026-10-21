@@ -135,17 +135,18 @@ object CompEnum {
       // property per state (including the built-in Start/End); the tree's own
       // `parameters/...` list can't be used because states whose node has no
       // parameters (e.g. a plain AnimationNodeAnimation) don't appear there.
-      val root = t.getTreeRoot()
-      val names =
-        if (root.isNull) Seq.empty[String]
+      val names = gdext.api.Gd.scoped {
+        val root = t.getTreeRoot()
+        if (root == null) Seq.empty[String]
         else
           ObjectPropertyList
-            .names(root.objectPtr)
+            .names(root.hostPtr)
             .collect {
               case p if p.startsWith("states/") && p.endsWith("/node") =>
                 p.stripPrefix("states/").stripSuffix("/node")
             }
             .distinct
+      }
       if (names.isEmpty) Seq("") else names
     }
 
@@ -164,23 +165,25 @@ object CompEnum {
   def animationStateNodeNames(t: AnimationTree, state: String): Seq[String] =
     if (t == null || state.isEmpty) Seq("")
     else {
-      val root = t.getTreeRoot()
-      val names =
-        if (root.isNull) Seq.empty[String]
+      val names = gdext.api.Gd.scoped {
+        val root = t.getTreeRoot()
+        if (root == null) Seq.empty[String]
         else {
-          val stateMachine =
-            summon[ClassMeta[AnimationNodeStateMachine]].fromHandle(root.objectPtr)
-          val stateNode = stateMachine.getNode(StringNames.cached(state))
-          if (stateNode.isNull) Seq.empty[String]
+          val stateMachine = root.cast[AnimationNodeStateMachine]
+          val stateNode =
+            if (stateMachine == null) null
+            else stateMachine.getNode(StringNames.cached(state))
+          if (stateNode == null) Seq.empty[String]
           else
             ObjectPropertyList
-              .names(stateNode.objectPtr)
+              .names(stateNode.hostPtr)
               .collect {
                 case p if p.startsWith("nodes/") && p.endsWith("/node") =>
                   p.stripPrefix("nodes/").stripSuffix("/node")
               }
               .distinct
         }
+      }
       if (names.isEmpty) Seq("") else names
     }
 

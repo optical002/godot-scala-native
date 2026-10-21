@@ -35,6 +35,14 @@ const SBT_EXECUTABLE := "sbt"         # on PATH, or an absolute path
     does not edit it. Enable the plugin yourself in *Project Settings >
     Plugins*.
 
+## Rebuild time
+
+Each save relinks the native library. Projects build with Scala Native's
+optimizer (`godotNativeMode := "releaseFast"`, the default). For a large project
+where linking dominates the reload time, `godotNativeMode := "debug"` links
+faster, at the cost of the zero-allocation hot path (see
+[Performance](performance.md#build-modes)).
+
 ## Without the plugin
 
 Run the watch in a terminal instead:

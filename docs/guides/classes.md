@@ -70,12 +70,19 @@ override def _process(delta: Double): Unit =
   setPosition(getPosition() + Vector2(1f, 0f))
 ```
 
-Methods that return an engine object return a raw handle. Wrap it as the type
-you expect:
+Methods that return an engine object return its typed wrapper, or `null` when
+there is none. Use `cast` to narrow it to a subclass (`null` if the object is not
+one):
 
 ```scala
-val mesh = Gd.wrap[ArrayMesh](body.getMesh())
+val parent: Node = getParent()
+val mesh: ArrayMesh = body.getMesh().cast[ArrayMesh]
 ```
+
+Each engine object has exactly one wrapper, so the same node always comes back
+as the same Scala object. Methods returning a `RefCounted` (`getMesh`,
+`ResourceLoader.load`, ...) hand you a reference to release; see
+[Memory and object lifetimes](memory.md).
 
 ## Creating objects
 
@@ -84,8 +91,9 @@ val mesh  = Gd.create[ArrayMesh]()          // engine class
 val enemy = Gd.create[Enemy](Some(this))    // game class, added as a child
 ```
 
-`Gd.create` works for engine and game classes alike. Reference-counted classes
-(`Resource` and its subclasses) are reference-initialised. When you pass a parent
+`Gd.create` works for engine and game classes alike. A reference-counted class
+(`Resource` and its subclasses) comes back owning its first reference: release
+it with `unref()` or create it inside `Gd.scoped`. When you pass a parent
 `Node`, the new node is added as its child.
 
 ## Logging

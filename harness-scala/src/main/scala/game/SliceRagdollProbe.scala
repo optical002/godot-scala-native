@@ -191,7 +191,7 @@ final class SliceRagdollProbe(
   @func def testSkinnedCustom0(): String = run { c =>
     val skel = skeleton
     val body = node[MeshInstance3D]("Body")
-    val mesh = Gd.wrap[ArrayMesh](body.getMesh())
+    val mesh = body.getMesh().cast[ArrayMesh]
     val format = mesh.surfaceGetFormat(0)
     c.check("source has bones", (format & FormatBones) != 0L)
     c.check("source has weights", (format & FormatWeights) != 0L)
@@ -468,8 +468,8 @@ final class SliceRagdollProbe(
       |""".stripMargin
 
   private def cpuSkinned(body: MeshInstance3D, skel: Skeleton3D): Vector[Vector3] = {
-    val mesh = Gd.wrap[ArrayMesh](body.getMesh())
-    val skin = Gd.wrap[Skin](body.getSkin())
+    val mesh = body.getMesh().cast[ArrayMesh]
+    val skin = body.getSkin()
     val binds = (0L until skin.getBindCount()).map { b =>
       val direct = skin.getBindBone(b)
       val bone =
@@ -495,7 +495,7 @@ final class SliceRagdollProbe(
   }
 
   private def restVertex(body: MeshInstance3D, i: Int): Vector3 = {
-    val arrays = Gd.wrap[ArrayMesh](body.getMesh()).surfaceGetArrays(0)
+    val arrays = body.getMesh().cast[ArrayMesh].surfaceGetArrays(0)
     val vertices = arrays.get[PackedVector3Array](MeshArray.Vertex)
     val v = vertices(i)
     vertices.free()
@@ -661,9 +661,7 @@ final class SliceRagdollProbe(
     val sim = simulator
     (0L until sim.getChildCount(false)).flatMap { i =>
       val child = sim.getChild(i, false)
-      if (Gd.wrap[Object](child).isClass("PhysicalBone3D"))
-        Some(Gd.wrap[PhysicalBone3D](child))
-      else None
+      Option(child.cast[PhysicalBone3D])
     }
   }
 
@@ -671,9 +669,9 @@ final class SliceRagdollProbe(
     name: String
   )(using gdext.internal.engine.ClassMeta[T]): T = {
     val found = findChild(name, true, false)
-    if (found.isNull)
+    if (found == null)
       throw new IllegalStateException(s"scene is missing node '$name'")
-    Gd.wrap[T](found)
+    found.cast[T]
   }
 
   private def close(a: Vector3, b: Vector3): Boolean =
@@ -682,14 +680,16 @@ final class SliceRagdollProbe(
     ) < 1e-3f
 
   private def closeT(a: Transform3D, b: Transform3D): Boolean =
-    close(a.origin, b.origin) && close(a.basis.row0, b.basis.row0) &&
-      close(a.basis.row1, b.basis.row1) && close(a.basis.row2, b.basis.row2)
+    close(a.origin, b.origin) && close(a.basis.x, b.basis.x) &&
+      close(a.basis.y, b.basis.y) && close(a.basis.z, b.basis.z)
 
   private def finite(f: Float): Boolean = !f.isNaN && !f.isInfinite
 
   private def run(body: Checks => Unit): String = {
     val c = new Checks
-    try body(c)
+    // Every RefCounted reference a step adopts (meshes, materials, shapes,
+    // engine Ref<T> returns) is released when the step ends.
+    try Gd.scoped(body(c))
     catch {
       case t: Throwable =>
         c.fail(s"unexpected ${t.getClass.getSimpleName}: ${t.getMessage}")

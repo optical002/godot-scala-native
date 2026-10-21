@@ -16,7 +16,7 @@ The repo root is a **workspace, not an sbt build**. Three siblings:
 - `godot/` — the Godot project the built `.so` is loaded into.
 
 Harness consumes the binding and plugin as **published artifacts** — there is no
-source `ProjectRef`. Dev version `0.1.8`, group
+source `ProjectRef`. Dev version `0.1.9`, group
 `com.github.optical002.godot-scala-native`.
 
 ## Build & verify
@@ -33,16 +33,19 @@ failure, not a build error. A `PreToolUse` hook warns when this is about to happ
 Codegen: `cd language-binding-scala && sbt igen/regenerate`.
 
 **A clean `sbt` compile is not proof that a change works.** Only a clean headless
-run is. Run it yourself and read the output — exit 0 is not enough. Failures show
+run is. Hot-path changes also need `memory_verify.gd` (allocation budgets) and
+math changes `math_parity_verify.gd`. Run it yourself and read the output — exit 0 is not enough. Failures show
 up as `Cannot get class 'X'`, `Can't open dynamic library`, `ERROR:`, or a missing
 self-test banner.
 
 ## Invariants
 
-- **Generated code is never hand-edited** — `gdext/classes/` (~1025 files),
-  `gdext/internal/ffi/`, `godot/scala.gdextension`, `GeneratedRegistrations`/
-  `GeneratedEntry`, and the `game/harness/` files. Change the generator and
-  regenerate. A hook blocks the first three.
+- **Generated code is never hand-edited** — `gdext/classes/` (~1025 files;
+  `EngineExtras.scala` is the one hand-written file there),
+  `gdext/internal/ffi/`, `godot/scala.gdextension`, `gdext/builtin/BuiltinSizes.scala`
+  and `ColorNames.scala`, `GeneratedRegistrations`/`GeneratedEntry`, and the
+  `game/harness/` files. Change the generator and regenerate. A hook blocks
+  the first five.
 - **`publishLocal` precedes `godotBuild`** after any binding, generator, or
   plugin change.
 - **`CHANGELOG.md` gets an entry** under the topmost *Unreleased* section for

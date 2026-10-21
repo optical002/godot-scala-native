@@ -4,81 +4,139 @@ import gdext.Godot
 import gdext.builtin.*
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
+import gdext.internal.ffi.types.GDExtensionMethodBindPtr
 
 /** Generated wrapper for Godot's `AnimationNodeStateMachineTransition`, extends `Resource`. */
 abstract class AnimationNodeStateMachineTransition extends Resource {
   override def godotClassName: String = "AnimationNodeStateMachineTransition"
 
   /** AnimationNodeStateMachineTransition.set_switch_mode */
-  final def setSwitchMode(mode: Long): Unit =
-    Ptrcall.callVoid1(MethodBind.get("AnimationNodeStateMachineTransition", "set_switch_mode", 2074906633L), hostObject.objectPtr, mode)
+  final def setSwitchMode(mode: Long): Unit = {
+    if (gdext.classes.AnimationNodeStateMachineTransition.mb_set_switch_mode == null) gdext.classes.AnimationNodeStateMachineTransition.mb_set_switch_mode = MethodBind.get("AnimationNodeStateMachineTransition", "set_switch_mode", 2074906633L)
+    Ptrcall.callVoid1(gdext.classes.AnimationNodeStateMachineTransition.mb_set_switch_mode, livePtr, mode)
+  }
 
   /** AnimationNodeStateMachineTransition.get_switch_mode */
-  final def getSwitchMode(): Long =
-    Ptrcall.call0[Long](MethodBind.get("AnimationNodeStateMachineTransition", "get_switch_mode", 2138562085L), hostObject.objectPtr)
+  final def getSwitchMode(): Long = {
+    if (gdext.classes.AnimationNodeStateMachineTransition.mb_get_switch_mode == null) gdext.classes.AnimationNodeStateMachineTransition.mb_get_switch_mode = MethodBind.get("AnimationNodeStateMachineTransition", "get_switch_mode", 2138562085L)
+    Ptrcall.call0[Long](gdext.classes.AnimationNodeStateMachineTransition.mb_get_switch_mode, livePtr)
+  }
 
   /** AnimationNodeStateMachineTransition.set_advance_mode */
-  final def setAdvanceMode(mode: Long): Unit =
-    Ptrcall.callVoid1(MethodBind.get("AnimationNodeStateMachineTransition", "set_advance_mode", 1210869868L), hostObject.objectPtr, mode)
+  final def setAdvanceMode(mode: Long): Unit = {
+    if (gdext.classes.AnimationNodeStateMachineTransition.mb_set_advance_mode == null) gdext.classes.AnimationNodeStateMachineTransition.mb_set_advance_mode = MethodBind.get("AnimationNodeStateMachineTransition", "set_advance_mode", 1210869868L)
+    Ptrcall.callVoid1(gdext.classes.AnimationNodeStateMachineTransition.mb_set_advance_mode, livePtr, mode)
+  }
 
   /** AnimationNodeStateMachineTransition.get_advance_mode */
-  final def getAdvanceMode(): Long =
-    Ptrcall.call0[Long](MethodBind.get("AnimationNodeStateMachineTransition", "get_advance_mode", 61101689L), hostObject.objectPtr)
+  final def getAdvanceMode(): Long = {
+    if (gdext.classes.AnimationNodeStateMachineTransition.mb_get_advance_mode == null) gdext.classes.AnimationNodeStateMachineTransition.mb_get_advance_mode = MethodBind.get("AnimationNodeStateMachineTransition", "get_advance_mode", 61101689L)
+    Ptrcall.call0[Long](gdext.classes.AnimationNodeStateMachineTransition.mb_get_advance_mode, livePtr)
+  }
 
   /** AnimationNodeStateMachineTransition.set_advance_condition */
-  final def setAdvanceCondition(name: gdext.builtin.StringName): Unit =
-    Ptrcall.callVoid1(MethodBind.get("AnimationNodeStateMachineTransition", "set_advance_condition", 3304788590L), hostObject.objectPtr, name)
+  final def setAdvanceCondition(name: gdext.builtin.StringName): Unit = {
+    if (gdext.classes.AnimationNodeStateMachineTransition.mb_set_advance_condition == null) gdext.classes.AnimationNodeStateMachineTransition.mb_set_advance_condition = MethodBind.get("AnimationNodeStateMachineTransition", "set_advance_condition", 3304788590L)
+    Ptrcall.callVoid1(gdext.classes.AnimationNodeStateMachineTransition.mb_set_advance_condition, livePtr, name)
+  }
 
   /** AnimationNodeStateMachineTransition.get_advance_condition */
-  final def getAdvanceCondition(): gdext.builtin.StringName =
-    Ptrcall.call0[gdext.builtin.StringName](MethodBind.get("AnimationNodeStateMachineTransition", "get_advance_condition", 2002593661L), hostObject.objectPtr)
+  final def getAdvanceCondition(): gdext.builtin.StringName = {
+    if (gdext.classes.AnimationNodeStateMachineTransition.mb_get_advance_condition == null) gdext.classes.AnimationNodeStateMachineTransition.mb_get_advance_condition = MethodBind.get("AnimationNodeStateMachineTransition", "get_advance_condition", 2002593661L)
+    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.AnimationNodeStateMachineTransition.mb_get_advance_condition, livePtr)
+  }
 
   /** AnimationNodeStateMachineTransition.set_xfade_time */
-  final def setXfadeTime(secs: Double): Unit =
-    Ptrcall.callVoid1(MethodBind.get("AnimationNodeStateMachineTransition", "set_xfade_time", 373806689L), hostObject.objectPtr, secs)
+  final def setXfadeTime(secs: Double): Unit = {
+    if (gdext.classes.AnimationNodeStateMachineTransition.mb_set_xfade_time == null) gdext.classes.AnimationNodeStateMachineTransition.mb_set_xfade_time = MethodBind.get("AnimationNodeStateMachineTransition", "set_xfade_time", 373806689L)
+    Ptrcall.callVoid1(gdext.classes.AnimationNodeStateMachineTransition.mb_set_xfade_time, livePtr, secs)
+  }
 
   /** AnimationNodeStateMachineTransition.get_xfade_time */
-  final def getXfadeTime(): Double =
-    Ptrcall.call0[Double](MethodBind.get("AnimationNodeStateMachineTransition", "get_xfade_time", 1740695150L), hostObject.objectPtr)
+  final def getXfadeTime(): Double = {
+    if (gdext.classes.AnimationNodeStateMachineTransition.mb_get_xfade_time == null) gdext.classes.AnimationNodeStateMachineTransition.mb_get_xfade_time = MethodBind.get("AnimationNodeStateMachineTransition", "get_xfade_time", 1740695150L)
+    Ptrcall.call0[Double](gdext.classes.AnimationNodeStateMachineTransition.mb_get_xfade_time, livePtr)
+  }
 
   /** AnimationNodeStateMachineTransition.set_xfade_curve */
-  final def setXfadeCurve(curve: Curve): Unit =
-    Ptrcall.callVoid1(MethodBind.get("AnimationNodeStateMachineTransition", "set_xfade_curve", 270443179L), hostObject.objectPtr, curve.hostObject)
+  final def setXfadeCurve(curve: Curve): Unit = {
+    if (gdext.classes.AnimationNodeStateMachineTransition.mb_set_xfade_curve == null) gdext.classes.AnimationNodeStateMachineTransition.mb_set_xfade_curve = MethodBind.get("AnimationNodeStateMachineTransition", "set_xfade_curve", 270443179L)
+    Ptrcall.callVoid1(gdext.classes.AnimationNodeStateMachineTransition.mb_set_xfade_curve, livePtr, Wrappers.handle(curve))
+  }
 
-  /** AnimationNodeStateMachineTransition.get_xfade_curve */
-  final def getXfadeCurve(): GodotObject =
-    Ptrcall.call0[GodotObject](MethodBind.get("AnimationNodeStateMachineTransition", "get_xfade_curve", 2460114913L), hostObject.objectPtr)
+  /** AnimationNodeStateMachineTransition.get_xfade_curve. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
+  final def getXfadeCurve(): Curve = {
+    if (gdext.classes.AnimationNodeStateMachineTransition.mb_get_xfade_curve == null) gdext.classes.AnimationNodeStateMachineTransition.mb_get_xfade_curve = MethodBind.get("AnimationNodeStateMachineTransition", "get_xfade_curve", 2460114913L)
+    Wrappers.owned[Curve](Ptrcall.call0[Long](gdext.classes.AnimationNodeStateMachineTransition.mb_get_xfade_curve, livePtr))
+  }
 
   /** AnimationNodeStateMachineTransition.set_break_loop_at_end */
-  final def setBreakLoopAtEnd(enable: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("AnimationNodeStateMachineTransition", "set_break_loop_at_end", 2586408642L), hostObject.objectPtr, enable)
+  final def setBreakLoopAtEnd(enable: Boolean): Unit = {
+    if (gdext.classes.AnimationNodeStateMachineTransition.mb_set_break_loop_at_end == null) gdext.classes.AnimationNodeStateMachineTransition.mb_set_break_loop_at_end = MethodBind.get("AnimationNodeStateMachineTransition", "set_break_loop_at_end", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.AnimationNodeStateMachineTransition.mb_set_break_loop_at_end, livePtr, enable)
+  }
 
   /** AnimationNodeStateMachineTransition.is_loop_broken_at_end */
-  final def isLoopBrokenAtEnd(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("AnimationNodeStateMachineTransition", "is_loop_broken_at_end", 36873697L), hostObject.objectPtr)
+  final def isLoopBrokenAtEnd(): Boolean = {
+    if (gdext.classes.AnimationNodeStateMachineTransition.mb_is_loop_broken_at_end == null) gdext.classes.AnimationNodeStateMachineTransition.mb_is_loop_broken_at_end = MethodBind.get("AnimationNodeStateMachineTransition", "is_loop_broken_at_end", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.AnimationNodeStateMachineTransition.mb_is_loop_broken_at_end, livePtr)
+  }
 
   /** AnimationNodeStateMachineTransition.set_reset */
-  final def setReset(reset: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("AnimationNodeStateMachineTransition", "set_reset", 2586408642L), hostObject.objectPtr, reset)
+  final def setReset(reset: Boolean): Unit = {
+    if (gdext.classes.AnimationNodeStateMachineTransition.mb_set_reset == null) gdext.classes.AnimationNodeStateMachineTransition.mb_set_reset = MethodBind.get("AnimationNodeStateMachineTransition", "set_reset", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.AnimationNodeStateMachineTransition.mb_set_reset, livePtr, reset)
+  }
 
   /** AnimationNodeStateMachineTransition.is_reset */
-  final def isReset(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("AnimationNodeStateMachineTransition", "is_reset", 36873697L), hostObject.objectPtr)
+  final def isReset(): Boolean = {
+    if (gdext.classes.AnimationNodeStateMachineTransition.mb_is_reset == null) gdext.classes.AnimationNodeStateMachineTransition.mb_is_reset = MethodBind.get("AnimationNodeStateMachineTransition", "is_reset", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.AnimationNodeStateMachineTransition.mb_is_reset, livePtr)
+  }
 
   /** AnimationNodeStateMachineTransition.set_priority */
-  final def setPriority(priority: Long): Unit =
-    Ptrcall.callVoid1(MethodBind.get("AnimationNodeStateMachineTransition", "set_priority", 1286410249L), hostObject.objectPtr, priority)
+  final def setPriority(priority: Long): Unit = {
+    if (gdext.classes.AnimationNodeStateMachineTransition.mb_set_priority == null) gdext.classes.AnimationNodeStateMachineTransition.mb_set_priority = MethodBind.get("AnimationNodeStateMachineTransition", "set_priority", 1286410249L)
+    Ptrcall.callVoid1(gdext.classes.AnimationNodeStateMachineTransition.mb_set_priority, livePtr, priority)
+  }
 
   /** AnimationNodeStateMachineTransition.get_priority */
-  final def getPriority(): Long =
-    Ptrcall.call0[Long](MethodBind.get("AnimationNodeStateMachineTransition", "get_priority", 3905245786L), hostObject.objectPtr)
+  final def getPriority(): Long = {
+    if (gdext.classes.AnimationNodeStateMachineTransition.mb_get_priority == null) gdext.classes.AnimationNodeStateMachineTransition.mb_get_priority = MethodBind.get("AnimationNodeStateMachineTransition", "get_priority", 3905245786L)
+    Ptrcall.call0[Long](gdext.classes.AnimationNodeStateMachineTransition.mb_get_priority, livePtr)
+  }
 
   /** AnimationNodeStateMachineTransition.set_advance_expression */
-  final def setAdvanceExpression(text: String): Unit =
-    Ptrcall.callVoid1(MethodBind.get("AnimationNodeStateMachineTransition", "set_advance_expression", 83702148L), hostObject.objectPtr, text)
+  final def setAdvanceExpression(text: String): Unit = {
+    if (gdext.classes.AnimationNodeStateMachineTransition.mb_set_advance_expression == null) gdext.classes.AnimationNodeStateMachineTransition.mb_set_advance_expression = MethodBind.get("AnimationNodeStateMachineTransition", "set_advance_expression", 83702148L)
+    Ptrcall.callVoid1(gdext.classes.AnimationNodeStateMachineTransition.mb_set_advance_expression, livePtr, text)
+  }
 
   /** AnimationNodeStateMachineTransition.get_advance_expression */
-  final def getAdvanceExpression(): String =
-    Ptrcall.call0[String](MethodBind.get("AnimationNodeStateMachineTransition", "get_advance_expression", 201670096L), hostObject.objectPtr)
+  final def getAdvanceExpression(): String = {
+    if (gdext.classes.AnimationNodeStateMachineTransition.mb_get_advance_expression == null) gdext.classes.AnimationNodeStateMachineTransition.mb_get_advance_expression = MethodBind.get("AnimationNodeStateMachineTransition", "get_advance_expression", 201670096L)
+    Ptrcall.call0[String](gdext.classes.AnimationNodeStateMachineTransition.mb_get_advance_expression, livePtr)
+  }
 
+}
+
+object AnimationNodeStateMachineTransition {
+  private[classes] var mb_set_switch_mode: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_switch_mode: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_advance_mode: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_advance_mode: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_advance_condition: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_advance_condition: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_xfade_time: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_xfade_time: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_xfade_curve: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_xfade_curve: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_break_loop_at_end: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_loop_broken_at_end: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_reset: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_reset: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_priority: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_priority: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_advance_expression: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_advance_expression: GDExtensionMethodBindPtr = null
 }

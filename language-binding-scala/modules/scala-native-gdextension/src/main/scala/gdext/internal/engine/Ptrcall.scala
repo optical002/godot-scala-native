@@ -1,608 +1,461 @@
 package gdext.internal.engine
 
+import scala.compiletime.{erasedValue, error}
 import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
 import gdext.Godot
 import gdext.builtin.*
 import gdext.internal.ffi.types.*
 
-/**
- * Marshalling for engine method `ptrcall`s.
- *
- * Unlike the Variant path (Phase 1), `ptrcall` passes each argument as a
- * pointer to its *native* representation (an int64, a double, an 8-byte
- * Vector2, an object pointer, ...) and writes the return value's native
- * representation into a caller-provided buffer. This is the fast path Godot
- * uses for statically-typed calls, and the default the generated engine-class
- * wrappers use. Vararg / Variant-typed methods fall back to the call path
- * (added alongside this when first needed).
- *
- * [[PtrArg]] knows how to lay a Scala value down as a ptrcall argument;
- * [[PtrRet]] knows how to read a return value back and how big its buffer is.
- */
-trait PtrArg[A] {
-  /** Bytes needed for this argument's native representation. */
-  def size: Int
-  /** Write `value` into `buf` (exactly [[size]] bytes). */
-  def write(value: A, buf: Ptr[Byte]): Unit
-}
+/** Compile-time marshalling for engine method `ptrcall`s.
+  *
+  * `ptrcall` passes each argument as a pointer to its *native* representation
+  * (an int64, a double, a Vector2's 8 bytes, an object pointer, ...) and writes
+  * the return value's native representation into a caller-provided buffer.
+  *
+  * Every method here is `inline` and dispatches on the static type with
+  * `erasedValue`, so a call site expands to straight-line code for its exact
+  * types: no typeclass instances, no boxing of primitives or `Ptr`-backed
+  * opaque types, no heap allocation. Argument and return buffers live on the
+  * stack of the (non-inline) calling method.
+  */
+object Marshal {
 
-trait PtrRet[A] {
-  def size: Int
-  def read(buf: Ptr[Byte]): A
-}
-
-object PtrArg {
-  def apply[A](using p: PtrArg[A]): PtrArg[A] = p
-
-  given PtrArg[Long] with {
-    def size = 8
-    def write(v: Long, b: Ptr[Byte]) = !b.asInstanceOf[Ptr[GDExtensionInt]] = v
-  }
-  given PtrArg[Int] with {
-    def size = 8 // engine ints are int64 on the ptrcall boundary
-    def write(v: Int, b: Ptr[Byte]) = !b.asInstanceOf[Ptr[GDExtensionInt]] = v.toLong
-  }
-  given PtrArg[Boolean] with {
-    def size = 1
-    def write(v: Boolean, b: Ptr[Byte]) =
-      !b.asInstanceOf[Ptr[GDExtensionBool]] = (if (v) 1 else 0).toUByte
-  }
-  given PtrArg[Double] with {
-    def size = 8
-    def write(v: Double, b: Ptr[Byte]) = !b.asInstanceOf[Ptr[CDouble]] = v
-  }
-  given PtrArg[Vector2] with {
-    def size = BuiltinSizes.Vector2
-    def write(v: Vector2, b: Ptr[Byte]) = Vector2.writeType(v, b)
-  }
-  given PtrArg[Color] with {
-    def size = BuiltinSizes.Color
-    def write(v: Color, b: Ptr[Byte]) = Color.writeType(v, b)
-  }
-  /**
-   * String arguments: the buffer holds an 8-byte Godot String handle built
-   * from the Scala value. NOTE: this currently leaks the constructed String's
-   * reference once per call (there is no post-call hook in the fixed-arity
-   * dispatchers to destroy it). A follow-up should give Ptrcall a cleanup pass;
-   * tracked as a known Phase 2 limitation.
-   */
-  given PtrArg[String] with {
-    def size = BuiltinSizes.String
-    def write(v: String, b: Ptr[Byte]) = { GString.from(v, b); () }
-  }
-  /** Object arguments are passed as a pointer to the object pointer. */
-  given PtrArg[GodotObject] with {
-    def size = sizeof[Ptr[Byte]].toInt
-    def write(v: GodotObject, b: Ptr[Byte]) =
-      !b.asInstanceOf[Ptr[GDExtensionObjectPtr]] = v.objectPtr
+  /** Bytes needed for `A`'s native representation. Object returns are read as
+    * the pointer's address (`Long`), never as a `Ptr`, so no box is made.
+    */
+  inline def size[A]: Int = inline erasedValue[A] match {
+    case _: Long        => 8
+    case _: Int         => 8
+    case _: Double      => 8
+    case _: Boolean     => 1
+    case _: GodotObject => 8
+    case _: String      => BuiltinSizes.String
+    case _: StringName  => BuiltinSizes.StringName
+    case _: Variant     => BuiltinSizes.Variant
+    case _: Callable    => BuiltinSizes.Callable
+    case _: Vector2     => BuiltinSizes.Vector2
+    case _: Vector2i    => BuiltinSizes.Vector2i
+    case _: Vector3     => BuiltinSizes.Vector3
+    case _: Vector3i    => BuiltinSizes.Vector3i
+    case _: Vector4     => BuiltinSizes.Vector4
+    case _: Vector4i    => BuiltinSizes.Vector4i
+    case _: Color       => BuiltinSizes.Color
+    case _: Rect2       => BuiltinSizes.Rect2
+    case _: Rect2i      => BuiltinSizes.Rect2i
+    case _: Quaternion  => BuiltinSizes.Quaternion
+    case _: Plane       => BuiltinSizes.Plane
+    case _: AABB        => BuiltinSizes.AABB
+    case _: Basis       => BuiltinSizes.Basis
+    case _: Transform2D => BuiltinSizes.Transform2D
+    case _: Transform3D => BuiltinSizes.Transform3D
+    case _: Projection  => BuiltinSizes.Projection
+    case _              => error("ptrcall: unsupported type")
   }
 
-  /**
-   * StringName arguments: ptrcall expects `args[i]` to point at the StringName's
-   * 8-byte opaque storage. A cached [[StringName]] (`v.ptr`) already points at
-   * that storage, so we copy its 8 handle bytes into the call buffer `b` (the
-   * same shape as [[PtrArg]] for `String`, which writes the handle into `b`).
-   *
-   * NB: writing the *pointer* `v.ptr` here instead would add one level of
-   * indirection — the engine would then read the storage address as if it were
-   * the StringName's internal data and crash.
-   */
-  given PtrArg[StringName] with {
-    def size = BuiltinSizes.StringName
-    def write(v: StringName, b: Ptr[Byte]) = {
-      val src = v.ptr.asInstanceOf[Ptr[Byte]]
-      var i = 0
-      while (i < BuiltinSizes.StringName) { b(i) = src(i); i += 1 }
+  /** Lay `v` down as a ptrcall argument in `b` ([[size]] bytes). A String
+    * argument builds a temporary Godot String that [[release]] destroys after
+    * the call; every other kind is a plain copy.
+    */
+  inline def write[A](inline v: A, b: Ptr[Byte]): Unit =
+    inline erasedValue[A] match {
+      case _: Long =>
+        !b.asInstanceOf[Ptr[GDExtensionInt]] = v.asInstanceOf[Long]
+      case _: Int =>
+        !b.asInstanceOf[Ptr[GDExtensionInt]] = v.asInstanceOf[Int].toLong
+      case _: Double  => !b.asInstanceOf[Ptr[CDouble]] = v.asInstanceOf[Double]
+      case _: Boolean =>
+        !b.asInstanceOf[Ptr[GDExtensionBool]] =
+          (if (v.asInstanceOf[Boolean]) 1 else 0).toUByte
+      case _: GodotObject =>
+        !b.asInstanceOf[Ptr[GDExtensionObjectPtr]] =
+          GodotObject.objectPtr(v.asInstanceOf[GodotObject])
+      case _: String => GString.writeAt(v.asInstanceOf[String], b.toLong)
+      // A StringName / Variant / Callable value is a pointer to its storage;
+      // ptrcall wants the storage bytes themselves in the arg buffer.
+      case _: StringName =>
+        copy(
+          v.asInstanceOf[StringName].ptr.asInstanceOf[Ptr[Byte]],
+          b,
+          BuiltinSizes.StringName
+        )
+      case _: Variant =>
+        copy(
+          v.asInstanceOf[Variant].ptr.asInstanceOf[Ptr[Byte]],
+          b,
+          BuiltinSizes.Variant
+        )
+      case _: Callable =>
+        copy(v.asInstanceOf[Callable].ptr, b, BuiltinSizes.Callable)
+      case _: Vector2     => Vector2.writeType(v.asInstanceOf[Vector2], b)
+      case _: Vector2i    => Vector2i.writeType(v.asInstanceOf[Vector2i], b)
+      case _: Vector3     => Vector3.writeType(v.asInstanceOf[Vector3], b)
+      case _: Vector3i    => Vector3i.writeType(v.asInstanceOf[Vector3i], b)
+      case _: Vector4     => Vector4.writeType(v.asInstanceOf[Vector4], b)
+      case _: Vector4i    => Vector4i.writeType(v.asInstanceOf[Vector4i], b)
+      case _: Color       => Color.writeType(v.asInstanceOf[Color], b)
+      case _: Rect2       => Rect2.writeType(v.asInstanceOf[Rect2], b)
+      case _: Rect2i      => Rect2i.writeType(v.asInstanceOf[Rect2i], b)
+      case _: Quaternion  => Quaternion.writeType(v.asInstanceOf[Quaternion], b)
+      case _: Plane       => Plane.writeType(v.asInstanceOf[Plane], b)
+      case _: AABB        => AABB.writeType(v.asInstanceOf[AABB], b)
+      case _: Basis       => Basis.writeType(v.asInstanceOf[Basis], b)
+      case _: Transform2D =>
+        Transform2D.writeType(v.asInstanceOf[Transform2D], b)
+      case _: Transform3D =>
+        Transform3D.writeType(v.asInstanceOf[Transform3D], b)
+      case _: Projection => Projection.writeType(v.asInstanceOf[Projection], b)
     }
+
+  /** Destroy whatever [[write]] built in `b` once the call has returned. */
+  inline def release[A](b: Ptr[Byte]): Unit = inline erasedValue[A] match {
+    case _: String =>
+      VariantConstructors.destructor(
+        gdext.internal.ffi.types.GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_STRING
+      )(b)
+    case _ => ()
   }
 
-  /**
-   * Callable arguments: the buffer holds the 16-byte Callable value, copied from
-   * the caller-built storage (a Callable is an inline builtin, not a handle).
-   */
-  given PtrArg[Callable] with {
-    def size = BuiltinSizes.Callable
-    def write(v: Callable, b: Ptr[Byte]) = {
-      val src = v.ptr
-      var i = 0
-      while (i < BuiltinSizes.Callable) { b(i) = src(i); i += 1 }
-    }
+  /** Read a ptrcall return value of type `R` out of `b`. Owned engine values in
+    * the buffer (a String's reference, a StringName's reference) are consumed:
+    * a String is decoded and destroyed; a StringName is interned through
+    * [[StringNames.adopt]], so its storage stays valid for the process.
+    */
+  inline def read[R](b: Ptr[Byte]): R = inline erasedValue[R] match {
+    case _: Long => (!b.asInstanceOf[Ptr[GDExtensionInt]]).asInstanceOf[R]
+    case _: Int  => (!b.asInstanceOf[Ptr[GDExtensionInt]]).toInt.asInstanceOf[R]
+    case _: Double  => (!b.asInstanceOf[Ptr[CDouble]]).asInstanceOf[R]
+    case _: Boolean =>
+      ((!b.asInstanceOf[Ptr[GDExtensionBool]]).toInt != 0).asInstanceOf[R]
+    case _: GodotObject =>
+      GodotObject
+        .fromPtr(!b.asInstanceOf[Ptr[GDExtensionObjectPtr]])
+        .asInstanceOf[R]
+    case _: String      => GString.takeAt(b.toLong).asInstanceOf[R]
+    case _: StringName  => StringNames.adopt(b.toLong).asInstanceOf[R]
+    case _: Variant     => Variant.copyToHeap(b).asInstanceOf[R]
+    case _: Vector2     => Vector2.readType(b).asInstanceOf[R]
+    case _: Vector2i    => Vector2i.readType(b).asInstanceOf[R]
+    case _: Vector3     => Vector3.readType(b).asInstanceOf[R]
+    case _: Vector3i    => Vector3i.readType(b).asInstanceOf[R]
+    case _: Vector4     => Vector4.readType(b).asInstanceOf[R]
+    case _: Vector4i    => Vector4i.readType(b).asInstanceOf[R]
+    case _: Color       => Color.readType(b).asInstanceOf[R]
+    case _: Rect2       => Rect2.readType(b).asInstanceOf[R]
+    case _: Rect2i      => Rect2i.readType(b).asInstanceOf[R]
+    case _: Quaternion  => Quaternion.readType(b).asInstanceOf[R]
+    case _: Plane       => Plane.readType(b).asInstanceOf[R]
+    case _: AABB        => AABB.readType(b).asInstanceOf[R]
+    case _: Basis       => Basis.readType(b).asInstanceOf[R]
+    case _: Transform2D => Transform2D.readType(b).asInstanceOf[R]
+    case _: Transform3D => Transform3D.readType(b).asInstanceOf[R]
+    case _: Projection  => Projection.readType(b).asInstanceOf[R]
   }
 
-  // Fixed-layout math builtins (see MathBuiltins.scala / Vector2 / Color).
-  given PtrArg[Vector2i] with {
-    def size = BuiltinSizes.Vector2i
-    def write(v: Vector2i, b: Ptr[Byte]) = Vector2i.writeType(v, b)
-  }
-  given PtrArg[Vector3] with {
-    def size = BuiltinSizes.Vector3
-    def write(v: Vector3, b: Ptr[Byte]) = Vector3.writeType(v, b)
-  }
-  given PtrArg[Vector3i] with {
-    def size = BuiltinSizes.Vector3i
-    def write(v: Vector3i, b: Ptr[Byte]) = Vector3i.writeType(v, b)
-  }
-  given PtrArg[Vector4] with {
-    def size = BuiltinSizes.Vector4
-    def write(v: Vector4, b: Ptr[Byte]) = Vector4.writeType(v, b)
-  }
-  given PtrArg[Vector4i] with {
-    def size = BuiltinSizes.Vector4i
-    def write(v: Vector4i, b: Ptr[Byte]) = Vector4i.writeType(v, b)
-  }
-  given PtrArg[Rect2] with {
-    def size = BuiltinSizes.Rect2
-    def write(v: Rect2, b: Ptr[Byte]) = Rect2.writeType(v, b)
-  }
-  given PtrArg[Rect2i] with {
-    def size = BuiltinSizes.Rect2i
-    def write(v: Rect2i, b: Ptr[Byte]) = Rect2i.writeType(v, b)
-  }
-  given PtrArg[Quaternion] with {
-    def size = BuiltinSizes.Quaternion
-    def write(v: Quaternion, b: Ptr[Byte]) = Quaternion.writeType(v, b)
-  }
-  given PtrArg[Plane] with {
-    def size = BuiltinSizes.Plane
-    def write(v: Plane, b: Ptr[Byte]) = Plane.writeType(v, b)
-  }
-  given PtrArg[AABB] with {
-    def size = BuiltinSizes.AABB
-    def write(v: AABB, b: Ptr[Byte]) = AABB.writeType(v, b)
-  }
-  given PtrArg[Basis] with {
-    def size = BuiltinSizes.Basis
-    def write(v: Basis, b: Ptr[Byte]) = Basis.writeType(v, b)
-  }
-  given PtrArg[Transform2D] with {
-    def size = BuiltinSizes.Transform2D
-    def write(v: Transform2D, b: Ptr[Byte]) = Transform2D.writeType(v, b)
-  }
-  given PtrArg[Transform3D] with {
-    def size = BuiltinSizes.Transform3D
-    def write(v: Transform3D, b: Ptr[Byte]) = Transform3D.writeType(v, b)
-  }
-  given PtrArg[Projection] with {
-    def size = BuiltinSizes.Projection
-    def write(v: Projection, b: Ptr[Byte]) = Projection.writeType(v, b)
-  }
-
-  /**
-   * Variant arguments: the ptrcall buffer is the 24-byte Variant storage. We
-   * copy the caller's Variant bytes into the call buffer; the caller still owns
-   * (and must destroy) the source Variant.
-   */
-  given PtrArg[Variant] with {
-    def size = BuiltinSizes.Variant
-    def write(v: Variant, b: Ptr[Byte]) = {
-      val src = v.ptr.asInstanceOf[Ptr[Byte]]
-      var i = 0
-      while (i < BuiltinSizes.Variant) { b(i) = src(i); i += 1 }
-    }
-  }
-}
-
-object PtrRet {
-  def apply[A](using p: PtrRet[A]): PtrRet[A] = p
-
-  given PtrRet[Long] with {
-    def size = 8
-    def read(b: Ptr[Byte]) = !b.asInstanceOf[Ptr[GDExtensionInt]]
-  }
-  given PtrRet[Int] with {
-    def size = 8
-    def read(b: Ptr[Byte]) = (!b.asInstanceOf[Ptr[GDExtensionInt]]).toInt
-  }
-  given PtrRet[Boolean] with {
-    def size = 1
-    def read(b: Ptr[Byte]) = (!b.asInstanceOf[Ptr[GDExtensionBool]]).toInt != 0
-  }
-  given PtrRet[Double] with {
-    def size = 8
-    def read(b: Ptr[Byte]) = !b.asInstanceOf[Ptr[CDouble]]
-  }
-  given PtrRet[Vector2] with {
-    def size = BuiltinSizes.Vector2
-    def read(b: Ptr[Byte]) = Vector2.readType(b)
-  }
-  given PtrRet[Color] with {
-    def size = BuiltinSizes.Color
-    def read(b: Ptr[Byte]) = Color.readType(b)
-  }
-  /** Object returns: the buffer holds an object pointer. */
-  given PtrRet[GodotObject] with {
-    def size = sizeof[Ptr[Byte]].toInt
-    def read(b: Ptr[Byte]) =
-      GodotObject.fromPtr(!b.asInstanceOf[Ptr[GDExtensionObjectPtr]])
-  }
-  /**
-   * String returns: the buffer holds an 8-byte Godot String handle. We decode
-   * it to a Scala String and release the engine String's reference.
-   */
-  given PtrRet[String] with {
-    def size = BuiltinSizes.String
-    def read(b: Ptr[Byte]) = {
-      val s = GString.fromPtr(b)
-      val out = s.toScala
-      s.destroy()
-      out
-    }
-  }
-
-  /**
-   * StringName returns: the buffer holds the 8-byte handle. NOTE: this borrows
-   * the returned handle without taking a destroy pass; rare among engine
-   * methods, tracked with the same Phase-2 cleanup caveat as `PtrArg[String]`.
-   */
-  given PtrRet[StringName] with {
-    def size = BuiltinSizes.StringName
-    def read(b: Ptr[Byte]) = {
-      // The engine wrote the StringName's 8-byte handle INTO `b` (the return
-      // buffer), so the handle storage is `b` itself — not `*b`. `b` is a
-      // stack buffer that dies when the call returns, so copy the handle into
-      // stable malloc storage and wrap that (mirrors PtrRet[Variant]). The
-      // matching arg side copies handle bytes too (see PtrArg[StringName]).
-      val dest = scala.scalanative.libc.stdlib
-        .malloc(BuiltinSizes.StringName.toCSize)
-        .asInstanceOf[Ptr[Byte]]
-      var i = 0
-      while (i < BuiltinSizes.StringName) { dest(i) = b(i); i += 1 }
-      StringName.fromPtr(dest.asInstanceOf[GDExtensionStringNamePtr])
-    }
-  }
-
-  // Fixed-layout math builtins (see MathBuiltins.scala / Vector2 / Color).
-  given PtrRet[Vector2i] with {
-    def size = BuiltinSizes.Vector2i
-    def read(b: Ptr[Byte]) = Vector2i.readType(b)
-  }
-  given PtrRet[Vector3] with {
-    def size = BuiltinSizes.Vector3
-    def read(b: Ptr[Byte]) = Vector3.readType(b)
-  }
-  given PtrRet[Vector3i] with {
-    def size = BuiltinSizes.Vector3i
-    def read(b: Ptr[Byte]) = Vector3i.readType(b)
-  }
-  given PtrRet[Vector4] with {
-    def size = BuiltinSizes.Vector4
-    def read(b: Ptr[Byte]) = Vector4.readType(b)
-  }
-  given PtrRet[Vector4i] with {
-    def size = BuiltinSizes.Vector4i
-    def read(b: Ptr[Byte]) = Vector4i.readType(b)
-  }
-  given PtrRet[Rect2] with {
-    def size = BuiltinSizes.Rect2
-    def read(b: Ptr[Byte]) = Rect2.readType(b)
-  }
-  given PtrRet[Rect2i] with {
-    def size = BuiltinSizes.Rect2i
-    def read(b: Ptr[Byte]) = Rect2i.readType(b)
-  }
-  given PtrRet[Quaternion] with {
-    def size = BuiltinSizes.Quaternion
-    def read(b: Ptr[Byte]) = Quaternion.readType(b)
-  }
-  given PtrRet[Plane] with {
-    def size = BuiltinSizes.Plane
-    def read(b: Ptr[Byte]) = Plane.readType(b)
-  }
-  given PtrRet[AABB] with {
-    def size = BuiltinSizes.AABB
-    def read(b: Ptr[Byte]) = AABB.readType(b)
-  }
-  given PtrRet[Basis] with {
-    def size = BuiltinSizes.Basis
-    def read(b: Ptr[Byte]) = Basis.readType(b)
-  }
-  given PtrRet[Transform2D] with {
-    def size = BuiltinSizes.Transform2D
-    def read(b: Ptr[Byte]) = Transform2D.readType(b)
-  }
-  given PtrRet[Transform3D] with {
-    def size = BuiltinSizes.Transform3D
-    def read(b: Ptr[Byte]) = Transform3D.readType(b)
-  }
-  given PtrRet[Projection] with {
-    def size = BuiltinSizes.Projection
-    def read(b: Ptr[Byte]) = Projection.readType(b)
-  }
-
-  /**
-   * Variant returns: the ptrcall buffer holds the 24-byte Variant the engine
-   * wrote. We copy it into heap storage so the returned [[Variant]] outlives the
-   * call's stack buffer; the caller is responsible for [[Variant.destroy]] when
-   * done (it may hold a ref-counted payload).
-   */
-  given PtrRet[Variant] with {
-    def size = BuiltinSizes.Variant
-    def read(b: Ptr[Byte]) = {
-      val dest = scala.scalanative.libc.stdlib
-        .malloc(BuiltinSizes.Variant.toCSize)
-        .asInstanceOf[Ptr[Byte]]
-      var i = 0
-      while (i < BuiltinSizes.Variant) { dest(i) = b(i); i += 1 }
-      Variant.fromPtr(dest.asInstanceOf[GDExtensionVariantPtr])
-    }
+  private[gdext] def copy(src: Ptr[Byte], dst: Ptr[Byte], n: Int): Unit = {
+    var i = 0
+    while (i < n) { dst(i) = src(i); i += 1 }
   }
 }
 
 /** Fixed-arity ptrcall dispatchers used by the generated engine wrappers. */
 object Ptrcall {
 
-  private[gdext] def invoke(
+  // Inline so the stack buffers never cross a method boundary: Scala Native
+  // boxes a `Ptr` passed to a non-inlined method (one heap object each).
+  private[gdext] inline def invoke(
     bind: GDExtensionMethodBindPtr,
     instance: GDExtensionObjectPtr,
     args: Ptr[GDExtensionConstTypePtr],
     ret: GDExtensionTypePtr
   ): Unit = {
-    if (bind == null)
-      throw new IllegalStateException("engine method bind not found (hash mismatch?)")
+    if (bind == null) unboundMethod()
     Godot.interface.object_method_bind_ptrcall(bind, instance, args, ret)
   }
 
-  /** A method with no return value (`r_ret = null`). */
-  def callVoid0(
+  private def unboundMethod(): Nothing =
+    throw new IllegalStateException(
+      "engine method bind not found (hash mismatch?)"
+    )
+
+  inline def callVoid0(
     bind: GDExtensionMethodBindPtr,
     instance: GDExtensionObjectPtr
   ): Unit =
     invoke(bind, instance, null, null)
 
-  def call0[R](
+  inline def call0[R](
     bind: GDExtensionMethodBindPtr,
     instance: GDExtensionObjectPtr
-  )(using ret: PtrRet[R]): R = {
-    val retBuf = stackalloc[Byte](ret.size.toCSize)
-    invoke(
-      bind,
-      instance,
-      null,
-      retBuf
-    )
-    ret.read(retBuf)
+  ): R = {
+    val r = stackalloc[Byte](Marshal.size[R].toCSize)
+    invoke(bind, instance, null, r)
+    Marshal.read[R](r)
   }
 
-  def callVoid1[A1](
+  inline def callVoid1[A1](
     bind: GDExtensionMethodBindPtr,
     instance: GDExtensionObjectPtr,
-    a1: A1
-  )(using p1: PtrArg[A1]): Unit = {
-    val b1 = stackalloc[Byte](p1.size.toCSize)
-    p1.write(a1, b1)
+    inline a1: A1
+  ): Unit = {
+    val b1 = stackalloc[Byte](Marshal.size[A1].toCSize);
+    Marshal.write[A1](a1, b1)
     val args = stackalloc[GDExtensionConstTypePtr](1)
     args(0) = b1
     invoke(bind, instance, args, null)
+    Marshal.release[A1](b1)
   }
 
-  def call1[A1, R](
+  inline def call1[A1, R](
     bind: GDExtensionMethodBindPtr,
     instance: GDExtensionObjectPtr,
-    a1: A1
-  )(using p1: PtrArg[A1], ret: PtrRet[R]): R = {
-    val b1 = stackalloc[Byte](p1.size.toCSize)
-    p1.write(a1, b1)
+    inline a1: A1
+  ): R = {
+    val b1 = stackalloc[Byte](Marshal.size[A1].toCSize);
+    Marshal.write[A1](a1, b1)
     val args = stackalloc[GDExtensionConstTypePtr](1)
     args(0) = b1
-    val retBuf = stackalloc[Byte](ret.size.toCSize)
-    invoke(bind, instance, args, retBuf)
-    ret.read(retBuf)
+    val r = stackalloc[Byte](Marshal.size[R].toCSize)
+    invoke(bind, instance, args, r)
+    Marshal.release[A1](b1)
+    Marshal.read[R](r)
   }
 
-  def callVoid2[A1, A2](
+  inline def callVoid2[A1, A2](
     bind: GDExtensionMethodBindPtr,
     instance: GDExtensionObjectPtr,
-    a1: A1,
-    a2: A2
-  )(using p1: PtrArg[A1], p2: PtrArg[A2]): Unit = {
-    val b1 = stackalloc[Byte](p1.size.toCSize); p1.write(a1, b1)
-    val b2 = stackalloc[Byte](p2.size.toCSize); p2.write(a2, b2)
+    inline a1: A1,
+    inline a2: A2
+  ): Unit = {
+    val b1 = stackalloc[Byte](Marshal.size[A1].toCSize);
+    Marshal.write[A1](a1, b1)
+    val b2 = stackalloc[Byte](Marshal.size[A2].toCSize);
+    Marshal.write[A2](a2, b2)
     val args = stackalloc[GDExtensionConstTypePtr](2)
     args(0) = b1; args(1) = b2
     invoke(bind, instance, args, null)
+    Marshal.release[A1](b1); Marshal.release[A2](b2)
   }
 
-  def call2[A1, A2, R](
+  inline def call2[A1, A2, R](
     bind: GDExtensionMethodBindPtr,
     instance: GDExtensionObjectPtr,
-    a1: A1,
-    a2: A2
-  )(using p1: PtrArg[A1], p2: PtrArg[A2], ret: PtrRet[R]): R = {
-    val b1 = stackalloc[Byte](p1.size.toCSize); p1.write(a1, b1)
-    val b2 = stackalloc[Byte](p2.size.toCSize); p2.write(a2, b2)
+    inline a1: A1,
+    inline a2: A2
+  ): R = {
+    val b1 = stackalloc[Byte](Marshal.size[A1].toCSize);
+    Marshal.write[A1](a1, b1)
+    val b2 = stackalloc[Byte](Marshal.size[A2].toCSize);
+    Marshal.write[A2](a2, b2)
     val args = stackalloc[GDExtensionConstTypePtr](2)
     args(0) = b1; args(1) = b2
-    val retBuf = stackalloc[Byte](ret.size.toCSize)
-    invoke(bind, instance, args, retBuf)
-    ret.read(retBuf)
+    val r = stackalloc[Byte](Marshal.size[R].toCSize)
+    invoke(bind, instance, args, r)
+    Marshal.release[A1](b1); Marshal.release[A2](b2)
+    Marshal.read[R](r)
   }
 
-  def callVoid3[A1, A2, A3](
+  inline def callVoid3[A1, A2, A3](
     bind: GDExtensionMethodBindPtr,
     instance: GDExtensionObjectPtr,
-    a1: A1,
-    a2: A2,
-    a3: A3
-  )(using p1: PtrArg[A1], p2: PtrArg[A2], p3: PtrArg[A3]): Unit = {
-    val b1 = stackalloc[Byte](p1.size.toCSize); p1.write(a1, b1)
-    val b2 = stackalloc[Byte](p2.size.toCSize); p2.write(a2, b2)
-    val b3 = stackalloc[Byte](p3.size.toCSize); p3.write(a3, b3)
+    inline a1: A1,
+    inline a2: A2,
+    inline a3: A3
+  ): Unit = {
+    val b1 = stackalloc[Byte](Marshal.size[A1].toCSize);
+    Marshal.write[A1](a1, b1)
+    val b2 = stackalloc[Byte](Marshal.size[A2].toCSize);
+    Marshal.write[A2](a2, b2)
+    val b3 = stackalloc[Byte](Marshal.size[A3].toCSize);
+    Marshal.write[A3](a3, b3)
     val args = stackalloc[GDExtensionConstTypePtr](3)
     args(0) = b1; args(1) = b2; args(2) = b3
     invoke(bind, instance, args, null)
+    Marshal.release[A1](b1); Marshal.release[A2](b2); Marshal.release[A3](b3)
   }
 
-  def call3[A1, A2, A3, R](
+  inline def call3[A1, A2, A3, R](
     bind: GDExtensionMethodBindPtr,
     instance: GDExtensionObjectPtr,
-    a1: A1,
-    a2: A2,
-    a3: A3
-  )(using p1: PtrArg[A1], p2: PtrArg[A2], p3: PtrArg[A3], ret: PtrRet[R]): R = {
-    val b1 = stackalloc[Byte](p1.size.toCSize); p1.write(a1, b1)
-    val b2 = stackalloc[Byte](p2.size.toCSize); p2.write(a2, b2)
-    val b3 = stackalloc[Byte](p3.size.toCSize); p3.write(a3, b3)
+    inline a1: A1,
+    inline a2: A2,
+    inline a3: A3
+  ): R = {
+    val b1 = stackalloc[Byte](Marshal.size[A1].toCSize);
+    Marshal.write[A1](a1, b1)
+    val b2 = stackalloc[Byte](Marshal.size[A2].toCSize);
+    Marshal.write[A2](a2, b2)
+    val b3 = stackalloc[Byte](Marshal.size[A3].toCSize);
+    Marshal.write[A3](a3, b3)
     val args = stackalloc[GDExtensionConstTypePtr](3)
     args(0) = b1; args(1) = b2; args(2) = b3
-    val retBuf = stackalloc[Byte](ret.size.toCSize)
-    invoke(bind, instance, args, retBuf)
-    ret.read(retBuf)
+    val r = stackalloc[Byte](Marshal.size[R].toCSize)
+    invoke(bind, instance, args, r)
+    Marshal.release[A1](b1); Marshal.release[A2](b2); Marshal.release[A3](b3)
+    Marshal.read[R](r)
   }
 
-  def callVoid4[A1, A2, A3, A4](
+  inline def callVoid4[A1, A2, A3, A4](
     bind: GDExtensionMethodBindPtr,
     instance: GDExtensionObjectPtr,
-    a1: A1,
-    a2: A2,
-    a3: A3,
-    a4: A4
-  )(using p1: PtrArg[A1], p2: PtrArg[A2], p3: PtrArg[A3], p4: PtrArg[A4]): Unit = {
-    val b1 = stackalloc[Byte](p1.size.toCSize); p1.write(a1, b1)
-    val b2 = stackalloc[Byte](p2.size.toCSize); p2.write(a2, b2)
-    val b3 = stackalloc[Byte](p3.size.toCSize); p3.write(a3, b3)
-    val b4 = stackalloc[Byte](p4.size.toCSize); p4.write(a4, b4)
+    inline a1: A1,
+    inline a2: A2,
+    inline a3: A3,
+    inline a4: A4
+  ): Unit = {
+    val b1 = stackalloc[Byte](Marshal.size[A1].toCSize);
+    Marshal.write[A1](a1, b1)
+    val b2 = stackalloc[Byte](Marshal.size[A2].toCSize);
+    Marshal.write[A2](a2, b2)
+    val b3 = stackalloc[Byte](Marshal.size[A3].toCSize);
+    Marshal.write[A3](a3, b3)
+    val b4 = stackalloc[Byte](Marshal.size[A4].toCSize);
+    Marshal.write[A4](a4, b4)
     val args = stackalloc[GDExtensionConstTypePtr](4)
     args(0) = b1; args(1) = b2; args(2) = b3; args(3) = b4
     invoke(bind, instance, args, null)
+    Marshal.release[A1](b1); Marshal.release[A2](b2); Marshal.release[A3](b3)
+    Marshal.release[A4](b4)
   }
 
-  def call4[A1, A2, A3, A4, R](
+  inline def call4[A1, A2, A3, A4, R](
     bind: GDExtensionMethodBindPtr,
     instance: GDExtensionObjectPtr,
-    a1: A1,
-    a2: A2,
-    a3: A3,
-    a4: A4
-  )(using
-    p1: PtrArg[A1],
-    p2: PtrArg[A2],
-    p3: PtrArg[A3],
-    p4: PtrArg[A4],
-    ret: PtrRet[R]
+    inline a1: A1,
+    inline a2: A2,
+    inline a3: A3,
+    inline a4: A4
   ): R = {
-    val b1 = stackalloc[Byte](p1.size.toCSize); p1.write(a1, b1)
-    val b2 = stackalloc[Byte](p2.size.toCSize); p2.write(a2, b2)
-    val b3 = stackalloc[Byte](p3.size.toCSize); p3.write(a3, b3)
-    val b4 = stackalloc[Byte](p4.size.toCSize); p4.write(a4, b4)
+    val b1 = stackalloc[Byte](Marshal.size[A1].toCSize);
+    Marshal.write[A1](a1, b1)
+    val b2 = stackalloc[Byte](Marshal.size[A2].toCSize);
+    Marshal.write[A2](a2, b2)
+    val b3 = stackalloc[Byte](Marshal.size[A3].toCSize);
+    Marshal.write[A3](a3, b3)
+    val b4 = stackalloc[Byte](Marshal.size[A4].toCSize);
+    Marshal.write[A4](a4, b4)
     val args = stackalloc[GDExtensionConstTypePtr](4)
     args(0) = b1; args(1) = b2; args(2) = b3; args(3) = b4
-    val retBuf = stackalloc[Byte](ret.size.toCSize)
-    invoke(bind, instance, args, retBuf)
-    ret.read(retBuf)
+    val r = stackalloc[Byte](Marshal.size[R].toCSize)
+    invoke(bind, instance, args, r)
+    Marshal.release[A1](b1); Marshal.release[A2](b2); Marshal.release[A3](b3)
+    Marshal.release[A4](b4)
+    Marshal.read[R](r)
   }
 
-  def callVoid5[A1, A2, A3, A4, A5](
+  inline def callVoid5[A1, A2, A3, A4, A5](
     bind: GDExtensionMethodBindPtr,
     instance: GDExtensionObjectPtr,
-    a1: A1,
-    a2: A2,
-    a3: A3,
-    a4: A4,
-    a5: A5
-  )(using
-    p1: PtrArg[A1],
-    p2: PtrArg[A2],
-    p3: PtrArg[A3],
-    p4: PtrArg[A4],
-    p5: PtrArg[A5]
+    inline a1: A1,
+    inline a2: A2,
+    inline a3: A3,
+    inline a4: A4,
+    inline a5: A5
   ): Unit = {
-    val b1 = stackalloc[Byte](p1.size.toCSize); p1.write(a1, b1)
-    val b2 = stackalloc[Byte](p2.size.toCSize); p2.write(a2, b2)
-    val b3 = stackalloc[Byte](p3.size.toCSize); p3.write(a3, b3)
-    val b4 = stackalloc[Byte](p4.size.toCSize); p4.write(a4, b4)
-    val b5 = stackalloc[Byte](p5.size.toCSize); p5.write(a5, b5)
+    val b1 = stackalloc[Byte](Marshal.size[A1].toCSize);
+    Marshal.write[A1](a1, b1)
+    val b2 = stackalloc[Byte](Marshal.size[A2].toCSize);
+    Marshal.write[A2](a2, b2)
+    val b3 = stackalloc[Byte](Marshal.size[A3].toCSize);
+    Marshal.write[A3](a3, b3)
+    val b4 = stackalloc[Byte](Marshal.size[A4].toCSize);
+    Marshal.write[A4](a4, b4)
+    val b5 = stackalloc[Byte](Marshal.size[A5].toCSize);
+    Marshal.write[A5](a5, b5)
     val args = stackalloc[GDExtensionConstTypePtr](5)
     args(0) = b1; args(1) = b2; args(2) = b3; args(3) = b4; args(4) = b5
     invoke(bind, instance, args, null)
+    Marshal.release[A1](b1); Marshal.release[A2](b2); Marshal.release[A3](b3)
+    Marshal.release[A4](b4); Marshal.release[A5](b5)
   }
 
-  def call5[A1, A2, A3, A4, A5, R](
+  inline def call5[A1, A2, A3, A4, A5, R](
     bind: GDExtensionMethodBindPtr,
     instance: GDExtensionObjectPtr,
-    a1: A1,
-    a2: A2,
-    a3: A3,
-    a4: A4,
-    a5: A5
-  )(using
-    p1: PtrArg[A1],
-    p2: PtrArg[A2],
-    p3: PtrArg[A3],
-    p4: PtrArg[A4],
-    p5: PtrArg[A5],
-    ret: PtrRet[R]
+    inline a1: A1,
+    inline a2: A2,
+    inline a3: A3,
+    inline a4: A4,
+    inline a5: A5
   ): R = {
-    val b1 = stackalloc[Byte](p1.size.toCSize); p1.write(a1, b1)
-    val b2 = stackalloc[Byte](p2.size.toCSize); p2.write(a2, b2)
-    val b3 = stackalloc[Byte](p3.size.toCSize); p3.write(a3, b3)
-    val b4 = stackalloc[Byte](p4.size.toCSize); p4.write(a4, b4)
-    val b5 = stackalloc[Byte](p5.size.toCSize); p5.write(a5, b5)
+    val b1 = stackalloc[Byte](Marshal.size[A1].toCSize);
+    Marshal.write[A1](a1, b1)
+    val b2 = stackalloc[Byte](Marshal.size[A2].toCSize);
+    Marshal.write[A2](a2, b2)
+    val b3 = stackalloc[Byte](Marshal.size[A3].toCSize);
+    Marshal.write[A3](a3, b3)
+    val b4 = stackalloc[Byte](Marshal.size[A4].toCSize);
+    Marshal.write[A4](a4, b4)
+    val b5 = stackalloc[Byte](Marshal.size[A5].toCSize);
+    Marshal.write[A5](a5, b5)
     val args = stackalloc[GDExtensionConstTypePtr](5)
     args(0) = b1; args(1) = b2; args(2) = b3; args(3) = b4; args(4) = b5
-    val retBuf = stackalloc[Byte](ret.size.toCSize)
-    invoke(bind, instance, args, retBuf)
-    ret.read(retBuf)
+    val r = stackalloc[Byte](Marshal.size[R].toCSize)
+    invoke(bind, instance, args, r)
+    Marshal.release[A1](b1); Marshal.release[A2](b2); Marshal.release[A3](b3)
+    Marshal.release[A4](b4); Marshal.release[A5](b5)
+    Marshal.read[R](r)
   }
 
-  def callVoid6[A1, A2, A3, A4, A5, A6](
+  inline def callVoid6[A1, A2, A3, A4, A5, A6](
     bind: GDExtensionMethodBindPtr,
     instance: GDExtensionObjectPtr,
-    a1: A1,
-    a2: A2,
-    a3: A3,
-    a4: A4,
-    a5: A5,
-    a6: A6
-  )(using
-    p1: PtrArg[A1],
-    p2: PtrArg[A2],
-    p3: PtrArg[A3],
-    p4: PtrArg[A4],
-    p5: PtrArg[A5],
-    p6: PtrArg[A6]
+    inline a1: A1,
+    inline a2: A2,
+    inline a3: A3,
+    inline a4: A4,
+    inline a5: A5,
+    inline a6: A6
   ): Unit = {
-    val b1 = stackalloc[Byte](p1.size.toCSize); p1.write(a1, b1)
-    val b2 = stackalloc[Byte](p2.size.toCSize); p2.write(a2, b2)
-    val b3 = stackalloc[Byte](p3.size.toCSize); p3.write(a3, b3)
-    val b4 = stackalloc[Byte](p4.size.toCSize); p4.write(a4, b4)
-    val b5 = stackalloc[Byte](p5.size.toCSize); p5.write(a5, b5)
-    val b6 = stackalloc[Byte](p6.size.toCSize); p6.write(a6, b6)
+    val b1 = stackalloc[Byte](Marshal.size[A1].toCSize);
+    Marshal.write[A1](a1, b1)
+    val b2 = stackalloc[Byte](Marshal.size[A2].toCSize);
+    Marshal.write[A2](a2, b2)
+    val b3 = stackalloc[Byte](Marshal.size[A3].toCSize);
+    Marshal.write[A3](a3, b3)
+    val b4 = stackalloc[Byte](Marshal.size[A4].toCSize);
+    Marshal.write[A4](a4, b4)
+    val b5 = stackalloc[Byte](Marshal.size[A5].toCSize);
+    Marshal.write[A5](a5, b5)
+    val b6 = stackalloc[Byte](Marshal.size[A6].toCSize);
+    Marshal.write[A6](a6, b6)
     val args = stackalloc[GDExtensionConstTypePtr](6)
     args(0) = b1; args(1) = b2; args(2) = b3; args(3) = b4; args(4) = b5
     args(5) = b6
     invoke(bind, instance, args, null)
+    Marshal.release[A1](b1); Marshal.release[A2](b2); Marshal.release[A3](b3)
+    Marshal.release[A4](b4); Marshal.release[A5](b5); Marshal.release[A6](b6)
   }
 
-  def call6[A1, A2, A3, A4, A5, A6, R](
+  inline def call6[A1, A2, A3, A4, A5, A6, R](
     bind: GDExtensionMethodBindPtr,
     instance: GDExtensionObjectPtr,
-    a1: A1,
-    a2: A2,
-    a3: A3,
-    a4: A4,
-    a5: A5,
-    a6: A6
-  )(using
-    p1: PtrArg[A1],
-    p2: PtrArg[A2],
-    p3: PtrArg[A3],
-    p4: PtrArg[A4],
-    p5: PtrArg[A5],
-    p6: PtrArg[A6],
-    ret: PtrRet[R]
+    inline a1: A1,
+    inline a2: A2,
+    inline a3: A3,
+    inline a4: A4,
+    inline a5: A5,
+    inline a6: A6
   ): R = {
-    val b1 = stackalloc[Byte](p1.size.toCSize); p1.write(a1, b1)
-    val b2 = stackalloc[Byte](p2.size.toCSize); p2.write(a2, b2)
-    val b3 = stackalloc[Byte](p3.size.toCSize); p3.write(a3, b3)
-    val b4 = stackalloc[Byte](p4.size.toCSize); p4.write(a4, b4)
-    val b5 = stackalloc[Byte](p5.size.toCSize); p5.write(a5, b5)
-    val b6 = stackalloc[Byte](p6.size.toCSize); p6.write(a6, b6)
+    val b1 = stackalloc[Byte](Marshal.size[A1].toCSize);
+    Marshal.write[A1](a1, b1)
+    val b2 = stackalloc[Byte](Marshal.size[A2].toCSize);
+    Marshal.write[A2](a2, b2)
+    val b3 = stackalloc[Byte](Marshal.size[A3].toCSize);
+    Marshal.write[A3](a3, b3)
+    val b4 = stackalloc[Byte](Marshal.size[A4].toCSize);
+    Marshal.write[A4](a4, b4)
+    val b5 = stackalloc[Byte](Marshal.size[A5].toCSize);
+    Marshal.write[A5](a5, b5)
+    val b6 = stackalloc[Byte](Marshal.size[A6].toCSize);
+    Marshal.write[A6](a6, b6)
     val args = stackalloc[GDExtensionConstTypePtr](6)
     args(0) = b1; args(1) = b2; args(2) = b3; args(3) = b4; args(4) = b5
     args(5) = b6
-    val retBuf = stackalloc[Byte](ret.size.toCSize)
-    invoke(bind, instance, args, retBuf)
-    ret.read(retBuf)
+    val r = stackalloc[Byte](Marshal.size[R].toCSize)
+    invoke(bind, instance, args, r)
+    Marshal.release[A1](b1); Marshal.release[A2](b2); Marshal.release[A3](b3)
+    Marshal.release[A4](b4); Marshal.release[A5](b5); Marshal.release[A6](b6)
+    Marshal.read[R](r)
   }
 }

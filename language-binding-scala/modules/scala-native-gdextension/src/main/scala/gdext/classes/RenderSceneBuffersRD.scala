@@ -4,65 +4,111 @@ import gdext.Godot
 import gdext.builtin.*
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
+import gdext.internal.ffi.types.GDExtensionMethodBindPtr
 
 /** Generated wrapper for Godot's `RenderSceneBuffersRD`, extends `RenderSceneBuffers`. */
 abstract class RenderSceneBuffersRD extends RenderSceneBuffers {
   override def godotClassName: String = "RenderSceneBuffersRD"
 
   /** RenderSceneBuffersRD.has_texture */
-  final def hasTexture(context: gdext.builtin.StringName, name: gdext.builtin.StringName): Boolean =
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Boolean](MethodBind.get("RenderSceneBuffersRD", "has_texture", 471820014L), hostObject.objectPtr, context, name)
+  final def hasTexture(context: gdext.builtin.StringName, name: gdext.builtin.StringName): Boolean = {
+    if (gdext.classes.RenderSceneBuffersRD.mb_has_texture == null) gdext.classes.RenderSceneBuffersRD.mb_has_texture = MethodBind.get("RenderSceneBuffersRD", "has_texture", 471820014L)
+    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Boolean](gdext.classes.RenderSceneBuffersRD.mb_has_texture, livePtr, context, name)
+  }
 
-  /** RenderSceneBuffersRD.get_texture_format */
-  final def getTextureFormat(context: gdext.builtin.StringName, name: gdext.builtin.StringName): GodotObject =
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, GodotObject](MethodBind.get("RenderSceneBuffersRD", "get_texture_format", 371461758L), hostObject.objectPtr, context, name)
+  /** RenderSceneBuffersRD.get_texture_format. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
+  final def getTextureFormat(context: gdext.builtin.StringName, name: gdext.builtin.StringName): RDTextureFormat = {
+    if (gdext.classes.RenderSceneBuffersRD.mb_get_texture_format == null) gdext.classes.RenderSceneBuffersRD.mb_get_texture_format = MethodBind.get("RenderSceneBuffersRD", "get_texture_format", 371461758L)
+    Wrappers.owned[RDTextureFormat](Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Long](gdext.classes.RenderSceneBuffersRD.mb_get_texture_format, livePtr, context, name))
+  }
 
   /** RenderSceneBuffersRD.get_texture_slice_size */
-  final def getTextureSliceSize(context: gdext.builtin.StringName, name: gdext.builtin.StringName, mipmap: Long): gdext.builtin.Vector2i =
-    Ptrcall.call3[gdext.builtin.StringName, gdext.builtin.StringName, Long, gdext.builtin.Vector2i](MethodBind.get("RenderSceneBuffersRD", "get_texture_slice_size", 2617625368L), hostObject.objectPtr, context, name, mipmap)
+  final def getTextureSliceSize(context: gdext.builtin.StringName, name: gdext.builtin.StringName, mipmap: Long): gdext.builtin.Vector2i = {
+    if (gdext.classes.RenderSceneBuffersRD.mb_get_texture_slice_size == null) gdext.classes.RenderSceneBuffersRD.mb_get_texture_slice_size = MethodBind.get("RenderSceneBuffersRD", "get_texture_slice_size", 2617625368L)
+    Ptrcall.call3[gdext.builtin.StringName, gdext.builtin.StringName, Long, gdext.builtin.Vector2i](gdext.classes.RenderSceneBuffersRD.mb_get_texture_slice_size, livePtr, context, name, mipmap)
+  }
 
   /** RenderSceneBuffersRD.clear_context */
-  final def clearContext(context: gdext.builtin.StringName): Unit =
-    Ptrcall.callVoid1(MethodBind.get("RenderSceneBuffersRD", "clear_context", 3304788590L), hostObject.objectPtr, context)
+  final def clearContext(context: gdext.builtin.StringName): Unit = {
+    if (gdext.classes.RenderSceneBuffersRD.mb_clear_context == null) gdext.classes.RenderSceneBuffersRD.mb_clear_context = MethodBind.get("RenderSceneBuffersRD", "clear_context", 3304788590L)
+    Ptrcall.callVoid1(gdext.classes.RenderSceneBuffersRD.mb_clear_context, livePtr, context)
+  }
 
   /** RenderSceneBuffersRD.get_view_count */
-  final def getViewCount(): Long =
-    Ptrcall.call0[Long](MethodBind.get("RenderSceneBuffersRD", "get_view_count", 3905245786L), hostObject.objectPtr)
+  final def getViewCount(): Long = {
+    if (gdext.classes.RenderSceneBuffersRD.mb_get_view_count == null) gdext.classes.RenderSceneBuffersRD.mb_get_view_count = MethodBind.get("RenderSceneBuffersRD", "get_view_count", 3905245786L)
+    Ptrcall.call0[Long](gdext.classes.RenderSceneBuffersRD.mb_get_view_count, livePtr)
+  }
 
   /** RenderSceneBuffersRD.get_internal_size */
-  final def getInternalSize(): gdext.builtin.Vector2i =
-    Ptrcall.call0[gdext.builtin.Vector2i](MethodBind.get("RenderSceneBuffersRD", "get_internal_size", 3690982128L), hostObject.objectPtr)
+  final def getInternalSize(): gdext.builtin.Vector2i = {
+    if (gdext.classes.RenderSceneBuffersRD.mb_get_internal_size == null) gdext.classes.RenderSceneBuffersRD.mb_get_internal_size = MethodBind.get("RenderSceneBuffersRD", "get_internal_size", 3690982128L)
+    Ptrcall.call0[gdext.builtin.Vector2i](gdext.classes.RenderSceneBuffersRD.mb_get_internal_size, livePtr)
+  }
 
   /** RenderSceneBuffersRD.get_target_size */
-  final def getTargetSize(): gdext.builtin.Vector2i =
-    Ptrcall.call0[gdext.builtin.Vector2i](MethodBind.get("RenderSceneBuffersRD", "get_target_size", 3690982128L), hostObject.objectPtr)
+  final def getTargetSize(): gdext.builtin.Vector2i = {
+    if (gdext.classes.RenderSceneBuffersRD.mb_get_target_size == null) gdext.classes.RenderSceneBuffersRD.mb_get_target_size = MethodBind.get("RenderSceneBuffersRD", "get_target_size", 3690982128L)
+    Ptrcall.call0[gdext.builtin.Vector2i](gdext.classes.RenderSceneBuffersRD.mb_get_target_size, livePtr)
+  }
 
   /** RenderSceneBuffersRD.get_scaling_3d_mode */
-  final def getScaling3dMode(): Long =
-    Ptrcall.call0[Long](MethodBind.get("RenderSceneBuffersRD", "get_scaling_3d_mode", 976778074L), hostObject.objectPtr)
+  final def getScaling3dMode(): Long = {
+    if (gdext.classes.RenderSceneBuffersRD.mb_get_scaling_3d_mode == null) gdext.classes.RenderSceneBuffersRD.mb_get_scaling_3d_mode = MethodBind.get("RenderSceneBuffersRD", "get_scaling_3d_mode", 976778074L)
+    Ptrcall.call0[Long](gdext.classes.RenderSceneBuffersRD.mb_get_scaling_3d_mode, livePtr)
+  }
 
   /** RenderSceneBuffersRD.get_fsr_sharpness */
-  final def getFsrSharpness(): Double =
-    Ptrcall.call0[Double](MethodBind.get("RenderSceneBuffersRD", "get_fsr_sharpness", 1740695150L), hostObject.objectPtr)
+  final def getFsrSharpness(): Double = {
+    if (gdext.classes.RenderSceneBuffersRD.mb_get_fsr_sharpness == null) gdext.classes.RenderSceneBuffersRD.mb_get_fsr_sharpness = MethodBind.get("RenderSceneBuffersRD", "get_fsr_sharpness", 1740695150L)
+    Ptrcall.call0[Double](gdext.classes.RenderSceneBuffersRD.mb_get_fsr_sharpness, livePtr)
+  }
 
   /** RenderSceneBuffersRD.get_msaa_3d */
-  final def getMsaa3d(): Long =
-    Ptrcall.call0[Long](MethodBind.get("RenderSceneBuffersRD", "get_msaa_3d", 3109158617L), hostObject.objectPtr)
+  final def getMsaa3d(): Long = {
+    if (gdext.classes.RenderSceneBuffersRD.mb_get_msaa_3d == null) gdext.classes.RenderSceneBuffersRD.mb_get_msaa_3d = MethodBind.get("RenderSceneBuffersRD", "get_msaa_3d", 3109158617L)
+    Ptrcall.call0[Long](gdext.classes.RenderSceneBuffersRD.mb_get_msaa_3d, livePtr)
+  }
 
   /** RenderSceneBuffersRD.get_texture_samples */
-  final def getTextureSamples(): Long =
-    Ptrcall.call0[Long](MethodBind.get("RenderSceneBuffersRD", "get_texture_samples", 407791724L), hostObject.objectPtr)
+  final def getTextureSamples(): Long = {
+    if (gdext.classes.RenderSceneBuffersRD.mb_get_texture_samples == null) gdext.classes.RenderSceneBuffersRD.mb_get_texture_samples = MethodBind.get("RenderSceneBuffersRD", "get_texture_samples", 407791724L)
+    Ptrcall.call0[Long](gdext.classes.RenderSceneBuffersRD.mb_get_texture_samples, livePtr)
+  }
 
   /** RenderSceneBuffersRD.get_screen_space_aa */
-  final def getScreenSpaceAa(): Long =
-    Ptrcall.call0[Long](MethodBind.get("RenderSceneBuffersRD", "get_screen_space_aa", 641513172L), hostObject.objectPtr)
+  final def getScreenSpaceAa(): Long = {
+    if (gdext.classes.RenderSceneBuffersRD.mb_get_screen_space_aa == null) gdext.classes.RenderSceneBuffersRD.mb_get_screen_space_aa = MethodBind.get("RenderSceneBuffersRD", "get_screen_space_aa", 641513172L)
+    Ptrcall.call0[Long](gdext.classes.RenderSceneBuffersRD.mb_get_screen_space_aa, livePtr)
+  }
 
   /** RenderSceneBuffersRD.get_use_taa */
-  final def getUseTaa(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("RenderSceneBuffersRD", "get_use_taa", 36873697L), hostObject.objectPtr)
+  final def getUseTaa(): Boolean = {
+    if (gdext.classes.RenderSceneBuffersRD.mb_get_use_taa == null) gdext.classes.RenderSceneBuffersRD.mb_get_use_taa = MethodBind.get("RenderSceneBuffersRD", "get_use_taa", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.RenderSceneBuffersRD.mb_get_use_taa, livePtr)
+  }
 
   /** RenderSceneBuffersRD.get_use_debanding */
-  final def getUseDebanding(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("RenderSceneBuffersRD", "get_use_debanding", 36873697L), hostObject.objectPtr)
+  final def getUseDebanding(): Boolean = {
+    if (gdext.classes.RenderSceneBuffersRD.mb_get_use_debanding == null) gdext.classes.RenderSceneBuffersRD.mb_get_use_debanding = MethodBind.get("RenderSceneBuffersRD", "get_use_debanding", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.RenderSceneBuffersRD.mb_get_use_debanding, livePtr)
+  }
 
+}
+
+object RenderSceneBuffersRD {
+  private[classes] var mb_has_texture: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_texture_format: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_texture_slice_size: GDExtensionMethodBindPtr = null
+  private[classes] var mb_clear_context: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_view_count: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_internal_size: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_target_size: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_scaling_3d_mode: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_fsr_sharpness: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_msaa_3d: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_texture_samples: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_screen_space_aa: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_use_taa: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_use_debanding: GDExtensionMethodBindPtr = null
 }

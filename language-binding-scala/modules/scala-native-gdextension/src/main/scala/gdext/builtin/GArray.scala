@@ -106,7 +106,7 @@ object GArray {
   /** Construct an empty Array into caller storage. */
   def empty(dest: GDExtensionTypePtr): GArray = {
     // Constructor index 0 of Array is the default (empty) constructor.
-    val ctor = Godot.interface.variant_get_ptr_constructor(
+    val ctor = VariantConstructors.constructor(
       GDEXTENSION_VARIANT_TYPE_ARRAY,
       0
     )
@@ -141,7 +141,7 @@ object GArray {
     args(1) = typeBuf.asInstanceOf[GDExtensionConstTypePtr]
     args(2) = classSn.ptr
     args(3) = script
-    val ctor = Godot.interface.variant_get_ptr_constructor(
+    val ctor = VariantConstructors.constructor(
       GDEXTENSION_VARIANT_TYPE_ARRAY,
       2
     )

@@ -9,6 +9,98 @@ semver — the topmost *Unreleased* section is the version being worked toward,
 which `sbt publishLocal` produces locally and which appears on JitPack only once
 its tag is pushed.
 
+## [0.1.9] — Unreleased
+
+Memory and performance release. The Scala heap stays untouched on the engine
+call path, `RefCounted` lifetimes are deterministic and leak-checked, and the
+math builtins are a complete native port of Godot's `core/math`. Numbers are in
+`docs/guides/performance.md`, measured by `godot/memory_verify.gd`.
+
+### Performance
+- Engine method calls allocate nothing on the Scala heap and run 20-60x faster
+  (`setPosition`: 832 B / 1982 ns → 0 B / 33 ns; `getChild`: 1072 B / 2467 ns →
+  0 B / 60 ns).
+  - Each generated method caches its `MethodBind` in a companion field instead of
+    building a string map key per call.
+  - `Ptrcall` dispatchers are `inline` and specialized per argument type at
+    compile time (no typeclasses, no boxing).
+  - Strings convert as UTF-16 through a stack buffer.
+  - Returned `StringName`s are interned, so returning one allocates nothing.
+- GDScript → Scala `@func` calls: 2704 B / 5353 ns → 0 B / 100 ns. `_process`
+  dispatch: 130 B per node per frame → 0 B. The per-call virtuals and the method
+  trampoline are `@exported` functions (address via
+  `resources/scala-native/gdext_trampolines.c`) instead of lambda `CFuncPtr`s,
+  which box every argument. Primitive getters and setters are specialized at
+  compile time.
+- `emitSignal`, `Input.singleton` (and every singleton), `getTree` allocate
+  nothing. Singletons are cached.
+- `Log.trace` builds its message only when tracing is on; registry lookups use
+  token-indexed tables and primitive maps instead of boxed `Long` keys; builtin
+  constructor and method lookups are cached without per-call keys or closures.
+
+### Added
+- `godotNativeMode` plugin setting: `releaseFast` (default), `releaseFull`,
+  `debug`. Projects previously always built in `debug` (no optimizer).
+- `Gd.scoped { ... }` releases every `RefCounted` reference adopted inside it;
+  `keep()` takes one out of the block.
+- `gdext.api.Gc`: `collect()`, `disable()`/`enable()`, `paused { }`, `stats`
+  (heap, total allocated bytes, collections, owned references).
+- Shutdown leak report: a warning naming the classes of `RefCounted`
+  references Scala still owns.
+- Full math API: all 367 methods, the operators, and the constants of `Vector2/3/4(i)`,
+  `Rect2(i)`, `AABB`, `Plane`, `Quaternion`, `Basis`, `Transform2D/3D`,
+  `Projection`, `Color` (including HSV, OKHSL, HTML and the 146 named colors),
+  plus `GodotMath` scalar helpers.
+- Static engine methods (71) are generated in the class companion, e.g.
+  `FileAccess.fileExists`, `DirAccess.open`.
+- `Arr`, `Dict`, `Packed*Array` are `AutoCloseable`; `Arr.free()`, `Dict.free()`.
+- igen `BuiltinGenerator`: generates `BuiltinSizes`, `ColorNames`, and the
+  math parity harness from `extension_api.json`.
+- Harness: `MemoryProbe` + `godot/memory_verify.gd` (byte budgets per hot path,
+  ownership rules); `MathParityProbe` + `godot/math_parity_verify.gd` (604
+  Scala-vs-engine checks over every math method, member and operator).
+
+### Changed
+- **Breaking:** engine methods returning an object return the typed wrapper
+  (`getParent(): Node`, `getMesh(): Mesh`, `load(...): Resource`) instead of a
+  raw `GodotObject`. Replace `Gd.wrap[T](x.getFoo())` with `x.getFoo()`, or
+  `x.getFoo().cast[T]` to narrow.
+- **Breaking:** each engine object has exactly one wrapper (cached through
+  Godot instance bindings, like godot-cpp). Wrappers of objects the engine
+  freed throw `NullPointerException` on use instead of crashing.
+- **Breaking:** `Ref<T>` returns and `Gd.create` of a `RefCounted` are owned by
+  the caller: release with `unref()` or `Gd.scoped`. `unref()` destroys the
+  object at the last reference (it previously never freed) and ignores a
+  wrapper that owns no reference. Decoding an object from a Variant (`Arr` and
+  `Dict` elements, `Object.get`, `Tres` elements) borrows instead of taking a
+  reference.
+- **Breaking:** `Basis`, `Transform2D`, `Transform3D`, `Projection` are stored
+  flat (one object instead of 4-6). `Basis(row0, row1, row2)` →
+  `Basis.fromRows(...)`; `Basis(x, y, z)` now takes columns (GDScript order);
+  `basis.row0` → `basis.row(0)` / `basis.x` for the X axis.
+  `Transform3D(basis, origin)`, `Transform2D(x, y, origin)`,
+  `Projection(x, y, z, w)` keep working as factories.
+- **Breaking:** math method signatures follow the engine API: `int` arguments are
+  `Long`, zero-argument methods take no parentheses. `Vector3.rotatedY(a)` is
+  removed; use `rotated(Vector3.UP, a)`. Lowercase `zero`/`identity` constants
+  are deprecated aliases of `ZERO`/`IDENTITY`.
+- Exported resource, scene, `Arr` and `Dict` properties release the value they
+  replace and, when the instance is freed, what they still hold.
+- `BuiltinSizes` is generated from the API dump.
+
+### Fixed
+- Leaks: one Godot `String` per engine call with a `String` argument; a
+  `StringName` reference and 8 bytes of malloc per `StringName` return; one
+  reference per `Ref<T>` return (`load`, `duplicate`, `getMesh`, ...); one
+  reference per export setter call; the binding self-test's `DirAccess`. The
+  harness no longer ends with `ERROR: 3 resources still in use at exit`.
+- `StringName.from` encoded with the platform default charset but measured
+  UTF-8 bytes.
+- `GString` conversion used the platform default charset; it is now exact
+  UTF-16.
+- Hand-written `FileAccess`/`DirAccess` statics in generated files were lost on
+  regenerate; statics are now generated.
+
 ## [0.1.8] — 2026-10-20
 
 ### Removed

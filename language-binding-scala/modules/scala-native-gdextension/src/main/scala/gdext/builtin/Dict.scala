@@ -22,8 +22,27 @@ final class Dict[K, V] private[builtin] (
   fk: FromVariant[K],
   tv: ToVariant[V],
   fv: FromVariant[V]
-) {
-  private def dict: Dictionary = Dictionary.fromPtr(backing)
+) extends AutoCloseable {
+  private var freed = false
+
+  private def dict: Dictionary = {
+    if (freed) throw new IllegalStateException("Dict used after free()")
+    Dictionary.fromPtr(backing)
+  }
+
+  /**
+   * Release this handle's reference to the engine Dictionary and its storage.
+   * Idempotent; any later use throws. An exported `Dict` property is released
+   * by the binding when the property is overwritten or the instance is freed.
+   */
+  def free(): Unit =
+    if (!freed) {
+      freed = true
+      Dictionary.fromPtr(backing).destroy()
+      stdlib.free(backing.asInstanceOf[Ptr[Byte]])
+    }
+
+  def close(): Unit = free()
 
   def put(key: K, value: V): Unit = dict.put(key, value)
   def apply(key: K): V = dict.get[K, V](key)

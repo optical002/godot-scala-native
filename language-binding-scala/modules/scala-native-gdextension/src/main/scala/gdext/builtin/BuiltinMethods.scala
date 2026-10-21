@@ -13,23 +13,29 @@ import gdext.internal.ffi.types.*
  * will generate; it is kept minimal here to support the Phase 1 containers.
  */
 object BuiltinMethods {
-  private val cache =
-    new java.util.concurrent.ConcurrentHashMap[String, GDExtensionPtrBuiltInMethod]()
+  // One name -> function map per variant type, so a hit is an array index plus
+  // a map read: no key building, no closure.
+  private val byType =
+    Array.fill(64)(
+      new java.util.concurrent.ConcurrentHashMap[String, GDExtensionPtrBuiltInMethod]()
+    )
 
   def method(
     variantType: GDExtensionVariantType,
     name: String,
     hash: Long
-  ): GDExtensionPtrBuiltInMethod =
-    cache.computeIfAbsent(
-      s"${variantType.toInt}#$name",
-      _ => {
-        val sn = StringNames.cached(name)
-        Godot.interface.variant_get_ptr_builtin_method(
-          variantType,
-          sn.ptr,
-          hash
-        )
-      }
-    )
+  ): GDExtensionPtrBuiltInMethod = {
+    val cache = byType(variantType.toInt)
+    val hit = cache.get(name)
+    if (hit != null) hit
+    else {
+      val fn = Godot.interface.variant_get_ptr_builtin_method(
+        variantType,
+        StringNames.cached(name).ptr,
+        hash
+      )
+      cache.put(name, fn)
+      fn
+    }
+  }
 }

@@ -4,17 +4,27 @@ import gdext.Godot
 import gdext.builtin.*
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
+import gdext.internal.ffi.types.GDExtensionMethodBindPtr
 
 /** Generated wrapper for Godot's `EditorInspectorPlugin`, extends `RefCounted`. */
 abstract class EditorInspectorPlugin extends RefCounted {
   override def godotClassName: String = "EditorInspectorPlugin"
 
   /** EditorInspectorPlugin.add_custom_control */
-  final def addCustomControl(control: Control): Unit =
-    Ptrcall.callVoid1(MethodBind.get("EditorInspectorPlugin", "add_custom_control", 1496901182L), hostObject.objectPtr, control.hostObject)
+  final def addCustomControl(control: Control): Unit = {
+    if (gdext.classes.EditorInspectorPlugin.mb_add_custom_control == null) gdext.classes.EditorInspectorPlugin.mb_add_custom_control = MethodBind.get("EditorInspectorPlugin", "add_custom_control", 1496901182L)
+    Ptrcall.callVoid1(gdext.classes.EditorInspectorPlugin.mb_add_custom_control, livePtr, Wrappers.handle(control))
+  }
 
   /** EditorInspectorPlugin.add_property_editor */
-  final def addPropertyEditor(property: String, editor: Control, add_to_end: Boolean, label: String): Unit =
-    Ptrcall.callVoid4(MethodBind.get("EditorInspectorPlugin", "add_property_editor", 2042698479L), hostObject.objectPtr, property, editor.hostObject, add_to_end, label)
+  final def addPropertyEditor(property: String, editor: Control, add_to_end: Boolean, label: String): Unit = {
+    if (gdext.classes.EditorInspectorPlugin.mb_add_property_editor == null) gdext.classes.EditorInspectorPlugin.mb_add_property_editor = MethodBind.get("EditorInspectorPlugin", "add_property_editor", 2042698479L)
+    Ptrcall.callVoid4(gdext.classes.EditorInspectorPlugin.mb_add_property_editor, livePtr, property, Wrappers.handle(editor), add_to_end, label)
+  }
 
+}
+
+object EditorInspectorPlugin {
+  private[classes] var mb_add_custom_control: GDExtensionMethodBindPtr = null
+  private[classes] var mb_add_property_editor: GDExtensionMethodBindPtr = null
 }

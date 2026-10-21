@@ -20,7 +20,7 @@ import gdext.internal.ffi.types.GDExtensionVariantType.*
 sealed abstract class PackedArray[E] private[builtin] (
   private[gdext] val backing: GDExtensionTypePtr,
   variantType: GDExtensionVariantType
-) {
+) extends AutoCloseable {
   private var freed = false
 
   def size: Int = {
@@ -50,6 +50,8 @@ sealed abstract class PackedArray[E] private[builtin] (
   def isEmpty: Boolean = size == 0
   def iterator: Iterator[E] = Iterator.tabulate(size)(apply)
   def toSeq: Seq[E] = iterator.toSeq
+
+  def close(): Unit = free()
 
   def free(): Unit =
     if (!freed) {
@@ -82,7 +84,7 @@ object PackedArray {
     variantType: GDExtensionVariantType
   ): GDExtensionTypePtr = {
     val buf = stdlib.malloc(16.toCSize).asInstanceOf[GDExtensionTypePtr]
-    Godot.interface.variant_get_ptr_constructor(variantType, 0)(buf, null)
+    VariantConstructors.constructor(variantType, 0)(buf, null)
     buf
   }
 

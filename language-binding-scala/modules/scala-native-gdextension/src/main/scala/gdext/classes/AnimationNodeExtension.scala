@@ -4,6 +4,7 @@ import gdext.Godot
 import gdext.builtin.*
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
+import gdext.internal.ffi.types.GDExtensionMethodBindPtr
 
 /** Generated wrapper for Godot's `AnimationNodeExtension`, extends `AnimationNode`. */
 abstract class AnimationNodeExtension extends AnimationNode {

@@ -69,6 +69,8 @@ nav:
       - Methods and signals: guides/methods-signals.md
       - Builtin types: guides/builtin-types.md
       - Resources and files: guides/resources-files.md
+      - Memory and object lifetimes: guides/memory.md
+      - Performance: guides/performance.md
       - Editor hot reload: guides/hot-reload.md
   - Reference:
       - sbt plugin: reference/sbt-plugin.md

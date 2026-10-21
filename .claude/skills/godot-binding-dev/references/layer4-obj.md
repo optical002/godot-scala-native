@@ -11,11 +11,19 @@ Root base of the whole hierarchy. Carries `_hostObject` (the handle) and:
 - `hostObject`/`hostPtr` (raw handle), `withHost(ptr)` (rebind, fluent),
   `instanceId: InstanceId`, `godotClassName` (override; baked literal on engine
   wrappers, else `getClass.getSimpleName` — currently a convenience, unused).
-- `isRefCounted = this.isInstanceOf[RefCounted]` (no typeclass field).
-- **lifetime, plain members**: `free()` (`object_destroy`, no-op for RefCounted),
-  `unref()` (RefCounted only), `refInc()` (take a strong ref; **named `refInc`,
-  NOT `reference`, to avoid clashing with the generated
-  `RefCounted.reference(): Boolean` engine method** — don't rename it back).
+- `isRefCounted = this.isInstanceOf[RefCounted]`. Accurate because every
+  wrapper comes from `ClassFactory` with the object's most-derived class.
+- **lifetime, plain members**: `free()` (`object_destroy` + clears the
+  handle, no-op for RefCounted), `unref()` (release ONE owned ref via
+  `Ownership.unref`; `RefCounted.unreference` and, when it returns true,
+  `object_destroy` — unreference alone never frees; ignored when the wrapper
+  owns nothing), `refInc()` (take an owned ref; **named `refInc`, NOT
+  `reference`, to avoid clashing with the generated
+  `RefCounted.reference(): Boolean` engine method** — don't rename it back),
+  `keep()` (move a ref out of the innermost `Gd.scoped`).
+- `ownedRefs: Int` (private[gdext]) counts refs this wrapper owns.
+- `livePtr` (private[gdext]): the handle, or NPE "the engine object was freed
+  or never bound" — what generated methods pass as the instance.
 - `cast[U <: GodotScriptClass](using ClassMeta[U]): U` — `object_cast_to` + class
   tag; returns `null` on failed cast (real engine type check).
 - object-Variant `given to/fromVariant[T <: GodotScriptClass]` live in `object
@@ -23,14 +31,42 @@ Root base of the whole hierarchy. Carries `_hostObject` (the handle) and:
   (no import) — this is what lets `Arr[Enemy]`/`Dict[Int, Tres[Stats]]` work.
   `from` side preserves identity + `refInc()`s RefCounted payloads.
 
+## `Wrappers` (`engine/Wrappers.scala`) — one wrapper per engine object
+godot-cpp's instance-binding cache. `of(ptr)` / `at(addr: Long)` call
+`object_get_instance_binding(obj, Godot.library, callbacks)`:
+- first sight → Godot calls `createCallback`: the bound user instance
+  (`ClassRegistry.instanceForObjectId`) or `ClassFactory.create(class)` walking
+  `ClassDB.getParentClass` until a generated class matches; stored in a
+  `SlotTable`, binding = token (never a raw Scala address).
+- later → the same wrapper, no allocation. `bindInstance` calls `bindUser`
+  so user objects resolve to the instance Godot drives.
+- `freeCallback` (object destroyed) clears the wrapper's handle → later calls
+  throw NPE. `referenceCallback` returns true (wrappers never keep objects alive).
+- `getBinding` is re-typed `CFuncPtr3[Long, Long, Long, Long]`: an FFI call
+  RETURNING a `Ptr` boxes it.
+- Defensive: a binding that resolves to a wrapper with a different handle (an
+  earlier library image) → fresh uncached wrapper.
+
+## `Ownership` (`engine/Ownership.scala`) — owned RefCounted refs
+- `adopt(w)`: +1 on the wrapper + global count + innermost `Gd.scoped` scope
+  (generated `Ref<T>` returns via `Wrappers.owned`, `Gd.create` of RefCounted).
+- `acquired(w)`: `refInc()` — counted, never scoped (so an export setter run
+  inside a user's scope is not released by it).
+- `Gd.scoped` = `enter()`/`exit(scope)` stack; exit releases newest first,
+  also on exceptions. `keep(w)` removes one record from the innermost scope
+  holding it.
+- `leakReport` (IdentityHashMap of owning wrappers, by `godotClassName`) →
+  SCENE deinit warning "N RefCounted reference(s) still owned by Scala".
+- Decoding from a Variant BORROWS (`GodotScriptClass.fromVariant`,
+  `Tres.fromVariant`). Export leaves (`RefLeaf`) `refInc` and implement
+  `release`; `PropertyRegistration.registerExport` wraps the setter to release
+  the replaced value and registers `ClassRegistry.addExportReleaser`, run by
+  `freeInstance` (`releaseExports`, walking registered parents).
+
 ## `ClassMeta[T]` (`engine/ClassMeta.scala`) — the only residual typeclass
-Slim: `{ className; fromHandle(ptr): T }` — all that's needed at a
-handle→object boundary (cast/export-read/construct). **No instances are written
-or generated**; a single `inline given derived[T <: GodotScriptClass]` macro
-synthesizes one from the type: `className = T.simpleName`, `fromHandle = new
-T{}.withHost(p)` (anonymous concrete subclass — works for abstract engine
-wrappers), with the `boundInstance` identity check. The generator emits **no**
-per-class given (was ~1024 `given GodotClass`). Summoned only at boundaries.
+`{ className; fromHandle(ptr): T }`. `inline given derived` expands to
+`ClassMeta.named[T]("<SimpleName>")`: one shared instance per class name
+(no allocation per summon); `fromHandle` = `Wrappers.of(p).asInstanceOf[T]`.
 
 ## Construction — `Gd.create` (facade in `api/Api.scala`)
 The `Gd` **type** is gone; the **name `Gd` is reused as a facade object** in
@@ -42,18 +78,17 @@ The `Gd` **type** is gone; the **name `Gd` is reused as a facade object** in
   `GodotPrint` logic verbatim; `GodotPrint.scala` was deleted). `gdext.Log` and
   `GodotEngine` call `gdext.api.Gd.print`.
 
-## Identity preservation (kept — not a `Gd` artifact)
-`ClassRegistry.instancesByObjectId` maps a Godot object id → the canonical Scala
-instance Godot drives. `ClassMeta.boundInstance` consults it from `fromHandle`, so
-fetching a live user node through an export returns THAT instance, not a fresh
-wrapper. This survives `Gd`'s removal — keep it.
+## Identity preservation
+`ClassRegistry` maps object id → instance token (`LongMap`) and token → user
+instance (`SlotTable`). With `Wrappers` binding user objects too, every fetch of
+a live user node returns THE instance Godot drives the virtuals on.
 
 ## Two lifetime regimes
 - Manually-managed (Object/Node): `free()` → `object_destroy`. Scene-tree nodes
   are owned by their parent — don't free those.
-- RefCounted (Resource): `Gd.create` calls `init_ref`; `unref()` drops; `refInc()`
-  holds (called when a Resource is read out of an export Variant so it outlives
-  Godot's temporary loader ref). `free()` is a no-op on RefCounted.
+- RefCounted (Resource): owned refs (see `Ownership`). `Gd.create` calls
+  `init_ref` + adopts; engine `Ref<T>` returns adopt; `unref()` releases;
+  exports `refInc` and release on replace/free. `free()` is a no-op.
 
 ## `ClassTags.scala`
 Caches `classdb_get_class_tag(name)` for `object_cast_to` (backs `cast`).

@@ -4,37 +4,62 @@ import gdext.Godot
 import gdext.builtin.*
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
+import gdext.internal.ffi.types.GDExtensionMethodBindPtr
 
 /** Generated wrapper for Godot's `Skeleton2D`, extends `Node2D`. */
 abstract class Skeleton2D extends Node2D {
   override def godotClassName: String = "Skeleton2D"
 
   /** Skeleton2D.get_bone_count */
-  final def getBoneCount(): Long =
-    Ptrcall.call0[Long](MethodBind.get("Skeleton2D", "get_bone_count", 3905245786L), hostObject.objectPtr)
+  final def getBoneCount(): Long = {
+    if (gdext.classes.Skeleton2D.mb_get_bone_count == null) gdext.classes.Skeleton2D.mb_get_bone_count = MethodBind.get("Skeleton2D", "get_bone_count", 3905245786L)
+    Ptrcall.call0[Long](gdext.classes.Skeleton2D.mb_get_bone_count, livePtr)
+  }
 
   /** Skeleton2D.get_bone */
-  final def getBone(idx: Long): GodotObject =
-    Ptrcall.call1[Long, GodotObject](MethodBind.get("Skeleton2D", "get_bone", 2556267111L), hostObject.objectPtr, idx)
+  final def getBone(idx: Long): Bone2D = {
+    if (gdext.classes.Skeleton2D.mb_get_bone == null) gdext.classes.Skeleton2D.mb_get_bone = MethodBind.get("Skeleton2D", "get_bone", 2556267111L)
+    Wrappers.borrowed[Bone2D](Ptrcall.call1[Long, Long](gdext.classes.Skeleton2D.mb_get_bone, livePtr, idx))
+  }
 
   /** Skeleton2D.set_modification_stack */
-  final def setModificationStack(modification_stack: SkeletonModificationStack2D): Unit =
-    Ptrcall.callVoid1(MethodBind.get("Skeleton2D", "set_modification_stack", 3907307132L), hostObject.objectPtr, modification_stack.hostObject)
+  final def setModificationStack(modification_stack: SkeletonModificationStack2D): Unit = {
+    if (gdext.classes.Skeleton2D.mb_set_modification_stack == null) gdext.classes.Skeleton2D.mb_set_modification_stack = MethodBind.get("Skeleton2D", "set_modification_stack", 3907307132L)
+    Ptrcall.callVoid1(gdext.classes.Skeleton2D.mb_set_modification_stack, livePtr, Wrappers.handle(modification_stack))
+  }
 
-  /** Skeleton2D.get_modification_stack */
-  final def getModificationStack(): GodotObject =
-    Ptrcall.call0[GodotObject](MethodBind.get("Skeleton2D", "get_modification_stack", 2107508396L), hostObject.objectPtr)
+  /** Skeleton2D.get_modification_stack. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
+  final def getModificationStack(): SkeletonModificationStack2D = {
+    if (gdext.classes.Skeleton2D.mb_get_modification_stack == null) gdext.classes.Skeleton2D.mb_get_modification_stack = MethodBind.get("Skeleton2D", "get_modification_stack", 2107508396L)
+    Wrappers.owned[SkeletonModificationStack2D](Ptrcall.call0[Long](gdext.classes.Skeleton2D.mb_get_modification_stack, livePtr))
+  }
 
   /** Skeleton2D.execute_modifications */
-  final def executeModifications(delta: Double, execution_mode: Long): Unit =
-    Ptrcall.callVoid2(MethodBind.get("Skeleton2D", "execute_modifications", 1005356550L), hostObject.objectPtr, delta, execution_mode)
+  final def executeModifications(delta: Double, execution_mode: Long): Unit = {
+    if (gdext.classes.Skeleton2D.mb_execute_modifications == null) gdext.classes.Skeleton2D.mb_execute_modifications = MethodBind.get("Skeleton2D", "execute_modifications", 1005356550L)
+    Ptrcall.callVoid2(gdext.classes.Skeleton2D.mb_execute_modifications, livePtr, delta, execution_mode)
+  }
 
   /** Skeleton2D.set_bone_local_pose_override */
-  final def setBoneLocalPoseOverride(bone_idx: Long, override_pose: gdext.builtin.Transform2D, strength: Double, persistent: Boolean): Unit =
-    Ptrcall.callVoid4(MethodBind.get("Skeleton2D", "set_bone_local_pose_override", 555457532L), hostObject.objectPtr, bone_idx, override_pose, strength, persistent)
+  final def setBoneLocalPoseOverride(bone_idx: Long, override_pose: gdext.builtin.Transform2D, strength: Double, persistent: Boolean): Unit = {
+    if (gdext.classes.Skeleton2D.mb_set_bone_local_pose_override == null) gdext.classes.Skeleton2D.mb_set_bone_local_pose_override = MethodBind.get("Skeleton2D", "set_bone_local_pose_override", 555457532L)
+    Ptrcall.callVoid4(gdext.classes.Skeleton2D.mb_set_bone_local_pose_override, livePtr, bone_idx, override_pose, strength, persistent)
+  }
 
   /** Skeleton2D.get_bone_local_pose_override */
-  final def getBoneLocalPoseOverride(bone_idx: Long): gdext.builtin.Transform2D =
-    Ptrcall.call1[Long, gdext.builtin.Transform2D](MethodBind.get("Skeleton2D", "get_bone_local_pose_override", 2995540667L), hostObject.objectPtr, bone_idx)
+  final def getBoneLocalPoseOverride(bone_idx: Long): gdext.builtin.Transform2D = {
+    if (gdext.classes.Skeleton2D.mb_get_bone_local_pose_override == null) gdext.classes.Skeleton2D.mb_get_bone_local_pose_override = MethodBind.get("Skeleton2D", "get_bone_local_pose_override", 2995540667L)
+    Ptrcall.call1[Long, gdext.builtin.Transform2D](gdext.classes.Skeleton2D.mb_get_bone_local_pose_override, livePtr, bone_idx)
+  }
 
+}
+
+object Skeleton2D {
+  private[classes] var mb_get_bone_count: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_bone: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_modification_stack: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_modification_stack: GDExtensionMethodBindPtr = null
+  private[classes] var mb_execute_modifications: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_bone_local_pose_override: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_bone_local_pose_override: GDExtensionMethodBindPtr = null
 }

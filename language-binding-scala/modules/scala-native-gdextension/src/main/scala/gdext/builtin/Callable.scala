@@ -44,7 +44,7 @@ object Callable {
     dest: Ptr[Byte]
   ): Callable = {
     val ctor =
-      Godot.interface.variant_get_ptr_constructor(GDEXTENSION_VARIANT_TYPE_CALLABLE, 2)
+      VariantConstructors.constructor(GDEXTENSION_VARIANT_TYPE_CALLABLE, 2)
     // The Object argument's type-pointer is a pointer to the object handle.
     val objSlot = stackalloc[GDExtensionObjectPtr](1)
     !objSlot = objectPtr

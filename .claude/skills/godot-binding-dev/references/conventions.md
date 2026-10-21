@@ -13,11 +13,56 @@ These cost real debugging time. Respect them.
 - **CFuncPtr from proc address**: `CFuncPtr.fromPtr[T](ptr)`, never `asInstanceOf`.
 - **Never let exceptions unwind across the C ABI**: catch at the boundary
   (`GodotEngine.run` does this), return failure.
-- **`Ptrcall` dispatchers must not be `inline`** (inlining crashed dotty).
+- **`Ptrcall` dispatchers ARE `inline` now** (0.1.9) with `erasedValue`
+  matches in `Marshal`; the old "inlining crashed dotty" no longer reproduces
+  on Scala 3.8.1 with this shape (no typeclass givens inside the inline).
+
+## Zero-allocation hot path (Scala Native 0.5 gotchas)
+Prove any hot-path change with `memory_verify.gd`; find a new allocation with
+gdb (`nix-shell -p gdb`, run the unwrapped binary from the `godot` wrapper's
+`exec` line, `break scalanative_GC_alloc_small`, `ignore 1 300000`, `bt 8`
+inside a probe loop: a throwaway `--script` that sets `MemoryProbe.step`,
+`iterations = 400000` and calls `measure()`).
+- **`Ptr` is a class**: a `Ptr` passed to / returned from a NON-inlined method
+  is boxed (`Boxes.boxToPtr`, 32 B). Pass addresses as `Long` (`gdext.internal.
+  Addr.ptr[T](addr)` rebuilds locally) or make the method `inline`.
+- A `Ptr` chosen by an `if` (e.g. stackalloc vs malloc) is boxed: pick the
+  address as a `Long` in each branch.
+- **FFI returns of `Ptr` box** too: re-type the `CFuncPtr` with `Long`
+  params/return via `CFuncPtr.fromPtr[CFuncPtrN[Long, ...]](CFuncPtr.toPtr(fn))`
+  (pointers and int64 share registers on every 64-bit target).
+- **Lambda `CFuncPtr` callbacks box every argument** (`$extern$forwarder` →
+  `boxToLong`/`boxToPtr`). Per-call callbacks are `@exported` object methods
+  taking `Long`s; `resources/scala-native/gdext_trampolines.c` returns their
+  addresses (Scala can't take an exported method's address). The owning
+  object must be reachable (SN keeps `@exported` methods of reachable objects).
+- Interflow (`releaseFast`) scalar-replaces small case classes (Vector3) but
+  not a 12-field `Transform3D`; `debug` mode boxes much more — budgets in
+  `memory_verify.gd` are for optimized builds (`-- debug` reports only).
+- **Inline code + top-level objects**: an object reached through a WILDCARD
+  package import (`import gdext.builtin.*`) inside an `inline def` that gets
+  inlined elsewhere links as an unknown `gdext.builtin$` type ("Found N
+  unreachable symbols"). Import the object explicitly. A `private[gdext]`
+  object referenced from inlined code / C-callback lambdas hit the same
+  failure (`gdext.internal.engine$`) — such helper objects are public, under
+  `gdext.internal`.
+- `ConcurrentHashMap.computeIfAbsent(key, _ => ...)` allocates a capturing
+  closure even on a hit: `get` first.
+- Generic `Function1/4` and typeclass methods over `A` box primitives and Ptrs;
+  registration getters/setters are specialized with `inline` + `erasedValue`.
 
 ## StringName
-Two StringName *handles* for the same text are NOT pointer-equal. Compare by
-decoding (`StringName.toScala`), e.g. in `get_virtual` dispatch.
+Two StringName *storage pointers* for the same text are NOT pointer-equal, but
+the 8-byte handle word they contain (`_data`) IS unique per text while alive —
+`StringNames.adopt` keys on it. Compare by decoding (`StringName.toScala`) when
+you only have an engine pointer, e.g. in `get_virtual` dispatch.
+
+## Ref<T> ptrcall returns (verified, Godot 4.6.1)
+The engine's `PtrToArg<Ref<T>>::encode` assigns a `Ref` into the return buffer:
+the caller receives **+1** (`memory_verify.gd` prints `load=1 duplicate=1`).
+Generated methods adopt it (`Wrappers.owned`). `RefCounted.unreference` only
+decrements; when it returns true the caller must `object_destroy` (as
+godot-cpp's `Ref::unref`).
 
 ## Editor hot-reload
 - `godot/scala.gdextension` is **GENERATED** by the plugin (`godotManifest`,
@@ -111,8 +156,11 @@ decoding (`StringName.toScala`), e.g. in `get_virtual` dispatch.
 (Godot Output). Don't mix.
 
 ## Codegen
-The generated packages — `gdext.classes` (engine) and `gdext.internal.ffi` (FFI)
-— are generated, never hand-edit; change the generator in `igen` and run
+The generated packages — `gdext.classes` (engine, incl. `ClassFactory`) and
+`gdext.internal.ffi` (FFI), plus `builtin/BuiltinSizes.scala`,
+`builtin/ColorNames.scala` and `harness/MathParity*.scala` (BuiltinGenerator)
+— are generated, never hand-edit (`classes/EngineExtras.scala` is the one
+hand-written file under `classes/`); change the generator in `igen` and run
 `cd language-binding-scala && sbt igen/regenerate`. (The generator emits the FFI
 `Interface` as `private[gdext]`.) After moving the entry symbol, `cd harness-scala
 && sbt clean` (stale `.nir` causes "multiple definition of godot_scala_init").
@@ -130,6 +178,6 @@ Consumers import only `gdext.api.*`, `gdext.classes`, `gdext.builtin`,
 `harness-scala` consumes the binding + plugin as **published** artifacts (no
 source `ProjectRef`), so any change in `language-binding-scala` needs
 `sbt publishLocal` before `sbt godotBuild` — see the skill body, which the
-`check-publish-local` hook enforces. Both publish under `0.1.8`.
+`check-publish-local` hook enforces. Both publish under `0.1.9`.
 Changing the plugin's task/setting keys or the embedded `gdext` version requires
 a republish to take effect downstream.

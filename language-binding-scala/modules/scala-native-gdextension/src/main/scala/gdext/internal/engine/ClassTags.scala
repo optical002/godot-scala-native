@@ -16,12 +16,16 @@ object ClassTags {
   private val cache =
     new java.util.concurrent.ConcurrentHashMap[String, CVoidPtr]()
 
-  def tag(className: String): CVoidPtr =
-    cache.computeIfAbsent(
-      className,
-      _ =>
-        Godot.interface.classdb_get_class_tag(
-          StringNames.cached(className).ptr
-        )
-    )
+  def tag(className: String): CVoidPtr = {
+    val hit = cache.get(className)
+    if (hit != null) hit
+    else
+      cache.computeIfAbsent(
+        className,
+        _ =>
+          Godot.interface.classdb_get_class_tag(
+            StringNames.cached(className).ptr
+          )
+      )
+  }
 }

@@ -8,6 +8,9 @@ import java.util.concurrent.atomic.AtomicLong
 import gdext.Godot
 import gdext.builtin.*
 import gdext.internal.ffi.types.*
+import gdext.internal.Addr
+import gdext.builtin.VariantIO
+import gdext.internal.engine.Wrappers
 import gdext.internal.ffi.types.GDExtensionClassMethodFlags.*
 
 /**
@@ -24,39 +27,124 @@ import gdext.internal.ffi.types.GDExtensionClassMethodFlags.*
  */
 object MethodRegistration {
 
-  /** A registered method's runtime dispatch over raw Variant pointers. */
-  private type Dispatch =
-    (GodotScriptClass, Ptr[GDExtensionConstVariantPtr], Long, GDExtensionVariantPtr) => Unit
+  /**
+   * A registered method's runtime dispatch over raw Variant storage. The
+   * argument array and return slot arrive as `Long` addresses (see
+   * [[gdext.internal.Addr]]), so a call boxes nothing.
+   */
+  abstract class Dispatch {
+    def apply(inst: GodotScriptClass, args: Long, argCount: Long, ret: Long): Unit
+  }
 
-  private val methods = new ConcurrentHashMap[Long, Dispatch]()
-  private val methodIds = new AtomicLong(1L)
+  private val methods = new gdext.internal.SlotTable[Dispatch]
+
+  /** The address of the `i`-th argument Variant. */
+  inline def argAt(args: Long, i: Int): Long =
+    !Addr.ptr[Long](args + i * 8L)
+
+  /**
+   * Getter dispatch: primitives are written straight into the return Variant
+   * (no boxing); any other type goes through its [[ToVariant]].
+   */
+  inline def getterDispatch[A](inline get: GodotScriptClass => A)(using
+    tv: ToVariant[A]
+  ): Dispatch =
+    inline scala.compiletime.erasedValue[A] match {
+      case _: Long =>
+        new Dispatch {
+          def apply(inst: GodotScriptClass, a: Long, n: Long, ret: Long) =
+            VariantIO.writeLong(ret, get(inst).asInstanceOf[Long])
+        }
+      case _: Int =>
+        new Dispatch {
+          def apply(inst: GodotScriptClass, a: Long, n: Long, ret: Long) =
+            VariantIO.writeLong(ret, get(inst).asInstanceOf[Int].toLong)
+        }
+      case _: Double =>
+        new Dispatch {
+          def apply(inst: GodotScriptClass, a: Long, n: Long, ret: Long) =
+            VariantIO.writeDouble(ret, get(inst).asInstanceOf[Double])
+        }
+      case _: Float =>
+        new Dispatch {
+          def apply(inst: GodotScriptClass, a: Long, n: Long, ret: Long) =
+            VariantIO.writeDouble(ret, get(inst).asInstanceOf[Float].toDouble)
+        }
+      case _: Boolean =>
+        new Dispatch {
+          def apply(inst: GodotScriptClass, a: Long, n: Long, ret: Long) =
+            VariantIO.writeBool(ret, get(inst).asInstanceOf[Boolean])
+        }
+      case _ =>
+        new Dispatch {
+          def apply(inst: GodotScriptClass, a: Long, n: Long, ret: Long) =
+            tv.toVariant(get(inst), Addr.ptr[Byte](ret))
+        }
+    }
+
+  /** Setter dispatch: the counterpart of [[getterDispatch]] for argument 0. */
+  inline def setterDispatch[A](inline set: (GodotScriptClass, A) => Unit)(using
+    fv: FromVariant[A]
+  ): Dispatch =
+    inline scala.compiletime.erasedValue[A] match {
+      case _: Long =>
+        new Dispatch {
+          def apply(inst: GodotScriptClass, a: Long, n: Long, ret: Long) =
+            set(inst, VariantIO.readLong(argAt(a, 0)).asInstanceOf[A])
+        }
+      case _: Int =>
+        new Dispatch {
+          def apply(inst: GodotScriptClass, a: Long, n: Long, ret: Long) =
+            set(inst, VariantIO.readLong(argAt(a, 0)).toInt.asInstanceOf[A])
+        }
+      case _: Double =>
+        new Dispatch {
+          def apply(inst: GodotScriptClass, a: Long, n: Long, ret: Long) =
+            set(inst, VariantIO.readDouble(argAt(a, 0)).asInstanceOf[A])
+        }
+      case _: Float =>
+        new Dispatch {
+          def apply(inst: GodotScriptClass, a: Long, n: Long, ret: Long) =
+            set(inst, VariantIO.readDouble(argAt(a, 0)).toFloat.asInstanceOf[A])
+        }
+      case _: Boolean =>
+        new Dispatch {
+          def apply(inst: GodotScriptClass, a: Long, n: Long, ret: Long) =
+            set(inst, VariantIO.readBool(argAt(a, 0)).asInstanceOf[A])
+        }
+      case _ =>
+        new Dispatch {
+          def apply(inst: GodotScriptClass, a: Long, n: Long, ret: Long) =
+            set(inst, fv.fromVariant(Addr.ptr[Byte](argAt(a, 0))))
+        }
+    }
 
   /** A getter: `() => A`, exposed as a no-arg method returning `A`. */
-  def registerGetter[A](
+  inline def registerGetter[A](
     className: String,
     methodName: String,
-    get: GodotScriptClass => A
+    inline get: GodotScriptClass => A
   )(using tv: ToVariant[A], vt: VariantTypeOf[A]): Unit =
     register(
       className,
       methodName,
       argTypes = Nil,
       returnType = Some(vt.variantType),
-      dispatch = (inst, _args, _n, rRet) => tv.toVariant(get(inst), rRet)
+      dispatch = getterDispatch[A](get)
     )
 
   /** A setter: `A => Unit`, exposed as a 1-arg void method. */
-  def registerSetter[A](
+  inline def registerSetter[A](
     className: String,
     methodName: String,
-    set: (GodotScriptClass, A) => Unit
+    inline set: (GodotScriptClass, A) => Unit
   )(using fv: FromVariant[A], vt: VariantTypeOf[A]): Unit =
     register(
       className,
       methodName,
       argTypes = List(vt.variantType),
       returnType = None,
-      dispatch = (inst, args, _n, _rRet) => set(inst, fv.fromVariant(args(0)))
+      dispatch = setterDispatch[A](set)
     )
 
   /** Getter backed by an [[ExportType]] (covers object/enum/dict exports). */
@@ -70,10 +158,9 @@ object MethodRegistration {
       methodName,
       argTypes = Nil,
       returnType = Some(et.variantType),
-      dispatch = (inst, _args, _n, rRet) => {
-        gdext.Log.trace(s"EXPORT-GET: $className.$methodName begin")
-        et.toVariant(get(inst), rRet)
-        gdext.Log.trace(s"EXPORT-GET: $className.$methodName done")
+      dispatch = new Dispatch {
+        def apply(inst: GodotScriptClass, a: Long, n: Long, ret: Long) =
+          et.toVariantAt(get(inst), ret)
       }
     )
 
@@ -88,10 +175,9 @@ object MethodRegistration {
       methodName,
       argTypes = List(et.variantType),
       returnType = None,
-      dispatch = (inst, args, _n, _rRet) => {
-        gdext.Log.trace(s"EXPORT-SET: $className.$methodName begin")
-        set(inst, et.fromVariant(args(0)))
-        gdext.Log.trace(s"EXPORT-SET: $className.$methodName done")
+      dispatch = new Dispatch {
+        def apply(inst: GodotScriptClass, a: Long, n: Long, ret: Long) =
+          set(inst, et.fromVariantAt(argAt(a, 0)))
       }
     )
 
@@ -110,20 +196,22 @@ object MethodRegistration {
       methodName,
       argTypes = Nil,
       returnType = None,
-      dispatch = (inst, _args, _n, _rRet) => action(inst)
+      dispatch = new Dispatch {
+        def apply(inst: GodotScriptClass, a: Long, n: Long, ret: Long) =
+          action(inst)
+      }
     )
 
   // --- core registration --------------------------------------------------
 
-  private def register(
+  private[register] def register(
     className: String,
     methodName: String,
     argTypes: List[GDExtensionVariantType],
     returnType: Option[GDExtensionVariantType],
     dispatch: Dispatch
   ): Unit = {
-    val methodToken = methodIds.getAndIncrement()
-    methods.put(methodToken, dispatch)
+    val methodToken = methods.add(dispatch)
 
     // Allocate with the concrete struct size. NOTE: do NOT route this through a
     // generic `malloc(sizeof[T])` helper — inside a generic, `sizeof[T]` does
@@ -180,27 +268,31 @@ object MethodRegistration {
     )
   }
 
-  private val callTrampoline: GDExtensionClassMethodCall =
-    (
-      methodUserdata: CVoidPtr,
-      instance: GDExtensionClassInstancePtr,
-      args: Ptr[GDExtensionConstVariantPtr],
-      argCount: GDExtensionInt,
-      rReturn: GDExtensionVariantPtr,
-      _rError: Ptr[GDExtensionCallError]
-    ) => {
-      val instTok = Tokens.fromPtr(instance)
-      val mTok = Tokens.fromPtr(methodUserdata)
-      val scala = ClassRegistry.instanceFor(instTok)
-      val dispatch = methods.get(mTok)
-      gdext.Log.trace(
-        s"callTrampoline: ENTER methodToken=$mTok instToken=$instTok argc=$argCount " +
-          s"scala=${if (scala == null) "null" else scala.getClass.getSimpleName} dispatch=${if (dispatch == null) "null" else "ok"}"
-      )
-      if (scala != null && dispatch != null)
-        dispatch(scala, args, argCount.toLong, rReturn)
-      gdext.Log.trace(s"callTrampoline: EXIT methodToken=$mTok instToken=$instTok")
-    }
+  // The method-call callback is an `@exported` method taking its pointer
+  // parameters as `Long` addresses; `gdext_trampolines.c` supplies its
+  // address. A CFuncPtr made from a lambda would box every parameter on every
+  // call.
+  @exported("gdext_scala_method_call")
+  def methodCallExport(
+    methodUserdata: Long,
+    instance: Long,
+    args: Long,
+    argCount: Long,
+    rReturn: Long,
+    rError: Long
+  ): Unit = {
+    val scala = ClassRegistry.instanceFor(instance)
+    val dispatch = methods(methodUserdata)
+    gdext.Log.trace(
+      s"callTrampoline: methodToken=$methodUserdata instToken=$instance argc=$argCount " +
+        s"scala=${if (scala == null) "null" else scala.getClass.getSimpleName} dispatch=${if (dispatch == null) "null" else "ok"}"
+    )
+    if (scala != null && dispatch != null)
+      dispatch(scala, args, argCount, rReturn)
+  }
+
+  private lazy val callTrampoline: GDExtensionClassMethodCall =
+    CFuncPtr.fromPtr[GDExtensionClassMethodCall](TrampolineAddrs.methodCall())
 
   // --- helpers ------------------------------------------------------------
 

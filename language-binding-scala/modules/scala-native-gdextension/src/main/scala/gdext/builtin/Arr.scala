@@ -20,8 +20,27 @@ final class Arr[A] private[builtin] (
 )(using
   tv: ToVariant[A],
   fv: FromVariant[A]
-) {
-  private def array: GArray = GArray.fromPtr(backing)
+) extends AutoCloseable {
+  private var freed = false
+
+  private def array: GArray = {
+    if (freed) throw new IllegalStateException("Arr used after free()")
+    GArray.fromPtr(backing)
+  }
+
+  /**
+   * Release this handle's reference to the engine Array and its storage.
+   * Idempotent; any later use throws. An exported `Arr` property is released
+   * by the binding when the property is overwritten or the instance is freed.
+   */
+  def free(): Unit =
+    if (!freed) {
+      freed = true
+      GArray.fromPtr(backing).destroy()
+      stdlib.free(backing.asInstanceOf[Ptr[Byte]])
+    }
+
+  def close(): Unit = free()
 
   def append(value: A): Unit = array.pushBack(value)
   def apply(i: Int): A = array.get[A](i)

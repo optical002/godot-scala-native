@@ -4,13 +4,20 @@ import gdext.Godot
 import gdext.builtin.*
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
+import gdext.internal.ffi.types.GDExtensionMethodBindPtr
 
 /** Generated wrapper for Godot's `JNISingleton`, extends `Object`. */
 abstract class JNISingleton extends Object {
   override def godotClassName: String = "JNISingleton"
 
   /** JNISingleton.has_java_method */
-  final def hasJavaMethod(method: gdext.builtin.StringName): Boolean =
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](MethodBind.get("JNISingleton", "has_java_method", 2619796661L), hostObject.objectPtr, method)
+  final def hasJavaMethod(method: gdext.builtin.StringName): Boolean = {
+    if (gdext.classes.JNISingleton.mb_has_java_method == null) gdext.classes.JNISingleton.mb_has_java_method = MethodBind.get("JNISingleton", "has_java_method", 2619796661L)
+    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.JNISingleton.mb_has_java_method, livePtr, method)
+  }
 
+}
+
+object JNISingleton {
+  private[classes] var mb_has_java_method: GDExtensionMethodBindPtr = null
 }

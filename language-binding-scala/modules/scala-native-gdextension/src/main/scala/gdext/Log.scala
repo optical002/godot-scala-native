@@ -62,17 +62,20 @@ private[gdext] object Log {
     try new java.io.File(".scala/trace").exists()
     catch { case _: Throwable => false }
 
-  def trace(msg: String): Unit =
-    if (traceEnabled) {
-      // Do NOT touch Thread.currentThread() here: on Scala Native/Windows the
-      // first thread-local access during godot_scala_init triggers main-thread
-      // setup -> System.getenv -> NPE (EnvVars not yet initialized). Keep the
-      // prefix thread-free (timestamp only) so logging never forces that path.
-      val prefix =
-        try s"[${System.nanoTime() / 1000000L}ms] "
-        catch { case _: Throwable => "[trace] " }
-      file(s"$prefix$msg")
-    }
+  /** `msg` is only built when tracing is on: no cost on the hot path. */
+  inline def trace(inline msg: String): Unit =
+    if (traceEnabled) traceLine(msg)
+
+  def traceLine(msg: String): Unit = {
+    // Do NOT touch Thread.currentThread() here: on Scala Native/Windows the
+    // first thread-local access during godot_scala_init triggers main-thread
+    // setup -> System.getenv -> NPE (EnvVars not yet initialized). Keep the
+    // prefix thread-free (timestamp only) so logging never forces that path.
+    val prefix =
+      try s"[${System.nanoTime() / 1000000L}ms] "
+      catch { case _: Throwable => "[trace] " }
+    file(s"$prefix$msg")
+  }
 
   /** Truncate the side log file and write the first line (start-of-run). */
   def fileReset(msg: String): Unit = FileLogger.use(File)(_.log(msg))

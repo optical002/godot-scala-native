@@ -22,9 +22,8 @@ import java.util.concurrent.atomic.AtomicLong
  */
 object ClassRegistry {
   private val classes = new ConcurrentHashMap[Long, ClassDescriptor]()
-  private val instances = new ConcurrentHashMap[Long, GodotScriptClass]()
+  private val instances = new gdext.internal.SlotTable[GodotScriptClass]
   private val classIds = new AtomicLong(1L)
-  private val instanceIds = new AtomicLong(1L)
 
   // Secondary index: Godot object instance id -> the canonical Scala instance
   // bound to it, plus instance token -> object id so free can evict both. This
@@ -33,8 +32,10 @@ object ClassRegistry {
   // wrapper with its own field state. Without it, fetching a user node through an
   // exported-node field yields a second Scala object whose state diverges from
   // the processed one.
-  private val instancesByObjectId = new ConcurrentHashMap[Long, GodotScriptClass]()
-  private val objectIdByToken = new ConcurrentHashMap[Long, java.lang.Long]()
+  // Both are primitive Long -> Long maps (object id -> instance token, token ->
+  // object id), so the per-call lookups never box.
+  private val tokenByObjectId = new gdext.internal.LongMap(256)
+  private val objectIdByToken = new gdext.internal.LongMap(256)
 
   // Class name -> its token, so re-registration of the same class (e.g. on a
   // hot-reload) reuses the existing entry instead of duplicating it.
@@ -97,11 +98,10 @@ object ClassRegistry {
    * same engine node is later fetched through `Gd[T]`.
    */
   def addInstance(obj: GodotScriptClass, objectId: Long): Long = {
-    val id = instanceIds.getAndIncrement()
-    instances.put(id, obj)
+    val id = instances.add(obj)
     if (objectId != 0L) {
-      instancesByObjectId.put(objectId, obj)
-      objectIdByToken.put(id, objectId)
+      tokenByObjectId(objectId) = id
+      objectIdByToken(id) = objectId
     }
     gdext.Log.trace(
       s"ClassRegistry.addInstance: token $id (objectId=$objectId) = ${obj.getClass.getSimpleName} (live=${instances.size})"
@@ -111,26 +111,57 @@ object ClassRegistry {
 
   def instanceFor(token: Long): GodotScriptClass = {
     gdext.internal.GcThread.ensureRegistered()
-    instances.get(token)
+    instances(token)
   }
 
   /** The canonical Scala instance bound to the engine object with this instance
     * id, or null if none is bound (e.g. a pure engine object). */
   def instanceForObjectId(objectId: Long): GodotScriptClass = {
     gdext.internal.GcThread.ensureRegistered()
-    instancesByObjectId.get(objectId)
+    val token = tokenByObjectId.getOrElse(objectId, 0L)
+    if (token == 0L) null else instances(token)
   }
 
   def removeInstance(token: Long): GodotScriptClass = {
     gdext.internal.GcThread.ensureRegistered()
     val r = instances.remove(token)
-    val objectId: java.lang.Long = objectIdByToken.remove(token)
-    if (objectId != null) instancesByObjectId.remove(objectId.longValue)
+    val objectId = objectIdByToken.getOrElse(token, 0L)
+    if (objectId != 0L) {
+      objectIdByToken.remove(token)
+      tokenByObjectId.remove(objectId)
+    }
     gdext.Log.trace(
       s"ClassRegistry.removeInstance: token $token = ${if (r == null) "null" else r.getClass.getSimpleName} (live=${instances.size})"
     )
     r
   }
+
+  // Per class name: how to release what each exported property of an
+  // instance holds (registered by PropertyRegistration.registerExport).
+  private val exportReleasers =
+    new ConcurrentHashMap[String, List[GodotScriptClass => Unit]]()
+
+  def addExportReleaser(className: String, f: GodotScriptClass => Unit): Unit =
+    exportReleasers.merge(className, List(f), (a, b) => b ::: a)
+
+  /** Run the export releasers of `inst`'s class and every registered parent. */
+  def releaseExports(inst: GodotScriptClass): Unit = {
+    var cls = inst.getClass.getSimpleName
+    while (cls != null) {
+      val fs = exportReleasers.get(cls)
+      if (fs != null) fs.foreach { f =>
+        try f(inst)
+        catch {
+          case t: Throwable =>
+            gdext.Log.error(s"releasing exports of $cls: ${t.getMessage}")
+        }
+      }
+      cls = parentNameOf(cls)
+    }
+  }
+
+  /** Every live Scala instance (for teardown passes). */
+  def foreachInstance(f: GodotScriptClass => Unit): Unit = instances.foreach(f)
 }
 
 /**

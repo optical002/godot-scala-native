@@ -44,6 +44,20 @@ object Variant {
   def fromPtr(p: GDExtensionVariantPtr): Variant = p
 
   /**
+   * Move the 24 Variant bytes at `b` (e.g. a ptrcall return buffer) into
+   * malloc'd storage. The caller owns the result: [[destroy]] it, then
+   * `stdlib.free` its [[ptr]].
+   */
+  private[gdext] def copyToHeap(b: Ptr[Byte]): Variant = {
+    val dest = scala.scalanative.libc.stdlib
+      .malloc(BuiltinSizes.Variant.toCSize)
+      .asInstanceOf[Ptr[Byte]]
+    var i = 0
+    while (i < BuiltinSizes.Variant) { dest(i) = b(i); i += 1 }
+    dest.asInstanceOf[GDExtensionVariantPtr]
+  }
+
+  /**
    * Build a Variant from a Scala value into caller-provided storage.
    *
    * @param dest a buffer of at least [[BuiltinSizes.Variant]] bytes

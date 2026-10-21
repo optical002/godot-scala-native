@@ -4,145 +4,251 @@ import gdext.Godot
 import gdext.builtin.*
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
+import gdext.internal.ffi.types.GDExtensionMethodBindPtr
 
 /** Generated wrapper for Godot's `EditorProperty`, extends `Container`. */
 abstract class EditorProperty extends Container {
   override def godotClassName: String = "EditorProperty"
 
   /** EditorProperty.set_label */
-  final def setLabel(text: String): Unit =
-    Ptrcall.callVoid1(MethodBind.get("EditorProperty", "set_label", 83702148L), hostObject.objectPtr, text)
+  final def setLabel(text: String): Unit = {
+    if (gdext.classes.EditorProperty.mb_set_label == null) gdext.classes.EditorProperty.mb_set_label = MethodBind.get("EditorProperty", "set_label", 83702148L)
+    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_set_label, livePtr, text)
+  }
 
   /** EditorProperty.get_label */
-  final def getLabel(): String =
-    Ptrcall.call0[String](MethodBind.get("EditorProperty", "get_label", 201670096L), hostObject.objectPtr)
+  final def getLabel(): String = {
+    if (gdext.classes.EditorProperty.mb_get_label == null) gdext.classes.EditorProperty.mb_get_label = MethodBind.get("EditorProperty", "get_label", 201670096L)
+    Ptrcall.call0[String](gdext.classes.EditorProperty.mb_get_label, livePtr)
+  }
 
   /** EditorProperty.set_read_only */
-  final def setReadOnly(read_only: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("EditorProperty", "set_read_only", 2586408642L), hostObject.objectPtr, read_only)
+  final def setReadOnly(read_only: Boolean): Unit = {
+    if (gdext.classes.EditorProperty.mb_set_read_only == null) gdext.classes.EditorProperty.mb_set_read_only = MethodBind.get("EditorProperty", "set_read_only", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_set_read_only, livePtr, read_only)
+  }
 
   /** EditorProperty.is_read_only */
-  final def isReadOnly(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("EditorProperty", "is_read_only", 36873697L), hostObject.objectPtr)
+  final def isReadOnly(): Boolean = {
+    if (gdext.classes.EditorProperty.mb_is_read_only == null) gdext.classes.EditorProperty.mb_is_read_only = MethodBind.get("EditorProperty", "is_read_only", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.EditorProperty.mb_is_read_only, livePtr)
+  }
 
   /** EditorProperty.set_draw_label */
-  final def setDrawLabel(draw_label: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("EditorProperty", "set_draw_label", 2586408642L), hostObject.objectPtr, draw_label)
+  final def setDrawLabel(draw_label: Boolean): Unit = {
+    if (gdext.classes.EditorProperty.mb_set_draw_label == null) gdext.classes.EditorProperty.mb_set_draw_label = MethodBind.get("EditorProperty", "set_draw_label", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_set_draw_label, livePtr, draw_label)
+  }
 
   /** EditorProperty.is_draw_label */
-  final def isDrawLabel(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("EditorProperty", "is_draw_label", 36873697L), hostObject.objectPtr)
+  final def isDrawLabel(): Boolean = {
+    if (gdext.classes.EditorProperty.mb_is_draw_label == null) gdext.classes.EditorProperty.mb_is_draw_label = MethodBind.get("EditorProperty", "is_draw_label", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.EditorProperty.mb_is_draw_label, livePtr)
+  }
 
   /** EditorProperty.set_draw_background */
-  final def setDrawBackground(draw_background: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("EditorProperty", "set_draw_background", 2586408642L), hostObject.objectPtr, draw_background)
+  final def setDrawBackground(draw_background: Boolean): Unit = {
+    if (gdext.classes.EditorProperty.mb_set_draw_background == null) gdext.classes.EditorProperty.mb_set_draw_background = MethodBind.get("EditorProperty", "set_draw_background", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_set_draw_background, livePtr, draw_background)
+  }
 
   /** EditorProperty.is_draw_background */
-  final def isDrawBackground(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("EditorProperty", "is_draw_background", 36873697L), hostObject.objectPtr)
+  final def isDrawBackground(): Boolean = {
+    if (gdext.classes.EditorProperty.mb_is_draw_background == null) gdext.classes.EditorProperty.mb_is_draw_background = MethodBind.get("EditorProperty", "is_draw_background", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.EditorProperty.mb_is_draw_background, livePtr)
+  }
 
   /** EditorProperty.set_checkable */
-  final def setCheckable(checkable: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("EditorProperty", "set_checkable", 2586408642L), hostObject.objectPtr, checkable)
+  final def setCheckable(checkable: Boolean): Unit = {
+    if (gdext.classes.EditorProperty.mb_set_checkable == null) gdext.classes.EditorProperty.mb_set_checkable = MethodBind.get("EditorProperty", "set_checkable", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_set_checkable, livePtr, checkable)
+  }
 
   /** EditorProperty.is_checkable */
-  final def isCheckable(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("EditorProperty", "is_checkable", 36873697L), hostObject.objectPtr)
+  final def isCheckable(): Boolean = {
+    if (gdext.classes.EditorProperty.mb_is_checkable == null) gdext.classes.EditorProperty.mb_is_checkable = MethodBind.get("EditorProperty", "is_checkable", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.EditorProperty.mb_is_checkable, livePtr)
+  }
 
   /** EditorProperty.set_checked */
-  final def setChecked(checked: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("EditorProperty", "set_checked", 2586408642L), hostObject.objectPtr, checked)
+  final def setChecked(checked: Boolean): Unit = {
+    if (gdext.classes.EditorProperty.mb_set_checked == null) gdext.classes.EditorProperty.mb_set_checked = MethodBind.get("EditorProperty", "set_checked", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_set_checked, livePtr, checked)
+  }
 
   /** EditorProperty.is_checked */
-  final def isChecked(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("EditorProperty", "is_checked", 36873697L), hostObject.objectPtr)
+  final def isChecked(): Boolean = {
+    if (gdext.classes.EditorProperty.mb_is_checked == null) gdext.classes.EditorProperty.mb_is_checked = MethodBind.get("EditorProperty", "is_checked", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.EditorProperty.mb_is_checked, livePtr)
+  }
 
   /** EditorProperty.set_draw_warning */
-  final def setDrawWarning(draw_warning: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("EditorProperty", "set_draw_warning", 2586408642L), hostObject.objectPtr, draw_warning)
+  final def setDrawWarning(draw_warning: Boolean): Unit = {
+    if (gdext.classes.EditorProperty.mb_set_draw_warning == null) gdext.classes.EditorProperty.mb_set_draw_warning = MethodBind.get("EditorProperty", "set_draw_warning", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_set_draw_warning, livePtr, draw_warning)
+  }
 
   /** EditorProperty.is_draw_warning */
-  final def isDrawWarning(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("EditorProperty", "is_draw_warning", 36873697L), hostObject.objectPtr)
+  final def isDrawWarning(): Boolean = {
+    if (gdext.classes.EditorProperty.mb_is_draw_warning == null) gdext.classes.EditorProperty.mb_is_draw_warning = MethodBind.get("EditorProperty", "is_draw_warning", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.EditorProperty.mb_is_draw_warning, livePtr)
+  }
 
   /** EditorProperty.set_keying */
-  final def setKeying(keying: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("EditorProperty", "set_keying", 2586408642L), hostObject.objectPtr, keying)
+  final def setKeying(keying: Boolean): Unit = {
+    if (gdext.classes.EditorProperty.mb_set_keying == null) gdext.classes.EditorProperty.mb_set_keying = MethodBind.get("EditorProperty", "set_keying", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_set_keying, livePtr, keying)
+  }
 
   /** EditorProperty.is_keying */
-  final def isKeying(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("EditorProperty", "is_keying", 36873697L), hostObject.objectPtr)
+  final def isKeying(): Boolean = {
+    if (gdext.classes.EditorProperty.mb_is_keying == null) gdext.classes.EditorProperty.mb_is_keying = MethodBind.get("EditorProperty", "is_keying", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.EditorProperty.mb_is_keying, livePtr)
+  }
 
   /** EditorProperty.set_deletable */
-  final def setDeletable(deletable: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("EditorProperty", "set_deletable", 2586408642L), hostObject.objectPtr, deletable)
+  final def setDeletable(deletable: Boolean): Unit = {
+    if (gdext.classes.EditorProperty.mb_set_deletable == null) gdext.classes.EditorProperty.mb_set_deletable = MethodBind.get("EditorProperty", "set_deletable", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_set_deletable, livePtr, deletable)
+  }
 
   /** EditorProperty.is_deletable */
-  final def isDeletable(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("EditorProperty", "is_deletable", 36873697L), hostObject.objectPtr)
+  final def isDeletable(): Boolean = {
+    if (gdext.classes.EditorProperty.mb_is_deletable == null) gdext.classes.EditorProperty.mb_is_deletable = MethodBind.get("EditorProperty", "is_deletable", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.EditorProperty.mb_is_deletable, livePtr)
+  }
 
   /** EditorProperty.get_edited_property */
-  final def getEditedProperty(): gdext.builtin.StringName =
-    Ptrcall.call0[gdext.builtin.StringName](MethodBind.get("EditorProperty", "get_edited_property", 2002593661L), hostObject.objectPtr)
+  final def getEditedProperty(): gdext.builtin.StringName = {
+    if (gdext.classes.EditorProperty.mb_get_edited_property == null) gdext.classes.EditorProperty.mb_get_edited_property = MethodBind.get("EditorProperty", "get_edited_property", 2002593661L)
+    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.EditorProperty.mb_get_edited_property, livePtr)
+  }
 
   /** EditorProperty.get_edited_object */
-  final def getEditedObject(): GodotObject =
-    Ptrcall.call0[GodotObject](MethodBind.get("EditorProperty", "get_edited_object", 2050059866L), hostObject.objectPtr)
+  final def getEditedObject(): Object = {
+    if (gdext.classes.EditorProperty.mb_get_edited_object == null) gdext.classes.EditorProperty.mb_get_edited_object = MethodBind.get("EditorProperty", "get_edited_object", 2050059866L)
+    Wrappers.borrowed[Object](Ptrcall.call0[Long](gdext.classes.EditorProperty.mb_get_edited_object, livePtr))
+  }
 
   /** EditorProperty.update_property */
-  final def updateProperty(): Unit =
-    Ptrcall.callVoid0(MethodBind.get("EditorProperty", "update_property", 3218959716L), hostObject.objectPtr)
+  final def updateProperty(): Unit = {
+    if (gdext.classes.EditorProperty.mb_update_property == null) gdext.classes.EditorProperty.mb_update_property = MethodBind.get("EditorProperty", "update_property", 3218959716L)
+    Ptrcall.callVoid0(gdext.classes.EditorProperty.mb_update_property, livePtr)
+  }
 
   /** EditorProperty.add_focusable */
-  final def addFocusable(control: Control): Unit =
-    Ptrcall.callVoid1(MethodBind.get("EditorProperty", "add_focusable", 1496901182L), hostObject.objectPtr, control.hostObject)
+  final def addFocusable(control: Control): Unit = {
+    if (gdext.classes.EditorProperty.mb_add_focusable == null) gdext.classes.EditorProperty.mb_add_focusable = MethodBind.get("EditorProperty", "add_focusable", 1496901182L)
+    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_add_focusable, livePtr, Wrappers.handle(control))
+  }
 
   /** EditorProperty.set_bottom_editor */
-  final def setBottomEditor(editor: Control): Unit =
-    Ptrcall.callVoid1(MethodBind.get("EditorProperty", "set_bottom_editor", 1496901182L), hostObject.objectPtr, editor.hostObject)
+  final def setBottomEditor(editor: Control): Unit = {
+    if (gdext.classes.EditorProperty.mb_set_bottom_editor == null) gdext.classes.EditorProperty.mb_set_bottom_editor = MethodBind.get("EditorProperty", "set_bottom_editor", 1496901182L)
+    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_set_bottom_editor, livePtr, Wrappers.handle(editor))
+  }
 
   /** EditorProperty.set_selectable */
-  final def setSelectable(selectable: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("EditorProperty", "set_selectable", 2586408642L), hostObject.objectPtr, selectable)
+  final def setSelectable(selectable: Boolean): Unit = {
+    if (gdext.classes.EditorProperty.mb_set_selectable == null) gdext.classes.EditorProperty.mb_set_selectable = MethodBind.get("EditorProperty", "set_selectable", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_set_selectable, livePtr, selectable)
+  }
 
   /** EditorProperty.is_selectable */
-  final def isSelectable(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("EditorProperty", "is_selectable", 36873697L), hostObject.objectPtr)
+  final def isSelectable(): Boolean = {
+    if (gdext.classes.EditorProperty.mb_is_selectable == null) gdext.classes.EditorProperty.mb_is_selectable = MethodBind.get("EditorProperty", "is_selectable", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.EditorProperty.mb_is_selectable, livePtr)
+  }
 
   /** EditorProperty.set_use_folding */
-  final def setUseFolding(use_folding: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("EditorProperty", "set_use_folding", 2586408642L), hostObject.objectPtr, use_folding)
+  final def setUseFolding(use_folding: Boolean): Unit = {
+    if (gdext.classes.EditorProperty.mb_set_use_folding == null) gdext.classes.EditorProperty.mb_set_use_folding = MethodBind.get("EditorProperty", "set_use_folding", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_set_use_folding, livePtr, use_folding)
+  }
 
   /** EditorProperty.is_using_folding */
-  final def isUsingFolding(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("EditorProperty", "is_using_folding", 36873697L), hostObject.objectPtr)
+  final def isUsingFolding(): Boolean = {
+    if (gdext.classes.EditorProperty.mb_is_using_folding == null) gdext.classes.EditorProperty.mb_is_using_folding = MethodBind.get("EditorProperty", "is_using_folding", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.EditorProperty.mb_is_using_folding, livePtr)
+  }
 
   /** EditorProperty.set_name_split_ratio */
-  final def setNameSplitRatio(ratio: Double): Unit =
-    Ptrcall.callVoid1(MethodBind.get("EditorProperty", "set_name_split_ratio", 373806689L), hostObject.objectPtr, ratio)
+  final def setNameSplitRatio(ratio: Double): Unit = {
+    if (gdext.classes.EditorProperty.mb_set_name_split_ratio == null) gdext.classes.EditorProperty.mb_set_name_split_ratio = MethodBind.get("EditorProperty", "set_name_split_ratio", 373806689L)
+    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_set_name_split_ratio, livePtr, ratio)
+  }
 
   /** EditorProperty.get_name_split_ratio */
-  final def getNameSplitRatio(): Double =
-    Ptrcall.call0[Double](MethodBind.get("EditorProperty", "get_name_split_ratio", 1740695150L), hostObject.objectPtr)
+  final def getNameSplitRatio(): Double = {
+    if (gdext.classes.EditorProperty.mb_get_name_split_ratio == null) gdext.classes.EditorProperty.mb_get_name_split_ratio = MethodBind.get("EditorProperty", "get_name_split_ratio", 1740695150L)
+    Ptrcall.call0[Double](gdext.classes.EditorProperty.mb_get_name_split_ratio, livePtr)
+  }
 
   /** EditorProperty.deselect */
-  final def deselect(): Unit =
-    Ptrcall.callVoid0(MethodBind.get("EditorProperty", "deselect", 3218959716L), hostObject.objectPtr)
+  final def deselect(): Unit = {
+    if (gdext.classes.EditorProperty.mb_deselect == null) gdext.classes.EditorProperty.mb_deselect = MethodBind.get("EditorProperty", "deselect", 3218959716L)
+    Ptrcall.callVoid0(gdext.classes.EditorProperty.mb_deselect, livePtr)
+  }
 
   /** EditorProperty.is_selected */
-  final def isSelected(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("EditorProperty", "is_selected", 36873697L), hostObject.objectPtr)
+  final def isSelected(): Boolean = {
+    if (gdext.classes.EditorProperty.mb_is_selected == null) gdext.classes.EditorProperty.mb_is_selected = MethodBind.get("EditorProperty", "is_selected", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.EditorProperty.mb_is_selected, livePtr)
+  }
 
   /** EditorProperty.select */
-  final def select(focusable: Long): Unit =
-    Ptrcall.callVoid1(MethodBind.get("EditorProperty", "select", 1025054187L), hostObject.objectPtr, focusable)
+  final def select(focusable: Long): Unit = {
+    if (gdext.classes.EditorProperty.mb_select == null) gdext.classes.EditorProperty.mb_select = MethodBind.get("EditorProperty", "select", 1025054187L)
+    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_select, livePtr, focusable)
+  }
 
   /** EditorProperty.set_object_and_property */
-  final def setObjectAndProperty(`object`: Object, property: gdext.builtin.StringName): Unit =
-    Ptrcall.callVoid2(MethodBind.get("EditorProperty", "set_object_and_property", 4157606280L), hostObject.objectPtr, `object`.hostObject, property)
+  final def setObjectAndProperty(`object`: Object, property: gdext.builtin.StringName): Unit = {
+    if (gdext.classes.EditorProperty.mb_set_object_and_property == null) gdext.classes.EditorProperty.mb_set_object_and_property = MethodBind.get("EditorProperty", "set_object_and_property", 4157606280L)
+    Ptrcall.callVoid2(gdext.classes.EditorProperty.mb_set_object_and_property, livePtr, Wrappers.handle(`object`), property)
+  }
 
   /** EditorProperty.set_label_reference */
-  final def setLabelReference(control: Control): Unit =
-    Ptrcall.callVoid1(MethodBind.get("EditorProperty", "set_label_reference", 1496901182L), hostObject.objectPtr, control.hostObject)
+  final def setLabelReference(control: Control): Unit = {
+    if (gdext.classes.EditorProperty.mb_set_label_reference == null) gdext.classes.EditorProperty.mb_set_label_reference = MethodBind.get("EditorProperty", "set_label_reference", 1496901182L)
+    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_set_label_reference, livePtr, Wrappers.handle(control))
+  }
 
+}
+
+object EditorProperty {
+  private[classes] var mb_set_label: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_label: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_read_only: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_read_only: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_draw_label: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_draw_label: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_draw_background: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_draw_background: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_checkable: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_checkable: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_checked: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_checked: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_draw_warning: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_draw_warning: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_keying: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_keying: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_deletable: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_deletable: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_edited_property: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_edited_object: GDExtensionMethodBindPtr = null
+  private[classes] var mb_update_property: GDExtensionMethodBindPtr = null
+  private[classes] var mb_add_focusable: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_bottom_editor: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_selectable: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_selectable: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_use_folding: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_using_folding: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_name_split_ratio: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_name_split_ratio: GDExtensionMethodBindPtr = null
+  private[classes] var mb_deselect: GDExtensionMethodBindPtr = null
+  private[classes] var mb_is_selected: GDExtensionMethodBindPtr = null
+  private[classes] var mb_select: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_object_and_property: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_label_reference: GDExtensionMethodBindPtr = null
 }

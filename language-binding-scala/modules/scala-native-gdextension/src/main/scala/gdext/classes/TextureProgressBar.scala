@@ -4,113 +4,195 @@ import gdext.Godot
 import gdext.builtin.*
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
+import gdext.internal.ffi.types.GDExtensionMethodBindPtr
 
 /** Generated wrapper for Godot's `TextureProgressBar`, extends `Range`. */
 abstract class TextureProgressBar extends Range {
   override def godotClassName: String = "TextureProgressBar"
 
   /** TextureProgressBar.set_under_texture */
-  final def setUnderTexture(tex: Texture2D): Unit =
-    Ptrcall.callVoid1(MethodBind.get("TextureProgressBar", "set_under_texture", 4051416890L), hostObject.objectPtr, tex.hostObject)
+  final def setUnderTexture(tex: Texture2D): Unit = {
+    if (gdext.classes.TextureProgressBar.mb_set_under_texture == null) gdext.classes.TextureProgressBar.mb_set_under_texture = MethodBind.get("TextureProgressBar", "set_under_texture", 4051416890L)
+    Ptrcall.callVoid1(gdext.classes.TextureProgressBar.mb_set_under_texture, livePtr, Wrappers.handle(tex))
+  }
 
-  /** TextureProgressBar.get_under_texture */
-  final def getUnderTexture(): GodotObject =
-    Ptrcall.call0[GodotObject](MethodBind.get("TextureProgressBar", "get_under_texture", 3635182373L), hostObject.objectPtr)
+  /** TextureProgressBar.get_under_texture. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
+  final def getUnderTexture(): Texture2D = {
+    if (gdext.classes.TextureProgressBar.mb_get_under_texture == null) gdext.classes.TextureProgressBar.mb_get_under_texture = MethodBind.get("TextureProgressBar", "get_under_texture", 3635182373L)
+    Wrappers.owned[Texture2D](Ptrcall.call0[Long](gdext.classes.TextureProgressBar.mb_get_under_texture, livePtr))
+  }
 
   /** TextureProgressBar.set_progress_texture */
-  final def setProgressTexture(tex: Texture2D): Unit =
-    Ptrcall.callVoid1(MethodBind.get("TextureProgressBar", "set_progress_texture", 4051416890L), hostObject.objectPtr, tex.hostObject)
+  final def setProgressTexture(tex: Texture2D): Unit = {
+    if (gdext.classes.TextureProgressBar.mb_set_progress_texture == null) gdext.classes.TextureProgressBar.mb_set_progress_texture = MethodBind.get("TextureProgressBar", "set_progress_texture", 4051416890L)
+    Ptrcall.callVoid1(gdext.classes.TextureProgressBar.mb_set_progress_texture, livePtr, Wrappers.handle(tex))
+  }
 
-  /** TextureProgressBar.get_progress_texture */
-  final def getProgressTexture(): GodotObject =
-    Ptrcall.call0[GodotObject](MethodBind.get("TextureProgressBar", "get_progress_texture", 3635182373L), hostObject.objectPtr)
+  /** TextureProgressBar.get_progress_texture. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
+  final def getProgressTexture(): Texture2D = {
+    if (gdext.classes.TextureProgressBar.mb_get_progress_texture == null) gdext.classes.TextureProgressBar.mb_get_progress_texture = MethodBind.get("TextureProgressBar", "get_progress_texture", 3635182373L)
+    Wrappers.owned[Texture2D](Ptrcall.call0[Long](gdext.classes.TextureProgressBar.mb_get_progress_texture, livePtr))
+  }
 
   /** TextureProgressBar.set_over_texture */
-  final def setOverTexture(tex: Texture2D): Unit =
-    Ptrcall.callVoid1(MethodBind.get("TextureProgressBar", "set_over_texture", 4051416890L), hostObject.objectPtr, tex.hostObject)
+  final def setOverTexture(tex: Texture2D): Unit = {
+    if (gdext.classes.TextureProgressBar.mb_set_over_texture == null) gdext.classes.TextureProgressBar.mb_set_over_texture = MethodBind.get("TextureProgressBar", "set_over_texture", 4051416890L)
+    Ptrcall.callVoid1(gdext.classes.TextureProgressBar.mb_set_over_texture, livePtr, Wrappers.handle(tex))
+  }
 
-  /** TextureProgressBar.get_over_texture */
-  final def getOverTexture(): GodotObject =
-    Ptrcall.call0[GodotObject](MethodBind.get("TextureProgressBar", "get_over_texture", 3635182373L), hostObject.objectPtr)
+  /** TextureProgressBar.get_over_texture. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
+  final def getOverTexture(): Texture2D = {
+    if (gdext.classes.TextureProgressBar.mb_get_over_texture == null) gdext.classes.TextureProgressBar.mb_get_over_texture = MethodBind.get("TextureProgressBar", "get_over_texture", 3635182373L)
+    Wrappers.owned[Texture2D](Ptrcall.call0[Long](gdext.classes.TextureProgressBar.mb_get_over_texture, livePtr))
+  }
 
   /** TextureProgressBar.set_fill_mode */
-  final def setFillMode(mode: Long): Unit =
-    Ptrcall.callVoid1(MethodBind.get("TextureProgressBar", "set_fill_mode", 1286410249L), hostObject.objectPtr, mode)
+  final def setFillMode(mode: Long): Unit = {
+    if (gdext.classes.TextureProgressBar.mb_set_fill_mode == null) gdext.classes.TextureProgressBar.mb_set_fill_mode = MethodBind.get("TextureProgressBar", "set_fill_mode", 1286410249L)
+    Ptrcall.callVoid1(gdext.classes.TextureProgressBar.mb_set_fill_mode, livePtr, mode)
+  }
 
   /** TextureProgressBar.get_fill_mode */
-  final def getFillMode(): Long =
-    Ptrcall.call0[Long](MethodBind.get("TextureProgressBar", "get_fill_mode", 2455072627L), hostObject.objectPtr)
+  final def getFillMode(): Long = {
+    if (gdext.classes.TextureProgressBar.mb_get_fill_mode == null) gdext.classes.TextureProgressBar.mb_get_fill_mode = MethodBind.get("TextureProgressBar", "get_fill_mode", 2455072627L)
+    Ptrcall.call0[Long](gdext.classes.TextureProgressBar.mb_get_fill_mode, livePtr)
+  }
 
   /** TextureProgressBar.set_tint_under */
-  final def setTintUnder(tint: gdext.builtin.Color): Unit =
-    Ptrcall.callVoid1(MethodBind.get("TextureProgressBar", "set_tint_under", 2920490490L), hostObject.objectPtr, tint)
+  final def setTintUnder(tint: gdext.builtin.Color): Unit = {
+    if (gdext.classes.TextureProgressBar.mb_set_tint_under == null) gdext.classes.TextureProgressBar.mb_set_tint_under = MethodBind.get("TextureProgressBar", "set_tint_under", 2920490490L)
+    Ptrcall.callVoid1(gdext.classes.TextureProgressBar.mb_set_tint_under, livePtr, tint)
+  }
 
   /** TextureProgressBar.get_tint_under */
-  final def getTintUnder(): gdext.builtin.Color =
-    Ptrcall.call0[gdext.builtin.Color](MethodBind.get("TextureProgressBar", "get_tint_under", 3444240500L), hostObject.objectPtr)
+  final def getTintUnder(): gdext.builtin.Color = {
+    if (gdext.classes.TextureProgressBar.mb_get_tint_under == null) gdext.classes.TextureProgressBar.mb_get_tint_under = MethodBind.get("TextureProgressBar", "get_tint_under", 3444240500L)
+    Ptrcall.call0[gdext.builtin.Color](gdext.classes.TextureProgressBar.mb_get_tint_under, livePtr)
+  }
 
   /** TextureProgressBar.set_tint_progress */
-  final def setTintProgress(tint: gdext.builtin.Color): Unit =
-    Ptrcall.callVoid1(MethodBind.get("TextureProgressBar", "set_tint_progress", 2920490490L), hostObject.objectPtr, tint)
+  final def setTintProgress(tint: gdext.builtin.Color): Unit = {
+    if (gdext.classes.TextureProgressBar.mb_set_tint_progress == null) gdext.classes.TextureProgressBar.mb_set_tint_progress = MethodBind.get("TextureProgressBar", "set_tint_progress", 2920490490L)
+    Ptrcall.callVoid1(gdext.classes.TextureProgressBar.mb_set_tint_progress, livePtr, tint)
+  }
 
   /** TextureProgressBar.get_tint_progress */
-  final def getTintProgress(): gdext.builtin.Color =
-    Ptrcall.call0[gdext.builtin.Color](MethodBind.get("TextureProgressBar", "get_tint_progress", 3444240500L), hostObject.objectPtr)
+  final def getTintProgress(): gdext.builtin.Color = {
+    if (gdext.classes.TextureProgressBar.mb_get_tint_progress == null) gdext.classes.TextureProgressBar.mb_get_tint_progress = MethodBind.get("TextureProgressBar", "get_tint_progress", 3444240500L)
+    Ptrcall.call0[gdext.builtin.Color](gdext.classes.TextureProgressBar.mb_get_tint_progress, livePtr)
+  }
 
   /** TextureProgressBar.set_tint_over */
-  final def setTintOver(tint: gdext.builtin.Color): Unit =
-    Ptrcall.callVoid1(MethodBind.get("TextureProgressBar", "set_tint_over", 2920490490L), hostObject.objectPtr, tint)
+  final def setTintOver(tint: gdext.builtin.Color): Unit = {
+    if (gdext.classes.TextureProgressBar.mb_set_tint_over == null) gdext.classes.TextureProgressBar.mb_set_tint_over = MethodBind.get("TextureProgressBar", "set_tint_over", 2920490490L)
+    Ptrcall.callVoid1(gdext.classes.TextureProgressBar.mb_set_tint_over, livePtr, tint)
+  }
 
   /** TextureProgressBar.get_tint_over */
-  final def getTintOver(): gdext.builtin.Color =
-    Ptrcall.call0[gdext.builtin.Color](MethodBind.get("TextureProgressBar", "get_tint_over", 3444240500L), hostObject.objectPtr)
+  final def getTintOver(): gdext.builtin.Color = {
+    if (gdext.classes.TextureProgressBar.mb_get_tint_over == null) gdext.classes.TextureProgressBar.mb_get_tint_over = MethodBind.get("TextureProgressBar", "get_tint_over", 3444240500L)
+    Ptrcall.call0[gdext.builtin.Color](gdext.classes.TextureProgressBar.mb_get_tint_over, livePtr)
+  }
 
   /** TextureProgressBar.set_texture_progress_offset */
-  final def setTextureProgressOffset(offset: gdext.builtin.Vector2): Unit =
-    Ptrcall.callVoid1(MethodBind.get("TextureProgressBar", "set_texture_progress_offset", 743155724L), hostObject.objectPtr, offset)
+  final def setTextureProgressOffset(offset: gdext.builtin.Vector2): Unit = {
+    if (gdext.classes.TextureProgressBar.mb_set_texture_progress_offset == null) gdext.classes.TextureProgressBar.mb_set_texture_progress_offset = MethodBind.get("TextureProgressBar", "set_texture_progress_offset", 743155724L)
+    Ptrcall.callVoid1(gdext.classes.TextureProgressBar.mb_set_texture_progress_offset, livePtr, offset)
+  }
 
   /** TextureProgressBar.get_texture_progress_offset */
-  final def getTextureProgressOffset(): gdext.builtin.Vector2 =
-    Ptrcall.call0[gdext.builtin.Vector2](MethodBind.get("TextureProgressBar", "get_texture_progress_offset", 3341600327L), hostObject.objectPtr)
+  final def getTextureProgressOffset(): gdext.builtin.Vector2 = {
+    if (gdext.classes.TextureProgressBar.mb_get_texture_progress_offset == null) gdext.classes.TextureProgressBar.mb_get_texture_progress_offset = MethodBind.get("TextureProgressBar", "get_texture_progress_offset", 3341600327L)
+    Ptrcall.call0[gdext.builtin.Vector2](gdext.classes.TextureProgressBar.mb_get_texture_progress_offset, livePtr)
+  }
 
   /** TextureProgressBar.set_radial_initial_angle */
-  final def setRadialInitialAngle(mode: Double): Unit =
-    Ptrcall.callVoid1(MethodBind.get("TextureProgressBar", "set_radial_initial_angle", 373806689L), hostObject.objectPtr, mode)
+  final def setRadialInitialAngle(mode: Double): Unit = {
+    if (gdext.classes.TextureProgressBar.mb_set_radial_initial_angle == null) gdext.classes.TextureProgressBar.mb_set_radial_initial_angle = MethodBind.get("TextureProgressBar", "set_radial_initial_angle", 373806689L)
+    Ptrcall.callVoid1(gdext.classes.TextureProgressBar.mb_set_radial_initial_angle, livePtr, mode)
+  }
 
   /** TextureProgressBar.get_radial_initial_angle */
-  final def getRadialInitialAngle(): Double =
-    Ptrcall.call0[Double](MethodBind.get("TextureProgressBar", "get_radial_initial_angle", 191475506L), hostObject.objectPtr)
+  final def getRadialInitialAngle(): Double = {
+    if (gdext.classes.TextureProgressBar.mb_get_radial_initial_angle == null) gdext.classes.TextureProgressBar.mb_get_radial_initial_angle = MethodBind.get("TextureProgressBar", "get_radial_initial_angle", 191475506L)
+    Ptrcall.call0[Double](gdext.classes.TextureProgressBar.mb_get_radial_initial_angle, livePtr)
+  }
 
   /** TextureProgressBar.set_radial_center_offset */
-  final def setRadialCenterOffset(mode: gdext.builtin.Vector2): Unit =
-    Ptrcall.callVoid1(MethodBind.get("TextureProgressBar", "set_radial_center_offset", 743155724L), hostObject.objectPtr, mode)
+  final def setRadialCenterOffset(mode: gdext.builtin.Vector2): Unit = {
+    if (gdext.classes.TextureProgressBar.mb_set_radial_center_offset == null) gdext.classes.TextureProgressBar.mb_set_radial_center_offset = MethodBind.get("TextureProgressBar", "set_radial_center_offset", 743155724L)
+    Ptrcall.callVoid1(gdext.classes.TextureProgressBar.mb_set_radial_center_offset, livePtr, mode)
+  }
 
   /** TextureProgressBar.get_radial_center_offset */
-  final def getRadialCenterOffset(): gdext.builtin.Vector2 =
-    Ptrcall.call0[gdext.builtin.Vector2](MethodBind.get("TextureProgressBar", "get_radial_center_offset", 1497962370L), hostObject.objectPtr)
+  final def getRadialCenterOffset(): gdext.builtin.Vector2 = {
+    if (gdext.classes.TextureProgressBar.mb_get_radial_center_offset == null) gdext.classes.TextureProgressBar.mb_get_radial_center_offset = MethodBind.get("TextureProgressBar", "get_radial_center_offset", 1497962370L)
+    Ptrcall.call0[gdext.builtin.Vector2](gdext.classes.TextureProgressBar.mb_get_radial_center_offset, livePtr)
+  }
 
   /** TextureProgressBar.set_fill_degrees */
-  final def setFillDegrees(mode: Double): Unit =
-    Ptrcall.callVoid1(MethodBind.get("TextureProgressBar", "set_fill_degrees", 373806689L), hostObject.objectPtr, mode)
+  final def setFillDegrees(mode: Double): Unit = {
+    if (gdext.classes.TextureProgressBar.mb_set_fill_degrees == null) gdext.classes.TextureProgressBar.mb_set_fill_degrees = MethodBind.get("TextureProgressBar", "set_fill_degrees", 373806689L)
+    Ptrcall.callVoid1(gdext.classes.TextureProgressBar.mb_set_fill_degrees, livePtr, mode)
+  }
 
   /** TextureProgressBar.get_fill_degrees */
-  final def getFillDegrees(): Double =
-    Ptrcall.call0[Double](MethodBind.get("TextureProgressBar", "get_fill_degrees", 191475506L), hostObject.objectPtr)
+  final def getFillDegrees(): Double = {
+    if (gdext.classes.TextureProgressBar.mb_get_fill_degrees == null) gdext.classes.TextureProgressBar.mb_get_fill_degrees = MethodBind.get("TextureProgressBar", "get_fill_degrees", 191475506L)
+    Ptrcall.call0[Double](gdext.classes.TextureProgressBar.mb_get_fill_degrees, livePtr)
+  }
 
   /** TextureProgressBar.set_stretch_margin */
-  final def setStretchMargin(margin: Long, value: Long): Unit =
-    Ptrcall.callVoid2(MethodBind.get("TextureProgressBar", "set_stretch_margin", 437707142L), hostObject.objectPtr, margin, value)
+  final def setStretchMargin(margin: Long, value: Long): Unit = {
+    if (gdext.classes.TextureProgressBar.mb_set_stretch_margin == null) gdext.classes.TextureProgressBar.mb_set_stretch_margin = MethodBind.get("TextureProgressBar", "set_stretch_margin", 437707142L)
+    Ptrcall.callVoid2(gdext.classes.TextureProgressBar.mb_set_stretch_margin, livePtr, margin, value)
+  }
 
   /** TextureProgressBar.get_stretch_margin */
-  final def getStretchMargin(margin: Long): Long =
-    Ptrcall.call1[Long, Long](MethodBind.get("TextureProgressBar", "get_stretch_margin", 1983885014L), hostObject.objectPtr, margin)
+  final def getStretchMargin(margin: Long): Long = {
+    if (gdext.classes.TextureProgressBar.mb_get_stretch_margin == null) gdext.classes.TextureProgressBar.mb_get_stretch_margin = MethodBind.get("TextureProgressBar", "get_stretch_margin", 1983885014L)
+    Ptrcall.call1[Long, Long](gdext.classes.TextureProgressBar.mb_get_stretch_margin, livePtr, margin)
+  }
 
   /** TextureProgressBar.set_nine_patch_stretch */
-  final def setNinePatchStretch(stretch: Boolean): Unit =
-    Ptrcall.callVoid1(MethodBind.get("TextureProgressBar", "set_nine_patch_stretch", 2586408642L), hostObject.objectPtr, stretch)
+  final def setNinePatchStretch(stretch: Boolean): Unit = {
+    if (gdext.classes.TextureProgressBar.mb_set_nine_patch_stretch == null) gdext.classes.TextureProgressBar.mb_set_nine_patch_stretch = MethodBind.get("TextureProgressBar", "set_nine_patch_stretch", 2586408642L)
+    Ptrcall.callVoid1(gdext.classes.TextureProgressBar.mb_set_nine_patch_stretch, livePtr, stretch)
+  }
 
   /** TextureProgressBar.get_nine_patch_stretch */
-  final def getNinePatchStretch(): Boolean =
-    Ptrcall.call0[Boolean](MethodBind.get("TextureProgressBar", "get_nine_patch_stretch", 36873697L), hostObject.objectPtr)
+  final def getNinePatchStretch(): Boolean = {
+    if (gdext.classes.TextureProgressBar.mb_get_nine_patch_stretch == null) gdext.classes.TextureProgressBar.mb_get_nine_patch_stretch = MethodBind.get("TextureProgressBar", "get_nine_patch_stretch", 36873697L)
+    Ptrcall.call0[Boolean](gdext.classes.TextureProgressBar.mb_get_nine_patch_stretch, livePtr)
+  }
 
+}
+
+object TextureProgressBar {
+  private[classes] var mb_set_under_texture: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_under_texture: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_progress_texture: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_progress_texture: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_over_texture: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_over_texture: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_fill_mode: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_fill_mode: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_tint_under: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_tint_under: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_tint_progress: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_tint_progress: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_tint_over: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_tint_over: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_texture_progress_offset: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_texture_progress_offset: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_radial_initial_angle: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_radial_initial_angle: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_radial_center_offset: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_radial_center_offset: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_fill_degrees: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_fill_degrees: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_stretch_margin: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_stretch_margin: GDExtensionMethodBindPtr = null
+  private[classes] var mb_set_nine_patch_stretch: GDExtensionMethodBindPtr = null
+  private[classes] var mb_get_nine_patch_stretch: GDExtensionMethodBindPtr = null
 }

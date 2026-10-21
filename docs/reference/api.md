@@ -12,7 +12,7 @@ release.
 
 | Package | Contents |
 |---------|----------|
-| <a href="../../api/gdext/api$.html"><code>gdext.api</code></a> | Everyday helpers: `Gd.create`, `Gd.wrap`, `Gd.print`, `Tres`, `Tscn`, `Required`, `ExportHint`, `emitSignal`, `Math`. |
+| <a href="../../api/gdext/api$.html"><code>gdext.api</code></a> | Everyday helpers: `Gd.create`, `Gd.scoped`, `Gd.wrap`, `Gd.print`, `Gc`, `Tres`, `Tscn`, `Required`, `ExportHint`, `emitSignal`, `Math`. |
 | <a href="../../api/gdext/annotations.html"><code>gdext.annotations</code></a> | `@func`, `@signal`, `@gdexport`, inspector sections, component-reference dropdowns. |
 | <a href="../../api/gdext/builtin.html"><code>gdext.builtin</code></a> | Builtin value types: math types, `Color`, `Arr`, `Dict`, packed arrays. |
 | <a href="../../api/gdext/classes.html"><code>gdext.classes</code></a> | About 1000 engine classes generated from Godot's `extension_api.json`. |

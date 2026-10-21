@@ -180,6 +180,15 @@ private[gdext] object GodotEngine {
         // unregister(old) -> register(new) -> recreate_instance(new) handoff;
         // without it the live editor instances are never rebound and inspecting
         // them after a reload freezes the editor.
+        val leaked = gdext.internal.engine.Ownership.outstanding
+        if (leaked != 0L) {
+          val msg =
+            s"$leaked RefCounted reference(s) still owned by Scala at shutdown " +
+              s"(missing unref() or Gd.scoped): " +
+              gdext.internal.engine.Ownership.leakReport.mkString(", ")
+          Log.warning(msg)
+          Log.file(msg)
+        }
         Log.trace("deinitialize(SCENE): unregisterAll begin")
         gdext.internal.register.ClassRegistration.unregisterAll()
         // Drop comp-dropdown builders so the reloaded image rebuilds them fresh.

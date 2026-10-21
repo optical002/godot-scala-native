@@ -56,6 +56,9 @@ object GodotScalaNativePlugin extends AutoPlugin {
     val godotCompatibilityMinimum = settingKey[String](
       "Godot `compatibility_minimum` written into the generated manifest"
     )
+    val godotNativeMode = settingKey[String](
+      "Scala Native build mode: releaseFast (default), releaseFull (slowest link, fastest code) or debug (fastest link, no optimizer)"
+    )
     val godotManifest = taskKey[File](
       "Generates the .gdextension manifest into the Godot project root"
     )
@@ -87,6 +90,7 @@ object GodotScalaNativePlugin extends AutoPlugin {
     godotLibName              := "scala-native-gdextension",
     godotManifestName         := "scala.gdextension",
     godotCompatibilityMinimum := "4.2",
+    godotNativeMode           := "releaseFast",
 
     // The binding artifact. `.cross(ScalaNativeCrossVersion.binary)` applies the
     // Scala Native platform suffix (e.g. `_native0.5_3`) — this is exactly what
@@ -102,29 +106,32 @@ object GodotScalaNativePlugin extends AutoPlugin {
       ("com.github.optical002.godot-scala-native" % "scala-native-gdextension" % GodotScalaNativeBuildInfo.version)
         .cross(ScalaNativeCrossVersion.binary),
 
-    // Produce a dynamic library (.so/.dylib/.dll) Godot can dlopen, using the
-    // Boehm GC. Required because the build runs in Scala Native's
-    // multithreaded mode (any consumer referencing a Thread — e.g. a
-    // deep-recursion parser run on a big-stack Thread to avoid overflowing
-    // Godot main thread's ~8 MiB stack — flips SN to MT mode for the whole
-    // binary). The default IMMIX GC's MT stop-the-world corrupts
-    // the heap during Godot's `_process` (signal-11 a few seconds into
-    // gameplay); `boehm` collects safely under MT and runs cleanly (verified
-    // 0 crashes / 35s of real gameplay) while still collecting (no leak).
-    //
-    // Boehm (`libgc`) must be installed on the build host — Scala Native's
-    // `GC.boehm` emits `-lgc` and finds the library/headers in the toolchain's
-    // standard search paths (system packages, or `pkg-config`/`CPATH`/
-    // `LIBRARY_PATH`). We deliberately add NO explicit `-I`/`-L`/`-rpath`: those
-    // would hard-code one machine's install prefix and break every other host.
-    // Force single-threaded mode for every consumer. Scala Native enables
-    // multithreading by auto-detecting `java.lang.Thread` usage; in MT mode the
-    // Boehm GC crashes on Windows at extension load (unhandled C++ exception),
-    // and the IMMIX GC corrupts the heap under Godot's `_process`. Disabling MT
-    // here keeps the binding stable on every platform, so game projects must not
-    // rely on system threads (do config parsing etc. on the main thread).
-    nativeConfig ~= { c =>
-      c.withMode(Mode.debug)
+    // A dynamic library (.so/.dylib/.dll) Godot can dlopen, built with the
+    // Boehm GC in single-threaded mode:
+    // - Multithreading is forced off. Scala Native turns it on whenever a
+    //   program references `java.lang.Thread`; in MT mode Boehm crashes on
+    //   Windows at extension load and IMMIX corrupts the heap under Godot's
+    //   `_process`. Game code must therefore not rely on system threads.
+    // - Boehm is the GC that runs stably here (verified on real gameplay). It
+    //   must be installed on the build host (`-lgc`, found on the toolchain's
+    //   standard search paths — no explicit `-I`/`-L`/`-rpath` on purpose, so
+    //   no machine-specific prefix is hard-coded).
+    // - `godotNativeMode` picks the optimizer level. releaseFast runs Scala
+    //   Native's optimizer (inlining, devirtualization, box elimination),
+    //   which the binding's allocation-free hot path relies on; debug skips it
+    //   for the quickest link during hot-reload iteration.
+    nativeConfig := {
+      val c = nativeConfig.value
+      val mode = godotNativeMode.value match {
+        case "debug"       => Mode.debug
+        case "releaseFast" => Mode.releaseFast
+        case "releaseFull" => Mode.releaseFull
+        case other =>
+          sys.error(
+            s"godotNativeMode must be debug, releaseFast or releaseFull (got '$other')"
+          )
+      }
+      c.withMode(mode)
         .withBuildTarget(BuildTarget.libraryDynamic)
         .withGC(scala.scalanative.build.GC.boehm)
         .withMultithreading(false)

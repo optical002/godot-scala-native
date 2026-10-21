@@ -91,16 +91,26 @@ object GdSelfTest {
 
     // --- static DirAccess: open + list a res:// directory ---
     check("DirAccess.open + list finds project.godot at res://") {
-      val da = DirAccess.open("res://")
-      if (da == null) false
-      else {
-        da.listDirBegin()
-        val names = scala.collection.mutable.ListBuffer.empty[String]
-        var n = da.getNext()
-        while (n != null && n.nonEmpty) { names += n; n = da.getNext() }
-        da.listDirEnd()
-        names.contains("project.godot")
+      // `open` returns an owned Ref<DirAccess>; scoped releases it.
+      Gd.scoped {
+        val da = DirAccess.open("res://")
+        if (da == null) false
+        else {
+          da.listDirBegin()
+          val names = scala.collection.mutable.ListBuffer.empty[String]
+          var n = da.getNext()
+          while (n != null && n.nonEmpty) { names += n; n = da.getNext() }
+          da.listDirEnd()
+          names.contains("project.godot")
+        }
       }
+    }
+
+    // --- ownership: owned references are counted and released ---
+    check("Gd.scoped releases an adopted reference") {
+      val before = Ownership.outstanding
+      val rc = Gd.scoped(Gd.create[RefCounted]())
+      rc.hostObject.isNull && Ownership.outstanding == before
     }
 
     log(s"GdSelfTest: $passed passed, $failed failed")
