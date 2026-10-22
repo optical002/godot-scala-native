@@ -148,15 +148,45 @@ object RegistrationScan {
     engineNames: Set[String],
     selfTest: Boolean,
     librarySources: Seq[(String, String)] = Seq.empty
-  ): String = {
+  ): String =
+    generateWithClasses(harnessSrcDir, engineNames, selfTest, librarySources).source
+
+  /** What one scan produces: the registrations source, the Godot class name ->
+    * Scala FQCN of every class reaching an engine class (for [[ResScan]]), the
+    * packages declared by the module's own (non-library) sources, and the engine
+    * classes the wrapper factory knows (None: all of them). */
+  final case class Scan(
+    source: String,
+    godotClasses: Map[String, String],
+    localPackages: Set[String],
+    engineClasses: Option[Seq[String]]
+  )
+
+  /** [[generate]] plus what [[Scan]] carries. With `engineGraph`, the generated
+    * entry installs a wrapper factory over just the engine classes the sources
+    * can observe (see [[EngineClassScan]]); without it, over all of them. */
+  def generateWithClasses(
+    harnessSrcDir: File,
+    engineNames: Set[String],
+    selfTest: Boolean,
+    librarySources: Seq[(String, String)],
+    engineGraph: Option[EngineClassScan.Graph] = None,
+    generatedSources: Map[String, String] => Seq[String] = _ => Seq.empty
+  ): Scan = {
     // Local game sources + every godot-library dependency's published sources,
     // as uniform (path, content) units so both feed the same scan/fingerprint.
     val localUnits: Seq[(String, String)] =
       allScalaFiles(harnessSrcDir).map(f => (f.getAbsolutePath, IO.read(f)))
     val allUnits: Seq[(String, String)] = localUnits ++ librarySources
 
-    val classes: Seq[ClassInfo] =
-      allUnits.flatMap { case (path, content) => parseSource(path, content) }
+    val parsed: Seq[(String, Seq[ClassInfo], String, Seq[String])] =
+      allUnits.map { case (path, content) =>
+        val (cs, shape, pkgs) = parseSource(path, content)
+        (path, cs, shape, pkgs)
+      }
+    val classes: Seq[ClassInfo] = parsed.flatMap(_._2)
+    val localPackages: Set[String] =
+      parsed.take(localUnits.size).flatMap(_._4).toSet
     val byName: Map[String, ClassInfo] = classes.map(c => c.name -> c).toMap
 
     def reachesEngine(name: String, seen: Set[String]): Boolean =
@@ -220,19 +250,41 @@ object RegistrationScan {
     // builds (the class list is unchanged), Zinc skips recompiling it, and the
     // stale Scala Native NIR keeps calling an old constructor after you add/remove
     // a `var` field — nativeLink then fails with "unknown constructor /
-    // unreachable symbol". (`~godotBuild` only triggers on source changes, so this
-    // recompiles exactly when a registered class might have changed shape.)
+    // unreachable symbol". It hashes each source's *shape* (see [[shapeOf]]):
+    // bodies of methods with a declared return type are dropped, because the
+    // macros read only declarations, so editing such a body recompiles just its
+    // own file instead of re-expanding every `Register.auto[T]` here.
     val srcFingerprint = {
       val md = java.security.MessageDigest.getInstance("MD5")
       // Include library sources too: bumping a godot-library version changes its
       // node shapes, which must re-expand the `Register.auto[T]` macros here.
-      allUnits
+      parsed
         .sortBy(_._1)
-        .foreach { case (_, content) => md.update(content.getBytes("UTF-8")) }
+        .foreach { case (_, _, shape, _) => md.update(shape.getBytes("UTF-8")) }
       md.digest().map("%02x".format(_)).mkString
     }
 
-    s"""// GENERATED — DO NOT EDIT.
+    val godotClasses: Map[String, String] =
+      classes
+        .filter(c => !c.isCase && c.parent.exists(reachesEngine(_, Set(c.name))))
+        .map(c => c.name -> (if (c.pkg.isEmpty) c.name else s"${c.pkg}.${c.name}"))
+        .toMap
+
+    // Other generated sources (the Res tree) need the class map, and their
+    // engine types must be in the factory too.
+    val extraSources = generatedSources(godotClasses)
+    val engineClasses: Option[Seq[String]] = engineGraph.map { g =>
+      val seed = (allUnits.iterator.map(_._2) ++ extraSources.iterator)
+        .flatMap(EngineClassScan.namesIn(_, g))
+        .toSet
+      EngineClassScan.closure(g, seed)
+    }
+    val (factoryDefn, factoryRef) = engineClasses match {
+      case Some(cs) => (EngineClassScan.renderFactory(cs), "GeneratedEngineClasses.create")
+      case None     => ("", "GodotEntry.allEngineClasses")
+    }
+
+    val source = s"""// GENERATED — DO NOT EDIT.
        |// Regenerated on every compile by RegistrationScan (shipped in the
        |// sbt-godot-scala-native plugin). Every concrete class in this module that
        |// extends a Godot engine class is discovered automatically: add a class and
@@ -274,7 +326,8 @@ object RegistrationScan {
        |    getProcAddress: EntryGetProcAddress,
        |    library: EntryClassLibraryPtr,
        |    r_initialization: Ptr[EntryInitialization]
-       |  ): CUnsignedChar =
+       |  ): CUnsignedChar = {
+       |    GodotEntry.useEngineClasses($factoryRef)
        |    GodotEntry.run(
        |      getProcAddress,
        |      library,
@@ -282,8 +335,11 @@ object RegistrationScan {
        |      register = () => GeneratedRegistrations.registerAll(),
        |      selfTest = $selfTest
        |    )
+       |  }
        |}
-       |""".stripMargin
+       |
+       |$factoryDefn""".stripMargin
+    Scan(source, godotClasses, localPackages, engineClasses)
   }
 
   private def allScalaFiles(dir: File): Seq[File] =
@@ -294,17 +350,68 @@ object RegistrationScan {
         entries.filter(_.isDirectory).flatMap(allScalaFiles)
     }
 
-  private def parseSource(path: String, content: String): Seq[ClassInfo] = {
+  /** The classes in a source, plus its fingerprint shape (the raw content if
+    * it does not parse). */
+  /** Parse results by (path, content): the sbt server re-runs the scan on every
+    * compile, but usually only one file changed. */
+  private val parseCache =
+    new java.util.concurrent.ConcurrentHashMap[(String, String), (Seq[ClassInfo], String, Seq[String])]()
+
+  private def parseSource(
+    path: String,
+    content: String
+  ): (Seq[ClassInfo], String, Seq[String]) = {
+    val key = (path, content)
+    val hit = parseCache.get(key)
+    if (hit != null) hit
+    else {
+      // One entry per path: drop the previous version of this file.
+      parseCache.keySet.removeIf(_._1 == path)
+      val r = parseSourceUncached(path, content)
+      parseCache.put(key, r)
+      r
+    }
+  }
+
+  private def parseSourceUncached(
+    path: String,
+    content: String
+  ): (Seq[ClassInfo], String, Seq[String]) = {
     val input = Input.VirtualFile(path, content)
     dialects.Scala3(input).parse[Source] match {
-      case Parsed.Success(src) => collectClasses(src, "")
+      case Parsed.Success(src) =>
+        (collectClasses(src, ""), shapeOf(src), packagesOf(src, ""))
       case Parsed.Error(_, msg, _) =>
         System.err.println(
           s"[auto-register] could not parse $path, skipping: $msg"
         )
-        Seq.empty
+        (Seq.empty, content, Seq.empty)
     }
   }
+
+  /** Fully qualified names of the packages a source declares. */
+  private def packagesOf(tree: Tree, outer: String): Seq[String] =
+    tree match {
+      case s: Source => s.stats.flatMap(packagesOf(_, outer))
+      case p: Pkg =>
+        val name = if (outer.isEmpty) p.ref.toString else s"$outer.${p.ref}"
+        name +: p.stats.flatMap(packagesOf(_, name))
+      case _ => Seq.empty
+    }
+
+  /** The source with the body of every method that declares its return type
+    * replaced by `???`. `Register.auto` reads declarations only (names,
+    * annotations, parameter and return types, constructor defaults), so these
+    * bodies cannot change what it expands to. A method without a declared
+    * return type keeps its body: its type is inferred from it. Field
+    * initializers keep theirs for the same reason. */
+  private[godotscala] def shapeOf(src: Source): String =
+    src
+      .transform {
+        case d: Defn.Def if d.decltpe.isDefined => d.copy(body = Term.Name("???"))
+      }
+      .syntax
+
 
   private def collectClasses(tree: Tree, pkg: String): Seq[ClassInfo] =
     tree match {

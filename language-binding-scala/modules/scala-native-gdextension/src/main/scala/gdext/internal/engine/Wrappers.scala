@@ -13,8 +13,8 @@ import gdext.internal.register.{ClassRegistry, GodotScriptClass, Tokens}
   *
   * The first time an object is wrapped, Godot calls [[createCallback]]: it
   * returns the object's bound user instance if it has one, else a fresh wrapper
-  * of the object's most-derived generated class
-  * ([[gdext.classes.ClassFactory]]). Later wraps are a single
+  * of the object's lowest ancestor class the installed factory knows (see
+  * [[installFactory]]). Later wraps are a single
   * `object_get_instance_binding` call: no allocation, and the same wrapper
   * every time. When the engine frees the object, Godot calls [[freeCallback]],
   * which clears the wrapper's handle, so calling a method on it throws instead
@@ -25,6 +25,17 @@ import gdext.internal.register.{ClassRegistry, GodotScriptClass, Tokens}
   */
 object Wrappers {
   private val table = new gdext.internal.SlotTable[GodotScriptClass]
+
+  /** Engine class name -> fresh wrapper of that class, or null if unknown.
+    * Installed by the generated entry point before anything is wrapped. The
+    * build generates it for just the engine classes the game can observe (the
+    * classes it names, plus every class reachable from them through method
+    * return types), so the other ~900 classes are never linked. Every cast the
+    * program can make targets one of those classes, and a wrapper is always of
+    * the object's lowest such ancestor, so it satisfies all of them. */
+  private var factory: String => GodotScriptClass = null
+
+  def installFactory(f: String => GodotScriptClass): Unit = factory = f
   private var callbacksPtr: Ptr[GDExtensionInstanceBindingCallbacks] = null
 
   private def callbacks: Ptr[GDExtensionInstanceBindingCallbacks] = {
@@ -139,13 +150,18 @@ object Wrappers {
     Godot.interface.object_get_class_name(p, Godot.library, sn)
     var name = StringNames.adopt(sn.toLong)
     var text = StringName.toScala(name.ptr)
-    var w = gdext.classes.ClassFactory.create(text)
+    val f = factory
+    if (f == null)
+      throw new IllegalStateException(
+        "no engine wrapper factory installed (GodotEntry.useEngineClasses)"
+      )
+    var w = f(text)
     while (w == null && text.nonEmpty) {
       name = gdext.classes.ClassDB.singleton.getParentClass(name)
       text = StringName.toScala(name.ptr)
-      w = gdext.classes.ClassFactory.create(text)
+      w = f(text)
     }
-    if (w == null) gdext.classes.ClassFactory.create("Object") else w
+    if (w == null) f("Object") else w
   }
 
   private val createCallback: GDExtensionInstanceBindingCreateCallback =

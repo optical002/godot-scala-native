@@ -28,7 +28,7 @@ The repo root is a workspace, **not** an sbt build. Top level:
   aggregates `igen` + `gdext` + `sbtGodotPlugin`, `publish / skip := true`.
   Exists only to group the modules. Invoke tasks as `sbt gdext/<task>` /
   `sbt igen/<task>`. `ThisBuild / version` is
-  `sys.env.getOrElse("VERSION", "0.1.9")` — the fallback is the NEXT
+  `sys.env.getOrElse("VERSION", "0.1.10")` — the fallback is the NEXT
   release version in plain semver, used by `publishLocal` (it doesn't exist on
   JitPack until tagged; local ivy wins over JitPack); JitPack sets `VERSION` to
   the requested tag when building a release.
@@ -97,7 +97,7 @@ interface table + library handle.
 - **publishLocal first**: harness consumes the binding + plugin as published
   artifacts. After any change in `language-binding-scala`,
   `cd language-binding-scala && sbt publishLocal` (publishes `gdext` + the sbt
-  plugin under `0.1.9`) **before** building harness.
+  plugin under `0.1.10`) **before** building harness.
 - `cd harness-scala && sbt godotBuild` → (task from the plugin) runs the
   auto-registration source generator, compiles (linking the published binding),
   native-links, atomically swaps the `.so` into `godot/.scala/`, **generates the
@@ -139,6 +139,12 @@ interface table + library handle.
   `releaseFull`, `debug`) sets the Scala Native mode; the zero-allocation hot
   path relies on the optimizer (see [conventions](conventions.md)
   "Zero-allocation hot path"). GC is always Boehm, MT always off.
+  `godotResRefs` (default true) / `godotResObject` (default `"Res"`) control
+  the generated typed `res://` tree (see [layer5-register](layer5-register.md)).
+  The plugin also ships `snpatch/Metadata.scala`, a patched copy of a Scala
+  Native toolchain class that makes incremental native compilation work (see
+  [conventions](conventions.md) "Incremental native codegen") — re-copy it on
+  every Scala Native upgrade.
 - Auto-registration: `GodotScalaNativePlugin` adds a `Compile / sourceGenerators`
   that runs `RegistrationScan` (scalameta, shipped in the plugin) every compile,
   scanning `game` sources and emitting `game.GeneratedRegistrations` (managed,
@@ -157,7 +163,7 @@ build via `%%%`; and the sbt plugin, `_2.12_1.0` Maven-style layout via
 `sbtPluginPublishLegacyMavenStyle := false`) are served by **JitPack** under
 group **`com.github.optical002.godot-scala-native`**. `organization` in
 `build.sbt` is set to exactly that group so `publishLocal` yields the same
-coordinates (dev version `0.1.9`; last release tag `0.1.8`).
+coordinates (dev version `0.1.10`; last release tag `0.1.9`).
 Release flow: push a **plain semver tag** (`0.1.1`, no `v` prefix — the tag IS
 the version) → JitPack builds on demand via repo-root `jitpack.yml`
 (`cd language-binding-scala && sbt gdext/publishM2 sbtGodotPlugin/publishM2`;

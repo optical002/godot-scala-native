@@ -1,0 +1,564 @@
+// Patched copy of Scala Native 0.5.10 `tools/.../build/LLVM.scala` (BSD-licensed,
+// https://github.com/scala-native/scala-native): `needsCompiling` uses
+// timestamps only (see there). Shipped in sbt-godot-scala-native with the other
+// snpatch files; re-copy on every Scala Native upgrade.
+package scala.scalanative
+package build
+
+import java.io.{File, PrintWriter}
+import java.nio.file.{Files, Path, Paths, StandardCopyOption}
+
+import scala.concurrent._
+import scala.sys.process._
+import scala.util.{Failure, Success}
+
+import scala.scalanative.build.IO.RichPath
+import scala.scalanative.linker.ReachabilityAnalysis
+import scala.scalanative.nir.Attr.Link
+
+import _root_.java.io.IOException
+
+/** Internal utilities to interact with LLVM command-line tools. */
+private[scalanative] object LLVM {
+
+  // C++14 or newer standard is needed to compile code using Windows API
+  // shipped with Windows 10 / Server 2016+ (we do not plan supporting older versions)
+  val defaultWinCppStd = "-std=c++14"
+  val defaultCppStd = "-std=c++11"
+  val defaultCStd = "-std=c11"
+
+  /** Object file extension: ".o" */
+  val oExt = ".o"
+
+  /** C++ file extension: ".cpp" */
+  val cppExt = ".cpp"
+
+  /** LLVM intermediate file extension: ".ll" */
+  val llExt = ".ll"
+
+  /** List of source patterns used: ".c, .cpp, .S" */
+  val srcExtensions = Seq(".c", cppExt, ".S")
+
+  /** Compile the given files to object files
+   *
+   *  @param config
+   *    The configuration of the toolchain.
+   *  @param analysis
+   *    The output of the reachability analysis.
+   *  @param path
+   *    The directory path containing native files to compile.
+   *  @return
+   *    The paths of the `.o` files.
+   */
+  def compile(
+      config: Config,
+      analysis: ReachabilityAnalysis.Result,
+      path: Path
+  )(implicit
+      ec: ExecutionContext
+  ): Future[Path] = {
+    implicit val _config: Config = config
+    implicit val _analysis: ReachabilityAnalysis.Result = analysis
+
+    val inpath = path.abs
+    val outpath = inpath + oExt
+    val objPath = Paths.get(outpath)
+    // compile if out of date or no object file
+    if (needsCompiling(path, objPath)) compileFile(path, objPath)
+    else Future.successful(objPath)
+  }
+
+  private def compileFile(srcPath: Path, objPath: Path)(implicit
+      config: Config,
+      analysis: ReachabilityAnalysis.Result,
+      ec: ExecutionContext
+  ): Future[Path] = Future {
+    val inpath = srcPath.abs
+    val outpath = objPath.abs
+    val isCpp = inpath.endsWith(cppExt)
+    val isLl = inpath.endsWith(llExt)
+    val workDir = config.workDir
+
+    val compiler = if (isCpp) config.clangPP.abs else config.clang.abs
+    val langOptions = {
+      if (isLl) llvmIrFeatures
+      else if (isCpp) cppOptions(analysis)
+      else cOptions(analysis)
+    }
+    val platformFlags = {
+      if (config.targetsMsys) msysExtras
+      else Nil
+    }
+
+    val configFlags = {
+      val multithreadingEnabled =
+        if (config.compilerConfig.multithreadingSupport)
+          Seq("-DSCALANATIVE_MULTITHREADING_ENABLED")
+        else Nil
+      val usingCppExceptions =
+        if (config.usingCppExceptions)
+          Seq("-DSCALANATIVE_USING_CPP_EXCEPTIONS")
+        else Nil
+      val allowTargetOverrrides =
+        config.compilerConfig.targetTriple.map(_ => s"-Wno-override-module")
+      multithreadingEnabled ++ usingCppExceptions ++ allowTargetOverrrides
+    }
+    // Always generate debug metadata on Windows, it's required for stack traces to work
+    val debugFlags =
+      if (config.targetsWindows) List("-g")
+      else if (config.compilerConfig.sourceLevelDebuggingConfig.enabled) {
+        // newer LLVM uses DWARFv5 by default on Linux. We support only DWARFv4 for now
+        List("-gdwarf-4")
+      } else Nil
+
+    val flags: Seq[String] =
+      buildTargetCompileOpts ++ flto ++ sanitizer ++ target ++
+        langOptions ++ platformFlags ++ debugFlags ++
+        configFlags ++ Seq("-fvisibility=hidden", opt) ++
+        Seq("-fomit-frame-pointer") ++
+        config.compileOptions
+    val compilec: Seq[String] =
+      Seq(compiler, "-c", inpath, "-o", outpath) ++ flags
+
+    // compile
+    config.logger.running(compilec)
+    val result = Process(compilec, workDir.toFile) !
+      Logger.toProcessLogger(config.logger)
+    if (result != 0) {
+      throw new BuildException(s"Failed to compile ${inpath}")
+    }
+
+    objPath
+  }
+
+  /** Links a collection of `.ll.o` files and the `.o` files from the
+   *  `nativelib`, other libaries, and the application project into the native
+   *  binary.
+   *
+   *  @param config
+   *    The configuration of the toolchain.
+   *  @param linkerResult
+   *    The results from the linker.
+   *  @param objectPaths
+   *    The paths to all the `.o` files.
+   *  @return
+   *    `outpath` The config.artifactPath
+   */
+  def link(
+      config: Config,
+      analysis: ReachabilityAnalysis.Result,
+      objectsPaths: Seq[Path]
+  ): Path = {
+    implicit val _config: Config = config
+    val buildPath = config.buildPath
+
+    // don't link if no changes
+    if (!needsLinking(objectsPaths, buildPath)) {
+      return copyOutput(config, buildPath)
+    }
+
+    val command = config.compilerConfig.buildTarget match {
+      case BuildTarget.Application | BuildTarget.LibraryDynamic =>
+        prepareLinkCommand(objectsPaths, analysis)
+      case BuildTarget.LibraryStatic =>
+        prepareArchiveCommand(objectsPaths)
+    }
+    // link
+    val result = command ! Logger.toProcessLogger(config.logger)
+    if (result != 0) {
+      throw new BuildException(s"Failed to link ${buildPath}")
+    }
+
+    copyOutput(config, buildPath)
+  }
+
+  /** Links the DWARF debug information found in the object file at `path`,
+   *  reading toolchain configuations from `config`.
+   */
+  def dsymutil(config: Config, path: Path): Unit =
+    Discover.tryDiscover("dsymutil", "LLVM_BIN").flatMap { dsymutil =>
+      val proc = Process(Seq(dsymutil.abs, path.abs), config.workDir.toFile())
+      val result = proc ! Logger.toProcessLogger(config.logger)
+      if (result != 0) {
+        Failure(
+          new BuildException(
+            s"Failed to link the debug information."
+          )
+        )
+      } else Success(())
+    } match {
+      case Failure(e) => config.logger.warn(e.getMessage())
+      case Success(_) =>
+    }
+
+  /** This function allows a project to have multiple `main` files by copying
+   *  the one selected to the same parent directory as the `workDir` which is by
+   *  default named `native`. Since the directory is named `native`, having a
+   *  project named `native` will by default produce an executable named
+   *  `native` which will throw an exception since the copy command uses
+   *  REPLACE_EXISTING.
+   *
+   *  Having a project or `baseName` named `native` conflicts with the build.
+   */
+  private def copyOutput(config: Config, buildPath: Path) = {
+    val outPath = config.artifactPath
+    try {
+      config.compilerConfig.buildTarget match {
+        case BuildTarget.Application =>
+          Files.copy(buildPath, outPath, StandardCopyOption.REPLACE_EXISTING)
+        case _: BuildTarget.Library => outPath
+      }
+    } catch {
+      case ex: IOException if (outPath.toFile().exists()) =>
+        throw new BuildException(
+          s"""|Executable build module or `baseName` is named 'native'
+              |which conflicts with the compiler `workDir`.
+              |Please rename the build module or
+              |use `withBaseName` to rename the executable.
+              |Cause: ${ex}""".stripMargin
+        )
+    }
+  }
+
+  private def prepareLinkCommand(
+      objectsPaths: Seq[Path],
+      analysis: ReachabilityAnalysis.Result
+  )(implicit config: Config) = {
+    val workDir = config.workDir
+    val links = {
+      val srclinks = analysis.links.map(_.name)
+      val gclinks = config.gc.links
+      // We need extra linking dependencies for:
+      // * libdl for our vendored libunwind implementation.
+      // * libpthread for process APIs and parallel garbage collection.
+      // * Dbghelp for windows implementation of unwind libunwind API
+      val platformsLinks =
+        if (config.targetsWindows) Seq("dbghelp")
+        else if (config.targetsOpenBSD || config.targetsNetBSD)
+          Seq("pthread")
+        else Seq("pthread", "dl", "m")
+      platformsLinks ++ srclinks ++ gclinks
+    }.distinct
+    config.logger.info(s"Linking with [${links.mkString(", ")}]")
+    // GNU ld and ld.lld support the --as-needed flag which avoids linking
+    // libraries (defined after the option) you don't use. LLVM intrinsics
+    // call libm which is not added by default. However, the math functions
+    // in libm as often inlined in release mode which makes it useless to
+    // link it. The Mac OS linker doesn't support the flag and libm is not
+    // in a separate library there, so we use it only in other UNIX targets
+    // (also Windows on msys and cgwin)
+    val asNeededLinkerFlags =
+      if (config.targetsWindows || config.targetsMac) Nil
+      else List("-Wl,--as-needed")
+    val linkopts =
+      asNeededLinkerFlags ++ config.linkingOptions ++ links.map("-l" + _)
+
+    val debugFlags =
+      if (config.targetsWindows) List("-g")
+      else if (config.compilerConfig.sourceLevelDebuggingConfig.enabled) {
+        List(
+          // newer LLVM uses DWARFv5 by default on Linux. We support only DWARF 4 for now
+          "-gdwarf-4"
+        )
+      } else Nil
+
+    val platformFlags =
+      if (!config.targetsWindows) Nil
+      else {
+        // https://github.com/scala-native/scala-native/issues/2372
+        // When using LTO make sure to use lld linker instead of default one
+        // LLD might find some duplicated symbols defined in both C and C++,
+        // runtime libraries (libUCRT, libCPMT), we ignore these warnings.
+        val ltoSupport = config.compilerConfig.lto match {
+          case LTO.None => Nil
+          case _        => Seq("-fuse-ld=lld", "-Wl,/force:multiple")
+        }
+        ltoSupport
+      }
+
+    // This is to ensure that the load path of the resulting dynamic library
+    // only contains the library filename, instead of the full path
+    // (i.e. in the target folder of SBT build) - this would make the library
+    // non-portable
+    val linkNameFlags =
+      if (config.compilerConfig.buildTarget == BuildTarget.LibraryDynamic)
+        if (config.targetsLinux)
+          List(s"-Wl,-soname,${config.artifactName}")
+        else if (config.targetsMac)
+          List(s"-Wl,-install_name,${config.artifactName}")
+        else Nil
+      else Nil
+
+    val output = Seq("-o", config.buildPath.abs)
+
+    // it's a fix for passing too many file paths to the clang compiler,
+    // If too many packages are compiled and the platform is windows, windows
+    // terminal doesn't support too many characters, which will cause an error.
+    val configFile = workDir.resolve("llvmLinkInfo").toFile
+    locally {
+      val pw = new PrintWriter(configFile)
+      def add(str: String) =
+        // Paths containg whitespaces needs to be escaped, otherwise
+        // config file might be not interpretted correctly by the LLVM
+        // in windows system, the file separator doesn't work very well, so we
+        // replace it to linux file separator
+        pw.println(escapeWhitespaces(str.replace("\\", "/")))
+
+      try {
+        buildTargetLinkOpts.foreach(add)
+        flto.foreach(add)
+        debugFlags.foreach(add)
+        platformFlags.foreach(add)
+        linkNameFlags.foreach(add)
+        output.foreach(add)
+        sanitizer.foreach(add)
+        target.foreach(add)
+
+        val useLdd = config.linkingOptions.contains("-fuse-ld=lld")
+
+        // lld requires that object files are listed in the order
+        // they require each other. We don't do that so we wrap
+        // the files in --start-lib and --end-lib which consider
+        // them like they were in a .a library and links all symbols
+        // regardless of ordering
+        if (useLdd) add("-Wl,--start-lib")
+        objectsPaths.foreach(p => add(p.abs))
+        if (useLdd) add("-Wl,--end-lib")
+
+        linkopts.foreach(add)
+
+      } finally pw.close()
+    }
+
+    val compiler =
+      if (isCppRuntimeRequired(config, analysis)) config.clangPP.abs
+      else config.clang.abs
+
+    val command = Seq(compiler, s"@${configFile.getAbsolutePath()}")
+    config.logger.running(command)
+    Process(command, config.workDir.toFile())
+  }
+
+  private def prepareArchiveCommand(
+      objectPaths: Seq[Path]
+  )(implicit config: Config) = {
+    val workDir = config.workDir
+
+    val MRICompatibleAR =
+      Discover.tryDiscover("llvm-ar", "LLVM_BIN").toOption orElse
+        // MacOS ar command does not support -M flag...
+        Discover.tryDiscover("ar").toOption.filter(_ => config.targetsLinux)
+
+    def stageFiles(): Seq[String] = {
+      objectPaths.map { path =>
+        val uniqueName =
+          workDir
+            .relativize(path)
+            .toString()
+            .replace(File.separator, "_")
+        val newPath = workDir.resolve(uniqueName)
+        Files.move(path, newPath, StandardCopyOption.REPLACE_EXISTING)
+        newPath.abs
+      }
+    }
+
+    def useMRIScript(ar: Path) = {
+      val MIRScriptFile = workDir.resolve("MIRScript").toFile
+      val pw = new PrintWriter(MIRScriptFile)
+      try {
+        pw.println(s"CREATE ${escapeWhitespaces(config.buildPath.abs)}")
+        stageFiles().foreach { path =>
+          pw.println(s"ADDMOD ${escapeWhitespaces(path)}")
+        }
+        pw.println("SAVE")
+        pw.println("END")
+      } finally pw.close()
+
+      val command = Seq(ar.abs, "-M")
+      config.logger.running(command)
+
+      Process(command, config.workDir.toFile()) #< MIRScriptFile
+    }
+
+    MRICompatibleAR match {
+      case None =>
+        val ar = Discover.discover("ar")
+        val command = Seq(ar.abs, "rc", config.buildPath.abs) ++ stageFiles()
+        config.logger.running(command)
+        Process(command, config.workDir.toFile())
+      case Some(path) => useMRIScript(path)
+    }
+  }
+
+  /** Checks the input timestamp to see if the file needs compiling. The call to
+   *  lastModified will return 0 for a non-existent output file but that makes
+   *  the timestamp always less forcing a recompile.
+   *
+   *  @param in
+   *    the source file
+   *  @param out
+   *    the object file
+   *  @return
+   *    true if it needs compiling false otherwise.
+   */
+  @inline private def needsCompiling(in: Path, out: Path)(implicit
+      config: Config
+  ): Boolean = {
+    // patched: timestamps only. Upstream also recompiled when
+    // `Build.userConfigHasChanged(config)`, but native libraries are compiled
+    // with a per-library config (extra preprocessor flags) whose hash never
+    // equals the stored one, so all ~170 runtime C/C++ files recompiled on every
+    // link. A real config change already deletes `dependencies/` and
+    // `generated/` (with their objects), which the timestamp check catches.
+    in.toFile().lastModified() > out.toFile().lastModified()
+  }
+
+  /** Looks at all the object files to see if one is newer than the output
+   *  (executable). All object files will be compiled at this time so
+   *  lastModified will always be a real time stamp. The output executable
+   *  lastModified can be 0 but that forces the link to occur.
+   *
+   *  @param in
+   *    the list of object file to link
+   *  @param out
+   *    the executable
+   *  @return
+   *    true if it needs linking
+   */
+  @inline private def needsLinking(in: Seq[Path], out: Path): Boolean = {
+    val inmax = in.map(_.toFile().lastModified()).max
+    val outmax = out.toFile().lastModified()
+    inmax > outmax
+  }
+
+  private def flto(implicit config: Config): Seq[String] =
+    config.compilerConfig.lto match {
+      case LTO.None => Seq.empty
+      case lto      => Seq(s"-flto=${lto.name}")
+    }
+
+  private def sanitizer(implicit config: Config): Seq[String] =
+    config.compilerConfig.sanitizer match {
+      case Some(sanitizer) =>
+        Seq(s"-fsanitize=${sanitizer.name}", "-fno-omit-frame-pointer")
+      case _ => Seq.empty
+    }
+
+  private def target(implicit config: Config): Seq[String] =
+    config.compilerConfig.targetTriple match {
+      case Some(tt) => Seq("-target", tt)
+      case None     => Seq("-Wno-override-module")
+    }
+
+  private def opt(implicit config: Config): String =
+    config.mode match {
+      case Mode.Debug       => "-O0"
+      case Mode.ReleaseFast => "-O2"
+      case Mode.ReleaseSize => "-Oz"
+      case Mode.ReleaseFull => "-O3"
+    }
+
+  private def isStdFlag(option: String): Boolean =
+    option.startsWith("-std=") || option.startsWith("--std=")
+
+  private def cppOptions(
+      analysis: ReachabilityAnalysis.Result
+  )(implicit config: Config): Seq[String] = {
+    val options = config.compilerConfig.cppOptions
+    val defaultStd =
+      if (config.targetsWindows) defaultWinCppStd else defaultCppStd
+    val languageStandard = {
+      val hasStdFlag = options.exists(isStdFlag)
+      if (!hasStdFlag) List(defaultStd)
+      else Nil
+    }
+    // this will change
+    val exceptionsHandling =
+      if (isCppRuntimeRequired(config, analysis)) { // checks for -fcxx-exceptions
+        List("-fexceptions", "-funwind-tables")
+      } else
+        List("-fno-rtti", "-fno-exceptions", "-funwind-tables")
+
+    languageStandard ++ options ++ exceptionsHandling
+  }
+
+  private def cOptions(
+      analysis: ReachabilityAnalysis.Result
+  )(implicit config: Config): Seq[String] = {
+
+    val options = config.compilerConfig.cOptions
+
+    val languageStandard = {
+      val hasStdFlag = options.exists(isStdFlag)
+      if (!hasStdFlag) List(defaultCStd)
+      else Nil
+    }
+    val exceptionHandling =
+      if (isCppRuntimeRequired(config, analysis))
+        List("-fexceptions", "-funwind-tables")
+      else Nil
+
+    languageStandard ++ options ++ exceptionHandling
+  }
+
+  private def llvmIrFeatures(implicit config: Config): Seq[String] = {
+    implicit def nativeConfig: NativeConfig = config.compilerConfig
+    val opaquePointers = Discover.features.opaquePointers.requiredFlag.toList
+      .flatMap(Seq("-mllvm", _))
+
+    opaquePointers
+  }
+
+  private def buildTargetCompileOpts(implicit config: Config): Seq[String] =
+    config.compilerConfig.buildTarget match {
+      case BuildTarget.Application =>
+        Nil
+      case BuildTarget.LibraryStatic =>
+        optionalPICflag ++ Seq("--emit-static-lib")
+      case BuildTarget.LibraryDynamic =>
+        optionalPICflag :+
+          "-DSCALANATIVE_DYLIB" // allow to compile dynamic library constructor in dylib_init.c
+    }
+
+  private def buildTargetLinkOpts(implicit config: Config): Seq[String] = {
+    val optRdynamic =
+      if (config.targetsWindows) Nil
+      else {
+        if (config.linkingOptions.contains("-static")) Nil
+        else Seq("-rdynamic")
+      }
+    config.compilerConfig.buildTarget match {
+      case BuildTarget.Application =>
+        optRdynamic
+      case BuildTarget.LibraryStatic =>
+        optionalPICflag ++ Seq("--emit-static-lib")
+      case BuildTarget.LibraryDynamic =>
+        val libFlag = if (config.targetsMac) "-dynamiclib" else "-shared"
+        Seq(libFlag) ++ optionalPICflag ++ optRdynamic
+    }
+  }
+
+  private def optionalPICflag(implicit config: Config): Seq[String] =
+    if (config.targetsWindows) Nil
+    else Seq("-fPIC")
+
+  private def escapeWhitespaces(str: String): String = {
+    if (str.exists(_.isWhitespace)) s""""$str""""
+    else str
+  }
+
+  private def isCppRuntimeRequired(
+      config: Config,
+      analysis: ReachabilityAnalysis.Result
+  ) = config.usingCppExceptions || analysis.linkCppRuntime
+
+  lazy val msysExtras = Seq(
+    "-D_WIN64",
+    "-D__MINGW64__",
+    "-D_X86_64_ -D__X86_64__ -D__x86_64",
+    "-D__USING_SJLJ_EXCEPTIONS__",
+    "-DNO_OLDNAMES",
+    "-D_LIBUNWIND_BUILD_ZERO_COST_APIS"
+  )
+
+}

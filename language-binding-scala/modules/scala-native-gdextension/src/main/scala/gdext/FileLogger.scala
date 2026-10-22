@@ -1,7 +1,6 @@
 package gdext
 
 import java.io.{File, FileWriter}
-import java.nio.file.{Files, Paths, StandardCopyOption}
 
 private[gdext] class FileLogger private (writer: FileWriter) {
   private def logBase(msg: String): Unit = {
@@ -15,7 +14,13 @@ private[gdext] class FileLogger private (writer: FileWriter) {
     val mins = minutes % 60
     val secs = seconds % 60
 
-    val timestamp = f"$hours%02d:$mins%02d:$secs%02d.$ms%03d"
+    // Hand-padded: an `f"..."` interpolator links java.util.Formatter (and with
+    // it regex and java.math) into every game.
+    def pad(v: Long, w: Int): String = {
+      val s = v.toString
+      if (s.length >= w) s else "0" * (w - s.length) + s
+    }
+    val timestamp = s"${pad(hours, 2)}:${pad(mins, 2)}:${pad(secs, 2)}.${pad(ms, 3)}"
     val threadName = Thread.currentThread().getName
     writer.write(s"[$timestamp] [$threadName] $msg\n")
     writer.flush()
@@ -29,15 +34,15 @@ private[gdext] object FileLogger {
   def use[A](logFileName: String)(f: FileLogger => A): A = {
     // The log lives under `.scala/`; make sure that dir exists before writing.
     Log.ensureParentDir(logFileName)
-    // Backup previous log file
+    // Keep the previous log as `<name>.prev` (java.io only: java.nio.file
+    // would link a large part of the JDK into every game).
     val sourceFile = new File(logFileName)
     if (sourceFile.exists()) {
-      val backupFileName = logFileName + ".prev"
-      val source = Paths.get(logFileName)
-      val dest = Paths.get(backupFileName)
-      Files.copy(source, dest, StandardCopyOption.REPLACE_EXISTING)
+      val backup = new File(logFileName + ".prev")
+      backup.delete()
+      sourceFile.renameTo(backup)
     }
-    
+
     val writer = new FileWriter(logFileName, false)
     val fileLogger = new FileLogger(writer)
     try {

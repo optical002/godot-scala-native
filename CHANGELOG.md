@@ -9,6 +9,91 @@ semver — the topmost *Unreleased* section is the version being worked toward,
 which `sbt publishLocal` produces locally and which appears on JitPack only once
 its tag is pushed.
 
+## [0.1.10] — 2026-10-22
+
+Build-speed release, plus typed `res://` references. With the editor open and
+`~godotBuild` running, a code change now reaches Godot about twice as fast.
+Measured on the harness project against 0.1.9 with the same script
+(`releaseFast`, 16 cores):
+
+| | 0.1.9 | 0.1.10 |
+|---|---|---|
+| `~godotBuild` running: file saved → library swapped | 40–45 s | 19–22 s |
+| `sbt godotBuild` after a code change, sbt server running | 40–43 s | 18–22 s |
+| `sbt godotBuild` after a code change, new sbt process | 52–54 s | 32 s |
+| Full build from scratch | 71 s | 39 s |
+| Editor hot reload after adding an exported property | 41.5 s | 30.9 s |
+
+A project without the harness's 255 test classes rebuilds an edit in 11–15 s.
+
+### Added
+- Typed `res://` references. The plugin generates `game.Res`, an object tree
+  mirroring the Godot project, so a renamed or deleted asset is a compile error
+  and a wrong-kind resource is a type error.
+  - `Res.icon: ResPath[CompressedTexture2D]`, `Res.test: ScenePath[Player]`,
+    `Res.data.levels: FilePath`. Types come from `.import` files, `.tres`
+    headers and `.tscn` root nodes; your own classes resolve to their Scala type.
+  - `ResPath[T].load(): T` (owned, no cast), `ScenePath[T].load(): Tscn[T]` and
+    `instantiate()`, `FilePath.readText()`. All are opaque `String`s in
+    `gdext.api`.
+  - Settings `godotResRefs` (default `true`) and `godotResObject` (default
+    `"Res"`). The scan is skipped when `godotProjectDir` is unset, so a plain
+    `compile` still needs no Godot project.
+  - `~godotBuild` also reruns when assets are added, removed or reimported.
+    Saving a scene without changing its root type rebuilds nothing.
+  - Additive: the string API, `Tscn`, `Tres` and exports are unchanged.
+- Setting `godotTrimEngineClasses` (default `true`), see below.
+
+### Performance
+- Only the engine classes a game can observe are linked: the classes its
+  sources and godot-libraries name, their parents, and transitively every class
+  their methods return (148 of ~1000 on a game-sized project). The generated
+  entry point installs a wrapper factory over just those instead of the
+  all-class `ClassFactory`. The optimizer phase roughly halves. The binding jar
+  carries `gdext/engine-graph.txt` and `gdext/engine-core.txt` for this.
+- Unchanged code is no longer recompiled to native code. Scala Native 0.5.10
+  numbered classes in a different order on every build, so every link
+  regenerated and recompiled all LLVM IR. A one-line edit now recompiles 2 IR
+  files instead of 61.
+- The project's own code gets one LLVM IR file per source file (library code
+  stays per directory): editing `Player.scala` recompiles its 52 KB of IR
+  instead of the whole 4.7 MB `game` package.
+- Classes in the project's own packages are numbered after library classes, so
+  adding a lambda or class recompiles a few files instead of most of them.
+- Source directories with C-string literals are no longer regenerated on every
+  link (their NIR hashed differently each run).
+- Scala Native's own C/C++ runtime sources (~170 files) are no longer
+  recompiled on every link (~2 s). A real `nativeConfig` change still
+  recompiles everything.
+- Library jars are cached in the sbt server between links instead of being
+  re-read and deserialized every time: NIR linking ~3.5 s → ~1.2–2.2 s. Keyed by
+  jar path, size and mtime; held softly, so heap pressure drops entries instead
+  of failing.
+- Editing a method body no longer re-expands every class registration: the
+  `GeneratedRegistrations` fingerprint covers declarations only. A body edit
+  compiles one file (~1.7 s instead of ~3.5–4 s). Constructor, field,
+  annotation and signature changes still re-expand the registrations.
+- The plugin's source scan caches parse results per file (~500 ms → ~30 ms).
+- The binding no longer links `java.util.Formatter`, `java.math`, `java.net` or
+  `java.nio.file` itself; a game that avoids `f"..."` and `split` no longer
+  pays for them.
+
+### Changed
+- `godotBuild` no longer swaps the library (which makes the editor hot-reload)
+  when the linked file is unchanged since the last swap.
+- `debug` mode no longer links faster than `releaseFast` for small edits: its
+  parallel optimizer does not produce identical output twice, so every native
+  file is recompiled. Keep `releaseFast` for development.
+
+### Notes
+- The incremental-build fixes are patched copies of six Scala Native 0.5.10
+  toolchain classes shipped in the plugin (`snpatch/`). They are tied to that
+  exact version: the plugin warns if a different `sbt-scala-native` is on the
+  build classpath. Don't override it.
+- The sbt server keeps ~150 MB of library code between builds. With the default
+  1 GB heap some of it is dropped and reloaded; `-J-Xmx2G` in `.sbtopts` keeps
+  all of it.
+
 ## [0.1.9] — 2026-10-21
 
 Memory and performance release. The Scala heap stays untouched on the engine

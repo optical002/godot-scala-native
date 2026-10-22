@@ -12,7 +12,7 @@ is no source `ProjectRef`. So any change under `language-binding-scala/` (bindin
 code, generator, or plugin) must be republished before harness will see it:
 
 ```
-cd language-binding-scala && sbt publishLocal   # gdext + plugin @ 0.1.9
+cd language-binding-scala && sbt publishLocal   # gdext + plugin @ 0.1.10
 cd harness-scala          && sbt godotBuild     # generate, compile, link, swap .so
 ```
 
@@ -66,7 +66,7 @@ Read only what the task needs.
   `gdext.annotations`. Everything else is `gdext.internal.*`, much of it
   `private[gdext]` and compiler-enforced.
 - Never let exceptions unwind across the C ABI — catch at the boundary.
-- Dev version is `0.1.9`; releases are plain semver tags built by JitPack.
+- Dev version is `0.1.10`; releases are plain semver tags built by JitPack.
 
 ## Maintenance
 

@@ -161,8 +161,10 @@ private[gdext] object GodotEngine {
       val f = new java.io.File(ReloadStampFile)
       if (!f.exists()) { Log.trace("reloadElapsedMs: stamp absent"); None }
       else {
+        val in = new java.io.BufferedReader(new java.io.FileReader(f))
         val stamp =
-          new String(java.nio.file.Files.readAllBytes(f.toPath)).trim.toLong
+          try in.readLine().trim.toLong
+          finally in.close()
         f.delete()
         Some(System.currentTimeMillis() - stamp)
       }

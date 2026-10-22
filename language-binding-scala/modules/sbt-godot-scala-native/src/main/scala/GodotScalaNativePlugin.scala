@@ -2,6 +2,8 @@ package godotscala
 
 import sbt._
 import sbt.Keys._
+import sbt.nio.Keys.watchTriggers
+import sbt.nio.file.{**, Glob}
 import scala.scalanative.sbtplugin.{ScalaNativeCrossVersion, ScalaNativePlugin}
 import scala.scalanative.sbtplugin.ScalaNativePlugin.autoImport._
 import scala.scalanative.build.{BuildTarget, Mode}
@@ -59,6 +61,15 @@ object GodotScalaNativePlugin extends AutoPlugin {
     val godotNativeMode = settingKey[String](
       "Scala Native build mode: releaseFast (default), releaseFull (slowest link, fastest code) or debug (fastest link, no optimizer)"
     )
+    val godotResRefs = settingKey[Boolean](
+      "Generate the typed `game.Res` tree of res:// paths from the Godot project (default true)"
+    )
+    val godotResObject = settingKey[String](
+      "Name of the generated res:// object in package `game` (default Res)"
+    )
+    val godotTrimEngineClasses = settingKey[Boolean](
+      "Link only the engine classes the game can observe instead of all ~1000 (default true)"
+    )
     val godotManifest = taskKey[File](
       "Generates the .gdextension manifest into the Godot project root"
     )
@@ -68,6 +79,13 @@ object GodotScalaNativePlugin extends AutoPlugin {
   }
 
   import autoImport._
+
+  /** The Scala Native version `snpatch/Metadata.scala` was copied from. Must
+    * equal the `sbt-scala-native` version in language-binding-scala/build.sbt. */
+  private val PatchedScalaNativeVersion = "0.5.10"
+
+  /** Read by snpatch/Metadata (`Metadata.LastPackagesProperty`). */
+  private val SnPatchLastPackagesProperty = "godot.scalanative.lastPackages"
 
   /** Resolves the mandatory [[autoImport.godotProjectDir]], failing the task
     * (not project load) with an actionable message when it is unset. */
@@ -91,6 +109,9 @@ object GodotScalaNativePlugin extends AutoPlugin {
     godotManifestName         := "scala.gdextension",
     godotCompatibilityMinimum := "4.2",
     godotNativeMode           := "releaseFast",
+    godotResRefs              := true,
+    godotTrimEngineClasses    := true,
+    godotResObject            := "Res",
 
     // The binding artifact. `.cross(ScalaNativeCrossVersion.binary)` applies the
     // Scala Native platform suffix (e.g. `_native0.5_3`) — this is exactly what
@@ -149,11 +170,26 @@ object GodotScalaNativePlugin extends AutoPlugin {
 
     Compile / sourceGenerators += Def.task {
       val log    = streams.value.log
+      // The bundled Metadata patch (snpatch/Metadata.scala) is a copy of one
+      // exact toolchain version; on any other version it may break nativeLink.
+      if (scala.scalanative.nir.Versions.current != PatchedScalaNativeVersion)
+        log.warn(
+          s"[godot] Scala Native ${scala.scalanative.nir.Versions.current} on the build " +
+            s"classpath, but the bundled toolchain patch targets $PatchedScalaNativeVersion. " +
+            "Remove any sbt-scala-native override, or nativeLink may fail."
+        )
       val srcDir = (Compile / scalaSource).value
       val cpFiles = (Compile / dependencyClasspath).value.files
       // Engine base-class names come from the binding's `engine-classes.txt`
       // resource on the classpath — no path into the binding's sources.
+      var lapT = System.nanoTime()
+      def lap(what: String): Unit = {
+        val now = System.nanoTime()
+        log.debug(s"[godot] generators $what: ${(now - lapT) / 1000000} ms")
+        lapT = now
+      }
       val engineNames = RegistrationScan.engineNamesFromClasspath(cpFiles)
+      lap("engine names")
 
       // Godot-library auto-registration: a dependency that packages the marker
       // resource (RegistrationScan.GodotLibraryMarker) in its MAIN jar opts its
@@ -188,18 +224,88 @@ object GodotScalaNativePlugin extends AutoPlugin {
 
       val outFile =
         (Compile / sourceManaged).value / "game" / "GeneratedRegistrations.scala"
-      IO.write(
-        outFile,
-        RegistrationScan.generate(
-          srcDir,
-          engineNames,
-          godotEntrySelfTest.value,
-          librarySources
-        )
+      // Settings read up front: sbt does not allow `.value` inside the
+      // callback below.
+      lap("library sources")
+      val engineGraph =
+        if (godotTrimEngineClasses.value) EngineClassScan.graphFromClasspath(cpFiles)
+        else None
+      lap("engine graph")
+      val godotDirOpt = godotProjectDir.?.value
+      val resEnabled  = godotResRefs.value
+      val resObject   = godotResObject.value
+      val resFile     = (Compile / sourceManaged).value / "game" / s"$resObject.scala"
+      val stampFile   = streams.value.cacheDirectory / "res-scan.stamp"
+      val excluded    = Seq(baseDirectory.value, target.value)
+
+      // Typed res:// tree (ResScan). Skipped when disabled or when no Godot
+      // project is configured, so a plain `compile` needs no godotProjectDir.
+      // Runs inside the registration scan (it needs the scanned class map) and
+      // returns its text, whose engine types the wrapper factory must cover.
+      def writeRes(godotClasses: Map[String, String]): Seq[File] =
+        godotDirOpt match {
+          case Some(godotDir) if resEnabled && godotDir.isDirectory =>
+            val files = ResScan.assetFiles(godotDir, excluded)
+            val stamp = ResScan.fingerprint(godotDir, files, godotClasses, resObject)
+            val fresh =
+              resFile.exists && stampFile.exists && IO.read(stampFile) == stamp
+            if (!fresh) {
+              val result = ResScan.scan(godotDir, files, engineNames, godotClasses)
+              result.warnings.foreach(w => log.warn(s"[res] $w"))
+              val content = ResScan.render(result.entries, resObject)
+              if (!resFile.exists || IO.read(resFile) != content) {
+                IO.write(resFile, content)
+                log.info(s"[res] generated $resFile (${result.entries.size} files)")
+              }
+              IO.write(stampFile, stamp)
+            }
+            Seq(resFile)
+          case _ =>
+            IO.delete(resFile)
+            Seq.empty
+        }
+      var resOut: Seq[File] = Seq.empty
+
+      val scan = RegistrationScan.generateWithClasses(
+        srcDir,
+        engineNames,
+        godotEntrySelfTest.value,
+        librarySources,
+        engineGraph,
+        godotClasses => {
+          resOut = writeRes(godotClasses)
+          resOut.map(IO.read(_))
+        }
       )
-      streams.value.log.info(s"[auto-register] generated $outFile")
-      Seq(outFile)
+      scan.engineClasses.foreach(cs =>
+        log.debug(s"[auto-register] ${cs.size} engine classes linked: ${cs.mkString(" ")}")
+      )
+      lap("scan + res")
+      IO.write(outFile, scan.source)
+      // Tell the patched toolchain Metadata (snpatch) which classes are the
+      // project's own, so it numbers them last: adding a class or lambda then
+      // shifts only the project's ids, not the whole program's. The generated
+      // sources live in `game`. Ordering only — never affects correctness.
+      System.setProperty(
+        SnPatchLastPackagesProperty,
+        (scan.localPackages + "game").toSeq.sorted.mkString(",")
+      )
+      log.info(s"[auto-register] generated $outFile")
+      outFile +: resOut
     }.taskValue,
+
+    // `~godotBuild` (the editor addon's watch) also reruns when the asset set or
+    // headers change, so `Res` follows the Godot project. Only files whose change
+    // can alter `Res`; nothing godotBuild itself writes (`.scala/`, the manifest).
+    godotBuild / watchTriggers ++= {
+      godotProjectDir.?.value match {
+        case Some(godotDir) if godotResRefs.value =>
+          Seq(
+            Glob(godotDir) / ** / "*.{import,tres,tscn,res,scn,json,txt,csv}"
+          )
+        case _ => Seq.empty
+      }
+    },
 
     // Generates the `.gdextension` manifest into the Godot project root. The
     // entry symbol is always RegistrationScan.EntrySymbol (it must match the
@@ -224,6 +330,8 @@ object GodotScalaNativePlugin extends AutoPlugin {
 
     godotBuild := {
       val libFile = (Compile / nativeLink).value
+      val log     = streams.value.log
+      val cache   = streams.value.cacheDirectory
       // Refresh the manifest alongside the library so the two always agree.
       val manifest = godotManifest.value
 
@@ -246,25 +354,40 @@ object GodotScalaNativePlugin extends AutoPlugin {
       // manifest, this lets the editor pick up the new build without a restart.
       val targetLib = godotLibDir / targetName
       val tmpLib    = godotLibDir / (targetName + ".new")
-      IO.copyFile(libFile, tmpLib)
-      java.nio.file.Files.move(
-        tmpLib.toPath,
-        targetLib.toPath,
-        java.nio.file.StandardCopyOption.REPLACE_EXISTING,
-        java.nio.file.StandardCopyOption.ATOMIC_MOVE
-      )
 
-      // Stamp the swap time (epoch millis) for the running editor to read on its
-      // next hot-reload, so the binding can report the full swap→live reload
-      // latency on the Godot Output panel. Written under `.scala/`, matching
-      // where the binding reads it (relative to Godot's working dir).
-      IO.write(godotLibDir / "reload.stamp", System.currentTimeMillis().toString)
+      // nativeLink is cached (no relink when its inputs are unchanged), so a
+      // trigger that changed no code (e.g. an asset save under `~godotBuild`)
+      // yields the same file. Skip the swap then, or the editor hot-reloads for
+      // nothing.
+      val swapStamp = cache / "last-swap.stamp"
+      val libStamp =
+        s"${libFile.getCanonicalPath}|${libFile.length}|${libFile.lastModified}|$targetLib"
+      val unchanged =
+        targetLib.exists && swapStamp.exists && IO.read(swapStamp) == libStamp
+
+      if (unchanged)
+        log.info(s"[godot] $targetName unchanged, not swapped")
+      else {
+        IO.copyFile(libFile, tmpLib)
+        java.nio.file.Files.move(
+          tmpLib.toPath,
+          targetLib.toPath,
+          java.nio.file.StandardCopyOption.REPLACE_EXISTING,
+          java.nio.file.StandardCopyOption.ATOMIC_MOVE
+        )
+
+        // Stamp the swap time (epoch millis) for the running editor to read on
+        // its next hot-reload, so the binding can report the full swap→live
+        // reload latency on the Godot Output panel. Written under `.scala/`,
+        // matching where the binding reads it (relative to Godot's working dir).
+        IO.write(godotLibDir / "reload.stamp", System.currentTimeMillis().toString)
+        IO.write(swapStamp, libStamp)
+        log.info(s"[godot] swapped $targetName, manifest $manifest")
+      }
 
       // First-run convenience: drop the editor addon into the Godot project (only
       // if it isn't already there, so user edits are never clobbered).
-      installAddon(godotDir, baseDirectory.value, streams.value.log)
-
-      streams.value.log.info(s"[godot] swapped $targetName, manifest $manifest")
+      installAddon(godotDir, baseDirectory.value, log)
     }
   )
 

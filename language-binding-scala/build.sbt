@@ -41,7 +41,7 @@ inThisBuild(
 // not exist on JitPack until the matching release tag is pushed, and
 // locally-published artifacts win over JitPack (the local ivy repo is consulted
 // first). Plain semver, matching godot-scala-native-utilities.
-ThisBuild / version := sys.env.getOrElse("VERSION", "0.1.9")
+ThisBuild / version := sys.env.getOrElse("VERSION", "0.1.10")
 
 // Aggregating root. It exists only to group the modules; it is never published
 // (only `gdext` and the sbt plugin are).
@@ -106,7 +106,47 @@ lazy val gdext =
         val out =
           (Compile / resourceManaged).value / "gdext" / "engine-classes.txt"
         IO.write(out, names.mkString("\n"))
-        Seq(out)
+
+        // Inputs for the plugin's engine-class trimming (EngineClassScan):
+        // - engine-graph.txt: `Class<TAB>Parent<TAB>A,B,..` per generated engine
+        //   class, where A,B,.. are the classes its methods wrap results as
+        //   (`Wrappers.owned[X]` / `borrowed[X]`).
+        // - engine-core.txt: engine classes named by the binding's hand-written
+        //   code (everything that is not a generated engine class file).
+        val srcRoot  = (Compile / scalaSource).value / "gdext"
+        val classHdr = """(?m)^abstract class (\w+) extends ([\w.]+)""".r
+        val wrapRef  = """Wrappers\.(?:owned|borrowed)\[(\w+)\]""".r
+        val generated = Option(engineDir.listFiles)
+          .getOrElse(Array.empty[File])
+          .iterator
+          .filter(f => f.isFile && f.getName.endsWith(".scala"))
+          .flatMap { f =>
+            val text = IO.read(f)
+            classHdr.findFirstMatchIn(text).map { m =>
+              val parent = m.group(2).split('.').last
+              val refs = wrapRef.findAllMatchIn(text).map(_.group(1)).toSet - m.group(1)
+              (f, m.group(1), parent, refs.toVector.sorted)
+            }
+          }
+          .toVector
+          .sortBy(_._2)
+        val engineNames = generated.map(_._2).toSet
+        val graph = generated.map { case (_, n, p, refs) =>
+          val parent = if (engineNames.contains(p)) p else "-"
+          s"$n\t$parent\t${refs.mkString(",")}"
+        }
+        val generatedFiles = generated.map(_._1.getCanonicalPath).toSet +
+          (engineDir / "ClassFactory.scala").getCanonicalPath
+        val token = """\b[A-Z]\w*\b""".r
+        val core = (srcRoot ** "*.scala").get
+          .filterNot(f => generatedFiles.contains(f.getCanonicalPath))
+          .flatMap(f => token.findAllIn(IO.read(f)).filter(engineNames))
+          .toSet + "Object"
+        val graphOut = (Compile / resourceManaged).value / "gdext" / "engine-graph.txt"
+        val coreOut  = (Compile / resourceManaged).value / "gdext" / "engine-core.txt"
+        IO.write(graphOut, graph.mkString("\n"))
+        IO.write(coreOut, core.toVector.sorted.mkString("\n"))
+        Seq(out, graphOut, coreOut)
       }.taskValue
     )
 
@@ -137,6 +177,8 @@ lazy val sbtGodotPlugin =
       addSbtPlugin("org.scala-native" % "sbt-scala-native" % "0.5.10"),
       // scalameta parses game sources in RegistrationScan.
       libraryDependencies += "org.scalameta" %% "scalameta" % "4.9.9",
+      // Unit tests for the pure generators (ResScan).
+      libraryDependencies += "org.scalameta" %% "munit" % "1.0.1" % Test,
       // Embed this build's version so the plugin pulls the matching `gdext`.
       Compile / sourceGenerators += Def.task {
         val out =

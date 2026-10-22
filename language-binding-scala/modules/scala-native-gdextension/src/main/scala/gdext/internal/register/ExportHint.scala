@@ -30,7 +30,7 @@ object ExportHint {
     step: Double = 1.0,
     flags: String*
   ): ExportHint = {
-    val parts = f"$min%s,$max%s,$step%s" +: flags
+    val parts = s"$min,$max,$step" +: flags
     ExportHint(PropertyHint.Range, parts.mkString(","))
   }
 

@@ -32,6 +32,21 @@ sbt clean godotBuild
 A clean build makes sure no stale Scala Native intermediate files from the old
 binding are linked.
 
+### From 0.1.9 to 0.1.10
+
+No code changes are needed. Two new defaults can affect a project:
+
+1. **`game.Res` is generated** from your Godot project (typed `res://`
+   references; see [Resources and files](../guides/resources-files.md#typed-res-references)).
+   If you have your own `game.Res`, rename the generated one with
+   `godotResObject := "Assets"`, or turn it off with `godotResRefs := false`.
+2. **Only the engine classes your game can observe are linked.** If a
+   dependency that is not a godot-library uses engine classes your own code
+   never names, add `godotTrimEngineClasses := false`.
+
+Don't override the `sbt-scala-native` version: the plugin ships patches for
+Scala Native 0.5.10 and warns if another version is on the build classpath.
+
 ### From 0.1.8 to 0.1.9
 
 0.1.9 changes how engine objects and math values are represented. The compiler

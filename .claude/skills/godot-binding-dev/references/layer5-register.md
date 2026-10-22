@@ -232,8 +232,13 @@ class body/ctor), so Zinc skips recompiling it and the `Register.auto[T]` macro
 removing a `var` field then breaks `nativeLink` with "unknown constructor /
 unreachable symbol" until `sbt clean`. The fingerprint changes whenever any game
 source changes, forcing a recompile so the factories re-expand against the
-current class shapes. Don't remove it. (`~godotBuild` only fires on source
-changes, so this recompiles the one generated file exactly when needed.)
+current class shapes. Don't remove it. It hashes each source's **shape**
+(`RegistrationScan.shapeOf`): bodies of methods *with a declared return type*
+are replaced by `???` (the macro reads declarations only — `.tree` is used just
+for `returnTpt`/`tpt` types), so a body-only edit recompiles 1 file (~1.7 s
+warm) instead of also re-expanding all `Register.auto` (~3.5–4 s). Methods
+without a declared type and all field/ctor initializers keep their text (their
+type may be inferred from it). Unit-tested in `RegistrationScanSpec`.
 Registers iff: concrete `class` (not abstract/trait/object) **and** every
 primary-ctor param is constructible with no caller args — has a default **OR** is
 a `var` (the macro factory fills an un-defaulted `var` from its `DefaultValue`);
@@ -256,6 +261,30 @@ works from the **published `gdext` jar** the plugin adds — a downstream consum
 artifact, no path into the binding sources. The plugin adds the `gdext`
 dependency at its own version (embedded via the generated
 `GodotScalaNativeBuildInfo`), so plugin and binding are always in lockstep.
+
+## Typed `res://` tree (`ResScan` → `game.Res`)
+Same `Compile / sourceGenerators` task as RegistrationScan (one scalameta parse:
+`RegistrationScan.generateWithClasses` also returns Godot name → FQCN, used to
+type user resources/scene roots). `ResScan` (plugin, pure, unit-tested in
+`modules/sbt-godot-scala-native/src/test/scala/ResScanSpec.scala`) walks
+`godotProjectDir`, reads headers only (`.import` `[remap] type=`, `.tres`
+`[gd_resource type=]`, `.tscn` first `[node` `type=`), emits `inline def`s typed
+`ResPath[T]`/`ScenePath[T]`/`FilePath` (opaque `String`s in
+`gdext/internal/engine/ResPath.scala`, exported from `gdext.api`).
+- Never fails the build: unknown class → `Resource`/`Node` + `[res]` warning;
+  name collisions → extension suffix, then numeric.
+- Skipped when `godotResRefs := false` or `godotProjectDir` unset (plain
+  `compile` must keep working without a Godot dir). Disabled → `Res.scala` deleted.
+- Fast path: fingerprint of (path, size, mtime) of assets + `.import`s, the
+  class map, the object name and **the plugin jar's own size/mtime** (so a
+  `publishLocal` of a changed generator invalidates it — without that a stale
+  `Res.scala` survives). Stored in the generator's `streams` cache dir.
+- `inline def`s leave `Res$.nir` constant, but `Res.tasty` still changes when
+  the file set changes, and Scala Native's link cache is keyed on classpath
+  **mtimes** → adding/removing/renaming an asset relinks. Header-only scene saves
+  do not (content unchanged → no write → no recompile).
+- `godotBuild / watchTriggers` += `godotDir/**/*.{import,tres,tscn,res,scn,json,txt,csv}`.
+  Must never match anything `godotBuild` writes (`.scala/`, `*.gdextension`).
 
 ## Custom-node inheritance (custom extends custom)
 A custom node may extend **another custom node**, not just an engine class —

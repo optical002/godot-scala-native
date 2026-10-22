@@ -76,5 +76,35 @@ Not yet allocation-free:
 godotNativeMode := "debug"
 ```
 
+## Build times
+
+A code change rebuilds in three steps: the Scala compile, Scala Native's link
+(NIR linking, optimizer, LLVM IR generation) and `clang`. The plugin keeps each
+of them small:
+
+- **Only the engine classes your game can observe are linked.** That is every
+  engine class your sources (and godot-library dependencies) name, their
+  parents, and every class their methods return. On a small game this is ~150
+  of Godot's ~1000 classes, which roughly halves the optimizer's work. Turn it
+  off with `godotTrimEngineClasses := false` if a dependency that is not a
+  godot-library uses engine classes your own code never names.
+- **Unchanged code is not recompiled to native code.** Editing one method
+  recompiles that source directory only; adding a lambda or class renumbers
+  only your own classes.
+- **Editing a method body does not re-run class registration.**
+
+Measured on the harness game without its test-harness classes (`releaseFast`,
+16 cores, warm sbt server as used by the editor's `~godotBuild` watch): a
+one-line edit takes 11–15 s end to end, of which 7–10 s is the native link.
+Adding a lambda takes 12–16 s.
+
+`debug` mode does not link faster for small edits: its optimizer runs in
+parallel and does not produce identical output twice, so every native file is
+recompiled on each build. Keep `releaseFast` for development.
+
+The sbt server holds compiled library code between builds (~150 MB). With the
+default 1 GB heap some of it is dropped and reloaded; giving sbt more memory
+(`-J-Xmx2G` in `.sbtopts`) keeps all of it.
+
 See [Memory and object lifetimes](memory.md) for the GC controls and for keeping
 your own per-frame code free of allocations.

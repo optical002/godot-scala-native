@@ -133,6 +133,22 @@ final class MemoryProbe(
     }
     check("load: count restored", Gc.stats.outstandingOwnedRefs == before)
 
+    // Generated `Res` references: typed loads with no cast, owned like `load`.
+    Gd.scoped {
+      val stats: PlayerStats = Res.newPlayerStats.load()
+      check("Res: typed resource load", stats != null)
+      val icon: CompressedTexture2D = Res.icon.load()
+      check("Res: imported texture load", icon != null && icon.getWidth() > 0L)
+      val scene: Tscn[Player] = Res.test.load()
+      check("Res: scene load", scene.isAssigned && scene.rootClassName == "Player")
+    }
+    check("Res: count restored", Gc.stats.outstandingOwnedRefs == before)
+    val player: Player = Res.test.instantiate()
+    check("Res: instantiate typed root", player != null)
+    if (player != null) player.free()
+    check("Res: instantiate releases the scene", Gc.stats.outstandingOwnedRefs == before)
+    check("Res: file path", Res.harnessManifest.exists && Res.harnessManifest.readText().nonEmpty)
+
     // Each `refInc()` is one more owned reference; `unref()` beyond what the
     // wrapper owns is ignored instead of freeing someone else's object.
     val twice = Gd.create[RefCounted]().refInc()

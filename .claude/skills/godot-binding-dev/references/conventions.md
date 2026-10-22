@@ -178,6 +178,77 @@ Consumers import only `gdext.api.*`, `gdext.classes`, `gdext.builtin`,
 `harness-scala` consumes the binding + plugin as **published** artifacts (no
 source `ProjectRef`), so any change in `language-binding-scala` needs
 `sbt publishLocal` before `sbt godotBuild` — see the skill body, which the
-`check-publish-local` hook enforces. Both publish under `0.1.9`.
+`check-publish-local` hook enforces. Both publish under `0.1.10`.
 Changing the plugin's task/setting keys or the embedded `gdext` version requires
 a republish to take effect downstream.
+
+## Scala Native link cache misses (upstream bug, 0.5.10)
+`Build.buildCached` writes `target/scala-3.8.1/native/build-checksum` with
+`Files.write(CREATE, WRITE)` — **no truncate**. A shorter new checksum leaves the
+old tail (e.g. `14993716273`, not a valid Int), the next check fails, and
+no-change builds relink (~35 s releaseFast) until a long-enough checksum lands.
+Looks random. Not ours; `godotBuild` skips the `.so` swap when the linked file's
+path/size/mtime equals the last swap (`last-swap.stamp`), so a cache hit means
+no hot reload. Deleting `build-checksum` forces one relink and resets it.
+Upstream: issue #5111, fix PR #5112 (open, not in 0.5.12).
+
+## Scala Native 0.5.12 upgrade: executable stack (tried 2026-10-22, reverted)
+0.5.12's nativelib ships `SafepointPollTrampoline-aarch64.S` without a
+`.note.GNU-stack` section, so the linked `.so` gets `GNU_STACK RWE`; glibc 2.41+
+refuses to `dlopen` it ("cannot enable executable stack as shared object
+requires") → Godot loads no extension, every verify fails. Fix if upgrading:
+add `-Wl,-z,noexecstack` to `nativeConfig.linkingOptions` in the plugin, check
+`readelf -lW <so> | grep GNU_STACK` shows `RW`. No link-time gain measured on
+the harness (32.6 s vs 30.4–31.6 s on 0.5.10). Republishing the plugin under the
+same version does NOT re-resolve harness's meta-build deps — `rm -rf
+harness-scala/project/target` after changing the plugin's dependencies.
+
+## Incremental native codegen: patched in the plugin (Scala Native 0.5.10)
+Upstream (0.5.10–main, unreported) numbers classes by iterating
+`linker.Class.subclasses`, a `mutable.Set` with identity hashCodes, so ids differ
+every JVM run; type tests are lowered to id-range compares *before*
+`IncrementalCodeGenContext` hashes each source dir → every dir looked changed →
+all `.ll` regenerated + recompiled. **Fix shipped**:
+`modules/sbt-godot-scala-native/src/main/scala/snpatch/Metadata.scala`, a copy
+of 0.5.10 `codegen/Metadata.scala` with `sortBy(_.name.mangle)` on subclasses
+(and traits — no measured effect, trait order was already stable). It shadows
+the toolchain class because the plugin jar precedes `tools_2.12` on the
+consumer's meta-build classpath (verified on harness). A class compiled into
+`harness-scala/project/` does NOT shadow it (separate classloader layer).
+- **On every Scala Native bump: re-copy the new `Metadata.scala`, re-apply the
+  sort, update `PatchedScalaNativeVersion`** in `GodotScalaNativePlugin`, which
+  warns when the classpath version differs.
+- Verify it is active: two `rm target/scala-3.8.1/native/build-checksum` +
+  `godotBuild` runs with `set Compile/nativeLink/logLevel := Level.Debug` →
+  ~67 "has not changed" lines and 3 `clang` runs.
+- `snpatch/IncrementalCodeGenContext.scala` hashes defns by content
+  (`stableHash`): upstream `Defn.hashCode` includes `nir.Val.ByteString`'s
+  `Array[Byte]` (identity hash), so every dir with a C-string literal
+  (`runtime`, `unsafe`) regenerated every link. Now only `__buildInfo.ll` does.
+- `snpatch/LLVM.scala`: `needsCompiling` = timestamps only. Upstream also
+  checked `Build.userConfigHasChanged(config)`, but native libs compile with a
+  per-library config (`configureNativeLibrary` adds preprocessor flags) whose
+  hash never matches `userConfigHash` → all ~170 runtime `.c` files recompiled
+  every link (~2 s). A real config change deletes `dependencies/` + `generated/`
+  so the objects go too (verified: debug ↔ releaseFast recompiles 169 files).
+- `snpatch/CodeGen.scala`: `outputFileId` groups project-package defns per
+  *source file* (library code stays per directory) → an edit recompiles one
+  small `.ll`. The harness has ~337 `.ll` files instead of 70.
+- `snpatch/ClassLoader.scala` + `ClassPath.scala`: `ClassPathCache` keeps jar
+  entries (listing, entry-point header scan, deserialized NIR) across links in
+  the sbt JVM, keyed by canonical path + size + mtime, each with its own
+  `Scope.unsafe()` closed on eviction; held via `SoftReference` (~150 MB NIR on
+  the harness, 1 GB default sbt heap → some entries get dropped: NIR link
+  1.2–2.2 s instead of ~3.5 s). `ClassPath.load` is synchronized (shared).
+- `snpatch/CodeGen.scala` also logs debug-level `[snpatch] codegen <phase>: N ms`
+  (metadata / generate / lower / hash+dispatch); lowering (~3.4 s, parallel,
+  whole program) is the IR-generation floor. Skipping it for unchanged dirs
+  would need a digest of every metadata input Lower reads (vtable slots, field
+  layouts, id ranges) — not done: a miss means a silent miscompile.
+- Project packages (from RegistrationScan, + `game`) are passed via system
+  property `godot.scalanative.lastPackages` and numbered after library
+  siblings, so a new project lambda/class shifts only project ids (6 files
+  recompile instead of 58; the 16 MB `game.harness` MathParity file is one of
+  them in this repo).
+- Adding/removing a *linked* class or lambda shifts ids after it → ~half the
+  files recompile (no gain then).
