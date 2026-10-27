@@ -9,6 +9,14 @@ semver — the topmost *Unreleased* section is the version being worked toward,
 which `sbt publishLocal` produces locally and which appears on JitPack only once
 its tag is pushed.
 
+## [0.1.11] — 2026-10-28
+
+### Fixed
+- `godotBuild` failed with `UnsupportedOperationException: Scala212 doesn't support inline
+  modifiers` when any game source used `inline`. 0.1.10's source fingerprint (`shapeOf`)
+  printed the rewritten Scala 3 tree with scalameta's default Scala 2.12 dialect; it now
+  prints with `dialects.Scala3`. The harness covers it with `game/InlineCase.scala`.
+
 ## [0.1.10] — 2026-10-22
 
 Build-speed release, plus typed `res://` references. With the editor open and

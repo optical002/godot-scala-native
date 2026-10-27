@@ -410,7 +410,7 @@ object RegistrationScan {
       .transform {
         case d: Defn.Def if d.decltpe.isDefined => d.copy(body = Term.Name("???"))
       }
-      .syntax
+      .printSyntaxFor(dialects.Scala3)
 
 
   private def collectClasses(tree: Tree, pkg: String): Seq[ClassInfo] =
