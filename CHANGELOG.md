@@ -9,6 +9,17 @@ semver — the topmost *Unreleased* section is the version being worked toward,
 which `sbt publishLocal` produces locally and which appears on JitPack only once
 its tag is pushed.
 
+## [Unreleased]
+
+### Known issues
+- Typed `res://` references (`game.Res`, since 0.1.10) write scene root types by their
+  package-relative name, e.g. `ScenePath[entry.Entry]`. Inside `Res`, a generated member with
+  the same name as a game package shadows that package: a scene `entry.tscn` whose root is
+  `entry.Entry` fails with "Cyclic reference involving method entry", and a `prefabs/ui/`
+  folder breaks references to a `ui` package ("value init is not a member of object
+  game.Res.prefabs.ui"). Fix: emit `_root_.`-qualified type names. Workaround:
+  `godotResRefs := false`.
+
 ## [0.1.11] — 2026-10-28
 
 ### Fixed
