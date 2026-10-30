@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class OpenXRSpatialQueryResultData extends OpenXRSpatialComponentData {
   }
 
   /** OpenXRSpatialQueryResultData.get_entity_state */
-  final def getEntityState(index: Long): Long = {
+  final def getEntityState(index: Long): gdext.classes.OpenXRSpatialEntityTracker.EntityTrackingState = {
     if (gdext.classes.OpenXRSpatialQueryResultData.mb_get_entity_state == null) gdext.classes.OpenXRSpatialQueryResultData.mb_get_entity_state = MethodBind.get("OpenXRSpatialQueryResultData", "get_entity_state", 1411962015L)
-    Ptrcall.call1[Long, Long](gdext.classes.OpenXRSpatialQueryResultData.mb_get_entity_state, livePtr, index)
+    gdext.classes.OpenXRSpatialEntityTracker.EntityTrackingState(Ptrcall.call1[Long, Long](gdext.classes.OpenXRSpatialQueryResultData.mb_get_entity_state, livePtr, index))
   }
 
 }

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,33 +12,33 @@ abstract class GraphEdit extends Control {
   override def godotClassName: String = "GraphEdit"
 
   /** GraphEdit.connect_node */
-  final def connectNode(from_node: gdext.builtin.StringName, from_port: Long, to_node: gdext.builtin.StringName, to_port: Long, keep_alive: Boolean): Long = {
+  final def connectNode(fromNode: String, fromPort: Long, toNode: String, toPort: Long, keepAlive: Boolean = false): gdext.classes.Error = {
     if (gdext.classes.GraphEdit.mb_connect_node == null) gdext.classes.GraphEdit.mb_connect_node = MethodBind.get("GraphEdit", "connect_node", 1376144231L)
-    Ptrcall.call5[gdext.builtin.StringName, Long, gdext.builtin.StringName, Long, Boolean, Long](gdext.classes.GraphEdit.mb_connect_node, livePtr, from_node, from_port, to_node, to_port, keep_alive)
+    gdext.classes.Error(Ptrcall.call5[SnArg, Long, SnArg, Long, Boolean, Long](gdext.classes.GraphEdit.mb_connect_node, livePtr, SnArg(fromNode), fromPort, SnArg(toNode), toPort, keepAlive))
   }
 
   /** GraphEdit.is_node_connected */
-  final def isNodeConnected(from_node: gdext.builtin.StringName, from_port: Long, to_node: gdext.builtin.StringName, to_port: Long): Boolean = {
+  final def isNodeConnected(fromNode: String, fromPort: Long, toNode: String, toPort: Long): Boolean = {
     if (gdext.classes.GraphEdit.mb_is_node_connected == null) gdext.classes.GraphEdit.mb_is_node_connected = MethodBind.get("GraphEdit", "is_node_connected", 4216241294L)
-    Ptrcall.call4[gdext.builtin.StringName, Long, gdext.builtin.StringName, Long, Boolean](gdext.classes.GraphEdit.mb_is_node_connected, livePtr, from_node, from_port, to_node, to_port)
+    Ptrcall.call4[SnArg, Long, SnArg, Long, Boolean](gdext.classes.GraphEdit.mb_is_node_connected, livePtr, SnArg(fromNode), fromPort, SnArg(toNode), toPort)
   }
 
   /** GraphEdit.disconnect_node */
-  final def disconnectNode(from_node: gdext.builtin.StringName, from_port: Long, to_node: gdext.builtin.StringName, to_port: Long): Unit = {
+  final def disconnectNode(fromNode: String, fromPort: Long, toNode: String, toPort: Long): Unit = {
     if (gdext.classes.GraphEdit.mb_disconnect_node == null) gdext.classes.GraphEdit.mb_disconnect_node = MethodBind.get("GraphEdit", "disconnect_node", 1933654315L)
-    Ptrcall.callVoid4(gdext.classes.GraphEdit.mb_disconnect_node, livePtr, from_node, from_port, to_node, to_port)
+    Ptrcall.callVoid4(gdext.classes.GraphEdit.mb_disconnect_node, livePtr, SnArg(fromNode), fromPort, SnArg(toNode), toPort)
   }
 
   /** GraphEdit.set_connection_activity */
-  final def setConnectionActivity(from_node: gdext.builtin.StringName, from_port: Long, to_node: gdext.builtin.StringName, to_port: Long, amount: Double): Unit = {
+  final def setConnectionActivity(fromNode: String, fromPort: Long, toNode: String, toPort: Long, amount: Double): Unit = {
     if (gdext.classes.GraphEdit.mb_set_connection_activity == null) gdext.classes.GraphEdit.mb_set_connection_activity = MethodBind.get("GraphEdit", "set_connection_activity", 1141899943L)
-    Ptrcall.callVoid5(gdext.classes.GraphEdit.mb_set_connection_activity, livePtr, from_node, from_port, to_node, to_port, amount)
+    Ptrcall.callVoid5(gdext.classes.GraphEdit.mb_set_connection_activity, livePtr, SnArg(fromNode), fromPort, SnArg(toNode), toPort, amount)
   }
 
   /** GraphEdit.get_connection_count */
-  final def getConnectionCount(from_node: gdext.builtin.StringName, from_port: Long): Long = {
+  final def getConnectionCount(fromNode: String, fromPort: Long): Long = {
     if (gdext.classes.GraphEdit.mb_get_connection_count == null) gdext.classes.GraphEdit.mb_get_connection_count = MethodBind.get("GraphEdit", "get_connection_count", 861718734L)
-    Ptrcall.call2[gdext.builtin.StringName, Long, Long](gdext.classes.GraphEdit.mb_get_connection_count, livePtr, from_node, from_port)
+    Ptrcall.call2[SnArg, Long, Long](gdext.classes.GraphEdit.mb_get_connection_count, livePtr, SnArg(fromNode), fromPort)
   }
 
   /** GraphEdit.clear_connections */
@@ -89,51 +90,51 @@ abstract class GraphEdit extends Control {
   }
 
   /** GraphEdit.add_valid_connection_type */
-  final def addValidConnectionType(from_type: Long, to_type: Long): Unit = {
+  final def addValidConnectionType(fromType: Long, toType: Long): Unit = {
     if (gdext.classes.GraphEdit.mb_add_valid_connection_type == null) gdext.classes.GraphEdit.mb_add_valid_connection_type = MethodBind.get("GraphEdit", "add_valid_connection_type", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.GraphEdit.mb_add_valid_connection_type, livePtr, from_type, to_type)
+    Ptrcall.callVoid2(gdext.classes.GraphEdit.mb_add_valid_connection_type, livePtr, fromType, toType)
   }
 
   /** GraphEdit.remove_valid_connection_type */
-  final def removeValidConnectionType(from_type: Long, to_type: Long): Unit = {
+  final def removeValidConnectionType(fromType: Long, toType: Long): Unit = {
     if (gdext.classes.GraphEdit.mb_remove_valid_connection_type == null) gdext.classes.GraphEdit.mb_remove_valid_connection_type = MethodBind.get("GraphEdit", "remove_valid_connection_type", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.GraphEdit.mb_remove_valid_connection_type, livePtr, from_type, to_type)
+    Ptrcall.callVoid2(gdext.classes.GraphEdit.mb_remove_valid_connection_type, livePtr, fromType, toType)
   }
 
   /** GraphEdit.is_valid_connection_type */
-  final def isValidConnectionType(from_type: Long, to_type: Long): Boolean = {
+  final def isValidConnectionType(fromType: Long, toType: Long): Boolean = {
     if (gdext.classes.GraphEdit.mb_is_valid_connection_type == null) gdext.classes.GraphEdit.mb_is_valid_connection_type = MethodBind.get("GraphEdit", "is_valid_connection_type", 2522259332L)
-    Ptrcall.call2[Long, Long, Boolean](gdext.classes.GraphEdit.mb_is_valid_connection_type, livePtr, from_type, to_type)
+    Ptrcall.call2[Long, Long, Boolean](gdext.classes.GraphEdit.mb_is_valid_connection_type, livePtr, fromType, toType)
   }
 
   /** GraphEdit.attach_graph_element_to_frame */
-  final def attachGraphElementToFrame(element: gdext.builtin.StringName, frame: gdext.builtin.StringName): Unit = {
+  final def attachGraphElementToFrame(element: String, frame: String): Unit = {
     if (gdext.classes.GraphEdit.mb_attach_graph_element_to_frame == null) gdext.classes.GraphEdit.mb_attach_graph_element_to_frame = MethodBind.get("GraphEdit", "attach_graph_element_to_frame", 3740211285L)
-    Ptrcall.callVoid2(gdext.classes.GraphEdit.mb_attach_graph_element_to_frame, livePtr, element, frame)
+    Ptrcall.callVoid2(gdext.classes.GraphEdit.mb_attach_graph_element_to_frame, livePtr, SnArg(element), SnArg(frame))
   }
 
   /** GraphEdit.detach_graph_element_from_frame */
-  final def detachGraphElementFromFrame(element: gdext.builtin.StringName): Unit = {
+  final def detachGraphElementFromFrame(element: String): Unit = {
     if (gdext.classes.GraphEdit.mb_detach_graph_element_from_frame == null) gdext.classes.GraphEdit.mb_detach_graph_element_from_frame = MethodBind.get("GraphEdit", "detach_graph_element_from_frame", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.GraphEdit.mb_detach_graph_element_from_frame, livePtr, element)
+    Ptrcall.callVoid1(gdext.classes.GraphEdit.mb_detach_graph_element_from_frame, livePtr, SnArg(element))
   }
 
   /** GraphEdit.get_element_frame */
-  final def getElementFrame(element: gdext.builtin.StringName): GraphFrame = {
+  final def getElementFrame(element: String): GraphFrame = {
     if (gdext.classes.GraphEdit.mb_get_element_frame == null) gdext.classes.GraphEdit.mb_get_element_frame = MethodBind.get("GraphEdit", "get_element_frame", 988084372L)
-    Wrappers.borrowed[GraphFrame](Ptrcall.call1[gdext.builtin.StringName, Long](gdext.classes.GraphEdit.mb_get_element_frame, livePtr, element))
+    Wrappers.borrowed[GraphFrame](Ptrcall.call1[SnArg, Long](gdext.classes.GraphEdit.mb_get_element_frame, livePtr, SnArg(element)))
   }
 
   /** GraphEdit.set_panning_scheme */
-  final def setPanningScheme(scheme: Long): Unit = {
+  final def setPanningScheme(scheme: gdext.classes.GraphEdit.PanningScheme): Unit = {
     if (gdext.classes.GraphEdit.mb_set_panning_scheme == null) gdext.classes.GraphEdit.mb_set_panning_scheme = MethodBind.get("GraphEdit", "set_panning_scheme", 18893313L)
     Ptrcall.callVoid1(gdext.classes.GraphEdit.mb_set_panning_scheme, livePtr, scheme)
   }
 
   /** GraphEdit.get_panning_scheme */
-  final def getPanningScheme(): Long = {
+  final def getPanningScheme(): gdext.classes.GraphEdit.PanningScheme = {
     if (gdext.classes.GraphEdit.mb_get_panning_scheme == null) gdext.classes.GraphEdit.mb_get_panning_scheme = MethodBind.get("GraphEdit", "get_panning_scheme", 549924446L)
-    Ptrcall.call0[Long](gdext.classes.GraphEdit.mb_get_panning_scheme, livePtr)
+    gdext.classes.GraphEdit.PanningScheme(Ptrcall.call0[Long](gdext.classes.GraphEdit.mb_get_panning_scheme, livePtr))
   }
 
   /** GraphEdit.set_zoom */
@@ -149,9 +150,9 @@ abstract class GraphEdit extends Control {
   }
 
   /** GraphEdit.set_zoom_min */
-  final def setZoomMin(zoom_min: Double): Unit = {
+  final def setZoomMin(zoomMin: Double): Unit = {
     if (gdext.classes.GraphEdit.mb_set_zoom_min == null) gdext.classes.GraphEdit.mb_set_zoom_min = MethodBind.get("GraphEdit", "set_zoom_min", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.GraphEdit.mb_set_zoom_min, livePtr, zoom_min)
+    Ptrcall.callVoid1(gdext.classes.GraphEdit.mb_set_zoom_min, livePtr, zoomMin)
   }
 
   /** GraphEdit.get_zoom_min */
@@ -161,9 +162,9 @@ abstract class GraphEdit extends Control {
   }
 
   /** GraphEdit.set_zoom_max */
-  final def setZoomMax(zoom_max: Double): Unit = {
+  final def setZoomMax(zoomMax: Double): Unit = {
     if (gdext.classes.GraphEdit.mb_set_zoom_max == null) gdext.classes.GraphEdit.mb_set_zoom_max = MethodBind.get("GraphEdit", "set_zoom_max", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.GraphEdit.mb_set_zoom_max, livePtr, zoom_max)
+    Ptrcall.callVoid1(gdext.classes.GraphEdit.mb_set_zoom_max, livePtr, zoomMax)
   }
 
   /** GraphEdit.get_zoom_max */
@@ -173,9 +174,9 @@ abstract class GraphEdit extends Control {
   }
 
   /** GraphEdit.set_zoom_step */
-  final def setZoomStep(zoom_step: Double): Unit = {
+  final def setZoomStep(zoomStep: Double): Unit = {
     if (gdext.classes.GraphEdit.mb_set_zoom_step == null) gdext.classes.GraphEdit.mb_set_zoom_step = MethodBind.get("GraphEdit", "set_zoom_step", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.GraphEdit.mb_set_zoom_step, livePtr, zoom_step)
+    Ptrcall.callVoid1(gdext.classes.GraphEdit.mb_set_zoom_step, livePtr, zoomStep)
   }
 
   /** GraphEdit.get_zoom_step */
@@ -197,15 +198,15 @@ abstract class GraphEdit extends Control {
   }
 
   /** GraphEdit.set_grid_pattern */
-  final def setGridPattern(pattern: Long): Unit = {
+  final def setGridPattern(pattern: gdext.classes.GraphEdit.GridPattern): Unit = {
     if (gdext.classes.GraphEdit.mb_set_grid_pattern == null) gdext.classes.GraphEdit.mb_set_grid_pattern = MethodBind.get("GraphEdit", "set_grid_pattern", 1074098205L)
     Ptrcall.callVoid1(gdext.classes.GraphEdit.mb_set_grid_pattern, livePtr, pattern)
   }
 
   /** GraphEdit.get_grid_pattern */
-  final def getGridPattern(): Long = {
+  final def getGridPattern(): gdext.classes.GraphEdit.GridPattern = {
     if (gdext.classes.GraphEdit.mb_get_grid_pattern == null) gdext.classes.GraphEdit.mb_get_grid_pattern = MethodBind.get("GraphEdit", "get_grid_pattern", 1286127528L)
-    Ptrcall.call0[Long](gdext.classes.GraphEdit.mb_get_grid_pattern, livePtr)
+    gdext.classes.GraphEdit.GridPattern(Ptrcall.call0[Long](gdext.classes.GraphEdit.mb_get_grid_pattern, livePtr))
   }
 
   /** GraphEdit.set_snapping_enabled */
@@ -475,4 +476,48 @@ object GraphEdit {
   private[classes] var mb_get_menu_hbox: GDExtensionMethodBindPtr = null
   private[classes] var mb_arrange_nodes: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_selected: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `GraphEdit.PanningScheme`. */
+  opaque type PanningScheme <: Long = Long
+
+  object PanningScheme {
+    final val Zooms: PanningScheme = 0L.asInstanceOf[PanningScheme]
+    final val Pans: PanningScheme = 1L.asInstanceOf[PanningScheme]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): PanningScheme = value.asInstanceOf[PanningScheme]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[PanningScheme] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[PanningScheme]]
+
+    extension (self: PanningScheme)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Zooms"
+        case 1L => "Pans"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `GraphEdit.GridPattern`. */
+  opaque type GridPattern <: Long = Long
+
+  object GridPattern {
+    final val Lines: GridPattern = 0L.asInstanceOf[GridPattern]
+    final val Dots: GridPattern = 1L.asInstanceOf[GridPattern]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): GridPattern = value.asInstanceOf[GridPattern]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[GridPattern] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[GridPattern]]
+
+    extension (self: GridPattern)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Lines"
+        case 1L => "Dots"
+        case other => other.toString
+      }
+  }
 }

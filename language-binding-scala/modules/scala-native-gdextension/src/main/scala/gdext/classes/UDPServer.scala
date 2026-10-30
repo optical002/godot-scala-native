@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,15 +12,15 @@ abstract class UDPServer extends RefCounted {
   override def godotClassName: String = "UDPServer"
 
   /** UDPServer.listen */
-  final def listen(port: Long, bind_address: String): Long = {
+  final def listen(port: Long, bindAddress: String = "*"): gdext.classes.Error = {
     if (gdext.classes.UDPServer.mb_listen == null) gdext.classes.UDPServer.mb_listen = MethodBind.get("UDPServer", "listen", 3167955072L)
-    Ptrcall.call2[Long, String, Long](gdext.classes.UDPServer.mb_listen, livePtr, port, bind_address)
+    gdext.classes.Error(Ptrcall.call2[Long, String, Long](gdext.classes.UDPServer.mb_listen, livePtr, port, bindAddress))
   }
 
   /** UDPServer.poll */
-  final def poll(): Long = {
+  final def poll(): gdext.classes.Error = {
     if (gdext.classes.UDPServer.mb_poll == null) gdext.classes.UDPServer.mb_poll = MethodBind.get("UDPServer", "poll", 166280745L)
-    Ptrcall.call0[Long](gdext.classes.UDPServer.mb_poll, livePtr)
+    gdext.classes.Error(Ptrcall.call0[Long](gdext.classes.UDPServer.mb_poll, livePtr))
   }
 
   /** UDPServer.is_connection_available */
@@ -53,9 +54,9 @@ abstract class UDPServer extends RefCounted {
   }
 
   /** UDPServer.set_max_pending_connections */
-  final def setMaxPendingConnections(max_pending_connections: Long): Unit = {
+  final def setMaxPendingConnections(maxPendingConnections: Long): Unit = {
     if (gdext.classes.UDPServer.mb_set_max_pending_connections == null) gdext.classes.UDPServer.mb_set_max_pending_connections = MethodBind.get("UDPServer", "set_max_pending_connections", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.UDPServer.mb_set_max_pending_connections, livePtr, max_pending_connections)
+    Ptrcall.callVoid1(gdext.classes.UDPServer.mb_set_max_pending_connections, livePtr, maxPendingConnections)
   }
 
   /** UDPServer.get_max_pending_connections */

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -71,13 +72,13 @@ abstract class MeshInstance3D extends GeometryInstance3D {
   }
 
   /** MeshInstance3D.create_convex_collision */
-  final def createConvexCollision(clean: Boolean, simplify: Boolean): Unit = {
+  final def createConvexCollision(clean: Boolean = true, simplify: Boolean = false): Unit = {
     if (gdext.classes.MeshInstance3D.mb_create_convex_collision == null) gdext.classes.MeshInstance3D.mb_create_convex_collision = MethodBind.get("MeshInstance3D", "create_convex_collision", 2751962654L)
     Ptrcall.callVoid2(gdext.classes.MeshInstance3D.mb_create_convex_collision, livePtr, clean, simplify)
   }
 
   /** MeshInstance3D.create_multiple_convex_collisions */
-  final def createMultipleConvexCollisions(settings: MeshConvexDecompositionSettings): Unit = {
+  final def createMultipleConvexCollisions(settings: MeshConvexDecompositionSettings = null): Unit = {
     if (gdext.classes.MeshInstance3D.mb_create_multiple_convex_collisions == null) gdext.classes.MeshInstance3D.mb_create_multiple_convex_collisions = MethodBind.get("MeshInstance3D", "create_multiple_convex_collisions", 628789669L)
     Ptrcall.callVoid1(gdext.classes.MeshInstance3D.mb_create_multiple_convex_collisions, livePtr, Wrappers.handle(settings))
   }
@@ -89,21 +90,21 @@ abstract class MeshInstance3D extends GeometryInstance3D {
   }
 
   /** MeshInstance3D.find_blend_shape_by_name */
-  final def findBlendShapeByName(name: gdext.builtin.StringName): Long = {
+  final def findBlendShapeByName(name: String): Long = {
     if (gdext.classes.MeshInstance3D.mb_find_blend_shape_by_name == null) gdext.classes.MeshInstance3D.mb_find_blend_shape_by_name = MethodBind.get("MeshInstance3D", "find_blend_shape_by_name", 4150868206L)
-    Ptrcall.call1[gdext.builtin.StringName, Long](gdext.classes.MeshInstance3D.mb_find_blend_shape_by_name, livePtr, name)
+    Ptrcall.call1[SnArg, Long](gdext.classes.MeshInstance3D.mb_find_blend_shape_by_name, livePtr, SnArg(name))
   }
 
   /** MeshInstance3D.get_blend_shape_value */
-  final def getBlendShapeValue(blend_shape_idx: Long): Double = {
+  final def getBlendShapeValue(blendShapeIdx: Long): Double = {
     if (gdext.classes.MeshInstance3D.mb_get_blend_shape_value == null) gdext.classes.MeshInstance3D.mb_get_blend_shape_value = MethodBind.get("MeshInstance3D", "get_blend_shape_value", 2339986948L)
-    Ptrcall.call1[Long, Double](gdext.classes.MeshInstance3D.mb_get_blend_shape_value, livePtr, blend_shape_idx)
+    Ptrcall.call1[Long, Double](gdext.classes.MeshInstance3D.mb_get_blend_shape_value, livePtr, blendShapeIdx)
   }
 
   /** MeshInstance3D.set_blend_shape_value */
-  final def setBlendShapeValue(blend_shape_idx: Long, value: Double): Unit = {
+  final def setBlendShapeValue(blendShapeIdx: Long, value: Double): Unit = {
     if (gdext.classes.MeshInstance3D.mb_set_blend_shape_value == null) gdext.classes.MeshInstance3D.mb_set_blend_shape_value = MethodBind.get("MeshInstance3D", "set_blend_shape_value", 1602489585L)
-    Ptrcall.callVoid2(gdext.classes.MeshInstance3D.mb_set_blend_shape_value, livePtr, blend_shape_idx, value)
+    Ptrcall.callVoid2(gdext.classes.MeshInstance3D.mb_set_blend_shape_value, livePtr, blendShapeIdx, value)
   }
 
   /** MeshInstance3D.create_debug_tangents */
@@ -113,13 +114,13 @@ abstract class MeshInstance3D extends GeometryInstance3D {
   }
 
   /** MeshInstance3D.bake_mesh_from_current_blend_shape_mix. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def bakeMeshFromCurrentBlendShapeMix(existing: ArrayMesh): ArrayMesh = {
+  final def bakeMeshFromCurrentBlendShapeMix(existing: ArrayMesh = null): ArrayMesh = {
     if (gdext.classes.MeshInstance3D.mb_bake_mesh_from_current_blend_shape_mix == null) gdext.classes.MeshInstance3D.mb_bake_mesh_from_current_blend_shape_mix = MethodBind.get("MeshInstance3D", "bake_mesh_from_current_blend_shape_mix", 1457573577L)
     Wrappers.owned[ArrayMesh](Ptrcall.call1[GodotObject, Long](gdext.classes.MeshInstance3D.mb_bake_mesh_from_current_blend_shape_mix, livePtr, Wrappers.handle(existing)))
   }
 
   /** MeshInstance3D.bake_mesh_from_current_skeleton_pose. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def bakeMeshFromCurrentSkeletonPose(existing: ArrayMesh): ArrayMesh = {
+  final def bakeMeshFromCurrentSkeletonPose(existing: ArrayMesh = null): ArrayMesh = {
     if (gdext.classes.MeshInstance3D.mb_bake_mesh_from_current_skeleton_pose == null) gdext.classes.MeshInstance3D.mb_bake_mesh_from_current_skeleton_pose = MethodBind.get("MeshInstance3D", "bake_mesh_from_current_skeleton_pose", 1457573577L)
     Wrappers.owned[ArrayMesh](Ptrcall.call1[GodotObject, Long](gdext.classes.MeshInstance3D.mb_bake_mesh_from_current_skeleton_pose, livePtr, Wrappers.handle(existing)))
   }

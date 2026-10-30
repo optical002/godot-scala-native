@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class OggPacketSequence extends Resource {
   override def godotClassName: String = "OggPacketSequence"
 
   /** OggPacketSequence.set_sampling_rate */
-  final def setSamplingRate(sampling_rate: Double): Unit = {
+  final def setSamplingRate(samplingRate: Double): Unit = {
     if (gdext.classes.OggPacketSequence.mb_set_sampling_rate == null) gdext.classes.OggPacketSequence.mb_set_sampling_rate = MethodBind.get("OggPacketSequence", "set_sampling_rate", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.OggPacketSequence.mb_set_sampling_rate, livePtr, sampling_rate)
+    Ptrcall.callVoid1(gdext.classes.OggPacketSequence.mb_set_sampling_rate, livePtr, samplingRate)
   }
 
   /** OggPacketSequence.get_sampling_rate */

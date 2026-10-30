@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -71,9 +72,9 @@ abstract class CSGTorus3D extends CSGPrimitive3D {
   }
 
   /** CSGTorus3D.set_smooth_faces */
-  final def setSmoothFaces(smooth_faces: Boolean): Unit = {
+  final def setSmoothFaces(smoothFaces: Boolean): Unit = {
     if (gdext.classes.CSGTorus3D.mb_set_smooth_faces == null) gdext.classes.CSGTorus3D.mb_set_smooth_faces = MethodBind.get("CSGTorus3D", "set_smooth_faces", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.CSGTorus3D.mb_set_smooth_faces, livePtr, smooth_faces)
+    Ptrcall.callVoid1(gdext.classes.CSGTorus3D.mb_set_smooth_faces, livePtr, smoothFaces)
   }
 
   /** CSGTorus3D.get_smooth_faces */

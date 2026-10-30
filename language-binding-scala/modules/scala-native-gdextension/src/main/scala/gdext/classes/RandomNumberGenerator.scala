@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -47,7 +48,7 @@ abstract class RandomNumberGenerator extends RefCounted {
   }
 
   /** RandomNumberGenerator.randfn */
-  final def randfn(mean: Double, deviation: Double): Double = {
+  final def randfn(mean: Double = 0.0, deviation: Double = 1.0): Double = {
     if (gdext.classes.RandomNumberGenerator.mb_randfn == null) gdext.classes.RandomNumberGenerator.mb_randfn = MethodBind.get("RandomNumberGenerator", "randfn", 837325100L)
     Ptrcall.call2[Double, Double, Double](gdext.classes.RandomNumberGenerator.mb_randfn, livePtr, mean, deviation)
   }

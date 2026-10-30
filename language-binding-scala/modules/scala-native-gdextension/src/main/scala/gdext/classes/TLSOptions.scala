@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -60,15 +61,15 @@ object TLSOptions {
   private[classes] var mb_get_own_certificate: GDExtensionMethodBindPtr = null
 
   /** TLSOptions.client. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def client(trusted_chain: X509Certificate, common_name_override: String): TLSOptions = {
+  final def client(trustedChain: X509Certificate = null, commonNameOverride: String = ""): TLSOptions = {
     if (gdext.classes.TLSOptions.mb_client == null) gdext.classes.TLSOptions.mb_client = MethodBind.get("TLSOptions", "client", 3565000357L)
-    Wrappers.owned[TLSOptions](Ptrcall.call2[GodotObject, String, Long](gdext.classes.TLSOptions.mb_client, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], Wrappers.handle(trusted_chain), common_name_override))
+    Wrappers.owned[TLSOptions](Ptrcall.call2[GodotObject, String, Long](gdext.classes.TLSOptions.mb_client, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], Wrappers.handle(trustedChain), commonNameOverride))
   }
 
   /** TLSOptions.client_unsafe. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def clientUnsafe(trusted_chain: X509Certificate): TLSOptions = {
+  final def clientUnsafe(trustedChain: X509Certificate = null): TLSOptions = {
     if (gdext.classes.TLSOptions.mb_client_unsafe == null) gdext.classes.TLSOptions.mb_client_unsafe = MethodBind.get("TLSOptions", "client_unsafe", 2090251749L)
-    Wrappers.owned[TLSOptions](Ptrcall.call1[GodotObject, Long](gdext.classes.TLSOptions.mb_client_unsafe, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], Wrappers.handle(trusted_chain)))
+    Wrappers.owned[TLSOptions](Ptrcall.call1[GodotObject, Long](gdext.classes.TLSOptions.mb_client_unsafe, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], Wrappers.handle(trustedChain)))
   }
 
   /** TLSOptions.server. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,9 +18,9 @@ abstract class SpringBoneCollision3D extends Node3D {
   }
 
   /** SpringBoneCollision3D.set_bone_name */
-  final def setBoneName(bone_name: String): Unit = {
+  final def setBoneName(boneName: String): Unit = {
     if (gdext.classes.SpringBoneCollision3D.mb_set_bone_name == null) gdext.classes.SpringBoneCollision3D.mb_set_bone_name = MethodBind.get("SpringBoneCollision3D", "set_bone_name", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.SpringBoneCollision3D.mb_set_bone_name, livePtr, bone_name)
+    Ptrcall.callVoid1(gdext.classes.SpringBoneCollision3D.mb_set_bone_name, livePtr, boneName)
   }
 
   /** SpringBoneCollision3D.get_bone_name */

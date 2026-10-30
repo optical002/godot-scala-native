@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -71,15 +72,15 @@ abstract class NavigationObstacle3D extends Node3D {
   }
 
   /** NavigationObstacle3D.set_avoidance_layer_value */
-  final def setAvoidanceLayerValue(layer_number: Long, value: Boolean): Unit = {
+  final def setAvoidanceLayerValue(layerNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.NavigationObstacle3D.mb_set_avoidance_layer_value == null) gdext.classes.NavigationObstacle3D.mb_set_avoidance_layer_value = MethodBind.get("NavigationObstacle3D", "set_avoidance_layer_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.NavigationObstacle3D.mb_set_avoidance_layer_value, livePtr, layer_number, value)
+    Ptrcall.callVoid2(gdext.classes.NavigationObstacle3D.mb_set_avoidance_layer_value, livePtr, layerNumber, value)
   }
 
   /** NavigationObstacle3D.get_avoidance_layer_value */
-  final def getAvoidanceLayerValue(layer_number: Long): Boolean = {
+  final def getAvoidanceLayerValue(layerNumber: Long): Boolean = {
     if (gdext.classes.NavigationObstacle3D.mb_get_avoidance_layer_value == null) gdext.classes.NavigationObstacle3D.mb_get_avoidance_layer_value = MethodBind.get("NavigationObstacle3D", "get_avoidance_layer_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.NavigationObstacle3D.mb_get_avoidance_layer_value, livePtr, layer_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.NavigationObstacle3D.mb_get_avoidance_layer_value, livePtr, layerNumber)
   }
 
   /** NavigationObstacle3D.set_use_3d_avoidance */

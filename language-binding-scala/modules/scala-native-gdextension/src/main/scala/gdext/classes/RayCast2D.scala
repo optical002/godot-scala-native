@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class RayCast2D extends Node2D {
   }
 
   /** RayCast2D.set_target_position */
-  final def setTargetPosition(local_point: gdext.builtin.Vector2): Unit = {
+  final def setTargetPosition(localPoint: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.RayCast2D.mb_set_target_position == null) gdext.classes.RayCast2D.mb_set_target_position = MethodBind.get("RayCast2D", "set_target_position", 743155724L)
-    Ptrcall.callVoid1(gdext.classes.RayCast2D.mb_set_target_position, livePtr, local_point)
+    Ptrcall.callVoid1(gdext.classes.RayCast2D.mb_set_target_position, livePtr, localPoint)
   }
 
   /** RayCast2D.get_target_position */
@@ -101,15 +102,15 @@ abstract class RayCast2D extends Node2D {
   }
 
   /** RayCast2D.set_collision_mask_value */
-  final def setCollisionMaskValue(layer_number: Long, value: Boolean): Unit = {
+  final def setCollisionMaskValue(layerNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.RayCast2D.mb_set_collision_mask_value == null) gdext.classes.RayCast2D.mb_set_collision_mask_value = MethodBind.get("RayCast2D", "set_collision_mask_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.RayCast2D.mb_set_collision_mask_value, livePtr, layer_number, value)
+    Ptrcall.callVoid2(gdext.classes.RayCast2D.mb_set_collision_mask_value, livePtr, layerNumber, value)
   }
 
   /** RayCast2D.get_collision_mask_value */
-  final def getCollisionMaskValue(layer_number: Long): Boolean = {
+  final def getCollisionMaskValue(layerNumber: Long): Boolean = {
     if (gdext.classes.RayCast2D.mb_get_collision_mask_value == null) gdext.classes.RayCast2D.mb_get_collision_mask_value = MethodBind.get("RayCast2D", "get_collision_mask_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.RayCast2D.mb_get_collision_mask_value, livePtr, layer_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.RayCast2D.mb_get_collision_mask_value, livePtr, layerNumber)
   }
 
   /** RayCast2D.set_exclude_parent_body */

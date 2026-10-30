@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,21 +24,21 @@ abstract class OccluderInstance3D extends VisualInstance3D {
   }
 
   /** OccluderInstance3D.set_bake_mask_value */
-  final def setBakeMaskValue(layer_number: Long, value: Boolean): Unit = {
+  final def setBakeMaskValue(layerNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.OccluderInstance3D.mb_set_bake_mask_value == null) gdext.classes.OccluderInstance3D.mb_set_bake_mask_value = MethodBind.get("OccluderInstance3D", "set_bake_mask_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.OccluderInstance3D.mb_set_bake_mask_value, livePtr, layer_number, value)
+    Ptrcall.callVoid2(gdext.classes.OccluderInstance3D.mb_set_bake_mask_value, livePtr, layerNumber, value)
   }
 
   /** OccluderInstance3D.get_bake_mask_value */
-  final def getBakeMaskValue(layer_number: Long): Boolean = {
+  final def getBakeMaskValue(layerNumber: Long): Boolean = {
     if (gdext.classes.OccluderInstance3D.mb_get_bake_mask_value == null) gdext.classes.OccluderInstance3D.mb_get_bake_mask_value = MethodBind.get("OccluderInstance3D", "get_bake_mask_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.OccluderInstance3D.mb_get_bake_mask_value, livePtr, layer_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.OccluderInstance3D.mb_get_bake_mask_value, livePtr, layerNumber)
   }
 
   /** OccluderInstance3D.set_bake_simplification_distance */
-  final def setBakeSimplificationDistance(simplification_distance: Double): Unit = {
+  final def setBakeSimplificationDistance(simplificationDistance: Double): Unit = {
     if (gdext.classes.OccluderInstance3D.mb_set_bake_simplification_distance == null) gdext.classes.OccluderInstance3D.mb_set_bake_simplification_distance = MethodBind.get("OccluderInstance3D", "set_bake_simplification_distance", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.OccluderInstance3D.mb_set_bake_simplification_distance, livePtr, simplification_distance)
+    Ptrcall.callVoid1(gdext.classes.OccluderInstance3D.mb_set_bake_simplification_distance, livePtr, simplificationDistance)
   }
 
   /** OccluderInstance3D.get_bake_simplification_distance */

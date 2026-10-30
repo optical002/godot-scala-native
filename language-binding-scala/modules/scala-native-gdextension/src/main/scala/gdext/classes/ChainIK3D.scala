@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class ChainIK3D extends IKModifier3D {
   override def godotClassName: String = "ChainIK3D"
 
   /** ChainIK3D.set_root_bone_name */
-  final def setRootBoneName(index: Long, bone_name: String): Unit = {
+  final def setRootBoneName(index: Long, boneName: String): Unit = {
     if (gdext.classes.ChainIK3D.mb_set_root_bone_name == null) gdext.classes.ChainIK3D.mb_set_root_bone_name = MethodBind.get("ChainIK3D", "set_root_bone_name", 501894301L)
-    Ptrcall.callVoid2(gdext.classes.ChainIK3D.mb_set_root_bone_name, livePtr, index, bone_name)
+    Ptrcall.callVoid2(gdext.classes.ChainIK3D.mb_set_root_bone_name, livePtr, index, boneName)
   }
 
   /** ChainIK3D.get_root_bone_name */
@@ -35,9 +36,9 @@ abstract class ChainIK3D extends IKModifier3D {
   }
 
   /** ChainIK3D.set_end_bone_name */
-  final def setEndBoneName(index: Long, bone_name: String): Unit = {
+  final def setEndBoneName(index: Long, boneName: String): Unit = {
     if (gdext.classes.ChainIK3D.mb_set_end_bone_name == null) gdext.classes.ChainIK3D.mb_set_end_bone_name = MethodBind.get("ChainIK3D", "set_end_bone_name", 501894301L)
-    Ptrcall.callVoid2(gdext.classes.ChainIK3D.mb_set_end_bone_name, livePtr, index, bone_name)
+    Ptrcall.callVoid2(gdext.classes.ChainIK3D.mb_set_end_bone_name, livePtr, index, boneName)
   }
 
   /** ChainIK3D.get_end_bone_name */
@@ -71,15 +72,15 @@ abstract class ChainIK3D extends IKModifier3D {
   }
 
   /** ChainIK3D.set_end_bone_direction */
-  final def setEndBoneDirection(index: Long, bone_direction: Long): Unit = {
+  final def setEndBoneDirection(index: Long, boneDirection: gdext.classes.SkeletonModifier3D.BoneDirection): Unit = {
     if (gdext.classes.ChainIK3D.mb_set_end_bone_direction == null) gdext.classes.ChainIK3D.mb_set_end_bone_direction = MethodBind.get("ChainIK3D", "set_end_bone_direction", 2838484201L)
-    Ptrcall.callVoid2(gdext.classes.ChainIK3D.mb_set_end_bone_direction, livePtr, index, bone_direction)
+    Ptrcall.callVoid2(gdext.classes.ChainIK3D.mb_set_end_bone_direction, livePtr, index, boneDirection)
   }
 
   /** ChainIK3D.get_end_bone_direction */
-  final def getEndBoneDirection(index: Long): Long = {
+  final def getEndBoneDirection(index: Long): gdext.classes.SkeletonModifier3D.BoneDirection = {
     if (gdext.classes.ChainIK3D.mb_get_end_bone_direction == null) gdext.classes.ChainIK3D.mb_get_end_bone_direction = MethodBind.get("ChainIK3D", "get_end_bone_direction", 1843036459L)
-    Ptrcall.call1[Long, Long](gdext.classes.ChainIK3D.mb_get_end_bone_direction, livePtr, index)
+    gdext.classes.SkeletonModifier3D.BoneDirection(Ptrcall.call1[Long, Long](gdext.classes.ChainIK3D.mb_get_end_bone_direction, livePtr, index))
   }
 
   /** ChainIK3D.set_end_bone_length */

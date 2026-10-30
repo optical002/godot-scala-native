@@ -35,7 +35,7 @@ a reference. So does `Gd.create` of a `RefCounted` class. The wrapper **owns**
 that reference until you release it:
 
 ```scala
-val tex = ResourceLoader.singleton.load("res://icon.svg", "", 1L).cast[Texture2D]
+val tex = ResourceLoader.load("res://icon.svg").cast[Texture2D]
 sprite.setTexture(tex)   // the sprite takes its own reference
 tex.unref()              // release ours; the sprite keeps the texture alive
 ```
@@ -44,7 +44,7 @@ tex.unref()              // release ours; the sprite keeps the texture alive
   the last one. It does nothing on a wrapper that owns no reference, so you
   cannot free an object the engine or another owner still uses.
 - `refInc()` takes one more owned reference, for example to keep an
-  `InputEvent` that `_input` gave you after the callback returns.
+  `InputEvent` that `input` gave you after the callback returns.
 - Forgetting `unref()` leaks the object. It is never freed under you.
 
 ### `Gd.scoped`
@@ -55,7 +55,7 @@ and you own it from then on:
 
 ```scala
 val mesh: ArrayMesh = Gd.scoped {
-  val arrays = ResourceLoader.singleton.load("res://rock.tres", "", 1L)
+  val arrays = ResourceLoader.load("res://rock.tres")
   val built = Gd.create[ArrayMesh]()
   // ... fill `built` from `arrays` ...
   meshInstance.setMesh(built)  // the node holds its own reference
@@ -115,7 +115,7 @@ pauses. `gdext.api.Gc` gives you control:
 that frame's allocation.
 
 The binding itself does not allocate on its hot paths: engine calls, signals,
-`_process`, and GDScript calls into `@func` methods (see
+`process`, and GDScript calls into `@func` methods (see
 [Performance](performance.md)). The usual game techniques apply to your own
 code:
 

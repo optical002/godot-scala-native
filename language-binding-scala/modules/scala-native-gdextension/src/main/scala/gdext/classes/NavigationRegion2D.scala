@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class NavigationRegion2D extends Node2D {
   override def godotClassName: String = "NavigationRegion2D"
 
   /** NavigationRegion2D.set_navigation_polygon */
-  final def setNavigationPolygon(navigation_polygon: NavigationPolygon): Unit = {
+  final def setNavigationPolygon(navigationPolygon: NavigationPolygon): Unit = {
     if (gdext.classes.NavigationRegion2D.mb_set_navigation_polygon == null) gdext.classes.NavigationRegion2D.mb_set_navigation_polygon = MethodBind.get("NavigationRegion2D", "set_navigation_polygon", 1515040758L)
-    Ptrcall.callVoid1(gdext.classes.NavigationRegion2D.mb_set_navigation_polygon, livePtr, Wrappers.handle(navigation_polygon))
+    Ptrcall.callVoid1(gdext.classes.NavigationRegion2D.mb_set_navigation_polygon, livePtr, Wrappers.handle(navigationPolygon))
   }
 
   /** NavigationRegion2D.get_navigation_polygon. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -47,9 +48,9 @@ abstract class NavigationRegion2D extends Node2D {
   }
 
   /** NavigationRegion2D.set_navigation_layers */
-  final def setNavigationLayers(navigation_layers: Long): Unit = {
+  final def setNavigationLayers(navigationLayers: Long): Unit = {
     if (gdext.classes.NavigationRegion2D.mb_set_navigation_layers == null) gdext.classes.NavigationRegion2D.mb_set_navigation_layers = MethodBind.get("NavigationRegion2D", "set_navigation_layers", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.NavigationRegion2D.mb_set_navigation_layers, livePtr, navigation_layers)
+    Ptrcall.callVoid1(gdext.classes.NavigationRegion2D.mb_set_navigation_layers, livePtr, navigationLayers)
   }
 
   /** NavigationRegion2D.get_navigation_layers */
@@ -59,21 +60,21 @@ abstract class NavigationRegion2D extends Node2D {
   }
 
   /** NavigationRegion2D.set_navigation_layer_value */
-  final def setNavigationLayerValue(layer_number: Long, value: Boolean): Unit = {
+  final def setNavigationLayerValue(layerNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.NavigationRegion2D.mb_set_navigation_layer_value == null) gdext.classes.NavigationRegion2D.mb_set_navigation_layer_value = MethodBind.get("NavigationRegion2D", "set_navigation_layer_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.NavigationRegion2D.mb_set_navigation_layer_value, livePtr, layer_number, value)
+    Ptrcall.callVoid2(gdext.classes.NavigationRegion2D.mb_set_navigation_layer_value, livePtr, layerNumber, value)
   }
 
   /** NavigationRegion2D.get_navigation_layer_value */
-  final def getNavigationLayerValue(layer_number: Long): Boolean = {
+  final def getNavigationLayerValue(layerNumber: Long): Boolean = {
     if (gdext.classes.NavigationRegion2D.mb_get_navigation_layer_value == null) gdext.classes.NavigationRegion2D.mb_get_navigation_layer_value = MethodBind.get("NavigationRegion2D", "get_navigation_layer_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.NavigationRegion2D.mb_get_navigation_layer_value, livePtr, layer_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.NavigationRegion2D.mb_get_navigation_layer_value, livePtr, layerNumber)
   }
 
   /** NavigationRegion2D.set_enter_cost */
-  final def setEnterCost(enter_cost: Double): Unit = {
+  final def setEnterCost(enterCost: Double): Unit = {
     if (gdext.classes.NavigationRegion2D.mb_set_enter_cost == null) gdext.classes.NavigationRegion2D.mb_set_enter_cost = MethodBind.get("NavigationRegion2D", "set_enter_cost", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.NavigationRegion2D.mb_set_enter_cost, livePtr, enter_cost)
+    Ptrcall.callVoid1(gdext.classes.NavigationRegion2D.mb_set_enter_cost, livePtr, enterCost)
   }
 
   /** NavigationRegion2D.get_enter_cost */
@@ -83,9 +84,9 @@ abstract class NavigationRegion2D extends Node2D {
   }
 
   /** NavigationRegion2D.set_travel_cost */
-  final def setTravelCost(travel_cost: Double): Unit = {
+  final def setTravelCost(travelCost: Double): Unit = {
     if (gdext.classes.NavigationRegion2D.mb_set_travel_cost == null) gdext.classes.NavigationRegion2D.mb_set_travel_cost = MethodBind.get("NavigationRegion2D", "set_travel_cost", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.NavigationRegion2D.mb_set_travel_cost, livePtr, travel_cost)
+    Ptrcall.callVoid1(gdext.classes.NavigationRegion2D.mb_set_travel_cost, livePtr, travelCost)
   }
 
   /** NavigationRegion2D.get_travel_cost */
@@ -95,9 +96,9 @@ abstract class NavigationRegion2D extends Node2D {
   }
 
   /** NavigationRegion2D.bake_navigation_polygon */
-  final def bakeNavigationPolygon(on_thread: Boolean): Unit = {
+  final def bakeNavigationPolygon(onThread: Boolean = true): Unit = {
     if (gdext.classes.NavigationRegion2D.mb_bake_navigation_polygon == null) gdext.classes.NavigationRegion2D.mb_bake_navigation_polygon = MethodBind.get("NavigationRegion2D", "bake_navigation_polygon", 3216645846L)
-    Ptrcall.callVoid1(gdext.classes.NavigationRegion2D.mb_bake_navigation_polygon, livePtr, on_thread)
+    Ptrcall.callVoid1(gdext.classes.NavigationRegion2D.mb_bake_navigation_polygon, livePtr, onThread)
   }
 
   /** NavigationRegion2D.is_baking */

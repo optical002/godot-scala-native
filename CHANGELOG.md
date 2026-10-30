@@ -11,14 +11,67 @@ its tag is pushed.
 
 ## [Unreleased]
 
-### Known issues
-- Typed `res://` references (`game.Res`, since 0.1.10) write scene root types by their
-  package-relative name, e.g. `ScenePath[entry.Entry]`. Inside `Res`, a generated member with
-  the same name as a game package shadows that package: a scene `entry.tscn` whose root is
-  `entry.Entry` fails with "Cyclic reference involving method entry", and a `prefabs/ui/`
-  folder breaks references to a `ui` package ("value init is not a member of object
-  game.Res.prefabs.ui"). Fix: emit `_root_.`-qualified type names. Workaround:
-  `godotResRefs := false`.
+## [0.1.12] — 2026-10-30
+
+### Added
+- Typed input API on `Input`: `getKey(Key.Space, KeyState.JustPressed)`, `getKey(key, state,
+  KeyMod.Ctrl)`, `getPhysicalKey`, `getMouseButton`, `getJoyButton`, `getAction(Actions.Jump,
+  state, exact = false)`, `getActionStrength`, `getAxis`, `getVector`, `press`/`release`.
+  `KeyState` is `Pressed` / `JustPressed` / `JustReleased` / `Released`. Key and button edges
+  use hidden Input Map actions (`__gdsn_*`), registered on the first query of each kind. 0 B
+  per call. Events get `isKey`, `isPhysicalKey`, `isMouseButton`, `isJoyButton` and `isAction`.
+  `KeyState`, `KeyMod` and `InputAction` are in `gdext.api`. See the new Input guide.
+- The sbt plugin generates `game.Actions`, an enum of the Input Map actions in `project.godot`
+  plus Godot's built-in `ui_*` actions, so a renamed action breaks the build. Settings:
+  `godotInputActions` (default `true`), `godotActionsObject` (default `"Actions"`). `~godotBuild`
+  also rebuilds when `project.godot` changes.
+- Engine singletons are called on the class itself: `Input.isKeyPressed(...)`,
+  `Engine.isEditorHint()`, `ResourceLoader.load(path)`. `X.singleton` still works.
+- Generated engine methods keep Godot's default arguments (bool, int, float, enum, String,
+  StringName, `null`, and `Vector2/3`, `Vector2i/3i`, `Color`, `Rect2` literals):
+  `addChild(node)`, `ResourceLoader.load(path)`, `isActionJustPressed("jump")`.
+
+### Changed
+- **Breaking:** Godot enums and bitfields are typed instead of `Long`. Global enums
+  (`Key`, `MouseButton`, `JoyButton`, `Error`, `Side`, ...) are in `gdext.classes`; class
+  enums are in the class's companion (`Node.ProcessMode`, `Input.MouseMode`,
+  `ResourceLoader.CacheMode`). Each is an opaque `Long` (no run-time cost) with named
+  constants (`MOUSE_MODE_CAPTURED` becomes `Input.MouseMode.Captured`, `KEY_0` becomes
+  `Key.Key0`), `values`, `.name` and `X(n)`. Enums still pass as `Long`; bitfields don't, and
+  have `|`, `&`, `has` and `.value`. Migration: replace number literals with the constants
+  (`setProcessMode(4L)` becomes `setProcessMode(Node.ProcessMode.Disabled)`) and read raw
+  bits with `.value` (`mesh.surfaceGetFormat(0).value & mask`).
+- **Breaking:** engine virtuals are overridden by their camelCase names, without the
+  underscore: `ready`, `process`, `physicsProcess`, `enterTree`, `exitTree`, `input`,
+  `shortcutInput`, `unhandledInput`, `unhandledKeyInput` (and the editor-plugin hooks
+  `canHandle`, `parseProperty`). `_update_property` is unchanged, because
+  `EditorProperty.updateProperty()` is an existing engine method. Migration:
+  `override def _process(delta: Double)` becomes `override def process(delta: Double)`.
+- **Breaking:** generated engine-method parameter names are camelCase (`exactMatch`, not
+  `exact_match`). Only calls using named arguments are affected.
+- **Breaking:** `StringName` is no longer public API. Engine methods that take or return a
+  Godot `StringName` now take and return Scala `String` (`node.setName("Child")`,
+  `val n: String = node.getName()`), as do `Object.set/get/getAs/connect/connectMethod`,
+  `AnimationTree.paramPath` and `Callable.of`. Each argument becomes a temporary
+  StringName on the stack, destroyed after the call (0 B per call); a returned name is
+  decoded once per distinct name and then returned without allocating. `gdext.builtin.StringName`
+  / `StringNames` moved to `gdext.internal`. Migration: drop `StringNames.cached(...)`
+  wrappers and `StringName.toScala(x.ptr)` calls.
+- `godotBuild` updates the editor addon in `addons/godot_scala` when its `plugin.cfg`
+  `version` differs from the addon bundled in the plugin. Before, the addon was installed
+  once and never touched, so projects kept a stale copy (including ones whose template
+  shipped one). Only the addon's own files are rewritten (`plugin.cfg`, `scala_build.gd`,
+  `icon.svg`, `godot.svg`); `.uid`/`.import` files and `project.godot` are left alone.
+  Local edits to the addon are overwritten when the version changes. The bundled addon is
+  now version 0.1.1.
+
+### Fixed
+- Typed `res://` references (`game.Res`, since 0.1.10) no longer break when a generated member
+  has the same name as a package. Type names were written unqualified (`ScenePath[game.Player]`),
+  so inside `Res` a file `game.json`, a scene `entry.tscn` with root `entry.Entry`, or a
+  `prefabs/ui/` folder shadowed that package ("type Player is not a member of
+  gdext.api.FilePath", "Cyclic reference involving method entry"). `ResScan` now emits
+  `_root_`-qualified type names.
 
 ## [0.1.11] — 2026-10-28
 

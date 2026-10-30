@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,15 +12,15 @@ abstract class CryptoKey extends Resource {
   override def godotClassName: String = "CryptoKey"
 
   /** CryptoKey.save */
-  final def save(path: String, public_only: Boolean): Long = {
+  final def save(path: String, publicOnly: Boolean = false): gdext.classes.Error = {
     if (gdext.classes.CryptoKey.mb_save == null) gdext.classes.CryptoKey.mb_save = MethodBind.get("CryptoKey", "save", 885841341L)
-    Ptrcall.call2[String, Boolean, Long](gdext.classes.CryptoKey.mb_save, livePtr, path, public_only)
+    gdext.classes.Error(Ptrcall.call2[String, Boolean, Long](gdext.classes.CryptoKey.mb_save, livePtr, path, publicOnly))
   }
 
   /** CryptoKey.load */
-  final def load(path: String, public_only: Boolean): Long = {
+  final def load(path: String, publicOnly: Boolean = false): gdext.classes.Error = {
     if (gdext.classes.CryptoKey.mb_load == null) gdext.classes.CryptoKey.mb_load = MethodBind.get("CryptoKey", "load", 885841341L)
-    Ptrcall.call2[String, Boolean, Long](gdext.classes.CryptoKey.mb_load, livePtr, path, public_only)
+    gdext.classes.Error(Ptrcall.call2[String, Boolean, Long](gdext.classes.CryptoKey.mb_load, livePtr, path, publicOnly))
   }
 
   /** CryptoKey.is_public_only */
@@ -29,15 +30,15 @@ abstract class CryptoKey extends Resource {
   }
 
   /** CryptoKey.save_to_string */
-  final def saveToString(public_only: Boolean): String = {
+  final def saveToString(publicOnly: Boolean = false): String = {
     if (gdext.classes.CryptoKey.mb_save_to_string == null) gdext.classes.CryptoKey.mb_save_to_string = MethodBind.get("CryptoKey", "save_to_string", 32795936L)
-    Ptrcall.call1[Boolean, String](gdext.classes.CryptoKey.mb_save_to_string, livePtr, public_only)
+    Ptrcall.call1[Boolean, String](gdext.classes.CryptoKey.mb_save_to_string, livePtr, publicOnly)
   }
 
   /** CryptoKey.load_from_string */
-  final def loadFromString(string_key: String, public_only: Boolean): Long = {
+  final def loadFromString(stringKey: String, publicOnly: Boolean = false): gdext.classes.Error = {
     if (gdext.classes.CryptoKey.mb_load_from_string == null) gdext.classes.CryptoKey.mb_load_from_string = MethodBind.get("CryptoKey", "load_from_string", 885841341L)
-    Ptrcall.call2[String, Boolean, Long](gdext.classes.CryptoKey.mb_load_from_string, livePtr, string_key, public_only)
+    gdext.classes.Error(Ptrcall.call2[String, Boolean, Long](gdext.classes.CryptoKey.mb_load_from_string, livePtr, stringKey, publicOnly))
   }
 
 }

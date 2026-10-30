@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,9 +36,9 @@ abstract class VisualShaderNodeParticleMeshEmitter extends VisualShaderNodeParti
   }
 
   /** VisualShaderNodeParticleMeshEmitter.set_surface_index */
-  final def setSurfaceIndex(surface_index: Long): Unit = {
+  final def setSurfaceIndex(surfaceIndex: Long): Unit = {
     if (gdext.classes.VisualShaderNodeParticleMeshEmitter.mb_set_surface_index == null) gdext.classes.VisualShaderNodeParticleMeshEmitter.mb_set_surface_index = MethodBind.get("VisualShaderNodeParticleMeshEmitter", "set_surface_index", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.VisualShaderNodeParticleMeshEmitter.mb_set_surface_index, livePtr, surface_index)
+    Ptrcall.callVoid1(gdext.classes.VisualShaderNodeParticleMeshEmitter.mb_set_surface_index, livePtr, surfaceIndex)
   }
 
   /** VisualShaderNodeParticleMeshEmitter.get_surface_index */

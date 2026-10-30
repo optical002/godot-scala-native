@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -29,9 +30,9 @@ abstract class RichTextLabel extends Control {
   }
 
   /** RichTextLabel.add_hr */
-  final def addHr(width: Long, height: Long, color: gdext.builtin.Color, alignment: Long, width_in_percent: Boolean, height_in_percent: Boolean): Unit = {
+  final def addHr(width: Long = 90L, height: Long = 2L, color: gdext.builtin.Color = gdext.builtin.Color(1f, 1f, 1f, 1f), alignment: gdext.classes.HorizontalAlignment = gdext.classes.HorizontalAlignment(1L), widthInPercent: Boolean = true, heightInPercent: Boolean = false): Unit = {
     if (gdext.classes.RichTextLabel.mb_add_hr == null) gdext.classes.RichTextLabel.mb_add_hr = MethodBind.get("RichTextLabel", "add_hr", 16816895L)
-    Ptrcall.callVoid6(gdext.classes.RichTextLabel.mb_add_hr, livePtr, width, height, color, alignment, width_in_percent, height_in_percent)
+    Ptrcall.callVoid6(gdext.classes.RichTextLabel.mb_add_hr, livePtr, width, height, color, alignment, widthInPercent, heightInPercent)
   }
 
   /** RichTextLabel.newline */
@@ -41,9 +42,9 @@ abstract class RichTextLabel extends Control {
   }
 
   /** RichTextLabel.remove_paragraph */
-  final def removeParagraph(paragraph: Long, no_invalidate: Boolean): Boolean = {
+  final def removeParagraph(paragraph: Long, noInvalidate: Boolean = false): Boolean = {
     if (gdext.classes.RichTextLabel.mb_remove_paragraph == null) gdext.classes.RichTextLabel.mb_remove_paragraph = MethodBind.get("RichTextLabel", "remove_paragraph", 3262369265L)
-    Ptrcall.call2[Long, Boolean, Boolean](gdext.classes.RichTextLabel.mb_remove_paragraph, livePtr, paragraph, no_invalidate)
+    Ptrcall.call2[Long, Boolean, Boolean](gdext.classes.RichTextLabel.mb_remove_paragraph, livePtr, paragraph, noInvalidate)
   }
 
   /** RichTextLabel.invalidate_paragraph */
@@ -53,15 +54,15 @@ abstract class RichTextLabel extends Control {
   }
 
   /** RichTextLabel.push_font */
-  final def pushFont(font: Font, font_size: Long): Unit = {
+  final def pushFont(font: Font, fontSize: Long = 0L): Unit = {
     if (gdext.classes.RichTextLabel.mb_push_font == null) gdext.classes.RichTextLabel.mb_push_font = MethodBind.get("RichTextLabel", "push_font", 2347424842L)
-    Ptrcall.callVoid2(gdext.classes.RichTextLabel.mb_push_font, livePtr, Wrappers.handle(font), font_size)
+    Ptrcall.callVoid2(gdext.classes.RichTextLabel.mb_push_font, livePtr, Wrappers.handle(font), fontSize)
   }
 
   /** RichTextLabel.push_font_size */
-  final def pushFontSize(font_size: Long): Unit = {
+  final def pushFontSize(fontSize: Long): Unit = {
     if (gdext.classes.RichTextLabel.mb_push_font_size == null) gdext.classes.RichTextLabel.mb_push_font_size = MethodBind.get("RichTextLabel", "push_font_size", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.RichTextLabel.mb_push_font_size, livePtr, font_size)
+    Ptrcall.callVoid1(gdext.classes.RichTextLabel.mb_push_font_size, livePtr, fontSize)
   }
 
   /** RichTextLabel.push_normal */
@@ -101,9 +102,9 @@ abstract class RichTextLabel extends Control {
   }
 
   /** RichTextLabel.push_outline_size */
-  final def pushOutlineSize(outline_size: Long): Unit = {
+  final def pushOutlineSize(outlineSize: Long): Unit = {
     if (gdext.classes.RichTextLabel.mb_push_outline_size == null) gdext.classes.RichTextLabel.mb_push_outline_size = MethodBind.get("RichTextLabel", "push_outline_size", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.RichTextLabel.mb_push_outline_size, livePtr, outline_size)
+    Ptrcall.callVoid1(gdext.classes.RichTextLabel.mb_push_outline_size, livePtr, outlineSize)
   }
 
   /** RichTextLabel.push_outline_color */
@@ -119,7 +120,7 @@ abstract class RichTextLabel extends Control {
   }
 
   /** RichTextLabel.push_list */
-  final def pushList(level: Long, `type`: Long, capitalize: Boolean, bullet: String): Unit = {
+  final def pushList(level: Long, `type`: gdext.classes.RichTextLabel.ListType, capitalize: Boolean, bullet: String = "•"): Unit = {
     if (gdext.classes.RichTextLabel.mb_push_list == null) gdext.classes.RichTextLabel.mb_push_list = MethodBind.get("RichTextLabel", "push_list", 3017143144L)
     Ptrcall.callVoid4(gdext.classes.RichTextLabel.mb_push_list, livePtr, level, `type`, capitalize, bullet)
   }
@@ -137,25 +138,25 @@ abstract class RichTextLabel extends Control {
   }
 
   /** RichTextLabel.push_underline */
-  final def pushUnderline(color: gdext.builtin.Color): Unit = {
+  final def pushUnderline(color: gdext.builtin.Color = gdext.builtin.Color(0f, 0f, 0f, 0f)): Unit = {
     if (gdext.classes.RichTextLabel.mb_push_underline == null) gdext.classes.RichTextLabel.mb_push_underline = MethodBind.get("RichTextLabel", "push_underline", 1458098034L)
     Ptrcall.callVoid1(gdext.classes.RichTextLabel.mb_push_underline, livePtr, color)
   }
 
   /** RichTextLabel.push_strikethrough */
-  final def pushStrikethrough(color: gdext.builtin.Color): Unit = {
+  final def pushStrikethrough(color: gdext.builtin.Color = gdext.builtin.Color(0f, 0f, 0f, 0f)): Unit = {
     if (gdext.classes.RichTextLabel.mb_push_strikethrough == null) gdext.classes.RichTextLabel.mb_push_strikethrough = MethodBind.get("RichTextLabel", "push_strikethrough", 1458098034L)
     Ptrcall.callVoid1(gdext.classes.RichTextLabel.mb_push_strikethrough, livePtr, color)
   }
 
   /** RichTextLabel.push_table */
-  final def pushTable(columns: Long, inline_align: Long, align_to_row: Long, name: String): Unit = {
+  final def pushTable(columns: Long, inlineAlign: gdext.classes.InlineAlignment = gdext.classes.InlineAlignment(0L), alignToRow: Long = -1L, name: String = ""): Unit = {
     if (gdext.classes.RichTextLabel.mb_push_table == null) gdext.classes.RichTextLabel.mb_push_table = MethodBind.get("RichTextLabel", "push_table", 3426862026L)
-    Ptrcall.callVoid4(gdext.classes.RichTextLabel.mb_push_table, livePtr, columns, inline_align, align_to_row, name)
+    Ptrcall.callVoid4(gdext.classes.RichTextLabel.mb_push_table, livePtr, columns, inlineAlign, alignToRow, name)
   }
 
   /** RichTextLabel.set_table_column_expand */
-  final def setTableColumnExpand(column: Long, expand: Boolean, ratio: Long, shrink: Boolean): Unit = {
+  final def setTableColumnExpand(column: Long, expand: Boolean, ratio: Long = 1L, shrink: Boolean = true): Unit = {
     if (gdext.classes.RichTextLabel.mb_set_table_column_expand == null) gdext.classes.RichTextLabel.mb_set_table_column_expand = MethodBind.get("RichTextLabel", "set_table_column_expand", 117236061L)
     Ptrcall.callVoid4(gdext.classes.RichTextLabel.mb_set_table_column_expand, livePtr, column, expand, ratio, shrink)
   }
@@ -167,9 +168,9 @@ abstract class RichTextLabel extends Control {
   }
 
   /** RichTextLabel.set_cell_row_background_color */
-  final def setCellRowBackgroundColor(odd_row_bg: gdext.builtin.Color, even_row_bg: gdext.builtin.Color): Unit = {
+  final def setCellRowBackgroundColor(oddRowBg: gdext.builtin.Color, evenRowBg: gdext.builtin.Color): Unit = {
     if (gdext.classes.RichTextLabel.mb_set_cell_row_background_color == null) gdext.classes.RichTextLabel.mb_set_cell_row_background_color = MethodBind.get("RichTextLabel", "set_cell_row_background_color", 3465483165L)
-    Ptrcall.callVoid2(gdext.classes.RichTextLabel.mb_set_cell_row_background_color, livePtr, odd_row_bg, even_row_bg)
+    Ptrcall.callVoid2(gdext.classes.RichTextLabel.mb_set_cell_row_background_color, livePtr, oddRowBg, evenRowBg)
   }
 
   /** RichTextLabel.set_cell_border_color */
@@ -179,9 +180,9 @@ abstract class RichTextLabel extends Control {
   }
 
   /** RichTextLabel.set_cell_size_override */
-  final def setCellSizeOverride(min_size: gdext.builtin.Vector2, max_size: gdext.builtin.Vector2): Unit = {
+  final def setCellSizeOverride(minSize: gdext.builtin.Vector2, maxSize: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.RichTextLabel.mb_set_cell_size_override == null) gdext.classes.RichTextLabel.mb_set_cell_size_override = MethodBind.get("RichTextLabel", "set_cell_size_override", 3108078480L)
-    Ptrcall.callVoid2(gdext.classes.RichTextLabel.mb_set_cell_size_override, livePtr, min_size, max_size)
+    Ptrcall.callVoid2(gdext.classes.RichTextLabel.mb_set_cell_size_override, livePtr, minSize, maxSize)
   }
 
   /** RichTextLabel.set_cell_padding */
@@ -239,27 +240,27 @@ abstract class RichTextLabel extends Control {
   }
 
   /** RichTextLabel.set_structured_text_bidi_override */
-  final def setStructuredTextBidiOverride(parser: Long): Unit = {
+  final def setStructuredTextBidiOverride(parser: gdext.classes.TextServer.StructuredTextParser): Unit = {
     if (gdext.classes.RichTextLabel.mb_set_structured_text_bidi_override == null) gdext.classes.RichTextLabel.mb_set_structured_text_bidi_override = MethodBind.get("RichTextLabel", "set_structured_text_bidi_override", 55961453L)
     Ptrcall.callVoid1(gdext.classes.RichTextLabel.mb_set_structured_text_bidi_override, livePtr, parser)
   }
 
   /** RichTextLabel.get_structured_text_bidi_override */
-  final def getStructuredTextBidiOverride(): Long = {
+  final def getStructuredTextBidiOverride(): gdext.classes.TextServer.StructuredTextParser = {
     if (gdext.classes.RichTextLabel.mb_get_structured_text_bidi_override == null) gdext.classes.RichTextLabel.mb_get_structured_text_bidi_override = MethodBind.get("RichTextLabel", "get_structured_text_bidi_override", 3385126229L)
-    Ptrcall.call0[Long](gdext.classes.RichTextLabel.mb_get_structured_text_bidi_override, livePtr)
+    gdext.classes.TextServer.StructuredTextParser(Ptrcall.call0[Long](gdext.classes.RichTextLabel.mb_get_structured_text_bidi_override, livePtr))
   }
 
   /** RichTextLabel.set_text_direction */
-  final def setTextDirection(direction: Long): Unit = {
+  final def setTextDirection(direction: gdext.classes.Control.TextDirection): Unit = {
     if (gdext.classes.RichTextLabel.mb_set_text_direction == null) gdext.classes.RichTextLabel.mb_set_text_direction = MethodBind.get("RichTextLabel", "set_text_direction", 119160795L)
     Ptrcall.callVoid1(gdext.classes.RichTextLabel.mb_set_text_direction, livePtr, direction)
   }
 
   /** RichTextLabel.get_text_direction */
-  final def getTextDirection(): Long = {
+  final def getTextDirection(): gdext.classes.Control.TextDirection = {
     if (gdext.classes.RichTextLabel.mb_get_text_direction == null) gdext.classes.RichTextLabel.mb_get_text_direction = MethodBind.get("RichTextLabel", "get_text_direction", 797257663L)
-    Ptrcall.call0[Long](gdext.classes.RichTextLabel.mb_get_text_direction, livePtr)
+    gdext.classes.Control.TextDirection(Ptrcall.call0[Long](gdext.classes.RichTextLabel.mb_get_text_direction, livePtr))
   }
 
   /** RichTextLabel.set_language */
@@ -275,63 +276,63 @@ abstract class RichTextLabel extends Control {
   }
 
   /** RichTextLabel.set_horizontal_alignment */
-  final def setHorizontalAlignment(alignment: Long): Unit = {
+  final def setHorizontalAlignment(alignment: gdext.classes.HorizontalAlignment): Unit = {
     if (gdext.classes.RichTextLabel.mb_set_horizontal_alignment == null) gdext.classes.RichTextLabel.mb_set_horizontal_alignment = MethodBind.get("RichTextLabel", "set_horizontal_alignment", 2312603777L)
     Ptrcall.callVoid1(gdext.classes.RichTextLabel.mb_set_horizontal_alignment, livePtr, alignment)
   }
 
   /** RichTextLabel.get_horizontal_alignment */
-  final def getHorizontalAlignment(): Long = {
+  final def getHorizontalAlignment(): gdext.classes.HorizontalAlignment = {
     if (gdext.classes.RichTextLabel.mb_get_horizontal_alignment == null) gdext.classes.RichTextLabel.mb_get_horizontal_alignment = MethodBind.get("RichTextLabel", "get_horizontal_alignment", 341400642L)
-    Ptrcall.call0[Long](gdext.classes.RichTextLabel.mb_get_horizontal_alignment, livePtr)
+    gdext.classes.HorizontalAlignment(Ptrcall.call0[Long](gdext.classes.RichTextLabel.mb_get_horizontal_alignment, livePtr))
   }
 
   /** RichTextLabel.set_vertical_alignment */
-  final def setVerticalAlignment(alignment: Long): Unit = {
+  final def setVerticalAlignment(alignment: gdext.classes.VerticalAlignment): Unit = {
     if (gdext.classes.RichTextLabel.mb_set_vertical_alignment == null) gdext.classes.RichTextLabel.mb_set_vertical_alignment = MethodBind.get("RichTextLabel", "set_vertical_alignment", 1796458609L)
     Ptrcall.callVoid1(gdext.classes.RichTextLabel.mb_set_vertical_alignment, livePtr, alignment)
   }
 
   /** RichTextLabel.get_vertical_alignment */
-  final def getVerticalAlignment(): Long = {
+  final def getVerticalAlignment(): gdext.classes.VerticalAlignment = {
     if (gdext.classes.RichTextLabel.mb_get_vertical_alignment == null) gdext.classes.RichTextLabel.mb_get_vertical_alignment = MethodBind.get("RichTextLabel", "get_vertical_alignment", 3274884059L)
-    Ptrcall.call0[Long](gdext.classes.RichTextLabel.mb_get_vertical_alignment, livePtr)
+    gdext.classes.VerticalAlignment(Ptrcall.call0[Long](gdext.classes.RichTextLabel.mb_get_vertical_alignment, livePtr))
   }
 
   /** RichTextLabel.set_justification_flags */
-  final def setJustificationFlags(justification_flags: Long): Unit = {
+  final def setJustificationFlags(justificationFlags: gdext.classes.TextServer.JustificationFlag): Unit = {
     if (gdext.classes.RichTextLabel.mb_set_justification_flags == null) gdext.classes.RichTextLabel.mb_set_justification_flags = MethodBind.get("RichTextLabel", "set_justification_flags", 2877345813L)
-    Ptrcall.callVoid1(gdext.classes.RichTextLabel.mb_set_justification_flags, livePtr, justification_flags)
+    Ptrcall.callVoid1(gdext.classes.RichTextLabel.mb_set_justification_flags, livePtr, justificationFlags.asInstanceOf[Long])
   }
 
   /** RichTextLabel.get_justification_flags */
-  final def getJustificationFlags(): Long = {
+  final def getJustificationFlags(): gdext.classes.TextServer.JustificationFlag = {
     if (gdext.classes.RichTextLabel.mb_get_justification_flags == null) gdext.classes.RichTextLabel.mb_get_justification_flags = MethodBind.get("RichTextLabel", "get_justification_flags", 1583363614L)
-    Ptrcall.call0[Long](gdext.classes.RichTextLabel.mb_get_justification_flags, livePtr)
+    gdext.classes.TextServer.JustificationFlag(Ptrcall.call0[Long](gdext.classes.RichTextLabel.mb_get_justification_flags, livePtr))
   }
 
   /** RichTextLabel.set_autowrap_mode */
-  final def setAutowrapMode(autowrap_mode: Long): Unit = {
+  final def setAutowrapMode(autowrapMode: gdext.classes.TextServer.AutowrapMode): Unit = {
     if (gdext.classes.RichTextLabel.mb_set_autowrap_mode == null) gdext.classes.RichTextLabel.mb_set_autowrap_mode = MethodBind.get("RichTextLabel", "set_autowrap_mode", 3289138044L)
-    Ptrcall.callVoid1(gdext.classes.RichTextLabel.mb_set_autowrap_mode, livePtr, autowrap_mode)
+    Ptrcall.callVoid1(gdext.classes.RichTextLabel.mb_set_autowrap_mode, livePtr, autowrapMode)
   }
 
   /** RichTextLabel.get_autowrap_mode */
-  final def getAutowrapMode(): Long = {
+  final def getAutowrapMode(): gdext.classes.TextServer.AutowrapMode = {
     if (gdext.classes.RichTextLabel.mb_get_autowrap_mode == null) gdext.classes.RichTextLabel.mb_get_autowrap_mode = MethodBind.get("RichTextLabel", "get_autowrap_mode", 1549071663L)
-    Ptrcall.call0[Long](gdext.classes.RichTextLabel.mb_get_autowrap_mode, livePtr)
+    gdext.classes.TextServer.AutowrapMode(Ptrcall.call0[Long](gdext.classes.RichTextLabel.mb_get_autowrap_mode, livePtr))
   }
 
   /** RichTextLabel.set_autowrap_trim_flags */
-  final def setAutowrapTrimFlags(autowrap_trim_flags: Long): Unit = {
+  final def setAutowrapTrimFlags(autowrapTrimFlags: gdext.classes.TextServer.LineBreakFlag): Unit = {
     if (gdext.classes.RichTextLabel.mb_set_autowrap_trim_flags == null) gdext.classes.RichTextLabel.mb_set_autowrap_trim_flags = MethodBind.get("RichTextLabel", "set_autowrap_trim_flags", 2809697122L)
-    Ptrcall.callVoid1(gdext.classes.RichTextLabel.mb_set_autowrap_trim_flags, livePtr, autowrap_trim_flags)
+    Ptrcall.callVoid1(gdext.classes.RichTextLabel.mb_set_autowrap_trim_flags, livePtr, autowrapTrimFlags.asInstanceOf[Long])
   }
 
   /** RichTextLabel.get_autowrap_trim_flags */
-  final def getAutowrapTrimFlags(): Long = {
+  final def getAutowrapTrimFlags(): gdext.classes.TextServer.LineBreakFlag = {
     if (gdext.classes.RichTextLabel.mb_get_autowrap_trim_flags == null) gdext.classes.RichTextLabel.mb_get_autowrap_trim_flags = MethodBind.get("RichTextLabel", "get_autowrap_trim_flags", 2340632602L)
-    Ptrcall.call0[Long](gdext.classes.RichTextLabel.mb_get_autowrap_trim_flags, livePtr)
+    gdext.classes.TextServer.LineBreakFlag(Ptrcall.call0[Long](gdext.classes.RichTextLabel.mb_get_autowrap_trim_flags, livePtr))
   }
 
   /** RichTextLabel.set_meta_underline */
@@ -581,9 +582,9 @@ abstract class RichTextLabel extends Control {
   }
 
   /** RichTextLabel.set_progress_bar_delay */
-  final def setProgressBarDelay(delay_ms: Long): Unit = {
+  final def setProgressBarDelay(delayMs: Long): Unit = {
     if (gdext.classes.RichTextLabel.mb_set_progress_bar_delay == null) gdext.classes.RichTextLabel.mb_set_progress_bar_delay = MethodBind.get("RichTextLabel", "set_progress_bar_delay", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.RichTextLabel.mb_set_progress_bar_delay, livePtr, delay_ms)
+    Ptrcall.callVoid1(gdext.classes.RichTextLabel.mb_set_progress_bar_delay, livePtr, delayMs)
   }
 
   /** RichTextLabel.get_progress_bar_delay */
@@ -605,13 +606,13 @@ abstract class RichTextLabel extends Control {
   }
 
   /** RichTextLabel.get_visible_characters_behavior */
-  final def getVisibleCharactersBehavior(): Long = {
+  final def getVisibleCharactersBehavior(): gdext.classes.TextServer.VisibleCharactersBehavior = {
     if (gdext.classes.RichTextLabel.mb_get_visible_characters_behavior == null) gdext.classes.RichTextLabel.mb_get_visible_characters_behavior = MethodBind.get("RichTextLabel", "get_visible_characters_behavior", 258789322L)
-    Ptrcall.call0[Long](gdext.classes.RichTextLabel.mb_get_visible_characters_behavior, livePtr)
+    gdext.classes.TextServer.VisibleCharactersBehavior(Ptrcall.call0[Long](gdext.classes.RichTextLabel.mb_get_visible_characters_behavior, livePtr))
   }
 
   /** RichTextLabel.set_visible_characters_behavior */
-  final def setVisibleCharactersBehavior(behavior: Long): Unit = {
+  final def setVisibleCharactersBehavior(behavior: gdext.classes.TextServer.VisibleCharactersBehavior): Unit = {
     if (gdext.classes.RichTextLabel.mb_set_visible_characters_behavior == null) gdext.classes.RichTextLabel.mb_set_visible_characters_behavior = MethodBind.get("RichTextLabel", "set_visible_characters_behavior", 3383839701L)
     Ptrcall.callVoid1(gdext.classes.RichTextLabel.mb_set_visible_characters_behavior, livePtr, behavior)
   }
@@ -881,4 +882,119 @@ object RichTextLabel {
   private[classes] var mb_get_menu: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_menu_visible: GDExtensionMethodBindPtr = null
   private[classes] var mb_menu_option: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `RichTextLabel.ListType`. */
+  opaque type ListType <: Long = Long
+
+  object ListType {
+    final val Numbers: ListType = 0L.asInstanceOf[ListType]
+    final val Letters: ListType = 1L.asInstanceOf[ListType]
+    final val Roman: ListType = 2L.asInstanceOf[ListType]
+    final val Dots: ListType = 3L.asInstanceOf[ListType]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ListType = value.asInstanceOf[ListType]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ListType] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[ListType]]
+
+    extension (self: ListType)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Numbers"
+        case 1L => "Letters"
+        case 2L => "Roman"
+        case 3L => "Dots"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `RichTextLabel.MenuItems`. */
+  opaque type MenuItems <: Long = Long
+
+  object MenuItems {
+    final val Copy: MenuItems = 0L.asInstanceOf[MenuItems]
+    final val SelectAll: MenuItems = 1L.asInstanceOf[MenuItems]
+    final val Max: MenuItems = 2L.asInstanceOf[MenuItems]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): MenuItems = value.asInstanceOf[MenuItems]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[MenuItems] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[MenuItems]]
+
+    extension (self: MenuItems)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Copy"
+        case 1L => "SelectAll"
+        case 2L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `RichTextLabel.MetaUnderline`. */
+  opaque type MetaUnderline <: Long = Long
+
+  object MetaUnderline {
+    final val Never: MetaUnderline = 0L.asInstanceOf[MetaUnderline]
+    final val Always: MetaUnderline = 1L.asInstanceOf[MetaUnderline]
+    final val OnHover: MetaUnderline = 2L.asInstanceOf[MetaUnderline]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): MetaUnderline = value.asInstanceOf[MetaUnderline]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[MetaUnderline] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[MetaUnderline]]
+
+    extension (self: MetaUnderline)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Never"
+        case 1L => "Always"
+        case 2L => "OnHover"
+        case other => other.toString
+      }
+  }
+
+  /** Godot bitfield `RichTextLabel.ImageUpdateMask`. */
+  opaque type ImageUpdateMask = Long
+
+  object ImageUpdateMask {
+    final val Texture: ImageUpdateMask = 1L.asInstanceOf[ImageUpdateMask]
+    final val Size: ImageUpdateMask = 2L.asInstanceOf[ImageUpdateMask]
+    final val Color: ImageUpdateMask = 4L.asInstanceOf[ImageUpdateMask]
+    final val Alignment: ImageUpdateMask = 8L.asInstanceOf[ImageUpdateMask]
+    final val Region: ImageUpdateMask = 16L.asInstanceOf[ImageUpdateMask]
+    final val Pad: ImageUpdateMask = 32L.asInstanceOf[ImageUpdateMask]
+    final val Tooltip: ImageUpdateMask = 64L.asInstanceOf[ImageUpdateMask]
+    final val WidthInPercent: ImageUpdateMask = 128L.asInstanceOf[ImageUpdateMask]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ImageUpdateMask = value.asInstanceOf[ImageUpdateMask]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ImageUpdateMask] = scala.IArray[Long](1L, 2L, 4L, 8L, 16L, 32L, 64L, 128L).asInstanceOf[scala.IArray[ImageUpdateMask]]
+
+    extension (self: ImageUpdateMask)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 1L => "Texture"
+        case 2L => "Size"
+        case 4L => "Color"
+        case 8L => "Alignment"
+        case 16L => "Region"
+        case 32L => "Pad"
+        case 64L => "Tooltip"
+        case 128L => "WidthInPercent"
+        case other => other.toString
+      }
+    extension (self: ImageUpdateMask) {
+      inline def value: Long = self.asInstanceOf[Long]
+      inline def |(other: ImageUpdateMask): ImageUpdateMask = (self.value | other.value).asInstanceOf[ImageUpdateMask]
+      inline def &(other: ImageUpdateMask): ImageUpdateMask = (self.value & other.value).asInstanceOf[ImageUpdateMask]
+      /** Every bit of `flag` is set. */
+      inline def has(flag: ImageUpdateMask): Boolean = (self.value & flag.value) == flag.value
+    }
+  }
 }

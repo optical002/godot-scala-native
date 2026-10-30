@@ -29,7 +29,30 @@ object Node { private[classes] var mb_get_child: GDExtensionMethodBindPtr = null
   `RefCounted`; adopts the +1 the engine hands over — verified by
   `memory_verify.gd`'s `ref counts after Ref<T> returns: load=1 duplicate=1`).
 - Object args: `Wrappers.handle(x)` (null-safe).
-- Singletons: `def singleton` cached in a companion `var`.
+- Singletons: `def singleton` cached in a companion `var`, plus one companion
+  forwarder per instance method (`Input.isKeyPressed(k)` =
+  `singleton.isKeyPressed(k)`), skipped when a static owns the name
+  (`ResourceUID`).
+- **Enums/bitfields typed** (not `Long`): global ones in `classes/GlobalEnums.scala`
+  (`Key`, `MouseButton`, `Error`, ...; `Variant.Type`/`Operator` stay `Long`),
+  class ones in the companion (`Node.ProcessMode`). Shape: `opaque type X <: Long
+  = Long` + `object X` with `final val` constants (`XL.asInstanceOf[X]`),
+  `inline apply(Long)`, `values: IArray[X]`, `.name`. Casts, not alias
+  transparency: a top-level opaque type's alias is NOT visible in its top-level
+  companion. Constant names: shared `_`-prefix dropped, PascalCase; a
+  digit-leading name keeps the prefix's last word (`KEY_0` -> `Key0`).
+  **Bitfields have no `<: Long` bound**: with it, `Long.|` (a member) beats the
+  extension `|` and returns bare `Long`. They carry `value`/`|`/`&`/`has`
+  extensions; args pass `x.asInstanceOf[Long]`. Ptrcall type params stay `Long`;
+  enum returns wrap as `X(call)`.
+- **Default args** from `default_value` (`defaultExpr`): bool/int/float/enum,
+  String/StringName literals, object `null`, `Vector2/3/2i/3i`, `Color`, `Rect2`
+  ctors. Others leave the param required. Param names camelCased.
+- **Mixins** (`classMixins` / `companionMixins` in the generator): hand-written
+  traits mixed into a generated class/companion. `InputEvent with
+  internal.input.InputEventOps`, `object Input extends internal.input.InputOps`.
+- `GlobalEnums.scala` is excluded from `engine-core.txt` (build.sbt), like
+  `ClassFactory.scala`; it does appear in `engine-classes.txt` (harmless).
 - `ClassFactory.scala` (generated, one `case "Name" => new Name {}` per class):
   `Wrappers` builds the most-derived wrapper on first sight of an object.
 
@@ -40,13 +63,18 @@ object Node { private[classes] var mb_get_child: GDExtensionMethodBindPtr = null
   `erasedValue` matches (no typeclasses, no boxing); `Ptrcall.callVoidN/callN`
   are `inline`; `invoke` is `inline` (a stack buffer passed to a non-inline
   method gets boxed). `release` destroys temp String args after the call.
-  `read[StringName]` interns via `StringNames.adopt`.
+  `SnArg` (`internal/engine/SnArg.scala`, `opaque type SnArg <: String`) marks
+  a `String` that crosses as a StringName: `write` builds a stack temp
+  (`StringName.writeAt`), `release` destroys it, `read` returns the cached text
+  via `StringNames.adoptText` (0 B after first sight of a name). Its cases sit
+  **before** `case _: String`. Internal `read[StringName]` interns via `adopt`.
 - `Wrappers.scala` — instance-binding cache (see layer4-obj).
 
 ## Generator scope (ALL classes)
 Generates **every** class in `extension_api.json` (~1024 files + ClassFactory).
-- Type map (`builtinScalar` + `isEnumLike`): primitives, String, StringName,
-  and the math builtins → Scala types; `enum::`/`bitfield::` → **`Long`**;
+- Type map (`builtinScalar` + `isEnumLike`): primitives, String, and the math
+  builtins → Scala types; StringName → `String` (args wrapped `SnArg(x)`,
+  type params / returns `SnArg` via `ptrArgType`/`callRet`); `enum::`/`bitfield::` → **`Long`**;
   any generated class → its wrapper type.
 - Method skipped if: vararg, virtual, no hash, **>6 args**, any arg/return
   type unmappable, or a universal Any/AnyRef name (`getClass`/`toString`/… —

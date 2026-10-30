@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,15 +12,15 @@ abstract class PhysicsBody2D extends CollisionObject2D {
   override def godotClassName: String = "PhysicsBody2D"
 
   /** PhysicsBody2D.move_and_collide. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def moveAndCollide(motion: gdext.builtin.Vector2, test_only: Boolean, safe_margin: Double, recovery_as_collision: Boolean): KinematicCollision2D = {
+  final def moveAndCollide(motion: gdext.builtin.Vector2, testOnly: Boolean = false, safeMargin: Double = 0.08, recoveryAsCollision: Boolean = false): KinematicCollision2D = {
     if (gdext.classes.PhysicsBody2D.mb_move_and_collide == null) gdext.classes.PhysicsBody2D.mb_move_and_collide = MethodBind.get("PhysicsBody2D", "move_and_collide", 3681923724L)
-    Wrappers.owned[KinematicCollision2D](Ptrcall.call4[gdext.builtin.Vector2, Boolean, Double, Boolean, Long](gdext.classes.PhysicsBody2D.mb_move_and_collide, livePtr, motion, test_only, safe_margin, recovery_as_collision))
+    Wrappers.owned[KinematicCollision2D](Ptrcall.call4[gdext.builtin.Vector2, Boolean, Double, Boolean, Long](gdext.classes.PhysicsBody2D.mb_move_and_collide, livePtr, motion, testOnly, safeMargin, recoveryAsCollision))
   }
 
   /** PhysicsBody2D.test_move */
-  final def testMove(from: gdext.builtin.Transform2D, motion: gdext.builtin.Vector2, collision: KinematicCollision2D, safe_margin: Double, recovery_as_collision: Boolean): Boolean = {
+  final def testMove(from: gdext.builtin.Transform2D, motion: gdext.builtin.Vector2, collision: KinematicCollision2D = null, safeMargin: Double = 0.08, recoveryAsCollision: Boolean = false): Boolean = {
     if (gdext.classes.PhysicsBody2D.mb_test_move == null) gdext.classes.PhysicsBody2D.mb_test_move = MethodBind.get("PhysicsBody2D", "test_move", 3324464701L)
-    Ptrcall.call5[gdext.builtin.Transform2D, gdext.builtin.Vector2, GodotObject, Double, Boolean, Boolean](gdext.classes.PhysicsBody2D.mb_test_move, livePtr, from, motion, Wrappers.handle(collision), safe_margin, recovery_as_collision)
+    Ptrcall.call5[gdext.builtin.Transform2D, gdext.builtin.Vector2, GodotObject, Double, Boolean, Boolean](gdext.classes.PhysicsBody2D.mb_test_move, livePtr, from, motion, Wrappers.handle(collision), safeMargin, recoveryAsCollision)
   }
 
   /** PhysicsBody2D.get_gravity */

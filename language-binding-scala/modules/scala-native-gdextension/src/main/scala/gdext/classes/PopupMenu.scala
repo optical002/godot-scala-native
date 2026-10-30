@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class PopupMenu extends Popup {
   override def godotClassName: String = "PopupMenu"
 
   /** PopupMenu.activate_item_by_event */
-  final def activateItemByEvent(event: InputEvent, for_global_only: Boolean): Boolean = {
+  final def activateItemByEvent(event: InputEvent, forGlobalOnly: Boolean = false): Boolean = {
     if (gdext.classes.PopupMenu.mb_activate_item_by_event == null) gdext.classes.PopupMenu.mb_activate_item_by_event = MethodBind.get("PopupMenu", "activate_item_by_event", 3716412023L)
-    Ptrcall.call2[GodotObject, Boolean, Boolean](gdext.classes.PopupMenu.mb_activate_item_by_event, livePtr, Wrappers.handle(event), for_global_only)
+    Ptrcall.call2[GodotObject, Boolean, Boolean](gdext.classes.PopupMenu.mb_activate_item_by_event, livePtr, Wrappers.handle(event), forGlobalOnly)
   }
 
   /** PopupMenu.set_prefer_native_menu */
@@ -35,91 +36,91 @@ abstract class PopupMenu extends Popup {
   }
 
   /** PopupMenu.add_item */
-  final def addItem(label: String, id: Long, accel: Long): Unit = {
+  final def addItem(label: String, id: Long = -1L, accel: gdext.classes.Key = gdext.classes.Key(0L)): Unit = {
     if (gdext.classes.PopupMenu.mb_add_item == null) gdext.classes.PopupMenu.mb_add_item = MethodBind.get("PopupMenu", "add_item", 3674230041L)
     Ptrcall.callVoid3(gdext.classes.PopupMenu.mb_add_item, livePtr, label, id, accel)
   }
 
   /** PopupMenu.add_icon_item */
-  final def addIconItem(texture: Texture2D, label: String, id: Long, accel: Long): Unit = {
+  final def addIconItem(texture: Texture2D, label: String, id: Long = -1L, accel: gdext.classes.Key = gdext.classes.Key(0L)): Unit = {
     if (gdext.classes.PopupMenu.mb_add_icon_item == null) gdext.classes.PopupMenu.mb_add_icon_item = MethodBind.get("PopupMenu", "add_icon_item", 1086190128L)
     Ptrcall.callVoid4(gdext.classes.PopupMenu.mb_add_icon_item, livePtr, Wrappers.handle(texture), label, id, accel)
   }
 
   /** PopupMenu.add_check_item */
-  final def addCheckItem(label: String, id: Long, accel: Long): Unit = {
+  final def addCheckItem(label: String, id: Long = -1L, accel: gdext.classes.Key = gdext.classes.Key(0L)): Unit = {
     if (gdext.classes.PopupMenu.mb_add_check_item == null) gdext.classes.PopupMenu.mb_add_check_item = MethodBind.get("PopupMenu", "add_check_item", 3674230041L)
     Ptrcall.callVoid3(gdext.classes.PopupMenu.mb_add_check_item, livePtr, label, id, accel)
   }
 
   /** PopupMenu.add_icon_check_item */
-  final def addIconCheckItem(texture: Texture2D, label: String, id: Long, accel: Long): Unit = {
+  final def addIconCheckItem(texture: Texture2D, label: String, id: Long = -1L, accel: gdext.classes.Key = gdext.classes.Key(0L)): Unit = {
     if (gdext.classes.PopupMenu.mb_add_icon_check_item == null) gdext.classes.PopupMenu.mb_add_icon_check_item = MethodBind.get("PopupMenu", "add_icon_check_item", 1086190128L)
     Ptrcall.callVoid4(gdext.classes.PopupMenu.mb_add_icon_check_item, livePtr, Wrappers.handle(texture), label, id, accel)
   }
 
   /** PopupMenu.add_radio_check_item */
-  final def addRadioCheckItem(label: String, id: Long, accel: Long): Unit = {
+  final def addRadioCheckItem(label: String, id: Long = -1L, accel: gdext.classes.Key = gdext.classes.Key(0L)): Unit = {
     if (gdext.classes.PopupMenu.mb_add_radio_check_item == null) gdext.classes.PopupMenu.mb_add_radio_check_item = MethodBind.get("PopupMenu", "add_radio_check_item", 3674230041L)
     Ptrcall.callVoid3(gdext.classes.PopupMenu.mb_add_radio_check_item, livePtr, label, id, accel)
   }
 
   /** PopupMenu.add_icon_radio_check_item */
-  final def addIconRadioCheckItem(texture: Texture2D, label: String, id: Long, accel: Long): Unit = {
+  final def addIconRadioCheckItem(texture: Texture2D, label: String, id: Long = -1L, accel: gdext.classes.Key = gdext.classes.Key(0L)): Unit = {
     if (gdext.classes.PopupMenu.mb_add_icon_radio_check_item == null) gdext.classes.PopupMenu.mb_add_icon_radio_check_item = MethodBind.get("PopupMenu", "add_icon_radio_check_item", 1086190128L)
     Ptrcall.callVoid4(gdext.classes.PopupMenu.mb_add_icon_radio_check_item, livePtr, Wrappers.handle(texture), label, id, accel)
   }
 
   /** PopupMenu.add_multistate_item */
-  final def addMultistateItem(label: String, max_states: Long, default_state: Long, id: Long, accel: Long): Unit = {
+  final def addMultistateItem(label: String, maxStates: Long, defaultState: Long = 0L, id: Long = -1L, accel: gdext.classes.Key = gdext.classes.Key(0L)): Unit = {
     if (gdext.classes.PopupMenu.mb_add_multistate_item == null) gdext.classes.PopupMenu.mb_add_multistate_item = MethodBind.get("PopupMenu", "add_multistate_item", 150780458L)
-    Ptrcall.callVoid5(gdext.classes.PopupMenu.mb_add_multistate_item, livePtr, label, max_states, default_state, id, accel)
+    Ptrcall.callVoid5(gdext.classes.PopupMenu.mb_add_multistate_item, livePtr, label, maxStates, defaultState, id, accel)
   }
 
   /** PopupMenu.add_shortcut */
-  final def addShortcut(shortcut: Shortcut, id: Long, global: Boolean, allow_echo: Boolean): Unit = {
+  final def addShortcut(shortcut: Shortcut, id: Long = -1L, global: Boolean = false, allowEcho: Boolean = false): Unit = {
     if (gdext.classes.PopupMenu.mb_add_shortcut == null) gdext.classes.PopupMenu.mb_add_shortcut = MethodBind.get("PopupMenu", "add_shortcut", 3451850107L)
-    Ptrcall.callVoid4(gdext.classes.PopupMenu.mb_add_shortcut, livePtr, Wrappers.handle(shortcut), id, global, allow_echo)
+    Ptrcall.callVoid4(gdext.classes.PopupMenu.mb_add_shortcut, livePtr, Wrappers.handle(shortcut), id, global, allowEcho)
   }
 
   /** PopupMenu.add_icon_shortcut */
-  final def addIconShortcut(texture: Texture2D, shortcut: Shortcut, id: Long, global: Boolean, allow_echo: Boolean): Unit = {
+  final def addIconShortcut(texture: Texture2D, shortcut: Shortcut, id: Long = -1L, global: Boolean = false, allowEcho: Boolean = false): Unit = {
     if (gdext.classes.PopupMenu.mb_add_icon_shortcut == null) gdext.classes.PopupMenu.mb_add_icon_shortcut = MethodBind.get("PopupMenu", "add_icon_shortcut", 2997871092L)
-    Ptrcall.callVoid5(gdext.classes.PopupMenu.mb_add_icon_shortcut, livePtr, Wrappers.handle(texture), Wrappers.handle(shortcut), id, global, allow_echo)
+    Ptrcall.callVoid5(gdext.classes.PopupMenu.mb_add_icon_shortcut, livePtr, Wrappers.handle(texture), Wrappers.handle(shortcut), id, global, allowEcho)
   }
 
   /** PopupMenu.add_check_shortcut */
-  final def addCheckShortcut(shortcut: Shortcut, id: Long, global: Boolean): Unit = {
+  final def addCheckShortcut(shortcut: Shortcut, id: Long = -1L, global: Boolean = false): Unit = {
     if (gdext.classes.PopupMenu.mb_add_check_shortcut == null) gdext.classes.PopupMenu.mb_add_check_shortcut = MethodBind.get("PopupMenu", "add_check_shortcut", 1642193386L)
     Ptrcall.callVoid3(gdext.classes.PopupMenu.mb_add_check_shortcut, livePtr, Wrappers.handle(shortcut), id, global)
   }
 
   /** PopupMenu.add_icon_check_shortcut */
-  final def addIconCheckShortcut(texture: Texture2D, shortcut: Shortcut, id: Long, global: Boolean): Unit = {
+  final def addIconCheckShortcut(texture: Texture2D, shortcut: Shortcut, id: Long = -1L, global: Boolean = false): Unit = {
     if (gdext.classes.PopupMenu.mb_add_icon_check_shortcut == null) gdext.classes.PopupMenu.mb_add_icon_check_shortcut = MethodBind.get("PopupMenu", "add_icon_check_shortcut", 3856247530L)
     Ptrcall.callVoid4(gdext.classes.PopupMenu.mb_add_icon_check_shortcut, livePtr, Wrappers.handle(texture), Wrappers.handle(shortcut), id, global)
   }
 
   /** PopupMenu.add_radio_check_shortcut */
-  final def addRadioCheckShortcut(shortcut: Shortcut, id: Long, global: Boolean): Unit = {
+  final def addRadioCheckShortcut(shortcut: Shortcut, id: Long = -1L, global: Boolean = false): Unit = {
     if (gdext.classes.PopupMenu.mb_add_radio_check_shortcut == null) gdext.classes.PopupMenu.mb_add_radio_check_shortcut = MethodBind.get("PopupMenu", "add_radio_check_shortcut", 1642193386L)
     Ptrcall.callVoid3(gdext.classes.PopupMenu.mb_add_radio_check_shortcut, livePtr, Wrappers.handle(shortcut), id, global)
   }
 
   /** PopupMenu.add_icon_radio_check_shortcut */
-  final def addIconRadioCheckShortcut(texture: Texture2D, shortcut: Shortcut, id: Long, global: Boolean): Unit = {
+  final def addIconRadioCheckShortcut(texture: Texture2D, shortcut: Shortcut, id: Long = -1L, global: Boolean = false): Unit = {
     if (gdext.classes.PopupMenu.mb_add_icon_radio_check_shortcut == null) gdext.classes.PopupMenu.mb_add_icon_radio_check_shortcut = MethodBind.get("PopupMenu", "add_icon_radio_check_shortcut", 3856247530L)
     Ptrcall.callVoid4(gdext.classes.PopupMenu.mb_add_icon_radio_check_shortcut, livePtr, Wrappers.handle(texture), Wrappers.handle(shortcut), id, global)
   }
 
   /** PopupMenu.add_submenu_item */
-  final def addSubmenuItem(label: String, submenu: String, id: Long): Unit = {
+  final def addSubmenuItem(label: String, submenu: String, id: Long = -1L): Unit = {
     if (gdext.classes.PopupMenu.mb_add_submenu_item == null) gdext.classes.PopupMenu.mb_add_submenu_item = MethodBind.get("PopupMenu", "add_submenu_item", 2979222410L)
     Ptrcall.callVoid3(gdext.classes.PopupMenu.mb_add_submenu_item, livePtr, label, submenu, id)
   }
 
   /** PopupMenu.add_submenu_node_item */
-  final def addSubmenuNodeItem(label: String, submenu: PopupMenu, id: Long): Unit = {
+  final def addSubmenuNodeItem(label: String, submenu: PopupMenu, id: Long = -1L): Unit = {
     if (gdext.classes.PopupMenu.mb_add_submenu_node_item == null) gdext.classes.PopupMenu.mb_add_submenu_node_item = MethodBind.get("PopupMenu", "add_submenu_node_item", 1325455216L)
     Ptrcall.callVoid3(gdext.classes.PopupMenu.mb_add_submenu_node_item, livePtr, label, Wrappers.handle(submenu), id)
   }
@@ -131,7 +132,7 @@ abstract class PopupMenu extends Popup {
   }
 
   /** PopupMenu.set_item_text_direction */
-  final def setItemTextDirection(index: Long, direction: Long): Unit = {
+  final def setItemTextDirection(index: Long, direction: gdext.classes.Control.TextDirection): Unit = {
     if (gdext.classes.PopupMenu.mb_set_item_text_direction == null) gdext.classes.PopupMenu.mb_set_item_text_direction = MethodBind.get("PopupMenu", "set_item_text_direction", 1707680378L)
     Ptrcall.callVoid2(gdext.classes.PopupMenu.mb_set_item_text_direction, livePtr, index, direction)
   }
@@ -143,7 +144,7 @@ abstract class PopupMenu extends Popup {
   }
 
   /** PopupMenu.set_item_auto_translate_mode */
-  final def setItemAutoTranslateMode(index: Long, mode: Long): Unit = {
+  final def setItemAutoTranslateMode(index: Long, mode: gdext.classes.Node.AutoTranslateMode): Unit = {
     if (gdext.classes.PopupMenu.mb_set_item_auto_translate_mode == null) gdext.classes.PopupMenu.mb_set_item_auto_translate_mode = MethodBind.get("PopupMenu", "set_item_auto_translate_mode", 287402019L)
     Ptrcall.callVoid2(gdext.classes.PopupMenu.mb_set_item_auto_translate_mode, livePtr, index, mode)
   }
@@ -179,7 +180,7 @@ abstract class PopupMenu extends Popup {
   }
 
   /** PopupMenu.set_item_accelerator */
-  final def setItemAccelerator(index: Long, accel: Long): Unit = {
+  final def setItemAccelerator(index: Long, accel: gdext.classes.Key): Unit = {
     if (gdext.classes.PopupMenu.mb_set_item_accelerator == null) gdext.classes.PopupMenu.mb_set_item_accelerator = MethodBind.get("PopupMenu", "set_item_accelerator", 2992817551L)
     Ptrcall.callVoid2(gdext.classes.PopupMenu.mb_set_item_accelerator, livePtr, index, accel)
   }
@@ -227,7 +228,7 @@ abstract class PopupMenu extends Popup {
   }
 
   /** PopupMenu.set_item_shortcut */
-  final def setItemShortcut(index: Long, shortcut: Shortcut, global: Boolean): Unit = {
+  final def setItemShortcut(index: Long, shortcut: Shortcut, global: Boolean = false): Unit = {
     if (gdext.classes.PopupMenu.mb_set_item_shortcut == null) gdext.classes.PopupMenu.mb_set_item_shortcut = MethodBind.get("PopupMenu", "set_item_shortcut", 825127832L)
     Ptrcall.callVoid3(gdext.classes.PopupMenu.mb_set_item_shortcut, livePtr, index, Wrappers.handle(shortcut), global)
   }
@@ -245,9 +246,9 @@ abstract class PopupMenu extends Popup {
   }
 
   /** PopupMenu.set_item_multistate_max */
-  final def setItemMultistateMax(index: Long, max_states: Long): Unit = {
+  final def setItemMultistateMax(index: Long, maxStates: Long): Unit = {
     if (gdext.classes.PopupMenu.mb_set_item_multistate_max == null) gdext.classes.PopupMenu.mb_set_item_multistate_max = MethodBind.get("PopupMenu", "set_item_multistate_max", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.PopupMenu.mb_set_item_multistate_max, livePtr, index, max_states)
+    Ptrcall.callVoid2(gdext.classes.PopupMenu.mb_set_item_multistate_max, livePtr, index, maxStates)
   }
 
   /** PopupMenu.set_item_shortcut_disabled */
@@ -275,9 +276,9 @@ abstract class PopupMenu extends Popup {
   }
 
   /** PopupMenu.get_item_text_direction */
-  final def getItemTextDirection(index: Long): Long = {
+  final def getItemTextDirection(index: Long): gdext.classes.Control.TextDirection = {
     if (gdext.classes.PopupMenu.mb_get_item_text_direction == null) gdext.classes.PopupMenu.mb_get_item_text_direction = MethodBind.get("PopupMenu", "get_item_text_direction", 4235602388L)
-    Ptrcall.call1[Long, Long](gdext.classes.PopupMenu.mb_get_item_text_direction, livePtr, index)
+    gdext.classes.Control.TextDirection(Ptrcall.call1[Long, Long](gdext.classes.PopupMenu.mb_get_item_text_direction, livePtr, index))
   }
 
   /** PopupMenu.get_item_language */
@@ -287,9 +288,9 @@ abstract class PopupMenu extends Popup {
   }
 
   /** PopupMenu.get_item_auto_translate_mode */
-  final def getItemAutoTranslateMode(index: Long): Long = {
+  final def getItemAutoTranslateMode(index: Long): gdext.classes.Node.AutoTranslateMode = {
     if (gdext.classes.PopupMenu.mb_get_item_auto_translate_mode == null) gdext.classes.PopupMenu.mb_get_item_auto_translate_mode = MethodBind.get("PopupMenu", "get_item_auto_translate_mode", 906302372L)
-    Ptrcall.call1[Long, Long](gdext.classes.PopupMenu.mb_get_item_auto_translate_mode, livePtr, index)
+    gdext.classes.Node.AutoTranslateMode(Ptrcall.call1[Long, Long](gdext.classes.PopupMenu.mb_get_item_auto_translate_mode, livePtr, index))
   }
 
   /** PopupMenu.get_item_icon. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -329,9 +330,9 @@ abstract class PopupMenu extends Popup {
   }
 
   /** PopupMenu.get_item_accelerator */
-  final def getItemAccelerator(index: Long): Long = {
+  final def getItemAccelerator(index: Long): gdext.classes.Key = {
     if (gdext.classes.PopupMenu.mb_get_item_accelerator == null) gdext.classes.PopupMenu.mb_get_item_accelerator = MethodBind.get("PopupMenu", "get_item_accelerator", 253789942L)
-    Ptrcall.call1[Long, Long](gdext.classes.PopupMenu.mb_get_item_accelerator, livePtr, index)
+    gdext.classes.Key(Ptrcall.call1[Long, Long](gdext.classes.PopupMenu.mb_get_item_accelerator, livePtr, index))
   }
 
   /** PopupMenu.is_item_disabled */
@@ -443,15 +444,15 @@ abstract class PopupMenu extends Popup {
   }
 
   /** PopupMenu.add_separator */
-  final def addSeparator(label: String, id: Long): Unit = {
+  final def addSeparator(label: String = "", id: Long = -1L): Unit = {
     if (gdext.classes.PopupMenu.mb_add_separator == null) gdext.classes.PopupMenu.mb_add_separator = MethodBind.get("PopupMenu", "add_separator", 2266703459L)
     Ptrcall.callVoid2(gdext.classes.PopupMenu.mb_add_separator, livePtr, label, id)
   }
 
   /** PopupMenu.clear */
-  final def clear(free_submenus: Boolean): Unit = {
+  final def clear(freeSubmenus: Boolean = false): Unit = {
     if (gdext.classes.PopupMenu.mb_clear == null) gdext.classes.PopupMenu.mb_clear = MethodBind.get("PopupMenu", "clear", 107499316L)
-    Ptrcall.callVoid1(gdext.classes.PopupMenu.mb_clear, livePtr, free_submenus)
+    Ptrcall.callVoid1(gdext.classes.PopupMenu.mb_clear, livePtr, freeSubmenus)
   }
 
   /** PopupMenu.set_hide_on_item_selection */
@@ -521,15 +522,15 @@ abstract class PopupMenu extends Popup {
   }
 
   /** PopupMenu.set_system_menu */
-  final def setSystemMenu(system_menu_id: Long): Unit = {
+  final def setSystemMenu(systemMenuId: gdext.classes.NativeMenu.SystemMenus): Unit = {
     if (gdext.classes.PopupMenu.mb_set_system_menu == null) gdext.classes.PopupMenu.mb_set_system_menu = MethodBind.get("PopupMenu", "set_system_menu", 600639674L)
-    Ptrcall.callVoid1(gdext.classes.PopupMenu.mb_set_system_menu, livePtr, system_menu_id)
+    Ptrcall.callVoid1(gdext.classes.PopupMenu.mb_set_system_menu, livePtr, systemMenuId)
   }
 
   /** PopupMenu.get_system_menu */
-  final def getSystemMenu(): Long = {
+  final def getSystemMenu(): gdext.classes.NativeMenu.SystemMenus = {
     if (gdext.classes.PopupMenu.mb_get_system_menu == null) gdext.classes.PopupMenu.mb_get_system_menu = MethodBind.get("PopupMenu", "get_system_menu", 1222557358L)
-    Ptrcall.call0[Long](gdext.classes.PopupMenu.mb_get_system_menu, livePtr)
+    gdext.classes.NativeMenu.SystemMenus(Ptrcall.call0[Long](gdext.classes.PopupMenu.mb_get_system_menu, livePtr))
   }
 
   /** PopupMenu.set_shrink_height */

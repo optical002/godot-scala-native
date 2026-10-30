@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -30,4 +31,8 @@ object NavigationServer3DManager {
         Godot.interface.global_get_singleton(StringNames.cached("NavigationServer3DManager").ptr)))
     instance
   }
+
+  /** Forwards to [[singleton]]: NavigationServer3DManager.set_default_server */
+  final def setDefaultServer(name: String, priority: Long): Unit =
+    singleton.setDefaultServer(name, priority)
 }

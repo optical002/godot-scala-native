@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class EditorExportPreset extends RefCounted {
   override def godotClassName: String = "EditorExportPreset"
 
   /** EditorExportPreset.has */
-  final def has(property: gdext.builtin.StringName): Boolean = {
+  final def has(property: String): Boolean = {
     if (gdext.classes.EditorExportPreset.mb_has == null) gdext.classes.EditorExportPreset.mb_has = MethodBind.get("EditorExportPreset", "has", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.EditorExportPreset.mb_has, livePtr, property)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.EditorExportPreset.mb_has, livePtr, SnArg(property))
   }
 
   /** EditorExportPreset.get_customized_files_count */
@@ -29,9 +30,9 @@ abstract class EditorExportPreset extends RefCounted {
   }
 
   /** EditorExportPreset.get_file_export_mode */
-  final def getFileExportMode(path: String, default: Long): Long = {
+  final def getFileExportMode(path: String, default: gdext.classes.EditorExportPreset.FileExportMode = gdext.classes.EditorExportPreset.FileExportMode(0L)): gdext.classes.EditorExportPreset.FileExportMode = {
     if (gdext.classes.EditorExportPreset.mb_get_file_export_mode == null) gdext.classes.EditorExportPreset.mb_get_file_export_mode = MethodBind.get("EditorExportPreset", "get_file_export_mode", 407825436L)
-    Ptrcall.call2[String, Long, Long](gdext.classes.EditorExportPreset.mb_get_file_export_mode, livePtr, path, default)
+    gdext.classes.EditorExportPreset.FileExportMode(Ptrcall.call2[String, Long, Long](gdext.classes.EditorExportPreset.mb_get_file_export_mode, livePtr, path, default))
   }
 
   /** EditorExportPreset.get_preset_name */
@@ -59,9 +60,9 @@ abstract class EditorExportPreset extends RefCounted {
   }
 
   /** EditorExportPreset.get_export_filter */
-  final def getExportFilter(): Long = {
+  final def getExportFilter(): gdext.classes.EditorExportPreset.ExportFilter = {
     if (gdext.classes.EditorExportPreset.mb_get_export_filter == null) gdext.classes.EditorExportPreset.mb_get_export_filter = MethodBind.get("EditorExportPreset", "get_export_filter", 4227045696L)
-    Ptrcall.call0[Long](gdext.classes.EditorExportPreset.mb_get_export_filter, livePtr)
+    gdext.classes.EditorExportPreset.ExportFilter(Ptrcall.call0[Long](gdext.classes.EditorExportPreset.mb_get_export_filter, livePtr))
   }
 
   /** EditorExportPreset.get_include_filter */
@@ -119,15 +120,15 @@ abstract class EditorExportPreset extends RefCounted {
   }
 
   /** EditorExportPreset.get_script_export_mode */
-  final def getScriptExportMode(): Long = {
+  final def getScriptExportMode(): gdext.classes.EditorExportPreset.ScriptExportMode = {
     if (gdext.classes.EditorExportPreset.mb_get_script_export_mode == null) gdext.classes.EditorExportPreset.mb_get_script_export_mode = MethodBind.get("EditorExportPreset", "get_script_export_mode", 2835358398L)
-    Ptrcall.call0[Long](gdext.classes.EditorExportPreset.mb_get_script_export_mode, livePtr)
+    gdext.classes.EditorExportPreset.ScriptExportMode(Ptrcall.call0[Long](gdext.classes.EditorExportPreset.mb_get_script_export_mode, livePtr))
   }
 
   /** EditorExportPreset.get_version */
-  final def getVersion(name: gdext.builtin.StringName, windows_version: Boolean): String = {
+  final def getVersion(name: String, windowsVersion: Boolean): String = {
     if (gdext.classes.EditorExportPreset.mb_get_version == null) gdext.classes.EditorExportPreset.mb_get_version = MethodBind.get("EditorExportPreset", "get_version", 1132184663L)
-    Ptrcall.call2[gdext.builtin.StringName, Boolean, String](gdext.classes.EditorExportPreset.mb_get_version, livePtr, name, windows_version)
+    Ptrcall.call2[SnArg, Boolean, String](gdext.classes.EditorExportPreset.mb_get_version, livePtr, SnArg(name), windowsVersion)
   }
 
 }
@@ -153,4 +154,82 @@ object EditorExportPreset {
   private[classes] var mb_get_encryption_key: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_script_export_mode: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_version: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `EditorExportPreset.ExportFilter`. */
+  opaque type ExportFilter <: Long = Long
+
+  object ExportFilter {
+    final val ExportAllResources: ExportFilter = 0L.asInstanceOf[ExportFilter]
+    final val ExportSelectedScenes: ExportFilter = 1L.asInstanceOf[ExportFilter]
+    final val ExportSelectedResources: ExportFilter = 2L.asInstanceOf[ExportFilter]
+    final val ExcludeSelectedResources: ExportFilter = 3L.asInstanceOf[ExportFilter]
+    final val ExportCustomized: ExportFilter = 4L.asInstanceOf[ExportFilter]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ExportFilter = value.asInstanceOf[ExportFilter]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ExportFilter] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[ExportFilter]]
+
+    extension (self: ExportFilter)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "ExportAllResources"
+        case 1L => "ExportSelectedScenes"
+        case 2L => "ExportSelectedResources"
+        case 3L => "ExcludeSelectedResources"
+        case 4L => "ExportCustomized"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `EditorExportPreset.FileExportMode`. */
+  opaque type FileExportMode <: Long = Long
+
+  object FileExportMode {
+    final val NotCustomized: FileExportMode = 0L.asInstanceOf[FileExportMode]
+    final val Strip: FileExportMode = 1L.asInstanceOf[FileExportMode]
+    final val Keep: FileExportMode = 2L.asInstanceOf[FileExportMode]
+    final val Remove: FileExportMode = 3L.asInstanceOf[FileExportMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): FileExportMode = value.asInstanceOf[FileExportMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[FileExportMode] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[FileExportMode]]
+
+    extension (self: FileExportMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "NotCustomized"
+        case 1L => "Strip"
+        case 2L => "Keep"
+        case 3L => "Remove"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `EditorExportPreset.ScriptExportMode`. */
+  opaque type ScriptExportMode <: Long = Long
+
+  object ScriptExportMode {
+    final val Text: ScriptExportMode = 0L.asInstanceOf[ScriptExportMode]
+    final val BinaryTokens: ScriptExportMode = 1L.asInstanceOf[ScriptExportMode]
+    final val BinaryTokensCompressed: ScriptExportMode = 2L.asInstanceOf[ScriptExportMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ScriptExportMode = value.asInstanceOf[ScriptExportMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ScriptExportMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[ScriptExportMode]]
+
+    extension (self: ScriptExportMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Text"
+        case 1L => "BinaryTokens"
+        case 2L => "BinaryTokensCompressed"
+        case other => other.toString
+      }
+  }
 }

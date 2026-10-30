@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,15 +12,15 @@ abstract class InputEventMouse extends InputEventWithModifiers {
   override def godotClassName: String = "InputEventMouse"
 
   /** InputEventMouse.set_button_mask */
-  final def setButtonMask(button_mask: Long): Unit = {
+  final def setButtonMask(buttonMask: gdext.classes.MouseButtonMask): Unit = {
     if (gdext.classes.InputEventMouse.mb_set_button_mask == null) gdext.classes.InputEventMouse.mb_set_button_mask = MethodBind.get("InputEventMouse", "set_button_mask", 3950145251L)
-    Ptrcall.callVoid1(gdext.classes.InputEventMouse.mb_set_button_mask, livePtr, button_mask)
+    Ptrcall.callVoid1(gdext.classes.InputEventMouse.mb_set_button_mask, livePtr, buttonMask.asInstanceOf[Long])
   }
 
   /** InputEventMouse.get_button_mask */
-  final def getButtonMask(): Long = {
+  final def getButtonMask(): gdext.classes.MouseButtonMask = {
     if (gdext.classes.InputEventMouse.mb_get_button_mask == null) gdext.classes.InputEventMouse.mb_get_button_mask = MethodBind.get("InputEventMouse", "get_button_mask", 2512161324L)
-    Ptrcall.call0[Long](gdext.classes.InputEventMouse.mb_get_button_mask, livePtr)
+    gdext.classes.MouseButtonMask(Ptrcall.call0[Long](gdext.classes.InputEventMouse.mb_get_button_mask, livePtr))
   }
 
   /** InputEventMouse.set_position */
@@ -35,9 +36,9 @@ abstract class InputEventMouse extends InputEventWithModifiers {
   }
 
   /** InputEventMouse.set_global_position */
-  final def setGlobalPosition(global_position: gdext.builtin.Vector2): Unit = {
+  final def setGlobalPosition(globalPosition: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.InputEventMouse.mb_set_global_position == null) gdext.classes.InputEventMouse.mb_set_global_position = MethodBind.get("InputEventMouse", "set_global_position", 743155724L)
-    Ptrcall.callVoid1(gdext.classes.InputEventMouse.mb_set_global_position, livePtr, global_position)
+    Ptrcall.callVoid1(gdext.classes.InputEventMouse.mb_set_global_position, livePtr, globalPosition)
   }
 
   /** InputEventMouse.get_global_position */

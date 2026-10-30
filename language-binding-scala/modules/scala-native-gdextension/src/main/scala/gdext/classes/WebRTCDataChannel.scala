@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class WebRTCDataChannel extends PacketPeer {
   override def godotClassName: String = "WebRTCDataChannel"
 
   /** WebRTCDataChannel.poll */
-  final def poll(): Long = {
+  final def poll(): gdext.classes.Error = {
     if (gdext.classes.WebRTCDataChannel.mb_poll == null) gdext.classes.WebRTCDataChannel.mb_poll = MethodBind.get("WebRTCDataChannel", "poll", 166280745L)
-    Ptrcall.call0[Long](gdext.classes.WebRTCDataChannel.mb_poll, livePtr)
+    gdext.classes.Error(Ptrcall.call0[Long](gdext.classes.WebRTCDataChannel.mb_poll, livePtr))
   }
 
   /** WebRTCDataChannel.close */
@@ -29,21 +30,21 @@ abstract class WebRTCDataChannel extends PacketPeer {
   }
 
   /** WebRTCDataChannel.set_write_mode */
-  final def setWriteMode(write_mode: Long): Unit = {
+  final def setWriteMode(writeMode: gdext.classes.WebRTCDataChannel.WriteMode): Unit = {
     if (gdext.classes.WebRTCDataChannel.mb_set_write_mode == null) gdext.classes.WebRTCDataChannel.mb_set_write_mode = MethodBind.get("WebRTCDataChannel", "set_write_mode", 1999768052L)
-    Ptrcall.callVoid1(gdext.classes.WebRTCDataChannel.mb_set_write_mode, livePtr, write_mode)
+    Ptrcall.callVoid1(gdext.classes.WebRTCDataChannel.mb_set_write_mode, livePtr, writeMode)
   }
 
   /** WebRTCDataChannel.get_write_mode */
-  final def getWriteMode(): Long = {
+  final def getWriteMode(): gdext.classes.WebRTCDataChannel.WriteMode = {
     if (gdext.classes.WebRTCDataChannel.mb_get_write_mode == null) gdext.classes.WebRTCDataChannel.mb_get_write_mode = MethodBind.get("WebRTCDataChannel", "get_write_mode", 2848495172L)
-    Ptrcall.call0[Long](gdext.classes.WebRTCDataChannel.mb_get_write_mode, livePtr)
+    gdext.classes.WebRTCDataChannel.WriteMode(Ptrcall.call0[Long](gdext.classes.WebRTCDataChannel.mb_get_write_mode, livePtr))
   }
 
   /** WebRTCDataChannel.get_ready_state */
-  final def getReadyState(): Long = {
+  final def getReadyState(): gdext.classes.WebRTCDataChannel.ChannelState = {
     if (gdext.classes.WebRTCDataChannel.mb_get_ready_state == null) gdext.classes.WebRTCDataChannel.mb_get_ready_state = MethodBind.get("WebRTCDataChannel", "get_ready_state", 3501143017L)
-    Ptrcall.call0[Long](gdext.classes.WebRTCDataChannel.mb_get_ready_state, livePtr)
+    gdext.classes.WebRTCDataChannel.ChannelState(Ptrcall.call0[Long](gdext.classes.WebRTCDataChannel.mb_get_ready_state, livePtr))
   }
 
   /** WebRTCDataChannel.get_label */
@@ -111,4 +112,52 @@ object WebRTCDataChannel {
   private[classes] var mb_get_protocol: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_negotiated: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_buffered_amount: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `WebRTCDataChannel.WriteMode`. */
+  opaque type WriteMode <: Long = Long
+
+  object WriteMode {
+    final val Text: WriteMode = 0L.asInstanceOf[WriteMode]
+    final val Binary: WriteMode = 1L.asInstanceOf[WriteMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): WriteMode = value.asInstanceOf[WriteMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[WriteMode] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[WriteMode]]
+
+    extension (self: WriteMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Text"
+        case 1L => "Binary"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `WebRTCDataChannel.ChannelState`. */
+  opaque type ChannelState <: Long = Long
+
+  object ChannelState {
+    final val Connecting: ChannelState = 0L.asInstanceOf[ChannelState]
+    final val Open: ChannelState = 1L.asInstanceOf[ChannelState]
+    final val Closing: ChannelState = 2L.asInstanceOf[ChannelState]
+    final val Closed: ChannelState = 3L.asInstanceOf[ChannelState]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ChannelState = value.asInstanceOf[ChannelState]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ChannelState] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[ChannelState]]
+
+    extension (self: ChannelState)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Connecting"
+        case 1L => "Open"
+        case 2L => "Closing"
+        case 3L => "Closed"
+        case other => other.toString
+      }
+  }
 }

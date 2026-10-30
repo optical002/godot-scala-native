@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,9 +36,9 @@ abstract class PhysicsRayQueryParameters3D extends RefCounted {
   }
 
   /** PhysicsRayQueryParameters3D.set_collision_mask */
-  final def setCollisionMask(collision_mask: Long): Unit = {
+  final def setCollisionMask(collisionMask: Long): Unit = {
     if (gdext.classes.PhysicsRayQueryParameters3D.mb_set_collision_mask == null) gdext.classes.PhysicsRayQueryParameters3D.mb_set_collision_mask = MethodBind.get("PhysicsRayQueryParameters3D", "set_collision_mask", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.PhysicsRayQueryParameters3D.mb_set_collision_mask, livePtr, collision_mask)
+    Ptrcall.callVoid1(gdext.classes.PhysicsRayQueryParameters3D.mb_set_collision_mask, livePtr, collisionMask)
   }
 
   /** PhysicsRayQueryParameters3D.get_collision_mask */

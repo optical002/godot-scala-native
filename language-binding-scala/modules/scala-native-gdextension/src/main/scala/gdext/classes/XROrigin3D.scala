@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class XROrigin3D extends Node3D {
   override def godotClassName: String = "XROrigin3D"
 
   /** XROrigin3D.set_world_scale */
-  final def setWorldScale(world_scale: Double): Unit = {
+  final def setWorldScale(worldScale: Double): Unit = {
     if (gdext.classes.XROrigin3D.mb_set_world_scale == null) gdext.classes.XROrigin3D.mb_set_world_scale = MethodBind.get("XROrigin3D", "set_world_scale", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.XROrigin3D.mb_set_world_scale, livePtr, world_scale)
+    Ptrcall.callVoid1(gdext.classes.XROrigin3D.mb_set_world_scale, livePtr, worldScale)
   }
 
   /** XROrigin3D.get_world_scale */

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,15 +12,15 @@ abstract class StreamPeerUDS extends StreamPeerSocket {
   override def godotClassName: String = "StreamPeerUDS"
 
   /** StreamPeerUDS.bind */
-  final def bind(path: String): Long = {
+  final def bind(path: String): gdext.classes.Error = {
     if (gdext.classes.StreamPeerUDS.mb_bind == null) gdext.classes.StreamPeerUDS.mb_bind = MethodBind.get("StreamPeerUDS", "bind", 166001499L)
-    Ptrcall.call1[String, Long](gdext.classes.StreamPeerUDS.mb_bind, livePtr, path)
+    gdext.classes.Error(Ptrcall.call1[String, Long](gdext.classes.StreamPeerUDS.mb_bind, livePtr, path))
   }
 
   /** StreamPeerUDS.connect_to_host */
-  final def connectToHost(path: String): Long = {
+  final def connectToHost(path: String): gdext.classes.Error = {
     if (gdext.classes.StreamPeerUDS.mb_connect_to_host == null) gdext.classes.StreamPeerUDS.mb_connect_to_host = MethodBind.get("StreamPeerUDS", "connect_to_host", 166001499L)
-    Ptrcall.call1[String, Long](gdext.classes.StreamPeerUDS.mb_connect_to_host, livePtr, path)
+    gdext.classes.Error(Ptrcall.call1[String, Long](gdext.classes.StreamPeerUDS.mb_connect_to_host, livePtr, path))
   }
 
   /** StreamPeerUDS.get_connected_path */

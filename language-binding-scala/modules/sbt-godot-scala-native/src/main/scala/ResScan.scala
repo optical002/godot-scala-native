@@ -285,9 +285,15 @@ object ResScan {
         sb ++= s"$ind}\n"
       case (id, Right(e)) =>
         val p = literal("res://" + e.rel)
+        // `_root_`-qualified: a member named like a package (`game.json`,
+        // a `ui/` folder) would otherwise shadow it inside this object.
         val line = e.kind match {
-          case Res(t)   => s"inline def $id: ResPath[$t] = ResPath[$t]($p)"
-          case Scene(t) => s"inline def $id: ScenePath[$t] = ScenePath[$t]($p)"
+          case Res(t0) =>
+            val t = s"_root_.$t0"
+            s"inline def $id: ResPath[$t] = ResPath[$t]($p)"
+          case Scene(t0) =>
+            val t = s"_root_.$t0"
+            s"inline def $id: ScenePath[$t] = ScenePath[$t]($p)"
           case Plain    => s"inline def $id: FilePath = FilePath($p)"
         }
         sb ++= s"$ind$line\n"

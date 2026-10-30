@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -47,21 +48,21 @@ abstract class GradientTexture2D extends Texture2D {
   }
 
   /** GradientTexture2D.set_fill */
-  final def setFill(fill: Long): Unit = {
+  final def setFill(fill: gdext.classes.GradientTexture2D.Fill): Unit = {
     if (gdext.classes.GradientTexture2D.mb_set_fill == null) gdext.classes.GradientTexture2D.mb_set_fill = MethodBind.get("GradientTexture2D", "set_fill", 3623927636L)
     Ptrcall.callVoid1(gdext.classes.GradientTexture2D.mb_set_fill, livePtr, fill)
   }
 
   /** GradientTexture2D.get_fill */
-  final def getFill(): Long = {
+  final def getFill(): gdext.classes.GradientTexture2D.Fill = {
     if (gdext.classes.GradientTexture2D.mb_get_fill == null) gdext.classes.GradientTexture2D.mb_get_fill = MethodBind.get("GradientTexture2D", "get_fill", 1876227217L)
-    Ptrcall.call0[Long](gdext.classes.GradientTexture2D.mb_get_fill, livePtr)
+    gdext.classes.GradientTexture2D.Fill(Ptrcall.call0[Long](gdext.classes.GradientTexture2D.mb_get_fill, livePtr))
   }
 
   /** GradientTexture2D.set_fill_from */
-  final def setFillFrom(fill_from: gdext.builtin.Vector2): Unit = {
+  final def setFillFrom(fillFrom: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.GradientTexture2D.mb_set_fill_from == null) gdext.classes.GradientTexture2D.mb_set_fill_from = MethodBind.get("GradientTexture2D", "set_fill_from", 743155724L)
-    Ptrcall.callVoid1(gdext.classes.GradientTexture2D.mb_set_fill_from, livePtr, fill_from)
+    Ptrcall.callVoid1(gdext.classes.GradientTexture2D.mb_set_fill_from, livePtr, fillFrom)
   }
 
   /** GradientTexture2D.get_fill_from */
@@ -71,9 +72,9 @@ abstract class GradientTexture2D extends Texture2D {
   }
 
   /** GradientTexture2D.set_fill_to */
-  final def setFillTo(fill_to: gdext.builtin.Vector2): Unit = {
+  final def setFillTo(fillTo: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.GradientTexture2D.mb_set_fill_to == null) gdext.classes.GradientTexture2D.mb_set_fill_to = MethodBind.get("GradientTexture2D", "set_fill_to", 743155724L)
-    Ptrcall.callVoid1(gdext.classes.GradientTexture2D.mb_set_fill_to, livePtr, fill_to)
+    Ptrcall.callVoid1(gdext.classes.GradientTexture2D.mb_set_fill_to, livePtr, fillTo)
   }
 
   /** GradientTexture2D.get_fill_to */
@@ -83,15 +84,15 @@ abstract class GradientTexture2D extends Texture2D {
   }
 
   /** GradientTexture2D.set_repeat */
-  final def setRepeat(repeat: Long): Unit = {
+  final def setRepeat(repeat: gdext.classes.GradientTexture2D.Repeat): Unit = {
     if (gdext.classes.GradientTexture2D.mb_set_repeat == null) gdext.classes.GradientTexture2D.mb_set_repeat = MethodBind.get("GradientTexture2D", "set_repeat", 1357597002L)
     Ptrcall.callVoid1(gdext.classes.GradientTexture2D.mb_set_repeat, livePtr, repeat)
   }
 
   /** GradientTexture2D.get_repeat */
-  final def getRepeat(): Long = {
+  final def getRepeat(): gdext.classes.GradientTexture2D.Repeat = {
     if (gdext.classes.GradientTexture2D.mb_get_repeat == null) gdext.classes.GradientTexture2D.mb_get_repeat = MethodBind.get("GradientTexture2D", "get_repeat", 3351758665L)
-    Ptrcall.call0[Long](gdext.classes.GradientTexture2D.mb_get_repeat, livePtr)
+    gdext.classes.GradientTexture2D.Repeat(Ptrcall.call0[Long](gdext.classes.GradientTexture2D.mb_get_repeat, livePtr))
   }
 
 }
@@ -111,4 +112,52 @@ object GradientTexture2D {
   private[classes] var mb_get_fill_to: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_repeat: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_repeat: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `GradientTexture2D.Fill`. */
+  opaque type Fill <: Long = Long
+
+  object Fill {
+    final val Linear: Fill = 0L.asInstanceOf[Fill]
+    final val Radial: Fill = 1L.asInstanceOf[Fill]
+    final val Square: Fill = 2L.asInstanceOf[Fill]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): Fill = value.asInstanceOf[Fill]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[Fill] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[Fill]]
+
+    extension (self: Fill)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Linear"
+        case 1L => "Radial"
+        case 2L => "Square"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `GradientTexture2D.Repeat`. */
+  opaque type Repeat <: Long = Long
+
+  object Repeat {
+    final val RepeatNone: Repeat = 0L.asInstanceOf[Repeat]
+    final val Repeat: Repeat = 1L.asInstanceOf[Repeat]
+    final val RepeatMirror: Repeat = 2L.asInstanceOf[Repeat]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): Repeat = value.asInstanceOf[Repeat]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[Repeat] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[Repeat]]
+
+    extension (self: Repeat)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "RepeatNone"
+        case 1L => "Repeat"
+        case 2L => "RepeatMirror"
+        case other => other.toString
+      }
+  }
 }

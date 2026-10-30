@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class PointLight2D extends Light2D {
   }
 
   /** PointLight2D.set_texture_offset */
-  final def setTextureOffset(texture_offset: gdext.builtin.Vector2): Unit = {
+  final def setTextureOffset(textureOffset: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.PointLight2D.mb_set_texture_offset == null) gdext.classes.PointLight2D.mb_set_texture_offset = MethodBind.get("PointLight2D", "set_texture_offset", 743155724L)
-    Ptrcall.callVoid1(gdext.classes.PointLight2D.mb_set_texture_offset, livePtr, texture_offset)
+    Ptrcall.callVoid1(gdext.classes.PointLight2D.mb_set_texture_offset, livePtr, textureOffset)
   }
 
   /** PointLight2D.get_texture_offset */
@@ -35,9 +36,9 @@ abstract class PointLight2D extends Light2D {
   }
 
   /** PointLight2D.set_texture_scale */
-  final def setTextureScale(texture_scale: Double): Unit = {
+  final def setTextureScale(textureScale: Double): Unit = {
     if (gdext.classes.PointLight2D.mb_set_texture_scale == null) gdext.classes.PointLight2D.mb_set_texture_scale = MethodBind.get("PointLight2D", "set_texture_scale", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.PointLight2D.mb_set_texture_scale, livePtr, texture_scale)
+    Ptrcall.callVoid1(gdext.classes.PointLight2D.mb_set_texture_scale, livePtr, textureScale)
   }
 
   /** PointLight2D.get_texture_scale */

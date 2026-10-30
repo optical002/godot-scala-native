@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class VehicleBody3D extends RigidBody3D {
   override def godotClassName: String = "VehicleBody3D"
 
   /** VehicleBody3D.set_engine_force */
-  final def setEngineForce(engine_force: Double): Unit = {
+  final def setEngineForce(engineForce: Double): Unit = {
     if (gdext.classes.VehicleBody3D.mb_set_engine_force == null) gdext.classes.VehicleBody3D.mb_set_engine_force = MethodBind.get("VehicleBody3D", "set_engine_force", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.VehicleBody3D.mb_set_engine_force, livePtr, engine_force)
+    Ptrcall.callVoid1(gdext.classes.VehicleBody3D.mb_set_engine_force, livePtr, engineForce)
   }
 
   /** VehicleBody3D.get_engine_force */

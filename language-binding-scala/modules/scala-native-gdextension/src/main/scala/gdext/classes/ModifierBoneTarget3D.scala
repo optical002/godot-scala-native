@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class ModifierBoneTarget3D extends SkeletonModifier3D {
   override def godotClassName: String = "ModifierBoneTarget3D"
 
   /** ModifierBoneTarget3D.set_bone_name */
-  final def setBoneName(bone_name: String): Unit = {
+  final def setBoneName(boneName: String): Unit = {
     if (gdext.classes.ModifierBoneTarget3D.mb_set_bone_name == null) gdext.classes.ModifierBoneTarget3D.mb_set_bone_name = MethodBind.get("ModifierBoneTarget3D", "set_bone_name", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.ModifierBoneTarget3D.mb_set_bone_name, livePtr, bone_name)
+    Ptrcall.callVoid1(gdext.classes.ModifierBoneTarget3D.mb_set_bone_name, livePtr, boneName)
   }
 
   /** ModifierBoneTarget3D.get_bone_name */

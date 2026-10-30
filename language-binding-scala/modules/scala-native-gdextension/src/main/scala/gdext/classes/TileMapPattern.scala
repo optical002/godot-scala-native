@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class TileMapPattern extends Resource {
   override def godotClassName: String = "TileMapPattern"
 
   /** TileMapPattern.set_cell */
-  final def setCell(coords: gdext.builtin.Vector2i, source_id: Long, atlas_coords: gdext.builtin.Vector2i, alternative_tile: Long): Unit = {
+  final def setCell(coords: gdext.builtin.Vector2i, sourceId: Long = -1L, atlasCoords: gdext.builtin.Vector2i = gdext.builtin.Vector2i(-1, -1), alternativeTile: Long = -1L): Unit = {
     if (gdext.classes.TileMapPattern.mb_set_cell == null) gdext.classes.TileMapPattern.mb_set_cell = MethodBind.get("TileMapPattern", "set_cell", 2224802556L)
-    Ptrcall.callVoid4(gdext.classes.TileMapPattern.mb_set_cell, livePtr, coords, source_id, atlas_coords, alternative_tile)
+    Ptrcall.callVoid4(gdext.classes.TileMapPattern.mb_set_cell, livePtr, coords, sourceId, atlasCoords, alternativeTile)
   }
 
   /** TileMapPattern.has_cell */
@@ -23,9 +24,9 @@ abstract class TileMapPattern extends Resource {
   }
 
   /** TileMapPattern.remove_cell */
-  final def removeCell(coords: gdext.builtin.Vector2i, update_size: Boolean): Unit = {
+  final def removeCell(coords: gdext.builtin.Vector2i, updateSize: Boolean): Unit = {
     if (gdext.classes.TileMapPattern.mb_remove_cell == null) gdext.classes.TileMapPattern.mb_remove_cell = MethodBind.get("TileMapPattern", "remove_cell", 4153096796L)
-    Ptrcall.callVoid2(gdext.classes.TileMapPattern.mb_remove_cell, livePtr, coords, update_size)
+    Ptrcall.callVoid2(gdext.classes.TileMapPattern.mb_remove_cell, livePtr, coords, updateSize)
   }
 
   /** TileMapPattern.get_cell_source_id */

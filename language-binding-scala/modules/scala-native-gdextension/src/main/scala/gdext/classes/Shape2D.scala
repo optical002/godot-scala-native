@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,15 +24,15 @@ abstract class Shape2D extends Resource {
   }
 
   /** Shape2D.collide */
-  final def collide(local_xform: gdext.builtin.Transform2D, with_shape: Shape2D, shape_xform: gdext.builtin.Transform2D): Boolean = {
+  final def collide(localXform: gdext.builtin.Transform2D, withShape: Shape2D, shapeXform: gdext.builtin.Transform2D): Boolean = {
     if (gdext.classes.Shape2D.mb_collide == null) gdext.classes.Shape2D.mb_collide = MethodBind.get("Shape2D", "collide", 3709843132L)
-    Ptrcall.call3[gdext.builtin.Transform2D, GodotObject, gdext.builtin.Transform2D, Boolean](gdext.classes.Shape2D.mb_collide, livePtr, local_xform, Wrappers.handle(with_shape), shape_xform)
+    Ptrcall.call3[gdext.builtin.Transform2D, GodotObject, gdext.builtin.Transform2D, Boolean](gdext.classes.Shape2D.mb_collide, livePtr, localXform, Wrappers.handle(withShape), shapeXform)
   }
 
   /** Shape2D.collide_with_motion */
-  final def collideWithMotion(local_xform: gdext.builtin.Transform2D, local_motion: gdext.builtin.Vector2, with_shape: Shape2D, shape_xform: gdext.builtin.Transform2D, shape_motion: gdext.builtin.Vector2): Boolean = {
+  final def collideWithMotion(localXform: gdext.builtin.Transform2D, localMotion: gdext.builtin.Vector2, withShape: Shape2D, shapeXform: gdext.builtin.Transform2D, shapeMotion: gdext.builtin.Vector2): Boolean = {
     if (gdext.classes.Shape2D.mb_collide_with_motion == null) gdext.classes.Shape2D.mb_collide_with_motion = MethodBind.get("Shape2D", "collide_with_motion", 2869556801L)
-    Ptrcall.call5[gdext.builtin.Transform2D, gdext.builtin.Vector2, GodotObject, gdext.builtin.Transform2D, gdext.builtin.Vector2, Boolean](gdext.classes.Shape2D.mb_collide_with_motion, livePtr, local_xform, local_motion, Wrappers.handle(with_shape), shape_xform, shape_motion)
+    Ptrcall.call5[gdext.builtin.Transform2D, gdext.builtin.Vector2, GodotObject, gdext.builtin.Transform2D, gdext.builtin.Vector2, Boolean](gdext.classes.Shape2D.mb_collide_with_motion, livePtr, localXform, localMotion, Wrappers.handle(withShape), shapeXform, shapeMotion)
   }
 
   /** Shape2D.get_rect */

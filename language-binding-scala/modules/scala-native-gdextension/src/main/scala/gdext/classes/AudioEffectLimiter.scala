@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,9 +36,9 @@ abstract class AudioEffectLimiter extends AudioEffect {
   }
 
   /** AudioEffectLimiter.set_soft_clip_db */
-  final def setSoftClipDb(soft_clip: Double): Unit = {
+  final def setSoftClipDb(softClip: Double): Unit = {
     if (gdext.classes.AudioEffectLimiter.mb_set_soft_clip_db == null) gdext.classes.AudioEffectLimiter.mb_set_soft_clip_db = MethodBind.get("AudioEffectLimiter", "set_soft_clip_db", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AudioEffectLimiter.mb_set_soft_clip_db, livePtr, soft_clip)
+    Ptrcall.callVoid1(gdext.classes.AudioEffectLimiter.mb_set_soft_clip_db, livePtr, softClip)
   }
 
   /** AudioEffectLimiter.get_soft_clip_db */
@@ -47,9 +48,9 @@ abstract class AudioEffectLimiter extends AudioEffect {
   }
 
   /** AudioEffectLimiter.set_soft_clip_ratio */
-  final def setSoftClipRatio(soft_clip: Double): Unit = {
+  final def setSoftClipRatio(softClip: Double): Unit = {
     if (gdext.classes.AudioEffectLimiter.mb_set_soft_clip_ratio == null) gdext.classes.AudioEffectLimiter.mb_set_soft_clip_ratio = MethodBind.get("AudioEffectLimiter", "set_soft_clip_ratio", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AudioEffectLimiter.mb_set_soft_clip_ratio, livePtr, soft_clip)
+    Ptrcall.callVoid1(gdext.classes.AudioEffectLimiter.mb_set_soft_clip_ratio, livePtr, softClip)
   }
 
   /** AudioEffectLimiter.get_soft_clip_ratio */

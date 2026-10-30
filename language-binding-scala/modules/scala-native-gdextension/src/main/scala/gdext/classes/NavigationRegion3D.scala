@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class NavigationRegion3D extends Node3D {
   override def godotClassName: String = "NavigationRegion3D"
 
   /** NavigationRegion3D.set_navigation_mesh */
-  final def setNavigationMesh(navigation_mesh: NavigationMesh): Unit = {
+  final def setNavigationMesh(navigationMesh: NavigationMesh): Unit = {
     if (gdext.classes.NavigationRegion3D.mb_set_navigation_mesh == null) gdext.classes.NavigationRegion3D.mb_set_navigation_mesh = MethodBind.get("NavigationRegion3D", "set_navigation_mesh", 2923361153L)
-    Ptrcall.callVoid1(gdext.classes.NavigationRegion3D.mb_set_navigation_mesh, livePtr, Wrappers.handle(navigation_mesh))
+    Ptrcall.callVoid1(gdext.classes.NavigationRegion3D.mb_set_navigation_mesh, livePtr, Wrappers.handle(navigationMesh))
   }
 
   /** NavigationRegion3D.get_navigation_mesh. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -47,9 +48,9 @@ abstract class NavigationRegion3D extends Node3D {
   }
 
   /** NavigationRegion3D.set_navigation_layers */
-  final def setNavigationLayers(navigation_layers: Long): Unit = {
+  final def setNavigationLayers(navigationLayers: Long): Unit = {
     if (gdext.classes.NavigationRegion3D.mb_set_navigation_layers == null) gdext.classes.NavigationRegion3D.mb_set_navigation_layers = MethodBind.get("NavigationRegion3D", "set_navigation_layers", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.NavigationRegion3D.mb_set_navigation_layers, livePtr, navigation_layers)
+    Ptrcall.callVoid1(gdext.classes.NavigationRegion3D.mb_set_navigation_layers, livePtr, navigationLayers)
   }
 
   /** NavigationRegion3D.get_navigation_layers */
@@ -59,21 +60,21 @@ abstract class NavigationRegion3D extends Node3D {
   }
 
   /** NavigationRegion3D.set_navigation_layer_value */
-  final def setNavigationLayerValue(layer_number: Long, value: Boolean): Unit = {
+  final def setNavigationLayerValue(layerNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.NavigationRegion3D.mb_set_navigation_layer_value == null) gdext.classes.NavigationRegion3D.mb_set_navigation_layer_value = MethodBind.get("NavigationRegion3D", "set_navigation_layer_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.NavigationRegion3D.mb_set_navigation_layer_value, livePtr, layer_number, value)
+    Ptrcall.callVoid2(gdext.classes.NavigationRegion3D.mb_set_navigation_layer_value, livePtr, layerNumber, value)
   }
 
   /** NavigationRegion3D.get_navigation_layer_value */
-  final def getNavigationLayerValue(layer_number: Long): Boolean = {
+  final def getNavigationLayerValue(layerNumber: Long): Boolean = {
     if (gdext.classes.NavigationRegion3D.mb_get_navigation_layer_value == null) gdext.classes.NavigationRegion3D.mb_get_navigation_layer_value = MethodBind.get("NavigationRegion3D", "get_navigation_layer_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.NavigationRegion3D.mb_get_navigation_layer_value, livePtr, layer_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.NavigationRegion3D.mb_get_navigation_layer_value, livePtr, layerNumber)
   }
 
   /** NavigationRegion3D.set_enter_cost */
-  final def setEnterCost(enter_cost: Double): Unit = {
+  final def setEnterCost(enterCost: Double): Unit = {
     if (gdext.classes.NavigationRegion3D.mb_set_enter_cost == null) gdext.classes.NavigationRegion3D.mb_set_enter_cost = MethodBind.get("NavigationRegion3D", "set_enter_cost", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.NavigationRegion3D.mb_set_enter_cost, livePtr, enter_cost)
+    Ptrcall.callVoid1(gdext.classes.NavigationRegion3D.mb_set_enter_cost, livePtr, enterCost)
   }
 
   /** NavigationRegion3D.get_enter_cost */
@@ -83,9 +84,9 @@ abstract class NavigationRegion3D extends Node3D {
   }
 
   /** NavigationRegion3D.set_travel_cost */
-  final def setTravelCost(travel_cost: Double): Unit = {
+  final def setTravelCost(travelCost: Double): Unit = {
     if (gdext.classes.NavigationRegion3D.mb_set_travel_cost == null) gdext.classes.NavigationRegion3D.mb_set_travel_cost = MethodBind.get("NavigationRegion3D", "set_travel_cost", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.NavigationRegion3D.mb_set_travel_cost, livePtr, travel_cost)
+    Ptrcall.callVoid1(gdext.classes.NavigationRegion3D.mb_set_travel_cost, livePtr, travelCost)
   }
 
   /** NavigationRegion3D.get_travel_cost */
@@ -95,9 +96,9 @@ abstract class NavigationRegion3D extends Node3D {
   }
 
   /** NavigationRegion3D.bake_navigation_mesh */
-  final def bakeNavigationMesh(on_thread: Boolean): Unit = {
+  final def bakeNavigationMesh(onThread: Boolean = true): Unit = {
     if (gdext.classes.NavigationRegion3D.mb_bake_navigation_mesh == null) gdext.classes.NavigationRegion3D.mb_bake_navigation_mesh = MethodBind.get("NavigationRegion3D", "bake_navigation_mesh", 3216645846L)
-    Ptrcall.callVoid1(gdext.classes.NavigationRegion3D.mb_bake_navigation_mesh, livePtr, on_thread)
+    Ptrcall.callVoid1(gdext.classes.NavigationRegion3D.mb_bake_navigation_mesh, livePtr, onThread)
   }
 
   /** NavigationRegion3D.is_baking */

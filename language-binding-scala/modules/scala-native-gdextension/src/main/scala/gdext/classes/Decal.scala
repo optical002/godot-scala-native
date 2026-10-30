@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,13 +24,13 @@ abstract class Decal extends VisualInstance3D {
   }
 
   /** Decal.set_texture */
-  final def setTexture(`type`: Long, texture: Texture2D): Unit = {
+  final def setTexture(`type`: gdext.classes.Decal.DecalTexture, texture: Texture2D): Unit = {
     if (gdext.classes.Decal.mb_set_texture == null) gdext.classes.Decal.mb_set_texture = MethodBind.get("Decal", "set_texture", 2086764391L)
     Ptrcall.callVoid2(gdext.classes.Decal.mb_set_texture, livePtr, `type`, Wrappers.handle(texture))
   }
 
   /** Decal.get_texture. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getTexture(`type`: Long): Texture2D = {
+  final def getTexture(`type`: gdext.classes.Decal.DecalTexture): Texture2D = {
     if (gdext.classes.Decal.mb_get_texture == null) gdext.classes.Decal.mb_get_texture = MethodBind.get("Decal", "get_texture", 3244119503L)
     Wrappers.owned[Texture2D](Ptrcall.call1[Long, Long](gdext.classes.Decal.mb_get_texture, livePtr, `type`))
   }
@@ -181,4 +182,32 @@ object Decal {
   private[classes] var mb_get_distance_fade_length: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_cull_mask: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_cull_mask: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `Decal.DecalTexture`. */
+  opaque type DecalTexture <: Long = Long
+
+  object DecalTexture {
+    final val Albedo: DecalTexture = 0L.asInstanceOf[DecalTexture]
+    final val Normal: DecalTexture = 1L.asInstanceOf[DecalTexture]
+    final val Orm: DecalTexture = 2L.asInstanceOf[DecalTexture]
+    final val Emission: DecalTexture = 3L.asInstanceOf[DecalTexture]
+    final val Max: DecalTexture = 4L.asInstanceOf[DecalTexture]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DecalTexture = value.asInstanceOf[DecalTexture]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DecalTexture] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[DecalTexture]]
+
+    extension (self: DecalTexture)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Albedo"
+        case 1L => "Normal"
+        case 2L => "Orm"
+        case 3L => "Emission"
+        case 4L => "Max"
+        case other => other.toString
+      }
+  }
 }

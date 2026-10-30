@@ -89,5 +89,5 @@ final class Rig extends Node {
   `nameOf(field)` checks that name at compile time and keeps it correct
   through renames. On `var` constructor parameters, use a string literal.
 - A node class that uses any of these annotations registers as a *tool* class,
-  so the dropdowns work in the editor. Guard any `_process` logic that should
+  so the dropdowns work in the editor. Guard any `process` logic that should
   not run in the editor.

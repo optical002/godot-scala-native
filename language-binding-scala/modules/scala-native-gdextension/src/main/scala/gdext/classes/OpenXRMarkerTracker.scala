@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class OpenXRMarkerTracker extends OpenXRSpatialEntityTracker {
   override def godotClassName: String = "OpenXRMarkerTracker"
 
   /** OpenXRMarkerTracker.set_bounds_size */
-  final def setBoundsSize(bounds_size: gdext.builtin.Vector2): Unit = {
+  final def setBoundsSize(boundsSize: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.OpenXRMarkerTracker.mb_set_bounds_size == null) gdext.classes.OpenXRMarkerTracker.mb_set_bounds_size = MethodBind.get("OpenXRMarkerTracker", "set_bounds_size", 743155724L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRMarkerTracker.mb_set_bounds_size, livePtr, bounds_size)
+    Ptrcall.callVoid1(gdext.classes.OpenXRMarkerTracker.mb_set_bounds_size, livePtr, boundsSize)
   }
 
   /** OpenXRMarkerTracker.get_bounds_size */
@@ -23,21 +24,21 @@ abstract class OpenXRMarkerTracker extends OpenXRSpatialEntityTracker {
   }
 
   /** OpenXRMarkerTracker.set_marker_type */
-  final def setMarkerType(marker_type: Long): Unit = {
+  final def setMarkerType(markerType: gdext.classes.OpenXRSpatialComponentMarkerList.MarkerType): Unit = {
     if (gdext.classes.OpenXRMarkerTracker.mb_set_marker_type == null) gdext.classes.OpenXRMarkerTracker.mb_set_marker_type = MethodBind.get("OpenXRMarkerTracker", "set_marker_type", 2156241362L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRMarkerTracker.mb_set_marker_type, livePtr, marker_type)
+    Ptrcall.callVoid1(gdext.classes.OpenXRMarkerTracker.mb_set_marker_type, livePtr, markerType)
   }
 
   /** OpenXRMarkerTracker.get_marker_type */
-  final def getMarkerType(): Long = {
+  final def getMarkerType(): gdext.classes.OpenXRSpatialComponentMarkerList.MarkerType = {
     if (gdext.classes.OpenXRMarkerTracker.mb_get_marker_type == null) gdext.classes.OpenXRMarkerTracker.mb_get_marker_type = MethodBind.get("OpenXRMarkerTracker", "get_marker_type", 612702862L)
-    Ptrcall.call0[Long](gdext.classes.OpenXRMarkerTracker.mb_get_marker_type, livePtr)
+    gdext.classes.OpenXRSpatialComponentMarkerList.MarkerType(Ptrcall.call0[Long](gdext.classes.OpenXRMarkerTracker.mb_get_marker_type, livePtr))
   }
 
   /** OpenXRMarkerTracker.set_marker_id */
-  final def setMarkerId(marker_id: Long): Unit = {
+  final def setMarkerId(markerId: Long): Unit = {
     if (gdext.classes.OpenXRMarkerTracker.mb_set_marker_id == null) gdext.classes.OpenXRMarkerTracker.mb_set_marker_id = MethodBind.get("OpenXRMarkerTracker", "set_marker_id", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRMarkerTracker.mb_set_marker_id, livePtr, marker_id)
+    Ptrcall.callVoid1(gdext.classes.OpenXRMarkerTracker.mb_set_marker_id, livePtr, markerId)
   }
 
   /** OpenXRMarkerTracker.get_marker_id */

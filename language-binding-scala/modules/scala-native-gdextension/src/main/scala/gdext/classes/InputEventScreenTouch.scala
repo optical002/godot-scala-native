@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -47,9 +48,9 @@ abstract class InputEventScreenTouch extends InputEventFromWindow {
   }
 
   /** InputEventScreenTouch.set_double_tap */
-  final def setDoubleTap(double_tap: Boolean): Unit = {
+  final def setDoubleTap(doubleTap: Boolean): Unit = {
     if (gdext.classes.InputEventScreenTouch.mb_set_double_tap == null) gdext.classes.InputEventScreenTouch.mb_set_double_tap = MethodBind.get("InputEventScreenTouch", "set_double_tap", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.InputEventScreenTouch.mb_set_double_tap, livePtr, double_tap)
+    Ptrcall.callVoid1(gdext.classes.InputEventScreenTouch.mb_set_double_tap, livePtr, doubleTap)
   }
 
   /** InputEventScreenTouch.is_double_tap */

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,15 +12,15 @@ abstract class GLTFState extends Resource {
   override def godotClassName: String = "GLTFState"
 
   /** GLTFState.add_used_extension */
-  final def addUsedExtension(extension_name: String, required: Boolean): Unit = {
+  final def addUsedExtension(extensionName: String, required: Boolean): Unit = {
     if (gdext.classes.GLTFState.mb_add_used_extension == null) gdext.classes.GLTFState.mb_add_used_extension = MethodBind.get("GLTFState", "add_used_extension", 2678287736L)
-    Ptrcall.callVoid2(gdext.classes.GLTFState.mb_add_used_extension, livePtr, extension_name, required)
+    Ptrcall.callVoid2(gdext.classes.GLTFState.mb_add_used_extension, livePtr, extensionName, required)
   }
 
   /** GLTFState.append_gltf_node */
-  final def appendGltfNode(gltf_node: GLTFNode, godot_scene_node: Node, parent_node_index: Long): Long = {
+  final def appendGltfNode(gltfNode: GLTFNode, godotSceneNode: Node, parentNodeIndex: Long): Long = {
     if (gdext.classes.GLTFState.mb_append_gltf_node == null) gdext.classes.GLTFState.mb_append_gltf_node = MethodBind.get("GLTFState", "append_gltf_node", 3562288551L)
-    Ptrcall.call3[GodotObject, GodotObject, Long, Long](gdext.classes.GLTFState.mb_append_gltf_node, livePtr, Wrappers.handle(gltf_node), Wrappers.handle(godot_scene_node), parent_node_index)
+    Ptrcall.call3[GodotObject, GodotObject, Long, Long](gdext.classes.GLTFState.mb_append_gltf_node, livePtr, Wrappers.handle(gltfNode), Wrappers.handle(godotSceneNode), parentNodeIndex)
   }
 
   /** GLTFState.get_major_version */
@@ -29,9 +30,9 @@ abstract class GLTFState extends Resource {
   }
 
   /** GLTFState.set_major_version */
-  final def setMajorVersion(major_version: Long): Unit = {
+  final def setMajorVersion(majorVersion: Long): Unit = {
     if (gdext.classes.GLTFState.mb_set_major_version == null) gdext.classes.GLTFState.mb_set_major_version = MethodBind.get("GLTFState", "set_major_version", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.GLTFState.mb_set_major_version, livePtr, major_version)
+    Ptrcall.callVoid1(gdext.classes.GLTFState.mb_set_major_version, livePtr, majorVersion)
   }
 
   /** GLTFState.get_minor_version */
@@ -41,9 +42,9 @@ abstract class GLTFState extends Resource {
   }
 
   /** GLTFState.set_minor_version */
-  final def setMinorVersion(minor_version: Long): Unit = {
+  final def setMinorVersion(minorVersion: Long): Unit = {
     if (gdext.classes.GLTFState.mb_set_minor_version == null) gdext.classes.GLTFState.mb_set_minor_version = MethodBind.get("GLTFState", "set_minor_version", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.GLTFState.mb_set_minor_version, livePtr, minor_version)
+    Ptrcall.callVoid1(gdext.classes.GLTFState.mb_set_minor_version, livePtr, minorVersion)
   }
 
   /** GLTFState.get_copyright */
@@ -65,21 +66,21 @@ abstract class GLTFState extends Resource {
   }
 
   /** GLTFState.set_use_named_skin_binds */
-  final def setUseNamedSkinBinds(use_named_skin_binds: Boolean): Unit = {
+  final def setUseNamedSkinBinds(useNamedSkinBinds: Boolean): Unit = {
     if (gdext.classes.GLTFState.mb_set_use_named_skin_binds == null) gdext.classes.GLTFState.mb_set_use_named_skin_binds = MethodBind.get("GLTFState", "set_use_named_skin_binds", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.GLTFState.mb_set_use_named_skin_binds, livePtr, use_named_skin_binds)
+    Ptrcall.callVoid1(gdext.classes.GLTFState.mb_set_use_named_skin_binds, livePtr, useNamedSkinBinds)
   }
 
   /** GLTFState.get_animation_players_count */
-  final def getAnimationPlayersCount(anim_player_index: Long): Long = {
+  final def getAnimationPlayersCount(animPlayerIndex: Long): Long = {
     if (gdext.classes.GLTFState.mb_get_animation_players_count == null) gdext.classes.GLTFState.mb_get_animation_players_count = MethodBind.get("GLTFState", "get_animation_players_count", 923996154L)
-    Ptrcall.call1[Long, Long](gdext.classes.GLTFState.mb_get_animation_players_count, livePtr, anim_player_index)
+    Ptrcall.call1[Long, Long](gdext.classes.GLTFState.mb_get_animation_players_count, livePtr, animPlayerIndex)
   }
 
   /** GLTFState.get_animation_player */
-  final def getAnimationPlayer(anim_player_index: Long): AnimationPlayer = {
+  final def getAnimationPlayer(animPlayerIndex: Long): AnimationPlayer = {
     if (gdext.classes.GLTFState.mb_get_animation_player == null) gdext.classes.GLTFState.mb_get_animation_player = MethodBind.get("GLTFState", "get_animation_player", 1550200483L)
-    Wrappers.borrowed[AnimationPlayer](Ptrcall.call1[Long, Long](gdext.classes.GLTFState.mb_get_animation_player, livePtr, anim_player_index))
+    Wrappers.borrowed[AnimationPlayer](Ptrcall.call1[Long, Long](gdext.classes.GLTFState.mb_get_animation_player, livePtr, animPlayerIndex))
   }
 
   /** GLTFState.get_scene_name */
@@ -89,9 +90,9 @@ abstract class GLTFState extends Resource {
   }
 
   /** GLTFState.set_scene_name */
-  final def setSceneName(scene_name: String): Unit = {
+  final def setSceneName(sceneName: String): Unit = {
     if (gdext.classes.GLTFState.mb_set_scene_name == null) gdext.classes.GLTFState.mb_set_scene_name = MethodBind.get("GLTFState", "set_scene_name", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.GLTFState.mb_set_scene_name, livePtr, scene_name)
+    Ptrcall.callVoid1(gdext.classes.GLTFState.mb_set_scene_name, livePtr, sceneName)
   }
 
   /** GLTFState.get_base_path */
@@ -101,9 +102,9 @@ abstract class GLTFState extends Resource {
   }
 
   /** GLTFState.set_base_path */
-  final def setBasePath(base_path: String): Unit = {
+  final def setBasePath(basePath: String): Unit = {
     if (gdext.classes.GLTFState.mb_set_base_path == null) gdext.classes.GLTFState.mb_set_base_path = MethodBind.get("GLTFState", "set_base_path", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.GLTFState.mb_set_base_path, livePtr, base_path)
+    Ptrcall.callVoid1(gdext.classes.GLTFState.mb_set_base_path, livePtr, basePath)
   }
 
   /** GLTFState.get_filename */
@@ -125,9 +126,9 @@ abstract class GLTFState extends Resource {
   }
 
   /** GLTFState.set_create_animations */
-  final def setCreateAnimations(create_animations: Boolean): Unit = {
+  final def setCreateAnimations(createAnimations: Boolean): Unit = {
     if (gdext.classes.GLTFState.mb_set_create_animations == null) gdext.classes.GLTFState.mb_set_create_animations = MethodBind.get("GLTFState", "set_create_animations", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.GLTFState.mb_set_create_animations, livePtr, create_animations)
+    Ptrcall.callVoid1(gdext.classes.GLTFState.mb_set_create_animations, livePtr, createAnimations)
   }
 
   /** GLTFState.get_import_as_skeleton_bones */
@@ -137,31 +138,31 @@ abstract class GLTFState extends Resource {
   }
 
   /** GLTFState.set_import_as_skeleton_bones */
-  final def setImportAsSkeletonBones(import_as_skeleton_bones: Boolean): Unit = {
+  final def setImportAsSkeletonBones(importAsSkeletonBones: Boolean): Unit = {
     if (gdext.classes.GLTFState.mb_set_import_as_skeleton_bones == null) gdext.classes.GLTFState.mb_set_import_as_skeleton_bones = MethodBind.get("GLTFState", "set_import_as_skeleton_bones", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.GLTFState.mb_set_import_as_skeleton_bones, livePtr, import_as_skeleton_bones)
+    Ptrcall.callVoid1(gdext.classes.GLTFState.mb_set_import_as_skeleton_bones, livePtr, importAsSkeletonBones)
   }
 
   /** GLTFState.get_scene_node */
-  final def getSceneNode(gltf_node_index: Long): Node = {
+  final def getSceneNode(gltfNodeIndex: Long): Node = {
     if (gdext.classes.GLTFState.mb_get_scene_node == null) gdext.classes.GLTFState.mb_get_scene_node = MethodBind.get("GLTFState", "get_scene_node", 539202265L)
-    Wrappers.borrowed[Node](Ptrcall.call1[Long, Long](gdext.classes.GLTFState.mb_get_scene_node, livePtr, gltf_node_index))
+    Wrappers.borrowed[Node](Ptrcall.call1[Long, Long](gdext.classes.GLTFState.mb_get_scene_node, livePtr, gltfNodeIndex))
   }
 
   /** GLTFState.get_node_index */
-  final def getNodeIndex(scene_node: Node): Long = {
+  final def getNodeIndex(sceneNode: Node): Long = {
     if (gdext.classes.GLTFState.mb_get_node_index == null) gdext.classes.GLTFState.mb_get_node_index = MethodBind.get("GLTFState", "get_node_index", 3810805390L)
-    Ptrcall.call1[GodotObject, Long](gdext.classes.GLTFState.mb_get_node_index, livePtr, Wrappers.handle(scene_node))
+    Ptrcall.call1[GodotObject, Long](gdext.classes.GLTFState.mb_get_node_index, livePtr, Wrappers.handle(sceneNode))
   }
 
   /** GLTFState.get_handle_binary_image_mode */
-  final def getHandleBinaryImageMode(): Long = {
+  final def getHandleBinaryImageMode(): gdext.classes.GLTFState.HandleBinaryImageMode = {
     if (gdext.classes.GLTFState.mb_get_handle_binary_image_mode == null) gdext.classes.GLTFState.mb_get_handle_binary_image_mode = MethodBind.get("GLTFState", "get_handle_binary_image_mode", 1363384196L)
-    Ptrcall.call0[Long](gdext.classes.GLTFState.mb_get_handle_binary_image_mode, livePtr)
+    gdext.classes.GLTFState.HandleBinaryImageMode(Ptrcall.call0[Long](gdext.classes.GLTFState.mb_get_handle_binary_image_mode, livePtr))
   }
 
   /** GLTFState.set_handle_binary_image_mode */
-  final def setHandleBinaryImageMode(method: Long): Unit = {
+  final def setHandleBinaryImageMode(method: gdext.classes.GLTFState.HandleBinaryImageMode): Unit = {
     if (gdext.classes.GLTFState.mb_set_handle_binary_image_mode == null) gdext.classes.GLTFState.mb_set_handle_binary_image_mode = MethodBind.get("GLTFState", "set_handle_binary_image_mode", 854676334L)
     Ptrcall.callVoid1(gdext.classes.GLTFState.mb_set_handle_binary_image_mode, livePtr, method)
   }
@@ -223,4 +224,30 @@ object GLTFState {
   private[classes] var mb_get_bake_fps: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_handle_binary_image: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_handle_binary_image: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `GLTFState.HandleBinaryImageMode`. */
+  opaque type HandleBinaryImageMode <: Long = Long
+
+  object HandleBinaryImageMode {
+    final val DiscardTextures: HandleBinaryImageMode = 0L.asInstanceOf[HandleBinaryImageMode]
+    final val ExtractTextures: HandleBinaryImageMode = 1L.asInstanceOf[HandleBinaryImageMode]
+    final val EmbedAsBasisu: HandleBinaryImageMode = 2L.asInstanceOf[HandleBinaryImageMode]
+    final val EmbedAsUncompressed: HandleBinaryImageMode = 3L.asInstanceOf[HandleBinaryImageMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): HandleBinaryImageMode = value.asInstanceOf[HandleBinaryImageMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[HandleBinaryImageMode] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[HandleBinaryImageMode]]
+
+    extension (self: HandleBinaryImageMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "DiscardTextures"
+        case 1L => "ExtractTextures"
+        case 2L => "EmbedAsBasisu"
+        case 3L => "EmbedAsUncompressed"
+        case other => other.toString
+      }
+  }
 }

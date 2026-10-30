@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,15 +24,15 @@ abstract class VisualShaderNodeVarying extends VisualShaderNode {
   }
 
   /** VisualShaderNodeVarying.set_varying_type */
-  final def setVaryingType(`type`: Long): Unit = {
+  final def setVaryingType(`type`: gdext.classes.VisualShader.VaryingType): Unit = {
     if (gdext.classes.VisualShaderNodeVarying.mb_set_varying_type == null) gdext.classes.VisualShaderNodeVarying.mb_set_varying_type = MethodBind.get("VisualShaderNodeVarying", "set_varying_type", 3565867981L)
     Ptrcall.callVoid1(gdext.classes.VisualShaderNodeVarying.mb_set_varying_type, livePtr, `type`)
   }
 
   /** VisualShaderNodeVarying.get_varying_type */
-  final def getVaryingType(): Long = {
+  final def getVaryingType(): gdext.classes.VisualShader.VaryingType = {
     if (gdext.classes.VisualShaderNodeVarying.mb_get_varying_type == null) gdext.classes.VisualShaderNodeVarying.mb_get_varying_type = MethodBind.get("VisualShaderNodeVarying", "get_varying_type", 523183580L)
-    Ptrcall.call0[Long](gdext.classes.VisualShaderNodeVarying.mb_get_varying_type, livePtr)
+    gdext.classes.VisualShader.VaryingType(Ptrcall.call0[Long](gdext.classes.VisualShaderNodeVarying.mb_get_varying_type, livePtr))
   }
 
 }

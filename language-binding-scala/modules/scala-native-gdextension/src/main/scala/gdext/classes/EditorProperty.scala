@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class EditorProperty extends Container {
   }
 
   /** EditorProperty.set_read_only */
-  final def setReadOnly(read_only: Boolean): Unit = {
+  final def setReadOnly(readOnly: Boolean): Unit = {
     if (gdext.classes.EditorProperty.mb_set_read_only == null) gdext.classes.EditorProperty.mb_set_read_only = MethodBind.get("EditorProperty", "set_read_only", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_set_read_only, livePtr, read_only)
+    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_set_read_only, livePtr, readOnly)
   }
 
   /** EditorProperty.is_read_only */
@@ -35,9 +36,9 @@ abstract class EditorProperty extends Container {
   }
 
   /** EditorProperty.set_draw_label */
-  final def setDrawLabel(draw_label: Boolean): Unit = {
+  final def setDrawLabel(drawLabel: Boolean): Unit = {
     if (gdext.classes.EditorProperty.mb_set_draw_label == null) gdext.classes.EditorProperty.mb_set_draw_label = MethodBind.get("EditorProperty", "set_draw_label", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_set_draw_label, livePtr, draw_label)
+    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_set_draw_label, livePtr, drawLabel)
   }
 
   /** EditorProperty.is_draw_label */
@@ -47,9 +48,9 @@ abstract class EditorProperty extends Container {
   }
 
   /** EditorProperty.set_draw_background */
-  final def setDrawBackground(draw_background: Boolean): Unit = {
+  final def setDrawBackground(drawBackground: Boolean): Unit = {
     if (gdext.classes.EditorProperty.mb_set_draw_background == null) gdext.classes.EditorProperty.mb_set_draw_background = MethodBind.get("EditorProperty", "set_draw_background", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_set_draw_background, livePtr, draw_background)
+    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_set_draw_background, livePtr, drawBackground)
   }
 
   /** EditorProperty.is_draw_background */
@@ -83,9 +84,9 @@ abstract class EditorProperty extends Container {
   }
 
   /** EditorProperty.set_draw_warning */
-  final def setDrawWarning(draw_warning: Boolean): Unit = {
+  final def setDrawWarning(drawWarning: Boolean): Unit = {
     if (gdext.classes.EditorProperty.mb_set_draw_warning == null) gdext.classes.EditorProperty.mb_set_draw_warning = MethodBind.get("EditorProperty", "set_draw_warning", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_set_draw_warning, livePtr, draw_warning)
+    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_set_draw_warning, livePtr, drawWarning)
   }
 
   /** EditorProperty.is_draw_warning */
@@ -119,9 +120,9 @@ abstract class EditorProperty extends Container {
   }
 
   /** EditorProperty.get_edited_property */
-  final def getEditedProperty(): gdext.builtin.StringName = {
+  final def getEditedProperty(): String = {
     if (gdext.classes.EditorProperty.mb_get_edited_property == null) gdext.classes.EditorProperty.mb_get_edited_property = MethodBind.get("EditorProperty", "get_edited_property", 2002593661L)
-    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.EditorProperty.mb_get_edited_property, livePtr)
+    Ptrcall.call0[SnArg](gdext.classes.EditorProperty.mb_get_edited_property, livePtr)
   }
 
   /** EditorProperty.get_edited_object */
@@ -161,9 +162,9 @@ abstract class EditorProperty extends Container {
   }
 
   /** EditorProperty.set_use_folding */
-  final def setUseFolding(use_folding: Boolean): Unit = {
+  final def setUseFolding(useFolding: Boolean): Unit = {
     if (gdext.classes.EditorProperty.mb_set_use_folding == null) gdext.classes.EditorProperty.mb_set_use_folding = MethodBind.get("EditorProperty", "set_use_folding", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_set_use_folding, livePtr, use_folding)
+    Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_set_use_folding, livePtr, useFolding)
   }
 
   /** EditorProperty.is_using_folding */
@@ -197,15 +198,15 @@ abstract class EditorProperty extends Container {
   }
 
   /** EditorProperty.select */
-  final def select(focusable: Long): Unit = {
+  final def select(focusable: Long = -1L): Unit = {
     if (gdext.classes.EditorProperty.mb_select == null) gdext.classes.EditorProperty.mb_select = MethodBind.get("EditorProperty", "select", 1025054187L)
     Ptrcall.callVoid1(gdext.classes.EditorProperty.mb_select, livePtr, focusable)
   }
 
   /** EditorProperty.set_object_and_property */
-  final def setObjectAndProperty(`object`: Object, property: gdext.builtin.StringName): Unit = {
+  final def setObjectAndProperty(`object`: Object, property: String): Unit = {
     if (gdext.classes.EditorProperty.mb_set_object_and_property == null) gdext.classes.EditorProperty.mb_set_object_and_property = MethodBind.get("EditorProperty", "set_object_and_property", 4157606280L)
-    Ptrcall.callVoid2(gdext.classes.EditorProperty.mb_set_object_and_property, livePtr, Wrappers.handle(`object`), property)
+    Ptrcall.callVoid2(gdext.classes.EditorProperty.mb_set_object_and_property, livePtr, Wrappers.handle(`object`), SnArg(property))
   }
 
   /** EditorProperty.set_label_reference */

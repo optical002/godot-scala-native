@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class PinJoint2D extends Joint2D {
   }
 
   /** PinJoint2D.set_angular_limit_lower */
-  final def setAngularLimitLower(angular_limit_lower: Double): Unit = {
+  final def setAngularLimitLower(angularLimitLower: Double): Unit = {
     if (gdext.classes.PinJoint2D.mb_set_angular_limit_lower == null) gdext.classes.PinJoint2D.mb_set_angular_limit_lower = MethodBind.get("PinJoint2D", "set_angular_limit_lower", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.PinJoint2D.mb_set_angular_limit_lower, livePtr, angular_limit_lower)
+    Ptrcall.callVoid1(gdext.classes.PinJoint2D.mb_set_angular_limit_lower, livePtr, angularLimitLower)
   }
 
   /** PinJoint2D.get_angular_limit_lower */
@@ -35,9 +36,9 @@ abstract class PinJoint2D extends Joint2D {
   }
 
   /** PinJoint2D.set_angular_limit_upper */
-  final def setAngularLimitUpper(angular_limit_upper: Double): Unit = {
+  final def setAngularLimitUpper(angularLimitUpper: Double): Unit = {
     if (gdext.classes.PinJoint2D.mb_set_angular_limit_upper == null) gdext.classes.PinJoint2D.mb_set_angular_limit_upper = MethodBind.get("PinJoint2D", "set_angular_limit_upper", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.PinJoint2D.mb_set_angular_limit_upper, livePtr, angular_limit_upper)
+    Ptrcall.callVoid1(gdext.classes.PinJoint2D.mb_set_angular_limit_upper, livePtr, angularLimitUpper)
   }
 
   /** PinJoint2D.get_angular_limit_upper */
@@ -47,9 +48,9 @@ abstract class PinJoint2D extends Joint2D {
   }
 
   /** PinJoint2D.set_motor_target_velocity */
-  final def setMotorTargetVelocity(motor_target_velocity: Double): Unit = {
+  final def setMotorTargetVelocity(motorTargetVelocity: Double): Unit = {
     if (gdext.classes.PinJoint2D.mb_set_motor_target_velocity == null) gdext.classes.PinJoint2D.mb_set_motor_target_velocity = MethodBind.get("PinJoint2D", "set_motor_target_velocity", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.PinJoint2D.mb_set_motor_target_velocity, livePtr, motor_target_velocity)
+    Ptrcall.callVoid1(gdext.classes.PinJoint2D.mb_set_motor_target_velocity, livePtr, motorTargetVelocity)
   }
 
   /** PinJoint2D.get_motor_target_velocity */

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,15 +12,15 @@ abstract class VisualShaderNodeIntParameter extends VisualShaderNodeParameter {
   override def godotClassName: String = "VisualShaderNodeIntParameter"
 
   /** VisualShaderNodeIntParameter.set_hint */
-  final def setHint(hint: Long): Unit = {
+  final def setHint(hint: gdext.classes.VisualShaderNodeIntParameter.Hint): Unit = {
     if (gdext.classes.VisualShaderNodeIntParameter.mb_set_hint == null) gdext.classes.VisualShaderNodeIntParameter.mb_set_hint = MethodBind.get("VisualShaderNodeIntParameter", "set_hint", 2540512075L)
     Ptrcall.callVoid1(gdext.classes.VisualShaderNodeIntParameter.mb_set_hint, livePtr, hint)
   }
 
   /** VisualShaderNodeIntParameter.get_hint */
-  final def getHint(): Long = {
+  final def getHint(): gdext.classes.VisualShaderNodeIntParameter.Hint = {
     if (gdext.classes.VisualShaderNodeIntParameter.mb_get_hint == null) gdext.classes.VisualShaderNodeIntParameter.mb_get_hint = MethodBind.get("VisualShaderNodeIntParameter", "get_hint", 4250814924L)
-    Ptrcall.call0[Long](gdext.classes.VisualShaderNodeIntParameter.mb_get_hint, livePtr)
+    gdext.classes.VisualShaderNodeIntParameter.Hint(Ptrcall.call0[Long](gdext.classes.VisualShaderNodeIntParameter.mb_get_hint, livePtr))
   }
 
   /** VisualShaderNodeIntParameter.set_min */
@@ -97,4 +98,32 @@ object VisualShaderNodeIntParameter {
   private[classes] var mb_is_default_value_enabled: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_default_value: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_default_value: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `VisualShaderNodeIntParameter.Hint`. */
+  opaque type Hint <: Long = Long
+
+  object Hint {
+    final val None: Hint = 0L.asInstanceOf[Hint]
+    final val Range: Hint = 1L.asInstanceOf[Hint]
+    final val RangeStep: Hint = 2L.asInstanceOf[Hint]
+    final val Enum: Hint = 3L.asInstanceOf[Hint]
+    final val Max: Hint = 4L.asInstanceOf[Hint]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): Hint = value.asInstanceOf[Hint]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[Hint] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[Hint]]
+
+    extension (self: Hint)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "None"
+        case 1L => "Range"
+        case 2L => "RangeStep"
+        case 3L => "Enum"
+        case 4L => "Max"
+        case other => other.toString
+      }
+  }
 }

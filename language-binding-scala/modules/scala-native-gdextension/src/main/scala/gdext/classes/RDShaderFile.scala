@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,15 +12,15 @@ abstract class RDShaderFile extends Resource {
   override def godotClassName: String = "RDShaderFile"
 
   /** RDShaderFile.set_bytecode */
-  final def setBytecode(bytecode: RDShaderSPIRV, version: gdext.builtin.StringName): Unit = {
+  final def setBytecode(bytecode: RDShaderSPIRV, version: String = ""): Unit = {
     if (gdext.classes.RDShaderFile.mb_set_bytecode == null) gdext.classes.RDShaderFile.mb_set_bytecode = MethodBind.get("RDShaderFile", "set_bytecode", 1526857008L)
-    Ptrcall.callVoid2(gdext.classes.RDShaderFile.mb_set_bytecode, livePtr, Wrappers.handle(bytecode), version)
+    Ptrcall.callVoid2(gdext.classes.RDShaderFile.mb_set_bytecode, livePtr, Wrappers.handle(bytecode), SnArg(version))
   }
 
   /** RDShaderFile.get_spirv. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getSpirv(version: gdext.builtin.StringName): RDShaderSPIRV = {
+  final def getSpirv(version: String = ""): RDShaderSPIRV = {
     if (gdext.classes.RDShaderFile.mb_get_spirv == null) gdext.classes.RDShaderFile.mb_get_spirv = MethodBind.get("RDShaderFile", "get_spirv", 2689310080L)
-    Wrappers.owned[RDShaderSPIRV](Ptrcall.call1[gdext.builtin.StringName, Long](gdext.classes.RDShaderFile.mb_get_spirv, livePtr, version))
+    Wrappers.owned[RDShaderSPIRV](Ptrcall.call1[SnArg, Long](gdext.classes.RDShaderFile.mb_get_spirv, livePtr, SnArg(version)))
   }
 
   /** RDShaderFile.set_base_error */

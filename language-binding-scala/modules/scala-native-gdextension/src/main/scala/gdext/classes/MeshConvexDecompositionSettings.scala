@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class MeshConvexDecompositionSettings extends RefCounted {
   override def godotClassName: String = "MeshConvexDecompositionSettings"
 
   /** MeshConvexDecompositionSettings.set_max_concavity */
-  final def setMaxConcavity(max_concavity: Double): Unit = {
+  final def setMaxConcavity(maxConcavity: Double): Unit = {
     if (gdext.classes.MeshConvexDecompositionSettings.mb_set_max_concavity == null) gdext.classes.MeshConvexDecompositionSettings.mb_set_max_concavity = MethodBind.get("MeshConvexDecompositionSettings", "set_max_concavity", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_max_concavity, livePtr, max_concavity)
+    Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_max_concavity, livePtr, maxConcavity)
   }
 
   /** MeshConvexDecompositionSettings.get_max_concavity */
@@ -23,9 +24,9 @@ abstract class MeshConvexDecompositionSettings extends RefCounted {
   }
 
   /** MeshConvexDecompositionSettings.set_symmetry_planes_clipping_bias */
-  final def setSymmetryPlanesClippingBias(symmetry_planes_clipping_bias: Double): Unit = {
+  final def setSymmetryPlanesClippingBias(symmetryPlanesClippingBias: Double): Unit = {
     if (gdext.classes.MeshConvexDecompositionSettings.mb_set_symmetry_planes_clipping_bias == null) gdext.classes.MeshConvexDecompositionSettings.mb_set_symmetry_planes_clipping_bias = MethodBind.get("MeshConvexDecompositionSettings", "set_symmetry_planes_clipping_bias", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_symmetry_planes_clipping_bias, livePtr, symmetry_planes_clipping_bias)
+    Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_symmetry_planes_clipping_bias, livePtr, symmetryPlanesClippingBias)
   }
 
   /** MeshConvexDecompositionSettings.get_symmetry_planes_clipping_bias */
@@ -35,9 +36,9 @@ abstract class MeshConvexDecompositionSettings extends RefCounted {
   }
 
   /** MeshConvexDecompositionSettings.set_revolution_axes_clipping_bias */
-  final def setRevolutionAxesClippingBias(revolution_axes_clipping_bias: Double): Unit = {
+  final def setRevolutionAxesClippingBias(revolutionAxesClippingBias: Double): Unit = {
     if (gdext.classes.MeshConvexDecompositionSettings.mb_set_revolution_axes_clipping_bias == null) gdext.classes.MeshConvexDecompositionSettings.mb_set_revolution_axes_clipping_bias = MethodBind.get("MeshConvexDecompositionSettings", "set_revolution_axes_clipping_bias", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_revolution_axes_clipping_bias, livePtr, revolution_axes_clipping_bias)
+    Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_revolution_axes_clipping_bias, livePtr, revolutionAxesClippingBias)
   }
 
   /** MeshConvexDecompositionSettings.get_revolution_axes_clipping_bias */
@@ -47,9 +48,9 @@ abstract class MeshConvexDecompositionSettings extends RefCounted {
   }
 
   /** MeshConvexDecompositionSettings.set_min_volume_per_convex_hull */
-  final def setMinVolumePerConvexHull(min_volume_per_convex_hull: Double): Unit = {
+  final def setMinVolumePerConvexHull(minVolumePerConvexHull: Double): Unit = {
     if (gdext.classes.MeshConvexDecompositionSettings.mb_set_min_volume_per_convex_hull == null) gdext.classes.MeshConvexDecompositionSettings.mb_set_min_volume_per_convex_hull = MethodBind.get("MeshConvexDecompositionSettings", "set_min_volume_per_convex_hull", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_min_volume_per_convex_hull, livePtr, min_volume_per_convex_hull)
+    Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_min_volume_per_convex_hull, livePtr, minVolumePerConvexHull)
   }
 
   /** MeshConvexDecompositionSettings.get_min_volume_per_convex_hull */
@@ -59,9 +60,9 @@ abstract class MeshConvexDecompositionSettings extends RefCounted {
   }
 
   /** MeshConvexDecompositionSettings.set_resolution */
-  final def setResolution(min_volume_per_convex_hull: Long): Unit = {
+  final def setResolution(minVolumePerConvexHull: Long): Unit = {
     if (gdext.classes.MeshConvexDecompositionSettings.mb_set_resolution == null) gdext.classes.MeshConvexDecompositionSettings.mb_set_resolution = MethodBind.get("MeshConvexDecompositionSettings", "set_resolution", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_resolution, livePtr, min_volume_per_convex_hull)
+    Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_resolution, livePtr, minVolumePerConvexHull)
   }
 
   /** MeshConvexDecompositionSettings.get_resolution */
@@ -71,9 +72,9 @@ abstract class MeshConvexDecompositionSettings extends RefCounted {
   }
 
   /** MeshConvexDecompositionSettings.set_max_num_vertices_per_convex_hull */
-  final def setMaxNumVerticesPerConvexHull(max_num_vertices_per_convex_hull: Long): Unit = {
+  final def setMaxNumVerticesPerConvexHull(maxNumVerticesPerConvexHull: Long): Unit = {
     if (gdext.classes.MeshConvexDecompositionSettings.mb_set_max_num_vertices_per_convex_hull == null) gdext.classes.MeshConvexDecompositionSettings.mb_set_max_num_vertices_per_convex_hull = MethodBind.get("MeshConvexDecompositionSettings", "set_max_num_vertices_per_convex_hull", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_max_num_vertices_per_convex_hull, livePtr, max_num_vertices_per_convex_hull)
+    Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_max_num_vertices_per_convex_hull, livePtr, maxNumVerticesPerConvexHull)
   }
 
   /** MeshConvexDecompositionSettings.get_max_num_vertices_per_convex_hull */
@@ -83,9 +84,9 @@ abstract class MeshConvexDecompositionSettings extends RefCounted {
   }
 
   /** MeshConvexDecompositionSettings.set_plane_downsampling */
-  final def setPlaneDownsampling(plane_downsampling: Long): Unit = {
+  final def setPlaneDownsampling(planeDownsampling: Long): Unit = {
     if (gdext.classes.MeshConvexDecompositionSettings.mb_set_plane_downsampling == null) gdext.classes.MeshConvexDecompositionSettings.mb_set_plane_downsampling = MethodBind.get("MeshConvexDecompositionSettings", "set_plane_downsampling", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_plane_downsampling, livePtr, plane_downsampling)
+    Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_plane_downsampling, livePtr, planeDownsampling)
   }
 
   /** MeshConvexDecompositionSettings.get_plane_downsampling */
@@ -95,9 +96,9 @@ abstract class MeshConvexDecompositionSettings extends RefCounted {
   }
 
   /** MeshConvexDecompositionSettings.set_convex_hull_downsampling */
-  final def setConvexHullDownsampling(convex_hull_downsampling: Long): Unit = {
+  final def setConvexHullDownsampling(convexHullDownsampling: Long): Unit = {
     if (gdext.classes.MeshConvexDecompositionSettings.mb_set_convex_hull_downsampling == null) gdext.classes.MeshConvexDecompositionSettings.mb_set_convex_hull_downsampling = MethodBind.get("MeshConvexDecompositionSettings", "set_convex_hull_downsampling", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_convex_hull_downsampling, livePtr, convex_hull_downsampling)
+    Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_convex_hull_downsampling, livePtr, convexHullDownsampling)
   }
 
   /** MeshConvexDecompositionSettings.get_convex_hull_downsampling */
@@ -107,9 +108,9 @@ abstract class MeshConvexDecompositionSettings extends RefCounted {
   }
 
   /** MeshConvexDecompositionSettings.set_normalize_mesh */
-  final def setNormalizeMesh(normalize_mesh: Boolean): Unit = {
+  final def setNormalizeMesh(normalizeMesh: Boolean): Unit = {
     if (gdext.classes.MeshConvexDecompositionSettings.mb_set_normalize_mesh == null) gdext.classes.MeshConvexDecompositionSettings.mb_set_normalize_mesh = MethodBind.get("MeshConvexDecompositionSettings", "set_normalize_mesh", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_normalize_mesh, livePtr, normalize_mesh)
+    Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_normalize_mesh, livePtr, normalizeMesh)
   }
 
   /** MeshConvexDecompositionSettings.get_normalize_mesh */
@@ -119,21 +120,21 @@ abstract class MeshConvexDecompositionSettings extends RefCounted {
   }
 
   /** MeshConvexDecompositionSettings.set_mode */
-  final def setMode(mode: Long): Unit = {
+  final def setMode(mode: gdext.classes.MeshConvexDecompositionSettings.Mode): Unit = {
     if (gdext.classes.MeshConvexDecompositionSettings.mb_set_mode == null) gdext.classes.MeshConvexDecompositionSettings.mb_set_mode = MethodBind.get("MeshConvexDecompositionSettings", "set_mode", 1668072869L)
     Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_mode, livePtr, mode)
   }
 
   /** MeshConvexDecompositionSettings.get_mode */
-  final def getMode(): Long = {
+  final def getMode(): gdext.classes.MeshConvexDecompositionSettings.Mode = {
     if (gdext.classes.MeshConvexDecompositionSettings.mb_get_mode == null) gdext.classes.MeshConvexDecompositionSettings.mb_get_mode = MethodBind.get("MeshConvexDecompositionSettings", "get_mode", 23479454L)
-    Ptrcall.call0[Long](gdext.classes.MeshConvexDecompositionSettings.mb_get_mode, livePtr)
+    gdext.classes.MeshConvexDecompositionSettings.Mode(Ptrcall.call0[Long](gdext.classes.MeshConvexDecompositionSettings.mb_get_mode, livePtr))
   }
 
   /** MeshConvexDecompositionSettings.set_convex_hull_approximation */
-  final def setConvexHullApproximation(convex_hull_approximation: Boolean): Unit = {
+  final def setConvexHullApproximation(convexHullApproximation: Boolean): Unit = {
     if (gdext.classes.MeshConvexDecompositionSettings.mb_set_convex_hull_approximation == null) gdext.classes.MeshConvexDecompositionSettings.mb_set_convex_hull_approximation = MethodBind.get("MeshConvexDecompositionSettings", "set_convex_hull_approximation", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_convex_hull_approximation, livePtr, convex_hull_approximation)
+    Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_convex_hull_approximation, livePtr, convexHullApproximation)
   }
 
   /** MeshConvexDecompositionSettings.get_convex_hull_approximation */
@@ -143,9 +144,9 @@ abstract class MeshConvexDecompositionSettings extends RefCounted {
   }
 
   /** MeshConvexDecompositionSettings.set_max_convex_hulls */
-  final def setMaxConvexHulls(max_convex_hulls: Long): Unit = {
+  final def setMaxConvexHulls(maxConvexHulls: Long): Unit = {
     if (gdext.classes.MeshConvexDecompositionSettings.mb_set_max_convex_hulls == null) gdext.classes.MeshConvexDecompositionSettings.mb_set_max_convex_hulls = MethodBind.get("MeshConvexDecompositionSettings", "set_max_convex_hulls", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_max_convex_hulls, livePtr, max_convex_hulls)
+    Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_max_convex_hulls, livePtr, maxConvexHulls)
   }
 
   /** MeshConvexDecompositionSettings.get_max_convex_hulls */
@@ -155,9 +156,9 @@ abstract class MeshConvexDecompositionSettings extends RefCounted {
   }
 
   /** MeshConvexDecompositionSettings.set_project_hull_vertices */
-  final def setProjectHullVertices(project_hull_vertices: Boolean): Unit = {
+  final def setProjectHullVertices(projectHullVertices: Boolean): Unit = {
     if (gdext.classes.MeshConvexDecompositionSettings.mb_set_project_hull_vertices == null) gdext.classes.MeshConvexDecompositionSettings.mb_set_project_hull_vertices = MethodBind.get("MeshConvexDecompositionSettings", "set_project_hull_vertices", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_project_hull_vertices, livePtr, project_hull_vertices)
+    Ptrcall.callVoid1(gdext.classes.MeshConvexDecompositionSettings.mb_set_project_hull_vertices, livePtr, projectHullVertices)
   }
 
   /** MeshConvexDecompositionSettings.get_project_hull_vertices */
@@ -195,4 +196,26 @@ object MeshConvexDecompositionSettings {
   private[classes] var mb_get_max_convex_hulls: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_project_hull_vertices: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_project_hull_vertices: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `MeshConvexDecompositionSettings.Mode`. */
+  opaque type Mode <: Long = Long
+
+  object Mode {
+    final val Voxel: Mode = 0L.asInstanceOf[Mode]
+    final val Tetrahedron: Mode = 1L.asInstanceOf[Mode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): Mode = value.asInstanceOf[Mode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[Mode] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[Mode]]
+
+    extension (self: Mode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Voxel"
+        case 1L => "Tetrahedron"
+        case other => other.toString
+      }
+  }
 }

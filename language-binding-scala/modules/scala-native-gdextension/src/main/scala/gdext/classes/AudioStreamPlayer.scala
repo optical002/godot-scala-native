@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class AudioStreamPlayer extends Node {
   }
 
   /** AudioStreamPlayer.set_volume_db */
-  final def setVolumeDb(volume_db: Double): Unit = {
+  final def setVolumeDb(volumeDb: Double): Unit = {
     if (gdext.classes.AudioStreamPlayer.mb_set_volume_db == null) gdext.classes.AudioStreamPlayer.mb_set_volume_db = MethodBind.get("AudioStreamPlayer", "set_volume_db", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer.mb_set_volume_db, livePtr, volume_db)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer.mb_set_volume_db, livePtr, volumeDb)
   }
 
   /** AudioStreamPlayer.get_volume_db */
@@ -35,9 +36,9 @@ abstract class AudioStreamPlayer extends Node {
   }
 
   /** AudioStreamPlayer.set_volume_linear */
-  final def setVolumeLinear(volume_linear: Double): Unit = {
+  final def setVolumeLinear(volumeLinear: Double): Unit = {
     if (gdext.classes.AudioStreamPlayer.mb_set_volume_linear == null) gdext.classes.AudioStreamPlayer.mb_set_volume_linear = MethodBind.get("AudioStreamPlayer", "set_volume_linear", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer.mb_set_volume_linear, livePtr, volume_linear)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer.mb_set_volume_linear, livePtr, volumeLinear)
   }
 
   /** AudioStreamPlayer.get_volume_linear */
@@ -47,9 +48,9 @@ abstract class AudioStreamPlayer extends Node {
   }
 
   /** AudioStreamPlayer.set_pitch_scale */
-  final def setPitchScale(pitch_scale: Double): Unit = {
+  final def setPitchScale(pitchScale: Double): Unit = {
     if (gdext.classes.AudioStreamPlayer.mb_set_pitch_scale == null) gdext.classes.AudioStreamPlayer.mb_set_pitch_scale = MethodBind.get("AudioStreamPlayer", "set_pitch_scale", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer.mb_set_pitch_scale, livePtr, pitch_scale)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer.mb_set_pitch_scale, livePtr, pitchScale)
   }
 
   /** AudioStreamPlayer.get_pitch_scale */
@@ -59,15 +60,15 @@ abstract class AudioStreamPlayer extends Node {
   }
 
   /** AudioStreamPlayer.play */
-  final def play(from_position: Double): Unit = {
+  final def play(fromPosition: Double = 0.0): Unit = {
     if (gdext.classes.AudioStreamPlayer.mb_play == null) gdext.classes.AudioStreamPlayer.mb_play = MethodBind.get("AudioStreamPlayer", "play", 1958160172L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer.mb_play, livePtr, from_position)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer.mb_play, livePtr, fromPosition)
   }
 
   /** AudioStreamPlayer.seek */
-  final def seek(to_position: Double): Unit = {
+  final def seek(toPosition: Double): Unit = {
     if (gdext.classes.AudioStreamPlayer.mb_seek == null) gdext.classes.AudioStreamPlayer.mb_seek = MethodBind.get("AudioStreamPlayer", "seek", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer.mb_seek, livePtr, to_position)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer.mb_seek, livePtr, toPosition)
   }
 
   /** AudioStreamPlayer.stop */
@@ -89,15 +90,15 @@ abstract class AudioStreamPlayer extends Node {
   }
 
   /** AudioStreamPlayer.set_bus */
-  final def setBus(bus: gdext.builtin.StringName): Unit = {
+  final def setBus(bus: String): Unit = {
     if (gdext.classes.AudioStreamPlayer.mb_set_bus == null) gdext.classes.AudioStreamPlayer.mb_set_bus = MethodBind.get("AudioStreamPlayer", "set_bus", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer.mb_set_bus, livePtr, bus)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer.mb_set_bus, livePtr, SnArg(bus))
   }
 
   /** AudioStreamPlayer.get_bus */
-  final def getBus(): gdext.builtin.StringName = {
+  final def getBus(): String = {
     if (gdext.classes.AudioStreamPlayer.mb_get_bus == null) gdext.classes.AudioStreamPlayer.mb_get_bus = MethodBind.get("AudioStreamPlayer", "get_bus", 2002593661L)
-    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.AudioStreamPlayer.mb_get_bus, livePtr)
+    Ptrcall.call0[SnArg](gdext.classes.AudioStreamPlayer.mb_get_bus, livePtr)
   }
 
   /** AudioStreamPlayer.set_autoplay */
@@ -113,15 +114,15 @@ abstract class AudioStreamPlayer extends Node {
   }
 
   /** AudioStreamPlayer.set_mix_target */
-  final def setMixTarget(mix_target: Long): Unit = {
+  final def setMixTarget(mixTarget: gdext.classes.AudioStreamPlayer.MixTarget): Unit = {
     if (gdext.classes.AudioStreamPlayer.mb_set_mix_target == null) gdext.classes.AudioStreamPlayer.mb_set_mix_target = MethodBind.get("AudioStreamPlayer", "set_mix_target", 2300306138L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer.mb_set_mix_target, livePtr, mix_target)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer.mb_set_mix_target, livePtr, mixTarget)
   }
 
   /** AudioStreamPlayer.get_mix_target */
-  final def getMixTarget(): Long = {
+  final def getMixTarget(): gdext.classes.AudioStreamPlayer.MixTarget = {
     if (gdext.classes.AudioStreamPlayer.mb_get_mix_target == null) gdext.classes.AudioStreamPlayer.mb_get_mix_target = MethodBind.get("AudioStreamPlayer", "get_mix_target", 172807476L)
-    Ptrcall.call0[Long](gdext.classes.AudioStreamPlayer.mb_get_mix_target, livePtr)
+    gdext.classes.AudioStreamPlayer.MixTarget(Ptrcall.call0[Long](gdext.classes.AudioStreamPlayer.mb_get_mix_target, livePtr))
   }
 
   /** AudioStreamPlayer.set_playing */
@@ -143,9 +144,9 @@ abstract class AudioStreamPlayer extends Node {
   }
 
   /** AudioStreamPlayer.set_max_polyphony */
-  final def setMaxPolyphony(max_polyphony: Long): Unit = {
+  final def setMaxPolyphony(maxPolyphony: Long): Unit = {
     if (gdext.classes.AudioStreamPlayer.mb_set_max_polyphony == null) gdext.classes.AudioStreamPlayer.mb_set_max_polyphony = MethodBind.get("AudioStreamPlayer", "set_max_polyphony", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer.mb_set_max_polyphony, livePtr, max_polyphony)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer.mb_set_max_polyphony, livePtr, maxPolyphony)
   }
 
   /** AudioStreamPlayer.get_max_polyphony */
@@ -167,15 +168,15 @@ abstract class AudioStreamPlayer extends Node {
   }
 
   /** AudioStreamPlayer.set_playback_type */
-  final def setPlaybackType(playback_type: Long): Unit = {
+  final def setPlaybackType(playbackType: gdext.classes.AudioServer.PlaybackType): Unit = {
     if (gdext.classes.AudioStreamPlayer.mb_set_playback_type == null) gdext.classes.AudioStreamPlayer.mb_set_playback_type = MethodBind.get("AudioStreamPlayer", "set_playback_type", 725473817L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer.mb_set_playback_type, livePtr, playback_type)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer.mb_set_playback_type, livePtr, playbackType)
   }
 
   /** AudioStreamPlayer.get_playback_type */
-  final def getPlaybackType(): Long = {
+  final def getPlaybackType(): gdext.classes.AudioServer.PlaybackType = {
     if (gdext.classes.AudioStreamPlayer.mb_get_playback_type == null) gdext.classes.AudioStreamPlayer.mb_get_playback_type = MethodBind.get("AudioStreamPlayer", "get_playback_type", 4011264623L)
-    Ptrcall.call0[Long](gdext.classes.AudioStreamPlayer.mb_get_playback_type, livePtr)
+    gdext.classes.AudioServer.PlaybackType(Ptrcall.call0[Long](gdext.classes.AudioStreamPlayer.mb_get_playback_type, livePtr))
   }
 
 }
@@ -209,4 +210,28 @@ object AudioStreamPlayer {
   private[classes] var mb_get_stream_playback: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_playback_type: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_playback_type: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `AudioStreamPlayer.MixTarget`. */
+  opaque type MixTarget <: Long = Long
+
+  object MixTarget {
+    final val Stereo: MixTarget = 0L.asInstanceOf[MixTarget]
+    final val Surround: MixTarget = 1L.asInstanceOf[MixTarget]
+    final val Center: MixTarget = 2L.asInstanceOf[MixTarget]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): MixTarget = value.asInstanceOf[MixTarget]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[MixTarget] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[MixTarget]]
+
+    extension (self: MixTarget)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Stereo"
+        case 1L => "Surround"
+        case 2L => "Center"
+        case other => other.toString
+      }
+  }
 }

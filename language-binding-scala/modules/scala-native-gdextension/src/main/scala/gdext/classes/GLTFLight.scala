@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -47,9 +48,9 @@ abstract class GLTFLight extends Resource {
   }
 
   /** GLTFLight.set_light_type */
-  final def setLightType(light_type: String): Unit = {
+  final def setLightType(lightType: String): Unit = {
     if (gdext.classes.GLTFLight.mb_set_light_type == null) gdext.classes.GLTFLight.mb_set_light_type = MethodBind.get("GLTFLight", "set_light_type", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.GLTFLight.mb_set_light_type, livePtr, light_type)
+    Ptrcall.callVoid1(gdext.classes.GLTFLight.mb_set_light_type, livePtr, lightType)
   }
 
   /** GLTFLight.get_range */
@@ -71,9 +72,9 @@ abstract class GLTFLight extends Resource {
   }
 
   /** GLTFLight.set_inner_cone_angle */
-  final def setInnerConeAngle(inner_cone_angle: Double): Unit = {
+  final def setInnerConeAngle(innerConeAngle: Double): Unit = {
     if (gdext.classes.GLTFLight.mb_set_inner_cone_angle == null) gdext.classes.GLTFLight.mb_set_inner_cone_angle = MethodBind.get("GLTFLight", "set_inner_cone_angle", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.GLTFLight.mb_set_inner_cone_angle, livePtr, inner_cone_angle)
+    Ptrcall.callVoid1(gdext.classes.GLTFLight.mb_set_inner_cone_angle, livePtr, innerConeAngle)
   }
 
   /** GLTFLight.get_outer_cone_angle */
@@ -83,9 +84,9 @@ abstract class GLTFLight extends Resource {
   }
 
   /** GLTFLight.set_outer_cone_angle */
-  final def setOuterConeAngle(outer_cone_angle: Double): Unit = {
+  final def setOuterConeAngle(outerConeAngle: Double): Unit = {
     if (gdext.classes.GLTFLight.mb_set_outer_cone_angle == null) gdext.classes.GLTFLight.mb_set_outer_cone_angle = MethodBind.get("GLTFLight", "set_outer_cone_angle", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.GLTFLight.mb_set_outer_cone_angle, livePtr, outer_cone_angle)
+    Ptrcall.callVoid1(gdext.classes.GLTFLight.mb_set_outer_cone_angle, livePtr, outerConeAngle)
   }
 
 }
@@ -107,8 +108,8 @@ object GLTFLight {
   private[classes] var mb_set_outer_cone_angle: GDExtensionMethodBindPtr = null
 
   /** GLTFLight.from_node. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def fromNode(light_node: Light3D): GLTFLight = {
+  final def fromNode(lightNode: Light3D): GLTFLight = {
     if (gdext.classes.GLTFLight.mb_from_node == null) gdext.classes.GLTFLight.mb_from_node = MethodBind.get("GLTFLight", "from_node", 3907677874L)
-    Wrappers.owned[GLTFLight](Ptrcall.call1[GodotObject, Long](gdext.classes.GLTFLight.mb_from_node, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], Wrappers.handle(light_node)))
+    Wrappers.owned[GLTFLight](Ptrcall.call1[GodotObject, Long](gdext.classes.GLTFLight.mb_from_node, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], Wrappers.handle(lightNode)))
   }
 }

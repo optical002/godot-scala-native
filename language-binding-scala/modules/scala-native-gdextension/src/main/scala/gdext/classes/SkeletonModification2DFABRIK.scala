@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,39 +24,39 @@ abstract class SkeletonModification2DFABRIK extends SkeletonModification2D {
   }
 
   /** SkeletonModification2DFABRIK.set_fabrik_joint_bone_index */
-  final def setFabrikJointBoneIndex(joint_idx: Long, bone_idx: Long): Unit = {
+  final def setFabrikJointBoneIndex(jointIdx: Long, boneIdx: Long): Unit = {
     if (gdext.classes.SkeletonModification2DFABRIK.mb_set_fabrik_joint_bone_index == null) gdext.classes.SkeletonModification2DFABRIK.mb_set_fabrik_joint_bone_index = MethodBind.get("SkeletonModification2DFABRIK", "set_fabrik_joint_bone_index", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DFABRIK.mb_set_fabrik_joint_bone_index, livePtr, joint_idx, bone_idx)
+    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DFABRIK.mb_set_fabrik_joint_bone_index, livePtr, jointIdx, boneIdx)
   }
 
   /** SkeletonModification2DFABRIK.get_fabrik_joint_bone_index */
-  final def getFabrikJointBoneIndex(joint_idx: Long): Long = {
+  final def getFabrikJointBoneIndex(jointIdx: Long): Long = {
     if (gdext.classes.SkeletonModification2DFABRIK.mb_get_fabrik_joint_bone_index == null) gdext.classes.SkeletonModification2DFABRIK.mb_get_fabrik_joint_bone_index = MethodBind.get("SkeletonModification2DFABRIK", "get_fabrik_joint_bone_index", 923996154L)
-    Ptrcall.call1[Long, Long](gdext.classes.SkeletonModification2DFABRIK.mb_get_fabrik_joint_bone_index, livePtr, joint_idx)
+    Ptrcall.call1[Long, Long](gdext.classes.SkeletonModification2DFABRIK.mb_get_fabrik_joint_bone_index, livePtr, jointIdx)
   }
 
   /** SkeletonModification2DFABRIK.set_fabrik_joint_magnet_position */
-  final def setFabrikJointMagnetPosition(joint_idx: Long, magnet_position: gdext.builtin.Vector2): Unit = {
+  final def setFabrikJointMagnetPosition(jointIdx: Long, magnetPosition: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.SkeletonModification2DFABRIK.mb_set_fabrik_joint_magnet_position == null) gdext.classes.SkeletonModification2DFABRIK.mb_set_fabrik_joint_magnet_position = MethodBind.get("SkeletonModification2DFABRIK", "set_fabrik_joint_magnet_position", 163021252L)
-    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DFABRIK.mb_set_fabrik_joint_magnet_position, livePtr, joint_idx, magnet_position)
+    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DFABRIK.mb_set_fabrik_joint_magnet_position, livePtr, jointIdx, magnetPosition)
   }
 
   /** SkeletonModification2DFABRIK.get_fabrik_joint_magnet_position */
-  final def getFabrikJointMagnetPosition(joint_idx: Long): gdext.builtin.Vector2 = {
+  final def getFabrikJointMagnetPosition(jointIdx: Long): gdext.builtin.Vector2 = {
     if (gdext.classes.SkeletonModification2DFABRIK.mb_get_fabrik_joint_magnet_position == null) gdext.classes.SkeletonModification2DFABRIK.mb_get_fabrik_joint_magnet_position = MethodBind.get("SkeletonModification2DFABRIK", "get_fabrik_joint_magnet_position", 2299179447L)
-    Ptrcall.call1[Long, gdext.builtin.Vector2](gdext.classes.SkeletonModification2DFABRIK.mb_get_fabrik_joint_magnet_position, livePtr, joint_idx)
+    Ptrcall.call1[Long, gdext.builtin.Vector2](gdext.classes.SkeletonModification2DFABRIK.mb_get_fabrik_joint_magnet_position, livePtr, jointIdx)
   }
 
   /** SkeletonModification2DFABRIK.set_fabrik_joint_use_target_rotation */
-  final def setFabrikJointUseTargetRotation(joint_idx: Long, use_target_rotation: Boolean): Unit = {
+  final def setFabrikJointUseTargetRotation(jointIdx: Long, useTargetRotation: Boolean): Unit = {
     if (gdext.classes.SkeletonModification2DFABRIK.mb_set_fabrik_joint_use_target_rotation == null) gdext.classes.SkeletonModification2DFABRIK.mb_set_fabrik_joint_use_target_rotation = MethodBind.get("SkeletonModification2DFABRIK", "set_fabrik_joint_use_target_rotation", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DFABRIK.mb_set_fabrik_joint_use_target_rotation, livePtr, joint_idx, use_target_rotation)
+    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DFABRIK.mb_set_fabrik_joint_use_target_rotation, livePtr, jointIdx, useTargetRotation)
   }
 
   /** SkeletonModification2DFABRIK.get_fabrik_joint_use_target_rotation */
-  final def getFabrikJointUseTargetRotation(joint_idx: Long): Boolean = {
+  final def getFabrikJointUseTargetRotation(jointIdx: Long): Boolean = {
     if (gdext.classes.SkeletonModification2DFABRIK.mb_get_fabrik_joint_use_target_rotation == null) gdext.classes.SkeletonModification2DFABRIK.mb_get_fabrik_joint_use_target_rotation = MethodBind.get("SkeletonModification2DFABRIK", "get_fabrik_joint_use_target_rotation", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.SkeletonModification2DFABRIK.mb_get_fabrik_joint_use_target_rotation, livePtr, joint_idx)
+    Ptrcall.call1[Long, Boolean](gdext.classes.SkeletonModification2DFABRIK.mb_get_fabrik_joint_use_target_rotation, livePtr, jointIdx)
   }
 
 }

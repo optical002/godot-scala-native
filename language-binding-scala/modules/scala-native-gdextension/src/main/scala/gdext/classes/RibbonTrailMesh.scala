@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,9 +36,9 @@ abstract class RibbonTrailMesh extends PrimitiveMesh {
   }
 
   /** RibbonTrailMesh.set_section_length */
-  final def setSectionLength(section_length: Double): Unit = {
+  final def setSectionLength(sectionLength: Double): Unit = {
     if (gdext.classes.RibbonTrailMesh.mb_set_section_length == null) gdext.classes.RibbonTrailMesh.mb_set_section_length = MethodBind.get("RibbonTrailMesh", "set_section_length", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.RibbonTrailMesh.mb_set_section_length, livePtr, section_length)
+    Ptrcall.callVoid1(gdext.classes.RibbonTrailMesh.mb_set_section_length, livePtr, sectionLength)
   }
 
   /** RibbonTrailMesh.get_section_length */
@@ -47,9 +48,9 @@ abstract class RibbonTrailMesh extends PrimitiveMesh {
   }
 
   /** RibbonTrailMesh.set_section_segments */
-  final def setSectionSegments(section_segments: Long): Unit = {
+  final def setSectionSegments(sectionSegments: Long): Unit = {
     if (gdext.classes.RibbonTrailMesh.mb_set_section_segments == null) gdext.classes.RibbonTrailMesh.mb_set_section_segments = MethodBind.get("RibbonTrailMesh", "set_section_segments", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.RibbonTrailMesh.mb_set_section_segments, livePtr, section_segments)
+    Ptrcall.callVoid1(gdext.classes.RibbonTrailMesh.mb_set_section_segments, livePtr, sectionSegments)
   }
 
   /** RibbonTrailMesh.get_section_segments */
@@ -71,15 +72,15 @@ abstract class RibbonTrailMesh extends PrimitiveMesh {
   }
 
   /** RibbonTrailMesh.set_shape */
-  final def setShape(shape: Long): Unit = {
+  final def setShape(shape: gdext.classes.RibbonTrailMesh.Shape): Unit = {
     if (gdext.classes.RibbonTrailMesh.mb_set_shape == null) gdext.classes.RibbonTrailMesh.mb_set_shape = MethodBind.get("RibbonTrailMesh", "set_shape", 1684440262L)
     Ptrcall.callVoid1(gdext.classes.RibbonTrailMesh.mb_set_shape, livePtr, shape)
   }
 
   /** RibbonTrailMesh.get_shape */
-  final def getShape(): Long = {
+  final def getShape(): gdext.classes.RibbonTrailMesh.Shape = {
     if (gdext.classes.RibbonTrailMesh.mb_get_shape == null) gdext.classes.RibbonTrailMesh.mb_get_shape = MethodBind.get("RibbonTrailMesh", "get_shape", 1317484155L)
-    Ptrcall.call0[Long](gdext.classes.RibbonTrailMesh.mb_get_shape, livePtr)
+    gdext.classes.RibbonTrailMesh.Shape(Ptrcall.call0[Long](gdext.classes.RibbonTrailMesh.mb_get_shape, livePtr))
   }
 
 }
@@ -97,4 +98,26 @@ object RibbonTrailMesh {
   private[classes] var mb_get_curve: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_shape: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_shape: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `RibbonTrailMesh.Shape`. */
+  opaque type Shape <: Long = Long
+
+  object Shape {
+    final val Flat: Shape = 0L.asInstanceOf[Shape]
+    final val Cross: Shape = 1L.asInstanceOf[Shape]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): Shape = value.asInstanceOf[Shape]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[Shape] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[Shape]]
+
+    extension (self: Shape)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Flat"
+        case 1L => "Cross"
+        case other => other.toString
+      }
+  }
 }

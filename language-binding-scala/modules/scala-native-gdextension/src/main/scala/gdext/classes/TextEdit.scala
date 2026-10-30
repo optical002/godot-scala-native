@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -41,15 +42,15 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.set_text_direction */
-  final def setTextDirection(direction: Long): Unit = {
+  final def setTextDirection(direction: gdext.classes.Control.TextDirection): Unit = {
     if (gdext.classes.TextEdit.mb_set_text_direction == null) gdext.classes.TextEdit.mb_set_text_direction = MethodBind.get("TextEdit", "set_text_direction", 119160795L)
     Ptrcall.callVoid1(gdext.classes.TextEdit.mb_set_text_direction, livePtr, direction)
   }
 
   /** TextEdit.get_text_direction */
-  final def getTextDirection(): Long = {
+  final def getTextDirection(): gdext.classes.Control.TextDirection = {
     if (gdext.classes.TextEdit.mb_get_text_direction == null) gdext.classes.TextEdit.mb_get_text_direction = MethodBind.get("TextEdit", "get_text_direction", 797257663L)
-    Ptrcall.call0[Long](gdext.classes.TextEdit.mb_get_text_direction, livePtr)
+    gdext.classes.Control.TextDirection(Ptrcall.call0[Long](gdext.classes.TextEdit.mb_get_text_direction, livePtr))
   }
 
   /** TextEdit.set_language */
@@ -65,15 +66,15 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.set_structured_text_bidi_override */
-  final def setStructuredTextBidiOverride(parser: Long): Unit = {
+  final def setStructuredTextBidiOverride(parser: gdext.classes.TextServer.StructuredTextParser): Unit = {
     if (gdext.classes.TextEdit.mb_set_structured_text_bidi_override == null) gdext.classes.TextEdit.mb_set_structured_text_bidi_override = MethodBind.get("TextEdit", "set_structured_text_bidi_override", 55961453L)
     Ptrcall.callVoid1(gdext.classes.TextEdit.mb_set_structured_text_bidi_override, livePtr, parser)
   }
 
   /** TextEdit.get_structured_text_bidi_override */
-  final def getStructuredTextBidiOverride(): Long = {
+  final def getStructuredTextBidiOverride(): gdext.classes.TextServer.StructuredTextParser = {
     if (gdext.classes.TextEdit.mb_get_structured_text_bidi_override == null) gdext.classes.TextEdit.mb_get_structured_text_bidi_override = MethodBind.get("TextEdit", "get_structured_text_bidi_override", 3385126229L)
-    Ptrcall.call0[Long](gdext.classes.TextEdit.mb_get_structured_text_bidi_override, livePtr)
+    gdext.classes.TextServer.StructuredTextParser(Ptrcall.call0[Long](gdext.classes.TextEdit.mb_get_structured_text_bidi_override, livePtr))
   }
 
   /** TextEdit.set_tab_size */
@@ -185,9 +186,9 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.set_virtual_keyboard_show_on_focus */
-  final def setVirtualKeyboardShowOnFocus(show_on_focus: Boolean): Unit = {
+  final def setVirtualKeyboardShowOnFocus(showOnFocus: Boolean): Unit = {
     if (gdext.classes.TextEdit.mb_set_virtual_keyboard_show_on_focus == null) gdext.classes.TextEdit.mb_set_virtual_keyboard_show_on_focus = MethodBind.get("TextEdit", "set_virtual_keyboard_show_on_focus", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_set_virtual_keyboard_show_on_focus, livePtr, show_on_focus)
+    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_set_virtual_keyboard_show_on_focus, livePtr, showOnFocus)
   }
 
   /** TextEdit.get_virtual_keyboard_show_on_focus */
@@ -257,9 +258,9 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.set_line */
-  final def setLine(line: Long, new_text: String): Unit = {
+  final def setLine(line: Long, newText: String): Unit = {
     if (gdext.classes.TextEdit.mb_set_line == null) gdext.classes.TextEdit.mb_set_line = MethodBind.get("TextEdit", "set_line", 501894301L)
-    Ptrcall.callVoid2(gdext.classes.TextEdit.mb_set_line, livePtr, line, new_text)
+    Ptrcall.callVoid2(gdext.classes.TextEdit.mb_set_line, livePtr, line, newText)
   }
 
   /** TextEdit.get_line */
@@ -275,9 +276,9 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.get_line_width */
-  final def getLineWidth(line: Long, wrap_index: Long): Long = {
+  final def getLineWidth(line: Long, wrapIndex: Long = -1L): Long = {
     if (gdext.classes.TextEdit.mb_get_line_width == null) gdext.classes.TextEdit.mb_get_line_width = MethodBind.get("TextEdit", "get_line_width", 688195400L)
-    Ptrcall.call2[Long, Long, Long](gdext.classes.TextEdit.mb_get_line_width, livePtr, line, wrap_index)
+    Ptrcall.call2[Long, Long, Long](gdext.classes.TextEdit.mb_get_line_width, livePtr, line, wrapIndex)
   }
 
   /** TextEdit.get_line_height */
@@ -299,9 +300,9 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.swap_lines */
-  final def swapLines(from_line: Long, to_line: Long): Unit = {
+  final def swapLines(fromLine: Long, toLine: Long): Unit = {
     if (gdext.classes.TextEdit.mb_swap_lines == null) gdext.classes.TextEdit.mb_swap_lines = MethodBind.get("TextEdit", "swap_lines", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.TextEdit.mb_swap_lines, livePtr, from_line, to_line)
+    Ptrcall.callVoid2(gdext.classes.TextEdit.mb_swap_lines, livePtr, fromLine, toLine)
   }
 
   /** TextEdit.insert_line_at */
@@ -311,27 +312,27 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.remove_line_at */
-  final def removeLineAt(line: Long, move_carets_down: Boolean): Unit = {
+  final def removeLineAt(line: Long, moveCaretsDown: Boolean = true): Unit = {
     if (gdext.classes.TextEdit.mb_remove_line_at == null) gdext.classes.TextEdit.mb_remove_line_at = MethodBind.get("TextEdit", "remove_line_at", 972357352L)
-    Ptrcall.callVoid2(gdext.classes.TextEdit.mb_remove_line_at, livePtr, line, move_carets_down)
+    Ptrcall.callVoid2(gdext.classes.TextEdit.mb_remove_line_at, livePtr, line, moveCaretsDown)
   }
 
   /** TextEdit.insert_text_at_caret */
-  final def insertTextAtCaret(text: String, caret_index: Long): Unit = {
+  final def insertTextAtCaret(text: String, caretIndex: Long = -1L): Unit = {
     if (gdext.classes.TextEdit.mb_insert_text_at_caret == null) gdext.classes.TextEdit.mb_insert_text_at_caret = MethodBind.get("TextEdit", "insert_text_at_caret", 2697778442L)
-    Ptrcall.callVoid2(gdext.classes.TextEdit.mb_insert_text_at_caret, livePtr, text, caret_index)
+    Ptrcall.callVoid2(gdext.classes.TextEdit.mb_insert_text_at_caret, livePtr, text, caretIndex)
   }
 
   /** TextEdit.insert_text */
-  final def insertText(text: String, line: Long, column: Long, before_selection_begin: Boolean, before_selection_end: Boolean): Unit = {
+  final def insertText(text: String, line: Long, column: Long, beforeSelectionBegin: Boolean = true, beforeSelectionEnd: Boolean = false): Unit = {
     if (gdext.classes.TextEdit.mb_insert_text == null) gdext.classes.TextEdit.mb_insert_text = MethodBind.get("TextEdit", "insert_text", 1881564334L)
-    Ptrcall.callVoid5(gdext.classes.TextEdit.mb_insert_text, livePtr, text, line, column, before_selection_begin, before_selection_end)
+    Ptrcall.callVoid5(gdext.classes.TextEdit.mb_insert_text, livePtr, text, line, column, beforeSelectionBegin, beforeSelectionEnd)
   }
 
   /** TextEdit.remove_text */
-  final def removeText(from_line: Long, from_column: Long, to_line: Long, to_column: Long): Unit = {
+  final def removeText(fromLine: Long, fromColumn: Long, toLine: Long, toColumn: Long): Unit = {
     if (gdext.classes.TextEdit.mb_remove_text == null) gdext.classes.TextEdit.mb_remove_text = MethodBind.get("TextEdit", "remove_text", 4275841770L)
-    Ptrcall.callVoid4(gdext.classes.TextEdit.mb_remove_text, livePtr, from_line, from_column, to_line, to_column)
+    Ptrcall.callVoid4(gdext.classes.TextEdit.mb_remove_text, livePtr, fromLine, fromColumn, toLine, toColumn)
   }
 
   /** TextEdit.get_last_unhidden_line */
@@ -341,49 +342,49 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.get_next_visible_line_offset_from */
-  final def getNextVisibleLineOffsetFrom(line: Long, visible_amount: Long): Long = {
+  final def getNextVisibleLineOffsetFrom(line: Long, visibleAmount: Long): Long = {
     if (gdext.classes.TextEdit.mb_get_next_visible_line_offset_from == null) gdext.classes.TextEdit.mb_get_next_visible_line_offset_from = MethodBind.get("TextEdit", "get_next_visible_line_offset_from", 3175239445L)
-    Ptrcall.call2[Long, Long, Long](gdext.classes.TextEdit.mb_get_next_visible_line_offset_from, livePtr, line, visible_amount)
+    Ptrcall.call2[Long, Long, Long](gdext.classes.TextEdit.mb_get_next_visible_line_offset_from, livePtr, line, visibleAmount)
   }
 
   /** TextEdit.get_next_visible_line_index_offset_from */
-  final def getNextVisibleLineIndexOffsetFrom(line: Long, wrap_index: Long, visible_amount: Long): gdext.builtin.Vector2i = {
+  final def getNextVisibleLineIndexOffsetFrom(line: Long, wrapIndex: Long, visibleAmount: Long): gdext.builtin.Vector2i = {
     if (gdext.classes.TextEdit.mb_get_next_visible_line_index_offset_from == null) gdext.classes.TextEdit.mb_get_next_visible_line_index_offset_from = MethodBind.get("TextEdit", "get_next_visible_line_index_offset_from", 3386475622L)
-    Ptrcall.call3[Long, Long, Long, gdext.builtin.Vector2i](gdext.classes.TextEdit.mb_get_next_visible_line_index_offset_from, livePtr, line, wrap_index, visible_amount)
+    Ptrcall.call3[Long, Long, Long, gdext.builtin.Vector2i](gdext.classes.TextEdit.mb_get_next_visible_line_index_offset_from, livePtr, line, wrapIndex, visibleAmount)
   }
 
   /** TextEdit.backspace */
-  final def backspace(caret_index: Long): Unit = {
+  final def backspace(caretIndex: Long = -1L): Unit = {
     if (gdext.classes.TextEdit.mb_backspace == null) gdext.classes.TextEdit.mb_backspace = MethodBind.get("TextEdit", "backspace", 1025054187L)
-    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_backspace, livePtr, caret_index)
+    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_backspace, livePtr, caretIndex)
   }
 
   /** TextEdit.cut */
-  final def cut(caret_index: Long): Unit = {
+  final def cut(caretIndex: Long = -1L): Unit = {
     if (gdext.classes.TextEdit.mb_cut == null) gdext.classes.TextEdit.mb_cut = MethodBind.get("TextEdit", "cut", 1025054187L)
-    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_cut, livePtr, caret_index)
+    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_cut, livePtr, caretIndex)
   }
 
   /** TextEdit.copy */
-  final def copy(caret_index: Long): Unit = {
+  final def copy(caretIndex: Long = -1L): Unit = {
     if (gdext.classes.TextEdit.mb_copy == null) gdext.classes.TextEdit.mb_copy = MethodBind.get("TextEdit", "copy", 1025054187L)
-    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_copy, livePtr, caret_index)
+    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_copy, livePtr, caretIndex)
   }
 
   /** TextEdit.paste */
-  final def paste(caret_index: Long): Unit = {
+  final def paste(caretIndex: Long = -1L): Unit = {
     if (gdext.classes.TextEdit.mb_paste == null) gdext.classes.TextEdit.mb_paste = MethodBind.get("TextEdit", "paste", 1025054187L)
-    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_paste, livePtr, caret_index)
+    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_paste, livePtr, caretIndex)
   }
 
   /** TextEdit.paste_primary_clipboard */
-  final def pastePrimaryClipboard(caret_index: Long): Unit = {
+  final def pastePrimaryClipboard(caretIndex: Long = -1L): Unit = {
     if (gdext.classes.TextEdit.mb_paste_primary_clipboard == null) gdext.classes.TextEdit.mb_paste_primary_clipboard = MethodBind.get("TextEdit", "paste_primary_clipboard", 1025054187L)
-    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_paste_primary_clipboard, livePtr, caret_index)
+    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_paste_primary_clipboard, livePtr, caretIndex)
   }
 
   /** TextEdit.start_action */
-  final def startAction(action: Long): Unit = {
+  final def startAction(action: gdext.classes.TextEdit.EditAction): Unit = {
     if (gdext.classes.TextEdit.mb_start_action == null) gdext.classes.TextEdit.mb_start_action = MethodBind.get("TextEdit", "start_action", 2834827583L)
     Ptrcall.callVoid1(gdext.classes.TextEdit.mb_start_action, livePtr, action)
   }
@@ -455,9 +456,9 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.set_search_text */
-  final def setSearchText(search_text: String): Unit = {
+  final def setSearchText(searchText: String): Unit = {
     if (gdext.classes.TextEdit.mb_set_search_text == null) gdext.classes.TextEdit.mb_set_search_text = MethodBind.get("TextEdit", "set_search_text", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_set_search_text, livePtr, search_text)
+    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_set_search_text, livePtr, searchText)
   }
 
   /** TextEdit.set_search_flags */
@@ -467,9 +468,9 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.search */
-  final def search(text: String, flags: Long, from_line: Long, from_column: Long): gdext.builtin.Vector2i = {
+  final def search(text: String, flags: Long, fromLine: Long, fromColumn: Long): gdext.builtin.Vector2i = {
     if (gdext.classes.TextEdit.mb_search == null) gdext.classes.TextEdit.mb_search = MethodBind.get("TextEdit", "search", 1203739136L)
-    Ptrcall.call4[String, Long, Long, Long, gdext.builtin.Vector2i](gdext.classes.TextEdit.mb_search, livePtr, text, flags, from_line, from_column)
+    Ptrcall.call4[String, Long, Long, Long, gdext.builtin.Vector2i](gdext.classes.TextEdit.mb_search, livePtr, text, flags, fromLine, fromColumn)
   }
 
   /** TextEdit.get_local_mouse_pos */
@@ -485,9 +486,9 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.get_line_column_at_pos */
-  final def getLineColumnAtPos(position: gdext.builtin.Vector2i, clamp_line: Boolean, clamp_column: Boolean): gdext.builtin.Vector2i = {
+  final def getLineColumnAtPos(position: gdext.builtin.Vector2i, clampLine: Boolean = true, clampColumn: Boolean = true): gdext.builtin.Vector2i = {
     if (gdext.classes.TextEdit.mb_get_line_column_at_pos == null) gdext.classes.TextEdit.mb_get_line_column_at_pos = MethodBind.get("TextEdit", "get_line_column_at_pos", 3472935744L)
-    Ptrcall.call3[gdext.builtin.Vector2i, Boolean, Boolean, gdext.builtin.Vector2i](gdext.classes.TextEdit.mb_get_line_column_at_pos, livePtr, position, clamp_line, clamp_column)
+    Ptrcall.call3[gdext.builtin.Vector2i, Boolean, Boolean, gdext.builtin.Vector2i](gdext.classes.TextEdit.mb_get_line_column_at_pos, livePtr, position, clampLine, clampColumn)
   }
 
   /** TextEdit.get_pos_at_line_column */
@@ -515,21 +516,21 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.is_mouse_over_selection */
-  final def isMouseOverSelection(edges: Boolean, caret_index: Long): Boolean = {
+  final def isMouseOverSelection(edges: Boolean, caretIndex: Long = -1L): Boolean = {
     if (gdext.classes.TextEdit.mb_is_mouse_over_selection == null) gdext.classes.TextEdit.mb_is_mouse_over_selection = MethodBind.get("TextEdit", "is_mouse_over_selection", 1840282309L)
-    Ptrcall.call2[Boolean, Long, Boolean](gdext.classes.TextEdit.mb_is_mouse_over_selection, livePtr, edges, caret_index)
+    Ptrcall.call2[Boolean, Long, Boolean](gdext.classes.TextEdit.mb_is_mouse_over_selection, livePtr, edges, caretIndex)
   }
 
   /** TextEdit.set_caret_type */
-  final def setCaretType(`type`: Long): Unit = {
+  final def setCaretType(`type`: gdext.classes.TextEdit.CaretType): Unit = {
     if (gdext.classes.TextEdit.mb_set_caret_type == null) gdext.classes.TextEdit.mb_set_caret_type = MethodBind.get("TextEdit", "set_caret_type", 1211596914L)
     Ptrcall.callVoid1(gdext.classes.TextEdit.mb_set_caret_type, livePtr, `type`)
   }
 
   /** TextEdit.get_caret_type */
-  final def getCaretType(): Long = {
+  final def getCaretType(): gdext.classes.TextEdit.CaretType = {
     if (gdext.classes.TextEdit.mb_get_caret_type == null) gdext.classes.TextEdit.mb_get_caret_type = MethodBind.get("TextEdit", "get_caret_type", 2830252959L)
-    Ptrcall.call0[Long](gdext.classes.TextEdit.mb_get_caret_type, livePtr)
+    gdext.classes.TextEdit.CaretType(Ptrcall.call0[Long](gdext.classes.TextEdit.mb_get_caret_type, livePtr))
   }
 
   /** TextEdit.set_caret_blink_enabled */
@@ -635,9 +636,9 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.collapse_carets */
-  final def collapseCarets(from_line: Long, from_column: Long, to_line: Long, to_column: Long, inclusive: Boolean): Unit = {
+  final def collapseCarets(fromLine: Long, fromColumn: Long, toLine: Long, toColumn: Long, inclusive: Boolean = false): Unit = {
     if (gdext.classes.TextEdit.mb_collapse_carets == null) gdext.classes.TextEdit.mb_collapse_carets = MethodBind.get("TextEdit", "collapse_carets", 228654177L)
-    Ptrcall.callVoid5(gdext.classes.TextEdit.mb_collapse_carets, livePtr, from_line, from_column, to_line, to_column, inclusive)
+    Ptrcall.callVoid5(gdext.classes.TextEdit.mb_collapse_carets, livePtr, fromLine, fromColumn, toLine, toColumn, inclusive)
   }
 
   /** TextEdit.merge_overlapping_carets */
@@ -665,45 +666,45 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.multicaret_edit_ignore_caret */
-  final def multicaretEditIgnoreCaret(caret_index: Long): Boolean = {
+  final def multicaretEditIgnoreCaret(caretIndex: Long): Boolean = {
     if (gdext.classes.TextEdit.mb_multicaret_edit_ignore_caret == null) gdext.classes.TextEdit.mb_multicaret_edit_ignore_caret = MethodBind.get("TextEdit", "multicaret_edit_ignore_caret", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.TextEdit.mb_multicaret_edit_ignore_caret, livePtr, caret_index)
+    Ptrcall.call1[Long, Boolean](gdext.classes.TextEdit.mb_multicaret_edit_ignore_caret, livePtr, caretIndex)
   }
 
   /** TextEdit.is_caret_visible */
-  final def isCaretVisible(caret_index: Long): Boolean = {
+  final def isCaretVisible(caretIndex: Long = 0L): Boolean = {
     if (gdext.classes.TextEdit.mb_is_caret_visible == null) gdext.classes.TextEdit.mb_is_caret_visible = MethodBind.get("TextEdit", "is_caret_visible", 1051549951L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.TextEdit.mb_is_caret_visible, livePtr, caret_index)
+    Ptrcall.call1[Long, Boolean](gdext.classes.TextEdit.mb_is_caret_visible, livePtr, caretIndex)
   }
 
   /** TextEdit.get_caret_draw_pos */
-  final def getCaretDrawPos(caret_index: Long): gdext.builtin.Vector2 = {
+  final def getCaretDrawPos(caretIndex: Long = 0L): gdext.builtin.Vector2 = {
     if (gdext.classes.TextEdit.mb_get_caret_draw_pos == null) gdext.classes.TextEdit.mb_get_caret_draw_pos = MethodBind.get("TextEdit", "get_caret_draw_pos", 478253731L)
-    Ptrcall.call1[Long, gdext.builtin.Vector2](gdext.classes.TextEdit.mb_get_caret_draw_pos, livePtr, caret_index)
+    Ptrcall.call1[Long, gdext.builtin.Vector2](gdext.classes.TextEdit.mb_get_caret_draw_pos, livePtr, caretIndex)
   }
 
   /** TextEdit.set_caret_line */
-  final def setCaretLine(line: Long, adjust_viewport: Boolean, can_be_hidden: Boolean, wrap_index: Long, caret_index: Long): Unit = {
+  final def setCaretLine(line: Long, adjustViewport: Boolean = true, canBeHidden: Boolean = true, wrapIndex: Long = 0L, caretIndex: Long = 0L): Unit = {
     if (gdext.classes.TextEdit.mb_set_caret_line == null) gdext.classes.TextEdit.mb_set_caret_line = MethodBind.get("TextEdit", "set_caret_line", 1302582944L)
-    Ptrcall.callVoid5(gdext.classes.TextEdit.mb_set_caret_line, livePtr, line, adjust_viewport, can_be_hidden, wrap_index, caret_index)
+    Ptrcall.callVoid5(gdext.classes.TextEdit.mb_set_caret_line, livePtr, line, adjustViewport, canBeHidden, wrapIndex, caretIndex)
   }
 
   /** TextEdit.get_caret_line */
-  final def getCaretLine(caret_index: Long): Long = {
+  final def getCaretLine(caretIndex: Long = 0L): Long = {
     if (gdext.classes.TextEdit.mb_get_caret_line == null) gdext.classes.TextEdit.mb_get_caret_line = MethodBind.get("TextEdit", "get_caret_line", 1591665591L)
-    Ptrcall.call1[Long, Long](gdext.classes.TextEdit.mb_get_caret_line, livePtr, caret_index)
+    Ptrcall.call1[Long, Long](gdext.classes.TextEdit.mb_get_caret_line, livePtr, caretIndex)
   }
 
   /** TextEdit.set_caret_column */
-  final def setCaretColumn(column: Long, adjust_viewport: Boolean, caret_index: Long): Unit = {
+  final def setCaretColumn(column: Long, adjustViewport: Boolean = true, caretIndex: Long = 0L): Unit = {
     if (gdext.classes.TextEdit.mb_set_caret_column == null) gdext.classes.TextEdit.mb_set_caret_column = MethodBind.get("TextEdit", "set_caret_column", 3796796178L)
-    Ptrcall.callVoid3(gdext.classes.TextEdit.mb_set_caret_column, livePtr, column, adjust_viewport, caret_index)
+    Ptrcall.callVoid3(gdext.classes.TextEdit.mb_set_caret_column, livePtr, column, adjustViewport, caretIndex)
   }
 
   /** TextEdit.get_caret_column */
-  final def getCaretColumn(caret_index: Long): Long = {
+  final def getCaretColumn(caretIndex: Long = 0L): Long = {
     if (gdext.classes.TextEdit.mb_get_caret_column == null) gdext.classes.TextEdit.mb_get_caret_column = MethodBind.get("TextEdit", "get_caret_column", 1591665591L)
-    Ptrcall.call1[Long, Long](gdext.classes.TextEdit.mb_get_caret_column, livePtr, caret_index)
+    Ptrcall.call1[Long, Long](gdext.classes.TextEdit.mb_get_caret_column, livePtr, caretIndex)
   }
 
   /** TextEdit.get_next_composite_character_column */
@@ -719,15 +720,15 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.get_caret_wrap_index */
-  final def getCaretWrapIndex(caret_index: Long): Long = {
+  final def getCaretWrapIndex(caretIndex: Long = 0L): Long = {
     if (gdext.classes.TextEdit.mb_get_caret_wrap_index == null) gdext.classes.TextEdit.mb_get_caret_wrap_index = MethodBind.get("TextEdit", "get_caret_wrap_index", 1591665591L)
-    Ptrcall.call1[Long, Long](gdext.classes.TextEdit.mb_get_caret_wrap_index, livePtr, caret_index)
+    Ptrcall.call1[Long, Long](gdext.classes.TextEdit.mb_get_caret_wrap_index, livePtr, caretIndex)
   }
 
   /** TextEdit.get_word_under_caret */
-  final def getWordUnderCaret(caret_index: Long): String = {
+  final def getWordUnderCaret(caretIndex: Long = -1L): String = {
     if (gdext.classes.TextEdit.mb_get_word_under_caret == null) gdext.classes.TextEdit.mb_get_word_under_caret = MethodBind.get("TextEdit", "get_word_under_caret", 3929349208L)
-    Ptrcall.call1[Long, String](gdext.classes.TextEdit.mb_get_word_under_caret, livePtr, caret_index)
+    Ptrcall.call1[Long, String](gdext.classes.TextEdit.mb_get_word_under_caret, livePtr, caretIndex)
   }
 
   /** TextEdit.set_use_default_word_separators */
@@ -755,9 +756,9 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.set_custom_word_separators */
-  final def setCustomWordSeparators(custom_word_separators: String): Unit = {
+  final def setCustomWordSeparators(customWordSeparators: String): Unit = {
     if (gdext.classes.TextEdit.mb_set_custom_word_separators == null) gdext.classes.TextEdit.mb_set_custom_word_separators = MethodBind.get("TextEdit", "set_custom_word_separators", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_set_custom_word_separators, livePtr, custom_word_separators)
+    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_set_custom_word_separators, livePtr, customWordSeparators)
   }
 
   /** TextEdit.get_custom_word_separators */
@@ -803,15 +804,15 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.set_selection_mode */
-  final def setSelectionMode(mode: Long): Unit = {
+  final def setSelectionMode(mode: gdext.classes.TextEdit.SelectionMode): Unit = {
     if (gdext.classes.TextEdit.mb_set_selection_mode == null) gdext.classes.TextEdit.mb_set_selection_mode = MethodBind.get("TextEdit", "set_selection_mode", 1658801786L)
     Ptrcall.callVoid1(gdext.classes.TextEdit.mb_set_selection_mode, livePtr, mode)
   }
 
   /** TextEdit.get_selection_mode */
-  final def getSelectionMode(): Long = {
+  final def getSelectionMode(): gdext.classes.TextEdit.SelectionMode = {
     if (gdext.classes.TextEdit.mb_get_selection_mode == null) gdext.classes.TextEdit.mb_get_selection_mode = MethodBind.get("TextEdit", "get_selection_mode", 3750106938L)
-    Ptrcall.call0[Long](gdext.classes.TextEdit.mb_get_selection_mode, livePtr)
+    gdext.classes.TextEdit.SelectionMode(Ptrcall.call0[Long](gdext.classes.TextEdit.mb_get_selection_mode, livePtr))
   }
 
   /** TextEdit.select_all */
@@ -821,9 +822,9 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.select_word_under_caret */
-  final def selectWordUnderCaret(caret_index: Long): Unit = {
+  final def selectWordUnderCaret(caretIndex: Long = -1L): Unit = {
     if (gdext.classes.TextEdit.mb_select_word_under_caret == null) gdext.classes.TextEdit.mb_select_word_under_caret = MethodBind.get("TextEdit", "select_word_under_caret", 1025054187L)
-    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_select_word_under_caret, livePtr, caret_index)
+    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_select_word_under_caret, livePtr, caretIndex)
   }
 
   /** TextEdit.add_selection_for_next_occurrence */
@@ -839,117 +840,117 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.select */
-  final def select(origin_line: Long, origin_column: Long, caret_line: Long, caret_column: Long, caret_index: Long): Unit = {
+  final def select(originLine: Long, originColumn: Long, caretLine: Long, caretColumn: Long, caretIndex: Long = 0L): Unit = {
     if (gdext.classes.TextEdit.mb_select == null) gdext.classes.TextEdit.mb_select = MethodBind.get("TextEdit", "select", 2560984452L)
-    Ptrcall.callVoid5(gdext.classes.TextEdit.mb_select, livePtr, origin_line, origin_column, caret_line, caret_column, caret_index)
+    Ptrcall.callVoid5(gdext.classes.TextEdit.mb_select, livePtr, originLine, originColumn, caretLine, caretColumn, caretIndex)
   }
 
   /** TextEdit.has_selection */
-  final def hasSelection(caret_index: Long): Boolean = {
+  final def hasSelection(caretIndex: Long = -1L): Boolean = {
     if (gdext.classes.TextEdit.mb_has_selection == null) gdext.classes.TextEdit.mb_has_selection = MethodBind.get("TextEdit", "has_selection", 2824505868L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.TextEdit.mb_has_selection, livePtr, caret_index)
+    Ptrcall.call1[Long, Boolean](gdext.classes.TextEdit.mb_has_selection, livePtr, caretIndex)
   }
 
   /** TextEdit.get_selected_text */
-  final def getSelectedText(caret_index: Long): String = {
+  final def getSelectedText(caretIndex: Long = -1L): String = {
     if (gdext.classes.TextEdit.mb_get_selected_text == null) gdext.classes.TextEdit.mb_get_selected_text = MethodBind.get("TextEdit", "get_selected_text", 2309358862L)
-    Ptrcall.call1[Long, String](gdext.classes.TextEdit.mb_get_selected_text, livePtr, caret_index)
+    Ptrcall.call1[Long, String](gdext.classes.TextEdit.mb_get_selected_text, livePtr, caretIndex)
   }
 
   /** TextEdit.get_selection_at_line_column */
-  final def getSelectionAtLineColumn(line: Long, column: Long, include_edges: Boolean, only_selections: Boolean): Long = {
+  final def getSelectionAtLineColumn(line: Long, column: Long, includeEdges: Boolean = true, onlySelections: Boolean = true): Long = {
     if (gdext.classes.TextEdit.mb_get_selection_at_line_column == null) gdext.classes.TextEdit.mb_get_selection_at_line_column = MethodBind.get("TextEdit", "get_selection_at_line_column", 1810224333L)
-    Ptrcall.call4[Long, Long, Boolean, Boolean, Long](gdext.classes.TextEdit.mb_get_selection_at_line_column, livePtr, line, column, include_edges, only_selections)
+    Ptrcall.call4[Long, Long, Boolean, Boolean, Long](gdext.classes.TextEdit.mb_get_selection_at_line_column, livePtr, line, column, includeEdges, onlySelections)
   }
 
   /** TextEdit.get_selection_origin_line */
-  final def getSelectionOriginLine(caret_index: Long): Long = {
+  final def getSelectionOriginLine(caretIndex: Long = 0L): Long = {
     if (gdext.classes.TextEdit.mb_get_selection_origin_line == null) gdext.classes.TextEdit.mb_get_selection_origin_line = MethodBind.get("TextEdit", "get_selection_origin_line", 1591665591L)
-    Ptrcall.call1[Long, Long](gdext.classes.TextEdit.mb_get_selection_origin_line, livePtr, caret_index)
+    Ptrcall.call1[Long, Long](gdext.classes.TextEdit.mb_get_selection_origin_line, livePtr, caretIndex)
   }
 
   /** TextEdit.get_selection_origin_column */
-  final def getSelectionOriginColumn(caret_index: Long): Long = {
+  final def getSelectionOriginColumn(caretIndex: Long = 0L): Long = {
     if (gdext.classes.TextEdit.mb_get_selection_origin_column == null) gdext.classes.TextEdit.mb_get_selection_origin_column = MethodBind.get("TextEdit", "get_selection_origin_column", 1591665591L)
-    Ptrcall.call1[Long, Long](gdext.classes.TextEdit.mb_get_selection_origin_column, livePtr, caret_index)
+    Ptrcall.call1[Long, Long](gdext.classes.TextEdit.mb_get_selection_origin_column, livePtr, caretIndex)
   }
 
   /** TextEdit.set_selection_origin_line */
-  final def setSelectionOriginLine(line: Long, can_be_hidden: Boolean, wrap_index: Long, caret_index: Long): Unit = {
+  final def setSelectionOriginLine(line: Long, canBeHidden: Boolean = true, wrapIndex: Long = -1L, caretIndex: Long = 0L): Unit = {
     if (gdext.classes.TextEdit.mb_set_selection_origin_line == null) gdext.classes.TextEdit.mb_set_selection_origin_line = MethodBind.get("TextEdit", "set_selection_origin_line", 195434140L)
-    Ptrcall.callVoid4(gdext.classes.TextEdit.mb_set_selection_origin_line, livePtr, line, can_be_hidden, wrap_index, caret_index)
+    Ptrcall.callVoid4(gdext.classes.TextEdit.mb_set_selection_origin_line, livePtr, line, canBeHidden, wrapIndex, caretIndex)
   }
 
   /** TextEdit.set_selection_origin_column */
-  final def setSelectionOriginColumn(column: Long, caret_index: Long): Unit = {
+  final def setSelectionOriginColumn(column: Long, caretIndex: Long = 0L): Unit = {
     if (gdext.classes.TextEdit.mb_set_selection_origin_column == null) gdext.classes.TextEdit.mb_set_selection_origin_column = MethodBind.get("TextEdit", "set_selection_origin_column", 2230941749L)
-    Ptrcall.callVoid2(gdext.classes.TextEdit.mb_set_selection_origin_column, livePtr, column, caret_index)
+    Ptrcall.callVoid2(gdext.classes.TextEdit.mb_set_selection_origin_column, livePtr, column, caretIndex)
   }
 
   /** TextEdit.get_selection_from_line */
-  final def getSelectionFromLine(caret_index: Long): Long = {
+  final def getSelectionFromLine(caretIndex: Long = 0L): Long = {
     if (gdext.classes.TextEdit.mb_get_selection_from_line == null) gdext.classes.TextEdit.mb_get_selection_from_line = MethodBind.get("TextEdit", "get_selection_from_line", 1591665591L)
-    Ptrcall.call1[Long, Long](gdext.classes.TextEdit.mb_get_selection_from_line, livePtr, caret_index)
+    Ptrcall.call1[Long, Long](gdext.classes.TextEdit.mb_get_selection_from_line, livePtr, caretIndex)
   }
 
   /** TextEdit.get_selection_from_column */
-  final def getSelectionFromColumn(caret_index: Long): Long = {
+  final def getSelectionFromColumn(caretIndex: Long = 0L): Long = {
     if (gdext.classes.TextEdit.mb_get_selection_from_column == null) gdext.classes.TextEdit.mb_get_selection_from_column = MethodBind.get("TextEdit", "get_selection_from_column", 1591665591L)
-    Ptrcall.call1[Long, Long](gdext.classes.TextEdit.mb_get_selection_from_column, livePtr, caret_index)
+    Ptrcall.call1[Long, Long](gdext.classes.TextEdit.mb_get_selection_from_column, livePtr, caretIndex)
   }
 
   /** TextEdit.get_selection_to_line */
-  final def getSelectionToLine(caret_index: Long): Long = {
+  final def getSelectionToLine(caretIndex: Long = 0L): Long = {
     if (gdext.classes.TextEdit.mb_get_selection_to_line == null) gdext.classes.TextEdit.mb_get_selection_to_line = MethodBind.get("TextEdit", "get_selection_to_line", 1591665591L)
-    Ptrcall.call1[Long, Long](gdext.classes.TextEdit.mb_get_selection_to_line, livePtr, caret_index)
+    Ptrcall.call1[Long, Long](gdext.classes.TextEdit.mb_get_selection_to_line, livePtr, caretIndex)
   }
 
   /** TextEdit.get_selection_to_column */
-  final def getSelectionToColumn(caret_index: Long): Long = {
+  final def getSelectionToColumn(caretIndex: Long = 0L): Long = {
     if (gdext.classes.TextEdit.mb_get_selection_to_column == null) gdext.classes.TextEdit.mb_get_selection_to_column = MethodBind.get("TextEdit", "get_selection_to_column", 1591665591L)
-    Ptrcall.call1[Long, Long](gdext.classes.TextEdit.mb_get_selection_to_column, livePtr, caret_index)
+    Ptrcall.call1[Long, Long](gdext.classes.TextEdit.mb_get_selection_to_column, livePtr, caretIndex)
   }
 
   /** TextEdit.is_caret_after_selection_origin */
-  final def isCaretAfterSelectionOrigin(caret_index: Long): Boolean = {
+  final def isCaretAfterSelectionOrigin(caretIndex: Long = 0L): Boolean = {
     if (gdext.classes.TextEdit.mb_is_caret_after_selection_origin == null) gdext.classes.TextEdit.mb_is_caret_after_selection_origin = MethodBind.get("TextEdit", "is_caret_after_selection_origin", 1051549951L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.TextEdit.mb_is_caret_after_selection_origin, livePtr, caret_index)
+    Ptrcall.call1[Long, Boolean](gdext.classes.TextEdit.mb_is_caret_after_selection_origin, livePtr, caretIndex)
   }
 
   /** TextEdit.deselect */
-  final def deselect(caret_index: Long): Unit = {
+  final def deselect(caretIndex: Long = -1L): Unit = {
     if (gdext.classes.TextEdit.mb_deselect == null) gdext.classes.TextEdit.mb_deselect = MethodBind.get("TextEdit", "deselect", 1025054187L)
-    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_deselect, livePtr, caret_index)
+    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_deselect, livePtr, caretIndex)
   }
 
   /** TextEdit.delete_selection */
-  final def deleteSelection(caret_index: Long): Unit = {
+  final def deleteSelection(caretIndex: Long = -1L): Unit = {
     if (gdext.classes.TextEdit.mb_delete_selection == null) gdext.classes.TextEdit.mb_delete_selection = MethodBind.get("TextEdit", "delete_selection", 1025054187L)
-    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_delete_selection, livePtr, caret_index)
+    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_delete_selection, livePtr, caretIndex)
   }
 
   /** TextEdit.set_line_wrapping_mode */
-  final def setLineWrappingMode(mode: Long): Unit = {
+  final def setLineWrappingMode(mode: gdext.classes.TextEdit.LineWrappingMode): Unit = {
     if (gdext.classes.TextEdit.mb_set_line_wrapping_mode == null) gdext.classes.TextEdit.mb_set_line_wrapping_mode = MethodBind.get("TextEdit", "set_line_wrapping_mode", 2525115309L)
     Ptrcall.callVoid1(gdext.classes.TextEdit.mb_set_line_wrapping_mode, livePtr, mode)
   }
 
   /** TextEdit.get_line_wrapping_mode */
-  final def getLineWrappingMode(): Long = {
+  final def getLineWrappingMode(): gdext.classes.TextEdit.LineWrappingMode = {
     if (gdext.classes.TextEdit.mb_get_line_wrapping_mode == null) gdext.classes.TextEdit.mb_get_line_wrapping_mode = MethodBind.get("TextEdit", "get_line_wrapping_mode", 3562716114L)
-    Ptrcall.call0[Long](gdext.classes.TextEdit.mb_get_line_wrapping_mode, livePtr)
+    gdext.classes.TextEdit.LineWrappingMode(Ptrcall.call0[Long](gdext.classes.TextEdit.mb_get_line_wrapping_mode, livePtr))
   }
 
   /** TextEdit.set_autowrap_mode */
-  final def setAutowrapMode(autowrap_mode: Long): Unit = {
+  final def setAutowrapMode(autowrapMode: gdext.classes.TextServer.AutowrapMode): Unit = {
     if (gdext.classes.TextEdit.mb_set_autowrap_mode == null) gdext.classes.TextEdit.mb_set_autowrap_mode = MethodBind.get("TextEdit", "set_autowrap_mode", 3289138044L)
-    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_set_autowrap_mode, livePtr, autowrap_mode)
+    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_set_autowrap_mode, livePtr, autowrapMode)
   }
 
   /** TextEdit.get_autowrap_mode */
-  final def getAutowrapMode(): Long = {
+  final def getAutowrapMode(): gdext.classes.TextServer.AutowrapMode = {
     if (gdext.classes.TextEdit.mb_get_autowrap_mode == null) gdext.classes.TextEdit.mb_get_autowrap_mode = MethodBind.get("TextEdit", "get_autowrap_mode", 1549071663L)
-    Ptrcall.call0[Long](gdext.classes.TextEdit.mb_get_autowrap_mode, livePtr)
+    gdext.classes.TextServer.AutowrapMode(Ptrcall.call0[Long](gdext.classes.TextEdit.mb_get_autowrap_mode, livePtr))
   }
 
   /** TextEdit.is_line_wrapped */
@@ -1067,15 +1068,15 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.get_scroll_pos_for_line */
-  final def getScrollPosForLine(line: Long, wrap_index: Long): Double = {
+  final def getScrollPosForLine(line: Long, wrapIndex: Long = 0L): Double = {
     if (gdext.classes.TextEdit.mb_get_scroll_pos_for_line == null) gdext.classes.TextEdit.mb_get_scroll_pos_for_line = MethodBind.get("TextEdit", "get_scroll_pos_for_line", 3929084198L)
-    Ptrcall.call2[Long, Long, Double](gdext.classes.TextEdit.mb_get_scroll_pos_for_line, livePtr, line, wrap_index)
+    Ptrcall.call2[Long, Long, Double](gdext.classes.TextEdit.mb_get_scroll_pos_for_line, livePtr, line, wrapIndex)
   }
 
   /** TextEdit.set_line_as_first_visible */
-  final def setLineAsFirstVisible(line: Long, wrap_index: Long): Unit = {
+  final def setLineAsFirstVisible(line: Long, wrapIndex: Long = 0L): Unit = {
     if (gdext.classes.TextEdit.mb_set_line_as_first_visible == null) gdext.classes.TextEdit.mb_set_line_as_first_visible = MethodBind.get("TextEdit", "set_line_as_first_visible", 2230941749L)
-    Ptrcall.callVoid2(gdext.classes.TextEdit.mb_set_line_as_first_visible, livePtr, line, wrap_index)
+    Ptrcall.callVoid2(gdext.classes.TextEdit.mb_set_line_as_first_visible, livePtr, line, wrapIndex)
   }
 
   /** TextEdit.get_first_visible_line */
@@ -1085,15 +1086,15 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.set_line_as_center_visible */
-  final def setLineAsCenterVisible(line: Long, wrap_index: Long): Unit = {
+  final def setLineAsCenterVisible(line: Long, wrapIndex: Long = 0L): Unit = {
     if (gdext.classes.TextEdit.mb_set_line_as_center_visible == null) gdext.classes.TextEdit.mb_set_line_as_center_visible = MethodBind.get("TextEdit", "set_line_as_center_visible", 2230941749L)
-    Ptrcall.callVoid2(gdext.classes.TextEdit.mb_set_line_as_center_visible, livePtr, line, wrap_index)
+    Ptrcall.callVoid2(gdext.classes.TextEdit.mb_set_line_as_center_visible, livePtr, line, wrapIndex)
   }
 
   /** TextEdit.set_line_as_last_visible */
-  final def setLineAsLastVisible(line: Long, wrap_index: Long): Unit = {
+  final def setLineAsLastVisible(line: Long, wrapIndex: Long = 0L): Unit = {
     if (gdext.classes.TextEdit.mb_set_line_as_last_visible == null) gdext.classes.TextEdit.mb_set_line_as_last_visible = MethodBind.get("TextEdit", "set_line_as_last_visible", 2230941749L)
-    Ptrcall.callVoid2(gdext.classes.TextEdit.mb_set_line_as_last_visible, livePtr, line, wrap_index)
+    Ptrcall.callVoid2(gdext.classes.TextEdit.mb_set_line_as_last_visible, livePtr, line, wrapIndex)
   }
 
   /** TextEdit.get_last_full_visible_line */
@@ -1115,9 +1116,9 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.get_visible_line_count_in_range */
-  final def getVisibleLineCountInRange(from_line: Long, to_line: Long): Long = {
+  final def getVisibleLineCountInRange(fromLine: Long, toLine: Long): Long = {
     if (gdext.classes.TextEdit.mb_get_visible_line_count_in_range == null) gdext.classes.TextEdit.mb_get_visible_line_count_in_range = MethodBind.get("TextEdit", "get_visible_line_count_in_range", 3175239445L)
-    Ptrcall.call2[Long, Long, Long](gdext.classes.TextEdit.mb_get_visible_line_count_in_range, livePtr, from_line, to_line)
+    Ptrcall.call2[Long, Long, Long](gdext.classes.TextEdit.mb_get_visible_line_count_in_range, livePtr, fromLine, toLine)
   }
 
   /** TextEdit.get_total_visible_line_count */
@@ -1127,15 +1128,15 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.adjust_viewport_to_caret */
-  final def adjustViewportToCaret(caret_index: Long): Unit = {
+  final def adjustViewportToCaret(caretIndex: Long = 0L): Unit = {
     if (gdext.classes.TextEdit.mb_adjust_viewport_to_caret == null) gdext.classes.TextEdit.mb_adjust_viewport_to_caret = MethodBind.get("TextEdit", "adjust_viewport_to_caret", 1995695955L)
-    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_adjust_viewport_to_caret, livePtr, caret_index)
+    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_adjust_viewport_to_caret, livePtr, caretIndex)
   }
 
   /** TextEdit.center_viewport_to_caret */
-  final def centerViewportToCaret(caret_index: Long): Unit = {
+  final def centerViewportToCaret(caretIndex: Long = 0L): Unit = {
     if (gdext.classes.TextEdit.mb_center_viewport_to_caret == null) gdext.classes.TextEdit.mb_center_viewport_to_caret = MethodBind.get("TextEdit", "center_viewport_to_caret", 1995695955L)
-    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_center_viewport_to_caret, livePtr, caret_index)
+    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_center_viewport_to_caret, livePtr, caretIndex)
   }
 
   /** TextEdit.set_draw_minimap */
@@ -1169,7 +1170,7 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.add_gutter */
-  final def addGutter(at: Long): Unit = {
+  final def addGutter(at: Long = -1L): Unit = {
     if (gdext.classes.TextEdit.mb_add_gutter == null) gdext.classes.TextEdit.mb_add_gutter = MethodBind.get("TextEdit", "add_gutter", 1025054187L)
     Ptrcall.callVoid1(gdext.classes.TextEdit.mb_add_gutter, livePtr, at)
   }
@@ -1199,15 +1200,15 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.set_gutter_type */
-  final def setGutterType(gutter: Long, `type`: Long): Unit = {
+  final def setGutterType(gutter: Long, `type`: gdext.classes.TextEdit.GutterType): Unit = {
     if (gdext.classes.TextEdit.mb_set_gutter_type == null) gdext.classes.TextEdit.mb_set_gutter_type = MethodBind.get("TextEdit", "set_gutter_type", 1088959071L)
     Ptrcall.callVoid2(gdext.classes.TextEdit.mb_set_gutter_type, livePtr, gutter, `type`)
   }
 
   /** TextEdit.get_gutter_type */
-  final def getGutterType(gutter: Long): Long = {
+  final def getGutterType(gutter: Long): gdext.classes.TextEdit.GutterType = {
     if (gdext.classes.TextEdit.mb_get_gutter_type == null) gdext.classes.TextEdit.mb_get_gutter_type = MethodBind.get("TextEdit", "get_gutter_type", 1159699127L)
-    Ptrcall.call1[Long, Long](gdext.classes.TextEdit.mb_get_gutter_type, livePtr, gutter)
+    gdext.classes.TextEdit.GutterType(Ptrcall.call1[Long, Long](gdext.classes.TextEdit.mb_get_gutter_type, livePtr, gutter))
   }
 
   /** TextEdit.set_gutter_width */
@@ -1259,9 +1260,9 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.merge_gutters */
-  final def mergeGutters(from_line: Long, to_line: Long): Unit = {
+  final def mergeGutters(fromLine: Long, toLine: Long): Unit = {
     if (gdext.classes.TextEdit.mb_merge_gutters == null) gdext.classes.TextEdit.mb_merge_gutters = MethodBind.get("TextEdit", "merge_gutters", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.TextEdit.mb_merge_gutters, livePtr, from_line, to_line)
+    Ptrcall.callVoid2(gdext.classes.TextEdit.mb_merge_gutters, livePtr, fromLine, toLine)
   }
 
   /** TextEdit.get_total_gutter_width */
@@ -1331,9 +1332,9 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.set_syntax_highlighter */
-  final def setSyntaxHighlighter(syntax_highlighter: SyntaxHighlighter): Unit = {
+  final def setSyntaxHighlighter(syntaxHighlighter: SyntaxHighlighter): Unit = {
     if (gdext.classes.TextEdit.mb_set_syntax_highlighter == null) gdext.classes.TextEdit.mb_set_syntax_highlighter = MethodBind.get("TextEdit", "set_syntax_highlighter", 2765644541L)
-    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_set_syntax_highlighter, livePtr, Wrappers.handle(syntax_highlighter))
+    Ptrcall.callVoid1(gdext.classes.TextEdit.mb_set_syntax_highlighter, livePtr, Wrappers.handle(syntaxHighlighter))
   }
 
   /** TextEdit.get_syntax_highlighter. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -1421,21 +1422,21 @@ abstract class TextEdit extends Control {
   }
 
   /** TextEdit.adjust_carets_after_edit */
-  final def adjustCaretsAfterEdit(caret: Long, from_line: Long, from_col: Long, to_line: Long, to_col: Long): Unit = {
+  final def adjustCaretsAfterEdit(caret: Long, fromLine: Long, fromCol: Long, toLine: Long, toCol: Long): Unit = {
     if (gdext.classes.TextEdit.mb_adjust_carets_after_edit == null) gdext.classes.TextEdit.mb_adjust_carets_after_edit = MethodBind.get("TextEdit", "adjust_carets_after_edit", 1770277138L)
-    Ptrcall.callVoid5(gdext.classes.TextEdit.mb_adjust_carets_after_edit, livePtr, caret, from_line, from_col, to_line, to_col)
+    Ptrcall.callVoid5(gdext.classes.TextEdit.mb_adjust_carets_after_edit, livePtr, caret, fromLine, fromCol, toLine, toCol)
   }
 
   /** TextEdit.get_selection_line */
-  final def getSelectionLine(caret_index: Long): Long = {
+  final def getSelectionLine(caretIndex: Long = 0L): Long = {
     if (gdext.classes.TextEdit.mb_get_selection_line == null) gdext.classes.TextEdit.mb_get_selection_line = MethodBind.get("TextEdit", "get_selection_line", 1591665591L)
-    Ptrcall.call1[Long, Long](gdext.classes.TextEdit.mb_get_selection_line, livePtr, caret_index)
+    Ptrcall.call1[Long, Long](gdext.classes.TextEdit.mb_get_selection_line, livePtr, caretIndex)
   }
 
   /** TextEdit.get_selection_column */
-  final def getSelectionColumn(caret_index: Long): Long = {
+  final def getSelectionColumn(caretIndex: Long = 0L): Long = {
     if (gdext.classes.TextEdit.mb_get_selection_column == null) gdext.classes.TextEdit.mb_get_selection_column = MethodBind.get("TextEdit", "get_selection_column", 1591665591L)
-    Ptrcall.call1[Long, Long](gdext.classes.TextEdit.mb_get_selection_column, livePtr, caret_index)
+    Ptrcall.call1[Long, Long](gdext.classes.TextEdit.mb_get_selection_column, livePtr, caretIndex)
   }
 
 }
@@ -1679,4 +1680,232 @@ object TextEdit {
   private[classes] var mb_adjust_carets_after_edit: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_selection_line: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_selection_column: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `TextEdit.MenuItems`. */
+  opaque type MenuItems <: Long = Long
+
+  object MenuItems {
+    final val Cut: MenuItems = 0L.asInstanceOf[MenuItems]
+    final val Copy: MenuItems = 1L.asInstanceOf[MenuItems]
+    final val Paste: MenuItems = 2L.asInstanceOf[MenuItems]
+    final val Clear: MenuItems = 3L.asInstanceOf[MenuItems]
+    final val SelectAll: MenuItems = 4L.asInstanceOf[MenuItems]
+    final val Undo: MenuItems = 5L.asInstanceOf[MenuItems]
+    final val Redo: MenuItems = 6L.asInstanceOf[MenuItems]
+    final val SubmenuTextDir: MenuItems = 7L.asInstanceOf[MenuItems]
+    final val DirInherited: MenuItems = 8L.asInstanceOf[MenuItems]
+    final val DirAuto: MenuItems = 9L.asInstanceOf[MenuItems]
+    final val DirLtr: MenuItems = 10L.asInstanceOf[MenuItems]
+    final val DirRtl: MenuItems = 11L.asInstanceOf[MenuItems]
+    final val DisplayUcc: MenuItems = 12L.asInstanceOf[MenuItems]
+    final val SubmenuInsertUcc: MenuItems = 13L.asInstanceOf[MenuItems]
+    final val InsertLrm: MenuItems = 14L.asInstanceOf[MenuItems]
+    final val InsertRlm: MenuItems = 15L.asInstanceOf[MenuItems]
+    final val InsertLre: MenuItems = 16L.asInstanceOf[MenuItems]
+    final val InsertRle: MenuItems = 17L.asInstanceOf[MenuItems]
+    final val InsertLro: MenuItems = 18L.asInstanceOf[MenuItems]
+    final val InsertRlo: MenuItems = 19L.asInstanceOf[MenuItems]
+    final val InsertPdf: MenuItems = 20L.asInstanceOf[MenuItems]
+    final val InsertAlm: MenuItems = 21L.asInstanceOf[MenuItems]
+    final val InsertLri: MenuItems = 22L.asInstanceOf[MenuItems]
+    final val InsertRli: MenuItems = 23L.asInstanceOf[MenuItems]
+    final val InsertFsi: MenuItems = 24L.asInstanceOf[MenuItems]
+    final val InsertPdi: MenuItems = 25L.asInstanceOf[MenuItems]
+    final val InsertZwj: MenuItems = 26L.asInstanceOf[MenuItems]
+    final val InsertZwnj: MenuItems = 27L.asInstanceOf[MenuItems]
+    final val InsertWj: MenuItems = 28L.asInstanceOf[MenuItems]
+    final val InsertShy: MenuItems = 29L.asInstanceOf[MenuItems]
+    final val EmojiAndSymbol: MenuItems = 30L.asInstanceOf[MenuItems]
+    final val Max: MenuItems = 31L.asInstanceOf[MenuItems]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): MenuItems = value.asInstanceOf[MenuItems]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[MenuItems] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 13L, 14L, 15L, 16L, 17L, 18L, 19L, 20L, 21L, 22L, 23L, 24L, 25L, 26L, 27L, 28L, 29L, 30L, 31L).asInstanceOf[scala.IArray[MenuItems]]
+
+    extension (self: MenuItems)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Cut"
+        case 1L => "Copy"
+        case 2L => "Paste"
+        case 3L => "Clear"
+        case 4L => "SelectAll"
+        case 5L => "Undo"
+        case 6L => "Redo"
+        case 7L => "SubmenuTextDir"
+        case 8L => "DirInherited"
+        case 9L => "DirAuto"
+        case 10L => "DirLtr"
+        case 11L => "DirRtl"
+        case 12L => "DisplayUcc"
+        case 13L => "SubmenuInsertUcc"
+        case 14L => "InsertLrm"
+        case 15L => "InsertRlm"
+        case 16L => "InsertLre"
+        case 17L => "InsertRle"
+        case 18L => "InsertLro"
+        case 19L => "InsertRlo"
+        case 20L => "InsertPdf"
+        case 21L => "InsertAlm"
+        case 22L => "InsertLri"
+        case 23L => "InsertRli"
+        case 24L => "InsertFsi"
+        case 25L => "InsertPdi"
+        case 26L => "InsertZwj"
+        case 27L => "InsertZwnj"
+        case 28L => "InsertWj"
+        case 29L => "InsertShy"
+        case 30L => "EmojiAndSymbol"
+        case 31L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `TextEdit.EditAction`. */
+  opaque type EditAction <: Long = Long
+
+  object EditAction {
+    final val None: EditAction = 0L.asInstanceOf[EditAction]
+    final val Typing: EditAction = 1L.asInstanceOf[EditAction]
+    final val Backspace: EditAction = 2L.asInstanceOf[EditAction]
+    final val Delete: EditAction = 3L.asInstanceOf[EditAction]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): EditAction = value.asInstanceOf[EditAction]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[EditAction] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[EditAction]]
+
+    extension (self: EditAction)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "None"
+        case 1L => "Typing"
+        case 2L => "Backspace"
+        case 3L => "Delete"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `TextEdit.SearchFlags`. */
+  opaque type SearchFlags <: Long = Long
+
+  object SearchFlags {
+    final val MatchCase: SearchFlags = 1L.asInstanceOf[SearchFlags]
+    final val WholeWords: SearchFlags = 2L.asInstanceOf[SearchFlags]
+    final val Backwards: SearchFlags = 4L.asInstanceOf[SearchFlags]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): SearchFlags = value.asInstanceOf[SearchFlags]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[SearchFlags] = scala.IArray[Long](1L, 2L, 4L).asInstanceOf[scala.IArray[SearchFlags]]
+
+    extension (self: SearchFlags)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 1L => "MatchCase"
+        case 2L => "WholeWords"
+        case 4L => "Backwards"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `TextEdit.CaretType`. */
+  opaque type CaretType <: Long = Long
+
+  object CaretType {
+    final val Line: CaretType = 0L.asInstanceOf[CaretType]
+    final val Block: CaretType = 1L.asInstanceOf[CaretType]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): CaretType = value.asInstanceOf[CaretType]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[CaretType] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[CaretType]]
+
+    extension (self: CaretType)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Line"
+        case 1L => "Block"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `TextEdit.SelectionMode`. */
+  opaque type SelectionMode <: Long = Long
+
+  object SelectionMode {
+    final val None: SelectionMode = 0L.asInstanceOf[SelectionMode]
+    final val Shift: SelectionMode = 1L.asInstanceOf[SelectionMode]
+    final val Pointer: SelectionMode = 2L.asInstanceOf[SelectionMode]
+    final val Word: SelectionMode = 3L.asInstanceOf[SelectionMode]
+    final val Line: SelectionMode = 4L.asInstanceOf[SelectionMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): SelectionMode = value.asInstanceOf[SelectionMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[SelectionMode] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[SelectionMode]]
+
+    extension (self: SelectionMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "None"
+        case 1L => "Shift"
+        case 2L => "Pointer"
+        case 3L => "Word"
+        case 4L => "Line"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `TextEdit.LineWrappingMode`. */
+  opaque type LineWrappingMode <: Long = Long
+
+  object LineWrappingMode {
+    final val None: LineWrappingMode = 0L.asInstanceOf[LineWrappingMode]
+    final val Boundary: LineWrappingMode = 1L.asInstanceOf[LineWrappingMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): LineWrappingMode = value.asInstanceOf[LineWrappingMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[LineWrappingMode] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[LineWrappingMode]]
+
+    extension (self: LineWrappingMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "None"
+        case 1L => "Boundary"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `TextEdit.GutterType`. */
+  opaque type GutterType <: Long = Long
+
+  object GutterType {
+    final val String: GutterType = 0L.asInstanceOf[GutterType]
+    final val Icon: GutterType = 1L.asInstanceOf[GutterType]
+    final val Custom: GutterType = 2L.asInstanceOf[GutterType]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): GutterType = value.asInstanceOf[GutterType]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[GutterType] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[GutterType]]
+
+    extension (self: GutterType)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "String"
+        case 1L => "Icon"
+        case 2L => "Custom"
+        case other => other.toString
+      }
+  }
 }

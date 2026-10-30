@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class NavigationMeshSourceGeometryData2D extends Resource {
   }
 
   /** NavigationMeshSourceGeometryData2D.merge */
-  final def merge(other_geometry: NavigationMeshSourceGeometryData2D): Unit = {
+  final def merge(otherGeometry: NavigationMeshSourceGeometryData2D): Unit = {
     if (gdext.classes.NavigationMeshSourceGeometryData2D.mb_merge == null) gdext.classes.NavigationMeshSourceGeometryData2D.mb_merge = MethodBind.get("NavigationMeshSourceGeometryData2D", "merge", 742424872L)
-    Ptrcall.callVoid1(gdext.classes.NavigationMeshSourceGeometryData2D.mb_merge, livePtr, Wrappers.handle(other_geometry))
+    Ptrcall.callVoid1(gdext.classes.NavigationMeshSourceGeometryData2D.mb_merge, livePtr, Wrappers.handle(otherGeometry))
   }
 
   /** NavigationMeshSourceGeometryData2D.clear_projected_obstructions */

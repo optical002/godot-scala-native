@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class RDPipelineColorBlendState extends RefCounted {
   override def godotClassName: String = "RDPipelineColorBlendState"
 
   /** RDPipelineColorBlendState.set_enable_logic_op */
-  final def setEnableLogicOp(p_member: Boolean): Unit = {
+  final def setEnableLogicOp(pMember: Boolean): Unit = {
     if (gdext.classes.RDPipelineColorBlendState.mb_set_enable_logic_op == null) gdext.classes.RDPipelineColorBlendState.mb_set_enable_logic_op = MethodBind.get("RDPipelineColorBlendState", "set_enable_logic_op", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineColorBlendState.mb_set_enable_logic_op, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineColorBlendState.mb_set_enable_logic_op, livePtr, pMember)
   }
 
   /** RDPipelineColorBlendState.get_enable_logic_op */
@@ -23,21 +24,21 @@ abstract class RDPipelineColorBlendState extends RefCounted {
   }
 
   /** RDPipelineColorBlendState.set_logic_op */
-  final def setLogicOp(p_member: Long): Unit = {
+  final def setLogicOp(pMember: gdext.classes.RenderingDevice.LogicOperation): Unit = {
     if (gdext.classes.RDPipelineColorBlendState.mb_set_logic_op == null) gdext.classes.RDPipelineColorBlendState.mb_set_logic_op = MethodBind.get("RDPipelineColorBlendState", "set_logic_op", 3610841058L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineColorBlendState.mb_set_logic_op, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineColorBlendState.mb_set_logic_op, livePtr, pMember)
   }
 
   /** RDPipelineColorBlendState.get_logic_op */
-  final def getLogicOp(): Long = {
+  final def getLogicOp(): gdext.classes.RenderingDevice.LogicOperation = {
     if (gdext.classes.RDPipelineColorBlendState.mb_get_logic_op == null) gdext.classes.RDPipelineColorBlendState.mb_get_logic_op = MethodBind.get("RDPipelineColorBlendState", "get_logic_op", 988254690L)
-    Ptrcall.call0[Long](gdext.classes.RDPipelineColorBlendState.mb_get_logic_op, livePtr)
+    gdext.classes.RenderingDevice.LogicOperation(Ptrcall.call0[Long](gdext.classes.RDPipelineColorBlendState.mb_get_logic_op, livePtr))
   }
 
   /** RDPipelineColorBlendState.set_blend_constant */
-  final def setBlendConstant(p_member: gdext.builtin.Color): Unit = {
+  final def setBlendConstant(pMember: gdext.builtin.Color): Unit = {
     if (gdext.classes.RDPipelineColorBlendState.mb_set_blend_constant == null) gdext.classes.RDPipelineColorBlendState.mb_set_blend_constant = MethodBind.get("RDPipelineColorBlendState", "set_blend_constant", 2920490490L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineColorBlendState.mb_set_blend_constant, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineColorBlendState.mb_set_blend_constant, livePtr, pMember)
   }
 
   /** RDPipelineColorBlendState.get_blend_constant */

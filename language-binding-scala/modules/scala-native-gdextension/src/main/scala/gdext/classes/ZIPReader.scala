@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,27 +12,27 @@ abstract class ZIPReader extends RefCounted {
   override def godotClassName: String = "ZIPReader"
 
   /** ZIPReader.open */
-  final def open(path: String): Long = {
+  final def open(path: String): gdext.classes.Error = {
     if (gdext.classes.ZIPReader.mb_open == null) gdext.classes.ZIPReader.mb_open = MethodBind.get("ZIPReader", "open", 166001499L)
-    Ptrcall.call1[String, Long](gdext.classes.ZIPReader.mb_open, livePtr, path)
+    gdext.classes.Error(Ptrcall.call1[String, Long](gdext.classes.ZIPReader.mb_open, livePtr, path))
   }
 
   /** ZIPReader.close */
-  final def close(): Long = {
+  final def close(): gdext.classes.Error = {
     if (gdext.classes.ZIPReader.mb_close == null) gdext.classes.ZIPReader.mb_close = MethodBind.get("ZIPReader", "close", 166280745L)
-    Ptrcall.call0[Long](gdext.classes.ZIPReader.mb_close, livePtr)
+    gdext.classes.Error(Ptrcall.call0[Long](gdext.classes.ZIPReader.mb_close, livePtr))
   }
 
   /** ZIPReader.file_exists */
-  final def fileExists(path: String, case_sensitive: Boolean): Boolean = {
+  final def fileExists(path: String, caseSensitive: Boolean = true): Boolean = {
     if (gdext.classes.ZIPReader.mb_file_exists == null) gdext.classes.ZIPReader.mb_file_exists = MethodBind.get("ZIPReader", "file_exists", 35364943L)
-    Ptrcall.call2[String, Boolean, Boolean](gdext.classes.ZIPReader.mb_file_exists, livePtr, path, case_sensitive)
+    Ptrcall.call2[String, Boolean, Boolean](gdext.classes.ZIPReader.mb_file_exists, livePtr, path, caseSensitive)
   }
 
   /** ZIPReader.get_compression_level */
-  final def getCompressionLevel(path: String, case_sensitive: Boolean): Long = {
+  final def getCompressionLevel(path: String, caseSensitive: Boolean = true): Long = {
     if (gdext.classes.ZIPReader.mb_get_compression_level == null) gdext.classes.ZIPReader.mb_get_compression_level = MethodBind.get("ZIPReader", "get_compression_level", 3694577386L)
-    Ptrcall.call2[String, Boolean, Long](gdext.classes.ZIPReader.mb_get_compression_level, livePtr, path, case_sensitive)
+    Ptrcall.call2[String, Boolean, Long](gdext.classes.ZIPReader.mb_get_compression_level, livePtr, path, caseSensitive)
   }
 
 }

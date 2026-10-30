@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -53,7 +54,7 @@ abstract class TextureButton extends BaseButton {
   }
 
   /** TextureButton.set_stretch_mode */
-  final def setStretchMode(mode: Long): Unit = {
+  final def setStretchMode(mode: gdext.classes.TextureButton.StretchMode): Unit = {
     if (gdext.classes.TextureButton.mb_set_stretch_mode == null) gdext.classes.TextureButton.mb_set_stretch_mode = MethodBind.get("TextureButton", "set_stretch_mode", 252530840L)
     Ptrcall.callVoid1(gdext.classes.TextureButton.mb_set_stretch_mode, livePtr, mode)
   }
@@ -125,9 +126,9 @@ abstract class TextureButton extends BaseButton {
   }
 
   /** TextureButton.get_stretch_mode */
-  final def getStretchMode(): Long = {
+  final def getStretchMode(): gdext.classes.TextureButton.StretchMode = {
     if (gdext.classes.TextureButton.mb_get_stretch_mode == null) gdext.classes.TextureButton.mb_get_stretch_mode = MethodBind.get("TextureButton", "get_stretch_mode", 33815122L)
-    Ptrcall.call0[Long](gdext.classes.TextureButton.mb_get_stretch_mode, livePtr)
+    gdext.classes.TextureButton.StretchMode(Ptrcall.call0[Long](gdext.classes.TextureButton.mb_get_stretch_mode, livePtr))
   }
 
 }
@@ -153,4 +154,36 @@ object TextureButton {
   private[classes] var mb_get_click_mask: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_ignore_texture_size: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_stretch_mode: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `TextureButton.StretchMode`. */
+  opaque type StretchMode <: Long = Long
+
+  object StretchMode {
+    final val Scale: StretchMode = 0L.asInstanceOf[StretchMode]
+    final val Tile: StretchMode = 1L.asInstanceOf[StretchMode]
+    final val Keep: StretchMode = 2L.asInstanceOf[StretchMode]
+    final val KeepCentered: StretchMode = 3L.asInstanceOf[StretchMode]
+    final val KeepAspect: StretchMode = 4L.asInstanceOf[StretchMode]
+    final val KeepAspectCentered: StretchMode = 5L.asInstanceOf[StretchMode]
+    final val KeepAspectCovered: StretchMode = 6L.asInstanceOf[StretchMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): StretchMode = value.asInstanceOf[StretchMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[StretchMode] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L).asInstanceOf[scala.IArray[StretchMode]]
+
+    extension (self: StretchMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Scale"
+        case 1L => "Tile"
+        case 2L => "Keep"
+        case 3L => "KeepCentered"
+        case 4L => "KeepAspect"
+        case 5L => "KeepAspectCentered"
+        case 6L => "KeepAspectCovered"
+        case other => other.toString
+      }
+  }
 }

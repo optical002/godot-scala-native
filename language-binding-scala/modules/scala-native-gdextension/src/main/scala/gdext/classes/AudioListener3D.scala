@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,15 +36,15 @@ abstract class AudioListener3D extends Node3D {
   }
 
   /** AudioListener3D.set_doppler_tracking */
-  final def setDopplerTracking(mode: Long): Unit = {
+  final def setDopplerTracking(mode: gdext.classes.AudioListener3D.DopplerTracking): Unit = {
     if (gdext.classes.AudioListener3D.mb_set_doppler_tracking == null) gdext.classes.AudioListener3D.mb_set_doppler_tracking = MethodBind.get("AudioListener3D", "set_doppler_tracking", 2365921740L)
     Ptrcall.callVoid1(gdext.classes.AudioListener3D.mb_set_doppler_tracking, livePtr, mode)
   }
 
   /** AudioListener3D.get_doppler_tracking */
-  final def getDopplerTracking(): Long = {
+  final def getDopplerTracking(): gdext.classes.AudioListener3D.DopplerTracking = {
     if (gdext.classes.AudioListener3D.mb_get_doppler_tracking == null) gdext.classes.AudioListener3D.mb_get_doppler_tracking = MethodBind.get("AudioListener3D", "get_doppler_tracking", 550229039L)
-    Ptrcall.call0[Long](gdext.classes.AudioListener3D.mb_get_doppler_tracking, livePtr)
+    gdext.classes.AudioListener3D.DopplerTracking(Ptrcall.call0[Long](gdext.classes.AudioListener3D.mb_get_doppler_tracking, livePtr))
   }
 
 }
@@ -55,4 +56,28 @@ object AudioListener3D {
   private[classes] var mb_get_listener_transform: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_doppler_tracking: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_doppler_tracking: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `AudioListener3D.DopplerTracking`. */
+  opaque type DopplerTracking <: Long = Long
+
+  object DopplerTracking {
+    final val Disabled: DopplerTracking = 0L.asInstanceOf[DopplerTracking]
+    final val IdleStep: DopplerTracking = 1L.asInstanceOf[DopplerTracking]
+    final val PhysicsStep: DopplerTracking = 2L.asInstanceOf[DopplerTracking]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DopplerTracking = value.asInstanceOf[DopplerTracking]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DopplerTracking] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[DopplerTracking]]
+
+    extension (self: DopplerTracking)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "IdleStep"
+        case 2L => "PhysicsStep"
+        case other => other.toString
+      }
+  }
 }

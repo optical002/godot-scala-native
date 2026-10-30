@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class DirAccess extends RefCounted {
   override def godotClassName: String = "DirAccess"
 
   /** DirAccess.list_dir_begin */
-  final def listDirBegin(): Long = {
+  final def listDirBegin(): gdext.classes.Error = {
     if (gdext.classes.DirAccess.mb_list_dir_begin == null) gdext.classes.DirAccess.mb_list_dir_begin = MethodBind.get("DirAccess", "list_dir_begin", 166280745L)
-    Ptrcall.call0[Long](gdext.classes.DirAccess.mb_list_dir_begin, livePtr)
+    gdext.classes.Error(Ptrcall.call0[Long](gdext.classes.DirAccess.mb_list_dir_begin, livePtr))
   }
 
   /** DirAccess.get_next */
@@ -41,27 +42,27 @@ abstract class DirAccess extends RefCounted {
   }
 
   /** DirAccess.change_dir */
-  final def changeDir(to_dir: String): Long = {
+  final def changeDir(toDir: String): gdext.classes.Error = {
     if (gdext.classes.DirAccess.mb_change_dir == null) gdext.classes.DirAccess.mb_change_dir = MethodBind.get("DirAccess", "change_dir", 166001499L)
-    Ptrcall.call1[String, Long](gdext.classes.DirAccess.mb_change_dir, livePtr, to_dir)
+    gdext.classes.Error(Ptrcall.call1[String, Long](gdext.classes.DirAccess.mb_change_dir, livePtr, toDir))
   }
 
   /** DirAccess.get_current_dir */
-  final def getCurrentDir(include_drive: Boolean): String = {
+  final def getCurrentDir(includeDrive: Boolean = true): String = {
     if (gdext.classes.DirAccess.mb_get_current_dir == null) gdext.classes.DirAccess.mb_get_current_dir = MethodBind.get("DirAccess", "get_current_dir", 1287308131L)
-    Ptrcall.call1[Boolean, String](gdext.classes.DirAccess.mb_get_current_dir, livePtr, include_drive)
+    Ptrcall.call1[Boolean, String](gdext.classes.DirAccess.mb_get_current_dir, livePtr, includeDrive)
   }
 
   /** DirAccess.make_dir */
-  final def makeDir(path: String): Long = {
+  final def makeDir(path: String): gdext.classes.Error = {
     if (gdext.classes.DirAccess.mb_make_dir == null) gdext.classes.DirAccess.mb_make_dir = MethodBind.get("DirAccess", "make_dir", 166001499L)
-    Ptrcall.call1[String, Long](gdext.classes.DirAccess.mb_make_dir, livePtr, path)
+    gdext.classes.Error(Ptrcall.call1[String, Long](gdext.classes.DirAccess.mb_make_dir, livePtr, path))
   }
 
   /** DirAccess.make_dir_recursive */
-  final def makeDirRecursive(path: String): Long = {
+  final def makeDirRecursive(path: String): gdext.classes.Error = {
     if (gdext.classes.DirAccess.mb_make_dir_recursive == null) gdext.classes.DirAccess.mb_make_dir_recursive = MethodBind.get("DirAccess", "make_dir_recursive", 166001499L)
-    Ptrcall.call1[String, Long](gdext.classes.DirAccess.mb_make_dir_recursive, livePtr, path)
+    gdext.classes.Error(Ptrcall.call1[String, Long](gdext.classes.DirAccess.mb_make_dir_recursive, livePtr, path))
   }
 
   /** DirAccess.file_exists */
@@ -83,21 +84,21 @@ abstract class DirAccess extends RefCounted {
   }
 
   /** DirAccess.copy */
-  final def copy(from: String, to: String, chmod_flags: Long): Long = {
+  final def copy(from: String, to: String, chmodFlags: Long = -1L): gdext.classes.Error = {
     if (gdext.classes.DirAccess.mb_copy == null) gdext.classes.DirAccess.mb_copy = MethodBind.get("DirAccess", "copy", 1063198817L)
-    Ptrcall.call3[String, String, Long, Long](gdext.classes.DirAccess.mb_copy, livePtr, from, to, chmod_flags)
+    gdext.classes.Error(Ptrcall.call3[String, String, Long, Long](gdext.classes.DirAccess.mb_copy, livePtr, from, to, chmodFlags))
   }
 
   /** DirAccess.rename */
-  final def rename(from: String, to: String): Long = {
+  final def rename(from: String, to: String): gdext.classes.Error = {
     if (gdext.classes.DirAccess.mb_rename == null) gdext.classes.DirAccess.mb_rename = MethodBind.get("DirAccess", "rename", 852856452L)
-    Ptrcall.call2[String, String, Long](gdext.classes.DirAccess.mb_rename, livePtr, from, to)
+    gdext.classes.Error(Ptrcall.call2[String, String, Long](gdext.classes.DirAccess.mb_rename, livePtr, from, to))
   }
 
   /** DirAccess.remove */
-  final def remove(path: String): Long = {
+  final def remove(path: String): gdext.classes.Error = {
     if (gdext.classes.DirAccess.mb_remove == null) gdext.classes.DirAccess.mb_remove = MethodBind.get("DirAccess", "remove", 166001499L)
-    Ptrcall.call1[String, Long](gdext.classes.DirAccess.mb_remove, livePtr, path)
+    gdext.classes.Error(Ptrcall.call1[String, Long](gdext.classes.DirAccess.mb_remove, livePtr, path))
   }
 
   /** DirAccess.is_link */
@@ -113,9 +114,9 @@ abstract class DirAccess extends RefCounted {
   }
 
   /** DirAccess.create_link */
-  final def createLink(source: String, target: String): Long = {
+  final def createLink(source: String, target: String): gdext.classes.Error = {
     if (gdext.classes.DirAccess.mb_create_link == null) gdext.classes.DirAccess.mb_create_link = MethodBind.get("DirAccess", "create_link", 852856452L)
-    Ptrcall.call2[String, String, Long](gdext.classes.DirAccess.mb_create_link, livePtr, source, target)
+    gdext.classes.Error(Ptrcall.call2[String, String, Long](gdext.classes.DirAccess.mb_create_link, livePtr, source, target))
   }
 
   /** DirAccess.is_bundle */
@@ -161,9 +162,9 @@ abstract class DirAccess extends RefCounted {
   }
 
   /** DirAccess.is_equivalent */
-  final def isEquivalent(path_a: String, path_b: String): Boolean = {
+  final def isEquivalent(pathA: String, pathB: String): Boolean = {
     if (gdext.classes.DirAccess.mb_is_equivalent == null) gdext.classes.DirAccess.mb_is_equivalent = MethodBind.get("DirAccess", "is_equivalent", 820780508L)
-    Ptrcall.call2[String, String, Boolean](gdext.classes.DirAccess.mb_is_equivalent, livePtr, path_a, path_b)
+    Ptrcall.call2[String, String, Boolean](gdext.classes.DirAccess.mb_is_equivalent, livePtr, pathA, pathB)
   }
 
 }
@@ -214,13 +215,13 @@ object DirAccess {
   }
 
   /** DirAccess.get_open_error */
-  final def getOpenError(): Long = {
+  final def getOpenError(): gdext.classes.Error = {
     if (gdext.classes.DirAccess.mb_get_open_error == null) gdext.classes.DirAccess.mb_get_open_error = MethodBind.get("DirAccess", "get_open_error", 166280745L)
-    Ptrcall.call0[Long](gdext.classes.DirAccess.mb_get_open_error, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr])
+    gdext.classes.Error(Ptrcall.call0[Long](gdext.classes.DirAccess.mb_get_open_error, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr]))
   }
 
   /** DirAccess.create_temp. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def createTemp(prefix: String, keep: Boolean): DirAccess = {
+  final def createTemp(prefix: String = "", keep: Boolean = false): DirAccess = {
     if (gdext.classes.DirAccess.mb_create_temp == null) gdext.classes.DirAccess.mb_create_temp = MethodBind.get("DirAccess", "create_temp", 812913566L)
     Wrappers.owned[DirAccess](Ptrcall.call2[String, Boolean, Long](gdext.classes.DirAccess.mb_create_temp, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], prefix, keep))
   }
@@ -238,15 +239,15 @@ object DirAccess {
   }
 
   /** DirAccess.make_dir_absolute */
-  final def makeDirAbsolute(path: String): Long = {
+  final def makeDirAbsolute(path: String): gdext.classes.Error = {
     if (gdext.classes.DirAccess.mb_make_dir_absolute == null) gdext.classes.DirAccess.mb_make_dir_absolute = MethodBind.get("DirAccess", "make_dir_absolute", 166001499L)
-    Ptrcall.call1[String, Long](gdext.classes.DirAccess.mb_make_dir_absolute, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], path)
+    gdext.classes.Error(Ptrcall.call1[String, Long](gdext.classes.DirAccess.mb_make_dir_absolute, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], path))
   }
 
   /** DirAccess.make_dir_recursive_absolute */
-  final def makeDirRecursiveAbsolute(path: String): Long = {
+  final def makeDirRecursiveAbsolute(path: String): gdext.classes.Error = {
     if (gdext.classes.DirAccess.mb_make_dir_recursive_absolute == null) gdext.classes.DirAccess.mb_make_dir_recursive_absolute = MethodBind.get("DirAccess", "make_dir_recursive_absolute", 166001499L)
-    Ptrcall.call1[String, Long](gdext.classes.DirAccess.mb_make_dir_recursive_absolute, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], path)
+    gdext.classes.Error(Ptrcall.call1[String, Long](gdext.classes.DirAccess.mb_make_dir_recursive_absolute, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], path))
   }
 
   /** DirAccess.dir_exists_absolute */
@@ -256,20 +257,20 @@ object DirAccess {
   }
 
   /** DirAccess.copy_absolute */
-  final def copyAbsolute(from: String, to: String, chmod_flags: Long): Long = {
+  final def copyAbsolute(from: String, to: String, chmodFlags: Long = -1L): gdext.classes.Error = {
     if (gdext.classes.DirAccess.mb_copy_absolute == null) gdext.classes.DirAccess.mb_copy_absolute = MethodBind.get("DirAccess", "copy_absolute", 1063198817L)
-    Ptrcall.call3[String, String, Long, Long](gdext.classes.DirAccess.mb_copy_absolute, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], from, to, chmod_flags)
+    gdext.classes.Error(Ptrcall.call3[String, String, Long, Long](gdext.classes.DirAccess.mb_copy_absolute, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], from, to, chmodFlags))
   }
 
   /** DirAccess.rename_absolute */
-  final def renameAbsolute(from: String, to: String): Long = {
+  final def renameAbsolute(from: String, to: String): gdext.classes.Error = {
     if (gdext.classes.DirAccess.mb_rename_absolute == null) gdext.classes.DirAccess.mb_rename_absolute = MethodBind.get("DirAccess", "rename_absolute", 852856452L)
-    Ptrcall.call2[String, String, Long](gdext.classes.DirAccess.mb_rename_absolute, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], from, to)
+    gdext.classes.Error(Ptrcall.call2[String, String, Long](gdext.classes.DirAccess.mb_rename_absolute, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], from, to))
   }
 
   /** DirAccess.remove_absolute */
-  final def removeAbsolute(path: String): Long = {
+  final def removeAbsolute(path: String): gdext.classes.Error = {
     if (gdext.classes.DirAccess.mb_remove_absolute == null) gdext.classes.DirAccess.mb_remove_absolute = MethodBind.get("DirAccess", "remove_absolute", 166001499L)
-    Ptrcall.call1[String, Long](gdext.classes.DirAccess.mb_remove_absolute, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], path)
+    gdext.classes.Error(Ptrcall.call1[String, Long](gdext.classes.DirAccess.mb_remove_absolute, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], path))
   }
 }

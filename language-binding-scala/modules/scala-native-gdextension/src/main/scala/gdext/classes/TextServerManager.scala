@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -72,4 +73,32 @@ object TextServerManager {
         Godot.interface.global_get_singleton(StringNames.cached("TextServerManager").ptr)))
     instance
   }
+
+  /** Forwards to [[singleton]]: TextServerManager.add_interface */
+  final def addInterface(interface: TextServer): Unit =
+    singleton.addInterface(interface)
+
+  /** Forwards to [[singleton]]: TextServerManager.get_interface_count */
+  final def getInterfaceCount(): Long =
+    singleton.getInterfaceCount()
+
+  /** Forwards to [[singleton]]: TextServerManager.remove_interface */
+  final def removeInterface(interface: TextServer): Unit =
+    singleton.removeInterface(interface)
+
+  /** Forwards to [[singleton]]: TextServerManager.get_interface */
+  final def getInterface(idx: Long): TextServer =
+    singleton.getInterface(idx)
+
+  /** Forwards to [[singleton]]: TextServerManager.find_interface */
+  final def findInterface(name: String): TextServer =
+    singleton.findInterface(name)
+
+  /** Forwards to [[singleton]]: TextServerManager.set_primary_interface */
+  final def setPrimaryInterface(index: TextServer): Unit =
+    singleton.setPrimaryInterface(index)
+
+  /** Forwards to [[singleton]]: TextServerManager.get_primary_interface */
+  final def getPrimaryInterface(): TextServer =
+    singleton.getPrimaryInterface()
 }

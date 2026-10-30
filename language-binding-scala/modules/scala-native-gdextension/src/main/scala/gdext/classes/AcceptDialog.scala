@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -47,7 +48,7 @@ abstract class AcceptDialog extends Window {
   }
 
   /** AcceptDialog.add_button */
-  final def addButton(text: String, right: Boolean, action: String): Button = {
+  final def addButton(text: String, right: Boolean = false, action: String = ""): Button = {
     if (gdext.classes.AcceptDialog.mb_add_button == null) gdext.classes.AcceptDialog.mb_add_button = MethodBind.get("AcceptDialog", "add_button", 3328440682L)
     Wrappers.borrowed[Button](Ptrcall.call3[String, Boolean, String, Long](gdext.classes.AcceptDialog.mb_add_button, livePtr, text, right, action))
   }
@@ -65,9 +66,9 @@ abstract class AcceptDialog extends Window {
   }
 
   /** AcceptDialog.register_text_enter */
-  final def registerTextEnter(line_edit: LineEdit): Unit = {
+  final def registerTextEnter(lineEdit: LineEdit): Unit = {
     if (gdext.classes.AcceptDialog.mb_register_text_enter == null) gdext.classes.AcceptDialog.mb_register_text_enter = MethodBind.get("AcceptDialog", "register_text_enter", 3714008017L)
-    Ptrcall.callVoid1(gdext.classes.AcceptDialog.mb_register_text_enter, livePtr, Wrappers.handle(line_edit))
+    Ptrcall.callVoid1(gdext.classes.AcceptDialog.mb_register_text_enter, livePtr, Wrappers.handle(lineEdit))
   }
 
   /** AcceptDialog.set_text */

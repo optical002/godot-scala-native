@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -53,39 +54,39 @@ abstract class ScriptBacktrace extends RefCounted {
   }
 
   /** ScriptBacktrace.get_global_variable_name */
-  final def getGlobalVariableName(variable_index: Long): String = {
+  final def getGlobalVariableName(variableIndex: Long): String = {
     if (gdext.classes.ScriptBacktrace.mb_get_global_variable_name == null) gdext.classes.ScriptBacktrace.mb_get_global_variable_name = MethodBind.get("ScriptBacktrace", "get_global_variable_name", 844755477L)
-    Ptrcall.call1[Long, String](gdext.classes.ScriptBacktrace.mb_get_global_variable_name, livePtr, variable_index)
+    Ptrcall.call1[Long, String](gdext.classes.ScriptBacktrace.mb_get_global_variable_name, livePtr, variableIndex)
   }
 
   /** ScriptBacktrace.get_local_variable_count */
-  final def getLocalVariableCount(frame_index: Long): Long = {
+  final def getLocalVariableCount(frameIndex: Long): Long = {
     if (gdext.classes.ScriptBacktrace.mb_get_local_variable_count == null) gdext.classes.ScriptBacktrace.mb_get_local_variable_count = MethodBind.get("ScriptBacktrace", "get_local_variable_count", 923996154L)
-    Ptrcall.call1[Long, Long](gdext.classes.ScriptBacktrace.mb_get_local_variable_count, livePtr, frame_index)
+    Ptrcall.call1[Long, Long](gdext.classes.ScriptBacktrace.mb_get_local_variable_count, livePtr, frameIndex)
   }
 
   /** ScriptBacktrace.get_local_variable_name */
-  final def getLocalVariableName(frame_index: Long, variable_index: Long): String = {
+  final def getLocalVariableName(frameIndex: Long, variableIndex: Long): String = {
     if (gdext.classes.ScriptBacktrace.mb_get_local_variable_name == null) gdext.classes.ScriptBacktrace.mb_get_local_variable_name = MethodBind.get("ScriptBacktrace", "get_local_variable_name", 1391810591L)
-    Ptrcall.call2[Long, Long, String](gdext.classes.ScriptBacktrace.mb_get_local_variable_name, livePtr, frame_index, variable_index)
+    Ptrcall.call2[Long, Long, String](gdext.classes.ScriptBacktrace.mb_get_local_variable_name, livePtr, frameIndex, variableIndex)
   }
 
   /** ScriptBacktrace.get_member_variable_count */
-  final def getMemberVariableCount(frame_index: Long): Long = {
+  final def getMemberVariableCount(frameIndex: Long): Long = {
     if (gdext.classes.ScriptBacktrace.mb_get_member_variable_count == null) gdext.classes.ScriptBacktrace.mb_get_member_variable_count = MethodBind.get("ScriptBacktrace", "get_member_variable_count", 923996154L)
-    Ptrcall.call1[Long, Long](gdext.classes.ScriptBacktrace.mb_get_member_variable_count, livePtr, frame_index)
+    Ptrcall.call1[Long, Long](gdext.classes.ScriptBacktrace.mb_get_member_variable_count, livePtr, frameIndex)
   }
 
   /** ScriptBacktrace.get_member_variable_name */
-  final def getMemberVariableName(frame_index: Long, variable_index: Long): String = {
+  final def getMemberVariableName(frameIndex: Long, variableIndex: Long): String = {
     if (gdext.classes.ScriptBacktrace.mb_get_member_variable_name == null) gdext.classes.ScriptBacktrace.mb_get_member_variable_name = MethodBind.get("ScriptBacktrace", "get_member_variable_name", 1391810591L)
-    Ptrcall.call2[Long, Long, String](gdext.classes.ScriptBacktrace.mb_get_member_variable_name, livePtr, frame_index, variable_index)
+    Ptrcall.call2[Long, Long, String](gdext.classes.ScriptBacktrace.mb_get_member_variable_name, livePtr, frameIndex, variableIndex)
   }
 
   /** ScriptBacktrace.format */
-  final def format(indent_all: Long, indent_frames: Long): String = {
+  final def format(indentAll: Long = 0L, indentFrames: Long = 4L): String = {
     if (gdext.classes.ScriptBacktrace.mb_format == null) gdext.classes.ScriptBacktrace.mb_format = MethodBind.get("ScriptBacktrace", "format", 3464456933L)
-    Ptrcall.call2[Long, Long, String](gdext.classes.ScriptBacktrace.mb_format, livePtr, indent_all, indent_frames)
+    Ptrcall.call2[Long, Long, String](gdext.classes.ScriptBacktrace.mb_format, livePtr, indentAll, indentFrames)
   }
 
 }

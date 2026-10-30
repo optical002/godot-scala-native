@@ -1,5 +1,6 @@
 package gdext.internal.register
 
+import gdext.internal.StringNames
 import gdext.Godot
 import gdext.builtin.*
 import gdext.internal.ffi.types.GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_NIL

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,15 +12,15 @@ abstract class CollisionPolygon2D extends Node2D {
   override def godotClassName: String = "CollisionPolygon2D"
 
   /** CollisionPolygon2D.set_build_mode */
-  final def setBuildMode(build_mode: Long): Unit = {
+  final def setBuildMode(buildMode: gdext.classes.CollisionPolygon2D.BuildMode): Unit = {
     if (gdext.classes.CollisionPolygon2D.mb_set_build_mode == null) gdext.classes.CollisionPolygon2D.mb_set_build_mode = MethodBind.get("CollisionPolygon2D", "set_build_mode", 2780803135L)
-    Ptrcall.callVoid1(gdext.classes.CollisionPolygon2D.mb_set_build_mode, livePtr, build_mode)
+    Ptrcall.callVoid1(gdext.classes.CollisionPolygon2D.mb_set_build_mode, livePtr, buildMode)
   }
 
   /** CollisionPolygon2D.get_build_mode */
-  final def getBuildMode(): Long = {
+  final def getBuildMode(): gdext.classes.CollisionPolygon2D.BuildMode = {
     if (gdext.classes.CollisionPolygon2D.mb_get_build_mode == null) gdext.classes.CollisionPolygon2D.mb_get_build_mode = MethodBind.get("CollisionPolygon2D", "get_build_mode", 3044948800L)
-    Ptrcall.call0[Long](gdext.classes.CollisionPolygon2D.mb_get_build_mode, livePtr)
+    gdext.classes.CollisionPolygon2D.BuildMode(Ptrcall.call0[Long](gdext.classes.CollisionPolygon2D.mb_get_build_mode, livePtr))
   }
 
   /** CollisionPolygon2D.set_disabled */
@@ -69,4 +70,26 @@ object CollisionPolygon2D {
   private[classes] var mb_is_one_way_collision_enabled: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_one_way_collision_margin: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_one_way_collision_margin: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `CollisionPolygon2D.BuildMode`. */
+  opaque type BuildMode <: Long = Long
+
+  object BuildMode {
+    final val Solids: BuildMode = 0L.asInstanceOf[BuildMode]
+    final val Segments: BuildMode = 1L.asInstanceOf[BuildMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): BuildMode = value.asInstanceOf[BuildMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[BuildMode] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[BuildMode]]
+
+    extension (self: BuildMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Solids"
+        case 1L => "Segments"
+        case other => other.toString
+      }
+  }
 }

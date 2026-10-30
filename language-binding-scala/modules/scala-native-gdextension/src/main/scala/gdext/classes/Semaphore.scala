@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,7 +18,7 @@ abstract class Semaphore extends RefCounted {
   }
 
   /** Semaphore.post */
-  final def post(count: Long): Unit = {
+  final def post(count: Long = 1L): Unit = {
     if (gdext.classes.Semaphore.mb_post == null) gdext.classes.Semaphore.mb_post = MethodBind.get("Semaphore", "post", 1667783136L)
     Ptrcall.callVoid1(gdext.classes.Semaphore.mb_post, livePtr, count)
   }

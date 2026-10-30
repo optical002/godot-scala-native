@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class ReflectionProbe extends VisualInstance3D {
   }
 
   /** ReflectionProbe.set_blend_distance */
-  final def setBlendDistance(blend_distance: Double): Unit = {
+  final def setBlendDistance(blendDistance: Double): Unit = {
     if (gdext.classes.ReflectionProbe.mb_set_blend_distance == null) gdext.classes.ReflectionProbe.mb_set_blend_distance = MethodBind.get("ReflectionProbe", "set_blend_distance", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.ReflectionProbe.mb_set_blend_distance, livePtr, blend_distance)
+    Ptrcall.callVoid1(gdext.classes.ReflectionProbe.mb_set_blend_distance, livePtr, blendDistance)
   }
 
   /** ReflectionProbe.get_blend_distance */
@@ -35,15 +36,15 @@ abstract class ReflectionProbe extends VisualInstance3D {
   }
 
   /** ReflectionProbe.set_ambient_mode */
-  final def setAmbientMode(ambient: Long): Unit = {
+  final def setAmbientMode(ambient: gdext.classes.ReflectionProbe.AmbientMode): Unit = {
     if (gdext.classes.ReflectionProbe.mb_set_ambient_mode == null) gdext.classes.ReflectionProbe.mb_set_ambient_mode = MethodBind.get("ReflectionProbe", "set_ambient_mode", 1748981278L)
     Ptrcall.callVoid1(gdext.classes.ReflectionProbe.mb_set_ambient_mode, livePtr, ambient)
   }
 
   /** ReflectionProbe.get_ambient_mode */
-  final def getAmbientMode(): Long = {
+  final def getAmbientMode(): gdext.classes.ReflectionProbe.AmbientMode = {
     if (gdext.classes.ReflectionProbe.mb_get_ambient_mode == null) gdext.classes.ReflectionProbe.mb_get_ambient_mode = MethodBind.get("ReflectionProbe", "get_ambient_mode", 1014607621L)
-    Ptrcall.call0[Long](gdext.classes.ReflectionProbe.mb_get_ambient_mode, livePtr)
+    gdext.classes.ReflectionProbe.AmbientMode(Ptrcall.call0[Long](gdext.classes.ReflectionProbe.mb_get_ambient_mode, livePtr))
   }
 
   /** ReflectionProbe.set_ambient_color */
@@ -59,9 +60,9 @@ abstract class ReflectionProbe extends VisualInstance3D {
   }
 
   /** ReflectionProbe.set_ambient_color_energy */
-  final def setAmbientColorEnergy(ambient_energy: Double): Unit = {
+  final def setAmbientColorEnergy(ambientEnergy: Double): Unit = {
     if (gdext.classes.ReflectionProbe.mb_set_ambient_color_energy == null) gdext.classes.ReflectionProbe.mb_set_ambient_color_energy = MethodBind.get("ReflectionProbe", "set_ambient_color_energy", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.ReflectionProbe.mb_set_ambient_color_energy, livePtr, ambient_energy)
+    Ptrcall.callVoid1(gdext.classes.ReflectionProbe.mb_set_ambient_color_energy, livePtr, ambientEnergy)
   }
 
   /** ReflectionProbe.get_ambient_color_energy */
@@ -71,9 +72,9 @@ abstract class ReflectionProbe extends VisualInstance3D {
   }
 
   /** ReflectionProbe.set_max_distance */
-  final def setMaxDistance(max_distance: Double): Unit = {
+  final def setMaxDistance(maxDistance: Double): Unit = {
     if (gdext.classes.ReflectionProbe.mb_set_max_distance == null) gdext.classes.ReflectionProbe.mb_set_max_distance = MethodBind.get("ReflectionProbe", "set_max_distance", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.ReflectionProbe.mb_set_max_distance, livePtr, max_distance)
+    Ptrcall.callVoid1(gdext.classes.ReflectionProbe.mb_set_max_distance, livePtr, maxDistance)
   }
 
   /** ReflectionProbe.get_max_distance */
@@ -107,9 +108,9 @@ abstract class ReflectionProbe extends VisualInstance3D {
   }
 
   /** ReflectionProbe.set_origin_offset */
-  final def setOriginOffset(origin_offset: gdext.builtin.Vector3): Unit = {
+  final def setOriginOffset(originOffset: gdext.builtin.Vector3): Unit = {
     if (gdext.classes.ReflectionProbe.mb_set_origin_offset == null) gdext.classes.ReflectionProbe.mb_set_origin_offset = MethodBind.get("ReflectionProbe", "set_origin_offset", 3460891852L)
-    Ptrcall.callVoid1(gdext.classes.ReflectionProbe.mb_set_origin_offset, livePtr, origin_offset)
+    Ptrcall.callVoid1(gdext.classes.ReflectionProbe.mb_set_origin_offset, livePtr, originOffset)
   }
 
   /** ReflectionProbe.get_origin_offset */
@@ -179,15 +180,15 @@ abstract class ReflectionProbe extends VisualInstance3D {
   }
 
   /** ReflectionProbe.set_update_mode */
-  final def setUpdateMode(mode: Long): Unit = {
+  final def setUpdateMode(mode: gdext.classes.ReflectionProbe.UpdateMode): Unit = {
     if (gdext.classes.ReflectionProbe.mb_set_update_mode == null) gdext.classes.ReflectionProbe.mb_set_update_mode = MethodBind.get("ReflectionProbe", "set_update_mode", 4090221187L)
     Ptrcall.callVoid1(gdext.classes.ReflectionProbe.mb_set_update_mode, livePtr, mode)
   }
 
   /** ReflectionProbe.get_update_mode */
-  final def getUpdateMode(): Long = {
+  final def getUpdateMode(): gdext.classes.ReflectionProbe.UpdateMode = {
     if (gdext.classes.ReflectionProbe.mb_get_update_mode == null) gdext.classes.ReflectionProbe.mb_get_update_mode = MethodBind.get("ReflectionProbe", "get_update_mode", 2367550552L)
-    Ptrcall.call0[Long](gdext.classes.ReflectionProbe.mb_get_update_mode, livePtr)
+    gdext.classes.ReflectionProbe.UpdateMode(Ptrcall.call0[Long](gdext.classes.ReflectionProbe.mb_get_update_mode, livePtr))
   }
 
 }
@@ -223,4 +224,50 @@ object ReflectionProbe {
   private[classes] var mb_get_reflection_mask: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_update_mode: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_update_mode: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `ReflectionProbe.UpdateMode`. */
+  opaque type UpdateMode <: Long = Long
+
+  object UpdateMode {
+    final val Once: UpdateMode = 0L.asInstanceOf[UpdateMode]
+    final val Always: UpdateMode = 1L.asInstanceOf[UpdateMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): UpdateMode = value.asInstanceOf[UpdateMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[UpdateMode] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[UpdateMode]]
+
+    extension (self: UpdateMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Once"
+        case 1L => "Always"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `ReflectionProbe.AmbientMode`. */
+  opaque type AmbientMode <: Long = Long
+
+  object AmbientMode {
+    final val Disabled: AmbientMode = 0L.asInstanceOf[AmbientMode]
+    final val Environment: AmbientMode = 1L.asInstanceOf[AmbientMode]
+    final val Color: AmbientMode = 2L.asInstanceOf[AmbientMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): AmbientMode = value.asInstanceOf[AmbientMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[AmbientMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[AmbientMode]]
+
+    extension (self: AmbientMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "Environment"
+        case 2L => "Color"
+        case other => other.toString
+      }
+  }
 }

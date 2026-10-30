@@ -1,5 +1,6 @@
 package gdext.internal.register
 
+import gdext.internal.StringNames
 import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
 import scala.scalanative.libc.stdlib

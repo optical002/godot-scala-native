@@ -16,7 +16,7 @@ final class Player(                           // base derived from superclass
   @gdexport var hp: Int = 100                 // body @gdexport still works too
   @func def getScore(): Long = ...           // callable from GDScript
   @signal def pinged(): Unit = ()            // signal
-  override def _process(delta: Double) = ... // virtual, auto-detected
+  override def process(delta: Double) = ... // virtual, auto-detected
 }
 ```
 Two export forms: **body** `@gdexport var` fields (need a Scala initializer) and
@@ -33,9 +33,14 @@ Scans `T` at compile time and emits all registration calls:
 - **No case classes**: `Flags.Case` on `T` → `errorAndAbort` (backstop; the scan
   rejects them first). Godot objects have identity, so structural
   `equals`/`hashCode`/`copy` are wrong. Removed in 0.1.8.
-- **virtuals** auto-detected from overrides; `knownVirtuals` = `_ready`/`_process`/
-  `_physics_process` + editor ones (`_enter_tree`/`_exit_tree`/`_update_property`/
-  `_can_handle`/`_parse_property`).
+- **virtuals** auto-detected from overrides (`Flags.Override` + name, so an
+  overload isn't mistaken for one). `knownVirtuals` maps Godot name -> Scala
+  method on `GodotScriptClass`: camelCase, no underscore (`_physics_process` ->
+  `physicsProcess`, `_unhandled_input` -> `unhandledInput`, editor
+  `_can_handle` -> `canHandle`, ...). Exception: `_update_property` keeps its
+  name, since generated `EditorProperty.updateProperty()` (non-virtual
+  `update_property`) owns the camelCase one. Check a new virtual's camelCase
+  name against every generated method before adding it.
 - `@func` → `MethodRegistration.registerGetter`; `@gdexport` →
   `PropertyRegistration.registerExport`; `@signal` → `SignalRegistration`.
 - Annotations in `annotations/annotations.scala`, package **`gdext.annotations`**
@@ -273,6 +278,10 @@ type user resources/scene roots). `ResScan` (plugin, pure, unit-tested in
 `gdext/internal/engine/ResPath.scala`, exported from `gdext.api`).
 - Never fails the build: unknown class → `Resource`/`Node` + `[res]` warning;
   name collisions → extension suffix, then numeric.
+- Type args are emitted `_root_.`-qualified: members are lowerCamel, so a
+  `game.json` / `gdext/` folder / `ui/` folder makes a member that shadows the
+  `game`/`gdext`/`ui` package inside `Res` ("type Player is not a member of
+  gdext.api.FilePath").
 - Skipped when `godotResRefs := false` or `godotProjectDir` unset (plain
   `compile` must keep working without a Godot dir). Disabled → `Res.scala` deleted.
 - Fast path: fingerprint of (path, size, mtime) of assets + `.import`s, the

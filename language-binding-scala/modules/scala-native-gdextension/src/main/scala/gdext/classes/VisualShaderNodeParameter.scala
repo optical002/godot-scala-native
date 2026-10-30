@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,21 +24,21 @@ abstract class VisualShaderNodeParameter extends VisualShaderNode {
   }
 
   /** VisualShaderNodeParameter.set_qualifier */
-  final def setQualifier(qualifier: Long): Unit = {
+  final def setQualifier(qualifier: gdext.classes.VisualShaderNodeParameter.Qualifier): Unit = {
     if (gdext.classes.VisualShaderNodeParameter.mb_set_qualifier == null) gdext.classes.VisualShaderNodeParameter.mb_set_qualifier = MethodBind.get("VisualShaderNodeParameter", "set_qualifier", 1276489447L)
     Ptrcall.callVoid1(gdext.classes.VisualShaderNodeParameter.mb_set_qualifier, livePtr, qualifier)
   }
 
   /** VisualShaderNodeParameter.get_qualifier */
-  final def getQualifier(): Long = {
+  final def getQualifier(): gdext.classes.VisualShaderNodeParameter.Qualifier = {
     if (gdext.classes.VisualShaderNodeParameter.mb_get_qualifier == null) gdext.classes.VisualShaderNodeParameter.mb_get_qualifier = MethodBind.get("VisualShaderNodeParameter", "get_qualifier", 3558406205L)
-    Ptrcall.call0[Long](gdext.classes.VisualShaderNodeParameter.mb_get_qualifier, livePtr)
+    gdext.classes.VisualShaderNodeParameter.Qualifier(Ptrcall.call0[Long](gdext.classes.VisualShaderNodeParameter.mb_get_qualifier, livePtr))
   }
 
   /** VisualShaderNodeParameter.set_instance_index */
-  final def setInstanceIndex(instance_index: Long): Unit = {
+  final def setInstanceIndex(instanceIndex: Long): Unit = {
     if (gdext.classes.VisualShaderNodeParameter.mb_set_instance_index == null) gdext.classes.VisualShaderNodeParameter.mb_set_instance_index = MethodBind.get("VisualShaderNodeParameter", "set_instance_index", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.VisualShaderNodeParameter.mb_set_instance_index, livePtr, instance_index)
+    Ptrcall.callVoid1(gdext.classes.VisualShaderNodeParameter.mb_set_instance_index, livePtr, instanceIndex)
   }
 
   /** VisualShaderNodeParameter.get_instance_index */
@@ -55,4 +56,32 @@ object VisualShaderNodeParameter {
   private[classes] var mb_get_qualifier: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_instance_index: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_instance_index: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `VisualShaderNodeParameter.Qualifier`. */
+  opaque type Qualifier <: Long = Long
+
+  object Qualifier {
+    final val None: Qualifier = 0L.asInstanceOf[Qualifier]
+    final val Global: Qualifier = 1L.asInstanceOf[Qualifier]
+    final val Instance: Qualifier = 2L.asInstanceOf[Qualifier]
+    final val InstanceIndex: Qualifier = 3L.asInstanceOf[Qualifier]
+    final val Max: Qualifier = 4L.asInstanceOf[Qualifier]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): Qualifier = value.asInstanceOf[Qualifier]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[Qualifier] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[Qualifier]]
+
+    extension (self: Qualifier)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "None"
+        case 1L => "Global"
+        case 2L => "Instance"
+        case 3L => "InstanceIndex"
+        case 4L => "Max"
+        case other => other.toString
+      }
+  }
 }

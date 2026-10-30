@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class BoneConstraint3D extends SkeletonModifier3D {
   }
 
   /** BoneConstraint3D.set_apply_bone_name */
-  final def setApplyBoneName(index: Long, bone_name: String): Unit = {
+  final def setApplyBoneName(index: Long, boneName: String): Unit = {
     if (gdext.classes.BoneConstraint3D.mb_set_apply_bone_name == null) gdext.classes.BoneConstraint3D.mb_set_apply_bone_name = MethodBind.get("BoneConstraint3D", "set_apply_bone_name", 501894301L)
-    Ptrcall.callVoid2(gdext.classes.BoneConstraint3D.mb_set_apply_bone_name, livePtr, index, bone_name)
+    Ptrcall.callVoid2(gdext.classes.BoneConstraint3D.mb_set_apply_bone_name, livePtr, index, boneName)
   }
 
   /** BoneConstraint3D.get_apply_bone_name */
@@ -47,21 +48,21 @@ abstract class BoneConstraint3D extends SkeletonModifier3D {
   }
 
   /** BoneConstraint3D.set_reference_type */
-  final def setReferenceType(index: Long, `type`: Long): Unit = {
+  final def setReferenceType(index: Long, `type`: gdext.classes.BoneConstraint3D.ReferenceType): Unit = {
     if (gdext.classes.BoneConstraint3D.mb_set_reference_type == null) gdext.classes.BoneConstraint3D.mb_set_reference_type = MethodBind.get("BoneConstraint3D", "set_reference_type", 1830520418L)
     Ptrcall.callVoid2(gdext.classes.BoneConstraint3D.mb_set_reference_type, livePtr, index, `type`)
   }
 
   /** BoneConstraint3D.get_reference_type */
-  final def getReferenceType(index: Long): Long = {
+  final def getReferenceType(index: Long): gdext.classes.BoneConstraint3D.ReferenceType = {
     if (gdext.classes.BoneConstraint3D.mb_get_reference_type == null) gdext.classes.BoneConstraint3D.mb_get_reference_type = MethodBind.get("BoneConstraint3D", "get_reference_type", 3456416152L)
-    Ptrcall.call1[Long, Long](gdext.classes.BoneConstraint3D.mb_get_reference_type, livePtr, index)
+    gdext.classes.BoneConstraint3D.ReferenceType(Ptrcall.call1[Long, Long](gdext.classes.BoneConstraint3D.mb_get_reference_type, livePtr, index))
   }
 
   /** BoneConstraint3D.set_reference_bone_name */
-  final def setReferenceBoneName(index: Long, bone_name: String): Unit = {
+  final def setReferenceBoneName(index: Long, boneName: String): Unit = {
     if (gdext.classes.BoneConstraint3D.mb_set_reference_bone_name == null) gdext.classes.BoneConstraint3D.mb_set_reference_bone_name = MethodBind.get("BoneConstraint3D", "set_reference_bone_name", 501894301L)
-    Ptrcall.callVoid2(gdext.classes.BoneConstraint3D.mb_set_reference_bone_name, livePtr, index, bone_name)
+    Ptrcall.callVoid2(gdext.classes.BoneConstraint3D.mb_set_reference_bone_name, livePtr, index, boneName)
   }
 
   /** BoneConstraint3D.get_reference_bone_name */
@@ -118,4 +119,26 @@ object BoneConstraint3D {
   private[classes] var mb_set_setting_count: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_setting_count: GDExtensionMethodBindPtr = null
   private[classes] var mb_clear_setting: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `BoneConstraint3D.ReferenceType`. */
+  opaque type ReferenceType <: Long = Long
+
+  object ReferenceType {
+    final val Bone: ReferenceType = 0L.asInstanceOf[ReferenceType]
+    final val Node: ReferenceType = 1L.asInstanceOf[ReferenceType]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ReferenceType = value.asInstanceOf[ReferenceType]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ReferenceType] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[ReferenceType]]
+
+    extension (self: ReferenceType)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Bone"
+        case 1L => "Node"
+        case other => other.toString
+      }
+  }
 }

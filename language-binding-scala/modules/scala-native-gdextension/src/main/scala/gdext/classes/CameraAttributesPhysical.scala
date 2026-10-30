@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class CameraAttributesPhysical extends CameraAttributes {
   }
 
   /** CameraAttributesPhysical.set_shutter_speed */
-  final def setShutterSpeed(shutter_speed: Double): Unit = {
+  final def setShutterSpeed(shutterSpeed: Double): Unit = {
     if (gdext.classes.CameraAttributesPhysical.mb_set_shutter_speed == null) gdext.classes.CameraAttributesPhysical.mb_set_shutter_speed = MethodBind.get("CameraAttributesPhysical", "set_shutter_speed", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.CameraAttributesPhysical.mb_set_shutter_speed, livePtr, shutter_speed)
+    Ptrcall.callVoid1(gdext.classes.CameraAttributesPhysical.mb_set_shutter_speed, livePtr, shutterSpeed)
   }
 
   /** CameraAttributesPhysical.get_shutter_speed */
@@ -35,9 +36,9 @@ abstract class CameraAttributesPhysical extends CameraAttributes {
   }
 
   /** CameraAttributesPhysical.set_focal_length */
-  final def setFocalLength(focal_length: Double): Unit = {
+  final def setFocalLength(focalLength: Double): Unit = {
     if (gdext.classes.CameraAttributesPhysical.mb_set_focal_length == null) gdext.classes.CameraAttributesPhysical.mb_set_focal_length = MethodBind.get("CameraAttributesPhysical", "set_focal_length", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.CameraAttributesPhysical.mb_set_focal_length, livePtr, focal_length)
+    Ptrcall.callVoid1(gdext.classes.CameraAttributesPhysical.mb_set_focal_length, livePtr, focalLength)
   }
 
   /** CameraAttributesPhysical.get_focal_length */
@@ -47,9 +48,9 @@ abstract class CameraAttributesPhysical extends CameraAttributes {
   }
 
   /** CameraAttributesPhysical.set_focus_distance */
-  final def setFocusDistance(focus_distance: Double): Unit = {
+  final def setFocusDistance(focusDistance: Double): Unit = {
     if (gdext.classes.CameraAttributesPhysical.mb_set_focus_distance == null) gdext.classes.CameraAttributesPhysical.mb_set_focus_distance = MethodBind.get("CameraAttributesPhysical", "set_focus_distance", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.CameraAttributesPhysical.mb_set_focus_distance, livePtr, focus_distance)
+    Ptrcall.callVoid1(gdext.classes.CameraAttributesPhysical.mb_set_focus_distance, livePtr, focusDistance)
   }
 
   /** CameraAttributesPhysical.get_focus_distance */
@@ -89,9 +90,9 @@ abstract class CameraAttributesPhysical extends CameraAttributes {
   }
 
   /** CameraAttributesPhysical.set_auto_exposure_max_exposure_value */
-  final def setAutoExposureMaxExposureValue(exposure_value_max: Double): Unit = {
+  final def setAutoExposureMaxExposureValue(exposureValueMax: Double): Unit = {
     if (gdext.classes.CameraAttributesPhysical.mb_set_auto_exposure_max_exposure_value == null) gdext.classes.CameraAttributesPhysical.mb_set_auto_exposure_max_exposure_value = MethodBind.get("CameraAttributesPhysical", "set_auto_exposure_max_exposure_value", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.CameraAttributesPhysical.mb_set_auto_exposure_max_exposure_value, livePtr, exposure_value_max)
+    Ptrcall.callVoid1(gdext.classes.CameraAttributesPhysical.mb_set_auto_exposure_max_exposure_value, livePtr, exposureValueMax)
   }
 
   /** CameraAttributesPhysical.get_auto_exposure_max_exposure_value */
@@ -101,9 +102,9 @@ abstract class CameraAttributesPhysical extends CameraAttributes {
   }
 
   /** CameraAttributesPhysical.set_auto_exposure_min_exposure_value */
-  final def setAutoExposureMinExposureValue(exposure_value_min: Double): Unit = {
+  final def setAutoExposureMinExposureValue(exposureValueMin: Double): Unit = {
     if (gdext.classes.CameraAttributesPhysical.mb_set_auto_exposure_min_exposure_value == null) gdext.classes.CameraAttributesPhysical.mb_set_auto_exposure_min_exposure_value = MethodBind.get("CameraAttributesPhysical", "set_auto_exposure_min_exposure_value", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.CameraAttributesPhysical.mb_set_auto_exposure_min_exposure_value, livePtr, exposure_value_min)
+    Ptrcall.callVoid1(gdext.classes.CameraAttributesPhysical.mb_set_auto_exposure_min_exposure_value, livePtr, exposureValueMin)
   }
 
   /** CameraAttributesPhysical.get_auto_exposure_min_exposure_value */

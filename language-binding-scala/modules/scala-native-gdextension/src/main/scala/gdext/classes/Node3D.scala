@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,9 +36,9 @@ abstract class Node3D extends Node {
   }
 
   /** Node3D.set_rotation */
-  final def setRotation(euler_radians: gdext.builtin.Vector3): Unit = {
+  final def setRotation(eulerRadians: gdext.builtin.Vector3): Unit = {
     if (gdext.classes.Node3D.mb_set_rotation == null) gdext.classes.Node3D.mb_set_rotation = MethodBind.get("Node3D", "set_rotation", 3460891852L)
-    Ptrcall.callVoid1(gdext.classes.Node3D.mb_set_rotation, livePtr, euler_radians)
+    Ptrcall.callVoid1(gdext.classes.Node3D.mb_set_rotation, livePtr, eulerRadians)
   }
 
   /** Node3D.get_rotation */
@@ -47,9 +48,9 @@ abstract class Node3D extends Node {
   }
 
   /** Node3D.set_rotation_degrees */
-  final def setRotationDegrees(euler_degrees: gdext.builtin.Vector3): Unit = {
+  final def setRotationDegrees(eulerDegrees: gdext.builtin.Vector3): Unit = {
     if (gdext.classes.Node3D.mb_set_rotation_degrees == null) gdext.classes.Node3D.mb_set_rotation_degrees = MethodBind.get("Node3D", "set_rotation_degrees", 3460891852L)
-    Ptrcall.callVoid1(gdext.classes.Node3D.mb_set_rotation_degrees, livePtr, euler_degrees)
+    Ptrcall.callVoid1(gdext.classes.Node3D.mb_set_rotation_degrees, livePtr, eulerDegrees)
   }
 
   /** Node3D.get_rotation_degrees */
@@ -59,27 +60,27 @@ abstract class Node3D extends Node {
   }
 
   /** Node3D.set_rotation_order */
-  final def setRotationOrder(order: Long): Unit = {
+  final def setRotationOrder(order: gdext.classes.EulerOrder): Unit = {
     if (gdext.classes.Node3D.mb_set_rotation_order == null) gdext.classes.Node3D.mb_set_rotation_order = MethodBind.get("Node3D", "set_rotation_order", 1820889989L)
     Ptrcall.callVoid1(gdext.classes.Node3D.mb_set_rotation_order, livePtr, order)
   }
 
   /** Node3D.get_rotation_order */
-  final def getRotationOrder(): Long = {
+  final def getRotationOrder(): gdext.classes.EulerOrder = {
     if (gdext.classes.Node3D.mb_get_rotation_order == null) gdext.classes.Node3D.mb_get_rotation_order = MethodBind.get("Node3D", "get_rotation_order", 916939469L)
-    Ptrcall.call0[Long](gdext.classes.Node3D.mb_get_rotation_order, livePtr)
+    gdext.classes.EulerOrder(Ptrcall.call0[Long](gdext.classes.Node3D.mb_get_rotation_order, livePtr))
   }
 
   /** Node3D.set_rotation_edit_mode */
-  final def setRotationEditMode(edit_mode: Long): Unit = {
+  final def setRotationEditMode(editMode: gdext.classes.Node3D.RotationEditMode): Unit = {
     if (gdext.classes.Node3D.mb_set_rotation_edit_mode == null) gdext.classes.Node3D.mb_set_rotation_edit_mode = MethodBind.get("Node3D", "set_rotation_edit_mode", 141483330L)
-    Ptrcall.callVoid1(gdext.classes.Node3D.mb_set_rotation_edit_mode, livePtr, edit_mode)
+    Ptrcall.callVoid1(gdext.classes.Node3D.mb_set_rotation_edit_mode, livePtr, editMode)
   }
 
   /** Node3D.get_rotation_edit_mode */
-  final def getRotationEditMode(): Long = {
+  final def getRotationEditMode(): gdext.classes.Node3D.RotationEditMode = {
     if (gdext.classes.Node3D.mb_get_rotation_edit_mode == null) gdext.classes.Node3D.mb_get_rotation_edit_mode = MethodBind.get("Node3D", "get_rotation_edit_mode", 1572188370L)
-    Ptrcall.call0[Long](gdext.classes.Node3D.mb_get_rotation_edit_mode, livePtr)
+    gdext.classes.Node3D.RotationEditMode(Ptrcall.call0[Long](gdext.classes.Node3D.mb_get_rotation_edit_mode, livePtr))
   }
 
   /** Node3D.set_scale */
@@ -161,9 +162,9 @@ abstract class Node3D extends Node {
   }
 
   /** Node3D.set_global_rotation */
-  final def setGlobalRotation(euler_radians: gdext.builtin.Vector3): Unit = {
+  final def setGlobalRotation(eulerRadians: gdext.builtin.Vector3): Unit = {
     if (gdext.classes.Node3D.mb_set_global_rotation == null) gdext.classes.Node3D.mb_set_global_rotation = MethodBind.get("Node3D", "set_global_rotation", 3460891852L)
-    Ptrcall.callVoid1(gdext.classes.Node3D.mb_set_global_rotation, livePtr, euler_radians)
+    Ptrcall.callVoid1(gdext.classes.Node3D.mb_set_global_rotation, livePtr, eulerRadians)
   }
 
   /** Node3D.get_global_rotation */
@@ -173,9 +174,9 @@ abstract class Node3D extends Node {
   }
 
   /** Node3D.set_global_rotation_degrees */
-  final def setGlobalRotationDegrees(euler_degrees: gdext.builtin.Vector3): Unit = {
+  final def setGlobalRotationDegrees(eulerDegrees: gdext.builtin.Vector3): Unit = {
     if (gdext.classes.Node3D.mb_set_global_rotation_degrees == null) gdext.classes.Node3D.mb_set_global_rotation_degrees = MethodBind.get("Node3D", "set_global_rotation_degrees", 3460891852L)
-    Ptrcall.callVoid1(gdext.classes.Node3D.mb_set_global_rotation_degrees, livePtr, euler_degrees)
+    Ptrcall.callVoid1(gdext.classes.Node3D.mb_set_global_rotation_degrees, livePtr, eulerDegrees)
   }
 
   /** Node3D.get_global_rotation_degrees */
@@ -395,27 +396,27 @@ abstract class Node3D extends Node {
   }
 
   /** Node3D.look_at */
-  final def lookAt(target: gdext.builtin.Vector3, up: gdext.builtin.Vector3, use_model_front: Boolean): Unit = {
+  final def lookAt(target: gdext.builtin.Vector3, up: gdext.builtin.Vector3 = gdext.builtin.Vector3(0f, 1f, 0f), useModelFront: Boolean = false): Unit = {
     if (gdext.classes.Node3D.mb_look_at == null) gdext.classes.Node3D.mb_look_at = MethodBind.get("Node3D", "look_at", 2882425029L)
-    Ptrcall.callVoid3(gdext.classes.Node3D.mb_look_at, livePtr, target, up, use_model_front)
+    Ptrcall.callVoid3(gdext.classes.Node3D.mb_look_at, livePtr, target, up, useModelFront)
   }
 
   /** Node3D.look_at_from_position */
-  final def lookAtFromPosition(position: gdext.builtin.Vector3, target: gdext.builtin.Vector3, up: gdext.builtin.Vector3, use_model_front: Boolean): Unit = {
+  final def lookAtFromPosition(position: gdext.builtin.Vector3, target: gdext.builtin.Vector3, up: gdext.builtin.Vector3 = gdext.builtin.Vector3(0f, 1f, 0f), useModelFront: Boolean = false): Unit = {
     if (gdext.classes.Node3D.mb_look_at_from_position == null) gdext.classes.Node3D.mb_look_at_from_position = MethodBind.get("Node3D", "look_at_from_position", 2086826090L)
-    Ptrcall.callVoid4(gdext.classes.Node3D.mb_look_at_from_position, livePtr, position, target, up, use_model_front)
+    Ptrcall.callVoid4(gdext.classes.Node3D.mb_look_at_from_position, livePtr, position, target, up, useModelFront)
   }
 
   /** Node3D.to_local */
-  final def toLocal(global_point: gdext.builtin.Vector3): gdext.builtin.Vector3 = {
+  final def toLocal(globalPoint: gdext.builtin.Vector3): gdext.builtin.Vector3 = {
     if (gdext.classes.Node3D.mb_to_local == null) gdext.classes.Node3D.mb_to_local = MethodBind.get("Node3D", "to_local", 192990374L)
-    Ptrcall.call1[gdext.builtin.Vector3, gdext.builtin.Vector3](gdext.classes.Node3D.mb_to_local, livePtr, global_point)
+    Ptrcall.call1[gdext.builtin.Vector3, gdext.builtin.Vector3](gdext.classes.Node3D.mb_to_local, livePtr, globalPoint)
   }
 
   /** Node3D.to_global */
-  final def toGlobal(local_point: gdext.builtin.Vector3): gdext.builtin.Vector3 = {
+  final def toGlobal(localPoint: gdext.builtin.Vector3): gdext.builtin.Vector3 = {
     if (gdext.classes.Node3D.mb_to_global == null) gdext.classes.Node3D.mb_to_global = MethodBind.get("Node3D", "to_global", 192990374L)
-    Ptrcall.call1[gdext.builtin.Vector3, gdext.builtin.Vector3](gdext.classes.Node3D.mb_to_global, livePtr, local_point)
+    Ptrcall.call1[gdext.builtin.Vector3, gdext.builtin.Vector3](gdext.classes.Node3D.mb_to_global, livePtr, localPoint)
   }
 
 }
@@ -489,4 +490,28 @@ object Node3D {
   private[classes] var mb_look_at_from_position: GDExtensionMethodBindPtr = null
   private[classes] var mb_to_local: GDExtensionMethodBindPtr = null
   private[classes] var mb_to_global: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `Node3D.RotationEditMode`. */
+  opaque type RotationEditMode <: Long = Long
+
+  object RotationEditMode {
+    final val Euler: RotationEditMode = 0L.asInstanceOf[RotationEditMode]
+    final val Quaternion: RotationEditMode = 1L.asInstanceOf[RotationEditMode]
+    final val Basis: RotationEditMode = 2L.asInstanceOf[RotationEditMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): RotationEditMode = value.asInstanceOf[RotationEditMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[RotationEditMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[RotationEditMode]]
+
+    extension (self: RotationEditMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Euler"
+        case 1L => "Quaternion"
+        case 2L => "Basis"
+        case other => other.toString
+      }
+  }
 }

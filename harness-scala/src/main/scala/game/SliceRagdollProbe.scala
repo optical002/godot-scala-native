@@ -35,16 +35,12 @@ final class SliceRagdollProbe(
     c.eq("empty size", a.size, 0)
     a.pushBack(7L)
     a.pushBack("text")
-    a.pushBack(StringNames.cached("spine"))
+    a.pushBack("spine")
     a.pushBack(Vector3(1f, 2f, 3f))
     c.eq("size after push", a.size, 4)
     c.eq("int type", a.variantTypeAt(0), GDEXTENSION_VARIANT_TYPE_INT)
     c.eq("string type", a.variantTypeAt(1), GDEXTENSION_VARIANT_TYPE_STRING)
-    c.eq(
-      "string name type",
-      a.variantTypeAt(2),
-      GDEXTENSION_VARIANT_TYPE_STRING_NAME
-    )
+    c.eq("second string type", a.variantTypeAt(2), GDEXTENSION_VARIANT_TYPE_STRING)
     c.eq("vector3 type", a.variantTypeAt(3), GDEXTENSION_VARIANT_TYPE_VECTOR3)
     c.check("nothing nil", !(0 until 4).exists(a.isNilAt))
     a.set(0, 42L)
@@ -67,7 +63,7 @@ final class SliceRagdollProbe(
     while (i < 2000) {
       val s = GArray.allocate()
       s.pushBack(i.toLong)
-      s.pushBack(StringNames.cached("bone"))
+      s.pushBack("bone")
       s.set(0, (i * 2).toLong)
       if (s.get[Long](0) != i * 2L)
         c.fail(s"stress iteration $i read back wrong value")
@@ -110,7 +106,7 @@ final class SliceRagdollProbe(
     c.eq("plain vertex count", plain.surfaceGetArrayLen(0), n.toLong)
     c.check(
       "plain has no custom0",
-      (plain.surfaceGetFormat(0) & FormatCustom0) == 0L
+      (plain.surfaceGetFormat(0).value & FormatCustom0) == 0L
     )
 
     val custom = PackedFloat32Array.ofSize(n)
@@ -122,7 +118,7 @@ final class SliceRagdollProbe(
       arrays,
       custom0Flags
     )
-    val format = withCustom.surfaceGetFormat(0)
+    val format = withCustom.surfaceGetFormat(0).value
     c.check("custom0 format bit", (format & FormatCustom0) != 0L)
     c.eq(
       "custom0 is R_FLOAT",
@@ -192,7 +188,7 @@ final class SliceRagdollProbe(
     val skel = skeleton
     val body = node[MeshInstance3D]("Body")
     val mesh = body.getMesh().cast[ArrayMesh]
-    val format = mesh.surfaceGetFormat(0)
+    val format = mesh.surfaceGetFormat(0).value
     c.check("source has bones", (format & FormatBones) != 0L)
     c.check("source has weights", (format & FormatWeights) != 0L)
 
@@ -233,7 +229,7 @@ final class SliceRagdollProbe(
     arrays.free()
     body.setMesh(sliced)
 
-    val slicedFormat = sliced.surfaceGetFormat(0)
+    val slicedFormat = sliced.surfaceGetFormat(0).value
     c.check("sliced keeps bones", (slicedFormat & FormatBones) != 0L)
     c.check("sliced keeps weights", (slicedFormat & FormatWeights) != 0L)
     c.check("sliced has custom0", (slicedFormat & FormatCustom0) != 0L)
@@ -268,19 +264,19 @@ final class SliceRagdollProbe(
     val material = Gd.create[ShaderMaterial]()
     material.setShader(shader)
     material.set(
-      StringNames.cached("shader_parameter/cut_color"),
+      "shader_parameter/cut_color",
       Color(0.6f, 0.05f, 0.05f, 1f)
     )
     c.eq(
       "shader parameter round trip",
-      material.getAs[Color](StringNames.cached("shader_parameter/cut_color")),
+      material.getAs[Color]("shader_parameter/cut_color"),
       Color(0.6f, 0.05f, 0.05f, 1f)
     )
     body.setSurfaceOverrideMaterial(0, material)
-    body.set(StringNames.cached("instance_shader_parameters/side"), -1.0)
+    body.set("instance_shader_parameters/side", -1.0)
     c.eq(
       "instance uniform round trip",
-      body.getAs[Double](StringNames.cached("instance_shader_parameters/side")),
+      body.getAs[Double]("instance_shader_parameters/side"),
       -1.0
     )
   }
@@ -312,7 +308,7 @@ final class SliceRagdollProbe(
     sim.setActive(true)
     sim.physicalBonesStartSimulation(wanted)
     physicalBones.foreach { b =>
-      val name = b.getAs[String](StringNames.cached("bone_name"))
+      val name = b.getAs[String]("bone_name")
       c.eq(
         s"bone $name simulating",
         b.isSimulatingPhysics(),
@@ -352,7 +348,7 @@ final class SliceRagdollProbe(
 
   @func def freeBone(): String = run { c =>
     val name = boneToFree
-    physicalBones.find(_.getAs[String](StringNames.cached("bone_name")) == name) match {
+    physicalBones.find(_.getAs[String]("bone_name") == name) match {
       case Some(b) =>
         simulator.removeChild(b)
         b.queueFree()
@@ -363,7 +359,7 @@ final class SliceRagdollProbe(
   @func def setDormant(): String = run { c =>
     val sim = simulator
     sim.setActive(false)
-    sim.setProcessMode(4L)
+    sim.setProcessMode(Node.ProcessMode.Disabled)
     physicalBones.foreach { b =>
       b.setCollisionLayer(0L)
       b.setCollisionMask(0L)
@@ -373,7 +369,7 @@ final class SliceRagdollProbe(
 
   @func def wake(): String = run { c =>
     val sim = simulator
-    sim.setProcessMode(0L)
+    sim.setProcessMode(Node.ProcessMode.Inherit)
     val skel = skeleton
     val skelGlobal = skel.getGlobalTransform()
     physicalBones.foreach { b =>
@@ -402,7 +398,7 @@ final class SliceRagdollProbe(
     val sim = simulator
     if (!captureConnected) {
       val err = sim.connect(
-        StringNames.cached("modification_processed"),
+        "modification_processed",
         () => if (captureRequested) captureLivePoses()
       )
       c.eq("connect modification_processed", err, 0L)
@@ -474,7 +470,7 @@ final class SliceRagdollProbe(
       val direct = skin.getBindBone(b)
       val bone =
         if (direct >= 0) direct
-        else skel.findBone(StringName.toScala(skin.getBindName(b).ptr))
+        else skel.findBone(skin.getBindName(b))
       skel.getBoneGlobalPose(bone) * skin.getBindPose(b)
     }
     val arrays = mesh.surfaceGetArrays(0)
@@ -642,8 +638,8 @@ final class SliceRagdollProbe(
     points(1) = Vector3(1f, 0f, 0f)
     points(2) = Vector3(0f, 1f, 0f)
     points(3) = Vector3(0f, 0f, 1f)
-    shape.set(StringNames.cached("points"), points)
-    val back = shape.getAs[PackedVector3Array](StringNames.cached("points"))
+    shape.set("points", points)
+    val back = shape.getAs[PackedVector3Array]("points")
     c.eq("engine property point count", back.size, 4)
     c.check(
       "engine property holds the points",

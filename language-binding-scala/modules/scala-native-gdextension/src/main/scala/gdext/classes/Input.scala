@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,93 +18,93 @@ abstract class Input extends Object {
   }
 
   /** Input.is_key_pressed */
-  final def isKeyPressed(keycode: Long): Boolean = {
+  final def isKeyPressed(keycode: gdext.classes.Key): Boolean = {
     if (gdext.classes.Input.mb_is_key_pressed == null) gdext.classes.Input.mb_is_key_pressed = MethodBind.get("Input", "is_key_pressed", 1938909964L)
     Ptrcall.call1[Long, Boolean](gdext.classes.Input.mb_is_key_pressed, livePtr, keycode)
   }
 
   /** Input.is_physical_key_pressed */
-  final def isPhysicalKeyPressed(keycode: Long): Boolean = {
+  final def isPhysicalKeyPressed(keycode: gdext.classes.Key): Boolean = {
     if (gdext.classes.Input.mb_is_physical_key_pressed == null) gdext.classes.Input.mb_is_physical_key_pressed = MethodBind.get("Input", "is_physical_key_pressed", 1938909964L)
     Ptrcall.call1[Long, Boolean](gdext.classes.Input.mb_is_physical_key_pressed, livePtr, keycode)
   }
 
   /** Input.is_key_label_pressed */
-  final def isKeyLabelPressed(keycode: Long): Boolean = {
+  final def isKeyLabelPressed(keycode: gdext.classes.Key): Boolean = {
     if (gdext.classes.Input.mb_is_key_label_pressed == null) gdext.classes.Input.mb_is_key_label_pressed = MethodBind.get("Input", "is_key_label_pressed", 1938909964L)
     Ptrcall.call1[Long, Boolean](gdext.classes.Input.mb_is_key_label_pressed, livePtr, keycode)
   }
 
   /** Input.is_mouse_button_pressed */
-  final def isMouseButtonPressed(button: Long): Boolean = {
+  final def isMouseButtonPressed(button: gdext.classes.MouseButton): Boolean = {
     if (gdext.classes.Input.mb_is_mouse_button_pressed == null) gdext.classes.Input.mb_is_mouse_button_pressed = MethodBind.get("Input", "is_mouse_button_pressed", 1821097125L)
     Ptrcall.call1[Long, Boolean](gdext.classes.Input.mb_is_mouse_button_pressed, livePtr, button)
   }
 
   /** Input.is_joy_button_pressed */
-  final def isJoyButtonPressed(device: Long, button: Long): Boolean = {
+  final def isJoyButtonPressed(device: Long, button: gdext.classes.JoyButton): Boolean = {
     if (gdext.classes.Input.mb_is_joy_button_pressed == null) gdext.classes.Input.mb_is_joy_button_pressed = MethodBind.get("Input", "is_joy_button_pressed", 787208542L)
     Ptrcall.call2[Long, Long, Boolean](gdext.classes.Input.mb_is_joy_button_pressed, livePtr, device, button)
   }
 
   /** Input.is_action_pressed */
-  final def isActionPressed(action: gdext.builtin.StringName, exact_match: Boolean): Boolean = {
+  final def isActionPressed(action: String, exactMatch: Boolean = false): Boolean = {
     if (gdext.classes.Input.mb_is_action_pressed == null) gdext.classes.Input.mb_is_action_pressed = MethodBind.get("Input", "is_action_pressed", 1558498928L)
-    Ptrcall.call2[gdext.builtin.StringName, Boolean, Boolean](gdext.classes.Input.mb_is_action_pressed, livePtr, action, exact_match)
+    Ptrcall.call2[SnArg, Boolean, Boolean](gdext.classes.Input.mb_is_action_pressed, livePtr, SnArg(action), exactMatch)
   }
 
   /** Input.is_action_just_pressed */
-  final def isActionJustPressed(action: gdext.builtin.StringName, exact_match: Boolean): Boolean = {
+  final def isActionJustPressed(action: String, exactMatch: Boolean = false): Boolean = {
     if (gdext.classes.Input.mb_is_action_just_pressed == null) gdext.classes.Input.mb_is_action_just_pressed = MethodBind.get("Input", "is_action_just_pressed", 1558498928L)
-    Ptrcall.call2[gdext.builtin.StringName, Boolean, Boolean](gdext.classes.Input.mb_is_action_just_pressed, livePtr, action, exact_match)
+    Ptrcall.call2[SnArg, Boolean, Boolean](gdext.classes.Input.mb_is_action_just_pressed, livePtr, SnArg(action), exactMatch)
   }
 
   /** Input.is_action_just_released */
-  final def isActionJustReleased(action: gdext.builtin.StringName, exact_match: Boolean): Boolean = {
+  final def isActionJustReleased(action: String, exactMatch: Boolean = false): Boolean = {
     if (gdext.classes.Input.mb_is_action_just_released == null) gdext.classes.Input.mb_is_action_just_released = MethodBind.get("Input", "is_action_just_released", 1558498928L)
-    Ptrcall.call2[gdext.builtin.StringName, Boolean, Boolean](gdext.classes.Input.mb_is_action_just_released, livePtr, action, exact_match)
+    Ptrcall.call2[SnArg, Boolean, Boolean](gdext.classes.Input.mb_is_action_just_released, livePtr, SnArg(action), exactMatch)
   }
 
   /** Input.is_action_just_pressed_by_event */
-  final def isActionJustPressedByEvent(action: gdext.builtin.StringName, event: InputEvent, exact_match: Boolean): Boolean = {
+  final def isActionJustPressedByEvent(action: String, event: InputEvent, exactMatch: Boolean = false): Boolean = {
     if (gdext.classes.Input.mb_is_action_just_pressed_by_event == null) gdext.classes.Input.mb_is_action_just_pressed_by_event = MethodBind.get("Input", "is_action_just_pressed_by_event", 551972873L)
-    Ptrcall.call3[gdext.builtin.StringName, GodotObject, Boolean, Boolean](gdext.classes.Input.mb_is_action_just_pressed_by_event, livePtr, action, Wrappers.handle(event), exact_match)
+    Ptrcall.call3[SnArg, GodotObject, Boolean, Boolean](gdext.classes.Input.mb_is_action_just_pressed_by_event, livePtr, SnArg(action), Wrappers.handle(event), exactMatch)
   }
 
   /** Input.is_action_just_released_by_event */
-  final def isActionJustReleasedByEvent(action: gdext.builtin.StringName, event: InputEvent, exact_match: Boolean): Boolean = {
+  final def isActionJustReleasedByEvent(action: String, event: InputEvent, exactMatch: Boolean = false): Boolean = {
     if (gdext.classes.Input.mb_is_action_just_released_by_event == null) gdext.classes.Input.mb_is_action_just_released_by_event = MethodBind.get("Input", "is_action_just_released_by_event", 551972873L)
-    Ptrcall.call3[gdext.builtin.StringName, GodotObject, Boolean, Boolean](gdext.classes.Input.mb_is_action_just_released_by_event, livePtr, action, Wrappers.handle(event), exact_match)
+    Ptrcall.call3[SnArg, GodotObject, Boolean, Boolean](gdext.classes.Input.mb_is_action_just_released_by_event, livePtr, SnArg(action), Wrappers.handle(event), exactMatch)
   }
 
   /** Input.get_action_strength */
-  final def getActionStrength(action: gdext.builtin.StringName, exact_match: Boolean): Double = {
+  final def getActionStrength(action: String, exactMatch: Boolean = false): Double = {
     if (gdext.classes.Input.mb_get_action_strength == null) gdext.classes.Input.mb_get_action_strength = MethodBind.get("Input", "get_action_strength", 801543509L)
-    Ptrcall.call2[gdext.builtin.StringName, Boolean, Double](gdext.classes.Input.mb_get_action_strength, livePtr, action, exact_match)
+    Ptrcall.call2[SnArg, Boolean, Double](gdext.classes.Input.mb_get_action_strength, livePtr, SnArg(action), exactMatch)
   }
 
   /** Input.get_action_raw_strength */
-  final def getActionRawStrength(action: gdext.builtin.StringName, exact_match: Boolean): Double = {
+  final def getActionRawStrength(action: String, exactMatch: Boolean = false): Double = {
     if (gdext.classes.Input.mb_get_action_raw_strength == null) gdext.classes.Input.mb_get_action_raw_strength = MethodBind.get("Input", "get_action_raw_strength", 801543509L)
-    Ptrcall.call2[gdext.builtin.StringName, Boolean, Double](gdext.classes.Input.mb_get_action_raw_strength, livePtr, action, exact_match)
+    Ptrcall.call2[SnArg, Boolean, Double](gdext.classes.Input.mb_get_action_raw_strength, livePtr, SnArg(action), exactMatch)
   }
 
   /** Input.get_axis */
-  final def getAxis(negative_action: gdext.builtin.StringName, positive_action: gdext.builtin.StringName): Double = {
+  final def getAxis(negativeAction: String, positiveAction: String): Double = {
     if (gdext.classes.Input.mb_get_axis == null) gdext.classes.Input.mb_get_axis = MethodBind.get("Input", "get_axis", 1958752504L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Double](gdext.classes.Input.mb_get_axis, livePtr, negative_action, positive_action)
+    Ptrcall.call2[SnArg, SnArg, Double](gdext.classes.Input.mb_get_axis, livePtr, SnArg(negativeAction), SnArg(positiveAction))
   }
 
   /** Input.get_vector */
-  final def getVector(negative_x: gdext.builtin.StringName, positive_x: gdext.builtin.StringName, negative_y: gdext.builtin.StringName, positive_y: gdext.builtin.StringName, deadzone: Double): gdext.builtin.Vector2 = {
+  final def getVector(negativeX: String, positiveX: String, negativeY: String, positiveY: String, deadzone: Double = -1.0): gdext.builtin.Vector2 = {
     if (gdext.classes.Input.mb_get_vector == null) gdext.classes.Input.mb_get_vector = MethodBind.get("Input", "get_vector", 2479607902L)
-    Ptrcall.call5[gdext.builtin.StringName, gdext.builtin.StringName, gdext.builtin.StringName, gdext.builtin.StringName, Double, gdext.builtin.Vector2](gdext.classes.Input.mb_get_vector, livePtr, negative_x, positive_x, negative_y, positive_y, deadzone)
+    Ptrcall.call5[SnArg, SnArg, SnArg, SnArg, Double, gdext.builtin.Vector2](gdext.classes.Input.mb_get_vector, livePtr, SnArg(negativeX), SnArg(positiveX), SnArg(negativeY), SnArg(positiveY), deadzone)
   }
 
   /** Input.add_joy_mapping */
-  final def addJoyMapping(mapping: String, update_existing: Boolean): Unit = {
+  final def addJoyMapping(mapping: String, updateExisting: Boolean = false): Unit = {
     if (gdext.classes.Input.mb_add_joy_mapping == null) gdext.classes.Input.mb_add_joy_mapping = MethodBind.get("Input", "add_joy_mapping", 1168363258L)
-    Ptrcall.callVoid2(gdext.classes.Input.mb_add_joy_mapping, livePtr, mapping, update_existing)
+    Ptrcall.callVoid2(gdext.classes.Input.mb_add_joy_mapping, livePtr, mapping, updateExisting)
   }
 
   /** Input.remove_joy_mapping */
@@ -119,7 +120,7 @@ abstract class Input extends Object {
   }
 
   /** Input.get_joy_axis */
-  final def getJoyAxis(device: Long, axis: Long): Double = {
+  final def getJoyAxis(device: Long, axis: gdext.classes.JoyAxis): Double = {
     if (gdext.classes.Input.mb_get_joy_axis == null) gdext.classes.Input.mb_get_joy_axis = MethodBind.get("Input", "get_joy_axis", 4063175957L)
     Ptrcall.call2[Long, Long, Double](gdext.classes.Input.mb_get_joy_axis, livePtr, device, axis)
   }
@@ -137,9 +138,9 @@ abstract class Input extends Object {
   }
 
   /** Input.should_ignore_device */
-  final def shouldIgnoreDevice(vendor_id: Long, product_id: Long): Boolean = {
+  final def shouldIgnoreDevice(vendorId: Long, productId: Long): Boolean = {
     if (gdext.classes.Input.mb_should_ignore_device == null) gdext.classes.Input.mb_should_ignore_device = MethodBind.get("Input", "should_ignore_device", 2522259332L)
-    Ptrcall.call2[Long, Long, Boolean](gdext.classes.Input.mb_should_ignore_device, livePtr, vendor_id, product_id)
+    Ptrcall.call2[Long, Long, Boolean](gdext.classes.Input.mb_should_ignore_device, livePtr, vendorId, productId)
   }
 
   /** Input.get_joy_vibration_strength */
@@ -155,9 +156,9 @@ abstract class Input extends Object {
   }
 
   /** Input.start_joy_vibration */
-  final def startJoyVibration(device: Long, weak_magnitude: Double, strong_magnitude: Double, duration: Double): Unit = {
+  final def startJoyVibration(device: Long, weakMagnitude: Double, strongMagnitude: Double, duration: Double = 0.0): Unit = {
     if (gdext.classes.Input.mb_start_joy_vibration == null) gdext.classes.Input.mb_start_joy_vibration = MethodBind.get("Input", "start_joy_vibration", 2576575033L)
-    Ptrcall.callVoid4(gdext.classes.Input.mb_start_joy_vibration, livePtr, device, weak_magnitude, strong_magnitude, duration)
+    Ptrcall.callVoid4(gdext.classes.Input.mb_start_joy_vibration, livePtr, device, weakMagnitude, strongMagnitude, duration)
   }
 
   /** Input.stop_joy_vibration */
@@ -167,9 +168,9 @@ abstract class Input extends Object {
   }
 
   /** Input.vibrate_handheld */
-  final def vibrateHandheld(duration_ms: Long, amplitude: Double): Unit = {
+  final def vibrateHandheld(durationMs: Long = 500L, amplitude: Double = -1.0): Unit = {
     if (gdext.classes.Input.mb_vibrate_handheld == null) gdext.classes.Input.mb_vibrate_handheld = MethodBind.get("Input", "vibrate_handheld", 544894297L)
-    Ptrcall.callVoid2(gdext.classes.Input.mb_vibrate_handheld, livePtr, duration_ms, amplitude)
+    Ptrcall.callVoid2(gdext.classes.Input.mb_vibrate_handheld, livePtr, durationMs, amplitude)
   }
 
   /** Input.get_gravity */
@@ -245,21 +246,21 @@ abstract class Input extends Object {
   }
 
   /** Input.get_mouse_button_mask */
-  final def getMouseButtonMask(): Long = {
+  final def getMouseButtonMask(): gdext.classes.MouseButtonMask = {
     if (gdext.classes.Input.mb_get_mouse_button_mask == null) gdext.classes.Input.mb_get_mouse_button_mask = MethodBind.get("Input", "get_mouse_button_mask", 2512161324L)
-    Ptrcall.call0[Long](gdext.classes.Input.mb_get_mouse_button_mask, livePtr)
+    gdext.classes.MouseButtonMask(Ptrcall.call0[Long](gdext.classes.Input.mb_get_mouse_button_mask, livePtr))
   }
 
   /** Input.set_mouse_mode */
-  final def setMouseMode(mode: Long): Unit = {
+  final def setMouseMode(mode: gdext.classes.Input.MouseMode): Unit = {
     if (gdext.classes.Input.mb_set_mouse_mode == null) gdext.classes.Input.mb_set_mouse_mode = MethodBind.get("Input", "set_mouse_mode", 2228490894L)
     Ptrcall.callVoid1(gdext.classes.Input.mb_set_mouse_mode, livePtr, mode)
   }
 
   /** Input.get_mouse_mode */
-  final def getMouseMode(): Long = {
+  final def getMouseMode(): gdext.classes.Input.MouseMode = {
     if (gdext.classes.Input.mb_get_mouse_mode == null) gdext.classes.Input.mb_get_mouse_mode = MethodBind.get("Input", "get_mouse_mode", 965286182L)
-    Ptrcall.call0[Long](gdext.classes.Input.mb_get_mouse_mode, livePtr)
+    gdext.classes.Input.MouseMode(Ptrcall.call0[Long](gdext.classes.Input.mb_get_mouse_mode, livePtr))
   }
 
   /** Input.warp_mouse */
@@ -269,31 +270,31 @@ abstract class Input extends Object {
   }
 
   /** Input.action_press */
-  final def actionPress(action: gdext.builtin.StringName, strength: Double): Unit = {
+  final def actionPress(action: String, strength: Double = 1.0): Unit = {
     if (gdext.classes.Input.mb_action_press == null) gdext.classes.Input.mb_action_press = MethodBind.get("Input", "action_press", 1713091165L)
-    Ptrcall.callVoid2(gdext.classes.Input.mb_action_press, livePtr, action, strength)
+    Ptrcall.callVoid2(gdext.classes.Input.mb_action_press, livePtr, SnArg(action), strength)
   }
 
   /** Input.action_release */
-  final def actionRelease(action: gdext.builtin.StringName): Unit = {
+  final def actionRelease(action: String): Unit = {
     if (gdext.classes.Input.mb_action_release == null) gdext.classes.Input.mb_action_release = MethodBind.get("Input", "action_release", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.Input.mb_action_release, livePtr, action)
+    Ptrcall.callVoid1(gdext.classes.Input.mb_action_release, livePtr, SnArg(action))
   }
 
   /** Input.set_default_cursor_shape */
-  final def setDefaultCursorShape(shape: Long): Unit = {
+  final def setDefaultCursorShape(shape: gdext.classes.Input.CursorShape = gdext.classes.Input.CursorShape(0L)): Unit = {
     if (gdext.classes.Input.mb_set_default_cursor_shape == null) gdext.classes.Input.mb_set_default_cursor_shape = MethodBind.get("Input", "set_default_cursor_shape", 2124816902L)
     Ptrcall.callVoid1(gdext.classes.Input.mb_set_default_cursor_shape, livePtr, shape)
   }
 
   /** Input.get_current_cursor_shape */
-  final def getCurrentCursorShape(): Long = {
+  final def getCurrentCursorShape(): gdext.classes.Input.CursorShape = {
     if (gdext.classes.Input.mb_get_current_cursor_shape == null) gdext.classes.Input.mb_get_current_cursor_shape = MethodBind.get("Input", "get_current_cursor_shape", 3455658929L)
-    Ptrcall.call0[Long](gdext.classes.Input.mb_get_current_cursor_shape, livePtr)
+    gdext.classes.Input.CursorShape(Ptrcall.call0[Long](gdext.classes.Input.mb_get_current_cursor_shape, livePtr))
   }
 
   /** Input.set_custom_mouse_cursor */
-  final def setCustomMouseCursor(image: Resource, shape: Long, hotspot: gdext.builtin.Vector2): Unit = {
+  final def setCustomMouseCursor(image: Resource, shape: gdext.classes.Input.CursorShape = gdext.classes.Input.CursorShape(0L), hotspot: gdext.builtin.Vector2 = gdext.builtin.Vector2(0f, 0f)): Unit = {
     if (gdext.classes.Input.mb_set_custom_mouse_cursor == null) gdext.classes.Input.mb_set_custom_mouse_cursor = MethodBind.get("Input", "set_custom_mouse_cursor", 703945977L)
     Ptrcall.callVoid3(gdext.classes.Input.mb_set_custom_mouse_cursor, livePtr, Wrappers.handle(image), shape, hotspot)
   }
@@ -348,7 +349,7 @@ abstract class Input extends Object {
 
 }
 
-object Input {
+object Input extends gdext.internal.input.InputOps {
   private[classes] var mb_is_anything_pressed: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_key_pressed: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_physical_key_pressed: GDExtensionMethodBindPtr = null
@@ -414,5 +415,311 @@ object Input {
       instance = Wrappers.borrowed[Input](GodotObject.fromPtr(
         Godot.interface.global_get_singleton(StringNames.cached("Input").ptr)))
     instance
+  }
+
+  /** Forwards to [[singleton]]: Input.is_anything_pressed */
+  final def isAnythingPressed(): Boolean =
+    singleton.isAnythingPressed()
+
+  /** Forwards to [[singleton]]: Input.is_key_pressed */
+  final def isKeyPressed(keycode: gdext.classes.Key): Boolean =
+    singleton.isKeyPressed(keycode)
+
+  /** Forwards to [[singleton]]: Input.is_physical_key_pressed */
+  final def isPhysicalKeyPressed(keycode: gdext.classes.Key): Boolean =
+    singleton.isPhysicalKeyPressed(keycode)
+
+  /** Forwards to [[singleton]]: Input.is_key_label_pressed */
+  final def isKeyLabelPressed(keycode: gdext.classes.Key): Boolean =
+    singleton.isKeyLabelPressed(keycode)
+
+  /** Forwards to [[singleton]]: Input.is_mouse_button_pressed */
+  final def isMouseButtonPressed(button: gdext.classes.MouseButton): Boolean =
+    singleton.isMouseButtonPressed(button)
+
+  /** Forwards to [[singleton]]: Input.is_joy_button_pressed */
+  final def isJoyButtonPressed(device: Long, button: gdext.classes.JoyButton): Boolean =
+    singleton.isJoyButtonPressed(device, button)
+
+  /** Forwards to [[singleton]]: Input.is_action_pressed */
+  final def isActionPressed(action: String, exactMatch: Boolean = false): Boolean =
+    singleton.isActionPressed(action, exactMatch)
+
+  /** Forwards to [[singleton]]: Input.is_action_just_pressed */
+  final def isActionJustPressed(action: String, exactMatch: Boolean = false): Boolean =
+    singleton.isActionJustPressed(action, exactMatch)
+
+  /** Forwards to [[singleton]]: Input.is_action_just_released */
+  final def isActionJustReleased(action: String, exactMatch: Boolean = false): Boolean =
+    singleton.isActionJustReleased(action, exactMatch)
+
+  /** Forwards to [[singleton]]: Input.is_action_just_pressed_by_event */
+  final def isActionJustPressedByEvent(action: String, event: InputEvent, exactMatch: Boolean = false): Boolean =
+    singleton.isActionJustPressedByEvent(action, event, exactMatch)
+
+  /** Forwards to [[singleton]]: Input.is_action_just_released_by_event */
+  final def isActionJustReleasedByEvent(action: String, event: InputEvent, exactMatch: Boolean = false): Boolean =
+    singleton.isActionJustReleasedByEvent(action, event, exactMatch)
+
+  /** Forwards to [[singleton]]: Input.get_action_strength */
+  final def getActionStrength(action: String, exactMatch: Boolean = false): Double =
+    singleton.getActionStrength(action, exactMatch)
+
+  /** Forwards to [[singleton]]: Input.get_action_raw_strength */
+  final def getActionRawStrength(action: String, exactMatch: Boolean = false): Double =
+    singleton.getActionRawStrength(action, exactMatch)
+
+  /** Forwards to [[singleton]]: Input.get_axis */
+  final def getAxis(negativeAction: String, positiveAction: String): Double =
+    singleton.getAxis(negativeAction, positiveAction)
+
+  /** Forwards to [[singleton]]: Input.get_vector */
+  final def getVector(negativeX: String, positiveX: String, negativeY: String, positiveY: String, deadzone: Double = -1.0): gdext.builtin.Vector2 =
+    singleton.getVector(negativeX, positiveX, negativeY, positiveY, deadzone)
+
+  /** Forwards to [[singleton]]: Input.add_joy_mapping */
+  final def addJoyMapping(mapping: String, updateExisting: Boolean = false): Unit =
+    singleton.addJoyMapping(mapping, updateExisting)
+
+  /** Forwards to [[singleton]]: Input.remove_joy_mapping */
+  final def removeJoyMapping(guid: String): Unit =
+    singleton.removeJoyMapping(guid)
+
+  /** Forwards to [[singleton]]: Input.is_joy_known */
+  final def isJoyKnown(device: Long): Boolean =
+    singleton.isJoyKnown(device)
+
+  /** Forwards to [[singleton]]: Input.get_joy_axis */
+  final def getJoyAxis(device: Long, axis: gdext.classes.JoyAxis): Double =
+    singleton.getJoyAxis(device, axis)
+
+  /** Forwards to [[singleton]]: Input.get_joy_name */
+  final def getJoyName(device: Long): String =
+    singleton.getJoyName(device)
+
+  /** Forwards to [[singleton]]: Input.get_joy_guid */
+  final def getJoyGuid(device: Long): String =
+    singleton.getJoyGuid(device)
+
+  /** Forwards to [[singleton]]: Input.should_ignore_device */
+  final def shouldIgnoreDevice(vendorId: Long, productId: Long): Boolean =
+    singleton.shouldIgnoreDevice(vendorId, productId)
+
+  /** Forwards to [[singleton]]: Input.get_joy_vibration_strength */
+  final def getJoyVibrationStrength(device: Long): gdext.builtin.Vector2 =
+    singleton.getJoyVibrationStrength(device)
+
+  /** Forwards to [[singleton]]: Input.get_joy_vibration_duration */
+  final def getJoyVibrationDuration(device: Long): Double =
+    singleton.getJoyVibrationDuration(device)
+
+  /** Forwards to [[singleton]]: Input.start_joy_vibration */
+  final def startJoyVibration(device: Long, weakMagnitude: Double, strongMagnitude: Double, duration: Double = 0.0): Unit =
+    singleton.startJoyVibration(device, weakMagnitude, strongMagnitude, duration)
+
+  /** Forwards to [[singleton]]: Input.stop_joy_vibration */
+  final def stopJoyVibration(device: Long): Unit =
+    singleton.stopJoyVibration(device)
+
+  /** Forwards to [[singleton]]: Input.vibrate_handheld */
+  final def vibrateHandheld(durationMs: Long = 500L, amplitude: Double = -1.0): Unit =
+    singleton.vibrateHandheld(durationMs, amplitude)
+
+  /** Forwards to [[singleton]]: Input.get_gravity */
+  final def getGravity(): gdext.builtin.Vector3 =
+    singleton.getGravity()
+
+  /** Forwards to [[singleton]]: Input.get_accelerometer */
+  final def getAccelerometer(): gdext.builtin.Vector3 =
+    singleton.getAccelerometer()
+
+  /** Forwards to [[singleton]]: Input.get_magnetometer */
+  final def getMagnetometer(): gdext.builtin.Vector3 =
+    singleton.getMagnetometer()
+
+  /** Forwards to [[singleton]]: Input.get_gyroscope */
+  final def getGyroscope(): gdext.builtin.Vector3 =
+    singleton.getGyroscope()
+
+  /** Forwards to [[singleton]]: Input.set_gravity */
+  final def setGravity(value: gdext.builtin.Vector3): Unit =
+    singleton.setGravity(value)
+
+  /** Forwards to [[singleton]]: Input.set_accelerometer */
+  final def setAccelerometer(value: gdext.builtin.Vector3): Unit =
+    singleton.setAccelerometer(value)
+
+  /** Forwards to [[singleton]]: Input.set_magnetometer */
+  final def setMagnetometer(value: gdext.builtin.Vector3): Unit =
+    singleton.setMagnetometer(value)
+
+  /** Forwards to [[singleton]]: Input.set_gyroscope */
+  final def setGyroscope(value: gdext.builtin.Vector3): Unit =
+    singleton.setGyroscope(value)
+
+  /** Forwards to [[singleton]]: Input.set_joy_light */
+  final def setJoyLight(device: Long, color: gdext.builtin.Color): Unit =
+    singleton.setJoyLight(device, color)
+
+  /** Forwards to [[singleton]]: Input.has_joy_light */
+  final def hasJoyLight(device: Long): Boolean =
+    singleton.hasJoyLight(device)
+
+  /** Forwards to [[singleton]]: Input.get_last_mouse_velocity */
+  final def getLastMouseVelocity(): gdext.builtin.Vector2 =
+    singleton.getLastMouseVelocity()
+
+  /** Forwards to [[singleton]]: Input.get_last_mouse_screen_velocity */
+  final def getLastMouseScreenVelocity(): gdext.builtin.Vector2 =
+    singleton.getLastMouseScreenVelocity()
+
+  /** Forwards to [[singleton]]: Input.get_mouse_button_mask */
+  final def getMouseButtonMask(): gdext.classes.MouseButtonMask =
+    singleton.getMouseButtonMask()
+
+  /** Forwards to [[singleton]]: Input.set_mouse_mode */
+  final def setMouseMode(mode: gdext.classes.Input.MouseMode): Unit =
+    singleton.setMouseMode(mode)
+
+  /** Forwards to [[singleton]]: Input.get_mouse_mode */
+  final def getMouseMode(): gdext.classes.Input.MouseMode =
+    singleton.getMouseMode()
+
+  /** Forwards to [[singleton]]: Input.warp_mouse */
+  final def warpMouse(position: gdext.builtin.Vector2): Unit =
+    singleton.warpMouse(position)
+
+  /** Forwards to [[singleton]]: Input.action_press */
+  final def actionPress(action: String, strength: Double = 1.0): Unit =
+    singleton.actionPress(action, strength)
+
+  /** Forwards to [[singleton]]: Input.action_release */
+  final def actionRelease(action: String): Unit =
+    singleton.actionRelease(action)
+
+  /** Forwards to [[singleton]]: Input.set_default_cursor_shape */
+  final def setDefaultCursorShape(shape: gdext.classes.Input.CursorShape = gdext.classes.Input.CursorShape(0L)): Unit =
+    singleton.setDefaultCursorShape(shape)
+
+  /** Forwards to [[singleton]]: Input.get_current_cursor_shape */
+  final def getCurrentCursorShape(): gdext.classes.Input.CursorShape =
+    singleton.getCurrentCursorShape()
+
+  /** Forwards to [[singleton]]: Input.set_custom_mouse_cursor */
+  final def setCustomMouseCursor(image: Resource, shape: gdext.classes.Input.CursorShape = gdext.classes.Input.CursorShape(0L), hotspot: gdext.builtin.Vector2 = gdext.builtin.Vector2(0f, 0f)): Unit =
+    singleton.setCustomMouseCursor(image, shape, hotspot)
+
+  /** Forwards to [[singleton]]: Input.parse_input_event */
+  final def parseInputEvent(event: InputEvent): Unit =
+    singleton.parseInputEvent(event)
+
+  /** Forwards to [[singleton]]: Input.set_use_accumulated_input */
+  final def setUseAccumulatedInput(enable: Boolean): Unit =
+    singleton.setUseAccumulatedInput(enable)
+
+  /** Forwards to [[singleton]]: Input.is_using_accumulated_input */
+  final def isUsingAccumulatedInput(): Boolean =
+    singleton.isUsingAccumulatedInput()
+
+  /** Forwards to [[singleton]]: Input.flush_buffered_events */
+  final def flushBufferedEvents(): Unit =
+    singleton.flushBufferedEvents()
+
+  /** Forwards to [[singleton]]: Input.set_emulate_mouse_from_touch */
+  final def setEmulateMouseFromTouch(enable: Boolean): Unit =
+    singleton.setEmulateMouseFromTouch(enable)
+
+  /** Forwards to [[singleton]]: Input.is_emulating_mouse_from_touch */
+  final def isEmulatingMouseFromTouch(): Boolean =
+    singleton.isEmulatingMouseFromTouch()
+
+  /** Forwards to [[singleton]]: Input.set_emulate_touch_from_mouse */
+  final def setEmulateTouchFromMouse(enable: Boolean): Unit =
+    singleton.setEmulateTouchFromMouse(enable)
+
+  /** Forwards to [[singleton]]: Input.is_emulating_touch_from_mouse */
+  final def isEmulatingTouchFromMouse(): Boolean =
+    singleton.isEmulatingTouchFromMouse()
+
+  /** Godot enum `Input.MouseMode`. */
+  opaque type MouseMode <: Long = Long
+
+  object MouseMode {
+    final val Visible: MouseMode = 0L.asInstanceOf[MouseMode]
+    final val Hidden: MouseMode = 1L.asInstanceOf[MouseMode]
+    final val Captured: MouseMode = 2L.asInstanceOf[MouseMode]
+    final val Confined: MouseMode = 3L.asInstanceOf[MouseMode]
+    final val ConfinedHidden: MouseMode = 4L.asInstanceOf[MouseMode]
+    final val Max: MouseMode = 5L.asInstanceOf[MouseMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): MouseMode = value.asInstanceOf[MouseMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[MouseMode] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L).asInstanceOf[scala.IArray[MouseMode]]
+
+    extension (self: MouseMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Visible"
+        case 1L => "Hidden"
+        case 2L => "Captured"
+        case 3L => "Confined"
+        case 4L => "ConfinedHidden"
+        case 5L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Input.CursorShape`. */
+  opaque type CursorShape <: Long = Long
+
+  object CursorShape {
+    final val Arrow: CursorShape = 0L.asInstanceOf[CursorShape]
+    final val Ibeam: CursorShape = 1L.asInstanceOf[CursorShape]
+    final val PointingHand: CursorShape = 2L.asInstanceOf[CursorShape]
+    final val Cross: CursorShape = 3L.asInstanceOf[CursorShape]
+    final val Wait: CursorShape = 4L.asInstanceOf[CursorShape]
+    final val Busy: CursorShape = 5L.asInstanceOf[CursorShape]
+    final val Drag: CursorShape = 6L.asInstanceOf[CursorShape]
+    final val CanDrop: CursorShape = 7L.asInstanceOf[CursorShape]
+    final val Forbidden: CursorShape = 8L.asInstanceOf[CursorShape]
+    final val Vsize: CursorShape = 9L.asInstanceOf[CursorShape]
+    final val Hsize: CursorShape = 10L.asInstanceOf[CursorShape]
+    final val Bdiagsize: CursorShape = 11L.asInstanceOf[CursorShape]
+    final val Fdiagsize: CursorShape = 12L.asInstanceOf[CursorShape]
+    final val Move: CursorShape = 13L.asInstanceOf[CursorShape]
+    final val Vsplit: CursorShape = 14L.asInstanceOf[CursorShape]
+    final val Hsplit: CursorShape = 15L.asInstanceOf[CursorShape]
+    final val Help: CursorShape = 16L.asInstanceOf[CursorShape]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): CursorShape = value.asInstanceOf[CursorShape]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[CursorShape] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 13L, 14L, 15L, 16L).asInstanceOf[scala.IArray[CursorShape]]
+
+    extension (self: CursorShape)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Arrow"
+        case 1L => "Ibeam"
+        case 2L => "PointingHand"
+        case 3L => "Cross"
+        case 4L => "Wait"
+        case 5L => "Busy"
+        case 6L => "Drag"
+        case 7L => "CanDrop"
+        case 8L => "Forbidden"
+        case 9L => "Vsize"
+        case 10L => "Hsize"
+        case 11L => "Bdiagsize"
+        case 12L => "Fdiagsize"
+        case 13L => "Move"
+        case 14L => "Vsplit"
+        case 15L => "Hsplit"
+        case 16L => "Help"
+        case other => other.toString
+      }
   }
 }

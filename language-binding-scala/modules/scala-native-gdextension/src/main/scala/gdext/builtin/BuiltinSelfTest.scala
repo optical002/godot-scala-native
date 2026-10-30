@@ -1,5 +1,6 @@
 package gdext.builtin
 
+import gdext.internal.StringNames
 import gdext.internal.ffi.types.GDExtensionVariantType.*
 
 /**

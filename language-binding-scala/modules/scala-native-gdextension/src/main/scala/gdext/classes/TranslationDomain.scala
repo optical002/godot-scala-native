@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -47,15 +48,15 @@ abstract class TranslationDomain extends RefCounted {
   }
 
   /** TranslationDomain.translate */
-  final def translate(message: gdext.builtin.StringName, context: gdext.builtin.StringName): gdext.builtin.StringName = {
+  final def translate(message: String, context: String = ""): String = {
     if (gdext.classes.TranslationDomain.mb_translate == null) gdext.classes.TranslationDomain.mb_translate = MethodBind.get("TranslationDomain", "translate", 1829228469L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, gdext.builtin.StringName](gdext.classes.TranslationDomain.mb_translate, livePtr, message, context)
+    Ptrcall.call2[SnArg, SnArg, SnArg](gdext.classes.TranslationDomain.mb_translate, livePtr, SnArg(message), SnArg(context))
   }
 
   /** TranslationDomain.translate_plural */
-  final def translatePlural(message: gdext.builtin.StringName, message_plural: gdext.builtin.StringName, n: Long, context: gdext.builtin.StringName): gdext.builtin.StringName = {
+  final def translatePlural(message: String, messagePlural: String, n: Long, context: String = ""): String = {
     if (gdext.classes.TranslationDomain.mb_translate_plural == null) gdext.classes.TranslationDomain.mb_translate_plural = MethodBind.get("TranslationDomain", "translate_plural", 229954002L)
-    Ptrcall.call4[gdext.builtin.StringName, gdext.builtin.StringName, Long, gdext.builtin.StringName, gdext.builtin.StringName](gdext.classes.TranslationDomain.mb_translate_plural, livePtr, message, message_plural, n, context)
+    Ptrcall.call4[SnArg, SnArg, Long, SnArg, SnArg](gdext.classes.TranslationDomain.mb_translate_plural, livePtr, SnArg(message), SnArg(messagePlural), n, SnArg(context))
   }
 
   /** TranslationDomain.get_locale_override */
@@ -191,9 +192,9 @@ abstract class TranslationDomain extends RefCounted {
   }
 
   /** TranslationDomain.pseudolocalize */
-  final def pseudolocalize(message: gdext.builtin.StringName): gdext.builtin.StringName = {
+  final def pseudolocalize(message: String): String = {
     if (gdext.classes.TranslationDomain.mb_pseudolocalize == null) gdext.classes.TranslationDomain.mb_pseudolocalize = MethodBind.get("TranslationDomain", "pseudolocalize", 1965194235L)
-    Ptrcall.call1[gdext.builtin.StringName, gdext.builtin.StringName](gdext.classes.TranslationDomain.mb_pseudolocalize, livePtr, message)
+    Ptrcall.call1[SnArg, SnArg](gdext.classes.TranslationDomain.mb_pseudolocalize, livePtr, SnArg(message))
   }
 
 }

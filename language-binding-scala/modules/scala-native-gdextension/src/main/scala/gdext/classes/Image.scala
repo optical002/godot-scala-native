@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,9 +36,9 @@ abstract class Image extends Resource {
   }
 
   /** Image.get_format */
-  final def getFormat(): Long = {
+  final def getFormat(): gdext.classes.Image.Format = {
     if (gdext.classes.Image.mb_get_format == null) gdext.classes.Image.mb_get_format = MethodBind.get("Image", "get_format", 3847873762L)
-    Ptrcall.call0[Long](gdext.classes.Image.mb_get_format, livePtr)
+    gdext.classes.Image.Format(Ptrcall.call0[Long](gdext.classes.Image.mb_get_format, livePtr))
   }
 
   /** Image.get_data_size */
@@ -47,7 +48,7 @@ abstract class Image extends Resource {
   }
 
   /** Image.convert */
-  final def convert(format: Long): Unit = {
+  final def convert(format: gdext.classes.Image.Format): Unit = {
     if (gdext.classes.Image.mb_convert == null) gdext.classes.Image.mb_convert = MethodBind.get("Image", "convert", 2120693146L)
     Ptrcall.callVoid1(gdext.classes.Image.mb_convert, livePtr, format)
   }
@@ -65,13 +66,13 @@ abstract class Image extends Resource {
   }
 
   /** Image.resize_to_po2 */
-  final def resizeToPo2(square: Boolean, interpolation: Long): Unit = {
+  final def resizeToPo2(square: Boolean = false, interpolation: gdext.classes.Image.Interpolation = gdext.classes.Image.Interpolation(1L)): Unit = {
     if (gdext.classes.Image.mb_resize_to_po2 == null) gdext.classes.Image.mb_resize_to_po2 = MethodBind.get("Image", "resize_to_po2", 4189212329L)
     Ptrcall.callVoid2(gdext.classes.Image.mb_resize_to_po2, livePtr, square, interpolation)
   }
 
   /** Image.resize */
-  final def resize(width: Long, height: Long, interpolation: Long): Unit = {
+  final def resize(width: Long, height: Long, interpolation: gdext.classes.Image.Interpolation = gdext.classes.Image.Interpolation(1L)): Unit = {
     if (gdext.classes.Image.mb_resize == null) gdext.classes.Image.mb_resize = MethodBind.get("Image", "resize", 994498151L)
     Ptrcall.callVoid3(gdext.classes.Image.mb_resize, livePtr, width, height, interpolation)
   }
@@ -101,9 +102,9 @@ abstract class Image extends Resource {
   }
 
   /** Image.generate_mipmaps */
-  final def generateMipmaps(renormalize: Boolean): Long = {
+  final def generateMipmaps(renormalize: Boolean = false): gdext.classes.Error = {
     if (gdext.classes.Image.mb_generate_mipmaps == null) gdext.classes.Image.mb_generate_mipmaps = MethodBind.get("Image", "generate_mipmaps", 1633102583L)
-    Ptrcall.call1[Boolean, Long](gdext.classes.Image.mb_generate_mipmaps, livePtr, renormalize)
+    gdext.classes.Error(Ptrcall.call1[Boolean, Long](gdext.classes.Image.mb_generate_mipmaps, livePtr, renormalize))
   }
 
   /** Image.clear_mipmaps */
@@ -119,45 +120,45 @@ abstract class Image extends Resource {
   }
 
   /** Image.load */
-  final def load(path: String): Long = {
+  final def load(path: String): gdext.classes.Error = {
     if (gdext.classes.Image.mb_load == null) gdext.classes.Image.mb_load = MethodBind.get("Image", "load", 166001499L)
-    Ptrcall.call1[String, Long](gdext.classes.Image.mb_load, livePtr, path)
+    gdext.classes.Error(Ptrcall.call1[String, Long](gdext.classes.Image.mb_load, livePtr, path))
   }
 
   /** Image.save_png */
-  final def savePng(path: String): Long = {
+  final def savePng(path: String): gdext.classes.Error = {
     if (gdext.classes.Image.mb_save_png == null) gdext.classes.Image.mb_save_png = MethodBind.get("Image", "save_png", 2113323047L)
-    Ptrcall.call1[String, Long](gdext.classes.Image.mb_save_png, livePtr, path)
+    gdext.classes.Error(Ptrcall.call1[String, Long](gdext.classes.Image.mb_save_png, livePtr, path))
   }
 
   /** Image.save_jpg */
-  final def saveJpg(path: String, quality: Double): Long = {
+  final def saveJpg(path: String, quality: Double = 0.75): gdext.classes.Error = {
     if (gdext.classes.Image.mb_save_jpg == null) gdext.classes.Image.mb_save_jpg = MethodBind.get("Image", "save_jpg", 2800019068L)
-    Ptrcall.call2[String, Double, Long](gdext.classes.Image.mb_save_jpg, livePtr, path, quality)
+    gdext.classes.Error(Ptrcall.call2[String, Double, Long](gdext.classes.Image.mb_save_jpg, livePtr, path, quality))
   }
 
   /** Image.save_exr */
-  final def saveExr(path: String, grayscale: Boolean): Long = {
+  final def saveExr(path: String, grayscale: Boolean = false): gdext.classes.Error = {
     if (gdext.classes.Image.mb_save_exr == null) gdext.classes.Image.mb_save_exr = MethodBind.get("Image", "save_exr", 3108122999L)
-    Ptrcall.call2[String, Boolean, Long](gdext.classes.Image.mb_save_exr, livePtr, path, grayscale)
+    gdext.classes.Error(Ptrcall.call2[String, Boolean, Long](gdext.classes.Image.mb_save_exr, livePtr, path, grayscale))
   }
 
   /** Image.save_dds */
-  final def saveDds(path: String): Long = {
+  final def saveDds(path: String): gdext.classes.Error = {
     if (gdext.classes.Image.mb_save_dds == null) gdext.classes.Image.mb_save_dds = MethodBind.get("Image", "save_dds", 2113323047L)
-    Ptrcall.call1[String, Long](gdext.classes.Image.mb_save_dds, livePtr, path)
+    gdext.classes.Error(Ptrcall.call1[String, Long](gdext.classes.Image.mb_save_dds, livePtr, path))
   }
 
   /** Image.save_webp */
-  final def saveWebp(path: String, lossy: Boolean, quality: Double): Long = {
+  final def saveWebp(path: String, lossy: Boolean = false, quality: Double = 0.75): gdext.classes.Error = {
     if (gdext.classes.Image.mb_save_webp == null) gdext.classes.Image.mb_save_webp = MethodBind.get("Image", "save_webp", 2781156876L)
-    Ptrcall.call3[String, Boolean, Double, Long](gdext.classes.Image.mb_save_webp, livePtr, path, lossy, quality)
+    gdext.classes.Error(Ptrcall.call3[String, Boolean, Double, Long](gdext.classes.Image.mb_save_webp, livePtr, path, lossy, quality))
   }
 
   /** Image.detect_alpha */
-  final def detectAlpha(): Long = {
+  final def detectAlpha(): gdext.classes.Image.AlphaMode = {
     if (gdext.classes.Image.mb_detect_alpha == null) gdext.classes.Image.mb_detect_alpha = MethodBind.get("Image", "detect_alpha", 2030116505L)
-    Ptrcall.call0[Long](gdext.classes.Image.mb_detect_alpha, livePtr)
+    gdext.classes.Image.AlphaMode(Ptrcall.call0[Long](gdext.classes.Image.mb_detect_alpha, livePtr))
   }
 
   /** Image.is_invisible */
@@ -167,27 +168,27 @@ abstract class Image extends Resource {
   }
 
   /** Image.detect_used_channels */
-  final def detectUsedChannels(source: Long): Long = {
+  final def detectUsedChannels(source: gdext.classes.Image.CompressSource = gdext.classes.Image.CompressSource(0L)): gdext.classes.Image.UsedChannels = {
     if (gdext.classes.Image.mb_detect_used_channels == null) gdext.classes.Image.mb_detect_used_channels = MethodBind.get("Image", "detect_used_channels", 2703139984L)
-    Ptrcall.call1[Long, Long](gdext.classes.Image.mb_detect_used_channels, livePtr, source)
+    gdext.classes.Image.UsedChannels(Ptrcall.call1[Long, Long](gdext.classes.Image.mb_detect_used_channels, livePtr, source))
   }
 
   /** Image.compress */
-  final def compress(mode: Long, source: Long, astc_format: Long): Long = {
+  final def compress(mode: gdext.classes.Image.CompressMode, source: gdext.classes.Image.CompressSource = gdext.classes.Image.CompressSource(0L), astcFormat: gdext.classes.Image.ASTCFormat = gdext.classes.Image.ASTCFormat(0L)): gdext.classes.Error = {
     if (gdext.classes.Image.mb_compress == null) gdext.classes.Image.mb_compress = MethodBind.get("Image", "compress", 2975424957L)
-    Ptrcall.call3[Long, Long, Long, Long](gdext.classes.Image.mb_compress, livePtr, mode, source, astc_format)
+    gdext.classes.Error(Ptrcall.call3[Long, Long, Long, Long](gdext.classes.Image.mb_compress, livePtr, mode, source, astcFormat))
   }
 
   /** Image.compress_from_channels */
-  final def compressFromChannels(mode: Long, channels: Long, astc_format: Long): Long = {
+  final def compressFromChannels(mode: gdext.classes.Image.CompressMode, channels: gdext.classes.Image.UsedChannels, astcFormat: gdext.classes.Image.ASTCFormat = gdext.classes.Image.ASTCFormat(0L)): gdext.classes.Error = {
     if (gdext.classes.Image.mb_compress_from_channels == null) gdext.classes.Image.mb_compress_from_channels = MethodBind.get("Image", "compress_from_channels", 4212890953L)
-    Ptrcall.call3[Long, Long, Long, Long](gdext.classes.Image.mb_compress_from_channels, livePtr, mode, channels, astc_format)
+    gdext.classes.Error(Ptrcall.call3[Long, Long, Long, Long](gdext.classes.Image.mb_compress_from_channels, livePtr, mode, channels, astcFormat))
   }
 
   /** Image.decompress */
-  final def decompress(): Long = {
+  final def decompress(): gdext.classes.Error = {
     if (gdext.classes.Image.mb_decompress == null) gdext.classes.Image.mb_decompress = MethodBind.get("Image", "decompress", 166280745L)
-    Ptrcall.call0[Long](gdext.classes.Image.mb_decompress, livePtr)
+    gdext.classes.Error(Ptrcall.call0[Long](gdext.classes.Image.mb_decompress, livePtr))
   }
 
   /** Image.is_compressed */
@@ -197,7 +198,7 @@ abstract class Image extends Resource {
   }
 
   /** Image.rotate_90 */
-  final def rotate90(direction: Long): Unit = {
+  final def rotate90(direction: gdext.classes.ClockDirection): Unit = {
     if (gdext.classes.Image.mb_rotate_90 == null) gdext.classes.Image.mb_rotate_90 = MethodBind.get("Image", "rotate_90", 1901204267L)
     Ptrcall.callVoid1(gdext.classes.Image.mb_rotate_90, livePtr, direction)
   }
@@ -245,33 +246,33 @@ abstract class Image extends Resource {
   }
 
   /** Image.bump_map_to_normal_map */
-  final def bumpMapToNormalMap(bump_scale: Double): Unit = {
+  final def bumpMapToNormalMap(bumpScale: Double = 1.0): Unit = {
     if (gdext.classes.Image.mb_bump_map_to_normal_map == null) gdext.classes.Image.mb_bump_map_to_normal_map = MethodBind.get("Image", "bump_map_to_normal_map", 3423495036L)
-    Ptrcall.callVoid1(gdext.classes.Image.mb_bump_map_to_normal_map, livePtr, bump_scale)
+    Ptrcall.callVoid1(gdext.classes.Image.mb_bump_map_to_normal_map, livePtr, bumpScale)
   }
 
   /** Image.blit_rect */
-  final def blitRect(src: Image, src_rect: gdext.builtin.Rect2i, dst: gdext.builtin.Vector2i): Unit = {
+  final def blitRect(src: Image, srcRect: gdext.builtin.Rect2i, dst: gdext.builtin.Vector2i): Unit = {
     if (gdext.classes.Image.mb_blit_rect == null) gdext.classes.Image.mb_blit_rect = MethodBind.get("Image", "blit_rect", 2903928755L)
-    Ptrcall.callVoid3(gdext.classes.Image.mb_blit_rect, livePtr, Wrappers.handle(src), src_rect, dst)
+    Ptrcall.callVoid3(gdext.classes.Image.mb_blit_rect, livePtr, Wrappers.handle(src), srcRect, dst)
   }
 
   /** Image.blit_rect_mask */
-  final def blitRectMask(src: Image, mask: Image, src_rect: gdext.builtin.Rect2i, dst: gdext.builtin.Vector2i): Unit = {
+  final def blitRectMask(src: Image, mask: Image, srcRect: gdext.builtin.Rect2i, dst: gdext.builtin.Vector2i): Unit = {
     if (gdext.classes.Image.mb_blit_rect_mask == null) gdext.classes.Image.mb_blit_rect_mask = MethodBind.get("Image", "blit_rect_mask", 3383581145L)
-    Ptrcall.callVoid4(gdext.classes.Image.mb_blit_rect_mask, livePtr, Wrappers.handle(src), Wrappers.handle(mask), src_rect, dst)
+    Ptrcall.callVoid4(gdext.classes.Image.mb_blit_rect_mask, livePtr, Wrappers.handle(src), Wrappers.handle(mask), srcRect, dst)
   }
 
   /** Image.blend_rect */
-  final def blendRect(src: Image, src_rect: gdext.builtin.Rect2i, dst: gdext.builtin.Vector2i): Unit = {
+  final def blendRect(src: Image, srcRect: gdext.builtin.Rect2i, dst: gdext.builtin.Vector2i): Unit = {
     if (gdext.classes.Image.mb_blend_rect == null) gdext.classes.Image.mb_blend_rect = MethodBind.get("Image", "blend_rect", 2903928755L)
-    Ptrcall.callVoid3(gdext.classes.Image.mb_blend_rect, livePtr, Wrappers.handle(src), src_rect, dst)
+    Ptrcall.callVoid3(gdext.classes.Image.mb_blend_rect, livePtr, Wrappers.handle(src), srcRect, dst)
   }
 
   /** Image.blend_rect_mask */
-  final def blendRectMask(src: Image, mask: Image, src_rect: gdext.builtin.Rect2i, dst: gdext.builtin.Vector2i): Unit = {
+  final def blendRectMask(src: Image, mask: Image, srcRect: gdext.builtin.Rect2i, dst: gdext.builtin.Vector2i): Unit = {
     if (gdext.classes.Image.mb_blend_rect_mask == null) gdext.classes.Image.mb_blend_rect_mask = MethodBind.get("Image", "blend_rect_mask", 3383581145L)
-    Ptrcall.callVoid4(gdext.classes.Image.mb_blend_rect_mask, livePtr, Wrappers.handle(src), Wrappers.handle(mask), src_rect, dst)
+    Ptrcall.callVoid4(gdext.classes.Image.mb_blend_rect_mask, livePtr, Wrappers.handle(src), Wrappers.handle(mask), srcRect, dst)
   }
 
   /** Image.fill */
@@ -335,9 +336,9 @@ abstract class Image extends Resource {
   }
 
   /** Image.load_svg_from_string */
-  final def loadSvgFromString(svg_str: String, scale: Double): Long = {
+  final def loadSvgFromString(svgStr: String, scale: Double = 1.0): gdext.classes.Error = {
     if (gdext.classes.Image.mb_load_svg_from_string == null) gdext.classes.Image.mb_load_svg_from_string = MethodBind.get("Image", "load_svg_from_string", 3254053600L)
-    Ptrcall.call2[String, Double, Long](gdext.classes.Image.mb_load_svg_from_string, livePtr, svg_str, scale)
+    gdext.classes.Error(Ptrcall.call2[String, Double, Long](gdext.classes.Image.mb_load_svg_from_string, livePtr, svgStr, scale))
   }
 
 }
@@ -403,20 +404,292 @@ object Image {
   private[classes] var mb_load_svg_from_string: GDExtensionMethodBindPtr = null
 
   /** Image.create. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def create(width: Long, height: Long, use_mipmaps: Boolean, format: Long): Image = {
+  final def create(width: Long, height: Long, useMipmaps: Boolean, format: gdext.classes.Image.Format): Image = {
     if (gdext.classes.Image.mb_create == null) gdext.classes.Image.mb_create = MethodBind.get("Image", "create", 986942177L)
-    Wrappers.owned[Image](Ptrcall.call4[Long, Long, Boolean, Long, Long](gdext.classes.Image.mb_create, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], width, height, use_mipmaps, format))
+    Wrappers.owned[Image](Ptrcall.call4[Long, Long, Boolean, Long, Long](gdext.classes.Image.mb_create, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], width, height, useMipmaps, format))
   }
 
   /** Image.create_empty. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def createEmpty(width: Long, height: Long, use_mipmaps: Boolean, format: Long): Image = {
+  final def createEmpty(width: Long, height: Long, useMipmaps: Boolean, format: gdext.classes.Image.Format): Image = {
     if (gdext.classes.Image.mb_create_empty == null) gdext.classes.Image.mb_create_empty = MethodBind.get("Image", "create_empty", 986942177L)
-    Wrappers.owned[Image](Ptrcall.call4[Long, Long, Boolean, Long, Long](gdext.classes.Image.mb_create_empty, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], width, height, use_mipmaps, format))
+    Wrappers.owned[Image](Ptrcall.call4[Long, Long, Boolean, Long, Long](gdext.classes.Image.mb_create_empty, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], width, height, useMipmaps, format))
   }
 
   /** Image.load_from_file. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
   final def loadFromFile(path: String): Image = {
     if (gdext.classes.Image.mb_load_from_file == null) gdext.classes.Image.mb_load_from_file = MethodBind.get("Image", "load_from_file", 736337515L)
     Wrappers.owned[Image](Ptrcall.call1[String, Long](gdext.classes.Image.mb_load_from_file, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], path))
+  }
+
+  /** Godot enum `Image.Format`. */
+  opaque type Format <: Long = Long
+
+  object Format {
+    final val L8: Format = 0L.asInstanceOf[Format]
+    final val La8: Format = 1L.asInstanceOf[Format]
+    final val R8: Format = 2L.asInstanceOf[Format]
+    final val Rg8: Format = 3L.asInstanceOf[Format]
+    final val Rgb8: Format = 4L.asInstanceOf[Format]
+    final val Rgba8: Format = 5L.asInstanceOf[Format]
+    final val Rgba4444: Format = 6L.asInstanceOf[Format]
+    final val Rgb565: Format = 7L.asInstanceOf[Format]
+    final val Rf: Format = 8L.asInstanceOf[Format]
+    final val Rgf: Format = 9L.asInstanceOf[Format]
+    final val Rgbf: Format = 10L.asInstanceOf[Format]
+    final val Rgbaf: Format = 11L.asInstanceOf[Format]
+    final val Rh: Format = 12L.asInstanceOf[Format]
+    final val Rgh: Format = 13L.asInstanceOf[Format]
+    final val Rgbh: Format = 14L.asInstanceOf[Format]
+    final val Rgbah: Format = 15L.asInstanceOf[Format]
+    final val Rgbe9995: Format = 16L.asInstanceOf[Format]
+    final val Dxt1: Format = 17L.asInstanceOf[Format]
+    final val Dxt3: Format = 18L.asInstanceOf[Format]
+    final val Dxt5: Format = 19L.asInstanceOf[Format]
+    final val RgtcR: Format = 20L.asInstanceOf[Format]
+    final val RgtcRg: Format = 21L.asInstanceOf[Format]
+    final val BptcRgba: Format = 22L.asInstanceOf[Format]
+    final val BptcRgbf: Format = 23L.asInstanceOf[Format]
+    final val BptcRgbfu: Format = 24L.asInstanceOf[Format]
+    final val Etc: Format = 25L.asInstanceOf[Format]
+    final val Etc2R11: Format = 26L.asInstanceOf[Format]
+    final val Etc2R11s: Format = 27L.asInstanceOf[Format]
+    final val Etc2Rg11: Format = 28L.asInstanceOf[Format]
+    final val Etc2Rg11s: Format = 29L.asInstanceOf[Format]
+    final val Etc2Rgb8: Format = 30L.asInstanceOf[Format]
+    final val Etc2Rgba8: Format = 31L.asInstanceOf[Format]
+    final val Etc2Rgb8a1: Format = 32L.asInstanceOf[Format]
+    final val Etc2RaAsRg: Format = 33L.asInstanceOf[Format]
+    final val Dxt5RaAsRg: Format = 34L.asInstanceOf[Format]
+    final val Astc4x4: Format = 35L.asInstanceOf[Format]
+    final val Astc4x4Hdr: Format = 36L.asInstanceOf[Format]
+    final val Astc8x8: Format = 37L.asInstanceOf[Format]
+    final val Astc8x8Hdr: Format = 38L.asInstanceOf[Format]
+    final val R16: Format = 39L.asInstanceOf[Format]
+    final val Rg16: Format = 40L.asInstanceOf[Format]
+    final val Rgb16: Format = 41L.asInstanceOf[Format]
+    final val Rgba16: Format = 42L.asInstanceOf[Format]
+    final val R16i: Format = 43L.asInstanceOf[Format]
+    final val Rg16i: Format = 44L.asInstanceOf[Format]
+    final val Rgb16i: Format = 45L.asInstanceOf[Format]
+    final val Rgba16i: Format = 46L.asInstanceOf[Format]
+    final val Max: Format = 47L.asInstanceOf[Format]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): Format = value.asInstanceOf[Format]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[Format] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 13L, 14L, 15L, 16L, 17L, 18L, 19L, 20L, 21L, 22L, 23L, 24L, 25L, 26L, 27L, 28L, 29L, 30L, 31L, 32L, 33L, 34L, 35L, 36L, 37L, 38L, 39L, 40L, 41L, 42L, 43L, 44L, 45L, 46L, 47L).asInstanceOf[scala.IArray[Format]]
+
+    extension (self: Format)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "L8"
+        case 1L => "La8"
+        case 2L => "R8"
+        case 3L => "Rg8"
+        case 4L => "Rgb8"
+        case 5L => "Rgba8"
+        case 6L => "Rgba4444"
+        case 7L => "Rgb565"
+        case 8L => "Rf"
+        case 9L => "Rgf"
+        case 10L => "Rgbf"
+        case 11L => "Rgbaf"
+        case 12L => "Rh"
+        case 13L => "Rgh"
+        case 14L => "Rgbh"
+        case 15L => "Rgbah"
+        case 16L => "Rgbe9995"
+        case 17L => "Dxt1"
+        case 18L => "Dxt3"
+        case 19L => "Dxt5"
+        case 20L => "RgtcR"
+        case 21L => "RgtcRg"
+        case 22L => "BptcRgba"
+        case 23L => "BptcRgbf"
+        case 24L => "BptcRgbfu"
+        case 25L => "Etc"
+        case 26L => "Etc2R11"
+        case 27L => "Etc2R11s"
+        case 28L => "Etc2Rg11"
+        case 29L => "Etc2Rg11s"
+        case 30L => "Etc2Rgb8"
+        case 31L => "Etc2Rgba8"
+        case 32L => "Etc2Rgb8a1"
+        case 33L => "Etc2RaAsRg"
+        case 34L => "Dxt5RaAsRg"
+        case 35L => "Astc4x4"
+        case 36L => "Astc4x4Hdr"
+        case 37L => "Astc8x8"
+        case 38L => "Astc8x8Hdr"
+        case 39L => "R16"
+        case 40L => "Rg16"
+        case 41L => "Rgb16"
+        case 42L => "Rgba16"
+        case 43L => "R16i"
+        case 44L => "Rg16i"
+        case 45L => "Rgb16i"
+        case 46L => "Rgba16i"
+        case 47L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Image.Interpolation`. */
+  opaque type Interpolation <: Long = Long
+
+  object Interpolation {
+    final val Nearest: Interpolation = 0L.asInstanceOf[Interpolation]
+    final val Bilinear: Interpolation = 1L.asInstanceOf[Interpolation]
+    final val Cubic: Interpolation = 2L.asInstanceOf[Interpolation]
+    final val Trilinear: Interpolation = 3L.asInstanceOf[Interpolation]
+    final val Lanczos: Interpolation = 4L.asInstanceOf[Interpolation]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): Interpolation = value.asInstanceOf[Interpolation]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[Interpolation] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[Interpolation]]
+
+    extension (self: Interpolation)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Nearest"
+        case 1L => "Bilinear"
+        case 2L => "Cubic"
+        case 3L => "Trilinear"
+        case 4L => "Lanczos"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Image.AlphaMode`. */
+  opaque type AlphaMode <: Long = Long
+
+  object AlphaMode {
+    final val None: AlphaMode = 0L.asInstanceOf[AlphaMode]
+    final val Bit: AlphaMode = 1L.asInstanceOf[AlphaMode]
+    final val Blend: AlphaMode = 2L.asInstanceOf[AlphaMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): AlphaMode = value.asInstanceOf[AlphaMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[AlphaMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[AlphaMode]]
+
+    extension (self: AlphaMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "None"
+        case 1L => "Bit"
+        case 2L => "Blend"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Image.CompressMode`. */
+  opaque type CompressMode <: Long = Long
+
+  object CompressMode {
+    final val S3tc: CompressMode = 0L.asInstanceOf[CompressMode]
+    final val Etc: CompressMode = 1L.asInstanceOf[CompressMode]
+    final val Etc2: CompressMode = 2L.asInstanceOf[CompressMode]
+    final val Bptc: CompressMode = 3L.asInstanceOf[CompressMode]
+    final val Astc: CompressMode = 4L.asInstanceOf[CompressMode]
+    final val Max: CompressMode = 5L.asInstanceOf[CompressMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): CompressMode = value.asInstanceOf[CompressMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[CompressMode] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L).asInstanceOf[scala.IArray[CompressMode]]
+
+    extension (self: CompressMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "S3tc"
+        case 1L => "Etc"
+        case 2L => "Etc2"
+        case 3L => "Bptc"
+        case 4L => "Astc"
+        case 5L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Image.UsedChannels`. */
+  opaque type UsedChannels <: Long = Long
+
+  object UsedChannels {
+    final val L: UsedChannels = 0L.asInstanceOf[UsedChannels]
+    final val La: UsedChannels = 1L.asInstanceOf[UsedChannels]
+    final val R: UsedChannels = 2L.asInstanceOf[UsedChannels]
+    final val Rg: UsedChannels = 3L.asInstanceOf[UsedChannels]
+    final val Rgb: UsedChannels = 4L.asInstanceOf[UsedChannels]
+    final val Rgba: UsedChannels = 5L.asInstanceOf[UsedChannels]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): UsedChannels = value.asInstanceOf[UsedChannels]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[UsedChannels] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L).asInstanceOf[scala.IArray[UsedChannels]]
+
+    extension (self: UsedChannels)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "L"
+        case 1L => "La"
+        case 2L => "R"
+        case 3L => "Rg"
+        case 4L => "Rgb"
+        case 5L => "Rgba"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Image.CompressSource`. */
+  opaque type CompressSource <: Long = Long
+
+  object CompressSource {
+    final val Generic: CompressSource = 0L.asInstanceOf[CompressSource]
+    final val Srgb: CompressSource = 1L.asInstanceOf[CompressSource]
+    final val Normal: CompressSource = 2L.asInstanceOf[CompressSource]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): CompressSource = value.asInstanceOf[CompressSource]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[CompressSource] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[CompressSource]]
+
+    extension (self: CompressSource)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Generic"
+        case 1L => "Srgb"
+        case 2L => "Normal"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Image.ASTCFormat`. */
+  opaque type ASTCFormat <: Long = Long
+
+  object ASTCFormat {
+    final val Format4x4: ASTCFormat = 0L.asInstanceOf[ASTCFormat]
+    final val Format8x8: ASTCFormat = 1L.asInstanceOf[ASTCFormat]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ASTCFormat = value.asInstanceOf[ASTCFormat]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ASTCFormat] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[ASTCFormat]]
+
+    extension (self: ASTCFormat)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Format4x4"
+        case 1L => "Format8x8"
+        case other => other.toString
+      }
   }
 }

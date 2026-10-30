@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -29,7 +30,7 @@ abstract class OS extends Object {
   }
 
   /** OS.alert */
-  final def alert(text: String, title: String): Unit = {
+  final def alert(text: String, title: String = "Alert!"): Unit = {
     if (gdext.classes.OS.mb_alert == null) gdext.classes.OS.mb_alert = MethodBind.get("OS", "alert", 1783970740L)
     Ptrcall.callVoid2(gdext.classes.OS.mb_alert, livePtr, text, title)
   }
@@ -65,9 +66,9 @@ abstract class OS extends Object {
   }
 
   /** OS.set_delta_smoothing */
-  final def setDeltaSmoothing(delta_smoothing_enabled: Boolean): Unit = {
+  final def setDeltaSmoothing(deltaSmoothingEnabled: Boolean): Unit = {
     if (gdext.classes.OS.mb_set_delta_smoothing == null) gdext.classes.OS.mb_set_delta_smoothing = MethodBind.get("OS", "set_delta_smoothing", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.OS.mb_set_delta_smoothing, livePtr, delta_smoothing_enabled)
+    Ptrcall.callVoid1(gdext.classes.OS.mb_set_delta_smoothing, livePtr, deltaSmoothingEnabled)
   }
 
   /** OS.is_delta_smoothing_enabled */
@@ -89,9 +90,9 @@ abstract class OS extends Object {
   }
 
   /** OS.get_system_font_path */
-  final def getSystemFontPath(font_name: String, weight: Long, stretch: Long, italic: Boolean): String = {
+  final def getSystemFontPath(fontName: String, weight: Long = 400L, stretch: Long = 100L, italic: Boolean = false): String = {
     if (gdext.classes.OS.mb_get_system_font_path == null) gdext.classes.OS.mb_get_system_font_path = MethodBind.get("OS", "get_system_font_path", 626580860L)
-    Ptrcall.call4[String, Long, Long, Boolean, String](gdext.classes.OS.mb_get_system_font_path, livePtr, font_name, weight, stretch, italic)
+    Ptrcall.call4[String, Long, Long, Boolean, String](gdext.classes.OS.mb_get_system_font_path, livePtr, fontName, weight, stretch, italic)
   }
 
   /** OS.get_executable_path */
@@ -101,45 +102,45 @@ abstract class OS extends Object {
   }
 
   /** OS.read_string_from_stdin */
-  final def readStringFromStdin(buffer_size: Long): String = {
+  final def readStringFromStdin(bufferSize: Long = 1024L): String = {
     if (gdext.classes.OS.mb_read_string_from_stdin == null) gdext.classes.OS.mb_read_string_from_stdin = MethodBind.get("OS", "read_string_from_stdin", 723587915L)
-    Ptrcall.call1[Long, String](gdext.classes.OS.mb_read_string_from_stdin, livePtr, buffer_size)
+    Ptrcall.call1[Long, String](gdext.classes.OS.mb_read_string_from_stdin, livePtr, bufferSize)
   }
 
   /** OS.get_stdin_type */
-  final def getStdinType(): Long = {
+  final def getStdinType(): gdext.classes.OS.StdHandleType = {
     if (gdext.classes.OS.mb_get_stdin_type == null) gdext.classes.OS.mb_get_stdin_type = MethodBind.get("OS", "get_stdin_type", 1704816237L)
-    Ptrcall.call0[Long](gdext.classes.OS.mb_get_stdin_type, livePtr)
+    gdext.classes.OS.StdHandleType(Ptrcall.call0[Long](gdext.classes.OS.mb_get_stdin_type, livePtr))
   }
 
   /** OS.get_stdout_type */
-  final def getStdoutType(): Long = {
+  final def getStdoutType(): gdext.classes.OS.StdHandleType = {
     if (gdext.classes.OS.mb_get_stdout_type == null) gdext.classes.OS.mb_get_stdout_type = MethodBind.get("OS", "get_stdout_type", 1704816237L)
-    Ptrcall.call0[Long](gdext.classes.OS.mb_get_stdout_type, livePtr)
+    gdext.classes.OS.StdHandleType(Ptrcall.call0[Long](gdext.classes.OS.mb_get_stdout_type, livePtr))
   }
 
   /** OS.get_stderr_type */
-  final def getStderrType(): Long = {
+  final def getStderrType(): gdext.classes.OS.StdHandleType = {
     if (gdext.classes.OS.mb_get_stderr_type == null) gdext.classes.OS.mb_get_stderr_type = MethodBind.get("OS", "get_stderr_type", 1704816237L)
-    Ptrcall.call0[Long](gdext.classes.OS.mb_get_stderr_type, livePtr)
+    gdext.classes.OS.StdHandleType(Ptrcall.call0[Long](gdext.classes.OS.mb_get_stderr_type, livePtr))
   }
 
   /** OS.kill */
-  final def kill(pid: Long): Long = {
+  final def kill(pid: Long): gdext.classes.Error = {
     if (gdext.classes.OS.mb_kill == null) gdext.classes.OS.mb_kill = MethodBind.get("OS", "kill", 844576869L)
-    Ptrcall.call1[Long, Long](gdext.classes.OS.mb_kill, livePtr, pid)
+    gdext.classes.Error(Ptrcall.call1[Long, Long](gdext.classes.OS.mb_kill, livePtr, pid))
   }
 
   /** OS.shell_open */
-  final def shellOpen(uri: String): Long = {
+  final def shellOpen(uri: String): gdext.classes.Error = {
     if (gdext.classes.OS.mb_shell_open == null) gdext.classes.OS.mb_shell_open = MethodBind.get("OS", "shell_open", 166001499L)
-    Ptrcall.call1[String, Long](gdext.classes.OS.mb_shell_open, livePtr, uri)
+    gdext.classes.Error(Ptrcall.call1[String, Long](gdext.classes.OS.mb_shell_open, livePtr, uri))
   }
 
   /** OS.shell_show_in_file_manager */
-  final def shellShowInFileManager(file_or_dir_path: String, open_folder: Boolean): Long = {
+  final def shellShowInFileManager(fileOrDirPath: String, openFolder: Boolean = true): gdext.classes.Error = {
     if (gdext.classes.OS.mb_shell_show_in_file_manager == null) gdext.classes.OS.mb_shell_show_in_file_manager = MethodBind.get("OS", "shell_show_in_file_manager", 3565188097L)
-    Ptrcall.call2[String, Boolean, Long](gdext.classes.OS.mb_shell_show_in_file_manager, livePtr, file_or_dir_path, open_folder)
+    gdext.classes.Error(Ptrcall.call2[String, Boolean, Long](gdext.classes.OS.mb_shell_show_in_file_manager, livePtr, fileOrDirPath, openFolder))
   }
 
   /** OS.is_process_running */
@@ -275,9 +276,9 @@ abstract class OS extends Object {
   }
 
   /** OS.move_to_trash */
-  final def moveToTrash(path: String): Long = {
+  final def moveToTrash(path: String): gdext.classes.Error = {
     if (gdext.classes.OS.mb_move_to_trash == null) gdext.classes.OS.mb_move_to_trash = MethodBind.get("OS", "move_to_trash", 2113323047L)
-    Ptrcall.call1[String, Long](gdext.classes.OS.mb_move_to_trash, livePtr, path)
+    gdext.classes.Error(Ptrcall.call1[String, Long](gdext.classes.OS.mb_move_to_trash, livePtr, path))
   }
 
   /** OS.get_user_data_dir */
@@ -287,9 +288,9 @@ abstract class OS extends Object {
   }
 
   /** OS.get_system_dir */
-  final def getSystemDir(dir: Long, shared_storage: Boolean): String = {
+  final def getSystemDir(dir: gdext.classes.OS.SystemDir, sharedStorage: Boolean = true): String = {
     if (gdext.classes.OS.mb_get_system_dir == null) gdext.classes.OS.mb_get_system_dir = MethodBind.get("OS", "get_system_dir", 3073895123L)
-    Ptrcall.call2[Long, Boolean, String](gdext.classes.OS.mb_get_system_dir, livePtr, dir, shared_storage)
+    Ptrcall.call2[Long, Boolean, String](gdext.classes.OS.mb_get_system_dir, livePtr, dir, sharedStorage)
   }
 
   /** OS.get_config_dir */
@@ -323,7 +324,7 @@ abstract class OS extends Object {
   }
 
   /** OS.get_keycode_string */
-  final def getKeycodeString(code: Long): String = {
+  final def getKeycodeString(code: gdext.classes.Key): String = {
     if (gdext.classes.OS.mb_get_keycode_string == null) gdext.classes.OS.mb_get_keycode_string = MethodBind.get("OS", "get_keycode_string", 2261993717L)
     Ptrcall.call1[Long, String](gdext.classes.OS.mb_get_keycode_string, livePtr, code)
   }
@@ -335,9 +336,9 @@ abstract class OS extends Object {
   }
 
   /** OS.find_keycode_from_string */
-  final def findKeycodeFromString(string: String): Long = {
+  final def findKeycodeFromString(string: String): gdext.classes.Key = {
     if (gdext.classes.OS.mb_find_keycode_from_string == null) gdext.classes.OS.mb_find_keycode_from_string = MethodBind.get("OS", "find_keycode_from_string", 1084858572L)
-    Ptrcall.call1[String, Long](gdext.classes.OS.mb_find_keycode_from_string, livePtr, string)
+    gdext.classes.Key(Ptrcall.call1[String, Long](gdext.classes.OS.mb_find_keycode_from_string, livePtr, string))
   }
 
   /** OS.set_use_file_access_save_and_swap */
@@ -347,9 +348,9 @@ abstract class OS extends Object {
   }
 
   /** OS.set_thread_name */
-  final def setThreadName(name: String): Long = {
+  final def setThreadName(name: String): gdext.classes.Error = {
     if (gdext.classes.OS.mb_set_thread_name == null) gdext.classes.OS.mb_set_thread_name = MethodBind.get("OS", "set_thread_name", 166001499L)
-    Ptrcall.call1[String, Long](gdext.classes.OS.mb_set_thread_name, livePtr, name)
+    gdext.classes.Error(Ptrcall.call1[String, Long](gdext.classes.OS.mb_set_thread_name, livePtr, name))
   }
 
   /** OS.get_thread_caller_id */
@@ -365,9 +366,9 @@ abstract class OS extends Object {
   }
 
   /** OS.has_feature */
-  final def hasFeature(tag_name: String): Boolean = {
+  final def hasFeature(tagName: String): Boolean = {
     if (gdext.classes.OS.mb_has_feature == null) gdext.classes.OS.mb_has_feature = MethodBind.get("OS", "has_feature", 3927539163L)
-    Ptrcall.call1[String, Boolean](gdext.classes.OS.mb_has_feature, livePtr, tag_name)
+    Ptrcall.call1[String, Boolean](gdext.classes.OS.mb_has_feature, livePtr, tagName)
   }
 
   /** OS.is_sandboxed */
@@ -484,5 +485,357 @@ object OS {
       instance = Wrappers.borrowed[OS](GodotObject.fromPtr(
         Godot.interface.global_get_singleton(StringNames.cached("OS").ptr)))
     instance
+  }
+
+  /** Forwards to [[singleton]]: OS.get_system_ca_certificates */
+  final def getSystemCaCertificates(): String =
+    singleton.getSystemCaCertificates()
+
+  /** Forwards to [[singleton]]: OS.open_midi_inputs */
+  final def openMidiInputs(): Unit =
+    singleton.openMidiInputs()
+
+  /** Forwards to [[singleton]]: OS.close_midi_inputs */
+  final def closeMidiInputs(): Unit =
+    singleton.closeMidiInputs()
+
+  /** Forwards to [[singleton]]: OS.alert */
+  final def alert(text: String, title: String = "Alert!"): Unit =
+    singleton.alert(text, title)
+
+  /** Forwards to [[singleton]]: OS.crash */
+  final def crash(message: String): Unit =
+    singleton.crash(message)
+
+  /** Forwards to [[singleton]]: OS.set_low_processor_usage_mode */
+  final def setLowProcessorUsageMode(enable: Boolean): Unit =
+    singleton.setLowProcessorUsageMode(enable)
+
+  /** Forwards to [[singleton]]: OS.is_in_low_processor_usage_mode */
+  final def isInLowProcessorUsageMode(): Boolean =
+    singleton.isInLowProcessorUsageMode()
+
+  /** Forwards to [[singleton]]: OS.set_low_processor_usage_mode_sleep_usec */
+  final def setLowProcessorUsageModeSleepUsec(usec: Long): Unit =
+    singleton.setLowProcessorUsageModeSleepUsec(usec)
+
+  /** Forwards to [[singleton]]: OS.get_low_processor_usage_mode_sleep_usec */
+  final def getLowProcessorUsageModeSleepUsec(): Long =
+    singleton.getLowProcessorUsageModeSleepUsec()
+
+  /** Forwards to [[singleton]]: OS.set_delta_smoothing */
+  final def setDeltaSmoothing(deltaSmoothingEnabled: Boolean): Unit =
+    singleton.setDeltaSmoothing(deltaSmoothingEnabled)
+
+  /** Forwards to [[singleton]]: OS.is_delta_smoothing_enabled */
+  final def isDeltaSmoothingEnabled(): Boolean =
+    singleton.isDeltaSmoothingEnabled()
+
+  /** Forwards to [[singleton]]: OS.get_processor_count */
+  final def getProcessorCount(): Long =
+    singleton.getProcessorCount()
+
+  /** Forwards to [[singleton]]: OS.get_processor_name */
+  final def getProcessorName(): String =
+    singleton.getProcessorName()
+
+  /** Forwards to [[singleton]]: OS.get_system_font_path */
+  final def getSystemFontPath(fontName: String, weight: Long = 400L, stretch: Long = 100L, italic: Boolean = false): String =
+    singleton.getSystemFontPath(fontName, weight, stretch, italic)
+
+  /** Forwards to [[singleton]]: OS.get_executable_path */
+  final def getExecutablePath(): String =
+    singleton.getExecutablePath()
+
+  /** Forwards to [[singleton]]: OS.read_string_from_stdin */
+  final def readStringFromStdin(bufferSize: Long = 1024L): String =
+    singleton.readStringFromStdin(bufferSize)
+
+  /** Forwards to [[singleton]]: OS.get_stdin_type */
+  final def getStdinType(): gdext.classes.OS.StdHandleType =
+    singleton.getStdinType()
+
+  /** Forwards to [[singleton]]: OS.get_stdout_type */
+  final def getStdoutType(): gdext.classes.OS.StdHandleType =
+    singleton.getStdoutType()
+
+  /** Forwards to [[singleton]]: OS.get_stderr_type */
+  final def getStderrType(): gdext.classes.OS.StdHandleType =
+    singleton.getStderrType()
+
+  /** Forwards to [[singleton]]: OS.kill */
+  final def kill(pid: Long): gdext.classes.Error =
+    singleton.kill(pid)
+
+  /** Forwards to [[singleton]]: OS.shell_open */
+  final def shellOpen(uri: String): gdext.classes.Error =
+    singleton.shellOpen(uri)
+
+  /** Forwards to [[singleton]]: OS.shell_show_in_file_manager */
+  final def shellShowInFileManager(fileOrDirPath: String, openFolder: Boolean = true): gdext.classes.Error =
+    singleton.shellShowInFileManager(fileOrDirPath, openFolder)
+
+  /** Forwards to [[singleton]]: OS.is_process_running */
+  final def isProcessRunning(pid: Long): Boolean =
+    singleton.isProcessRunning(pid)
+
+  /** Forwards to [[singleton]]: OS.get_process_exit_code */
+  final def getProcessExitCode(pid: Long): Long =
+    singleton.getProcessExitCode(pid)
+
+  /** Forwards to [[singleton]]: OS.get_process_id */
+  final def getProcessId(): Long =
+    singleton.getProcessId()
+
+  /** Forwards to [[singleton]]: OS.has_environment */
+  final def hasEnvironment(variable: String): Boolean =
+    singleton.hasEnvironment(variable)
+
+  /** Forwards to [[singleton]]: OS.get_environment */
+  final def getEnvironment(variable: String): String =
+    singleton.getEnvironment(variable)
+
+  /** Forwards to [[singleton]]: OS.set_environment */
+  final def setEnvironment(variable: String, value: String): Unit =
+    singleton.setEnvironment(variable, value)
+
+  /** Forwards to [[singleton]]: OS.unset_environment */
+  final def unsetEnvironment(variable: String): Unit =
+    singleton.unsetEnvironment(variable)
+
+  /** Forwards to [[singleton]]: OS.get_name */
+  final def getName(): String =
+    singleton.getName()
+
+  /** Forwards to [[singleton]]: OS.get_distribution_name */
+  final def getDistributionName(): String =
+    singleton.getDistributionName()
+
+  /** Forwards to [[singleton]]: OS.get_version */
+  final def getVersion(): String =
+    singleton.getVersion()
+
+  /** Forwards to [[singleton]]: OS.get_version_alias */
+  final def getVersionAlias(): String =
+    singleton.getVersionAlias()
+
+  /** Forwards to [[singleton]]: OS.is_restart_on_exit_set */
+  final def isRestartOnExitSet(): Boolean =
+    singleton.isRestartOnExitSet()
+
+  /** Forwards to [[singleton]]: OS.delay_usec */
+  final def delayUsec(usec: Long): Unit =
+    singleton.delayUsec(usec)
+
+  /** Forwards to [[singleton]]: OS.delay_msec */
+  final def delayMsec(msec: Long): Unit =
+    singleton.delayMsec(msec)
+
+  /** Forwards to [[singleton]]: OS.get_locale */
+  final def getLocale(): String =
+    singleton.getLocale()
+
+  /** Forwards to [[singleton]]: OS.get_locale_language */
+  final def getLocaleLanguage(): String =
+    singleton.getLocaleLanguage()
+
+  /** Forwards to [[singleton]]: OS.get_model_name */
+  final def getModelName(): String =
+    singleton.getModelName()
+
+  /** Forwards to [[singleton]]: OS.is_userfs_persistent */
+  final def isUserfsPersistent(): Boolean =
+    singleton.isUserfsPersistent()
+
+  /** Forwards to [[singleton]]: OS.is_stdout_verbose */
+  final def isStdoutVerbose(): Boolean =
+    singleton.isStdoutVerbose()
+
+  /** Forwards to [[singleton]]: OS.is_debug_build */
+  final def isDebugBuild(): Boolean =
+    singleton.isDebugBuild()
+
+  /** Forwards to [[singleton]]: OS.get_static_memory_usage */
+  final def getStaticMemoryUsage(): Long =
+    singleton.getStaticMemoryUsage()
+
+  /** Forwards to [[singleton]]: OS.get_static_memory_peak_usage */
+  final def getStaticMemoryPeakUsage(): Long =
+    singleton.getStaticMemoryPeakUsage()
+
+  /** Forwards to [[singleton]]: OS.move_to_trash */
+  final def moveToTrash(path: String): gdext.classes.Error =
+    singleton.moveToTrash(path)
+
+  /** Forwards to [[singleton]]: OS.get_user_data_dir */
+  final def getUserDataDir(): String =
+    singleton.getUserDataDir()
+
+  /** Forwards to [[singleton]]: OS.get_system_dir */
+  final def getSystemDir(dir: gdext.classes.OS.SystemDir, sharedStorage: Boolean = true): String =
+    singleton.getSystemDir(dir, sharedStorage)
+
+  /** Forwards to [[singleton]]: OS.get_config_dir */
+  final def getConfigDir(): String =
+    singleton.getConfigDir()
+
+  /** Forwards to [[singleton]]: OS.get_data_dir */
+  final def getDataDir(): String =
+    singleton.getDataDir()
+
+  /** Forwards to [[singleton]]: OS.get_cache_dir */
+  final def getCacheDir(): String =
+    singleton.getCacheDir()
+
+  /** Forwards to [[singleton]]: OS.get_temp_dir */
+  final def getTempDir(): String =
+    singleton.getTempDir()
+
+  /** Forwards to [[singleton]]: OS.get_unique_id */
+  final def getUniqueId(): String =
+    singleton.getUniqueId()
+
+  /** Forwards to [[singleton]]: OS.get_keycode_string */
+  final def getKeycodeString(code: gdext.classes.Key): String =
+    singleton.getKeycodeString(code)
+
+  /** Forwards to [[singleton]]: OS.is_keycode_unicode */
+  final def isKeycodeUnicode(code: Long): Boolean =
+    singleton.isKeycodeUnicode(code)
+
+  /** Forwards to [[singleton]]: OS.find_keycode_from_string */
+  final def findKeycodeFromString(string: String): gdext.classes.Key =
+    singleton.findKeycodeFromString(string)
+
+  /** Forwards to [[singleton]]: OS.set_use_file_access_save_and_swap */
+  final def setUseFileAccessSaveAndSwap(enabled: Boolean): Unit =
+    singleton.setUseFileAccessSaveAndSwap(enabled)
+
+  /** Forwards to [[singleton]]: OS.set_thread_name */
+  final def setThreadName(name: String): gdext.classes.Error =
+    singleton.setThreadName(name)
+
+  /** Forwards to [[singleton]]: OS.get_thread_caller_id */
+  final def getThreadCallerId(): Long =
+    singleton.getThreadCallerId()
+
+  /** Forwards to [[singleton]]: OS.get_main_thread_id */
+  final def getMainThreadId(): Long =
+    singleton.getMainThreadId()
+
+  /** Forwards to [[singleton]]: OS.has_feature */
+  final def hasFeature(tagName: String): Boolean =
+    singleton.hasFeature(tagName)
+
+  /** Forwards to [[singleton]]: OS.is_sandboxed */
+  final def isSandboxed(): Boolean =
+    singleton.isSandboxed()
+
+  /** Forwards to [[singleton]]: OS.request_permission */
+  final def requestPermission(name: String): Boolean =
+    singleton.requestPermission(name)
+
+  /** Forwards to [[singleton]]: OS.request_permissions */
+  final def requestPermissions(): Boolean =
+    singleton.requestPermissions()
+
+  /** Forwards to [[singleton]]: OS.revoke_granted_permissions */
+  final def revokeGrantedPermissions(): Unit =
+    singleton.revokeGrantedPermissions()
+
+  /** Forwards to [[singleton]]: OS.add_logger */
+  final def addLogger(logger: Logger): Unit =
+    singleton.addLogger(logger)
+
+  /** Forwards to [[singleton]]: OS.remove_logger */
+  final def removeLogger(logger: Logger): Unit =
+    singleton.removeLogger(logger)
+
+  /** Godot enum `OS.RenderingDriver`. */
+  opaque type RenderingDriver <: Long = Long
+
+  object RenderingDriver {
+    final val Vulkan: RenderingDriver = 0L.asInstanceOf[RenderingDriver]
+    final val Opengl3: RenderingDriver = 1L.asInstanceOf[RenderingDriver]
+    final val D3d12: RenderingDriver = 2L.asInstanceOf[RenderingDriver]
+    final val Metal: RenderingDriver = 3L.asInstanceOf[RenderingDriver]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): RenderingDriver = value.asInstanceOf[RenderingDriver]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[RenderingDriver] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[RenderingDriver]]
+
+    extension (self: RenderingDriver)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Vulkan"
+        case 1L => "Opengl3"
+        case 2L => "D3d12"
+        case 3L => "Metal"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `OS.SystemDir`. */
+  opaque type SystemDir <: Long = Long
+
+  object SystemDir {
+    final val Desktop: SystemDir = 0L.asInstanceOf[SystemDir]
+    final val Dcim: SystemDir = 1L.asInstanceOf[SystemDir]
+    final val Documents: SystemDir = 2L.asInstanceOf[SystemDir]
+    final val Downloads: SystemDir = 3L.asInstanceOf[SystemDir]
+    final val Movies: SystemDir = 4L.asInstanceOf[SystemDir]
+    final val Music: SystemDir = 5L.asInstanceOf[SystemDir]
+    final val Pictures: SystemDir = 6L.asInstanceOf[SystemDir]
+    final val Ringtones: SystemDir = 7L.asInstanceOf[SystemDir]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): SystemDir = value.asInstanceOf[SystemDir]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[SystemDir] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L).asInstanceOf[scala.IArray[SystemDir]]
+
+    extension (self: SystemDir)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Desktop"
+        case 1L => "Dcim"
+        case 2L => "Documents"
+        case 3L => "Downloads"
+        case 4L => "Movies"
+        case 5L => "Music"
+        case 6L => "Pictures"
+        case 7L => "Ringtones"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `OS.StdHandleType`. */
+  opaque type StdHandleType <: Long = Long
+
+  object StdHandleType {
+    final val Invalid: StdHandleType = 0L.asInstanceOf[StdHandleType]
+    final val Console: StdHandleType = 1L.asInstanceOf[StdHandleType]
+    final val File: StdHandleType = 2L.asInstanceOf[StdHandleType]
+    final val Pipe: StdHandleType = 3L.asInstanceOf[StdHandleType]
+    final val Unknown: StdHandleType = 4L.asInstanceOf[StdHandleType]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): StdHandleType = value.asInstanceOf[StdHandleType]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[StdHandleType] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[StdHandleType]]
+
+    extension (self: StdHandleType)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Invalid"
+        case 1L => "Console"
+        case 2L => "File"
+        case 3L => "Pipe"
+        case 4L => "Unknown"
+        case other => other.toString
+      }
   }
 }

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,13 +18,13 @@ abstract class MethodTweener extends Tweener {
   }
 
   /** MethodTweener.set_trans. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def setTrans(trans: Long): MethodTweener = {
+  final def setTrans(trans: gdext.classes.Tween.TransitionType): MethodTweener = {
     if (gdext.classes.MethodTweener.mb_set_trans == null) gdext.classes.MethodTweener.mb_set_trans = MethodBind.get("MethodTweener", "set_trans", 3740975367L)
     Wrappers.owned[MethodTweener](Ptrcall.call1[Long, Long](gdext.classes.MethodTweener.mb_set_trans, livePtr, trans))
   }
 
   /** MethodTweener.set_ease. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def setEase(ease: Long): MethodTweener = {
+  final def setEase(ease: gdext.classes.Tween.EaseType): MethodTweener = {
     if (gdext.classes.MethodTweener.mb_set_ease == null) gdext.classes.MethodTweener.mb_set_ease = MethodBind.get("MethodTweener", "set_ease", 315540545L)
     Wrappers.owned[MethodTweener](Ptrcall.call1[Long, Long](gdext.classes.MethodTweener.mb_set_ease, livePtr, ease))
   }

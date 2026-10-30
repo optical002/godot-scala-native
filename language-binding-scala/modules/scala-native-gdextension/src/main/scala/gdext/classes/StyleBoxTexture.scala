@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,7 +24,7 @@ abstract class StyleBoxTexture extends StyleBox {
   }
 
   /** StyleBoxTexture.set_texture_margin */
-  final def setTextureMargin(margin: Long, size: Double): Unit = {
+  final def setTextureMargin(margin: gdext.classes.Side, size: Double): Unit = {
     if (gdext.classes.StyleBoxTexture.mb_set_texture_margin == null) gdext.classes.StyleBoxTexture.mb_set_texture_margin = MethodBind.get("StyleBoxTexture", "set_texture_margin", 4290182280L)
     Ptrcall.callVoid2(gdext.classes.StyleBoxTexture.mb_set_texture_margin, livePtr, margin, size)
   }
@@ -35,13 +36,13 @@ abstract class StyleBoxTexture extends StyleBox {
   }
 
   /** StyleBoxTexture.get_texture_margin */
-  final def getTextureMargin(margin: Long): Double = {
+  final def getTextureMargin(margin: gdext.classes.Side): Double = {
     if (gdext.classes.StyleBoxTexture.mb_get_texture_margin == null) gdext.classes.StyleBoxTexture.mb_get_texture_margin = MethodBind.get("StyleBoxTexture", "get_texture_margin", 2869120046L)
     Ptrcall.call1[Long, Double](gdext.classes.StyleBoxTexture.mb_get_texture_margin, livePtr, margin)
   }
 
   /** StyleBoxTexture.set_expand_margin */
-  final def setExpandMargin(margin: Long, size: Double): Unit = {
+  final def setExpandMargin(margin: gdext.classes.Side, size: Double): Unit = {
     if (gdext.classes.StyleBoxTexture.mb_set_expand_margin == null) gdext.classes.StyleBoxTexture.mb_set_expand_margin = MethodBind.get("StyleBoxTexture", "set_expand_margin", 4290182280L)
     Ptrcall.callVoid2(gdext.classes.StyleBoxTexture.mb_set_expand_margin, livePtr, margin, size)
   }
@@ -53,7 +54,7 @@ abstract class StyleBoxTexture extends StyleBox {
   }
 
   /** StyleBoxTexture.get_expand_margin */
-  final def getExpandMargin(margin: Long): Double = {
+  final def getExpandMargin(margin: gdext.classes.Side): Double = {
     if (gdext.classes.StyleBoxTexture.mb_get_expand_margin == null) gdext.classes.StyleBoxTexture.mb_get_expand_margin = MethodBind.get("StyleBoxTexture", "get_expand_margin", 2869120046L)
     Ptrcall.call1[Long, Double](gdext.classes.StyleBoxTexture.mb_get_expand_margin, livePtr, margin)
   }
@@ -95,27 +96,27 @@ abstract class StyleBoxTexture extends StyleBox {
   }
 
   /** StyleBoxTexture.set_h_axis_stretch_mode */
-  final def setHAxisStretchMode(mode: Long): Unit = {
+  final def setHAxisStretchMode(mode: gdext.classes.StyleBoxTexture.AxisStretchMode): Unit = {
     if (gdext.classes.StyleBoxTexture.mb_set_h_axis_stretch_mode == null) gdext.classes.StyleBoxTexture.mb_set_h_axis_stretch_mode = MethodBind.get("StyleBoxTexture", "set_h_axis_stretch_mode", 2965538783L)
     Ptrcall.callVoid1(gdext.classes.StyleBoxTexture.mb_set_h_axis_stretch_mode, livePtr, mode)
   }
 
   /** StyleBoxTexture.get_h_axis_stretch_mode */
-  final def getHAxisStretchMode(): Long = {
+  final def getHAxisStretchMode(): gdext.classes.StyleBoxTexture.AxisStretchMode = {
     if (gdext.classes.StyleBoxTexture.mb_get_h_axis_stretch_mode == null) gdext.classes.StyleBoxTexture.mb_get_h_axis_stretch_mode = MethodBind.get("StyleBoxTexture", "get_h_axis_stretch_mode", 3807744063L)
-    Ptrcall.call0[Long](gdext.classes.StyleBoxTexture.mb_get_h_axis_stretch_mode, livePtr)
+    gdext.classes.StyleBoxTexture.AxisStretchMode(Ptrcall.call0[Long](gdext.classes.StyleBoxTexture.mb_get_h_axis_stretch_mode, livePtr))
   }
 
   /** StyleBoxTexture.set_v_axis_stretch_mode */
-  final def setVAxisStretchMode(mode: Long): Unit = {
+  final def setVAxisStretchMode(mode: gdext.classes.StyleBoxTexture.AxisStretchMode): Unit = {
     if (gdext.classes.StyleBoxTexture.mb_set_v_axis_stretch_mode == null) gdext.classes.StyleBoxTexture.mb_set_v_axis_stretch_mode = MethodBind.get("StyleBoxTexture", "set_v_axis_stretch_mode", 2965538783L)
     Ptrcall.callVoid1(gdext.classes.StyleBoxTexture.mb_set_v_axis_stretch_mode, livePtr, mode)
   }
 
   /** StyleBoxTexture.get_v_axis_stretch_mode */
-  final def getVAxisStretchMode(): Long = {
+  final def getVAxisStretchMode(): gdext.classes.StyleBoxTexture.AxisStretchMode = {
     if (gdext.classes.StyleBoxTexture.mb_get_v_axis_stretch_mode == null) gdext.classes.StyleBoxTexture.mb_get_v_axis_stretch_mode = MethodBind.get("StyleBoxTexture", "get_v_axis_stretch_mode", 3807744063L)
-    Ptrcall.call0[Long](gdext.classes.StyleBoxTexture.mb_get_v_axis_stretch_mode, livePtr)
+    gdext.classes.StyleBoxTexture.AxisStretchMode(Ptrcall.call0[Long](gdext.classes.StyleBoxTexture.mb_get_v_axis_stretch_mode, livePtr))
   }
 
 }
@@ -139,4 +140,28 @@ object StyleBoxTexture {
   private[classes] var mb_get_h_axis_stretch_mode: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_v_axis_stretch_mode: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_v_axis_stretch_mode: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `StyleBoxTexture.AxisStretchMode`. */
+  opaque type AxisStretchMode <: Long = Long
+
+  object AxisStretchMode {
+    final val Stretch: AxisStretchMode = 0L.asInstanceOf[AxisStretchMode]
+    final val Tile: AxisStretchMode = 1L.asInstanceOf[AxisStretchMode]
+    final val TileFit: AxisStretchMode = 2L.asInstanceOf[AxisStretchMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): AxisStretchMode = value.asInstanceOf[AxisStretchMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[AxisStretchMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[AxisStretchMode]]
+
+    extension (self: AxisStretchMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Stretch"
+        case 1L => "Tile"
+        case 2L => "TileFit"
+        case other => other.toString
+      }
+  }
 }

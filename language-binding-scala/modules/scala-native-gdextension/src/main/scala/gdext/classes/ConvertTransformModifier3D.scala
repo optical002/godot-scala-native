@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,15 +12,15 @@ abstract class ConvertTransformModifier3D extends BoneConstraint3D {
   override def godotClassName: String = "ConvertTransformModifier3D"
 
   /** ConvertTransformModifier3D.set_apply_transform_mode */
-  final def setApplyTransformMode(index: Long, transform_mode: Long): Unit = {
+  final def setApplyTransformMode(index: Long, transformMode: gdext.classes.ConvertTransformModifier3D.TransformMode): Unit = {
     if (gdext.classes.ConvertTransformModifier3D.mb_set_apply_transform_mode == null) gdext.classes.ConvertTransformModifier3D.mb_set_apply_transform_mode = MethodBind.get("ConvertTransformModifier3D", "set_apply_transform_mode", 1386463405L)
-    Ptrcall.callVoid2(gdext.classes.ConvertTransformModifier3D.mb_set_apply_transform_mode, livePtr, index, transform_mode)
+    Ptrcall.callVoid2(gdext.classes.ConvertTransformModifier3D.mb_set_apply_transform_mode, livePtr, index, transformMode)
   }
 
   /** ConvertTransformModifier3D.get_apply_transform_mode */
-  final def getApplyTransformMode(index: Long): Long = {
+  final def getApplyTransformMode(index: Long): gdext.classes.ConvertTransformModifier3D.TransformMode = {
     if (gdext.classes.ConvertTransformModifier3D.mb_get_apply_transform_mode == null) gdext.classes.ConvertTransformModifier3D.mb_get_apply_transform_mode = MethodBind.get("ConvertTransformModifier3D", "get_apply_transform_mode", 3234663511L)
-    Ptrcall.call1[Long, Long](gdext.classes.ConvertTransformModifier3D.mb_get_apply_transform_mode, livePtr, index)
+    gdext.classes.ConvertTransformModifier3D.TransformMode(Ptrcall.call1[Long, Long](gdext.classes.ConvertTransformModifier3D.mb_get_apply_transform_mode, livePtr, index))
   }
 
   /** ConvertTransformModifier3D.set_apply_axis */
@@ -35,9 +36,9 @@ abstract class ConvertTransformModifier3D extends BoneConstraint3D {
   }
 
   /** ConvertTransformModifier3D.set_apply_range_min */
-  final def setApplyRangeMin(index: Long, range_min: Double): Unit = {
+  final def setApplyRangeMin(index: Long, rangeMin: Double): Unit = {
     if (gdext.classes.ConvertTransformModifier3D.mb_set_apply_range_min == null) gdext.classes.ConvertTransformModifier3D.mb_set_apply_range_min = MethodBind.get("ConvertTransformModifier3D", "set_apply_range_min", 1602489585L)
-    Ptrcall.callVoid2(gdext.classes.ConvertTransformModifier3D.mb_set_apply_range_min, livePtr, index, range_min)
+    Ptrcall.callVoid2(gdext.classes.ConvertTransformModifier3D.mb_set_apply_range_min, livePtr, index, rangeMin)
   }
 
   /** ConvertTransformModifier3D.get_apply_range_min */
@@ -47,9 +48,9 @@ abstract class ConvertTransformModifier3D extends BoneConstraint3D {
   }
 
   /** ConvertTransformModifier3D.set_apply_range_max */
-  final def setApplyRangeMax(index: Long, range_max: Double): Unit = {
+  final def setApplyRangeMax(index: Long, rangeMax: Double): Unit = {
     if (gdext.classes.ConvertTransformModifier3D.mb_set_apply_range_max == null) gdext.classes.ConvertTransformModifier3D.mb_set_apply_range_max = MethodBind.get("ConvertTransformModifier3D", "set_apply_range_max", 1602489585L)
-    Ptrcall.callVoid2(gdext.classes.ConvertTransformModifier3D.mb_set_apply_range_max, livePtr, index, range_max)
+    Ptrcall.callVoid2(gdext.classes.ConvertTransformModifier3D.mb_set_apply_range_max, livePtr, index, rangeMax)
   }
 
   /** ConvertTransformModifier3D.get_apply_range_max */
@@ -59,15 +60,15 @@ abstract class ConvertTransformModifier3D extends BoneConstraint3D {
   }
 
   /** ConvertTransformModifier3D.set_reference_transform_mode */
-  final def setReferenceTransformMode(index: Long, transform_mode: Long): Unit = {
+  final def setReferenceTransformMode(index: Long, transformMode: gdext.classes.ConvertTransformModifier3D.TransformMode): Unit = {
     if (gdext.classes.ConvertTransformModifier3D.mb_set_reference_transform_mode == null) gdext.classes.ConvertTransformModifier3D.mb_set_reference_transform_mode = MethodBind.get("ConvertTransformModifier3D", "set_reference_transform_mode", 1386463405L)
-    Ptrcall.callVoid2(gdext.classes.ConvertTransformModifier3D.mb_set_reference_transform_mode, livePtr, index, transform_mode)
+    Ptrcall.callVoid2(gdext.classes.ConvertTransformModifier3D.mb_set_reference_transform_mode, livePtr, index, transformMode)
   }
 
   /** ConvertTransformModifier3D.get_reference_transform_mode */
-  final def getReferenceTransformMode(index: Long): Long = {
+  final def getReferenceTransformMode(index: Long): gdext.classes.ConvertTransformModifier3D.TransformMode = {
     if (gdext.classes.ConvertTransformModifier3D.mb_get_reference_transform_mode == null) gdext.classes.ConvertTransformModifier3D.mb_get_reference_transform_mode = MethodBind.get("ConvertTransformModifier3D", "get_reference_transform_mode", 3234663511L)
-    Ptrcall.call1[Long, Long](gdext.classes.ConvertTransformModifier3D.mb_get_reference_transform_mode, livePtr, index)
+    gdext.classes.ConvertTransformModifier3D.TransformMode(Ptrcall.call1[Long, Long](gdext.classes.ConvertTransformModifier3D.mb_get_reference_transform_mode, livePtr, index))
   }
 
   /** ConvertTransformModifier3D.set_reference_axis */
@@ -83,9 +84,9 @@ abstract class ConvertTransformModifier3D extends BoneConstraint3D {
   }
 
   /** ConvertTransformModifier3D.set_reference_range_min */
-  final def setReferenceRangeMin(index: Long, range_min: Double): Unit = {
+  final def setReferenceRangeMin(index: Long, rangeMin: Double): Unit = {
     if (gdext.classes.ConvertTransformModifier3D.mb_set_reference_range_min == null) gdext.classes.ConvertTransformModifier3D.mb_set_reference_range_min = MethodBind.get("ConvertTransformModifier3D", "set_reference_range_min", 1602489585L)
-    Ptrcall.callVoid2(gdext.classes.ConvertTransformModifier3D.mb_set_reference_range_min, livePtr, index, range_min)
+    Ptrcall.callVoid2(gdext.classes.ConvertTransformModifier3D.mb_set_reference_range_min, livePtr, index, rangeMin)
   }
 
   /** ConvertTransformModifier3D.get_reference_range_min */
@@ -95,9 +96,9 @@ abstract class ConvertTransformModifier3D extends BoneConstraint3D {
   }
 
   /** ConvertTransformModifier3D.set_reference_range_max */
-  final def setReferenceRangeMax(index: Long, range_max: Double): Unit = {
+  final def setReferenceRangeMax(index: Long, rangeMax: Double): Unit = {
     if (gdext.classes.ConvertTransformModifier3D.mb_set_reference_range_max == null) gdext.classes.ConvertTransformModifier3D.mb_set_reference_range_max = MethodBind.get("ConvertTransformModifier3D", "set_reference_range_max", 1602489585L)
-    Ptrcall.callVoid2(gdext.classes.ConvertTransformModifier3D.mb_set_reference_range_max, livePtr, index, range_max)
+    Ptrcall.callVoid2(gdext.classes.ConvertTransformModifier3D.mb_set_reference_range_max, livePtr, index, rangeMax)
   }
 
   /** ConvertTransformModifier3D.get_reference_range_max */
@@ -153,4 +154,28 @@ object ConvertTransformModifier3D {
   private[classes] var mb_is_relative: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_additive: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_additive: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `ConvertTransformModifier3D.TransformMode`. */
+  opaque type TransformMode <: Long = Long
+
+  object TransformMode {
+    final val Position: TransformMode = 0L.asInstanceOf[TransformMode]
+    final val Rotation: TransformMode = 1L.asInstanceOf[TransformMode]
+    final val Scale: TransformMode = 2L.asInstanceOf[TransformMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): TransformMode = value.asInstanceOf[TransformMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[TransformMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[TransformMode]]
+
+    extension (self: TransformMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Position"
+        case 1L => "Rotation"
+        case 2L => "Scale"
+        case other => other.toString
+      }
+  }
 }

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,9 +18,9 @@ abstract class Script extends Resource {
   }
 
   /** Script.instance_has */
-  final def instanceHas(base_object: Object): Boolean = {
+  final def instanceHas(baseObject: Object): Boolean = {
     if (gdext.classes.Script.mb_instance_has == null) gdext.classes.Script.mb_instance_has = MethodBind.get("Script", "instance_has", 397768994L)
-    Ptrcall.call1[GodotObject, Boolean](gdext.classes.Script.mb_instance_has, livePtr, Wrappers.handle(base_object))
+    Ptrcall.call1[GodotObject, Boolean](gdext.classes.Script.mb_instance_has, livePtr, Wrappers.handle(baseObject))
   }
 
   /** Script.has_source_code */
@@ -41,9 +42,9 @@ abstract class Script extends Resource {
   }
 
   /** Script.reload */
-  final def reload(keep_state: Boolean): Long = {
+  final def reload(keepState: Boolean = false): gdext.classes.Error = {
     if (gdext.classes.Script.mb_reload == null) gdext.classes.Script.mb_reload = MethodBind.get("Script", "reload", 1633102583L)
-    Ptrcall.call1[Boolean, Long](gdext.classes.Script.mb_reload, livePtr, keep_state)
+    gdext.classes.Error(Ptrcall.call1[Boolean, Long](gdext.classes.Script.mb_reload, livePtr, keepState))
   }
 
   /** Script.get_base_script. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -53,21 +54,21 @@ abstract class Script extends Resource {
   }
 
   /** Script.get_instance_base_type */
-  final def getInstanceBaseType(): gdext.builtin.StringName = {
+  final def getInstanceBaseType(): String = {
     if (gdext.classes.Script.mb_get_instance_base_type == null) gdext.classes.Script.mb_get_instance_base_type = MethodBind.get("Script", "get_instance_base_type", 2002593661L)
-    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.Script.mb_get_instance_base_type, livePtr)
+    Ptrcall.call0[SnArg](gdext.classes.Script.mb_get_instance_base_type, livePtr)
   }
 
   /** Script.get_global_name */
-  final def getGlobalName(): gdext.builtin.StringName = {
+  final def getGlobalName(): String = {
     if (gdext.classes.Script.mb_get_global_name == null) gdext.classes.Script.mb_get_global_name = MethodBind.get("Script", "get_global_name", 2002593661L)
-    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.Script.mb_get_global_name, livePtr)
+    Ptrcall.call0[SnArg](gdext.classes.Script.mb_get_global_name, livePtr)
   }
 
   /** Script.has_script_signal */
-  final def hasScriptSignal(signal_name: gdext.builtin.StringName): Boolean = {
+  final def hasScriptSignal(signalName: String): Boolean = {
     if (gdext.classes.Script.mb_has_script_signal == null) gdext.classes.Script.mb_has_script_signal = MethodBind.get("Script", "has_script_signal", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.Script.mb_has_script_signal, livePtr, signal_name)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.Script.mb_has_script_signal, livePtr, SnArg(signalName))
   }
 
   /** Script.is_tool */

@@ -3,6 +3,7 @@ package gdext.builtin
 import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
 import gdext.Godot
+import gdext.internal.StringName
 import gdext.internal.ffi.types.*
 import gdext.internal.ffi.types.GDExtensionVariantType.*
 
@@ -16,7 +17,7 @@ import gdext.internal.ffi.types.GDExtensionVariantType.*
  * through the method-call trampoline (so the bound method must be registered,
  * e.g. via [[gdext.internal.register.MethodRegistration]]).
  *
- * Represented as a pointer to its 16-byte storage, like [[StringName]].
+ * Represented as a pointer to its 16-byte storage.
  */
 opaque type Callable = Ptr[Byte]
 
@@ -36,11 +37,12 @@ object Callable {
 
   /**
    * Build `Callable(object, method)` into caller storage `dest` (at least
-   * [[BuiltinSizes.Callable]] bytes).
+   * [[BuiltinSizes.Callable]] bytes). The method name is a temporary
+   * StringName, released once the Callable holds its own reference.
    */
   def of(
     objectPtr: GDExtensionObjectPtr,
-    method: StringName,
+    method: String,
     dest: Ptr[Byte]
   ): Callable = {
     val ctor =
@@ -50,8 +52,11 @@ object Callable {
     !objSlot = objectPtr
     val args = stackalloc[GDExtensionConstTypePtr](2)
     args(0) = objSlot.asInstanceOf[GDExtensionConstTypePtr]
-    args(1) = method.ptr.asInstanceOf[GDExtensionConstTypePtr]
+    val sn = stackalloc[Byte](BuiltinSizes.StringName.toCSize)
+    StringName.writeAt(method, sn.toLong)
+    args(1) = sn.asInstanceOf[GDExtensionConstTypePtr]
     ctor(dest.asInstanceOf[GDExtensionUninitializedTypePtr], args)
+    VariantConstructors.destructor(GDEXTENSION_VARIANT_TYPE_STRING_NAME)(sn)
     dest
   }
 }

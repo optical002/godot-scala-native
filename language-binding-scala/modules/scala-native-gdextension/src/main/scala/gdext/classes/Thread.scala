@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -47,5 +48,29 @@ object Thread {
   final def isMainThread(): Boolean = {
     if (gdext.classes.Thread.mb_is_main_thread == null) gdext.classes.Thread.mb_is_main_thread = MethodBind.get("Thread", "is_main_thread", 2240911060L)
     Ptrcall.call0[Boolean](gdext.classes.Thread.mb_is_main_thread, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr])
+  }
+
+  /** Godot enum `Thread.Priority`. */
+  opaque type Priority <: Long = Long
+
+  object Priority {
+    final val Low: Priority = 0L.asInstanceOf[Priority]
+    final val Normal: Priority = 1L.asInstanceOf[Priority]
+    final val High: Priority = 2L.asInstanceOf[Priority]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): Priority = value.asInstanceOf[Priority]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[Priority] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[Priority]]
+
+    extension (self: Priority)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Low"
+        case 1L => "Normal"
+        case 2L => "High"
+        case other => other.toString
+      }
   }
 }

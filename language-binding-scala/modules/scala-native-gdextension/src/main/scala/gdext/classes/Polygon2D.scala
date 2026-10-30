@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,9 +36,9 @@ abstract class Polygon2D extends Node2D {
   }
 
   /** Polygon2D.set_texture_offset */
-  final def setTextureOffset(texture_offset: gdext.builtin.Vector2): Unit = {
+  final def setTextureOffset(textureOffset: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.Polygon2D.mb_set_texture_offset == null) gdext.classes.Polygon2D.mb_set_texture_offset = MethodBind.get("Polygon2D", "set_texture_offset", 743155724L)
-    Ptrcall.callVoid1(gdext.classes.Polygon2D.mb_set_texture_offset, livePtr, texture_offset)
+    Ptrcall.callVoid1(gdext.classes.Polygon2D.mb_set_texture_offset, livePtr, textureOffset)
   }
 
   /** Polygon2D.get_texture_offset */
@@ -47,9 +48,9 @@ abstract class Polygon2D extends Node2D {
   }
 
   /** Polygon2D.set_texture_rotation */
-  final def setTextureRotation(texture_rotation: Double): Unit = {
+  final def setTextureRotation(textureRotation: Double): Unit = {
     if (gdext.classes.Polygon2D.mb_set_texture_rotation == null) gdext.classes.Polygon2D.mb_set_texture_rotation = MethodBind.get("Polygon2D", "set_texture_rotation", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Polygon2D.mb_set_texture_rotation, livePtr, texture_rotation)
+    Ptrcall.callVoid1(gdext.classes.Polygon2D.mb_set_texture_rotation, livePtr, textureRotation)
   }
 
   /** Polygon2D.get_texture_rotation */
@@ -59,9 +60,9 @@ abstract class Polygon2D extends Node2D {
   }
 
   /** Polygon2D.set_texture_scale */
-  final def setTextureScale(texture_scale: gdext.builtin.Vector2): Unit = {
+  final def setTextureScale(textureScale: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.Polygon2D.mb_set_texture_scale == null) gdext.classes.Polygon2D.mb_set_texture_scale = MethodBind.get("Polygon2D", "set_texture_scale", 743155724L)
-    Ptrcall.callVoid1(gdext.classes.Polygon2D.mb_set_texture_scale, livePtr, texture_scale)
+    Ptrcall.callVoid1(gdext.classes.Polygon2D.mb_set_texture_scale, livePtr, textureScale)
   }
 
   /** Polygon2D.get_texture_scale */
@@ -95,9 +96,9 @@ abstract class Polygon2D extends Node2D {
   }
 
   /** Polygon2D.set_invert_border */
-  final def setInvertBorder(invert_border: Double): Unit = {
+  final def setInvertBorder(invertBorder: Double): Unit = {
     if (gdext.classes.Polygon2D.mb_set_invert_border == null) gdext.classes.Polygon2D.mb_set_invert_border = MethodBind.get("Polygon2D", "set_invert_border", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Polygon2D.mb_set_invert_border, livePtr, invert_border)
+    Ptrcall.callVoid1(gdext.classes.Polygon2D.mb_set_invert_border, livePtr, invertBorder)
   }
 
   /** Polygon2D.get_invert_border */
@@ -137,9 +138,9 @@ abstract class Polygon2D extends Node2D {
   }
 
   /** Polygon2D.set_internal_vertex_count */
-  final def setInternalVertexCount(internal_vertex_count: Long): Unit = {
+  final def setInternalVertexCount(internalVertexCount: Long): Unit = {
     if (gdext.classes.Polygon2D.mb_set_internal_vertex_count == null) gdext.classes.Polygon2D.mb_set_internal_vertex_count = MethodBind.get("Polygon2D", "set_internal_vertex_count", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.Polygon2D.mb_set_internal_vertex_count, livePtr, internal_vertex_count)
+    Ptrcall.callVoid1(gdext.classes.Polygon2D.mb_set_internal_vertex_count, livePtr, internalVertexCount)
   }
 
   /** Polygon2D.get_internal_vertex_count */

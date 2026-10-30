@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -71,33 +72,33 @@ abstract class BaseButton extends Control {
   }
 
   /** BaseButton.set_action_mode */
-  final def setActionMode(mode: Long): Unit = {
+  final def setActionMode(mode: gdext.classes.BaseButton.ActionMode): Unit = {
     if (gdext.classes.BaseButton.mb_set_action_mode == null) gdext.classes.BaseButton.mb_set_action_mode = MethodBind.get("BaseButton", "set_action_mode", 1985162088L)
     Ptrcall.callVoid1(gdext.classes.BaseButton.mb_set_action_mode, livePtr, mode)
   }
 
   /** BaseButton.get_action_mode */
-  final def getActionMode(): Long = {
+  final def getActionMode(): gdext.classes.BaseButton.ActionMode = {
     if (gdext.classes.BaseButton.mb_get_action_mode == null) gdext.classes.BaseButton.mb_get_action_mode = MethodBind.get("BaseButton", "get_action_mode", 2589712189L)
-    Ptrcall.call0[Long](gdext.classes.BaseButton.mb_get_action_mode, livePtr)
+    gdext.classes.BaseButton.ActionMode(Ptrcall.call0[Long](gdext.classes.BaseButton.mb_get_action_mode, livePtr))
   }
 
   /** BaseButton.set_button_mask */
-  final def setButtonMask(mask: Long): Unit = {
+  final def setButtonMask(mask: gdext.classes.MouseButtonMask): Unit = {
     if (gdext.classes.BaseButton.mb_set_button_mask == null) gdext.classes.BaseButton.mb_set_button_mask = MethodBind.get("BaseButton", "set_button_mask", 3950145251L)
-    Ptrcall.callVoid1(gdext.classes.BaseButton.mb_set_button_mask, livePtr, mask)
+    Ptrcall.callVoid1(gdext.classes.BaseButton.mb_set_button_mask, livePtr, mask.asInstanceOf[Long])
   }
 
   /** BaseButton.get_button_mask */
-  final def getButtonMask(): Long = {
+  final def getButtonMask(): gdext.classes.MouseButtonMask = {
     if (gdext.classes.BaseButton.mb_get_button_mask == null) gdext.classes.BaseButton.mb_get_button_mask = MethodBind.get("BaseButton", "get_button_mask", 2512161324L)
-    Ptrcall.call0[Long](gdext.classes.BaseButton.mb_get_button_mask, livePtr)
+    gdext.classes.MouseButtonMask(Ptrcall.call0[Long](gdext.classes.BaseButton.mb_get_button_mask, livePtr))
   }
 
   /** BaseButton.get_draw_mode */
-  final def getDrawMode(): Long = {
+  final def getDrawMode(): gdext.classes.BaseButton.DrawMode = {
     if (gdext.classes.BaseButton.mb_get_draw_mode == null) gdext.classes.BaseButton.mb_get_draw_mode = MethodBind.get("BaseButton", "get_draw_mode", 2492721305L)
-    Ptrcall.call0[Long](gdext.classes.BaseButton.mb_get_draw_mode, livePtr)
+    gdext.classes.BaseButton.DrawMode(Ptrcall.call0[Long](gdext.classes.BaseButton.mb_get_draw_mode, livePtr))
   }
 
   /** BaseButton.set_keep_pressed_outside */
@@ -137,9 +138,9 @@ abstract class BaseButton extends Control {
   }
 
   /** BaseButton.set_button_group */
-  final def setButtonGroup(button_group: ButtonGroup): Unit = {
+  final def setButtonGroup(buttonGroup: ButtonGroup): Unit = {
     if (gdext.classes.BaseButton.mb_set_button_group == null) gdext.classes.BaseButton.mb_set_button_group = MethodBind.get("BaseButton", "set_button_group", 1794463739L)
-    Ptrcall.callVoid1(gdext.classes.BaseButton.mb_set_button_group, livePtr, Wrappers.handle(button_group))
+    Ptrcall.callVoid1(gdext.classes.BaseButton.mb_set_button_group, livePtr, Wrappers.handle(buttonGroup))
   }
 
   /** BaseButton.get_button_group. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -174,4 +175,54 @@ object BaseButton {
   private[classes] var mb_get_shortcut: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_button_group: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_button_group: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `BaseButton.DrawMode`. */
+  opaque type DrawMode <: Long = Long
+
+  object DrawMode {
+    final val Normal: DrawMode = 0L.asInstanceOf[DrawMode]
+    final val Pressed: DrawMode = 1L.asInstanceOf[DrawMode]
+    final val Hover: DrawMode = 2L.asInstanceOf[DrawMode]
+    final val Disabled: DrawMode = 3L.asInstanceOf[DrawMode]
+    final val HoverPressed: DrawMode = 4L.asInstanceOf[DrawMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DrawMode = value.asInstanceOf[DrawMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DrawMode] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[DrawMode]]
+
+    extension (self: DrawMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Normal"
+        case 1L => "Pressed"
+        case 2L => "Hover"
+        case 3L => "Disabled"
+        case 4L => "HoverPressed"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `BaseButton.ActionMode`. */
+  opaque type ActionMode <: Long = Long
+
+  object ActionMode {
+    final val Press: ActionMode = 0L.asInstanceOf[ActionMode]
+    final val Release: ActionMode = 1L.asInstanceOf[ActionMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ActionMode = value.asInstanceOf[ActionMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ActionMode] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[ActionMode]]
+
+    extension (self: ActionMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Press"
+        case 1L => "Release"
+        case other => other.toString
+      }
+  }
 }

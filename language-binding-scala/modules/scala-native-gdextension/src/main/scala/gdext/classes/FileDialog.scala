@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,9 +18,9 @@ abstract class FileDialog extends ConfirmationDialog {
   }
 
   /** FileDialog.add_filter */
-  final def addFilter(filter: String, description: String, mime_type: String): Unit = {
+  final def addFilter(filter: String, description: String = "", mimeType: String = ""): Unit = {
     if (gdext.classes.FileDialog.mb_add_filter == null) gdext.classes.FileDialog.mb_add_filter = MethodBind.get("FileDialog", "add_filter", 914921954L)
-    Ptrcall.callVoid3(gdext.classes.FileDialog.mb_add_filter, livePtr, filter, description, mime_type)
+    Ptrcall.callVoid3(gdext.classes.FileDialog.mb_add_filter, livePtr, filter, description, mimeType)
   }
 
   /** FileDialog.clear_filename_filter */
@@ -59,9 +60,9 @@ abstract class FileDialog extends ConfirmationDialog {
   }
 
   /** FileDialog.set_option_default */
-  final def setOptionDefault(option: Long, default_value_index: Long): Unit = {
+  final def setOptionDefault(option: Long, defaultValueIndex: Long): Unit = {
     if (gdext.classes.FileDialog.mb_set_option_default == null) gdext.classes.FileDialog.mb_set_option_default = MethodBind.get("FileDialog", "set_option_default", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.FileDialog.mb_set_option_default, livePtr, option, default_value_index)
+    Ptrcall.callVoid2(gdext.classes.FileDialog.mb_set_option_default, livePtr, option, defaultValueIndex)
   }
 
   /** FileDialog.set_option_count */
@@ -125,27 +126,27 @@ abstract class FileDialog extends ConfirmationDialog {
   }
 
   /** FileDialog.set_file_mode */
-  final def setFileMode(mode: Long): Unit = {
+  final def setFileMode(mode: gdext.classes.FileDialog.FileMode): Unit = {
     if (gdext.classes.FileDialog.mb_set_file_mode == null) gdext.classes.FileDialog.mb_set_file_mode = MethodBind.get("FileDialog", "set_file_mode", 3654936397L)
     Ptrcall.callVoid1(gdext.classes.FileDialog.mb_set_file_mode, livePtr, mode)
   }
 
   /** FileDialog.get_file_mode */
-  final def getFileMode(): Long = {
+  final def getFileMode(): gdext.classes.FileDialog.FileMode = {
     if (gdext.classes.FileDialog.mb_get_file_mode == null) gdext.classes.FileDialog.mb_get_file_mode = MethodBind.get("FileDialog", "get_file_mode", 4074825319L)
-    Ptrcall.call0[Long](gdext.classes.FileDialog.mb_get_file_mode, livePtr)
+    gdext.classes.FileDialog.FileMode(Ptrcall.call0[Long](gdext.classes.FileDialog.mb_get_file_mode, livePtr))
   }
 
   /** FileDialog.set_display_mode */
-  final def setDisplayMode(mode: Long): Unit = {
+  final def setDisplayMode(mode: gdext.classes.FileDialog.DisplayMode): Unit = {
     if (gdext.classes.FileDialog.mb_set_display_mode == null) gdext.classes.FileDialog.mb_set_display_mode = MethodBind.get("FileDialog", "set_display_mode", 2692197101L)
     Ptrcall.callVoid1(gdext.classes.FileDialog.mb_set_display_mode, livePtr, mode)
   }
 
   /** FileDialog.get_display_mode */
-  final def getDisplayMode(): Long = {
+  final def getDisplayMode(): gdext.classes.FileDialog.DisplayMode = {
     if (gdext.classes.FileDialog.mb_get_display_mode == null) gdext.classes.FileDialog.mb_get_display_mode = MethodBind.get("FileDialog", "get_display_mode", 1092104624L)
-    Ptrcall.call0[Long](gdext.classes.FileDialog.mb_get_display_mode, livePtr)
+    gdext.classes.FileDialog.DisplayMode(Ptrcall.call0[Long](gdext.classes.FileDialog.mb_get_display_mode, livePtr))
   }
 
   /** FileDialog.get_vbox */
@@ -161,15 +162,15 @@ abstract class FileDialog extends ConfirmationDialog {
   }
 
   /** FileDialog.set_access */
-  final def setAccess(access: Long): Unit = {
+  final def setAccess(access: gdext.classes.FileDialog.Access): Unit = {
     if (gdext.classes.FileDialog.mb_set_access == null) gdext.classes.FileDialog.mb_set_access = MethodBind.get("FileDialog", "set_access", 4104413466L)
     Ptrcall.callVoid1(gdext.classes.FileDialog.mb_set_access, livePtr, access)
   }
 
   /** FileDialog.get_access */
-  final def getAccess(): Long = {
+  final def getAccess(): gdext.classes.FileDialog.Access = {
     if (gdext.classes.FileDialog.mb_get_access == null) gdext.classes.FileDialog.mb_get_access = MethodBind.get("FileDialog", "get_access", 3344081076L)
-    Ptrcall.call0[Long](gdext.classes.FileDialog.mb_get_access, livePtr)
+    gdext.classes.FileDialog.Access(Ptrcall.call0[Long](gdext.classes.FileDialog.mb_get_access, livePtr))
   }
 
   /** FileDialog.set_root_subfolder */
@@ -209,13 +210,13 @@ abstract class FileDialog extends ConfirmationDialog {
   }
 
   /** FileDialog.set_customization_flag_enabled */
-  final def setCustomizationFlagEnabled(flag: Long, enabled: Boolean): Unit = {
+  final def setCustomizationFlagEnabled(flag: gdext.classes.FileDialog.Customization, enabled: Boolean): Unit = {
     if (gdext.classes.FileDialog.mb_set_customization_flag_enabled == null) gdext.classes.FileDialog.mb_set_customization_flag_enabled = MethodBind.get("FileDialog", "set_customization_flag_enabled", 3849177100L)
     Ptrcall.callVoid2(gdext.classes.FileDialog.mb_set_customization_flag_enabled, livePtr, flag, enabled)
   }
 
   /** FileDialog.is_customization_flag_enabled */
-  final def isCustomizationFlagEnabled(flag: Long): Boolean = {
+  final def isCustomizationFlagEnabled(flag: gdext.classes.FileDialog.Customization): Boolean = {
     if (gdext.classes.FileDialog.mb_is_customization_flag_enabled == null) gdext.classes.FileDialog.mb_is_customization_flag_enabled = MethodBind.get("FileDialog", "is_customization_flag_enabled", 3722277863L)
     Ptrcall.call1[Long, Boolean](gdext.classes.FileDialog.mb_is_customization_flag_enabled, livePtr, flag)
   }
@@ -279,4 +280,114 @@ object FileDialog {
   private[classes] var mb_deselect_all: GDExtensionMethodBindPtr = null
   private[classes] var mb_popup_file_dialog: GDExtensionMethodBindPtr = null
   private[classes] var mb_invalidate: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `FileDialog.FileMode`. */
+  opaque type FileMode <: Long = Long
+
+  object FileMode {
+    final val OpenFile: FileMode = 0L.asInstanceOf[FileMode]
+    final val OpenFiles: FileMode = 1L.asInstanceOf[FileMode]
+    final val OpenDir: FileMode = 2L.asInstanceOf[FileMode]
+    final val OpenAny: FileMode = 3L.asInstanceOf[FileMode]
+    final val SaveFile: FileMode = 4L.asInstanceOf[FileMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): FileMode = value.asInstanceOf[FileMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[FileMode] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[FileMode]]
+
+    extension (self: FileMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "OpenFile"
+        case 1L => "OpenFiles"
+        case 2L => "OpenDir"
+        case 3L => "OpenAny"
+        case 4L => "SaveFile"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `FileDialog.Access`. */
+  opaque type Access <: Long = Long
+
+  object Access {
+    final val Resources: Access = 0L.asInstanceOf[Access]
+    final val Userdata: Access = 1L.asInstanceOf[Access]
+    final val Filesystem: Access = 2L.asInstanceOf[Access]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): Access = value.asInstanceOf[Access]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[Access] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[Access]]
+
+    extension (self: Access)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Resources"
+        case 1L => "Userdata"
+        case 2L => "Filesystem"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `FileDialog.DisplayMode`. */
+  opaque type DisplayMode <: Long = Long
+
+  object DisplayMode {
+    final val Thumbnails: DisplayMode = 0L.asInstanceOf[DisplayMode]
+    final val List: DisplayMode = 1L.asInstanceOf[DisplayMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DisplayMode = value.asInstanceOf[DisplayMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DisplayMode] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[DisplayMode]]
+
+    extension (self: DisplayMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Thumbnails"
+        case 1L => "List"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `FileDialog.Customization`. */
+  opaque type Customization <: Long = Long
+
+  object Customization {
+    final val HiddenFiles: Customization = 0L.asInstanceOf[Customization]
+    final val CreateFolder: Customization = 1L.asInstanceOf[Customization]
+    final val FileFilter: Customization = 2L.asInstanceOf[Customization]
+    final val FileSort: Customization = 3L.asInstanceOf[Customization]
+    final val Favorites: Customization = 4L.asInstanceOf[Customization]
+    final val Recent: Customization = 5L.asInstanceOf[Customization]
+    final val Layout: Customization = 6L.asInstanceOf[Customization]
+    final val OverwriteWarning: Customization = 7L.asInstanceOf[Customization]
+    final val Delete: Customization = 8L.asInstanceOf[Customization]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): Customization = value.asInstanceOf[Customization]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[Customization] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L).asInstanceOf[scala.IArray[Customization]]
+
+    extension (self: Customization)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "HiddenFiles"
+        case 1L => "CreateFolder"
+        case 2L => "FileFilter"
+        case 3L => "FileSort"
+        case 4L => "Favorites"
+        case 5L => "Recent"
+        case 6L => "Layout"
+        case 7L => "OverwriteWarning"
+        case 8L => "Delete"
+        case other => other.toString
+      }
+  }
 }

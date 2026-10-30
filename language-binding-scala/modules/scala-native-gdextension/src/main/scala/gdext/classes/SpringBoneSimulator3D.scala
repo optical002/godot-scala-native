@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class SpringBoneSimulator3D extends SkeletonModifier3D {
   override def godotClassName: String = "SpringBoneSimulator3D"
 
   /** SpringBoneSimulator3D.set_root_bone_name */
-  final def setRootBoneName(index: Long, bone_name: String): Unit = {
+  final def setRootBoneName(index: Long, boneName: String): Unit = {
     if (gdext.classes.SpringBoneSimulator3D.mb_set_root_bone_name == null) gdext.classes.SpringBoneSimulator3D.mb_set_root_bone_name = MethodBind.get("SpringBoneSimulator3D", "set_root_bone_name", 501894301L)
-    Ptrcall.callVoid2(gdext.classes.SpringBoneSimulator3D.mb_set_root_bone_name, livePtr, index, bone_name)
+    Ptrcall.callVoid2(gdext.classes.SpringBoneSimulator3D.mb_set_root_bone_name, livePtr, index, boneName)
   }
 
   /** SpringBoneSimulator3D.get_root_bone_name */
@@ -35,9 +36,9 @@ abstract class SpringBoneSimulator3D extends SkeletonModifier3D {
   }
 
   /** SpringBoneSimulator3D.set_end_bone_name */
-  final def setEndBoneName(index: Long, bone_name: String): Unit = {
+  final def setEndBoneName(index: Long, boneName: String): Unit = {
     if (gdext.classes.SpringBoneSimulator3D.mb_set_end_bone_name == null) gdext.classes.SpringBoneSimulator3D.mb_set_end_bone_name = MethodBind.get("SpringBoneSimulator3D", "set_end_bone_name", 501894301L)
-    Ptrcall.callVoid2(gdext.classes.SpringBoneSimulator3D.mb_set_end_bone_name, livePtr, index, bone_name)
+    Ptrcall.callVoid2(gdext.classes.SpringBoneSimulator3D.mb_set_end_bone_name, livePtr, index, boneName)
   }
 
   /** SpringBoneSimulator3D.get_end_bone_name */
@@ -71,15 +72,15 @@ abstract class SpringBoneSimulator3D extends SkeletonModifier3D {
   }
 
   /** SpringBoneSimulator3D.set_end_bone_direction */
-  final def setEndBoneDirection(index: Long, bone_direction: Long): Unit = {
+  final def setEndBoneDirection(index: Long, boneDirection: gdext.classes.SkeletonModifier3D.BoneDirection): Unit = {
     if (gdext.classes.SpringBoneSimulator3D.mb_set_end_bone_direction == null) gdext.classes.SpringBoneSimulator3D.mb_set_end_bone_direction = MethodBind.get("SpringBoneSimulator3D", "set_end_bone_direction", 2838484201L)
-    Ptrcall.callVoid2(gdext.classes.SpringBoneSimulator3D.mb_set_end_bone_direction, livePtr, index, bone_direction)
+    Ptrcall.callVoid2(gdext.classes.SpringBoneSimulator3D.mb_set_end_bone_direction, livePtr, index, boneDirection)
   }
 
   /** SpringBoneSimulator3D.get_end_bone_direction */
-  final def getEndBoneDirection(index: Long): Long = {
+  final def getEndBoneDirection(index: Long): gdext.classes.SkeletonModifier3D.BoneDirection = {
     if (gdext.classes.SpringBoneSimulator3D.mb_get_end_bone_direction == null) gdext.classes.SpringBoneSimulator3D.mb_get_end_bone_direction = MethodBind.get("SpringBoneSimulator3D", "get_end_bone_direction", 1843036459L)
-    Ptrcall.call1[Long, Long](gdext.classes.SpringBoneSimulator3D.mb_get_end_bone_direction, livePtr, index)
+    gdext.classes.SkeletonModifier3D.BoneDirection(Ptrcall.call1[Long, Long](gdext.classes.SpringBoneSimulator3D.mb_get_end_bone_direction, livePtr, index))
   }
 
   /** SpringBoneSimulator3D.set_end_bone_length */
@@ -95,21 +96,21 @@ abstract class SpringBoneSimulator3D extends SkeletonModifier3D {
   }
 
   /** SpringBoneSimulator3D.set_center_from */
-  final def setCenterFrom(index: Long, center_from: Long): Unit = {
+  final def setCenterFrom(index: Long, centerFrom: gdext.classes.SpringBoneSimulator3D.CenterFrom): Unit = {
     if (gdext.classes.SpringBoneSimulator3D.mb_set_center_from == null) gdext.classes.SpringBoneSimulator3D.mb_set_center_from = MethodBind.get("SpringBoneSimulator3D", "set_center_from", 2551505749L)
-    Ptrcall.callVoid2(gdext.classes.SpringBoneSimulator3D.mb_set_center_from, livePtr, index, center_from)
+    Ptrcall.callVoid2(gdext.classes.SpringBoneSimulator3D.mb_set_center_from, livePtr, index, centerFrom)
   }
 
   /** SpringBoneSimulator3D.get_center_from */
-  final def getCenterFrom(index: Long): Long = {
+  final def getCenterFrom(index: Long): gdext.classes.SpringBoneSimulator3D.CenterFrom = {
     if (gdext.classes.SpringBoneSimulator3D.mb_get_center_from == null) gdext.classes.SpringBoneSimulator3D.mb_get_center_from = MethodBind.get("SpringBoneSimulator3D", "get_center_from", 2721930813L)
-    Ptrcall.call1[Long, Long](gdext.classes.SpringBoneSimulator3D.mb_get_center_from, livePtr, index)
+    gdext.classes.SpringBoneSimulator3D.CenterFrom(Ptrcall.call1[Long, Long](gdext.classes.SpringBoneSimulator3D.mb_get_center_from, livePtr, index))
   }
 
   /** SpringBoneSimulator3D.set_center_bone_name */
-  final def setCenterBoneName(index: Long, bone_name: String): Unit = {
+  final def setCenterBoneName(index: Long, boneName: String): Unit = {
     if (gdext.classes.SpringBoneSimulator3D.mb_set_center_bone_name == null) gdext.classes.SpringBoneSimulator3D.mb_set_center_bone_name = MethodBind.get("SpringBoneSimulator3D", "set_center_bone_name", 501894301L)
-    Ptrcall.callVoid2(gdext.classes.SpringBoneSimulator3D.mb_set_center_bone_name, livePtr, index, bone_name)
+    Ptrcall.callVoid2(gdext.classes.SpringBoneSimulator3D.mb_set_center_bone_name, livePtr, index, boneName)
   }
 
   /** SpringBoneSimulator3D.get_center_bone_name */
@@ -143,15 +144,15 @@ abstract class SpringBoneSimulator3D extends SkeletonModifier3D {
   }
 
   /** SpringBoneSimulator3D.set_rotation_axis */
-  final def setRotationAxis(index: Long, axis: Long): Unit = {
+  final def setRotationAxis(index: Long, axis: gdext.classes.SkeletonModifier3D.RotationAxis): Unit = {
     if (gdext.classes.SpringBoneSimulator3D.mb_set_rotation_axis == null) gdext.classes.SpringBoneSimulator3D.mb_set_rotation_axis = MethodBind.get("SpringBoneSimulator3D", "set_rotation_axis", 1539703856L)
     Ptrcall.callVoid2(gdext.classes.SpringBoneSimulator3D.mb_set_rotation_axis, livePtr, index, axis)
   }
 
   /** SpringBoneSimulator3D.get_rotation_axis */
-  final def getRotationAxis(index: Long): Long = {
+  final def getRotationAxis(index: Long): gdext.classes.SkeletonModifier3D.RotationAxis = {
     if (gdext.classes.SpringBoneSimulator3D.mb_get_rotation_axis == null) gdext.classes.SpringBoneSimulator3D.mb_get_rotation_axis = MethodBind.get("SpringBoneSimulator3D", "get_rotation_axis", 2844851118L)
-    Ptrcall.call1[Long, Long](gdext.classes.SpringBoneSimulator3D.mb_get_rotation_axis, livePtr, index)
+    gdext.classes.SkeletonModifier3D.RotationAxis(Ptrcall.call1[Long, Long](gdext.classes.SpringBoneSimulator3D.mb_get_rotation_axis, livePtr, index))
   }
 
   /** SpringBoneSimulator3D.set_rotation_axis_vector */
@@ -251,9 +252,9 @@ abstract class SpringBoneSimulator3D extends SkeletonModifier3D {
   }
 
   /** SpringBoneSimulator3D.set_gravity_direction */
-  final def setGravityDirection(index: Long, gravity_direction: gdext.builtin.Vector3): Unit = {
+  final def setGravityDirection(index: Long, gravityDirection: gdext.builtin.Vector3): Unit = {
     if (gdext.classes.SpringBoneSimulator3D.mb_set_gravity_direction == null) gdext.classes.SpringBoneSimulator3D.mb_set_gravity_direction = MethodBind.get("SpringBoneSimulator3D", "set_gravity_direction", 1530502735L)
-    Ptrcall.callVoid2(gdext.classes.SpringBoneSimulator3D.mb_set_gravity_direction, livePtr, index, gravity_direction)
+    Ptrcall.callVoid2(gdext.classes.SpringBoneSimulator3D.mb_set_gravity_direction, livePtr, index, gravityDirection)
   }
 
   /** SpringBoneSimulator3D.get_gravity_direction */
@@ -305,15 +306,15 @@ abstract class SpringBoneSimulator3D extends SkeletonModifier3D {
   }
 
   /** SpringBoneSimulator3D.set_joint_rotation_axis */
-  final def setJointRotationAxis(index: Long, joint: Long, axis: Long): Unit = {
+  final def setJointRotationAxis(index: Long, joint: Long, axis: gdext.classes.SkeletonModifier3D.RotationAxis): Unit = {
     if (gdext.classes.SpringBoneSimulator3D.mb_set_joint_rotation_axis == null) gdext.classes.SpringBoneSimulator3D.mb_set_joint_rotation_axis = MethodBind.get("SpringBoneSimulator3D", "set_joint_rotation_axis", 1391134969L)
     Ptrcall.callVoid3(gdext.classes.SpringBoneSimulator3D.mb_set_joint_rotation_axis, livePtr, index, joint, axis)
   }
 
   /** SpringBoneSimulator3D.get_joint_rotation_axis */
-  final def getJointRotationAxis(index: Long, joint: Long): Long = {
+  final def getJointRotationAxis(index: Long, joint: Long): gdext.classes.SkeletonModifier3D.RotationAxis = {
     if (gdext.classes.SpringBoneSimulator3D.mb_get_joint_rotation_axis == null) gdext.classes.SpringBoneSimulator3D.mb_get_joint_rotation_axis = MethodBind.get("SpringBoneSimulator3D", "get_joint_rotation_axis", 3312594080L)
-    Ptrcall.call2[Long, Long, Long](gdext.classes.SpringBoneSimulator3D.mb_get_joint_rotation_axis, livePtr, index, joint)
+    gdext.classes.SkeletonModifier3D.RotationAxis(Ptrcall.call2[Long, Long, Long](gdext.classes.SpringBoneSimulator3D.mb_get_joint_rotation_axis, livePtr, index, joint))
   }
 
   /** SpringBoneSimulator3D.set_joint_rotation_axis_vector */
@@ -377,9 +378,9 @@ abstract class SpringBoneSimulator3D extends SkeletonModifier3D {
   }
 
   /** SpringBoneSimulator3D.set_joint_gravity_direction */
-  final def setJointGravityDirection(index: Long, joint: Long, gravity_direction: gdext.builtin.Vector3): Unit = {
+  final def setJointGravityDirection(index: Long, joint: Long, gravityDirection: gdext.builtin.Vector3): Unit = {
     if (gdext.classes.SpringBoneSimulator3D.mb_set_joint_gravity_direction == null) gdext.classes.SpringBoneSimulator3D.mb_set_joint_gravity_direction = MethodBind.get("SpringBoneSimulator3D", "set_joint_gravity_direction", 2866752138L)
-    Ptrcall.callVoid3(gdext.classes.SpringBoneSimulator3D.mb_set_joint_gravity_direction, livePtr, index, joint, gravity_direction)
+    Ptrcall.callVoid3(gdext.classes.SpringBoneSimulator3D.mb_set_joint_gravity_direction, livePtr, index, joint, gravityDirection)
   }
 
   /** SpringBoneSimulator3D.get_joint_gravity_direction */
@@ -552,4 +553,28 @@ object SpringBoneSimulator3D {
   private[classes] var mb_set_mutable_bone_axes: GDExtensionMethodBindPtr = null
   private[classes] var mb_are_bone_axes_mutable: GDExtensionMethodBindPtr = null
   private[classes] var mb_reset: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `SpringBoneSimulator3D.CenterFrom`. */
+  opaque type CenterFrom <: Long = Long
+
+  object CenterFrom {
+    final val WorldOrigin: CenterFrom = 0L.asInstanceOf[CenterFrom]
+    final val Node: CenterFrom = 1L.asInstanceOf[CenterFrom]
+    final val Bone: CenterFrom = 2L.asInstanceOf[CenterFrom]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): CenterFrom = value.asInstanceOf[CenterFrom]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[CenterFrom] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[CenterFrom]]
+
+    extension (self: CenterFrom)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "WorldOrigin"
+        case 1L => "Node"
+        case 2L => "Bone"
+        case other => other.toString
+      }
+  }
 }

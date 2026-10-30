@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,27 +24,27 @@ abstract class Translation extends Resource {
   }
 
   /** Translation.add_message */
-  final def addMessage(src_message: gdext.builtin.StringName, xlated_message: gdext.builtin.StringName, context: gdext.builtin.StringName): Unit = {
+  final def addMessage(srcMessage: String, xlatedMessage: String, context: String = ""): Unit = {
     if (gdext.classes.Translation.mb_add_message == null) gdext.classes.Translation.mb_add_message = MethodBind.get("Translation", "add_message", 3898530326L)
-    Ptrcall.callVoid3(gdext.classes.Translation.mb_add_message, livePtr, src_message, xlated_message, context)
+    Ptrcall.callVoid3(gdext.classes.Translation.mb_add_message, livePtr, SnArg(srcMessage), SnArg(xlatedMessage), SnArg(context))
   }
 
   /** Translation.get_message */
-  final def getMessage(src_message: gdext.builtin.StringName, context: gdext.builtin.StringName): gdext.builtin.StringName = {
+  final def getMessage(srcMessage: String, context: String = ""): String = {
     if (gdext.classes.Translation.mb_get_message == null) gdext.classes.Translation.mb_get_message = MethodBind.get("Translation", "get_message", 1829228469L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, gdext.builtin.StringName](gdext.classes.Translation.mb_get_message, livePtr, src_message, context)
+    Ptrcall.call2[SnArg, SnArg, SnArg](gdext.classes.Translation.mb_get_message, livePtr, SnArg(srcMessage), SnArg(context))
   }
 
   /** Translation.get_plural_message */
-  final def getPluralMessage(src_message: gdext.builtin.StringName, src_plural_message: gdext.builtin.StringName, n: Long, context: gdext.builtin.StringName): gdext.builtin.StringName = {
+  final def getPluralMessage(srcMessage: String, srcPluralMessage: String, n: Long, context: String = ""): String = {
     if (gdext.classes.Translation.mb_get_plural_message == null) gdext.classes.Translation.mb_get_plural_message = MethodBind.get("Translation", "get_plural_message", 229954002L)
-    Ptrcall.call4[gdext.builtin.StringName, gdext.builtin.StringName, Long, gdext.builtin.StringName, gdext.builtin.StringName](gdext.classes.Translation.mb_get_plural_message, livePtr, src_message, src_plural_message, n, context)
+    Ptrcall.call4[SnArg, SnArg, Long, SnArg, SnArg](gdext.classes.Translation.mb_get_plural_message, livePtr, SnArg(srcMessage), SnArg(srcPluralMessage), n, SnArg(context))
   }
 
   /** Translation.erase_message */
-  final def eraseMessage(src_message: gdext.builtin.StringName, context: gdext.builtin.StringName): Unit = {
+  final def eraseMessage(srcMessage: String, context: String = ""): Unit = {
     if (gdext.classes.Translation.mb_erase_message == null) gdext.classes.Translation.mb_erase_message = MethodBind.get("Translation", "erase_message", 3959009644L)
-    Ptrcall.callVoid2(gdext.classes.Translation.mb_erase_message, livePtr, src_message, context)
+    Ptrcall.callVoid2(gdext.classes.Translation.mb_erase_message, livePtr, SnArg(srcMessage), SnArg(context))
   }
 
   /** Translation.get_message_count */

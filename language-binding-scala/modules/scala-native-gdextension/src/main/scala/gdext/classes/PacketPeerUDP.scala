@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class PacketPeerUDP extends PacketPeer {
   override def godotClassName: String = "PacketPeerUDP"
 
   /** PacketPeerUDP.bind */
-  final def bind(port: Long, bind_address: String, recv_buf_size: Long): Long = {
+  final def bind(port: Long, bindAddress: String = "*", recvBufSize: Long = 65536L): gdext.classes.Error = {
     if (gdext.classes.PacketPeerUDP.mb_bind == null) gdext.classes.PacketPeerUDP.mb_bind = MethodBind.get("PacketPeerUDP", "bind", 4051239242L)
-    Ptrcall.call3[Long, String, Long, Long](gdext.classes.PacketPeerUDP.mb_bind, livePtr, port, bind_address, recv_buf_size)
+    gdext.classes.Error(Ptrcall.call3[Long, String, Long, Long](gdext.classes.PacketPeerUDP.mb_bind, livePtr, port, bindAddress, recvBufSize))
   }
 
   /** PacketPeerUDP.close */
@@ -29,9 +30,9 @@ abstract class PacketPeerUDP extends PacketPeer {
   }
 
   /** PacketPeerUDP.connect_to_host */
-  final def connectToHost(host: String, port: Long): Long = {
+  final def connectToHost(host: String, port: Long): gdext.classes.Error = {
     if (gdext.classes.PacketPeerUDP.mb_connect_to_host == null) gdext.classes.PacketPeerUDP.mb_connect_to_host = MethodBind.get("PacketPeerUDP", "connect_to_host", 993915709L)
-    Ptrcall.call2[String, Long, Long](gdext.classes.PacketPeerUDP.mb_connect_to_host, livePtr, host, port)
+    gdext.classes.Error(Ptrcall.call2[String, Long, Long](gdext.classes.PacketPeerUDP.mb_connect_to_host, livePtr, host, port))
   }
 
   /** PacketPeerUDP.is_socket_connected */
@@ -59,9 +60,9 @@ abstract class PacketPeerUDP extends PacketPeer {
   }
 
   /** PacketPeerUDP.set_dest_address */
-  final def setDestAddress(host: String, port: Long): Long = {
+  final def setDestAddress(host: String, port: Long): gdext.classes.Error = {
     if (gdext.classes.PacketPeerUDP.mb_set_dest_address == null) gdext.classes.PacketPeerUDP.mb_set_dest_address = MethodBind.get("PacketPeerUDP", "set_dest_address", 993915709L)
-    Ptrcall.call2[String, Long, Long](gdext.classes.PacketPeerUDP.mb_set_dest_address, livePtr, host, port)
+    gdext.classes.Error(Ptrcall.call2[String, Long, Long](gdext.classes.PacketPeerUDP.mb_set_dest_address, livePtr, host, port))
   }
 
   /** PacketPeerUDP.set_broadcast_enabled */
@@ -71,15 +72,15 @@ abstract class PacketPeerUDP extends PacketPeer {
   }
 
   /** PacketPeerUDP.join_multicast_group */
-  final def joinMulticastGroup(multicast_address: String, interface_name: String): Long = {
+  final def joinMulticastGroup(multicastAddress: String, interfaceName: String): gdext.classes.Error = {
     if (gdext.classes.PacketPeerUDP.mb_join_multicast_group == null) gdext.classes.PacketPeerUDP.mb_join_multicast_group = MethodBind.get("PacketPeerUDP", "join_multicast_group", 852856452L)
-    Ptrcall.call2[String, String, Long](gdext.classes.PacketPeerUDP.mb_join_multicast_group, livePtr, multicast_address, interface_name)
+    gdext.classes.Error(Ptrcall.call2[String, String, Long](gdext.classes.PacketPeerUDP.mb_join_multicast_group, livePtr, multicastAddress, interfaceName))
   }
 
   /** PacketPeerUDP.leave_multicast_group */
-  final def leaveMulticastGroup(multicast_address: String, interface_name: String): Long = {
+  final def leaveMulticastGroup(multicastAddress: String, interfaceName: String): gdext.classes.Error = {
     if (gdext.classes.PacketPeerUDP.mb_leave_multicast_group == null) gdext.classes.PacketPeerUDP.mb_leave_multicast_group = MethodBind.get("PacketPeerUDP", "leave_multicast_group", 852856452L)
-    Ptrcall.call2[String, String, Long](gdext.classes.PacketPeerUDP.mb_leave_multicast_group, livePtr, multicast_address, interface_name)
+    gdext.classes.Error(Ptrcall.call2[String, String, Long](gdext.classes.PacketPeerUDP.mb_leave_multicast_group, livePtr, multicastAddress, interfaceName))
   }
 
 }

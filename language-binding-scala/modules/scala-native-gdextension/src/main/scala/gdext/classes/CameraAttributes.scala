@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -47,9 +48,9 @@ abstract class CameraAttributes extends Resource {
   }
 
   /** CameraAttributes.set_auto_exposure_speed */
-  final def setAutoExposureSpeed(exposure_speed: Double): Unit = {
+  final def setAutoExposureSpeed(exposureSpeed: Double): Unit = {
     if (gdext.classes.CameraAttributes.mb_set_auto_exposure_speed == null) gdext.classes.CameraAttributes.mb_set_auto_exposure_speed = MethodBind.get("CameraAttributes", "set_auto_exposure_speed", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.CameraAttributes.mb_set_auto_exposure_speed, livePtr, exposure_speed)
+    Ptrcall.callVoid1(gdext.classes.CameraAttributes.mb_set_auto_exposure_speed, livePtr, exposureSpeed)
   }
 
   /** CameraAttributes.get_auto_exposure_speed */
@@ -59,9 +60,9 @@ abstract class CameraAttributes extends Resource {
   }
 
   /** CameraAttributes.set_auto_exposure_scale */
-  final def setAutoExposureScale(exposure_grey: Double): Unit = {
+  final def setAutoExposureScale(exposureGrey: Double): Unit = {
     if (gdext.classes.CameraAttributes.mb_set_auto_exposure_scale == null) gdext.classes.CameraAttributes.mb_set_auto_exposure_scale = MethodBind.get("CameraAttributes", "set_auto_exposure_scale", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.CameraAttributes.mb_set_auto_exposure_scale, livePtr, exposure_grey)
+    Ptrcall.callVoid1(gdext.classes.CameraAttributes.mb_set_auto_exposure_scale, livePtr, exposureGrey)
   }
 
   /** CameraAttributes.get_auto_exposure_scale */

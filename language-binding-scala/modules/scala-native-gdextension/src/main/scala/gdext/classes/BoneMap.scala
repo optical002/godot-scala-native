@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,21 +24,21 @@ abstract class BoneMap extends Resource {
   }
 
   /** BoneMap.get_skeleton_bone_name */
-  final def getSkeletonBoneName(profile_bone_name: gdext.builtin.StringName): gdext.builtin.StringName = {
+  final def getSkeletonBoneName(profileBoneName: String): String = {
     if (gdext.classes.BoneMap.mb_get_skeleton_bone_name == null) gdext.classes.BoneMap.mb_get_skeleton_bone_name = MethodBind.get("BoneMap", "get_skeleton_bone_name", 1965194235L)
-    Ptrcall.call1[gdext.builtin.StringName, gdext.builtin.StringName](gdext.classes.BoneMap.mb_get_skeleton_bone_name, livePtr, profile_bone_name)
+    Ptrcall.call1[SnArg, SnArg](gdext.classes.BoneMap.mb_get_skeleton_bone_name, livePtr, SnArg(profileBoneName))
   }
 
   /** BoneMap.set_skeleton_bone_name */
-  final def setSkeletonBoneName(profile_bone_name: gdext.builtin.StringName, skeleton_bone_name: gdext.builtin.StringName): Unit = {
+  final def setSkeletonBoneName(profileBoneName: String, skeletonBoneName: String): Unit = {
     if (gdext.classes.BoneMap.mb_set_skeleton_bone_name == null) gdext.classes.BoneMap.mb_set_skeleton_bone_name = MethodBind.get("BoneMap", "set_skeleton_bone_name", 3740211285L)
-    Ptrcall.callVoid2(gdext.classes.BoneMap.mb_set_skeleton_bone_name, livePtr, profile_bone_name, skeleton_bone_name)
+    Ptrcall.callVoid2(gdext.classes.BoneMap.mb_set_skeleton_bone_name, livePtr, SnArg(profileBoneName), SnArg(skeletonBoneName))
   }
 
   /** BoneMap.find_profile_bone_name */
-  final def findProfileBoneName(skeleton_bone_name: gdext.builtin.StringName): gdext.builtin.StringName = {
+  final def findProfileBoneName(skeletonBoneName: String): String = {
     if (gdext.classes.BoneMap.mb_find_profile_bone_name == null) gdext.classes.BoneMap.mb_find_profile_bone_name = MethodBind.get("BoneMap", "find_profile_bone_name", 1965194235L)
-    Ptrcall.call1[gdext.builtin.StringName, gdext.builtin.StringName](gdext.classes.BoneMap.mb_find_profile_bone_name, livePtr, skeleton_bone_name)
+    Ptrcall.call1[SnArg, SnArg](gdext.classes.BoneMap.mb_find_profile_bone_name, livePtr, SnArg(skeletonBoneName))
   }
 
 }

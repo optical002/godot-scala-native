@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -47,21 +48,21 @@ abstract class OpenXRAPIExtension extends RefCounted {
   }
 
   /** OpenXRAPIExtension.get_swapchain_format_name */
-  final def getSwapchainFormatName(swapchain_format: Long): String = {
+  final def getSwapchainFormatName(swapchainFormat: Long): String = {
     if (gdext.classes.OpenXRAPIExtension.mb_get_swapchain_format_name == null) gdext.classes.OpenXRAPIExtension.mb_get_swapchain_format_name = MethodBind.get("OpenXRAPIExtension", "get_swapchain_format_name", 990163283L)
-    Ptrcall.call1[Long, String](gdext.classes.OpenXRAPIExtension.mb_get_swapchain_format_name, livePtr, swapchain_format)
+    Ptrcall.call1[Long, String](gdext.classes.OpenXRAPIExtension.mb_get_swapchain_format_name, livePtr, swapchainFormat)
   }
 
   /** OpenXRAPIExtension.set_object_name */
-  final def setObjectName(object_type: Long, object_handle: Long, object_name: String): Unit = {
+  final def setObjectName(objectType: Long, objectHandle: Long, objectName: String): Unit = {
     if (gdext.classes.OpenXRAPIExtension.mb_set_object_name == null) gdext.classes.OpenXRAPIExtension.mb_set_object_name = MethodBind.get("OpenXRAPIExtension", "set_object_name", 2285447957L)
-    Ptrcall.callVoid3(gdext.classes.OpenXRAPIExtension.mb_set_object_name, livePtr, object_type, object_handle, object_name)
+    Ptrcall.callVoid3(gdext.classes.OpenXRAPIExtension.mb_set_object_name, livePtr, objectType, objectHandle, objectName)
   }
 
   /** OpenXRAPIExtension.begin_debug_label_region */
-  final def beginDebugLabelRegion(label_name: String): Unit = {
+  final def beginDebugLabelRegion(labelName: String): Unit = {
     if (gdext.classes.OpenXRAPIExtension.mb_begin_debug_label_region == null) gdext.classes.OpenXRAPIExtension.mb_begin_debug_label_region = MethodBind.get("OpenXRAPIExtension", "begin_debug_label_region", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRAPIExtension.mb_begin_debug_label_region, livePtr, label_name)
+    Ptrcall.callVoid1(gdext.classes.OpenXRAPIExtension.mb_begin_debug_label_region, livePtr, labelName)
   }
 
   /** OpenXRAPIExtension.end_debug_label_region */
@@ -71,9 +72,9 @@ abstract class OpenXRAPIExtension extends RefCounted {
   }
 
   /** OpenXRAPIExtension.insert_debug_label */
-  final def insertDebugLabel(label_name: String): Unit = {
+  final def insertDebugLabel(labelName: String): Unit = {
     if (gdext.classes.OpenXRAPIExtension.mb_insert_debug_label == null) gdext.classes.OpenXRAPIExtension.mb_insert_debug_label = MethodBind.get("OpenXRAPIExtension", "insert_debug_label", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRAPIExtension.mb_insert_debug_label, livePtr, label_name)
+    Ptrcall.callVoid1(gdext.classes.OpenXRAPIExtension.mb_insert_debug_label, livePtr, labelName)
   }
 
   /** OpenXRAPIExtension.is_initialized */
@@ -113,9 +114,9 @@ abstract class OpenXRAPIExtension extends RefCounted {
   }
 
   /** OpenXRAPIExtension.get_hand_tracker */
-  final def getHandTracker(hand_index: Long): Long = {
+  final def getHandTracker(handIndex: Long): Long = {
     if (gdext.classes.OpenXRAPIExtension.mb_get_hand_tracker == null) gdext.classes.OpenXRAPIExtension.mb_get_hand_tracker = MethodBind.get("OpenXRAPIExtension", "get_hand_tracker", 3744713108L)
-    Ptrcall.call1[Long, Long](gdext.classes.OpenXRAPIExtension.mb_get_hand_tracker, livePtr, hand_index)
+    Ptrcall.call1[Long, Long](gdext.classes.OpenXRAPIExtension.mb_get_hand_tracker, livePtr, handIndex)
   }
 
   /** OpenXRAPIExtension.register_composition_layer_provider */
@@ -167,9 +168,9 @@ abstract class OpenXRAPIExtension extends RefCounted {
   }
 
   /** OpenXRAPIExtension.set_velocity_target_size */
-  final def setVelocityTargetSize(target_size: gdext.builtin.Vector2i): Unit = {
+  final def setVelocityTargetSize(targetSize: gdext.builtin.Vector2i): Unit = {
     if (gdext.classes.OpenXRAPIExtension.mb_set_velocity_target_size == null) gdext.classes.OpenXRAPIExtension.mb_set_velocity_target_size = MethodBind.get("OpenXRAPIExtension", "set_velocity_target_size", 1130785943L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRAPIExtension.mb_set_velocity_target_size, livePtr, target_size)
+    Ptrcall.callVoid1(gdext.classes.OpenXRAPIExtension.mb_set_velocity_target_size, livePtr, targetSize)
   }
 
   /** OpenXRAPIExtension.openxr_swapchain_free */
@@ -203,9 +204,9 @@ abstract class OpenXRAPIExtension extends RefCounted {
   }
 
   /** OpenXRAPIExtension.set_render_region */
-  final def setRenderRegion(render_region: gdext.builtin.Rect2i): Unit = {
+  final def setRenderRegion(renderRegion: gdext.builtin.Rect2i): Unit = {
     if (gdext.classes.OpenXRAPIExtension.mb_set_render_region == null) gdext.classes.OpenXRAPIExtension.mb_set_render_region = MethodBind.get("OpenXRAPIExtension", "set_render_region", 1763793166L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRAPIExtension.mb_set_render_region, livePtr, render_region)
+    Ptrcall.callVoid1(gdext.classes.OpenXRAPIExtension.mb_set_render_region, livePtr, renderRegion)
   }
 
   /** OpenXRAPIExtension.set_emulate_environment_blend_mode_alpha_blend */
@@ -215,9 +216,9 @@ abstract class OpenXRAPIExtension extends RefCounted {
   }
 
   /** OpenXRAPIExtension.is_environment_blend_mode_alpha_supported */
-  final def isEnvironmentBlendModeAlphaSupported(): Long = {
+  final def isEnvironmentBlendModeAlphaSupported(): gdext.classes.OpenXRAPIExtension.OpenXRAlphaBlendModeSupport = {
     if (gdext.classes.OpenXRAPIExtension.mb_is_environment_blend_mode_alpha_supported == null) gdext.classes.OpenXRAPIExtension.mb_is_environment_blend_mode_alpha_supported = MethodBind.get("OpenXRAPIExtension", "is_environment_blend_mode_alpha_supported", 1579290861L)
-    Ptrcall.call0[Long](gdext.classes.OpenXRAPIExtension.mb_is_environment_blend_mode_alpha_supported, livePtr)
+    gdext.classes.OpenXRAPIExtension.OpenXRAlphaBlendModeSupport(Ptrcall.call0[Long](gdext.classes.OpenXRAPIExtension.mb_is_environment_blend_mode_alpha_supported, livePtr))
   }
 
   /** OpenXRAPIExtension.update_main_swapchain_size */
@@ -268,8 +269,32 @@ object OpenXRAPIExtension {
   private[classes] var mb_update_main_swapchain_size: GDExtensionMethodBindPtr = null
 
   /** OpenXRAPIExtension.openxr_is_enabled */
-  final def openxrIsEnabled(check_run_in_editor: Boolean): Boolean = {
+  final def openxrIsEnabled(checkRunInEditor: Boolean): Boolean = {
     if (gdext.classes.OpenXRAPIExtension.mb_openxr_is_enabled == null) gdext.classes.OpenXRAPIExtension.mb_openxr_is_enabled = MethodBind.get("OpenXRAPIExtension", "openxr_is_enabled", 2703660260L)
-    Ptrcall.call1[Boolean, Boolean](gdext.classes.OpenXRAPIExtension.mb_openxr_is_enabled, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], check_run_in_editor)
+    Ptrcall.call1[Boolean, Boolean](gdext.classes.OpenXRAPIExtension.mb_openxr_is_enabled, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], checkRunInEditor)
+  }
+
+  /** Godot enum `OpenXRAPIExtension.OpenXRAlphaBlendModeSupport`. */
+  opaque type OpenXRAlphaBlendModeSupport <: Long = Long
+
+  object OpenXRAlphaBlendModeSupport {
+    final val None: OpenXRAlphaBlendModeSupport = 0L.asInstanceOf[OpenXRAlphaBlendModeSupport]
+    final val Real: OpenXRAlphaBlendModeSupport = 1L.asInstanceOf[OpenXRAlphaBlendModeSupport]
+    final val Emulating: OpenXRAlphaBlendModeSupport = 2L.asInstanceOf[OpenXRAlphaBlendModeSupport]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): OpenXRAlphaBlendModeSupport = value.asInstanceOf[OpenXRAlphaBlendModeSupport]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[OpenXRAlphaBlendModeSupport] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[OpenXRAlphaBlendModeSupport]]
+
+    extension (self: OpenXRAlphaBlendModeSupport)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "None"
+        case 1L => "Real"
+        case 2L => "Emulating"
+        case other => other.toString
+      }
   }
 }

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,15 +18,15 @@ abstract class CSGShape3D extends GeometryInstance3D {
   }
 
   /** CSGShape3D.set_operation */
-  final def setOperation(operation: Long): Unit = {
+  final def setOperation(operation: gdext.classes.CSGShape3D.Operation): Unit = {
     if (gdext.classes.CSGShape3D.mb_set_operation == null) gdext.classes.CSGShape3D.mb_set_operation = MethodBind.get("CSGShape3D", "set_operation", 811425055L)
     Ptrcall.callVoid1(gdext.classes.CSGShape3D.mb_set_operation, livePtr, operation)
   }
 
   /** CSGShape3D.get_operation */
-  final def getOperation(): Long = {
+  final def getOperation(): gdext.classes.CSGShape3D.Operation = {
     if (gdext.classes.CSGShape3D.mb_get_operation == null) gdext.classes.CSGShape3D.mb_get_operation = MethodBind.get("CSGShape3D", "get_operation", 2662425879L)
-    Ptrcall.call0[Long](gdext.classes.CSGShape3D.mb_get_operation, livePtr)
+    gdext.classes.CSGShape3D.Operation(Ptrcall.call0[Long](gdext.classes.CSGShape3D.mb_get_operation, livePtr))
   }
 
   /** CSGShape3D.set_snap */
@@ -77,27 +78,27 @@ abstract class CSGShape3D extends GeometryInstance3D {
   }
 
   /** CSGShape3D.set_collision_mask_value */
-  final def setCollisionMaskValue(layer_number: Long, value: Boolean): Unit = {
+  final def setCollisionMaskValue(layerNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.CSGShape3D.mb_set_collision_mask_value == null) gdext.classes.CSGShape3D.mb_set_collision_mask_value = MethodBind.get("CSGShape3D", "set_collision_mask_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.CSGShape3D.mb_set_collision_mask_value, livePtr, layer_number, value)
+    Ptrcall.callVoid2(gdext.classes.CSGShape3D.mb_set_collision_mask_value, livePtr, layerNumber, value)
   }
 
   /** CSGShape3D.get_collision_mask_value */
-  final def getCollisionMaskValue(layer_number: Long): Boolean = {
+  final def getCollisionMaskValue(layerNumber: Long): Boolean = {
     if (gdext.classes.CSGShape3D.mb_get_collision_mask_value == null) gdext.classes.CSGShape3D.mb_get_collision_mask_value = MethodBind.get("CSGShape3D", "get_collision_mask_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.CSGShape3D.mb_get_collision_mask_value, livePtr, layer_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.CSGShape3D.mb_get_collision_mask_value, livePtr, layerNumber)
   }
 
   /** CSGShape3D.set_collision_layer_value */
-  final def setCollisionLayerValue(layer_number: Long, value: Boolean): Unit = {
+  final def setCollisionLayerValue(layerNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.CSGShape3D.mb_set_collision_layer_value == null) gdext.classes.CSGShape3D.mb_set_collision_layer_value = MethodBind.get("CSGShape3D", "set_collision_layer_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.CSGShape3D.mb_set_collision_layer_value, livePtr, layer_number, value)
+    Ptrcall.callVoid2(gdext.classes.CSGShape3D.mb_set_collision_layer_value, livePtr, layerNumber, value)
   }
 
   /** CSGShape3D.get_collision_layer_value */
-  final def getCollisionLayerValue(layer_number: Long): Boolean = {
+  final def getCollisionLayerValue(layerNumber: Long): Boolean = {
     if (gdext.classes.CSGShape3D.mb_get_collision_layer_value == null) gdext.classes.CSGShape3D.mb_get_collision_layer_value = MethodBind.get("CSGShape3D", "get_collision_layer_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.CSGShape3D.mb_get_collision_layer_value, livePtr, layer_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.CSGShape3D.mb_get_collision_layer_value, livePtr, layerNumber)
   }
 
   /** CSGShape3D.set_collision_priority */
@@ -160,4 +161,28 @@ object CSGShape3D {
   private[classes] var mb_set_calculate_tangents: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_calculating_tangents: GDExtensionMethodBindPtr = null
   private[classes] var mb_bake_static_mesh: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `CSGShape3D.Operation`. */
+  opaque type Operation <: Long = Long
+
+  object Operation {
+    final val Union: Operation = 0L.asInstanceOf[Operation]
+    final val Intersection: Operation = 1L.asInstanceOf[Operation]
+    final val Subtraction: Operation = 2L.asInstanceOf[Operation]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): Operation = value.asInstanceOf[Operation]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[Operation] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[Operation]]
+
+    extension (self: Operation)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Union"
+        case 1L => "Intersection"
+        case 2L => "Subtraction"
+        case other => other.toString
+      }
+  }
 }

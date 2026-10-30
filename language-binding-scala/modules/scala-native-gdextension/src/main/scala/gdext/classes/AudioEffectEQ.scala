@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,15 +12,15 @@ abstract class AudioEffectEQ extends AudioEffect {
   override def godotClassName: String = "AudioEffectEQ"
 
   /** AudioEffectEQ.set_band_gain_db */
-  final def setBandGainDb(band_idx: Long, volume_db: Double): Unit = {
+  final def setBandGainDb(bandIdx: Long, volumeDb: Double): Unit = {
     if (gdext.classes.AudioEffectEQ.mb_set_band_gain_db == null) gdext.classes.AudioEffectEQ.mb_set_band_gain_db = MethodBind.get("AudioEffectEQ", "set_band_gain_db", 1602489585L)
-    Ptrcall.callVoid2(gdext.classes.AudioEffectEQ.mb_set_band_gain_db, livePtr, band_idx, volume_db)
+    Ptrcall.callVoid2(gdext.classes.AudioEffectEQ.mb_set_band_gain_db, livePtr, bandIdx, volumeDb)
   }
 
   /** AudioEffectEQ.get_band_gain_db */
-  final def getBandGainDb(band_idx: Long): Double = {
+  final def getBandGainDb(bandIdx: Long): Double = {
     if (gdext.classes.AudioEffectEQ.mb_get_band_gain_db == null) gdext.classes.AudioEffectEQ.mb_get_band_gain_db = MethodBind.get("AudioEffectEQ", "get_band_gain_db", 2339986948L)
-    Ptrcall.call1[Long, Double](gdext.classes.AudioEffectEQ.mb_get_band_gain_db, livePtr, band_idx)
+    Ptrcall.call1[Long, Double](gdext.classes.AudioEffectEQ.mb_get_band_gain_db, livePtr, bandIdx)
   }
 
   /** AudioEffectEQ.get_band_count */

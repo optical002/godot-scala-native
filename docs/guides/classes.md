@@ -47,15 +47,17 @@ registers it, and deleting one unregisters it.
 
 ## Engine virtuals
 
-Override an engine virtual and it is wired up automatically:
+Override an engine virtual and it is wired up automatically. The Scala names
+are Godot's in camelCase, without the leading underscore:
 
-| Virtual | Signature |
-|---------|-----------|
-| `_ready` | `(): Unit` |
-| `_process` | `(delta: Double): Unit` |
-| `_physics_process` | `(delta: Double): Unit` |
-| `_enter_tree` / `_exit_tree` | `(): Unit` |
-| `_input` / `_unhandled_input` / `_shortcut_input` / `_unhandled_key_input` | `(event: InputEvent): Unit` |
+| Scala override | Godot virtual | Signature |
+|----------------|---------------|-----------|
+| `ready` | `_ready` | `(): Unit` |
+| `process` | `_process` | `(delta: Double): Unit` |
+| `physicsProcess` | `_physics_process` | `(delta: Double): Unit` |
+| `enterTree` / `exitTree` | `_enter_tree` / `_exit_tree` | `(): Unit` |
+| `input` / `unhandledInput` | `_input` / `_unhandled_input` | `(event: InputEvent): Unit` |
+| `shortcutInput` / `unhandledKeyInput` | `_shortcut_input` / `_unhandled_key_input` | `(event: InputEvent): Unit` |
 
 Only overridden virtuals are registered, so a class pays nothing for the
 virtuals it leaves alone.
@@ -66,7 +68,7 @@ Engine methods are camelCase Scala methods on the inherited class, so you call
 them directly on `this`:
 
 ```scala
-override def _process(delta: Double): Unit =
+override def process(delta: Double): Unit =
   setPosition(getPosition() + Vector2(1f, 0f))
 ```
 
@@ -83,6 +85,48 @@ Each engine object has exactly one wrapper, so the same node always comes back
 as the same Scala object. Methods returning a `RefCounted` (`getMesh`,
 `ResourceLoader.load`, ...) hand you a reference to release; see
 [Memory and object lifetimes](memory.md).
+
+Optional parameters keep Godot's defaults, and named arguments use camelCase:
+
+```scala
+addChild(enemy)                                   // forceReadableName = false, ...
+findChild("Gun", owned = false)
+```
+
+### Enums and singletons
+
+Godot enums and bitfields are typed. A global enum lives in `gdext.classes`
+(`Key`, `MouseButton`, `JoyButton`, `Side`, `Error`, ...). A class enum lives
+in the class's companion (`Node.ProcessMode`, `Input.MouseMode`). Passing a raw
+number where an enum is expected does not compile:
+
+```scala
+setProcessMode(Node.ProcessMode.Disabled)
+Input.setMouseMode(Input.MouseMode.Captured)
+val err: Error = ResourceSaver.save(stats, "user://stats.tres")
+if (err != Error.Ok) Gd.printError(s"save failed: ${err.name}")
+```
+
+- Each enum is an opaque `Long`, so it costs nothing at run time, compares with
+  `==`, and can be matched on: `case Node.ProcessMode.Disabled =>`. It also
+  passes wherever a `Long` is expected.
+- `X.values` lists the named values and `value.name` gives the constant's name.
+  `X(n)` converts a raw number, for example one read from a save file.
+- Bitfields combine with `|` and `&` and test with `has`:
+  `mesh.surfaceGetFormat(0).has(Mesh.ArrayFormat.FormatBones)`. They are not
+  `Long`s (so `|` keeps the type); `.value` gives the raw bits.
+- Constant names drop the prefix Godot repeats on every value
+  (`MOUSE_MODE_CAPTURED` becomes `Input.MouseMode.Captured`). A name that would
+  then start with a digit keeps the prefix's last word (`KEY_0` becomes
+  `Key.Key0`).
+
+Engine singletons (`Input`, `Engine`, `OS`, `Time`, `ResourceLoader`, ...) are
+called on the class itself. `Input.singleton` still returns the instance:
+
+```scala
+if (Engine.isEditorHint()) return
+val start = Time.getTicksMsec()
+```
 
 ## Creating objects
 
@@ -122,10 +166,7 @@ class Skeleton(
   hp: Int = 10,
   var age: Int
 ) extends Enemy(hp, None, Tscn.unassigned[Player]) {
-  override def _ready(): Unit = {
-    super._ready()
-    Gd.print(s"Skeleton $skeletonName")
-  }
+  override def ready(): Unit = Gd.print(s"Skeleton $skeletonName")
 }
 ```
 

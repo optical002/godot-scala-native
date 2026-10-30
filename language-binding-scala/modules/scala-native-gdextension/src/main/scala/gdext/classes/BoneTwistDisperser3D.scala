@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -41,9 +42,9 @@ abstract class BoneTwistDisperser3D extends SkeletonModifier3D {
   }
 
   /** BoneTwistDisperser3D.set_root_bone_name */
-  final def setRootBoneName(index: Long, bone_name: String): Unit = {
+  final def setRootBoneName(index: Long, boneName: String): Unit = {
     if (gdext.classes.BoneTwistDisperser3D.mb_set_root_bone_name == null) gdext.classes.BoneTwistDisperser3D.mb_set_root_bone_name = MethodBind.get("BoneTwistDisperser3D", "set_root_bone_name", 501894301L)
-    Ptrcall.callVoid2(gdext.classes.BoneTwistDisperser3D.mb_set_root_bone_name, livePtr, index, bone_name)
+    Ptrcall.callVoid2(gdext.classes.BoneTwistDisperser3D.mb_set_root_bone_name, livePtr, index, boneName)
   }
 
   /** BoneTwistDisperser3D.get_root_bone_name */
@@ -65,9 +66,9 @@ abstract class BoneTwistDisperser3D extends SkeletonModifier3D {
   }
 
   /** BoneTwistDisperser3D.set_end_bone_name */
-  final def setEndBoneName(index: Long, bone_name: String): Unit = {
+  final def setEndBoneName(index: Long, boneName: String): Unit = {
     if (gdext.classes.BoneTwistDisperser3D.mb_set_end_bone_name == null) gdext.classes.BoneTwistDisperser3D.mb_set_end_bone_name = MethodBind.get("BoneTwistDisperser3D", "set_end_bone_name", 501894301L)
-    Ptrcall.callVoid2(gdext.classes.BoneTwistDisperser3D.mb_set_end_bone_name, livePtr, index, bone_name)
+    Ptrcall.callVoid2(gdext.classes.BoneTwistDisperser3D.mb_set_end_bone_name, livePtr, index, boneName)
   }
 
   /** BoneTwistDisperser3D.get_end_bone_name */
@@ -113,15 +114,15 @@ abstract class BoneTwistDisperser3D extends SkeletonModifier3D {
   }
 
   /** BoneTwistDisperser3D.set_end_bone_direction */
-  final def setEndBoneDirection(index: Long, bone_direction: Long): Unit = {
+  final def setEndBoneDirection(index: Long, boneDirection: gdext.classes.SkeletonModifier3D.BoneDirection): Unit = {
     if (gdext.classes.BoneTwistDisperser3D.mb_set_end_bone_direction == null) gdext.classes.BoneTwistDisperser3D.mb_set_end_bone_direction = MethodBind.get("BoneTwistDisperser3D", "set_end_bone_direction", 2838484201L)
-    Ptrcall.callVoid2(gdext.classes.BoneTwistDisperser3D.mb_set_end_bone_direction, livePtr, index, bone_direction)
+    Ptrcall.callVoid2(gdext.classes.BoneTwistDisperser3D.mb_set_end_bone_direction, livePtr, index, boneDirection)
   }
 
   /** BoneTwistDisperser3D.get_end_bone_direction */
-  final def getEndBoneDirection(index: Long): Long = {
+  final def getEndBoneDirection(index: Long): gdext.classes.SkeletonModifier3D.BoneDirection = {
     if (gdext.classes.BoneTwistDisperser3D.mb_get_end_bone_direction == null) gdext.classes.BoneTwistDisperser3D.mb_get_end_bone_direction = MethodBind.get("BoneTwistDisperser3D", "get_end_bone_direction", 1843036459L)
-    Ptrcall.call1[Long, Long](gdext.classes.BoneTwistDisperser3D.mb_get_end_bone_direction, livePtr, index)
+    gdext.classes.SkeletonModifier3D.BoneDirection(Ptrcall.call1[Long, Long](gdext.classes.BoneTwistDisperser3D.mb_get_end_bone_direction, livePtr, index))
   }
 
   /** BoneTwistDisperser3D.set_twist_from_rest */
@@ -149,21 +150,21 @@ abstract class BoneTwistDisperser3D extends SkeletonModifier3D {
   }
 
   /** BoneTwistDisperser3D.set_disperse_mode */
-  final def setDisperseMode(index: Long, disperse_mode: Long): Unit = {
+  final def setDisperseMode(index: Long, disperseMode: gdext.classes.BoneTwistDisperser3D.DisperseMode): Unit = {
     if (gdext.classes.BoneTwistDisperser3D.mb_set_disperse_mode == null) gdext.classes.BoneTwistDisperser3D.mb_set_disperse_mode = MethodBind.get("BoneTwistDisperser3D", "set_disperse_mode", 2954194337L)
-    Ptrcall.callVoid2(gdext.classes.BoneTwistDisperser3D.mb_set_disperse_mode, livePtr, index, disperse_mode)
+    Ptrcall.callVoid2(gdext.classes.BoneTwistDisperser3D.mb_set_disperse_mode, livePtr, index, disperseMode)
   }
 
   /** BoneTwistDisperser3D.get_disperse_mode */
-  final def getDisperseMode(index: Long): Long = {
+  final def getDisperseMode(index: Long): gdext.classes.BoneTwistDisperser3D.DisperseMode = {
     if (gdext.classes.BoneTwistDisperser3D.mb_get_disperse_mode == null) gdext.classes.BoneTwistDisperser3D.mb_get_disperse_mode = MethodBind.get("BoneTwistDisperser3D", "get_disperse_mode", 1326397005L)
-    Ptrcall.call1[Long, Long](gdext.classes.BoneTwistDisperser3D.mb_get_disperse_mode, livePtr, index)
+    gdext.classes.BoneTwistDisperser3D.DisperseMode(Ptrcall.call1[Long, Long](gdext.classes.BoneTwistDisperser3D.mb_get_disperse_mode, livePtr, index))
   }
 
   /** BoneTwistDisperser3D.set_weight_position */
-  final def setWeightPosition(index: Long, weight_position: Double): Unit = {
+  final def setWeightPosition(index: Long, weightPosition: Double): Unit = {
     if (gdext.classes.BoneTwistDisperser3D.mb_set_weight_position == null) gdext.classes.BoneTwistDisperser3D.mb_set_weight_position = MethodBind.get("BoneTwistDisperser3D", "set_weight_position", 1602489585L)
-    Ptrcall.callVoid2(gdext.classes.BoneTwistDisperser3D.mb_set_weight_position, livePtr, index, weight_position)
+    Ptrcall.callVoid2(gdext.classes.BoneTwistDisperser3D.mb_set_weight_position, livePtr, index, weightPosition)
   }
 
   /** BoneTwistDisperser3D.get_weight_position */
@@ -203,9 +204,9 @@ abstract class BoneTwistDisperser3D extends SkeletonModifier3D {
   }
 
   /** BoneTwistDisperser3D.set_joint_twist_amount */
-  final def setJointTwistAmount(index: Long, joint: Long, twist_amount: Double): Unit = {
+  final def setJointTwistAmount(index: Long, joint: Long, twistAmount: Double): Unit = {
     if (gdext.classes.BoneTwistDisperser3D.mb_set_joint_twist_amount == null) gdext.classes.BoneTwistDisperser3D.mb_set_joint_twist_amount = MethodBind.get("BoneTwistDisperser3D", "set_joint_twist_amount", 3506521499L)
-    Ptrcall.callVoid3(gdext.classes.BoneTwistDisperser3D.mb_set_joint_twist_amount, livePtr, index, joint, twist_amount)
+    Ptrcall.callVoid3(gdext.classes.BoneTwistDisperser3D.mb_set_joint_twist_amount, livePtr, index, joint, twistAmount)
   }
 
   /** BoneTwistDisperser3D.get_joint_count */
@@ -251,4 +252,28 @@ object BoneTwistDisperser3D {
   private[classes] var mb_get_joint_twist_amount: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_joint_twist_amount: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_joint_count: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `BoneTwistDisperser3D.DisperseMode`. */
+  opaque type DisperseMode <: Long = Long
+
+  object DisperseMode {
+    final val Even: DisperseMode = 0L.asInstanceOf[DisperseMode]
+    final val Weighted: DisperseMode = 1L.asInstanceOf[DisperseMode]
+    final val Custom: DisperseMode = 2L.asInstanceOf[DisperseMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DisperseMode = value.asInstanceOf[DisperseMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DisperseMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[DisperseMode]]
+
+    extension (self: DisperseMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Even"
+        case 1L => "Weighted"
+        case 2L => "Custom"
+        case other => other.toString
+      }
+  }
 }

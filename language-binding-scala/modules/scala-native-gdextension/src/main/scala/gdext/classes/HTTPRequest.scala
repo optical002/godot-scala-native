@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,15 +18,15 @@ abstract class HTTPRequest extends Node {
   }
 
   /** HTTPRequest.set_tls_options */
-  final def setTlsOptions(client_options: TLSOptions): Unit = {
+  final def setTlsOptions(clientOptions: TLSOptions): Unit = {
     if (gdext.classes.HTTPRequest.mb_set_tls_options == null) gdext.classes.HTTPRequest.mb_set_tls_options = MethodBind.get("HTTPRequest", "set_tls_options", 2210231844L)
-    Ptrcall.callVoid1(gdext.classes.HTTPRequest.mb_set_tls_options, livePtr, Wrappers.handle(client_options))
+    Ptrcall.callVoid1(gdext.classes.HTTPRequest.mb_set_tls_options, livePtr, Wrappers.handle(clientOptions))
   }
 
   /** HTTPRequest.get_http_client_status */
-  final def getHttpClientStatus(): Long = {
+  final def getHttpClientStatus(): gdext.classes.HTTPClient.Status = {
     if (gdext.classes.HTTPRequest.mb_get_http_client_status == null) gdext.classes.HTTPRequest.mb_get_http_client_status = MethodBind.get("HTTPRequest", "get_http_client_status", 1426656811L)
-    Ptrcall.call0[Long](gdext.classes.HTTPRequest.mb_get_http_client_status, livePtr)
+    gdext.classes.HTTPClient.Status(Ptrcall.call0[Long](gdext.classes.HTTPRequest.mb_get_http_client_status, livePtr))
   }
 
   /** HTTPRequest.set_use_threads */
@@ -113,9 +114,9 @@ abstract class HTTPRequest extends Node {
   }
 
   /** HTTPRequest.set_download_chunk_size */
-  final def setDownloadChunkSize(chunk_size: Long): Unit = {
+  final def setDownloadChunkSize(chunkSize: Long): Unit = {
     if (gdext.classes.HTTPRequest.mb_set_download_chunk_size == null) gdext.classes.HTTPRequest.mb_set_download_chunk_size = MethodBind.get("HTTPRequest", "set_download_chunk_size", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.HTTPRequest.mb_set_download_chunk_size, livePtr, chunk_size)
+    Ptrcall.callVoid1(gdext.classes.HTTPRequest.mb_set_download_chunk_size, livePtr, chunkSize)
   }
 
   /** HTTPRequest.get_download_chunk_size */
@@ -160,4 +161,50 @@ object HTTPRequest {
   private[classes] var mb_get_download_chunk_size: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_http_proxy: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_https_proxy: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `HTTPRequest.Result`. */
+  opaque type Result <: Long = Long
+
+  object Result {
+    final val Success: Result = 0L.asInstanceOf[Result]
+    final val ChunkedBodySizeMismatch: Result = 1L.asInstanceOf[Result]
+    final val CantConnect: Result = 2L.asInstanceOf[Result]
+    final val CantResolve: Result = 3L.asInstanceOf[Result]
+    final val ConnectionError: Result = 4L.asInstanceOf[Result]
+    final val TlsHandshakeError: Result = 5L.asInstanceOf[Result]
+    final val NoResponse: Result = 6L.asInstanceOf[Result]
+    final val BodySizeLimitExceeded: Result = 7L.asInstanceOf[Result]
+    final val BodyDecompressFailed: Result = 8L.asInstanceOf[Result]
+    final val RequestFailed: Result = 9L.asInstanceOf[Result]
+    final val DownloadFileCantOpen: Result = 10L.asInstanceOf[Result]
+    final val DownloadFileWriteError: Result = 11L.asInstanceOf[Result]
+    final val RedirectLimitReached: Result = 12L.asInstanceOf[Result]
+    final val Timeout: Result = 13L.asInstanceOf[Result]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): Result = value.asInstanceOf[Result]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[Result] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 13L).asInstanceOf[scala.IArray[Result]]
+
+    extension (self: Result)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Success"
+        case 1L => "ChunkedBodySizeMismatch"
+        case 2L => "CantConnect"
+        case 3L => "CantResolve"
+        case 4L => "ConnectionError"
+        case 5L => "TlsHandshakeError"
+        case 6L => "NoResponse"
+        case 7L => "BodySizeLimitExceeded"
+        case 8L => "BodyDecompressFailed"
+        case 9L => "RequestFailed"
+        case 10L => "DownloadFileCantOpen"
+        case 11L => "DownloadFileWriteError"
+        case 12L => "RedirectLimitReached"
+        case 13L => "Timeout"
+        case other => other.toString
+      }
+  }
 }

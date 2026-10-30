@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,33 +24,33 @@ abstract class TextLine extends RefCounted {
   }
 
   /** TextLine.set_direction */
-  final def setDirection(direction: Long): Unit = {
+  final def setDirection(direction: gdext.classes.TextServer.Direction): Unit = {
     if (gdext.classes.TextLine.mb_set_direction == null) gdext.classes.TextLine.mb_set_direction = MethodBind.get("TextLine", "set_direction", 1418190634L)
     Ptrcall.callVoid1(gdext.classes.TextLine.mb_set_direction, livePtr, direction)
   }
 
   /** TextLine.get_direction */
-  final def getDirection(): Long = {
+  final def getDirection(): gdext.classes.TextServer.Direction = {
     if (gdext.classes.TextLine.mb_get_direction == null) gdext.classes.TextLine.mb_get_direction = MethodBind.get("TextLine", "get_direction", 2516697328L)
-    Ptrcall.call0[Long](gdext.classes.TextLine.mb_get_direction, livePtr)
+    gdext.classes.TextServer.Direction(Ptrcall.call0[Long](gdext.classes.TextLine.mb_get_direction, livePtr))
   }
 
   /** TextLine.get_inferred_direction */
-  final def getInferredDirection(): Long = {
+  final def getInferredDirection(): gdext.classes.TextServer.Direction = {
     if (gdext.classes.TextLine.mb_get_inferred_direction == null) gdext.classes.TextLine.mb_get_inferred_direction = MethodBind.get("TextLine", "get_inferred_direction", 2516697328L)
-    Ptrcall.call0[Long](gdext.classes.TextLine.mb_get_inferred_direction, livePtr)
+    gdext.classes.TextServer.Direction(Ptrcall.call0[Long](gdext.classes.TextLine.mb_get_inferred_direction, livePtr))
   }
 
   /** TextLine.set_orientation */
-  final def setOrientation(orientation: Long): Unit = {
+  final def setOrientation(orientation: gdext.classes.TextServer.Orientation): Unit = {
     if (gdext.classes.TextLine.mb_set_orientation == null) gdext.classes.TextLine.mb_set_orientation = MethodBind.get("TextLine", "set_orientation", 42823726L)
     Ptrcall.callVoid1(gdext.classes.TextLine.mb_set_orientation, livePtr, orientation)
   }
 
   /** TextLine.get_orientation */
-  final def getOrientation(): Long = {
+  final def getOrientation(): gdext.classes.TextServer.Orientation = {
     if (gdext.classes.TextLine.mb_get_orientation == null) gdext.classes.TextLine.mb_get_orientation = MethodBind.get("TextLine", "get_orientation", 175768116L)
-    Ptrcall.call0[Long](gdext.classes.TextLine.mb_get_orientation, livePtr)
+    gdext.classes.TextServer.Orientation(Ptrcall.call0[Long](gdext.classes.TextLine.mb_get_orientation, livePtr))
   }
 
   /** TextLine.set_preserve_invalid */
@@ -89,39 +90,39 @@ abstract class TextLine extends RefCounted {
   }
 
   /** TextLine.set_horizontal_alignment */
-  final def setHorizontalAlignment(alignment: Long): Unit = {
+  final def setHorizontalAlignment(alignment: gdext.classes.HorizontalAlignment): Unit = {
     if (gdext.classes.TextLine.mb_set_horizontal_alignment == null) gdext.classes.TextLine.mb_set_horizontal_alignment = MethodBind.get("TextLine", "set_horizontal_alignment", 2312603777L)
     Ptrcall.callVoid1(gdext.classes.TextLine.mb_set_horizontal_alignment, livePtr, alignment)
   }
 
   /** TextLine.get_horizontal_alignment */
-  final def getHorizontalAlignment(): Long = {
+  final def getHorizontalAlignment(): gdext.classes.HorizontalAlignment = {
     if (gdext.classes.TextLine.mb_get_horizontal_alignment == null) gdext.classes.TextLine.mb_get_horizontal_alignment = MethodBind.get("TextLine", "get_horizontal_alignment", 341400642L)
-    Ptrcall.call0[Long](gdext.classes.TextLine.mb_get_horizontal_alignment, livePtr)
+    gdext.classes.HorizontalAlignment(Ptrcall.call0[Long](gdext.classes.TextLine.mb_get_horizontal_alignment, livePtr))
   }
 
   /** TextLine.set_flags */
-  final def setFlags(flags: Long): Unit = {
+  final def setFlags(flags: gdext.classes.TextServer.JustificationFlag): Unit = {
     if (gdext.classes.TextLine.mb_set_flags == null) gdext.classes.TextLine.mb_set_flags = MethodBind.get("TextLine", "set_flags", 2877345813L)
-    Ptrcall.callVoid1(gdext.classes.TextLine.mb_set_flags, livePtr, flags)
+    Ptrcall.callVoid1(gdext.classes.TextLine.mb_set_flags, livePtr, flags.asInstanceOf[Long])
   }
 
   /** TextLine.get_flags */
-  final def getFlags(): Long = {
+  final def getFlags(): gdext.classes.TextServer.JustificationFlag = {
     if (gdext.classes.TextLine.mb_get_flags == null) gdext.classes.TextLine.mb_get_flags = MethodBind.get("TextLine", "get_flags", 1583363614L)
-    Ptrcall.call0[Long](gdext.classes.TextLine.mb_get_flags, livePtr)
+    gdext.classes.TextServer.JustificationFlag(Ptrcall.call0[Long](gdext.classes.TextLine.mb_get_flags, livePtr))
   }
 
   /** TextLine.set_text_overrun_behavior */
-  final def setTextOverrunBehavior(overrun_behavior: Long): Unit = {
+  final def setTextOverrunBehavior(overrunBehavior: gdext.classes.TextServer.OverrunBehavior): Unit = {
     if (gdext.classes.TextLine.mb_set_text_overrun_behavior == null) gdext.classes.TextLine.mb_set_text_overrun_behavior = MethodBind.get("TextLine", "set_text_overrun_behavior", 1008890932L)
-    Ptrcall.callVoid1(gdext.classes.TextLine.mb_set_text_overrun_behavior, livePtr, overrun_behavior)
+    Ptrcall.callVoid1(gdext.classes.TextLine.mb_set_text_overrun_behavior, livePtr, overrunBehavior)
   }
 
   /** TextLine.get_text_overrun_behavior */
-  final def getTextOverrunBehavior(): Long = {
+  final def getTextOverrunBehavior(): gdext.classes.TextServer.OverrunBehavior = {
     if (gdext.classes.TextLine.mb_get_text_overrun_behavior == null) gdext.classes.TextLine.mb_get_text_overrun_behavior = MethodBind.get("TextLine", "get_text_overrun_behavior", 3779142101L)
-    Ptrcall.call0[Long](gdext.classes.TextLine.mb_get_text_overrun_behavior, livePtr)
+    gdext.classes.TextServer.OverrunBehavior(Ptrcall.call0[Long](gdext.classes.TextLine.mb_get_text_overrun_behavior, livePtr))
   }
 
   /** TextLine.set_ellipsis_char */

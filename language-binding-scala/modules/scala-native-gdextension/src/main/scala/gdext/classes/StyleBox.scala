@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,7 +18,7 @@ abstract class StyleBox extends Resource {
   }
 
   /** StyleBox.set_content_margin */
-  final def setContentMargin(margin: Long, offset: Double): Unit = {
+  final def setContentMargin(margin: gdext.classes.Side, offset: Double): Unit = {
     if (gdext.classes.StyleBox.mb_set_content_margin == null) gdext.classes.StyleBox.mb_set_content_margin = MethodBind.get("StyleBox", "set_content_margin", 4290182280L)
     Ptrcall.callVoid2(gdext.classes.StyleBox.mb_set_content_margin, livePtr, margin, offset)
   }
@@ -29,13 +30,13 @@ abstract class StyleBox extends Resource {
   }
 
   /** StyleBox.get_content_margin */
-  final def getContentMargin(margin: Long): Double = {
+  final def getContentMargin(margin: gdext.classes.Side): Double = {
     if (gdext.classes.StyleBox.mb_get_content_margin == null) gdext.classes.StyleBox.mb_get_content_margin = MethodBind.get("StyleBox", "get_content_margin", 2869120046L)
     Ptrcall.call1[Long, Double](gdext.classes.StyleBox.mb_get_content_margin, livePtr, margin)
   }
 
   /** StyleBox.get_margin */
-  final def getMargin(margin: Long): Double = {
+  final def getMargin(margin: gdext.classes.Side): Double = {
     if (gdext.classes.StyleBox.mb_get_margin == null) gdext.classes.StyleBox.mb_get_margin = MethodBind.get("StyleBox", "get_margin", 2869120046L)
     Ptrcall.call1[Long, Double](gdext.classes.StyleBox.mb_get_margin, livePtr, margin)
   }

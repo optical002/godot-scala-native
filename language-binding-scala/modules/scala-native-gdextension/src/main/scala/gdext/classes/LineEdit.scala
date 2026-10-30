@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -29,21 +30,21 @@ abstract class LineEdit extends Control {
   }
 
   /** LineEdit.set_horizontal_alignment */
-  final def setHorizontalAlignment(alignment: Long): Unit = {
+  final def setHorizontalAlignment(alignment: gdext.classes.HorizontalAlignment): Unit = {
     if (gdext.classes.LineEdit.mb_set_horizontal_alignment == null) gdext.classes.LineEdit.mb_set_horizontal_alignment = MethodBind.get("LineEdit", "set_horizontal_alignment", 2312603777L)
     Ptrcall.callVoid1(gdext.classes.LineEdit.mb_set_horizontal_alignment, livePtr, alignment)
   }
 
   /** LineEdit.get_horizontal_alignment */
-  final def getHorizontalAlignment(): Long = {
+  final def getHorizontalAlignment(): gdext.classes.HorizontalAlignment = {
     if (gdext.classes.LineEdit.mb_get_horizontal_alignment == null) gdext.classes.LineEdit.mb_get_horizontal_alignment = MethodBind.get("LineEdit", "get_horizontal_alignment", 341400642L)
-    Ptrcall.call0[Long](gdext.classes.LineEdit.mb_get_horizontal_alignment, livePtr)
+    gdext.classes.HorizontalAlignment(Ptrcall.call0[Long](gdext.classes.LineEdit.mb_get_horizontal_alignment, livePtr))
   }
 
   /** LineEdit.edit */
-  final def edit(hide_focus: Boolean): Unit = {
+  final def edit(hideFocus: Boolean = false): Unit = {
     if (gdext.classes.LineEdit.mb_edit == null) gdext.classes.LineEdit.mb_edit = MethodBind.get("LineEdit", "edit", 107499316L)
-    Ptrcall.callVoid1(gdext.classes.LineEdit.mb_edit, livePtr, hide_focus)
+    Ptrcall.callVoid1(gdext.classes.LineEdit.mb_edit, livePtr, hideFocus)
   }
 
   /** LineEdit.unedit */
@@ -77,7 +78,7 @@ abstract class LineEdit extends Control {
   }
 
   /** LineEdit.select */
-  final def select(from: Long, to: Long): Unit = {
+  final def select(from: Long = 0L, to: Long = -1L): Unit = {
     if (gdext.classes.LineEdit.mb_select == null) gdext.classes.LineEdit.mb_select = MethodBind.get("LineEdit", "select", 1328111411L)
     Ptrcall.callVoid2(gdext.classes.LineEdit.mb_select, livePtr, from, to)
   }
@@ -155,15 +156,15 @@ abstract class LineEdit extends Control {
   }
 
   /** LineEdit.set_text_direction */
-  final def setTextDirection(direction: Long): Unit = {
+  final def setTextDirection(direction: gdext.classes.Control.TextDirection): Unit = {
     if (gdext.classes.LineEdit.mb_set_text_direction == null) gdext.classes.LineEdit.mb_set_text_direction = MethodBind.get("LineEdit", "set_text_direction", 119160795L)
     Ptrcall.callVoid1(gdext.classes.LineEdit.mb_set_text_direction, livePtr, direction)
   }
 
   /** LineEdit.get_text_direction */
-  final def getTextDirection(): Long = {
+  final def getTextDirection(): gdext.classes.Control.TextDirection = {
     if (gdext.classes.LineEdit.mb_get_text_direction == null) gdext.classes.LineEdit.mb_get_text_direction = MethodBind.get("LineEdit", "get_text_direction", 797257663L)
-    Ptrcall.call0[Long](gdext.classes.LineEdit.mb_get_text_direction, livePtr)
+    gdext.classes.Control.TextDirection(Ptrcall.call0[Long](gdext.classes.LineEdit.mb_get_text_direction, livePtr))
   }
 
   /** LineEdit.set_language */
@@ -179,15 +180,15 @@ abstract class LineEdit extends Control {
   }
 
   /** LineEdit.set_structured_text_bidi_override */
-  final def setStructuredTextBidiOverride(parser: Long): Unit = {
+  final def setStructuredTextBidiOverride(parser: gdext.classes.TextServer.StructuredTextParser): Unit = {
     if (gdext.classes.LineEdit.mb_set_structured_text_bidi_override == null) gdext.classes.LineEdit.mb_set_structured_text_bidi_override = MethodBind.get("LineEdit", "set_structured_text_bidi_override", 55961453L)
     Ptrcall.callVoid1(gdext.classes.LineEdit.mb_set_structured_text_bidi_override, livePtr, parser)
   }
 
   /** LineEdit.get_structured_text_bidi_override */
-  final def getStructuredTextBidiOverride(): Long = {
+  final def getStructuredTextBidiOverride(): gdext.classes.TextServer.StructuredTextParser = {
     if (gdext.classes.LineEdit.mb_get_structured_text_bidi_override == null) gdext.classes.LineEdit.mb_get_structured_text_bidi_override = MethodBind.get("LineEdit", "get_structured_text_bidi_override", 3385126229L)
-    Ptrcall.call0[Long](gdext.classes.LineEdit.mb_get_structured_text_bidi_override, livePtr)
+    gdext.classes.TextServer.StructuredTextParser(Ptrcall.call0[Long](gdext.classes.LineEdit.mb_get_structured_text_bidi_override, livePtr))
   }
 
   /** LineEdit.set_placeholder */
@@ -317,9 +318,9 @@ abstract class LineEdit extends Control {
   }
 
   /** LineEdit.delete_text */
-  final def deleteText(from_column: Long, to_column: Long): Unit = {
+  final def deleteText(fromColumn: Long, toColumn: Long): Unit = {
     if (gdext.classes.LineEdit.mb_delete_text == null) gdext.classes.LineEdit.mb_delete_text = MethodBind.get("LineEdit", "delete_text", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.LineEdit.mb_delete_text, livePtr, from_column, to_column)
+    Ptrcall.callVoid2(gdext.classes.LineEdit.mb_delete_text, livePtr, fromColumn, toColumn)
   }
 
   /** LineEdit.set_editable */
@@ -425,9 +426,9 @@ abstract class LineEdit extends Control {
   }
 
   /** LineEdit.set_virtual_keyboard_show_on_focus */
-  final def setVirtualKeyboardShowOnFocus(show_on_focus: Boolean): Unit = {
+  final def setVirtualKeyboardShowOnFocus(showOnFocus: Boolean): Unit = {
     if (gdext.classes.LineEdit.mb_set_virtual_keyboard_show_on_focus == null) gdext.classes.LineEdit.mb_set_virtual_keyboard_show_on_focus = MethodBind.get("LineEdit", "set_virtual_keyboard_show_on_focus", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.LineEdit.mb_set_virtual_keyboard_show_on_focus, livePtr, show_on_focus)
+    Ptrcall.callVoid1(gdext.classes.LineEdit.mb_set_virtual_keyboard_show_on_focus, livePtr, showOnFocus)
   }
 
   /** LineEdit.get_virtual_keyboard_show_on_focus */
@@ -437,15 +438,15 @@ abstract class LineEdit extends Control {
   }
 
   /** LineEdit.set_virtual_keyboard_type */
-  final def setVirtualKeyboardType(`type`: Long): Unit = {
+  final def setVirtualKeyboardType(`type`: gdext.classes.LineEdit.VirtualKeyboardType): Unit = {
     if (gdext.classes.LineEdit.mb_set_virtual_keyboard_type == null) gdext.classes.LineEdit.mb_set_virtual_keyboard_type = MethodBind.get("LineEdit", "set_virtual_keyboard_type", 2696893573L)
     Ptrcall.callVoid1(gdext.classes.LineEdit.mb_set_virtual_keyboard_type, livePtr, `type`)
   }
 
   /** LineEdit.get_virtual_keyboard_type */
-  final def getVirtualKeyboardType(): Long = {
+  final def getVirtualKeyboardType(): gdext.classes.LineEdit.VirtualKeyboardType = {
     if (gdext.classes.LineEdit.mb_get_virtual_keyboard_type == null) gdext.classes.LineEdit.mb_get_virtual_keyboard_type = MethodBind.get("LineEdit", "get_virtual_keyboard_type", 1928699316L)
-    Ptrcall.call0[Long](gdext.classes.LineEdit.mb_get_virtual_keyboard_type, livePtr)
+    gdext.classes.LineEdit.VirtualKeyboardType(Ptrcall.call0[Long](gdext.classes.LineEdit.mb_get_virtual_keyboard_type, livePtr))
   }
 
   /** LineEdit.set_clear_button_enabled */
@@ -533,15 +534,15 @@ abstract class LineEdit extends Control {
   }
 
   /** LineEdit.set_icon_expand_mode */
-  final def setIconExpandMode(mode: Long): Unit = {
+  final def setIconExpandMode(mode: gdext.classes.LineEdit.ExpandMode): Unit = {
     if (gdext.classes.LineEdit.mb_set_icon_expand_mode == null) gdext.classes.LineEdit.mb_set_icon_expand_mode = MethodBind.get("LineEdit", "set_icon_expand_mode", 3019903192L)
     Ptrcall.callVoid1(gdext.classes.LineEdit.mb_set_icon_expand_mode, livePtr, mode)
   }
 
   /** LineEdit.get_icon_expand_mode */
-  final def getIconExpandMode(): Long = {
+  final def getIconExpandMode(): gdext.classes.LineEdit.ExpandMode = {
     if (gdext.classes.LineEdit.mb_get_icon_expand_mode == null) gdext.classes.LineEdit.mb_get_icon_expand_mode = MethodBind.get("LineEdit", "get_icon_expand_mode", 3273584435L)
-    Ptrcall.call0[Long](gdext.classes.LineEdit.mb_get_icon_expand_mode, livePtr)
+    gdext.classes.LineEdit.ExpandMode(Ptrcall.call0[Long](gdext.classes.LineEdit.mb_get_icon_expand_mode, livePtr))
   }
 
   /** LineEdit.set_right_icon_scale */
@@ -678,4 +679,144 @@ object LineEdit {
   private[classes] var mb_is_flat: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_select_all_on_focus: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_select_all_on_focus: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `LineEdit.MenuItems`. */
+  opaque type MenuItems <: Long = Long
+
+  object MenuItems {
+    final val Cut: MenuItems = 0L.asInstanceOf[MenuItems]
+    final val Copy: MenuItems = 1L.asInstanceOf[MenuItems]
+    final val Paste: MenuItems = 2L.asInstanceOf[MenuItems]
+    final val Clear: MenuItems = 3L.asInstanceOf[MenuItems]
+    final val SelectAll: MenuItems = 4L.asInstanceOf[MenuItems]
+    final val Undo: MenuItems = 5L.asInstanceOf[MenuItems]
+    final val Redo: MenuItems = 6L.asInstanceOf[MenuItems]
+    final val SubmenuTextDir: MenuItems = 7L.asInstanceOf[MenuItems]
+    final val DirInherited: MenuItems = 8L.asInstanceOf[MenuItems]
+    final val DirAuto: MenuItems = 9L.asInstanceOf[MenuItems]
+    final val DirLtr: MenuItems = 10L.asInstanceOf[MenuItems]
+    final val DirRtl: MenuItems = 11L.asInstanceOf[MenuItems]
+    final val DisplayUcc: MenuItems = 12L.asInstanceOf[MenuItems]
+    final val SubmenuInsertUcc: MenuItems = 13L.asInstanceOf[MenuItems]
+    final val InsertLrm: MenuItems = 14L.asInstanceOf[MenuItems]
+    final val InsertRlm: MenuItems = 15L.asInstanceOf[MenuItems]
+    final val InsertLre: MenuItems = 16L.asInstanceOf[MenuItems]
+    final val InsertRle: MenuItems = 17L.asInstanceOf[MenuItems]
+    final val InsertLro: MenuItems = 18L.asInstanceOf[MenuItems]
+    final val InsertRlo: MenuItems = 19L.asInstanceOf[MenuItems]
+    final val InsertPdf: MenuItems = 20L.asInstanceOf[MenuItems]
+    final val InsertAlm: MenuItems = 21L.asInstanceOf[MenuItems]
+    final val InsertLri: MenuItems = 22L.asInstanceOf[MenuItems]
+    final val InsertRli: MenuItems = 23L.asInstanceOf[MenuItems]
+    final val InsertFsi: MenuItems = 24L.asInstanceOf[MenuItems]
+    final val InsertPdi: MenuItems = 25L.asInstanceOf[MenuItems]
+    final val InsertZwj: MenuItems = 26L.asInstanceOf[MenuItems]
+    final val InsertZwnj: MenuItems = 27L.asInstanceOf[MenuItems]
+    final val InsertWj: MenuItems = 28L.asInstanceOf[MenuItems]
+    final val InsertShy: MenuItems = 29L.asInstanceOf[MenuItems]
+    final val EmojiAndSymbol: MenuItems = 30L.asInstanceOf[MenuItems]
+    final val Max: MenuItems = 31L.asInstanceOf[MenuItems]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): MenuItems = value.asInstanceOf[MenuItems]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[MenuItems] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 13L, 14L, 15L, 16L, 17L, 18L, 19L, 20L, 21L, 22L, 23L, 24L, 25L, 26L, 27L, 28L, 29L, 30L, 31L).asInstanceOf[scala.IArray[MenuItems]]
+
+    extension (self: MenuItems)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Cut"
+        case 1L => "Copy"
+        case 2L => "Paste"
+        case 3L => "Clear"
+        case 4L => "SelectAll"
+        case 5L => "Undo"
+        case 6L => "Redo"
+        case 7L => "SubmenuTextDir"
+        case 8L => "DirInherited"
+        case 9L => "DirAuto"
+        case 10L => "DirLtr"
+        case 11L => "DirRtl"
+        case 12L => "DisplayUcc"
+        case 13L => "SubmenuInsertUcc"
+        case 14L => "InsertLrm"
+        case 15L => "InsertRlm"
+        case 16L => "InsertLre"
+        case 17L => "InsertRle"
+        case 18L => "InsertLro"
+        case 19L => "InsertRlo"
+        case 20L => "InsertPdf"
+        case 21L => "InsertAlm"
+        case 22L => "InsertLri"
+        case 23L => "InsertRli"
+        case 24L => "InsertFsi"
+        case 25L => "InsertPdi"
+        case 26L => "InsertZwj"
+        case 27L => "InsertZwnj"
+        case 28L => "InsertWj"
+        case 29L => "InsertShy"
+        case 30L => "EmojiAndSymbol"
+        case 31L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `LineEdit.VirtualKeyboardType`. */
+  opaque type VirtualKeyboardType <: Long = Long
+
+  object VirtualKeyboardType {
+    final val Default: VirtualKeyboardType = 0L.asInstanceOf[VirtualKeyboardType]
+    final val Multiline: VirtualKeyboardType = 1L.asInstanceOf[VirtualKeyboardType]
+    final val Number: VirtualKeyboardType = 2L.asInstanceOf[VirtualKeyboardType]
+    final val NumberDecimal: VirtualKeyboardType = 3L.asInstanceOf[VirtualKeyboardType]
+    final val Phone: VirtualKeyboardType = 4L.asInstanceOf[VirtualKeyboardType]
+    final val EmailAddress: VirtualKeyboardType = 5L.asInstanceOf[VirtualKeyboardType]
+    final val Password: VirtualKeyboardType = 6L.asInstanceOf[VirtualKeyboardType]
+    final val Url: VirtualKeyboardType = 7L.asInstanceOf[VirtualKeyboardType]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): VirtualKeyboardType = value.asInstanceOf[VirtualKeyboardType]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[VirtualKeyboardType] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L).asInstanceOf[scala.IArray[VirtualKeyboardType]]
+
+    extension (self: VirtualKeyboardType)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Default"
+        case 1L => "Multiline"
+        case 2L => "Number"
+        case 3L => "NumberDecimal"
+        case 4L => "Phone"
+        case 5L => "EmailAddress"
+        case 6L => "Password"
+        case 7L => "Url"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `LineEdit.ExpandMode`. */
+  opaque type ExpandMode <: Long = Long
+
+  object ExpandMode {
+    final val OriginalSize: ExpandMode = 0L.asInstanceOf[ExpandMode]
+    final val FitToText: ExpandMode = 1L.asInstanceOf[ExpandMode]
+    final val FitToLineEdit: ExpandMode = 2L.asInstanceOf[ExpandMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ExpandMode = value.asInstanceOf[ExpandMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ExpandMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[ExpandMode]]
+
+    extension (self: ExpandMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "OriginalSize"
+        case 1L => "FitToText"
+        case 2L => "FitToLineEdit"
+        case other => other.toString
+      }
+  }
 }

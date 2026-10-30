@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,7 +18,7 @@ abstract class Tree extends Control {
   }
 
   /** Tree.create_item */
-  final def createItem(parent: TreeItem, index: Long): TreeItem = {
+  final def createItem(parent: TreeItem = null, index: Long = -1L): TreeItem = {
     if (gdext.classes.Tree.mb_create_item == null) gdext.classes.Tree.mb_create_item = MethodBind.get("Tree", "create_item", 528467046L)
     Wrappers.borrowed[TreeItem](Ptrcall.call2[GodotObject, Long, Long](gdext.classes.Tree.mb_create_item, livePtr, Wrappers.handle(parent), index))
   }
@@ -29,9 +30,9 @@ abstract class Tree extends Control {
   }
 
   /** Tree.set_column_custom_minimum_width */
-  final def setColumnCustomMinimumWidth(column: Long, min_width: Long): Unit = {
+  final def setColumnCustomMinimumWidth(column: Long, minWidth: Long): Unit = {
     if (gdext.classes.Tree.mb_set_column_custom_minimum_width == null) gdext.classes.Tree.mb_set_column_custom_minimum_width = MethodBind.get("Tree", "set_column_custom_minimum_width", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.Tree.mb_set_column_custom_minimum_width, livePtr, column, min_width)
+    Ptrcall.callVoid2(gdext.classes.Tree.mb_set_column_custom_minimum_width, livePtr, column, minWidth)
   }
 
   /** Tree.set_column_expand */
@@ -119,15 +120,15 @@ abstract class Tree extends Control {
   }
 
   /** Tree.set_select_mode */
-  final def setSelectMode(mode: Long): Unit = {
+  final def setSelectMode(mode: gdext.classes.Tree.SelectMode): Unit = {
     if (gdext.classes.Tree.mb_set_select_mode == null) gdext.classes.Tree.mb_set_select_mode = MethodBind.get("Tree", "set_select_mode", 3223887270L)
     Ptrcall.callVoid1(gdext.classes.Tree.mb_set_select_mode, livePtr, mode)
   }
 
   /** Tree.get_select_mode */
-  final def getSelectMode(): Long = {
+  final def getSelectMode(): gdext.classes.Tree.SelectMode = {
     if (gdext.classes.Tree.mb_get_select_mode == null) gdext.classes.Tree.mb_get_select_mode = MethodBind.get("Tree", "get_select_mode", 100748571L)
-    Ptrcall.call0[Long](gdext.classes.Tree.mb_get_select_mode, livePtr)
+    gdext.classes.Tree.SelectMode(Ptrcall.call0[Long](gdext.classes.Tree.mb_get_select_mode, livePtr))
   }
 
   /** Tree.deselect_all */
@@ -161,9 +162,9 @@ abstract class Tree extends Control {
   }
 
   /** Tree.edit_selected */
-  final def editSelected(force_edit: Boolean): Boolean = {
+  final def editSelected(forceEdit: Boolean = false): Boolean = {
     if (gdext.classes.Tree.mb_edit_selected == null) gdext.classes.Tree.mb_edit_selected = MethodBind.get("Tree", "edit_selected", 2595650253L)
-    Ptrcall.call1[Boolean, Boolean](gdext.classes.Tree.mb_edit_selected, livePtr, force_edit)
+    Ptrcall.call1[Boolean, Boolean](gdext.classes.Tree.mb_edit_selected, livePtr, forceEdit)
   }
 
   /** Tree.get_custom_popup_rect */
@@ -173,9 +174,9 @@ abstract class Tree extends Control {
   }
 
   /** Tree.get_item_area_rect */
-  final def getItemAreaRect(item: TreeItem, column: Long, button_index: Long): gdext.builtin.Rect2 = {
+  final def getItemAreaRect(item: TreeItem, column: Long = -1L, buttonIndex: Long = -1L): gdext.builtin.Rect2 = {
     if (gdext.classes.Tree.mb_get_item_area_rect == null) gdext.classes.Tree.mb_get_item_area_rect = MethodBind.get("Tree", "get_item_area_rect", 47968679L)
-    Ptrcall.call3[GodotObject, Long, Long, gdext.builtin.Rect2](gdext.classes.Tree.mb_get_item_area_rect, livePtr, Wrappers.handle(item), column, button_index)
+    Ptrcall.call3[GodotObject, Long, Long, gdext.builtin.Rect2](gdext.classes.Tree.mb_get_item_area_rect, livePtr, Wrappers.handle(item), column, buttonIndex)
   }
 
   /** Tree.get_item_at_position */
@@ -233,9 +234,9 @@ abstract class Tree extends Control {
   }
 
   /** Tree.set_column_title_tooltip_text */
-  final def setColumnTitleTooltipText(column: Long, tooltip_text: String): Unit = {
+  final def setColumnTitleTooltipText(column: Long, tooltipText: String): Unit = {
     if (gdext.classes.Tree.mb_set_column_title_tooltip_text == null) gdext.classes.Tree.mb_set_column_title_tooltip_text = MethodBind.get("Tree", "set_column_title_tooltip_text", 501894301L)
-    Ptrcall.callVoid2(gdext.classes.Tree.mb_set_column_title_tooltip_text, livePtr, column, tooltip_text)
+    Ptrcall.callVoid2(gdext.classes.Tree.mb_set_column_title_tooltip_text, livePtr, column, tooltipText)
   }
 
   /** Tree.get_column_title_tooltip_text */
@@ -245,27 +246,27 @@ abstract class Tree extends Control {
   }
 
   /** Tree.set_column_title_alignment */
-  final def setColumnTitleAlignment(column: Long, title_alignment: Long): Unit = {
+  final def setColumnTitleAlignment(column: Long, titleAlignment: gdext.classes.HorizontalAlignment): Unit = {
     if (gdext.classes.Tree.mb_set_column_title_alignment == null) gdext.classes.Tree.mb_set_column_title_alignment = MethodBind.get("Tree", "set_column_title_alignment", 3276431499L)
-    Ptrcall.callVoid2(gdext.classes.Tree.mb_set_column_title_alignment, livePtr, column, title_alignment)
+    Ptrcall.callVoid2(gdext.classes.Tree.mb_set_column_title_alignment, livePtr, column, titleAlignment)
   }
 
   /** Tree.get_column_title_alignment */
-  final def getColumnTitleAlignment(column: Long): Long = {
+  final def getColumnTitleAlignment(column: Long): gdext.classes.HorizontalAlignment = {
     if (gdext.classes.Tree.mb_get_column_title_alignment == null) gdext.classes.Tree.mb_get_column_title_alignment = MethodBind.get("Tree", "get_column_title_alignment", 4171562184L)
-    Ptrcall.call1[Long, Long](gdext.classes.Tree.mb_get_column_title_alignment, livePtr, column)
+    gdext.classes.HorizontalAlignment(Ptrcall.call1[Long, Long](gdext.classes.Tree.mb_get_column_title_alignment, livePtr, column))
   }
 
   /** Tree.set_column_title_direction */
-  final def setColumnTitleDirection(column: Long, direction: Long): Unit = {
+  final def setColumnTitleDirection(column: Long, direction: gdext.classes.Control.TextDirection): Unit = {
     if (gdext.classes.Tree.mb_set_column_title_direction == null) gdext.classes.Tree.mb_set_column_title_direction = MethodBind.get("Tree", "set_column_title_direction", 1707680378L)
     Ptrcall.callVoid2(gdext.classes.Tree.mb_set_column_title_direction, livePtr, column, direction)
   }
 
   /** Tree.get_column_title_direction */
-  final def getColumnTitleDirection(column: Long): Long = {
+  final def getColumnTitleDirection(column: Long): gdext.classes.Control.TextDirection = {
     if (gdext.classes.Tree.mb_get_column_title_direction == null) gdext.classes.Tree.mb_get_column_title_direction = MethodBind.get("Tree", "get_column_title_direction", 4235602388L)
-    Ptrcall.call1[Long, Long](gdext.classes.Tree.mb_get_column_title_direction, livePtr, column)
+    gdext.classes.Control.TextDirection(Ptrcall.call1[Long, Long](gdext.classes.Tree.mb_get_column_title_direction, livePtr, column))
   }
 
   /** Tree.set_column_title_language */
@@ -287,15 +288,15 @@ abstract class Tree extends Control {
   }
 
   /** Tree.scroll_to_item */
-  final def scrollToItem(item: TreeItem, center_on_item: Boolean): Unit = {
+  final def scrollToItem(item: TreeItem, centerOnItem: Boolean = false): Unit = {
     if (gdext.classes.Tree.mb_scroll_to_item == null) gdext.classes.Tree.mb_scroll_to_item = MethodBind.get("Tree", "scroll_to_item", 1314737213L)
-    Ptrcall.callVoid2(gdext.classes.Tree.mb_scroll_to_item, livePtr, Wrappers.handle(item), center_on_item)
+    Ptrcall.callVoid2(gdext.classes.Tree.mb_scroll_to_item, livePtr, Wrappers.handle(item), centerOnItem)
   }
 
   /** Tree.set_h_scroll_enabled */
-  final def setHScrollEnabled(h_scroll: Boolean): Unit = {
+  final def setHScrollEnabled(hScroll: Boolean): Unit = {
     if (gdext.classes.Tree.mb_set_h_scroll_enabled == null) gdext.classes.Tree.mb_set_h_scroll_enabled = MethodBind.get("Tree", "set_h_scroll_enabled", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.Tree.mb_set_h_scroll_enabled, livePtr, h_scroll)
+    Ptrcall.callVoid1(gdext.classes.Tree.mb_set_h_scroll_enabled, livePtr, hScroll)
   }
 
   /** Tree.is_h_scroll_enabled */
@@ -305,9 +306,9 @@ abstract class Tree extends Control {
   }
 
   /** Tree.set_v_scroll_enabled */
-  final def setVScrollEnabled(h_scroll: Boolean): Unit = {
+  final def setVScrollEnabled(hScroll: Boolean): Unit = {
     if (gdext.classes.Tree.mb_set_v_scroll_enabled == null) gdext.classes.Tree.mb_set_v_scroll_enabled = MethodBind.get("Tree", "set_v_scroll_enabled", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.Tree.mb_set_v_scroll_enabled, livePtr, h_scroll)
+    Ptrcall.callVoid1(gdext.classes.Tree.mb_set_v_scroll_enabled, livePtr, hScroll)
   }
 
   /** Tree.is_v_scroll_enabled */
@@ -317,21 +318,21 @@ abstract class Tree extends Control {
   }
 
   /** Tree.set_scroll_hint_mode */
-  final def setScrollHintMode(scroll_hint_mode: Long): Unit = {
+  final def setScrollHintMode(scrollHintMode: gdext.classes.Tree.ScrollHintMode): Unit = {
     if (gdext.classes.Tree.mb_set_scroll_hint_mode == null) gdext.classes.Tree.mb_set_scroll_hint_mode = MethodBind.get("Tree", "set_scroll_hint_mode", 415911924L)
-    Ptrcall.callVoid1(gdext.classes.Tree.mb_set_scroll_hint_mode, livePtr, scroll_hint_mode)
+    Ptrcall.callVoid1(gdext.classes.Tree.mb_set_scroll_hint_mode, livePtr, scrollHintMode)
   }
 
   /** Tree.get_scroll_hint_mode */
-  final def getScrollHintMode(): Long = {
+  final def getScrollHintMode(): gdext.classes.Tree.ScrollHintMode = {
     if (gdext.classes.Tree.mb_get_scroll_hint_mode == null) gdext.classes.Tree.mb_get_scroll_hint_mode = MethodBind.get("Tree", "get_scroll_hint_mode", 553087187L)
-    Ptrcall.call0[Long](gdext.classes.Tree.mb_get_scroll_hint_mode, livePtr)
+    gdext.classes.Tree.ScrollHintMode(Ptrcall.call0[Long](gdext.classes.Tree.mb_get_scroll_hint_mode, livePtr))
   }
 
   /** Tree.set_tile_scroll_hint */
-  final def setTileScrollHint(tile_scroll_hint: Boolean): Unit = {
+  final def setTileScrollHint(tileScrollHint: Boolean): Unit = {
     if (gdext.classes.Tree.mb_set_tile_scroll_hint == null) gdext.classes.Tree.mb_set_tile_scroll_hint = MethodBind.get("Tree", "set_tile_scroll_hint", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.Tree.mb_set_tile_scroll_hint, livePtr, tile_scroll_hint)
+    Ptrcall.callVoid1(gdext.classes.Tree.mb_set_tile_scroll_hint, livePtr, tileScrollHint)
   }
 
   /** Tree.is_scroll_hint_tiled */
@@ -510,4 +511,78 @@ object Tree {
   private[classes] var mb_get_allow_search: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_auto_tooltip: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_auto_tooltip_enabled: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `Tree.SelectMode`. */
+  opaque type SelectMode <: Long = Long
+
+  object SelectMode {
+    final val Single: SelectMode = 0L.asInstanceOf[SelectMode]
+    final val Row: SelectMode = 1L.asInstanceOf[SelectMode]
+    final val Multi: SelectMode = 2L.asInstanceOf[SelectMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): SelectMode = value.asInstanceOf[SelectMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[SelectMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[SelectMode]]
+
+    extension (self: SelectMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Single"
+        case 1L => "Row"
+        case 2L => "Multi"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Tree.DropModeFlags`. */
+  opaque type DropModeFlags <: Long = Long
+
+  object DropModeFlags {
+    final val Disabled: DropModeFlags = 0L.asInstanceOf[DropModeFlags]
+    final val OnItem: DropModeFlags = 1L.asInstanceOf[DropModeFlags]
+    final val Inbetween: DropModeFlags = 2L.asInstanceOf[DropModeFlags]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DropModeFlags = value.asInstanceOf[DropModeFlags]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DropModeFlags] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[DropModeFlags]]
+
+    extension (self: DropModeFlags)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "OnItem"
+        case 2L => "Inbetween"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Tree.ScrollHintMode`. */
+  opaque type ScrollHintMode <: Long = Long
+
+  object ScrollHintMode {
+    final val Disabled: ScrollHintMode = 0L.asInstanceOf[ScrollHintMode]
+    final val Both: ScrollHintMode = 1L.asInstanceOf[ScrollHintMode]
+    final val Top: ScrollHintMode = 2L.asInstanceOf[ScrollHintMode]
+    final val Bottom: ScrollHintMode = 3L.asInstanceOf[ScrollHintMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ScrollHintMode = value.asInstanceOf[ScrollHintMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ScrollHintMode] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[ScrollHintMode]]
+
+    extension (self: ScrollHintMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "Both"
+        case 2L => "Top"
+        case 3L => "Bottom"
+        case other => other.toString
+      }
+  }
 }

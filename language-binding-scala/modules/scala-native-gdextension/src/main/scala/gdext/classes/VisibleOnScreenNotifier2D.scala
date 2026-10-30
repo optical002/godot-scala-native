@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class VisibleOnScreenNotifier2D extends Node2D {
   }
 
   /** VisibleOnScreenNotifier2D.set_show_rect */
-  final def setShowRect(show_rect: Boolean): Unit = {
+  final def setShowRect(showRect: Boolean): Unit = {
     if (gdext.classes.VisibleOnScreenNotifier2D.mb_set_show_rect == null) gdext.classes.VisibleOnScreenNotifier2D.mb_set_show_rect = MethodBind.get("VisibleOnScreenNotifier2D", "set_show_rect", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.VisibleOnScreenNotifier2D.mb_set_show_rect, livePtr, show_rect)
+    Ptrcall.callVoid1(gdext.classes.VisibleOnScreenNotifier2D.mb_set_show_rect, livePtr, showRect)
   }
 
   /** VisibleOnScreenNotifier2D.is_showing_rect */

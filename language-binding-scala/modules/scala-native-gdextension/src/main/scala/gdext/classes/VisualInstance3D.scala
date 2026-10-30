@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,15 +24,15 @@ abstract class VisualInstance3D extends Node3D {
   }
 
   /** VisualInstance3D.set_layer_mask_value */
-  final def setLayerMaskValue(layer_number: Long, value: Boolean): Unit = {
+  final def setLayerMaskValue(layerNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.VisualInstance3D.mb_set_layer_mask_value == null) gdext.classes.VisualInstance3D.mb_set_layer_mask_value = MethodBind.get("VisualInstance3D", "set_layer_mask_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.VisualInstance3D.mb_set_layer_mask_value, livePtr, layer_number, value)
+    Ptrcall.callVoid2(gdext.classes.VisualInstance3D.mb_set_layer_mask_value, livePtr, layerNumber, value)
   }
 
   /** VisualInstance3D.get_layer_mask_value */
-  final def getLayerMaskValue(layer_number: Long): Boolean = {
+  final def getLayerMaskValue(layerNumber: Long): Boolean = {
     if (gdext.classes.VisualInstance3D.mb_get_layer_mask_value == null) gdext.classes.VisualInstance3D.mb_get_layer_mask_value = MethodBind.get("VisualInstance3D", "get_layer_mask_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.VisualInstance3D.mb_get_layer_mask_value, livePtr, layer_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.VisualInstance3D.mb_get_layer_mask_value, livePtr, layerNumber)
   }
 
   /** VisualInstance3D.set_sorting_offset */

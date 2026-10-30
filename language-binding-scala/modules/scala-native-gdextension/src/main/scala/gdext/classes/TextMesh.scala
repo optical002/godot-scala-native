@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,27 +12,27 @@ abstract class TextMesh extends PrimitiveMesh {
   override def godotClassName: String = "TextMesh"
 
   /** TextMesh.set_horizontal_alignment */
-  final def setHorizontalAlignment(alignment: Long): Unit = {
+  final def setHorizontalAlignment(alignment: gdext.classes.HorizontalAlignment): Unit = {
     if (gdext.classes.TextMesh.mb_set_horizontal_alignment == null) gdext.classes.TextMesh.mb_set_horizontal_alignment = MethodBind.get("TextMesh", "set_horizontal_alignment", 2312603777L)
     Ptrcall.callVoid1(gdext.classes.TextMesh.mb_set_horizontal_alignment, livePtr, alignment)
   }
 
   /** TextMesh.get_horizontal_alignment */
-  final def getHorizontalAlignment(): Long = {
+  final def getHorizontalAlignment(): gdext.classes.HorizontalAlignment = {
     if (gdext.classes.TextMesh.mb_get_horizontal_alignment == null) gdext.classes.TextMesh.mb_get_horizontal_alignment = MethodBind.get("TextMesh", "get_horizontal_alignment", 341400642L)
-    Ptrcall.call0[Long](gdext.classes.TextMesh.mb_get_horizontal_alignment, livePtr)
+    gdext.classes.HorizontalAlignment(Ptrcall.call0[Long](gdext.classes.TextMesh.mb_get_horizontal_alignment, livePtr))
   }
 
   /** TextMesh.set_vertical_alignment */
-  final def setVerticalAlignment(alignment: Long): Unit = {
+  final def setVerticalAlignment(alignment: gdext.classes.VerticalAlignment): Unit = {
     if (gdext.classes.TextMesh.mb_set_vertical_alignment == null) gdext.classes.TextMesh.mb_set_vertical_alignment = MethodBind.get("TextMesh", "set_vertical_alignment", 1796458609L)
     Ptrcall.callVoid1(gdext.classes.TextMesh.mb_set_vertical_alignment, livePtr, alignment)
   }
 
   /** TextMesh.get_vertical_alignment */
-  final def getVerticalAlignment(): Long = {
+  final def getVerticalAlignment(): gdext.classes.VerticalAlignment = {
     if (gdext.classes.TextMesh.mb_get_vertical_alignment == null) gdext.classes.TextMesh.mb_get_vertical_alignment = MethodBind.get("TextMesh", "get_vertical_alignment", 3274884059L)
-    Ptrcall.call0[Long](gdext.classes.TextMesh.mb_get_vertical_alignment, livePtr)
+    gdext.classes.VerticalAlignment(Ptrcall.call0[Long](gdext.classes.TextMesh.mb_get_vertical_alignment, livePtr))
   }
 
   /** TextMesh.set_text */
@@ -59,9 +60,9 @@ abstract class TextMesh extends PrimitiveMesh {
   }
 
   /** TextMesh.set_font_size */
-  final def setFontSize(font_size: Long): Unit = {
+  final def setFontSize(fontSize: Long): Unit = {
     if (gdext.classes.TextMesh.mb_set_font_size == null) gdext.classes.TextMesh.mb_set_font_size = MethodBind.get("TextMesh", "set_font_size", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.TextMesh.mb_set_font_size, livePtr, font_size)
+    Ptrcall.callVoid1(gdext.classes.TextMesh.mb_set_font_size, livePtr, fontSize)
   }
 
   /** TextMesh.get_font_size */
@@ -71,9 +72,9 @@ abstract class TextMesh extends PrimitiveMesh {
   }
 
   /** TextMesh.set_line_spacing */
-  final def setLineSpacing(line_spacing: Double): Unit = {
+  final def setLineSpacing(lineSpacing: Double): Unit = {
     if (gdext.classes.TextMesh.mb_set_line_spacing == null) gdext.classes.TextMesh.mb_set_line_spacing = MethodBind.get("TextMesh", "set_line_spacing", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.TextMesh.mb_set_line_spacing, livePtr, line_spacing)
+    Ptrcall.callVoid1(gdext.classes.TextMesh.mb_set_line_spacing, livePtr, lineSpacing)
   }
 
   /** TextMesh.get_line_spacing */
@@ -83,27 +84,27 @@ abstract class TextMesh extends PrimitiveMesh {
   }
 
   /** TextMesh.set_autowrap_mode */
-  final def setAutowrapMode(autowrap_mode: Long): Unit = {
+  final def setAutowrapMode(autowrapMode: gdext.classes.TextServer.AutowrapMode): Unit = {
     if (gdext.classes.TextMesh.mb_set_autowrap_mode == null) gdext.classes.TextMesh.mb_set_autowrap_mode = MethodBind.get("TextMesh", "set_autowrap_mode", 3289138044L)
-    Ptrcall.callVoid1(gdext.classes.TextMesh.mb_set_autowrap_mode, livePtr, autowrap_mode)
+    Ptrcall.callVoid1(gdext.classes.TextMesh.mb_set_autowrap_mode, livePtr, autowrapMode)
   }
 
   /** TextMesh.get_autowrap_mode */
-  final def getAutowrapMode(): Long = {
+  final def getAutowrapMode(): gdext.classes.TextServer.AutowrapMode = {
     if (gdext.classes.TextMesh.mb_get_autowrap_mode == null) gdext.classes.TextMesh.mb_get_autowrap_mode = MethodBind.get("TextMesh", "get_autowrap_mode", 1549071663L)
-    Ptrcall.call0[Long](gdext.classes.TextMesh.mb_get_autowrap_mode, livePtr)
+    gdext.classes.TextServer.AutowrapMode(Ptrcall.call0[Long](gdext.classes.TextMesh.mb_get_autowrap_mode, livePtr))
   }
 
   /** TextMesh.set_justification_flags */
-  final def setJustificationFlags(justification_flags: Long): Unit = {
+  final def setJustificationFlags(justificationFlags: gdext.classes.TextServer.JustificationFlag): Unit = {
     if (gdext.classes.TextMesh.mb_set_justification_flags == null) gdext.classes.TextMesh.mb_set_justification_flags = MethodBind.get("TextMesh", "set_justification_flags", 2877345813L)
-    Ptrcall.callVoid1(gdext.classes.TextMesh.mb_set_justification_flags, livePtr, justification_flags)
+    Ptrcall.callVoid1(gdext.classes.TextMesh.mb_set_justification_flags, livePtr, justificationFlags.asInstanceOf[Long])
   }
 
   /** TextMesh.get_justification_flags */
-  final def getJustificationFlags(): Long = {
+  final def getJustificationFlags(): gdext.classes.TextServer.JustificationFlag = {
     if (gdext.classes.TextMesh.mb_get_justification_flags == null) gdext.classes.TextMesh.mb_get_justification_flags = MethodBind.get("TextMesh", "get_justification_flags", 1583363614L)
-    Ptrcall.call0[Long](gdext.classes.TextMesh.mb_get_justification_flags, livePtr)
+    gdext.classes.TextServer.JustificationFlag(Ptrcall.call0[Long](gdext.classes.TextMesh.mb_get_justification_flags, livePtr))
   }
 
   /** TextMesh.set_depth */
@@ -131,9 +132,9 @@ abstract class TextMesh extends PrimitiveMesh {
   }
 
   /** TextMesh.set_pixel_size */
-  final def setPixelSize(pixel_size: Double): Unit = {
+  final def setPixelSize(pixelSize: Double): Unit = {
     if (gdext.classes.TextMesh.mb_set_pixel_size == null) gdext.classes.TextMesh.mb_set_pixel_size = MethodBind.get("TextMesh", "set_pixel_size", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.TextMesh.mb_set_pixel_size, livePtr, pixel_size)
+    Ptrcall.callVoid1(gdext.classes.TextMesh.mb_set_pixel_size, livePtr, pixelSize)
   }
 
   /** TextMesh.get_pixel_size */
@@ -155,9 +156,9 @@ abstract class TextMesh extends PrimitiveMesh {
   }
 
   /** TextMesh.set_curve_step */
-  final def setCurveStep(curve_step: Double): Unit = {
+  final def setCurveStep(curveStep: Double): Unit = {
     if (gdext.classes.TextMesh.mb_set_curve_step == null) gdext.classes.TextMesh.mb_set_curve_step = MethodBind.get("TextMesh", "set_curve_step", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.TextMesh.mb_set_curve_step, livePtr, curve_step)
+    Ptrcall.callVoid1(gdext.classes.TextMesh.mb_set_curve_step, livePtr, curveStep)
   }
 
   /** TextMesh.get_curve_step */
@@ -167,15 +168,15 @@ abstract class TextMesh extends PrimitiveMesh {
   }
 
   /** TextMesh.set_text_direction */
-  final def setTextDirection(direction: Long): Unit = {
+  final def setTextDirection(direction: gdext.classes.TextServer.Direction): Unit = {
     if (gdext.classes.TextMesh.mb_set_text_direction == null) gdext.classes.TextMesh.mb_set_text_direction = MethodBind.get("TextMesh", "set_text_direction", 1418190634L)
     Ptrcall.callVoid1(gdext.classes.TextMesh.mb_set_text_direction, livePtr, direction)
   }
 
   /** TextMesh.get_text_direction */
-  final def getTextDirection(): Long = {
+  final def getTextDirection(): gdext.classes.TextServer.Direction = {
     if (gdext.classes.TextMesh.mb_get_text_direction == null) gdext.classes.TextMesh.mb_get_text_direction = MethodBind.get("TextMesh", "get_text_direction", 2516697328L)
-    Ptrcall.call0[Long](gdext.classes.TextMesh.mb_get_text_direction, livePtr)
+    gdext.classes.TextServer.Direction(Ptrcall.call0[Long](gdext.classes.TextMesh.mb_get_text_direction, livePtr))
   }
 
   /** TextMesh.set_language */
@@ -191,15 +192,15 @@ abstract class TextMesh extends PrimitiveMesh {
   }
 
   /** TextMesh.set_structured_text_bidi_override */
-  final def setStructuredTextBidiOverride(parser: Long): Unit = {
+  final def setStructuredTextBidiOverride(parser: gdext.classes.TextServer.StructuredTextParser): Unit = {
     if (gdext.classes.TextMesh.mb_set_structured_text_bidi_override == null) gdext.classes.TextMesh.mb_set_structured_text_bidi_override = MethodBind.get("TextMesh", "set_structured_text_bidi_override", 55961453L)
     Ptrcall.callVoid1(gdext.classes.TextMesh.mb_set_structured_text_bidi_override, livePtr, parser)
   }
 
   /** TextMesh.get_structured_text_bidi_override */
-  final def getStructuredTextBidiOverride(): Long = {
+  final def getStructuredTextBidiOverride(): gdext.classes.TextServer.StructuredTextParser = {
     if (gdext.classes.TextMesh.mb_get_structured_text_bidi_override == null) gdext.classes.TextMesh.mb_get_structured_text_bidi_override = MethodBind.get("TextMesh", "get_structured_text_bidi_override", 3385126229L)
-    Ptrcall.call0[Long](gdext.classes.TextMesh.mb_get_structured_text_bidi_override, livePtr)
+    gdext.classes.TextServer.StructuredTextParser(Ptrcall.call0[Long](gdext.classes.TextMesh.mb_get_structured_text_bidi_override, livePtr))
   }
 
   /** TextMesh.set_uppercase */

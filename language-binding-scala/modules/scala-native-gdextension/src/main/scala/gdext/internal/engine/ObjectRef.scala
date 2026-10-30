@@ -1,7 +1,7 @@
 package gdext.internal.engine
 
 import gdext.Godot
-import gdext.builtin.StringNames
+import gdext.internal.StringNames
 import gdext.internal.register.GodotScriptClass
 
 /**

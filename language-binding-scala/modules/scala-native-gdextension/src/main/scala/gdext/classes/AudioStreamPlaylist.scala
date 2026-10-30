@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class AudioStreamPlaylist extends AudioStream {
   override def godotClassName: String = "AudioStreamPlaylist"
 
   /** AudioStreamPlaylist.set_stream_count */
-  final def setStreamCount(stream_count: Long): Unit = {
+  final def setStreamCount(streamCount: Long): Unit = {
     if (gdext.classes.AudioStreamPlaylist.mb_set_stream_count == null) gdext.classes.AudioStreamPlaylist.mb_set_stream_count = MethodBind.get("AudioStreamPlaylist", "set_stream_count", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlaylist.mb_set_stream_count, livePtr, stream_count)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlaylist.mb_set_stream_count, livePtr, streamCount)
   }
 
   /** AudioStreamPlaylist.get_stream_count */
@@ -29,15 +30,15 @@ abstract class AudioStreamPlaylist extends AudioStream {
   }
 
   /** AudioStreamPlaylist.set_list_stream */
-  final def setListStream(stream_index: Long, audio_stream: AudioStream): Unit = {
+  final def setListStream(streamIndex: Long, audioStream: AudioStream): Unit = {
     if (gdext.classes.AudioStreamPlaylist.mb_set_list_stream == null) gdext.classes.AudioStreamPlaylist.mb_set_list_stream = MethodBind.get("AudioStreamPlaylist", "set_list_stream", 111075094L)
-    Ptrcall.callVoid2(gdext.classes.AudioStreamPlaylist.mb_set_list_stream, livePtr, stream_index, Wrappers.handle(audio_stream))
+    Ptrcall.callVoid2(gdext.classes.AudioStreamPlaylist.mb_set_list_stream, livePtr, streamIndex, Wrappers.handle(audioStream))
   }
 
   /** AudioStreamPlaylist.get_list_stream. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getListStream(stream_index: Long): AudioStream = {
+  final def getListStream(streamIndex: Long): AudioStream = {
     if (gdext.classes.AudioStreamPlaylist.mb_get_list_stream == null) gdext.classes.AudioStreamPlaylist.mb_get_list_stream = MethodBind.get("AudioStreamPlaylist", "get_list_stream", 2739380747L)
-    Wrappers.owned[AudioStream](Ptrcall.call1[Long, Long](gdext.classes.AudioStreamPlaylist.mb_get_list_stream, livePtr, stream_index))
+    Wrappers.owned[AudioStream](Ptrcall.call1[Long, Long](gdext.classes.AudioStreamPlaylist.mb_get_list_stream, livePtr, streamIndex))
   }
 
   /** AudioStreamPlaylist.set_shuffle */

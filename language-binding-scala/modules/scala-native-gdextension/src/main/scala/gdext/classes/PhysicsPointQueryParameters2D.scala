@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class PhysicsPointQueryParameters2D extends RefCounted {
   }
 
   /** PhysicsPointQueryParameters2D.set_canvas_instance_id */
-  final def setCanvasInstanceId(canvas_instance_id: Long): Unit = {
+  final def setCanvasInstanceId(canvasInstanceId: Long): Unit = {
     if (gdext.classes.PhysicsPointQueryParameters2D.mb_set_canvas_instance_id == null) gdext.classes.PhysicsPointQueryParameters2D.mb_set_canvas_instance_id = MethodBind.get("PhysicsPointQueryParameters2D", "set_canvas_instance_id", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.PhysicsPointQueryParameters2D.mb_set_canvas_instance_id, livePtr, canvas_instance_id)
+    Ptrcall.callVoid1(gdext.classes.PhysicsPointQueryParameters2D.mb_set_canvas_instance_id, livePtr, canvasInstanceId)
   }
 
   /** PhysicsPointQueryParameters2D.get_canvas_instance_id */
@@ -35,9 +36,9 @@ abstract class PhysicsPointQueryParameters2D extends RefCounted {
   }
 
   /** PhysicsPointQueryParameters2D.set_collision_mask */
-  final def setCollisionMask(collision_mask: Long): Unit = {
+  final def setCollisionMask(collisionMask: Long): Unit = {
     if (gdext.classes.PhysicsPointQueryParameters2D.mb_set_collision_mask == null) gdext.classes.PhysicsPointQueryParameters2D.mb_set_collision_mask = MethodBind.get("PhysicsPointQueryParameters2D", "set_collision_mask", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.PhysicsPointQueryParameters2D.mb_set_collision_mask, livePtr, collision_mask)
+    Ptrcall.callVoid1(gdext.classes.PhysicsPointQueryParameters2D.mb_set_collision_mask, livePtr, collisionMask)
   }
 
   /** PhysicsPointQueryParameters2D.get_collision_mask */

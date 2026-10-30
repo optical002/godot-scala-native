@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,27 +12,27 @@ abstract class Node extends Object {
   override def godotClassName: String = "Node"
 
   /** Node.add_sibling */
-  final def addSibling(sibling: Node, force_readable_name: Boolean): Unit = {
+  final def addSibling(sibling: Node, forceReadableName: Boolean = false): Unit = {
     if (gdext.classes.Node.mb_add_sibling == null) gdext.classes.Node.mb_add_sibling = MethodBind.get("Node", "add_sibling", 2570952461L)
-    Ptrcall.callVoid2(gdext.classes.Node.mb_add_sibling, livePtr, Wrappers.handle(sibling), force_readable_name)
+    Ptrcall.callVoid2(gdext.classes.Node.mb_add_sibling, livePtr, Wrappers.handle(sibling), forceReadableName)
   }
 
   /** Node.set_name */
-  final def setName(name: gdext.builtin.StringName): Unit = {
+  final def setName(name: String): Unit = {
     if (gdext.classes.Node.mb_set_name == null) gdext.classes.Node.mb_set_name = MethodBind.get("Node", "set_name", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.Node.mb_set_name, livePtr, name)
+    Ptrcall.callVoid1(gdext.classes.Node.mb_set_name, livePtr, SnArg(name))
   }
 
   /** Node.get_name */
-  final def getName(): gdext.builtin.StringName = {
+  final def getName(): String = {
     if (gdext.classes.Node.mb_get_name == null) gdext.classes.Node.mb_get_name = MethodBind.get("Node", "get_name", 2002593661L)
-    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.Node.mb_get_name, livePtr)
+    Ptrcall.call0[SnArg](gdext.classes.Node.mb_get_name, livePtr)
   }
 
   /** Node.add_child */
-  final def addChild(node: Node, force_readable_name: Boolean, internal: Long): Unit = {
+  final def addChild(node: Node, forceReadableName: Boolean = false, internal: gdext.classes.Node.InternalMode = gdext.classes.Node.InternalMode(0L)): Unit = {
     if (gdext.classes.Node.mb_add_child == null) gdext.classes.Node.mb_add_child = MethodBind.get("Node", "add_child", 3863233950L)
-    Ptrcall.callVoid3(gdext.classes.Node.mb_add_child, livePtr, Wrappers.handle(node), force_readable_name, internal)
+    Ptrcall.callVoid3(gdext.classes.Node.mb_add_child, livePtr, Wrappers.handle(node), forceReadableName, internal)
   }
 
   /** Node.remove_child */
@@ -41,21 +42,21 @@ abstract class Node extends Object {
   }
 
   /** Node.reparent */
-  final def reparent(new_parent: Node, keep_global_transform: Boolean): Unit = {
+  final def reparent(newParent: Node, keepGlobalTransform: Boolean = true): Unit = {
     if (gdext.classes.Node.mb_reparent == null) gdext.classes.Node.mb_reparent = MethodBind.get("Node", "reparent", 3685795103L)
-    Ptrcall.callVoid2(gdext.classes.Node.mb_reparent, livePtr, Wrappers.handle(new_parent), keep_global_transform)
+    Ptrcall.callVoid2(gdext.classes.Node.mb_reparent, livePtr, Wrappers.handle(newParent), keepGlobalTransform)
   }
 
   /** Node.get_child_count */
-  final def getChildCount(include_internal: Boolean): Long = {
+  final def getChildCount(includeInternal: Boolean = false): Long = {
     if (gdext.classes.Node.mb_get_child_count == null) gdext.classes.Node.mb_get_child_count = MethodBind.get("Node", "get_child_count", 894402480L)
-    Ptrcall.call1[Boolean, Long](gdext.classes.Node.mb_get_child_count, livePtr, include_internal)
+    Ptrcall.call1[Boolean, Long](gdext.classes.Node.mb_get_child_count, livePtr, includeInternal)
   }
 
   /** Node.get_child */
-  final def getChild(idx: Long, include_internal: Boolean): Node = {
+  final def getChild(idx: Long, includeInternal: Boolean = false): Node = {
     if (gdext.classes.Node.mb_get_child == null) gdext.classes.Node.mb_get_child = MethodBind.get("Node", "get_child", 541253412L)
-    Wrappers.borrowed[Node](Ptrcall.call2[Long, Boolean, Long](gdext.classes.Node.mb_get_child, livePtr, idx, include_internal))
+    Wrappers.borrowed[Node](Ptrcall.call2[Long, Boolean, Long](gdext.classes.Node.mb_get_child, livePtr, idx, includeInternal))
   }
 
   /** Node.get_parent */
@@ -65,7 +66,7 @@ abstract class Node extends Object {
   }
 
   /** Node.find_child */
-  final def findChild(pattern: String, recursive: Boolean, owned: Boolean): Node = {
+  final def findChild(pattern: String, recursive: Boolean = true, owned: Boolean = true): Node = {
     if (gdext.classes.Node.mb_find_child == null) gdext.classes.Node.mb_find_child = MethodBind.get("Node", "find_child", 2008217037L)
     Wrappers.borrowed[Node](Ptrcall.call3[String, Boolean, Boolean, Long](gdext.classes.Node.mb_find_child, livePtr, pattern, recursive, owned))
   }
@@ -101,27 +102,27 @@ abstract class Node extends Object {
   }
 
   /** Node.add_to_group */
-  final def addToGroup(group: gdext.builtin.StringName, persistent: Boolean): Unit = {
+  final def addToGroup(group: String, persistent: Boolean = false): Unit = {
     if (gdext.classes.Node.mb_add_to_group == null) gdext.classes.Node.mb_add_to_group = MethodBind.get("Node", "add_to_group", 3683006648L)
-    Ptrcall.callVoid2(gdext.classes.Node.mb_add_to_group, livePtr, group, persistent)
+    Ptrcall.callVoid2(gdext.classes.Node.mb_add_to_group, livePtr, SnArg(group), persistent)
   }
 
   /** Node.remove_from_group */
-  final def removeFromGroup(group: gdext.builtin.StringName): Unit = {
+  final def removeFromGroup(group: String): Unit = {
     if (gdext.classes.Node.mb_remove_from_group == null) gdext.classes.Node.mb_remove_from_group = MethodBind.get("Node", "remove_from_group", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.Node.mb_remove_from_group, livePtr, group)
+    Ptrcall.callVoid1(gdext.classes.Node.mb_remove_from_group, livePtr, SnArg(group))
   }
 
   /** Node.is_in_group */
-  final def isInGroup(group: gdext.builtin.StringName): Boolean = {
+  final def isInGroup(group: String): Boolean = {
     if (gdext.classes.Node.mb_is_in_group == null) gdext.classes.Node.mb_is_in_group = MethodBind.get("Node", "is_in_group", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.Node.mb_is_in_group, livePtr, group)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.Node.mb_is_in_group, livePtr, SnArg(group))
   }
 
   /** Node.move_child */
-  final def moveChild(child_node: Node, to_index: Long): Unit = {
+  final def moveChild(childNode: Node, toIndex: Long): Unit = {
     if (gdext.classes.Node.mb_move_child == null) gdext.classes.Node.mb_move_child = MethodBind.get("Node", "move_child", 3315886247L)
-    Ptrcall.callVoid2(gdext.classes.Node.mb_move_child, livePtr, Wrappers.handle(child_node), to_index)
+    Ptrcall.callVoid2(gdext.classes.Node.mb_move_child, livePtr, Wrappers.handle(childNode), toIndex)
   }
 
   /** Node.set_owner */
@@ -137,9 +138,9 @@ abstract class Node extends Object {
   }
 
   /** Node.get_index */
-  final def getIndex(include_internal: Boolean): Long = {
+  final def getIndex(includeInternal: Boolean = false): Long = {
     if (gdext.classes.Node.mb_get_index == null) gdext.classes.Node.mb_get_index = MethodBind.get("Node", "get_index", 894402480L)
-    Ptrcall.call1[Boolean, Long](gdext.classes.Node.mb_get_index, livePtr, include_internal)
+    Ptrcall.call1[Boolean, Long](gdext.classes.Node.mb_get_index, livePtr, includeInternal)
   }
 
   /** Node.print_tree */
@@ -167,9 +168,9 @@ abstract class Node extends Object {
   }
 
   /** Node.set_scene_file_path */
-  final def setSceneFilePath(scene_file_path: String): Unit = {
+  final def setSceneFilePath(sceneFilePath: String): Unit = {
     if (gdext.classes.Node.mb_set_scene_file_path == null) gdext.classes.Node.mb_set_scene_file_path = MethodBind.get("Node", "set_scene_file_path", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.Node.mb_set_scene_file_path, livePtr, scene_file_path)
+    Ptrcall.callVoid1(gdext.classes.Node.mb_set_scene_file_path, livePtr, sceneFilePath)
   }
 
   /** Node.get_scene_file_path */
@@ -293,15 +294,15 @@ abstract class Node extends Object {
   }
 
   /** Node.set_process_mode */
-  final def setProcessMode(mode: Long): Unit = {
+  final def setProcessMode(mode: gdext.classes.Node.ProcessMode): Unit = {
     if (gdext.classes.Node.mb_set_process_mode == null) gdext.classes.Node.mb_set_process_mode = MethodBind.get("Node", "set_process_mode", 1841290486L)
     Ptrcall.callVoid1(gdext.classes.Node.mb_set_process_mode, livePtr, mode)
   }
 
   /** Node.get_process_mode */
-  final def getProcessMode(): Long = {
+  final def getProcessMode(): gdext.classes.Node.ProcessMode = {
     if (gdext.classes.Node.mb_get_process_mode == null) gdext.classes.Node.mb_get_process_mode = MethodBind.get("Node", "get_process_mode", 739966102L)
-    Ptrcall.call0[Long](gdext.classes.Node.mb_get_process_mode, livePtr)
+    gdext.classes.Node.ProcessMode(Ptrcall.call0[Long](gdext.classes.Node.mb_get_process_mode, livePtr))
   }
 
   /** Node.can_process */
@@ -311,27 +312,27 @@ abstract class Node extends Object {
   }
 
   /** Node.set_process_thread_group */
-  final def setProcessThreadGroup(mode: Long): Unit = {
+  final def setProcessThreadGroup(mode: gdext.classes.Node.ProcessThreadGroup): Unit = {
     if (gdext.classes.Node.mb_set_process_thread_group == null) gdext.classes.Node.mb_set_process_thread_group = MethodBind.get("Node", "set_process_thread_group", 2275442745L)
     Ptrcall.callVoid1(gdext.classes.Node.mb_set_process_thread_group, livePtr, mode)
   }
 
   /** Node.get_process_thread_group */
-  final def getProcessThreadGroup(): Long = {
+  final def getProcessThreadGroup(): gdext.classes.Node.ProcessThreadGroup = {
     if (gdext.classes.Node.mb_get_process_thread_group == null) gdext.classes.Node.mb_get_process_thread_group = MethodBind.get("Node", "get_process_thread_group", 1866404740L)
-    Ptrcall.call0[Long](gdext.classes.Node.mb_get_process_thread_group, livePtr)
+    gdext.classes.Node.ProcessThreadGroup(Ptrcall.call0[Long](gdext.classes.Node.mb_get_process_thread_group, livePtr))
   }
 
   /** Node.set_process_thread_messages */
-  final def setProcessThreadMessages(flags: Long): Unit = {
+  final def setProcessThreadMessages(flags: gdext.classes.Node.ProcessThreadMessages): Unit = {
     if (gdext.classes.Node.mb_set_process_thread_messages == null) gdext.classes.Node.mb_set_process_thread_messages = MethodBind.get("Node", "set_process_thread_messages", 1357280998L)
-    Ptrcall.callVoid1(gdext.classes.Node.mb_set_process_thread_messages, livePtr, flags)
+    Ptrcall.callVoid1(gdext.classes.Node.mb_set_process_thread_messages, livePtr, flags.asInstanceOf[Long])
   }
 
   /** Node.get_process_thread_messages */
-  final def getProcessThreadMessages(): Long = {
+  final def getProcessThreadMessages(): gdext.classes.Node.ProcessThreadMessages = {
     if (gdext.classes.Node.mb_get_process_thread_messages == null) gdext.classes.Node.mb_get_process_thread_messages = MethodBind.get("Node", "get_process_thread_messages", 4228993612L)
-    Ptrcall.call0[Long](gdext.classes.Node.mb_get_process_thread_messages, livePtr)
+    gdext.classes.Node.ProcessThreadMessages(Ptrcall.call0[Long](gdext.classes.Node.mb_get_process_thread_messages, livePtr))
   }
 
   /** Node.set_process_thread_group_order */
@@ -389,15 +390,15 @@ abstract class Node extends Object {
   }
 
   /** Node.set_physics_interpolation_mode */
-  final def setPhysicsInterpolationMode(mode: Long): Unit = {
+  final def setPhysicsInterpolationMode(mode: gdext.classes.Node.PhysicsInterpolationMode): Unit = {
     if (gdext.classes.Node.mb_set_physics_interpolation_mode == null) gdext.classes.Node.mb_set_physics_interpolation_mode = MethodBind.get("Node", "set_physics_interpolation_mode", 3202404928L)
     Ptrcall.callVoid1(gdext.classes.Node.mb_set_physics_interpolation_mode, livePtr, mode)
   }
 
   /** Node.get_physics_interpolation_mode */
-  final def getPhysicsInterpolationMode(): Long = {
+  final def getPhysicsInterpolationMode(): gdext.classes.Node.PhysicsInterpolationMode = {
     if (gdext.classes.Node.mb_get_physics_interpolation_mode == null) gdext.classes.Node.mb_get_physics_interpolation_mode = MethodBind.get("Node", "get_physics_interpolation_mode", 2920385216L)
-    Ptrcall.call0[Long](gdext.classes.Node.mb_get_physics_interpolation_mode, livePtr)
+    gdext.classes.Node.PhysicsInterpolationMode(Ptrcall.call0[Long](gdext.classes.Node.mb_get_physics_interpolation_mode, livePtr))
   }
 
   /** Node.is_physics_interpolated */
@@ -419,15 +420,15 @@ abstract class Node extends Object {
   }
 
   /** Node.set_auto_translate_mode */
-  final def setAutoTranslateMode(mode: Long): Unit = {
+  final def setAutoTranslateMode(mode: gdext.classes.Node.AutoTranslateMode): Unit = {
     if (gdext.classes.Node.mb_set_auto_translate_mode == null) gdext.classes.Node.mb_set_auto_translate_mode = MethodBind.get("Node", "set_auto_translate_mode", 776149714L)
     Ptrcall.callVoid1(gdext.classes.Node.mb_set_auto_translate_mode, livePtr, mode)
   }
 
   /** Node.get_auto_translate_mode */
-  final def getAutoTranslateMode(): Long = {
+  final def getAutoTranslateMode(): gdext.classes.Node.AutoTranslateMode = {
     if (gdext.classes.Node.mb_get_auto_translate_mode == null) gdext.classes.Node.mb_get_auto_translate_mode = MethodBind.get("Node", "get_auto_translate_mode", 2498906432L)
-    Ptrcall.call0[Long](gdext.classes.Node.mb_get_auto_translate_mode, livePtr)
+    gdext.classes.Node.AutoTranslateMode(Ptrcall.call0[Long](gdext.classes.Node.mb_get_auto_translate_mode, livePtr))
   }
 
   /** Node.can_auto_translate */
@@ -467,21 +468,21 @@ abstract class Node extends Object {
   }
 
   /** Node.duplicate */
-  final def duplicate(flags: Long): Node = {
+  final def duplicate(flags: Long = 15L): Node = {
     if (gdext.classes.Node.mb_duplicate == null) gdext.classes.Node.mb_duplicate = MethodBind.get("Node", "duplicate", 3511555459L)
     Wrappers.borrowed[Node](Ptrcall.call1[Long, Long](gdext.classes.Node.mb_duplicate, livePtr, flags))
   }
 
   /** Node.replace_by */
-  final def replaceBy(node: Node, keep_groups: Boolean): Unit = {
+  final def replaceBy(node: Node, keepGroups: Boolean = false): Unit = {
     if (gdext.classes.Node.mb_replace_by == null) gdext.classes.Node.mb_replace_by = MethodBind.get("Node", "replace_by", 2570952461L)
-    Ptrcall.callVoid2(gdext.classes.Node.mb_replace_by, livePtr, Wrappers.handle(node), keep_groups)
+    Ptrcall.callVoid2(gdext.classes.Node.mb_replace_by, livePtr, Wrappers.handle(node), keepGroups)
   }
 
   /** Node.set_scene_instance_load_placeholder */
-  final def setSceneInstanceLoadPlaceholder(load_placeholder: Boolean): Unit = {
+  final def setSceneInstanceLoadPlaceholder(loadPlaceholder: Boolean): Unit = {
     if (gdext.classes.Node.mb_set_scene_instance_load_placeholder == null) gdext.classes.Node.mb_set_scene_instance_load_placeholder = MethodBind.get("Node", "set_scene_instance_load_placeholder", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.Node.mb_set_scene_instance_load_placeholder, livePtr, load_placeholder)
+    Ptrcall.callVoid1(gdext.classes.Node.mb_set_scene_instance_load_placeholder, livePtr, loadPlaceholder)
   }
 
   /** Node.get_scene_instance_load_placeholder */
@@ -491,9 +492,9 @@ abstract class Node extends Object {
   }
 
   /** Node.set_editable_instance */
-  final def setEditableInstance(node: Node, is_editable: Boolean): Unit = {
+  final def setEditableInstance(node: Node, isEditable: Boolean): Unit = {
     if (gdext.classes.Node.mb_set_editable_instance == null) gdext.classes.Node.mb_set_editable_instance = MethodBind.get("Node", "set_editable_instance", 2731852923L)
-    Ptrcall.callVoid2(gdext.classes.Node.mb_set_editable_instance, livePtr, Wrappers.handle(node), is_editable)
+    Ptrcall.callVoid2(gdext.classes.Node.mb_set_editable_instance, livePtr, Wrappers.handle(node), isEditable)
   }
 
   /** Node.is_editable_instance */
@@ -527,7 +528,7 @@ abstract class Node extends Object {
   }
 
   /** Node.set_multiplayer_authority */
-  final def setMultiplayerAuthority(id: Long, recursive: Boolean): Unit = {
+  final def setMultiplayerAuthority(id: Long, recursive: Boolean = true): Unit = {
     if (gdext.classes.Node.mb_set_multiplayer_authority == null) gdext.classes.Node.mb_set_multiplayer_authority = MethodBind.get("Node", "set_multiplayer_authority", 972357352L)
     Ptrcall.callVoid2(gdext.classes.Node.mb_set_multiplayer_authority, livePtr, id, recursive)
   }
@@ -551,9 +552,9 @@ abstract class Node extends Object {
   }
 
   /** Node.set_editor_description */
-  final def setEditorDescription(editor_description: String): Unit = {
+  final def setEditorDescription(editorDescription: String): Unit = {
     if (gdext.classes.Node.mb_set_editor_description == null) gdext.classes.Node.mb_set_editor_description = MethodBind.get("Node", "set_editor_description", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.Node.mb_set_editor_description, livePtr, editor_description)
+    Ptrcall.callVoid1(gdext.classes.Node.mb_set_editor_description, livePtr, editorDescription)
   }
 
   /** Node.get_editor_description */
@@ -575,15 +576,15 @@ abstract class Node extends Object {
   }
 
   /** Node.atr */
-  final def atr(message: String, context: gdext.builtin.StringName): String = {
+  final def atr(message: String, context: String = ""): String = {
     if (gdext.classes.Node.mb_atr == null) gdext.classes.Node.mb_atr = MethodBind.get("Node", "atr", 3344478075L)
-    Ptrcall.call2[String, gdext.builtin.StringName, String](gdext.classes.Node.mb_atr, livePtr, message, context)
+    Ptrcall.call2[String, SnArg, String](gdext.classes.Node.mb_atr, livePtr, message, SnArg(context))
   }
 
   /** Node.atr_n */
-  final def atrN(message: String, plural_message: gdext.builtin.StringName, n: Long, context: gdext.builtin.StringName): String = {
+  final def atrN(message: String, pluralMessage: String, n: Long, context: String = ""): String = {
     if (gdext.classes.Node.mb_atr_n == null) gdext.classes.Node.mb_atr_n = MethodBind.get("Node", "atr_n", 259354841L)
-    Ptrcall.call4[String, gdext.builtin.StringName, Long, gdext.builtin.StringName, String](gdext.classes.Node.mb_atr_n, livePtr, message, plural_message, n, context)
+    Ptrcall.call4[String, SnArg, Long, SnArg, String](gdext.classes.Node.mb_atr_n, livePtr, message, SnArg(pluralMessage), n, SnArg(context))
   }
 
   /** Node.update_configuration_warnings */
@@ -712,5 +713,190 @@ object Node {
   final def printOrphanNodes(): Unit = {
     if (gdext.classes.Node.mb_print_orphan_nodes == null) gdext.classes.Node.mb_print_orphan_nodes = MethodBind.get("Node", "print_orphan_nodes", 3218959716L)
     Ptrcall.callVoid0(gdext.classes.Node.mb_print_orphan_nodes, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr])
+  }
+
+  /** Godot enum `Node.ProcessMode`. */
+  opaque type ProcessMode <: Long = Long
+
+  object ProcessMode {
+    final val Inherit: ProcessMode = 0L.asInstanceOf[ProcessMode]
+    final val Pausable: ProcessMode = 1L.asInstanceOf[ProcessMode]
+    final val WhenPaused: ProcessMode = 2L.asInstanceOf[ProcessMode]
+    final val Always: ProcessMode = 3L.asInstanceOf[ProcessMode]
+    final val Disabled: ProcessMode = 4L.asInstanceOf[ProcessMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ProcessMode = value.asInstanceOf[ProcessMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ProcessMode] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[ProcessMode]]
+
+    extension (self: ProcessMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Inherit"
+        case 1L => "Pausable"
+        case 2L => "WhenPaused"
+        case 3L => "Always"
+        case 4L => "Disabled"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Node.ProcessThreadGroup`. */
+  opaque type ProcessThreadGroup <: Long = Long
+
+  object ProcessThreadGroup {
+    final val Inherit: ProcessThreadGroup = 0L.asInstanceOf[ProcessThreadGroup]
+    final val MainThread: ProcessThreadGroup = 1L.asInstanceOf[ProcessThreadGroup]
+    final val SubThread: ProcessThreadGroup = 2L.asInstanceOf[ProcessThreadGroup]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ProcessThreadGroup = value.asInstanceOf[ProcessThreadGroup]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ProcessThreadGroup] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[ProcessThreadGroup]]
+
+    extension (self: ProcessThreadGroup)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Inherit"
+        case 1L => "MainThread"
+        case 2L => "SubThread"
+        case other => other.toString
+      }
+  }
+
+  /** Godot bitfield `Node.ProcessThreadMessages`. */
+  opaque type ProcessThreadMessages = Long
+
+  object ProcessThreadMessages {
+    final val Messages: ProcessThreadMessages = 1L.asInstanceOf[ProcessThreadMessages]
+    final val MessagesPhysics: ProcessThreadMessages = 2L.asInstanceOf[ProcessThreadMessages]
+    final val MessagesAll: ProcessThreadMessages = 3L.asInstanceOf[ProcessThreadMessages]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ProcessThreadMessages = value.asInstanceOf[ProcessThreadMessages]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ProcessThreadMessages] = scala.IArray[Long](1L, 2L, 3L).asInstanceOf[scala.IArray[ProcessThreadMessages]]
+
+    extension (self: ProcessThreadMessages)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 1L => "Messages"
+        case 2L => "MessagesPhysics"
+        case 3L => "MessagesAll"
+        case other => other.toString
+      }
+    extension (self: ProcessThreadMessages) {
+      inline def value: Long = self.asInstanceOf[Long]
+      inline def |(other: ProcessThreadMessages): ProcessThreadMessages = (self.value | other.value).asInstanceOf[ProcessThreadMessages]
+      inline def &(other: ProcessThreadMessages): ProcessThreadMessages = (self.value & other.value).asInstanceOf[ProcessThreadMessages]
+      /** Every bit of `flag` is set. */
+      inline def has(flag: ProcessThreadMessages): Boolean = (self.value & flag.value) == flag.value
+    }
+  }
+
+  /** Godot enum `Node.PhysicsInterpolationMode`. */
+  opaque type PhysicsInterpolationMode <: Long = Long
+
+  object PhysicsInterpolationMode {
+    final val Inherit: PhysicsInterpolationMode = 0L.asInstanceOf[PhysicsInterpolationMode]
+    final val On: PhysicsInterpolationMode = 1L.asInstanceOf[PhysicsInterpolationMode]
+    final val Off: PhysicsInterpolationMode = 2L.asInstanceOf[PhysicsInterpolationMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): PhysicsInterpolationMode = value.asInstanceOf[PhysicsInterpolationMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[PhysicsInterpolationMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[PhysicsInterpolationMode]]
+
+    extension (self: PhysicsInterpolationMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Inherit"
+        case 1L => "On"
+        case 2L => "Off"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Node.DuplicateFlags`. */
+  opaque type DuplicateFlags <: Long = Long
+
+  object DuplicateFlags {
+    final val Signals: DuplicateFlags = 1L.asInstanceOf[DuplicateFlags]
+    final val Groups: DuplicateFlags = 2L.asInstanceOf[DuplicateFlags]
+    final val Scripts: DuplicateFlags = 4L.asInstanceOf[DuplicateFlags]
+    final val UseInstantiation: DuplicateFlags = 8L.asInstanceOf[DuplicateFlags]
+    final val InternalState: DuplicateFlags = 16L.asInstanceOf[DuplicateFlags]
+    final val Default: DuplicateFlags = 15L.asInstanceOf[DuplicateFlags]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DuplicateFlags = value.asInstanceOf[DuplicateFlags]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DuplicateFlags] = scala.IArray[Long](1L, 2L, 4L, 8L, 15L, 16L).asInstanceOf[scala.IArray[DuplicateFlags]]
+
+    extension (self: DuplicateFlags)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 1L => "Signals"
+        case 2L => "Groups"
+        case 4L => "Scripts"
+        case 8L => "UseInstantiation"
+        case 15L => "Default"
+        case 16L => "InternalState"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Node.InternalMode`. */
+  opaque type InternalMode <: Long = Long
+
+  object InternalMode {
+    final val Disabled: InternalMode = 0L.asInstanceOf[InternalMode]
+    final val Front: InternalMode = 1L.asInstanceOf[InternalMode]
+    final val Back: InternalMode = 2L.asInstanceOf[InternalMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): InternalMode = value.asInstanceOf[InternalMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[InternalMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[InternalMode]]
+
+    extension (self: InternalMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "Front"
+        case 2L => "Back"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Node.AutoTranslateMode`. */
+  opaque type AutoTranslateMode <: Long = Long
+
+  object AutoTranslateMode {
+    final val Inherit: AutoTranslateMode = 0L.asInstanceOf[AutoTranslateMode]
+    final val Always: AutoTranslateMode = 1L.asInstanceOf[AutoTranslateMode]
+    final val Disabled: AutoTranslateMode = 2L.asInstanceOf[AutoTranslateMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): AutoTranslateMode = value.asInstanceOf[AutoTranslateMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[AutoTranslateMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[AutoTranslateMode]]
+
+    extension (self: AutoTranslateMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Inherit"
+        case 1L => "Always"
+        case 2L => "Disabled"
+        case other => other.toString
+      }
   }
 }

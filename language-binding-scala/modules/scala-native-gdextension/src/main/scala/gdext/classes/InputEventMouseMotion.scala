@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,9 +36,9 @@ abstract class InputEventMouseMotion extends InputEventMouse {
   }
 
   /** InputEventMouseMotion.set_pen_inverted */
-  final def setPenInverted(pen_inverted: Boolean): Unit = {
+  final def setPenInverted(penInverted: Boolean): Unit = {
     if (gdext.classes.InputEventMouseMotion.mb_set_pen_inverted == null) gdext.classes.InputEventMouseMotion.mb_set_pen_inverted = MethodBind.get("InputEventMouseMotion", "set_pen_inverted", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.InputEventMouseMotion.mb_set_pen_inverted, livePtr, pen_inverted)
+    Ptrcall.callVoid1(gdext.classes.InputEventMouseMotion.mb_set_pen_inverted, livePtr, penInverted)
   }
 
   /** InputEventMouseMotion.get_pen_inverted */

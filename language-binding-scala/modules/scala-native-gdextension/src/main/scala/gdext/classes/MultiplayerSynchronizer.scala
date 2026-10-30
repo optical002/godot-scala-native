@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -47,21 +48,21 @@ abstract class MultiplayerSynchronizer extends Node {
   }
 
   /** MultiplayerSynchronizer.set_visibility_update_mode */
-  final def setVisibilityUpdateMode(mode: Long): Unit = {
+  final def setVisibilityUpdateMode(mode: gdext.classes.MultiplayerSynchronizer.VisibilityUpdateMode): Unit = {
     if (gdext.classes.MultiplayerSynchronizer.mb_set_visibility_update_mode == null) gdext.classes.MultiplayerSynchronizer.mb_set_visibility_update_mode = MethodBind.get("MultiplayerSynchronizer", "set_visibility_update_mode", 3494860300L)
     Ptrcall.callVoid1(gdext.classes.MultiplayerSynchronizer.mb_set_visibility_update_mode, livePtr, mode)
   }
 
   /** MultiplayerSynchronizer.get_visibility_update_mode */
-  final def getVisibilityUpdateMode(): Long = {
+  final def getVisibilityUpdateMode(): gdext.classes.MultiplayerSynchronizer.VisibilityUpdateMode = {
     if (gdext.classes.MultiplayerSynchronizer.mb_get_visibility_update_mode == null) gdext.classes.MultiplayerSynchronizer.mb_get_visibility_update_mode = MethodBind.get("MultiplayerSynchronizer", "get_visibility_update_mode", 3352241418L)
-    Ptrcall.call0[Long](gdext.classes.MultiplayerSynchronizer.mb_get_visibility_update_mode, livePtr)
+    gdext.classes.MultiplayerSynchronizer.VisibilityUpdateMode(Ptrcall.call0[Long](gdext.classes.MultiplayerSynchronizer.mb_get_visibility_update_mode, livePtr))
   }
 
   /** MultiplayerSynchronizer.update_visibility */
-  final def updateVisibility(for_peer: Long): Unit = {
+  final def updateVisibility(forPeer: Long = 0L): Unit = {
     if (gdext.classes.MultiplayerSynchronizer.mb_update_visibility == null) gdext.classes.MultiplayerSynchronizer.mb_update_visibility = MethodBind.get("MultiplayerSynchronizer", "update_visibility", 1995695955L)
-    Ptrcall.callVoid1(gdext.classes.MultiplayerSynchronizer.mb_update_visibility, livePtr, for_peer)
+    Ptrcall.callVoid1(gdext.classes.MultiplayerSynchronizer.mb_update_visibility, livePtr, forPeer)
   }
 
   /** MultiplayerSynchronizer.set_visibility_public */
@@ -104,4 +105,28 @@ object MultiplayerSynchronizer {
   private[classes] var mb_is_visibility_public: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_visibility_for: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_visibility_for: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `MultiplayerSynchronizer.VisibilityUpdateMode`. */
+  opaque type VisibilityUpdateMode <: Long = Long
+
+  object VisibilityUpdateMode {
+    final val Idle: VisibilityUpdateMode = 0L.asInstanceOf[VisibilityUpdateMode]
+    final val Physics: VisibilityUpdateMode = 1L.asInstanceOf[VisibilityUpdateMode]
+    final val None: VisibilityUpdateMode = 2L.asInstanceOf[VisibilityUpdateMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): VisibilityUpdateMode = value.asInstanceOf[VisibilityUpdateMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[VisibilityUpdateMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[VisibilityUpdateMode]]
+
+    extension (self: VisibilityUpdateMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Idle"
+        case 1L => "Physics"
+        case 2L => "None"
+        case other => other.toString
+      }
+  }
 }

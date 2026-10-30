@@ -29,6 +29,8 @@ The plugin must be enabled explicitly. It requires and enables Scala Native's
 | `godotManifestName` | `String` | `scala.gdextension` | File name of the generated manifest. |
 | `godotCompatibilityMinimum` | `String` | `4.2` | `compatibility_minimum` written into the manifest. |
 | `godotNativeMode` | `String` | `releaseFast` | Scala Native build mode: `releaseFast`, `releaseFull`, or `debug`. See [Performance](../guides/performance.md#build-modes). |
+| `godotInputActions` | `Boolean` | `true` | Generate the `game.Actions` enum from `project.godot`'s Input Map. See [Input](../guides/input.md#actions). |
+| `godotActionsObject` | `String` | `Actions` | Name of the generated Input Map enum in package `game`. |
 
 ## Tasks
 

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,9 +18,9 @@ abstract class AStar3D extends RefCounted {
   }
 
   /** AStar3D.add_point */
-  final def addPoint(id: Long, position: gdext.builtin.Vector3, weight_scale: Double): Unit = {
+  final def addPoint(id: Long, position: gdext.builtin.Vector3, weightScale: Double = 1.0): Unit = {
     if (gdext.classes.AStar3D.mb_add_point == null) gdext.classes.AStar3D.mb_add_point = MethodBind.get("AStar3D", "add_point", 1038703438L)
-    Ptrcall.callVoid3(gdext.classes.AStar3D.mb_add_point, livePtr, id, position, weight_scale)
+    Ptrcall.callVoid3(gdext.classes.AStar3D.mb_add_point, livePtr, id, position, weightScale)
   }
 
   /** AStar3D.get_point_position */
@@ -41,9 +42,9 @@ abstract class AStar3D extends RefCounted {
   }
 
   /** AStar3D.set_point_weight_scale */
-  final def setPointWeightScale(id: Long, weight_scale: Double): Unit = {
+  final def setPointWeightScale(id: Long, weightScale: Double): Unit = {
     if (gdext.classes.AStar3D.mb_set_point_weight_scale == null) gdext.classes.AStar3D.mb_set_point_weight_scale = MethodBind.get("AStar3D", "set_point_weight_scale", 1602489585L)
-    Ptrcall.callVoid2(gdext.classes.AStar3D.mb_set_point_weight_scale, livePtr, id, weight_scale)
+    Ptrcall.callVoid2(gdext.classes.AStar3D.mb_set_point_weight_scale, livePtr, id, weightScale)
   }
 
   /** AStar3D.remove_point */
@@ -59,7 +60,7 @@ abstract class AStar3D extends RefCounted {
   }
 
   /** AStar3D.set_point_disabled */
-  final def setPointDisabled(id: Long, disabled: Boolean): Unit = {
+  final def setPointDisabled(id: Long, disabled: Boolean = true): Unit = {
     if (gdext.classes.AStar3D.mb_set_point_disabled == null) gdext.classes.AStar3D.mb_set_point_disabled = MethodBind.get("AStar3D", "set_point_disabled", 972357352L)
     Ptrcall.callVoid2(gdext.classes.AStar3D.mb_set_point_disabled, livePtr, id, disabled)
   }
@@ -83,21 +84,21 @@ abstract class AStar3D extends RefCounted {
   }
 
   /** AStar3D.connect_points */
-  final def connectPoints(id: Long, to_id: Long, bidirectional: Boolean): Unit = {
+  final def connectPoints(id: Long, toId: Long, bidirectional: Boolean = true): Unit = {
     if (gdext.classes.AStar3D.mb_connect_points == null) gdext.classes.AStar3D.mb_connect_points = MethodBind.get("AStar3D", "connect_points", 3710494224L)
-    Ptrcall.callVoid3(gdext.classes.AStar3D.mb_connect_points, livePtr, id, to_id, bidirectional)
+    Ptrcall.callVoid3(gdext.classes.AStar3D.mb_connect_points, livePtr, id, toId, bidirectional)
   }
 
   /** AStar3D.disconnect_points */
-  final def disconnectPoints(id: Long, to_id: Long, bidirectional: Boolean): Unit = {
+  final def disconnectPoints(id: Long, toId: Long, bidirectional: Boolean = true): Unit = {
     if (gdext.classes.AStar3D.mb_disconnect_points == null) gdext.classes.AStar3D.mb_disconnect_points = MethodBind.get("AStar3D", "disconnect_points", 3710494224L)
-    Ptrcall.callVoid3(gdext.classes.AStar3D.mb_disconnect_points, livePtr, id, to_id, bidirectional)
+    Ptrcall.callVoid3(gdext.classes.AStar3D.mb_disconnect_points, livePtr, id, toId, bidirectional)
   }
 
   /** AStar3D.are_points_connected */
-  final def arePointsConnected(id: Long, to_id: Long, bidirectional: Boolean): Boolean = {
+  final def arePointsConnected(id: Long, toId: Long, bidirectional: Boolean = true): Boolean = {
     if (gdext.classes.AStar3D.mb_are_points_connected == null) gdext.classes.AStar3D.mb_are_points_connected = MethodBind.get("AStar3D", "are_points_connected", 2288175859L)
-    Ptrcall.call3[Long, Long, Boolean, Boolean](gdext.classes.AStar3D.mb_are_points_connected, livePtr, id, to_id, bidirectional)
+    Ptrcall.call3[Long, Long, Boolean, Boolean](gdext.classes.AStar3D.mb_are_points_connected, livePtr, id, toId, bidirectional)
   }
 
   /** AStar3D.get_point_count */
@@ -113,9 +114,9 @@ abstract class AStar3D extends RefCounted {
   }
 
   /** AStar3D.reserve_space */
-  final def reserveSpace(num_nodes: Long): Unit = {
+  final def reserveSpace(numNodes: Long): Unit = {
     if (gdext.classes.AStar3D.mb_reserve_space == null) gdext.classes.AStar3D.mb_reserve_space = MethodBind.get("AStar3D", "reserve_space", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.AStar3D.mb_reserve_space, livePtr, num_nodes)
+    Ptrcall.callVoid1(gdext.classes.AStar3D.mb_reserve_space, livePtr, numNodes)
   }
 
   /** AStar3D.clear */
@@ -125,15 +126,15 @@ abstract class AStar3D extends RefCounted {
   }
 
   /** AStar3D.get_closest_point */
-  final def getClosestPoint(to_position: gdext.builtin.Vector3, include_disabled: Boolean): Long = {
+  final def getClosestPoint(toPosition: gdext.builtin.Vector3, includeDisabled: Boolean = false): Long = {
     if (gdext.classes.AStar3D.mb_get_closest_point == null) gdext.classes.AStar3D.mb_get_closest_point = MethodBind.get("AStar3D", "get_closest_point", 3241074317L)
-    Ptrcall.call2[gdext.builtin.Vector3, Boolean, Long](gdext.classes.AStar3D.mb_get_closest_point, livePtr, to_position, include_disabled)
+    Ptrcall.call2[gdext.builtin.Vector3, Boolean, Long](gdext.classes.AStar3D.mb_get_closest_point, livePtr, toPosition, includeDisabled)
   }
 
   /** AStar3D.get_closest_position_in_segment */
-  final def getClosestPositionInSegment(to_position: gdext.builtin.Vector3): gdext.builtin.Vector3 = {
+  final def getClosestPositionInSegment(toPosition: gdext.builtin.Vector3): gdext.builtin.Vector3 = {
     if (gdext.classes.AStar3D.mb_get_closest_position_in_segment == null) gdext.classes.AStar3D.mb_get_closest_position_in_segment = MethodBind.get("AStar3D", "get_closest_position_in_segment", 192990374L)
-    Ptrcall.call1[gdext.builtin.Vector3, gdext.builtin.Vector3](gdext.classes.AStar3D.mb_get_closest_position_in_segment, livePtr, to_position)
+    Ptrcall.call1[gdext.builtin.Vector3, gdext.builtin.Vector3](gdext.classes.AStar3D.mb_get_closest_position_in_segment, livePtr, toPosition)
   }
 
 }

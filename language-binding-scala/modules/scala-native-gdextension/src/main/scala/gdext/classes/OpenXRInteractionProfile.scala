@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class OpenXRInteractionProfile extends Resource {
   override def godotClassName: String = "OpenXRInteractionProfile"
 
   /** OpenXRInteractionProfile.set_interaction_profile_path */
-  final def setInteractionProfilePath(interaction_profile_path: String): Unit = {
+  final def setInteractionProfilePath(interactionProfilePath: String): Unit = {
     if (gdext.classes.OpenXRInteractionProfile.mb_set_interaction_profile_path == null) gdext.classes.OpenXRInteractionProfile.mb_set_interaction_profile_path = MethodBind.get("OpenXRInteractionProfile", "set_interaction_profile_path", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRInteractionProfile.mb_set_interaction_profile_path, livePtr, interaction_profile_path)
+    Ptrcall.callVoid1(gdext.classes.OpenXRInteractionProfile.mb_set_interaction_profile_path, livePtr, interactionProfilePath)
   }
 
   /** OpenXRInteractionProfile.get_interaction_profile_path */

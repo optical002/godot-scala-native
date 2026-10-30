@@ -2,12 +2,13 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
 
 /** Generated wrapper for Godot's `InputEvent`, extends `Resource`. */
-abstract class InputEvent extends Resource {
+abstract class InputEvent extends Resource with gdext.internal.input.InputEventOps {
   override def godotClassName: String = "InputEvent"
 
   /** InputEvent.set_device */
@@ -23,27 +24,27 @@ abstract class InputEvent extends Resource {
   }
 
   /** InputEvent.is_action */
-  final def isAction(action: gdext.builtin.StringName, exact_match: Boolean): Boolean = {
+  final def isAction(action: String, exactMatch: Boolean = false): Boolean = {
     if (gdext.classes.InputEvent.mb_is_action == null) gdext.classes.InputEvent.mb_is_action = MethodBind.get("InputEvent", "is_action", 1558498928L)
-    Ptrcall.call2[gdext.builtin.StringName, Boolean, Boolean](gdext.classes.InputEvent.mb_is_action, livePtr, action, exact_match)
+    Ptrcall.call2[SnArg, Boolean, Boolean](gdext.classes.InputEvent.mb_is_action, livePtr, SnArg(action), exactMatch)
   }
 
   /** InputEvent.is_action_pressed */
-  final def isActionPressed(action: gdext.builtin.StringName, allow_echo: Boolean, exact_match: Boolean): Boolean = {
+  final def isActionPressed(action: String, allowEcho: Boolean = false, exactMatch: Boolean = false): Boolean = {
     if (gdext.classes.InputEvent.mb_is_action_pressed == null) gdext.classes.InputEvent.mb_is_action_pressed = MethodBind.get("InputEvent", "is_action_pressed", 1631499404L)
-    Ptrcall.call3[gdext.builtin.StringName, Boolean, Boolean, Boolean](gdext.classes.InputEvent.mb_is_action_pressed, livePtr, action, allow_echo, exact_match)
+    Ptrcall.call3[SnArg, Boolean, Boolean, Boolean](gdext.classes.InputEvent.mb_is_action_pressed, livePtr, SnArg(action), allowEcho, exactMatch)
   }
 
   /** InputEvent.is_action_released */
-  final def isActionReleased(action: gdext.builtin.StringName, exact_match: Boolean): Boolean = {
+  final def isActionReleased(action: String, exactMatch: Boolean = false): Boolean = {
     if (gdext.classes.InputEvent.mb_is_action_released == null) gdext.classes.InputEvent.mb_is_action_released = MethodBind.get("InputEvent", "is_action_released", 1558498928L)
-    Ptrcall.call2[gdext.builtin.StringName, Boolean, Boolean](gdext.classes.InputEvent.mb_is_action_released, livePtr, action, exact_match)
+    Ptrcall.call2[SnArg, Boolean, Boolean](gdext.classes.InputEvent.mb_is_action_released, livePtr, SnArg(action), exactMatch)
   }
 
   /** InputEvent.get_action_strength */
-  final def getActionStrength(action: gdext.builtin.StringName, exact_match: Boolean): Double = {
+  final def getActionStrength(action: String, exactMatch: Boolean = false): Double = {
     if (gdext.classes.InputEvent.mb_get_action_strength == null) gdext.classes.InputEvent.mb_get_action_strength = MethodBind.get("InputEvent", "get_action_strength", 801543509L)
-    Ptrcall.call2[gdext.builtin.StringName, Boolean, Double](gdext.classes.InputEvent.mb_get_action_strength, livePtr, action, exact_match)
+    Ptrcall.call2[SnArg, Boolean, Double](gdext.classes.InputEvent.mb_get_action_strength, livePtr, SnArg(action), exactMatch)
   }
 
   /** InputEvent.is_canceled */
@@ -77,9 +78,9 @@ abstract class InputEvent extends Resource {
   }
 
   /** InputEvent.is_match */
-  final def isMatch(event: InputEvent, exact_match: Boolean): Boolean = {
+  final def isMatch(event: InputEvent, exactMatch: Boolean = true): Boolean = {
     if (gdext.classes.InputEvent.mb_is_match == null) gdext.classes.InputEvent.mb_is_match = MethodBind.get("InputEvent", "is_match", 1754951977L)
-    Ptrcall.call2[GodotObject, Boolean, Boolean](gdext.classes.InputEvent.mb_is_match, livePtr, Wrappers.handle(event), exact_match)
+    Ptrcall.call2[GodotObject, Boolean, Boolean](gdext.classes.InputEvent.mb_is_match, livePtr, Wrappers.handle(event), exactMatch)
   }
 
   /** InputEvent.is_action_type */
@@ -89,15 +90,15 @@ abstract class InputEvent extends Resource {
   }
 
   /** InputEvent.accumulate */
-  final def accumulate(with_event: InputEvent): Boolean = {
+  final def accumulate(withEvent: InputEvent): Boolean = {
     if (gdext.classes.InputEvent.mb_accumulate == null) gdext.classes.InputEvent.mb_accumulate = MethodBind.get("InputEvent", "accumulate", 1062211774L)
-    Ptrcall.call1[GodotObject, Boolean](gdext.classes.InputEvent.mb_accumulate, livePtr, Wrappers.handle(with_event))
+    Ptrcall.call1[GodotObject, Boolean](gdext.classes.InputEvent.mb_accumulate, livePtr, Wrappers.handle(withEvent))
   }
 
   /** InputEvent.xformed_by. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def xformedBy(xform: gdext.builtin.Transform2D, local_ofs: gdext.builtin.Vector2): InputEvent = {
+  final def xformedBy(xform: gdext.builtin.Transform2D, localOfs: gdext.builtin.Vector2 = gdext.builtin.Vector2(0f, 0f)): InputEvent = {
     if (gdext.classes.InputEvent.mb_xformed_by == null) gdext.classes.InputEvent.mb_xformed_by = MethodBind.get("InputEvent", "xformed_by", 1282766827L)
-    Wrappers.owned[InputEvent](Ptrcall.call2[gdext.builtin.Transform2D, gdext.builtin.Vector2, Long](gdext.classes.InputEvent.mb_xformed_by, livePtr, xform, local_ofs))
+    Wrappers.owned[InputEvent](Ptrcall.call2[gdext.builtin.Transform2D, gdext.builtin.Vector2, Long](gdext.classes.InputEvent.mb_xformed_by, livePtr, xform, localOfs))
   }
 
 }

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class RDFramebufferPass extends RefCounted {
   override def godotClassName: String = "RDFramebufferPass"
 
   /** RDFramebufferPass.set_depth_attachment */
-  final def setDepthAttachment(p_member: Long): Unit = {
+  final def setDepthAttachment(pMember: Long): Unit = {
     if (gdext.classes.RDFramebufferPass.mb_set_depth_attachment == null) gdext.classes.RDFramebufferPass.mb_set_depth_attachment = MethodBind.get("RDFramebufferPass", "set_depth_attachment", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.RDFramebufferPass.mb_set_depth_attachment, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDFramebufferPass.mb_set_depth_attachment, livePtr, pMember)
   }
 
   /** RDFramebufferPass.get_depth_attachment */

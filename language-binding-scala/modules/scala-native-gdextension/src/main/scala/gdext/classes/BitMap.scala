@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,7 +18,7 @@ abstract class BitMap extends Resource {
   }
 
   /** BitMap.create_from_image_alpha */
-  final def createFromImageAlpha(image: Image, threshold: Double): Unit = {
+  final def createFromImageAlpha(image: Image, threshold: Double = 0.1): Unit = {
     if (gdext.classes.BitMap.mb_create_from_image_alpha == null) gdext.classes.BitMap.mb_create_from_image_alpha = MethodBind.get("BitMap", "create_from_image_alpha", 106271684L)
     Ptrcall.callVoid2(gdext.classes.BitMap.mb_create_from_image_alpha, livePtr, Wrappers.handle(image), threshold)
   }
@@ -65,9 +66,9 @@ abstract class BitMap extends Resource {
   }
 
   /** BitMap.resize */
-  final def resize(new_size: gdext.builtin.Vector2i): Unit = {
+  final def resize(newSize: gdext.builtin.Vector2i): Unit = {
     if (gdext.classes.BitMap.mb_resize == null) gdext.classes.BitMap.mb_resize = MethodBind.get("BitMap", "resize", 1130785943L)
-    Ptrcall.callVoid1(gdext.classes.BitMap.mb_resize, livePtr, new_size)
+    Ptrcall.callVoid1(gdext.classes.BitMap.mb_resize, livePtr, newSize)
   }
 
   /** BitMap.grow_mask */

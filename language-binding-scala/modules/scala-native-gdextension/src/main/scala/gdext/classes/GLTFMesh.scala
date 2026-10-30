@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,9 +18,9 @@ abstract class GLTFMesh extends Resource {
   }
 
   /** GLTFMesh.set_original_name */
-  final def setOriginalName(original_name: String): Unit = {
+  final def setOriginalName(originalName: String): Unit = {
     if (gdext.classes.GLTFMesh.mb_set_original_name == null) gdext.classes.GLTFMesh.mb_set_original_name = MethodBind.get("GLTFMesh", "set_original_name", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.GLTFMesh.mb_set_original_name, livePtr, original_name)
+    Ptrcall.callVoid1(gdext.classes.GLTFMesh.mb_set_original_name, livePtr, originalName)
   }
 
   /** GLTFMesh.get_mesh. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */

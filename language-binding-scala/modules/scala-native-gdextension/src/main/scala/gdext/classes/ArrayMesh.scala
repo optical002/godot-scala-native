@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class ArrayMesh extends Mesh {
   override def godotClassName: String = "ArrayMesh"
 
   /** ArrayMesh.add_blend_shape */
-  final def addBlendShape(name: gdext.builtin.StringName): Unit = {
+  final def addBlendShape(name: String): Unit = {
     if (gdext.classes.ArrayMesh.mb_add_blend_shape == null) gdext.classes.ArrayMesh.mb_add_blend_shape = MethodBind.get("ArrayMesh", "add_blend_shape", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.ArrayMesh.mb_add_blend_shape, livePtr, name)
+    Ptrcall.callVoid1(gdext.classes.ArrayMesh.mb_add_blend_shape, livePtr, SnArg(name))
   }
 
   /** ArrayMesh.get_blend_shape_count */
@@ -23,15 +24,15 @@ abstract class ArrayMesh extends Mesh {
   }
 
   /** ArrayMesh.get_blend_shape_name */
-  final def getBlendShapeName(index: Long): gdext.builtin.StringName = {
+  final def getBlendShapeName(index: Long): String = {
     if (gdext.classes.ArrayMesh.mb_get_blend_shape_name == null) gdext.classes.ArrayMesh.mb_get_blend_shape_name = MethodBind.get("ArrayMesh", "get_blend_shape_name", 659327637L)
-    Ptrcall.call1[Long, gdext.builtin.StringName](gdext.classes.ArrayMesh.mb_get_blend_shape_name, livePtr, index)
+    Ptrcall.call1[Long, SnArg](gdext.classes.ArrayMesh.mb_get_blend_shape_name, livePtr, index)
   }
 
   /** ArrayMesh.set_blend_shape_name */
-  final def setBlendShapeName(index: Long, name: gdext.builtin.StringName): Unit = {
+  final def setBlendShapeName(index: Long, name: String): Unit = {
     if (gdext.classes.ArrayMesh.mb_set_blend_shape_name == null) gdext.classes.ArrayMesh.mb_set_blend_shape_name = MethodBind.get("ArrayMesh", "set_blend_shape_name", 3780747571L)
-    Ptrcall.callVoid2(gdext.classes.ArrayMesh.mb_set_blend_shape_name, livePtr, index, name)
+    Ptrcall.callVoid2(gdext.classes.ArrayMesh.mb_set_blend_shape_name, livePtr, index, SnArg(name))
   }
 
   /** ArrayMesh.clear_blend_shapes */
@@ -41,15 +42,15 @@ abstract class ArrayMesh extends Mesh {
   }
 
   /** ArrayMesh.set_blend_shape_mode */
-  final def setBlendShapeMode(mode: Long): Unit = {
+  final def setBlendShapeMode(mode: gdext.classes.Mesh.BlendShapeMode): Unit = {
     if (gdext.classes.ArrayMesh.mb_set_blend_shape_mode == null) gdext.classes.ArrayMesh.mb_set_blend_shape_mode = MethodBind.get("ArrayMesh", "set_blend_shape_mode", 227983991L)
     Ptrcall.callVoid1(gdext.classes.ArrayMesh.mb_set_blend_shape_mode, livePtr, mode)
   }
 
   /** ArrayMesh.get_blend_shape_mode */
-  final def getBlendShapeMode(): Long = {
+  final def getBlendShapeMode(): gdext.classes.Mesh.BlendShapeMode = {
     if (gdext.classes.ArrayMesh.mb_get_blend_shape_mode == null) gdext.classes.ArrayMesh.mb_get_blend_shape_mode = MethodBind.get("ArrayMesh", "get_blend_shape_mode", 836485024L)
-    Ptrcall.call0[Long](gdext.classes.ArrayMesh.mb_get_blend_shape_mode, livePtr)
+    gdext.classes.Mesh.BlendShapeMode(Ptrcall.call0[Long](gdext.classes.ArrayMesh.mb_get_blend_shape_mode, livePtr))
   }
 
   /** ArrayMesh.clear_surfaces */
@@ -59,33 +60,33 @@ abstract class ArrayMesh extends Mesh {
   }
 
   /** ArrayMesh.surface_remove */
-  final def surfaceRemove(surf_idx: Long): Unit = {
+  final def surfaceRemove(surfIdx: Long): Unit = {
     if (gdext.classes.ArrayMesh.mb_surface_remove == null) gdext.classes.ArrayMesh.mb_surface_remove = MethodBind.get("ArrayMesh", "surface_remove", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.ArrayMesh.mb_surface_remove, livePtr, surf_idx)
+    Ptrcall.callVoid1(gdext.classes.ArrayMesh.mb_surface_remove, livePtr, surfIdx)
   }
 
   /** ArrayMesh.surface_get_array_len */
-  final def surfaceGetArrayLen(surf_idx: Long): Long = {
+  final def surfaceGetArrayLen(surfIdx: Long): Long = {
     if (gdext.classes.ArrayMesh.mb_surface_get_array_len == null) gdext.classes.ArrayMesh.mb_surface_get_array_len = MethodBind.get("ArrayMesh", "surface_get_array_len", 923996154L)
-    Ptrcall.call1[Long, Long](gdext.classes.ArrayMesh.mb_surface_get_array_len, livePtr, surf_idx)
+    Ptrcall.call1[Long, Long](gdext.classes.ArrayMesh.mb_surface_get_array_len, livePtr, surfIdx)
   }
 
   /** ArrayMesh.surface_get_array_index_len */
-  final def surfaceGetArrayIndexLen(surf_idx: Long): Long = {
+  final def surfaceGetArrayIndexLen(surfIdx: Long): Long = {
     if (gdext.classes.ArrayMesh.mb_surface_get_array_index_len == null) gdext.classes.ArrayMesh.mb_surface_get_array_index_len = MethodBind.get("ArrayMesh", "surface_get_array_index_len", 923996154L)
-    Ptrcall.call1[Long, Long](gdext.classes.ArrayMesh.mb_surface_get_array_index_len, livePtr, surf_idx)
+    Ptrcall.call1[Long, Long](gdext.classes.ArrayMesh.mb_surface_get_array_index_len, livePtr, surfIdx)
   }
 
   /** ArrayMesh.surface_get_format */
-  final def surfaceGetFormat(surf_idx: Long): Long = {
+  final def surfaceGetFormat(surfIdx: Long): gdext.classes.Mesh.ArrayFormat = {
     if (gdext.classes.ArrayMesh.mb_surface_get_format == null) gdext.classes.ArrayMesh.mb_surface_get_format = MethodBind.get("ArrayMesh", "surface_get_format", 3718287884L)
-    Ptrcall.call1[Long, Long](gdext.classes.ArrayMesh.mb_surface_get_format, livePtr, surf_idx)
+    gdext.classes.Mesh.ArrayFormat(Ptrcall.call1[Long, Long](gdext.classes.ArrayMesh.mb_surface_get_format, livePtr, surfIdx))
   }
 
   /** ArrayMesh.surface_get_primitive_type */
-  final def surfaceGetPrimitiveType(surf_idx: Long): Long = {
+  final def surfaceGetPrimitiveType(surfIdx: Long): gdext.classes.Mesh.PrimitiveType = {
     if (gdext.classes.ArrayMesh.mb_surface_get_primitive_type == null) gdext.classes.ArrayMesh.mb_surface_get_primitive_type = MethodBind.get("ArrayMesh", "surface_get_primitive_type", 4141943888L)
-    Ptrcall.call1[Long, Long](gdext.classes.ArrayMesh.mb_surface_get_primitive_type, livePtr, surf_idx)
+    gdext.classes.Mesh.PrimitiveType(Ptrcall.call1[Long, Long](gdext.classes.ArrayMesh.mb_surface_get_primitive_type, livePtr, surfIdx))
   }
 
   /** ArrayMesh.surface_find_by_name */
@@ -95,15 +96,15 @@ abstract class ArrayMesh extends Mesh {
   }
 
   /** ArrayMesh.surface_set_name */
-  final def surfaceSetName(surf_idx: Long, name: String): Unit = {
+  final def surfaceSetName(surfIdx: Long, name: String): Unit = {
     if (gdext.classes.ArrayMesh.mb_surface_set_name == null) gdext.classes.ArrayMesh.mb_surface_set_name = MethodBind.get("ArrayMesh", "surface_set_name", 501894301L)
-    Ptrcall.callVoid2(gdext.classes.ArrayMesh.mb_surface_set_name, livePtr, surf_idx, name)
+    Ptrcall.callVoid2(gdext.classes.ArrayMesh.mb_surface_set_name, livePtr, surfIdx, name)
   }
 
   /** ArrayMesh.surface_get_name */
-  final def surfaceGetName(surf_idx: Long): String = {
+  final def surfaceGetName(surfIdx: Long): String = {
     if (gdext.classes.ArrayMesh.mb_surface_get_name == null) gdext.classes.ArrayMesh.mb_surface_get_name = MethodBind.get("ArrayMesh", "surface_get_name", 844755477L)
-    Ptrcall.call1[Long, String](gdext.classes.ArrayMesh.mb_surface_get_name, livePtr, surf_idx)
+    Ptrcall.call1[Long, String](gdext.classes.ArrayMesh.mb_surface_get_name, livePtr, surfIdx)
   }
 
   /** ArrayMesh.regen_normal_maps */
@@ -113,9 +114,9 @@ abstract class ArrayMesh extends Mesh {
   }
 
   /** ArrayMesh.lightmap_unwrap */
-  final def lightmapUnwrap(transform: gdext.builtin.Transform3D, texel_size: Double): Long = {
+  final def lightmapUnwrap(transform: gdext.builtin.Transform3D, texelSize: Double): gdext.classes.Error = {
     if (gdext.classes.ArrayMesh.mb_lightmap_unwrap == null) gdext.classes.ArrayMesh.mb_lightmap_unwrap = MethodBind.get("ArrayMesh", "lightmap_unwrap", 1476641071L)
-    Ptrcall.call2[gdext.builtin.Transform3D, Double, Long](gdext.classes.ArrayMesh.mb_lightmap_unwrap, livePtr, transform, texel_size)
+    gdext.classes.Error(Ptrcall.call2[gdext.builtin.Transform3D, Double, Long](gdext.classes.ArrayMesh.mb_lightmap_unwrap, livePtr, transform, texelSize))
   }
 
   /** ArrayMesh.set_custom_aabb */

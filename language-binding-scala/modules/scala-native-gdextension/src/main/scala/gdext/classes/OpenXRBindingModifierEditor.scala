@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,9 +18,9 @@ abstract class OpenXRBindingModifierEditor extends PanelContainer {
   }
 
   /** OpenXRBindingModifierEditor.setup */
-  final def setup(action_map: OpenXRActionMap, binding_modifier: OpenXRBindingModifier): Unit = {
+  final def setup(actionMap: OpenXRActionMap, bindingModifier: OpenXRBindingModifier): Unit = {
     if (gdext.classes.OpenXRBindingModifierEditor.mb_setup == null) gdext.classes.OpenXRBindingModifierEditor.mb_setup = MethodBind.get("OpenXRBindingModifierEditor", "setup", 1284787389L)
-    Ptrcall.callVoid2(gdext.classes.OpenXRBindingModifierEditor.mb_setup, livePtr, Wrappers.handle(action_map), Wrappers.handle(binding_modifier))
+    Ptrcall.callVoid2(gdext.classes.OpenXRBindingModifierEditor.mb_setup, livePtr, Wrappers.handle(actionMap), Wrappers.handle(bindingModifier))
   }
 
 }

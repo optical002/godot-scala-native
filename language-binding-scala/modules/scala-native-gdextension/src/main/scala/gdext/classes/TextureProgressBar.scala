@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -143,13 +144,13 @@ abstract class TextureProgressBar extends Range {
   }
 
   /** TextureProgressBar.set_stretch_margin */
-  final def setStretchMargin(margin: Long, value: Long): Unit = {
+  final def setStretchMargin(margin: gdext.classes.Side, value: Long): Unit = {
     if (gdext.classes.TextureProgressBar.mb_set_stretch_margin == null) gdext.classes.TextureProgressBar.mb_set_stretch_margin = MethodBind.get("TextureProgressBar", "set_stretch_margin", 437707142L)
     Ptrcall.callVoid2(gdext.classes.TextureProgressBar.mb_set_stretch_margin, livePtr, margin, value)
   }
 
   /** TextureProgressBar.get_stretch_margin */
-  final def getStretchMargin(margin: Long): Long = {
+  final def getStretchMargin(margin: gdext.classes.Side): Long = {
     if (gdext.classes.TextureProgressBar.mb_get_stretch_margin == null) gdext.classes.TextureProgressBar.mb_get_stretch_margin = MethodBind.get("TextureProgressBar", "get_stretch_margin", 1983885014L)
     Ptrcall.call1[Long, Long](gdext.classes.TextureProgressBar.mb_get_stretch_margin, livePtr, margin)
   }
@@ -195,4 +196,40 @@ object TextureProgressBar {
   private[classes] var mb_get_stretch_margin: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_nine_patch_stretch: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_nine_patch_stretch: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `TextureProgressBar.FillMode`. */
+  opaque type FillMode <: Long = Long
+
+  object FillMode {
+    final val LeftToRight: FillMode = 0L.asInstanceOf[FillMode]
+    final val RightToLeft: FillMode = 1L.asInstanceOf[FillMode]
+    final val TopToBottom: FillMode = 2L.asInstanceOf[FillMode]
+    final val BottomToTop: FillMode = 3L.asInstanceOf[FillMode]
+    final val Clockwise: FillMode = 4L.asInstanceOf[FillMode]
+    final val CounterClockwise: FillMode = 5L.asInstanceOf[FillMode]
+    final val BilinearLeftAndRight: FillMode = 6L.asInstanceOf[FillMode]
+    final val BilinearTopAndBottom: FillMode = 7L.asInstanceOf[FillMode]
+    final val ClockwiseAndCounterClockwise: FillMode = 8L.asInstanceOf[FillMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): FillMode = value.asInstanceOf[FillMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[FillMode] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L).asInstanceOf[scala.IArray[FillMode]]
+
+    extension (self: FillMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "LeftToRight"
+        case 1L => "RightToLeft"
+        case 2L => "TopToBottom"
+        case 3L => "BottomToTop"
+        case 4L => "Clockwise"
+        case 5L => "CounterClockwise"
+        case 6L => "BilinearLeftAndRight"
+        case 7L => "BilinearTopAndBottom"
+        case 8L => "ClockwiseAndCounterClockwise"
+        case other => other.toString
+      }
+  }
 }

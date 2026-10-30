@@ -23,13 +23,13 @@ final class MemoryProbe(
 
   @signal def pinged(): Unit = ()
 
-  override def _ready(): Unit = {
+  override def ready(): Unit = {
     child = Gd.create[Node3D]()
-    child.setName(StringNames.cached("Child"))
-    addChild(child, false, 0L)
+    child.setName("Child")
+    addChild(child, false, Node.InternalMode.Disabled)
   }
 
-  override def _process(delta: Double): Unit = processFrames += 1
+  override def process(delta: Double): Unit = processFrames += 1
 
   @func def processFrameCount(): Long = processFrames
 
@@ -67,19 +67,24 @@ final class MemoryProbe(
   )
   private var sink: AnyRef = null
   private var fsink: Float = 0f
+  private var bsink: Boolean = false
 
   private val ops: Map[String, () => Unit] = Map(
     "noop" -> (() => ()),
     "setPosition" -> (() => child.setPosition(v3a)),
     "getPosition" -> (() => sink = child.getPosition()),
     "getChild" -> (() => sink = getChild(0L, false)),
-    "getName" -> (() => sink = child.getName().asInstanceOf[AnyRef]),
+    "getName" -> (() => sink = child.getName()),
+    "setName" -> (() => child.setName("Child")),
     "findChild" -> (() => sink = findChild("Child", false, false)),
     "singleton" -> (() => sink = Input.singleton),
     "getTree" -> (() => sink = getTree()),
     "emitSignal" -> (() => emitSignal(hostObject, "pinged")),
     "vectorMath" -> (() => fsink += ((v3a + v3b) * 2f).dot(v3b)),
-    "transformMath" -> (() => fsink += (t3 * t3).xform(v3a).x)
+    "transformMath" -> (() => fsink += (t3 * t3).xform(v3a).x),
+    "inputKey" -> (() => bsink = Input.getKey(Key.Space, KeyState.JustPressed)),
+    "inputAction" -> (() => bsink = Input.getAction(Actions.Jump, KeyState.Pressed)),
+    "inputForward" -> (() => bsink = Input.isKeyPressed(Key.Space))
   )
 
   /** RefCounted ownership and wrapper lifetime rules; "" when all hold. */
@@ -125,9 +130,9 @@ final class MemoryProbe(
     // two references on the one wrapper, both released at the end.
     Gd.scoped {
       val a =
-        ResourceLoader.singleton.load("res://new_player_stats.tres", "", 1L)
+        ResourceLoader.singleton.load("res://new_player_stats.tres", "", ResourceLoader.CacheMode.Reuse)
       val b =
-        ResourceLoader.singleton.load("res://new_player_stats.tres", "", 1L)
+        ResourceLoader.singleton.load("res://new_player_stats.tres", "", ResourceLoader.CacheMode.Reuse)
       check("identity: same resource, same wrapper", a eq b)
       check("load: two refs held", a.getReferenceCount() == 2L)
     }
@@ -181,7 +186,7 @@ final class MemoryProbe(
     */
   @func def refCountsAfterReturn(): String = Gd.scoped {
     val loaded =
-      ResourceLoader.singleton.load("res://new_player_stats.tres", "", 0L)
+      ResourceLoader.singleton.load("res://new_player_stats.tres", "", ResourceLoader.CacheMode.Ignore)
     val loadedCount = loaded.getReferenceCount()
     val dup = loaded.duplicate(false)
     val dupCount = dup.getReferenceCount()

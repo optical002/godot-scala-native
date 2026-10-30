@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,21 +36,21 @@ abstract class RigidBody2D extends PhysicsBody2D {
   }
 
   /** RigidBody2D.set_center_of_mass_mode */
-  final def setCenterOfMassMode(mode: Long): Unit = {
+  final def setCenterOfMassMode(mode: gdext.classes.RigidBody2D.CenterOfMassMode): Unit = {
     if (gdext.classes.RigidBody2D.mb_set_center_of_mass_mode == null) gdext.classes.RigidBody2D.mb_set_center_of_mass_mode = MethodBind.get("RigidBody2D", "set_center_of_mass_mode", 1757235706L)
     Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_center_of_mass_mode, livePtr, mode)
   }
 
   /** RigidBody2D.get_center_of_mass_mode */
-  final def getCenterOfMassMode(): Long = {
+  final def getCenterOfMassMode(): gdext.classes.RigidBody2D.CenterOfMassMode = {
     if (gdext.classes.RigidBody2D.mb_get_center_of_mass_mode == null) gdext.classes.RigidBody2D.mb_get_center_of_mass_mode = MethodBind.get("RigidBody2D", "get_center_of_mass_mode", 3277132817L)
-    Ptrcall.call0[Long](gdext.classes.RigidBody2D.mb_get_center_of_mass_mode, livePtr)
+    gdext.classes.RigidBody2D.CenterOfMassMode(Ptrcall.call0[Long](gdext.classes.RigidBody2D.mb_get_center_of_mass_mode, livePtr))
   }
 
   /** RigidBody2D.set_center_of_mass */
-  final def setCenterOfMass(center_of_mass: gdext.builtin.Vector2): Unit = {
+  final def setCenterOfMass(centerOfMass: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.RigidBody2D.mb_set_center_of_mass == null) gdext.classes.RigidBody2D.mb_set_center_of_mass = MethodBind.get("RigidBody2D", "set_center_of_mass", 743155724L)
-    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_center_of_mass, livePtr, center_of_mass)
+    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_center_of_mass, livePtr, centerOfMass)
   }
 
   /** RigidBody2D.get_center_of_mass */
@@ -59,9 +60,9 @@ abstract class RigidBody2D extends PhysicsBody2D {
   }
 
   /** RigidBody2D.set_physics_material_override */
-  final def setPhysicsMaterialOverride(physics_material_override: PhysicsMaterial): Unit = {
+  final def setPhysicsMaterialOverride(physicsMaterialOverride: PhysicsMaterial): Unit = {
     if (gdext.classes.RigidBody2D.mb_set_physics_material_override == null) gdext.classes.RigidBody2D.mb_set_physics_material_override = MethodBind.get("RigidBody2D", "set_physics_material_override", 1784508650L)
-    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_physics_material_override, livePtr, Wrappers.handle(physics_material_override))
+    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_physics_material_override, livePtr, Wrappers.handle(physicsMaterialOverride))
   }
 
   /** RigidBody2D.get_physics_material_override. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -71,9 +72,9 @@ abstract class RigidBody2D extends PhysicsBody2D {
   }
 
   /** RigidBody2D.set_gravity_scale */
-  final def setGravityScale(gravity_scale: Double): Unit = {
+  final def setGravityScale(gravityScale: Double): Unit = {
     if (gdext.classes.RigidBody2D.mb_set_gravity_scale == null) gdext.classes.RigidBody2D.mb_set_gravity_scale = MethodBind.get("RigidBody2D", "set_gravity_scale", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_gravity_scale, livePtr, gravity_scale)
+    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_gravity_scale, livePtr, gravityScale)
   }
 
   /** RigidBody2D.get_gravity_scale */
@@ -83,33 +84,33 @@ abstract class RigidBody2D extends PhysicsBody2D {
   }
 
   /** RigidBody2D.set_linear_damp_mode */
-  final def setLinearDampMode(linear_damp_mode: Long): Unit = {
+  final def setLinearDampMode(linearDampMode: gdext.classes.RigidBody2D.DampMode): Unit = {
     if (gdext.classes.RigidBody2D.mb_set_linear_damp_mode == null) gdext.classes.RigidBody2D.mb_set_linear_damp_mode = MethodBind.get("RigidBody2D", "set_linear_damp_mode", 3406533708L)
-    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_linear_damp_mode, livePtr, linear_damp_mode)
+    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_linear_damp_mode, livePtr, linearDampMode)
   }
 
   /** RigidBody2D.get_linear_damp_mode */
-  final def getLinearDampMode(): Long = {
+  final def getLinearDampMode(): gdext.classes.RigidBody2D.DampMode = {
     if (gdext.classes.RigidBody2D.mb_get_linear_damp_mode == null) gdext.classes.RigidBody2D.mb_get_linear_damp_mode = MethodBind.get("RigidBody2D", "get_linear_damp_mode", 2970511462L)
-    Ptrcall.call0[Long](gdext.classes.RigidBody2D.mb_get_linear_damp_mode, livePtr)
+    gdext.classes.RigidBody2D.DampMode(Ptrcall.call0[Long](gdext.classes.RigidBody2D.mb_get_linear_damp_mode, livePtr))
   }
 
   /** RigidBody2D.set_angular_damp_mode */
-  final def setAngularDampMode(angular_damp_mode: Long): Unit = {
+  final def setAngularDampMode(angularDampMode: gdext.classes.RigidBody2D.DampMode): Unit = {
     if (gdext.classes.RigidBody2D.mb_set_angular_damp_mode == null) gdext.classes.RigidBody2D.mb_set_angular_damp_mode = MethodBind.get("RigidBody2D", "set_angular_damp_mode", 3406533708L)
-    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_angular_damp_mode, livePtr, angular_damp_mode)
+    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_angular_damp_mode, livePtr, angularDampMode)
   }
 
   /** RigidBody2D.get_angular_damp_mode */
-  final def getAngularDampMode(): Long = {
+  final def getAngularDampMode(): gdext.classes.RigidBody2D.DampMode = {
     if (gdext.classes.RigidBody2D.mb_get_angular_damp_mode == null) gdext.classes.RigidBody2D.mb_get_angular_damp_mode = MethodBind.get("RigidBody2D", "get_angular_damp_mode", 2970511462L)
-    Ptrcall.call0[Long](gdext.classes.RigidBody2D.mb_get_angular_damp_mode, livePtr)
+    gdext.classes.RigidBody2D.DampMode(Ptrcall.call0[Long](gdext.classes.RigidBody2D.mb_get_angular_damp_mode, livePtr))
   }
 
   /** RigidBody2D.set_linear_damp */
-  final def setLinearDamp(linear_damp: Double): Unit = {
+  final def setLinearDamp(linearDamp: Double): Unit = {
     if (gdext.classes.RigidBody2D.mb_set_linear_damp == null) gdext.classes.RigidBody2D.mb_set_linear_damp = MethodBind.get("RigidBody2D", "set_linear_damp", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_linear_damp, livePtr, linear_damp)
+    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_linear_damp, livePtr, linearDamp)
   }
 
   /** RigidBody2D.get_linear_damp */
@@ -119,9 +120,9 @@ abstract class RigidBody2D extends PhysicsBody2D {
   }
 
   /** RigidBody2D.set_angular_damp */
-  final def setAngularDamp(angular_damp: Double): Unit = {
+  final def setAngularDamp(angularDamp: Double): Unit = {
     if (gdext.classes.RigidBody2D.mb_set_angular_damp == null) gdext.classes.RigidBody2D.mb_set_angular_damp = MethodBind.get("RigidBody2D", "set_angular_damp", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_angular_damp, livePtr, angular_damp)
+    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_angular_damp, livePtr, angularDamp)
   }
 
   /** RigidBody2D.get_angular_damp */
@@ -131,9 +132,9 @@ abstract class RigidBody2D extends PhysicsBody2D {
   }
 
   /** RigidBody2D.set_linear_velocity */
-  final def setLinearVelocity(linear_velocity: gdext.builtin.Vector2): Unit = {
+  final def setLinearVelocity(linearVelocity: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.RigidBody2D.mb_set_linear_velocity == null) gdext.classes.RigidBody2D.mb_set_linear_velocity = MethodBind.get("RigidBody2D", "set_linear_velocity", 743155724L)
-    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_linear_velocity, livePtr, linear_velocity)
+    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_linear_velocity, livePtr, linearVelocity)
   }
 
   /** RigidBody2D.get_linear_velocity */
@@ -143,9 +144,9 @@ abstract class RigidBody2D extends PhysicsBody2D {
   }
 
   /** RigidBody2D.set_angular_velocity */
-  final def setAngularVelocity(angular_velocity: Double): Unit = {
+  final def setAngularVelocity(angularVelocity: Double): Unit = {
     if (gdext.classes.RigidBody2D.mb_set_angular_velocity == null) gdext.classes.RigidBody2D.mb_set_angular_velocity = MethodBind.get("RigidBody2D", "set_angular_velocity", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_angular_velocity, livePtr, angular_velocity)
+    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_angular_velocity, livePtr, angularVelocity)
   }
 
   /** RigidBody2D.get_angular_velocity */
@@ -197,31 +198,31 @@ abstract class RigidBody2D extends PhysicsBody2D {
   }
 
   /** RigidBody2D.set_continuous_collision_detection_mode */
-  final def setContinuousCollisionDetectionMode(mode: Long): Unit = {
+  final def setContinuousCollisionDetectionMode(mode: gdext.classes.RigidBody2D.CCDMode): Unit = {
     if (gdext.classes.RigidBody2D.mb_set_continuous_collision_detection_mode == null) gdext.classes.RigidBody2D.mb_set_continuous_collision_detection_mode = MethodBind.get("RigidBody2D", "set_continuous_collision_detection_mode", 1000241384L)
     Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_continuous_collision_detection_mode, livePtr, mode)
   }
 
   /** RigidBody2D.get_continuous_collision_detection_mode */
-  final def getContinuousCollisionDetectionMode(): Long = {
+  final def getContinuousCollisionDetectionMode(): gdext.classes.RigidBody2D.CCDMode = {
     if (gdext.classes.RigidBody2D.mb_get_continuous_collision_detection_mode == null) gdext.classes.RigidBody2D.mb_get_continuous_collision_detection_mode = MethodBind.get("RigidBody2D", "get_continuous_collision_detection_mode", 815214376L)
-    Ptrcall.call0[Long](gdext.classes.RigidBody2D.mb_get_continuous_collision_detection_mode, livePtr)
+    gdext.classes.RigidBody2D.CCDMode(Ptrcall.call0[Long](gdext.classes.RigidBody2D.mb_get_continuous_collision_detection_mode, livePtr))
   }
 
   /** RigidBody2D.set_axis_velocity */
-  final def setAxisVelocity(axis_velocity: gdext.builtin.Vector2): Unit = {
+  final def setAxisVelocity(axisVelocity: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.RigidBody2D.mb_set_axis_velocity == null) gdext.classes.RigidBody2D.mb_set_axis_velocity = MethodBind.get("RigidBody2D", "set_axis_velocity", 743155724L)
-    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_axis_velocity, livePtr, axis_velocity)
+    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_axis_velocity, livePtr, axisVelocity)
   }
 
   /** RigidBody2D.apply_central_impulse */
-  final def applyCentralImpulse(impulse: gdext.builtin.Vector2): Unit = {
+  final def applyCentralImpulse(impulse: gdext.builtin.Vector2 = gdext.builtin.Vector2(0f, 0f)): Unit = {
     if (gdext.classes.RigidBody2D.mb_apply_central_impulse == null) gdext.classes.RigidBody2D.mb_apply_central_impulse = MethodBind.get("RigidBody2D", "apply_central_impulse", 3862383994L)
     Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_apply_central_impulse, livePtr, impulse)
   }
 
   /** RigidBody2D.apply_impulse */
-  final def applyImpulse(impulse: gdext.builtin.Vector2, position: gdext.builtin.Vector2): Unit = {
+  final def applyImpulse(impulse: gdext.builtin.Vector2, position: gdext.builtin.Vector2 = gdext.builtin.Vector2(0f, 0f)): Unit = {
     if (gdext.classes.RigidBody2D.mb_apply_impulse == null) gdext.classes.RigidBody2D.mb_apply_impulse = MethodBind.get("RigidBody2D", "apply_impulse", 4288681949L)
     Ptrcall.callVoid2(gdext.classes.RigidBody2D.mb_apply_impulse, livePtr, impulse, position)
   }
@@ -239,7 +240,7 @@ abstract class RigidBody2D extends PhysicsBody2D {
   }
 
   /** RigidBody2D.apply_force */
-  final def applyForce(force: gdext.builtin.Vector2, position: gdext.builtin.Vector2): Unit = {
+  final def applyForce(force: gdext.builtin.Vector2, position: gdext.builtin.Vector2 = gdext.builtin.Vector2(0f, 0f)): Unit = {
     if (gdext.classes.RigidBody2D.mb_apply_force == null) gdext.classes.RigidBody2D.mb_apply_force = MethodBind.get("RigidBody2D", "apply_force", 4288681949L)
     Ptrcall.callVoid2(gdext.classes.RigidBody2D.mb_apply_force, livePtr, force, position)
   }
@@ -257,7 +258,7 @@ abstract class RigidBody2D extends PhysicsBody2D {
   }
 
   /** RigidBody2D.add_constant_force */
-  final def addConstantForce(force: gdext.builtin.Vector2, position: gdext.builtin.Vector2): Unit = {
+  final def addConstantForce(force: gdext.builtin.Vector2, position: gdext.builtin.Vector2 = gdext.builtin.Vector2(0f, 0f)): Unit = {
     if (gdext.classes.RigidBody2D.mb_add_constant_force == null) gdext.classes.RigidBody2D.mb_add_constant_force = MethodBind.get("RigidBody2D", "add_constant_force", 4288681949L)
     Ptrcall.callVoid2(gdext.classes.RigidBody2D.mb_add_constant_force, livePtr, force, position)
   }
@@ -305,9 +306,9 @@ abstract class RigidBody2D extends PhysicsBody2D {
   }
 
   /** RigidBody2D.set_can_sleep */
-  final def setCanSleep(able_to_sleep: Boolean): Unit = {
+  final def setCanSleep(ableToSleep: Boolean): Unit = {
     if (gdext.classes.RigidBody2D.mb_set_can_sleep == null) gdext.classes.RigidBody2D.mb_set_can_sleep = MethodBind.get("RigidBody2D", "set_can_sleep", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_can_sleep, livePtr, able_to_sleep)
+    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_can_sleep, livePtr, ableToSleep)
   }
 
   /** RigidBody2D.is_able_to_sleep */
@@ -317,9 +318,9 @@ abstract class RigidBody2D extends PhysicsBody2D {
   }
 
   /** RigidBody2D.set_lock_rotation_enabled */
-  final def setLockRotationEnabled(lock_rotation: Boolean): Unit = {
+  final def setLockRotationEnabled(lockRotation: Boolean): Unit = {
     if (gdext.classes.RigidBody2D.mb_set_lock_rotation_enabled == null) gdext.classes.RigidBody2D.mb_set_lock_rotation_enabled = MethodBind.get("RigidBody2D", "set_lock_rotation_enabled", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_lock_rotation_enabled, livePtr, lock_rotation)
+    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_lock_rotation_enabled, livePtr, lockRotation)
   }
 
   /** RigidBody2D.is_lock_rotation_enabled */
@@ -329,9 +330,9 @@ abstract class RigidBody2D extends PhysicsBody2D {
   }
 
   /** RigidBody2D.set_freeze_enabled */
-  final def setFreezeEnabled(freeze_mode: Boolean): Unit = {
+  final def setFreezeEnabled(freezeMode: Boolean): Unit = {
     if (gdext.classes.RigidBody2D.mb_set_freeze_enabled == null) gdext.classes.RigidBody2D.mb_set_freeze_enabled = MethodBind.get("RigidBody2D", "set_freeze_enabled", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_freeze_enabled, livePtr, freeze_mode)
+    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_freeze_enabled, livePtr, freezeMode)
   }
 
   /** RigidBody2D.is_freeze_enabled */
@@ -341,15 +342,15 @@ abstract class RigidBody2D extends PhysicsBody2D {
   }
 
   /** RigidBody2D.set_freeze_mode */
-  final def setFreezeMode(freeze_mode: Long): Unit = {
+  final def setFreezeMode(freezeMode: gdext.classes.RigidBody2D.FreezeMode): Unit = {
     if (gdext.classes.RigidBody2D.mb_set_freeze_mode == null) gdext.classes.RigidBody2D.mb_set_freeze_mode = MethodBind.get("RigidBody2D", "set_freeze_mode", 1705112154L)
-    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_freeze_mode, livePtr, freeze_mode)
+    Ptrcall.callVoid1(gdext.classes.RigidBody2D.mb_set_freeze_mode, livePtr, freezeMode)
   }
 
   /** RigidBody2D.get_freeze_mode */
-  final def getFreezeMode(): Long = {
+  final def getFreezeMode(): gdext.classes.RigidBody2D.FreezeMode = {
     if (gdext.classes.RigidBody2D.mb_get_freeze_mode == null) gdext.classes.RigidBody2D.mb_get_freeze_mode = MethodBind.get("RigidBody2D", "get_freeze_mode", 2016872314L)
-    Ptrcall.call0[Long](gdext.classes.RigidBody2D.mb_get_freeze_mode, livePtr)
+    gdext.classes.RigidBody2D.FreezeMode(Ptrcall.call0[Long](gdext.classes.RigidBody2D.mb_get_freeze_mode, livePtr))
   }
 
 }
@@ -412,4 +413,94 @@ object RigidBody2D {
   private[classes] var mb_is_freeze_enabled: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_freeze_mode: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_freeze_mode: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `RigidBody2D.FreezeMode`. */
+  opaque type FreezeMode <: Long = Long
+
+  object FreezeMode {
+    final val Static: FreezeMode = 0L.asInstanceOf[FreezeMode]
+    final val Kinematic: FreezeMode = 1L.asInstanceOf[FreezeMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): FreezeMode = value.asInstanceOf[FreezeMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[FreezeMode] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[FreezeMode]]
+
+    extension (self: FreezeMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Static"
+        case 1L => "Kinematic"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `RigidBody2D.CenterOfMassMode`. */
+  opaque type CenterOfMassMode <: Long = Long
+
+  object CenterOfMassMode {
+    final val Auto: CenterOfMassMode = 0L.asInstanceOf[CenterOfMassMode]
+    final val Custom: CenterOfMassMode = 1L.asInstanceOf[CenterOfMassMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): CenterOfMassMode = value.asInstanceOf[CenterOfMassMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[CenterOfMassMode] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[CenterOfMassMode]]
+
+    extension (self: CenterOfMassMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Auto"
+        case 1L => "Custom"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `RigidBody2D.DampMode`. */
+  opaque type DampMode <: Long = Long
+
+  object DampMode {
+    final val Combine: DampMode = 0L.asInstanceOf[DampMode]
+    final val Replace: DampMode = 1L.asInstanceOf[DampMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DampMode = value.asInstanceOf[DampMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DampMode] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[DampMode]]
+
+    extension (self: DampMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Combine"
+        case 1L => "Replace"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `RigidBody2D.CCDMode`. */
+  opaque type CCDMode <: Long = Long
+
+  object CCDMode {
+    final val Disabled: CCDMode = 0L.asInstanceOf[CCDMode]
+    final val CastRay: CCDMode = 1L.asInstanceOf[CCDMode]
+    final val CastShape: CCDMode = 2L.asInstanceOf[CCDMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): CCDMode = value.asInstanceOf[CCDMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[CCDMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[CCDMode]]
+
+    extension (self: CCDMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "CastRay"
+        case 2L => "CastShape"
+        case other => other.toString
+      }
+  }
 }

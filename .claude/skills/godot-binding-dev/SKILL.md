@@ -12,7 +12,7 @@ is no source `ProjectRef`. So any change under `language-binding-scala/` (bindin
 code, generator, or plugin) must be republished before harness will see it:
 
 ```
-cd language-binding-scala && sbt publishLocal   # gdext + plugin @ 0.1.10
+cd language-binding-scala && sbt publishLocal   # gdext + plugin @ 0.1.12
 cd harness-scala          && sbt godotBuild     # generate, compile, link, swap .so
 ```
 
@@ -44,7 +44,9 @@ is not proof.
 
 A `PreToolUse` hook blocks edits to the first three. When editing the editor
 addon, change **both** the plugin's template resource and the installed copy in
-`godot/addons/godot_scala/` — they differ only in `SBT_PROJECT_DIR`.
+`godot/addons/godot_scala/` — they differ only in `SBT_PROJECT_DIR` — and bump
+`version` in both `plugin.cfg` files. `AddonInstall` rewrites a project's addon only
+when that version differs, so an unbumped change never reaches existing projects.
 
 ## Reference map
 
@@ -66,7 +68,7 @@ Read only what the task needs.
   `gdext.annotations`. Everything else is `gdext.internal.*`, much of it
   `private[gdext]` and compiler-enforced.
 - Never let exceptions unwind across the C ABI — catch at the boundary.
-- Dev version is `0.1.10`; releases are plain semver tags built by JitPack.
+- Dev version is `0.1.12`; releases are plain semver tags built by JitPack.
 
 ## Maintenance
 

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,69 +12,69 @@ abstract class AnimationNodeStateMachine extends AnimationRootNode {
   override def godotClassName: String = "AnimationNodeStateMachine"
 
   /** AnimationNodeStateMachine.add_node */
-  final def addNode(name: gdext.builtin.StringName, node: AnimationNode, position: gdext.builtin.Vector2): Unit = {
+  final def addNode(name: String, node: AnimationNode, position: gdext.builtin.Vector2 = gdext.builtin.Vector2(0f, 0f)): Unit = {
     if (gdext.classes.AnimationNodeStateMachine.mb_add_node == null) gdext.classes.AnimationNodeStateMachine.mb_add_node = MethodBind.get("AnimationNodeStateMachine", "add_node", 1980270704L)
-    Ptrcall.callVoid3(gdext.classes.AnimationNodeStateMachine.mb_add_node, livePtr, name, Wrappers.handle(node), position)
+    Ptrcall.callVoid3(gdext.classes.AnimationNodeStateMachine.mb_add_node, livePtr, SnArg(name), Wrappers.handle(node), position)
   }
 
   /** AnimationNodeStateMachine.replace_node */
-  final def replaceNode(name: gdext.builtin.StringName, node: AnimationNode): Unit = {
+  final def replaceNode(name: String, node: AnimationNode): Unit = {
     if (gdext.classes.AnimationNodeStateMachine.mb_replace_node == null) gdext.classes.AnimationNodeStateMachine.mb_replace_node = MethodBind.get("AnimationNodeStateMachine", "replace_node", 2559412862L)
-    Ptrcall.callVoid2(gdext.classes.AnimationNodeStateMachine.mb_replace_node, livePtr, name, Wrappers.handle(node))
+    Ptrcall.callVoid2(gdext.classes.AnimationNodeStateMachine.mb_replace_node, livePtr, SnArg(name), Wrappers.handle(node))
   }
 
   /** AnimationNodeStateMachine.get_node. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getNode(name: gdext.builtin.StringName): AnimationNode = {
+  final def getNode(name: String): AnimationNode = {
     if (gdext.classes.AnimationNodeStateMachine.mb_get_node == null) gdext.classes.AnimationNodeStateMachine.mb_get_node = MethodBind.get("AnimationNodeStateMachine", "get_node", 625644256L)
-    Wrappers.owned[AnimationNode](Ptrcall.call1[gdext.builtin.StringName, Long](gdext.classes.AnimationNodeStateMachine.mb_get_node, livePtr, name))
+    Wrappers.owned[AnimationNode](Ptrcall.call1[SnArg, Long](gdext.classes.AnimationNodeStateMachine.mb_get_node, livePtr, SnArg(name)))
   }
 
   /** AnimationNodeStateMachine.remove_node */
-  final def removeNode(name: gdext.builtin.StringName): Unit = {
+  final def removeNode(name: String): Unit = {
     if (gdext.classes.AnimationNodeStateMachine.mb_remove_node == null) gdext.classes.AnimationNodeStateMachine.mb_remove_node = MethodBind.get("AnimationNodeStateMachine", "remove_node", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.AnimationNodeStateMachine.mb_remove_node, livePtr, name)
+    Ptrcall.callVoid1(gdext.classes.AnimationNodeStateMachine.mb_remove_node, livePtr, SnArg(name))
   }
 
   /** AnimationNodeStateMachine.rename_node */
-  final def renameNode(name: gdext.builtin.StringName, new_name: gdext.builtin.StringName): Unit = {
+  final def renameNode(name: String, newName: String): Unit = {
     if (gdext.classes.AnimationNodeStateMachine.mb_rename_node == null) gdext.classes.AnimationNodeStateMachine.mb_rename_node = MethodBind.get("AnimationNodeStateMachine", "rename_node", 3740211285L)
-    Ptrcall.callVoid2(gdext.classes.AnimationNodeStateMachine.mb_rename_node, livePtr, name, new_name)
+    Ptrcall.callVoid2(gdext.classes.AnimationNodeStateMachine.mb_rename_node, livePtr, SnArg(name), SnArg(newName))
   }
 
   /** AnimationNodeStateMachine.has_node */
-  final def hasNode(name: gdext.builtin.StringName): Boolean = {
+  final def hasNode(name: String): Boolean = {
     if (gdext.classes.AnimationNodeStateMachine.mb_has_node == null) gdext.classes.AnimationNodeStateMachine.mb_has_node = MethodBind.get("AnimationNodeStateMachine", "has_node", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.AnimationNodeStateMachine.mb_has_node, livePtr, name)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.AnimationNodeStateMachine.mb_has_node, livePtr, SnArg(name))
   }
 
   /** AnimationNodeStateMachine.get_node_name */
-  final def getNodeName(node: AnimationNode): gdext.builtin.StringName = {
+  final def getNodeName(node: AnimationNode): String = {
     if (gdext.classes.AnimationNodeStateMachine.mb_get_node_name == null) gdext.classes.AnimationNodeStateMachine.mb_get_node_name = MethodBind.get("AnimationNodeStateMachine", "get_node_name", 739213945L)
-    Ptrcall.call1[GodotObject, gdext.builtin.StringName](gdext.classes.AnimationNodeStateMachine.mb_get_node_name, livePtr, Wrappers.handle(node))
+    Ptrcall.call1[GodotObject, SnArg](gdext.classes.AnimationNodeStateMachine.mb_get_node_name, livePtr, Wrappers.handle(node))
   }
 
   /** AnimationNodeStateMachine.set_node_position */
-  final def setNodePosition(name: gdext.builtin.StringName, position: gdext.builtin.Vector2): Unit = {
+  final def setNodePosition(name: String, position: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.AnimationNodeStateMachine.mb_set_node_position == null) gdext.classes.AnimationNodeStateMachine.mb_set_node_position = MethodBind.get("AnimationNodeStateMachine", "set_node_position", 1999414630L)
-    Ptrcall.callVoid2(gdext.classes.AnimationNodeStateMachine.mb_set_node_position, livePtr, name, position)
+    Ptrcall.callVoid2(gdext.classes.AnimationNodeStateMachine.mb_set_node_position, livePtr, SnArg(name), position)
   }
 
   /** AnimationNodeStateMachine.get_node_position */
-  final def getNodePosition(name: gdext.builtin.StringName): gdext.builtin.Vector2 = {
+  final def getNodePosition(name: String): gdext.builtin.Vector2 = {
     if (gdext.classes.AnimationNodeStateMachine.mb_get_node_position == null) gdext.classes.AnimationNodeStateMachine.mb_get_node_position = MethodBind.get("AnimationNodeStateMachine", "get_node_position", 3100822709L)
-    Ptrcall.call1[gdext.builtin.StringName, gdext.builtin.Vector2](gdext.classes.AnimationNodeStateMachine.mb_get_node_position, livePtr, name)
+    Ptrcall.call1[SnArg, gdext.builtin.Vector2](gdext.classes.AnimationNodeStateMachine.mb_get_node_position, livePtr, SnArg(name))
   }
 
   /** AnimationNodeStateMachine.has_transition */
-  final def hasTransition(from: gdext.builtin.StringName, to: gdext.builtin.StringName): Boolean = {
+  final def hasTransition(from: String, to: String): Boolean = {
     if (gdext.classes.AnimationNodeStateMachine.mb_has_transition == null) gdext.classes.AnimationNodeStateMachine.mb_has_transition = MethodBind.get("AnimationNodeStateMachine", "has_transition", 471820014L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Boolean](gdext.classes.AnimationNodeStateMachine.mb_has_transition, livePtr, from, to)
+    Ptrcall.call2[SnArg, SnArg, Boolean](gdext.classes.AnimationNodeStateMachine.mb_has_transition, livePtr, SnArg(from), SnArg(to))
   }
 
   /** AnimationNodeStateMachine.add_transition */
-  final def addTransition(from: gdext.builtin.StringName, to: gdext.builtin.StringName, transition: AnimationNodeStateMachineTransition): Unit = {
+  final def addTransition(from: String, to: String, transition: AnimationNodeStateMachineTransition): Unit = {
     if (gdext.classes.AnimationNodeStateMachine.mb_add_transition == null) gdext.classes.AnimationNodeStateMachine.mb_add_transition = MethodBind.get("AnimationNodeStateMachine", "add_transition", 795486887L)
-    Ptrcall.callVoid3(gdext.classes.AnimationNodeStateMachine.mb_add_transition, livePtr, from, to, Wrappers.handle(transition))
+    Ptrcall.callVoid3(gdext.classes.AnimationNodeStateMachine.mb_add_transition, livePtr, SnArg(from), SnArg(to), Wrappers.handle(transition))
   }
 
   /** AnimationNodeStateMachine.get_transition. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -83,15 +84,15 @@ abstract class AnimationNodeStateMachine extends AnimationRootNode {
   }
 
   /** AnimationNodeStateMachine.get_transition_from */
-  final def getTransitionFrom(idx: Long): gdext.builtin.StringName = {
+  final def getTransitionFrom(idx: Long): String = {
     if (gdext.classes.AnimationNodeStateMachine.mb_get_transition_from == null) gdext.classes.AnimationNodeStateMachine.mb_get_transition_from = MethodBind.get("AnimationNodeStateMachine", "get_transition_from", 659327637L)
-    Ptrcall.call1[Long, gdext.builtin.StringName](gdext.classes.AnimationNodeStateMachine.mb_get_transition_from, livePtr, idx)
+    Ptrcall.call1[Long, SnArg](gdext.classes.AnimationNodeStateMachine.mb_get_transition_from, livePtr, idx)
   }
 
   /** AnimationNodeStateMachine.get_transition_to */
-  final def getTransitionTo(idx: Long): gdext.builtin.StringName = {
+  final def getTransitionTo(idx: Long): String = {
     if (gdext.classes.AnimationNodeStateMachine.mb_get_transition_to == null) gdext.classes.AnimationNodeStateMachine.mb_get_transition_to = MethodBind.get("AnimationNodeStateMachine", "get_transition_to", 659327637L)
-    Ptrcall.call1[Long, gdext.builtin.StringName](gdext.classes.AnimationNodeStateMachine.mb_get_transition_to, livePtr, idx)
+    Ptrcall.call1[Long, SnArg](gdext.classes.AnimationNodeStateMachine.mb_get_transition_to, livePtr, idx)
   }
 
   /** AnimationNodeStateMachine.get_transition_count */
@@ -107,9 +108,9 @@ abstract class AnimationNodeStateMachine extends AnimationRootNode {
   }
 
   /** AnimationNodeStateMachine.remove_transition */
-  final def removeTransition(from: gdext.builtin.StringName, to: gdext.builtin.StringName): Unit = {
+  final def removeTransition(from: String, to: String): Unit = {
     if (gdext.classes.AnimationNodeStateMachine.mb_remove_transition == null) gdext.classes.AnimationNodeStateMachine.mb_remove_transition = MethodBind.get("AnimationNodeStateMachine", "remove_transition", 3740211285L)
-    Ptrcall.callVoid2(gdext.classes.AnimationNodeStateMachine.mb_remove_transition, livePtr, from, to)
+    Ptrcall.callVoid2(gdext.classes.AnimationNodeStateMachine.mb_remove_transition, livePtr, SnArg(from), SnArg(to))
   }
 
   /** AnimationNodeStateMachine.set_graph_offset */
@@ -125,15 +126,15 @@ abstract class AnimationNodeStateMachine extends AnimationRootNode {
   }
 
   /** AnimationNodeStateMachine.set_state_machine_type */
-  final def setStateMachineType(state_machine_type: Long): Unit = {
+  final def setStateMachineType(stateMachineType: gdext.classes.AnimationNodeStateMachine.StateMachineType): Unit = {
     if (gdext.classes.AnimationNodeStateMachine.mb_set_state_machine_type == null) gdext.classes.AnimationNodeStateMachine.mb_set_state_machine_type = MethodBind.get("AnimationNodeStateMachine", "set_state_machine_type", 2584759088L)
-    Ptrcall.callVoid1(gdext.classes.AnimationNodeStateMachine.mb_set_state_machine_type, livePtr, state_machine_type)
+    Ptrcall.callVoid1(gdext.classes.AnimationNodeStateMachine.mb_set_state_machine_type, livePtr, stateMachineType)
   }
 
   /** AnimationNodeStateMachine.get_state_machine_type */
-  final def getStateMachineType(): Long = {
+  final def getStateMachineType(): gdext.classes.AnimationNodeStateMachine.StateMachineType = {
     if (gdext.classes.AnimationNodeStateMachine.mb_get_state_machine_type == null) gdext.classes.AnimationNodeStateMachine.mb_get_state_machine_type = MethodBind.get("AnimationNodeStateMachine", "get_state_machine_type", 1140726469L)
-    Ptrcall.call0[Long](gdext.classes.AnimationNodeStateMachine.mb_get_state_machine_type, livePtr)
+    gdext.classes.AnimationNodeStateMachine.StateMachineType(Ptrcall.call0[Long](gdext.classes.AnimationNodeStateMachine.mb_get_state_machine_type, livePtr))
   }
 
   /** AnimationNodeStateMachine.set_allow_transition_to_self */
@@ -188,4 +189,28 @@ object AnimationNodeStateMachine {
   private[classes] var mb_is_allow_transition_to_self: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_reset_ends: GDExtensionMethodBindPtr = null
   private[classes] var mb_are_ends_reset: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `AnimationNodeStateMachine.StateMachineType`. */
+  opaque type StateMachineType <: Long = Long
+
+  object StateMachineType {
+    final val Root: StateMachineType = 0L.asInstanceOf[StateMachineType]
+    final val Nested: StateMachineType = 1L.asInstanceOf[StateMachineType]
+    final val Grouped: StateMachineType = 2L.asInstanceOf[StateMachineType]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): StateMachineType = value.asInstanceOf[StateMachineType]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[StateMachineType] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[StateMachineType]]
+
+    extension (self: StateMachineType)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Root"
+        case 1L => "Nested"
+        case 2L => "Grouped"
+        case other => other.toString
+      }
+  }
 }

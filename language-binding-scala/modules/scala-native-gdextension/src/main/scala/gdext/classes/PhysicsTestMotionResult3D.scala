@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -41,51 +42,51 @@ abstract class PhysicsTestMotionResult3D extends RefCounted {
   }
 
   /** PhysicsTestMotionResult3D.get_collision_point */
-  final def getCollisionPoint(collision_index: Long): gdext.builtin.Vector3 = {
+  final def getCollisionPoint(collisionIndex: Long = 0L): gdext.builtin.Vector3 = {
     if (gdext.classes.PhysicsTestMotionResult3D.mb_get_collision_point == null) gdext.classes.PhysicsTestMotionResult3D.mb_get_collision_point = MethodBind.get("PhysicsTestMotionResult3D", "get_collision_point", 1914908202L)
-    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.PhysicsTestMotionResult3D.mb_get_collision_point, livePtr, collision_index)
+    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.PhysicsTestMotionResult3D.mb_get_collision_point, livePtr, collisionIndex)
   }
 
   /** PhysicsTestMotionResult3D.get_collision_normal */
-  final def getCollisionNormal(collision_index: Long): gdext.builtin.Vector3 = {
+  final def getCollisionNormal(collisionIndex: Long = 0L): gdext.builtin.Vector3 = {
     if (gdext.classes.PhysicsTestMotionResult3D.mb_get_collision_normal == null) gdext.classes.PhysicsTestMotionResult3D.mb_get_collision_normal = MethodBind.get("PhysicsTestMotionResult3D", "get_collision_normal", 1914908202L)
-    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.PhysicsTestMotionResult3D.mb_get_collision_normal, livePtr, collision_index)
+    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.PhysicsTestMotionResult3D.mb_get_collision_normal, livePtr, collisionIndex)
   }
 
   /** PhysicsTestMotionResult3D.get_collider_velocity */
-  final def getColliderVelocity(collision_index: Long): gdext.builtin.Vector3 = {
+  final def getColliderVelocity(collisionIndex: Long = 0L): gdext.builtin.Vector3 = {
     if (gdext.classes.PhysicsTestMotionResult3D.mb_get_collider_velocity == null) gdext.classes.PhysicsTestMotionResult3D.mb_get_collider_velocity = MethodBind.get("PhysicsTestMotionResult3D", "get_collider_velocity", 1914908202L)
-    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.PhysicsTestMotionResult3D.mb_get_collider_velocity, livePtr, collision_index)
+    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.PhysicsTestMotionResult3D.mb_get_collider_velocity, livePtr, collisionIndex)
   }
 
   /** PhysicsTestMotionResult3D.get_collider_id */
-  final def getColliderId(collision_index: Long): Long = {
+  final def getColliderId(collisionIndex: Long = 0L): Long = {
     if (gdext.classes.PhysicsTestMotionResult3D.mb_get_collider_id == null) gdext.classes.PhysicsTestMotionResult3D.mb_get_collider_id = MethodBind.get("PhysicsTestMotionResult3D", "get_collider_id", 1591665591L)
-    Ptrcall.call1[Long, Long](gdext.classes.PhysicsTestMotionResult3D.mb_get_collider_id, livePtr, collision_index)
+    Ptrcall.call1[Long, Long](gdext.classes.PhysicsTestMotionResult3D.mb_get_collider_id, livePtr, collisionIndex)
   }
 
   /** PhysicsTestMotionResult3D.get_collider */
-  final def getCollider(collision_index: Long): Object = {
+  final def getCollider(collisionIndex: Long = 0L): Object = {
     if (gdext.classes.PhysicsTestMotionResult3D.mb_get_collider == null) gdext.classes.PhysicsTestMotionResult3D.mb_get_collider = MethodBind.get("PhysicsTestMotionResult3D", "get_collider", 2639523548L)
-    Wrappers.borrowed[Object](Ptrcall.call1[Long, Long](gdext.classes.PhysicsTestMotionResult3D.mb_get_collider, livePtr, collision_index))
+    Wrappers.borrowed[Object](Ptrcall.call1[Long, Long](gdext.classes.PhysicsTestMotionResult3D.mb_get_collider, livePtr, collisionIndex))
   }
 
   /** PhysicsTestMotionResult3D.get_collider_shape */
-  final def getColliderShape(collision_index: Long): Long = {
+  final def getColliderShape(collisionIndex: Long = 0L): Long = {
     if (gdext.classes.PhysicsTestMotionResult3D.mb_get_collider_shape == null) gdext.classes.PhysicsTestMotionResult3D.mb_get_collider_shape = MethodBind.get("PhysicsTestMotionResult3D", "get_collider_shape", 1591665591L)
-    Ptrcall.call1[Long, Long](gdext.classes.PhysicsTestMotionResult3D.mb_get_collider_shape, livePtr, collision_index)
+    Ptrcall.call1[Long, Long](gdext.classes.PhysicsTestMotionResult3D.mb_get_collider_shape, livePtr, collisionIndex)
   }
 
   /** PhysicsTestMotionResult3D.get_collision_local_shape */
-  final def getCollisionLocalShape(collision_index: Long): Long = {
+  final def getCollisionLocalShape(collisionIndex: Long = 0L): Long = {
     if (gdext.classes.PhysicsTestMotionResult3D.mb_get_collision_local_shape == null) gdext.classes.PhysicsTestMotionResult3D.mb_get_collision_local_shape = MethodBind.get("PhysicsTestMotionResult3D", "get_collision_local_shape", 1591665591L)
-    Ptrcall.call1[Long, Long](gdext.classes.PhysicsTestMotionResult3D.mb_get_collision_local_shape, livePtr, collision_index)
+    Ptrcall.call1[Long, Long](gdext.classes.PhysicsTestMotionResult3D.mb_get_collision_local_shape, livePtr, collisionIndex)
   }
 
   /** PhysicsTestMotionResult3D.get_collision_depth */
-  final def getCollisionDepth(collision_index: Long): Double = {
+  final def getCollisionDepth(collisionIndex: Long = 0L): Double = {
     if (gdext.classes.PhysicsTestMotionResult3D.mb_get_collision_depth == null) gdext.classes.PhysicsTestMotionResult3D.mb_get_collision_depth = MethodBind.get("PhysicsTestMotionResult3D", "get_collision_depth", 218038398L)
-    Ptrcall.call1[Long, Double](gdext.classes.PhysicsTestMotionResult3D.mb_get_collision_depth, livePtr, collision_index)
+    Ptrcall.call1[Long, Double](gdext.classes.PhysicsTestMotionResult3D.mb_get_collision_depth, livePtr, collisionIndex)
   }
 
 }

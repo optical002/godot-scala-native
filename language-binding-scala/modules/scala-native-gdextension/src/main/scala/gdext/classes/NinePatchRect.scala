@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,13 +24,13 @@ abstract class NinePatchRect extends Control {
   }
 
   /** NinePatchRect.set_patch_margin */
-  final def setPatchMargin(margin: Long, value: Long): Unit = {
+  final def setPatchMargin(margin: gdext.classes.Side, value: Long): Unit = {
     if (gdext.classes.NinePatchRect.mb_set_patch_margin == null) gdext.classes.NinePatchRect.mb_set_patch_margin = MethodBind.get("NinePatchRect", "set_patch_margin", 437707142L)
     Ptrcall.callVoid2(gdext.classes.NinePatchRect.mb_set_patch_margin, livePtr, margin, value)
   }
 
   /** NinePatchRect.get_patch_margin */
-  final def getPatchMargin(margin: Long): Long = {
+  final def getPatchMargin(margin: gdext.classes.Side): Long = {
     if (gdext.classes.NinePatchRect.mb_get_patch_margin == null) gdext.classes.NinePatchRect.mb_get_patch_margin = MethodBind.get("NinePatchRect", "get_patch_margin", 1983885014L)
     Ptrcall.call1[Long, Long](gdext.classes.NinePatchRect.mb_get_patch_margin, livePtr, margin)
   }
@@ -47,9 +48,9 @@ abstract class NinePatchRect extends Control {
   }
 
   /** NinePatchRect.set_draw_center */
-  final def setDrawCenter(draw_center: Boolean): Unit = {
+  final def setDrawCenter(drawCenter: Boolean): Unit = {
     if (gdext.classes.NinePatchRect.mb_set_draw_center == null) gdext.classes.NinePatchRect.mb_set_draw_center = MethodBind.get("NinePatchRect", "set_draw_center", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.NinePatchRect.mb_set_draw_center, livePtr, draw_center)
+    Ptrcall.callVoid1(gdext.classes.NinePatchRect.mb_set_draw_center, livePtr, drawCenter)
   }
 
   /** NinePatchRect.is_draw_center_enabled */
@@ -59,27 +60,27 @@ abstract class NinePatchRect extends Control {
   }
 
   /** NinePatchRect.set_h_axis_stretch_mode */
-  final def setHAxisStretchMode(mode: Long): Unit = {
+  final def setHAxisStretchMode(mode: gdext.classes.NinePatchRect.AxisStretchMode): Unit = {
     if (gdext.classes.NinePatchRect.mb_set_h_axis_stretch_mode == null) gdext.classes.NinePatchRect.mb_set_h_axis_stretch_mode = MethodBind.get("NinePatchRect", "set_h_axis_stretch_mode", 3219608417L)
     Ptrcall.callVoid1(gdext.classes.NinePatchRect.mb_set_h_axis_stretch_mode, livePtr, mode)
   }
 
   /** NinePatchRect.get_h_axis_stretch_mode */
-  final def getHAxisStretchMode(): Long = {
+  final def getHAxisStretchMode(): gdext.classes.NinePatchRect.AxisStretchMode = {
     if (gdext.classes.NinePatchRect.mb_get_h_axis_stretch_mode == null) gdext.classes.NinePatchRect.mb_get_h_axis_stretch_mode = MethodBind.get("NinePatchRect", "get_h_axis_stretch_mode", 3317113799L)
-    Ptrcall.call0[Long](gdext.classes.NinePatchRect.mb_get_h_axis_stretch_mode, livePtr)
+    gdext.classes.NinePatchRect.AxisStretchMode(Ptrcall.call0[Long](gdext.classes.NinePatchRect.mb_get_h_axis_stretch_mode, livePtr))
   }
 
   /** NinePatchRect.set_v_axis_stretch_mode */
-  final def setVAxisStretchMode(mode: Long): Unit = {
+  final def setVAxisStretchMode(mode: gdext.classes.NinePatchRect.AxisStretchMode): Unit = {
     if (gdext.classes.NinePatchRect.mb_set_v_axis_stretch_mode == null) gdext.classes.NinePatchRect.mb_set_v_axis_stretch_mode = MethodBind.get("NinePatchRect", "set_v_axis_stretch_mode", 3219608417L)
     Ptrcall.callVoid1(gdext.classes.NinePatchRect.mb_set_v_axis_stretch_mode, livePtr, mode)
   }
 
   /** NinePatchRect.get_v_axis_stretch_mode */
-  final def getVAxisStretchMode(): Long = {
+  final def getVAxisStretchMode(): gdext.classes.NinePatchRect.AxisStretchMode = {
     if (gdext.classes.NinePatchRect.mb_get_v_axis_stretch_mode == null) gdext.classes.NinePatchRect.mb_get_v_axis_stretch_mode = MethodBind.get("NinePatchRect", "get_v_axis_stretch_mode", 3317113799L)
-    Ptrcall.call0[Long](gdext.classes.NinePatchRect.mb_get_v_axis_stretch_mode, livePtr)
+    gdext.classes.NinePatchRect.AxisStretchMode(Ptrcall.call0[Long](gdext.classes.NinePatchRect.mb_get_v_axis_stretch_mode, livePtr))
   }
 
 }
@@ -97,4 +98,28 @@ object NinePatchRect {
   private[classes] var mb_get_h_axis_stretch_mode: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_v_axis_stretch_mode: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_v_axis_stretch_mode: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `NinePatchRect.AxisStretchMode`. */
+  opaque type AxisStretchMode <: Long = Long
+
+  object AxisStretchMode {
+    final val Stretch: AxisStretchMode = 0L.asInstanceOf[AxisStretchMode]
+    final val Tile: AxisStretchMode = 1L.asInstanceOf[AxisStretchMode]
+    final val TileFit: AxisStretchMode = 2L.asInstanceOf[AxisStretchMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): AxisStretchMode = value.asInstanceOf[AxisStretchMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[AxisStretchMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[AxisStretchMode]]
+
+    extension (self: AxisStretchMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Stretch"
+        case 1L => "Tile"
+        case 2L => "TileFit"
+        case other => other.toString
+      }
+  }
 }

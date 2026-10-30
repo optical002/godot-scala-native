@@ -28,7 +28,7 @@ The repo root is a workspace, **not** an sbt build. Top level:
   aggregates `igen` + `gdext` + `sbtGodotPlugin`, `publish / skip := true`.
   Exists only to group the modules. Invoke tasks as `sbt gdext/<task>` /
   `sbt igen/<task>`. `ThisBuild / version` is
-  `sys.env.getOrElse("VERSION", "0.1.10")` — the fallback is the NEXT
+  `sys.env.getOrElse("VERSION", "0.1.12")` — the fallback is the NEXT
   release version in plain semver, used by `publishLocal` (it doesn't exist on
   JitPack until tagged; local ivy wins over JitPack); JitPack sets `VERSION` to
   the requested tag when building a release.
@@ -47,13 +47,23 @@ The repo root is a workspace, **not** an sbt build. Top level:
 1. **FFI** (`internal/ffi`, `Interface`) — raw GDExtension C API. **Internal**:
    `Interface` is `private[gdext]`; the FFI *types* stay public (needed by the
    entry aliases) but live under `gdext.internal.ffi`.
-2. **builtin** (`builtin/`) — Variant + GString/StringName/Vector2/Array/Dictionary.
+2. **builtin** (`builtin/`) — Variant + GString/Vector2/Array/Dictionary. StringName is
+   internal (`gdext.internal.StringName`); the public API uses `String`.
 3. **engine** (`classes/`, generated) — typed engine classes as
    `abstract class Node2D extends CanvasItem`, package **`gdext.classes`**.
 4. **obj** (`internal/engine/`, `GodotScriptClass`, `ClassMeta`, `ClassTags`) —
    plain wrapper types (there is **no** `Gd[T]` smart pointer), casts, refcount.
    `Gd` survives only as a facade object in `gdext.api`. See [layer4-obj](layer4-obj.md).
 5. **register** (`internal/register/`) — register user `game` classes via macros/annotations.
+- **input** (`internal/input/InputOps.scala`) — typed Input API, mixed into the
+  generated `Input` companion / `InputEvent` class (see
+  [layer3-engine](layer3-engine.md) "Mixins"). `KeyState`/`KeyMod`/`InputAction`
+  are re-exported by `gdext.api`. Key/button edges go through hidden Input Map
+  actions (`HiddenActions`, `__gdsn_<kind>_<code>`, one table per kind, seeded
+  with every enum value on first query, sorted `Long` arrays). Proven by
+  `godot/input_verify.gd`; budgets `inputKey`/`inputAction`/`inputForward` = 0 B.
+- `@func` takes **no parameters** and returns only Long/Int/Double/Boolean/String
+  (no `Unit`): probes pass arguments via `@gdexport` fields (see `InputProbe`).
 
 ## Package layout — public surface vs internal
 Consumer (game) code imports ONLY these:
@@ -97,7 +107,7 @@ interface table + library handle.
 - **publishLocal first**: harness consumes the binding + plugin as published
   artifacts. After any change in `language-binding-scala`,
   `cd language-binding-scala && sbt publishLocal` (publishes `gdext` + the sbt
-  plugin under `0.1.10`) **before** building harness.
+  plugin under `0.1.12`) **before** building harness.
 - `cd harness-scala && sbt godotBuild` → (task from the plugin) runs the
   auto-registration source generator, compiles (linking the published binding),
   native-links, atomically swaps the `.so` into `godot/.scala/`, **generates the
@@ -141,6 +151,12 @@ interface table + library handle.
   "Zero-allocation hot path"). GC is always Boehm, MT always off.
   `godotResRefs` (default true) / `godotResObject` (default `"Res"`) control
   the generated typed `res://` tree (see [layer5-register](layer5-register.md)).
+  `godotInputActions` (default true) / `godotActionsObject` (default
+  `"Actions"`) control `ActionScan`: `game.Actions`, an enum of
+  `project.godot`'s `[input]` actions + Godot 4.6's built-in `ui_*` list
+  (hard-coded in `ActionScan.Builtins`; feature-tagged `ui_x.macos` skipped).
+  Separate `sourceGenerators` task, rewritten only on text change; `project.godot`
+  is a `~godotBuild` watch trigger.
   The plugin also ships `snpatch/Metadata.scala`, a patched copy of a Scala
   Native toolchain class that makes incremental native compilation work (see
   [conventions](conventions.md) "Incremental native codegen") — re-copy it on
@@ -163,7 +179,7 @@ build via `%%%`; and the sbt plugin, `_2.12_1.0` Maven-style layout via
 `sbtPluginPublishLegacyMavenStyle := false`) are served by **JitPack** under
 group **`com.github.optical002.godot-scala-native`**. `organization` in
 `build.sbt` is set to exactly that group so `publishLocal` yields the same
-coordinates (dev version `0.1.10`; last release tag `0.1.9`).
+coordinates (dev version `0.1.12`; last release tag `0.1.11`).
 Release flow: push a **plain semver tag** (`0.1.1`, no `v` prefix — the tag IS
 the version) → JitPack builds on demand via repo-root `jitpack.yml`
 (`cd language-binding-scala && sbt gdext/publishM2 sbtGodotPlugin/publishM2`;

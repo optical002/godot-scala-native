@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,33 +12,33 @@ abstract class AnimationLibrary extends Resource {
   override def godotClassName: String = "AnimationLibrary"
 
   /** AnimationLibrary.add_animation */
-  final def addAnimation(name: gdext.builtin.StringName, animation: Animation): Long = {
+  final def addAnimation(name: String, animation: Animation): gdext.classes.Error = {
     if (gdext.classes.AnimationLibrary.mb_add_animation == null) gdext.classes.AnimationLibrary.mb_add_animation = MethodBind.get("AnimationLibrary", "add_animation", 1811855551L)
-    Ptrcall.call2[gdext.builtin.StringName, GodotObject, Long](gdext.classes.AnimationLibrary.mb_add_animation, livePtr, name, Wrappers.handle(animation))
+    gdext.classes.Error(Ptrcall.call2[SnArg, GodotObject, Long](gdext.classes.AnimationLibrary.mb_add_animation, livePtr, SnArg(name), Wrappers.handle(animation)))
   }
 
   /** AnimationLibrary.remove_animation */
-  final def removeAnimation(name: gdext.builtin.StringName): Unit = {
+  final def removeAnimation(name: String): Unit = {
     if (gdext.classes.AnimationLibrary.mb_remove_animation == null) gdext.classes.AnimationLibrary.mb_remove_animation = MethodBind.get("AnimationLibrary", "remove_animation", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.AnimationLibrary.mb_remove_animation, livePtr, name)
+    Ptrcall.callVoid1(gdext.classes.AnimationLibrary.mb_remove_animation, livePtr, SnArg(name))
   }
 
   /** AnimationLibrary.rename_animation */
-  final def renameAnimation(name: gdext.builtin.StringName, newname: gdext.builtin.StringName): Unit = {
+  final def renameAnimation(name: String, newname: String): Unit = {
     if (gdext.classes.AnimationLibrary.mb_rename_animation == null) gdext.classes.AnimationLibrary.mb_rename_animation = MethodBind.get("AnimationLibrary", "rename_animation", 3740211285L)
-    Ptrcall.callVoid2(gdext.classes.AnimationLibrary.mb_rename_animation, livePtr, name, newname)
+    Ptrcall.callVoid2(gdext.classes.AnimationLibrary.mb_rename_animation, livePtr, SnArg(name), SnArg(newname))
   }
 
   /** AnimationLibrary.has_animation */
-  final def hasAnimation(name: gdext.builtin.StringName): Boolean = {
+  final def hasAnimation(name: String): Boolean = {
     if (gdext.classes.AnimationLibrary.mb_has_animation == null) gdext.classes.AnimationLibrary.mb_has_animation = MethodBind.get("AnimationLibrary", "has_animation", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.AnimationLibrary.mb_has_animation, livePtr, name)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.AnimationLibrary.mb_has_animation, livePtr, SnArg(name))
   }
 
   /** AnimationLibrary.get_animation. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getAnimation(name: gdext.builtin.StringName): Animation = {
+  final def getAnimation(name: String): Animation = {
     if (gdext.classes.AnimationLibrary.mb_get_animation == null) gdext.classes.AnimationLibrary.mb_get_animation = MethodBind.get("AnimationLibrary", "get_animation", 2933122410L)
-    Wrappers.owned[Animation](Ptrcall.call1[gdext.builtin.StringName, Long](gdext.classes.AnimationLibrary.mb_get_animation, livePtr, name))
+    Wrappers.owned[Animation](Ptrcall.call1[SnArg, Long](gdext.classes.AnimationLibrary.mb_get_animation, livePtr, SnArg(name)))
   }
 
   /** AnimationLibrary.get_animation_list_size */

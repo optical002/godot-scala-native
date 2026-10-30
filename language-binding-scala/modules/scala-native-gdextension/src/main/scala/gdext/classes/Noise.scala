@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -41,15 +42,15 @@ abstract class Noise extends Resource {
   }
 
   /** Noise.get_image. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getImage(width: Long, height: Long, invert: Boolean, in_3d_space: Boolean, normalize: Boolean): Image = {
+  final def getImage(width: Long, height: Long, invert: Boolean = false, in3dSpace: Boolean = false, normalize: Boolean = true): Image = {
     if (gdext.classes.Noise.mb_get_image == null) gdext.classes.Noise.mb_get_image = MethodBind.get("Noise", "get_image", 3180683109L)
-    Wrappers.owned[Image](Ptrcall.call5[Long, Long, Boolean, Boolean, Boolean, Long](gdext.classes.Noise.mb_get_image, livePtr, width, height, invert, in_3d_space, normalize))
+    Wrappers.owned[Image](Ptrcall.call5[Long, Long, Boolean, Boolean, Boolean, Long](gdext.classes.Noise.mb_get_image, livePtr, width, height, invert, in3dSpace, normalize))
   }
 
   /** Noise.get_seamless_image. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getSeamlessImage(width: Long, height: Long, invert: Boolean, in_3d_space: Boolean, skirt: Double, normalize: Boolean): Image = {
+  final def getSeamlessImage(width: Long, height: Long, invert: Boolean = false, in3dSpace: Boolean = false, skirt: Double = 0.1, normalize: Boolean = true): Image = {
     if (gdext.classes.Noise.mb_get_seamless_image == null) gdext.classes.Noise.mb_get_seamless_image = MethodBind.get("Noise", "get_seamless_image", 2770743602L)
-    Wrappers.owned[Image](Ptrcall.call6[Long, Long, Boolean, Boolean, Double, Boolean, Long](gdext.classes.Noise.mb_get_seamless_image, livePtr, width, height, invert, in_3d_space, skirt, normalize))
+    Wrappers.owned[Image](Ptrcall.call6[Long, Long, Boolean, Boolean, Double, Boolean, Long](gdext.classes.Noise.mb_get_seamless_image, livePtr, width, height, invert, in3dSpace, skirt, normalize))
   }
 
 }

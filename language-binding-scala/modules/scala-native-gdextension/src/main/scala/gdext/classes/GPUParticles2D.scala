@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -53,9 +54,9 @@ abstract class GPUParticles2D extends Node2D {
   }
 
   /** GPUParticles2D.set_visibility_rect */
-  final def setVisibilityRect(visibility_rect: gdext.builtin.Rect2): Unit = {
+  final def setVisibilityRect(visibilityRect: gdext.builtin.Rect2): Unit = {
     if (gdext.classes.GPUParticles2D.mb_set_visibility_rect == null) gdext.classes.GPUParticles2D.mb_set_visibility_rect = MethodBind.get("GPUParticles2D", "set_visibility_rect", 2046264180L)
-    Ptrcall.callVoid1(gdext.classes.GPUParticles2D.mb_set_visibility_rect, livePtr, visibility_rect)
+    Ptrcall.callVoid1(gdext.classes.GPUParticles2D.mb_set_visibility_rect, livePtr, visibilityRect)
   }
 
   /** GPUParticles2D.set_use_local_coordinates */
@@ -107,9 +108,9 @@ abstract class GPUParticles2D extends Node2D {
   }
 
   /** GPUParticles2D.request_particles_process */
-  final def requestParticlesProcess(process_time: Double): Unit = {
+  final def requestParticlesProcess(processTime: Double): Unit = {
     if (gdext.classes.GPUParticles2D.mb_request_particles_process == null) gdext.classes.GPUParticles2D.mb_request_particles_process = MethodBind.get("GPUParticles2D", "request_particles_process", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.GPUParticles2D.mb_request_particles_process, livePtr, process_time)
+    Ptrcall.callVoid1(gdext.classes.GPUParticles2D.mb_request_particles_process, livePtr, processTime)
   }
 
   /** GPUParticles2D.is_emitting */
@@ -209,15 +210,15 @@ abstract class GPUParticles2D extends Node2D {
   }
 
   /** GPUParticles2D.set_draw_order */
-  final def setDrawOrder(order: Long): Unit = {
+  final def setDrawOrder(order: gdext.classes.GPUParticles2D.DrawOrder): Unit = {
     if (gdext.classes.GPUParticles2D.mb_set_draw_order == null) gdext.classes.GPUParticles2D.mb_set_draw_order = MethodBind.get("GPUParticles2D", "set_draw_order", 1939677959L)
     Ptrcall.callVoid1(gdext.classes.GPUParticles2D.mb_set_draw_order, livePtr, order)
   }
 
   /** GPUParticles2D.get_draw_order */
-  final def getDrawOrder(): Long = {
+  final def getDrawOrder(): gdext.classes.GPUParticles2D.DrawOrder = {
     if (gdext.classes.GPUParticles2D.mb_get_draw_order == null) gdext.classes.GPUParticles2D.mb_get_draw_order = MethodBind.get("GPUParticles2D", "get_draw_order", 941479095L)
-    Ptrcall.call0[Long](gdext.classes.GPUParticles2D.mb_get_draw_order, livePtr)
+    gdext.classes.GPUParticles2D.DrawOrder(Ptrcall.call0[Long](gdext.classes.GPUParticles2D.mb_get_draw_order, livePtr))
   }
 
   /** GPUParticles2D.set_texture */
@@ -239,9 +240,9 @@ abstract class GPUParticles2D extends Node2D {
   }
 
   /** GPUParticles2D.restart */
-  final def restart(keep_seed: Boolean): Unit = {
+  final def restart(keepSeed: Boolean = false): Unit = {
     if (gdext.classes.GPUParticles2D.mb_restart == null) gdext.classes.GPUParticles2D.mb_restart = MethodBind.get("GPUParticles2D", "restart", 107499316L)
-    Ptrcall.callVoid1(gdext.classes.GPUParticles2D.mb_restart, livePtr, keep_seed)
+    Ptrcall.callVoid1(gdext.classes.GPUParticles2D.mb_restart, livePtr, keepSeed)
   }
 
   /** GPUParticles2D.emit_particle */
@@ -317,9 +318,9 @@ abstract class GPUParticles2D extends Node2D {
   }
 
   /** GPUParticles2D.set_use_fixed_seed */
-  final def setUseFixedSeed(use_fixed_seed: Boolean): Unit = {
+  final def setUseFixedSeed(useFixedSeed: Boolean): Unit = {
     if (gdext.classes.GPUParticles2D.mb_set_use_fixed_seed == null) gdext.classes.GPUParticles2D.mb_set_use_fixed_seed = MethodBind.get("GPUParticles2D", "set_use_fixed_seed", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.GPUParticles2D.mb_set_use_fixed_seed, livePtr, use_fixed_seed)
+    Ptrcall.callVoid1(gdext.classes.GPUParticles2D.mb_set_use_fixed_seed, livePtr, useFixedSeed)
   }
 
   /** GPUParticles2D.get_use_fixed_seed */
@@ -398,4 +399,56 @@ object GPUParticles2D {
   private[classes] var mb_get_use_fixed_seed: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_seed: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_seed: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `GPUParticles2D.DrawOrder`. */
+  opaque type DrawOrder <: Long = Long
+
+  object DrawOrder {
+    final val Index: DrawOrder = 0L.asInstanceOf[DrawOrder]
+    final val Lifetime: DrawOrder = 1L.asInstanceOf[DrawOrder]
+    final val ReverseLifetime: DrawOrder = 2L.asInstanceOf[DrawOrder]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DrawOrder = value.asInstanceOf[DrawOrder]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DrawOrder] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[DrawOrder]]
+
+    extension (self: DrawOrder)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Index"
+        case 1L => "Lifetime"
+        case 2L => "ReverseLifetime"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `GPUParticles2D.EmitFlags`. */
+  opaque type EmitFlags <: Long = Long
+
+  object EmitFlags {
+    final val Position: EmitFlags = 1L.asInstanceOf[EmitFlags]
+    final val RotationScale: EmitFlags = 2L.asInstanceOf[EmitFlags]
+    final val Velocity: EmitFlags = 4L.asInstanceOf[EmitFlags]
+    final val Color: EmitFlags = 8L.asInstanceOf[EmitFlags]
+    final val Custom: EmitFlags = 16L.asInstanceOf[EmitFlags]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): EmitFlags = value.asInstanceOf[EmitFlags]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[EmitFlags] = scala.IArray[Long](1L, 2L, 4L, 8L, 16L).asInstanceOf[scala.IArray[EmitFlags]]
+
+    extension (self: EmitFlags)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 1L => "Position"
+        case 2L => "RotationScale"
+        case 4L => "Velocity"
+        case 8L => "Color"
+        case 16L => "Custom"
+        case other => other.toString
+      }
+  }
 }

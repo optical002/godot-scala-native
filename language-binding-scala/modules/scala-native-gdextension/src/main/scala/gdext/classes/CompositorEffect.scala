@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,15 +24,15 @@ abstract class CompositorEffect extends Resource {
   }
 
   /** CompositorEffect.set_effect_callback_type */
-  final def setEffectCallbackType(effect_callback_type: Long): Unit = {
+  final def setEffectCallbackType(effectCallbackType: gdext.classes.CompositorEffect.EffectCallbackType): Unit = {
     if (gdext.classes.CompositorEffect.mb_set_effect_callback_type == null) gdext.classes.CompositorEffect.mb_set_effect_callback_type = MethodBind.get("CompositorEffect", "set_effect_callback_type", 1390728419L)
-    Ptrcall.callVoid1(gdext.classes.CompositorEffect.mb_set_effect_callback_type, livePtr, effect_callback_type)
+    Ptrcall.callVoid1(gdext.classes.CompositorEffect.mb_set_effect_callback_type, livePtr, effectCallbackType)
   }
 
   /** CompositorEffect.get_effect_callback_type */
-  final def getEffectCallbackType(): Long = {
+  final def getEffectCallbackType(): gdext.classes.CompositorEffect.EffectCallbackType = {
     if (gdext.classes.CompositorEffect.mb_get_effect_callback_type == null) gdext.classes.CompositorEffect.mb_get_effect_callback_type = MethodBind.get("CompositorEffect", "get_effect_callback_type", 1221912590L)
-    Ptrcall.call0[Long](gdext.classes.CompositorEffect.mb_get_effect_callback_type, livePtr)
+    gdext.classes.CompositorEffect.EffectCallbackType(Ptrcall.call0[Long](gdext.classes.CompositorEffect.mb_get_effect_callback_type, livePtr))
   }
 
   /** CompositorEffect.set_access_resolved_color */
@@ -111,4 +112,34 @@ object CompositorEffect {
   private[classes] var mb_get_needs_normal_roughness: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_needs_separate_specular: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_needs_separate_specular: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `CompositorEffect.EffectCallbackType`. */
+  opaque type EffectCallbackType <: Long = Long
+
+  object EffectCallbackType {
+    final val PreOpaque: EffectCallbackType = 0L.asInstanceOf[EffectCallbackType]
+    final val PostOpaque: EffectCallbackType = 1L.asInstanceOf[EffectCallbackType]
+    final val PostSky: EffectCallbackType = 2L.asInstanceOf[EffectCallbackType]
+    final val PreTransparent: EffectCallbackType = 3L.asInstanceOf[EffectCallbackType]
+    final val PostTransparent: EffectCallbackType = 4L.asInstanceOf[EffectCallbackType]
+    final val Max: EffectCallbackType = 5L.asInstanceOf[EffectCallbackType]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): EffectCallbackType = value.asInstanceOf[EffectCallbackType]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[EffectCallbackType] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L).asInstanceOf[scala.IArray[EffectCallbackType]]
+
+    extension (self: EffectCallbackType)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "PreOpaque"
+        case 1L => "PostOpaque"
+        case 2L => "PostSky"
+        case 3L => "PreTransparent"
+        case 4L => "PostTransparent"
+        case 5L => "Max"
+        case other => other.toString
+      }
+  }
 }

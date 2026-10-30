@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -89,9 +90,9 @@ abstract class NoiseTexture3D extends Texture3D {
   }
 
   /** NoiseTexture3D.set_seamless_blend_skirt */
-  final def setSeamlessBlendSkirt(seamless_blend_skirt: Double): Unit = {
+  final def setSeamlessBlendSkirt(seamlessBlendSkirt: Double): Unit = {
     if (gdext.classes.NoiseTexture3D.mb_set_seamless_blend_skirt == null) gdext.classes.NoiseTexture3D.mb_set_seamless_blend_skirt = MethodBind.get("NoiseTexture3D", "set_seamless_blend_skirt", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.NoiseTexture3D.mb_set_seamless_blend_skirt, livePtr, seamless_blend_skirt)
+    Ptrcall.callVoid1(gdext.classes.NoiseTexture3D.mb_set_seamless_blend_skirt, livePtr, seamlessBlendSkirt)
   }
 
   /** NoiseTexture3D.get_seamless_blend_skirt */

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -59,15 +60,15 @@ abstract class PlaneMesh extends PrimitiveMesh {
   }
 
   /** PlaneMesh.set_orientation */
-  final def setOrientation(orientation: Long): Unit = {
+  final def setOrientation(orientation: gdext.classes.PlaneMesh.Orientation): Unit = {
     if (gdext.classes.PlaneMesh.mb_set_orientation == null) gdext.classes.PlaneMesh.mb_set_orientation = MethodBind.get("PlaneMesh", "set_orientation", 2751399687L)
     Ptrcall.callVoid1(gdext.classes.PlaneMesh.mb_set_orientation, livePtr, orientation)
   }
 
   /** PlaneMesh.get_orientation */
-  final def getOrientation(): Long = {
+  final def getOrientation(): gdext.classes.PlaneMesh.Orientation = {
     if (gdext.classes.PlaneMesh.mb_get_orientation == null) gdext.classes.PlaneMesh.mb_get_orientation = MethodBind.get("PlaneMesh", "get_orientation", 3227599250L)
-    Ptrcall.call0[Long](gdext.classes.PlaneMesh.mb_get_orientation, livePtr)
+    gdext.classes.PlaneMesh.Orientation(Ptrcall.call0[Long](gdext.classes.PlaneMesh.mb_get_orientation, livePtr))
   }
 
 }
@@ -83,4 +84,28 @@ object PlaneMesh {
   private[classes] var mb_get_center_offset: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_orientation: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_orientation: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `PlaneMesh.Orientation`. */
+  opaque type Orientation <: Long = Long
+
+  object Orientation {
+    final val X: Orientation = 0L.asInstanceOf[Orientation]
+    final val Y: Orientation = 1L.asInstanceOf[Orientation]
+    final val Z: Orientation = 2L.asInstanceOf[Orientation]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): Orientation = value.asInstanceOf[Orientation]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[Orientation] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[Orientation]]
+
+    extension (self: Orientation)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "X"
+        case 1L => "Y"
+        case 2L => "Z"
+        case other => other.toString
+      }
+  }
 }

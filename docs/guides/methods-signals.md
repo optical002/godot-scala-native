@@ -39,7 +39,7 @@ then call the method.
 final class Player extends Node2D {
   @signal def pinged(): Unit = ()
 
-  override def _process(delta: Double): Unit =
+  override def process(delta: Double): Unit =
     emitSignal(hostObject, "pinged")
 }
 ```

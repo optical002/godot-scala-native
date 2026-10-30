@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class SplitContainer extends Container {
   override def godotClassName: String = "SplitContainer"
 
   /** SplitContainer.clamp_split_offset */
-  final def clampSplitOffset(priority_index: Long): Unit = {
+  final def clampSplitOffset(priorityIndex: Long = 0L): Unit = {
     if (gdext.classes.SplitContainer.mb_clamp_split_offset == null) gdext.classes.SplitContainer.mb_clamp_split_offset = MethodBind.get("SplitContainer", "clamp_split_offset", 1995695955L)
-    Ptrcall.callVoid1(gdext.classes.SplitContainer.mb_clamp_split_offset, livePtr, priority_index)
+    Ptrcall.callVoid1(gdext.classes.SplitContainer.mb_clamp_split_offset, livePtr, priorityIndex)
   }
 
   /** SplitContainer.set_collapsed */
@@ -29,15 +30,15 @@ abstract class SplitContainer extends Container {
   }
 
   /** SplitContainer.set_dragger_visibility */
-  final def setDraggerVisibility(mode: Long): Unit = {
+  final def setDraggerVisibility(mode: gdext.classes.SplitContainer.DraggerVisibility): Unit = {
     if (gdext.classes.SplitContainer.mb_set_dragger_visibility == null) gdext.classes.SplitContainer.mb_set_dragger_visibility = MethodBind.get("SplitContainer", "set_dragger_visibility", 1168273952L)
     Ptrcall.callVoid1(gdext.classes.SplitContainer.mb_set_dragger_visibility, livePtr, mode)
   }
 
   /** SplitContainer.get_dragger_visibility */
-  final def getDraggerVisibility(): Long = {
+  final def getDraggerVisibility(): gdext.classes.SplitContainer.DraggerVisibility = {
     if (gdext.classes.SplitContainer.mb_get_dragger_visibility == null) gdext.classes.SplitContainer.mb_get_dragger_visibility = MethodBind.get("SplitContainer", "get_dragger_visibility", 967297479L)
-    Ptrcall.call0[Long](gdext.classes.SplitContainer.mb_get_dragger_visibility, livePtr)
+    gdext.classes.SplitContainer.DraggerVisibility(Ptrcall.call0[Long](gdext.classes.SplitContainer.mb_get_dragger_visibility, livePtr))
   }
 
   /** SplitContainer.set_vertical */
@@ -53,9 +54,9 @@ abstract class SplitContainer extends Container {
   }
 
   /** SplitContainer.set_dragging_enabled */
-  final def setDraggingEnabled(dragging_enabled: Boolean): Unit = {
+  final def setDraggingEnabled(draggingEnabled: Boolean): Unit = {
     if (gdext.classes.SplitContainer.mb_set_dragging_enabled == null) gdext.classes.SplitContainer.mb_set_dragging_enabled = MethodBind.get("SplitContainer", "set_dragging_enabled", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.SplitContainer.mb_set_dragging_enabled, livePtr, dragging_enabled)
+    Ptrcall.callVoid1(gdext.classes.SplitContainer.mb_set_dragging_enabled, livePtr, draggingEnabled)
   }
 
   /** SplitContainer.is_dragging_enabled */
@@ -101,9 +102,9 @@ abstract class SplitContainer extends Container {
   }
 
   /** SplitContainer.set_drag_area_highlight_in_editor */
-  final def setDragAreaHighlightInEditor(drag_area_highlight_in_editor: Boolean): Unit = {
+  final def setDragAreaHighlightInEditor(dragAreaHighlightInEditor: Boolean): Unit = {
     if (gdext.classes.SplitContainer.mb_set_drag_area_highlight_in_editor == null) gdext.classes.SplitContainer.mb_set_drag_area_highlight_in_editor = MethodBind.get("SplitContainer", "set_drag_area_highlight_in_editor", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.SplitContainer.mb_set_drag_area_highlight_in_editor, livePtr, drag_area_highlight_in_editor)
+    Ptrcall.callVoid1(gdext.classes.SplitContainer.mb_set_drag_area_highlight_in_editor, livePtr, dragAreaHighlightInEditor)
   }
 
   /** SplitContainer.is_drag_area_highlight_in_editor_enabled */
@@ -167,4 +168,28 @@ object SplitContainer {
   private[classes] var mb_get_drag_area_control: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_split_offset: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_split_offset: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `SplitContainer.DraggerVisibility`. */
+  opaque type DraggerVisibility <: Long = Long
+
+  object DraggerVisibility {
+    final val Visible: DraggerVisibility = 0L.asInstanceOf[DraggerVisibility]
+    final val Hidden: DraggerVisibility = 1L.asInstanceOf[DraggerVisibility]
+    final val HiddenCollapsed: DraggerVisibility = 2L.asInstanceOf[DraggerVisibility]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DraggerVisibility = value.asInstanceOf[DraggerVisibility]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DraggerVisibility] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[DraggerVisibility]]
+
+    extension (self: DraggerVisibility)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Visible"
+        case 1L => "Hidden"
+        case 2L => "HiddenCollapsed"
+        case other => other.toString
+      }
+  }
 }

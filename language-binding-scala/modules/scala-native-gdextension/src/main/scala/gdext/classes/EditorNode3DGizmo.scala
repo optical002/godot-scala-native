@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,7 +12,7 @@ abstract class EditorNode3DGizmo extends Node3DGizmo {
   override def godotClassName: String = "EditorNode3DGizmo"
 
   /** EditorNode3DGizmo.add_mesh */
-  final def addMesh(mesh: Mesh, material: Material, transform: gdext.builtin.Transform3D, skeleton: SkinReference): Unit = {
+  final def addMesh(mesh: Mesh, material: Material = null, transform: gdext.builtin.Transform3D, skeleton: SkinReference = null): Unit = {
     if (gdext.classes.EditorNode3DGizmo.mb_add_mesh == null) gdext.classes.EditorNode3DGizmo.mb_add_mesh = MethodBind.get("EditorNode3DGizmo", "add_mesh", 1579955111L)
     Ptrcall.callVoid4(gdext.classes.EditorNode3DGizmo.mb_add_mesh, livePtr, Wrappers.handle(mesh), Wrappers.handle(material), transform, Wrappers.handle(skeleton))
   }
@@ -23,9 +24,9 @@ abstract class EditorNode3DGizmo extends Node3DGizmo {
   }
 
   /** EditorNode3DGizmo.add_unscaled_billboard */
-  final def addUnscaledBillboard(material: Material, default_scale: Double, modulate: gdext.builtin.Color): Unit = {
+  final def addUnscaledBillboard(material: Material, defaultScale: Double = 1.0, modulate: gdext.builtin.Color = gdext.builtin.Color(1f, 1f, 1f, 1f)): Unit = {
     if (gdext.classes.EditorNode3DGizmo.mb_add_unscaled_billboard == null) gdext.classes.EditorNode3DGizmo.mb_add_unscaled_billboard = MethodBind.get("EditorNode3DGizmo", "add_unscaled_billboard", 520007164L)
-    Ptrcall.callVoid3(gdext.classes.EditorNode3DGizmo.mb_add_unscaled_billboard, livePtr, Wrappers.handle(material), default_scale, modulate)
+    Ptrcall.callVoid3(gdext.classes.EditorNode3DGizmo.mb_add_unscaled_billboard, livePtr, Wrappers.handle(material), defaultScale, modulate)
   }
 
   /** EditorNode3DGizmo.set_node_3d */

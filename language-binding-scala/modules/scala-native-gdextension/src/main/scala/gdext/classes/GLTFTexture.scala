@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,9 +18,9 @@ abstract class GLTFTexture extends Resource {
   }
 
   /** GLTFTexture.set_src_image */
-  final def setSrcImage(src_image: Long): Unit = {
+  final def setSrcImage(srcImage: Long): Unit = {
     if (gdext.classes.GLTFTexture.mb_set_src_image == null) gdext.classes.GLTFTexture.mb_set_src_image = MethodBind.get("GLTFTexture", "set_src_image", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.GLTFTexture.mb_set_src_image, livePtr, src_image)
+    Ptrcall.callVoid1(gdext.classes.GLTFTexture.mb_set_src_image, livePtr, srcImage)
   }
 
   /** GLTFTexture.get_sampler */

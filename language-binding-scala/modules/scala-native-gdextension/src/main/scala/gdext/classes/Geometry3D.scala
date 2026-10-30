@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -44,4 +45,16 @@ object Geometry3D {
         Godot.interface.global_get_singleton(StringNames.cached("Geometry3D").ptr)))
     instance
   }
+
+  /** Forwards to [[singleton]]: Geometry3D.get_closest_point_to_segment */
+  final def getClosestPointToSegment(point: gdext.builtin.Vector3, s1: gdext.builtin.Vector3, s2: gdext.builtin.Vector3): gdext.builtin.Vector3 =
+    singleton.getClosestPointToSegment(point, s1, s2)
+
+  /** Forwards to [[singleton]]: Geometry3D.get_closest_point_to_segment_uncapped */
+  final def getClosestPointToSegmentUncapped(point: gdext.builtin.Vector3, s1: gdext.builtin.Vector3, s2: gdext.builtin.Vector3): gdext.builtin.Vector3 =
+    singleton.getClosestPointToSegmentUncapped(point, s1, s2)
+
+  /** Forwards to [[singleton]]: Geometry3D.get_triangle_barycentric_coords */
+  final def getTriangleBarycentricCoords(point: gdext.builtin.Vector3, a: gdext.builtin.Vector3, b: gdext.builtin.Vector3, c: gdext.builtin.Vector3): gdext.builtin.Vector3 =
+    singleton.getTriangleBarycentricCoords(point, a, b, c)
 }

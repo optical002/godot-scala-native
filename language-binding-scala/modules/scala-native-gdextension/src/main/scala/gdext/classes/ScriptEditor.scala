@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,21 +18,21 @@ abstract class ScriptEditor extends PanelContainer {
   }
 
   /** ScriptEditor.register_syntax_highlighter */
-  final def registerSyntaxHighlighter(syntax_highlighter: EditorSyntaxHighlighter): Unit = {
+  final def registerSyntaxHighlighter(syntaxHighlighter: EditorSyntaxHighlighter): Unit = {
     if (gdext.classes.ScriptEditor.mb_register_syntax_highlighter == null) gdext.classes.ScriptEditor.mb_register_syntax_highlighter = MethodBind.get("ScriptEditor", "register_syntax_highlighter", 1092774468L)
-    Ptrcall.callVoid1(gdext.classes.ScriptEditor.mb_register_syntax_highlighter, livePtr, Wrappers.handle(syntax_highlighter))
+    Ptrcall.callVoid1(gdext.classes.ScriptEditor.mb_register_syntax_highlighter, livePtr, Wrappers.handle(syntaxHighlighter))
   }
 
   /** ScriptEditor.unregister_syntax_highlighter */
-  final def unregisterSyntaxHighlighter(syntax_highlighter: EditorSyntaxHighlighter): Unit = {
+  final def unregisterSyntaxHighlighter(syntaxHighlighter: EditorSyntaxHighlighter): Unit = {
     if (gdext.classes.ScriptEditor.mb_unregister_syntax_highlighter == null) gdext.classes.ScriptEditor.mb_unregister_syntax_highlighter = MethodBind.get("ScriptEditor", "unregister_syntax_highlighter", 1092774468L)
-    Ptrcall.callVoid1(gdext.classes.ScriptEditor.mb_unregister_syntax_highlighter, livePtr, Wrappers.handle(syntax_highlighter))
+    Ptrcall.callVoid1(gdext.classes.ScriptEditor.mb_unregister_syntax_highlighter, livePtr, Wrappers.handle(syntaxHighlighter))
   }
 
   /** ScriptEditor.goto_line */
-  final def gotoLine(line_number: Long): Unit = {
+  final def gotoLine(lineNumber: Long): Unit = {
     if (gdext.classes.ScriptEditor.mb_goto_line == null) gdext.classes.ScriptEditor.mb_goto_line = MethodBind.get("ScriptEditor", "goto_line", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.ScriptEditor.mb_goto_line, livePtr, line_number)
+    Ptrcall.callVoid1(gdext.classes.ScriptEditor.mb_goto_line, livePtr, lineNumber)
   }
 
   /** ScriptEditor.get_current_script. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -41,9 +42,9 @@ abstract class ScriptEditor extends PanelContainer {
   }
 
   /** ScriptEditor.open_script_create_dialog */
-  final def openScriptCreateDialog(base_name: String, base_path: String): Unit = {
+  final def openScriptCreateDialog(baseName: String, basePath: String): Unit = {
     if (gdext.classes.ScriptEditor.mb_open_script_create_dialog == null) gdext.classes.ScriptEditor.mb_open_script_create_dialog = MethodBind.get("ScriptEditor", "open_script_create_dialog", 3186203200L)
-    Ptrcall.callVoid2(gdext.classes.ScriptEditor.mb_open_script_create_dialog, livePtr, base_name, base_path)
+    Ptrcall.callVoid2(gdext.classes.ScriptEditor.mb_open_script_create_dialog, livePtr, baseName, basePath)
   }
 
   /** ScriptEditor.goto_help */

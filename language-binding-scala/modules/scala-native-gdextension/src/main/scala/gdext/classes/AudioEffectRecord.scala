@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,15 +24,15 @@ abstract class AudioEffectRecord extends AudioEffect {
   }
 
   /** AudioEffectRecord.set_format */
-  final def setFormat(format: Long): Unit = {
+  final def setFormat(format: gdext.classes.AudioStreamWAV.Format): Unit = {
     if (gdext.classes.AudioEffectRecord.mb_set_format == null) gdext.classes.AudioEffectRecord.mb_set_format = MethodBind.get("AudioEffectRecord", "set_format", 60648488L)
     Ptrcall.callVoid1(gdext.classes.AudioEffectRecord.mb_set_format, livePtr, format)
   }
 
   /** AudioEffectRecord.get_format */
-  final def getFormat(): Long = {
+  final def getFormat(): gdext.classes.AudioStreamWAV.Format = {
     if (gdext.classes.AudioEffectRecord.mb_get_format == null) gdext.classes.AudioEffectRecord.mb_get_format = MethodBind.get("AudioEffectRecord", "get_format", 3151724922L)
-    Ptrcall.call0[Long](gdext.classes.AudioEffectRecord.mb_get_format, livePtr)
+    gdext.classes.AudioStreamWAV.Format(Ptrcall.call0[Long](gdext.classes.AudioEffectRecord.mb_get_format, livePtr))
   }
 
   /** AudioEffectRecord.get_recording. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */

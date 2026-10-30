@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,15 +24,15 @@ abstract class VoxelGI extends VisualInstance3D {
   }
 
   /** VoxelGI.set_subdiv */
-  final def setSubdiv(subdiv: Long): Unit = {
+  final def setSubdiv(subdiv: gdext.classes.VoxelGI.Subdiv): Unit = {
     if (gdext.classes.VoxelGI.mb_set_subdiv == null) gdext.classes.VoxelGI.mb_set_subdiv = MethodBind.get("VoxelGI", "set_subdiv", 2240898472L)
     Ptrcall.callVoid1(gdext.classes.VoxelGI.mb_set_subdiv, livePtr, subdiv)
   }
 
   /** VoxelGI.get_subdiv */
-  final def getSubdiv(): Long = {
+  final def getSubdiv(): gdext.classes.VoxelGI.Subdiv = {
     if (gdext.classes.VoxelGI.mb_get_subdiv == null) gdext.classes.VoxelGI.mb_get_subdiv = MethodBind.get("VoxelGI", "get_subdiv", 4261647950L)
-    Ptrcall.call0[Long](gdext.classes.VoxelGI.mb_get_subdiv, livePtr)
+    gdext.classes.VoxelGI.Subdiv(Ptrcall.call0[Long](gdext.classes.VoxelGI.mb_get_subdiv, livePtr))
   }
 
   /** VoxelGI.set_size */
@@ -47,9 +48,9 @@ abstract class VoxelGI extends VisualInstance3D {
   }
 
   /** VoxelGI.set_camera_attributes */
-  final def setCameraAttributes(camera_attributes: CameraAttributes): Unit = {
+  final def setCameraAttributes(cameraAttributes: CameraAttributes): Unit = {
     if (gdext.classes.VoxelGI.mb_set_camera_attributes == null) gdext.classes.VoxelGI.mb_set_camera_attributes = MethodBind.get("VoxelGI", "set_camera_attributes", 2817810567L)
-    Ptrcall.callVoid1(gdext.classes.VoxelGI.mb_set_camera_attributes, livePtr, Wrappers.handle(camera_attributes))
+    Ptrcall.callVoid1(gdext.classes.VoxelGI.mb_set_camera_attributes, livePtr, Wrappers.handle(cameraAttributes))
   }
 
   /** VoxelGI.get_camera_attributes. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -59,9 +60,9 @@ abstract class VoxelGI extends VisualInstance3D {
   }
 
   /** VoxelGI.bake */
-  final def bake(from_node: Node, create_visual_debug: Boolean): Unit = {
+  final def bake(fromNode: Node = null, createVisualDebug: Boolean = false): Unit = {
     if (gdext.classes.VoxelGI.mb_bake == null) gdext.classes.VoxelGI.mb_bake = MethodBind.get("VoxelGI", "bake", 2781551026L)
-    Ptrcall.callVoid2(gdext.classes.VoxelGI.mb_bake, livePtr, Wrappers.handle(from_node), create_visual_debug)
+    Ptrcall.callVoid2(gdext.classes.VoxelGI.mb_bake, livePtr, Wrappers.handle(fromNode), createVisualDebug)
   }
 
   /** VoxelGI.debug_bake */
@@ -83,4 +84,32 @@ object VoxelGI {
   private[classes] var mb_get_camera_attributes: GDExtensionMethodBindPtr = null
   private[classes] var mb_bake: GDExtensionMethodBindPtr = null
   private[classes] var mb_debug_bake: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `VoxelGI.Subdiv`. */
+  opaque type Subdiv <: Long = Long
+
+  object Subdiv {
+    final val Subdiv64: Subdiv = 0L.asInstanceOf[Subdiv]
+    final val Subdiv128: Subdiv = 1L.asInstanceOf[Subdiv]
+    final val Subdiv256: Subdiv = 2L.asInstanceOf[Subdiv]
+    final val Subdiv512: Subdiv = 3L.asInstanceOf[Subdiv]
+    final val Max: Subdiv = 4L.asInstanceOf[Subdiv]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): Subdiv = value.asInstanceOf[Subdiv]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[Subdiv] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[Subdiv]]
+
+    extension (self: Subdiv)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Subdiv64"
+        case 1L => "Subdiv128"
+        case 2L => "Subdiv256"
+        case 3L => "Subdiv512"
+        case 4L => "Max"
+        case other => other.toString
+      }
+  }
 }

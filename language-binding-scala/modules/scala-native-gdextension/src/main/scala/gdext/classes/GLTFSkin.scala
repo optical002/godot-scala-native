@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,9 +18,9 @@ abstract class GLTFSkin extends Resource {
   }
 
   /** GLTFSkin.set_skin_root */
-  final def setSkinRoot(skin_root: Long): Unit = {
+  final def setSkinRoot(skinRoot: Long): Unit = {
     if (gdext.classes.GLTFSkin.mb_set_skin_root == null) gdext.classes.GLTFSkin.mb_set_skin_root = MethodBind.get("GLTFSkin", "set_skin_root", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.GLTFSkin.mb_set_skin_root, livePtr, skin_root)
+    Ptrcall.callVoid1(gdext.classes.GLTFSkin.mb_set_skin_root, livePtr, skinRoot)
   }
 
   /** GLTFSkin.get_skeleton */
@@ -41,9 +42,9 @@ abstract class GLTFSkin extends Resource {
   }
 
   /** GLTFSkin.set_godot_skin */
-  final def setGodotSkin(godot_skin: Skin): Unit = {
+  final def setGodotSkin(godotSkin: Skin): Unit = {
     if (gdext.classes.GLTFSkin.mb_set_godot_skin == null) gdext.classes.GLTFSkin.mb_set_godot_skin = MethodBind.get("GLTFSkin", "set_godot_skin", 3971435618L)
-    Ptrcall.callVoid1(gdext.classes.GLTFSkin.mb_set_godot_skin, livePtr, Wrappers.handle(godot_skin))
+    Ptrcall.callVoid1(gdext.classes.GLTFSkin.mb_set_godot_skin, livePtr, Wrappers.handle(godotSkin))
   }
 
 }

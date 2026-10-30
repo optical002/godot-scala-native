@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,33 +24,33 @@ abstract class GPUParticlesCollisionHeightField3D extends GPUParticlesCollision3
   }
 
   /** GPUParticlesCollisionHeightField3D.set_resolution */
-  final def setResolution(resolution: Long): Unit = {
+  final def setResolution(resolution: gdext.classes.GPUParticlesCollisionHeightField3D.Resolution): Unit = {
     if (gdext.classes.GPUParticlesCollisionHeightField3D.mb_set_resolution == null) gdext.classes.GPUParticlesCollisionHeightField3D.mb_set_resolution = MethodBind.get("GPUParticlesCollisionHeightField3D", "set_resolution", 1009996517L)
     Ptrcall.callVoid1(gdext.classes.GPUParticlesCollisionHeightField3D.mb_set_resolution, livePtr, resolution)
   }
 
   /** GPUParticlesCollisionHeightField3D.get_resolution */
-  final def getResolution(): Long = {
+  final def getResolution(): gdext.classes.GPUParticlesCollisionHeightField3D.Resolution = {
     if (gdext.classes.GPUParticlesCollisionHeightField3D.mb_get_resolution == null) gdext.classes.GPUParticlesCollisionHeightField3D.mb_get_resolution = MethodBind.get("GPUParticlesCollisionHeightField3D", "get_resolution", 1156065644L)
-    Ptrcall.call0[Long](gdext.classes.GPUParticlesCollisionHeightField3D.mb_get_resolution, livePtr)
+    gdext.classes.GPUParticlesCollisionHeightField3D.Resolution(Ptrcall.call0[Long](gdext.classes.GPUParticlesCollisionHeightField3D.mb_get_resolution, livePtr))
   }
 
   /** GPUParticlesCollisionHeightField3D.set_update_mode */
-  final def setUpdateMode(update_mode: Long): Unit = {
+  final def setUpdateMode(updateMode: gdext.classes.GPUParticlesCollisionHeightField3D.UpdateMode): Unit = {
     if (gdext.classes.GPUParticlesCollisionHeightField3D.mb_set_update_mode == null) gdext.classes.GPUParticlesCollisionHeightField3D.mb_set_update_mode = MethodBind.get("GPUParticlesCollisionHeightField3D", "set_update_mode", 673680859L)
-    Ptrcall.callVoid1(gdext.classes.GPUParticlesCollisionHeightField3D.mb_set_update_mode, livePtr, update_mode)
+    Ptrcall.callVoid1(gdext.classes.GPUParticlesCollisionHeightField3D.mb_set_update_mode, livePtr, updateMode)
   }
 
   /** GPUParticlesCollisionHeightField3D.get_update_mode */
-  final def getUpdateMode(): Long = {
+  final def getUpdateMode(): gdext.classes.GPUParticlesCollisionHeightField3D.UpdateMode = {
     if (gdext.classes.GPUParticlesCollisionHeightField3D.mb_get_update_mode == null) gdext.classes.GPUParticlesCollisionHeightField3D.mb_get_update_mode = MethodBind.get("GPUParticlesCollisionHeightField3D", "get_update_mode", 1998141380L)
-    Ptrcall.call0[Long](gdext.classes.GPUParticlesCollisionHeightField3D.mb_get_update_mode, livePtr)
+    gdext.classes.GPUParticlesCollisionHeightField3D.UpdateMode(Ptrcall.call0[Long](gdext.classes.GPUParticlesCollisionHeightField3D.mb_get_update_mode, livePtr))
   }
 
   /** GPUParticlesCollisionHeightField3D.set_heightfield_mask */
-  final def setHeightfieldMask(heightfield_mask: Long): Unit = {
+  final def setHeightfieldMask(heightfieldMask: Long): Unit = {
     if (gdext.classes.GPUParticlesCollisionHeightField3D.mb_set_heightfield_mask == null) gdext.classes.GPUParticlesCollisionHeightField3D.mb_set_heightfield_mask = MethodBind.get("GPUParticlesCollisionHeightField3D", "set_heightfield_mask", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.GPUParticlesCollisionHeightField3D.mb_set_heightfield_mask, livePtr, heightfield_mask)
+    Ptrcall.callVoid1(gdext.classes.GPUParticlesCollisionHeightField3D.mb_set_heightfield_mask, livePtr, heightfieldMask)
   }
 
   /** GPUParticlesCollisionHeightField3D.get_heightfield_mask */
@@ -59,15 +60,15 @@ abstract class GPUParticlesCollisionHeightField3D extends GPUParticlesCollision3
   }
 
   /** GPUParticlesCollisionHeightField3D.set_heightfield_mask_value */
-  final def setHeightfieldMaskValue(layer_number: Long, value: Boolean): Unit = {
+  final def setHeightfieldMaskValue(layerNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.GPUParticlesCollisionHeightField3D.mb_set_heightfield_mask_value == null) gdext.classes.GPUParticlesCollisionHeightField3D.mb_set_heightfield_mask_value = MethodBind.get("GPUParticlesCollisionHeightField3D", "set_heightfield_mask_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.GPUParticlesCollisionHeightField3D.mb_set_heightfield_mask_value, livePtr, layer_number, value)
+    Ptrcall.callVoid2(gdext.classes.GPUParticlesCollisionHeightField3D.mb_set_heightfield_mask_value, livePtr, layerNumber, value)
   }
 
   /** GPUParticlesCollisionHeightField3D.get_heightfield_mask_value */
-  final def getHeightfieldMaskValue(layer_number: Long): Boolean = {
+  final def getHeightfieldMaskValue(layerNumber: Long): Boolean = {
     if (gdext.classes.GPUParticlesCollisionHeightField3D.mb_get_heightfield_mask_value == null) gdext.classes.GPUParticlesCollisionHeightField3D.mb_get_heightfield_mask_value = MethodBind.get("GPUParticlesCollisionHeightField3D", "get_heightfield_mask_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.GPUParticlesCollisionHeightField3D.mb_get_heightfield_mask_value, livePtr, layer_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.GPUParticlesCollisionHeightField3D.mb_get_heightfield_mask_value, livePtr, layerNumber)
   }
 
   /** GPUParticlesCollisionHeightField3D.set_follow_camera_enabled */
@@ -97,4 +98,58 @@ object GPUParticlesCollisionHeightField3D {
   private[classes] var mb_get_heightfield_mask_value: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_follow_camera_enabled: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_follow_camera_enabled: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `GPUParticlesCollisionHeightField3D.Resolution`. */
+  opaque type Resolution <: Long = Long
+
+  object Resolution {
+    final val Resolution256: Resolution = 0L.asInstanceOf[Resolution]
+    final val Resolution512: Resolution = 1L.asInstanceOf[Resolution]
+    final val Resolution1024: Resolution = 2L.asInstanceOf[Resolution]
+    final val Resolution2048: Resolution = 3L.asInstanceOf[Resolution]
+    final val Resolution4096: Resolution = 4L.asInstanceOf[Resolution]
+    final val Resolution8192: Resolution = 5L.asInstanceOf[Resolution]
+    final val Max: Resolution = 6L.asInstanceOf[Resolution]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): Resolution = value.asInstanceOf[Resolution]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[Resolution] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L).asInstanceOf[scala.IArray[Resolution]]
+
+    extension (self: Resolution)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Resolution256"
+        case 1L => "Resolution512"
+        case 2L => "Resolution1024"
+        case 3L => "Resolution2048"
+        case 4L => "Resolution4096"
+        case 5L => "Resolution8192"
+        case 6L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `GPUParticlesCollisionHeightField3D.UpdateMode`. */
+  opaque type UpdateMode <: Long = Long
+
+  object UpdateMode {
+    final val WhenMoved: UpdateMode = 0L.asInstanceOf[UpdateMode]
+    final val Always: UpdateMode = 1L.asInstanceOf[UpdateMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): UpdateMode = value.asInstanceOf[UpdateMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[UpdateMode] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[UpdateMode]]
+
+    extension (self: UpdateMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "WhenMoved"
+        case 1L => "Always"
+        case other => other.toString
+      }
+  }
 }

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,27 +12,27 @@ abstract class Label3D extends GeometryInstance3D {
   override def godotClassName: String = "Label3D"
 
   /** Label3D.set_horizontal_alignment */
-  final def setHorizontalAlignment(alignment: Long): Unit = {
+  final def setHorizontalAlignment(alignment: gdext.classes.HorizontalAlignment): Unit = {
     if (gdext.classes.Label3D.mb_set_horizontal_alignment == null) gdext.classes.Label3D.mb_set_horizontal_alignment = MethodBind.get("Label3D", "set_horizontal_alignment", 2312603777L)
     Ptrcall.callVoid1(gdext.classes.Label3D.mb_set_horizontal_alignment, livePtr, alignment)
   }
 
   /** Label3D.get_horizontal_alignment */
-  final def getHorizontalAlignment(): Long = {
+  final def getHorizontalAlignment(): gdext.classes.HorizontalAlignment = {
     if (gdext.classes.Label3D.mb_get_horizontal_alignment == null) gdext.classes.Label3D.mb_get_horizontal_alignment = MethodBind.get("Label3D", "get_horizontal_alignment", 341400642L)
-    Ptrcall.call0[Long](gdext.classes.Label3D.mb_get_horizontal_alignment, livePtr)
+    gdext.classes.HorizontalAlignment(Ptrcall.call0[Long](gdext.classes.Label3D.mb_get_horizontal_alignment, livePtr))
   }
 
   /** Label3D.set_vertical_alignment */
-  final def setVerticalAlignment(alignment: Long): Unit = {
+  final def setVerticalAlignment(alignment: gdext.classes.VerticalAlignment): Unit = {
     if (gdext.classes.Label3D.mb_set_vertical_alignment == null) gdext.classes.Label3D.mb_set_vertical_alignment = MethodBind.get("Label3D", "set_vertical_alignment", 1796458609L)
     Ptrcall.callVoid1(gdext.classes.Label3D.mb_set_vertical_alignment, livePtr, alignment)
   }
 
   /** Label3D.get_vertical_alignment */
-  final def getVerticalAlignment(): Long = {
+  final def getVerticalAlignment(): gdext.classes.VerticalAlignment = {
     if (gdext.classes.Label3D.mb_get_vertical_alignment == null) gdext.classes.Label3D.mb_get_vertical_alignment = MethodBind.get("Label3D", "get_vertical_alignment", 3274884059L)
-    Ptrcall.call0[Long](gdext.classes.Label3D.mb_get_vertical_alignment, livePtr)
+    gdext.classes.VerticalAlignment(Ptrcall.call0[Long](gdext.classes.Label3D.mb_get_vertical_alignment, livePtr))
   }
 
   /** Label3D.set_modulate */
@@ -71,15 +72,15 @@ abstract class Label3D extends GeometryInstance3D {
   }
 
   /** Label3D.set_text_direction */
-  final def setTextDirection(direction: Long): Unit = {
+  final def setTextDirection(direction: gdext.classes.TextServer.Direction): Unit = {
     if (gdext.classes.Label3D.mb_set_text_direction == null) gdext.classes.Label3D.mb_set_text_direction = MethodBind.get("Label3D", "set_text_direction", 1418190634L)
     Ptrcall.callVoid1(gdext.classes.Label3D.mb_set_text_direction, livePtr, direction)
   }
 
   /** Label3D.get_text_direction */
-  final def getTextDirection(): Long = {
+  final def getTextDirection(): gdext.classes.TextServer.Direction = {
     if (gdext.classes.Label3D.mb_get_text_direction == null) gdext.classes.Label3D.mb_get_text_direction = MethodBind.get("Label3D", "get_text_direction", 2516697328L)
-    Ptrcall.call0[Long](gdext.classes.Label3D.mb_get_text_direction, livePtr)
+    gdext.classes.TextServer.Direction(Ptrcall.call0[Long](gdext.classes.Label3D.mb_get_text_direction, livePtr))
   }
 
   /** Label3D.set_language */
@@ -95,15 +96,15 @@ abstract class Label3D extends GeometryInstance3D {
   }
 
   /** Label3D.set_structured_text_bidi_override */
-  final def setStructuredTextBidiOverride(parser: Long): Unit = {
+  final def setStructuredTextBidiOverride(parser: gdext.classes.TextServer.StructuredTextParser): Unit = {
     if (gdext.classes.Label3D.mb_set_structured_text_bidi_override == null) gdext.classes.Label3D.mb_set_structured_text_bidi_override = MethodBind.get("Label3D", "set_structured_text_bidi_override", 55961453L)
     Ptrcall.callVoid1(gdext.classes.Label3D.mb_set_structured_text_bidi_override, livePtr, parser)
   }
 
   /** Label3D.get_structured_text_bidi_override */
-  final def getStructuredTextBidiOverride(): Long = {
+  final def getStructuredTextBidiOverride(): gdext.classes.TextServer.StructuredTextParser = {
     if (gdext.classes.Label3D.mb_get_structured_text_bidi_override == null) gdext.classes.Label3D.mb_get_structured_text_bidi_override = MethodBind.get("Label3D", "get_structured_text_bidi_override", 3385126229L)
-    Ptrcall.call0[Long](gdext.classes.Label3D.mb_get_structured_text_bidi_override, livePtr)
+    gdext.classes.TextServer.StructuredTextParser(Ptrcall.call0[Long](gdext.classes.Label3D.mb_get_structured_text_bidi_override, livePtr))
   }
 
   /** Label3D.set_uppercase */
@@ -167,9 +168,9 @@ abstract class Label3D extends GeometryInstance3D {
   }
 
   /** Label3D.set_outline_size */
-  final def setOutlineSize(outline_size: Long): Unit = {
+  final def setOutlineSize(outlineSize: Long): Unit = {
     if (gdext.classes.Label3D.mb_set_outline_size == null) gdext.classes.Label3D.mb_set_outline_size = MethodBind.get("Label3D", "set_outline_size", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.Label3D.mb_set_outline_size, livePtr, outline_size)
+    Ptrcall.callVoid1(gdext.classes.Label3D.mb_set_outline_size, livePtr, outlineSize)
   }
 
   /** Label3D.get_outline_size */
@@ -179,9 +180,9 @@ abstract class Label3D extends GeometryInstance3D {
   }
 
   /** Label3D.set_line_spacing */
-  final def setLineSpacing(line_spacing: Double): Unit = {
+  final def setLineSpacing(lineSpacing: Double): Unit = {
     if (gdext.classes.Label3D.mb_set_line_spacing == null) gdext.classes.Label3D.mb_set_line_spacing = MethodBind.get("Label3D", "set_line_spacing", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Label3D.mb_set_line_spacing, livePtr, line_spacing)
+    Ptrcall.callVoid1(gdext.classes.Label3D.mb_set_line_spacing, livePtr, lineSpacing)
   }
 
   /** Label3D.get_line_spacing */
@@ -191,39 +192,39 @@ abstract class Label3D extends GeometryInstance3D {
   }
 
   /** Label3D.set_autowrap_mode */
-  final def setAutowrapMode(autowrap_mode: Long): Unit = {
+  final def setAutowrapMode(autowrapMode: gdext.classes.TextServer.AutowrapMode): Unit = {
     if (gdext.classes.Label3D.mb_set_autowrap_mode == null) gdext.classes.Label3D.mb_set_autowrap_mode = MethodBind.get("Label3D", "set_autowrap_mode", 3289138044L)
-    Ptrcall.callVoid1(gdext.classes.Label3D.mb_set_autowrap_mode, livePtr, autowrap_mode)
+    Ptrcall.callVoid1(gdext.classes.Label3D.mb_set_autowrap_mode, livePtr, autowrapMode)
   }
 
   /** Label3D.get_autowrap_mode */
-  final def getAutowrapMode(): Long = {
+  final def getAutowrapMode(): gdext.classes.TextServer.AutowrapMode = {
     if (gdext.classes.Label3D.mb_get_autowrap_mode == null) gdext.classes.Label3D.mb_get_autowrap_mode = MethodBind.get("Label3D", "get_autowrap_mode", 1549071663L)
-    Ptrcall.call0[Long](gdext.classes.Label3D.mb_get_autowrap_mode, livePtr)
+    gdext.classes.TextServer.AutowrapMode(Ptrcall.call0[Long](gdext.classes.Label3D.mb_get_autowrap_mode, livePtr))
   }
 
   /** Label3D.set_autowrap_trim_flags */
-  final def setAutowrapTrimFlags(autowrap_trim_flags: Long): Unit = {
+  final def setAutowrapTrimFlags(autowrapTrimFlags: gdext.classes.TextServer.LineBreakFlag): Unit = {
     if (gdext.classes.Label3D.mb_set_autowrap_trim_flags == null) gdext.classes.Label3D.mb_set_autowrap_trim_flags = MethodBind.get("Label3D", "set_autowrap_trim_flags", 2809697122L)
-    Ptrcall.callVoid1(gdext.classes.Label3D.mb_set_autowrap_trim_flags, livePtr, autowrap_trim_flags)
+    Ptrcall.callVoid1(gdext.classes.Label3D.mb_set_autowrap_trim_flags, livePtr, autowrapTrimFlags.asInstanceOf[Long])
   }
 
   /** Label3D.get_autowrap_trim_flags */
-  final def getAutowrapTrimFlags(): Long = {
+  final def getAutowrapTrimFlags(): gdext.classes.TextServer.LineBreakFlag = {
     if (gdext.classes.Label3D.mb_get_autowrap_trim_flags == null) gdext.classes.Label3D.mb_get_autowrap_trim_flags = MethodBind.get("Label3D", "get_autowrap_trim_flags", 2340632602L)
-    Ptrcall.call0[Long](gdext.classes.Label3D.mb_get_autowrap_trim_flags, livePtr)
+    gdext.classes.TextServer.LineBreakFlag(Ptrcall.call0[Long](gdext.classes.Label3D.mb_get_autowrap_trim_flags, livePtr))
   }
 
   /** Label3D.set_justification_flags */
-  final def setJustificationFlags(justification_flags: Long): Unit = {
+  final def setJustificationFlags(justificationFlags: gdext.classes.TextServer.JustificationFlag): Unit = {
     if (gdext.classes.Label3D.mb_set_justification_flags == null) gdext.classes.Label3D.mb_set_justification_flags = MethodBind.get("Label3D", "set_justification_flags", 2877345813L)
-    Ptrcall.callVoid1(gdext.classes.Label3D.mb_set_justification_flags, livePtr, justification_flags)
+    Ptrcall.callVoid1(gdext.classes.Label3D.mb_set_justification_flags, livePtr, justificationFlags.asInstanceOf[Long])
   }
 
   /** Label3D.get_justification_flags */
-  final def getJustificationFlags(): Long = {
+  final def getJustificationFlags(): gdext.classes.TextServer.JustificationFlag = {
     if (gdext.classes.Label3D.mb_get_justification_flags == null) gdext.classes.Label3D.mb_get_justification_flags = MethodBind.get("Label3D", "get_justification_flags", 1583363614L)
-    Ptrcall.call0[Long](gdext.classes.Label3D.mb_get_justification_flags, livePtr)
+    gdext.classes.TextServer.JustificationFlag(Ptrcall.call0[Long](gdext.classes.Label3D.mb_get_justification_flags, livePtr))
   }
 
   /** Label3D.set_width */
@@ -239,9 +240,9 @@ abstract class Label3D extends GeometryInstance3D {
   }
 
   /** Label3D.set_pixel_size */
-  final def setPixelSize(pixel_size: Double): Unit = {
+  final def setPixelSize(pixelSize: Double): Unit = {
     if (gdext.classes.Label3D.mb_set_pixel_size == null) gdext.classes.Label3D.mb_set_pixel_size = MethodBind.get("Label3D", "set_pixel_size", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Label3D.mb_set_pixel_size, livePtr, pixel_size)
+    Ptrcall.callVoid1(gdext.classes.Label3D.mb_set_pixel_size, livePtr, pixelSize)
   }
 
   /** Label3D.get_pixel_size */
@@ -263,39 +264,39 @@ abstract class Label3D extends GeometryInstance3D {
   }
 
   /** Label3D.set_draw_flag */
-  final def setDrawFlag(flag: Long, enabled: Boolean): Unit = {
+  final def setDrawFlag(flag: gdext.classes.Label3D.DrawFlags, enabled: Boolean): Unit = {
     if (gdext.classes.Label3D.mb_set_draw_flag == null) gdext.classes.Label3D.mb_set_draw_flag = MethodBind.get("Label3D", "set_draw_flag", 1285833066L)
     Ptrcall.callVoid2(gdext.classes.Label3D.mb_set_draw_flag, livePtr, flag, enabled)
   }
 
   /** Label3D.get_draw_flag */
-  final def getDrawFlag(flag: Long): Boolean = {
+  final def getDrawFlag(flag: gdext.classes.Label3D.DrawFlags): Boolean = {
     if (gdext.classes.Label3D.mb_get_draw_flag == null) gdext.classes.Label3D.mb_get_draw_flag = MethodBind.get("Label3D", "get_draw_flag", 259226453L)
     Ptrcall.call1[Long, Boolean](gdext.classes.Label3D.mb_get_draw_flag, livePtr, flag)
   }
 
   /** Label3D.set_billboard_mode */
-  final def setBillboardMode(mode: Long): Unit = {
+  final def setBillboardMode(mode: gdext.classes.BaseMaterial3D.BillboardMode): Unit = {
     if (gdext.classes.Label3D.mb_set_billboard_mode == null) gdext.classes.Label3D.mb_set_billboard_mode = MethodBind.get("Label3D", "set_billboard_mode", 4202036497L)
     Ptrcall.callVoid1(gdext.classes.Label3D.mb_set_billboard_mode, livePtr, mode)
   }
 
   /** Label3D.get_billboard_mode */
-  final def getBillboardMode(): Long = {
+  final def getBillboardMode(): gdext.classes.BaseMaterial3D.BillboardMode = {
     if (gdext.classes.Label3D.mb_get_billboard_mode == null) gdext.classes.Label3D.mb_get_billboard_mode = MethodBind.get("Label3D", "get_billboard_mode", 1283840139L)
-    Ptrcall.call0[Long](gdext.classes.Label3D.mb_get_billboard_mode, livePtr)
+    gdext.classes.BaseMaterial3D.BillboardMode(Ptrcall.call0[Long](gdext.classes.Label3D.mb_get_billboard_mode, livePtr))
   }
 
   /** Label3D.set_alpha_cut_mode */
-  final def setAlphaCutMode(mode: Long): Unit = {
+  final def setAlphaCutMode(mode: gdext.classes.Label3D.AlphaCutMode): Unit = {
     if (gdext.classes.Label3D.mb_set_alpha_cut_mode == null) gdext.classes.Label3D.mb_set_alpha_cut_mode = MethodBind.get("Label3D", "set_alpha_cut_mode", 2549142916L)
     Ptrcall.callVoid1(gdext.classes.Label3D.mb_set_alpha_cut_mode, livePtr, mode)
   }
 
   /** Label3D.get_alpha_cut_mode */
-  final def getAlphaCutMode(): Long = {
+  final def getAlphaCutMode(): gdext.classes.Label3D.AlphaCutMode = {
     if (gdext.classes.Label3D.mb_get_alpha_cut_mode == null) gdext.classes.Label3D.mb_get_alpha_cut_mode = MethodBind.get("Label3D", "get_alpha_cut_mode", 219468601L)
-    Ptrcall.call0[Long](gdext.classes.Label3D.mb_get_alpha_cut_mode, livePtr)
+    gdext.classes.Label3D.AlphaCutMode(Ptrcall.call0[Long](gdext.classes.Label3D.mb_get_alpha_cut_mode, livePtr))
   }
 
   /** Label3D.set_alpha_scissor_threshold */
@@ -323,15 +324,15 @@ abstract class Label3D extends GeometryInstance3D {
   }
 
   /** Label3D.set_alpha_antialiasing */
-  final def setAlphaAntialiasing(alpha_aa: Long): Unit = {
+  final def setAlphaAntialiasing(alphaAa: gdext.classes.BaseMaterial3D.AlphaAntiAliasing): Unit = {
     if (gdext.classes.Label3D.mb_set_alpha_antialiasing == null) gdext.classes.Label3D.mb_set_alpha_antialiasing = MethodBind.get("Label3D", "set_alpha_antialiasing", 3212649852L)
-    Ptrcall.callVoid1(gdext.classes.Label3D.mb_set_alpha_antialiasing, livePtr, alpha_aa)
+    Ptrcall.callVoid1(gdext.classes.Label3D.mb_set_alpha_antialiasing, livePtr, alphaAa)
   }
 
   /** Label3D.get_alpha_antialiasing */
-  final def getAlphaAntialiasing(): Long = {
+  final def getAlphaAntialiasing(): gdext.classes.BaseMaterial3D.AlphaAntiAliasing = {
     if (gdext.classes.Label3D.mb_get_alpha_antialiasing == null) gdext.classes.Label3D.mb_get_alpha_antialiasing = MethodBind.get("Label3D", "get_alpha_antialiasing", 2889939400L)
-    Ptrcall.call0[Long](gdext.classes.Label3D.mb_get_alpha_antialiasing, livePtr)
+    gdext.classes.BaseMaterial3D.AlphaAntiAliasing(Ptrcall.call0[Long](gdext.classes.Label3D.mb_get_alpha_antialiasing, livePtr))
   }
 
   /** Label3D.set_alpha_antialiasing_edge */
@@ -347,15 +348,15 @@ abstract class Label3D extends GeometryInstance3D {
   }
 
   /** Label3D.set_texture_filter */
-  final def setTextureFilter(mode: Long): Unit = {
+  final def setTextureFilter(mode: gdext.classes.BaseMaterial3D.TextureFilter): Unit = {
     if (gdext.classes.Label3D.mb_set_texture_filter == null) gdext.classes.Label3D.mb_set_texture_filter = MethodBind.get("Label3D", "set_texture_filter", 22904437L)
     Ptrcall.callVoid1(gdext.classes.Label3D.mb_set_texture_filter, livePtr, mode)
   }
 
   /** Label3D.get_texture_filter */
-  final def getTextureFilter(): Long = {
+  final def getTextureFilter(): gdext.classes.BaseMaterial3D.TextureFilter = {
     if (gdext.classes.Label3D.mb_get_texture_filter == null) gdext.classes.Label3D.mb_get_texture_filter = MethodBind.get("Label3D", "get_texture_filter", 3289213076L)
-    Ptrcall.call0[Long](gdext.classes.Label3D.mb_get_texture_filter, livePtr)
+    gdext.classes.BaseMaterial3D.TextureFilter(Ptrcall.call0[Long](gdext.classes.Label3D.mb_get_texture_filter, livePtr))
   }
 
   /** Label3D.generate_triangle_mesh. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -426,4 +427,58 @@ object Label3D {
   private[classes] var mb_set_texture_filter: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_texture_filter: GDExtensionMethodBindPtr = null
   private[classes] var mb_generate_triangle_mesh: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `Label3D.DrawFlags`. */
+  opaque type DrawFlags <: Long = Long
+
+  object DrawFlags {
+    final val Shaded: DrawFlags = 0L.asInstanceOf[DrawFlags]
+    final val DoubleSided: DrawFlags = 1L.asInstanceOf[DrawFlags]
+    final val DisableDepthTest: DrawFlags = 2L.asInstanceOf[DrawFlags]
+    final val FixedSize: DrawFlags = 3L.asInstanceOf[DrawFlags]
+    final val Max: DrawFlags = 4L.asInstanceOf[DrawFlags]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DrawFlags = value.asInstanceOf[DrawFlags]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DrawFlags] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[DrawFlags]]
+
+    extension (self: DrawFlags)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Shaded"
+        case 1L => "DoubleSided"
+        case 2L => "DisableDepthTest"
+        case 3L => "FixedSize"
+        case 4L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Label3D.AlphaCutMode`. */
+  opaque type AlphaCutMode <: Long = Long
+
+  object AlphaCutMode {
+    final val Disabled: AlphaCutMode = 0L.asInstanceOf[AlphaCutMode]
+    final val Discard: AlphaCutMode = 1L.asInstanceOf[AlphaCutMode]
+    final val OpaquePrepass: AlphaCutMode = 2L.asInstanceOf[AlphaCutMode]
+    final val Hash: AlphaCutMode = 3L.asInstanceOf[AlphaCutMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): AlphaCutMode = value.asInstanceOf[AlphaCutMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[AlphaCutMode] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[AlphaCutMode]]
+
+    extension (self: AlphaCutMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "Discard"
+        case 2L => "OpaquePrepass"
+        case 3L => "Hash"
+        case other => other.toString
+      }
+  }
 }

@@ -15,7 +15,7 @@ final class Player(var speed: Double = 120.0) extends Node2D {
   @func def getScore(): Long = 42
   @signal def pinged(): Unit = ()
 
-  override def _process(delta: Double): Unit =
+  override def process(delta: Double): Unit =
     Gd.print(s"moving at $speed")
 }
 ```
@@ -39,7 +39,7 @@ used from GDScript.
   GC's. A `RefCounted` you receive is owned until `unref()` or the end of a
   `Gd.scoped` block, exported properties release what they hold, wrappers of
   freed objects throw instead of crashing, and leaks are reported at shutdown.
-- **Allocation-free hot path.** Engine calls, signals, `_process`, and
+- **Allocation-free hot path.** Engine calls, signals, `process`, and
   `@func` calls from GDScript allocate nothing on the Scala heap: method binds are
   cached, marshalling is specialized at compile time, and wrappers are cached on
   the engine object. The 16 math types are a native port of Godot's

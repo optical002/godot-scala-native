@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class SceneMultiplayer extends MultiplayerAPI {
   }
 
   /** SceneMultiplayer.complete_auth */
-  final def completeAuth(id: Long): Long = {
+  final def completeAuth(id: Long): gdext.classes.Error = {
     if (gdext.classes.SceneMultiplayer.mb_complete_auth == null) gdext.classes.SceneMultiplayer.mb_complete_auth = MethodBind.get("SceneMultiplayer", "complete_auth", 844576869L)
-    Ptrcall.call1[Long, Long](gdext.classes.SceneMultiplayer.mb_complete_auth, livePtr, id)
+    gdext.classes.Error(Ptrcall.call1[Long, Long](gdext.classes.SceneMultiplayer.mb_complete_auth, livePtr, id))
   }
 
   /** SceneMultiplayer.set_auth_timeout */

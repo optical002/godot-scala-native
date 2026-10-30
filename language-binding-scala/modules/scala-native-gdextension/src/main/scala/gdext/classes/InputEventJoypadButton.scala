@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,15 +12,15 @@ abstract class InputEventJoypadButton extends InputEvent {
   override def godotClassName: String = "InputEventJoypadButton"
 
   /** InputEventJoypadButton.set_button_index */
-  final def setButtonIndex(button_index: Long): Unit = {
+  final def setButtonIndex(buttonIndex: gdext.classes.JoyButton): Unit = {
     if (gdext.classes.InputEventJoypadButton.mb_set_button_index == null) gdext.classes.InputEventJoypadButton.mb_set_button_index = MethodBind.get("InputEventJoypadButton", "set_button_index", 1466368136L)
-    Ptrcall.callVoid1(gdext.classes.InputEventJoypadButton.mb_set_button_index, livePtr, button_index)
+    Ptrcall.callVoid1(gdext.classes.InputEventJoypadButton.mb_set_button_index, livePtr, buttonIndex)
   }
 
   /** InputEventJoypadButton.get_button_index */
-  final def getButtonIndex(): Long = {
+  final def getButtonIndex(): gdext.classes.JoyButton = {
     if (gdext.classes.InputEventJoypadButton.mb_get_button_index == null) gdext.classes.InputEventJoypadButton.mb_get_button_index = MethodBind.get("InputEventJoypadButton", "get_button_index", 595588182L)
-    Ptrcall.call0[Long](gdext.classes.InputEventJoypadButton.mb_get_button_index, livePtr)
+    gdext.classes.JoyButton(Ptrcall.call0[Long](gdext.classes.InputEventJoypadButton.mb_get_button_index, livePtr))
   }
 
   /** InputEventJoypadButton.set_pressure */

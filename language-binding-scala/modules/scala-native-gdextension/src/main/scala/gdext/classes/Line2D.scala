@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -29,7 +30,7 @@ abstract class Line2D extends Node2D {
   }
 
   /** Line2D.add_point */
-  final def addPoint(position: gdext.builtin.Vector2, index: Long): Unit = {
+  final def addPoint(position: gdext.builtin.Vector2, index: Long = -1L): Unit = {
     if (gdext.classes.Line2D.mb_add_point == null) gdext.classes.Line2D.mb_add_point = MethodBind.get("Line2D", "add_point", 2654014372L)
     Ptrcall.callVoid2(gdext.classes.Line2D.mb_add_point, livePtr, position, index)
   }
@@ -119,51 +120,51 @@ abstract class Line2D extends Node2D {
   }
 
   /** Line2D.set_texture_mode */
-  final def setTextureMode(mode: Long): Unit = {
+  final def setTextureMode(mode: gdext.classes.Line2D.LineTextureMode): Unit = {
     if (gdext.classes.Line2D.mb_set_texture_mode == null) gdext.classes.Line2D.mb_set_texture_mode = MethodBind.get("Line2D", "set_texture_mode", 1952559516L)
     Ptrcall.callVoid1(gdext.classes.Line2D.mb_set_texture_mode, livePtr, mode)
   }
 
   /** Line2D.get_texture_mode */
-  final def getTextureMode(): Long = {
+  final def getTextureMode(): gdext.classes.Line2D.LineTextureMode = {
     if (gdext.classes.Line2D.mb_get_texture_mode == null) gdext.classes.Line2D.mb_get_texture_mode = MethodBind.get("Line2D", "get_texture_mode", 2341040722L)
-    Ptrcall.call0[Long](gdext.classes.Line2D.mb_get_texture_mode, livePtr)
+    gdext.classes.Line2D.LineTextureMode(Ptrcall.call0[Long](gdext.classes.Line2D.mb_get_texture_mode, livePtr))
   }
 
   /** Line2D.set_joint_mode */
-  final def setJointMode(mode: Long): Unit = {
+  final def setJointMode(mode: gdext.classes.Line2D.LineJointMode): Unit = {
     if (gdext.classes.Line2D.mb_set_joint_mode == null) gdext.classes.Line2D.mb_set_joint_mode = MethodBind.get("Line2D", "set_joint_mode", 604292979L)
     Ptrcall.callVoid1(gdext.classes.Line2D.mb_set_joint_mode, livePtr, mode)
   }
 
   /** Line2D.get_joint_mode */
-  final def getJointMode(): Long = {
+  final def getJointMode(): gdext.classes.Line2D.LineJointMode = {
     if (gdext.classes.Line2D.mb_get_joint_mode == null) gdext.classes.Line2D.mb_get_joint_mode = MethodBind.get("Line2D", "get_joint_mode", 2546544037L)
-    Ptrcall.call0[Long](gdext.classes.Line2D.mb_get_joint_mode, livePtr)
+    gdext.classes.Line2D.LineJointMode(Ptrcall.call0[Long](gdext.classes.Line2D.mb_get_joint_mode, livePtr))
   }
 
   /** Line2D.set_begin_cap_mode */
-  final def setBeginCapMode(mode: Long): Unit = {
+  final def setBeginCapMode(mode: gdext.classes.Line2D.LineCapMode): Unit = {
     if (gdext.classes.Line2D.mb_set_begin_cap_mode == null) gdext.classes.Line2D.mb_set_begin_cap_mode = MethodBind.get("Line2D", "set_begin_cap_mode", 1669024546L)
     Ptrcall.callVoid1(gdext.classes.Line2D.mb_set_begin_cap_mode, livePtr, mode)
   }
 
   /** Line2D.get_begin_cap_mode */
-  final def getBeginCapMode(): Long = {
+  final def getBeginCapMode(): gdext.classes.Line2D.LineCapMode = {
     if (gdext.classes.Line2D.mb_get_begin_cap_mode == null) gdext.classes.Line2D.mb_get_begin_cap_mode = MethodBind.get("Line2D", "get_begin_cap_mode", 1107511441L)
-    Ptrcall.call0[Long](gdext.classes.Line2D.mb_get_begin_cap_mode, livePtr)
+    gdext.classes.Line2D.LineCapMode(Ptrcall.call0[Long](gdext.classes.Line2D.mb_get_begin_cap_mode, livePtr))
   }
 
   /** Line2D.set_end_cap_mode */
-  final def setEndCapMode(mode: Long): Unit = {
+  final def setEndCapMode(mode: gdext.classes.Line2D.LineCapMode): Unit = {
     if (gdext.classes.Line2D.mb_set_end_cap_mode == null) gdext.classes.Line2D.mb_set_end_cap_mode = MethodBind.get("Line2D", "set_end_cap_mode", 1669024546L)
     Ptrcall.callVoid1(gdext.classes.Line2D.mb_set_end_cap_mode, livePtr, mode)
   }
 
   /** Line2D.get_end_cap_mode */
-  final def getEndCapMode(): Long = {
+  final def getEndCapMode(): gdext.classes.Line2D.LineCapMode = {
     if (gdext.classes.Line2D.mb_get_end_cap_mode == null) gdext.classes.Line2D.mb_get_end_cap_mode = MethodBind.get("Line2D", "get_end_cap_mode", 1107511441L)
-    Ptrcall.call0[Long](gdext.classes.Line2D.mb_get_end_cap_mode, livePtr)
+    gdext.classes.Line2D.LineCapMode(Ptrcall.call0[Long](gdext.classes.Line2D.mb_get_end_cap_mode, livePtr))
   }
 
   /** Line2D.set_sharp_limit */
@@ -237,4 +238,76 @@ object Line2D {
   private[classes] var mb_get_round_precision: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_antialiased: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_antialiased: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `Line2D.LineJointMode`. */
+  opaque type LineJointMode <: Long = Long
+
+  object LineJointMode {
+    final val Sharp: LineJointMode = 0L.asInstanceOf[LineJointMode]
+    final val Bevel: LineJointMode = 1L.asInstanceOf[LineJointMode]
+    final val Round: LineJointMode = 2L.asInstanceOf[LineJointMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): LineJointMode = value.asInstanceOf[LineJointMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[LineJointMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[LineJointMode]]
+
+    extension (self: LineJointMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Sharp"
+        case 1L => "Bevel"
+        case 2L => "Round"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Line2D.LineCapMode`. */
+  opaque type LineCapMode <: Long = Long
+
+  object LineCapMode {
+    final val None: LineCapMode = 0L.asInstanceOf[LineCapMode]
+    final val Box: LineCapMode = 1L.asInstanceOf[LineCapMode]
+    final val Round: LineCapMode = 2L.asInstanceOf[LineCapMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): LineCapMode = value.asInstanceOf[LineCapMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[LineCapMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[LineCapMode]]
+
+    extension (self: LineCapMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "None"
+        case 1L => "Box"
+        case 2L => "Round"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Line2D.LineTextureMode`. */
+  opaque type LineTextureMode <: Long = Long
+
+  object LineTextureMode {
+    final val None: LineTextureMode = 0L.asInstanceOf[LineTextureMode]
+    final val Tile: LineTextureMode = 1L.asInstanceOf[LineTextureMode]
+    final val Stretch: LineTextureMode = 2L.asInstanceOf[LineTextureMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): LineTextureMode = value.asInstanceOf[LineTextureMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[LineTextureMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[LineTextureMode]]
+
+    extension (self: LineTextureMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "None"
+        case 1L => "Tile"
+        case 2L => "Stretch"
+        case other => other.toString
+      }
+  }
 }

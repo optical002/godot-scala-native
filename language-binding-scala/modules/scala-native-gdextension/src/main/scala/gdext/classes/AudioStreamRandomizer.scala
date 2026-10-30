@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,15 +12,15 @@ abstract class AudioStreamRandomizer extends AudioStream {
   override def godotClassName: String = "AudioStreamRandomizer"
 
   /** AudioStreamRandomizer.add_stream */
-  final def addStream(index: Long, stream: AudioStream, weight: Double): Unit = {
+  final def addStream(index: Long, stream: AudioStream, weight: Double = 1.0): Unit = {
     if (gdext.classes.AudioStreamRandomizer.mb_add_stream == null) gdext.classes.AudioStreamRandomizer.mb_add_stream = MethodBind.get("AudioStreamRandomizer", "add_stream", 1892018854L)
     Ptrcall.callVoid3(gdext.classes.AudioStreamRandomizer.mb_add_stream, livePtr, index, Wrappers.handle(stream), weight)
   }
 
   /** AudioStreamRandomizer.move_stream */
-  final def moveStream(index_from: Long, index_to: Long): Unit = {
+  final def moveStream(indexFrom: Long, indexTo: Long): Unit = {
     if (gdext.classes.AudioStreamRandomizer.mb_move_stream == null) gdext.classes.AudioStreamRandomizer.mb_move_stream = MethodBind.get("AudioStreamRandomizer", "move_stream", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.AudioStreamRandomizer.mb_move_stream, livePtr, index_from, index_to)
+    Ptrcall.callVoid2(gdext.classes.AudioStreamRandomizer.mb_move_stream, livePtr, indexFrom, indexTo)
   }
 
   /** AudioStreamRandomizer.remove_stream */
@@ -89,9 +90,9 @@ abstract class AudioStreamRandomizer extends AudioStream {
   }
 
   /** AudioStreamRandomizer.set_random_volume_offset_db */
-  final def setRandomVolumeOffsetDb(db_offset: Double): Unit = {
+  final def setRandomVolumeOffsetDb(dbOffset: Double): Unit = {
     if (gdext.classes.AudioStreamRandomizer.mb_set_random_volume_offset_db == null) gdext.classes.AudioStreamRandomizer.mb_set_random_volume_offset_db = MethodBind.get("AudioStreamRandomizer", "set_random_volume_offset_db", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamRandomizer.mb_set_random_volume_offset_db, livePtr, db_offset)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamRandomizer.mb_set_random_volume_offset_db, livePtr, dbOffset)
   }
 
   /** AudioStreamRandomizer.get_random_volume_offset_db */
@@ -101,15 +102,15 @@ abstract class AudioStreamRandomizer extends AudioStream {
   }
 
   /** AudioStreamRandomizer.set_playback_mode */
-  final def setPlaybackMode(mode: Long): Unit = {
+  final def setPlaybackMode(mode: gdext.classes.AudioStreamRandomizer.PlaybackMode): Unit = {
     if (gdext.classes.AudioStreamRandomizer.mb_set_playback_mode == null) gdext.classes.AudioStreamRandomizer.mb_set_playback_mode = MethodBind.get("AudioStreamRandomizer", "set_playback_mode", 3950967023L)
     Ptrcall.callVoid1(gdext.classes.AudioStreamRandomizer.mb_set_playback_mode, livePtr, mode)
   }
 
   /** AudioStreamRandomizer.get_playback_mode */
-  final def getPlaybackMode(): Long = {
+  final def getPlaybackMode(): gdext.classes.AudioStreamRandomizer.PlaybackMode = {
     if (gdext.classes.AudioStreamRandomizer.mb_get_playback_mode == null) gdext.classes.AudioStreamRandomizer.mb_get_playback_mode = MethodBind.get("AudioStreamRandomizer", "get_playback_mode", 3943055077L)
-    Ptrcall.call0[Long](gdext.classes.AudioStreamRandomizer.mb_get_playback_mode, livePtr)
+    gdext.classes.AudioStreamRandomizer.PlaybackMode(Ptrcall.call0[Long](gdext.classes.AudioStreamRandomizer.mb_get_playback_mode, livePtr))
   }
 
 }
@@ -132,4 +133,28 @@ object AudioStreamRandomizer {
   private[classes] var mb_get_random_volume_offset_db: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_playback_mode: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_playback_mode: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `AudioStreamRandomizer.PlaybackMode`. */
+  opaque type PlaybackMode <: Long = Long
+
+  object PlaybackMode {
+    final val RandomNoRepeats: PlaybackMode = 0L.asInstanceOf[PlaybackMode]
+    final val Random: PlaybackMode = 1L.asInstanceOf[PlaybackMode]
+    final val Sequential: PlaybackMode = 2L.asInstanceOf[PlaybackMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): PlaybackMode = value.asInstanceOf[PlaybackMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[PlaybackMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[PlaybackMode]]
+
+    extension (self: PlaybackMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "RandomNoRepeats"
+        case 1L => "Random"
+        case 2L => "Sequential"
+        case other => other.toString
+      }
+  }
 }

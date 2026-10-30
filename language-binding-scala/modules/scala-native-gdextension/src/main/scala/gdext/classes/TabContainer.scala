@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,9 +18,9 @@ abstract class TabContainer extends Container {
   }
 
   /** TabContainer.set_current_tab */
-  final def setCurrentTab(tab_idx: Long): Unit = {
+  final def setCurrentTab(tabIdx: Long): Unit = {
     if (gdext.classes.TabContainer.mb_set_current_tab == null) gdext.classes.TabContainer.mb_set_current_tab = MethodBind.get("TabContainer", "set_current_tab", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.TabContainer.mb_set_current_tab, livePtr, tab_idx)
+    Ptrcall.callVoid1(gdext.classes.TabContainer.mb_set_current_tab, livePtr, tabIdx)
   }
 
   /** TabContainer.get_current_tab */
@@ -59,39 +60,39 @@ abstract class TabContainer extends Container {
   }
 
   /** TabContainer.get_tab_control */
-  final def getTabControl(tab_idx: Long): Control = {
+  final def getTabControl(tabIdx: Long): Control = {
     if (gdext.classes.TabContainer.mb_get_tab_control == null) gdext.classes.TabContainer.mb_get_tab_control = MethodBind.get("TabContainer", "get_tab_control", 1065994134L)
-    Wrappers.borrowed[Control](Ptrcall.call1[Long, Long](gdext.classes.TabContainer.mb_get_tab_control, livePtr, tab_idx))
+    Wrappers.borrowed[Control](Ptrcall.call1[Long, Long](gdext.classes.TabContainer.mb_get_tab_control, livePtr, tabIdx))
   }
 
   /** TabContainer.set_tab_alignment */
-  final def setTabAlignment(alignment: Long): Unit = {
+  final def setTabAlignment(alignment: gdext.classes.TabBar.AlignmentMode): Unit = {
     if (gdext.classes.TabContainer.mb_set_tab_alignment == null) gdext.classes.TabContainer.mb_set_tab_alignment = MethodBind.get("TabContainer", "set_tab_alignment", 2413632353L)
     Ptrcall.callVoid1(gdext.classes.TabContainer.mb_set_tab_alignment, livePtr, alignment)
   }
 
   /** TabContainer.get_tab_alignment */
-  final def getTabAlignment(): Long = {
+  final def getTabAlignment(): gdext.classes.TabBar.AlignmentMode = {
     if (gdext.classes.TabContainer.mb_get_tab_alignment == null) gdext.classes.TabContainer.mb_get_tab_alignment = MethodBind.get("TabContainer", "get_tab_alignment", 2178122193L)
-    Ptrcall.call0[Long](gdext.classes.TabContainer.mb_get_tab_alignment, livePtr)
+    gdext.classes.TabBar.AlignmentMode(Ptrcall.call0[Long](gdext.classes.TabContainer.mb_get_tab_alignment, livePtr))
   }
 
   /** TabContainer.set_tabs_position */
-  final def setTabsPosition(tabs_position: Long): Unit = {
+  final def setTabsPosition(tabsPosition: gdext.classes.TabContainer.TabPosition): Unit = {
     if (gdext.classes.TabContainer.mb_set_tabs_position == null) gdext.classes.TabContainer.mb_set_tabs_position = MethodBind.get("TabContainer", "set_tabs_position", 256673370L)
-    Ptrcall.callVoid1(gdext.classes.TabContainer.mb_set_tabs_position, livePtr, tabs_position)
+    Ptrcall.callVoid1(gdext.classes.TabContainer.mb_set_tabs_position, livePtr, tabsPosition)
   }
 
   /** TabContainer.get_tabs_position */
-  final def getTabsPosition(): Long = {
+  final def getTabsPosition(): gdext.classes.TabContainer.TabPosition = {
     if (gdext.classes.TabContainer.mb_get_tabs_position == null) gdext.classes.TabContainer.mb_get_tabs_position = MethodBind.get("TabContainer", "get_tabs_position", 919937023L)
-    Ptrcall.call0[Long](gdext.classes.TabContainer.mb_get_tabs_position, livePtr)
+    gdext.classes.TabContainer.TabPosition(Ptrcall.call0[Long](gdext.classes.TabContainer.mb_get_tabs_position, livePtr))
   }
 
   /** TabContainer.set_clip_tabs */
-  final def setClipTabs(clip_tabs: Boolean): Unit = {
+  final def setClipTabs(clipTabs: Boolean): Unit = {
     if (gdext.classes.TabContainer.mb_set_clip_tabs == null) gdext.classes.TabContainer.mb_set_clip_tabs = MethodBind.get("TabContainer", "set_clip_tabs", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.TabContainer.mb_set_clip_tabs, livePtr, clip_tabs)
+    Ptrcall.callVoid1(gdext.classes.TabContainer.mb_set_clip_tabs, livePtr, clipTabs)
   }
 
   /** TabContainer.get_clip_tabs */
@@ -113,9 +114,9 @@ abstract class TabContainer extends Container {
   }
 
   /** TabContainer.set_all_tabs_in_front */
-  final def setAllTabsInFront(is_front: Boolean): Unit = {
+  final def setAllTabsInFront(isFront: Boolean): Unit = {
     if (gdext.classes.TabContainer.mb_set_all_tabs_in_front == null) gdext.classes.TabContainer.mb_set_all_tabs_in_front = MethodBind.get("TabContainer", "set_all_tabs_in_front", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.TabContainer.mb_set_all_tabs_in_front, livePtr, is_front)
+    Ptrcall.callVoid1(gdext.classes.TabContainer.mb_set_all_tabs_in_front, livePtr, isFront)
   }
 
   /** TabContainer.is_all_tabs_in_front */
@@ -125,87 +126,87 @@ abstract class TabContainer extends Container {
   }
 
   /** TabContainer.set_tab_title */
-  final def setTabTitle(tab_idx: Long, title: String): Unit = {
+  final def setTabTitle(tabIdx: Long, title: String): Unit = {
     if (gdext.classes.TabContainer.mb_set_tab_title == null) gdext.classes.TabContainer.mb_set_tab_title = MethodBind.get("TabContainer", "set_tab_title", 501894301L)
-    Ptrcall.callVoid2(gdext.classes.TabContainer.mb_set_tab_title, livePtr, tab_idx, title)
+    Ptrcall.callVoid2(gdext.classes.TabContainer.mb_set_tab_title, livePtr, tabIdx, title)
   }
 
   /** TabContainer.get_tab_title */
-  final def getTabTitle(tab_idx: Long): String = {
+  final def getTabTitle(tabIdx: Long): String = {
     if (gdext.classes.TabContainer.mb_get_tab_title == null) gdext.classes.TabContainer.mb_get_tab_title = MethodBind.get("TabContainer", "get_tab_title", 844755477L)
-    Ptrcall.call1[Long, String](gdext.classes.TabContainer.mb_get_tab_title, livePtr, tab_idx)
+    Ptrcall.call1[Long, String](gdext.classes.TabContainer.mb_get_tab_title, livePtr, tabIdx)
   }
 
   /** TabContainer.set_tab_tooltip */
-  final def setTabTooltip(tab_idx: Long, tooltip: String): Unit = {
+  final def setTabTooltip(tabIdx: Long, tooltip: String): Unit = {
     if (gdext.classes.TabContainer.mb_set_tab_tooltip == null) gdext.classes.TabContainer.mb_set_tab_tooltip = MethodBind.get("TabContainer", "set_tab_tooltip", 501894301L)
-    Ptrcall.callVoid2(gdext.classes.TabContainer.mb_set_tab_tooltip, livePtr, tab_idx, tooltip)
+    Ptrcall.callVoid2(gdext.classes.TabContainer.mb_set_tab_tooltip, livePtr, tabIdx, tooltip)
   }
 
   /** TabContainer.get_tab_tooltip */
-  final def getTabTooltip(tab_idx: Long): String = {
+  final def getTabTooltip(tabIdx: Long): String = {
     if (gdext.classes.TabContainer.mb_get_tab_tooltip == null) gdext.classes.TabContainer.mb_get_tab_tooltip = MethodBind.get("TabContainer", "get_tab_tooltip", 844755477L)
-    Ptrcall.call1[Long, String](gdext.classes.TabContainer.mb_get_tab_tooltip, livePtr, tab_idx)
+    Ptrcall.call1[Long, String](gdext.classes.TabContainer.mb_get_tab_tooltip, livePtr, tabIdx)
   }
 
   /** TabContainer.set_tab_icon */
-  final def setTabIcon(tab_idx: Long, icon: Texture2D): Unit = {
+  final def setTabIcon(tabIdx: Long, icon: Texture2D): Unit = {
     if (gdext.classes.TabContainer.mb_set_tab_icon == null) gdext.classes.TabContainer.mb_set_tab_icon = MethodBind.get("TabContainer", "set_tab_icon", 666127730L)
-    Ptrcall.callVoid2(gdext.classes.TabContainer.mb_set_tab_icon, livePtr, tab_idx, Wrappers.handle(icon))
+    Ptrcall.callVoid2(gdext.classes.TabContainer.mb_set_tab_icon, livePtr, tabIdx, Wrappers.handle(icon))
   }
 
   /** TabContainer.get_tab_icon. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getTabIcon(tab_idx: Long): Texture2D = {
+  final def getTabIcon(tabIdx: Long): Texture2D = {
     if (gdext.classes.TabContainer.mb_get_tab_icon == null) gdext.classes.TabContainer.mb_get_tab_icon = MethodBind.get("TabContainer", "get_tab_icon", 3536238170L)
-    Wrappers.owned[Texture2D](Ptrcall.call1[Long, Long](gdext.classes.TabContainer.mb_get_tab_icon, livePtr, tab_idx))
+    Wrappers.owned[Texture2D](Ptrcall.call1[Long, Long](gdext.classes.TabContainer.mb_get_tab_icon, livePtr, tabIdx))
   }
 
   /** TabContainer.set_tab_icon_max_width */
-  final def setTabIconMaxWidth(tab_idx: Long, width: Long): Unit = {
+  final def setTabIconMaxWidth(tabIdx: Long, width: Long): Unit = {
     if (gdext.classes.TabContainer.mb_set_tab_icon_max_width == null) gdext.classes.TabContainer.mb_set_tab_icon_max_width = MethodBind.get("TabContainer", "set_tab_icon_max_width", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.TabContainer.mb_set_tab_icon_max_width, livePtr, tab_idx, width)
+    Ptrcall.callVoid2(gdext.classes.TabContainer.mb_set_tab_icon_max_width, livePtr, tabIdx, width)
   }
 
   /** TabContainer.get_tab_icon_max_width */
-  final def getTabIconMaxWidth(tab_idx: Long): Long = {
+  final def getTabIconMaxWidth(tabIdx: Long): Long = {
     if (gdext.classes.TabContainer.mb_get_tab_icon_max_width == null) gdext.classes.TabContainer.mb_get_tab_icon_max_width = MethodBind.get("TabContainer", "get_tab_icon_max_width", 923996154L)
-    Ptrcall.call1[Long, Long](gdext.classes.TabContainer.mb_get_tab_icon_max_width, livePtr, tab_idx)
+    Ptrcall.call1[Long, Long](gdext.classes.TabContainer.mb_get_tab_icon_max_width, livePtr, tabIdx)
   }
 
   /** TabContainer.set_tab_disabled */
-  final def setTabDisabled(tab_idx: Long, disabled: Boolean): Unit = {
+  final def setTabDisabled(tabIdx: Long, disabled: Boolean): Unit = {
     if (gdext.classes.TabContainer.mb_set_tab_disabled == null) gdext.classes.TabContainer.mb_set_tab_disabled = MethodBind.get("TabContainer", "set_tab_disabled", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.TabContainer.mb_set_tab_disabled, livePtr, tab_idx, disabled)
+    Ptrcall.callVoid2(gdext.classes.TabContainer.mb_set_tab_disabled, livePtr, tabIdx, disabled)
   }
 
   /** TabContainer.is_tab_disabled */
-  final def isTabDisabled(tab_idx: Long): Boolean = {
+  final def isTabDisabled(tabIdx: Long): Boolean = {
     if (gdext.classes.TabContainer.mb_is_tab_disabled == null) gdext.classes.TabContainer.mb_is_tab_disabled = MethodBind.get("TabContainer", "is_tab_disabled", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.TabContainer.mb_is_tab_disabled, livePtr, tab_idx)
+    Ptrcall.call1[Long, Boolean](gdext.classes.TabContainer.mb_is_tab_disabled, livePtr, tabIdx)
   }
 
   /** TabContainer.set_tab_hidden */
-  final def setTabHidden(tab_idx: Long, hidden: Boolean): Unit = {
+  final def setTabHidden(tabIdx: Long, hidden: Boolean): Unit = {
     if (gdext.classes.TabContainer.mb_set_tab_hidden == null) gdext.classes.TabContainer.mb_set_tab_hidden = MethodBind.get("TabContainer", "set_tab_hidden", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.TabContainer.mb_set_tab_hidden, livePtr, tab_idx, hidden)
+    Ptrcall.callVoid2(gdext.classes.TabContainer.mb_set_tab_hidden, livePtr, tabIdx, hidden)
   }
 
   /** TabContainer.is_tab_hidden */
-  final def isTabHidden(tab_idx: Long): Boolean = {
+  final def isTabHidden(tabIdx: Long): Boolean = {
     if (gdext.classes.TabContainer.mb_is_tab_hidden == null) gdext.classes.TabContainer.mb_is_tab_hidden = MethodBind.get("TabContainer", "is_tab_hidden", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.TabContainer.mb_is_tab_hidden, livePtr, tab_idx)
+    Ptrcall.call1[Long, Boolean](gdext.classes.TabContainer.mb_is_tab_hidden, livePtr, tabIdx)
   }
 
   /** TabContainer.set_tab_button_icon */
-  final def setTabButtonIcon(tab_idx: Long, icon: Texture2D): Unit = {
+  final def setTabButtonIcon(tabIdx: Long, icon: Texture2D): Unit = {
     if (gdext.classes.TabContainer.mb_set_tab_button_icon == null) gdext.classes.TabContainer.mb_set_tab_button_icon = MethodBind.get("TabContainer", "set_tab_button_icon", 666127730L)
-    Ptrcall.callVoid2(gdext.classes.TabContainer.mb_set_tab_button_icon, livePtr, tab_idx, Wrappers.handle(icon))
+    Ptrcall.callVoid2(gdext.classes.TabContainer.mb_set_tab_button_icon, livePtr, tabIdx, Wrappers.handle(icon))
   }
 
   /** TabContainer.get_tab_button_icon. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getTabButtonIcon(tab_idx: Long): Texture2D = {
+  final def getTabButtonIcon(tabIdx: Long): Texture2D = {
     if (gdext.classes.TabContainer.mb_get_tab_button_icon == null) gdext.classes.TabContainer.mb_get_tab_button_icon = MethodBind.get("TabContainer", "get_tab_button_icon", 3536238170L)
-    Wrappers.owned[Texture2D](Ptrcall.call1[Long, Long](gdext.classes.TabContainer.mb_get_tab_button_icon, livePtr, tab_idx))
+    Wrappers.owned[Texture2D](Ptrcall.call1[Long, Long](gdext.classes.TabContainer.mb_get_tab_button_icon, livePtr, tabIdx))
   }
 
   /** TabContainer.get_tab_idx_at_point */
@@ -257,9 +258,9 @@ abstract class TabContainer extends Container {
   }
 
   /** TabContainer.set_tabs_rearrange_group */
-  final def setTabsRearrangeGroup(group_id: Long): Unit = {
+  final def setTabsRearrangeGroup(groupId: Long): Unit = {
     if (gdext.classes.TabContainer.mb_set_tabs_rearrange_group == null) gdext.classes.TabContainer.mb_set_tabs_rearrange_group = MethodBind.get("TabContainer", "set_tabs_rearrange_group", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.TabContainer.mb_set_tabs_rearrange_group, livePtr, group_id)
+    Ptrcall.callVoid1(gdext.classes.TabContainer.mb_set_tabs_rearrange_group, livePtr, groupId)
   }
 
   /** TabContainer.get_tabs_rearrange_group */
@@ -281,15 +282,15 @@ abstract class TabContainer extends Container {
   }
 
   /** TabContainer.set_tab_focus_mode */
-  final def setTabFocusMode(focus_mode: Long): Unit = {
+  final def setTabFocusMode(focusMode: gdext.classes.Control.FocusMode): Unit = {
     if (gdext.classes.TabContainer.mb_set_tab_focus_mode == null) gdext.classes.TabContainer.mb_set_tab_focus_mode = MethodBind.get("TabContainer", "set_tab_focus_mode", 3232914922L)
-    Ptrcall.callVoid1(gdext.classes.TabContainer.mb_set_tab_focus_mode, livePtr, focus_mode)
+    Ptrcall.callVoid1(gdext.classes.TabContainer.mb_set_tab_focus_mode, livePtr, focusMode)
   }
 
   /** TabContainer.get_tab_focus_mode */
-  final def getTabFocusMode(): Long = {
+  final def getTabFocusMode(): gdext.classes.Control.FocusMode = {
     if (gdext.classes.TabContainer.mb_get_tab_focus_mode == null) gdext.classes.TabContainer.mb_get_tab_focus_mode = MethodBind.get("TabContainer", "get_tab_focus_mode", 2132829277L)
-    Ptrcall.call0[Long](gdext.classes.TabContainer.mb_get_tab_focus_mode, livePtr)
+    gdext.classes.Control.FocusMode(Ptrcall.call0[Long](gdext.classes.TabContainer.mb_get_tab_focus_mode, livePtr))
   }
 
   /** TabContainer.set_deselect_enabled */
@@ -356,4 +357,28 @@ object TabContainer {
   private[classes] var mb_get_tab_focus_mode: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_deselect_enabled: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_deselect_enabled: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `TabContainer.TabPosition`. */
+  opaque type TabPosition <: Long = Long
+
+  object TabPosition {
+    final val Top: TabPosition = 0L.asInstanceOf[TabPosition]
+    final val Bottom: TabPosition = 1L.asInstanceOf[TabPosition]
+    final val Max: TabPosition = 2L.asInstanceOf[TabPosition]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): TabPosition = value.asInstanceOf[TabPosition]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[TabPosition] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[TabPosition]]
+
+    extension (self: TabPosition)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Top"
+        case 1L => "Bottom"
+        case 2L => "Max"
+        case other => other.toString
+      }
+  }
 }

@@ -21,9 +21,11 @@ template ship with it already enabled. The plugin:
 Click the status group in the top bar to **Rebuild**, **Start**, **Restart**,
 or **Stop** the sbt server.
 
-The plugin is installed only when the `addons/godot_scala` folder does not
-exist yet, so your edits to it are never overwritten. Two constants at the top
-of `scala_build.gd` control it:
+`godotBuild` keeps the plugin current: when the `version` in
+`addons/godot_scala/plugin.cfg` differs from the one bundled in the sbt plugin,
+it rewrites the plugin's files (`plugin.cfg`, `scala_build.gd`, `icon.svg`,
+`godot.svg`). Your edits to them are kept until the version changes, then
+overwritten. Two constants at the top of `scala_build.gd` control it:
 
 ```gdscript
 const SBT_PROJECT_DIR := "../scala"   # sbt project, relative to godot/

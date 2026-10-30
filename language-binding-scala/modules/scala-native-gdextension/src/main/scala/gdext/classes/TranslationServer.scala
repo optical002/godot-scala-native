@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -29,15 +30,15 @@ abstract class TranslationServer extends Object {
   }
 
   /** TranslationServer.compare_locales */
-  final def compareLocales(locale_a: String, locale_b: String): Long = {
+  final def compareLocales(localeA: String, localeB: String): Long = {
     if (gdext.classes.TranslationServer.mb_compare_locales == null) gdext.classes.TranslationServer.mb_compare_locales = MethodBind.get("TranslationServer", "compare_locales", 2878152881L)
-    Ptrcall.call2[String, String, Long](gdext.classes.TranslationServer.mb_compare_locales, livePtr, locale_a, locale_b)
+    Ptrcall.call2[String, String, Long](gdext.classes.TranslationServer.mb_compare_locales, livePtr, localeA, localeB)
   }
 
   /** TranslationServer.standardize_locale */
-  final def standardizeLocale(locale: String, add_defaults: Boolean): String = {
+  final def standardizeLocale(locale: String, addDefaults: Boolean = false): String = {
     if (gdext.classes.TranslationServer.mb_standardize_locale == null) gdext.classes.TranslationServer.mb_standardize_locale = MethodBind.get("TranslationServer", "standardize_locale", 4216441673L)
-    Ptrcall.call2[String, Boolean, String](gdext.classes.TranslationServer.mb_standardize_locale, livePtr, locale, add_defaults)
+    Ptrcall.call2[String, Boolean, String](gdext.classes.TranslationServer.mb_standardize_locale, livePtr, locale, addDefaults)
   }
 
   /** TranslationServer.get_language_name */
@@ -71,15 +72,15 @@ abstract class TranslationServer extends Object {
   }
 
   /** TranslationServer.translate */
-  final def translate(message: gdext.builtin.StringName, context: gdext.builtin.StringName): gdext.builtin.StringName = {
+  final def translate(message: String, context: String = ""): String = {
     if (gdext.classes.TranslationServer.mb_translate == null) gdext.classes.TranslationServer.mb_translate = MethodBind.get("TranslationServer", "translate", 1829228469L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, gdext.builtin.StringName](gdext.classes.TranslationServer.mb_translate, livePtr, message, context)
+    Ptrcall.call2[SnArg, SnArg, SnArg](gdext.classes.TranslationServer.mb_translate, livePtr, SnArg(message), SnArg(context))
   }
 
   /** TranslationServer.translate_plural */
-  final def translatePlural(message: gdext.builtin.StringName, plural_message: gdext.builtin.StringName, n: Long, context: gdext.builtin.StringName): gdext.builtin.StringName = {
+  final def translatePlural(message: String, pluralMessage: String, n: Long, context: String = ""): String = {
     if (gdext.classes.TranslationServer.mb_translate_plural == null) gdext.classes.TranslationServer.mb_translate_plural = MethodBind.get("TranslationServer", "translate_plural", 229954002L)
-    Ptrcall.call4[gdext.builtin.StringName, gdext.builtin.StringName, Long, gdext.builtin.StringName, gdext.builtin.StringName](gdext.classes.TranslationServer.mb_translate_plural, livePtr, message, plural_message, n, context)
+    Ptrcall.call4[SnArg, SnArg, Long, SnArg, SnArg](gdext.classes.TranslationServer.mb_translate_plural, livePtr, SnArg(message), SnArg(pluralMessage), n, SnArg(context))
   }
 
   /** TranslationServer.add_translation */
@@ -113,21 +114,21 @@ abstract class TranslationServer extends Object {
   }
 
   /** TranslationServer.has_domain */
-  final def hasDomain(domain: gdext.builtin.StringName): Boolean = {
+  final def hasDomain(domain: String): Boolean = {
     if (gdext.classes.TranslationServer.mb_has_domain == null) gdext.classes.TranslationServer.mb_has_domain = MethodBind.get("TranslationServer", "has_domain", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.TranslationServer.mb_has_domain, livePtr, domain)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.TranslationServer.mb_has_domain, livePtr, SnArg(domain))
   }
 
   /** TranslationServer.get_or_add_domain. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getOrAddDomain(domain: gdext.builtin.StringName): TranslationDomain = {
+  final def getOrAddDomain(domain: String): TranslationDomain = {
     if (gdext.classes.TranslationServer.mb_get_or_add_domain == null) gdext.classes.TranslationServer.mb_get_or_add_domain = MethodBind.get("TranslationServer", "get_or_add_domain", 397200075L)
-    Wrappers.owned[TranslationDomain](Ptrcall.call1[gdext.builtin.StringName, Long](gdext.classes.TranslationServer.mb_get_or_add_domain, livePtr, domain))
+    Wrappers.owned[TranslationDomain](Ptrcall.call1[SnArg, Long](gdext.classes.TranslationServer.mb_get_or_add_domain, livePtr, SnArg(domain)))
   }
 
   /** TranslationServer.remove_domain */
-  final def removeDomain(domain: gdext.builtin.StringName): Unit = {
+  final def removeDomain(domain: String): Unit = {
     if (gdext.classes.TranslationServer.mb_remove_domain == null) gdext.classes.TranslationServer.mb_remove_domain = MethodBind.get("TranslationServer", "remove_domain", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.TranslationServer.mb_remove_domain, livePtr, domain)
+    Ptrcall.callVoid1(gdext.classes.TranslationServer.mb_remove_domain, livePtr, SnArg(domain))
   }
 
   /** TranslationServer.clear */
@@ -173,9 +174,9 @@ abstract class TranslationServer extends Object {
   }
 
   /** TranslationServer.pseudolocalize */
-  final def pseudolocalize(message: gdext.builtin.StringName): gdext.builtin.StringName = {
+  final def pseudolocalize(message: String): String = {
     if (gdext.classes.TranslationServer.mb_pseudolocalize == null) gdext.classes.TranslationServer.mb_pseudolocalize = MethodBind.get("TranslationServer", "pseudolocalize", 1965194235L)
-    Ptrcall.call1[gdext.builtin.StringName, gdext.builtin.StringName](gdext.classes.TranslationServer.mb_pseudolocalize, livePtr, message)
+    Ptrcall.call1[SnArg, SnArg](gdext.classes.TranslationServer.mb_pseudolocalize, livePtr, SnArg(message))
   }
 
 }
@@ -219,4 +220,116 @@ object TranslationServer {
         Godot.interface.global_get_singleton(StringNames.cached("TranslationServer").ptr)))
     instance
   }
+
+  /** Forwards to [[singleton]]: TranslationServer.set_locale */
+  final def setLocale(locale: String): Unit =
+    singleton.setLocale(locale)
+
+  /** Forwards to [[singleton]]: TranslationServer.get_locale */
+  final def getLocale(): String =
+    singleton.getLocale()
+
+  /** Forwards to [[singleton]]: TranslationServer.get_tool_locale */
+  final def getToolLocale(): String =
+    singleton.getToolLocale()
+
+  /** Forwards to [[singleton]]: TranslationServer.compare_locales */
+  final def compareLocales(localeA: String, localeB: String): Long =
+    singleton.compareLocales(localeA, localeB)
+
+  /** Forwards to [[singleton]]: TranslationServer.standardize_locale */
+  final def standardizeLocale(locale: String, addDefaults: Boolean = false): String =
+    singleton.standardizeLocale(locale, addDefaults)
+
+  /** Forwards to [[singleton]]: TranslationServer.get_language_name */
+  final def getLanguageName(language: String): String =
+    singleton.getLanguageName(language)
+
+  /** Forwards to [[singleton]]: TranslationServer.get_script_name */
+  final def getScriptName(script: String): String =
+    singleton.getScriptName(script)
+
+  /** Forwards to [[singleton]]: TranslationServer.get_country_name */
+  final def getCountryName(country: String): String =
+    singleton.getCountryName(country)
+
+  /** Forwards to [[singleton]]: TranslationServer.get_locale_name */
+  final def getLocaleName(locale: String): String =
+    singleton.getLocaleName(locale)
+
+  /** Forwards to [[singleton]]: TranslationServer.get_plural_rules */
+  final def getPluralRules(locale: String): String =
+    singleton.getPluralRules(locale)
+
+  /** Forwards to [[singleton]]: TranslationServer.translate */
+  final def translate(message: String, context: String = ""): String =
+    singleton.translate(message, context)
+
+  /** Forwards to [[singleton]]: TranslationServer.translate_plural */
+  final def translatePlural(message: String, pluralMessage: String, n: Long, context: String = ""): String =
+    singleton.translatePlural(message, pluralMessage, n, context)
+
+  /** Forwards to [[singleton]]: TranslationServer.add_translation */
+  final def addTranslation(translation: Translation): Unit =
+    singleton.addTranslation(translation)
+
+  /** Forwards to [[singleton]]: TranslationServer.remove_translation */
+  final def removeTranslation(translation: Translation): Unit =
+    singleton.removeTranslation(translation)
+
+  /** Forwards to [[singleton]]: TranslationServer.get_translation_object */
+  final def getTranslationObject(locale: String): Translation =
+    singleton.getTranslationObject(locale)
+
+  /** Forwards to [[singleton]]: TranslationServer.has_translation_for_locale */
+  final def hasTranslationForLocale(locale: String, exact: Boolean): Boolean =
+    singleton.hasTranslationForLocale(locale, exact)
+
+  /** Forwards to [[singleton]]: TranslationServer.has_translation */
+  final def hasTranslation(translation: Translation): Boolean =
+    singleton.hasTranslation(translation)
+
+  /** Forwards to [[singleton]]: TranslationServer.has_domain */
+  final def hasDomain(domain: String): Boolean =
+    singleton.hasDomain(domain)
+
+  /** Forwards to [[singleton]]: TranslationServer.get_or_add_domain */
+  final def getOrAddDomain(domain: String): TranslationDomain =
+    singleton.getOrAddDomain(domain)
+
+  /** Forwards to [[singleton]]: TranslationServer.remove_domain */
+  final def removeDomain(domain: String): Unit =
+    singleton.removeDomain(domain)
+
+  /** Forwards to [[singleton]]: TranslationServer.clear */
+  final def clear(): Unit =
+    singleton.clear()
+
+  /** Forwards to [[singleton]]: TranslationServer.format_number */
+  final def formatNumber(number: String, locale: String): String =
+    singleton.formatNumber(number, locale)
+
+  /** Forwards to [[singleton]]: TranslationServer.get_percent_sign */
+  final def getPercentSign(locale: String): String =
+    singleton.getPercentSign(locale)
+
+  /** Forwards to [[singleton]]: TranslationServer.parse_number */
+  final def parseNumber(number: String, locale: String): String =
+    singleton.parseNumber(number, locale)
+
+  /** Forwards to [[singleton]]: TranslationServer.is_pseudolocalization_enabled */
+  final def isPseudolocalizationEnabled(): Boolean =
+    singleton.isPseudolocalizationEnabled()
+
+  /** Forwards to [[singleton]]: TranslationServer.set_pseudolocalization_enabled */
+  final def setPseudolocalizationEnabled(enabled: Boolean): Unit =
+    singleton.setPseudolocalizationEnabled(enabled)
+
+  /** Forwards to [[singleton]]: TranslationServer.reload_pseudolocalization */
+  final def reloadPseudolocalization(): Unit =
+    singleton.reloadPseudolocalization()
+
+  /** Forwards to [[singleton]]: TranslationServer.pseudolocalize */
+  final def pseudolocalize(message: String): String =
+    singleton.pseudolocalize(message)
 }

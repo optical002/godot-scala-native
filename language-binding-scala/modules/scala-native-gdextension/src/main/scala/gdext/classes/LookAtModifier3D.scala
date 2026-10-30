@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class LookAtModifier3D extends SkeletonModifier3D {
   override def godotClassName: String = "LookAtModifier3D"
 
   /** LookAtModifier3D.set_bone_name */
-  final def setBoneName(bone_name: String): Unit = {
+  final def setBoneName(boneName: String): Unit = {
     if (gdext.classes.LookAtModifier3D.mb_set_bone_name == null) gdext.classes.LookAtModifier3D.mb_set_bone_name = MethodBind.get("LookAtModifier3D", "set_bone_name", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.LookAtModifier3D.mb_set_bone_name, livePtr, bone_name)
+    Ptrcall.callVoid1(gdext.classes.LookAtModifier3D.mb_set_bone_name, livePtr, boneName)
   }
 
   /** LookAtModifier3D.get_bone_name */
@@ -35,15 +36,15 @@ abstract class LookAtModifier3D extends SkeletonModifier3D {
   }
 
   /** LookAtModifier3D.set_forward_axis */
-  final def setForwardAxis(forward_axis: Long): Unit = {
+  final def setForwardAxis(forwardAxis: gdext.classes.SkeletonModifier3D.BoneAxis): Unit = {
     if (gdext.classes.LookAtModifier3D.mb_set_forward_axis == null) gdext.classes.LookAtModifier3D.mb_set_forward_axis = MethodBind.get("LookAtModifier3D", "set_forward_axis", 3199955933L)
-    Ptrcall.callVoid1(gdext.classes.LookAtModifier3D.mb_set_forward_axis, livePtr, forward_axis)
+    Ptrcall.callVoid1(gdext.classes.LookAtModifier3D.mb_set_forward_axis, livePtr, forwardAxis)
   }
 
   /** LookAtModifier3D.get_forward_axis */
-  final def getForwardAxis(): Long = {
+  final def getForwardAxis(): gdext.classes.SkeletonModifier3D.BoneAxis = {
     if (gdext.classes.LookAtModifier3D.mb_get_forward_axis == null) gdext.classes.LookAtModifier3D.mb_get_forward_axis = MethodBind.get("LookAtModifier3D", "get_forward_axis", 4076020284L)
-    Ptrcall.call0[Long](gdext.classes.LookAtModifier3D.mb_get_forward_axis, livePtr)
+    gdext.classes.SkeletonModifier3D.BoneAxis(Ptrcall.call0[Long](gdext.classes.LookAtModifier3D.mb_get_forward_axis, livePtr))
   }
 
   /** LookAtModifier3D.set_primary_rotation_axis */
@@ -95,21 +96,21 @@ abstract class LookAtModifier3D extends SkeletonModifier3D {
   }
 
   /** LookAtModifier3D.set_origin_from */
-  final def setOriginFrom(origin_from: Long): Unit = {
+  final def setOriginFrom(originFrom: gdext.classes.LookAtModifier3D.OriginFrom): Unit = {
     if (gdext.classes.LookAtModifier3D.mb_set_origin_from == null) gdext.classes.LookAtModifier3D.mb_set_origin_from = MethodBind.get("LookAtModifier3D", "set_origin_from", 4254695669L)
-    Ptrcall.callVoid1(gdext.classes.LookAtModifier3D.mb_set_origin_from, livePtr, origin_from)
+    Ptrcall.callVoid1(gdext.classes.LookAtModifier3D.mb_set_origin_from, livePtr, originFrom)
   }
 
   /** LookAtModifier3D.get_origin_from */
-  final def getOriginFrom(): Long = {
+  final def getOriginFrom(): gdext.classes.LookAtModifier3D.OriginFrom = {
     if (gdext.classes.LookAtModifier3D.mb_get_origin_from == null) gdext.classes.LookAtModifier3D.mb_get_origin_from = MethodBind.get("LookAtModifier3D", "get_origin_from", 4057166297L)
-    Ptrcall.call0[Long](gdext.classes.LookAtModifier3D.mb_get_origin_from, livePtr)
+    gdext.classes.LookAtModifier3D.OriginFrom(Ptrcall.call0[Long](gdext.classes.LookAtModifier3D.mb_get_origin_from, livePtr))
   }
 
   /** LookAtModifier3D.set_origin_bone_name */
-  final def setOriginBoneName(bone_name: String): Unit = {
+  final def setOriginBoneName(boneName: String): Unit = {
     if (gdext.classes.LookAtModifier3D.mb_set_origin_bone_name == null) gdext.classes.LookAtModifier3D.mb_set_origin_bone_name = MethodBind.get("LookAtModifier3D", "set_origin_bone_name", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.LookAtModifier3D.mb_set_origin_bone_name, livePtr, bone_name)
+    Ptrcall.callVoid1(gdext.classes.LookAtModifier3D.mb_set_origin_bone_name, livePtr, boneName)
   }
 
   /** LookAtModifier3D.get_origin_bone_name */
@@ -155,27 +156,27 @@ abstract class LookAtModifier3D extends SkeletonModifier3D {
   }
 
   /** LookAtModifier3D.set_transition_type */
-  final def setTransitionType(transition_type: Long): Unit = {
+  final def setTransitionType(transitionType: gdext.classes.Tween.TransitionType): Unit = {
     if (gdext.classes.LookAtModifier3D.mb_set_transition_type == null) gdext.classes.LookAtModifier3D.mb_set_transition_type = MethodBind.get("LookAtModifier3D", "set_transition_type", 1058637742L)
-    Ptrcall.callVoid1(gdext.classes.LookAtModifier3D.mb_set_transition_type, livePtr, transition_type)
+    Ptrcall.callVoid1(gdext.classes.LookAtModifier3D.mb_set_transition_type, livePtr, transitionType)
   }
 
   /** LookAtModifier3D.get_transition_type */
-  final def getTransitionType(): Long = {
+  final def getTransitionType(): gdext.classes.Tween.TransitionType = {
     if (gdext.classes.LookAtModifier3D.mb_get_transition_type == null) gdext.classes.LookAtModifier3D.mb_get_transition_type = MethodBind.get("LookAtModifier3D", "get_transition_type", 3842314528L)
-    Ptrcall.call0[Long](gdext.classes.LookAtModifier3D.mb_get_transition_type, livePtr)
+    gdext.classes.Tween.TransitionType(Ptrcall.call0[Long](gdext.classes.LookAtModifier3D.mb_get_transition_type, livePtr))
   }
 
   /** LookAtModifier3D.set_ease_type */
-  final def setEaseType(ease_type: Long): Unit = {
+  final def setEaseType(easeType: gdext.classes.Tween.EaseType): Unit = {
     if (gdext.classes.LookAtModifier3D.mb_set_ease_type == null) gdext.classes.LookAtModifier3D.mb_set_ease_type = MethodBind.get("LookAtModifier3D", "set_ease_type", 1208105857L)
-    Ptrcall.callVoid1(gdext.classes.LookAtModifier3D.mb_set_ease_type, livePtr, ease_type)
+    Ptrcall.callVoid1(gdext.classes.LookAtModifier3D.mb_set_ease_type, livePtr, easeType)
   }
 
   /** LookAtModifier3D.get_ease_type */
-  final def getEaseType(): Long = {
+  final def getEaseType(): gdext.classes.Tween.EaseType = {
     if (gdext.classes.LookAtModifier3D.mb_get_ease_type == null) gdext.classes.LookAtModifier3D.mb_get_ease_type = MethodBind.get("LookAtModifier3D", "get_ease_type", 631880200L)
-    Ptrcall.call0[Long](gdext.classes.LookAtModifier3D.mb_get_ease_type, livePtr)
+    gdext.classes.Tween.EaseType(Ptrcall.call0[Long](gdext.classes.LookAtModifier3D.mb_get_ease_type, livePtr))
   }
 
   /** LookAtModifier3D.set_use_angle_limitation */
@@ -426,4 +427,28 @@ object LookAtModifier3D {
   private[classes] var mb_get_interpolation_remaining: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_interpolating: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_target_within_limitation: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `LookAtModifier3D.OriginFrom`. */
+  opaque type OriginFrom <: Long = Long
+
+  object OriginFrom {
+    final val Self: OriginFrom = 0L.asInstanceOf[OriginFrom]
+    final val SpecificBone: OriginFrom = 1L.asInstanceOf[OriginFrom]
+    final val ExternalNode: OriginFrom = 2L.asInstanceOf[OriginFrom]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): OriginFrom = value.asInstanceOf[OriginFrom]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[OriginFrom] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[OriginFrom]]
+
+    extension (self: OriginFrom)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Self"
+        case 1L => "SpecificBone"
+        case 2L => "ExternalNode"
+        case other => other.toString
+      }
+  }
 }

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class AudioEffectCapture extends AudioEffect {
   }
 
   /** AudioEffectCapture.set_buffer_length */
-  final def setBufferLength(buffer_length_seconds: Double): Unit = {
+  final def setBufferLength(bufferLengthSeconds: Double): Unit = {
     if (gdext.classes.AudioEffectCapture.mb_set_buffer_length == null) gdext.classes.AudioEffectCapture.mb_set_buffer_length = MethodBind.get("AudioEffectCapture", "set_buffer_length", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AudioEffectCapture.mb_set_buffer_length, livePtr, buffer_length_seconds)
+    Ptrcall.callVoid1(gdext.classes.AudioEffectCapture.mb_set_buffer_length, livePtr, bufferLengthSeconds)
   }
 
   /** AudioEffectCapture.get_buffer_length */

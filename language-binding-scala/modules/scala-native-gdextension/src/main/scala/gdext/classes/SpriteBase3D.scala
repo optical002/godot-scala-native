@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,9 +36,9 @@ abstract class SpriteBase3D extends GeometryInstance3D {
   }
 
   /** SpriteBase3D.set_flip_h */
-  final def setFlipH(flip_h: Boolean): Unit = {
+  final def setFlipH(flipH: Boolean): Unit = {
     if (gdext.classes.SpriteBase3D.mb_set_flip_h == null) gdext.classes.SpriteBase3D.mb_set_flip_h = MethodBind.get("SpriteBase3D", "set_flip_h", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.SpriteBase3D.mb_set_flip_h, livePtr, flip_h)
+    Ptrcall.callVoid1(gdext.classes.SpriteBase3D.mb_set_flip_h, livePtr, flipH)
   }
 
   /** SpriteBase3D.is_flipped_h */
@@ -47,9 +48,9 @@ abstract class SpriteBase3D extends GeometryInstance3D {
   }
 
   /** SpriteBase3D.set_flip_v */
-  final def setFlipV(flip_v: Boolean): Unit = {
+  final def setFlipV(flipV: Boolean): Unit = {
     if (gdext.classes.SpriteBase3D.mb_set_flip_v == null) gdext.classes.SpriteBase3D.mb_set_flip_v = MethodBind.get("SpriteBase3D", "set_flip_v", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.SpriteBase3D.mb_set_flip_v, livePtr, flip_v)
+    Ptrcall.callVoid1(gdext.classes.SpriteBase3D.mb_set_flip_v, livePtr, flipV)
   }
 
   /** SpriteBase3D.is_flipped_v */
@@ -83,9 +84,9 @@ abstract class SpriteBase3D extends GeometryInstance3D {
   }
 
   /** SpriteBase3D.set_pixel_size */
-  final def setPixelSize(pixel_size: Double): Unit = {
+  final def setPixelSize(pixelSize: Double): Unit = {
     if (gdext.classes.SpriteBase3D.mb_set_pixel_size == null) gdext.classes.SpriteBase3D.mb_set_pixel_size = MethodBind.get("SpriteBase3D", "set_pixel_size", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.SpriteBase3D.mb_set_pixel_size, livePtr, pixel_size)
+    Ptrcall.callVoid1(gdext.classes.SpriteBase3D.mb_set_pixel_size, livePtr, pixelSize)
   }
 
   /** SpriteBase3D.get_pixel_size */
@@ -107,27 +108,27 @@ abstract class SpriteBase3D extends GeometryInstance3D {
   }
 
   /** SpriteBase3D.set_draw_flag */
-  final def setDrawFlag(flag: Long, enabled: Boolean): Unit = {
+  final def setDrawFlag(flag: gdext.classes.SpriteBase3D.DrawFlags, enabled: Boolean): Unit = {
     if (gdext.classes.SpriteBase3D.mb_set_draw_flag == null) gdext.classes.SpriteBase3D.mb_set_draw_flag = MethodBind.get("SpriteBase3D", "set_draw_flag", 1135633219L)
     Ptrcall.callVoid2(gdext.classes.SpriteBase3D.mb_set_draw_flag, livePtr, flag, enabled)
   }
 
   /** SpriteBase3D.get_draw_flag */
-  final def getDrawFlag(flag: Long): Boolean = {
+  final def getDrawFlag(flag: gdext.classes.SpriteBase3D.DrawFlags): Boolean = {
     if (gdext.classes.SpriteBase3D.mb_get_draw_flag == null) gdext.classes.SpriteBase3D.mb_get_draw_flag = MethodBind.get("SpriteBase3D", "get_draw_flag", 1733036628L)
     Ptrcall.call1[Long, Boolean](gdext.classes.SpriteBase3D.mb_get_draw_flag, livePtr, flag)
   }
 
   /** SpriteBase3D.set_alpha_cut_mode */
-  final def setAlphaCutMode(mode: Long): Unit = {
+  final def setAlphaCutMode(mode: gdext.classes.SpriteBase3D.AlphaCutMode): Unit = {
     if (gdext.classes.SpriteBase3D.mb_set_alpha_cut_mode == null) gdext.classes.SpriteBase3D.mb_set_alpha_cut_mode = MethodBind.get("SpriteBase3D", "set_alpha_cut_mode", 227561226L)
     Ptrcall.callVoid1(gdext.classes.SpriteBase3D.mb_set_alpha_cut_mode, livePtr, mode)
   }
 
   /** SpriteBase3D.get_alpha_cut_mode */
-  final def getAlphaCutMode(): Long = {
+  final def getAlphaCutMode(): gdext.classes.SpriteBase3D.AlphaCutMode = {
     if (gdext.classes.SpriteBase3D.mb_get_alpha_cut_mode == null) gdext.classes.SpriteBase3D.mb_get_alpha_cut_mode = MethodBind.get("SpriteBase3D", "get_alpha_cut_mode", 336003791L)
-    Ptrcall.call0[Long](gdext.classes.SpriteBase3D.mb_get_alpha_cut_mode, livePtr)
+    gdext.classes.SpriteBase3D.AlphaCutMode(Ptrcall.call0[Long](gdext.classes.SpriteBase3D.mb_get_alpha_cut_mode, livePtr))
   }
 
   /** SpriteBase3D.set_alpha_scissor_threshold */
@@ -155,15 +156,15 @@ abstract class SpriteBase3D extends GeometryInstance3D {
   }
 
   /** SpriteBase3D.set_alpha_antialiasing */
-  final def setAlphaAntialiasing(alpha_aa: Long): Unit = {
+  final def setAlphaAntialiasing(alphaAa: gdext.classes.BaseMaterial3D.AlphaAntiAliasing): Unit = {
     if (gdext.classes.SpriteBase3D.mb_set_alpha_antialiasing == null) gdext.classes.SpriteBase3D.mb_set_alpha_antialiasing = MethodBind.get("SpriteBase3D", "set_alpha_antialiasing", 3212649852L)
-    Ptrcall.callVoid1(gdext.classes.SpriteBase3D.mb_set_alpha_antialiasing, livePtr, alpha_aa)
+    Ptrcall.callVoid1(gdext.classes.SpriteBase3D.mb_set_alpha_antialiasing, livePtr, alphaAa)
   }
 
   /** SpriteBase3D.get_alpha_antialiasing */
-  final def getAlphaAntialiasing(): Long = {
+  final def getAlphaAntialiasing(): gdext.classes.BaseMaterial3D.AlphaAntiAliasing = {
     if (gdext.classes.SpriteBase3D.mb_get_alpha_antialiasing == null) gdext.classes.SpriteBase3D.mb_get_alpha_antialiasing = MethodBind.get("SpriteBase3D", "get_alpha_antialiasing", 2889939400L)
-    Ptrcall.call0[Long](gdext.classes.SpriteBase3D.mb_get_alpha_antialiasing, livePtr)
+    gdext.classes.BaseMaterial3D.AlphaAntiAliasing(Ptrcall.call0[Long](gdext.classes.SpriteBase3D.mb_get_alpha_antialiasing, livePtr))
   }
 
   /** SpriteBase3D.set_alpha_antialiasing_edge */
@@ -179,27 +180,27 @@ abstract class SpriteBase3D extends GeometryInstance3D {
   }
 
   /** SpriteBase3D.set_billboard_mode */
-  final def setBillboardMode(mode: Long): Unit = {
+  final def setBillboardMode(mode: gdext.classes.BaseMaterial3D.BillboardMode): Unit = {
     if (gdext.classes.SpriteBase3D.mb_set_billboard_mode == null) gdext.classes.SpriteBase3D.mb_set_billboard_mode = MethodBind.get("SpriteBase3D", "set_billboard_mode", 4202036497L)
     Ptrcall.callVoid1(gdext.classes.SpriteBase3D.mb_set_billboard_mode, livePtr, mode)
   }
 
   /** SpriteBase3D.get_billboard_mode */
-  final def getBillboardMode(): Long = {
+  final def getBillboardMode(): gdext.classes.BaseMaterial3D.BillboardMode = {
     if (gdext.classes.SpriteBase3D.mb_get_billboard_mode == null) gdext.classes.SpriteBase3D.mb_get_billboard_mode = MethodBind.get("SpriteBase3D", "get_billboard_mode", 1283840139L)
-    Ptrcall.call0[Long](gdext.classes.SpriteBase3D.mb_get_billboard_mode, livePtr)
+    gdext.classes.BaseMaterial3D.BillboardMode(Ptrcall.call0[Long](gdext.classes.SpriteBase3D.mb_get_billboard_mode, livePtr))
   }
 
   /** SpriteBase3D.set_texture_filter */
-  final def setTextureFilter(mode: Long): Unit = {
+  final def setTextureFilter(mode: gdext.classes.BaseMaterial3D.TextureFilter): Unit = {
     if (gdext.classes.SpriteBase3D.mb_set_texture_filter == null) gdext.classes.SpriteBase3D.mb_set_texture_filter = MethodBind.get("SpriteBase3D", "set_texture_filter", 22904437L)
     Ptrcall.callVoid1(gdext.classes.SpriteBase3D.mb_set_texture_filter, livePtr, mode)
   }
 
   /** SpriteBase3D.get_texture_filter */
-  final def getTextureFilter(): Long = {
+  final def getTextureFilter(): gdext.classes.BaseMaterial3D.TextureFilter = {
     if (gdext.classes.SpriteBase3D.mb_get_texture_filter == null) gdext.classes.SpriteBase3D.mb_get_texture_filter = MethodBind.get("SpriteBase3D", "get_texture_filter", 3289213076L)
-    Ptrcall.call0[Long](gdext.classes.SpriteBase3D.mb_get_texture_filter, livePtr)
+    gdext.classes.BaseMaterial3D.TextureFilter(Ptrcall.call0[Long](gdext.classes.SpriteBase3D.mb_get_texture_filter, livePtr))
   }
 
   /** SpriteBase3D.get_item_rect */
@@ -251,4 +252,60 @@ object SpriteBase3D {
   private[classes] var mb_get_texture_filter: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_item_rect: GDExtensionMethodBindPtr = null
   private[classes] var mb_generate_triangle_mesh: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `SpriteBase3D.DrawFlags`. */
+  opaque type DrawFlags <: Long = Long
+
+  object DrawFlags {
+    final val Transparent: DrawFlags = 0L.asInstanceOf[DrawFlags]
+    final val Shaded: DrawFlags = 1L.asInstanceOf[DrawFlags]
+    final val DoubleSided: DrawFlags = 2L.asInstanceOf[DrawFlags]
+    final val DisableDepthTest: DrawFlags = 3L.asInstanceOf[DrawFlags]
+    final val FixedSize: DrawFlags = 4L.asInstanceOf[DrawFlags]
+    final val Max: DrawFlags = 5L.asInstanceOf[DrawFlags]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DrawFlags = value.asInstanceOf[DrawFlags]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DrawFlags] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L).asInstanceOf[scala.IArray[DrawFlags]]
+
+    extension (self: DrawFlags)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Transparent"
+        case 1L => "Shaded"
+        case 2L => "DoubleSided"
+        case 3L => "DisableDepthTest"
+        case 4L => "FixedSize"
+        case 5L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `SpriteBase3D.AlphaCutMode`. */
+  opaque type AlphaCutMode <: Long = Long
+
+  object AlphaCutMode {
+    final val Disabled: AlphaCutMode = 0L.asInstanceOf[AlphaCutMode]
+    final val Discard: AlphaCutMode = 1L.asInstanceOf[AlphaCutMode]
+    final val OpaquePrepass: AlphaCutMode = 2L.asInstanceOf[AlphaCutMode]
+    final val Hash: AlphaCutMode = 3L.asInstanceOf[AlphaCutMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): AlphaCutMode = value.asInstanceOf[AlphaCutMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[AlphaCutMode] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[AlphaCutMode]]
+
+    extension (self: AlphaCutMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "Discard"
+        case 2L => "OpaquePrepass"
+        case 3L => "Hash"
+        case other => other.toString
+      }
+  }
 }

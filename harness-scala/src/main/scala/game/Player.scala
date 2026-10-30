@@ -101,10 +101,10 @@ final class Player(
   /** A signal other nodes can connect to. */
   @signal def pinged(): Unit = ()
 
-  override def _ready(): Unit =
+  override def ready(): Unit =
     Gd.print("Player._ready (extends Node2D)")
 
-  override def _process(delta: Double): Unit = {
+  override def process(delta: Double): Unit = {
     elapsed += delta
     // `setPosition` is inherited from Node2D and operates on this instance.
     setPosition(

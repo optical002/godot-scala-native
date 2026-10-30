@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,15 +36,15 @@ abstract class ColorPicker extends VBoxContainer {
   }
 
   /** ColorPicker.set_color_mode */
-  final def setColorMode(color_mode: Long): Unit = {
+  final def setColorMode(colorMode: gdext.classes.ColorPicker.ColorModeType): Unit = {
     if (gdext.classes.ColorPicker.mb_set_color_mode == null) gdext.classes.ColorPicker.mb_set_color_mode = MethodBind.get("ColorPicker", "set_color_mode", 1579114136L)
-    Ptrcall.callVoid1(gdext.classes.ColorPicker.mb_set_color_mode, livePtr, color_mode)
+    Ptrcall.callVoid1(gdext.classes.ColorPicker.mb_set_color_mode, livePtr, colorMode)
   }
 
   /** ColorPicker.get_color_mode */
-  final def getColorMode(): Long = {
+  final def getColorMode(): gdext.classes.ColorPicker.ColorModeType = {
     if (gdext.classes.ColorPicker.mb_get_color_mode == null) gdext.classes.ColorPicker.mb_get_color_mode = MethodBind.get("ColorPicker", "get_color_mode", 392907674L)
-    Ptrcall.call0[Long](gdext.classes.ColorPicker.mb_get_color_mode, livePtr)
+    gdext.classes.ColorPicker.ColorModeType(Ptrcall.call0[Long](gdext.classes.ColorPicker.mb_get_color_mode, livePtr))
   }
 
   /** ColorPicker.set_edit_alpha */
@@ -167,15 +168,15 @@ abstract class ColorPicker extends VBoxContainer {
   }
 
   /** ColorPicker.set_picker_shape */
-  final def setPickerShape(shape: Long): Unit = {
+  final def setPickerShape(shape: gdext.classes.ColorPicker.PickerShapeType): Unit = {
     if (gdext.classes.ColorPicker.mb_set_picker_shape == null) gdext.classes.ColorPicker.mb_set_picker_shape = MethodBind.get("ColorPicker", "set_picker_shape", 3981373861L)
     Ptrcall.callVoid1(gdext.classes.ColorPicker.mb_set_picker_shape, livePtr, shape)
   }
 
   /** ColorPicker.get_picker_shape */
-  final def getPickerShape(): Long = {
+  final def getPickerShape(): gdext.classes.ColorPicker.PickerShapeType = {
     if (gdext.classes.ColorPicker.mb_get_picker_shape == null) gdext.classes.ColorPicker.mb_get_picker_shape = MethodBind.get("ColorPicker", "get_picker_shape", 1143229889L)
-    Ptrcall.call0[Long](gdext.classes.ColorPicker.mb_get_picker_shape, livePtr)
+    gdext.classes.ColorPicker.PickerShapeType(Ptrcall.call0[Long](gdext.classes.ColorPicker.mb_get_picker_shape, livePtr))
   }
 
 }
@@ -209,4 +210,63 @@ object ColorPicker {
   private[classes] var mb_erase_recent_preset: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_picker_shape: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_picker_shape: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `ColorPicker.ColorModeType`. */
+  opaque type ColorModeType <: Long = Long
+
+  object ColorModeType {
+    final val Rgb: ColorModeType = 0L.asInstanceOf[ColorModeType]
+    final val Hsv: ColorModeType = 1L.asInstanceOf[ColorModeType]
+    final val Raw: ColorModeType = 2L.asInstanceOf[ColorModeType]
+    final val Linear: ColorModeType = 2L.asInstanceOf[ColorModeType]
+    final val Okhsl: ColorModeType = 3L.asInstanceOf[ColorModeType]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ColorModeType = value.asInstanceOf[ColorModeType]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ColorModeType] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[ColorModeType]]
+
+    extension (self: ColorModeType)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Rgb"
+        case 1L => "Hsv"
+        case 2L => "Raw"
+        case 3L => "Okhsl"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `ColorPicker.PickerShapeType`. */
+  opaque type PickerShapeType <: Long = Long
+
+  object PickerShapeType {
+    final val HsvRectangle: PickerShapeType = 0L.asInstanceOf[PickerShapeType]
+    final val HsvWheel: PickerShapeType = 1L.asInstanceOf[PickerShapeType]
+    final val VhsCircle: PickerShapeType = 2L.asInstanceOf[PickerShapeType]
+    final val OkhslCircle: PickerShapeType = 3L.asInstanceOf[PickerShapeType]
+    final val None: PickerShapeType = 4L.asInstanceOf[PickerShapeType]
+    final val OkHsRectangle: PickerShapeType = 5L.asInstanceOf[PickerShapeType]
+    final val OkHlRectangle: PickerShapeType = 6L.asInstanceOf[PickerShapeType]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): PickerShapeType = value.asInstanceOf[PickerShapeType]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[PickerShapeType] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L).asInstanceOf[scala.IArray[PickerShapeType]]
+
+    extension (self: PickerShapeType)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "HsvRectangle"
+        case 1L => "HsvWheel"
+        case 2L => "VhsCircle"
+        case 3L => "OkhslCircle"
+        case 4L => "None"
+        case 5L => "OkHsRectangle"
+        case 6L => "OkHlRectangle"
+        case other => other.toString
+      }
+  }
 }

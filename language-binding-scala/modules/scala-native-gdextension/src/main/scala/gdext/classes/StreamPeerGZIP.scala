@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,21 +12,21 @@ abstract class StreamPeerGZIP extends StreamPeer {
   override def godotClassName: String = "StreamPeerGZIP"
 
   /** StreamPeerGZIP.start_compression */
-  final def startCompression(use_deflate: Boolean, buffer_size: Long): Long = {
+  final def startCompression(useDeflate: Boolean = false, bufferSize: Long = 65535L): gdext.classes.Error = {
     if (gdext.classes.StreamPeerGZIP.mb_start_compression == null) gdext.classes.StreamPeerGZIP.mb_start_compression = MethodBind.get("StreamPeerGZIP", "start_compression", 781582770L)
-    Ptrcall.call2[Boolean, Long, Long](gdext.classes.StreamPeerGZIP.mb_start_compression, livePtr, use_deflate, buffer_size)
+    gdext.classes.Error(Ptrcall.call2[Boolean, Long, Long](gdext.classes.StreamPeerGZIP.mb_start_compression, livePtr, useDeflate, bufferSize))
   }
 
   /** StreamPeerGZIP.start_decompression */
-  final def startDecompression(use_deflate: Boolean, buffer_size: Long): Long = {
+  final def startDecompression(useDeflate: Boolean = false, bufferSize: Long = 65535L): gdext.classes.Error = {
     if (gdext.classes.StreamPeerGZIP.mb_start_decompression == null) gdext.classes.StreamPeerGZIP.mb_start_decompression = MethodBind.get("StreamPeerGZIP", "start_decompression", 781582770L)
-    Ptrcall.call2[Boolean, Long, Long](gdext.classes.StreamPeerGZIP.mb_start_decompression, livePtr, use_deflate, buffer_size)
+    gdext.classes.Error(Ptrcall.call2[Boolean, Long, Long](gdext.classes.StreamPeerGZIP.mb_start_decompression, livePtr, useDeflate, bufferSize))
   }
 
   /** StreamPeerGZIP.finish */
-  final def finish(): Long = {
+  final def finish(): gdext.classes.Error = {
     if (gdext.classes.StreamPeerGZIP.mb_finish == null) gdext.classes.StreamPeerGZIP.mb_finish = MethodBind.get("StreamPeerGZIP", "finish", 166280745L)
-    Ptrcall.call0[Long](gdext.classes.StreamPeerGZIP.mb_finish, livePtr)
+    gdext.classes.Error(Ptrcall.call0[Long](gdext.classes.StreamPeerGZIP.mb_finish, livePtr))
   }
 
   /** StreamPeerGZIP.clear */

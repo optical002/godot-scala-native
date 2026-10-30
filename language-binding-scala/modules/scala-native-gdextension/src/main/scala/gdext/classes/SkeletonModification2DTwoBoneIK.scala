@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class SkeletonModification2DTwoBoneIK extends SkeletonModification2D {
   override def godotClassName: String = "SkeletonModification2DTwoBoneIK"
 
   /** SkeletonModification2DTwoBoneIK.set_target_minimum_distance */
-  final def setTargetMinimumDistance(minimum_distance: Double): Unit = {
+  final def setTargetMinimumDistance(minimumDistance: Double): Unit = {
     if (gdext.classes.SkeletonModification2DTwoBoneIK.mb_set_target_minimum_distance == null) gdext.classes.SkeletonModification2DTwoBoneIK.mb_set_target_minimum_distance = MethodBind.get("SkeletonModification2DTwoBoneIK", "set_target_minimum_distance", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.SkeletonModification2DTwoBoneIK.mb_set_target_minimum_distance, livePtr, minimum_distance)
+    Ptrcall.callVoid1(gdext.classes.SkeletonModification2DTwoBoneIK.mb_set_target_minimum_distance, livePtr, minimumDistance)
   }
 
   /** SkeletonModification2DTwoBoneIK.get_target_minimum_distance */
@@ -23,9 +24,9 @@ abstract class SkeletonModification2DTwoBoneIK extends SkeletonModification2D {
   }
 
   /** SkeletonModification2DTwoBoneIK.set_target_maximum_distance */
-  final def setTargetMaximumDistance(maximum_distance: Double): Unit = {
+  final def setTargetMaximumDistance(maximumDistance: Double): Unit = {
     if (gdext.classes.SkeletonModification2DTwoBoneIK.mb_set_target_maximum_distance == null) gdext.classes.SkeletonModification2DTwoBoneIK.mb_set_target_maximum_distance = MethodBind.get("SkeletonModification2DTwoBoneIK", "set_target_maximum_distance", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.SkeletonModification2DTwoBoneIK.mb_set_target_maximum_distance, livePtr, maximum_distance)
+    Ptrcall.callVoid1(gdext.classes.SkeletonModification2DTwoBoneIK.mb_set_target_maximum_distance, livePtr, maximumDistance)
   }
 
   /** SkeletonModification2DTwoBoneIK.get_target_maximum_distance */
@@ -35,9 +36,9 @@ abstract class SkeletonModification2DTwoBoneIK extends SkeletonModification2D {
   }
 
   /** SkeletonModification2DTwoBoneIK.set_flip_bend_direction */
-  final def setFlipBendDirection(flip_direction: Boolean): Unit = {
+  final def setFlipBendDirection(flipDirection: Boolean): Unit = {
     if (gdext.classes.SkeletonModification2DTwoBoneIK.mb_set_flip_bend_direction == null) gdext.classes.SkeletonModification2DTwoBoneIK.mb_set_flip_bend_direction = MethodBind.get("SkeletonModification2DTwoBoneIK", "set_flip_bend_direction", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.SkeletonModification2DTwoBoneIK.mb_set_flip_bend_direction, livePtr, flip_direction)
+    Ptrcall.callVoid1(gdext.classes.SkeletonModification2DTwoBoneIK.mb_set_flip_bend_direction, livePtr, flipDirection)
   }
 
   /** SkeletonModification2DTwoBoneIK.get_flip_bend_direction */
@@ -47,9 +48,9 @@ abstract class SkeletonModification2DTwoBoneIK extends SkeletonModification2D {
   }
 
   /** SkeletonModification2DTwoBoneIK.set_joint_one_bone_idx */
-  final def setJointOneBoneIdx(bone_idx: Long): Unit = {
+  final def setJointOneBoneIdx(boneIdx: Long): Unit = {
     if (gdext.classes.SkeletonModification2DTwoBoneIK.mb_set_joint_one_bone_idx == null) gdext.classes.SkeletonModification2DTwoBoneIK.mb_set_joint_one_bone_idx = MethodBind.get("SkeletonModification2DTwoBoneIK", "set_joint_one_bone_idx", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.SkeletonModification2DTwoBoneIK.mb_set_joint_one_bone_idx, livePtr, bone_idx)
+    Ptrcall.callVoid1(gdext.classes.SkeletonModification2DTwoBoneIK.mb_set_joint_one_bone_idx, livePtr, boneIdx)
   }
 
   /** SkeletonModification2DTwoBoneIK.get_joint_one_bone_idx */
@@ -59,9 +60,9 @@ abstract class SkeletonModification2DTwoBoneIK extends SkeletonModification2D {
   }
 
   /** SkeletonModification2DTwoBoneIK.set_joint_two_bone_idx */
-  final def setJointTwoBoneIdx(bone_idx: Long): Unit = {
+  final def setJointTwoBoneIdx(boneIdx: Long): Unit = {
     if (gdext.classes.SkeletonModification2DTwoBoneIK.mb_set_joint_two_bone_idx == null) gdext.classes.SkeletonModification2DTwoBoneIK.mb_set_joint_two_bone_idx = MethodBind.get("SkeletonModification2DTwoBoneIK", "set_joint_two_bone_idx", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.SkeletonModification2DTwoBoneIK.mb_set_joint_two_bone_idx, livePtr, bone_idx)
+    Ptrcall.callVoid1(gdext.classes.SkeletonModification2DTwoBoneIK.mb_set_joint_two_bone_idx, livePtr, boneIdx)
   }
 
   /** SkeletonModification2DTwoBoneIK.get_joint_two_bone_idx */

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,21 +24,21 @@ abstract class ImporterMesh extends Resource {
   }
 
   /** ImporterMesh.get_blend_shape_name */
-  final def getBlendShapeName(blend_shape_idx: Long): String = {
+  final def getBlendShapeName(blendShapeIdx: Long): String = {
     if (gdext.classes.ImporterMesh.mb_get_blend_shape_name == null) gdext.classes.ImporterMesh.mb_get_blend_shape_name = MethodBind.get("ImporterMesh", "get_blend_shape_name", 844755477L)
-    Ptrcall.call1[Long, String](gdext.classes.ImporterMesh.mb_get_blend_shape_name, livePtr, blend_shape_idx)
+    Ptrcall.call1[Long, String](gdext.classes.ImporterMesh.mb_get_blend_shape_name, livePtr, blendShapeIdx)
   }
 
   /** ImporterMesh.set_blend_shape_mode */
-  final def setBlendShapeMode(mode: Long): Unit = {
+  final def setBlendShapeMode(mode: gdext.classes.Mesh.BlendShapeMode): Unit = {
     if (gdext.classes.ImporterMesh.mb_set_blend_shape_mode == null) gdext.classes.ImporterMesh.mb_set_blend_shape_mode = MethodBind.get("ImporterMesh", "set_blend_shape_mode", 227983991L)
     Ptrcall.callVoid1(gdext.classes.ImporterMesh.mb_set_blend_shape_mode, livePtr, mode)
   }
 
   /** ImporterMesh.get_blend_shape_mode */
-  final def getBlendShapeMode(): Long = {
+  final def getBlendShapeMode(): gdext.classes.Mesh.BlendShapeMode = {
     if (gdext.classes.ImporterMesh.mb_get_blend_shape_mode == null) gdext.classes.ImporterMesh.mb_get_blend_shape_mode = MethodBind.get("ImporterMesh", "get_blend_shape_mode", 836485024L)
-    Ptrcall.call0[Long](gdext.classes.ImporterMesh.mb_get_blend_shape_mode, livePtr)
+    gdext.classes.Mesh.BlendShapeMode(Ptrcall.call0[Long](gdext.classes.ImporterMesh.mb_get_blend_shape_mode, livePtr))
   }
 
   /** ImporterMesh.get_surface_count */
@@ -47,57 +48,57 @@ abstract class ImporterMesh extends Resource {
   }
 
   /** ImporterMesh.get_surface_primitive_type */
-  final def getSurfacePrimitiveType(surface_idx: Long): Long = {
+  final def getSurfacePrimitiveType(surfaceIdx: Long): gdext.classes.Mesh.PrimitiveType = {
     if (gdext.classes.ImporterMesh.mb_get_surface_primitive_type == null) gdext.classes.ImporterMesh.mb_get_surface_primitive_type = MethodBind.get("ImporterMesh", "get_surface_primitive_type", 3552571330L)
-    Ptrcall.call1[Long, Long](gdext.classes.ImporterMesh.mb_get_surface_primitive_type, livePtr, surface_idx)
+    gdext.classes.Mesh.PrimitiveType(Ptrcall.call1[Long, Long](gdext.classes.ImporterMesh.mb_get_surface_primitive_type, livePtr, surfaceIdx))
   }
 
   /** ImporterMesh.get_surface_name */
-  final def getSurfaceName(surface_idx: Long): String = {
+  final def getSurfaceName(surfaceIdx: Long): String = {
     if (gdext.classes.ImporterMesh.mb_get_surface_name == null) gdext.classes.ImporterMesh.mb_get_surface_name = MethodBind.get("ImporterMesh", "get_surface_name", 844755477L)
-    Ptrcall.call1[Long, String](gdext.classes.ImporterMesh.mb_get_surface_name, livePtr, surface_idx)
+    Ptrcall.call1[Long, String](gdext.classes.ImporterMesh.mb_get_surface_name, livePtr, surfaceIdx)
   }
 
   /** ImporterMesh.get_surface_lod_count */
-  final def getSurfaceLodCount(surface_idx: Long): Long = {
+  final def getSurfaceLodCount(surfaceIdx: Long): Long = {
     if (gdext.classes.ImporterMesh.mb_get_surface_lod_count == null) gdext.classes.ImporterMesh.mb_get_surface_lod_count = MethodBind.get("ImporterMesh", "get_surface_lod_count", 923996154L)
-    Ptrcall.call1[Long, Long](gdext.classes.ImporterMesh.mb_get_surface_lod_count, livePtr, surface_idx)
+    Ptrcall.call1[Long, Long](gdext.classes.ImporterMesh.mb_get_surface_lod_count, livePtr, surfaceIdx)
   }
 
   /** ImporterMesh.get_surface_lod_size */
-  final def getSurfaceLodSize(surface_idx: Long, lod_idx: Long): Double = {
+  final def getSurfaceLodSize(surfaceIdx: Long, lodIdx: Long): Double = {
     if (gdext.classes.ImporterMesh.mb_get_surface_lod_size == null) gdext.classes.ImporterMesh.mb_get_surface_lod_size = MethodBind.get("ImporterMesh", "get_surface_lod_size", 3085491603L)
-    Ptrcall.call2[Long, Long, Double](gdext.classes.ImporterMesh.mb_get_surface_lod_size, livePtr, surface_idx, lod_idx)
+    Ptrcall.call2[Long, Long, Double](gdext.classes.ImporterMesh.mb_get_surface_lod_size, livePtr, surfaceIdx, lodIdx)
   }
 
   /** ImporterMesh.get_surface_material. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getSurfaceMaterial(surface_idx: Long): Material = {
+  final def getSurfaceMaterial(surfaceIdx: Long): Material = {
     if (gdext.classes.ImporterMesh.mb_get_surface_material == null) gdext.classes.ImporterMesh.mb_get_surface_material = MethodBind.get("ImporterMesh", "get_surface_material", 2897466400L)
-    Wrappers.owned[Material](Ptrcall.call1[Long, Long](gdext.classes.ImporterMesh.mb_get_surface_material, livePtr, surface_idx))
+    Wrappers.owned[Material](Ptrcall.call1[Long, Long](gdext.classes.ImporterMesh.mb_get_surface_material, livePtr, surfaceIdx))
   }
 
   /** ImporterMesh.get_surface_format */
-  final def getSurfaceFormat(surface_idx: Long): Long = {
+  final def getSurfaceFormat(surfaceIdx: Long): Long = {
     if (gdext.classes.ImporterMesh.mb_get_surface_format == null) gdext.classes.ImporterMesh.mb_get_surface_format = MethodBind.get("ImporterMesh", "get_surface_format", 923996154L)
-    Ptrcall.call1[Long, Long](gdext.classes.ImporterMesh.mb_get_surface_format, livePtr, surface_idx)
+    Ptrcall.call1[Long, Long](gdext.classes.ImporterMesh.mb_get_surface_format, livePtr, surfaceIdx)
   }
 
   /** ImporterMesh.set_surface_name */
-  final def setSurfaceName(surface_idx: Long, name: String): Unit = {
+  final def setSurfaceName(surfaceIdx: Long, name: String): Unit = {
     if (gdext.classes.ImporterMesh.mb_set_surface_name == null) gdext.classes.ImporterMesh.mb_set_surface_name = MethodBind.get("ImporterMesh", "set_surface_name", 501894301L)
-    Ptrcall.callVoid2(gdext.classes.ImporterMesh.mb_set_surface_name, livePtr, surface_idx, name)
+    Ptrcall.callVoid2(gdext.classes.ImporterMesh.mb_set_surface_name, livePtr, surfaceIdx, name)
   }
 
   /** ImporterMesh.set_surface_material */
-  final def setSurfaceMaterial(surface_idx: Long, material: Material): Unit = {
+  final def setSurfaceMaterial(surfaceIdx: Long, material: Material): Unit = {
     if (gdext.classes.ImporterMesh.mb_set_surface_material == null) gdext.classes.ImporterMesh.mb_set_surface_material = MethodBind.get("ImporterMesh", "set_surface_material", 3671737478L)
-    Ptrcall.callVoid2(gdext.classes.ImporterMesh.mb_set_surface_material, livePtr, surface_idx, Wrappers.handle(material))
+    Ptrcall.callVoid2(gdext.classes.ImporterMesh.mb_set_surface_material, livePtr, surfaceIdx, Wrappers.handle(material))
   }
 
   /** ImporterMesh.get_mesh. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getMesh(base_mesh: ArrayMesh): ArrayMesh = {
+  final def getMesh(baseMesh: ArrayMesh = null): ArrayMesh = {
     if (gdext.classes.ImporterMesh.mb_get_mesh == null) gdext.classes.ImporterMesh.mb_get_mesh = MethodBind.get("ImporterMesh", "get_mesh", 1457573577L)
-    Wrappers.owned[ArrayMesh](Ptrcall.call1[GodotObject, Long](gdext.classes.ImporterMesh.mb_get_mesh, livePtr, Wrappers.handle(base_mesh)))
+    Wrappers.owned[ArrayMesh](Ptrcall.call1[GodotObject, Long](gdext.classes.ImporterMesh.mb_get_mesh, livePtr, Wrappers.handle(baseMesh)))
   }
 
   /** ImporterMesh.clear */

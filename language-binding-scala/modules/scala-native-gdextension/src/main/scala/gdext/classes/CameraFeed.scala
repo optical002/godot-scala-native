@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -41,13 +42,13 @@ abstract class CameraFeed extends RefCounted {
   }
 
   /** CameraFeed.get_position */
-  final def getPosition(): Long = {
+  final def getPosition(): gdext.classes.CameraFeed.FeedPosition = {
     if (gdext.classes.CameraFeed.mb_get_position == null) gdext.classes.CameraFeed.mb_get_position = MethodBind.get("CameraFeed", "get_position", 2711679033L)
-    Ptrcall.call0[Long](gdext.classes.CameraFeed.mb_get_position, livePtr)
+    gdext.classes.CameraFeed.FeedPosition(Ptrcall.call0[Long](gdext.classes.CameraFeed.mb_get_position, livePtr))
   }
 
   /** CameraFeed.set_position */
-  final def setPosition(position: Long): Unit = {
+  final def setPosition(position: gdext.classes.CameraFeed.FeedPosition): Unit = {
     if (gdext.classes.CameraFeed.mb_set_position == null) gdext.classes.CameraFeed.mb_set_position = MethodBind.get("CameraFeed", "set_position", 611162623L)
     Ptrcall.callVoid1(gdext.classes.CameraFeed.mb_set_position, livePtr, position)
   }
@@ -65,21 +66,21 @@ abstract class CameraFeed extends RefCounted {
   }
 
   /** CameraFeed.set_rgb_image */
-  final def setRgbImage(rgb_image: Image): Unit = {
+  final def setRgbImage(rgbImage: Image): Unit = {
     if (gdext.classes.CameraFeed.mb_set_rgb_image == null) gdext.classes.CameraFeed.mb_set_rgb_image = MethodBind.get("CameraFeed", "set_rgb_image", 532598488L)
-    Ptrcall.callVoid1(gdext.classes.CameraFeed.mb_set_rgb_image, livePtr, Wrappers.handle(rgb_image))
+    Ptrcall.callVoid1(gdext.classes.CameraFeed.mb_set_rgb_image, livePtr, Wrappers.handle(rgbImage))
   }
 
   /** CameraFeed.set_ycbcr_image */
-  final def setYcbcrImage(ycbcr_image: Image): Unit = {
+  final def setYcbcrImage(ycbcrImage: Image): Unit = {
     if (gdext.classes.CameraFeed.mb_set_ycbcr_image == null) gdext.classes.CameraFeed.mb_set_ycbcr_image = MethodBind.get("CameraFeed", "set_ycbcr_image", 532598488L)
-    Ptrcall.callVoid1(gdext.classes.CameraFeed.mb_set_ycbcr_image, livePtr, Wrappers.handle(ycbcr_image))
+    Ptrcall.callVoid1(gdext.classes.CameraFeed.mb_set_ycbcr_image, livePtr, Wrappers.handle(ycbcrImage))
   }
 
   /** CameraFeed.set_ycbcr_images */
-  final def setYcbcrImages(y_image: Image, cbcr_image: Image): Unit = {
+  final def setYcbcrImages(yImage: Image, cbcrImage: Image): Unit = {
     if (gdext.classes.CameraFeed.mb_set_ycbcr_images == null) gdext.classes.CameraFeed.mb_set_ycbcr_images = MethodBind.get("CameraFeed", "set_ycbcr_images", 1986484629L)
-    Ptrcall.callVoid2(gdext.classes.CameraFeed.mb_set_ycbcr_images, livePtr, Wrappers.handle(y_image), Wrappers.handle(cbcr_image))
+    Ptrcall.callVoid2(gdext.classes.CameraFeed.mb_set_ycbcr_images, livePtr, Wrappers.handle(yImage), Wrappers.handle(cbcrImage))
   }
 
   /** CameraFeed.set_external */
@@ -89,15 +90,15 @@ abstract class CameraFeed extends RefCounted {
   }
 
   /** CameraFeed.get_texture_tex_id */
-  final def getTextureTexId(feed_image_type: Long): Long = {
+  final def getTextureTexId(feedImageType: gdext.classes.CameraServer.FeedImage): Long = {
     if (gdext.classes.CameraFeed.mb_get_texture_tex_id == null) gdext.classes.CameraFeed.mb_get_texture_tex_id = MethodBind.get("CameraFeed", "get_texture_tex_id", 1135699418L)
-    Ptrcall.call1[Long, Long](gdext.classes.CameraFeed.mb_get_texture_tex_id, livePtr, feed_image_type)
+    Ptrcall.call1[Long, Long](gdext.classes.CameraFeed.mb_get_texture_tex_id, livePtr, feedImageType)
   }
 
   /** CameraFeed.get_datatype */
-  final def getDatatype(): Long = {
+  final def getDatatype(): gdext.classes.CameraFeed.FeedDataType = {
     if (gdext.classes.CameraFeed.mb_get_datatype == null) gdext.classes.CameraFeed.mb_get_datatype = MethodBind.get("CameraFeed", "get_datatype", 1477782850L)
-    Ptrcall.call0[Long](gdext.classes.CameraFeed.mb_get_datatype, livePtr)
+    gdext.classes.CameraFeed.FeedDataType(Ptrcall.call0[Long](gdext.classes.CameraFeed.mb_get_datatype, livePtr))
   }
 
 }
@@ -118,4 +119,56 @@ object CameraFeed {
   private[classes] var mb_set_external: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_texture_tex_id: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_datatype: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `CameraFeed.FeedDataType`. */
+  opaque type FeedDataType <: Long = Long
+
+  object FeedDataType {
+    final val Noimage: FeedDataType = 0L.asInstanceOf[FeedDataType]
+    final val Rgb: FeedDataType = 1L.asInstanceOf[FeedDataType]
+    final val Ycbcr: FeedDataType = 2L.asInstanceOf[FeedDataType]
+    final val YcbcrSep: FeedDataType = 3L.asInstanceOf[FeedDataType]
+    final val External: FeedDataType = 4L.asInstanceOf[FeedDataType]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): FeedDataType = value.asInstanceOf[FeedDataType]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[FeedDataType] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[FeedDataType]]
+
+    extension (self: FeedDataType)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Noimage"
+        case 1L => "Rgb"
+        case 2L => "Ycbcr"
+        case 3L => "YcbcrSep"
+        case 4L => "External"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `CameraFeed.FeedPosition`. */
+  opaque type FeedPosition <: Long = Long
+
+  object FeedPosition {
+    final val Unspecified: FeedPosition = 0L.asInstanceOf[FeedPosition]
+    final val Front: FeedPosition = 1L.asInstanceOf[FeedPosition]
+    final val Back: FeedPosition = 2L.asInstanceOf[FeedPosition]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): FeedPosition = value.asInstanceOf[FeedPosition]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[FeedPosition] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[FeedPosition]]
+
+    extension (self: FeedPosition)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Unspecified"
+        case 1L => "Front"
+        case 2L => "Back"
+        case other => other.toString
+      }
+  }
 }

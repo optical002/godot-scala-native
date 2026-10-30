@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,27 +12,27 @@ abstract class SkeletonIK3D extends SkeletonModifier3D {
   override def godotClassName: String = "SkeletonIK3D"
 
   /** SkeletonIK3D.set_root_bone */
-  final def setRootBone(root_bone: gdext.builtin.StringName): Unit = {
+  final def setRootBone(rootBone: String): Unit = {
     if (gdext.classes.SkeletonIK3D.mb_set_root_bone == null) gdext.classes.SkeletonIK3D.mb_set_root_bone = MethodBind.get("SkeletonIK3D", "set_root_bone", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.SkeletonIK3D.mb_set_root_bone, livePtr, root_bone)
+    Ptrcall.callVoid1(gdext.classes.SkeletonIK3D.mb_set_root_bone, livePtr, SnArg(rootBone))
   }
 
   /** SkeletonIK3D.get_root_bone */
-  final def getRootBone(): gdext.builtin.StringName = {
+  final def getRootBone(): String = {
     if (gdext.classes.SkeletonIK3D.mb_get_root_bone == null) gdext.classes.SkeletonIK3D.mb_get_root_bone = MethodBind.get("SkeletonIK3D", "get_root_bone", 2002593661L)
-    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.SkeletonIK3D.mb_get_root_bone, livePtr)
+    Ptrcall.call0[SnArg](gdext.classes.SkeletonIK3D.mb_get_root_bone, livePtr)
   }
 
   /** SkeletonIK3D.set_tip_bone */
-  final def setTipBone(tip_bone: gdext.builtin.StringName): Unit = {
+  final def setTipBone(tipBone: String): Unit = {
     if (gdext.classes.SkeletonIK3D.mb_set_tip_bone == null) gdext.classes.SkeletonIK3D.mb_set_tip_bone = MethodBind.get("SkeletonIK3D", "set_tip_bone", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.SkeletonIK3D.mb_set_tip_bone, livePtr, tip_bone)
+    Ptrcall.callVoid1(gdext.classes.SkeletonIK3D.mb_set_tip_bone, livePtr, SnArg(tipBone))
   }
 
   /** SkeletonIK3D.get_tip_bone */
-  final def getTipBone(): gdext.builtin.StringName = {
+  final def getTipBone(): String = {
     if (gdext.classes.SkeletonIK3D.mb_get_tip_bone == null) gdext.classes.SkeletonIK3D.mb_get_tip_bone = MethodBind.get("SkeletonIK3D", "get_tip_bone", 2002593661L)
-    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.SkeletonIK3D.mb_get_tip_bone, livePtr)
+    Ptrcall.call0[SnArg](gdext.classes.SkeletonIK3D.mb_get_tip_bone, livePtr)
   }
 
   /** SkeletonIK3D.set_target_transform */
@@ -71,9 +72,9 @@ abstract class SkeletonIK3D extends SkeletonModifier3D {
   }
 
   /** SkeletonIK3D.set_magnet_position */
-  final def setMagnetPosition(local_position: gdext.builtin.Vector3): Unit = {
+  final def setMagnetPosition(localPosition: gdext.builtin.Vector3): Unit = {
     if (gdext.classes.SkeletonIK3D.mb_set_magnet_position == null) gdext.classes.SkeletonIK3D.mb_set_magnet_position = MethodBind.get("SkeletonIK3D", "set_magnet_position", 3460891852L)
-    Ptrcall.callVoid1(gdext.classes.SkeletonIK3D.mb_set_magnet_position, livePtr, local_position)
+    Ptrcall.callVoid1(gdext.classes.SkeletonIK3D.mb_set_magnet_position, livePtr, localPosition)
   }
 
   /** SkeletonIK3D.get_magnet_position */
@@ -95,9 +96,9 @@ abstract class SkeletonIK3D extends SkeletonModifier3D {
   }
 
   /** SkeletonIK3D.set_min_distance */
-  final def setMinDistance(min_distance: Double): Unit = {
+  final def setMinDistance(minDistance: Double): Unit = {
     if (gdext.classes.SkeletonIK3D.mb_set_min_distance == null) gdext.classes.SkeletonIK3D.mb_set_min_distance = MethodBind.get("SkeletonIK3D", "set_min_distance", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.SkeletonIK3D.mb_set_min_distance, livePtr, min_distance)
+    Ptrcall.callVoid1(gdext.classes.SkeletonIK3D.mb_set_min_distance, livePtr, minDistance)
   }
 
   /** SkeletonIK3D.get_min_distance */
@@ -119,9 +120,9 @@ abstract class SkeletonIK3D extends SkeletonModifier3D {
   }
 
   /** SkeletonIK3D.start */
-  final def start(one_time: Boolean): Unit = {
+  final def start(oneTime: Boolean = false): Unit = {
     if (gdext.classes.SkeletonIK3D.mb_start == null) gdext.classes.SkeletonIK3D.mb_start = MethodBind.get("SkeletonIK3D", "start", 107499316L)
-    Ptrcall.callVoid1(gdext.classes.SkeletonIK3D.mb_start, livePtr, one_time)
+    Ptrcall.callVoid1(gdext.classes.SkeletonIK3D.mb_start, livePtr, oneTime)
   }
 
   /** SkeletonIK3D.stop */

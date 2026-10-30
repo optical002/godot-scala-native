@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,13 +24,13 @@ abstract class UPNPDevice extends RefCounted {
   }
 
   /** UPNPDevice.add_port_mapping */
-  final def addPortMapping(port: Long, port_internal: Long, desc: String, proto: String, duration: Long): Long = {
+  final def addPortMapping(port: Long, portInternal: Long = 0L, desc: String = "", proto: String = "UDP", duration: Long = 0L): Long = {
     if (gdext.classes.UPNPDevice.mb_add_port_mapping == null) gdext.classes.UPNPDevice.mb_add_port_mapping = MethodBind.get("UPNPDevice", "add_port_mapping", 818314583L)
-    Ptrcall.call5[Long, Long, String, String, Long, Long](gdext.classes.UPNPDevice.mb_add_port_mapping, livePtr, port, port_internal, desc, proto, duration)
+    Ptrcall.call5[Long, Long, String, String, Long, Long](gdext.classes.UPNPDevice.mb_add_port_mapping, livePtr, port, portInternal, desc, proto, duration)
   }
 
   /** UPNPDevice.delete_port_mapping */
-  final def deletePortMapping(port: Long, proto: String): Long = {
+  final def deletePortMapping(port: Long, proto: String = "UDP"): Long = {
     if (gdext.classes.UPNPDevice.mb_delete_port_mapping == null) gdext.classes.UPNPDevice.mb_delete_port_mapping = MethodBind.get("UPNPDevice", "delete_port_mapping", 3444187325L)
     Ptrcall.call2[Long, String, Long](gdext.classes.UPNPDevice.mb_delete_port_mapping, livePtr, port, proto)
   }
@@ -95,15 +96,15 @@ abstract class UPNPDevice extends RefCounted {
   }
 
   /** UPNPDevice.set_igd_status */
-  final def setIgdStatus(status: Long): Unit = {
+  final def setIgdStatus(status: gdext.classes.UPNPDevice.IGDStatus): Unit = {
     if (gdext.classes.UPNPDevice.mb_set_igd_status == null) gdext.classes.UPNPDevice.mb_set_igd_status = MethodBind.get("UPNPDevice", "set_igd_status", 519504122L)
     Ptrcall.callVoid1(gdext.classes.UPNPDevice.mb_set_igd_status, livePtr, status)
   }
 
   /** UPNPDevice.get_igd_status */
-  final def getIgdStatus(): Long = {
+  final def getIgdStatus(): gdext.classes.UPNPDevice.IGDStatus = {
     if (gdext.classes.UPNPDevice.mb_get_igd_status == null) gdext.classes.UPNPDevice.mb_get_igd_status = MethodBind.get("UPNPDevice", "get_igd_status", 180887011L)
-    Ptrcall.call0[Long](gdext.classes.UPNPDevice.mb_get_igd_status, livePtr)
+    gdext.classes.UPNPDevice.IGDStatus(Ptrcall.call0[Long](gdext.classes.UPNPDevice.mb_get_igd_status, livePtr))
   }
 
 }
@@ -125,4 +126,42 @@ object UPNPDevice {
   private[classes] var mb_get_igd_our_addr: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_igd_status: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_igd_status: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `UPNPDevice.IGDStatus`. */
+  opaque type IGDStatus <: Long = Long
+
+  object IGDStatus {
+    final val Ok: IGDStatus = 0L.asInstanceOf[IGDStatus]
+    final val HttpError: IGDStatus = 1L.asInstanceOf[IGDStatus]
+    final val HttpEmpty: IGDStatus = 2L.asInstanceOf[IGDStatus]
+    final val NoUrls: IGDStatus = 3L.asInstanceOf[IGDStatus]
+    final val NoIgd: IGDStatus = 4L.asInstanceOf[IGDStatus]
+    final val Disconnected: IGDStatus = 5L.asInstanceOf[IGDStatus]
+    final val UnknownDevice: IGDStatus = 6L.asInstanceOf[IGDStatus]
+    final val InvalidControl: IGDStatus = 7L.asInstanceOf[IGDStatus]
+    final val MallocError: IGDStatus = 8L.asInstanceOf[IGDStatus]
+    final val UnknownError: IGDStatus = 9L.asInstanceOf[IGDStatus]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): IGDStatus = value.asInstanceOf[IGDStatus]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[IGDStatus] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L).asInstanceOf[scala.IArray[IGDStatus]]
+
+    extension (self: IGDStatus)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Ok"
+        case 1L => "HttpError"
+        case 2L => "HttpEmpty"
+        case 3L => "NoUrls"
+        case 4L => "NoIgd"
+        case 5L => "Disconnected"
+        case 6L => "UnknownDevice"
+        case 7L => "InvalidControl"
+        case 8L => "MallocError"
+        case 9L => "UnknownError"
+        case other => other.toString
+      }
+  }
 }

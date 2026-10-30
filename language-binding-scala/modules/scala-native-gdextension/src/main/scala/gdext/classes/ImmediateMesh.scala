@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,7 +12,7 @@ abstract class ImmediateMesh extends Mesh {
   override def godotClassName: String = "ImmediateMesh"
 
   /** ImmediateMesh.surface_begin */
-  final def surfaceBegin(primitive: Long, material: Material): Unit = {
+  final def surfaceBegin(primitive: gdext.classes.Mesh.PrimitiveType, material: Material = null): Unit = {
     if (gdext.classes.ImmediateMesh.mb_surface_begin == null) gdext.classes.ImmediateMesh.mb_surface_begin = MethodBind.get("ImmediateMesh", "surface_begin", 2794442543L)
     Ptrcall.callVoid2(gdext.classes.ImmediateMesh.mb_surface_begin, livePtr, primitive, Wrappers.handle(material))
   }

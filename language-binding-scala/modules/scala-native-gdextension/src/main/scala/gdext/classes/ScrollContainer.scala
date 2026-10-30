@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -59,27 +60,27 @@ abstract class ScrollContainer extends Container {
   }
 
   /** ScrollContainer.set_horizontal_scroll_mode */
-  final def setHorizontalScrollMode(enable: Long): Unit = {
+  final def setHorizontalScrollMode(enable: gdext.classes.ScrollContainer.ScrollMode): Unit = {
     if (gdext.classes.ScrollContainer.mb_set_horizontal_scroll_mode == null) gdext.classes.ScrollContainer.mb_set_horizontal_scroll_mode = MethodBind.get("ScrollContainer", "set_horizontal_scroll_mode", 2750506364L)
     Ptrcall.callVoid1(gdext.classes.ScrollContainer.mb_set_horizontal_scroll_mode, livePtr, enable)
   }
 
   /** ScrollContainer.get_horizontal_scroll_mode */
-  final def getHorizontalScrollMode(): Long = {
+  final def getHorizontalScrollMode(): gdext.classes.ScrollContainer.ScrollMode = {
     if (gdext.classes.ScrollContainer.mb_get_horizontal_scroll_mode == null) gdext.classes.ScrollContainer.mb_get_horizontal_scroll_mode = MethodBind.get("ScrollContainer", "get_horizontal_scroll_mode", 3987985145L)
-    Ptrcall.call0[Long](gdext.classes.ScrollContainer.mb_get_horizontal_scroll_mode, livePtr)
+    gdext.classes.ScrollContainer.ScrollMode(Ptrcall.call0[Long](gdext.classes.ScrollContainer.mb_get_horizontal_scroll_mode, livePtr))
   }
 
   /** ScrollContainer.set_vertical_scroll_mode */
-  final def setVerticalScrollMode(enable: Long): Unit = {
+  final def setVerticalScrollMode(enable: gdext.classes.ScrollContainer.ScrollMode): Unit = {
     if (gdext.classes.ScrollContainer.mb_set_vertical_scroll_mode == null) gdext.classes.ScrollContainer.mb_set_vertical_scroll_mode = MethodBind.get("ScrollContainer", "set_vertical_scroll_mode", 2750506364L)
     Ptrcall.callVoid1(gdext.classes.ScrollContainer.mb_set_vertical_scroll_mode, livePtr, enable)
   }
 
   /** ScrollContainer.get_vertical_scroll_mode */
-  final def getVerticalScrollMode(): Long = {
+  final def getVerticalScrollMode(): gdext.classes.ScrollContainer.ScrollMode = {
     if (gdext.classes.ScrollContainer.mb_get_vertical_scroll_mode == null) gdext.classes.ScrollContainer.mb_get_vertical_scroll_mode = MethodBind.get("ScrollContainer", "get_vertical_scroll_mode", 3987985145L)
-    Ptrcall.call0[Long](gdext.classes.ScrollContainer.mb_get_vertical_scroll_mode, livePtr)
+    gdext.classes.ScrollContainer.ScrollMode(Ptrcall.call0[Long](gdext.classes.ScrollContainer.mb_get_vertical_scroll_mode, livePtr))
   }
 
   /** ScrollContainer.set_deadzone */
@@ -95,21 +96,21 @@ abstract class ScrollContainer extends Container {
   }
 
   /** ScrollContainer.set_scroll_hint_mode */
-  final def setScrollHintMode(scroll_hint_mode: Long): Unit = {
+  final def setScrollHintMode(scrollHintMode: gdext.classes.ScrollContainer.ScrollHintMode): Unit = {
     if (gdext.classes.ScrollContainer.mb_set_scroll_hint_mode == null) gdext.classes.ScrollContainer.mb_set_scroll_hint_mode = MethodBind.get("ScrollContainer", "set_scroll_hint_mode", 578158943L)
-    Ptrcall.callVoid1(gdext.classes.ScrollContainer.mb_set_scroll_hint_mode, livePtr, scroll_hint_mode)
+    Ptrcall.callVoid1(gdext.classes.ScrollContainer.mb_set_scroll_hint_mode, livePtr, scrollHintMode)
   }
 
   /** ScrollContainer.get_scroll_hint_mode */
-  final def getScrollHintMode(): Long = {
+  final def getScrollHintMode(): gdext.classes.ScrollContainer.ScrollHintMode = {
     if (gdext.classes.ScrollContainer.mb_get_scroll_hint_mode == null) gdext.classes.ScrollContainer.mb_get_scroll_hint_mode = MethodBind.get("ScrollContainer", "get_scroll_hint_mode", 246835423L)
-    Ptrcall.call0[Long](gdext.classes.ScrollContainer.mb_get_scroll_hint_mode, livePtr)
+    gdext.classes.ScrollContainer.ScrollHintMode(Ptrcall.call0[Long](gdext.classes.ScrollContainer.mb_get_scroll_hint_mode, livePtr))
   }
 
   /** ScrollContainer.set_tile_scroll_hint */
-  final def setTileScrollHint(tile_scroll_hint: Boolean): Unit = {
+  final def setTileScrollHint(tileScrollHint: Boolean): Unit = {
     if (gdext.classes.ScrollContainer.mb_set_tile_scroll_hint == null) gdext.classes.ScrollContainer.mb_set_tile_scroll_hint = MethodBind.get("ScrollContainer", "set_tile_scroll_hint", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.ScrollContainer.mb_set_tile_scroll_hint, livePtr, tile_scroll_hint)
+    Ptrcall.callVoid1(gdext.classes.ScrollContainer.mb_set_tile_scroll_hint, livePtr, tileScrollHint)
   }
 
   /** ScrollContainer.is_scroll_hint_tiled */
@@ -188,4 +189,58 @@ object ScrollContainer {
   private[classes] var mb_ensure_control_visible: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_draw_focus_border: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_draw_focus_border: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `ScrollContainer.ScrollMode`. */
+  opaque type ScrollMode <: Long = Long
+
+  object ScrollMode {
+    final val Disabled: ScrollMode = 0L.asInstanceOf[ScrollMode]
+    final val Auto: ScrollMode = 1L.asInstanceOf[ScrollMode]
+    final val ShowAlways: ScrollMode = 2L.asInstanceOf[ScrollMode]
+    final val ShowNever: ScrollMode = 3L.asInstanceOf[ScrollMode]
+    final val Reserve: ScrollMode = 4L.asInstanceOf[ScrollMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ScrollMode = value.asInstanceOf[ScrollMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ScrollMode] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[ScrollMode]]
+
+    extension (self: ScrollMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "Auto"
+        case 2L => "ShowAlways"
+        case 3L => "ShowNever"
+        case 4L => "Reserve"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `ScrollContainer.ScrollHintMode`. */
+  opaque type ScrollHintMode <: Long = Long
+
+  object ScrollHintMode {
+    final val Disabled: ScrollHintMode = 0L.asInstanceOf[ScrollHintMode]
+    final val All: ScrollHintMode = 1L.asInstanceOf[ScrollHintMode]
+    final val TopAndLeft: ScrollHintMode = 2L.asInstanceOf[ScrollHintMode]
+    final val BottomAndRight: ScrollHintMode = 3L.asInstanceOf[ScrollHintMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ScrollHintMode = value.asInstanceOf[ScrollHintMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ScrollHintMode] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[ScrollHintMode]]
+
+    extension (self: ScrollHintMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "All"
+        case 2L => "TopAndLeft"
+        case 3L => "BottomAndRight"
+        case other => other.toString
+      }
+  }
 }

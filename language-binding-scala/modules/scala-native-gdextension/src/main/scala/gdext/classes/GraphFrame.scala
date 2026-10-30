@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -41,9 +42,9 @@ abstract class GraphFrame extends GraphElement {
   }
 
   /** GraphFrame.set_autoshrink_margin */
-  final def setAutoshrinkMargin(autoshrink_margin: Long): Unit = {
+  final def setAutoshrinkMargin(autoshrinkMargin: Long): Unit = {
     if (gdext.classes.GraphFrame.mb_set_autoshrink_margin == null) gdext.classes.GraphFrame.mb_set_autoshrink_margin = MethodBind.get("GraphFrame", "set_autoshrink_margin", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.GraphFrame.mb_set_autoshrink_margin, livePtr, autoshrink_margin)
+    Ptrcall.callVoid1(gdext.classes.GraphFrame.mb_set_autoshrink_margin, livePtr, autoshrinkMargin)
   }
 
   /** GraphFrame.get_autoshrink_margin */
@@ -53,9 +54,9 @@ abstract class GraphFrame extends GraphElement {
   }
 
   /** GraphFrame.set_drag_margin */
-  final def setDragMargin(drag_margin: Long): Unit = {
+  final def setDragMargin(dragMargin: Long): Unit = {
     if (gdext.classes.GraphFrame.mb_set_drag_margin == null) gdext.classes.GraphFrame.mb_set_drag_margin = MethodBind.get("GraphFrame", "set_drag_margin", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.GraphFrame.mb_set_drag_margin, livePtr, drag_margin)
+    Ptrcall.callVoid1(gdext.classes.GraphFrame.mb_set_drag_margin, livePtr, dragMargin)
   }
 
   /** GraphFrame.get_drag_margin */

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class RayCast3D extends Node3D {
   }
 
   /** RayCast3D.set_target_position */
-  final def setTargetPosition(local_point: gdext.builtin.Vector3): Unit = {
+  final def setTargetPosition(localPoint: gdext.builtin.Vector3): Unit = {
     if (gdext.classes.RayCast3D.mb_set_target_position == null) gdext.classes.RayCast3D.mb_set_target_position = MethodBind.get("RayCast3D", "set_target_position", 3460891852L)
-    Ptrcall.callVoid1(gdext.classes.RayCast3D.mb_set_target_position, livePtr, local_point)
+    Ptrcall.callVoid1(gdext.classes.RayCast3D.mb_set_target_position, livePtr, localPoint)
   }
 
   /** RayCast3D.get_target_position */
@@ -107,15 +108,15 @@ abstract class RayCast3D extends Node3D {
   }
 
   /** RayCast3D.set_collision_mask_value */
-  final def setCollisionMaskValue(layer_number: Long, value: Boolean): Unit = {
+  final def setCollisionMaskValue(layerNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.RayCast3D.mb_set_collision_mask_value == null) gdext.classes.RayCast3D.mb_set_collision_mask_value = MethodBind.get("RayCast3D", "set_collision_mask_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.RayCast3D.mb_set_collision_mask_value, livePtr, layer_number, value)
+    Ptrcall.callVoid2(gdext.classes.RayCast3D.mb_set_collision_mask_value, livePtr, layerNumber, value)
   }
 
   /** RayCast3D.get_collision_mask_value */
-  final def getCollisionMaskValue(layer_number: Long): Boolean = {
+  final def getCollisionMaskValue(layerNumber: Long): Boolean = {
     if (gdext.classes.RayCast3D.mb_get_collision_mask_value == null) gdext.classes.RayCast3D.mb_get_collision_mask_value = MethodBind.get("RayCast3D", "get_collision_mask_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.RayCast3D.mb_get_collision_mask_value, livePtr, layer_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.RayCast3D.mb_get_collision_mask_value, livePtr, layerNumber)
   }
 
   /** RayCast3D.set_exclude_parent_body */
@@ -179,9 +180,9 @@ abstract class RayCast3D extends Node3D {
   }
 
   /** RayCast3D.set_debug_shape_custom_color */
-  final def setDebugShapeCustomColor(debug_shape_custom_color: gdext.builtin.Color): Unit = {
+  final def setDebugShapeCustomColor(debugShapeCustomColor: gdext.builtin.Color): Unit = {
     if (gdext.classes.RayCast3D.mb_set_debug_shape_custom_color == null) gdext.classes.RayCast3D.mb_set_debug_shape_custom_color = MethodBind.get("RayCast3D", "set_debug_shape_custom_color", 2920490490L)
-    Ptrcall.callVoid1(gdext.classes.RayCast3D.mb_set_debug_shape_custom_color, livePtr, debug_shape_custom_color)
+    Ptrcall.callVoid1(gdext.classes.RayCast3D.mb_set_debug_shape_custom_color, livePtr, debugShapeCustomColor)
   }
 
   /** RayCast3D.get_debug_shape_custom_color */
@@ -191,9 +192,9 @@ abstract class RayCast3D extends Node3D {
   }
 
   /** RayCast3D.set_debug_shape_thickness */
-  final def setDebugShapeThickness(debug_shape_thickness: Long): Unit = {
+  final def setDebugShapeThickness(debugShapeThickness: Long): Unit = {
     if (gdext.classes.RayCast3D.mb_set_debug_shape_thickness == null) gdext.classes.RayCast3D.mb_set_debug_shape_thickness = MethodBind.get("RayCast3D", "set_debug_shape_thickness", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.RayCast3D.mb_set_debug_shape_thickness, livePtr, debug_shape_thickness)
+    Ptrcall.callVoid1(gdext.classes.RayCast3D.mb_set_debug_shape_thickness, livePtr, debugShapeThickness)
   }
 
   /** RayCast3D.get_debug_shape_thickness */

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class PrismMesh extends PrimitiveMesh {
   override def godotClassName: String = "PrismMesh"
 
   /** PrismMesh.set_left_to_right */
-  final def setLeftToRight(left_to_right: Double): Unit = {
+  final def setLeftToRight(leftToRight: Double): Unit = {
     if (gdext.classes.PrismMesh.mb_set_left_to_right == null) gdext.classes.PrismMesh.mb_set_left_to_right = MethodBind.get("PrismMesh", "set_left_to_right", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.PrismMesh.mb_set_left_to_right, livePtr, left_to_right)
+    Ptrcall.callVoid1(gdext.classes.PrismMesh.mb_set_left_to_right, livePtr, leftToRight)
   }
 
   /** PrismMesh.get_left_to_right */

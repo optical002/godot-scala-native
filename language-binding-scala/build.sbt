@@ -41,7 +41,7 @@ inThisBuild(
 // not exist on JitPack until the matching release tag is pushed, and
 // locally-published artifacts win over JitPack (the local ivy repo is consulted
 // first). Plain semver, matching godot-scala-native-utilities.
-ThisBuild / version := sys.env.getOrElse("VERSION", "0.1.10")
+ThisBuild / version := sys.env.getOrElse("VERSION", "0.1.12")
 
 // Aggregating root. It exists only to group the modules; it is never published
 // (only `gdext` and the sbt plugin are).
@@ -136,7 +136,8 @@ lazy val gdext =
           s"$n\t$parent\t${refs.mkString(",")}"
         }
         val generatedFiles = generated.map(_._1.getCanonicalPath).toSet +
-          (engineDir / "ClassFactory.scala").getCanonicalPath
+          (engineDir / "ClassFactory.scala").getCanonicalPath +
+          (engineDir / "GlobalEnums.scala").getCanonicalPath
         val token = """\b[A-Z]\w*\b""".r
         val core = (srcRoot ** "*.scala").get
           .filterNot(f => generatedFiles.contains(f.getCanonicalPath))

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,15 +12,15 @@ abstract class GLTFPhysicsShape extends Resource {
   override def godotClassName: String = "GLTFPhysicsShape"
 
   /** GLTFPhysicsShape.to_node */
-  final def toNode(cache_shapes: Boolean): CollisionShape3D = {
+  final def toNode(cacheShapes: Boolean = false): CollisionShape3D = {
     if (gdext.classes.GLTFPhysicsShape.mb_to_node == null) gdext.classes.GLTFPhysicsShape.mb_to_node = MethodBind.get("GLTFPhysicsShape", "to_node", 563689933L)
-    Wrappers.borrowed[CollisionShape3D](Ptrcall.call1[Boolean, Long](gdext.classes.GLTFPhysicsShape.mb_to_node, livePtr, cache_shapes))
+    Wrappers.borrowed[CollisionShape3D](Ptrcall.call1[Boolean, Long](gdext.classes.GLTFPhysicsShape.mb_to_node, livePtr, cacheShapes))
   }
 
   /** GLTFPhysicsShape.to_resource. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def toResource(cache_shapes: Boolean): Shape3D = {
+  final def toResource(cacheShapes: Boolean = false): Shape3D = {
     if (gdext.classes.GLTFPhysicsShape.mb_to_resource == null) gdext.classes.GLTFPhysicsShape.mb_to_resource = MethodBind.get("GLTFPhysicsShape", "to_resource", 1913542110L)
-    Wrappers.owned[Shape3D](Ptrcall.call1[Boolean, Long](gdext.classes.GLTFPhysicsShape.mb_to_resource, livePtr, cache_shapes))
+    Wrappers.owned[Shape3D](Ptrcall.call1[Boolean, Long](gdext.classes.GLTFPhysicsShape.mb_to_resource, livePtr, cacheShapes))
   }
 
   /** GLTFPhysicsShape.get_shape_type */
@@ -29,9 +30,9 @@ abstract class GLTFPhysicsShape extends Resource {
   }
 
   /** GLTFPhysicsShape.set_shape_type */
-  final def setShapeType(shape_type: String): Unit = {
+  final def setShapeType(shapeType: String): Unit = {
     if (gdext.classes.GLTFPhysicsShape.mb_set_shape_type == null) gdext.classes.GLTFPhysicsShape.mb_set_shape_type = MethodBind.get("GLTFPhysicsShape", "set_shape_type", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.GLTFPhysicsShape.mb_set_shape_type, livePtr, shape_type)
+    Ptrcall.callVoid1(gdext.classes.GLTFPhysicsShape.mb_set_shape_type, livePtr, shapeType)
   }
 
   /** GLTFPhysicsShape.get_size */
@@ -77,9 +78,9 @@ abstract class GLTFPhysicsShape extends Resource {
   }
 
   /** GLTFPhysicsShape.set_is_trigger */
-  final def setIsTrigger(is_trigger: Boolean): Unit = {
+  final def setIsTrigger(isTrigger: Boolean): Unit = {
     if (gdext.classes.GLTFPhysicsShape.mb_set_is_trigger == null) gdext.classes.GLTFPhysicsShape.mb_set_is_trigger = MethodBind.get("GLTFPhysicsShape", "set_is_trigger", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.GLTFPhysicsShape.mb_set_is_trigger, livePtr, is_trigger)
+    Ptrcall.callVoid1(gdext.classes.GLTFPhysicsShape.mb_set_is_trigger, livePtr, isTrigger)
   }
 
   /** GLTFPhysicsShape.get_mesh_index */
@@ -89,9 +90,9 @@ abstract class GLTFPhysicsShape extends Resource {
   }
 
   /** GLTFPhysicsShape.set_mesh_index */
-  final def setMeshIndex(mesh_index: Long): Unit = {
+  final def setMeshIndex(meshIndex: Long): Unit = {
     if (gdext.classes.GLTFPhysicsShape.mb_set_mesh_index == null) gdext.classes.GLTFPhysicsShape.mb_set_mesh_index = MethodBind.get("GLTFPhysicsShape", "set_mesh_index", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.GLTFPhysicsShape.mb_set_mesh_index, livePtr, mesh_index)
+    Ptrcall.callVoid1(gdext.classes.GLTFPhysicsShape.mb_set_mesh_index, livePtr, meshIndex)
   }
 
   /** GLTFPhysicsShape.get_importer_mesh. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -101,9 +102,9 @@ abstract class GLTFPhysicsShape extends Resource {
   }
 
   /** GLTFPhysicsShape.set_importer_mesh */
-  final def setImporterMesh(importer_mesh: ImporterMesh): Unit = {
+  final def setImporterMesh(importerMesh: ImporterMesh): Unit = {
     if (gdext.classes.GLTFPhysicsShape.mb_set_importer_mesh == null) gdext.classes.GLTFPhysicsShape.mb_set_importer_mesh = MethodBind.get("GLTFPhysicsShape", "set_importer_mesh", 2255166972L)
-    Ptrcall.callVoid1(gdext.classes.GLTFPhysicsShape.mb_set_importer_mesh, livePtr, Wrappers.handle(importer_mesh))
+    Ptrcall.callVoid1(gdext.classes.GLTFPhysicsShape.mb_set_importer_mesh, livePtr, Wrappers.handle(importerMesh))
   }
 
 }
@@ -129,14 +130,14 @@ object GLTFPhysicsShape {
   private[classes] var mb_set_importer_mesh: GDExtensionMethodBindPtr = null
 
   /** GLTFPhysicsShape.from_node. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def fromNode(shape_node: CollisionShape3D): GLTFPhysicsShape = {
+  final def fromNode(shapeNode: CollisionShape3D): GLTFPhysicsShape = {
     if (gdext.classes.GLTFPhysicsShape.mb_from_node == null) gdext.classes.GLTFPhysicsShape.mb_from_node = MethodBind.get("GLTFPhysicsShape", "from_node", 3613751275L)
-    Wrappers.owned[GLTFPhysicsShape](Ptrcall.call1[GodotObject, Long](gdext.classes.GLTFPhysicsShape.mb_from_node, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], Wrappers.handle(shape_node)))
+    Wrappers.owned[GLTFPhysicsShape](Ptrcall.call1[GodotObject, Long](gdext.classes.GLTFPhysicsShape.mb_from_node, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], Wrappers.handle(shapeNode)))
   }
 
   /** GLTFPhysicsShape.from_resource. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def fromResource(shape_resource: Shape3D): GLTFPhysicsShape = {
+  final def fromResource(shapeResource: Shape3D): GLTFPhysicsShape = {
     if (gdext.classes.GLTFPhysicsShape.mb_from_resource == null) gdext.classes.GLTFPhysicsShape.mb_from_resource = MethodBind.get("GLTFPhysicsShape", "from_resource", 3845569786L)
-    Wrappers.owned[GLTFPhysicsShape](Ptrcall.call1[GodotObject, Long](gdext.classes.GLTFPhysicsShape.mb_from_resource, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], Wrappers.handle(shape_resource)))
+    Wrappers.owned[GLTFPhysicsShape](Ptrcall.call1[GodotObject, Long](gdext.classes.GLTFPhysicsShape.mb_from_resource, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], Wrappers.handle(shapeResource)))
   }
 }

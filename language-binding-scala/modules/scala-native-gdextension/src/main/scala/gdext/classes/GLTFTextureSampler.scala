@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,9 +18,9 @@ abstract class GLTFTextureSampler extends Resource {
   }
 
   /** GLTFTextureSampler.set_mag_filter */
-  final def setMagFilter(filter_mode: Long): Unit = {
+  final def setMagFilter(filterMode: Long): Unit = {
     if (gdext.classes.GLTFTextureSampler.mb_set_mag_filter == null) gdext.classes.GLTFTextureSampler.mb_set_mag_filter = MethodBind.get("GLTFTextureSampler", "set_mag_filter", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.GLTFTextureSampler.mb_set_mag_filter, livePtr, filter_mode)
+    Ptrcall.callVoid1(gdext.classes.GLTFTextureSampler.mb_set_mag_filter, livePtr, filterMode)
   }
 
   /** GLTFTextureSampler.get_min_filter */
@@ -29,9 +30,9 @@ abstract class GLTFTextureSampler extends Resource {
   }
 
   /** GLTFTextureSampler.set_min_filter */
-  final def setMinFilter(filter_mode: Long): Unit = {
+  final def setMinFilter(filterMode: Long): Unit = {
     if (gdext.classes.GLTFTextureSampler.mb_set_min_filter == null) gdext.classes.GLTFTextureSampler.mb_set_min_filter = MethodBind.get("GLTFTextureSampler", "set_min_filter", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.GLTFTextureSampler.mb_set_min_filter, livePtr, filter_mode)
+    Ptrcall.callVoid1(gdext.classes.GLTFTextureSampler.mb_set_min_filter, livePtr, filterMode)
   }
 
   /** GLTFTextureSampler.get_wrap_s */
@@ -41,9 +42,9 @@ abstract class GLTFTextureSampler extends Resource {
   }
 
   /** GLTFTextureSampler.set_wrap_s */
-  final def setWrapS(wrap_mode: Long): Unit = {
+  final def setWrapS(wrapMode: Long): Unit = {
     if (gdext.classes.GLTFTextureSampler.mb_set_wrap_s == null) gdext.classes.GLTFTextureSampler.mb_set_wrap_s = MethodBind.get("GLTFTextureSampler", "set_wrap_s", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.GLTFTextureSampler.mb_set_wrap_s, livePtr, wrap_mode)
+    Ptrcall.callVoid1(gdext.classes.GLTFTextureSampler.mb_set_wrap_s, livePtr, wrapMode)
   }
 
   /** GLTFTextureSampler.get_wrap_t */
@@ -53,9 +54,9 @@ abstract class GLTFTextureSampler extends Resource {
   }
 
   /** GLTFTextureSampler.set_wrap_t */
-  final def setWrapT(wrap_mode: Long): Unit = {
+  final def setWrapT(wrapMode: Long): Unit = {
     if (gdext.classes.GLTFTextureSampler.mb_set_wrap_t == null) gdext.classes.GLTFTextureSampler.mb_set_wrap_t = MethodBind.get("GLTFTextureSampler", "set_wrap_t", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.GLTFTextureSampler.mb_set_wrap_t, livePtr, wrap_mode)
+    Ptrcall.callVoid1(gdext.classes.GLTFTextureSampler.mb_set_wrap_t, livePtr, wrapMode)
   }
 
 }

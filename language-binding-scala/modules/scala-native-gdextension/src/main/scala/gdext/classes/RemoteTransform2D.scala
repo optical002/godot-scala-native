@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,9 +18,9 @@ abstract class RemoteTransform2D extends Node2D {
   }
 
   /** RemoteTransform2D.set_use_global_coordinates */
-  final def setUseGlobalCoordinates(use_global_coordinates: Boolean): Unit = {
+  final def setUseGlobalCoordinates(useGlobalCoordinates: Boolean): Unit = {
     if (gdext.classes.RemoteTransform2D.mb_set_use_global_coordinates == null) gdext.classes.RemoteTransform2D.mb_set_use_global_coordinates = MethodBind.get("RemoteTransform2D", "set_use_global_coordinates", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.RemoteTransform2D.mb_set_use_global_coordinates, livePtr, use_global_coordinates)
+    Ptrcall.callVoid1(gdext.classes.RemoteTransform2D.mb_set_use_global_coordinates, livePtr, useGlobalCoordinates)
   }
 
   /** RemoteTransform2D.get_use_global_coordinates */
@@ -29,9 +30,9 @@ abstract class RemoteTransform2D extends Node2D {
   }
 
   /** RemoteTransform2D.set_update_position */
-  final def setUpdatePosition(update_remote_position: Boolean): Unit = {
+  final def setUpdatePosition(updateRemotePosition: Boolean): Unit = {
     if (gdext.classes.RemoteTransform2D.mb_set_update_position == null) gdext.classes.RemoteTransform2D.mb_set_update_position = MethodBind.get("RemoteTransform2D", "set_update_position", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.RemoteTransform2D.mb_set_update_position, livePtr, update_remote_position)
+    Ptrcall.callVoid1(gdext.classes.RemoteTransform2D.mb_set_update_position, livePtr, updateRemotePosition)
   }
 
   /** RemoteTransform2D.get_update_position */
@@ -41,9 +42,9 @@ abstract class RemoteTransform2D extends Node2D {
   }
 
   /** RemoteTransform2D.set_update_rotation */
-  final def setUpdateRotation(update_remote_rotation: Boolean): Unit = {
+  final def setUpdateRotation(updateRemoteRotation: Boolean): Unit = {
     if (gdext.classes.RemoteTransform2D.mb_set_update_rotation == null) gdext.classes.RemoteTransform2D.mb_set_update_rotation = MethodBind.get("RemoteTransform2D", "set_update_rotation", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.RemoteTransform2D.mb_set_update_rotation, livePtr, update_remote_rotation)
+    Ptrcall.callVoid1(gdext.classes.RemoteTransform2D.mb_set_update_rotation, livePtr, updateRemoteRotation)
   }
 
   /** RemoteTransform2D.get_update_rotation */
@@ -53,9 +54,9 @@ abstract class RemoteTransform2D extends Node2D {
   }
 
   /** RemoteTransform2D.set_update_scale */
-  final def setUpdateScale(update_remote_scale: Boolean): Unit = {
+  final def setUpdateScale(updateRemoteScale: Boolean): Unit = {
     if (gdext.classes.RemoteTransform2D.mb_set_update_scale == null) gdext.classes.RemoteTransform2D.mb_set_update_scale = MethodBind.get("RemoteTransform2D", "set_update_scale", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.RemoteTransform2D.mb_set_update_scale, livePtr, update_remote_scale)
+    Ptrcall.callVoid1(gdext.classes.RemoteTransform2D.mb_set_update_scale, livePtr, updateRemoteScale)
   }
 
   /** RemoteTransform2D.get_update_scale */

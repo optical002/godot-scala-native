@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -95,9 +96,9 @@ abstract class NoiseTexture2D extends Texture2D {
   }
 
   /** NoiseTexture2D.set_as_normal_map */
-  final def setAsNormalMap(as_normal_map: Boolean): Unit = {
+  final def setAsNormalMap(asNormalMap: Boolean): Unit = {
     if (gdext.classes.NoiseTexture2D.mb_set_as_normal_map == null) gdext.classes.NoiseTexture2D.mb_set_as_normal_map = MethodBind.get("NoiseTexture2D", "set_as_normal_map", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.NoiseTexture2D.mb_set_as_normal_map, livePtr, as_normal_map)
+    Ptrcall.callVoid1(gdext.classes.NoiseTexture2D.mb_set_as_normal_map, livePtr, asNormalMap)
   }
 
   /** NoiseTexture2D.is_normal_map */
@@ -119,9 +120,9 @@ abstract class NoiseTexture2D extends Texture2D {
   }
 
   /** NoiseTexture2D.set_seamless_blend_skirt */
-  final def setSeamlessBlendSkirt(seamless_blend_skirt: Double): Unit = {
+  final def setSeamlessBlendSkirt(seamlessBlendSkirt: Double): Unit = {
     if (gdext.classes.NoiseTexture2D.mb_set_seamless_blend_skirt == null) gdext.classes.NoiseTexture2D.mb_set_seamless_blend_skirt = MethodBind.get("NoiseTexture2D", "set_seamless_blend_skirt", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.NoiseTexture2D.mb_set_seamless_blend_skirt, livePtr, seamless_blend_skirt)
+    Ptrcall.callVoid1(gdext.classes.NoiseTexture2D.mb_set_seamless_blend_skirt, livePtr, seamlessBlendSkirt)
   }
 
   /** NoiseTexture2D.get_seamless_blend_skirt */
@@ -131,9 +132,9 @@ abstract class NoiseTexture2D extends Texture2D {
   }
 
   /** NoiseTexture2D.set_bump_strength */
-  final def setBumpStrength(bump_strength: Double): Unit = {
+  final def setBumpStrength(bumpStrength: Double): Unit = {
     if (gdext.classes.NoiseTexture2D.mb_set_bump_strength == null) gdext.classes.NoiseTexture2D.mb_set_bump_strength = MethodBind.get("NoiseTexture2D", "set_bump_strength", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.NoiseTexture2D.mb_set_bump_strength, livePtr, bump_strength)
+    Ptrcall.callVoid1(gdext.classes.NoiseTexture2D.mb_set_bump_strength, livePtr, bumpStrength)
   }
 
   /** NoiseTexture2D.get_bump_strength */

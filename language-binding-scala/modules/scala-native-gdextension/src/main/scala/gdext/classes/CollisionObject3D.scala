@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,27 +36,27 @@ abstract class CollisionObject3D extends Node3D {
   }
 
   /** CollisionObject3D.set_collision_layer_value */
-  final def setCollisionLayerValue(layer_number: Long, value: Boolean): Unit = {
+  final def setCollisionLayerValue(layerNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.CollisionObject3D.mb_set_collision_layer_value == null) gdext.classes.CollisionObject3D.mb_set_collision_layer_value = MethodBind.get("CollisionObject3D", "set_collision_layer_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.CollisionObject3D.mb_set_collision_layer_value, livePtr, layer_number, value)
+    Ptrcall.callVoid2(gdext.classes.CollisionObject3D.mb_set_collision_layer_value, livePtr, layerNumber, value)
   }
 
   /** CollisionObject3D.get_collision_layer_value */
-  final def getCollisionLayerValue(layer_number: Long): Boolean = {
+  final def getCollisionLayerValue(layerNumber: Long): Boolean = {
     if (gdext.classes.CollisionObject3D.mb_get_collision_layer_value == null) gdext.classes.CollisionObject3D.mb_get_collision_layer_value = MethodBind.get("CollisionObject3D", "get_collision_layer_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.CollisionObject3D.mb_get_collision_layer_value, livePtr, layer_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.CollisionObject3D.mb_get_collision_layer_value, livePtr, layerNumber)
   }
 
   /** CollisionObject3D.set_collision_mask_value */
-  final def setCollisionMaskValue(layer_number: Long, value: Boolean): Unit = {
+  final def setCollisionMaskValue(layerNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.CollisionObject3D.mb_set_collision_mask_value == null) gdext.classes.CollisionObject3D.mb_set_collision_mask_value = MethodBind.get("CollisionObject3D", "set_collision_mask_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.CollisionObject3D.mb_set_collision_mask_value, livePtr, layer_number, value)
+    Ptrcall.callVoid2(gdext.classes.CollisionObject3D.mb_set_collision_mask_value, livePtr, layerNumber, value)
   }
 
   /** CollisionObject3D.get_collision_mask_value */
-  final def getCollisionMaskValue(layer_number: Long): Boolean = {
+  final def getCollisionMaskValue(layerNumber: Long): Boolean = {
     if (gdext.classes.CollisionObject3D.mb_get_collision_mask_value == null) gdext.classes.CollisionObject3D.mb_get_collision_mask_value = MethodBind.get("CollisionObject3D", "get_collision_mask_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.CollisionObject3D.mb_get_collision_mask_value, livePtr, layer_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.CollisionObject3D.mb_get_collision_mask_value, livePtr, layerNumber)
   }
 
   /** CollisionObject3D.set_collision_priority */
@@ -71,21 +72,21 @@ abstract class CollisionObject3D extends Node3D {
   }
 
   /** CollisionObject3D.set_disable_mode */
-  final def setDisableMode(mode: Long): Unit = {
+  final def setDisableMode(mode: gdext.classes.CollisionObject3D.DisableMode): Unit = {
     if (gdext.classes.CollisionObject3D.mb_set_disable_mode == null) gdext.classes.CollisionObject3D.mb_set_disable_mode = MethodBind.get("CollisionObject3D", "set_disable_mode", 1623620376L)
     Ptrcall.callVoid1(gdext.classes.CollisionObject3D.mb_set_disable_mode, livePtr, mode)
   }
 
   /** CollisionObject3D.get_disable_mode */
-  final def getDisableMode(): Long = {
+  final def getDisableMode(): gdext.classes.CollisionObject3D.DisableMode = {
     if (gdext.classes.CollisionObject3D.mb_get_disable_mode == null) gdext.classes.CollisionObject3D.mb_get_disable_mode = MethodBind.get("CollisionObject3D", "get_disable_mode", 410164780L)
-    Ptrcall.call0[Long](gdext.classes.CollisionObject3D.mb_get_disable_mode, livePtr)
+    gdext.classes.CollisionObject3D.DisableMode(Ptrcall.call0[Long](gdext.classes.CollisionObject3D.mb_get_disable_mode, livePtr))
   }
 
   /** CollisionObject3D.set_ray_pickable */
-  final def setRayPickable(ray_pickable: Boolean): Unit = {
+  final def setRayPickable(rayPickable: Boolean): Unit = {
     if (gdext.classes.CollisionObject3D.mb_set_ray_pickable == null) gdext.classes.CollisionObject3D.mb_set_ray_pickable = MethodBind.get("CollisionObject3D", "set_ray_pickable", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.CollisionObject3D.mb_set_ray_pickable, livePtr, ray_pickable)
+    Ptrcall.callVoid1(gdext.classes.CollisionObject3D.mb_set_ray_pickable, livePtr, rayPickable)
   }
 
   /** CollisionObject3D.is_ray_pickable */
@@ -113,81 +114,81 @@ abstract class CollisionObject3D extends Node3D {
   }
 
   /** CollisionObject3D.remove_shape_owner */
-  final def removeShapeOwner(owner_id: Long): Unit = {
+  final def removeShapeOwner(ownerId: Long): Unit = {
     if (gdext.classes.CollisionObject3D.mb_remove_shape_owner == null) gdext.classes.CollisionObject3D.mb_remove_shape_owner = MethodBind.get("CollisionObject3D", "remove_shape_owner", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.CollisionObject3D.mb_remove_shape_owner, livePtr, owner_id)
+    Ptrcall.callVoid1(gdext.classes.CollisionObject3D.mb_remove_shape_owner, livePtr, ownerId)
   }
 
   /** CollisionObject3D.shape_owner_set_transform */
-  final def shapeOwnerSetTransform(owner_id: Long, transform: gdext.builtin.Transform3D): Unit = {
+  final def shapeOwnerSetTransform(ownerId: Long, transform: gdext.builtin.Transform3D): Unit = {
     if (gdext.classes.CollisionObject3D.mb_shape_owner_set_transform == null) gdext.classes.CollisionObject3D.mb_shape_owner_set_transform = MethodBind.get("CollisionObject3D", "shape_owner_set_transform", 3616898986L)
-    Ptrcall.callVoid2(gdext.classes.CollisionObject3D.mb_shape_owner_set_transform, livePtr, owner_id, transform)
+    Ptrcall.callVoid2(gdext.classes.CollisionObject3D.mb_shape_owner_set_transform, livePtr, ownerId, transform)
   }
 
   /** CollisionObject3D.shape_owner_get_transform */
-  final def shapeOwnerGetTransform(owner_id: Long): gdext.builtin.Transform3D = {
+  final def shapeOwnerGetTransform(ownerId: Long): gdext.builtin.Transform3D = {
     if (gdext.classes.CollisionObject3D.mb_shape_owner_get_transform == null) gdext.classes.CollisionObject3D.mb_shape_owner_get_transform = MethodBind.get("CollisionObject3D", "shape_owner_get_transform", 1965739696L)
-    Ptrcall.call1[Long, gdext.builtin.Transform3D](gdext.classes.CollisionObject3D.mb_shape_owner_get_transform, livePtr, owner_id)
+    Ptrcall.call1[Long, gdext.builtin.Transform3D](gdext.classes.CollisionObject3D.mb_shape_owner_get_transform, livePtr, ownerId)
   }
 
   /** CollisionObject3D.shape_owner_get_owner */
-  final def shapeOwnerGetOwner(owner_id: Long): Object = {
+  final def shapeOwnerGetOwner(ownerId: Long): Object = {
     if (gdext.classes.CollisionObject3D.mb_shape_owner_get_owner == null) gdext.classes.CollisionObject3D.mb_shape_owner_get_owner = MethodBind.get("CollisionObject3D", "shape_owner_get_owner", 3332903315L)
-    Wrappers.borrowed[Object](Ptrcall.call1[Long, Long](gdext.classes.CollisionObject3D.mb_shape_owner_get_owner, livePtr, owner_id))
+    Wrappers.borrowed[Object](Ptrcall.call1[Long, Long](gdext.classes.CollisionObject3D.mb_shape_owner_get_owner, livePtr, ownerId))
   }
 
   /** CollisionObject3D.shape_owner_set_disabled */
-  final def shapeOwnerSetDisabled(owner_id: Long, disabled: Boolean): Unit = {
+  final def shapeOwnerSetDisabled(ownerId: Long, disabled: Boolean): Unit = {
     if (gdext.classes.CollisionObject3D.mb_shape_owner_set_disabled == null) gdext.classes.CollisionObject3D.mb_shape_owner_set_disabled = MethodBind.get("CollisionObject3D", "shape_owner_set_disabled", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.CollisionObject3D.mb_shape_owner_set_disabled, livePtr, owner_id, disabled)
+    Ptrcall.callVoid2(gdext.classes.CollisionObject3D.mb_shape_owner_set_disabled, livePtr, ownerId, disabled)
   }
 
   /** CollisionObject3D.is_shape_owner_disabled */
-  final def isShapeOwnerDisabled(owner_id: Long): Boolean = {
+  final def isShapeOwnerDisabled(ownerId: Long): Boolean = {
     if (gdext.classes.CollisionObject3D.mb_is_shape_owner_disabled == null) gdext.classes.CollisionObject3D.mb_is_shape_owner_disabled = MethodBind.get("CollisionObject3D", "is_shape_owner_disabled", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.CollisionObject3D.mb_is_shape_owner_disabled, livePtr, owner_id)
+    Ptrcall.call1[Long, Boolean](gdext.classes.CollisionObject3D.mb_is_shape_owner_disabled, livePtr, ownerId)
   }
 
   /** CollisionObject3D.shape_owner_add_shape */
-  final def shapeOwnerAddShape(owner_id: Long, shape: Shape3D): Unit = {
+  final def shapeOwnerAddShape(ownerId: Long, shape: Shape3D): Unit = {
     if (gdext.classes.CollisionObject3D.mb_shape_owner_add_shape == null) gdext.classes.CollisionObject3D.mb_shape_owner_add_shape = MethodBind.get("CollisionObject3D", "shape_owner_add_shape", 2566676345L)
-    Ptrcall.callVoid2(gdext.classes.CollisionObject3D.mb_shape_owner_add_shape, livePtr, owner_id, Wrappers.handle(shape))
+    Ptrcall.callVoid2(gdext.classes.CollisionObject3D.mb_shape_owner_add_shape, livePtr, ownerId, Wrappers.handle(shape))
   }
 
   /** CollisionObject3D.shape_owner_get_shape_count */
-  final def shapeOwnerGetShapeCount(owner_id: Long): Long = {
+  final def shapeOwnerGetShapeCount(ownerId: Long): Long = {
     if (gdext.classes.CollisionObject3D.mb_shape_owner_get_shape_count == null) gdext.classes.CollisionObject3D.mb_shape_owner_get_shape_count = MethodBind.get("CollisionObject3D", "shape_owner_get_shape_count", 923996154L)
-    Ptrcall.call1[Long, Long](gdext.classes.CollisionObject3D.mb_shape_owner_get_shape_count, livePtr, owner_id)
+    Ptrcall.call1[Long, Long](gdext.classes.CollisionObject3D.mb_shape_owner_get_shape_count, livePtr, ownerId)
   }
 
   /** CollisionObject3D.shape_owner_get_shape. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def shapeOwnerGetShape(owner_id: Long, shape_id: Long): Shape3D = {
+  final def shapeOwnerGetShape(ownerId: Long, shapeId: Long): Shape3D = {
     if (gdext.classes.CollisionObject3D.mb_shape_owner_get_shape == null) gdext.classes.CollisionObject3D.mb_shape_owner_get_shape = MethodBind.get("CollisionObject3D", "shape_owner_get_shape", 4015519174L)
-    Wrappers.owned[Shape3D](Ptrcall.call2[Long, Long, Long](gdext.classes.CollisionObject3D.mb_shape_owner_get_shape, livePtr, owner_id, shape_id))
+    Wrappers.owned[Shape3D](Ptrcall.call2[Long, Long, Long](gdext.classes.CollisionObject3D.mb_shape_owner_get_shape, livePtr, ownerId, shapeId))
   }
 
   /** CollisionObject3D.shape_owner_get_shape_index */
-  final def shapeOwnerGetShapeIndex(owner_id: Long, shape_id: Long): Long = {
+  final def shapeOwnerGetShapeIndex(ownerId: Long, shapeId: Long): Long = {
     if (gdext.classes.CollisionObject3D.mb_shape_owner_get_shape_index == null) gdext.classes.CollisionObject3D.mb_shape_owner_get_shape_index = MethodBind.get("CollisionObject3D", "shape_owner_get_shape_index", 3175239445L)
-    Ptrcall.call2[Long, Long, Long](gdext.classes.CollisionObject3D.mb_shape_owner_get_shape_index, livePtr, owner_id, shape_id)
+    Ptrcall.call2[Long, Long, Long](gdext.classes.CollisionObject3D.mb_shape_owner_get_shape_index, livePtr, ownerId, shapeId)
   }
 
   /** CollisionObject3D.shape_owner_remove_shape */
-  final def shapeOwnerRemoveShape(owner_id: Long, shape_id: Long): Unit = {
+  final def shapeOwnerRemoveShape(ownerId: Long, shapeId: Long): Unit = {
     if (gdext.classes.CollisionObject3D.mb_shape_owner_remove_shape == null) gdext.classes.CollisionObject3D.mb_shape_owner_remove_shape = MethodBind.get("CollisionObject3D", "shape_owner_remove_shape", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.CollisionObject3D.mb_shape_owner_remove_shape, livePtr, owner_id, shape_id)
+    Ptrcall.callVoid2(gdext.classes.CollisionObject3D.mb_shape_owner_remove_shape, livePtr, ownerId, shapeId)
   }
 
   /** CollisionObject3D.shape_owner_clear_shapes */
-  final def shapeOwnerClearShapes(owner_id: Long): Unit = {
+  final def shapeOwnerClearShapes(ownerId: Long): Unit = {
     if (gdext.classes.CollisionObject3D.mb_shape_owner_clear_shapes == null) gdext.classes.CollisionObject3D.mb_shape_owner_clear_shapes = MethodBind.get("CollisionObject3D", "shape_owner_clear_shapes", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.CollisionObject3D.mb_shape_owner_clear_shapes, livePtr, owner_id)
+    Ptrcall.callVoid1(gdext.classes.CollisionObject3D.mb_shape_owner_clear_shapes, livePtr, ownerId)
   }
 
   /** CollisionObject3D.shape_find_owner */
-  final def shapeFindOwner(shape_index: Long): Long = {
+  final def shapeFindOwner(shapeIndex: Long): Long = {
     if (gdext.classes.CollisionObject3D.mb_shape_find_owner == null) gdext.classes.CollisionObject3D.mb_shape_find_owner = MethodBind.get("CollisionObject3D", "shape_find_owner", 923996154L)
-    Ptrcall.call1[Long, Long](gdext.classes.CollisionObject3D.mb_shape_find_owner, livePtr, shape_index)
+    Ptrcall.call1[Long, Long](gdext.classes.CollisionObject3D.mb_shape_find_owner, livePtr, shapeIndex)
   }
 
 }
@@ -223,4 +224,28 @@ object CollisionObject3D {
   private[classes] var mb_shape_owner_remove_shape: GDExtensionMethodBindPtr = null
   private[classes] var mb_shape_owner_clear_shapes: GDExtensionMethodBindPtr = null
   private[classes] var mb_shape_find_owner: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `CollisionObject3D.DisableMode`. */
+  opaque type DisableMode <: Long = Long
+
+  object DisableMode {
+    final val Remove: DisableMode = 0L.asInstanceOf[DisableMode]
+    final val MakeStatic: DisableMode = 1L.asInstanceOf[DisableMode]
+    final val KeepActive: DisableMode = 2L.asInstanceOf[DisableMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DisableMode = value.asInstanceOf[DisableMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DisableMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[DisableMode]]
+
+    extension (self: DisableMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Remove"
+        case 1L => "MakeStatic"
+        case 2L => "KeepActive"
+        case other => other.toString
+      }
+  }
 }

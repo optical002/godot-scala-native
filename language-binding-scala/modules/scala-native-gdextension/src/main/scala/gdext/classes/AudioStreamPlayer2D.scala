@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class AudioStreamPlayer2D extends Node2D {
   }
 
   /** AudioStreamPlayer2D.set_volume_db */
-  final def setVolumeDb(volume_db: Double): Unit = {
+  final def setVolumeDb(volumeDb: Double): Unit = {
     if (gdext.classes.AudioStreamPlayer2D.mb_set_volume_db == null) gdext.classes.AudioStreamPlayer2D.mb_set_volume_db = MethodBind.get("AudioStreamPlayer2D", "set_volume_db", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer2D.mb_set_volume_db, livePtr, volume_db)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer2D.mb_set_volume_db, livePtr, volumeDb)
   }
 
   /** AudioStreamPlayer2D.get_volume_db */
@@ -35,9 +36,9 @@ abstract class AudioStreamPlayer2D extends Node2D {
   }
 
   /** AudioStreamPlayer2D.set_volume_linear */
-  final def setVolumeLinear(volume_linear: Double): Unit = {
+  final def setVolumeLinear(volumeLinear: Double): Unit = {
     if (gdext.classes.AudioStreamPlayer2D.mb_set_volume_linear == null) gdext.classes.AudioStreamPlayer2D.mb_set_volume_linear = MethodBind.get("AudioStreamPlayer2D", "set_volume_linear", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer2D.mb_set_volume_linear, livePtr, volume_linear)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer2D.mb_set_volume_linear, livePtr, volumeLinear)
   }
 
   /** AudioStreamPlayer2D.get_volume_linear */
@@ -47,9 +48,9 @@ abstract class AudioStreamPlayer2D extends Node2D {
   }
 
   /** AudioStreamPlayer2D.set_pitch_scale */
-  final def setPitchScale(pitch_scale: Double): Unit = {
+  final def setPitchScale(pitchScale: Double): Unit = {
     if (gdext.classes.AudioStreamPlayer2D.mb_set_pitch_scale == null) gdext.classes.AudioStreamPlayer2D.mb_set_pitch_scale = MethodBind.get("AudioStreamPlayer2D", "set_pitch_scale", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer2D.mb_set_pitch_scale, livePtr, pitch_scale)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer2D.mb_set_pitch_scale, livePtr, pitchScale)
   }
 
   /** AudioStreamPlayer2D.get_pitch_scale */
@@ -59,15 +60,15 @@ abstract class AudioStreamPlayer2D extends Node2D {
   }
 
   /** AudioStreamPlayer2D.play */
-  final def play(from_position: Double): Unit = {
+  final def play(fromPosition: Double = 0.0): Unit = {
     if (gdext.classes.AudioStreamPlayer2D.mb_play == null) gdext.classes.AudioStreamPlayer2D.mb_play = MethodBind.get("AudioStreamPlayer2D", "play", 1958160172L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer2D.mb_play, livePtr, from_position)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer2D.mb_play, livePtr, fromPosition)
   }
 
   /** AudioStreamPlayer2D.seek */
-  final def seek(to_position: Double): Unit = {
+  final def seek(toPosition: Double): Unit = {
     if (gdext.classes.AudioStreamPlayer2D.mb_seek == null) gdext.classes.AudioStreamPlayer2D.mb_seek = MethodBind.get("AudioStreamPlayer2D", "seek", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer2D.mb_seek, livePtr, to_position)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer2D.mb_seek, livePtr, toPosition)
   }
 
   /** AudioStreamPlayer2D.stop */
@@ -89,15 +90,15 @@ abstract class AudioStreamPlayer2D extends Node2D {
   }
 
   /** AudioStreamPlayer2D.set_bus */
-  final def setBus(bus: gdext.builtin.StringName): Unit = {
+  final def setBus(bus: String): Unit = {
     if (gdext.classes.AudioStreamPlayer2D.mb_set_bus == null) gdext.classes.AudioStreamPlayer2D.mb_set_bus = MethodBind.get("AudioStreamPlayer2D", "set_bus", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer2D.mb_set_bus, livePtr, bus)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer2D.mb_set_bus, livePtr, SnArg(bus))
   }
 
   /** AudioStreamPlayer2D.get_bus */
-  final def getBus(): gdext.builtin.StringName = {
+  final def getBus(): String = {
     if (gdext.classes.AudioStreamPlayer2D.mb_get_bus == null) gdext.classes.AudioStreamPlayer2D.mb_get_bus = MethodBind.get("AudioStreamPlayer2D", "get_bus", 2002593661L)
-    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.AudioStreamPlayer2D.mb_get_bus, livePtr)
+    Ptrcall.call0[SnArg](gdext.classes.AudioStreamPlayer2D.mb_get_bus, livePtr)
   }
 
   /** AudioStreamPlayer2D.set_autoplay */
@@ -167,9 +168,9 @@ abstract class AudioStreamPlayer2D extends Node2D {
   }
 
   /** AudioStreamPlayer2D.set_max_polyphony */
-  final def setMaxPolyphony(max_polyphony: Long): Unit = {
+  final def setMaxPolyphony(maxPolyphony: Long): Unit = {
     if (gdext.classes.AudioStreamPlayer2D.mb_set_max_polyphony == null) gdext.classes.AudioStreamPlayer2D.mb_set_max_polyphony = MethodBind.get("AudioStreamPlayer2D", "set_max_polyphony", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer2D.mb_set_max_polyphony, livePtr, max_polyphony)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer2D.mb_set_max_polyphony, livePtr, maxPolyphony)
   }
 
   /** AudioStreamPlayer2D.get_max_polyphony */
@@ -179,9 +180,9 @@ abstract class AudioStreamPlayer2D extends Node2D {
   }
 
   /** AudioStreamPlayer2D.set_panning_strength */
-  final def setPanningStrength(panning_strength: Double): Unit = {
+  final def setPanningStrength(panningStrength: Double): Unit = {
     if (gdext.classes.AudioStreamPlayer2D.mb_set_panning_strength == null) gdext.classes.AudioStreamPlayer2D.mb_set_panning_strength = MethodBind.get("AudioStreamPlayer2D", "set_panning_strength", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer2D.mb_set_panning_strength, livePtr, panning_strength)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer2D.mb_set_panning_strength, livePtr, panningStrength)
   }
 
   /** AudioStreamPlayer2D.get_panning_strength */
@@ -203,15 +204,15 @@ abstract class AudioStreamPlayer2D extends Node2D {
   }
 
   /** AudioStreamPlayer2D.set_playback_type */
-  final def setPlaybackType(playback_type: Long): Unit = {
+  final def setPlaybackType(playbackType: gdext.classes.AudioServer.PlaybackType): Unit = {
     if (gdext.classes.AudioStreamPlayer2D.mb_set_playback_type == null) gdext.classes.AudioStreamPlayer2D.mb_set_playback_type = MethodBind.get("AudioStreamPlayer2D", "set_playback_type", 725473817L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer2D.mb_set_playback_type, livePtr, playback_type)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer2D.mb_set_playback_type, livePtr, playbackType)
   }
 
   /** AudioStreamPlayer2D.get_playback_type */
-  final def getPlaybackType(): Long = {
+  final def getPlaybackType(): gdext.classes.AudioServer.PlaybackType = {
     if (gdext.classes.AudioStreamPlayer2D.mb_get_playback_type == null) gdext.classes.AudioStreamPlayer2D.mb_get_playback_type = MethodBind.get("AudioStreamPlayer2D", "get_playback_type", 4011264623L)
-    Ptrcall.call0[Long](gdext.classes.AudioStreamPlayer2D.mb_get_playback_type, livePtr)
+    gdext.classes.AudioServer.PlaybackType(Ptrcall.call0[Long](gdext.classes.AudioStreamPlayer2D.mb_get_playback_type, livePtr))
   }
 
 }

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -59,49 +60,49 @@ abstract class ParticleProcessMaterial extends Material {
   }
 
   /** ParticleProcessMaterial.set_param */
-  final def setParam(param: Long, value: gdext.builtin.Vector2): Unit = {
+  final def setParam(param: gdext.classes.ParticleProcessMaterial.Parameter, value: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.ParticleProcessMaterial.mb_set_param == null) gdext.classes.ParticleProcessMaterial.mb_set_param = MethodBind.get("ParticleProcessMaterial", "set_param", 676779352L)
     Ptrcall.callVoid2(gdext.classes.ParticleProcessMaterial.mb_set_param, livePtr, param, value)
   }
 
   /** ParticleProcessMaterial.get_param */
-  final def getParam(param: Long): gdext.builtin.Vector2 = {
+  final def getParam(param: gdext.classes.ParticleProcessMaterial.Parameter): gdext.builtin.Vector2 = {
     if (gdext.classes.ParticleProcessMaterial.mb_get_param == null) gdext.classes.ParticleProcessMaterial.mb_get_param = MethodBind.get("ParticleProcessMaterial", "get_param", 2623708480L)
     Ptrcall.call1[Long, gdext.builtin.Vector2](gdext.classes.ParticleProcessMaterial.mb_get_param, livePtr, param)
   }
 
   /** ParticleProcessMaterial.set_param_min */
-  final def setParamMin(param: Long, value: Double): Unit = {
+  final def setParamMin(param: gdext.classes.ParticleProcessMaterial.Parameter, value: Double): Unit = {
     if (gdext.classes.ParticleProcessMaterial.mb_set_param_min == null) gdext.classes.ParticleProcessMaterial.mb_set_param_min = MethodBind.get("ParticleProcessMaterial", "set_param_min", 2295964248L)
     Ptrcall.callVoid2(gdext.classes.ParticleProcessMaterial.mb_set_param_min, livePtr, param, value)
   }
 
   /** ParticleProcessMaterial.get_param_min */
-  final def getParamMin(param: Long): Double = {
+  final def getParamMin(param: gdext.classes.ParticleProcessMaterial.Parameter): Double = {
     if (gdext.classes.ParticleProcessMaterial.mb_get_param_min == null) gdext.classes.ParticleProcessMaterial.mb_get_param_min = MethodBind.get("ParticleProcessMaterial", "get_param_min", 3903786503L)
     Ptrcall.call1[Long, Double](gdext.classes.ParticleProcessMaterial.mb_get_param_min, livePtr, param)
   }
 
   /** ParticleProcessMaterial.set_param_max */
-  final def setParamMax(param: Long, value: Double): Unit = {
+  final def setParamMax(param: gdext.classes.ParticleProcessMaterial.Parameter, value: Double): Unit = {
     if (gdext.classes.ParticleProcessMaterial.mb_set_param_max == null) gdext.classes.ParticleProcessMaterial.mb_set_param_max = MethodBind.get("ParticleProcessMaterial", "set_param_max", 2295964248L)
     Ptrcall.callVoid2(gdext.classes.ParticleProcessMaterial.mb_set_param_max, livePtr, param, value)
   }
 
   /** ParticleProcessMaterial.get_param_max */
-  final def getParamMax(param: Long): Double = {
+  final def getParamMax(param: gdext.classes.ParticleProcessMaterial.Parameter): Double = {
     if (gdext.classes.ParticleProcessMaterial.mb_get_param_max == null) gdext.classes.ParticleProcessMaterial.mb_get_param_max = MethodBind.get("ParticleProcessMaterial", "get_param_max", 3903786503L)
     Ptrcall.call1[Long, Double](gdext.classes.ParticleProcessMaterial.mb_get_param_max, livePtr, param)
   }
 
   /** ParticleProcessMaterial.set_param_texture */
-  final def setParamTexture(param: Long, texture: Texture2D): Unit = {
+  final def setParamTexture(param: gdext.classes.ParticleProcessMaterial.Parameter, texture: Texture2D): Unit = {
     if (gdext.classes.ParticleProcessMaterial.mb_set_param_texture == null) gdext.classes.ParticleProcessMaterial.mb_set_param_texture = MethodBind.get("ParticleProcessMaterial", "set_param_texture", 526976089L)
     Ptrcall.callVoid2(gdext.classes.ParticleProcessMaterial.mb_set_param_texture, livePtr, param, Wrappers.handle(texture))
   }
 
   /** ParticleProcessMaterial.get_param_texture. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getParamTexture(param: Long): Texture2D = {
+  final def getParamTexture(param: gdext.classes.ParticleProcessMaterial.Parameter): Texture2D = {
     if (gdext.classes.ParticleProcessMaterial.mb_get_param_texture == null) gdext.classes.ParticleProcessMaterial.mb_get_param_texture = MethodBind.get("ParticleProcessMaterial", "get_param_texture", 3489372978L)
     Wrappers.owned[Texture2D](Ptrcall.call1[Long, Long](gdext.classes.ParticleProcessMaterial.mb_get_param_texture, livePtr, param))
   }
@@ -179,15 +180,15 @@ abstract class ParticleProcessMaterial extends Material {
   }
 
   /** ParticleProcessMaterial.set_particle_flag */
-  final def setParticleFlag(particle_flag: Long, enable: Boolean): Unit = {
+  final def setParticleFlag(particleFlag: gdext.classes.ParticleProcessMaterial.ParticleFlags, enable: Boolean): Unit = {
     if (gdext.classes.ParticleProcessMaterial.mb_set_particle_flag == null) gdext.classes.ParticleProcessMaterial.mb_set_particle_flag = MethodBind.get("ParticleProcessMaterial", "set_particle_flag", 1711815571L)
-    Ptrcall.callVoid2(gdext.classes.ParticleProcessMaterial.mb_set_particle_flag, livePtr, particle_flag, enable)
+    Ptrcall.callVoid2(gdext.classes.ParticleProcessMaterial.mb_set_particle_flag, livePtr, particleFlag, enable)
   }
 
   /** ParticleProcessMaterial.get_particle_flag */
-  final def getParticleFlag(particle_flag: Long): Boolean = {
+  final def getParticleFlag(particleFlag: gdext.classes.ParticleProcessMaterial.ParticleFlags): Boolean = {
     if (gdext.classes.ParticleProcessMaterial.mb_get_particle_flag == null) gdext.classes.ParticleProcessMaterial.mb_get_particle_flag = MethodBind.get("ParticleProcessMaterial", "get_particle_flag", 3895316907L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.ParticleProcessMaterial.mb_get_particle_flag, livePtr, particle_flag)
+    Ptrcall.call1[Long, Boolean](gdext.classes.ParticleProcessMaterial.mb_get_particle_flag, livePtr, particleFlag)
   }
 
   /** ParticleProcessMaterial.set_velocity_pivot */
@@ -203,15 +204,15 @@ abstract class ParticleProcessMaterial extends Material {
   }
 
   /** ParticleProcessMaterial.set_emission_shape */
-  final def setEmissionShape(shape: Long): Unit = {
+  final def setEmissionShape(shape: gdext.classes.ParticleProcessMaterial.EmissionShape): Unit = {
     if (gdext.classes.ParticleProcessMaterial.mb_set_emission_shape == null) gdext.classes.ParticleProcessMaterial.mb_set_emission_shape = MethodBind.get("ParticleProcessMaterial", "set_emission_shape", 461501442L)
     Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_emission_shape, livePtr, shape)
   }
 
   /** ParticleProcessMaterial.get_emission_shape */
-  final def getEmissionShape(): Long = {
+  final def getEmissionShape(): gdext.classes.ParticleProcessMaterial.EmissionShape = {
     if (gdext.classes.ParticleProcessMaterial.mb_get_emission_shape == null) gdext.classes.ParticleProcessMaterial.mb_get_emission_shape = MethodBind.get("ParticleProcessMaterial", "get_emission_shape", 3719733018L)
-    Ptrcall.call0[Long](gdext.classes.ParticleProcessMaterial.mb_get_emission_shape, livePtr)
+    gdext.classes.ParticleProcessMaterial.EmissionShape(Ptrcall.call0[Long](gdext.classes.ParticleProcessMaterial.mb_get_emission_shape, livePtr))
   }
 
   /** ParticleProcessMaterial.set_emission_sphere_radius */
@@ -275,9 +276,9 @@ abstract class ParticleProcessMaterial extends Material {
   }
 
   /** ParticleProcessMaterial.set_emission_point_count */
-  final def setEmissionPointCount(point_count: Long): Unit = {
+  final def setEmissionPointCount(pointCount: Long): Unit = {
     if (gdext.classes.ParticleProcessMaterial.mb_set_emission_point_count == null) gdext.classes.ParticleProcessMaterial.mb_set_emission_point_count = MethodBind.get("ParticleProcessMaterial", "set_emission_point_count", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_emission_point_count, livePtr, point_count)
+    Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_emission_point_count, livePtr, pointCount)
   }
 
   /** ParticleProcessMaterial.get_emission_point_count */
@@ -323,9 +324,9 @@ abstract class ParticleProcessMaterial extends Material {
   }
 
   /** ParticleProcessMaterial.set_emission_ring_inner_radius */
-  final def setEmissionRingInnerRadius(inner_radius: Double): Unit = {
+  final def setEmissionRingInnerRadius(innerRadius: Double): Unit = {
     if (gdext.classes.ParticleProcessMaterial.mb_set_emission_ring_inner_radius == null) gdext.classes.ParticleProcessMaterial.mb_set_emission_ring_inner_radius = MethodBind.get("ParticleProcessMaterial", "set_emission_ring_inner_radius", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_emission_ring_inner_radius, livePtr, inner_radius)
+    Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_emission_ring_inner_radius, livePtr, innerRadius)
   }
 
   /** ParticleProcessMaterial.get_emission_ring_inner_radius */
@@ -335,9 +336,9 @@ abstract class ParticleProcessMaterial extends Material {
   }
 
   /** ParticleProcessMaterial.set_emission_ring_cone_angle */
-  final def setEmissionRingConeAngle(cone_angle: Double): Unit = {
+  final def setEmissionRingConeAngle(coneAngle: Double): Unit = {
     if (gdext.classes.ParticleProcessMaterial.mb_set_emission_ring_cone_angle == null) gdext.classes.ParticleProcessMaterial.mb_set_emission_ring_cone_angle = MethodBind.get("ParticleProcessMaterial", "set_emission_ring_cone_angle", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_emission_ring_cone_angle, livePtr, cone_angle)
+    Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_emission_ring_cone_angle, livePtr, coneAngle)
   }
 
   /** ParticleProcessMaterial.get_emission_ring_cone_angle */
@@ -347,9 +348,9 @@ abstract class ParticleProcessMaterial extends Material {
   }
 
   /** ParticleProcessMaterial.set_emission_shape_offset */
-  final def setEmissionShapeOffset(emission_shape_offset: gdext.builtin.Vector3): Unit = {
+  final def setEmissionShapeOffset(emissionShapeOffset: gdext.builtin.Vector3): Unit = {
     if (gdext.classes.ParticleProcessMaterial.mb_set_emission_shape_offset == null) gdext.classes.ParticleProcessMaterial.mb_set_emission_shape_offset = MethodBind.get("ParticleProcessMaterial", "set_emission_shape_offset", 3460891852L)
-    Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_emission_shape_offset, livePtr, emission_shape_offset)
+    Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_emission_shape_offset, livePtr, emissionShapeOffset)
   }
 
   /** ParticleProcessMaterial.get_emission_shape_offset */
@@ -359,9 +360,9 @@ abstract class ParticleProcessMaterial extends Material {
   }
 
   /** ParticleProcessMaterial.set_emission_shape_scale */
-  final def setEmissionShapeScale(emission_shape_scale: gdext.builtin.Vector3): Unit = {
+  final def setEmissionShapeScale(emissionShapeScale: gdext.builtin.Vector3): Unit = {
     if (gdext.classes.ParticleProcessMaterial.mb_set_emission_shape_scale == null) gdext.classes.ParticleProcessMaterial.mb_set_emission_shape_scale = MethodBind.get("ParticleProcessMaterial", "set_emission_shape_scale", 3460891852L)
-    Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_emission_shape_scale, livePtr, emission_shape_scale)
+    Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_emission_shape_scale, livePtr, emissionShapeScale)
   }
 
   /** ParticleProcessMaterial.get_emission_shape_scale */
@@ -377,9 +378,9 @@ abstract class ParticleProcessMaterial extends Material {
   }
 
   /** ParticleProcessMaterial.set_turbulence_enabled */
-  final def setTurbulenceEnabled(turbulence_enabled: Boolean): Unit = {
+  final def setTurbulenceEnabled(turbulenceEnabled: Boolean): Unit = {
     if (gdext.classes.ParticleProcessMaterial.mb_set_turbulence_enabled == null) gdext.classes.ParticleProcessMaterial.mb_set_turbulence_enabled = MethodBind.get("ParticleProcessMaterial", "set_turbulence_enabled", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_turbulence_enabled, livePtr, turbulence_enabled)
+    Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_turbulence_enabled, livePtr, turbulenceEnabled)
   }
 
   /** ParticleProcessMaterial.get_turbulence_noise_strength */
@@ -389,9 +390,9 @@ abstract class ParticleProcessMaterial extends Material {
   }
 
   /** ParticleProcessMaterial.set_turbulence_noise_strength */
-  final def setTurbulenceNoiseStrength(turbulence_noise_strength: Double): Unit = {
+  final def setTurbulenceNoiseStrength(turbulenceNoiseStrength: Double): Unit = {
     if (gdext.classes.ParticleProcessMaterial.mb_set_turbulence_noise_strength == null) gdext.classes.ParticleProcessMaterial.mb_set_turbulence_noise_strength = MethodBind.get("ParticleProcessMaterial", "set_turbulence_noise_strength", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_turbulence_noise_strength, livePtr, turbulence_noise_strength)
+    Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_turbulence_noise_strength, livePtr, turbulenceNoiseStrength)
   }
 
   /** ParticleProcessMaterial.get_turbulence_noise_scale */
@@ -401,9 +402,9 @@ abstract class ParticleProcessMaterial extends Material {
   }
 
   /** ParticleProcessMaterial.set_turbulence_noise_scale */
-  final def setTurbulenceNoiseScale(turbulence_noise_scale: Double): Unit = {
+  final def setTurbulenceNoiseScale(turbulenceNoiseScale: Double): Unit = {
     if (gdext.classes.ParticleProcessMaterial.mb_set_turbulence_noise_scale == null) gdext.classes.ParticleProcessMaterial.mb_set_turbulence_noise_scale = MethodBind.get("ParticleProcessMaterial", "set_turbulence_noise_scale", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_turbulence_noise_scale, livePtr, turbulence_noise_scale)
+    Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_turbulence_noise_scale, livePtr, turbulenceNoiseScale)
   }
 
   /** ParticleProcessMaterial.get_turbulence_noise_speed_random */
@@ -413,9 +414,9 @@ abstract class ParticleProcessMaterial extends Material {
   }
 
   /** ParticleProcessMaterial.set_turbulence_noise_speed_random */
-  final def setTurbulenceNoiseSpeedRandom(turbulence_noise_speed_random: Double): Unit = {
+  final def setTurbulenceNoiseSpeedRandom(turbulenceNoiseSpeedRandom: Double): Unit = {
     if (gdext.classes.ParticleProcessMaterial.mb_set_turbulence_noise_speed_random == null) gdext.classes.ParticleProcessMaterial.mb_set_turbulence_noise_speed_random = MethodBind.get("ParticleProcessMaterial", "set_turbulence_noise_speed_random", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_turbulence_noise_speed_random, livePtr, turbulence_noise_speed_random)
+    Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_turbulence_noise_speed_random, livePtr, turbulenceNoiseSpeedRandom)
   }
 
   /** ParticleProcessMaterial.get_turbulence_noise_speed */
@@ -425,9 +426,9 @@ abstract class ParticleProcessMaterial extends Material {
   }
 
   /** ParticleProcessMaterial.set_turbulence_noise_speed */
-  final def setTurbulenceNoiseSpeed(turbulence_noise_speed: gdext.builtin.Vector3): Unit = {
+  final def setTurbulenceNoiseSpeed(turbulenceNoiseSpeed: gdext.builtin.Vector3): Unit = {
     if (gdext.classes.ParticleProcessMaterial.mb_set_turbulence_noise_speed == null) gdext.classes.ParticleProcessMaterial.mb_set_turbulence_noise_speed = MethodBind.get("ParticleProcessMaterial", "set_turbulence_noise_speed", 3460891852L)
-    Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_turbulence_noise_speed, livePtr, turbulence_noise_speed)
+    Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_turbulence_noise_speed, livePtr, turbulenceNoiseSpeed)
   }
 
   /** ParticleProcessMaterial.get_gravity */
@@ -437,9 +438,9 @@ abstract class ParticleProcessMaterial extends Material {
   }
 
   /** ParticleProcessMaterial.set_gravity */
-  final def setGravity(accel_vec: gdext.builtin.Vector3): Unit = {
+  final def setGravity(accelVec: gdext.builtin.Vector3): Unit = {
     if (gdext.classes.ParticleProcessMaterial.mb_set_gravity == null) gdext.classes.ParticleProcessMaterial.mb_set_gravity = MethodBind.get("ParticleProcessMaterial", "set_gravity", 3460891852L)
-    Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_gravity, livePtr, accel_vec)
+    Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_gravity, livePtr, accelVec)
   }
 
   /** ParticleProcessMaterial.set_lifetime_randomness */
@@ -455,13 +456,13 @@ abstract class ParticleProcessMaterial extends Material {
   }
 
   /** ParticleProcessMaterial.get_sub_emitter_mode */
-  final def getSubEmitterMode(): Long = {
+  final def getSubEmitterMode(): gdext.classes.ParticleProcessMaterial.SubEmitterMode = {
     if (gdext.classes.ParticleProcessMaterial.mb_get_sub_emitter_mode == null) gdext.classes.ParticleProcessMaterial.mb_get_sub_emitter_mode = MethodBind.get("ParticleProcessMaterial", "get_sub_emitter_mode", 2399052877L)
-    Ptrcall.call0[Long](gdext.classes.ParticleProcessMaterial.mb_get_sub_emitter_mode, livePtr)
+    gdext.classes.ParticleProcessMaterial.SubEmitterMode(Ptrcall.call0[Long](gdext.classes.ParticleProcessMaterial.mb_get_sub_emitter_mode, livePtr))
   }
 
   /** ParticleProcessMaterial.set_sub_emitter_mode */
-  final def setSubEmitterMode(mode: Long): Unit = {
+  final def setSubEmitterMode(mode: gdext.classes.ParticleProcessMaterial.SubEmitterMode): Unit = {
     if (gdext.classes.ParticleProcessMaterial.mb_set_sub_emitter_mode == null) gdext.classes.ParticleProcessMaterial.mb_set_sub_emitter_mode = MethodBind.get("ParticleProcessMaterial", "set_sub_emitter_mode", 2161806672L)
     Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_sub_emitter_mode, livePtr, mode)
   }
@@ -539,15 +540,15 @@ abstract class ParticleProcessMaterial extends Material {
   }
 
   /** ParticleProcessMaterial.set_collision_mode */
-  final def setCollisionMode(mode: Long): Unit = {
+  final def setCollisionMode(mode: gdext.classes.ParticleProcessMaterial.CollisionMode): Unit = {
     if (gdext.classes.ParticleProcessMaterial.mb_set_collision_mode == null) gdext.classes.ParticleProcessMaterial.mb_set_collision_mode = MethodBind.get("ParticleProcessMaterial", "set_collision_mode", 653804659L)
     Ptrcall.callVoid1(gdext.classes.ParticleProcessMaterial.mb_set_collision_mode, livePtr, mode)
   }
 
   /** ParticleProcessMaterial.get_collision_mode */
-  final def getCollisionMode(): Long = {
+  final def getCollisionMode(): gdext.classes.ParticleProcessMaterial.CollisionMode = {
     if (gdext.classes.ParticleProcessMaterial.mb_get_collision_mode == null) gdext.classes.ParticleProcessMaterial.mb_get_collision_mode = MethodBind.get("ParticleProcessMaterial", "get_collision_mode", 139371864L)
-    Ptrcall.call0[Long](gdext.classes.ParticleProcessMaterial.mb_get_collision_mode, livePtr)
+    gdext.classes.ParticleProcessMaterial.CollisionMode(Ptrcall.call0[Long](gdext.classes.ParticleProcessMaterial.mb_get_collision_mode, livePtr))
   }
 
   /** ParticleProcessMaterial.set_collision_use_scale */
@@ -685,4 +686,178 @@ object ParticleProcessMaterial {
   private[classes] var mb_get_collision_friction: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_collision_bounce: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_collision_bounce: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `ParticleProcessMaterial.Parameter`. */
+  opaque type Parameter <: Long = Long
+
+  object Parameter {
+    final val InitialLinearVelocity: Parameter = 0L.asInstanceOf[Parameter]
+    final val AngularVelocity: Parameter = 1L.asInstanceOf[Parameter]
+    final val OrbitVelocity: Parameter = 2L.asInstanceOf[Parameter]
+    final val LinearAccel: Parameter = 3L.asInstanceOf[Parameter]
+    final val RadialAccel: Parameter = 4L.asInstanceOf[Parameter]
+    final val TangentialAccel: Parameter = 5L.asInstanceOf[Parameter]
+    final val Damping: Parameter = 6L.asInstanceOf[Parameter]
+    final val Angle: Parameter = 7L.asInstanceOf[Parameter]
+    final val Scale: Parameter = 8L.asInstanceOf[Parameter]
+    final val HueVariation: Parameter = 9L.asInstanceOf[Parameter]
+    final val AnimSpeed: Parameter = 10L.asInstanceOf[Parameter]
+    final val AnimOffset: Parameter = 11L.asInstanceOf[Parameter]
+    final val RadialVelocity: Parameter = 15L.asInstanceOf[Parameter]
+    final val DirectionalVelocity: Parameter = 16L.asInstanceOf[Parameter]
+    final val ScaleOverVelocity: Parameter = 17L.asInstanceOf[Parameter]
+    final val Max: Parameter = 18L.asInstanceOf[Parameter]
+    final val TurbVelInfluence: Parameter = 13L.asInstanceOf[Parameter]
+    final val TurbInitDisplacement: Parameter = 14L.asInstanceOf[Parameter]
+    final val TurbInfluenceOverLife: Parameter = 12L.asInstanceOf[Parameter]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): Parameter = value.asInstanceOf[Parameter]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[Parameter] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 13L, 14L, 15L, 16L, 17L, 18L).asInstanceOf[scala.IArray[Parameter]]
+
+    extension (self: Parameter)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "InitialLinearVelocity"
+        case 1L => "AngularVelocity"
+        case 2L => "OrbitVelocity"
+        case 3L => "LinearAccel"
+        case 4L => "RadialAccel"
+        case 5L => "TangentialAccel"
+        case 6L => "Damping"
+        case 7L => "Angle"
+        case 8L => "Scale"
+        case 9L => "HueVariation"
+        case 10L => "AnimSpeed"
+        case 11L => "AnimOffset"
+        case 12L => "TurbInfluenceOverLife"
+        case 13L => "TurbVelInfluence"
+        case 14L => "TurbInitDisplacement"
+        case 15L => "RadialVelocity"
+        case 16L => "DirectionalVelocity"
+        case 17L => "ScaleOverVelocity"
+        case 18L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `ParticleProcessMaterial.ParticleFlags`. */
+  opaque type ParticleFlags <: Long = Long
+
+  object ParticleFlags {
+    final val AlignYToVelocity: ParticleFlags = 0L.asInstanceOf[ParticleFlags]
+    final val RotateY: ParticleFlags = 1L.asInstanceOf[ParticleFlags]
+    final val DisableZ: ParticleFlags = 2L.asInstanceOf[ParticleFlags]
+    final val DampingAsFriction: ParticleFlags = 3L.asInstanceOf[ParticleFlags]
+    final val Max: ParticleFlags = 4L.asInstanceOf[ParticleFlags]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ParticleFlags = value.asInstanceOf[ParticleFlags]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ParticleFlags] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[ParticleFlags]]
+
+    extension (self: ParticleFlags)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "AlignYToVelocity"
+        case 1L => "RotateY"
+        case 2L => "DisableZ"
+        case 3L => "DampingAsFriction"
+        case 4L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `ParticleProcessMaterial.EmissionShape`. */
+  opaque type EmissionShape <: Long = Long
+
+  object EmissionShape {
+    final val Point: EmissionShape = 0L.asInstanceOf[EmissionShape]
+    final val Sphere: EmissionShape = 1L.asInstanceOf[EmissionShape]
+    final val SphereSurface: EmissionShape = 2L.asInstanceOf[EmissionShape]
+    final val Box: EmissionShape = 3L.asInstanceOf[EmissionShape]
+    final val Points: EmissionShape = 4L.asInstanceOf[EmissionShape]
+    final val DirectedPoints: EmissionShape = 5L.asInstanceOf[EmissionShape]
+    final val Ring: EmissionShape = 6L.asInstanceOf[EmissionShape]
+    final val Max: EmissionShape = 7L.asInstanceOf[EmissionShape]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): EmissionShape = value.asInstanceOf[EmissionShape]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[EmissionShape] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L).asInstanceOf[scala.IArray[EmissionShape]]
+
+    extension (self: EmissionShape)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Point"
+        case 1L => "Sphere"
+        case 2L => "SphereSurface"
+        case 3L => "Box"
+        case 4L => "Points"
+        case 5L => "DirectedPoints"
+        case 6L => "Ring"
+        case 7L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `ParticleProcessMaterial.SubEmitterMode`. */
+  opaque type SubEmitterMode <: Long = Long
+
+  object SubEmitterMode {
+    final val Disabled: SubEmitterMode = 0L.asInstanceOf[SubEmitterMode]
+    final val Constant: SubEmitterMode = 1L.asInstanceOf[SubEmitterMode]
+    final val AtEnd: SubEmitterMode = 2L.asInstanceOf[SubEmitterMode]
+    final val AtCollision: SubEmitterMode = 3L.asInstanceOf[SubEmitterMode]
+    final val AtStart: SubEmitterMode = 4L.asInstanceOf[SubEmitterMode]
+    final val Max: SubEmitterMode = 5L.asInstanceOf[SubEmitterMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): SubEmitterMode = value.asInstanceOf[SubEmitterMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[SubEmitterMode] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L).asInstanceOf[scala.IArray[SubEmitterMode]]
+
+    extension (self: SubEmitterMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "Constant"
+        case 2L => "AtEnd"
+        case 3L => "AtCollision"
+        case 4L => "AtStart"
+        case 5L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `ParticleProcessMaterial.CollisionMode`. */
+  opaque type CollisionMode <: Long = Long
+
+  object CollisionMode {
+    final val Disabled: CollisionMode = 0L.asInstanceOf[CollisionMode]
+    final val Rigid: CollisionMode = 1L.asInstanceOf[CollisionMode]
+    final val HideOnContact: CollisionMode = 2L.asInstanceOf[CollisionMode]
+    final val Max: CollisionMode = 3L.asInstanceOf[CollisionMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): CollisionMode = value.asInstanceOf[CollisionMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[CollisionMode] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[CollisionMode]]
+
+    extension (self: CollisionMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "Rigid"
+        case 2L => "HideOnContact"
+        case 3L => "Max"
+        case other => other.toString
+      }
+  }
 }

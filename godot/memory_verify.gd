@@ -19,12 +19,16 @@ const BUDGETS := {
 	"getPosition": 32.0,
 	"getChild": 0.0,
 	"getName": 0.0,
+	"setName": 0.0,
 	"findChild": 0.0,
 	"singleton": 0.0,
 	"getTree": 0.0,
 	"emitSignal": 0.0,
 	"vectorMath": 0.0,
 	"transformMath": 64.0, # one Transform3D result
+	"inputKey": 0.0,
+	"inputAction": 0.0,
+	"inputForward": 0.0,
 }
 
 var _probe: Node3D

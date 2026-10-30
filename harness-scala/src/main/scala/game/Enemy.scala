@@ -34,6 +34,6 @@ class Enemy(
 
   @signal def died(): Unit = ()
 
-  override def _ready(): Unit =
+  override def ready(): Unit =
     Gd.print(s"Enemy._ready (hp=$hp)")
 }

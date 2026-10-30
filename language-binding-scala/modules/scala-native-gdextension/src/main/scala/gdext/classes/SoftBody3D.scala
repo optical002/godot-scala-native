@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class SoftBody3D extends MeshInstance3D {
   override def godotClassName: String = "SoftBody3D"
 
   /** SoftBody3D.set_collision_mask */
-  final def setCollisionMask(collision_mask: Long): Unit = {
+  final def setCollisionMask(collisionMask: Long): Unit = {
     if (gdext.classes.SoftBody3D.mb_set_collision_mask == null) gdext.classes.SoftBody3D.mb_set_collision_mask = MethodBind.get("SoftBody3D", "set_collision_mask", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.SoftBody3D.mb_set_collision_mask, livePtr, collision_mask)
+    Ptrcall.callVoid1(gdext.classes.SoftBody3D.mb_set_collision_mask, livePtr, collisionMask)
   }
 
   /** SoftBody3D.get_collision_mask */
@@ -23,9 +24,9 @@ abstract class SoftBody3D extends MeshInstance3D {
   }
 
   /** SoftBody3D.set_collision_layer */
-  final def setCollisionLayer(collision_layer: Long): Unit = {
+  final def setCollisionLayer(collisionLayer: Long): Unit = {
     if (gdext.classes.SoftBody3D.mb_set_collision_layer == null) gdext.classes.SoftBody3D.mb_set_collision_layer = MethodBind.get("SoftBody3D", "set_collision_layer", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.SoftBody3D.mb_set_collision_layer, livePtr, collision_layer)
+    Ptrcall.callVoid1(gdext.classes.SoftBody3D.mb_set_collision_layer, livePtr, collisionLayer)
   }
 
   /** SoftBody3D.get_collision_layer */
@@ -35,39 +36,39 @@ abstract class SoftBody3D extends MeshInstance3D {
   }
 
   /** SoftBody3D.set_collision_mask_value */
-  final def setCollisionMaskValue(layer_number: Long, value: Boolean): Unit = {
+  final def setCollisionMaskValue(layerNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.SoftBody3D.mb_set_collision_mask_value == null) gdext.classes.SoftBody3D.mb_set_collision_mask_value = MethodBind.get("SoftBody3D", "set_collision_mask_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.SoftBody3D.mb_set_collision_mask_value, livePtr, layer_number, value)
+    Ptrcall.callVoid2(gdext.classes.SoftBody3D.mb_set_collision_mask_value, livePtr, layerNumber, value)
   }
 
   /** SoftBody3D.get_collision_mask_value */
-  final def getCollisionMaskValue(layer_number: Long): Boolean = {
+  final def getCollisionMaskValue(layerNumber: Long): Boolean = {
     if (gdext.classes.SoftBody3D.mb_get_collision_mask_value == null) gdext.classes.SoftBody3D.mb_get_collision_mask_value = MethodBind.get("SoftBody3D", "get_collision_mask_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.SoftBody3D.mb_get_collision_mask_value, livePtr, layer_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.SoftBody3D.mb_get_collision_mask_value, livePtr, layerNumber)
   }
 
   /** SoftBody3D.set_collision_layer_value */
-  final def setCollisionLayerValue(layer_number: Long, value: Boolean): Unit = {
+  final def setCollisionLayerValue(layerNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.SoftBody3D.mb_set_collision_layer_value == null) gdext.classes.SoftBody3D.mb_set_collision_layer_value = MethodBind.get("SoftBody3D", "set_collision_layer_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.SoftBody3D.mb_set_collision_layer_value, livePtr, layer_number, value)
+    Ptrcall.callVoid2(gdext.classes.SoftBody3D.mb_set_collision_layer_value, livePtr, layerNumber, value)
   }
 
   /** SoftBody3D.get_collision_layer_value */
-  final def getCollisionLayerValue(layer_number: Long): Boolean = {
+  final def getCollisionLayerValue(layerNumber: Long): Boolean = {
     if (gdext.classes.SoftBody3D.mb_get_collision_layer_value == null) gdext.classes.SoftBody3D.mb_get_collision_layer_value = MethodBind.get("SoftBody3D", "get_collision_layer_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.SoftBody3D.mb_get_collision_layer_value, livePtr, layer_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.SoftBody3D.mb_get_collision_layer_value, livePtr, layerNumber)
   }
 
   /** SoftBody3D.set_disable_mode */
-  final def setDisableMode(mode: Long): Unit = {
+  final def setDisableMode(mode: gdext.classes.SoftBody3D.DisableMode): Unit = {
     if (gdext.classes.SoftBody3D.mb_set_disable_mode == null) gdext.classes.SoftBody3D.mb_set_disable_mode = MethodBind.get("SoftBody3D", "set_disable_mode", 1104158384L)
     Ptrcall.callVoid1(gdext.classes.SoftBody3D.mb_set_disable_mode, livePtr, mode)
   }
 
   /** SoftBody3D.get_disable_mode */
-  final def getDisableMode(): Long = {
+  final def getDisableMode(): gdext.classes.SoftBody3D.DisableMode = {
     if (gdext.classes.SoftBody3D.mb_get_disable_mode == null) gdext.classes.SoftBody3D.mb_get_disable_mode = MethodBind.get("SoftBody3D", "get_disable_mode", 4135042476L)
-    Ptrcall.call0[Long](gdext.classes.SoftBody3D.mb_get_disable_mode, livePtr)
+    gdext.classes.SoftBody3D.DisableMode(Ptrcall.call0[Long](gdext.classes.SoftBody3D.mb_get_disable_mode, livePtr))
   }
 
   /** SoftBody3D.add_collision_exception_with */
@@ -83,9 +84,9 @@ abstract class SoftBody3D extends MeshInstance3D {
   }
 
   /** SoftBody3D.set_simulation_precision */
-  final def setSimulationPrecision(simulation_precision: Long): Unit = {
+  final def setSimulationPrecision(simulationPrecision: Long): Unit = {
     if (gdext.classes.SoftBody3D.mb_set_simulation_precision == null) gdext.classes.SoftBody3D.mb_set_simulation_precision = MethodBind.get("SoftBody3D", "set_simulation_precision", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.SoftBody3D.mb_set_simulation_precision, livePtr, simulation_precision)
+    Ptrcall.callVoid1(gdext.classes.SoftBody3D.mb_set_simulation_precision, livePtr, simulationPrecision)
   }
 
   /** SoftBody3D.get_simulation_precision */
@@ -107,9 +108,9 @@ abstract class SoftBody3D extends MeshInstance3D {
   }
 
   /** SoftBody3D.set_linear_stiffness */
-  final def setLinearStiffness(linear_stiffness: Double): Unit = {
+  final def setLinearStiffness(linearStiffness: Double): Unit = {
     if (gdext.classes.SoftBody3D.mb_set_linear_stiffness == null) gdext.classes.SoftBody3D.mb_set_linear_stiffness = MethodBind.get("SoftBody3D", "set_linear_stiffness", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.SoftBody3D.mb_set_linear_stiffness, livePtr, linear_stiffness)
+    Ptrcall.callVoid1(gdext.classes.SoftBody3D.mb_set_linear_stiffness, livePtr, linearStiffness)
   }
 
   /** SoftBody3D.get_linear_stiffness */
@@ -119,9 +120,9 @@ abstract class SoftBody3D extends MeshInstance3D {
   }
 
   /** SoftBody3D.set_shrinking_factor */
-  final def setShrinkingFactor(shrinking_factor: Double): Unit = {
+  final def setShrinkingFactor(shrinkingFactor: Double): Unit = {
     if (gdext.classes.SoftBody3D.mb_set_shrinking_factor == null) gdext.classes.SoftBody3D.mb_set_shrinking_factor = MethodBind.get("SoftBody3D", "set_shrinking_factor", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.SoftBody3D.mb_set_shrinking_factor, livePtr, shrinking_factor)
+    Ptrcall.callVoid1(gdext.classes.SoftBody3D.mb_set_shrinking_factor, livePtr, shrinkingFactor)
   }
 
   /** SoftBody3D.get_shrinking_factor */
@@ -131,9 +132,9 @@ abstract class SoftBody3D extends MeshInstance3D {
   }
 
   /** SoftBody3D.set_pressure_coefficient */
-  final def setPressureCoefficient(pressure_coefficient: Double): Unit = {
+  final def setPressureCoefficient(pressureCoefficient: Double): Unit = {
     if (gdext.classes.SoftBody3D.mb_set_pressure_coefficient == null) gdext.classes.SoftBody3D.mb_set_pressure_coefficient = MethodBind.get("SoftBody3D", "set_pressure_coefficient", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.SoftBody3D.mb_set_pressure_coefficient, livePtr, pressure_coefficient)
+    Ptrcall.callVoid1(gdext.classes.SoftBody3D.mb_set_pressure_coefficient, livePtr, pressureCoefficient)
   }
 
   /** SoftBody3D.get_pressure_coefficient */
@@ -143,9 +144,9 @@ abstract class SoftBody3D extends MeshInstance3D {
   }
 
   /** SoftBody3D.set_damping_coefficient */
-  final def setDampingCoefficient(damping_coefficient: Double): Unit = {
+  final def setDampingCoefficient(dampingCoefficient: Double): Unit = {
     if (gdext.classes.SoftBody3D.mb_set_damping_coefficient == null) gdext.classes.SoftBody3D.mb_set_damping_coefficient = MethodBind.get("SoftBody3D", "set_damping_coefficient", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.SoftBody3D.mb_set_damping_coefficient, livePtr, damping_coefficient)
+    Ptrcall.callVoid1(gdext.classes.SoftBody3D.mb_set_damping_coefficient, livePtr, dampingCoefficient)
   }
 
   /** SoftBody3D.get_damping_coefficient */
@@ -155,9 +156,9 @@ abstract class SoftBody3D extends MeshInstance3D {
   }
 
   /** SoftBody3D.set_drag_coefficient */
-  final def setDragCoefficient(drag_coefficient: Double): Unit = {
+  final def setDragCoefficient(dragCoefficient: Double): Unit = {
     if (gdext.classes.SoftBody3D.mb_set_drag_coefficient == null) gdext.classes.SoftBody3D.mb_set_drag_coefficient = MethodBind.get("SoftBody3D", "set_drag_coefficient", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.SoftBody3D.mb_set_drag_coefficient, livePtr, drag_coefficient)
+    Ptrcall.callVoid1(gdext.classes.SoftBody3D.mb_set_drag_coefficient, livePtr, dragCoefficient)
   }
 
   /** SoftBody3D.get_drag_coefficient */
@@ -167,21 +168,21 @@ abstract class SoftBody3D extends MeshInstance3D {
   }
 
   /** SoftBody3D.get_point_transform */
-  final def getPointTransform(point_index: Long): gdext.builtin.Vector3 = {
+  final def getPointTransform(pointIndex: Long): gdext.builtin.Vector3 = {
     if (gdext.classes.SoftBody3D.mb_get_point_transform == null) gdext.classes.SoftBody3D.mb_get_point_transform = MethodBind.get("SoftBody3D", "get_point_transform", 871989493L)
-    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.SoftBody3D.mb_get_point_transform, livePtr, point_index)
+    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.SoftBody3D.mb_get_point_transform, livePtr, pointIndex)
   }
 
   /** SoftBody3D.apply_impulse */
-  final def applyImpulse(point_index: Long, impulse: gdext.builtin.Vector3): Unit = {
+  final def applyImpulse(pointIndex: Long, impulse: gdext.builtin.Vector3): Unit = {
     if (gdext.classes.SoftBody3D.mb_apply_impulse == null) gdext.classes.SoftBody3D.mb_apply_impulse = MethodBind.get("SoftBody3D", "apply_impulse", 1530502735L)
-    Ptrcall.callVoid2(gdext.classes.SoftBody3D.mb_apply_impulse, livePtr, point_index, impulse)
+    Ptrcall.callVoid2(gdext.classes.SoftBody3D.mb_apply_impulse, livePtr, pointIndex, impulse)
   }
 
   /** SoftBody3D.apply_force */
-  final def applyForce(point_index: Long, force: gdext.builtin.Vector3): Unit = {
+  final def applyForce(pointIndex: Long, force: gdext.builtin.Vector3): Unit = {
     if (gdext.classes.SoftBody3D.mb_apply_force == null) gdext.classes.SoftBody3D.mb_apply_force = MethodBind.get("SoftBody3D", "apply_force", 1530502735L)
-    Ptrcall.callVoid2(gdext.classes.SoftBody3D.mb_apply_force, livePtr, point_index, force)
+    Ptrcall.callVoid2(gdext.classes.SoftBody3D.mb_apply_force, livePtr, pointIndex, force)
   }
 
   /** SoftBody3D.apply_central_impulse */
@@ -197,15 +198,15 @@ abstract class SoftBody3D extends MeshInstance3D {
   }
 
   /** SoftBody3D.is_point_pinned */
-  final def isPointPinned(point_index: Long): Boolean = {
+  final def isPointPinned(pointIndex: Long): Boolean = {
     if (gdext.classes.SoftBody3D.mb_is_point_pinned == null) gdext.classes.SoftBody3D.mb_is_point_pinned = MethodBind.get("SoftBody3D", "is_point_pinned", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.SoftBody3D.mb_is_point_pinned, livePtr, point_index)
+    Ptrcall.call1[Long, Boolean](gdext.classes.SoftBody3D.mb_is_point_pinned, livePtr, pointIndex)
   }
 
   /** SoftBody3D.set_ray_pickable */
-  final def setRayPickable(ray_pickable: Boolean): Unit = {
+  final def setRayPickable(rayPickable: Boolean): Unit = {
     if (gdext.classes.SoftBody3D.mb_set_ray_pickable == null) gdext.classes.SoftBody3D.mb_set_ray_pickable = MethodBind.get("SoftBody3D", "set_ray_pickable", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.SoftBody3D.mb_set_ray_pickable, livePtr, ray_pickable)
+    Ptrcall.callVoid1(gdext.classes.SoftBody3D.mb_set_ray_pickable, livePtr, rayPickable)
   }
 
   /** SoftBody3D.is_ray_pickable */
@@ -251,4 +252,26 @@ object SoftBody3D {
   private[classes] var mb_is_point_pinned: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_ray_pickable: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_ray_pickable: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `SoftBody3D.DisableMode`. */
+  opaque type DisableMode <: Long = Long
+
+  object DisableMode {
+    final val Remove: DisableMode = 0L.asInstanceOf[DisableMode]
+    final val KeepActive: DisableMode = 1L.asInstanceOf[DisableMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DisableMode = value.asInstanceOf[DisableMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DisableMode] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[DisableMode]]
+
+    extension (self: DisableMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Remove"
+        case 1L => "KeepActive"
+        case other => other.toString
+      }
+  }
 }

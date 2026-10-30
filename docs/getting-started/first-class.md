@@ -12,7 +12,7 @@ final class HelloWorld(
   var speed: Double,
   var velocity: Tscn[Node2D],
 ) extends Node2D:
-  override def _ready(): Unit =
+  override def ready(): Unit =
     Gd.print(s"Hello from scala! (speed=$speed)")
 ```
 
@@ -22,7 +22,7 @@ final class HelloWorld(
   inspector. No default is needed, because Godot constructs the node with no
   arguments and each parameter is filled from its type's natural default
   (`0.0` here).
-- `override def _ready()`: overridden engine virtuals are detected and wired
+- `override def ready()`: overridden engine virtuals are detected and wired
   up automatically.
 - No registration call anywhere. The build scans `src/main/scala` and
   registers every concrete class that extends a Godot class.
@@ -46,7 +46,7 @@ final class Spinner(
 
   @func def turns(): Long = (getRotationDegrees() / 360.0).toLong
 
-  override def _process(delta: Double): Unit = {
+  override def process(delta: Double): Unit = {
     val before = turns()
     setRotationDegrees(getRotationDegrees() + degreesPerSecond * delta)
     if (turns() != before) emitSignal(hostObject, "turned")

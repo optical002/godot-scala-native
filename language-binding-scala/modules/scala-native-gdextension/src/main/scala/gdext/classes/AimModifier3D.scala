@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,15 +12,15 @@ abstract class AimModifier3D extends BoneConstraint3D {
   override def godotClassName: String = "AimModifier3D"
 
   /** AimModifier3D.set_forward_axis */
-  final def setForwardAxis(index: Long, axis: Long): Unit = {
+  final def setForwardAxis(index: Long, axis: gdext.classes.SkeletonModifier3D.BoneAxis): Unit = {
     if (gdext.classes.AimModifier3D.mb_set_forward_axis == null) gdext.classes.AimModifier3D.mb_set_forward_axis = MethodBind.get("AimModifier3D", "set_forward_axis", 2496831085L)
     Ptrcall.callVoid2(gdext.classes.AimModifier3D.mb_set_forward_axis, livePtr, index, axis)
   }
 
   /** AimModifier3D.get_forward_axis */
-  final def getForwardAxis(index: Long): Long = {
+  final def getForwardAxis(index: Long): gdext.classes.SkeletonModifier3D.BoneAxis = {
     if (gdext.classes.AimModifier3D.mb_get_forward_axis == null) gdext.classes.AimModifier3D.mb_get_forward_axis = MethodBind.get("AimModifier3D", "get_forward_axis", 3949866735L)
-    Ptrcall.call1[Long, Long](gdext.classes.AimModifier3D.mb_get_forward_axis, livePtr, index)
+    gdext.classes.SkeletonModifier3D.BoneAxis(Ptrcall.call1[Long, Long](gdext.classes.AimModifier3D.mb_get_forward_axis, livePtr, index))
   }
 
   /** AimModifier3D.set_use_euler */

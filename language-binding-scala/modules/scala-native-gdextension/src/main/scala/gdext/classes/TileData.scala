@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class TileData extends Object {
   override def godotClassName: String = "TileData"
 
   /** TileData.set_flip_h */
-  final def setFlipH(flip_h: Boolean): Unit = {
+  final def setFlipH(flipH: Boolean): Unit = {
     if (gdext.classes.TileData.mb_set_flip_h == null) gdext.classes.TileData.mb_set_flip_h = MethodBind.get("TileData", "set_flip_h", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.TileData.mb_set_flip_h, livePtr, flip_h)
+    Ptrcall.callVoid1(gdext.classes.TileData.mb_set_flip_h, livePtr, flipH)
   }
 
   /** TileData.get_flip_h */
@@ -23,9 +24,9 @@ abstract class TileData extends Object {
   }
 
   /** TileData.set_flip_v */
-  final def setFlipV(flip_v: Boolean): Unit = {
+  final def setFlipV(flipV: Boolean): Unit = {
     if (gdext.classes.TileData.mb_set_flip_v == null) gdext.classes.TileData.mb_set_flip_v = MethodBind.get("TileData", "set_flip_v", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.TileData.mb_set_flip_v, livePtr, flip_v)
+    Ptrcall.callVoid1(gdext.classes.TileData.mb_set_flip_v, livePtr, flipV)
   }
 
   /** TileData.get_flip_v */
@@ -59,9 +60,9 @@ abstract class TileData extends Object {
   }
 
   /** TileData.set_texture_origin */
-  final def setTextureOrigin(texture_origin: gdext.builtin.Vector2i): Unit = {
+  final def setTextureOrigin(textureOrigin: gdext.builtin.Vector2i): Unit = {
     if (gdext.classes.TileData.mb_set_texture_origin == null) gdext.classes.TileData.mb_set_texture_origin = MethodBind.get("TileData", "set_texture_origin", 1130785943L)
-    Ptrcall.callVoid1(gdext.classes.TileData.mb_set_texture_origin, livePtr, texture_origin)
+    Ptrcall.callVoid1(gdext.classes.TileData.mb_set_texture_origin, livePtr, textureOrigin)
   }
 
   /** TileData.get_texture_origin */
@@ -83,9 +84,9 @@ abstract class TileData extends Object {
   }
 
   /** TileData.set_z_index */
-  final def setZIndex(z_index: Long): Unit = {
+  final def setZIndex(zIndex: Long): Unit = {
     if (gdext.classes.TileData.mb_set_z_index == null) gdext.classes.TileData.mb_set_z_index = MethodBind.get("TileData", "set_z_index", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.TileData.mb_set_z_index, livePtr, z_index)
+    Ptrcall.callVoid1(gdext.classes.TileData.mb_set_z_index, livePtr, zIndex)
   }
 
   /** TileData.get_z_index */
@@ -95,9 +96,9 @@ abstract class TileData extends Object {
   }
 
   /** TileData.set_y_sort_origin */
-  final def setYSortOrigin(y_sort_origin: Long): Unit = {
+  final def setYSortOrigin(ySortOrigin: Long): Unit = {
     if (gdext.classes.TileData.mb_set_y_sort_origin == null) gdext.classes.TileData.mb_set_y_sort_origin = MethodBind.get("TileData", "set_y_sort_origin", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.TileData.mb_set_y_sort_origin, livePtr, y_sort_origin)
+    Ptrcall.callVoid1(gdext.classes.TileData.mb_set_y_sort_origin, livePtr, ySortOrigin)
   }
 
   /** TileData.get_y_sort_origin */
@@ -107,129 +108,129 @@ abstract class TileData extends Object {
   }
 
   /** TileData.set_occluder_polygons_count */
-  final def setOccluderPolygonsCount(layer_id: Long, polygons_count: Long): Unit = {
+  final def setOccluderPolygonsCount(layerId: Long, polygonsCount: Long): Unit = {
     if (gdext.classes.TileData.mb_set_occluder_polygons_count == null) gdext.classes.TileData.mb_set_occluder_polygons_count = MethodBind.get("TileData", "set_occluder_polygons_count", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.TileData.mb_set_occluder_polygons_count, livePtr, layer_id, polygons_count)
+    Ptrcall.callVoid2(gdext.classes.TileData.mb_set_occluder_polygons_count, livePtr, layerId, polygonsCount)
   }
 
   /** TileData.get_occluder_polygons_count */
-  final def getOccluderPolygonsCount(layer_id: Long): Long = {
+  final def getOccluderPolygonsCount(layerId: Long): Long = {
     if (gdext.classes.TileData.mb_get_occluder_polygons_count == null) gdext.classes.TileData.mb_get_occluder_polygons_count = MethodBind.get("TileData", "get_occluder_polygons_count", 923996154L)
-    Ptrcall.call1[Long, Long](gdext.classes.TileData.mb_get_occluder_polygons_count, livePtr, layer_id)
+    Ptrcall.call1[Long, Long](gdext.classes.TileData.mb_get_occluder_polygons_count, livePtr, layerId)
   }
 
   /** TileData.add_occluder_polygon */
-  final def addOccluderPolygon(layer_id: Long): Unit = {
+  final def addOccluderPolygon(layerId: Long): Unit = {
     if (gdext.classes.TileData.mb_add_occluder_polygon == null) gdext.classes.TileData.mb_add_occluder_polygon = MethodBind.get("TileData", "add_occluder_polygon", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.TileData.mb_add_occluder_polygon, livePtr, layer_id)
+    Ptrcall.callVoid1(gdext.classes.TileData.mb_add_occluder_polygon, livePtr, layerId)
   }
 
   /** TileData.remove_occluder_polygon */
-  final def removeOccluderPolygon(layer_id: Long, polygon_index: Long): Unit = {
+  final def removeOccluderPolygon(layerId: Long, polygonIndex: Long): Unit = {
     if (gdext.classes.TileData.mb_remove_occluder_polygon == null) gdext.classes.TileData.mb_remove_occluder_polygon = MethodBind.get("TileData", "remove_occluder_polygon", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.TileData.mb_remove_occluder_polygon, livePtr, layer_id, polygon_index)
+    Ptrcall.callVoid2(gdext.classes.TileData.mb_remove_occluder_polygon, livePtr, layerId, polygonIndex)
   }
 
   /** TileData.set_occluder_polygon */
-  final def setOccluderPolygon(layer_id: Long, polygon_index: Long, polygon: OccluderPolygon2D): Unit = {
+  final def setOccluderPolygon(layerId: Long, polygonIndex: Long, polygon: OccluderPolygon2D): Unit = {
     if (gdext.classes.TileData.mb_set_occluder_polygon == null) gdext.classes.TileData.mb_set_occluder_polygon = MethodBind.get("TileData", "set_occluder_polygon", 164249167L)
-    Ptrcall.callVoid3(gdext.classes.TileData.mb_set_occluder_polygon, livePtr, layer_id, polygon_index, Wrappers.handle(polygon))
+    Ptrcall.callVoid3(gdext.classes.TileData.mb_set_occluder_polygon, livePtr, layerId, polygonIndex, Wrappers.handle(polygon))
   }
 
   /** TileData.get_occluder_polygon. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getOccluderPolygon(layer_id: Long, polygon_index: Long, flip_h: Boolean, flip_v: Boolean, transpose: Boolean): OccluderPolygon2D = {
+  final def getOccluderPolygon(layerId: Long, polygonIndex: Long, flipH: Boolean = false, flipV: Boolean = false, transpose: Boolean = false): OccluderPolygon2D = {
     if (gdext.classes.TileData.mb_get_occluder_polygon == null) gdext.classes.TileData.mb_get_occluder_polygon = MethodBind.get("TileData", "get_occluder_polygon", 971166743L)
-    Wrappers.owned[OccluderPolygon2D](Ptrcall.call5[Long, Long, Boolean, Boolean, Boolean, Long](gdext.classes.TileData.mb_get_occluder_polygon, livePtr, layer_id, polygon_index, flip_h, flip_v, transpose))
+    Wrappers.owned[OccluderPolygon2D](Ptrcall.call5[Long, Long, Boolean, Boolean, Boolean, Long](gdext.classes.TileData.mb_get_occluder_polygon, livePtr, layerId, polygonIndex, flipH, flipV, transpose))
   }
 
   /** TileData.set_occluder */
-  final def setOccluder(layer_id: Long, occluder_polygon: OccluderPolygon2D): Unit = {
+  final def setOccluder(layerId: Long, occluderPolygon: OccluderPolygon2D): Unit = {
     if (gdext.classes.TileData.mb_set_occluder == null) gdext.classes.TileData.mb_set_occluder = MethodBind.get("TileData", "set_occluder", 914399637L)
-    Ptrcall.callVoid2(gdext.classes.TileData.mb_set_occluder, livePtr, layer_id, Wrappers.handle(occluder_polygon))
+    Ptrcall.callVoid2(gdext.classes.TileData.mb_set_occluder, livePtr, layerId, Wrappers.handle(occluderPolygon))
   }
 
   /** TileData.get_occluder. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getOccluder(layer_id: Long, flip_h: Boolean, flip_v: Boolean, transpose: Boolean): OccluderPolygon2D = {
+  final def getOccluder(layerId: Long, flipH: Boolean = false, flipV: Boolean = false, transpose: Boolean = false): OccluderPolygon2D = {
     if (gdext.classes.TileData.mb_get_occluder == null) gdext.classes.TileData.mb_get_occluder = MethodBind.get("TileData", "get_occluder", 2377324099L)
-    Wrappers.owned[OccluderPolygon2D](Ptrcall.call4[Long, Boolean, Boolean, Boolean, Long](gdext.classes.TileData.mb_get_occluder, livePtr, layer_id, flip_h, flip_v, transpose))
+    Wrappers.owned[OccluderPolygon2D](Ptrcall.call4[Long, Boolean, Boolean, Boolean, Long](gdext.classes.TileData.mb_get_occluder, livePtr, layerId, flipH, flipV, transpose))
   }
 
   /** TileData.set_constant_linear_velocity */
-  final def setConstantLinearVelocity(layer_id: Long, velocity: gdext.builtin.Vector2): Unit = {
+  final def setConstantLinearVelocity(layerId: Long, velocity: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.TileData.mb_set_constant_linear_velocity == null) gdext.classes.TileData.mb_set_constant_linear_velocity = MethodBind.get("TileData", "set_constant_linear_velocity", 163021252L)
-    Ptrcall.callVoid2(gdext.classes.TileData.mb_set_constant_linear_velocity, livePtr, layer_id, velocity)
+    Ptrcall.callVoid2(gdext.classes.TileData.mb_set_constant_linear_velocity, livePtr, layerId, velocity)
   }
 
   /** TileData.get_constant_linear_velocity */
-  final def getConstantLinearVelocity(layer_id: Long): gdext.builtin.Vector2 = {
+  final def getConstantLinearVelocity(layerId: Long): gdext.builtin.Vector2 = {
     if (gdext.classes.TileData.mb_get_constant_linear_velocity == null) gdext.classes.TileData.mb_get_constant_linear_velocity = MethodBind.get("TileData", "get_constant_linear_velocity", 2299179447L)
-    Ptrcall.call1[Long, gdext.builtin.Vector2](gdext.classes.TileData.mb_get_constant_linear_velocity, livePtr, layer_id)
+    Ptrcall.call1[Long, gdext.builtin.Vector2](gdext.classes.TileData.mb_get_constant_linear_velocity, livePtr, layerId)
   }
 
   /** TileData.set_constant_angular_velocity */
-  final def setConstantAngularVelocity(layer_id: Long, velocity: Double): Unit = {
+  final def setConstantAngularVelocity(layerId: Long, velocity: Double): Unit = {
     if (gdext.classes.TileData.mb_set_constant_angular_velocity == null) gdext.classes.TileData.mb_set_constant_angular_velocity = MethodBind.get("TileData", "set_constant_angular_velocity", 1602489585L)
-    Ptrcall.callVoid2(gdext.classes.TileData.mb_set_constant_angular_velocity, livePtr, layer_id, velocity)
+    Ptrcall.callVoid2(gdext.classes.TileData.mb_set_constant_angular_velocity, livePtr, layerId, velocity)
   }
 
   /** TileData.get_constant_angular_velocity */
-  final def getConstantAngularVelocity(layer_id: Long): Double = {
+  final def getConstantAngularVelocity(layerId: Long): Double = {
     if (gdext.classes.TileData.mb_get_constant_angular_velocity == null) gdext.classes.TileData.mb_get_constant_angular_velocity = MethodBind.get("TileData", "get_constant_angular_velocity", 2339986948L)
-    Ptrcall.call1[Long, Double](gdext.classes.TileData.mb_get_constant_angular_velocity, livePtr, layer_id)
+    Ptrcall.call1[Long, Double](gdext.classes.TileData.mb_get_constant_angular_velocity, livePtr, layerId)
   }
 
   /** TileData.set_collision_polygons_count */
-  final def setCollisionPolygonsCount(layer_id: Long, polygons_count: Long): Unit = {
+  final def setCollisionPolygonsCount(layerId: Long, polygonsCount: Long): Unit = {
     if (gdext.classes.TileData.mb_set_collision_polygons_count == null) gdext.classes.TileData.mb_set_collision_polygons_count = MethodBind.get("TileData", "set_collision_polygons_count", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.TileData.mb_set_collision_polygons_count, livePtr, layer_id, polygons_count)
+    Ptrcall.callVoid2(gdext.classes.TileData.mb_set_collision_polygons_count, livePtr, layerId, polygonsCount)
   }
 
   /** TileData.get_collision_polygons_count */
-  final def getCollisionPolygonsCount(layer_id: Long): Long = {
+  final def getCollisionPolygonsCount(layerId: Long): Long = {
     if (gdext.classes.TileData.mb_get_collision_polygons_count == null) gdext.classes.TileData.mb_get_collision_polygons_count = MethodBind.get("TileData", "get_collision_polygons_count", 923996154L)
-    Ptrcall.call1[Long, Long](gdext.classes.TileData.mb_get_collision_polygons_count, livePtr, layer_id)
+    Ptrcall.call1[Long, Long](gdext.classes.TileData.mb_get_collision_polygons_count, livePtr, layerId)
   }
 
   /** TileData.add_collision_polygon */
-  final def addCollisionPolygon(layer_id: Long): Unit = {
+  final def addCollisionPolygon(layerId: Long): Unit = {
     if (gdext.classes.TileData.mb_add_collision_polygon == null) gdext.classes.TileData.mb_add_collision_polygon = MethodBind.get("TileData", "add_collision_polygon", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.TileData.mb_add_collision_polygon, livePtr, layer_id)
+    Ptrcall.callVoid1(gdext.classes.TileData.mb_add_collision_polygon, livePtr, layerId)
   }
 
   /** TileData.remove_collision_polygon */
-  final def removeCollisionPolygon(layer_id: Long, polygon_index: Long): Unit = {
+  final def removeCollisionPolygon(layerId: Long, polygonIndex: Long): Unit = {
     if (gdext.classes.TileData.mb_remove_collision_polygon == null) gdext.classes.TileData.mb_remove_collision_polygon = MethodBind.get("TileData", "remove_collision_polygon", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.TileData.mb_remove_collision_polygon, livePtr, layer_id, polygon_index)
+    Ptrcall.callVoid2(gdext.classes.TileData.mb_remove_collision_polygon, livePtr, layerId, polygonIndex)
   }
 
   /** TileData.set_collision_polygon_one_way */
-  final def setCollisionPolygonOneWay(layer_id: Long, polygon_index: Long, one_way: Boolean): Unit = {
+  final def setCollisionPolygonOneWay(layerId: Long, polygonIndex: Long, oneWay: Boolean): Unit = {
     if (gdext.classes.TileData.mb_set_collision_polygon_one_way == null) gdext.classes.TileData.mb_set_collision_polygon_one_way = MethodBind.get("TileData", "set_collision_polygon_one_way", 1383440665L)
-    Ptrcall.callVoid3(gdext.classes.TileData.mb_set_collision_polygon_one_way, livePtr, layer_id, polygon_index, one_way)
+    Ptrcall.callVoid3(gdext.classes.TileData.mb_set_collision_polygon_one_way, livePtr, layerId, polygonIndex, oneWay)
   }
 
   /** TileData.is_collision_polygon_one_way */
-  final def isCollisionPolygonOneWay(layer_id: Long, polygon_index: Long): Boolean = {
+  final def isCollisionPolygonOneWay(layerId: Long, polygonIndex: Long): Boolean = {
     if (gdext.classes.TileData.mb_is_collision_polygon_one_way == null) gdext.classes.TileData.mb_is_collision_polygon_one_way = MethodBind.get("TileData", "is_collision_polygon_one_way", 2522259332L)
-    Ptrcall.call2[Long, Long, Boolean](gdext.classes.TileData.mb_is_collision_polygon_one_way, livePtr, layer_id, polygon_index)
+    Ptrcall.call2[Long, Long, Boolean](gdext.classes.TileData.mb_is_collision_polygon_one_way, livePtr, layerId, polygonIndex)
   }
 
   /** TileData.set_collision_polygon_one_way_margin */
-  final def setCollisionPolygonOneWayMargin(layer_id: Long, polygon_index: Long, one_way_margin: Double): Unit = {
+  final def setCollisionPolygonOneWayMargin(layerId: Long, polygonIndex: Long, oneWayMargin: Double): Unit = {
     if (gdext.classes.TileData.mb_set_collision_polygon_one_way_margin == null) gdext.classes.TileData.mb_set_collision_polygon_one_way_margin = MethodBind.get("TileData", "set_collision_polygon_one_way_margin", 3506521499L)
-    Ptrcall.callVoid3(gdext.classes.TileData.mb_set_collision_polygon_one_way_margin, livePtr, layer_id, polygon_index, one_way_margin)
+    Ptrcall.callVoid3(gdext.classes.TileData.mb_set_collision_polygon_one_way_margin, livePtr, layerId, polygonIndex, oneWayMargin)
   }
 
   /** TileData.get_collision_polygon_one_way_margin */
-  final def getCollisionPolygonOneWayMargin(layer_id: Long, polygon_index: Long): Double = {
+  final def getCollisionPolygonOneWayMargin(layerId: Long, polygonIndex: Long): Double = {
     if (gdext.classes.TileData.mb_get_collision_polygon_one_way_margin == null) gdext.classes.TileData.mb_get_collision_polygon_one_way_margin = MethodBind.get("TileData", "get_collision_polygon_one_way_margin", 3085491603L)
-    Ptrcall.call2[Long, Long, Double](gdext.classes.TileData.mb_get_collision_polygon_one_way_margin, livePtr, layer_id, polygon_index)
+    Ptrcall.call2[Long, Long, Double](gdext.classes.TileData.mb_get_collision_polygon_one_way_margin, livePtr, layerId, polygonIndex)
   }
 
   /** TileData.set_terrain_set */
-  final def setTerrainSet(terrain_set: Long): Unit = {
+  final def setTerrainSet(terrainSet: Long): Unit = {
     if (gdext.classes.TileData.mb_set_terrain_set == null) gdext.classes.TileData.mb_set_terrain_set = MethodBind.get("TileData", "set_terrain_set", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.TileData.mb_set_terrain_set, livePtr, terrain_set)
+    Ptrcall.callVoid1(gdext.classes.TileData.mb_set_terrain_set, livePtr, terrainSet)
   }
 
   /** TileData.get_terrain_set */
@@ -251,33 +252,33 @@ abstract class TileData extends Object {
   }
 
   /** TileData.set_terrain_peering_bit */
-  final def setTerrainPeeringBit(peering_bit: Long, terrain: Long): Unit = {
+  final def setTerrainPeeringBit(peeringBit: gdext.classes.TileSet.CellNeighbor, terrain: Long): Unit = {
     if (gdext.classes.TileData.mb_set_terrain_peering_bit == null) gdext.classes.TileData.mb_set_terrain_peering_bit = MethodBind.get("TileData", "set_terrain_peering_bit", 1084452308L)
-    Ptrcall.callVoid2(gdext.classes.TileData.mb_set_terrain_peering_bit, livePtr, peering_bit, terrain)
+    Ptrcall.callVoid2(gdext.classes.TileData.mb_set_terrain_peering_bit, livePtr, peeringBit, terrain)
   }
 
   /** TileData.get_terrain_peering_bit */
-  final def getTerrainPeeringBit(peering_bit: Long): Long = {
+  final def getTerrainPeeringBit(peeringBit: gdext.classes.TileSet.CellNeighbor): Long = {
     if (gdext.classes.TileData.mb_get_terrain_peering_bit == null) gdext.classes.TileData.mb_get_terrain_peering_bit = MethodBind.get("TileData", "get_terrain_peering_bit", 3831796792L)
-    Ptrcall.call1[Long, Long](gdext.classes.TileData.mb_get_terrain_peering_bit, livePtr, peering_bit)
+    Ptrcall.call1[Long, Long](gdext.classes.TileData.mb_get_terrain_peering_bit, livePtr, peeringBit)
   }
 
   /** TileData.is_valid_terrain_peering_bit */
-  final def isValidTerrainPeeringBit(peering_bit: Long): Boolean = {
+  final def isValidTerrainPeeringBit(peeringBit: gdext.classes.TileSet.CellNeighbor): Boolean = {
     if (gdext.classes.TileData.mb_is_valid_terrain_peering_bit == null) gdext.classes.TileData.mb_is_valid_terrain_peering_bit = MethodBind.get("TileData", "is_valid_terrain_peering_bit", 845723972L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.TileData.mb_is_valid_terrain_peering_bit, livePtr, peering_bit)
+    Ptrcall.call1[Long, Boolean](gdext.classes.TileData.mb_is_valid_terrain_peering_bit, livePtr, peeringBit)
   }
 
   /** TileData.set_navigation_polygon */
-  final def setNavigationPolygon(layer_id: Long, navigation_polygon: NavigationPolygon): Unit = {
+  final def setNavigationPolygon(layerId: Long, navigationPolygon: NavigationPolygon): Unit = {
     if (gdext.classes.TileData.mb_set_navigation_polygon == null) gdext.classes.TileData.mb_set_navigation_polygon = MethodBind.get("TileData", "set_navigation_polygon", 2224691167L)
-    Ptrcall.callVoid2(gdext.classes.TileData.mb_set_navigation_polygon, livePtr, layer_id, Wrappers.handle(navigation_polygon))
+    Ptrcall.callVoid2(gdext.classes.TileData.mb_set_navigation_polygon, livePtr, layerId, Wrappers.handle(navigationPolygon))
   }
 
   /** TileData.get_navigation_polygon. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getNavigationPolygon(layer_id: Long, flip_h: Boolean, flip_v: Boolean, transpose: Boolean): NavigationPolygon = {
+  final def getNavigationPolygon(layerId: Long, flipH: Boolean = false, flipV: Boolean = false, transpose: Boolean = false): NavigationPolygon = {
     if (gdext.classes.TileData.mb_get_navigation_polygon == null) gdext.classes.TileData.mb_get_navigation_polygon = MethodBind.get("TileData", "get_navigation_polygon", 2907127272L)
-    Wrappers.owned[NavigationPolygon](Ptrcall.call4[Long, Boolean, Boolean, Boolean, Long](gdext.classes.TileData.mb_get_navigation_polygon, livePtr, layer_id, flip_h, flip_v, transpose))
+    Wrappers.owned[NavigationPolygon](Ptrcall.call4[Long, Boolean, Boolean, Boolean, Long](gdext.classes.TileData.mb_get_navigation_polygon, livePtr, layerId, flipH, flipV, transpose))
   }
 
   /** TileData.set_probability */
@@ -293,9 +294,9 @@ abstract class TileData extends Object {
   }
 
   /** TileData.has_custom_data */
-  final def hasCustomData(layer_name: String): Boolean = {
+  final def hasCustomData(layerName: String): Boolean = {
     if (gdext.classes.TileData.mb_has_custom_data == null) gdext.classes.TileData.mb_has_custom_data = MethodBind.get("TileData", "has_custom_data", 3927539163L)
-    Ptrcall.call1[String, Boolean](gdext.classes.TileData.mb_has_custom_data, livePtr, layer_name)
+    Ptrcall.call1[String, Boolean](gdext.classes.TileData.mb_has_custom_data, livePtr, layerName)
   }
 
 }

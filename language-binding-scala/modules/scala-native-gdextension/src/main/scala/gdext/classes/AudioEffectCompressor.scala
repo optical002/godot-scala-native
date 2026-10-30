@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -47,9 +48,9 @@ abstract class AudioEffectCompressor extends AudioEffect {
   }
 
   /** AudioEffectCompressor.set_attack_us */
-  final def setAttackUs(attack_us: Double): Unit = {
+  final def setAttackUs(attackUs: Double): Unit = {
     if (gdext.classes.AudioEffectCompressor.mb_set_attack_us == null) gdext.classes.AudioEffectCompressor.mb_set_attack_us = MethodBind.get("AudioEffectCompressor", "set_attack_us", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AudioEffectCompressor.mb_set_attack_us, livePtr, attack_us)
+    Ptrcall.callVoid1(gdext.classes.AudioEffectCompressor.mb_set_attack_us, livePtr, attackUs)
   }
 
   /** AudioEffectCompressor.get_attack_us */
@@ -59,9 +60,9 @@ abstract class AudioEffectCompressor extends AudioEffect {
   }
 
   /** AudioEffectCompressor.set_release_ms */
-  final def setReleaseMs(release_ms: Double): Unit = {
+  final def setReleaseMs(releaseMs: Double): Unit = {
     if (gdext.classes.AudioEffectCompressor.mb_set_release_ms == null) gdext.classes.AudioEffectCompressor.mb_set_release_ms = MethodBind.get("AudioEffectCompressor", "set_release_ms", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AudioEffectCompressor.mb_set_release_ms, livePtr, release_ms)
+    Ptrcall.callVoid1(gdext.classes.AudioEffectCompressor.mb_set_release_ms, livePtr, releaseMs)
   }
 
   /** AudioEffectCompressor.get_release_ms */
@@ -83,15 +84,15 @@ abstract class AudioEffectCompressor extends AudioEffect {
   }
 
   /** AudioEffectCompressor.set_sidechain */
-  final def setSidechain(sidechain: gdext.builtin.StringName): Unit = {
+  final def setSidechain(sidechain: String): Unit = {
     if (gdext.classes.AudioEffectCompressor.mb_set_sidechain == null) gdext.classes.AudioEffectCompressor.mb_set_sidechain = MethodBind.get("AudioEffectCompressor", "set_sidechain", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.AudioEffectCompressor.mb_set_sidechain, livePtr, sidechain)
+    Ptrcall.callVoid1(gdext.classes.AudioEffectCompressor.mb_set_sidechain, livePtr, SnArg(sidechain))
   }
 
   /** AudioEffectCompressor.get_sidechain */
-  final def getSidechain(): gdext.builtin.StringName = {
+  final def getSidechain(): String = {
     if (gdext.classes.AudioEffectCompressor.mb_get_sidechain == null) gdext.classes.AudioEffectCompressor.mb_get_sidechain = MethodBind.get("AudioEffectCompressor", "get_sidechain", 2002593661L)
-    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.AudioEffectCompressor.mb_get_sidechain, livePtr)
+    Ptrcall.call0[SnArg](gdext.classes.AudioEffectCompressor.mb_get_sidechain, livePtr)
   }
 
 }

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,9 +18,9 @@ abstract class GLTFSpecGloss extends Resource {
   }
 
   /** GLTFSpecGloss.set_diffuse_img */
-  final def setDiffuseImg(diffuse_img: Image): Unit = {
+  final def setDiffuseImg(diffuseImg: Image): Unit = {
     if (gdext.classes.GLTFSpecGloss.mb_set_diffuse_img == null) gdext.classes.GLTFSpecGloss.mb_set_diffuse_img = MethodBind.get("GLTFSpecGloss", "set_diffuse_img", 532598488L)
-    Ptrcall.callVoid1(gdext.classes.GLTFSpecGloss.mb_set_diffuse_img, livePtr, Wrappers.handle(diffuse_img))
+    Ptrcall.callVoid1(gdext.classes.GLTFSpecGloss.mb_set_diffuse_img, livePtr, Wrappers.handle(diffuseImg))
   }
 
   /** GLTFSpecGloss.get_diffuse_factor */
@@ -29,9 +30,9 @@ abstract class GLTFSpecGloss extends Resource {
   }
 
   /** GLTFSpecGloss.set_diffuse_factor */
-  final def setDiffuseFactor(diffuse_factor: gdext.builtin.Color): Unit = {
+  final def setDiffuseFactor(diffuseFactor: gdext.builtin.Color): Unit = {
     if (gdext.classes.GLTFSpecGloss.mb_set_diffuse_factor == null) gdext.classes.GLTFSpecGloss.mb_set_diffuse_factor = MethodBind.get("GLTFSpecGloss", "set_diffuse_factor", 2920490490L)
-    Ptrcall.callVoid1(gdext.classes.GLTFSpecGloss.mb_set_diffuse_factor, livePtr, diffuse_factor)
+    Ptrcall.callVoid1(gdext.classes.GLTFSpecGloss.mb_set_diffuse_factor, livePtr, diffuseFactor)
   }
 
   /** GLTFSpecGloss.get_gloss_factor */
@@ -41,9 +42,9 @@ abstract class GLTFSpecGloss extends Resource {
   }
 
   /** GLTFSpecGloss.set_gloss_factor */
-  final def setGlossFactor(gloss_factor: Double): Unit = {
+  final def setGlossFactor(glossFactor: Double): Unit = {
     if (gdext.classes.GLTFSpecGloss.mb_set_gloss_factor == null) gdext.classes.GLTFSpecGloss.mb_set_gloss_factor = MethodBind.get("GLTFSpecGloss", "set_gloss_factor", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.GLTFSpecGloss.mb_set_gloss_factor, livePtr, gloss_factor)
+    Ptrcall.callVoid1(gdext.classes.GLTFSpecGloss.mb_set_gloss_factor, livePtr, glossFactor)
   }
 
   /** GLTFSpecGloss.get_specular_factor */
@@ -53,9 +54,9 @@ abstract class GLTFSpecGloss extends Resource {
   }
 
   /** GLTFSpecGloss.set_specular_factor */
-  final def setSpecularFactor(specular_factor: gdext.builtin.Color): Unit = {
+  final def setSpecularFactor(specularFactor: gdext.builtin.Color): Unit = {
     if (gdext.classes.GLTFSpecGloss.mb_set_specular_factor == null) gdext.classes.GLTFSpecGloss.mb_set_specular_factor = MethodBind.get("GLTFSpecGloss", "set_specular_factor", 2920490490L)
-    Ptrcall.callVoid1(gdext.classes.GLTFSpecGloss.mb_set_specular_factor, livePtr, specular_factor)
+    Ptrcall.callVoid1(gdext.classes.GLTFSpecGloss.mb_set_specular_factor, livePtr, specularFactor)
   }
 
   /** GLTFSpecGloss.get_spec_gloss_img. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -65,9 +66,9 @@ abstract class GLTFSpecGloss extends Resource {
   }
 
   /** GLTFSpecGloss.set_spec_gloss_img */
-  final def setSpecGlossImg(spec_gloss_img: Image): Unit = {
+  final def setSpecGlossImg(specGlossImg: Image): Unit = {
     if (gdext.classes.GLTFSpecGloss.mb_set_spec_gloss_img == null) gdext.classes.GLTFSpecGloss.mb_set_spec_gloss_img = MethodBind.get("GLTFSpecGloss", "set_spec_gloss_img", 532598488L)
-    Ptrcall.callVoid1(gdext.classes.GLTFSpecGloss.mb_set_spec_gloss_img, livePtr, Wrappers.handle(spec_gloss_img))
+    Ptrcall.callVoid1(gdext.classes.GLTFSpecGloss.mb_set_spec_gloss_img, livePtr, Wrappers.handle(specGlossImg))
   }
 
 }

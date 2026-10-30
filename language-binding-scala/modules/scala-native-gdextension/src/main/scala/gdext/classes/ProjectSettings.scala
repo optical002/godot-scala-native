@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -65,27 +66,27 @@ abstract class ProjectSettings extends Object {
   }
 
   /** ProjectSettings.save */
-  final def save(): Long = {
+  final def save(): gdext.classes.Error = {
     if (gdext.classes.ProjectSettings.mb_save == null) gdext.classes.ProjectSettings.mb_save = MethodBind.get("ProjectSettings", "save", 166280745L)
-    Ptrcall.call0[Long](gdext.classes.ProjectSettings.mb_save, livePtr)
+    gdext.classes.Error(Ptrcall.call0[Long](gdext.classes.ProjectSettings.mb_save, livePtr))
   }
 
   /** ProjectSettings.load_resource_pack */
-  final def loadResourcePack(pack: String, replace_files: Boolean, offset: Long): Boolean = {
+  final def loadResourcePack(pack: String, replaceFiles: Boolean = true, offset: Long = 0L): Boolean = {
     if (gdext.classes.ProjectSettings.mb_load_resource_pack == null) gdext.classes.ProjectSettings.mb_load_resource_pack = MethodBind.get("ProjectSettings", "load_resource_pack", 708980503L)
-    Ptrcall.call3[String, Boolean, Long, Boolean](gdext.classes.ProjectSettings.mb_load_resource_pack, livePtr, pack, replace_files, offset)
+    Ptrcall.call3[String, Boolean, Long, Boolean](gdext.classes.ProjectSettings.mb_load_resource_pack, livePtr, pack, replaceFiles, offset)
   }
 
   /** ProjectSettings.save_custom */
-  final def saveCustom(file: String): Long = {
+  final def saveCustom(file: String): gdext.classes.Error = {
     if (gdext.classes.ProjectSettings.mb_save_custom == null) gdext.classes.ProjectSettings.mb_save_custom = MethodBind.get("ProjectSettings", "save_custom", 166001499L)
-    Ptrcall.call1[String, Long](gdext.classes.ProjectSettings.mb_save_custom, livePtr, file)
+    gdext.classes.Error(Ptrcall.call1[String, Long](gdext.classes.ProjectSettings.mb_save_custom, livePtr, file))
   }
 
   /** ProjectSettings.check_changed_settings_in_group */
-  final def checkChangedSettingsInGroup(setting_prefix: String): Boolean = {
+  final def checkChangedSettingsInGroup(settingPrefix: String): Boolean = {
     if (gdext.classes.ProjectSettings.mb_check_changed_settings_in_group == null) gdext.classes.ProjectSettings.mb_check_changed_settings_in_group = MethodBind.get("ProjectSettings", "check_changed_settings_in_group", 3927539163L)
-    Ptrcall.call1[String, Boolean](gdext.classes.ProjectSettings.mb_check_changed_settings_in_group, livePtr, setting_prefix)
+    Ptrcall.call1[String, Boolean](gdext.classes.ProjectSettings.mb_check_changed_settings_in_group, livePtr, settingPrefix)
   }
 
 }
@@ -114,4 +115,56 @@ object ProjectSettings {
         Godot.interface.global_get_singleton(StringNames.cached("ProjectSettings").ptr)))
     instance
   }
+
+  /** Forwards to [[singleton]]: ProjectSettings.has_setting */
+  final def hasSetting(name: String): Boolean =
+    singleton.hasSetting(name)
+
+  /** Forwards to [[singleton]]: ProjectSettings.set_order */
+  final def setOrder(name: String, position: Long): Unit =
+    singleton.setOrder(name, position)
+
+  /** Forwards to [[singleton]]: ProjectSettings.get_order */
+  final def getOrder(name: String): Long =
+    singleton.getOrder(name)
+
+  /** Forwards to [[singleton]]: ProjectSettings.set_as_basic */
+  final def setAsBasic(name: String, basic: Boolean): Unit =
+    singleton.setAsBasic(name, basic)
+
+  /** Forwards to [[singleton]]: ProjectSettings.set_as_internal */
+  final def setAsInternal(name: String, internal: Boolean): Unit =
+    singleton.setAsInternal(name, internal)
+
+  /** Forwards to [[singleton]]: ProjectSettings.set_restart_if_changed */
+  final def setRestartIfChanged(name: String, restart: Boolean): Unit =
+    singleton.setRestartIfChanged(name, restart)
+
+  /** Forwards to [[singleton]]: ProjectSettings.clear */
+  final def clear(name: String): Unit =
+    singleton.clear(name)
+
+  /** Forwards to [[singleton]]: ProjectSettings.localize_path */
+  final def localizePath(path: String): String =
+    singleton.localizePath(path)
+
+  /** Forwards to [[singleton]]: ProjectSettings.globalize_path */
+  final def globalizePath(path: String): String =
+    singleton.globalizePath(path)
+
+  /** Forwards to [[singleton]]: ProjectSettings.save */
+  final def save(): gdext.classes.Error =
+    singleton.save()
+
+  /** Forwards to [[singleton]]: ProjectSettings.load_resource_pack */
+  final def loadResourcePack(pack: String, replaceFiles: Boolean = true, offset: Long = 0L): Boolean =
+    singleton.loadResourcePack(pack, replaceFiles, offset)
+
+  /** Forwards to [[singleton]]: ProjectSettings.save_custom */
+  final def saveCustom(file: String): gdext.classes.Error =
+    singleton.saveCustom(file)
+
+  /** Forwards to [[singleton]]: ProjectSettings.check_changed_settings_in_group */
+  final def checkChangedSettingsInGroup(settingPrefix: String): Boolean =
+    singleton.checkChangedSettingsInGroup(settingPrefix)
 }

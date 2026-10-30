@@ -1,7 +1,7 @@
 package gdext.internal.register
 
 import gdext.Godot
-import gdext.builtin.StringNames
+import gdext.internal.StringNames
 import gdext.internal.engine.{CachedBind, GodotObject, InstanceId, ClassMeta, ClassTags, MethodBind, Ptrcall}
 import gdext.classes.InputEvent
 import gdext.internal.ffi.types.*
@@ -143,13 +143,13 @@ abstract class GodotScriptClass {
   // --- overridable engine virtuals (no-op defaults) ---------------------
 
   /** Called when the node enters the scene tree and is ready. */
-  def _ready(): Unit = ()
+  def ready(): Unit = ()
 
   /** Called every rendered frame; `delta` is seconds since the last frame. */
-  def _process(delta: Double): Unit = ()
+  def process(delta: Double): Unit = ()
 
   /** Called every physics frame; `delta` is the fixed physics step. */
-  def _physics_process(delta: Double): Unit = ()
+  def physicsProcess(delta: Double): Unit = ()
 
   // --- input virtuals (Node) --------------------------------------------
   // Each receives the engine `InputEvent` directly as its wrapper type (a
@@ -157,35 +157,35 @@ abstract class GodotScriptClass {
   // ClassRegistration alongside the other node virtuals.
 
   /** Called for every unhandled-or-not input event (`Node._input`). */
-  def _input(event: InputEvent): Unit = ()
+  def input(event: InputEvent): Unit = ()
 
   /** Called for shortcut input before `_unhandled_input` (`Node._shortcut_input`). */
-  def _shortcut_input(event: InputEvent): Unit = ()
+  def shortcutInput(event: InputEvent): Unit = ()
 
   /** Called for input not consumed by the UI (`Node._unhandled_input`). */
-  def _unhandled_input(event: InputEvent): Unit = ()
+  def unhandledInput(event: InputEvent): Unit = ()
 
   /** Called for unhandled key input (`Node._unhandled_key_input`). */
-  def _unhandled_key_input(event: InputEvent): Unit = ()
+  def unhandledKeyInput(event: InputEvent): Unit = ()
 
   // --- editor virtuals (EditorPlugin / EditorInspectorPlugin / EditorProperty)
   // No-op defaults; only the binding's editor classes override these. Dispatch
   // for them is wired in ClassRegistration alongside the node virtuals.
 
   /** EditorPlugin/Node: entered the (editor) tree. */
-  def _enter_tree(): Unit = ()
+  def enterTree(): Unit = ()
 
   /** EditorPlugin/Node: leaving the (editor) tree. */
-  def _exit_tree(): Unit = ()
+  def exitTree(): Unit = ()
 
   /** EditorInspectorPlugin: can this plugin handle `obj`'s inspector? */
-  def _can_handle(obj: GodotObject): Boolean = false
+  def canHandle(obj: GodotObject): Boolean = false
 
   /**
    * EditorInspectorPlugin: inspect one property. Return true to take it over
    * (after calling addPropertyEditor), false to let the default editor render.
    */
-  def _parse_property(
+  def parseProperty(
     obj: GodotObject,
     varType: Long,
     name: String,

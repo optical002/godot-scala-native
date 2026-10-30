@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,9 +18,9 @@ abstract class EditorInspectorPlugin extends RefCounted {
   }
 
   /** EditorInspectorPlugin.add_property_editor */
-  final def addPropertyEditor(property: String, editor: Control, add_to_end: Boolean, label: String): Unit = {
+  final def addPropertyEditor(property: String, editor: Control, addToEnd: Boolean = false, label: String = ""): Unit = {
     if (gdext.classes.EditorInspectorPlugin.mb_add_property_editor == null) gdext.classes.EditorInspectorPlugin.mb_add_property_editor = MethodBind.get("EditorInspectorPlugin", "add_property_editor", 2042698479L)
-    Ptrcall.callVoid4(gdext.classes.EditorInspectorPlugin.mb_add_property_editor, livePtr, property, Wrappers.handle(editor), add_to_end, label)
+    Ptrcall.callVoid4(gdext.classes.EditorInspectorPlugin.mb_add_property_editor, livePtr, property, Wrappers.handle(editor), addToEnd, label)
   }
 
 }

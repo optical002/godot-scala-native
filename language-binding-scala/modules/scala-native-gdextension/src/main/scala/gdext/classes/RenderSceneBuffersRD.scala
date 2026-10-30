@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,27 +12,27 @@ abstract class RenderSceneBuffersRD extends RenderSceneBuffers {
   override def godotClassName: String = "RenderSceneBuffersRD"
 
   /** RenderSceneBuffersRD.has_texture */
-  final def hasTexture(context: gdext.builtin.StringName, name: gdext.builtin.StringName): Boolean = {
+  final def hasTexture(context: String, name: String): Boolean = {
     if (gdext.classes.RenderSceneBuffersRD.mb_has_texture == null) gdext.classes.RenderSceneBuffersRD.mb_has_texture = MethodBind.get("RenderSceneBuffersRD", "has_texture", 471820014L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Boolean](gdext.classes.RenderSceneBuffersRD.mb_has_texture, livePtr, context, name)
+    Ptrcall.call2[SnArg, SnArg, Boolean](gdext.classes.RenderSceneBuffersRD.mb_has_texture, livePtr, SnArg(context), SnArg(name))
   }
 
   /** RenderSceneBuffersRD.get_texture_format. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getTextureFormat(context: gdext.builtin.StringName, name: gdext.builtin.StringName): RDTextureFormat = {
+  final def getTextureFormat(context: String, name: String): RDTextureFormat = {
     if (gdext.classes.RenderSceneBuffersRD.mb_get_texture_format == null) gdext.classes.RenderSceneBuffersRD.mb_get_texture_format = MethodBind.get("RenderSceneBuffersRD", "get_texture_format", 371461758L)
-    Wrappers.owned[RDTextureFormat](Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Long](gdext.classes.RenderSceneBuffersRD.mb_get_texture_format, livePtr, context, name))
+    Wrappers.owned[RDTextureFormat](Ptrcall.call2[SnArg, SnArg, Long](gdext.classes.RenderSceneBuffersRD.mb_get_texture_format, livePtr, SnArg(context), SnArg(name)))
   }
 
   /** RenderSceneBuffersRD.get_texture_slice_size */
-  final def getTextureSliceSize(context: gdext.builtin.StringName, name: gdext.builtin.StringName, mipmap: Long): gdext.builtin.Vector2i = {
+  final def getTextureSliceSize(context: String, name: String, mipmap: Long): gdext.builtin.Vector2i = {
     if (gdext.classes.RenderSceneBuffersRD.mb_get_texture_slice_size == null) gdext.classes.RenderSceneBuffersRD.mb_get_texture_slice_size = MethodBind.get("RenderSceneBuffersRD", "get_texture_slice_size", 2617625368L)
-    Ptrcall.call3[gdext.builtin.StringName, gdext.builtin.StringName, Long, gdext.builtin.Vector2i](gdext.classes.RenderSceneBuffersRD.mb_get_texture_slice_size, livePtr, context, name, mipmap)
+    Ptrcall.call3[SnArg, SnArg, Long, gdext.builtin.Vector2i](gdext.classes.RenderSceneBuffersRD.mb_get_texture_slice_size, livePtr, SnArg(context), SnArg(name), mipmap)
   }
 
   /** RenderSceneBuffersRD.clear_context */
-  final def clearContext(context: gdext.builtin.StringName): Unit = {
+  final def clearContext(context: String): Unit = {
     if (gdext.classes.RenderSceneBuffersRD.mb_clear_context == null) gdext.classes.RenderSceneBuffersRD.mb_clear_context = MethodBind.get("RenderSceneBuffersRD", "clear_context", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.RenderSceneBuffersRD.mb_clear_context, livePtr, context)
+    Ptrcall.callVoid1(gdext.classes.RenderSceneBuffersRD.mb_clear_context, livePtr, SnArg(context))
   }
 
   /** RenderSceneBuffersRD.get_view_count */
@@ -53,9 +54,9 @@ abstract class RenderSceneBuffersRD extends RenderSceneBuffers {
   }
 
   /** RenderSceneBuffersRD.get_scaling_3d_mode */
-  final def getScaling3dMode(): Long = {
+  final def getScaling3dMode(): gdext.classes.RenderingServer.ViewportScaling3DMode = {
     if (gdext.classes.RenderSceneBuffersRD.mb_get_scaling_3d_mode == null) gdext.classes.RenderSceneBuffersRD.mb_get_scaling_3d_mode = MethodBind.get("RenderSceneBuffersRD", "get_scaling_3d_mode", 976778074L)
-    Ptrcall.call0[Long](gdext.classes.RenderSceneBuffersRD.mb_get_scaling_3d_mode, livePtr)
+    gdext.classes.RenderingServer.ViewportScaling3DMode(Ptrcall.call0[Long](gdext.classes.RenderSceneBuffersRD.mb_get_scaling_3d_mode, livePtr))
   }
 
   /** RenderSceneBuffersRD.get_fsr_sharpness */
@@ -65,21 +66,21 @@ abstract class RenderSceneBuffersRD extends RenderSceneBuffers {
   }
 
   /** RenderSceneBuffersRD.get_msaa_3d */
-  final def getMsaa3d(): Long = {
+  final def getMsaa3d(): gdext.classes.RenderingServer.ViewportMSAA = {
     if (gdext.classes.RenderSceneBuffersRD.mb_get_msaa_3d == null) gdext.classes.RenderSceneBuffersRD.mb_get_msaa_3d = MethodBind.get("RenderSceneBuffersRD", "get_msaa_3d", 3109158617L)
-    Ptrcall.call0[Long](gdext.classes.RenderSceneBuffersRD.mb_get_msaa_3d, livePtr)
+    gdext.classes.RenderingServer.ViewportMSAA(Ptrcall.call0[Long](gdext.classes.RenderSceneBuffersRD.mb_get_msaa_3d, livePtr))
   }
 
   /** RenderSceneBuffersRD.get_texture_samples */
-  final def getTextureSamples(): Long = {
+  final def getTextureSamples(): gdext.classes.RenderingDevice.TextureSamples = {
     if (gdext.classes.RenderSceneBuffersRD.mb_get_texture_samples == null) gdext.classes.RenderSceneBuffersRD.mb_get_texture_samples = MethodBind.get("RenderSceneBuffersRD", "get_texture_samples", 407791724L)
-    Ptrcall.call0[Long](gdext.classes.RenderSceneBuffersRD.mb_get_texture_samples, livePtr)
+    gdext.classes.RenderingDevice.TextureSamples(Ptrcall.call0[Long](gdext.classes.RenderSceneBuffersRD.mb_get_texture_samples, livePtr))
   }
 
   /** RenderSceneBuffersRD.get_screen_space_aa */
-  final def getScreenSpaceAa(): Long = {
+  final def getScreenSpaceAa(): gdext.classes.RenderingServer.ViewportScreenSpaceAA = {
     if (gdext.classes.RenderSceneBuffersRD.mb_get_screen_space_aa == null) gdext.classes.RenderSceneBuffersRD.mb_get_screen_space_aa = MethodBind.get("RenderSceneBuffersRD", "get_screen_space_aa", 641513172L)
-    Ptrcall.call0[Long](gdext.classes.RenderSceneBuffersRD.mb_get_screen_space_aa, livePtr)
+    gdext.classes.RenderingServer.ViewportScreenSpaceAA(Ptrcall.call0[Long](gdext.classes.RenderSceneBuffersRD.mb_get_screen_space_aa, livePtr))
   }
 
   /** RenderSceneBuffersRD.get_use_taa */

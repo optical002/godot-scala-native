@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -119,15 +120,15 @@ abstract class AnimationNodeOneShot extends AnimationNodeSync {
   }
 
   /** AnimationNodeOneShot.set_mix_mode */
-  final def setMixMode(mode: Long): Unit = {
+  final def setMixMode(mode: gdext.classes.AnimationNodeOneShot.MixMode): Unit = {
     if (gdext.classes.AnimationNodeOneShot.mb_set_mix_mode == null) gdext.classes.AnimationNodeOneShot.mb_set_mix_mode = MethodBind.get("AnimationNodeOneShot", "set_mix_mode", 1018899799L)
     Ptrcall.callVoid1(gdext.classes.AnimationNodeOneShot.mb_set_mix_mode, livePtr, mode)
   }
 
   /** AnimationNodeOneShot.get_mix_mode */
-  final def getMixMode(): Long = {
+  final def getMixMode(): gdext.classes.AnimationNodeOneShot.MixMode = {
     if (gdext.classes.AnimationNodeOneShot.mb_get_mix_mode == null) gdext.classes.AnimationNodeOneShot.mb_get_mix_mode = MethodBind.get("AnimationNodeOneShot", "get_mix_mode", 3076550526L)
-    Ptrcall.call0[Long](gdext.classes.AnimationNodeOneShot.mb_get_mix_mode, livePtr)
+    gdext.classes.AnimationNodeOneShot.MixMode(Ptrcall.call0[Long](gdext.classes.AnimationNodeOneShot.mb_get_mix_mode, livePtr))
   }
 
 }
@@ -153,4 +154,52 @@ object AnimationNodeOneShot {
   private[classes] var mb_get_autorestart_random_delay: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_mix_mode: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_mix_mode: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `AnimationNodeOneShot.OneShotRequest`. */
+  opaque type OneShotRequest <: Long = Long
+
+  object OneShotRequest {
+    final val None: OneShotRequest = 0L.asInstanceOf[OneShotRequest]
+    final val Fire: OneShotRequest = 1L.asInstanceOf[OneShotRequest]
+    final val Abort: OneShotRequest = 2L.asInstanceOf[OneShotRequest]
+    final val FadeOut: OneShotRequest = 3L.asInstanceOf[OneShotRequest]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): OneShotRequest = value.asInstanceOf[OneShotRequest]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[OneShotRequest] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[OneShotRequest]]
+
+    extension (self: OneShotRequest)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "None"
+        case 1L => "Fire"
+        case 2L => "Abort"
+        case 3L => "FadeOut"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `AnimationNodeOneShot.MixMode`. */
+  opaque type MixMode <: Long = Long
+
+  object MixMode {
+    final val Blend: MixMode = 0L.asInstanceOf[MixMode]
+    final val Add: MixMode = 1L.asInstanceOf[MixMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): MixMode = value.asInstanceOf[MixMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[MixMode] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[MixMode]]
+
+    extension (self: MixMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Blend"
+        case 1L => "Add"
+        case other => other.toString
+      }
+  }
 }

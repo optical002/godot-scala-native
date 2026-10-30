@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class JSON extends Resource {
   override def godotClassName: String = "JSON"
 
   /** JSON.parse */
-  final def parse(json_text: String, keep_text: Boolean): Long = {
+  final def parse(jsonText: String, keepText: Boolean = false): gdext.classes.Error = {
     if (gdext.classes.JSON.mb_parse == null) gdext.classes.JSON.mb_parse = MethodBind.get("JSON", "parse", 885841341L)
-    Ptrcall.call2[String, Boolean, Long](gdext.classes.JSON.mb_parse, livePtr, json_text, keep_text)
+    gdext.classes.Error(Ptrcall.call2[String, Boolean, Long](gdext.classes.JSON.mb_parse, livePtr, jsonText, keepText))
   }
 
   /** JSON.get_parsed_text */

@@ -21,7 +21,7 @@ bytes and time per operation over 20 000 calls (Linux x86_64, Godot 4.6.1).
 | `Input.singleton` | 128 B, 282 ns | **0 B, 7 ns** | 0 B, 8 ns |
 | `emitSignal` from Scala | 944 B, 2310 ns | **0 B, 102 ns** | 96 B, 334 ns |
 | GDScript → Scala `@func` call | 2704 B, 5353 ns | **0 B, 100 ns** | 0 B, 119 ns |
-| `_process` dispatch, per node per frame | 130 B | **0 B** | 0 B |
+| `process` dispatch, per node per frame | 130 B | **0 B** | 0 B |
 | `((a + b) * 2f).dot(b)` on `Vector3` | 64 B, 43 ns | **0 B, 5 ns** | 64 B, 94 ns |
 | `(t * t).xform(v)` on `Transform3D` | 448 B, 466 ns | 64 B, 92 ns | 96 B, 141 ns |
 
@@ -49,7 +49,7 @@ Not yet allocation-free:
 - **One wrapper per object.** Wrappers are cached on the engine object itself
   (Godot's instance bindings), as godot-cpp does. Fetching an object again
   allocates nothing.
-- **Callbacks without boxing.** `_process`, `_physics_process`, the input
+- **Callbacks without boxing.** `process`, `physicsProcess`, the input
   virtuals, and `@func` dispatch enter Scala through exported C functions
   that take plain integers, not through closures that box each argument.
 - **Native math.** All 367 methods of the 16 math types, plus their operators

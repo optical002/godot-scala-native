@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,15 +24,15 @@ abstract class Camera2D extends Node2D {
   }
 
   /** Camera2D.set_anchor_mode */
-  final def setAnchorMode(anchor_mode: Long): Unit = {
+  final def setAnchorMode(anchorMode: gdext.classes.Camera2D.AnchorMode): Unit = {
     if (gdext.classes.Camera2D.mb_set_anchor_mode == null) gdext.classes.Camera2D.mb_set_anchor_mode = MethodBind.get("Camera2D", "set_anchor_mode", 2050398218L)
-    Ptrcall.callVoid1(gdext.classes.Camera2D.mb_set_anchor_mode, livePtr, anchor_mode)
+    Ptrcall.callVoid1(gdext.classes.Camera2D.mb_set_anchor_mode, livePtr, anchorMode)
   }
 
   /** Camera2D.get_anchor_mode */
-  final def getAnchorMode(): Long = {
+  final def getAnchorMode(): gdext.classes.Camera2D.AnchorMode = {
     if (gdext.classes.Camera2D.mb_get_anchor_mode == null) gdext.classes.Camera2D.mb_get_anchor_mode = MethodBind.get("Camera2D", "get_anchor_mode", 155978067L)
-    Ptrcall.call0[Long](gdext.classes.Camera2D.mb_get_anchor_mode, livePtr)
+    gdext.classes.Camera2D.AnchorMode(Ptrcall.call0[Long](gdext.classes.Camera2D.mb_get_anchor_mode, livePtr))
   }
 
   /** Camera2D.set_ignore_rotation */
@@ -47,15 +48,15 @@ abstract class Camera2D extends Node2D {
   }
 
   /** Camera2D.set_process_callback */
-  final def setProcessCallback(mode: Long): Unit = {
+  final def setProcessCallback(mode: gdext.classes.Camera2D.Camera2DProcessCallback): Unit = {
     if (gdext.classes.Camera2D.mb_set_process_callback == null) gdext.classes.Camera2D.mb_set_process_callback = MethodBind.get("Camera2D", "set_process_callback", 4201947462L)
     Ptrcall.callVoid1(gdext.classes.Camera2D.mb_set_process_callback, livePtr, mode)
   }
 
   /** Camera2D.get_process_callback */
-  final def getProcessCallback(): Long = {
+  final def getProcessCallback(): gdext.classes.Camera2D.Camera2DProcessCallback = {
     if (gdext.classes.Camera2D.mb_get_process_callback == null) gdext.classes.Camera2D.mb_get_process_callback = MethodBind.get("Camera2D", "get_process_callback", 2325344499L)
-    Ptrcall.call0[Long](gdext.classes.Camera2D.mb_get_process_callback, livePtr)
+    gdext.classes.Camera2D.Camera2DProcessCallback(Ptrcall.call0[Long](gdext.classes.Camera2D.mb_get_process_callback, livePtr))
   }
 
   /** Camera2D.set_enabled */
@@ -83,9 +84,9 @@ abstract class Camera2D extends Node2D {
   }
 
   /** Camera2D.set_limit_enabled */
-  final def setLimitEnabled(limit_enabled: Boolean): Unit = {
+  final def setLimitEnabled(limitEnabled: Boolean): Unit = {
     if (gdext.classes.Camera2D.mb_set_limit_enabled == null) gdext.classes.Camera2D.mb_set_limit_enabled = MethodBind.get("Camera2D", "set_limit_enabled", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.Camera2D.mb_set_limit_enabled, livePtr, limit_enabled)
+    Ptrcall.callVoid1(gdext.classes.Camera2D.mb_set_limit_enabled, livePtr, limitEnabled)
   }
 
   /** Camera2D.is_limit_enabled */
@@ -95,21 +96,21 @@ abstract class Camera2D extends Node2D {
   }
 
   /** Camera2D.set_limit */
-  final def setLimit(margin: Long, limit: Long): Unit = {
+  final def setLimit(margin: gdext.classes.Side, limit: Long): Unit = {
     if (gdext.classes.Camera2D.mb_set_limit == null) gdext.classes.Camera2D.mb_set_limit = MethodBind.get("Camera2D", "set_limit", 437707142L)
     Ptrcall.callVoid2(gdext.classes.Camera2D.mb_set_limit, livePtr, margin, limit)
   }
 
   /** Camera2D.get_limit */
-  final def getLimit(margin: Long): Long = {
+  final def getLimit(margin: gdext.classes.Side): Long = {
     if (gdext.classes.Camera2D.mb_get_limit == null) gdext.classes.Camera2D.mb_get_limit = MethodBind.get("Camera2D", "get_limit", 1983885014L)
     Ptrcall.call1[Long, Long](gdext.classes.Camera2D.mb_get_limit, livePtr, margin)
   }
 
   /** Camera2D.set_limit_smoothing_enabled */
-  final def setLimitSmoothingEnabled(limit_smoothing_enabled: Boolean): Unit = {
+  final def setLimitSmoothingEnabled(limitSmoothingEnabled: Boolean): Unit = {
     if (gdext.classes.Camera2D.mb_set_limit_smoothing_enabled == null) gdext.classes.Camera2D.mb_set_limit_smoothing_enabled = MethodBind.get("Camera2D", "set_limit_smoothing_enabled", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.Camera2D.mb_set_limit_smoothing_enabled, livePtr, limit_smoothing_enabled)
+    Ptrcall.callVoid1(gdext.classes.Camera2D.mb_set_limit_smoothing_enabled, livePtr, limitSmoothingEnabled)
   }
 
   /** Camera2D.is_limit_smoothing_enabled */
@@ -167,13 +168,13 @@ abstract class Camera2D extends Node2D {
   }
 
   /** Camera2D.set_drag_margin */
-  final def setDragMargin(margin: Long, drag_margin: Double): Unit = {
+  final def setDragMargin(margin: gdext.classes.Side, dragMargin: Double): Unit = {
     if (gdext.classes.Camera2D.mb_set_drag_margin == null) gdext.classes.Camera2D.mb_set_drag_margin = MethodBind.get("Camera2D", "set_drag_margin", 4290182280L)
-    Ptrcall.callVoid2(gdext.classes.Camera2D.mb_set_drag_margin, livePtr, margin, drag_margin)
+    Ptrcall.callVoid2(gdext.classes.Camera2D.mb_set_drag_margin, livePtr, margin, dragMargin)
   }
 
   /** Camera2D.get_drag_margin */
-  final def getDragMargin(margin: Long): Double = {
+  final def getDragMargin(margin: gdext.classes.Side): Double = {
     if (gdext.classes.Camera2D.mb_get_drag_margin == null) gdext.classes.Camera2D.mb_get_drag_margin = MethodBind.get("Camera2D", "get_drag_margin", 2869120046L)
     Ptrcall.call1[Long, Double](gdext.classes.Camera2D.mb_get_drag_margin, livePtr, margin)
   }
@@ -221,9 +222,9 @@ abstract class Camera2D extends Node2D {
   }
 
   /** Camera2D.set_position_smoothing_speed */
-  final def setPositionSmoothingSpeed(position_smoothing_speed: Double): Unit = {
+  final def setPositionSmoothingSpeed(positionSmoothingSpeed: Double): Unit = {
     if (gdext.classes.Camera2D.mb_set_position_smoothing_speed == null) gdext.classes.Camera2D.mb_set_position_smoothing_speed = MethodBind.get("Camera2D", "set_position_smoothing_speed", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Camera2D.mb_set_position_smoothing_speed, livePtr, position_smoothing_speed)
+    Ptrcall.callVoid1(gdext.classes.Camera2D.mb_set_position_smoothing_speed, livePtr, positionSmoothingSpeed)
   }
 
   /** Camera2D.get_position_smoothing_speed */
@@ -287,9 +288,9 @@ abstract class Camera2D extends Node2D {
   }
 
   /** Camera2D.set_screen_drawing_enabled */
-  final def setScreenDrawingEnabled(screen_drawing_enabled: Boolean): Unit = {
+  final def setScreenDrawingEnabled(screenDrawingEnabled: Boolean): Unit = {
     if (gdext.classes.Camera2D.mb_set_screen_drawing_enabled == null) gdext.classes.Camera2D.mb_set_screen_drawing_enabled = MethodBind.get("Camera2D", "set_screen_drawing_enabled", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.Camera2D.mb_set_screen_drawing_enabled, livePtr, screen_drawing_enabled)
+    Ptrcall.callVoid1(gdext.classes.Camera2D.mb_set_screen_drawing_enabled, livePtr, screenDrawingEnabled)
   }
 
   /** Camera2D.is_screen_drawing_enabled */
@@ -299,9 +300,9 @@ abstract class Camera2D extends Node2D {
   }
 
   /** Camera2D.set_limit_drawing_enabled */
-  final def setLimitDrawingEnabled(limit_drawing_enabled: Boolean): Unit = {
+  final def setLimitDrawingEnabled(limitDrawingEnabled: Boolean): Unit = {
     if (gdext.classes.Camera2D.mb_set_limit_drawing_enabled == null) gdext.classes.Camera2D.mb_set_limit_drawing_enabled = MethodBind.get("Camera2D", "set_limit_drawing_enabled", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.Camera2D.mb_set_limit_drawing_enabled, livePtr, limit_drawing_enabled)
+    Ptrcall.callVoid1(gdext.classes.Camera2D.mb_set_limit_drawing_enabled, livePtr, limitDrawingEnabled)
   }
 
   /** Camera2D.is_limit_drawing_enabled */
@@ -311,9 +312,9 @@ abstract class Camera2D extends Node2D {
   }
 
   /** Camera2D.set_margin_drawing_enabled */
-  final def setMarginDrawingEnabled(margin_drawing_enabled: Boolean): Unit = {
+  final def setMarginDrawingEnabled(marginDrawingEnabled: Boolean): Unit = {
     if (gdext.classes.Camera2D.mb_set_margin_drawing_enabled == null) gdext.classes.Camera2D.mb_set_margin_drawing_enabled = MethodBind.get("Camera2D", "set_margin_drawing_enabled", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.Camera2D.mb_set_margin_drawing_enabled, livePtr, margin_drawing_enabled)
+    Ptrcall.callVoid1(gdext.classes.Camera2D.mb_set_margin_drawing_enabled, livePtr, marginDrawingEnabled)
   }
 
   /** Camera2D.is_margin_drawing_enabled */
@@ -377,4 +378,48 @@ object Camera2D {
   private[classes] var mb_is_limit_drawing_enabled: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_margin_drawing_enabled: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_margin_drawing_enabled: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `Camera2D.AnchorMode`. */
+  opaque type AnchorMode <: Long = Long
+
+  object AnchorMode {
+    final val FixedTopLeft: AnchorMode = 0L.asInstanceOf[AnchorMode]
+    final val DragCenter: AnchorMode = 1L.asInstanceOf[AnchorMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): AnchorMode = value.asInstanceOf[AnchorMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[AnchorMode] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[AnchorMode]]
+
+    extension (self: AnchorMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "FixedTopLeft"
+        case 1L => "DragCenter"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Camera2D.Camera2DProcessCallback`. */
+  opaque type Camera2DProcessCallback <: Long = Long
+
+  object Camera2DProcessCallback {
+    final val Physics: Camera2DProcessCallback = 0L.asInstanceOf[Camera2DProcessCallback]
+    final val Idle: Camera2DProcessCallback = 1L.asInstanceOf[Camera2DProcessCallback]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): Camera2DProcessCallback = value.asInstanceOf[Camera2DProcessCallback]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[Camera2DProcessCallback] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[Camera2DProcessCallback]]
+
+    extension (self: Camera2DProcessCallback)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Physics"
+        case 1L => "Idle"
+        case other => other.toString
+      }
+  }
 }

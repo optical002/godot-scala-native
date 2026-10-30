@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class AudioStreamPlayback extends RefCounted {
   override def godotClassName: String = "AudioStreamPlayback"
 
   /** AudioStreamPlayback.set_sample_playback */
-  final def setSamplePlayback(playback_sample: AudioSamplePlayback): Unit = {
+  final def setSamplePlayback(playbackSample: AudioSamplePlayback): Unit = {
     if (gdext.classes.AudioStreamPlayback.mb_set_sample_playback == null) gdext.classes.AudioStreamPlayback.mb_set_sample_playback = MethodBind.get("AudioStreamPlayback", "set_sample_playback", 3195455091L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayback.mb_set_sample_playback, livePtr, Wrappers.handle(playback_sample))
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayback.mb_set_sample_playback, livePtr, Wrappers.handle(playbackSample))
   }
 
   /** AudioStreamPlayback.get_sample_playback. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -23,13 +24,13 @@ abstract class AudioStreamPlayback extends RefCounted {
   }
 
   /** AudioStreamPlayback.start */
-  final def start(from_pos: Double): Unit = {
+  final def start(fromPos: Double = 0.0): Unit = {
     if (gdext.classes.AudioStreamPlayback.mb_start == null) gdext.classes.AudioStreamPlayback.mb_start = MethodBind.get("AudioStreamPlayback", "start", 1958160172L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayback.mb_start, livePtr, from_pos)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayback.mb_start, livePtr, fromPos)
   }
 
   /** AudioStreamPlayback.seek */
-  final def seek(time: Double): Unit = {
+  final def seek(time: Double = 0.0): Unit = {
     if (gdext.classes.AudioStreamPlayback.mb_seek == null) gdext.classes.AudioStreamPlayback.mb_seek = MethodBind.get("AudioStreamPlayback", "seek", 1958160172L)
     Ptrcall.callVoid1(gdext.classes.AudioStreamPlayback.mb_seek, livePtr, time)
   }

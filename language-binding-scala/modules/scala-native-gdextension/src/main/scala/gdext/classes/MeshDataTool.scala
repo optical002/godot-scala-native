@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,15 +18,15 @@ abstract class MeshDataTool extends RefCounted {
   }
 
   /** MeshDataTool.create_from_surface */
-  final def createFromSurface(mesh: ArrayMesh, surface: Long): Long = {
+  final def createFromSurface(mesh: ArrayMesh, surface: Long): gdext.classes.Error = {
     if (gdext.classes.MeshDataTool.mb_create_from_surface == null) gdext.classes.MeshDataTool.mb_create_from_surface = MethodBind.get("MeshDataTool", "create_from_surface", 2727020678L)
-    Ptrcall.call2[GodotObject, Long, Long](gdext.classes.MeshDataTool.mb_create_from_surface, livePtr, Wrappers.handle(mesh), surface)
+    gdext.classes.Error(Ptrcall.call2[GodotObject, Long, Long](gdext.classes.MeshDataTool.mb_create_from_surface, livePtr, Wrappers.handle(mesh), surface))
   }
 
   /** MeshDataTool.commit_to_surface */
-  final def commitToSurface(mesh: ArrayMesh, compression_flags: Long): Long = {
+  final def commitToSurface(mesh: ArrayMesh, compressionFlags: Long = 0L): gdext.classes.Error = {
     if (gdext.classes.MeshDataTool.mb_commit_to_surface == null) gdext.classes.MeshDataTool.mb_commit_to_surface = MethodBind.get("MeshDataTool", "commit_to_surface", 2021686445L)
-    Ptrcall.call2[GodotObject, Long, Long](gdext.classes.MeshDataTool.mb_commit_to_surface, livePtr, Wrappers.handle(mesh), compression_flags)
+    gdext.classes.Error(Ptrcall.call2[GodotObject, Long, Long](gdext.classes.MeshDataTool.mb_commit_to_surface, livePtr, Wrappers.handle(mesh), compressionFlags))
   }
 
   /** MeshDataTool.get_format */

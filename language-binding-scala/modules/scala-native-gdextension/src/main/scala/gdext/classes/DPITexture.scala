@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class DPITexture extends Texture2D {
   }
 
   /** DPITexture.set_base_scale */
-  final def setBaseScale(base_scale: Double): Unit = {
+  final def setBaseScale(baseScale: Double): Unit = {
     if (gdext.classes.DPITexture.mb_set_base_scale == null) gdext.classes.DPITexture.mb_set_base_scale = MethodBind.get("DPITexture", "set_base_scale", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.DPITexture.mb_set_base_scale, livePtr, base_scale)
+    Ptrcall.callVoid1(gdext.classes.DPITexture.mb_set_base_scale, livePtr, baseScale)
   }
 
   /** DPITexture.get_base_scale */

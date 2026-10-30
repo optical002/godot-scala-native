@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -95,15 +96,15 @@ abstract class TouchScreenButton extends Node2D {
   }
 
   /** TouchScreenButton.set_visibility_mode */
-  final def setVisibilityMode(mode: Long): Unit = {
+  final def setVisibilityMode(mode: gdext.classes.TouchScreenButton.VisibilityMode): Unit = {
     if (gdext.classes.TouchScreenButton.mb_set_visibility_mode == null) gdext.classes.TouchScreenButton.mb_set_visibility_mode = MethodBind.get("TouchScreenButton", "set_visibility_mode", 3031128463L)
     Ptrcall.callVoid1(gdext.classes.TouchScreenButton.mb_set_visibility_mode, livePtr, mode)
   }
 
   /** TouchScreenButton.get_visibility_mode */
-  final def getVisibilityMode(): Long = {
+  final def getVisibilityMode(): gdext.classes.TouchScreenButton.VisibilityMode = {
     if (gdext.classes.TouchScreenButton.mb_get_visibility_mode == null) gdext.classes.TouchScreenButton.mb_get_visibility_mode = MethodBind.get("TouchScreenButton", "get_visibility_mode", 2558996468L)
-    Ptrcall.call0[Long](gdext.classes.TouchScreenButton.mb_get_visibility_mode, livePtr)
+    gdext.classes.TouchScreenButton.VisibilityMode(Ptrcall.call0[Long](gdext.classes.TouchScreenButton.mb_get_visibility_mode, livePtr))
   }
 
   /** TouchScreenButton.set_passby_press */
@@ -146,4 +147,26 @@ object TouchScreenButton {
   private[classes] var mb_set_passby_press: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_passby_press_enabled: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_pressed: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `TouchScreenButton.VisibilityMode`. */
+  opaque type VisibilityMode <: Long = Long
+
+  object VisibilityMode {
+    final val Always: VisibilityMode = 0L.asInstanceOf[VisibilityMode]
+    final val TouchscreenOnly: VisibilityMode = 1L.asInstanceOf[VisibilityMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): VisibilityMode = value.asInstanceOf[VisibilityMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[VisibilityMode] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[VisibilityMode]]
+
+    extension (self: VisibilityMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Always"
+        case 1L => "TouchscreenOnly"
+        case other => other.toString
+      }
+  }
 }

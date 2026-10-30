@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -95,9 +96,9 @@ abstract class CameraAttributesPractical extends CameraAttributes {
   }
 
   /** CameraAttributesPractical.set_auto_exposure_max_sensitivity */
-  final def setAutoExposureMaxSensitivity(max_sensitivity: Double): Unit = {
+  final def setAutoExposureMaxSensitivity(maxSensitivity: Double): Unit = {
     if (gdext.classes.CameraAttributesPractical.mb_set_auto_exposure_max_sensitivity == null) gdext.classes.CameraAttributesPractical.mb_set_auto_exposure_max_sensitivity = MethodBind.get("CameraAttributesPractical", "set_auto_exposure_max_sensitivity", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.CameraAttributesPractical.mb_set_auto_exposure_max_sensitivity, livePtr, max_sensitivity)
+    Ptrcall.callVoid1(gdext.classes.CameraAttributesPractical.mb_set_auto_exposure_max_sensitivity, livePtr, maxSensitivity)
   }
 
   /** CameraAttributesPractical.get_auto_exposure_max_sensitivity */
@@ -107,9 +108,9 @@ abstract class CameraAttributesPractical extends CameraAttributes {
   }
 
   /** CameraAttributesPractical.set_auto_exposure_min_sensitivity */
-  final def setAutoExposureMinSensitivity(min_sensitivity: Double): Unit = {
+  final def setAutoExposureMinSensitivity(minSensitivity: Double): Unit = {
     if (gdext.classes.CameraAttributesPractical.mb_set_auto_exposure_min_sensitivity == null) gdext.classes.CameraAttributesPractical.mb_set_auto_exposure_min_sensitivity = MethodBind.get("CameraAttributesPractical", "set_auto_exposure_min_sensitivity", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.CameraAttributesPractical.mb_set_auto_exposure_min_sensitivity, livePtr, min_sensitivity)
+    Ptrcall.callVoid1(gdext.classes.CameraAttributesPractical.mb_set_auto_exposure_min_sensitivity, livePtr, minSensitivity)
   }
 
   /** CameraAttributesPractical.get_auto_exposure_min_sensitivity */

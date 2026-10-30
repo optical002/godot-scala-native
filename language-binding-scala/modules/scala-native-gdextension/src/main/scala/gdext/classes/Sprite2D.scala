@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -47,9 +48,9 @@ abstract class Sprite2D extends Node2D {
   }
 
   /** Sprite2D.set_flip_h */
-  final def setFlipH(flip_h: Boolean): Unit = {
+  final def setFlipH(flipH: Boolean): Unit = {
     if (gdext.classes.Sprite2D.mb_set_flip_h == null) gdext.classes.Sprite2D.mb_set_flip_h = MethodBind.get("Sprite2D", "set_flip_h", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.Sprite2D.mb_set_flip_h, livePtr, flip_h)
+    Ptrcall.callVoid1(gdext.classes.Sprite2D.mb_set_flip_h, livePtr, flipH)
   }
 
   /** Sprite2D.is_flipped_h */
@@ -59,9 +60,9 @@ abstract class Sprite2D extends Node2D {
   }
 
   /** Sprite2D.set_flip_v */
-  final def setFlipV(flip_v: Boolean): Unit = {
+  final def setFlipV(flipV: Boolean): Unit = {
     if (gdext.classes.Sprite2D.mb_set_flip_v == null) gdext.classes.Sprite2D.mb_set_flip_v = MethodBind.get("Sprite2D", "set_flip_v", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.Sprite2D.mb_set_flip_v, livePtr, flip_v)
+    Ptrcall.callVoid1(gdext.classes.Sprite2D.mb_set_flip_v, livePtr, flipV)
   }
 
   /** Sprite2D.is_flipped_v */

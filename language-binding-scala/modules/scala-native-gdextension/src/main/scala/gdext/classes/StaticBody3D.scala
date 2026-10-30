@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,9 +36,9 @@ abstract class StaticBody3D extends PhysicsBody3D {
   }
 
   /** StaticBody3D.set_physics_material_override */
-  final def setPhysicsMaterialOverride(physics_material_override: PhysicsMaterial): Unit = {
+  final def setPhysicsMaterialOverride(physicsMaterialOverride: PhysicsMaterial): Unit = {
     if (gdext.classes.StaticBody3D.mb_set_physics_material_override == null) gdext.classes.StaticBody3D.mb_set_physics_material_override = MethodBind.get("StaticBody3D", "set_physics_material_override", 1784508650L)
-    Ptrcall.callVoid1(gdext.classes.StaticBody3D.mb_set_physics_material_override, livePtr, Wrappers.handle(physics_material_override))
+    Ptrcall.callVoid1(gdext.classes.StaticBody3D.mb_set_physics_material_override, livePtr, Wrappers.handle(physicsMaterialOverride))
   }
 
   /** StaticBody3D.get_physics_material_override. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */

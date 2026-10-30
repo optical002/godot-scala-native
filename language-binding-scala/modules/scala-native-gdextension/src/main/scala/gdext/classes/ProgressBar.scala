@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -47,9 +48,9 @@ abstract class ProgressBar extends Range {
   }
 
   /** ProgressBar.set_editor_preview_indeterminate */
-  final def setEditorPreviewIndeterminate(preview_indeterminate: Boolean): Unit = {
+  final def setEditorPreviewIndeterminate(previewIndeterminate: Boolean): Unit = {
     if (gdext.classes.ProgressBar.mb_set_editor_preview_indeterminate == null) gdext.classes.ProgressBar.mb_set_editor_preview_indeterminate = MethodBind.get("ProgressBar", "set_editor_preview_indeterminate", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.ProgressBar.mb_set_editor_preview_indeterminate, livePtr, preview_indeterminate)
+    Ptrcall.callVoid1(gdext.classes.ProgressBar.mb_set_editor_preview_indeterminate, livePtr, previewIndeterminate)
   }
 
   /** ProgressBar.is_editor_preview_indeterminate_enabled */
@@ -69,4 +70,30 @@ object ProgressBar {
   private[classes] var mb_is_indeterminate: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_editor_preview_indeterminate: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_editor_preview_indeterminate_enabled: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `ProgressBar.FillMode`. */
+  opaque type FillMode <: Long = Long
+
+  object FillMode {
+    final val BeginToEnd: FillMode = 0L.asInstanceOf[FillMode]
+    final val EndToBegin: FillMode = 1L.asInstanceOf[FillMode]
+    final val TopToBottom: FillMode = 2L.asInstanceOf[FillMode]
+    final val BottomToTop: FillMode = 3L.asInstanceOf[FillMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): FillMode = value.asInstanceOf[FillMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[FillMode] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[FillMode]]
+
+    extension (self: FillMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "BeginToEnd"
+        case 1L => "EndToBegin"
+        case 2L => "TopToBottom"
+        case 3L => "BottomToTop"
+        case other => other.toString
+      }
+  }
 }

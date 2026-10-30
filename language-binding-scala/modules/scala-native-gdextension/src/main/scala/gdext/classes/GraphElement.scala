@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -59,9 +60,9 @@ abstract class GraphElement extends Container {
   }
 
   /** GraphElement.set_scaling_menus */
-  final def setScalingMenus(scaling_menus: Boolean): Unit = {
+  final def setScalingMenus(scalingMenus: Boolean): Unit = {
     if (gdext.classes.GraphElement.mb_set_scaling_menus == null) gdext.classes.GraphElement.mb_set_scaling_menus = MethodBind.get("GraphElement", "set_scaling_menus", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.GraphElement.mb_set_scaling_menus, livePtr, scaling_menus)
+    Ptrcall.callVoid1(gdext.classes.GraphElement.mb_set_scaling_menus, livePtr, scalingMenus)
   }
 
   /** GraphElement.is_scaling_menus */

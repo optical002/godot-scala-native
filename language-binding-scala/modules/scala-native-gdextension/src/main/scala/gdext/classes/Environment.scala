@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,15 +12,15 @@ abstract class Environment extends Resource {
   override def godotClassName: String = "Environment"
 
   /** Environment.set_background */
-  final def setBackground(mode: Long): Unit = {
+  final def setBackground(mode: gdext.classes.Environment.BGMode): Unit = {
     if (gdext.classes.Environment.mb_set_background == null) gdext.classes.Environment.mb_set_background = MethodBind.get("Environment", "set_background", 4071623990L)
     Ptrcall.callVoid1(gdext.classes.Environment.mb_set_background, livePtr, mode)
   }
 
   /** Environment.get_background */
-  final def getBackground(): Long = {
+  final def getBackground(): gdext.classes.Environment.BGMode = {
     if (gdext.classes.Environment.mb_get_background == null) gdext.classes.Environment.mb_get_background = MethodBind.get("Environment", "get_background", 1843210413L)
-    Ptrcall.call0[Long](gdext.classes.Environment.mb_get_background, livePtr)
+    gdext.classes.Environment.BGMode(Ptrcall.call0[Long](gdext.classes.Environment.mb_get_background, livePtr))
   }
 
   /** Environment.set_sky */
@@ -47,9 +48,9 @@ abstract class Environment extends Resource {
   }
 
   /** Environment.set_sky_rotation */
-  final def setSkyRotation(euler_radians: gdext.builtin.Vector3): Unit = {
+  final def setSkyRotation(eulerRadians: gdext.builtin.Vector3): Unit = {
     if (gdext.classes.Environment.mb_set_sky_rotation == null) gdext.classes.Environment.mb_set_sky_rotation = MethodBind.get("Environment", "set_sky_rotation", 3460891852L)
-    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_sky_rotation, livePtr, euler_radians)
+    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_sky_rotation, livePtr, eulerRadians)
   }
 
   /** Environment.get_sky_rotation */
@@ -131,15 +132,15 @@ abstract class Environment extends Resource {
   }
 
   /** Environment.set_ambient_source */
-  final def setAmbientSource(source: Long): Unit = {
+  final def setAmbientSource(source: gdext.classes.Environment.AmbientSource): Unit = {
     if (gdext.classes.Environment.mb_set_ambient_source == null) gdext.classes.Environment.mb_set_ambient_source = MethodBind.get("Environment", "set_ambient_source", 2607780160L)
     Ptrcall.callVoid1(gdext.classes.Environment.mb_set_ambient_source, livePtr, source)
   }
 
   /** Environment.get_ambient_source */
-  final def getAmbientSource(): Long = {
+  final def getAmbientSource(): gdext.classes.Environment.AmbientSource = {
     if (gdext.classes.Environment.mb_get_ambient_source == null) gdext.classes.Environment.mb_get_ambient_source = MethodBind.get("Environment", "get_ambient_source", 67453933L)
-    Ptrcall.call0[Long](gdext.classes.Environment.mb_get_ambient_source, livePtr)
+    gdext.classes.Environment.AmbientSource(Ptrcall.call0[Long](gdext.classes.Environment.mb_get_ambient_source, livePtr))
   }
 
   /** Environment.set_ambient_light_energy */
@@ -167,27 +168,27 @@ abstract class Environment extends Resource {
   }
 
   /** Environment.set_reflection_source */
-  final def setReflectionSource(source: Long): Unit = {
+  final def setReflectionSource(source: gdext.classes.Environment.ReflectionSource): Unit = {
     if (gdext.classes.Environment.mb_set_reflection_source == null) gdext.classes.Environment.mb_set_reflection_source = MethodBind.get("Environment", "set_reflection_source", 299673197L)
     Ptrcall.callVoid1(gdext.classes.Environment.mb_set_reflection_source, livePtr, source)
   }
 
   /** Environment.get_reflection_source */
-  final def getReflectionSource(): Long = {
+  final def getReflectionSource(): gdext.classes.Environment.ReflectionSource = {
     if (gdext.classes.Environment.mb_get_reflection_source == null) gdext.classes.Environment.mb_get_reflection_source = MethodBind.get("Environment", "get_reflection_source", 777700713L)
-    Ptrcall.call0[Long](gdext.classes.Environment.mb_get_reflection_source, livePtr)
+    gdext.classes.Environment.ReflectionSource(Ptrcall.call0[Long](gdext.classes.Environment.mb_get_reflection_source, livePtr))
   }
 
   /** Environment.set_tonemapper */
-  final def setTonemapper(mode: Long): Unit = {
+  final def setTonemapper(mode: gdext.classes.Environment.ToneMapper): Unit = {
     if (gdext.classes.Environment.mb_set_tonemapper == null) gdext.classes.Environment.mb_set_tonemapper = MethodBind.get("Environment", "set_tonemapper", 1509116664L)
     Ptrcall.callVoid1(gdext.classes.Environment.mb_set_tonemapper, livePtr, mode)
   }
 
   /** Environment.get_tonemapper */
-  final def getTonemapper(): Long = {
+  final def getTonemapper(): gdext.classes.Environment.ToneMapper = {
     if (gdext.classes.Environment.mb_get_tonemapper == null) gdext.classes.Environment.mb_get_tonemapper = MethodBind.get("Environment", "get_tonemapper", 2908408137L)
-    Ptrcall.call0[Long](gdext.classes.Environment.mb_get_tonemapper, livePtr)
+    gdext.classes.Environment.ToneMapper(Ptrcall.call0[Long](gdext.classes.Environment.mb_get_tonemapper, livePtr))
   }
 
   /** Environment.set_tonemap_exposure */
@@ -251,9 +252,9 @@ abstract class Environment extends Resource {
   }
 
   /** Environment.set_ssr_max_steps */
-  final def setSsrMaxSteps(max_steps: Long): Unit = {
+  final def setSsrMaxSteps(maxSteps: Long): Unit = {
     if (gdext.classes.Environment.mb_set_ssr_max_steps == null) gdext.classes.Environment.mb_set_ssr_max_steps = MethodBind.get("Environment", "set_ssr_max_steps", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_ssr_max_steps, livePtr, max_steps)
+    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_ssr_max_steps, livePtr, maxSteps)
   }
 
   /** Environment.get_ssr_max_steps */
@@ -263,9 +264,9 @@ abstract class Environment extends Resource {
   }
 
   /** Environment.set_ssr_fade_in */
-  final def setSsrFadeIn(fade_in: Double): Unit = {
+  final def setSsrFadeIn(fadeIn: Double): Unit = {
     if (gdext.classes.Environment.mb_set_ssr_fade_in == null) gdext.classes.Environment.mb_set_ssr_fade_in = MethodBind.get("Environment", "set_ssr_fade_in", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_ssr_fade_in, livePtr, fade_in)
+    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_ssr_fade_in, livePtr, fadeIn)
   }
 
   /** Environment.get_ssr_fade_in */
@@ -275,9 +276,9 @@ abstract class Environment extends Resource {
   }
 
   /** Environment.set_ssr_fade_out */
-  final def setSsrFadeOut(fade_out: Double): Unit = {
+  final def setSsrFadeOut(fadeOut: Double): Unit = {
     if (gdext.classes.Environment.mb_set_ssr_fade_out == null) gdext.classes.Environment.mb_set_ssr_fade_out = MethodBind.get("Environment", "set_ssr_fade_out", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_ssr_fade_out, livePtr, fade_out)
+    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_ssr_fade_out, livePtr, fadeOut)
   }
 
   /** Environment.get_ssr_fade_out */
@@ -287,9 +288,9 @@ abstract class Environment extends Resource {
   }
 
   /** Environment.set_ssr_depth_tolerance */
-  final def setSsrDepthTolerance(depth_tolerance: Double): Unit = {
+  final def setSsrDepthTolerance(depthTolerance: Double): Unit = {
     if (gdext.classes.Environment.mb_set_ssr_depth_tolerance == null) gdext.classes.Environment.mb_set_ssr_depth_tolerance = MethodBind.get("Environment", "set_ssr_depth_tolerance", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_ssr_depth_tolerance, livePtr, depth_tolerance)
+    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_ssr_depth_tolerance, livePtr, depthTolerance)
   }
 
   /** Environment.get_ssr_depth_tolerance */
@@ -455,9 +456,9 @@ abstract class Environment extends Resource {
   }
 
   /** Environment.set_ssil_normal_rejection */
-  final def setSsilNormalRejection(normal_rejection: Double): Unit = {
+  final def setSsilNormalRejection(normalRejection: Double): Unit = {
     if (gdext.classes.Environment.mb_set_ssil_normal_rejection == null) gdext.classes.Environment.mb_set_ssil_normal_rejection = MethodBind.get("Environment", "set_ssil_normal_rejection", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_ssil_normal_rejection, livePtr, normal_rejection)
+    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_ssil_normal_rejection, livePtr, normalRejection)
   }
 
   /** Environment.get_ssil_normal_rejection */
@@ -527,15 +528,15 @@ abstract class Environment extends Resource {
   }
 
   /** Environment.set_sdfgi_y_scale */
-  final def setSdfgiYScale(scale: Long): Unit = {
+  final def setSdfgiYScale(scale: gdext.classes.Environment.SDFGIYScale): Unit = {
     if (gdext.classes.Environment.mb_set_sdfgi_y_scale == null) gdext.classes.Environment.mb_set_sdfgi_y_scale = MethodBind.get("Environment", "set_sdfgi_y_scale", 3608608372L)
     Ptrcall.callVoid1(gdext.classes.Environment.mb_set_sdfgi_y_scale, livePtr, scale)
   }
 
   /** Environment.get_sdfgi_y_scale */
-  final def getSdfgiYScale(): Long = {
+  final def getSdfgiYScale(): gdext.classes.Environment.SDFGIYScale = {
     if (gdext.classes.Environment.mb_get_sdfgi_y_scale == null) gdext.classes.Environment.mb_get_sdfgi_y_scale = MethodBind.get("Environment", "get_sdfgi_y_scale", 2568002245L)
-    Ptrcall.call0[Long](gdext.classes.Environment.mb_get_sdfgi_y_scale, livePtr)
+    gdext.classes.Environment.SDFGIYScale(Ptrcall.call0[Long](gdext.classes.Environment.mb_get_sdfgi_y_scale, livePtr))
   }
 
   /** Environment.set_sdfgi_use_occlusion */
@@ -695,15 +696,15 @@ abstract class Environment extends Resource {
   }
 
   /** Environment.set_glow_blend_mode */
-  final def setGlowBlendMode(mode: Long): Unit = {
+  final def setGlowBlendMode(mode: gdext.classes.Environment.GlowBlendMode): Unit = {
     if (gdext.classes.Environment.mb_set_glow_blend_mode == null) gdext.classes.Environment.mb_set_glow_blend_mode = MethodBind.get("Environment", "set_glow_blend_mode", 2561587761L)
     Ptrcall.callVoid1(gdext.classes.Environment.mb_set_glow_blend_mode, livePtr, mode)
   }
 
   /** Environment.get_glow_blend_mode */
-  final def getGlowBlendMode(): Long = {
+  final def getGlowBlendMode(): gdext.classes.Environment.GlowBlendMode = {
     if (gdext.classes.Environment.mb_get_glow_blend_mode == null) gdext.classes.Environment.mb_get_glow_blend_mode = MethodBind.get("Environment", "get_glow_blend_mode", 1529667332L)
-    Ptrcall.call0[Long](gdext.classes.Environment.mb_get_glow_blend_mode, livePtr)
+    gdext.classes.Environment.GlowBlendMode(Ptrcall.call0[Long](gdext.classes.Environment.mb_get_glow_blend_mode, livePtr))
   }
 
   /** Environment.set_glow_hdr_bleed_threshold */
@@ -779,21 +780,21 @@ abstract class Environment extends Resource {
   }
 
   /** Environment.set_fog_mode */
-  final def setFogMode(mode: Long): Unit = {
+  final def setFogMode(mode: gdext.classes.Environment.FogMode): Unit = {
     if (gdext.classes.Environment.mb_set_fog_mode == null) gdext.classes.Environment.mb_set_fog_mode = MethodBind.get("Environment", "set_fog_mode", 3059806579L)
     Ptrcall.callVoid1(gdext.classes.Environment.mb_set_fog_mode, livePtr, mode)
   }
 
   /** Environment.get_fog_mode */
-  final def getFogMode(): Long = {
+  final def getFogMode(): gdext.classes.Environment.FogMode = {
     if (gdext.classes.Environment.mb_get_fog_mode == null) gdext.classes.Environment.mb_get_fog_mode = MethodBind.get("Environment", "get_fog_mode", 2456062483L)
-    Ptrcall.call0[Long](gdext.classes.Environment.mb_get_fog_mode, livePtr)
+    gdext.classes.Environment.FogMode(Ptrcall.call0[Long](gdext.classes.Environment.mb_get_fog_mode, livePtr))
   }
 
   /** Environment.set_fog_light_color */
-  final def setFogLightColor(light_color: gdext.builtin.Color): Unit = {
+  final def setFogLightColor(lightColor: gdext.builtin.Color): Unit = {
     if (gdext.classes.Environment.mb_set_fog_light_color == null) gdext.classes.Environment.mb_set_fog_light_color = MethodBind.get("Environment", "set_fog_light_color", 2920490490L)
-    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_fog_light_color, livePtr, light_color)
+    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_fog_light_color, livePtr, lightColor)
   }
 
   /** Environment.get_fog_light_color */
@@ -803,9 +804,9 @@ abstract class Environment extends Resource {
   }
 
   /** Environment.set_fog_light_energy */
-  final def setFogLightEnergy(light_energy: Double): Unit = {
+  final def setFogLightEnergy(lightEnergy: Double): Unit = {
     if (gdext.classes.Environment.mb_set_fog_light_energy == null) gdext.classes.Environment.mb_set_fog_light_energy = MethodBind.get("Environment", "set_fog_light_energy", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_fog_light_energy, livePtr, light_energy)
+    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_fog_light_energy, livePtr, lightEnergy)
   }
 
   /** Environment.get_fog_light_energy */
@@ -815,9 +816,9 @@ abstract class Environment extends Resource {
   }
 
   /** Environment.set_fog_sun_scatter */
-  final def setFogSunScatter(sun_scatter: Double): Unit = {
+  final def setFogSunScatter(sunScatter: Double): Unit = {
     if (gdext.classes.Environment.mb_set_fog_sun_scatter == null) gdext.classes.Environment.mb_set_fog_sun_scatter = MethodBind.get("Environment", "set_fog_sun_scatter", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_fog_sun_scatter, livePtr, sun_scatter)
+    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_fog_sun_scatter, livePtr, sunScatter)
   }
 
   /** Environment.get_fog_sun_scatter */
@@ -851,9 +852,9 @@ abstract class Environment extends Resource {
   }
 
   /** Environment.set_fog_height_density */
-  final def setFogHeightDensity(height_density: Double): Unit = {
+  final def setFogHeightDensity(heightDensity: Double): Unit = {
     if (gdext.classes.Environment.mb_set_fog_height_density == null) gdext.classes.Environment.mb_set_fog_height_density = MethodBind.get("Environment", "set_fog_height_density", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_fog_height_density, livePtr, height_density)
+    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_fog_height_density, livePtr, heightDensity)
   }
 
   /** Environment.get_fog_height_density */
@@ -863,9 +864,9 @@ abstract class Environment extends Resource {
   }
 
   /** Environment.set_fog_aerial_perspective */
-  final def setFogAerialPerspective(aerial_perspective: Double): Unit = {
+  final def setFogAerialPerspective(aerialPerspective: Double): Unit = {
     if (gdext.classes.Environment.mb_set_fog_aerial_perspective == null) gdext.classes.Environment.mb_set_fog_aerial_perspective = MethodBind.get("Environment", "set_fog_aerial_perspective", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_fog_aerial_perspective, livePtr, aerial_perspective)
+    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_fog_aerial_perspective, livePtr, aerialPerspective)
   }
 
   /** Environment.get_fog_aerial_perspective */
@@ -875,9 +876,9 @@ abstract class Environment extends Resource {
   }
 
   /** Environment.set_fog_sky_affect */
-  final def setFogSkyAffect(sky_affect: Double): Unit = {
+  final def setFogSkyAffect(skyAffect: Double): Unit = {
     if (gdext.classes.Environment.mb_set_fog_sky_affect == null) gdext.classes.Environment.mb_set_fog_sky_affect = MethodBind.get("Environment", "set_fog_sky_affect", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_fog_sky_affect, livePtr, sky_affect)
+    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_fog_sky_affect, livePtr, skyAffect)
   }
 
   /** Environment.get_fog_sky_affect */
@@ -1007,9 +1008,9 @@ abstract class Environment extends Resource {
   }
 
   /** Environment.set_volumetric_fog_detail_spread */
-  final def setVolumetricFogDetailSpread(detail_spread: Double): Unit = {
+  final def setVolumetricFogDetailSpread(detailSpread: Double): Unit = {
     if (gdext.classes.Environment.mb_set_volumetric_fog_detail_spread == null) gdext.classes.Environment.mb_set_volumetric_fog_detail_spread = MethodBind.get("Environment", "set_volumetric_fog_detail_spread", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_volumetric_fog_detail_spread, livePtr, detail_spread)
+    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_volumetric_fog_detail_spread, livePtr, detailSpread)
   }
 
   /** Environment.get_volumetric_fog_detail_spread */
@@ -1019,9 +1020,9 @@ abstract class Environment extends Resource {
   }
 
   /** Environment.set_volumetric_fog_gi_inject */
-  final def setVolumetricFogGiInject(gi_inject: Double): Unit = {
+  final def setVolumetricFogGiInject(giInject: Double): Unit = {
     if (gdext.classes.Environment.mb_set_volumetric_fog_gi_inject == null) gdext.classes.Environment.mb_set_volumetric_fog_gi_inject = MethodBind.get("Environment", "set_volumetric_fog_gi_inject", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_volumetric_fog_gi_inject, livePtr, gi_inject)
+    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_volumetric_fog_gi_inject, livePtr, giInject)
   }
 
   /** Environment.get_volumetric_fog_gi_inject */
@@ -1043,9 +1044,9 @@ abstract class Environment extends Resource {
   }
 
   /** Environment.set_volumetric_fog_sky_affect */
-  final def setVolumetricFogSkyAffect(sky_affect: Double): Unit = {
+  final def setVolumetricFogSkyAffect(skyAffect: Double): Unit = {
     if (gdext.classes.Environment.mb_set_volumetric_fog_sky_affect == null) gdext.classes.Environment.mb_set_volumetric_fog_sky_affect = MethodBind.get("Environment", "set_volumetric_fog_sky_affect", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_volumetric_fog_sky_affect, livePtr, sky_affect)
+    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_volumetric_fog_sky_affect, livePtr, skyAffect)
   }
 
   /** Environment.get_volumetric_fog_sky_affect */
@@ -1067,9 +1068,9 @@ abstract class Environment extends Resource {
   }
 
   /** Environment.set_volumetric_fog_temporal_reprojection_amount */
-  final def setVolumetricFogTemporalReprojectionAmount(temporal_reprojection_amount: Double): Unit = {
+  final def setVolumetricFogTemporalReprojectionAmount(temporalReprojectionAmount: Double): Unit = {
     if (gdext.classes.Environment.mb_set_volumetric_fog_temporal_reprojection_amount == null) gdext.classes.Environment.mb_set_volumetric_fog_temporal_reprojection_amount = MethodBind.get("Environment", "set_volumetric_fog_temporal_reprojection_amount", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_volumetric_fog_temporal_reprojection_amount, livePtr, temporal_reprojection_amount)
+    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_volumetric_fog_temporal_reprojection_amount, livePtr, temporalReprojectionAmount)
   }
 
   /** Environment.get_volumetric_fog_temporal_reprojection_amount */
@@ -1127,9 +1128,9 @@ abstract class Environment extends Resource {
   }
 
   /** Environment.set_adjustment_color_correction */
-  final def setAdjustmentColorCorrection(color_correction: Texture): Unit = {
+  final def setAdjustmentColorCorrection(colorCorrection: Texture): Unit = {
     if (gdext.classes.Environment.mb_set_adjustment_color_correction == null) gdext.classes.Environment.mb_set_adjustment_color_correction = MethodBind.get("Environment", "set_adjustment_color_correction", 1790811099L)
-    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_adjustment_color_correction, livePtr, Wrappers.handle(color_correction))
+    Ptrcall.callVoid1(gdext.classes.Environment.mb_set_adjustment_color_correction, livePtr, Wrappers.handle(colorCorrection))
   }
 
   /** Environment.get_adjustment_color_correction. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -1329,4 +1330,188 @@ object Environment {
   private[classes] var mb_get_adjustment_saturation: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_adjustment_color_correction: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_adjustment_color_correction: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `Environment.BGMode`. */
+  opaque type BGMode <: Long = Long
+
+  object BGMode {
+    final val ClearColor: BGMode = 0L.asInstanceOf[BGMode]
+    final val Color: BGMode = 1L.asInstanceOf[BGMode]
+    final val Sky: BGMode = 2L.asInstanceOf[BGMode]
+    final val Canvas: BGMode = 3L.asInstanceOf[BGMode]
+    final val Keep: BGMode = 4L.asInstanceOf[BGMode]
+    final val CameraFeed: BGMode = 5L.asInstanceOf[BGMode]
+    final val Max: BGMode = 6L.asInstanceOf[BGMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): BGMode = value.asInstanceOf[BGMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[BGMode] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L).asInstanceOf[scala.IArray[BGMode]]
+
+    extension (self: BGMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "ClearColor"
+        case 1L => "Color"
+        case 2L => "Sky"
+        case 3L => "Canvas"
+        case 4L => "Keep"
+        case 5L => "CameraFeed"
+        case 6L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Environment.AmbientSource`. */
+  opaque type AmbientSource <: Long = Long
+
+  object AmbientSource {
+    final val Bg: AmbientSource = 0L.asInstanceOf[AmbientSource]
+    final val Disabled: AmbientSource = 1L.asInstanceOf[AmbientSource]
+    final val Color: AmbientSource = 2L.asInstanceOf[AmbientSource]
+    final val Sky: AmbientSource = 3L.asInstanceOf[AmbientSource]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): AmbientSource = value.asInstanceOf[AmbientSource]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[AmbientSource] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[AmbientSource]]
+
+    extension (self: AmbientSource)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Bg"
+        case 1L => "Disabled"
+        case 2L => "Color"
+        case 3L => "Sky"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Environment.ReflectionSource`. */
+  opaque type ReflectionSource <: Long = Long
+
+  object ReflectionSource {
+    final val Bg: ReflectionSource = 0L.asInstanceOf[ReflectionSource]
+    final val Disabled: ReflectionSource = 1L.asInstanceOf[ReflectionSource]
+    final val Sky: ReflectionSource = 2L.asInstanceOf[ReflectionSource]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ReflectionSource = value.asInstanceOf[ReflectionSource]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ReflectionSource] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[ReflectionSource]]
+
+    extension (self: ReflectionSource)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Bg"
+        case 1L => "Disabled"
+        case 2L => "Sky"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Environment.ToneMapper`. */
+  opaque type ToneMapper <: Long = Long
+
+  object ToneMapper {
+    final val Linear: ToneMapper = 0L.asInstanceOf[ToneMapper]
+    final val Reinhardt: ToneMapper = 1L.asInstanceOf[ToneMapper]
+    final val Filmic: ToneMapper = 2L.asInstanceOf[ToneMapper]
+    final val Aces: ToneMapper = 3L.asInstanceOf[ToneMapper]
+    final val Agx: ToneMapper = 4L.asInstanceOf[ToneMapper]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ToneMapper = value.asInstanceOf[ToneMapper]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ToneMapper] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[ToneMapper]]
+
+    extension (self: ToneMapper)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Linear"
+        case 1L => "Reinhardt"
+        case 2L => "Filmic"
+        case 3L => "Aces"
+        case 4L => "Agx"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Environment.GlowBlendMode`. */
+  opaque type GlowBlendMode <: Long = Long
+
+  object GlowBlendMode {
+    final val Additive: GlowBlendMode = 0L.asInstanceOf[GlowBlendMode]
+    final val Screen: GlowBlendMode = 1L.asInstanceOf[GlowBlendMode]
+    final val Softlight: GlowBlendMode = 2L.asInstanceOf[GlowBlendMode]
+    final val Replace: GlowBlendMode = 3L.asInstanceOf[GlowBlendMode]
+    final val Mix: GlowBlendMode = 4L.asInstanceOf[GlowBlendMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): GlowBlendMode = value.asInstanceOf[GlowBlendMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[GlowBlendMode] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[GlowBlendMode]]
+
+    extension (self: GlowBlendMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Additive"
+        case 1L => "Screen"
+        case 2L => "Softlight"
+        case 3L => "Replace"
+        case 4L => "Mix"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Environment.FogMode`. */
+  opaque type FogMode <: Long = Long
+
+  object FogMode {
+    final val Exponential: FogMode = 0L.asInstanceOf[FogMode]
+    final val Depth: FogMode = 1L.asInstanceOf[FogMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): FogMode = value.asInstanceOf[FogMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[FogMode] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[FogMode]]
+
+    extension (self: FogMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Exponential"
+        case 1L => "Depth"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Environment.SDFGIYScale`. */
+  opaque type SDFGIYScale <: Long = Long
+
+  object SDFGIYScale {
+    final val Scale50Percent: SDFGIYScale = 0L.asInstanceOf[SDFGIYScale]
+    final val Scale75Percent: SDFGIYScale = 1L.asInstanceOf[SDFGIYScale]
+    final val Scale100Percent: SDFGIYScale = 2L.asInstanceOf[SDFGIYScale]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): SDFGIYScale = value.asInstanceOf[SDFGIYScale]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[SDFGIYScale] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[SDFGIYScale]]
+
+    extension (self: SDFGIYScale)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Scale50Percent"
+        case 1L => "Scale75Percent"
+        case 2L => "Scale100Percent"
+        case other => other.toString
+      }
+  }
 }

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -47,13 +48,13 @@ abstract class StyleBoxFlat extends StyleBox {
   }
 
   /** StyleBoxFlat.set_border_width */
-  final def setBorderWidth(margin: Long, width: Long): Unit = {
+  final def setBorderWidth(margin: gdext.classes.Side, width: Long): Unit = {
     if (gdext.classes.StyleBoxFlat.mb_set_border_width == null) gdext.classes.StyleBoxFlat.mb_set_border_width = MethodBind.get("StyleBoxFlat", "set_border_width", 437707142L)
     Ptrcall.callVoid2(gdext.classes.StyleBoxFlat.mb_set_border_width, livePtr, margin, width)
   }
 
   /** StyleBoxFlat.get_border_width */
-  final def getBorderWidth(margin: Long): Long = {
+  final def getBorderWidth(margin: gdext.classes.Side): Long = {
     if (gdext.classes.StyleBoxFlat.mb_get_border_width == null) gdext.classes.StyleBoxFlat.mb_get_border_width = MethodBind.get("StyleBoxFlat", "get_border_width", 1983885014L)
     Ptrcall.call1[Long, Long](gdext.classes.StyleBoxFlat.mb_get_border_width, livePtr, margin)
   }
@@ -77,19 +78,19 @@ abstract class StyleBoxFlat extends StyleBox {
   }
 
   /** StyleBoxFlat.set_corner_radius */
-  final def setCornerRadius(corner: Long, radius: Long): Unit = {
+  final def setCornerRadius(corner: gdext.classes.Corner, radius: Long): Unit = {
     if (gdext.classes.StyleBoxFlat.mb_set_corner_radius == null) gdext.classes.StyleBoxFlat.mb_set_corner_radius = MethodBind.get("StyleBoxFlat", "set_corner_radius", 2696158768L)
     Ptrcall.callVoid2(gdext.classes.StyleBoxFlat.mb_set_corner_radius, livePtr, corner, radius)
   }
 
   /** StyleBoxFlat.get_corner_radius */
-  final def getCornerRadius(corner: Long): Long = {
+  final def getCornerRadius(corner: gdext.classes.Corner): Long = {
     if (gdext.classes.StyleBoxFlat.mb_get_corner_radius == null) gdext.classes.StyleBoxFlat.mb_get_corner_radius = MethodBind.get("StyleBoxFlat", "get_corner_radius", 3982397690L)
     Ptrcall.call1[Long, Long](gdext.classes.StyleBoxFlat.mb_get_corner_radius, livePtr, corner)
   }
 
   /** StyleBoxFlat.set_expand_margin */
-  final def setExpandMargin(margin: Long, size: Double): Unit = {
+  final def setExpandMargin(margin: gdext.classes.Side, size: Double): Unit = {
     if (gdext.classes.StyleBoxFlat.mb_set_expand_margin == null) gdext.classes.StyleBoxFlat.mb_set_expand_margin = MethodBind.get("StyleBoxFlat", "set_expand_margin", 4290182280L)
     Ptrcall.callVoid2(gdext.classes.StyleBoxFlat.mb_set_expand_margin, livePtr, margin, size)
   }
@@ -101,15 +102,15 @@ abstract class StyleBoxFlat extends StyleBox {
   }
 
   /** StyleBoxFlat.get_expand_margin */
-  final def getExpandMargin(margin: Long): Double = {
+  final def getExpandMargin(margin: gdext.classes.Side): Double = {
     if (gdext.classes.StyleBoxFlat.mb_get_expand_margin == null) gdext.classes.StyleBoxFlat.mb_get_expand_margin = MethodBind.get("StyleBoxFlat", "get_expand_margin", 2869120046L)
     Ptrcall.call1[Long, Double](gdext.classes.StyleBoxFlat.mb_get_expand_margin, livePtr, margin)
   }
 
   /** StyleBoxFlat.set_draw_center */
-  final def setDrawCenter(draw_center: Boolean): Unit = {
+  final def setDrawCenter(drawCenter: Boolean): Unit = {
     if (gdext.classes.StyleBoxFlat.mb_set_draw_center == null) gdext.classes.StyleBoxFlat.mb_set_draw_center = MethodBind.get("StyleBoxFlat", "set_draw_center", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.StyleBoxFlat.mb_set_draw_center, livePtr, draw_center)
+    Ptrcall.callVoid1(gdext.classes.StyleBoxFlat.mb_set_draw_center, livePtr, drawCenter)
   }
 
   /** StyleBoxFlat.is_draw_center_enabled */
@@ -167,9 +168,9 @@ abstract class StyleBoxFlat extends StyleBox {
   }
 
   /** StyleBoxFlat.set_anti_aliased */
-  final def setAntiAliased(anti_aliased: Boolean): Unit = {
+  final def setAntiAliased(antiAliased: Boolean): Unit = {
     if (gdext.classes.StyleBoxFlat.mb_set_anti_aliased == null) gdext.classes.StyleBoxFlat.mb_set_anti_aliased = MethodBind.get("StyleBoxFlat", "set_anti_aliased", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.StyleBoxFlat.mb_set_anti_aliased, livePtr, anti_aliased)
+    Ptrcall.callVoid1(gdext.classes.StyleBoxFlat.mb_set_anti_aliased, livePtr, antiAliased)
   }
 
   /** StyleBoxFlat.is_anti_aliased */

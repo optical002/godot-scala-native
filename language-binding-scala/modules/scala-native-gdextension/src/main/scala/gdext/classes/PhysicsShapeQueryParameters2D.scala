@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -59,9 +60,9 @@ abstract class PhysicsShapeQueryParameters2D extends RefCounted {
   }
 
   /** PhysicsShapeQueryParameters2D.set_collision_mask */
-  final def setCollisionMask(collision_mask: Long): Unit = {
+  final def setCollisionMask(collisionMask: Long): Unit = {
     if (gdext.classes.PhysicsShapeQueryParameters2D.mb_set_collision_mask == null) gdext.classes.PhysicsShapeQueryParameters2D.mb_set_collision_mask = MethodBind.get("PhysicsShapeQueryParameters2D", "set_collision_mask", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.PhysicsShapeQueryParameters2D.mb_set_collision_mask, livePtr, collision_mask)
+    Ptrcall.callVoid1(gdext.classes.PhysicsShapeQueryParameters2D.mb_set_collision_mask, livePtr, collisionMask)
   }
 
   /** PhysicsShapeQueryParameters2D.get_collision_mask */

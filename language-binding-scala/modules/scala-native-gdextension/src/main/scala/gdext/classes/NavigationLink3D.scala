@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,9 +36,9 @@ abstract class NavigationLink3D extends Node3D {
   }
 
   /** NavigationLink3D.set_navigation_layers */
-  final def setNavigationLayers(navigation_layers: Long): Unit = {
+  final def setNavigationLayers(navigationLayers: Long): Unit = {
     if (gdext.classes.NavigationLink3D.mb_set_navigation_layers == null) gdext.classes.NavigationLink3D.mb_set_navigation_layers = MethodBind.get("NavigationLink3D", "set_navigation_layers", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.NavigationLink3D.mb_set_navigation_layers, livePtr, navigation_layers)
+    Ptrcall.callVoid1(gdext.classes.NavigationLink3D.mb_set_navigation_layers, livePtr, navigationLayers)
   }
 
   /** NavigationLink3D.get_navigation_layers */
@@ -47,15 +48,15 @@ abstract class NavigationLink3D extends Node3D {
   }
 
   /** NavigationLink3D.set_navigation_layer_value */
-  final def setNavigationLayerValue(layer_number: Long, value: Boolean): Unit = {
+  final def setNavigationLayerValue(layerNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.NavigationLink3D.mb_set_navigation_layer_value == null) gdext.classes.NavigationLink3D.mb_set_navigation_layer_value = MethodBind.get("NavigationLink3D", "set_navigation_layer_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.NavigationLink3D.mb_set_navigation_layer_value, livePtr, layer_number, value)
+    Ptrcall.callVoid2(gdext.classes.NavigationLink3D.mb_set_navigation_layer_value, livePtr, layerNumber, value)
   }
 
   /** NavigationLink3D.get_navigation_layer_value */
-  final def getNavigationLayerValue(layer_number: Long): Boolean = {
+  final def getNavigationLayerValue(layerNumber: Long): Boolean = {
     if (gdext.classes.NavigationLink3D.mb_get_navigation_layer_value == null) gdext.classes.NavigationLink3D.mb_get_navigation_layer_value = MethodBind.get("NavigationLink3D", "get_navigation_layer_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.NavigationLink3D.mb_get_navigation_layer_value, livePtr, layer_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.NavigationLink3D.mb_get_navigation_layer_value, livePtr, layerNumber)
   }
 
   /** NavigationLink3D.set_start_position */
@@ -107,9 +108,9 @@ abstract class NavigationLink3D extends Node3D {
   }
 
   /** NavigationLink3D.set_enter_cost */
-  final def setEnterCost(enter_cost: Double): Unit = {
+  final def setEnterCost(enterCost: Double): Unit = {
     if (gdext.classes.NavigationLink3D.mb_set_enter_cost == null) gdext.classes.NavigationLink3D.mb_set_enter_cost = MethodBind.get("NavigationLink3D", "set_enter_cost", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.NavigationLink3D.mb_set_enter_cost, livePtr, enter_cost)
+    Ptrcall.callVoid1(gdext.classes.NavigationLink3D.mb_set_enter_cost, livePtr, enterCost)
   }
 
   /** NavigationLink3D.get_enter_cost */
@@ -119,9 +120,9 @@ abstract class NavigationLink3D extends Node3D {
   }
 
   /** NavigationLink3D.set_travel_cost */
-  final def setTravelCost(travel_cost: Double): Unit = {
+  final def setTravelCost(travelCost: Double): Unit = {
     if (gdext.classes.NavigationLink3D.mb_set_travel_cost == null) gdext.classes.NavigationLink3D.mb_set_travel_cost = MethodBind.get("NavigationLink3D", "set_travel_cost", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.NavigationLink3D.mb_set_travel_cost, livePtr, travel_cost)
+    Ptrcall.callVoid1(gdext.classes.NavigationLink3D.mb_set_travel_cost, livePtr, travelCost)
   }
 
   /** NavigationLink3D.get_travel_cost */

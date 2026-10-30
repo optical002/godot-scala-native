@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -29,9 +30,9 @@ abstract class GLTFBufferView extends Resource {
   }
 
   /** GLTFBufferView.set_byte_offset */
-  final def setByteOffset(byte_offset: Long): Unit = {
+  final def setByteOffset(byteOffset: Long): Unit = {
     if (gdext.classes.GLTFBufferView.mb_set_byte_offset == null) gdext.classes.GLTFBufferView.mb_set_byte_offset = MethodBind.get("GLTFBufferView", "set_byte_offset", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.GLTFBufferView.mb_set_byte_offset, livePtr, byte_offset)
+    Ptrcall.callVoid1(gdext.classes.GLTFBufferView.mb_set_byte_offset, livePtr, byteOffset)
   }
 
   /** GLTFBufferView.get_byte_length */
@@ -41,9 +42,9 @@ abstract class GLTFBufferView extends Resource {
   }
 
   /** GLTFBufferView.set_byte_length */
-  final def setByteLength(byte_length: Long): Unit = {
+  final def setByteLength(byteLength: Long): Unit = {
     if (gdext.classes.GLTFBufferView.mb_set_byte_length == null) gdext.classes.GLTFBufferView.mb_set_byte_length = MethodBind.get("GLTFBufferView", "set_byte_length", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.GLTFBufferView.mb_set_byte_length, livePtr, byte_length)
+    Ptrcall.callVoid1(gdext.classes.GLTFBufferView.mb_set_byte_length, livePtr, byteLength)
   }
 
   /** GLTFBufferView.get_byte_stride */
@@ -53,9 +54,9 @@ abstract class GLTFBufferView extends Resource {
   }
 
   /** GLTFBufferView.set_byte_stride */
-  final def setByteStride(byte_stride: Long): Unit = {
+  final def setByteStride(byteStride: Long): Unit = {
     if (gdext.classes.GLTFBufferView.mb_set_byte_stride == null) gdext.classes.GLTFBufferView.mb_set_byte_stride = MethodBind.get("GLTFBufferView", "set_byte_stride", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.GLTFBufferView.mb_set_byte_stride, livePtr, byte_stride)
+    Ptrcall.callVoid1(gdext.classes.GLTFBufferView.mb_set_byte_stride, livePtr, byteStride)
   }
 
   /** GLTFBufferView.get_indices */
@@ -77,9 +78,9 @@ abstract class GLTFBufferView extends Resource {
   }
 
   /** GLTFBufferView.set_vertex_attributes */
-  final def setVertexAttributes(is_attributes: Boolean): Unit = {
+  final def setVertexAttributes(isAttributes: Boolean): Unit = {
     if (gdext.classes.GLTFBufferView.mb_set_vertex_attributes == null) gdext.classes.GLTFBufferView.mb_set_vertex_attributes = MethodBind.get("GLTFBufferView", "set_vertex_attributes", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.GLTFBufferView.mb_set_vertex_attributes, livePtr, is_attributes)
+    Ptrcall.callVoid1(gdext.classes.GLTFBufferView.mb_set_vertex_attributes, livePtr, isAttributes)
   }
 
 }

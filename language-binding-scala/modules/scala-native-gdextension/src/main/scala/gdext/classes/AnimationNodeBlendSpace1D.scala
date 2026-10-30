@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class AnimationNodeBlendSpace1D extends AnimationRootNode {
   override def godotClassName: String = "AnimationNodeBlendSpace1D"
 
   /** AnimationNodeBlendSpace1D.add_blend_point */
-  final def addBlendPoint(node: AnimationRootNode, pos: Double, at_index: Long): Unit = {
+  final def addBlendPoint(node: AnimationRootNode, pos: Double, atIndex: Long = -1L): Unit = {
     if (gdext.classes.AnimationNodeBlendSpace1D.mb_add_blend_point == null) gdext.classes.AnimationNodeBlendSpace1D.mb_add_blend_point = MethodBind.get("AnimationNodeBlendSpace1D", "add_blend_point", 285050433L)
-    Ptrcall.callVoid3(gdext.classes.AnimationNodeBlendSpace1D.mb_add_blend_point, livePtr, Wrappers.handle(node), pos, at_index)
+    Ptrcall.callVoid3(gdext.classes.AnimationNodeBlendSpace1D.mb_add_blend_point, livePtr, Wrappers.handle(node), pos, atIndex)
   }
 
   /** AnimationNodeBlendSpace1D.set_blend_point_position */
@@ -53,9 +54,9 @@ abstract class AnimationNodeBlendSpace1D extends AnimationRootNode {
   }
 
   /** AnimationNodeBlendSpace1D.set_min_space */
-  final def setMinSpace(min_space: Double): Unit = {
+  final def setMinSpace(minSpace: Double): Unit = {
     if (gdext.classes.AnimationNodeBlendSpace1D.mb_set_min_space == null) gdext.classes.AnimationNodeBlendSpace1D.mb_set_min_space = MethodBind.get("AnimationNodeBlendSpace1D", "set_min_space", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AnimationNodeBlendSpace1D.mb_set_min_space, livePtr, min_space)
+    Ptrcall.callVoid1(gdext.classes.AnimationNodeBlendSpace1D.mb_set_min_space, livePtr, minSpace)
   }
 
   /** AnimationNodeBlendSpace1D.get_min_space */
@@ -65,9 +66,9 @@ abstract class AnimationNodeBlendSpace1D extends AnimationRootNode {
   }
 
   /** AnimationNodeBlendSpace1D.set_max_space */
-  final def setMaxSpace(max_space: Double): Unit = {
+  final def setMaxSpace(maxSpace: Double): Unit = {
     if (gdext.classes.AnimationNodeBlendSpace1D.mb_set_max_space == null) gdext.classes.AnimationNodeBlendSpace1D.mb_set_max_space = MethodBind.get("AnimationNodeBlendSpace1D", "set_max_space", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AnimationNodeBlendSpace1D.mb_set_max_space, livePtr, max_space)
+    Ptrcall.callVoid1(gdext.classes.AnimationNodeBlendSpace1D.mb_set_max_space, livePtr, maxSpace)
   }
 
   /** AnimationNodeBlendSpace1D.get_max_space */
@@ -101,15 +102,15 @@ abstract class AnimationNodeBlendSpace1D extends AnimationRootNode {
   }
 
   /** AnimationNodeBlendSpace1D.set_blend_mode */
-  final def setBlendMode(mode: Long): Unit = {
+  final def setBlendMode(mode: gdext.classes.AnimationNodeBlendSpace1D.BlendMode): Unit = {
     if (gdext.classes.AnimationNodeBlendSpace1D.mb_set_blend_mode == null) gdext.classes.AnimationNodeBlendSpace1D.mb_set_blend_mode = MethodBind.get("AnimationNodeBlendSpace1D", "set_blend_mode", 2600869457L)
     Ptrcall.callVoid1(gdext.classes.AnimationNodeBlendSpace1D.mb_set_blend_mode, livePtr, mode)
   }
 
   /** AnimationNodeBlendSpace1D.get_blend_mode */
-  final def getBlendMode(): Long = {
+  final def getBlendMode(): gdext.classes.AnimationNodeBlendSpace1D.BlendMode = {
     if (gdext.classes.AnimationNodeBlendSpace1D.mb_get_blend_mode == null) gdext.classes.AnimationNodeBlendSpace1D.mb_get_blend_mode = MethodBind.get("AnimationNodeBlendSpace1D", "get_blend_mode", 1547667849L)
-    Ptrcall.call0[Long](gdext.classes.AnimationNodeBlendSpace1D.mb_get_blend_mode, livePtr)
+    gdext.classes.AnimationNodeBlendSpace1D.BlendMode(Ptrcall.call0[Long](gdext.classes.AnimationNodeBlendSpace1D.mb_get_blend_mode, livePtr))
   }
 
   /** AnimationNodeBlendSpace1D.set_use_sync */
@@ -146,4 +147,28 @@ object AnimationNodeBlendSpace1D {
   private[classes] var mb_get_blend_mode: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_use_sync: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_using_sync: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `AnimationNodeBlendSpace1D.BlendMode`. */
+  opaque type BlendMode <: Long = Long
+
+  object BlendMode {
+    final val Interpolated: BlendMode = 0L.asInstanceOf[BlendMode]
+    final val Discrete: BlendMode = 1L.asInstanceOf[BlendMode]
+    final val DiscreteCarry: BlendMode = 2L.asInstanceOf[BlendMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): BlendMode = value.asInstanceOf[BlendMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[BlendMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[BlendMode]]
+
+    extension (self: BlendMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Interpolated"
+        case 1L => "Discrete"
+        case 2L => "DiscreteCarry"
+        case other => other.toString
+      }
+  }
 }

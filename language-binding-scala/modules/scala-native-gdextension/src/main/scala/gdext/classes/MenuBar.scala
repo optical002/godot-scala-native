@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -53,15 +54,15 @@ abstract class MenuBar extends Control {
   }
 
   /** MenuBar.set_text_direction */
-  final def setTextDirection(direction: Long): Unit = {
+  final def setTextDirection(direction: gdext.classes.Control.TextDirection): Unit = {
     if (gdext.classes.MenuBar.mb_set_text_direction == null) gdext.classes.MenuBar.mb_set_text_direction = MethodBind.get("MenuBar", "set_text_direction", 119160795L)
     Ptrcall.callVoid1(gdext.classes.MenuBar.mb_set_text_direction, livePtr, direction)
   }
 
   /** MenuBar.get_text_direction */
-  final def getTextDirection(): Long = {
+  final def getTextDirection(): gdext.classes.Control.TextDirection = {
     if (gdext.classes.MenuBar.mb_get_text_direction == null) gdext.classes.MenuBar.mb_get_text_direction = MethodBind.get("MenuBar", "get_text_direction", 797257663L)
-    Ptrcall.call0[Long](gdext.classes.MenuBar.mb_get_text_direction, livePtr)
+    gdext.classes.Control.TextDirection(Ptrcall.call0[Long](gdext.classes.MenuBar.mb_get_text_direction, livePtr))
   }
 
   /** MenuBar.set_language */

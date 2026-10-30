@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -143,15 +144,15 @@ abstract class LabelSettings extends Resource {
   }
 
   /** LabelSettings.add_stacked_outline */
-  final def addStackedOutline(index: Long): Unit = {
+  final def addStackedOutline(index: Long = -1L): Unit = {
     if (gdext.classes.LabelSettings.mb_add_stacked_outline == null) gdext.classes.LabelSettings.mb_add_stacked_outline = MethodBind.get("LabelSettings", "add_stacked_outline", 1025054187L)
     Ptrcall.callVoid1(gdext.classes.LabelSettings.mb_add_stacked_outline, livePtr, index)
   }
 
   /** LabelSettings.move_stacked_outline */
-  final def moveStackedOutline(from_index: Long, to_position: Long): Unit = {
+  final def moveStackedOutline(fromIndex: Long, toPosition: Long): Unit = {
     if (gdext.classes.LabelSettings.mb_move_stacked_outline == null) gdext.classes.LabelSettings.mb_move_stacked_outline = MethodBind.get("LabelSettings", "move_stacked_outline", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.LabelSettings.mb_move_stacked_outline, livePtr, from_index, to_position)
+    Ptrcall.callVoid2(gdext.classes.LabelSettings.mb_move_stacked_outline, livePtr, fromIndex, toPosition)
   }
 
   /** LabelSettings.remove_stacked_outline */
@@ -197,15 +198,15 @@ abstract class LabelSettings extends Resource {
   }
 
   /** LabelSettings.add_stacked_shadow */
-  final def addStackedShadow(index: Long): Unit = {
+  final def addStackedShadow(index: Long = -1L): Unit = {
     if (gdext.classes.LabelSettings.mb_add_stacked_shadow == null) gdext.classes.LabelSettings.mb_add_stacked_shadow = MethodBind.get("LabelSettings", "add_stacked_shadow", 1025054187L)
     Ptrcall.callVoid1(gdext.classes.LabelSettings.mb_add_stacked_shadow, livePtr, index)
   }
 
   /** LabelSettings.move_stacked_shadow */
-  final def moveStackedShadow(from_index: Long, to_position: Long): Unit = {
+  final def moveStackedShadow(fromIndex: Long, toPosition: Long): Unit = {
     if (gdext.classes.LabelSettings.mb_move_stacked_shadow == null) gdext.classes.LabelSettings.mb_move_stacked_shadow = MethodBind.get("LabelSettings", "move_stacked_shadow", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.LabelSettings.mb_move_stacked_shadow, livePtr, from_index, to_position)
+    Ptrcall.callVoid2(gdext.classes.LabelSettings.mb_move_stacked_shadow, livePtr, fromIndex, toPosition)
   }
 
   /** LabelSettings.remove_stacked_shadow */

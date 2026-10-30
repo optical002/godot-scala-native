@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,39 +24,39 @@ abstract class Skeleton3D extends Node3D {
   }
 
   /** Skeleton3D.get_bone_name */
-  final def getBoneName(bone_idx: Long): String = {
+  final def getBoneName(boneIdx: Long): String = {
     if (gdext.classes.Skeleton3D.mb_get_bone_name == null) gdext.classes.Skeleton3D.mb_get_bone_name = MethodBind.get("Skeleton3D", "get_bone_name", 844755477L)
-    Ptrcall.call1[Long, String](gdext.classes.Skeleton3D.mb_get_bone_name, livePtr, bone_idx)
+    Ptrcall.call1[Long, String](gdext.classes.Skeleton3D.mb_get_bone_name, livePtr, boneIdx)
   }
 
   /** Skeleton3D.set_bone_name */
-  final def setBoneName(bone_idx: Long, name: String): Unit = {
+  final def setBoneName(boneIdx: Long, name: String): Unit = {
     if (gdext.classes.Skeleton3D.mb_set_bone_name == null) gdext.classes.Skeleton3D.mb_set_bone_name = MethodBind.get("Skeleton3D", "set_bone_name", 501894301L)
-    Ptrcall.callVoid2(gdext.classes.Skeleton3D.mb_set_bone_name, livePtr, bone_idx, name)
+    Ptrcall.callVoid2(gdext.classes.Skeleton3D.mb_set_bone_name, livePtr, boneIdx, name)
   }
 
   /** Skeleton3D.has_bone_meta */
-  final def hasBoneMeta(bone_idx: Long, key: gdext.builtin.StringName): Boolean = {
+  final def hasBoneMeta(boneIdx: Long, key: String): Boolean = {
     if (gdext.classes.Skeleton3D.mb_has_bone_meta == null) gdext.classes.Skeleton3D.mb_has_bone_meta = MethodBind.get("Skeleton3D", "has_bone_meta", 921227809L)
-    Ptrcall.call2[Long, gdext.builtin.StringName, Boolean](gdext.classes.Skeleton3D.mb_has_bone_meta, livePtr, bone_idx, key)
+    Ptrcall.call2[Long, SnArg, Boolean](gdext.classes.Skeleton3D.mb_has_bone_meta, livePtr, boneIdx, SnArg(key))
   }
 
   /** Skeleton3D.get_concatenated_bone_names */
-  final def getConcatenatedBoneNames(): gdext.builtin.StringName = {
+  final def getConcatenatedBoneNames(): String = {
     if (gdext.classes.Skeleton3D.mb_get_concatenated_bone_names == null) gdext.classes.Skeleton3D.mb_get_concatenated_bone_names = MethodBind.get("Skeleton3D", "get_concatenated_bone_names", 2002593661L)
-    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.Skeleton3D.mb_get_concatenated_bone_names, livePtr)
+    Ptrcall.call0[SnArg](gdext.classes.Skeleton3D.mb_get_concatenated_bone_names, livePtr)
   }
 
   /** Skeleton3D.get_bone_parent */
-  final def getBoneParent(bone_idx: Long): Long = {
+  final def getBoneParent(boneIdx: Long): Long = {
     if (gdext.classes.Skeleton3D.mb_get_bone_parent == null) gdext.classes.Skeleton3D.mb_get_bone_parent = MethodBind.get("Skeleton3D", "get_bone_parent", 923996154L)
-    Ptrcall.call1[Long, Long](gdext.classes.Skeleton3D.mb_get_bone_parent, livePtr, bone_idx)
+    Ptrcall.call1[Long, Long](gdext.classes.Skeleton3D.mb_get_bone_parent, livePtr, boneIdx)
   }
 
   /** Skeleton3D.set_bone_parent */
-  final def setBoneParent(bone_idx: Long, parent_idx: Long): Unit = {
+  final def setBoneParent(boneIdx: Long, parentIdx: Long): Unit = {
     if (gdext.classes.Skeleton3D.mb_set_bone_parent == null) gdext.classes.Skeleton3D.mb_set_bone_parent = MethodBind.get("Skeleton3D", "set_bone_parent", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.Skeleton3D.mb_set_bone_parent, livePtr, bone_idx, parent_idx)
+    Ptrcall.callVoid2(gdext.classes.Skeleton3D.mb_set_bone_parent, livePtr, boneIdx, parentIdx)
   }
 
   /** Skeleton3D.get_bone_count */
@@ -71,27 +72,27 @@ abstract class Skeleton3D extends Node3D {
   }
 
   /** Skeleton3D.unparent_bone_and_rest */
-  final def unparentBoneAndRest(bone_idx: Long): Unit = {
+  final def unparentBoneAndRest(boneIdx: Long): Unit = {
     if (gdext.classes.Skeleton3D.mb_unparent_bone_and_rest == null) gdext.classes.Skeleton3D.mb_unparent_bone_and_rest = MethodBind.get("Skeleton3D", "unparent_bone_and_rest", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.Skeleton3D.mb_unparent_bone_and_rest, livePtr, bone_idx)
+    Ptrcall.callVoid1(gdext.classes.Skeleton3D.mb_unparent_bone_and_rest, livePtr, boneIdx)
   }
 
   /** Skeleton3D.get_bone_rest */
-  final def getBoneRest(bone_idx: Long): gdext.builtin.Transform3D = {
+  final def getBoneRest(boneIdx: Long): gdext.builtin.Transform3D = {
     if (gdext.classes.Skeleton3D.mb_get_bone_rest == null) gdext.classes.Skeleton3D.mb_get_bone_rest = MethodBind.get("Skeleton3D", "get_bone_rest", 1965739696L)
-    Ptrcall.call1[Long, gdext.builtin.Transform3D](gdext.classes.Skeleton3D.mb_get_bone_rest, livePtr, bone_idx)
+    Ptrcall.call1[Long, gdext.builtin.Transform3D](gdext.classes.Skeleton3D.mb_get_bone_rest, livePtr, boneIdx)
   }
 
   /** Skeleton3D.set_bone_rest */
-  final def setBoneRest(bone_idx: Long, rest: gdext.builtin.Transform3D): Unit = {
+  final def setBoneRest(boneIdx: Long, rest: gdext.builtin.Transform3D): Unit = {
     if (gdext.classes.Skeleton3D.mb_set_bone_rest == null) gdext.classes.Skeleton3D.mb_set_bone_rest = MethodBind.get("Skeleton3D", "set_bone_rest", 3616898986L)
-    Ptrcall.callVoid2(gdext.classes.Skeleton3D.mb_set_bone_rest, livePtr, bone_idx, rest)
+    Ptrcall.callVoid2(gdext.classes.Skeleton3D.mb_set_bone_rest, livePtr, boneIdx, rest)
   }
 
   /** Skeleton3D.get_bone_global_rest */
-  final def getBoneGlobalRest(bone_idx: Long): gdext.builtin.Transform3D = {
+  final def getBoneGlobalRest(boneIdx: Long): gdext.builtin.Transform3D = {
     if (gdext.classes.Skeleton3D.mb_get_bone_global_rest == null) gdext.classes.Skeleton3D.mb_get_bone_global_rest = MethodBind.get("Skeleton3D", "get_bone_global_rest", 1965739696L)
-    Ptrcall.call1[Long, gdext.builtin.Transform3D](gdext.classes.Skeleton3D.mb_get_bone_global_rest, livePtr, bone_idx)
+    Ptrcall.call1[Long, gdext.builtin.Transform3D](gdext.classes.Skeleton3D.mb_get_bone_global_rest, livePtr, boneIdx)
   }
 
   /** Skeleton3D.create_skin_from_rest_transforms. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -119,57 +120,57 @@ abstract class Skeleton3D extends Node3D {
   }
 
   /** Skeleton3D.get_bone_pose */
-  final def getBonePose(bone_idx: Long): gdext.builtin.Transform3D = {
+  final def getBonePose(boneIdx: Long): gdext.builtin.Transform3D = {
     if (gdext.classes.Skeleton3D.mb_get_bone_pose == null) gdext.classes.Skeleton3D.mb_get_bone_pose = MethodBind.get("Skeleton3D", "get_bone_pose", 1965739696L)
-    Ptrcall.call1[Long, gdext.builtin.Transform3D](gdext.classes.Skeleton3D.mb_get_bone_pose, livePtr, bone_idx)
+    Ptrcall.call1[Long, gdext.builtin.Transform3D](gdext.classes.Skeleton3D.mb_get_bone_pose, livePtr, boneIdx)
   }
 
   /** Skeleton3D.set_bone_pose */
-  final def setBonePose(bone_idx: Long, pose: gdext.builtin.Transform3D): Unit = {
+  final def setBonePose(boneIdx: Long, pose: gdext.builtin.Transform3D): Unit = {
     if (gdext.classes.Skeleton3D.mb_set_bone_pose == null) gdext.classes.Skeleton3D.mb_set_bone_pose = MethodBind.get("Skeleton3D", "set_bone_pose", 3616898986L)
-    Ptrcall.callVoid2(gdext.classes.Skeleton3D.mb_set_bone_pose, livePtr, bone_idx, pose)
+    Ptrcall.callVoid2(gdext.classes.Skeleton3D.mb_set_bone_pose, livePtr, boneIdx, pose)
   }
 
   /** Skeleton3D.set_bone_pose_position */
-  final def setBonePosePosition(bone_idx: Long, position: gdext.builtin.Vector3): Unit = {
+  final def setBonePosePosition(boneIdx: Long, position: gdext.builtin.Vector3): Unit = {
     if (gdext.classes.Skeleton3D.mb_set_bone_pose_position == null) gdext.classes.Skeleton3D.mb_set_bone_pose_position = MethodBind.get("Skeleton3D", "set_bone_pose_position", 1530502735L)
-    Ptrcall.callVoid2(gdext.classes.Skeleton3D.mb_set_bone_pose_position, livePtr, bone_idx, position)
+    Ptrcall.callVoid2(gdext.classes.Skeleton3D.mb_set_bone_pose_position, livePtr, boneIdx, position)
   }
 
   /** Skeleton3D.set_bone_pose_rotation */
-  final def setBonePoseRotation(bone_idx: Long, rotation: gdext.builtin.Quaternion): Unit = {
+  final def setBonePoseRotation(boneIdx: Long, rotation: gdext.builtin.Quaternion): Unit = {
     if (gdext.classes.Skeleton3D.mb_set_bone_pose_rotation == null) gdext.classes.Skeleton3D.mb_set_bone_pose_rotation = MethodBind.get("Skeleton3D", "set_bone_pose_rotation", 2823819782L)
-    Ptrcall.callVoid2(gdext.classes.Skeleton3D.mb_set_bone_pose_rotation, livePtr, bone_idx, rotation)
+    Ptrcall.callVoid2(gdext.classes.Skeleton3D.mb_set_bone_pose_rotation, livePtr, boneIdx, rotation)
   }
 
   /** Skeleton3D.set_bone_pose_scale */
-  final def setBonePoseScale(bone_idx: Long, scale: gdext.builtin.Vector3): Unit = {
+  final def setBonePoseScale(boneIdx: Long, scale: gdext.builtin.Vector3): Unit = {
     if (gdext.classes.Skeleton3D.mb_set_bone_pose_scale == null) gdext.classes.Skeleton3D.mb_set_bone_pose_scale = MethodBind.get("Skeleton3D", "set_bone_pose_scale", 1530502735L)
-    Ptrcall.callVoid2(gdext.classes.Skeleton3D.mb_set_bone_pose_scale, livePtr, bone_idx, scale)
+    Ptrcall.callVoid2(gdext.classes.Skeleton3D.mb_set_bone_pose_scale, livePtr, boneIdx, scale)
   }
 
   /** Skeleton3D.get_bone_pose_position */
-  final def getBonePosePosition(bone_idx: Long): gdext.builtin.Vector3 = {
+  final def getBonePosePosition(boneIdx: Long): gdext.builtin.Vector3 = {
     if (gdext.classes.Skeleton3D.mb_get_bone_pose_position == null) gdext.classes.Skeleton3D.mb_get_bone_pose_position = MethodBind.get("Skeleton3D", "get_bone_pose_position", 711720468L)
-    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.Skeleton3D.mb_get_bone_pose_position, livePtr, bone_idx)
+    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.Skeleton3D.mb_get_bone_pose_position, livePtr, boneIdx)
   }
 
   /** Skeleton3D.get_bone_pose_rotation */
-  final def getBonePoseRotation(bone_idx: Long): gdext.builtin.Quaternion = {
+  final def getBonePoseRotation(boneIdx: Long): gdext.builtin.Quaternion = {
     if (gdext.classes.Skeleton3D.mb_get_bone_pose_rotation == null) gdext.classes.Skeleton3D.mb_get_bone_pose_rotation = MethodBind.get("Skeleton3D", "get_bone_pose_rotation", 476865136L)
-    Ptrcall.call1[Long, gdext.builtin.Quaternion](gdext.classes.Skeleton3D.mb_get_bone_pose_rotation, livePtr, bone_idx)
+    Ptrcall.call1[Long, gdext.builtin.Quaternion](gdext.classes.Skeleton3D.mb_get_bone_pose_rotation, livePtr, boneIdx)
   }
 
   /** Skeleton3D.get_bone_pose_scale */
-  final def getBonePoseScale(bone_idx: Long): gdext.builtin.Vector3 = {
+  final def getBonePoseScale(boneIdx: Long): gdext.builtin.Vector3 = {
     if (gdext.classes.Skeleton3D.mb_get_bone_pose_scale == null) gdext.classes.Skeleton3D.mb_get_bone_pose_scale = MethodBind.get("Skeleton3D", "get_bone_pose_scale", 711720468L)
-    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.Skeleton3D.mb_get_bone_pose_scale, livePtr, bone_idx)
+    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.Skeleton3D.mb_get_bone_pose_scale, livePtr, boneIdx)
   }
 
   /** Skeleton3D.reset_bone_pose */
-  final def resetBonePose(bone_idx: Long): Unit = {
+  final def resetBonePose(boneIdx: Long): Unit = {
     if (gdext.classes.Skeleton3D.mb_reset_bone_pose == null) gdext.classes.Skeleton3D.mb_reset_bone_pose = MethodBind.get("Skeleton3D", "reset_bone_pose", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.Skeleton3D.mb_reset_bone_pose, livePtr, bone_idx)
+    Ptrcall.callVoid1(gdext.classes.Skeleton3D.mb_reset_bone_pose, livePtr, boneIdx)
   }
 
   /** Skeleton3D.reset_bone_poses */
@@ -179,27 +180,27 @@ abstract class Skeleton3D extends Node3D {
   }
 
   /** Skeleton3D.is_bone_enabled */
-  final def isBoneEnabled(bone_idx: Long): Boolean = {
+  final def isBoneEnabled(boneIdx: Long): Boolean = {
     if (gdext.classes.Skeleton3D.mb_is_bone_enabled == null) gdext.classes.Skeleton3D.mb_is_bone_enabled = MethodBind.get("Skeleton3D", "is_bone_enabled", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.Skeleton3D.mb_is_bone_enabled, livePtr, bone_idx)
+    Ptrcall.call1[Long, Boolean](gdext.classes.Skeleton3D.mb_is_bone_enabled, livePtr, boneIdx)
   }
 
   /** Skeleton3D.set_bone_enabled */
-  final def setBoneEnabled(bone_idx: Long, enabled: Boolean): Unit = {
+  final def setBoneEnabled(boneIdx: Long, enabled: Boolean = true): Unit = {
     if (gdext.classes.Skeleton3D.mb_set_bone_enabled == null) gdext.classes.Skeleton3D.mb_set_bone_enabled = MethodBind.get("Skeleton3D", "set_bone_enabled", 972357352L)
-    Ptrcall.callVoid2(gdext.classes.Skeleton3D.mb_set_bone_enabled, livePtr, bone_idx, enabled)
+    Ptrcall.callVoid2(gdext.classes.Skeleton3D.mb_set_bone_enabled, livePtr, boneIdx, enabled)
   }
 
   /** Skeleton3D.get_bone_global_pose */
-  final def getBoneGlobalPose(bone_idx: Long): gdext.builtin.Transform3D = {
+  final def getBoneGlobalPose(boneIdx: Long): gdext.builtin.Transform3D = {
     if (gdext.classes.Skeleton3D.mb_get_bone_global_pose == null) gdext.classes.Skeleton3D.mb_get_bone_global_pose = MethodBind.get("Skeleton3D", "get_bone_global_pose", 1965739696L)
-    Ptrcall.call1[Long, gdext.builtin.Transform3D](gdext.classes.Skeleton3D.mb_get_bone_global_pose, livePtr, bone_idx)
+    Ptrcall.call1[Long, gdext.builtin.Transform3D](gdext.classes.Skeleton3D.mb_get_bone_global_pose, livePtr, boneIdx)
   }
 
   /** Skeleton3D.set_bone_global_pose */
-  final def setBoneGlobalPose(bone_idx: Long, pose: gdext.builtin.Transform3D): Unit = {
+  final def setBoneGlobalPose(boneIdx: Long, pose: gdext.builtin.Transform3D): Unit = {
     if (gdext.classes.Skeleton3D.mb_set_bone_global_pose == null) gdext.classes.Skeleton3D.mb_set_bone_global_pose = MethodBind.get("Skeleton3D", "set_bone_global_pose", 3616898986L)
-    Ptrcall.callVoid2(gdext.classes.Skeleton3D.mb_set_bone_global_pose, livePtr, bone_idx, pose)
+    Ptrcall.callVoid2(gdext.classes.Skeleton3D.mb_set_bone_global_pose, livePtr, boneIdx, pose)
   }
 
   /** Skeleton3D.force_update_all_bone_transforms */
@@ -209,15 +210,15 @@ abstract class Skeleton3D extends Node3D {
   }
 
   /** Skeleton3D.force_update_bone_child_transform */
-  final def forceUpdateBoneChildTransform(bone_idx: Long): Unit = {
+  final def forceUpdateBoneChildTransform(boneIdx: Long): Unit = {
     if (gdext.classes.Skeleton3D.mb_force_update_bone_child_transform == null) gdext.classes.Skeleton3D.mb_force_update_bone_child_transform = MethodBind.get("Skeleton3D", "force_update_bone_child_transform", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.Skeleton3D.mb_force_update_bone_child_transform, livePtr, bone_idx)
+    Ptrcall.callVoid1(gdext.classes.Skeleton3D.mb_force_update_bone_child_transform, livePtr, boneIdx)
   }
 
   /** Skeleton3D.set_motion_scale */
-  final def setMotionScale(motion_scale: Double): Unit = {
+  final def setMotionScale(motionScale: Double): Unit = {
     if (gdext.classes.Skeleton3D.mb_set_motion_scale == null) gdext.classes.Skeleton3D.mb_set_motion_scale = MethodBind.get("Skeleton3D", "set_motion_scale", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Skeleton3D.mb_set_motion_scale, livePtr, motion_scale)
+    Ptrcall.callVoid1(gdext.classes.Skeleton3D.mb_set_motion_scale, livePtr, motionScale)
   }
 
   /** Skeleton3D.get_motion_scale */
@@ -239,15 +240,15 @@ abstract class Skeleton3D extends Node3D {
   }
 
   /** Skeleton3D.set_modifier_callback_mode_process */
-  final def setModifierCallbackModeProcess(mode: Long): Unit = {
+  final def setModifierCallbackModeProcess(mode: gdext.classes.Skeleton3D.ModifierCallbackModeProcess): Unit = {
     if (gdext.classes.Skeleton3D.mb_set_modifier_callback_mode_process == null) gdext.classes.Skeleton3D.mb_set_modifier_callback_mode_process = MethodBind.get("Skeleton3D", "set_modifier_callback_mode_process", 3916362634L)
     Ptrcall.callVoid1(gdext.classes.Skeleton3D.mb_set_modifier_callback_mode_process, livePtr, mode)
   }
 
   /** Skeleton3D.get_modifier_callback_mode_process */
-  final def getModifierCallbackModeProcess(): Long = {
+  final def getModifierCallbackModeProcess(): gdext.classes.Skeleton3D.ModifierCallbackModeProcess = {
     if (gdext.classes.Skeleton3D.mb_get_modifier_callback_mode_process == null) gdext.classes.Skeleton3D.mb_get_modifier_callback_mode_process = MethodBind.get("Skeleton3D", "get_modifier_callback_mode_process", 997182536L)
-    Ptrcall.call0[Long](gdext.classes.Skeleton3D.mb_get_modifier_callback_mode_process, livePtr)
+    gdext.classes.Skeleton3D.ModifierCallbackModeProcess(Ptrcall.call0[Long](gdext.classes.Skeleton3D.mb_get_modifier_callback_mode_process, livePtr))
   }
 
   /** Skeleton3D.advance */
@@ -263,21 +264,21 @@ abstract class Skeleton3D extends Node3D {
   }
 
   /** Skeleton3D.set_bone_global_pose_override */
-  final def setBoneGlobalPoseOverride(bone_idx: Long, pose: gdext.builtin.Transform3D, amount: Double, persistent: Boolean): Unit = {
+  final def setBoneGlobalPoseOverride(boneIdx: Long, pose: gdext.builtin.Transform3D, amount: Double, persistent: Boolean = false): Unit = {
     if (gdext.classes.Skeleton3D.mb_set_bone_global_pose_override == null) gdext.classes.Skeleton3D.mb_set_bone_global_pose_override = MethodBind.get("Skeleton3D", "set_bone_global_pose_override", 3483398371L)
-    Ptrcall.callVoid4(gdext.classes.Skeleton3D.mb_set_bone_global_pose_override, livePtr, bone_idx, pose, amount, persistent)
+    Ptrcall.callVoid4(gdext.classes.Skeleton3D.mb_set_bone_global_pose_override, livePtr, boneIdx, pose, amount, persistent)
   }
 
   /** Skeleton3D.get_bone_global_pose_override */
-  final def getBoneGlobalPoseOverride(bone_idx: Long): gdext.builtin.Transform3D = {
+  final def getBoneGlobalPoseOverride(boneIdx: Long): gdext.builtin.Transform3D = {
     if (gdext.classes.Skeleton3D.mb_get_bone_global_pose_override == null) gdext.classes.Skeleton3D.mb_get_bone_global_pose_override = MethodBind.get("Skeleton3D", "get_bone_global_pose_override", 1965739696L)
-    Ptrcall.call1[Long, gdext.builtin.Transform3D](gdext.classes.Skeleton3D.mb_get_bone_global_pose_override, livePtr, bone_idx)
+    Ptrcall.call1[Long, gdext.builtin.Transform3D](gdext.classes.Skeleton3D.mb_get_bone_global_pose_override, livePtr, boneIdx)
   }
 
   /** Skeleton3D.get_bone_global_pose_no_override */
-  final def getBoneGlobalPoseNoOverride(bone_idx: Long): gdext.builtin.Transform3D = {
+  final def getBoneGlobalPoseNoOverride(boneIdx: Long): gdext.builtin.Transform3D = {
     if (gdext.classes.Skeleton3D.mb_get_bone_global_pose_no_override == null) gdext.classes.Skeleton3D.mb_get_bone_global_pose_no_override = MethodBind.get("Skeleton3D", "get_bone_global_pose_no_override", 1965739696L)
-    Ptrcall.call1[Long, gdext.builtin.Transform3D](gdext.classes.Skeleton3D.mb_get_bone_global_pose_no_override, livePtr, bone_idx)
+    Ptrcall.call1[Long, gdext.builtin.Transform3D](gdext.classes.Skeleton3D.mb_get_bone_global_pose_no_override, livePtr, boneIdx)
   }
 
   /** Skeleton3D.set_animate_physical_bones */
@@ -349,4 +350,28 @@ object Skeleton3D {
   private[classes] var mb_set_animate_physical_bones: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_animate_physical_bones: GDExtensionMethodBindPtr = null
   private[classes] var mb_physical_bones_stop_simulation: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `Skeleton3D.ModifierCallbackModeProcess`. */
+  opaque type ModifierCallbackModeProcess <: Long = Long
+
+  object ModifierCallbackModeProcess {
+    final val Physics: ModifierCallbackModeProcess = 0L.asInstanceOf[ModifierCallbackModeProcess]
+    final val Idle: ModifierCallbackModeProcess = 1L.asInstanceOf[ModifierCallbackModeProcess]
+    final val Manual: ModifierCallbackModeProcess = 2L.asInstanceOf[ModifierCallbackModeProcess]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ModifierCallbackModeProcess = value.asInstanceOf[ModifierCallbackModeProcess]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ModifierCallbackModeProcess] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[ModifierCallbackModeProcess]]
+
+    extension (self: ModifierCallbackModeProcess)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Physics"
+        case 1L => "Idle"
+        case 2L => "Manual"
+        case other => other.toString
+      }
+  }
 }

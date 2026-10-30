@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -41,27 +42,27 @@ abstract class CodeHighlighter extends SyntaxHighlighter {
   }
 
   /** CodeHighlighter.add_member_keyword_color */
-  final def addMemberKeywordColor(member_keyword: String, color: gdext.builtin.Color): Unit = {
+  final def addMemberKeywordColor(memberKeyword: String, color: gdext.builtin.Color): Unit = {
     if (gdext.classes.CodeHighlighter.mb_add_member_keyword_color == null) gdext.classes.CodeHighlighter.mb_add_member_keyword_color = MethodBind.get("CodeHighlighter", "add_member_keyword_color", 1636512886L)
-    Ptrcall.callVoid2(gdext.classes.CodeHighlighter.mb_add_member_keyword_color, livePtr, member_keyword, color)
+    Ptrcall.callVoid2(gdext.classes.CodeHighlighter.mb_add_member_keyword_color, livePtr, memberKeyword, color)
   }
 
   /** CodeHighlighter.remove_member_keyword_color */
-  final def removeMemberKeywordColor(member_keyword: String): Unit = {
+  final def removeMemberKeywordColor(memberKeyword: String): Unit = {
     if (gdext.classes.CodeHighlighter.mb_remove_member_keyword_color == null) gdext.classes.CodeHighlighter.mb_remove_member_keyword_color = MethodBind.get("CodeHighlighter", "remove_member_keyword_color", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.CodeHighlighter.mb_remove_member_keyword_color, livePtr, member_keyword)
+    Ptrcall.callVoid1(gdext.classes.CodeHighlighter.mb_remove_member_keyword_color, livePtr, memberKeyword)
   }
 
   /** CodeHighlighter.has_member_keyword_color */
-  final def hasMemberKeywordColor(member_keyword: String): Boolean = {
+  final def hasMemberKeywordColor(memberKeyword: String): Boolean = {
     if (gdext.classes.CodeHighlighter.mb_has_member_keyword_color == null) gdext.classes.CodeHighlighter.mb_has_member_keyword_color = MethodBind.get("CodeHighlighter", "has_member_keyword_color", 3927539163L)
-    Ptrcall.call1[String, Boolean](gdext.classes.CodeHighlighter.mb_has_member_keyword_color, livePtr, member_keyword)
+    Ptrcall.call1[String, Boolean](gdext.classes.CodeHighlighter.mb_has_member_keyword_color, livePtr, memberKeyword)
   }
 
   /** CodeHighlighter.get_member_keyword_color */
-  final def getMemberKeywordColor(member_keyword: String): gdext.builtin.Color = {
+  final def getMemberKeywordColor(memberKeyword: String): gdext.builtin.Color = {
     if (gdext.classes.CodeHighlighter.mb_get_member_keyword_color == null) gdext.classes.CodeHighlighter.mb_get_member_keyword_color = MethodBind.get("CodeHighlighter", "get_member_keyword_color", 3855908743L)
-    Ptrcall.call1[String, gdext.builtin.Color](gdext.classes.CodeHighlighter.mb_get_member_keyword_color, livePtr, member_keyword)
+    Ptrcall.call1[String, gdext.builtin.Color](gdext.classes.CodeHighlighter.mb_get_member_keyword_color, livePtr, memberKeyword)
   }
 
   /** CodeHighlighter.clear_member_keyword_colors */
@@ -71,21 +72,21 @@ abstract class CodeHighlighter extends SyntaxHighlighter {
   }
 
   /** CodeHighlighter.add_color_region */
-  final def addColorRegion(start_key: String, end_key: String, color: gdext.builtin.Color, line_only: Boolean): Unit = {
+  final def addColorRegion(startKey: String, endKey: String, color: gdext.builtin.Color, lineOnly: Boolean = false): Unit = {
     if (gdext.classes.CodeHighlighter.mb_add_color_region == null) gdext.classes.CodeHighlighter.mb_add_color_region = MethodBind.get("CodeHighlighter", "add_color_region", 2924977451L)
-    Ptrcall.callVoid4(gdext.classes.CodeHighlighter.mb_add_color_region, livePtr, start_key, end_key, color, line_only)
+    Ptrcall.callVoid4(gdext.classes.CodeHighlighter.mb_add_color_region, livePtr, startKey, endKey, color, lineOnly)
   }
 
   /** CodeHighlighter.remove_color_region */
-  final def removeColorRegion(start_key: String): Unit = {
+  final def removeColorRegion(startKey: String): Unit = {
     if (gdext.classes.CodeHighlighter.mb_remove_color_region == null) gdext.classes.CodeHighlighter.mb_remove_color_region = MethodBind.get("CodeHighlighter", "remove_color_region", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.CodeHighlighter.mb_remove_color_region, livePtr, start_key)
+    Ptrcall.callVoid1(gdext.classes.CodeHighlighter.mb_remove_color_region, livePtr, startKey)
   }
 
   /** CodeHighlighter.has_color_region */
-  final def hasColorRegion(start_key: String): Boolean = {
+  final def hasColorRegion(startKey: String): Boolean = {
     if (gdext.classes.CodeHighlighter.mb_has_color_region == null) gdext.classes.CodeHighlighter.mb_has_color_region = MethodBind.get("CodeHighlighter", "has_color_region", 3927539163L)
-    Ptrcall.call1[String, Boolean](gdext.classes.CodeHighlighter.mb_has_color_region, livePtr, start_key)
+    Ptrcall.call1[String, Boolean](gdext.classes.CodeHighlighter.mb_has_color_region, livePtr, startKey)
   }
 
   /** CodeHighlighter.clear_color_regions */

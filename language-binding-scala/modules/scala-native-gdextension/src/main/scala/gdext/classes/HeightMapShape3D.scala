@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -47,9 +48,9 @@ abstract class HeightMapShape3D extends Shape3D {
   }
 
   /** HeightMapShape3D.update_map_data_from_image */
-  final def updateMapDataFromImage(image: Image, height_min: Double, height_max: Double): Unit = {
+  final def updateMapDataFromImage(image: Image, heightMin: Double, heightMax: Double): Unit = {
     if (gdext.classes.HeightMapShape3D.mb_update_map_data_from_image == null) gdext.classes.HeightMapShape3D.mb_update_map_data_from_image = MethodBind.get("HeightMapShape3D", "update_map_data_from_image", 2636652979L)
-    Ptrcall.callVoid3(gdext.classes.HeightMapShape3D.mb_update_map_data_from_image, livePtr, Wrappers.handle(image), height_min, height_max)
+    Ptrcall.callVoid3(gdext.classes.HeightMapShape3D.mb_update_map_data_from_image, livePtr, Wrappers.handle(image), heightMin, heightMax)
   }
 
 }

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -59,9 +60,9 @@ abstract class ProceduralSkyMaterial extends Material {
   }
 
   /** ProceduralSkyMaterial.set_sky_cover */
-  final def setSkyCover(sky_cover: Texture2D): Unit = {
+  final def setSkyCover(skyCover: Texture2D): Unit = {
     if (gdext.classes.ProceduralSkyMaterial.mb_set_sky_cover == null) gdext.classes.ProceduralSkyMaterial.mb_set_sky_cover = MethodBind.get("ProceduralSkyMaterial", "set_sky_cover", 4051416890L)
-    Ptrcall.callVoid1(gdext.classes.ProceduralSkyMaterial.mb_set_sky_cover, livePtr, Wrappers.handle(sky_cover))
+    Ptrcall.callVoid1(gdext.classes.ProceduralSkyMaterial.mb_set_sky_cover, livePtr, Wrappers.handle(skyCover))
   }
 
   /** ProceduralSkyMaterial.get_sky_cover. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -155,9 +156,9 @@ abstract class ProceduralSkyMaterial extends Material {
   }
 
   /** ProceduralSkyMaterial.set_use_debanding */
-  final def setUseDebanding(use_debanding: Boolean): Unit = {
+  final def setUseDebanding(useDebanding: Boolean): Unit = {
     if (gdext.classes.ProceduralSkyMaterial.mb_set_use_debanding == null) gdext.classes.ProceduralSkyMaterial.mb_set_use_debanding = MethodBind.get("ProceduralSkyMaterial", "set_use_debanding", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.ProceduralSkyMaterial.mb_set_use_debanding, livePtr, use_debanding)
+    Ptrcall.callVoid1(gdext.classes.ProceduralSkyMaterial.mb_set_use_debanding, livePtr, useDebanding)
   }
 
   /** ProceduralSkyMaterial.get_use_debanding */

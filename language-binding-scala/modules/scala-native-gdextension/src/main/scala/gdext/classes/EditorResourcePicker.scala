@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class EditorResourcePicker extends HBoxContainer {
   override def godotClassName: String = "EditorResourcePicker"
 
   /** EditorResourcePicker.set_base_type */
-  final def setBaseType(base_type: String): Unit = {
+  final def setBaseType(baseType: String): Unit = {
     if (gdext.classes.EditorResourcePicker.mb_set_base_type == null) gdext.classes.EditorResourcePicker.mb_set_base_type = MethodBind.get("EditorResourcePicker", "set_base_type", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.EditorResourcePicker.mb_set_base_type, livePtr, base_type)
+    Ptrcall.callVoid1(gdext.classes.EditorResourcePicker.mb_set_base_type, livePtr, baseType)
   }
 
   /** EditorResourcePicker.get_base_type */

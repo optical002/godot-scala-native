@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class CameraServer extends Object {
   override def godotClassName: String = "CameraServer"
 
   /** CameraServer.set_monitoring_feeds */
-  final def setMonitoringFeeds(is_monitoring_feeds: Boolean): Unit = {
+  final def setMonitoringFeeds(isMonitoringFeeds: Boolean): Unit = {
     if (gdext.classes.CameraServer.mb_set_monitoring_feeds == null) gdext.classes.CameraServer.mb_set_monitoring_feeds = MethodBind.get("CameraServer", "set_monitoring_feeds", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.CameraServer.mb_set_monitoring_feeds, livePtr, is_monitoring_feeds)
+    Ptrcall.callVoid1(gdext.classes.CameraServer.mb_set_monitoring_feeds, livePtr, isMonitoringFeeds)
   }
 
   /** CameraServer.is_monitoring_feeds */
@@ -64,5 +65,53 @@ object CameraServer {
       instance = Wrappers.borrowed[CameraServer](GodotObject.fromPtr(
         Godot.interface.global_get_singleton(StringNames.cached("CameraServer").ptr)))
     instance
+  }
+
+  /** Forwards to [[singleton]]: CameraServer.set_monitoring_feeds */
+  final def setMonitoringFeeds(isMonitoringFeeds: Boolean): Unit =
+    singleton.setMonitoringFeeds(isMonitoringFeeds)
+
+  /** Forwards to [[singleton]]: CameraServer.is_monitoring_feeds */
+  final def isMonitoringFeeds(): Boolean =
+    singleton.isMonitoringFeeds()
+
+  /** Forwards to [[singleton]]: CameraServer.get_feed */
+  final def getFeed(index: Long): CameraFeed =
+    singleton.getFeed(index)
+
+  /** Forwards to [[singleton]]: CameraServer.get_feed_count */
+  final def getFeedCount(): Long =
+    singleton.getFeedCount()
+
+  /** Forwards to [[singleton]]: CameraServer.add_feed */
+  final def addFeed(feed: CameraFeed): Unit =
+    singleton.addFeed(feed)
+
+  /** Forwards to [[singleton]]: CameraServer.remove_feed */
+  final def removeFeed(feed: CameraFeed): Unit =
+    singleton.removeFeed(feed)
+
+  /** Godot enum `CameraServer.FeedImage`. */
+  opaque type FeedImage <: Long = Long
+
+  object FeedImage {
+    final val RgbaImage: FeedImage = 0L.asInstanceOf[FeedImage]
+    final val YcbcrImage: FeedImage = 0L.asInstanceOf[FeedImage]
+    final val YImage: FeedImage = 0L.asInstanceOf[FeedImage]
+    final val CbcrImage: FeedImage = 1L.asInstanceOf[FeedImage]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): FeedImage = value.asInstanceOf[FeedImage]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[FeedImage] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[FeedImage]]
+
+    extension (self: FeedImage)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "RgbaImage"
+        case 1L => "CbcrImage"
+        case other => other.toString
+      }
   }
 }

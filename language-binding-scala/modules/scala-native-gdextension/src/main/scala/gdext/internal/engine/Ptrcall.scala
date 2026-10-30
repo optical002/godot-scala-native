@@ -5,6 +5,7 @@ import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.{StringName, StringNames}
 import gdext.internal.ffi.types.*
 
 /** Compile-time marshalling for engine method `ptrcall`s.
@@ -30,6 +31,7 @@ object Marshal {
     case _: Double      => 8
     case _: Boolean     => 1
     case _: GodotObject => 8
+    case _: SnArg       => BuiltinSizes.StringName
     case _: String      => BuiltinSizes.String
     case _: StringName  => BuiltinSizes.StringName
     case _: Variant     => BuiltinSizes.Variant
@@ -53,9 +55,9 @@ object Marshal {
     case _              => error("ptrcall: unsupported type")
   }
 
-  /** Lay `v` down as a ptrcall argument in `b` ([[size]] bytes). A String
-    * argument builds a temporary Godot String that [[release]] destroys after
-    * the call; every other kind is a plain copy.
+  /** Lay `v` down as a ptrcall argument in `b` ([[size]] bytes). A String or
+    * [[SnArg]] argument builds a temporary Godot String / StringName that
+    * [[release]] destroys after the call; every other kind is a plain copy.
     */
   inline def write[A](inline v: A, b: Ptr[Byte]): Unit =
     inline erasedValue[A] match {
@@ -70,6 +72,7 @@ object Marshal {
       case _: GodotObject =>
         !b.asInstanceOf[Ptr[GDExtensionObjectPtr]] =
           GodotObject.objectPtr(v.asInstanceOf[GodotObject])
+      case _: SnArg  => StringName.writeAt(v.asInstanceOf[String], b.toLong)
       case _: String => GString.writeAt(v.asInstanceOf[String], b.toLong)
       // A StringName / Variant / Callable value is a pointer to its storage;
       // ptrcall wants the storage bytes themselves in the arg buffer.
@@ -109,6 +112,10 @@ object Marshal {
 
   /** Destroy whatever [[write]] built in `b` once the call has returned. */
   inline def release[A](b: Ptr[Byte]): Unit = inline erasedValue[A] match {
+    case _: SnArg =>
+      VariantConstructors.destructor(
+        gdext.internal.ffi.types.GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_STRING_NAME
+      )(b)
     case _: String =>
       VariantConstructors.destructor(
         gdext.internal.ffi.types.GDExtensionVariantType.GDEXTENSION_VARIANT_TYPE_STRING
@@ -119,7 +126,8 @@ object Marshal {
   /** Read a ptrcall return value of type `R` out of `b`. Owned engine values in
     * the buffer (a String's reference, a StringName's reference) are consumed:
     * a String is decoded and destroyed; a StringName is interned through
-    * [[StringNames.adopt]], so its storage stays valid for the process.
+    * [[StringNames.adopt]] (an [[SnArg]] through [[StringNames.adoptText]]),
+    * so its storage stays valid for the process.
     */
   inline def read[R](b: Ptr[Byte]): R = inline erasedValue[R] match {
     case _: Long => (!b.asInstanceOf[Ptr[GDExtensionInt]]).asInstanceOf[R]
@@ -131,6 +139,7 @@ object Marshal {
       GodotObject
         .fromPtr(!b.asInstanceOf[Ptr[GDExtensionObjectPtr]])
         .asInstanceOf[R]
+    case _: SnArg       => StringNames.adoptText(b.toLong).asInstanceOf[R]
     case _: String      => GString.takeAt(b.toLong).asInstanceOf[R]
     case _: StringName  => StringNames.adopt(b.toLong).asInstanceOf[R]
     case _: Variant     => Variant.copyToHeap(b).asInstanceOf[R]

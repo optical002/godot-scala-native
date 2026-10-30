@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -77,9 +78,9 @@ abstract class InputEventWithModifiers extends InputEventFromWindow {
   }
 
   /** InputEventWithModifiers.get_modifiers_mask */
-  final def getModifiersMask(): Long = {
+  final def getModifiersMask(): gdext.classes.KeyModifierMask = {
     if (gdext.classes.InputEventWithModifiers.mb_get_modifiers_mask == null) gdext.classes.InputEventWithModifiers.mb_get_modifiers_mask = MethodBind.get("InputEventWithModifiers", "get_modifiers_mask", 1258259499L)
-    Ptrcall.call0[Long](gdext.classes.InputEventWithModifiers.mb_get_modifiers_mask, livePtr)
+    gdext.classes.KeyModifierMask(Ptrcall.call0[Long](gdext.classes.InputEventWithModifiers.mb_get_modifiers_mask, livePtr))
   }
 
 }

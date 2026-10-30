@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -47,9 +48,9 @@ abstract class AStarGrid2D extends RefCounted {
   }
 
   /** AStarGrid2D.set_cell_size */
-  final def setCellSize(cell_size: gdext.builtin.Vector2): Unit = {
+  final def setCellSize(cellSize: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.AStarGrid2D.mb_set_cell_size == null) gdext.classes.AStarGrid2D.mb_set_cell_size = MethodBind.get("AStarGrid2D", "set_cell_size", 743155724L)
-    Ptrcall.callVoid1(gdext.classes.AStarGrid2D.mb_set_cell_size, livePtr, cell_size)
+    Ptrcall.callVoid1(gdext.classes.AStarGrid2D.mb_set_cell_size, livePtr, cellSize)
   }
 
   /** AStarGrid2D.get_cell_size */
@@ -59,15 +60,15 @@ abstract class AStarGrid2D extends RefCounted {
   }
 
   /** AStarGrid2D.set_cell_shape */
-  final def setCellShape(cell_shape: Long): Unit = {
+  final def setCellShape(cellShape: gdext.classes.AStarGrid2D.CellShape): Unit = {
     if (gdext.classes.AStarGrid2D.mb_set_cell_shape == null) gdext.classes.AStarGrid2D.mb_set_cell_shape = MethodBind.get("AStarGrid2D", "set_cell_shape", 4130591146L)
-    Ptrcall.callVoid1(gdext.classes.AStarGrid2D.mb_set_cell_shape, livePtr, cell_shape)
+    Ptrcall.callVoid1(gdext.classes.AStarGrid2D.mb_set_cell_shape, livePtr, cellShape)
   }
 
   /** AStarGrid2D.get_cell_shape */
-  final def getCellShape(): Long = {
+  final def getCellShape(): gdext.classes.AStarGrid2D.CellShape = {
     if (gdext.classes.AStarGrid2D.mb_get_cell_shape == null) gdext.classes.AStarGrid2D.mb_get_cell_shape = MethodBind.get("AStarGrid2D", "get_cell_shape", 3293463634L)
-    Ptrcall.call0[Long](gdext.classes.AStarGrid2D.mb_get_cell_shape, livePtr)
+    gdext.classes.AStarGrid2D.CellShape(Ptrcall.call0[Long](gdext.classes.AStarGrid2D.mb_get_cell_shape, livePtr))
   }
 
   /** AStarGrid2D.is_in_bounds */
@@ -107,43 +108,43 @@ abstract class AStarGrid2D extends RefCounted {
   }
 
   /** AStarGrid2D.set_diagonal_mode */
-  final def setDiagonalMode(mode: Long): Unit = {
+  final def setDiagonalMode(mode: gdext.classes.AStarGrid2D.DiagonalMode): Unit = {
     if (gdext.classes.AStarGrid2D.mb_set_diagonal_mode == null) gdext.classes.AStarGrid2D.mb_set_diagonal_mode = MethodBind.get("AStarGrid2D", "set_diagonal_mode", 1017829798L)
     Ptrcall.callVoid1(gdext.classes.AStarGrid2D.mb_set_diagonal_mode, livePtr, mode)
   }
 
   /** AStarGrid2D.get_diagonal_mode */
-  final def getDiagonalMode(): Long = {
+  final def getDiagonalMode(): gdext.classes.AStarGrid2D.DiagonalMode = {
     if (gdext.classes.AStarGrid2D.mb_get_diagonal_mode == null) gdext.classes.AStarGrid2D.mb_get_diagonal_mode = MethodBind.get("AStarGrid2D", "get_diagonal_mode", 3129282674L)
-    Ptrcall.call0[Long](gdext.classes.AStarGrid2D.mb_get_diagonal_mode, livePtr)
+    gdext.classes.AStarGrid2D.DiagonalMode(Ptrcall.call0[Long](gdext.classes.AStarGrid2D.mb_get_diagonal_mode, livePtr))
   }
 
   /** AStarGrid2D.set_default_compute_heuristic */
-  final def setDefaultComputeHeuristic(heuristic: Long): Unit = {
+  final def setDefaultComputeHeuristic(heuristic: gdext.classes.AStarGrid2D.Heuristic): Unit = {
     if (gdext.classes.AStarGrid2D.mb_set_default_compute_heuristic == null) gdext.classes.AStarGrid2D.mb_set_default_compute_heuristic = MethodBind.get("AStarGrid2D", "set_default_compute_heuristic", 1044375519L)
     Ptrcall.callVoid1(gdext.classes.AStarGrid2D.mb_set_default_compute_heuristic, livePtr, heuristic)
   }
 
   /** AStarGrid2D.get_default_compute_heuristic */
-  final def getDefaultComputeHeuristic(): Long = {
+  final def getDefaultComputeHeuristic(): gdext.classes.AStarGrid2D.Heuristic = {
     if (gdext.classes.AStarGrid2D.mb_get_default_compute_heuristic == null) gdext.classes.AStarGrid2D.mb_get_default_compute_heuristic = MethodBind.get("AStarGrid2D", "get_default_compute_heuristic", 2074731422L)
-    Ptrcall.call0[Long](gdext.classes.AStarGrid2D.mb_get_default_compute_heuristic, livePtr)
+    gdext.classes.AStarGrid2D.Heuristic(Ptrcall.call0[Long](gdext.classes.AStarGrid2D.mb_get_default_compute_heuristic, livePtr))
   }
 
   /** AStarGrid2D.set_default_estimate_heuristic */
-  final def setDefaultEstimateHeuristic(heuristic: Long): Unit = {
+  final def setDefaultEstimateHeuristic(heuristic: gdext.classes.AStarGrid2D.Heuristic): Unit = {
     if (gdext.classes.AStarGrid2D.mb_set_default_estimate_heuristic == null) gdext.classes.AStarGrid2D.mb_set_default_estimate_heuristic = MethodBind.get("AStarGrid2D", "set_default_estimate_heuristic", 1044375519L)
     Ptrcall.callVoid1(gdext.classes.AStarGrid2D.mb_set_default_estimate_heuristic, livePtr, heuristic)
   }
 
   /** AStarGrid2D.get_default_estimate_heuristic */
-  final def getDefaultEstimateHeuristic(): Long = {
+  final def getDefaultEstimateHeuristic(): gdext.classes.AStarGrid2D.Heuristic = {
     if (gdext.classes.AStarGrid2D.mb_get_default_estimate_heuristic == null) gdext.classes.AStarGrid2D.mb_get_default_estimate_heuristic = MethodBind.get("AStarGrid2D", "get_default_estimate_heuristic", 2074731422L)
-    Ptrcall.call0[Long](gdext.classes.AStarGrid2D.mb_get_default_estimate_heuristic, livePtr)
+    gdext.classes.AStarGrid2D.Heuristic(Ptrcall.call0[Long](gdext.classes.AStarGrid2D.mb_get_default_estimate_heuristic, livePtr))
   }
 
   /** AStarGrid2D.set_point_solid */
-  final def setPointSolid(id: gdext.builtin.Vector2i, solid: Boolean): Unit = {
+  final def setPointSolid(id: gdext.builtin.Vector2i, solid: Boolean = true): Unit = {
     if (gdext.classes.AStarGrid2D.mb_set_point_solid == null) gdext.classes.AStarGrid2D.mb_set_point_solid = MethodBind.get("AStarGrid2D", "set_point_solid", 1765703753L)
     Ptrcall.callVoid2(gdext.classes.AStarGrid2D.mb_set_point_solid, livePtr, id, solid)
   }
@@ -155,9 +156,9 @@ abstract class AStarGrid2D extends RefCounted {
   }
 
   /** AStarGrid2D.set_point_weight_scale */
-  final def setPointWeightScale(id: gdext.builtin.Vector2i, weight_scale: Double): Unit = {
+  final def setPointWeightScale(id: gdext.builtin.Vector2i, weightScale: Double): Unit = {
     if (gdext.classes.AStarGrid2D.mb_set_point_weight_scale == null) gdext.classes.AStarGrid2D.mb_set_point_weight_scale = MethodBind.get("AStarGrid2D", "set_point_weight_scale", 2262553149L)
-    Ptrcall.callVoid2(gdext.classes.AStarGrid2D.mb_set_point_weight_scale, livePtr, id, weight_scale)
+    Ptrcall.callVoid2(gdext.classes.AStarGrid2D.mb_set_point_weight_scale, livePtr, id, weightScale)
   }
 
   /** AStarGrid2D.get_point_weight_scale */
@@ -167,15 +168,15 @@ abstract class AStarGrid2D extends RefCounted {
   }
 
   /** AStarGrid2D.fill_solid_region */
-  final def fillSolidRegion(region: gdext.builtin.Rect2i, solid: Boolean): Unit = {
+  final def fillSolidRegion(region: gdext.builtin.Rect2i, solid: Boolean = true): Unit = {
     if (gdext.classes.AStarGrid2D.mb_fill_solid_region == null) gdext.classes.AStarGrid2D.mb_fill_solid_region = MethodBind.get("AStarGrid2D", "fill_solid_region", 2261970063L)
     Ptrcall.callVoid2(gdext.classes.AStarGrid2D.mb_fill_solid_region, livePtr, region, solid)
   }
 
   /** AStarGrid2D.fill_weight_scale_region */
-  final def fillWeightScaleRegion(region: gdext.builtin.Rect2i, weight_scale: Double): Unit = {
+  final def fillWeightScaleRegion(region: gdext.builtin.Rect2i, weightScale: Double): Unit = {
     if (gdext.classes.AStarGrid2D.mb_fill_weight_scale_region == null) gdext.classes.AStarGrid2D.mb_fill_weight_scale_region = MethodBind.get("AStarGrid2D", "fill_weight_scale_region", 2793244083L)
-    Ptrcall.callVoid2(gdext.classes.AStarGrid2D.mb_fill_weight_scale_region, livePtr, region, weight_scale)
+    Ptrcall.callVoid2(gdext.classes.AStarGrid2D.mb_fill_weight_scale_region, livePtr, region, weightScale)
   }
 
   /** AStarGrid2D.clear */
@@ -223,4 +224,86 @@ object AStarGrid2D {
   private[classes] var mb_fill_weight_scale_region: GDExtensionMethodBindPtr = null
   private[classes] var mb_clear: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_point_position: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `AStarGrid2D.Heuristic`. */
+  opaque type Heuristic <: Long = Long
+
+  object Heuristic {
+    final val Euclidean: Heuristic = 0L.asInstanceOf[Heuristic]
+    final val Manhattan: Heuristic = 1L.asInstanceOf[Heuristic]
+    final val Octile: Heuristic = 2L.asInstanceOf[Heuristic]
+    final val Chebyshev: Heuristic = 3L.asInstanceOf[Heuristic]
+    final val Max: Heuristic = 4L.asInstanceOf[Heuristic]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): Heuristic = value.asInstanceOf[Heuristic]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[Heuristic] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[Heuristic]]
+
+    extension (self: Heuristic)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Euclidean"
+        case 1L => "Manhattan"
+        case 2L => "Octile"
+        case 3L => "Chebyshev"
+        case 4L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `AStarGrid2D.DiagonalMode`. */
+  opaque type DiagonalMode <: Long = Long
+
+  object DiagonalMode {
+    final val Always: DiagonalMode = 0L.asInstanceOf[DiagonalMode]
+    final val Never: DiagonalMode = 1L.asInstanceOf[DiagonalMode]
+    final val AtLeastOneWalkable: DiagonalMode = 2L.asInstanceOf[DiagonalMode]
+    final val OnlyIfNoObstacles: DiagonalMode = 3L.asInstanceOf[DiagonalMode]
+    final val Max: DiagonalMode = 4L.asInstanceOf[DiagonalMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DiagonalMode = value.asInstanceOf[DiagonalMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DiagonalMode] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[DiagonalMode]]
+
+    extension (self: DiagonalMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Always"
+        case 1L => "Never"
+        case 2L => "AtLeastOneWalkable"
+        case 3L => "OnlyIfNoObstacles"
+        case 4L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `AStarGrid2D.CellShape`. */
+  opaque type CellShape <: Long = Long
+
+  object CellShape {
+    final val Square: CellShape = 0L.asInstanceOf[CellShape]
+    final val IsometricRight: CellShape = 1L.asInstanceOf[CellShape]
+    final val IsometricDown: CellShape = 2L.asInstanceOf[CellShape]
+    final val Max: CellShape = 3L.asInstanceOf[CellShape]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): CellShape = value.asInstanceOf[CellShape]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[CellShape] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[CellShape]]
+
+    extension (self: CellShape)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Square"
+        case 1L => "IsometricRight"
+        case 2L => "IsometricDown"
+        case 3L => "Max"
+        case other => other.toString
+      }
+  }
 }

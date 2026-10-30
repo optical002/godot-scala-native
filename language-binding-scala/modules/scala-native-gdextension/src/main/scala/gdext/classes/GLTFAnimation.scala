@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,9 +18,9 @@ abstract class GLTFAnimation extends Resource {
   }
 
   /** GLTFAnimation.set_original_name */
-  final def setOriginalName(original_name: String): Unit = {
+  final def setOriginalName(originalName: String): Unit = {
     if (gdext.classes.GLTFAnimation.mb_set_original_name == null) gdext.classes.GLTFAnimation.mb_set_original_name = MethodBind.get("GLTFAnimation", "set_original_name", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.GLTFAnimation.mb_set_original_name, livePtr, original_name)
+    Ptrcall.callVoid1(gdext.classes.GLTFAnimation.mb_set_original_name, livePtr, originalName)
   }
 
   /** GLTFAnimation.get_loop */

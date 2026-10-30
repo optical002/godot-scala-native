@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,9 +36,9 @@ abstract class ImporterMeshInstance3D extends Node3D {
   }
 
   /** ImporterMeshInstance3D.set_layer_mask */
-  final def setLayerMask(layer_mask: Long): Unit = {
+  final def setLayerMask(layerMask: Long): Unit = {
     if (gdext.classes.ImporterMeshInstance3D.mb_set_layer_mask == null) gdext.classes.ImporterMeshInstance3D.mb_set_layer_mask = MethodBind.get("ImporterMeshInstance3D", "set_layer_mask", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.ImporterMeshInstance3D.mb_set_layer_mask, livePtr, layer_mask)
+    Ptrcall.callVoid1(gdext.classes.ImporterMeshInstance3D.mb_set_layer_mask, livePtr, layerMask)
   }
 
   /** ImporterMeshInstance3D.get_layer_mask */
@@ -47,15 +48,15 @@ abstract class ImporterMeshInstance3D extends Node3D {
   }
 
   /** ImporterMeshInstance3D.set_cast_shadows_setting */
-  final def setCastShadowsSetting(shadow_casting_setting: Long): Unit = {
+  final def setCastShadowsSetting(shadowCastingSetting: gdext.classes.GeometryInstance3D.ShadowCastingSetting): Unit = {
     if (gdext.classes.ImporterMeshInstance3D.mb_set_cast_shadows_setting == null) gdext.classes.ImporterMeshInstance3D.mb_set_cast_shadows_setting = MethodBind.get("ImporterMeshInstance3D", "set_cast_shadows_setting", 856677339L)
-    Ptrcall.callVoid1(gdext.classes.ImporterMeshInstance3D.mb_set_cast_shadows_setting, livePtr, shadow_casting_setting)
+    Ptrcall.callVoid1(gdext.classes.ImporterMeshInstance3D.mb_set_cast_shadows_setting, livePtr, shadowCastingSetting)
   }
 
   /** ImporterMeshInstance3D.get_cast_shadows_setting */
-  final def getCastShadowsSetting(): Long = {
+  final def getCastShadowsSetting(): gdext.classes.GeometryInstance3D.ShadowCastingSetting = {
     if (gdext.classes.ImporterMeshInstance3D.mb_get_cast_shadows_setting == null) gdext.classes.ImporterMeshInstance3D.mb_get_cast_shadows_setting = MethodBind.get("ImporterMeshInstance3D", "get_cast_shadows_setting", 3383019359L)
-    Ptrcall.call0[Long](gdext.classes.ImporterMeshInstance3D.mb_get_cast_shadows_setting, livePtr)
+    gdext.classes.GeometryInstance3D.ShadowCastingSetting(Ptrcall.call0[Long](gdext.classes.ImporterMeshInstance3D.mb_get_cast_shadows_setting, livePtr))
   }
 
   /** ImporterMeshInstance3D.set_visibility_range_end_margin */
@@ -107,15 +108,15 @@ abstract class ImporterMeshInstance3D extends Node3D {
   }
 
   /** ImporterMeshInstance3D.set_visibility_range_fade_mode */
-  final def setVisibilityRangeFadeMode(mode: Long): Unit = {
+  final def setVisibilityRangeFadeMode(mode: gdext.classes.GeometryInstance3D.VisibilityRangeFadeMode): Unit = {
     if (gdext.classes.ImporterMeshInstance3D.mb_set_visibility_range_fade_mode == null) gdext.classes.ImporterMeshInstance3D.mb_set_visibility_range_fade_mode = MethodBind.get("ImporterMeshInstance3D", "set_visibility_range_fade_mode", 1440117808L)
     Ptrcall.callVoid1(gdext.classes.ImporterMeshInstance3D.mb_set_visibility_range_fade_mode, livePtr, mode)
   }
 
   /** ImporterMeshInstance3D.get_visibility_range_fade_mode */
-  final def getVisibilityRangeFadeMode(): Long = {
+  final def getVisibilityRangeFadeMode(): gdext.classes.GeometryInstance3D.VisibilityRangeFadeMode = {
     if (gdext.classes.ImporterMeshInstance3D.mb_get_visibility_range_fade_mode == null) gdext.classes.ImporterMeshInstance3D.mb_get_visibility_range_fade_mode = MethodBind.get("ImporterMeshInstance3D", "get_visibility_range_fade_mode", 2067221882L)
-    Ptrcall.call0[Long](gdext.classes.ImporterMeshInstance3D.mb_get_visibility_range_fade_mode, livePtr)
+    gdext.classes.GeometryInstance3D.VisibilityRangeFadeMode(Ptrcall.call0[Long](gdext.classes.ImporterMeshInstance3D.mb_get_visibility_range_fade_mode, livePtr))
   }
 
 }

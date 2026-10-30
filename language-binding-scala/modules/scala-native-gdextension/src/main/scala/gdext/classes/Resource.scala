@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -113,15 +114,15 @@ abstract class Resource extends RefCounted {
   }
 
   /** Resource.duplicate. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def duplicate(deep: Boolean): Resource = {
+  final def duplicate(deep: Boolean = false): Resource = {
     if (gdext.classes.Resource.mb_duplicate == null) gdext.classes.Resource.mb_duplicate = MethodBind.get("Resource", "duplicate", 482882304L)
     Wrappers.owned[Resource](Ptrcall.call1[Boolean, Long](gdext.classes.Resource.mb_duplicate, livePtr, deep))
   }
 
   /** Resource.duplicate_deep. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def duplicateDeep(deep_subresources_mode: Long): Resource = {
+  final def duplicateDeep(deepSubresourcesMode: gdext.classes.Resource.DeepDuplicateMode = gdext.classes.Resource.DeepDuplicateMode(1L)): Resource = {
     if (gdext.classes.Resource.mb_duplicate_deep == null) gdext.classes.Resource.mb_duplicate_deep = MethodBind.get("Resource", "duplicate_deep", 905779109L)
-    Wrappers.owned[Resource](Ptrcall.call1[Long, Long](gdext.classes.Resource.mb_duplicate_deep, livePtr, deep_subresources_mode))
+    Wrappers.owned[Resource](Ptrcall.call1[Long, Long](gdext.classes.Resource.mb_duplicate_deep, livePtr, deepSubresourcesMode))
   }
 
 }
@@ -152,5 +153,29 @@ object Resource {
   final def generateSceneUniqueId(): String = {
     if (gdext.classes.Resource.mb_generate_scene_unique_id == null) gdext.classes.Resource.mb_generate_scene_unique_id = MethodBind.get("Resource", "generate_scene_unique_id", 2841200299L)
     Ptrcall.call0[String](gdext.classes.Resource.mb_generate_scene_unique_id, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr])
+  }
+
+  /** Godot enum `Resource.DeepDuplicateMode`. */
+  opaque type DeepDuplicateMode <: Long = Long
+
+  object DeepDuplicateMode {
+    final val None: DeepDuplicateMode = 0L.asInstanceOf[DeepDuplicateMode]
+    final val Internal: DeepDuplicateMode = 1L.asInstanceOf[DeepDuplicateMode]
+    final val All: DeepDuplicateMode = 2L.asInstanceOf[DeepDuplicateMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DeepDuplicateMode = value.asInstanceOf[DeepDuplicateMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DeepDuplicateMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[DeepDuplicateMode]]
+
+    extension (self: DeepDuplicateMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "None"
+        case 1L => "Internal"
+        case 2L => "All"
+        case other => other.toString
+      }
   }
 }

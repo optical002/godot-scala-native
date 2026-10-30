@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class Timer extends Node {
   override def godotClassName: String = "Timer"
 
   /** Timer.set_wait_time */
-  final def setWaitTime(time_sec: Double): Unit = {
+  final def setWaitTime(timeSec: Double): Unit = {
     if (gdext.classes.Timer.mb_set_wait_time == null) gdext.classes.Timer.mb_set_wait_time = MethodBind.get("Timer", "set_wait_time", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Timer.mb_set_wait_time, livePtr, time_sec)
+    Ptrcall.callVoid1(gdext.classes.Timer.mb_set_wait_time, livePtr, timeSec)
   }
 
   /** Timer.get_wait_time */
@@ -47,9 +48,9 @@ abstract class Timer extends Node {
   }
 
   /** Timer.start */
-  final def start(time_sec: Double): Unit = {
+  final def start(timeSec: Double = -1.0): Unit = {
     if (gdext.classes.Timer.mb_start == null) gdext.classes.Timer.mb_start = MethodBind.get("Timer", "start", 1392008558L)
-    Ptrcall.callVoid1(gdext.classes.Timer.mb_start, livePtr, time_sec)
+    Ptrcall.callVoid1(gdext.classes.Timer.mb_start, livePtr, timeSec)
   }
 
   /** Timer.stop */
@@ -95,15 +96,15 @@ abstract class Timer extends Node {
   }
 
   /** Timer.set_timer_process_callback */
-  final def setTimerProcessCallback(callback: Long): Unit = {
+  final def setTimerProcessCallback(callback: gdext.classes.Timer.TimerProcessCallback): Unit = {
     if (gdext.classes.Timer.mb_set_timer_process_callback == null) gdext.classes.Timer.mb_set_timer_process_callback = MethodBind.get("Timer", "set_timer_process_callback", 3469495063L)
     Ptrcall.callVoid1(gdext.classes.Timer.mb_set_timer_process_callback, livePtr, callback)
   }
 
   /** Timer.get_timer_process_callback */
-  final def getTimerProcessCallback(): Long = {
+  final def getTimerProcessCallback(): gdext.classes.Timer.TimerProcessCallback = {
     if (gdext.classes.Timer.mb_get_timer_process_callback == null) gdext.classes.Timer.mb_get_timer_process_callback = MethodBind.get("Timer", "get_timer_process_callback", 2672570227L)
-    Ptrcall.call0[Long](gdext.classes.Timer.mb_get_timer_process_callback, livePtr)
+    gdext.classes.Timer.TimerProcessCallback(Ptrcall.call0[Long](gdext.classes.Timer.mb_get_timer_process_callback, livePtr))
   }
 
 }
@@ -125,4 +126,26 @@ object Timer {
   private[classes] var mb_get_time_left: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_timer_process_callback: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_timer_process_callback: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `Timer.TimerProcessCallback`. */
+  opaque type TimerProcessCallback <: Long = Long
+
+  object TimerProcessCallback {
+    final val Physics: TimerProcessCallback = 0L.asInstanceOf[TimerProcessCallback]
+    final val Idle: TimerProcessCallback = 1L.asInstanceOf[TimerProcessCallback]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): TimerProcessCallback = value.asInstanceOf[TimerProcessCallback]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[TimerProcessCallback] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[TimerProcessCallback]]
+
+    extension (self: TimerProcessCallback)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Physics"
+        case 1L => "Idle"
+        case other => other.toString
+      }
+  }
 }

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class AnimatedSprite2D extends Node2D {
   override def godotClassName: String = "AnimatedSprite2D"
 
   /** AnimatedSprite2D.set_sprite_frames */
-  final def setSpriteFrames(sprite_frames: SpriteFrames): Unit = {
+  final def setSpriteFrames(spriteFrames: SpriteFrames): Unit = {
     if (gdext.classes.AnimatedSprite2D.mb_set_sprite_frames == null) gdext.classes.AnimatedSprite2D.mb_set_sprite_frames = MethodBind.get("AnimatedSprite2D", "set_sprite_frames", 905781144L)
-    Ptrcall.callVoid1(gdext.classes.AnimatedSprite2D.mb_set_sprite_frames, livePtr, Wrappers.handle(sprite_frames))
+    Ptrcall.callVoid1(gdext.classes.AnimatedSprite2D.mb_set_sprite_frames, livePtr, Wrappers.handle(spriteFrames))
   }
 
   /** AnimatedSprite2D.get_sprite_frames. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -23,15 +24,15 @@ abstract class AnimatedSprite2D extends Node2D {
   }
 
   /** AnimatedSprite2D.set_animation */
-  final def setAnimation(name: gdext.builtin.StringName): Unit = {
+  final def setAnimation(name: String): Unit = {
     if (gdext.classes.AnimatedSprite2D.mb_set_animation == null) gdext.classes.AnimatedSprite2D.mb_set_animation = MethodBind.get("AnimatedSprite2D", "set_animation", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.AnimatedSprite2D.mb_set_animation, livePtr, name)
+    Ptrcall.callVoid1(gdext.classes.AnimatedSprite2D.mb_set_animation, livePtr, SnArg(name))
   }
 
   /** AnimatedSprite2D.get_animation */
-  final def getAnimation(): gdext.builtin.StringName = {
+  final def getAnimation(): String = {
     if (gdext.classes.AnimatedSprite2D.mb_get_animation == null) gdext.classes.AnimatedSprite2D.mb_get_animation = MethodBind.get("AnimatedSprite2D", "get_animation", 2002593661L)
-    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.AnimatedSprite2D.mb_get_animation, livePtr)
+    Ptrcall.call0[SnArg](gdext.classes.AnimatedSprite2D.mb_get_animation, livePtr)
   }
 
   /** AnimatedSprite2D.set_autoplay */
@@ -53,15 +54,15 @@ abstract class AnimatedSprite2D extends Node2D {
   }
 
   /** AnimatedSprite2D.play */
-  final def play(name: gdext.builtin.StringName, custom_speed: Double, from_end: Boolean): Unit = {
+  final def play(name: String = "", customSpeed: Double = 1.0, fromEnd: Boolean = false): Unit = {
     if (gdext.classes.AnimatedSprite2D.mb_play == null) gdext.classes.AnimatedSprite2D.mb_play = MethodBind.get("AnimatedSprite2D", "play", 3269405555L)
-    Ptrcall.callVoid3(gdext.classes.AnimatedSprite2D.mb_play, livePtr, name, custom_speed, from_end)
+    Ptrcall.callVoid3(gdext.classes.AnimatedSprite2D.mb_play, livePtr, SnArg(name), customSpeed, fromEnd)
   }
 
   /** AnimatedSprite2D.play_backwards */
-  final def playBackwards(name: gdext.builtin.StringName): Unit = {
+  final def playBackwards(name: String = ""): Unit = {
     if (gdext.classes.AnimatedSprite2D.mb_play_backwards == null) gdext.classes.AnimatedSprite2D.mb_play_backwards = MethodBind.get("AnimatedSprite2D", "play_backwards", 3323268493L)
-    Ptrcall.callVoid1(gdext.classes.AnimatedSprite2D.mb_play_backwards, livePtr, name)
+    Ptrcall.callVoid1(gdext.classes.AnimatedSprite2D.mb_play_backwards, livePtr, SnArg(name))
   }
 
   /** AnimatedSprite2D.pause */
@@ -101,9 +102,9 @@ abstract class AnimatedSprite2D extends Node2D {
   }
 
   /** AnimatedSprite2D.set_flip_h */
-  final def setFlipH(flip_h: Boolean): Unit = {
+  final def setFlipH(flipH: Boolean): Unit = {
     if (gdext.classes.AnimatedSprite2D.mb_set_flip_h == null) gdext.classes.AnimatedSprite2D.mb_set_flip_h = MethodBind.get("AnimatedSprite2D", "set_flip_h", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.AnimatedSprite2D.mb_set_flip_h, livePtr, flip_h)
+    Ptrcall.callVoid1(gdext.classes.AnimatedSprite2D.mb_set_flip_h, livePtr, flipH)
   }
 
   /** AnimatedSprite2D.is_flipped_h */
@@ -113,9 +114,9 @@ abstract class AnimatedSprite2D extends Node2D {
   }
 
   /** AnimatedSprite2D.set_flip_v */
-  final def setFlipV(flip_v: Boolean): Unit = {
+  final def setFlipV(flipV: Boolean): Unit = {
     if (gdext.classes.AnimatedSprite2D.mb_set_flip_v == null) gdext.classes.AnimatedSprite2D.mb_set_flip_v = MethodBind.get("AnimatedSprite2D", "set_flip_v", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.AnimatedSprite2D.mb_set_flip_v, livePtr, flip_v)
+    Ptrcall.callVoid1(gdext.classes.AnimatedSprite2D.mb_set_flip_v, livePtr, flipV)
   }
 
   /** AnimatedSprite2D.is_flipped_v */
@@ -155,9 +156,9 @@ abstract class AnimatedSprite2D extends Node2D {
   }
 
   /** AnimatedSprite2D.set_speed_scale */
-  final def setSpeedScale(speed_scale: Double): Unit = {
+  final def setSpeedScale(speedScale: Double): Unit = {
     if (gdext.classes.AnimatedSprite2D.mb_set_speed_scale == null) gdext.classes.AnimatedSprite2D.mb_set_speed_scale = MethodBind.get("AnimatedSprite2D", "set_speed_scale", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AnimatedSprite2D.mb_set_speed_scale, livePtr, speed_scale)
+    Ptrcall.callVoid1(gdext.classes.AnimatedSprite2D.mb_set_speed_scale, livePtr, speedScale)
   }
 
   /** AnimatedSprite2D.get_speed_scale */

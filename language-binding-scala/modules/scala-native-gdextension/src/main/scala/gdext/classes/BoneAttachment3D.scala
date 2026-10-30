@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,9 +18,9 @@ abstract class BoneAttachment3D extends Node3D {
   }
 
   /** BoneAttachment3D.set_bone_name */
-  final def setBoneName(bone_name: String): Unit = {
+  final def setBoneName(boneName: String): Unit = {
     if (gdext.classes.BoneAttachment3D.mb_set_bone_name == null) gdext.classes.BoneAttachment3D.mb_set_bone_name = MethodBind.get("BoneAttachment3D", "set_bone_name", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.BoneAttachment3D.mb_set_bone_name, livePtr, bone_name)
+    Ptrcall.callVoid1(gdext.classes.BoneAttachment3D.mb_set_bone_name, livePtr, boneName)
   }
 
   /** BoneAttachment3D.get_bone_name */
@@ -29,9 +30,9 @@ abstract class BoneAttachment3D extends Node3D {
   }
 
   /** BoneAttachment3D.set_bone_idx */
-  final def setBoneIdx(bone_idx: Long): Unit = {
+  final def setBoneIdx(boneIdx: Long): Unit = {
     if (gdext.classes.BoneAttachment3D.mb_set_bone_idx == null) gdext.classes.BoneAttachment3D.mb_set_bone_idx = MethodBind.get("BoneAttachment3D", "set_bone_idx", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.BoneAttachment3D.mb_set_bone_idx, livePtr, bone_idx)
+    Ptrcall.callVoid1(gdext.classes.BoneAttachment3D.mb_set_bone_idx, livePtr, boneIdx)
   }
 
   /** BoneAttachment3D.get_bone_idx */
@@ -47,9 +48,9 @@ abstract class BoneAttachment3D extends Node3D {
   }
 
   /** BoneAttachment3D.set_override_pose */
-  final def setOverridePose(override_pose: Boolean): Unit = {
+  final def setOverridePose(overridePose: Boolean): Unit = {
     if (gdext.classes.BoneAttachment3D.mb_set_override_pose == null) gdext.classes.BoneAttachment3D.mb_set_override_pose = MethodBind.get("BoneAttachment3D", "set_override_pose", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.BoneAttachment3D.mb_set_override_pose, livePtr, override_pose)
+    Ptrcall.callVoid1(gdext.classes.BoneAttachment3D.mb_set_override_pose, livePtr, overridePose)
   }
 
   /** BoneAttachment3D.get_override_pose */
@@ -59,9 +60,9 @@ abstract class BoneAttachment3D extends Node3D {
   }
 
   /** BoneAttachment3D.set_use_external_skeleton */
-  final def setUseExternalSkeleton(use_external_skeleton: Boolean): Unit = {
+  final def setUseExternalSkeleton(useExternalSkeleton: Boolean): Unit = {
     if (gdext.classes.BoneAttachment3D.mb_set_use_external_skeleton == null) gdext.classes.BoneAttachment3D.mb_set_use_external_skeleton = MethodBind.get("BoneAttachment3D", "set_use_external_skeleton", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.BoneAttachment3D.mb_set_use_external_skeleton, livePtr, use_external_skeleton)
+    Ptrcall.callVoid1(gdext.classes.BoneAttachment3D.mb_set_use_external_skeleton, livePtr, useExternalSkeleton)
   }
 
   /** BoneAttachment3D.get_use_external_skeleton */

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -41,9 +42,9 @@ abstract class XRVRS extends Object {
   }
 
   /** XRVRS.set_vrs_render_region */
-  final def setVrsRenderRegion(render_region: gdext.builtin.Rect2i): Unit = {
+  final def setVrsRenderRegion(renderRegion: gdext.builtin.Rect2i): Unit = {
     if (gdext.classes.XRVRS.mb_set_vrs_render_region == null) gdext.classes.XRVRS.mb_set_vrs_render_region = MethodBind.get("XRVRS", "set_vrs_render_region", 1763793166L)
-    Ptrcall.callVoid1(gdext.classes.XRVRS.mb_set_vrs_render_region, livePtr, render_region)
+    Ptrcall.callVoid1(gdext.classes.XRVRS.mb_set_vrs_render_region, livePtr, renderRegion)
   }
 
 }

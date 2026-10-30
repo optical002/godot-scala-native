@@ -1,5 +1,6 @@
 package gdext.internal.engine
 
+import gdext.internal.StringNames
 import gdext.Godot
 import gdext.builtin.*
 import gdext.classes.*
@@ -75,7 +76,7 @@ object EngineSelfTest {
     // --- enum argument/return marshals as Long ---
     check("Node set/get process_mode (enum as Long)") {
       val node = construct[Node]
-      node.setProcessMode(4L) // PROCESS_MODE_DISABLED
+      node.setProcessMode(gdext.classes.Node.ProcessMode.Disabled)
       node.getProcessMode() == 4L
     }
 

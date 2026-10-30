@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class OpenXRCompositionLayerCylinder extends OpenXRCompositionLayer {
   }
 
   /** OpenXRCompositionLayerCylinder.set_aspect_ratio */
-  final def setAspectRatio(aspect_ratio: Double): Unit = {
+  final def setAspectRatio(aspectRatio: Double): Unit = {
     if (gdext.classes.OpenXRCompositionLayerCylinder.mb_set_aspect_ratio == null) gdext.classes.OpenXRCompositionLayerCylinder.mb_set_aspect_ratio = MethodBind.get("OpenXRCompositionLayerCylinder", "set_aspect_ratio", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRCompositionLayerCylinder.mb_set_aspect_ratio, livePtr, aspect_ratio)
+    Ptrcall.callVoid1(gdext.classes.OpenXRCompositionLayerCylinder.mb_set_aspect_ratio, livePtr, aspectRatio)
   }
 
   /** OpenXRCompositionLayerCylinder.get_aspect_ratio */

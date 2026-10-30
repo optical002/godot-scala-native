@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,9 +36,9 @@ abstract class CapsuleShape3D extends Shape3D {
   }
 
   /** CapsuleShape3D.set_mid_height */
-  final def setMidHeight(mid_height: Double): Unit = {
+  final def setMidHeight(midHeight: Double): Unit = {
     if (gdext.classes.CapsuleShape3D.mb_set_mid_height == null) gdext.classes.CapsuleShape3D.mb_set_mid_height = MethodBind.get("CapsuleShape3D", "set_mid_height", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.CapsuleShape3D.mb_set_mid_height, livePtr, mid_height)
+    Ptrcall.callVoid1(gdext.classes.CapsuleShape3D.mb_set_mid_height, livePtr, midHeight)
   }
 
   /** CapsuleShape3D.get_mid_height */

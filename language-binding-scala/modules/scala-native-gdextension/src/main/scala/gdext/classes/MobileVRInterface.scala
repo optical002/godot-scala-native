@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class MobileVRInterface extends XRInterface {
   override def godotClassName: String = "MobileVRInterface"
 
   /** MobileVRInterface.set_eye_height */
-  final def setEyeHeight(eye_height: Double): Unit = {
+  final def setEyeHeight(eyeHeight: Double): Unit = {
     if (gdext.classes.MobileVRInterface.mb_set_eye_height == null) gdext.classes.MobileVRInterface.mb_set_eye_height = MethodBind.get("MobileVRInterface", "set_eye_height", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.MobileVRInterface.mb_set_eye_height, livePtr, eye_height)
+    Ptrcall.callVoid1(gdext.classes.MobileVRInterface.mb_set_eye_height, livePtr, eyeHeight)
   }
 
   /** MobileVRInterface.get_eye_height */
@@ -35,9 +36,9 @@ abstract class MobileVRInterface extends XRInterface {
   }
 
   /** MobileVRInterface.set_display_width */
-  final def setDisplayWidth(display_width: Double): Unit = {
+  final def setDisplayWidth(displayWidth: Double): Unit = {
     if (gdext.classes.MobileVRInterface.mb_set_display_width == null) gdext.classes.MobileVRInterface.mb_set_display_width = MethodBind.get("MobileVRInterface", "set_display_width", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.MobileVRInterface.mb_set_display_width, livePtr, display_width)
+    Ptrcall.callVoid1(gdext.classes.MobileVRInterface.mb_set_display_width, livePtr, displayWidth)
   }
 
   /** MobileVRInterface.get_display_width */
@@ -47,9 +48,9 @@ abstract class MobileVRInterface extends XRInterface {
   }
 
   /** MobileVRInterface.set_display_to_lens */
-  final def setDisplayToLens(display_to_lens: Double): Unit = {
+  final def setDisplayToLens(displayToLens: Double): Unit = {
     if (gdext.classes.MobileVRInterface.mb_set_display_to_lens == null) gdext.classes.MobileVRInterface.mb_set_display_to_lens = MethodBind.get("MobileVRInterface", "set_display_to_lens", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.MobileVRInterface.mb_set_display_to_lens, livePtr, display_to_lens)
+    Ptrcall.callVoid1(gdext.classes.MobileVRInterface.mb_set_display_to_lens, livePtr, displayToLens)
   }
 
   /** MobileVRInterface.get_display_to_lens */
@@ -59,9 +60,9 @@ abstract class MobileVRInterface extends XRInterface {
   }
 
   /** MobileVRInterface.set_offset_rect */
-  final def setOffsetRect(offset_rect: gdext.builtin.Rect2): Unit = {
+  final def setOffsetRect(offsetRect: gdext.builtin.Rect2): Unit = {
     if (gdext.classes.MobileVRInterface.mb_set_offset_rect == null) gdext.classes.MobileVRInterface.mb_set_offset_rect = MethodBind.get("MobileVRInterface", "set_offset_rect", 2046264180L)
-    Ptrcall.callVoid1(gdext.classes.MobileVRInterface.mb_set_offset_rect, livePtr, offset_rect)
+    Ptrcall.callVoid1(gdext.classes.MobileVRInterface.mb_set_offset_rect, livePtr, offsetRect)
   }
 
   /** MobileVRInterface.get_offset_rect */

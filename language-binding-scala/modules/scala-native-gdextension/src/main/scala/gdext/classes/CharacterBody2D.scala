@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -95,9 +96,9 @@ abstract class CharacterBody2D extends PhysicsBody2D {
   }
 
   /** CharacterBody2D.set_platform_floor_layers */
-  final def setPlatformFloorLayers(exclude_layer: Long): Unit = {
+  final def setPlatformFloorLayers(excludeLayer: Long): Unit = {
     if (gdext.classes.CharacterBody2D.mb_set_platform_floor_layers == null) gdext.classes.CharacterBody2D.mb_set_platform_floor_layers = MethodBind.get("CharacterBody2D", "set_platform_floor_layers", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.CharacterBody2D.mb_set_platform_floor_layers, livePtr, exclude_layer)
+    Ptrcall.callVoid1(gdext.classes.CharacterBody2D.mb_set_platform_floor_layers, livePtr, excludeLayer)
   }
 
   /** CharacterBody2D.get_platform_floor_layers */
@@ -107,9 +108,9 @@ abstract class CharacterBody2D extends PhysicsBody2D {
   }
 
   /** CharacterBody2D.set_platform_wall_layers */
-  final def setPlatformWallLayers(exclude_layer: Long): Unit = {
+  final def setPlatformWallLayers(excludeLayer: Long): Unit = {
     if (gdext.classes.CharacterBody2D.mb_set_platform_wall_layers == null) gdext.classes.CharacterBody2D.mb_set_platform_wall_layers = MethodBind.get("CharacterBody2D", "set_platform_wall_layers", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.CharacterBody2D.mb_set_platform_wall_layers, livePtr, exclude_layer)
+    Ptrcall.callVoid1(gdext.classes.CharacterBody2D.mb_set_platform_wall_layers, livePtr, excludeLayer)
   }
 
   /** CharacterBody2D.get_platform_wall_layers */
@@ -125,9 +126,9 @@ abstract class CharacterBody2D extends PhysicsBody2D {
   }
 
   /** CharacterBody2D.set_max_slides */
-  final def setMaxSlides(max_slides: Long): Unit = {
+  final def setMaxSlides(maxSlides: Long): Unit = {
     if (gdext.classes.CharacterBody2D.mb_set_max_slides == null) gdext.classes.CharacterBody2D.mb_set_max_slides = MethodBind.get("CharacterBody2D", "set_max_slides", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.CharacterBody2D.mb_set_max_slides, livePtr, max_slides)
+    Ptrcall.callVoid1(gdext.classes.CharacterBody2D.mb_set_max_slides, livePtr, maxSlides)
   }
 
   /** CharacterBody2D.get_floor_max_angle */
@@ -149,9 +150,9 @@ abstract class CharacterBody2D extends PhysicsBody2D {
   }
 
   /** CharacterBody2D.set_floor_snap_length */
-  final def setFloorSnapLength(floor_snap_length: Double): Unit = {
+  final def setFloorSnapLength(floorSnapLength: Double): Unit = {
     if (gdext.classes.CharacterBody2D.mb_set_floor_snap_length == null) gdext.classes.CharacterBody2D.mb_set_floor_snap_length = MethodBind.get("CharacterBody2D", "set_floor_snap_length", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.CharacterBody2D.mb_set_floor_snap_length, livePtr, floor_snap_length)
+    Ptrcall.callVoid1(gdext.classes.CharacterBody2D.mb_set_floor_snap_length, livePtr, floorSnapLength)
   }
 
   /** CharacterBody2D.get_wall_min_slide_angle */
@@ -173,33 +174,33 @@ abstract class CharacterBody2D extends PhysicsBody2D {
   }
 
   /** CharacterBody2D.set_up_direction */
-  final def setUpDirection(up_direction: gdext.builtin.Vector2): Unit = {
+  final def setUpDirection(upDirection: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.CharacterBody2D.mb_set_up_direction == null) gdext.classes.CharacterBody2D.mb_set_up_direction = MethodBind.get("CharacterBody2D", "set_up_direction", 743155724L)
-    Ptrcall.callVoid1(gdext.classes.CharacterBody2D.mb_set_up_direction, livePtr, up_direction)
+    Ptrcall.callVoid1(gdext.classes.CharacterBody2D.mb_set_up_direction, livePtr, upDirection)
   }
 
   /** CharacterBody2D.set_motion_mode */
-  final def setMotionMode(mode: Long): Unit = {
+  final def setMotionMode(mode: gdext.classes.CharacterBody2D.MotionMode): Unit = {
     if (gdext.classes.CharacterBody2D.mb_set_motion_mode == null) gdext.classes.CharacterBody2D.mb_set_motion_mode = MethodBind.get("CharacterBody2D", "set_motion_mode", 1224392233L)
     Ptrcall.callVoid1(gdext.classes.CharacterBody2D.mb_set_motion_mode, livePtr, mode)
   }
 
   /** CharacterBody2D.get_motion_mode */
-  final def getMotionMode(): Long = {
+  final def getMotionMode(): gdext.classes.CharacterBody2D.MotionMode = {
     if (gdext.classes.CharacterBody2D.mb_get_motion_mode == null) gdext.classes.CharacterBody2D.mb_get_motion_mode = MethodBind.get("CharacterBody2D", "get_motion_mode", 1160151236L)
-    Ptrcall.call0[Long](gdext.classes.CharacterBody2D.mb_get_motion_mode, livePtr)
+    gdext.classes.CharacterBody2D.MotionMode(Ptrcall.call0[Long](gdext.classes.CharacterBody2D.mb_get_motion_mode, livePtr))
   }
 
   /** CharacterBody2D.set_platform_on_leave */
-  final def setPlatformOnLeave(on_leave_apply_velocity: Long): Unit = {
+  final def setPlatformOnLeave(onLeaveApplyVelocity: gdext.classes.CharacterBody2D.PlatformOnLeave): Unit = {
     if (gdext.classes.CharacterBody2D.mb_set_platform_on_leave == null) gdext.classes.CharacterBody2D.mb_set_platform_on_leave = MethodBind.get("CharacterBody2D", "set_platform_on_leave", 2423324375L)
-    Ptrcall.callVoid1(gdext.classes.CharacterBody2D.mb_set_platform_on_leave, livePtr, on_leave_apply_velocity)
+    Ptrcall.callVoid1(gdext.classes.CharacterBody2D.mb_set_platform_on_leave, livePtr, onLeaveApplyVelocity)
   }
 
   /** CharacterBody2D.get_platform_on_leave */
-  final def getPlatformOnLeave(): Long = {
+  final def getPlatformOnLeave(): gdext.classes.CharacterBody2D.PlatformOnLeave = {
     if (gdext.classes.CharacterBody2D.mb_get_platform_on_leave == null) gdext.classes.CharacterBody2D.mb_get_platform_on_leave = MethodBind.get("CharacterBody2D", "get_platform_on_leave", 4054324341L)
-    Ptrcall.call0[Long](gdext.classes.CharacterBody2D.mb_get_platform_on_leave, livePtr)
+    gdext.classes.CharacterBody2D.PlatformOnLeave(Ptrcall.call0[Long](gdext.classes.CharacterBody2D.mb_get_platform_on_leave, livePtr))
   }
 
   /** CharacterBody2D.is_on_floor */
@@ -269,9 +270,9 @@ abstract class CharacterBody2D extends PhysicsBody2D {
   }
 
   /** CharacterBody2D.get_floor_angle */
-  final def getFloorAngle(up_direction: gdext.builtin.Vector2): Double = {
+  final def getFloorAngle(upDirection: gdext.builtin.Vector2 = gdext.builtin.Vector2(0f, -1f)): Double = {
     if (gdext.classes.CharacterBody2D.mb_get_floor_angle == null) gdext.classes.CharacterBody2D.mb_get_floor_angle = MethodBind.get("CharacterBody2D", "get_floor_angle", 2841063350L)
-    Ptrcall.call1[gdext.builtin.Vector2, Double](gdext.classes.CharacterBody2D.mb_get_floor_angle, livePtr, up_direction)
+    Ptrcall.call1[gdext.builtin.Vector2, Double](gdext.classes.CharacterBody2D.mb_get_floor_angle, livePtr, upDirection)
   }
 
   /** CharacterBody2D.get_platform_velocity */
@@ -287,9 +288,9 @@ abstract class CharacterBody2D extends PhysicsBody2D {
   }
 
   /** CharacterBody2D.get_slide_collision. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getSlideCollision(slide_idx: Long): KinematicCollision2D = {
+  final def getSlideCollision(slideIdx: Long): KinematicCollision2D = {
     if (gdext.classes.CharacterBody2D.mb_get_slide_collision == null) gdext.classes.CharacterBody2D.mb_get_slide_collision = MethodBind.get("CharacterBody2D", "get_slide_collision", 860659811L)
-    Wrappers.owned[KinematicCollision2D](Ptrcall.call1[Long, Long](gdext.classes.CharacterBody2D.mb_get_slide_collision, livePtr, slide_idx))
+    Wrappers.owned[KinematicCollision2D](Ptrcall.call1[Long, Long](gdext.classes.CharacterBody2D.mb_get_slide_collision, livePtr, slideIdx))
   }
 
   /** CharacterBody2D.get_last_slide_collision. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -349,4 +350,50 @@ object CharacterBody2D {
   private[classes] var mb_get_slide_collision_count: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_slide_collision: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_last_slide_collision: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `CharacterBody2D.MotionMode`. */
+  opaque type MotionMode <: Long = Long
+
+  object MotionMode {
+    final val Grounded: MotionMode = 0L.asInstanceOf[MotionMode]
+    final val Floating: MotionMode = 1L.asInstanceOf[MotionMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): MotionMode = value.asInstanceOf[MotionMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[MotionMode] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[MotionMode]]
+
+    extension (self: MotionMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Grounded"
+        case 1L => "Floating"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `CharacterBody2D.PlatformOnLeave`. */
+  opaque type PlatformOnLeave <: Long = Long
+
+  object PlatformOnLeave {
+    final val AddVelocity: PlatformOnLeave = 0L.asInstanceOf[PlatformOnLeave]
+    final val AddUpwardVelocity: PlatformOnLeave = 1L.asInstanceOf[PlatformOnLeave]
+    final val DoNothing: PlatformOnLeave = 2L.asInstanceOf[PlatformOnLeave]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): PlatformOnLeave = value.asInstanceOf[PlatformOnLeave]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[PlatformOnLeave] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[PlatformOnLeave]]
+
+    extension (self: PlatformOnLeave)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "AddVelocity"
+        case 1L => "AddUpwardVelocity"
+        case 2L => "DoNothing"
+        case other => other.toString
+      }
+  }
 }

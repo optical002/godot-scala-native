@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,27 +12,27 @@ abstract class XRNode3D extends Node3D {
   override def godotClassName: String = "XRNode3D"
 
   /** XRNode3D.set_tracker */
-  final def setTracker(tracker_name: gdext.builtin.StringName): Unit = {
+  final def setTracker(trackerName: String): Unit = {
     if (gdext.classes.XRNode3D.mb_set_tracker == null) gdext.classes.XRNode3D.mb_set_tracker = MethodBind.get("XRNode3D", "set_tracker", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.XRNode3D.mb_set_tracker, livePtr, tracker_name)
+    Ptrcall.callVoid1(gdext.classes.XRNode3D.mb_set_tracker, livePtr, SnArg(trackerName))
   }
 
   /** XRNode3D.get_tracker */
-  final def getTracker(): gdext.builtin.StringName = {
+  final def getTracker(): String = {
     if (gdext.classes.XRNode3D.mb_get_tracker == null) gdext.classes.XRNode3D.mb_get_tracker = MethodBind.get("XRNode3D", "get_tracker", 2002593661L)
-    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.XRNode3D.mb_get_tracker, livePtr)
+    Ptrcall.call0[SnArg](gdext.classes.XRNode3D.mb_get_tracker, livePtr)
   }
 
   /** XRNode3D.set_pose_name */
-  final def setPoseName(pose: gdext.builtin.StringName): Unit = {
+  final def setPoseName(pose: String): Unit = {
     if (gdext.classes.XRNode3D.mb_set_pose_name == null) gdext.classes.XRNode3D.mb_set_pose_name = MethodBind.get("XRNode3D", "set_pose_name", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.XRNode3D.mb_set_pose_name, livePtr, pose)
+    Ptrcall.callVoid1(gdext.classes.XRNode3D.mb_set_pose_name, livePtr, SnArg(pose))
   }
 
   /** XRNode3D.get_pose_name */
-  final def getPoseName(): gdext.builtin.StringName = {
+  final def getPoseName(): String = {
     if (gdext.classes.XRNode3D.mb_get_pose_name == null) gdext.classes.XRNode3D.mb_get_pose_name = MethodBind.get("XRNode3D", "get_pose_name", 2002593661L)
-    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.XRNode3D.mb_get_pose_name, livePtr)
+    Ptrcall.call0[SnArg](gdext.classes.XRNode3D.mb_get_pose_name, livePtr)
   }
 
   /** XRNode3D.set_show_when_tracked */
@@ -65,9 +66,9 @@ abstract class XRNode3D extends Node3D {
   }
 
   /** XRNode3D.trigger_haptic_pulse */
-  final def triggerHapticPulse(action_name: String, frequency: Double, amplitude: Double, duration_sec: Double, delay_sec: Double): Unit = {
+  final def triggerHapticPulse(actionName: String, frequency: Double, amplitude: Double, durationSec: Double, delaySec: Double): Unit = {
     if (gdext.classes.XRNode3D.mb_trigger_haptic_pulse == null) gdext.classes.XRNode3D.mb_trigger_haptic_pulse = MethodBind.get("XRNode3D", "trigger_haptic_pulse", 508576839L)
-    Ptrcall.callVoid5(gdext.classes.XRNode3D.mb_trigger_haptic_pulse, livePtr, action_name, frequency, amplitude, duration_sec, delay_sec)
+    Ptrcall.callVoid5(gdext.classes.XRNode3D.mb_trigger_haptic_pulse, livePtr, actionName, frequency, amplitude, durationSec, delaySec)
   }
 
 }

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -77,31 +78,31 @@ abstract class Tween extends RefCounted {
   }
 
   /** Tween.set_process_mode. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def setProcessMode(mode: Long): Tween = {
+  final def setProcessMode(mode: gdext.classes.Tween.TweenProcessMode): Tween = {
     if (gdext.classes.Tween.mb_set_process_mode == null) gdext.classes.Tween.mb_set_process_mode = MethodBind.get("Tween", "set_process_mode", 855258840L)
     Wrappers.owned[Tween](Ptrcall.call1[Long, Long](gdext.classes.Tween.mb_set_process_mode, livePtr, mode))
   }
 
   /** Tween.set_pause_mode. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def setPauseMode(mode: Long): Tween = {
+  final def setPauseMode(mode: gdext.classes.Tween.TweenPauseMode): Tween = {
     if (gdext.classes.Tween.mb_set_pause_mode == null) gdext.classes.Tween.mb_set_pause_mode = MethodBind.get("Tween", "set_pause_mode", 3363368837L)
     Wrappers.owned[Tween](Ptrcall.call1[Long, Long](gdext.classes.Tween.mb_set_pause_mode, livePtr, mode))
   }
 
   /** Tween.set_ignore_time_scale. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def setIgnoreTimeScale(ignore: Boolean): Tween = {
+  final def setIgnoreTimeScale(ignore: Boolean = true): Tween = {
     if (gdext.classes.Tween.mb_set_ignore_time_scale == null) gdext.classes.Tween.mb_set_ignore_time_scale = MethodBind.get("Tween", "set_ignore_time_scale", 1942052223L)
     Wrappers.owned[Tween](Ptrcall.call1[Boolean, Long](gdext.classes.Tween.mb_set_ignore_time_scale, livePtr, ignore))
   }
 
   /** Tween.set_parallel. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def setParallel(parallel: Boolean): Tween = {
+  final def setParallel(parallel: Boolean = true): Tween = {
     if (gdext.classes.Tween.mb_set_parallel == null) gdext.classes.Tween.mb_set_parallel = MethodBind.get("Tween", "set_parallel", 1942052223L)
     Wrappers.owned[Tween](Ptrcall.call1[Boolean, Long](gdext.classes.Tween.mb_set_parallel, livePtr, parallel))
   }
 
   /** Tween.set_loops. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def setLoops(loops: Long): Tween = {
+  final def setLoops(loops: Long = 0L): Tween = {
     if (gdext.classes.Tween.mb_set_loops == null) gdext.classes.Tween.mb_set_loops = MethodBind.get("Tween", "set_loops", 2670836414L)
     Wrappers.owned[Tween](Ptrcall.call1[Long, Long](gdext.classes.Tween.mb_set_loops, livePtr, loops))
   }
@@ -119,13 +120,13 @@ abstract class Tween extends RefCounted {
   }
 
   /** Tween.set_trans. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def setTrans(trans: Long): Tween = {
+  final def setTrans(trans: gdext.classes.Tween.TransitionType): Tween = {
     if (gdext.classes.Tween.mb_set_trans == null) gdext.classes.Tween.mb_set_trans = MethodBind.get("Tween", "set_trans", 3965963875L)
     Wrappers.owned[Tween](Ptrcall.call1[Long, Long](gdext.classes.Tween.mb_set_trans, livePtr, trans))
   }
 
   /** Tween.set_ease. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def setEase(ease: Long): Tween = {
+  final def setEase(ease: gdext.classes.Tween.EaseType): Tween = {
     if (gdext.classes.Tween.mb_set_ease == null) gdext.classes.Tween.mb_set_ease = MethodBind.get("Tween", "set_ease", 1208117252L)
     Wrappers.owned[Tween](Ptrcall.call1[Long, Long](gdext.classes.Tween.mb_set_ease, livePtr, ease))
   }
@@ -167,4 +168,118 @@ object Tween {
   private[classes] var mb_set_ease: GDExtensionMethodBindPtr = null
   private[classes] var mb_parallel: GDExtensionMethodBindPtr = null
   private[classes] var mb_chain: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `Tween.TweenProcessMode`. */
+  opaque type TweenProcessMode <: Long = Long
+
+  object TweenProcessMode {
+    final val Physics: TweenProcessMode = 0L.asInstanceOf[TweenProcessMode]
+    final val Idle: TweenProcessMode = 1L.asInstanceOf[TweenProcessMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): TweenProcessMode = value.asInstanceOf[TweenProcessMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[TweenProcessMode] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[TweenProcessMode]]
+
+    extension (self: TweenProcessMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Physics"
+        case 1L => "Idle"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Tween.TweenPauseMode`. */
+  opaque type TweenPauseMode <: Long = Long
+
+  object TweenPauseMode {
+    final val Bound: TweenPauseMode = 0L.asInstanceOf[TweenPauseMode]
+    final val Stop: TweenPauseMode = 1L.asInstanceOf[TweenPauseMode]
+    final val Process: TweenPauseMode = 2L.asInstanceOf[TweenPauseMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): TweenPauseMode = value.asInstanceOf[TweenPauseMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[TweenPauseMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[TweenPauseMode]]
+
+    extension (self: TweenPauseMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Bound"
+        case 1L => "Stop"
+        case 2L => "Process"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Tween.TransitionType`. */
+  opaque type TransitionType <: Long = Long
+
+  object TransitionType {
+    final val Linear: TransitionType = 0L.asInstanceOf[TransitionType]
+    final val Sine: TransitionType = 1L.asInstanceOf[TransitionType]
+    final val Quint: TransitionType = 2L.asInstanceOf[TransitionType]
+    final val Quart: TransitionType = 3L.asInstanceOf[TransitionType]
+    final val Quad: TransitionType = 4L.asInstanceOf[TransitionType]
+    final val Expo: TransitionType = 5L.asInstanceOf[TransitionType]
+    final val Elastic: TransitionType = 6L.asInstanceOf[TransitionType]
+    final val Cubic: TransitionType = 7L.asInstanceOf[TransitionType]
+    final val Circ: TransitionType = 8L.asInstanceOf[TransitionType]
+    final val Bounce: TransitionType = 9L.asInstanceOf[TransitionType]
+    final val Back: TransitionType = 10L.asInstanceOf[TransitionType]
+    final val Spring: TransitionType = 11L.asInstanceOf[TransitionType]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): TransitionType = value.asInstanceOf[TransitionType]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[TransitionType] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L).asInstanceOf[scala.IArray[TransitionType]]
+
+    extension (self: TransitionType)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Linear"
+        case 1L => "Sine"
+        case 2L => "Quint"
+        case 3L => "Quart"
+        case 4L => "Quad"
+        case 5L => "Expo"
+        case 6L => "Elastic"
+        case 7L => "Cubic"
+        case 8L => "Circ"
+        case 9L => "Bounce"
+        case 10L => "Back"
+        case 11L => "Spring"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Tween.EaseType`. */
+  opaque type EaseType <: Long = Long
+
+  object EaseType {
+    final val In: EaseType = 0L.asInstanceOf[EaseType]
+    final val Out: EaseType = 1L.asInstanceOf[EaseType]
+    final val InOut: EaseType = 2L.asInstanceOf[EaseType]
+    final val OutIn: EaseType = 3L.asInstanceOf[EaseType]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): EaseType = value.asInstanceOf[EaseType]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[EaseType] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[EaseType]]
+
+    extension (self: EaseType)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "In"
+        case 1L => "Out"
+        case 2L => "InOut"
+        case 3L => "OutIn"
+        case other => other.toString
+      }
+  }
 }

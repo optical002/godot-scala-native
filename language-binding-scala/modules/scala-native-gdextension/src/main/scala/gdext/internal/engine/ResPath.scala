@@ -28,7 +28,7 @@ object ResPath {
   }
 
   private[engine] def loadAs[T <: GodotScriptClass](path: String)(using ClassMeta[T]): T = {
-    val res = ResourceLoader.singleton.load(path, "", 1L)
+    val res = ResourceLoader.load(path)
     if (res == null) {
       gdext.api.Gd.printError(s"ResPath: could not load '$path'")
       null.asInstanceOf[T]

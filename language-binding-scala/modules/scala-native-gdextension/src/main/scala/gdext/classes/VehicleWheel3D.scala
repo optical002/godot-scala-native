@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -155,9 +156,9 @@ abstract class VehicleWheel3D extends Node3D {
   }
 
   /** VehicleWheel3D.set_roll_influence */
-  final def setRollInfluence(roll_influence: Double): Unit = {
+  final def setRollInfluence(rollInfluence: Double): Unit = {
     if (gdext.classes.VehicleWheel3D.mb_set_roll_influence == null) gdext.classes.VehicleWheel3D.mb_set_roll_influence = MethodBind.get("VehicleWheel3D", "set_roll_influence", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.VehicleWheel3D.mb_set_roll_influence, livePtr, roll_influence)
+    Ptrcall.callVoid1(gdext.classes.VehicleWheel3D.mb_set_roll_influence, livePtr, rollInfluence)
   }
 
   /** VehicleWheel3D.get_roll_influence */
@@ -179,9 +180,9 @@ abstract class VehicleWheel3D extends Node3D {
   }
 
   /** VehicleWheel3D.set_engine_force */
-  final def setEngineForce(engine_force: Double): Unit = {
+  final def setEngineForce(engineForce: Double): Unit = {
     if (gdext.classes.VehicleWheel3D.mb_set_engine_force == null) gdext.classes.VehicleWheel3D.mb_set_engine_force = MethodBind.get("VehicleWheel3D", "set_engine_force", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.VehicleWheel3D.mb_set_engine_force, livePtr, engine_force)
+    Ptrcall.callVoid1(gdext.classes.VehicleWheel3D.mb_set_engine_force, livePtr, engineForce)
   }
 
   /** VehicleWheel3D.get_engine_force */

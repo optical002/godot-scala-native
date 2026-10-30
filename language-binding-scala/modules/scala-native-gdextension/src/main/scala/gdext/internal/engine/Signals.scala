@@ -1,6 +1,7 @@
 package gdext.internal.engine
 
-import gdext.builtin.{Callable, StringName, StringNames}
+import gdext.builtin.Callable
+import gdext.internal.{StringName, StringNames}
 
 /**
  * Signal-connection helper. `Object.connect` takes a `Callable` argument, which

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,9 +36,9 @@ abstract class ShapeCast2D extends Node2D {
   }
 
   /** ShapeCast2D.set_target_position */
-  final def setTargetPosition(local_point: gdext.builtin.Vector2): Unit = {
+  final def setTargetPosition(localPoint: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.ShapeCast2D.mb_set_target_position == null) gdext.classes.ShapeCast2D.mb_set_target_position = MethodBind.get("ShapeCast2D", "set_target_position", 743155724L)
-    Ptrcall.callVoid1(gdext.classes.ShapeCast2D.mb_set_target_position, livePtr, local_point)
+    Ptrcall.callVoid1(gdext.classes.ShapeCast2D.mb_set_target_position, livePtr, localPoint)
   }
 
   /** ShapeCast2D.get_target_position */
@@ -59,9 +60,9 @@ abstract class ShapeCast2D extends Node2D {
   }
 
   /** ShapeCast2D.set_max_results */
-  final def setMaxResults(max_results: Long): Unit = {
+  final def setMaxResults(maxResults: Long): Unit = {
     if (gdext.classes.ShapeCast2D.mb_set_max_results == null) gdext.classes.ShapeCast2D.mb_set_max_results = MethodBind.get("ShapeCast2D", "set_max_results", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.ShapeCast2D.mb_set_max_results, livePtr, max_results)
+    Ptrcall.callVoid1(gdext.classes.ShapeCast2D.mb_set_max_results, livePtr, maxResults)
   }
 
   /** ShapeCast2D.get_max_results */
@@ -155,15 +156,15 @@ abstract class ShapeCast2D extends Node2D {
   }
 
   /** ShapeCast2D.set_collision_mask_value */
-  final def setCollisionMaskValue(layer_number: Long, value: Boolean): Unit = {
+  final def setCollisionMaskValue(layerNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.ShapeCast2D.mb_set_collision_mask_value == null) gdext.classes.ShapeCast2D.mb_set_collision_mask_value = MethodBind.get("ShapeCast2D", "set_collision_mask_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.ShapeCast2D.mb_set_collision_mask_value, livePtr, layer_number, value)
+    Ptrcall.callVoid2(gdext.classes.ShapeCast2D.mb_set_collision_mask_value, livePtr, layerNumber, value)
   }
 
   /** ShapeCast2D.get_collision_mask_value */
-  final def getCollisionMaskValue(layer_number: Long): Boolean = {
+  final def getCollisionMaskValue(layerNumber: Long): Boolean = {
     if (gdext.classes.ShapeCast2D.mb_get_collision_mask_value == null) gdext.classes.ShapeCast2D.mb_get_collision_mask_value = MethodBind.get("ShapeCast2D", "get_collision_mask_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.ShapeCast2D.mb_get_collision_mask_value, livePtr, layer_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.ShapeCast2D.mb_get_collision_mask_value, livePtr, layerNumber)
   }
 
   /** ShapeCast2D.set_exclude_parent_body */

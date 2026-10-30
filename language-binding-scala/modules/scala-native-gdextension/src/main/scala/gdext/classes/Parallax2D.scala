@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class Parallax2D extends Node2D {
   }
 
   /** Parallax2D.set_repeat_size */
-  final def setRepeatSize(repeat_size: gdext.builtin.Vector2): Unit = {
+  final def setRepeatSize(repeatSize: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.Parallax2D.mb_set_repeat_size == null) gdext.classes.Parallax2D.mb_set_repeat_size = MethodBind.get("Parallax2D", "set_repeat_size", 743155724L)
-    Ptrcall.callVoid1(gdext.classes.Parallax2D.mb_set_repeat_size, livePtr, repeat_size)
+    Ptrcall.callVoid1(gdext.classes.Parallax2D.mb_set_repeat_size, livePtr, repeatSize)
   }
 
   /** Parallax2D.get_repeat_size */
@@ -35,9 +36,9 @@ abstract class Parallax2D extends Node2D {
   }
 
   /** Parallax2D.set_repeat_times */
-  final def setRepeatTimes(repeat_times: Long): Unit = {
+  final def setRepeatTimes(repeatTimes: Long): Unit = {
     if (gdext.classes.Parallax2D.mb_set_repeat_times == null) gdext.classes.Parallax2D.mb_set_repeat_times = MethodBind.get("Parallax2D", "set_repeat_times", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.Parallax2D.mb_set_repeat_times, livePtr, repeat_times)
+    Ptrcall.callVoid1(gdext.classes.Parallax2D.mb_set_repeat_times, livePtr, repeatTimes)
   }
 
   /** Parallax2D.get_repeat_times */

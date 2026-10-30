@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,27 +12,27 @@ abstract class TreeItem extends Object {
   override def godotClassName: String = "TreeItem"
 
   /** TreeItem.set_cell_mode */
-  final def setCellMode(column: Long, mode: Long): Unit = {
+  final def setCellMode(column: Long, mode: gdext.classes.TreeItem.TreeCellMode): Unit = {
     if (gdext.classes.TreeItem.mb_set_cell_mode == null) gdext.classes.TreeItem.mb_set_cell_mode = MethodBind.get("TreeItem", "set_cell_mode", 289920701L)
     Ptrcall.callVoid2(gdext.classes.TreeItem.mb_set_cell_mode, livePtr, column, mode)
   }
 
   /** TreeItem.get_cell_mode */
-  final def getCellMode(column: Long): Long = {
+  final def getCellMode(column: Long): gdext.classes.TreeItem.TreeCellMode = {
     if (gdext.classes.TreeItem.mb_get_cell_mode == null) gdext.classes.TreeItem.mb_get_cell_mode = MethodBind.get("TreeItem", "get_cell_mode", 3406114978L)
-    Ptrcall.call1[Long, Long](gdext.classes.TreeItem.mb_get_cell_mode, livePtr, column)
+    gdext.classes.TreeItem.TreeCellMode(Ptrcall.call1[Long, Long](gdext.classes.TreeItem.mb_get_cell_mode, livePtr, column))
   }
 
   /** TreeItem.set_auto_translate_mode */
-  final def setAutoTranslateMode(column: Long, mode: Long): Unit = {
+  final def setAutoTranslateMode(column: Long, mode: gdext.classes.Node.AutoTranslateMode): Unit = {
     if (gdext.classes.TreeItem.mb_set_auto_translate_mode == null) gdext.classes.TreeItem.mb_set_auto_translate_mode = MethodBind.get("TreeItem", "set_auto_translate_mode", 287402019L)
     Ptrcall.callVoid2(gdext.classes.TreeItem.mb_set_auto_translate_mode, livePtr, column, mode)
   }
 
   /** TreeItem.get_auto_translate_mode */
-  final def getAutoTranslateMode(column: Long): Long = {
+  final def getAutoTranslateMode(column: Long): gdext.classes.Node.AutoTranslateMode = {
     if (gdext.classes.TreeItem.mb_get_auto_translate_mode == null) gdext.classes.TreeItem.mb_get_auto_translate_mode = MethodBind.get("TreeItem", "get_auto_translate_mode", 906302372L)
-    Ptrcall.call1[Long, Long](gdext.classes.TreeItem.mb_get_auto_translate_mode, livePtr, column)
+    gdext.classes.Node.AutoTranslateMode(Ptrcall.call1[Long, Long](gdext.classes.TreeItem.mb_get_auto_translate_mode, livePtr, column))
   }
 
   /** TreeItem.set_edit_multiline */
@@ -71,9 +72,9 @@ abstract class TreeItem extends Object {
   }
 
   /** TreeItem.propagate_check */
-  final def propagateCheck(column: Long, emit_signal: Boolean): Unit = {
+  final def propagateCheck(column: Long, emitSignal: Boolean = true): Unit = {
     if (gdext.classes.TreeItem.mb_propagate_check == null) gdext.classes.TreeItem.mb_propagate_check = MethodBind.get("TreeItem", "propagate_check", 972357352L)
-    Ptrcall.callVoid2(gdext.classes.TreeItem.mb_propagate_check, livePtr, column, emit_signal)
+    Ptrcall.callVoid2(gdext.classes.TreeItem.mb_propagate_check, livePtr, column, emitSignal)
   }
 
   /** TreeItem.set_text */
@@ -101,51 +102,51 @@ abstract class TreeItem extends Object {
   }
 
   /** TreeItem.set_text_direction */
-  final def setTextDirection(column: Long, direction: Long): Unit = {
+  final def setTextDirection(column: Long, direction: gdext.classes.Control.TextDirection): Unit = {
     if (gdext.classes.TreeItem.mb_set_text_direction == null) gdext.classes.TreeItem.mb_set_text_direction = MethodBind.get("TreeItem", "set_text_direction", 1707680378L)
     Ptrcall.callVoid2(gdext.classes.TreeItem.mb_set_text_direction, livePtr, column, direction)
   }
 
   /** TreeItem.get_text_direction */
-  final def getTextDirection(column: Long): Long = {
+  final def getTextDirection(column: Long): gdext.classes.Control.TextDirection = {
     if (gdext.classes.TreeItem.mb_get_text_direction == null) gdext.classes.TreeItem.mb_get_text_direction = MethodBind.get("TreeItem", "get_text_direction", 4235602388L)
-    Ptrcall.call1[Long, Long](gdext.classes.TreeItem.mb_get_text_direction, livePtr, column)
+    gdext.classes.Control.TextDirection(Ptrcall.call1[Long, Long](gdext.classes.TreeItem.mb_get_text_direction, livePtr, column))
   }
 
   /** TreeItem.set_autowrap_mode */
-  final def setAutowrapMode(column: Long, autowrap_mode: Long): Unit = {
+  final def setAutowrapMode(column: Long, autowrapMode: gdext.classes.TextServer.AutowrapMode): Unit = {
     if (gdext.classes.TreeItem.mb_set_autowrap_mode == null) gdext.classes.TreeItem.mb_set_autowrap_mode = MethodBind.get("TreeItem", "set_autowrap_mode", 3633006561L)
-    Ptrcall.callVoid2(gdext.classes.TreeItem.mb_set_autowrap_mode, livePtr, column, autowrap_mode)
+    Ptrcall.callVoid2(gdext.classes.TreeItem.mb_set_autowrap_mode, livePtr, column, autowrapMode)
   }
 
   /** TreeItem.get_autowrap_mode */
-  final def getAutowrapMode(column: Long): Long = {
+  final def getAutowrapMode(column: Long): gdext.classes.TextServer.AutowrapMode = {
     if (gdext.classes.TreeItem.mb_get_autowrap_mode == null) gdext.classes.TreeItem.mb_get_autowrap_mode = MethodBind.get("TreeItem", "get_autowrap_mode", 2902757236L)
-    Ptrcall.call1[Long, Long](gdext.classes.TreeItem.mb_get_autowrap_mode, livePtr, column)
+    gdext.classes.TextServer.AutowrapMode(Ptrcall.call1[Long, Long](gdext.classes.TreeItem.mb_get_autowrap_mode, livePtr, column))
   }
 
   /** TreeItem.set_text_overrun_behavior */
-  final def setTextOverrunBehavior(column: Long, overrun_behavior: Long): Unit = {
+  final def setTextOverrunBehavior(column: Long, overrunBehavior: gdext.classes.TextServer.OverrunBehavior): Unit = {
     if (gdext.classes.TreeItem.mb_set_text_overrun_behavior == null) gdext.classes.TreeItem.mb_set_text_overrun_behavior = MethodBind.get("TreeItem", "set_text_overrun_behavior", 1940772195L)
-    Ptrcall.callVoid2(gdext.classes.TreeItem.mb_set_text_overrun_behavior, livePtr, column, overrun_behavior)
+    Ptrcall.callVoid2(gdext.classes.TreeItem.mb_set_text_overrun_behavior, livePtr, column, overrunBehavior)
   }
 
   /** TreeItem.get_text_overrun_behavior */
-  final def getTextOverrunBehavior(column: Long): Long = {
+  final def getTextOverrunBehavior(column: Long): gdext.classes.TextServer.OverrunBehavior = {
     if (gdext.classes.TreeItem.mb_get_text_overrun_behavior == null) gdext.classes.TreeItem.mb_get_text_overrun_behavior = MethodBind.get("TreeItem", "get_text_overrun_behavior", 3782727860L)
-    Ptrcall.call1[Long, Long](gdext.classes.TreeItem.mb_get_text_overrun_behavior, livePtr, column)
+    gdext.classes.TextServer.OverrunBehavior(Ptrcall.call1[Long, Long](gdext.classes.TreeItem.mb_get_text_overrun_behavior, livePtr, column))
   }
 
   /** TreeItem.set_structured_text_bidi_override */
-  final def setStructuredTextBidiOverride(column: Long, parser: Long): Unit = {
+  final def setStructuredTextBidiOverride(column: Long, parser: gdext.classes.TextServer.StructuredTextParser): Unit = {
     if (gdext.classes.TreeItem.mb_set_structured_text_bidi_override == null) gdext.classes.TreeItem.mb_set_structured_text_bidi_override = MethodBind.get("TreeItem", "set_structured_text_bidi_override", 868756907L)
     Ptrcall.callVoid2(gdext.classes.TreeItem.mb_set_structured_text_bidi_override, livePtr, column, parser)
   }
 
   /** TreeItem.get_structured_text_bidi_override */
-  final def getStructuredTextBidiOverride(column: Long): Long = {
+  final def getStructuredTextBidiOverride(column: Long): gdext.classes.TextServer.StructuredTextParser = {
     if (gdext.classes.TreeItem.mb_get_structured_text_bidi_override == null) gdext.classes.TreeItem.mb_get_structured_text_bidi_override = MethodBind.get("TreeItem", "get_structured_text_bidi_override", 3377823772L)
-    Ptrcall.call1[Long, Long](gdext.classes.TreeItem.mb_get_structured_text_bidi_override, livePtr, column)
+    gdext.classes.TextServer.StructuredTextParser(Ptrcall.call1[Long, Long](gdext.classes.TreeItem.mb_get_structured_text_bidi_override, livePtr, column))
   }
 
   /** TreeItem.set_language */
@@ -245,15 +246,15 @@ abstract class TreeItem extends Object {
   }
 
   /** TreeItem.set_range_config */
-  final def setRangeConfig(column: Long, min: Double, max: Double, step: Double, expr: Boolean): Unit = {
+  final def setRangeConfig(column: Long, min: Double, max: Double, step: Double, expr: Boolean = false): Unit = {
     if (gdext.classes.TreeItem.mb_set_range_config == null) gdext.classes.TreeItem.mb_set_range_config = MethodBind.get("TreeItem", "set_range_config", 1547181014L)
     Ptrcall.callVoid5(gdext.classes.TreeItem.mb_set_range_config, livePtr, column, min, max, step, expr)
   }
 
   /** TreeItem.set_custom_draw */
-  final def setCustomDraw(column: Long, `object`: Object, callback: gdext.builtin.StringName): Unit = {
+  final def setCustomDraw(column: Long, `object`: Object, callback: String): Unit = {
     if (gdext.classes.TreeItem.mb_set_custom_draw == null) gdext.classes.TreeItem.mb_set_custom_draw = MethodBind.get("TreeItem", "set_custom_draw", 272420368L)
-    Ptrcall.callVoid3(gdext.classes.TreeItem.mb_set_custom_draw, livePtr, column, Wrappers.handle(`object`), callback)
+    Ptrcall.callVoid3(gdext.classes.TreeItem.mb_set_custom_draw, livePtr, column, Wrappers.handle(`object`), SnArg(callback))
   }
 
   /** TreeItem.set_custom_stylebox */
@@ -287,9 +288,9 @@ abstract class TreeItem extends Object {
   }
 
   /** TreeItem.is_any_collapsed */
-  final def isAnyCollapsed(only_visible: Boolean): Boolean = {
+  final def isAnyCollapsed(onlyVisible: Boolean = false): Boolean = {
     if (gdext.classes.TreeItem.mb_is_any_collapsed == null) gdext.classes.TreeItem.mb_is_any_collapsed = MethodBind.get("TreeItem", "is_any_collapsed", 2595650253L)
-    Ptrcall.call1[Boolean, Boolean](gdext.classes.TreeItem.mb_is_any_collapsed, livePtr, only_visible)
+    Ptrcall.call1[Boolean, Boolean](gdext.classes.TreeItem.mb_is_any_collapsed, livePtr, onlyVisible)
   }
 
   /** TreeItem.set_visible */
@@ -401,9 +402,9 @@ abstract class TreeItem extends Object {
   }
 
   /** TreeItem.set_custom_font_size */
-  final def setCustomFontSize(column: Long, font_size: Long): Unit = {
+  final def setCustomFontSize(column: Long, fontSize: Long): Unit = {
     if (gdext.classes.TreeItem.mb_set_custom_font_size == null) gdext.classes.TreeItem.mb_set_custom_font_size = MethodBind.get("TreeItem", "set_custom_font_size", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.TreeItem.mb_set_custom_font_size, livePtr, column, font_size)
+    Ptrcall.callVoid2(gdext.classes.TreeItem.mb_set_custom_font_size, livePtr, column, fontSize)
   }
 
   /** TreeItem.get_custom_font_size */
@@ -413,9 +414,9 @@ abstract class TreeItem extends Object {
   }
 
   /** TreeItem.set_custom_bg_color */
-  final def setCustomBgColor(column: Long, color: gdext.builtin.Color, just_outline: Boolean): Unit = {
+  final def setCustomBgColor(column: Long, color: gdext.builtin.Color, justOutline: Boolean = false): Unit = {
     if (gdext.classes.TreeItem.mb_set_custom_bg_color == null) gdext.classes.TreeItem.mb_set_custom_bg_color = MethodBind.get("TreeItem", "set_custom_bg_color", 894174518L)
-    Ptrcall.callVoid3(gdext.classes.TreeItem.mb_set_custom_bg_color, livePtr, column, color, just_outline)
+    Ptrcall.callVoid3(gdext.classes.TreeItem.mb_set_custom_bg_color, livePtr, column, color, justOutline)
   }
 
   /** TreeItem.clear_custom_bg_color */
@@ -449,9 +450,9 @@ abstract class TreeItem extends Object {
   }
 
   /** TreeItem.add_button */
-  final def addButton(column: Long, button: Texture2D, id: Long, disabled: Boolean, tooltip_text: String, description: String): Unit = {
+  final def addButton(column: Long, button: Texture2D, id: Long = -1L, disabled: Boolean = false, tooltipText: String = "", description: String = ""): Unit = {
     if (gdext.classes.TreeItem.mb_add_button == null) gdext.classes.TreeItem.mb_add_button = MethodBind.get("TreeItem", "add_button", 973481897L)
-    Ptrcall.callVoid6(gdext.classes.TreeItem.mb_add_button, livePtr, column, Wrappers.handle(button), id, disabled, tooltip_text, description)
+    Ptrcall.callVoid6(gdext.classes.TreeItem.mb_add_button, livePtr, column, Wrappers.handle(button), id, disabled, tooltipText, description)
   }
 
   /** TreeItem.get_button_count */
@@ -461,15 +462,15 @@ abstract class TreeItem extends Object {
   }
 
   /** TreeItem.get_button_tooltip_text */
-  final def getButtonTooltipText(column: Long, button_index: Long): String = {
+  final def getButtonTooltipText(column: Long, buttonIndex: Long): String = {
     if (gdext.classes.TreeItem.mb_get_button_tooltip_text == null) gdext.classes.TreeItem.mb_get_button_tooltip_text = MethodBind.get("TreeItem", "get_button_tooltip_text", 1391810591L)
-    Ptrcall.call2[Long, Long, String](gdext.classes.TreeItem.mb_get_button_tooltip_text, livePtr, column, button_index)
+    Ptrcall.call2[Long, Long, String](gdext.classes.TreeItem.mb_get_button_tooltip_text, livePtr, column, buttonIndex)
   }
 
   /** TreeItem.get_button_id */
-  final def getButtonId(column: Long, button_index: Long): Long = {
+  final def getButtonId(column: Long, buttonIndex: Long): Long = {
     if (gdext.classes.TreeItem.mb_get_button_id == null) gdext.classes.TreeItem.mb_get_button_id = MethodBind.get("TreeItem", "get_button_id", 3175239445L)
-    Ptrcall.call2[Long, Long, Long](gdext.classes.TreeItem.mb_get_button_id, livePtr, column, button_index)
+    Ptrcall.call2[Long, Long, Long](gdext.classes.TreeItem.mb_get_button_id, livePtr, column, buttonIndex)
   }
 
   /** TreeItem.get_button_by_id */
@@ -485,51 +486,51 @@ abstract class TreeItem extends Object {
   }
 
   /** TreeItem.get_button. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getButton(column: Long, button_index: Long): Texture2D = {
+  final def getButton(column: Long, buttonIndex: Long): Texture2D = {
     if (gdext.classes.TreeItem.mb_get_button == null) gdext.classes.TreeItem.mb_get_button = MethodBind.get("TreeItem", "get_button", 2584904275L)
-    Wrappers.owned[Texture2D](Ptrcall.call2[Long, Long, Long](gdext.classes.TreeItem.mb_get_button, livePtr, column, button_index))
+    Wrappers.owned[Texture2D](Ptrcall.call2[Long, Long, Long](gdext.classes.TreeItem.mb_get_button, livePtr, column, buttonIndex))
   }
 
   /** TreeItem.set_button_tooltip_text */
-  final def setButtonTooltipText(column: Long, button_index: Long, tooltip: String): Unit = {
+  final def setButtonTooltipText(column: Long, buttonIndex: Long, tooltip: String): Unit = {
     if (gdext.classes.TreeItem.mb_set_button_tooltip_text == null) gdext.classes.TreeItem.mb_set_button_tooltip_text = MethodBind.get("TreeItem", "set_button_tooltip_text", 2285447957L)
-    Ptrcall.callVoid3(gdext.classes.TreeItem.mb_set_button_tooltip_text, livePtr, column, button_index, tooltip)
+    Ptrcall.callVoid3(gdext.classes.TreeItem.mb_set_button_tooltip_text, livePtr, column, buttonIndex, tooltip)
   }
 
   /** TreeItem.set_button */
-  final def setButton(column: Long, button_index: Long, button: Texture2D): Unit = {
+  final def setButton(column: Long, buttonIndex: Long, button: Texture2D): Unit = {
     if (gdext.classes.TreeItem.mb_set_button == null) gdext.classes.TreeItem.mb_set_button = MethodBind.get("TreeItem", "set_button", 176101966L)
-    Ptrcall.callVoid3(gdext.classes.TreeItem.mb_set_button, livePtr, column, button_index, Wrappers.handle(button))
+    Ptrcall.callVoid3(gdext.classes.TreeItem.mb_set_button, livePtr, column, buttonIndex, Wrappers.handle(button))
   }
 
   /** TreeItem.erase_button */
-  final def eraseButton(column: Long, button_index: Long): Unit = {
+  final def eraseButton(column: Long, buttonIndex: Long): Unit = {
     if (gdext.classes.TreeItem.mb_erase_button == null) gdext.classes.TreeItem.mb_erase_button = MethodBind.get("TreeItem", "erase_button", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.TreeItem.mb_erase_button, livePtr, column, button_index)
+    Ptrcall.callVoid2(gdext.classes.TreeItem.mb_erase_button, livePtr, column, buttonIndex)
   }
 
   /** TreeItem.set_button_description */
-  final def setButtonDescription(column: Long, button_index: Long, description: String): Unit = {
+  final def setButtonDescription(column: Long, buttonIndex: Long, description: String): Unit = {
     if (gdext.classes.TreeItem.mb_set_button_description == null) gdext.classes.TreeItem.mb_set_button_description = MethodBind.get("TreeItem", "set_button_description", 2285447957L)
-    Ptrcall.callVoid3(gdext.classes.TreeItem.mb_set_button_description, livePtr, column, button_index, description)
+    Ptrcall.callVoid3(gdext.classes.TreeItem.mb_set_button_description, livePtr, column, buttonIndex, description)
   }
 
   /** TreeItem.set_button_disabled */
-  final def setButtonDisabled(column: Long, button_index: Long, disabled: Boolean): Unit = {
+  final def setButtonDisabled(column: Long, buttonIndex: Long, disabled: Boolean): Unit = {
     if (gdext.classes.TreeItem.mb_set_button_disabled == null) gdext.classes.TreeItem.mb_set_button_disabled = MethodBind.get("TreeItem", "set_button_disabled", 1383440665L)
-    Ptrcall.callVoid3(gdext.classes.TreeItem.mb_set_button_disabled, livePtr, column, button_index, disabled)
+    Ptrcall.callVoid3(gdext.classes.TreeItem.mb_set_button_disabled, livePtr, column, buttonIndex, disabled)
   }
 
   /** TreeItem.set_button_color */
-  final def setButtonColor(column: Long, button_index: Long, color: gdext.builtin.Color): Unit = {
+  final def setButtonColor(column: Long, buttonIndex: Long, color: gdext.builtin.Color): Unit = {
     if (gdext.classes.TreeItem.mb_set_button_color == null) gdext.classes.TreeItem.mb_set_button_color = MethodBind.get("TreeItem", "set_button_color", 3733378741L)
-    Ptrcall.callVoid3(gdext.classes.TreeItem.mb_set_button_color, livePtr, column, button_index, color)
+    Ptrcall.callVoid3(gdext.classes.TreeItem.mb_set_button_color, livePtr, column, buttonIndex, color)
   }
 
   /** TreeItem.is_button_disabled */
-  final def isButtonDisabled(column: Long, button_index: Long): Boolean = {
+  final def isButtonDisabled(column: Long, buttonIndex: Long): Boolean = {
     if (gdext.classes.TreeItem.mb_is_button_disabled == null) gdext.classes.TreeItem.mb_is_button_disabled = MethodBind.get("TreeItem", "is_button_disabled", 2522259332L)
-    Ptrcall.call2[Long, Long, Boolean](gdext.classes.TreeItem.mb_is_button_disabled, livePtr, column, button_index)
+    Ptrcall.call2[Long, Long, Boolean](gdext.classes.TreeItem.mb_is_button_disabled, livePtr, column, buttonIndex)
   }
 
   /** TreeItem.set_tooltip_text */
@@ -545,15 +546,15 @@ abstract class TreeItem extends Object {
   }
 
   /** TreeItem.set_text_alignment */
-  final def setTextAlignment(column: Long, text_alignment: Long): Unit = {
+  final def setTextAlignment(column: Long, textAlignment: gdext.classes.HorizontalAlignment): Unit = {
     if (gdext.classes.TreeItem.mb_set_text_alignment == null) gdext.classes.TreeItem.mb_set_text_alignment = MethodBind.get("TreeItem", "set_text_alignment", 3276431499L)
-    Ptrcall.callVoid2(gdext.classes.TreeItem.mb_set_text_alignment, livePtr, column, text_alignment)
+    Ptrcall.callVoid2(gdext.classes.TreeItem.mb_set_text_alignment, livePtr, column, textAlignment)
   }
 
   /** TreeItem.get_text_alignment */
-  final def getTextAlignment(column: Long): Long = {
+  final def getTextAlignment(column: Long): gdext.classes.HorizontalAlignment = {
     if (gdext.classes.TreeItem.mb_get_text_alignment == null) gdext.classes.TreeItem.mb_get_text_alignment = MethodBind.get("TreeItem", "get_text_alignment", 4171562184L)
-    Ptrcall.call1[Long, Long](gdext.classes.TreeItem.mb_get_text_alignment, livePtr, column)
+    gdext.classes.HorizontalAlignment(Ptrcall.call1[Long, Long](gdext.classes.TreeItem.mb_get_text_alignment, livePtr, column))
   }
 
   /** TreeItem.set_expand_right */
@@ -581,7 +582,7 @@ abstract class TreeItem extends Object {
   }
 
   /** TreeItem.create_child */
-  final def createChild(index: Long): TreeItem = {
+  final def createChild(index: Long = -1L): TreeItem = {
     if (gdext.classes.TreeItem.mb_create_child == null) gdext.classes.TreeItem.mb_create_child = MethodBind.get("TreeItem", "create_child", 954243986L)
     Wrappers.borrowed[TreeItem](Ptrcall.call1[Long, Long](gdext.classes.TreeItem.mb_create_child, livePtr, index))
   }
@@ -629,25 +630,25 @@ abstract class TreeItem extends Object {
   }
 
   /** TreeItem.get_next_in_tree */
-  final def getNextInTree(wrap: Boolean): TreeItem = {
+  final def getNextInTree(wrap: Boolean = false): TreeItem = {
     if (gdext.classes.TreeItem.mb_get_next_in_tree == null) gdext.classes.TreeItem.mb_get_next_in_tree = MethodBind.get("TreeItem", "get_next_in_tree", 1666920593L)
     Wrappers.borrowed[TreeItem](Ptrcall.call1[Boolean, Long](gdext.classes.TreeItem.mb_get_next_in_tree, livePtr, wrap))
   }
 
   /** TreeItem.get_prev_in_tree */
-  final def getPrevInTree(wrap: Boolean): TreeItem = {
+  final def getPrevInTree(wrap: Boolean = false): TreeItem = {
     if (gdext.classes.TreeItem.mb_get_prev_in_tree == null) gdext.classes.TreeItem.mb_get_prev_in_tree = MethodBind.get("TreeItem", "get_prev_in_tree", 1666920593L)
     Wrappers.borrowed[TreeItem](Ptrcall.call1[Boolean, Long](gdext.classes.TreeItem.mb_get_prev_in_tree, livePtr, wrap))
   }
 
   /** TreeItem.get_next_visible */
-  final def getNextVisible(wrap: Boolean): TreeItem = {
+  final def getNextVisible(wrap: Boolean = false): TreeItem = {
     if (gdext.classes.TreeItem.mb_get_next_visible == null) gdext.classes.TreeItem.mb_get_next_visible = MethodBind.get("TreeItem", "get_next_visible", 1666920593L)
     Wrappers.borrowed[TreeItem](Ptrcall.call1[Boolean, Long](gdext.classes.TreeItem.mb_get_next_visible, livePtr, wrap))
   }
 
   /** TreeItem.get_prev_visible */
-  final def getPrevVisible(wrap: Boolean): TreeItem = {
+  final def getPrevVisible(wrap: Boolean = false): TreeItem = {
     if (gdext.classes.TreeItem.mb_get_prev_visible == null) gdext.classes.TreeItem.mb_get_prev_visible = MethodBind.get("TreeItem", "get_prev_visible", 1666920593L)
     Wrappers.borrowed[TreeItem](Ptrcall.call1[Boolean, Long](gdext.classes.TreeItem.mb_get_prev_visible, livePtr, wrap))
   }
@@ -797,4 +798,32 @@ object TreeItem {
   private[classes] var mb_get_index: GDExtensionMethodBindPtr = null
   private[classes] var mb_move_before: GDExtensionMethodBindPtr = null
   private[classes] var mb_move_after: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `TreeItem.TreeCellMode`. */
+  opaque type TreeCellMode <: Long = Long
+
+  object TreeCellMode {
+    final val String: TreeCellMode = 0L.asInstanceOf[TreeCellMode]
+    final val Check: TreeCellMode = 1L.asInstanceOf[TreeCellMode]
+    final val Range: TreeCellMode = 2L.asInstanceOf[TreeCellMode]
+    final val Icon: TreeCellMode = 3L.asInstanceOf[TreeCellMode]
+    final val Custom: TreeCellMode = 4L.asInstanceOf[TreeCellMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): TreeCellMode = value.asInstanceOf[TreeCellMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[TreeCellMode] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[TreeCellMode]]
+
+    extension (self: TreeCellMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "String"
+        case 1L => "Check"
+        case 2L => "Range"
+        case 3L => "Icon"
+        case 4L => "Custom"
+        case other => other.toString
+      }
+  }
 }

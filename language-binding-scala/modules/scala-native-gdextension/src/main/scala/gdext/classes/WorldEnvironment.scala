@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class WorldEnvironment extends Node {
   }
 
   /** WorldEnvironment.set_camera_attributes */
-  final def setCameraAttributes(camera_attributes: CameraAttributes): Unit = {
+  final def setCameraAttributes(cameraAttributes: CameraAttributes): Unit = {
     if (gdext.classes.WorldEnvironment.mb_set_camera_attributes == null) gdext.classes.WorldEnvironment.mb_set_camera_attributes = MethodBind.get("WorldEnvironment", "set_camera_attributes", 2817810567L)
-    Ptrcall.callVoid1(gdext.classes.WorldEnvironment.mb_set_camera_attributes, livePtr, Wrappers.handle(camera_attributes))
+    Ptrcall.callVoid1(gdext.classes.WorldEnvironment.mb_set_camera_attributes, livePtr, Wrappers.handle(cameraAttributes))
   }
 
   /** WorldEnvironment.get_camera_attributes. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */

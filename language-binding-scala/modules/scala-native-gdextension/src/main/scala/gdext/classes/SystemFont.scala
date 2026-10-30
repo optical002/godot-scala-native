@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,21 +12,21 @@ abstract class SystemFont extends Font {
   override def godotClassName: String = "SystemFont"
 
   /** SystemFont.set_antialiasing */
-  final def setAntialiasing(antialiasing: Long): Unit = {
+  final def setAntialiasing(antialiasing: gdext.classes.TextServer.FontAntialiasing): Unit = {
     if (gdext.classes.SystemFont.mb_set_antialiasing == null) gdext.classes.SystemFont.mb_set_antialiasing = MethodBind.get("SystemFont", "set_antialiasing", 1669900L)
     Ptrcall.callVoid1(gdext.classes.SystemFont.mb_set_antialiasing, livePtr, antialiasing)
   }
 
   /** SystemFont.get_antialiasing */
-  final def getAntialiasing(): Long = {
+  final def getAntialiasing(): gdext.classes.TextServer.FontAntialiasing = {
     if (gdext.classes.SystemFont.mb_get_antialiasing == null) gdext.classes.SystemFont.mb_get_antialiasing = MethodBind.get("SystemFont", "get_antialiasing", 4262718649L)
-    Ptrcall.call0[Long](gdext.classes.SystemFont.mb_get_antialiasing, livePtr)
+    gdext.classes.TextServer.FontAntialiasing(Ptrcall.call0[Long](gdext.classes.SystemFont.mb_get_antialiasing, livePtr))
   }
 
   /** SystemFont.set_disable_embedded_bitmaps */
-  final def setDisableEmbeddedBitmaps(disable_embedded_bitmaps: Boolean): Unit = {
+  final def setDisableEmbeddedBitmaps(disableEmbeddedBitmaps: Boolean): Unit = {
     if (gdext.classes.SystemFont.mb_set_disable_embedded_bitmaps == null) gdext.classes.SystemFont.mb_set_disable_embedded_bitmaps = MethodBind.get("SystemFont", "set_disable_embedded_bitmaps", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.SystemFont.mb_set_disable_embedded_bitmaps, livePtr, disable_embedded_bitmaps)
+    Ptrcall.callVoid1(gdext.classes.SystemFont.mb_set_disable_embedded_bitmaps, livePtr, disableEmbeddedBitmaps)
   }
 
   /** SystemFont.get_disable_embedded_bitmaps */
@@ -35,9 +36,9 @@ abstract class SystemFont extends Font {
   }
 
   /** SystemFont.set_generate_mipmaps */
-  final def setGenerateMipmaps(generate_mipmaps: Boolean): Unit = {
+  final def setGenerateMipmaps(generateMipmaps: Boolean): Unit = {
     if (gdext.classes.SystemFont.mb_set_generate_mipmaps == null) gdext.classes.SystemFont.mb_set_generate_mipmaps = MethodBind.get("SystemFont", "set_generate_mipmaps", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.SystemFont.mb_set_generate_mipmaps, livePtr, generate_mipmaps)
+    Ptrcall.callVoid1(gdext.classes.SystemFont.mb_set_generate_mipmaps, livePtr, generateMipmaps)
   }
 
   /** SystemFont.get_generate_mipmaps */
@@ -47,9 +48,9 @@ abstract class SystemFont extends Font {
   }
 
   /** SystemFont.set_allow_system_fallback */
-  final def setAllowSystemFallback(allow_system_fallback: Boolean): Unit = {
+  final def setAllowSystemFallback(allowSystemFallback: Boolean): Unit = {
     if (gdext.classes.SystemFont.mb_set_allow_system_fallback == null) gdext.classes.SystemFont.mb_set_allow_system_fallback = MethodBind.get("SystemFont", "set_allow_system_fallback", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.SystemFont.mb_set_allow_system_fallback, livePtr, allow_system_fallback)
+    Ptrcall.callVoid1(gdext.classes.SystemFont.mb_set_allow_system_fallback, livePtr, allowSystemFallback)
   }
 
   /** SystemFont.is_allow_system_fallback */
@@ -59,9 +60,9 @@ abstract class SystemFont extends Font {
   }
 
   /** SystemFont.set_force_autohinter */
-  final def setForceAutohinter(force_autohinter: Boolean): Unit = {
+  final def setForceAutohinter(forceAutohinter: Boolean): Unit = {
     if (gdext.classes.SystemFont.mb_set_force_autohinter == null) gdext.classes.SystemFont.mb_set_force_autohinter = MethodBind.get("SystemFont", "set_force_autohinter", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.SystemFont.mb_set_force_autohinter, livePtr, force_autohinter)
+    Ptrcall.callVoid1(gdext.classes.SystemFont.mb_set_force_autohinter, livePtr, forceAutohinter)
   }
 
   /** SystemFont.is_force_autohinter */
@@ -83,33 +84,33 @@ abstract class SystemFont extends Font {
   }
 
   /** SystemFont.set_hinting */
-  final def setHinting(hinting: Long): Unit = {
+  final def setHinting(hinting: gdext.classes.TextServer.Hinting): Unit = {
     if (gdext.classes.SystemFont.mb_set_hinting == null) gdext.classes.SystemFont.mb_set_hinting = MethodBind.get("SystemFont", "set_hinting", 1827459492L)
     Ptrcall.callVoid1(gdext.classes.SystemFont.mb_set_hinting, livePtr, hinting)
   }
 
   /** SystemFont.get_hinting */
-  final def getHinting(): Long = {
+  final def getHinting(): gdext.classes.TextServer.Hinting = {
     if (gdext.classes.SystemFont.mb_get_hinting == null) gdext.classes.SystemFont.mb_get_hinting = MethodBind.get("SystemFont", "get_hinting", 3683214614L)
-    Ptrcall.call0[Long](gdext.classes.SystemFont.mb_get_hinting, livePtr)
+    gdext.classes.TextServer.Hinting(Ptrcall.call0[Long](gdext.classes.SystemFont.mb_get_hinting, livePtr))
   }
 
   /** SystemFont.set_subpixel_positioning */
-  final def setSubpixelPositioning(subpixel_positioning: Long): Unit = {
+  final def setSubpixelPositioning(subpixelPositioning: gdext.classes.TextServer.SubpixelPositioning): Unit = {
     if (gdext.classes.SystemFont.mb_set_subpixel_positioning == null) gdext.classes.SystemFont.mb_set_subpixel_positioning = MethodBind.get("SystemFont", "set_subpixel_positioning", 4225742182L)
-    Ptrcall.callVoid1(gdext.classes.SystemFont.mb_set_subpixel_positioning, livePtr, subpixel_positioning)
+    Ptrcall.callVoid1(gdext.classes.SystemFont.mb_set_subpixel_positioning, livePtr, subpixelPositioning)
   }
 
   /** SystemFont.get_subpixel_positioning */
-  final def getSubpixelPositioning(): Long = {
+  final def getSubpixelPositioning(): gdext.classes.TextServer.SubpixelPositioning = {
     if (gdext.classes.SystemFont.mb_get_subpixel_positioning == null) gdext.classes.SystemFont.mb_get_subpixel_positioning = MethodBind.get("SystemFont", "get_subpixel_positioning", 1069238588L)
-    Ptrcall.call0[Long](gdext.classes.SystemFont.mb_get_subpixel_positioning, livePtr)
+    gdext.classes.TextServer.SubpixelPositioning(Ptrcall.call0[Long](gdext.classes.SystemFont.mb_get_subpixel_positioning, livePtr))
   }
 
   /** SystemFont.set_keep_rounding_remainders */
-  final def setKeepRoundingRemainders(keep_rounding_remainders: Boolean): Unit = {
+  final def setKeepRoundingRemainders(keepRoundingRemainders: Boolean): Unit = {
     if (gdext.classes.SystemFont.mb_set_keep_rounding_remainders == null) gdext.classes.SystemFont.mb_set_keep_rounding_remainders = MethodBind.get("SystemFont", "set_keep_rounding_remainders", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.SystemFont.mb_set_keep_rounding_remainders, livePtr, keep_rounding_remainders)
+    Ptrcall.callVoid1(gdext.classes.SystemFont.mb_set_keep_rounding_remainders, livePtr, keepRoundingRemainders)
   }
 
   /** SystemFont.get_keep_rounding_remainders */
@@ -131,9 +132,9 @@ abstract class SystemFont extends Font {
   }
 
   /** SystemFont.set_msdf_pixel_range */
-  final def setMsdfPixelRange(msdf_pixel_range: Long): Unit = {
+  final def setMsdfPixelRange(msdfPixelRange: Long): Unit = {
     if (gdext.classes.SystemFont.mb_set_msdf_pixel_range == null) gdext.classes.SystemFont.mb_set_msdf_pixel_range = MethodBind.get("SystemFont", "set_msdf_pixel_range", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.SystemFont.mb_set_msdf_pixel_range, livePtr, msdf_pixel_range)
+    Ptrcall.callVoid1(gdext.classes.SystemFont.mb_set_msdf_pixel_range, livePtr, msdfPixelRange)
   }
 
   /** SystemFont.get_msdf_pixel_range */
@@ -143,9 +144,9 @@ abstract class SystemFont extends Font {
   }
 
   /** SystemFont.set_msdf_size */
-  final def setMsdfSize(msdf_size: Long): Unit = {
+  final def setMsdfSize(msdfSize: Long): Unit = {
     if (gdext.classes.SystemFont.mb_set_msdf_size == null) gdext.classes.SystemFont.mb_set_msdf_size = MethodBind.get("SystemFont", "set_msdf_size", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.SystemFont.mb_set_msdf_size, livePtr, msdf_size)
+    Ptrcall.callVoid1(gdext.classes.SystemFont.mb_set_msdf_size, livePtr, msdfSize)
   }
 
   /** SystemFont.get_msdf_size */

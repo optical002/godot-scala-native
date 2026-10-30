@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class IterateIK3D extends ChainIK3D {
   override def godotClassName: String = "IterateIK3D"
 
   /** IterateIK3D.set_max_iterations */
-  final def setMaxIterations(max_iterations: Long): Unit = {
+  final def setMaxIterations(maxIterations: Long): Unit = {
     if (gdext.classes.IterateIK3D.mb_set_max_iterations == null) gdext.classes.IterateIK3D.mb_set_max_iterations = MethodBind.get("IterateIK3D", "set_max_iterations", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.IterateIK3D.mb_set_max_iterations, livePtr, max_iterations)
+    Ptrcall.callVoid1(gdext.classes.IterateIK3D.mb_set_max_iterations, livePtr, maxIterations)
   }
 
   /** IterateIK3D.get_max_iterations */
@@ -23,9 +24,9 @@ abstract class IterateIK3D extends ChainIK3D {
   }
 
   /** IterateIK3D.set_min_distance */
-  final def setMinDistance(min_distance: Double): Unit = {
+  final def setMinDistance(minDistance: Double): Unit = {
     if (gdext.classes.IterateIK3D.mb_set_min_distance == null) gdext.classes.IterateIK3D.mb_set_min_distance = MethodBind.get("IterateIK3D", "set_min_distance", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.IterateIK3D.mb_set_min_distance, livePtr, min_distance)
+    Ptrcall.callVoid1(gdext.classes.IterateIK3D.mb_set_min_distance, livePtr, minDistance)
   }
 
   /** IterateIK3D.get_min_distance */
@@ -35,9 +36,9 @@ abstract class IterateIK3D extends ChainIK3D {
   }
 
   /** IterateIK3D.set_angular_delta_limit */
-  final def setAngularDeltaLimit(angular_delta_limit: Double): Unit = {
+  final def setAngularDeltaLimit(angularDeltaLimit: Double): Unit = {
     if (gdext.classes.IterateIK3D.mb_set_angular_delta_limit == null) gdext.classes.IterateIK3D.mb_set_angular_delta_limit = MethodBind.get("IterateIK3D", "set_angular_delta_limit", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.IterateIK3D.mb_set_angular_delta_limit, livePtr, angular_delta_limit)
+    Ptrcall.callVoid1(gdext.classes.IterateIK3D.mb_set_angular_delta_limit, livePtr, angularDeltaLimit)
   }
 
   /** IterateIK3D.get_angular_delta_limit */
@@ -59,21 +60,21 @@ abstract class IterateIK3D extends ChainIK3D {
   }
 
   /** IterateIK3D.set_joint_rotation_axis */
-  final def setJointRotationAxis(index: Long, joint: Long, axis: Long): Unit = {
+  final def setJointRotationAxis(index: Long, joint: Long, axis: gdext.classes.SkeletonModifier3D.RotationAxis): Unit = {
     if (gdext.classes.IterateIK3D.mb_set_joint_rotation_axis == null) gdext.classes.IterateIK3D.mb_set_joint_rotation_axis = MethodBind.get("IterateIK3D", "set_joint_rotation_axis", 1391134969L)
     Ptrcall.callVoid3(gdext.classes.IterateIK3D.mb_set_joint_rotation_axis, livePtr, index, joint, axis)
   }
 
   /** IterateIK3D.get_joint_rotation_axis */
-  final def getJointRotationAxis(index: Long, joint: Long): Long = {
+  final def getJointRotationAxis(index: Long, joint: Long): gdext.classes.SkeletonModifier3D.RotationAxis = {
     if (gdext.classes.IterateIK3D.mb_get_joint_rotation_axis == null) gdext.classes.IterateIK3D.mb_get_joint_rotation_axis = MethodBind.get("IterateIK3D", "get_joint_rotation_axis", 3312594080L)
-    Ptrcall.call2[Long, Long, Long](gdext.classes.IterateIK3D.mb_get_joint_rotation_axis, livePtr, index, joint)
+    gdext.classes.SkeletonModifier3D.RotationAxis(Ptrcall.call2[Long, Long, Long](gdext.classes.IterateIK3D.mb_get_joint_rotation_axis, livePtr, index, joint))
   }
 
   /** IterateIK3D.set_joint_rotation_axis_vector */
-  final def setJointRotationAxisVector(index: Long, joint: Long, axis_vector: gdext.builtin.Vector3): Unit = {
+  final def setJointRotationAxisVector(index: Long, joint: Long, axisVector: gdext.builtin.Vector3): Unit = {
     if (gdext.classes.IterateIK3D.mb_set_joint_rotation_axis_vector == null) gdext.classes.IterateIK3D.mb_set_joint_rotation_axis_vector = MethodBind.get("IterateIK3D", "set_joint_rotation_axis_vector", 2866752138L)
-    Ptrcall.callVoid3(gdext.classes.IterateIK3D.mb_set_joint_rotation_axis_vector, livePtr, index, joint, axis_vector)
+    Ptrcall.callVoid3(gdext.classes.IterateIK3D.mb_set_joint_rotation_axis_vector, livePtr, index, joint, axisVector)
   }
 
   /** IterateIK3D.get_joint_rotation_axis_vector */
@@ -95,15 +96,15 @@ abstract class IterateIK3D extends ChainIK3D {
   }
 
   /** IterateIK3D.set_joint_limitation_right_axis */
-  final def setJointLimitationRightAxis(index: Long, joint: Long, direction: Long): Unit = {
+  final def setJointLimitationRightAxis(index: Long, joint: Long, direction: gdext.classes.SkeletonModifier3D.SecondaryDirection): Unit = {
     if (gdext.classes.IterateIK3D.mb_set_joint_limitation_right_axis == null) gdext.classes.IterateIK3D.mb_set_joint_limitation_right_axis = MethodBind.get("IterateIK3D", "set_joint_limitation_right_axis", 3838967147L)
     Ptrcall.callVoid3(gdext.classes.IterateIK3D.mb_set_joint_limitation_right_axis, livePtr, index, joint, direction)
   }
 
   /** IterateIK3D.get_joint_limitation_right_axis */
-  final def getJointLimitationRightAxis(index: Long, joint: Long): Long = {
+  final def getJointLimitationRightAxis(index: Long, joint: Long): gdext.classes.SkeletonModifier3D.SecondaryDirection = {
     if (gdext.classes.IterateIK3D.mb_get_joint_limitation_right_axis == null) gdext.classes.IterateIK3D.mb_get_joint_limitation_right_axis = MethodBind.get("IterateIK3D", "get_joint_limitation_right_axis", 623936134L)
-    Ptrcall.call2[Long, Long, Long](gdext.classes.IterateIK3D.mb_get_joint_limitation_right_axis, livePtr, index, joint)
+    gdext.classes.SkeletonModifier3D.SecondaryDirection(Ptrcall.call2[Long, Long, Long](gdext.classes.IterateIK3D.mb_get_joint_limitation_right_axis, livePtr, index, joint))
   }
 
   /** IterateIK3D.set_joint_limitation_right_axis_vector */

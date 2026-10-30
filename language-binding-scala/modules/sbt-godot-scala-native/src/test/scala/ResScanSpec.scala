@@ -110,10 +110,10 @@ class ResScanSpec extends munit.FunSuite {
     ) { dir =>
       val out = generate(dir)
       assert(out.contains("inline def playerPng: FilePath"), out)
-      assert(out.contains("inline def playerTres: ResPath[gdext.classes.Resource]"), out)
+      assert(out.contains("inline def playerTres: ResPath[_root_.gdext.classes.Resource]"), out)
       assert(out.contains("object Res {"), out)
       assert(out.contains("object enemy {"), out)
-      assert(out.contains("inline def enemyTscn: ScenePath[gdext.classes.Node]"), out)
+      assert(out.contains("inline def enemyTscn: ScenePath[_root_.gdext.classes.Node]"), out)
       assert(out.contains("inline def myFileTxt: FilePath = FilePath(\"res://my-file.txt\")"), out)
       assert(out.contains("inline def myFileTxt2: FilePath = FilePath(\"res://my_file.txt\")"), out)
     }
@@ -144,6 +144,21 @@ class ResScanSpec extends munit.FunSuite {
       assertNotEquals(f1, f0)
       IO.write(new File(dir, "i.png.import"), "[remap]\ntype=\"Image\"\n\n")
       assertNotEquals(fp, f1)
+    }
+  }
+
+  test("type names are _root_-qualified, so a member named like a package can't shadow it") {
+    project(
+      "game.json" -> "{}",
+      "gdext/readme.txt" -> "",
+      "player.tscn" -> "[gd_scene format=3]\n\n[node name=\"Player\" type=\"Player\"]\n",
+      "stats.tres" -> "[gd_resource type=\"PlayerStats\" format=3]\n"
+    ) { dir =>
+      val out = generate(dir)
+      assert(out.contains("inline def game: FilePath"), out)
+      assert(out.contains("object gdext {"), out)
+      assert(out.contains("ScenePath[_root_.game.Player] = ScenePath[_root_.game.Player]("), out)
+      assert(out.contains("ResPath[_root_.game.PlayerStats] = ResPath[_root_.game.PlayerStats]("), out)
     }
   }
 }

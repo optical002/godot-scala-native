@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -101,9 +102,9 @@ abstract class CharFXTransform extends RefCounted {
   }
 
   /** CharFXTransform.set_glyph_index */
-  final def setGlyphIndex(glyph_index: Long): Unit = {
+  final def setGlyphIndex(glyphIndex: Long): Unit = {
     if (gdext.classes.CharFXTransform.mb_set_glyph_index == null) gdext.classes.CharFXTransform.mb_set_glyph_index = MethodBind.get("CharFXTransform", "set_glyph_index", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.CharFXTransform.mb_set_glyph_index, livePtr, glyph_index)
+    Ptrcall.callVoid1(gdext.classes.CharFXTransform.mb_set_glyph_index, livePtr, glyphIndex)
   }
 
   /** CharFXTransform.get_relative_index */
@@ -113,9 +114,9 @@ abstract class CharFXTransform extends RefCounted {
   }
 
   /** CharFXTransform.set_relative_index */
-  final def setRelativeIndex(relative_index: Long): Unit = {
+  final def setRelativeIndex(relativeIndex: Long): Unit = {
     if (gdext.classes.CharFXTransform.mb_set_relative_index == null) gdext.classes.CharFXTransform.mb_set_relative_index = MethodBind.get("CharFXTransform", "set_relative_index", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.CharFXTransform.mb_set_relative_index, livePtr, relative_index)
+    Ptrcall.callVoid1(gdext.classes.CharFXTransform.mb_set_relative_index, livePtr, relativeIndex)
   }
 
   /** CharFXTransform.get_glyph_count */
@@ -125,9 +126,9 @@ abstract class CharFXTransform extends RefCounted {
   }
 
   /** CharFXTransform.set_glyph_count */
-  final def setGlyphCount(glyph_count: Long): Unit = {
+  final def setGlyphCount(glyphCount: Long): Unit = {
     if (gdext.classes.CharFXTransform.mb_set_glyph_count == null) gdext.classes.CharFXTransform.mb_set_glyph_count = MethodBind.get("CharFXTransform", "set_glyph_count", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.CharFXTransform.mb_set_glyph_count, livePtr, glyph_count)
+    Ptrcall.callVoid1(gdext.classes.CharFXTransform.mb_set_glyph_count, livePtr, glyphCount)
   }
 
   /** CharFXTransform.get_glyph_flags */
@@ -137,9 +138,9 @@ abstract class CharFXTransform extends RefCounted {
   }
 
   /** CharFXTransform.set_glyph_flags */
-  final def setGlyphFlags(glyph_flags: Long): Unit = {
+  final def setGlyphFlags(glyphFlags: Long): Unit = {
     if (gdext.classes.CharFXTransform.mb_set_glyph_flags == null) gdext.classes.CharFXTransform.mb_set_glyph_flags = MethodBind.get("CharFXTransform", "set_glyph_flags", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.CharFXTransform.mb_set_glyph_flags, livePtr, glyph_flags)
+    Ptrcall.callVoid1(gdext.classes.CharFXTransform.mb_set_glyph_flags, livePtr, glyphFlags)
   }
 
 }

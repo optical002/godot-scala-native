@@ -18,11 +18,15 @@ The Variant marshalling seam everything above depends on.
 - `GString.scala` — Godot String ↔ Scala String as **UTF-16** (`*_utf16_*`
   interface functions) through a stack buffer (≤2048 units, else malloc).
   `writeAt(value, addr)` / `takeAt(addr)` take addresses (no `Ptr` box).
-- `StringName.scala` — interned 8-byte handle. `StringNames.cached(name)`
-  (closure-free on hit) and `StringNames.adopt(bufAddr)`: a returned
-  StringName is keyed by its handle word (`_data`, unique per text) in a
-  `LongMap` → the stored value is returned (no allocation; the duplicate ref is
-  destroyed). `StringName.from` encodes UTF-8 explicitly.
+- `internal/StringName.scala` (package `gdext.internal`, **not** public
+  surface: engine methods take/return `String`, tagged `SnArg`) — interned
+  8-byte handle. `StringName.writeAt(value, addr)` hand-encodes UTF-8 into a
+  stack buffer (no `getBytes`) — the per-call temp for `SnArg` args.
+  `StringNames.cached(name)` (closure-free on hit) for names the binding reuses.
+  `StringNames.adopt/adoptText(bufAddr)`: a returned StringName is keyed by its
+  handle word (`_data`, unique per text) in a `LongMap` → the stored value /
+  its once-decoded `String` is returned (no allocation; the duplicate ref is
+  destroyed).
 - **Math types** (one file each: `Vector2/2i/3/3i/4/4i`, `Rect2/2i`, `AABB`,
   `Plane`, `Quaternion`, `Basis`, `Transform2D/3D`, `Projection`, `Color`) —
   hand-written port of Godot `core/math` (+ `ok_color.h` for OKHSL in

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class Texture3D extends Texture {
   override def godotClassName: String = "Texture3D"
 
   /** Texture3D.get_format */
-  final def getFormat(): Long = {
+  final def getFormat(): gdext.classes.Image.Format = {
     if (gdext.classes.Texture3D.mb_get_format == null) gdext.classes.Texture3D.mb_get_format = MethodBind.get("Texture3D", "get_format", 3847873762L)
-    Ptrcall.call0[Long](gdext.classes.Texture3D.mb_get_format, livePtr)
+    gdext.classes.Image.Format(Ptrcall.call0[Long](gdext.classes.Texture3D.mb_get_format, livePtr))
   }
 
   /** Texture3D.get_width */

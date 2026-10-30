@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,21 +12,21 @@ abstract class WebSocketPeer extends PacketPeer {
   override def godotClassName: String = "WebSocketPeer"
 
   /** WebSocketPeer.connect_to_url */
-  final def connectToUrl(url: String, tls_client_options: TLSOptions): Long = {
+  final def connectToUrl(url: String, tlsClientOptions: TLSOptions = null): gdext.classes.Error = {
     if (gdext.classes.WebSocketPeer.mb_connect_to_url == null) gdext.classes.WebSocketPeer.mb_connect_to_url = MethodBind.get("WebSocketPeer", "connect_to_url", 1966198364L)
-    Ptrcall.call2[String, GodotObject, Long](gdext.classes.WebSocketPeer.mb_connect_to_url, livePtr, url, Wrappers.handle(tls_client_options))
+    gdext.classes.Error(Ptrcall.call2[String, GodotObject, Long](gdext.classes.WebSocketPeer.mb_connect_to_url, livePtr, url, Wrappers.handle(tlsClientOptions)))
   }
 
   /** WebSocketPeer.accept_stream */
-  final def acceptStream(stream: StreamPeer): Long = {
+  final def acceptStream(stream: StreamPeer): gdext.classes.Error = {
     if (gdext.classes.WebSocketPeer.mb_accept_stream == null) gdext.classes.WebSocketPeer.mb_accept_stream = MethodBind.get("WebSocketPeer", "accept_stream", 255125695L)
-    Ptrcall.call1[GodotObject, Long](gdext.classes.WebSocketPeer.mb_accept_stream, livePtr, Wrappers.handle(stream))
+    gdext.classes.Error(Ptrcall.call1[GodotObject, Long](gdext.classes.WebSocketPeer.mb_accept_stream, livePtr, Wrappers.handle(stream)))
   }
 
   /** WebSocketPeer.send_text */
-  final def sendText(message: String): Long = {
+  final def sendText(message: String): gdext.classes.Error = {
     if (gdext.classes.WebSocketPeer.mb_send_text == null) gdext.classes.WebSocketPeer.mb_send_text = MethodBind.get("WebSocketPeer", "send_text", 166001499L)
-    Ptrcall.call1[String, Long](gdext.classes.WebSocketPeer.mb_send_text, livePtr, message)
+    gdext.classes.Error(Ptrcall.call1[String, Long](gdext.classes.WebSocketPeer.mb_send_text, livePtr, message))
   }
 
   /** WebSocketPeer.was_string_packet */
@@ -41,7 +42,7 @@ abstract class WebSocketPeer extends PacketPeer {
   }
 
   /** WebSocketPeer.close */
-  final def close(code: Long, reason: String): Unit = {
+  final def close(code: Long = 1000L, reason: String = ""): Unit = {
     if (gdext.classes.WebSocketPeer.mb_close == null) gdext.classes.WebSocketPeer.mb_close = MethodBind.get("WebSocketPeer", "close", 1047156615L)
     Ptrcall.callVoid2(gdext.classes.WebSocketPeer.mb_close, livePtr, code, reason)
   }
@@ -83,9 +84,9 @@ abstract class WebSocketPeer extends PacketPeer {
   }
 
   /** WebSocketPeer.get_ready_state */
-  final def getReadyState(): Long = {
+  final def getReadyState(): gdext.classes.WebSocketPeer.State = {
     if (gdext.classes.WebSocketPeer.mb_get_ready_state == null) gdext.classes.WebSocketPeer.mb_get_ready_state = MethodBind.get("WebSocketPeer", "get_ready_state", 346482985L)
-    Ptrcall.call0[Long](gdext.classes.WebSocketPeer.mb_get_ready_state, livePtr)
+    gdext.classes.WebSocketPeer.State(Ptrcall.call0[Long](gdext.classes.WebSocketPeer.mb_get_ready_state, livePtr))
   }
 
   /** WebSocketPeer.get_close_code */
@@ -107,9 +108,9 @@ abstract class WebSocketPeer extends PacketPeer {
   }
 
   /** WebSocketPeer.set_inbound_buffer_size */
-  final def setInboundBufferSize(buffer_size: Long): Unit = {
+  final def setInboundBufferSize(bufferSize: Long): Unit = {
     if (gdext.classes.WebSocketPeer.mb_set_inbound_buffer_size == null) gdext.classes.WebSocketPeer.mb_set_inbound_buffer_size = MethodBind.get("WebSocketPeer", "set_inbound_buffer_size", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.WebSocketPeer.mb_set_inbound_buffer_size, livePtr, buffer_size)
+    Ptrcall.callVoid1(gdext.classes.WebSocketPeer.mb_set_inbound_buffer_size, livePtr, bufferSize)
   }
 
   /** WebSocketPeer.get_outbound_buffer_size */
@@ -119,15 +120,15 @@ abstract class WebSocketPeer extends PacketPeer {
   }
 
   /** WebSocketPeer.set_outbound_buffer_size */
-  final def setOutboundBufferSize(buffer_size: Long): Unit = {
+  final def setOutboundBufferSize(bufferSize: Long): Unit = {
     if (gdext.classes.WebSocketPeer.mb_set_outbound_buffer_size == null) gdext.classes.WebSocketPeer.mb_set_outbound_buffer_size = MethodBind.get("WebSocketPeer", "set_outbound_buffer_size", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.WebSocketPeer.mb_set_outbound_buffer_size, livePtr, buffer_size)
+    Ptrcall.callVoid1(gdext.classes.WebSocketPeer.mb_set_outbound_buffer_size, livePtr, bufferSize)
   }
 
   /** WebSocketPeer.set_max_queued_packets */
-  final def setMaxQueuedPackets(buffer_size: Long): Unit = {
+  final def setMaxQueuedPackets(bufferSize: Long): Unit = {
     if (gdext.classes.WebSocketPeer.mb_set_max_queued_packets == null) gdext.classes.WebSocketPeer.mb_set_max_queued_packets = MethodBind.get("WebSocketPeer", "set_max_queued_packets", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.WebSocketPeer.mb_set_max_queued_packets, livePtr, buffer_size)
+    Ptrcall.callVoid1(gdext.classes.WebSocketPeer.mb_set_max_queued_packets, livePtr, bufferSize)
   }
 
   /** WebSocketPeer.get_max_queued_packets */
@@ -174,4 +175,52 @@ object WebSocketPeer {
   private[classes] var mb_get_max_queued_packets: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_heartbeat_interval: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_heartbeat_interval: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `WebSocketPeer.WriteMode`. */
+  opaque type WriteMode <: Long = Long
+
+  object WriteMode {
+    final val Text: WriteMode = 0L.asInstanceOf[WriteMode]
+    final val Binary: WriteMode = 1L.asInstanceOf[WriteMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): WriteMode = value.asInstanceOf[WriteMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[WriteMode] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[WriteMode]]
+
+    extension (self: WriteMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Text"
+        case 1L => "Binary"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `WebSocketPeer.State`. */
+  opaque type State <: Long = Long
+
+  object State {
+    final val Connecting: State = 0L.asInstanceOf[State]
+    final val Open: State = 1L.asInstanceOf[State]
+    final val Closing: State = 2L.asInstanceOf[State]
+    final val Closed: State = 3L.asInstanceOf[State]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): State = value.asInstanceOf[State]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[State] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[State]]
+
+    extension (self: State)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Connecting"
+        case 1L => "Open"
+        case 2L => "Closing"
+        case 3L => "Closed"
+        case other => other.toString
+      }
+  }
 }

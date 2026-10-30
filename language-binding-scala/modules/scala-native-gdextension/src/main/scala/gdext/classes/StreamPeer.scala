@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -173,13 +174,13 @@ abstract class StreamPeer extends RefCounted {
   }
 
   /** StreamPeer.get_string */
-  final def getString(bytes: Long): String = {
+  final def getString(bytes: Long = -1L): String = {
     if (gdext.classes.StreamPeer.mb_get_string == null) gdext.classes.StreamPeer.mb_get_string = MethodBind.get("StreamPeer", "get_string", 2309358862L)
     Ptrcall.call1[Long, String](gdext.classes.StreamPeer.mb_get_string, livePtr, bytes)
   }
 
   /** StreamPeer.get_utf8_string */
-  final def getUtf8String(bytes: Long): String = {
+  final def getUtf8String(bytes: Long = -1L): String = {
     if (gdext.classes.StreamPeer.mb_get_utf8_string == null) gdext.classes.StreamPeer.mb_get_utf8_string = MethodBind.get("StreamPeer", "get_utf8_string", 2309358862L)
     Ptrcall.call1[Long, String](gdext.classes.StreamPeer.mb_get_utf8_string, livePtr, bytes)
   }

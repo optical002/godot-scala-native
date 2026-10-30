@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,15 +24,15 @@ abstract class LightmapGI extends VisualInstance3D {
   }
 
   /** LightmapGI.set_bake_quality */
-  final def setBakeQuality(bake_quality: Long): Unit = {
+  final def setBakeQuality(bakeQuality: gdext.classes.LightmapGI.BakeQuality): Unit = {
     if (gdext.classes.LightmapGI.mb_set_bake_quality == null) gdext.classes.LightmapGI.mb_set_bake_quality = MethodBind.get("LightmapGI", "set_bake_quality", 1192215803L)
-    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_bake_quality, livePtr, bake_quality)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_bake_quality, livePtr, bakeQuality)
   }
 
   /** LightmapGI.get_bake_quality */
-  final def getBakeQuality(): Long = {
+  final def getBakeQuality(): gdext.classes.LightmapGI.BakeQuality = {
     if (gdext.classes.LightmapGI.mb_get_bake_quality == null) gdext.classes.LightmapGI.mb_get_bake_quality = MethodBind.get("LightmapGI", "get_bake_quality", 688832735L)
-    Ptrcall.call0[Long](gdext.classes.LightmapGI.mb_get_bake_quality, livePtr)
+    gdext.classes.LightmapGI.BakeQuality(Ptrcall.call0[Long](gdext.classes.LightmapGI.mb_get_bake_quality, livePtr))
   }
 
   /** LightmapGI.set_bounces */
@@ -47,9 +48,9 @@ abstract class LightmapGI extends VisualInstance3D {
   }
 
   /** LightmapGI.set_bounce_indirect_energy */
-  final def setBounceIndirectEnergy(bounce_indirect_energy: Double): Unit = {
+  final def setBounceIndirectEnergy(bounceIndirectEnergy: Double): Unit = {
     if (gdext.classes.LightmapGI.mb_set_bounce_indirect_energy == null) gdext.classes.LightmapGI.mb_set_bounce_indirect_energy = MethodBind.get("LightmapGI", "set_bounce_indirect_energy", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_bounce_indirect_energy, livePtr, bounce_indirect_energy)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_bounce_indirect_energy, livePtr, bounceIndirectEnergy)
   }
 
   /** LightmapGI.get_bounce_indirect_energy */
@@ -59,15 +60,15 @@ abstract class LightmapGI extends VisualInstance3D {
   }
 
   /** LightmapGI.set_generate_probes */
-  final def setGenerateProbes(subdivision: Long): Unit = {
+  final def setGenerateProbes(subdivision: gdext.classes.LightmapGI.GenerateProbes): Unit = {
     if (gdext.classes.LightmapGI.mb_set_generate_probes == null) gdext.classes.LightmapGI.mb_set_generate_probes = MethodBind.get("LightmapGI", "set_generate_probes", 549981046L)
     Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_generate_probes, livePtr, subdivision)
   }
 
   /** LightmapGI.get_generate_probes */
-  final def getGenerateProbes(): Long = {
+  final def getGenerateProbes(): gdext.classes.LightmapGI.GenerateProbes = {
     if (gdext.classes.LightmapGI.mb_get_generate_probes == null) gdext.classes.LightmapGI.mb_get_generate_probes = MethodBind.get("LightmapGI", "get_generate_probes", 3930596226L)
-    Ptrcall.call0[Long](gdext.classes.LightmapGI.mb_get_generate_probes, livePtr)
+    gdext.classes.LightmapGI.GenerateProbes(Ptrcall.call0[Long](gdext.classes.LightmapGI.mb_get_generate_probes, livePtr))
   }
 
   /** LightmapGI.set_bias */
@@ -83,15 +84,15 @@ abstract class LightmapGI extends VisualInstance3D {
   }
 
   /** LightmapGI.set_environment_mode */
-  final def setEnvironmentMode(mode: Long): Unit = {
+  final def setEnvironmentMode(mode: gdext.classes.LightmapGI.EnvironmentMode): Unit = {
     if (gdext.classes.LightmapGI.mb_set_environment_mode == null) gdext.classes.LightmapGI.mb_set_environment_mode = MethodBind.get("LightmapGI", "set_environment_mode", 2282650285L)
     Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_environment_mode, livePtr, mode)
   }
 
   /** LightmapGI.get_environment_mode */
-  final def getEnvironmentMode(): Long = {
+  final def getEnvironmentMode(): gdext.classes.LightmapGI.EnvironmentMode = {
     if (gdext.classes.LightmapGI.mb_get_environment_mode == null) gdext.classes.LightmapGI.mb_get_environment_mode = MethodBind.get("LightmapGI", "get_environment_mode", 4128646479L)
-    Ptrcall.call0[Long](gdext.classes.LightmapGI.mb_get_environment_mode, livePtr)
+    gdext.classes.LightmapGI.EnvironmentMode(Ptrcall.call0[Long](gdext.classes.LightmapGI.mb_get_environment_mode, livePtr))
   }
 
   /** LightmapGI.set_environment_custom_sky */
@@ -131,9 +132,9 @@ abstract class LightmapGI extends VisualInstance3D {
   }
 
   /** LightmapGI.set_texel_scale */
-  final def setTexelScale(texel_scale: Double): Unit = {
+  final def setTexelScale(texelScale: Double): Unit = {
     if (gdext.classes.LightmapGI.mb_set_texel_scale == null) gdext.classes.LightmapGI.mb_set_texel_scale = MethodBind.get("LightmapGI", "set_texel_scale", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_texel_scale, livePtr, texel_scale)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_texel_scale, livePtr, texelScale)
   }
 
   /** LightmapGI.get_texel_scale */
@@ -143,9 +144,9 @@ abstract class LightmapGI extends VisualInstance3D {
   }
 
   /** LightmapGI.set_max_texture_size */
-  final def setMaxTextureSize(max_texture_size: Long): Unit = {
+  final def setMaxTextureSize(maxTextureSize: Long): Unit = {
     if (gdext.classes.LightmapGI.mb_set_max_texture_size == null) gdext.classes.LightmapGI.mb_set_max_texture_size = MethodBind.get("LightmapGI", "set_max_texture_size", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_max_texture_size, livePtr, max_texture_size)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_max_texture_size, livePtr, maxTextureSize)
   }
 
   /** LightmapGI.get_max_texture_size */
@@ -179,9 +180,9 @@ abstract class LightmapGI extends VisualInstance3D {
   }
 
   /** LightmapGI.set_use_denoiser */
-  final def setUseDenoiser(use_denoiser: Boolean): Unit = {
+  final def setUseDenoiser(useDenoiser: Boolean): Unit = {
     if (gdext.classes.LightmapGI.mb_set_use_denoiser == null) gdext.classes.LightmapGI.mb_set_use_denoiser = MethodBind.get("LightmapGI", "set_use_denoiser", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_use_denoiser, livePtr, use_denoiser)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_use_denoiser, livePtr, useDenoiser)
   }
 
   /** LightmapGI.is_using_denoiser */
@@ -191,9 +192,9 @@ abstract class LightmapGI extends VisualInstance3D {
   }
 
   /** LightmapGI.set_denoiser_strength */
-  final def setDenoiserStrength(denoiser_strength: Double): Unit = {
+  final def setDenoiserStrength(denoiserStrength: Double): Unit = {
     if (gdext.classes.LightmapGI.mb_set_denoiser_strength == null) gdext.classes.LightmapGI.mb_set_denoiser_strength = MethodBind.get("LightmapGI", "set_denoiser_strength", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_denoiser_strength, livePtr, denoiser_strength)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_denoiser_strength, livePtr, denoiserStrength)
   }
 
   /** LightmapGI.get_denoiser_strength */
@@ -203,9 +204,9 @@ abstract class LightmapGI extends VisualInstance3D {
   }
 
   /** LightmapGI.set_denoiser_range */
-  final def setDenoiserRange(denoiser_range: Long): Unit = {
+  final def setDenoiserRange(denoiserRange: Long): Unit = {
     if (gdext.classes.LightmapGI.mb_set_denoiser_range == null) gdext.classes.LightmapGI.mb_set_denoiser_range = MethodBind.get("LightmapGI", "set_denoiser_range", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_denoiser_range, livePtr, denoiser_range)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_denoiser_range, livePtr, denoiserRange)
   }
 
   /** LightmapGI.get_denoiser_range */
@@ -239,21 +240,21 @@ abstract class LightmapGI extends VisualInstance3D {
   }
 
   /** LightmapGI.set_shadowmask_mode */
-  final def setShadowmaskMode(mode: Long): Unit = {
+  final def setShadowmaskMode(mode: gdext.classes.LightmapGIData.ShadowmaskMode): Unit = {
     if (gdext.classes.LightmapGI.mb_set_shadowmask_mode == null) gdext.classes.LightmapGI.mb_set_shadowmask_mode = MethodBind.get("LightmapGI", "set_shadowmask_mode", 3451066572L)
     Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_shadowmask_mode, livePtr, mode)
   }
 
   /** LightmapGI.get_shadowmask_mode */
-  final def getShadowmaskMode(): Long = {
+  final def getShadowmaskMode(): gdext.classes.LightmapGIData.ShadowmaskMode = {
     if (gdext.classes.LightmapGI.mb_get_shadowmask_mode == null) gdext.classes.LightmapGI.mb_get_shadowmask_mode = MethodBind.get("LightmapGI", "get_shadowmask_mode", 785478560L)
-    Ptrcall.call0[Long](gdext.classes.LightmapGI.mb_get_shadowmask_mode, livePtr)
+    gdext.classes.LightmapGIData.ShadowmaskMode(Ptrcall.call0[Long](gdext.classes.LightmapGI.mb_get_shadowmask_mode, livePtr))
   }
 
   /** LightmapGI.set_use_texture_for_bounces */
-  final def setUseTextureForBounces(use_texture_for_bounces: Boolean): Unit = {
+  final def setUseTextureForBounces(useTextureForBounces: Boolean): Unit = {
     if (gdext.classes.LightmapGI.mb_set_use_texture_for_bounces == null) gdext.classes.LightmapGI.mb_set_use_texture_for_bounces = MethodBind.get("LightmapGI", "set_use_texture_for_bounces", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_use_texture_for_bounces, livePtr, use_texture_for_bounces)
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_use_texture_for_bounces, livePtr, useTextureForBounces)
   }
 
   /** LightmapGI.is_using_texture_for_bounces */
@@ -263,9 +264,9 @@ abstract class LightmapGI extends VisualInstance3D {
   }
 
   /** LightmapGI.set_camera_attributes */
-  final def setCameraAttributes(camera_attributes: CameraAttributes): Unit = {
+  final def setCameraAttributes(cameraAttributes: CameraAttributes): Unit = {
     if (gdext.classes.LightmapGI.mb_set_camera_attributes == null) gdext.classes.LightmapGI.mb_set_camera_attributes = MethodBind.get("LightmapGI", "set_camera_attributes", 2817810567L)
-    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_camera_attributes, livePtr, Wrappers.handle(camera_attributes))
+    Ptrcall.callVoid1(gdext.classes.LightmapGI.mb_set_camera_attributes, livePtr, Wrappers.handle(cameraAttributes))
   }
 
   /** LightmapGI.get_camera_attributes. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -321,4 +322,126 @@ object LightmapGI {
   private[classes] var mb_is_using_texture_for_bounces: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_camera_attributes: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_camera_attributes: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `LightmapGI.BakeQuality`. */
+  opaque type BakeQuality <: Long = Long
+
+  object BakeQuality {
+    final val Low: BakeQuality = 0L.asInstanceOf[BakeQuality]
+    final val Medium: BakeQuality = 1L.asInstanceOf[BakeQuality]
+    final val High: BakeQuality = 2L.asInstanceOf[BakeQuality]
+    final val Ultra: BakeQuality = 3L.asInstanceOf[BakeQuality]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): BakeQuality = value.asInstanceOf[BakeQuality]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[BakeQuality] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[BakeQuality]]
+
+    extension (self: BakeQuality)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Low"
+        case 1L => "Medium"
+        case 2L => "High"
+        case 3L => "Ultra"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `LightmapGI.GenerateProbes`. */
+  opaque type GenerateProbes <: Long = Long
+
+  object GenerateProbes {
+    final val Disabled: GenerateProbes = 0L.asInstanceOf[GenerateProbes]
+    final val Subdiv4: GenerateProbes = 1L.asInstanceOf[GenerateProbes]
+    final val Subdiv8: GenerateProbes = 2L.asInstanceOf[GenerateProbes]
+    final val Subdiv16: GenerateProbes = 3L.asInstanceOf[GenerateProbes]
+    final val Subdiv32: GenerateProbes = 4L.asInstanceOf[GenerateProbes]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): GenerateProbes = value.asInstanceOf[GenerateProbes]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[GenerateProbes] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[GenerateProbes]]
+
+    extension (self: GenerateProbes)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "Subdiv4"
+        case 2L => "Subdiv8"
+        case 3L => "Subdiv16"
+        case 4L => "Subdiv32"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `LightmapGI.BakeError`. */
+  opaque type BakeError <: Long = Long
+
+  object BakeError {
+    final val Ok: BakeError = 0L.asInstanceOf[BakeError]
+    final val NoSceneRoot: BakeError = 1L.asInstanceOf[BakeError]
+    final val ForeignData: BakeError = 2L.asInstanceOf[BakeError]
+    final val NoLightmapper: BakeError = 3L.asInstanceOf[BakeError]
+    final val NoSavePath: BakeError = 4L.asInstanceOf[BakeError]
+    final val NoMeshes: BakeError = 5L.asInstanceOf[BakeError]
+    final val MeshesInvalid: BakeError = 6L.asInstanceOf[BakeError]
+    final val CantCreateImage: BakeError = 7L.asInstanceOf[BakeError]
+    final val UserAborted: BakeError = 8L.asInstanceOf[BakeError]
+    final val TextureSizeTooSmall: BakeError = 9L.asInstanceOf[BakeError]
+    final val LightmapTooSmall: BakeError = 10L.asInstanceOf[BakeError]
+    final val AtlasTooSmall: BakeError = 11L.asInstanceOf[BakeError]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): BakeError = value.asInstanceOf[BakeError]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[BakeError] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L).asInstanceOf[scala.IArray[BakeError]]
+
+    extension (self: BakeError)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Ok"
+        case 1L => "NoSceneRoot"
+        case 2L => "ForeignData"
+        case 3L => "NoLightmapper"
+        case 4L => "NoSavePath"
+        case 5L => "NoMeshes"
+        case 6L => "MeshesInvalid"
+        case 7L => "CantCreateImage"
+        case 8L => "UserAborted"
+        case 9L => "TextureSizeTooSmall"
+        case 10L => "LightmapTooSmall"
+        case 11L => "AtlasTooSmall"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `LightmapGI.EnvironmentMode`. */
+  opaque type EnvironmentMode <: Long = Long
+
+  object EnvironmentMode {
+    final val Disabled: EnvironmentMode = 0L.asInstanceOf[EnvironmentMode]
+    final val Scene: EnvironmentMode = 1L.asInstanceOf[EnvironmentMode]
+    final val CustomSky: EnvironmentMode = 2L.asInstanceOf[EnvironmentMode]
+    final val CustomColor: EnvironmentMode = 3L.asInstanceOf[EnvironmentMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): EnvironmentMode = value.asInstanceOf[EnvironmentMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[EnvironmentMode] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[EnvironmentMode]]
+
+    extension (self: EnvironmentMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "Scene"
+        case 2L => "CustomSky"
+        case 3L => "CustomColor"
+        case other => other.toString
+      }
+  }
 }

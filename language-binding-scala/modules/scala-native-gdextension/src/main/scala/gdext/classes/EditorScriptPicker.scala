@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class EditorScriptPicker extends EditorResourcePicker {
   override def godotClassName: String = "EditorScriptPicker"
 
   /** EditorScriptPicker.set_script_owner */
-  final def setScriptOwner(owner_node: Node): Unit = {
+  final def setScriptOwner(ownerNode: Node): Unit = {
     if (gdext.classes.EditorScriptPicker.mb_set_script_owner == null) gdext.classes.EditorScriptPicker.mb_set_script_owner = MethodBind.get("EditorScriptPicker", "set_script_owner", 1078189570L)
-    Ptrcall.callVoid1(gdext.classes.EditorScriptPicker.mb_set_script_owner, livePtr, Wrappers.handle(owner_node))
+    Ptrcall.callVoid1(gdext.classes.EditorScriptPicker.mb_set_script_owner, livePtr, Wrappers.handle(ownerNode))
   }
 
   /** EditorScriptPicker.get_script_owner */

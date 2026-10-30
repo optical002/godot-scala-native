@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class AnimationNodeTransition extends AnimationNodeSync {
   override def godotClassName: String = "AnimationNodeTransition"
 
   /** AnimationNodeTransition.set_input_count */
-  final def setInputCount(input_count: Long): Unit = {
+  final def setInputCount(inputCount: Long): Unit = {
     if (gdext.classes.AnimationNodeTransition.mb_set_input_count == null) gdext.classes.AnimationNodeTransition.mb_set_input_count = MethodBind.get("AnimationNodeTransition", "set_input_count", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.AnimationNodeTransition.mb_set_input_count, livePtr, input_count)
+    Ptrcall.callVoid1(gdext.classes.AnimationNodeTransition.mb_set_input_count, livePtr, inputCount)
   }
 
   /** AnimationNodeTransition.set_input_as_auto_advance */

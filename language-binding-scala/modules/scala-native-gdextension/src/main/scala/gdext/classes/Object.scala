@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,13 +18,13 @@ abstract class Object extends gdext.internal.register.GodotScriptClass {
   }
 
   /** Object.property_can_revert */
-  final def propertyCanRevert(property: gdext.builtin.StringName): Boolean = {
+  final def propertyCanRevert(property: String): Boolean = {
     if (gdext.classes.Object.mb_property_can_revert == null) gdext.classes.Object.mb_property_can_revert = MethodBind.get("Object", "property_can_revert", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.Object.mb_property_can_revert, livePtr, property)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.Object.mb_property_can_revert, livePtr, SnArg(property))
   }
 
   /** Object.notification */
-  final def notification(what: Long, reversed: Boolean): Unit = {
+  final def notification(what: Long, reversed: Boolean = false): Unit = {
     if (gdext.classes.Object.mb_notification == null) gdext.classes.Object.mb_notification = MethodBind.get("Object", "notification", 4023243586L)
     Ptrcall.callVoid2(gdext.classes.Object.mb_notification, livePtr, what, reversed)
   }
@@ -35,51 +36,51 @@ abstract class Object extends gdext.internal.register.GodotScriptClass {
   }
 
   /** Object.remove_meta */
-  final def removeMeta(name: gdext.builtin.StringName): Unit = {
+  final def removeMeta(name: String): Unit = {
     if (gdext.classes.Object.mb_remove_meta == null) gdext.classes.Object.mb_remove_meta = MethodBind.get("Object", "remove_meta", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.Object.mb_remove_meta, livePtr, name)
+    Ptrcall.callVoid1(gdext.classes.Object.mb_remove_meta, livePtr, SnArg(name))
   }
 
   /** Object.has_meta */
-  final def hasMeta(name: gdext.builtin.StringName): Boolean = {
+  final def hasMeta(name: String): Boolean = {
     if (gdext.classes.Object.mb_has_meta == null) gdext.classes.Object.mb_has_meta = MethodBind.get("Object", "has_meta", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.Object.mb_has_meta, livePtr, name)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.Object.mb_has_meta, livePtr, SnArg(name))
   }
 
   /** Object.has_user_signal */
-  final def hasUserSignal(signal: gdext.builtin.StringName): Boolean = {
+  final def hasUserSignal(signal: String): Boolean = {
     if (gdext.classes.Object.mb_has_user_signal == null) gdext.classes.Object.mb_has_user_signal = MethodBind.get("Object", "has_user_signal", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.Object.mb_has_user_signal, livePtr, signal)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.Object.mb_has_user_signal, livePtr, SnArg(signal))
   }
 
   /** Object.remove_user_signal */
-  final def removeUserSignal(signal: gdext.builtin.StringName): Unit = {
+  final def removeUserSignal(signal: String): Unit = {
     if (gdext.classes.Object.mb_remove_user_signal == null) gdext.classes.Object.mb_remove_user_signal = MethodBind.get("Object", "remove_user_signal", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.Object.mb_remove_user_signal, livePtr, signal)
+    Ptrcall.callVoid1(gdext.classes.Object.mb_remove_user_signal, livePtr, SnArg(signal))
   }
 
   /** Object.has_method */
-  final def hasMethod(method: gdext.builtin.StringName): Boolean = {
+  final def hasMethod(method: String): Boolean = {
     if (gdext.classes.Object.mb_has_method == null) gdext.classes.Object.mb_has_method = MethodBind.get("Object", "has_method", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.Object.mb_has_method, livePtr, method)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.Object.mb_has_method, livePtr, SnArg(method))
   }
 
   /** Object.get_method_argument_count */
-  final def getMethodArgumentCount(method: gdext.builtin.StringName): Long = {
+  final def getMethodArgumentCount(method: String): Long = {
     if (gdext.classes.Object.mb_get_method_argument_count == null) gdext.classes.Object.mb_get_method_argument_count = MethodBind.get("Object", "get_method_argument_count", 2458036349L)
-    Ptrcall.call1[gdext.builtin.StringName, Long](gdext.classes.Object.mb_get_method_argument_count, livePtr, method)
+    Ptrcall.call1[SnArg, Long](gdext.classes.Object.mb_get_method_argument_count, livePtr, SnArg(method))
   }
 
   /** Object.has_signal */
-  final def hasSignal(signal: gdext.builtin.StringName): Boolean = {
+  final def hasSignal(signal: String): Boolean = {
     if (gdext.classes.Object.mb_has_signal == null) gdext.classes.Object.mb_has_signal = MethodBind.get("Object", "has_signal", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.Object.mb_has_signal, livePtr, signal)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.Object.mb_has_signal, livePtr, SnArg(signal))
   }
 
   /** Object.has_connections */
-  final def hasConnections(signal: gdext.builtin.StringName): Boolean = {
+  final def hasConnections(signal: String): Boolean = {
     if (gdext.classes.Object.mb_has_connections == null) gdext.classes.Object.mb_has_connections = MethodBind.get("Object", "has_connections", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.Object.mb_has_connections, livePtr, signal)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.Object.mb_has_connections, livePtr, SnArg(signal))
   }
 
   /** Object.set_block_signals */
@@ -113,27 +114,27 @@ abstract class Object extends gdext.internal.register.GodotScriptClass {
   }
 
   /** Object.tr */
-  final def tr(message: gdext.builtin.StringName, context: gdext.builtin.StringName): String = {
+  final def tr(message: String, context: String = ""): String = {
     if (gdext.classes.Object.mb_tr == null) gdext.classes.Object.mb_tr = MethodBind.get("Object", "tr", 1195764410L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, String](gdext.classes.Object.mb_tr, livePtr, message, context)
+    Ptrcall.call2[SnArg, SnArg, String](gdext.classes.Object.mb_tr, livePtr, SnArg(message), SnArg(context))
   }
 
   /** Object.tr_n */
-  final def trN(message: gdext.builtin.StringName, plural_message: gdext.builtin.StringName, n: Long, context: gdext.builtin.StringName): String = {
+  final def trN(message: String, pluralMessage: String, n: Long, context: String = ""): String = {
     if (gdext.classes.Object.mb_tr_n == null) gdext.classes.Object.mb_tr_n = MethodBind.get("Object", "tr_n", 162698058L)
-    Ptrcall.call4[gdext.builtin.StringName, gdext.builtin.StringName, Long, gdext.builtin.StringName, String](gdext.classes.Object.mb_tr_n, livePtr, message, plural_message, n, context)
+    Ptrcall.call4[SnArg, SnArg, Long, SnArg, String](gdext.classes.Object.mb_tr_n, livePtr, SnArg(message), SnArg(pluralMessage), n, SnArg(context))
   }
 
   /** Object.get_translation_domain */
-  final def getTranslationDomain(): gdext.builtin.StringName = {
+  final def getTranslationDomain(): String = {
     if (gdext.classes.Object.mb_get_translation_domain == null) gdext.classes.Object.mb_get_translation_domain = MethodBind.get("Object", "get_translation_domain", 2002593661L)
-    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.Object.mb_get_translation_domain, livePtr)
+    Ptrcall.call0[SnArg](gdext.classes.Object.mb_get_translation_domain, livePtr)
   }
 
   /** Object.set_translation_domain */
-  final def setTranslationDomain(domain: gdext.builtin.StringName): Unit = {
+  final def setTranslationDomain(domain: String): Unit = {
     if (gdext.classes.Object.mb_set_translation_domain == null) gdext.classes.Object.mb_set_translation_domain = MethodBind.get("Object", "set_translation_domain", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.Object.mb_set_translation_domain, livePtr, domain)
+    Ptrcall.callVoid1(gdext.classes.Object.mb_set_translation_domain, livePtr, SnArg(domain))
   }
 
   /** Object.is_queued_for_deletion */
@@ -174,4 +175,32 @@ object Object {
   private[classes] var mb_set_translation_domain: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_queued_for_deletion: GDExtensionMethodBindPtr = null
   private[classes] var mb_cancel_free: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `Object.ConnectFlags`. */
+  opaque type ConnectFlags <: Long = Long
+
+  object ConnectFlags {
+    final val Deferred: ConnectFlags = 1L.asInstanceOf[ConnectFlags]
+    final val Persist: ConnectFlags = 2L.asInstanceOf[ConnectFlags]
+    final val OneShot: ConnectFlags = 4L.asInstanceOf[ConnectFlags]
+    final val ReferenceCounted: ConnectFlags = 8L.asInstanceOf[ConnectFlags]
+    final val AppendSourceObject: ConnectFlags = 16L.asInstanceOf[ConnectFlags]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ConnectFlags = value.asInstanceOf[ConnectFlags]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ConnectFlags] = scala.IArray[Long](1L, 2L, 4L, 8L, 16L).asInstanceOf[scala.IArray[ConnectFlags]]
+
+    extension (self: ConnectFlags)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 1L => "Deferred"
+        case 2L => "Persist"
+        case 4L => "OneShot"
+        case 8L => "ReferenceCounted"
+        case 16L => "AppendSourceObject"
+        case other => other.toString
+      }
+  }
 }

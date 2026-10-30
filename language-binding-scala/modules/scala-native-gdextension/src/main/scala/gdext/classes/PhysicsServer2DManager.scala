@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -30,4 +31,8 @@ object PhysicsServer2DManager {
         Godot.interface.global_get_singleton(StringNames.cached("PhysicsServer2DManager").ptr)))
     instance
   }
+
+  /** Forwards to [[singleton]]: PhysicsServer2DManager.set_default_server */
+  final def setDefaultServer(name: String, priority: Long): Unit =
+    singleton.setDefaultServer(name, priority)
 }

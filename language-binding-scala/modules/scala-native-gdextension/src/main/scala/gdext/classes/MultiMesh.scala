@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -47,15 +48,15 @@ abstract class MultiMesh extends Resource {
   }
 
   /** MultiMesh.set_transform_format */
-  final def setTransformFormat(format: Long): Unit = {
+  final def setTransformFormat(format: gdext.classes.MultiMesh.TransformFormat): Unit = {
     if (gdext.classes.MultiMesh.mb_set_transform_format == null) gdext.classes.MultiMesh.mb_set_transform_format = MethodBind.get("MultiMesh", "set_transform_format", 2404750322L)
     Ptrcall.callVoid1(gdext.classes.MultiMesh.mb_set_transform_format, livePtr, format)
   }
 
   /** MultiMesh.get_transform_format */
-  final def getTransformFormat(): Long = {
+  final def getTransformFormat(): gdext.classes.MultiMesh.TransformFormat = {
     if (gdext.classes.MultiMesh.mb_get_transform_format == null) gdext.classes.MultiMesh.mb_get_transform_format = MethodBind.get("MultiMesh", "get_transform_format", 2444156481L)
-    Ptrcall.call0[Long](gdext.classes.MultiMesh.mb_get_transform_format, livePtr)
+    gdext.classes.MultiMesh.TransformFormat(Ptrcall.call0[Long](gdext.classes.MultiMesh.mb_get_transform_format, livePtr))
   }
 
   /** MultiMesh.set_instance_count */
@@ -83,15 +84,15 @@ abstract class MultiMesh extends Resource {
   }
 
   /** MultiMesh.set_physics_interpolation_quality */
-  final def setPhysicsInterpolationQuality(quality: Long): Unit = {
+  final def setPhysicsInterpolationQuality(quality: gdext.classes.MultiMesh.PhysicsInterpolationQuality): Unit = {
     if (gdext.classes.MultiMesh.mb_set_physics_interpolation_quality == null) gdext.classes.MultiMesh.mb_set_physics_interpolation_quality = MethodBind.get("MultiMesh", "set_physics_interpolation_quality", 1819488408L)
     Ptrcall.callVoid1(gdext.classes.MultiMesh.mb_set_physics_interpolation_quality, livePtr, quality)
   }
 
   /** MultiMesh.get_physics_interpolation_quality */
-  final def getPhysicsInterpolationQuality(): Long = {
+  final def getPhysicsInterpolationQuality(): gdext.classes.MultiMesh.PhysicsInterpolationQuality = {
     if (gdext.classes.MultiMesh.mb_get_physics_interpolation_quality == null) gdext.classes.MultiMesh.mb_get_physics_interpolation_quality = MethodBind.get("MultiMesh", "get_physics_interpolation_quality", 1465701882L)
-    Ptrcall.call0[Long](gdext.classes.MultiMesh.mb_get_physics_interpolation_quality, livePtr)
+    gdext.classes.MultiMesh.PhysicsInterpolationQuality(Ptrcall.call0[Long](gdext.classes.MultiMesh.mb_get_physics_interpolation_quality, livePtr))
   }
 
   /** MultiMesh.set_instance_transform */
@@ -131,9 +132,9 @@ abstract class MultiMesh extends Resource {
   }
 
   /** MultiMesh.set_instance_custom_data */
-  final def setInstanceCustomData(instance: Long, custom_data: gdext.builtin.Color): Unit = {
+  final def setInstanceCustomData(instance: Long, customData: gdext.builtin.Color): Unit = {
     if (gdext.classes.MultiMesh.mb_set_instance_custom_data == null) gdext.classes.MultiMesh.mb_set_instance_custom_data = MethodBind.get("MultiMesh", "set_instance_custom_data", 2878471219L)
-    Ptrcall.callVoid2(gdext.classes.MultiMesh.mb_set_instance_custom_data, livePtr, instance, custom_data)
+    Ptrcall.callVoid2(gdext.classes.MultiMesh.mb_set_instance_custom_data, livePtr, instance, customData)
   }
 
   /** MultiMesh.get_instance_custom_data */
@@ -202,4 +203,48 @@ object MultiMesh {
   private[classes] var mb_set_custom_aabb: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_custom_aabb: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_aabb: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `MultiMesh.TransformFormat`. */
+  opaque type TransformFormat <: Long = Long
+
+  object TransformFormat {
+    final val Transform2d: TransformFormat = 0L.asInstanceOf[TransformFormat]
+    final val Transform3d: TransformFormat = 1L.asInstanceOf[TransformFormat]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): TransformFormat = value.asInstanceOf[TransformFormat]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[TransformFormat] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[TransformFormat]]
+
+    extension (self: TransformFormat)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Transform2d"
+        case 1L => "Transform3d"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `MultiMesh.PhysicsInterpolationQuality`. */
+  opaque type PhysicsInterpolationQuality <: Long = Long
+
+  object PhysicsInterpolationQuality {
+    final val Fast: PhysicsInterpolationQuality = 0L.asInstanceOf[PhysicsInterpolationQuality]
+    final val High: PhysicsInterpolationQuality = 1L.asInstanceOf[PhysicsInterpolationQuality]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): PhysicsInterpolationQuality = value.asInstanceOf[PhysicsInterpolationQuality]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[PhysicsInterpolationQuality] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[PhysicsInterpolationQuality]]
+
+    extension (self: PhysicsInterpolationQuality)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Fast"
+        case 1L => "High"
+        case other => other.toString
+      }
+  }
 }

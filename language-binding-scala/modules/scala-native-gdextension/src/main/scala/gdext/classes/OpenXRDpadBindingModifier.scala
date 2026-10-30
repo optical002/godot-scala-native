@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class OpenXRDpadBindingModifier extends OpenXRIPBindingModifier {
   override def godotClassName: String = "OpenXRDpadBindingModifier"
 
   /** OpenXRDpadBindingModifier.set_action_set */
-  final def setActionSet(action_set: OpenXRActionSet): Unit = {
+  final def setActionSet(actionSet: OpenXRActionSet): Unit = {
     if (gdext.classes.OpenXRDpadBindingModifier.mb_set_action_set == null) gdext.classes.OpenXRDpadBindingModifier.mb_set_action_set = MethodBind.get("OpenXRDpadBindingModifier", "set_action_set", 2093310581L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRDpadBindingModifier.mb_set_action_set, livePtr, Wrappers.handle(action_set))
+    Ptrcall.callVoid1(gdext.classes.OpenXRDpadBindingModifier.mb_set_action_set, livePtr, Wrappers.handle(actionSet))
   }
 
   /** OpenXRDpadBindingModifier.get_action_set. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -23,9 +24,9 @@ abstract class OpenXRDpadBindingModifier extends OpenXRIPBindingModifier {
   }
 
   /** OpenXRDpadBindingModifier.set_input_path */
-  final def setInputPath(input_path: String): Unit = {
+  final def setInputPath(inputPath: String): Unit = {
     if (gdext.classes.OpenXRDpadBindingModifier.mb_set_input_path == null) gdext.classes.OpenXRDpadBindingModifier.mb_set_input_path = MethodBind.get("OpenXRDpadBindingModifier", "set_input_path", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRDpadBindingModifier.mb_set_input_path, livePtr, input_path)
+    Ptrcall.callVoid1(gdext.classes.OpenXRDpadBindingModifier.mb_set_input_path, livePtr, inputPath)
   }
 
   /** OpenXRDpadBindingModifier.get_input_path */
@@ -47,9 +48,9 @@ abstract class OpenXRDpadBindingModifier extends OpenXRIPBindingModifier {
   }
 
   /** OpenXRDpadBindingModifier.set_threshold_released */
-  final def setThresholdReleased(threshold_released: Double): Unit = {
+  final def setThresholdReleased(thresholdReleased: Double): Unit = {
     if (gdext.classes.OpenXRDpadBindingModifier.mb_set_threshold_released == null) gdext.classes.OpenXRDpadBindingModifier.mb_set_threshold_released = MethodBind.get("OpenXRDpadBindingModifier", "set_threshold_released", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRDpadBindingModifier.mb_set_threshold_released, livePtr, threshold_released)
+    Ptrcall.callVoid1(gdext.classes.OpenXRDpadBindingModifier.mb_set_threshold_released, livePtr, thresholdReleased)
   }
 
   /** OpenXRDpadBindingModifier.get_threshold_released */
@@ -59,9 +60,9 @@ abstract class OpenXRDpadBindingModifier extends OpenXRIPBindingModifier {
   }
 
   /** OpenXRDpadBindingModifier.set_center_region */
-  final def setCenterRegion(center_region: Double): Unit = {
+  final def setCenterRegion(centerRegion: Double): Unit = {
     if (gdext.classes.OpenXRDpadBindingModifier.mb_set_center_region == null) gdext.classes.OpenXRDpadBindingModifier.mb_set_center_region = MethodBind.get("OpenXRDpadBindingModifier", "set_center_region", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRDpadBindingModifier.mb_set_center_region, livePtr, center_region)
+    Ptrcall.callVoid1(gdext.classes.OpenXRDpadBindingModifier.mb_set_center_region, livePtr, centerRegion)
   }
 
   /** OpenXRDpadBindingModifier.get_center_region */
@@ -71,9 +72,9 @@ abstract class OpenXRDpadBindingModifier extends OpenXRIPBindingModifier {
   }
 
   /** OpenXRDpadBindingModifier.set_wedge_angle */
-  final def setWedgeAngle(wedge_angle: Double): Unit = {
+  final def setWedgeAngle(wedgeAngle: Double): Unit = {
     if (gdext.classes.OpenXRDpadBindingModifier.mb_set_wedge_angle == null) gdext.classes.OpenXRDpadBindingModifier.mb_set_wedge_angle = MethodBind.get("OpenXRDpadBindingModifier", "set_wedge_angle", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRDpadBindingModifier.mb_set_wedge_angle, livePtr, wedge_angle)
+    Ptrcall.callVoid1(gdext.classes.OpenXRDpadBindingModifier.mb_set_wedge_angle, livePtr, wedgeAngle)
   }
 
   /** OpenXRDpadBindingModifier.get_wedge_angle */
@@ -83,9 +84,9 @@ abstract class OpenXRDpadBindingModifier extends OpenXRIPBindingModifier {
   }
 
   /** OpenXRDpadBindingModifier.set_is_sticky */
-  final def setIsSticky(is_sticky: Boolean): Unit = {
+  final def setIsSticky(isSticky: Boolean): Unit = {
     if (gdext.classes.OpenXRDpadBindingModifier.mb_set_is_sticky == null) gdext.classes.OpenXRDpadBindingModifier.mb_set_is_sticky = MethodBind.get("OpenXRDpadBindingModifier", "set_is_sticky", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRDpadBindingModifier.mb_set_is_sticky, livePtr, is_sticky)
+    Ptrcall.callVoid1(gdext.classes.OpenXRDpadBindingModifier.mb_set_is_sticky, livePtr, isSticky)
   }
 
   /** OpenXRDpadBindingModifier.get_is_sticky */

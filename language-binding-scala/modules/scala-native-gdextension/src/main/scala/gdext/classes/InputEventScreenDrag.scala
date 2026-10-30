@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -47,9 +48,9 @@ abstract class InputEventScreenDrag extends InputEventFromWindow {
   }
 
   /** InputEventScreenDrag.set_pen_inverted */
-  final def setPenInverted(pen_inverted: Boolean): Unit = {
+  final def setPenInverted(penInverted: Boolean): Unit = {
     if (gdext.classes.InputEventScreenDrag.mb_set_pen_inverted == null) gdext.classes.InputEventScreenDrag.mb_set_pen_inverted = MethodBind.get("InputEventScreenDrag", "set_pen_inverted", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.InputEventScreenDrag.mb_set_pen_inverted, livePtr, pen_inverted)
+    Ptrcall.callVoid1(gdext.classes.InputEventScreenDrag.mb_set_pen_inverted, livePtr, penInverted)
   }
 
   /** InputEventScreenDrag.get_pen_inverted */

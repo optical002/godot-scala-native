@@ -1,7 +1,7 @@
 package gdext.internal.register.editor
 
 import gdext.{Godot, Log}
-import gdext.builtin.StringNames
+import gdext.internal.StringNames
 import gdext.internal.engine.GodotObject
 import gdext.classes.{EditorInspectorPlugin, EditorPlugin}
 import gdext.internal.register.*
@@ -72,7 +72,7 @@ object EditorIntegration {
 final class ScalaExportPlugin extends EditorPlugin {
   private var inspector: EditorInspectorPlugin = null
 
-  override def _enter_tree(): Unit = {
+  override def enterTree(): Unit = {
     val handle = Godot.interface.classdb_construct_object2(
       StringNames.cached("ScalaExportInspectorPlugin").ptr
     )
@@ -81,7 +81,7 @@ final class ScalaExportPlugin extends EditorPlugin {
     Log.file("[editor] ScalaExportPlugin: inspector plugin installed")
   }
 
-  override def _exit_tree(): Unit =
+  override def exitTree(): Unit =
     if (inspector != null) {
       removeInspectorPlugin(inspector)
       inspector = null
@@ -94,9 +94,9 @@ final class ScalaExportInspectorPlugin extends EditorInspectorPlugin {
   // EditorIntegration's docs — blocked on a Godot child-control theme crash and
   // some missing engine bindings). Returning false keeps Godot's default
   // PackedScene picker and stays out of every other inspection.
-  override def _can_handle(obj: GodotObject): Boolean = false
+  override def canHandle(obj: GodotObject): Boolean = false
 
-  override def _parse_property(
+  override def parseProperty(
     obj: GodotObject,
     varType: Long,
     name: String,

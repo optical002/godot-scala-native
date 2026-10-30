@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class Viewport extends Node {
   override def godotClassName: String = "Viewport"
 
   /** Viewport.set_world_2d */
-  final def setWorld2d(world_2d: World2D): Unit = {
+  final def setWorld2d(world2d: World2D): Unit = {
     if (gdext.classes.Viewport.mb_set_world_2d == null) gdext.classes.Viewport.mb_set_world_2d = MethodBind.get("Viewport", "set_world_2d", 2736080068L)
-    Ptrcall.callVoid1(gdext.classes.Viewport.mb_set_world_2d, livePtr, Wrappers.handle(world_2d))
+    Ptrcall.callVoid1(gdext.classes.Viewport.mb_set_world_2d, livePtr, Wrappers.handle(world2d))
   }
 
   /** Viewport.get_world_2d. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -101,39 +102,39 @@ abstract class Viewport extends Node {
   }
 
   /** Viewport.set_msaa_2d */
-  final def setMsaa2d(msaa: Long): Unit = {
+  final def setMsaa2d(msaa: gdext.classes.Viewport.MSAA): Unit = {
     if (gdext.classes.Viewport.mb_set_msaa_2d == null) gdext.classes.Viewport.mb_set_msaa_2d = MethodBind.get("Viewport", "set_msaa_2d", 3330258708L)
     Ptrcall.callVoid1(gdext.classes.Viewport.mb_set_msaa_2d, livePtr, msaa)
   }
 
   /** Viewport.get_msaa_2d */
-  final def getMsaa2d(): Long = {
+  final def getMsaa2d(): gdext.classes.Viewport.MSAA = {
     if (gdext.classes.Viewport.mb_get_msaa_2d == null) gdext.classes.Viewport.mb_get_msaa_2d = MethodBind.get("Viewport", "get_msaa_2d", 2542055527L)
-    Ptrcall.call0[Long](gdext.classes.Viewport.mb_get_msaa_2d, livePtr)
+    gdext.classes.Viewport.MSAA(Ptrcall.call0[Long](gdext.classes.Viewport.mb_get_msaa_2d, livePtr))
   }
 
   /** Viewport.set_msaa_3d */
-  final def setMsaa3d(msaa: Long): Unit = {
+  final def setMsaa3d(msaa: gdext.classes.Viewport.MSAA): Unit = {
     if (gdext.classes.Viewport.mb_set_msaa_3d == null) gdext.classes.Viewport.mb_set_msaa_3d = MethodBind.get("Viewport", "set_msaa_3d", 3330258708L)
     Ptrcall.callVoid1(gdext.classes.Viewport.mb_set_msaa_3d, livePtr, msaa)
   }
 
   /** Viewport.get_msaa_3d */
-  final def getMsaa3d(): Long = {
+  final def getMsaa3d(): gdext.classes.Viewport.MSAA = {
     if (gdext.classes.Viewport.mb_get_msaa_3d == null) gdext.classes.Viewport.mb_get_msaa_3d = MethodBind.get("Viewport", "get_msaa_3d", 2542055527L)
-    Ptrcall.call0[Long](gdext.classes.Viewport.mb_get_msaa_3d, livePtr)
+    gdext.classes.Viewport.MSAA(Ptrcall.call0[Long](gdext.classes.Viewport.mb_get_msaa_3d, livePtr))
   }
 
   /** Viewport.set_screen_space_aa */
-  final def setScreenSpaceAa(screen_space_aa: Long): Unit = {
+  final def setScreenSpaceAa(screenSpaceAa: gdext.classes.Viewport.ScreenSpaceAA): Unit = {
     if (gdext.classes.Viewport.mb_set_screen_space_aa == null) gdext.classes.Viewport.mb_set_screen_space_aa = MethodBind.get("Viewport", "set_screen_space_aa", 3544169389L)
-    Ptrcall.callVoid1(gdext.classes.Viewport.mb_set_screen_space_aa, livePtr, screen_space_aa)
+    Ptrcall.callVoid1(gdext.classes.Viewport.mb_set_screen_space_aa, livePtr, screenSpaceAa)
   }
 
   /** Viewport.get_screen_space_aa */
-  final def getScreenSpaceAa(): Long = {
+  final def getScreenSpaceAa(): gdext.classes.Viewport.ScreenSpaceAA = {
     if (gdext.classes.Viewport.mb_get_screen_space_aa == null) gdext.classes.Viewport.mb_get_screen_space_aa = MethodBind.get("Viewport", "get_screen_space_aa", 1390814124L)
-    Ptrcall.call0[Long](gdext.classes.Viewport.mb_get_screen_space_aa, livePtr)
+    gdext.classes.Viewport.ScreenSpaceAA(Ptrcall.call0[Long](gdext.classes.Viewport.mb_get_screen_space_aa, livePtr))
   }
 
   /** Viewport.set_use_taa */
@@ -173,15 +174,15 @@ abstract class Viewport extends Node {
   }
 
   /** Viewport.set_debug_draw */
-  final def setDebugDraw(debug_draw: Long): Unit = {
+  final def setDebugDraw(debugDraw: gdext.classes.Viewport.DebugDraw): Unit = {
     if (gdext.classes.Viewport.mb_set_debug_draw == null) gdext.classes.Viewport.mb_set_debug_draw = MethodBind.get("Viewport", "set_debug_draw", 1970246205L)
-    Ptrcall.callVoid1(gdext.classes.Viewport.mb_set_debug_draw, livePtr, debug_draw)
+    Ptrcall.callVoid1(gdext.classes.Viewport.mb_set_debug_draw, livePtr, debugDraw)
   }
 
   /** Viewport.get_debug_draw */
-  final def getDebugDraw(): Long = {
+  final def getDebugDraw(): gdext.classes.Viewport.DebugDraw = {
     if (gdext.classes.Viewport.mb_get_debug_draw == null) gdext.classes.Viewport.mb_get_debug_draw = MethodBind.get("Viewport", "get_debug_draw", 579191299L)
-    Ptrcall.call0[Long](gdext.classes.Viewport.mb_get_debug_draw, livePtr)
+    gdext.classes.Viewport.DebugDraw(Ptrcall.call0[Long](gdext.classes.Viewport.mb_get_debug_draw, livePtr))
   }
 
   /** Viewport.set_use_oversampling */
@@ -215,7 +216,7 @@ abstract class Viewport extends Node {
   }
 
   /** Viewport.get_render_info */
-  final def getRenderInfo(`type`: Long, info: Long): Long = {
+  final def getRenderInfo(`type`: gdext.classes.Viewport.RenderInfoType, info: gdext.classes.Viewport.RenderInfo): Long = {
     if (gdext.classes.Viewport.mb_get_render_info == null) gdext.classes.Viewport.mb_get_render_info = MethodBind.get("Viewport", "get_render_info", 481977019L)
     Ptrcall.call2[Long, Long, Long](gdext.classes.Viewport.mb_get_render_info, livePtr, `type`, info)
   }
@@ -269,15 +270,15 @@ abstract class Viewport extends Node {
   }
 
   /** Viewport.push_input */
-  final def pushInput(event: InputEvent, in_local_coords: Boolean): Unit = {
+  final def pushInput(event: InputEvent, inLocalCoords: Boolean = false): Unit = {
     if (gdext.classes.Viewport.mb_push_input == null) gdext.classes.Viewport.mb_push_input = MethodBind.get("Viewport", "push_input", 3644664830L)
-    Ptrcall.callVoid2(gdext.classes.Viewport.mb_push_input, livePtr, Wrappers.handle(event), in_local_coords)
+    Ptrcall.callVoid2(gdext.classes.Viewport.mb_push_input, livePtr, Wrappers.handle(event), inLocalCoords)
   }
 
   /** Viewport.push_unhandled_input */
-  final def pushUnhandledInput(event: InputEvent, in_local_coords: Boolean): Unit = {
+  final def pushUnhandledInput(event: InputEvent, inLocalCoords: Boolean = false): Unit = {
     if (gdext.classes.Viewport.mb_push_unhandled_input == null) gdext.classes.Viewport.mb_push_unhandled_input = MethodBind.get("Viewport", "push_unhandled_input", 3644664830L)
-    Ptrcall.callVoid2(gdext.classes.Viewport.mb_push_unhandled_input, livePtr, Wrappers.handle(event), in_local_coords)
+    Ptrcall.callVoid2(gdext.classes.Viewport.mb_push_unhandled_input, livePtr, Wrappers.handle(event), inLocalCoords)
   }
 
   /** Viewport.notify_mouse_entered */
@@ -431,15 +432,15 @@ abstract class Viewport extends Node {
   }
 
   /** Viewport.set_positional_shadow_atlas_quadrant_subdiv */
-  final def setPositionalShadowAtlasQuadrantSubdiv(quadrant: Long, subdiv: Long): Unit = {
+  final def setPositionalShadowAtlasQuadrantSubdiv(quadrant: Long, subdiv: gdext.classes.Viewport.PositionalShadowAtlasQuadrantSubdiv): Unit = {
     if (gdext.classes.Viewport.mb_set_positional_shadow_atlas_quadrant_subdiv == null) gdext.classes.Viewport.mb_set_positional_shadow_atlas_quadrant_subdiv = MethodBind.get("Viewport", "set_positional_shadow_atlas_quadrant_subdiv", 2596956071L)
     Ptrcall.callVoid2(gdext.classes.Viewport.mb_set_positional_shadow_atlas_quadrant_subdiv, livePtr, quadrant, subdiv)
   }
 
   /** Viewport.get_positional_shadow_atlas_quadrant_subdiv */
-  final def getPositionalShadowAtlasQuadrantSubdiv(quadrant: Long): Long = {
+  final def getPositionalShadowAtlasQuadrantSubdiv(quadrant: Long): gdext.classes.Viewport.PositionalShadowAtlasQuadrantSubdiv = {
     if (gdext.classes.Viewport.mb_get_positional_shadow_atlas_quadrant_subdiv == null) gdext.classes.Viewport.mb_get_positional_shadow_atlas_quadrant_subdiv = MethodBind.get("Viewport", "get_positional_shadow_atlas_quadrant_subdiv", 2676778355L)
-    Ptrcall.call1[Long, Long](gdext.classes.Viewport.mb_get_positional_shadow_atlas_quadrant_subdiv, livePtr, quadrant)
+    gdext.classes.Viewport.PositionalShadowAtlasQuadrantSubdiv(Ptrcall.call1[Long, Long](gdext.classes.Viewport.mb_get_positional_shadow_atlas_quadrant_subdiv, livePtr, quadrant))
   }
 
   /** Viewport.set_input_as_handled */
@@ -467,15 +468,15 @@ abstract class Viewport extends Node {
   }
 
   /** Viewport.set_default_canvas_item_texture_filter */
-  final def setDefaultCanvasItemTextureFilter(mode: Long): Unit = {
+  final def setDefaultCanvasItemTextureFilter(mode: gdext.classes.Viewport.DefaultCanvasItemTextureFilter): Unit = {
     if (gdext.classes.Viewport.mb_set_default_canvas_item_texture_filter == null) gdext.classes.Viewport.mb_set_default_canvas_item_texture_filter = MethodBind.get("Viewport", "set_default_canvas_item_texture_filter", 2815160100L)
     Ptrcall.callVoid1(gdext.classes.Viewport.mb_set_default_canvas_item_texture_filter, livePtr, mode)
   }
 
   /** Viewport.get_default_canvas_item_texture_filter */
-  final def getDefaultCanvasItemTextureFilter(): Long = {
+  final def getDefaultCanvasItemTextureFilter(): gdext.classes.Viewport.DefaultCanvasItemTextureFilter = {
     if (gdext.classes.Viewport.mb_get_default_canvas_item_texture_filter == null) gdext.classes.Viewport.mb_get_default_canvas_item_texture_filter = MethodBind.get("Viewport", "get_default_canvas_item_texture_filter", 896601198L)
-    Ptrcall.call0[Long](gdext.classes.Viewport.mb_get_default_canvas_item_texture_filter, livePtr)
+    gdext.classes.Viewport.DefaultCanvasItemTextureFilter(Ptrcall.call0[Long](gdext.classes.Viewport.mb_get_default_canvas_item_texture_filter, livePtr))
   }
 
   /** Viewport.set_embedding_subwindows */
@@ -527,39 +528,39 @@ abstract class Viewport extends Node {
   }
 
   /** Viewport.set_default_canvas_item_texture_repeat */
-  final def setDefaultCanvasItemTextureRepeat(mode: Long): Unit = {
+  final def setDefaultCanvasItemTextureRepeat(mode: gdext.classes.Viewport.DefaultCanvasItemTextureRepeat): Unit = {
     if (gdext.classes.Viewport.mb_set_default_canvas_item_texture_repeat == null) gdext.classes.Viewport.mb_set_default_canvas_item_texture_repeat = MethodBind.get("Viewport", "set_default_canvas_item_texture_repeat", 1658513413L)
     Ptrcall.callVoid1(gdext.classes.Viewport.mb_set_default_canvas_item_texture_repeat, livePtr, mode)
   }
 
   /** Viewport.get_default_canvas_item_texture_repeat */
-  final def getDefaultCanvasItemTextureRepeat(): Long = {
+  final def getDefaultCanvasItemTextureRepeat(): gdext.classes.Viewport.DefaultCanvasItemTextureRepeat = {
     if (gdext.classes.Viewport.mb_get_default_canvas_item_texture_repeat == null) gdext.classes.Viewport.mb_get_default_canvas_item_texture_repeat = MethodBind.get("Viewport", "get_default_canvas_item_texture_repeat", 4049774160L)
-    Ptrcall.call0[Long](gdext.classes.Viewport.mb_get_default_canvas_item_texture_repeat, livePtr)
+    gdext.classes.Viewport.DefaultCanvasItemTextureRepeat(Ptrcall.call0[Long](gdext.classes.Viewport.mb_get_default_canvas_item_texture_repeat, livePtr))
   }
 
   /** Viewport.set_sdf_oversize */
-  final def setSdfOversize(oversize: Long): Unit = {
+  final def setSdfOversize(oversize: gdext.classes.Viewport.SDFOversize): Unit = {
     if (gdext.classes.Viewport.mb_set_sdf_oversize == null) gdext.classes.Viewport.mb_set_sdf_oversize = MethodBind.get("Viewport", "set_sdf_oversize", 2574159017L)
     Ptrcall.callVoid1(gdext.classes.Viewport.mb_set_sdf_oversize, livePtr, oversize)
   }
 
   /** Viewport.get_sdf_oversize */
-  final def getSdfOversize(): Long = {
+  final def getSdfOversize(): gdext.classes.Viewport.SDFOversize = {
     if (gdext.classes.Viewport.mb_get_sdf_oversize == null) gdext.classes.Viewport.mb_get_sdf_oversize = MethodBind.get("Viewport", "get_sdf_oversize", 2631427510L)
-    Ptrcall.call0[Long](gdext.classes.Viewport.mb_get_sdf_oversize, livePtr)
+    gdext.classes.Viewport.SDFOversize(Ptrcall.call0[Long](gdext.classes.Viewport.mb_get_sdf_oversize, livePtr))
   }
 
   /** Viewport.set_sdf_scale */
-  final def setSdfScale(scale: Long): Unit = {
+  final def setSdfScale(scale: gdext.classes.Viewport.SDFScale): Unit = {
     if (gdext.classes.Viewport.mb_set_sdf_scale == null) gdext.classes.Viewport.mb_set_sdf_scale = MethodBind.get("Viewport", "set_sdf_scale", 1402773951L)
     Ptrcall.callVoid1(gdext.classes.Viewport.mb_set_sdf_scale, livePtr, scale)
   }
 
   /** Viewport.get_sdf_scale */
-  final def getSdfScale(): Long = {
+  final def getSdfScale(): gdext.classes.Viewport.SDFScale = {
     if (gdext.classes.Viewport.mb_get_sdf_scale == null) gdext.classes.Viewport.mb_get_sdf_scale = MethodBind.get("Viewport", "get_sdf_scale", 3162688184L)
-    Ptrcall.call0[Long](gdext.classes.Viewport.mb_get_sdf_scale, livePtr)
+    gdext.classes.Viewport.SDFScale(Ptrcall.call0[Long](gdext.classes.Viewport.mb_get_sdf_scale, livePtr))
   }
 
   /** Viewport.set_mesh_lod_threshold */
@@ -599,9 +600,9 @@ abstract class Viewport extends Node {
   }
 
   /** Viewport.set_world_3d */
-  final def setWorld3d(world_3d: World3D): Unit = {
+  final def setWorld3d(world3d: World3D): Unit = {
     if (gdext.classes.Viewport.mb_set_world_3d == null) gdext.classes.Viewport.mb_set_world_3d = MethodBind.get("Viewport", "set_world_3d", 1400875337L)
-    Ptrcall.callVoid1(gdext.classes.Viewport.mb_set_world_3d, livePtr, Wrappers.handle(world_3d))
+    Ptrcall.callVoid1(gdext.classes.Viewport.mb_set_world_3d, livePtr, Wrappers.handle(world3d))
   }
 
   /** Viewport.get_world_3d. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -677,15 +678,15 @@ abstract class Viewport extends Node {
   }
 
   /** Viewport.set_scaling_3d_mode */
-  final def setScaling3dMode(scaling_3d_mode: Long): Unit = {
+  final def setScaling3dMode(scaling3dMode: gdext.classes.Viewport.Scaling3DMode): Unit = {
     if (gdext.classes.Viewport.mb_set_scaling_3d_mode == null) gdext.classes.Viewport.mb_set_scaling_3d_mode = MethodBind.get("Viewport", "set_scaling_3d_mode", 1531597597L)
-    Ptrcall.callVoid1(gdext.classes.Viewport.mb_set_scaling_3d_mode, livePtr, scaling_3d_mode)
+    Ptrcall.callVoid1(gdext.classes.Viewport.mb_set_scaling_3d_mode, livePtr, scaling3dMode)
   }
 
   /** Viewport.get_scaling_3d_mode */
-  final def getScaling3dMode(): Long = {
+  final def getScaling3dMode(): gdext.classes.Viewport.Scaling3DMode = {
     if (gdext.classes.Viewport.mb_get_scaling_3d_mode == null) gdext.classes.Viewport.mb_get_scaling_3d_mode = MethodBind.get("Viewport", "get_scaling_3d_mode", 2597660574L)
-    Ptrcall.call0[Long](gdext.classes.Viewport.mb_get_scaling_3d_mode, livePtr)
+    gdext.classes.Viewport.Scaling3DMode(Ptrcall.call0[Long](gdext.classes.Viewport.mb_get_scaling_3d_mode, livePtr))
   }
 
   /** Viewport.set_scaling_3d_scale */
@@ -701,9 +702,9 @@ abstract class Viewport extends Node {
   }
 
   /** Viewport.set_fsr_sharpness */
-  final def setFsrSharpness(fsr_sharpness: Double): Unit = {
+  final def setFsrSharpness(fsrSharpness: Double): Unit = {
     if (gdext.classes.Viewport.mb_set_fsr_sharpness == null) gdext.classes.Viewport.mb_set_fsr_sharpness = MethodBind.get("Viewport", "set_fsr_sharpness", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Viewport.mb_set_fsr_sharpness, livePtr, fsr_sharpness)
+    Ptrcall.callVoid1(gdext.classes.Viewport.mb_set_fsr_sharpness, livePtr, fsrSharpness)
   }
 
   /** Viewport.get_fsr_sharpness */
@@ -713,9 +714,9 @@ abstract class Viewport extends Node {
   }
 
   /** Viewport.set_texture_mipmap_bias */
-  final def setTextureMipmapBias(texture_mipmap_bias: Double): Unit = {
+  final def setTextureMipmapBias(textureMipmapBias: Double): Unit = {
     if (gdext.classes.Viewport.mb_set_texture_mipmap_bias == null) gdext.classes.Viewport.mb_set_texture_mipmap_bias = MethodBind.get("Viewport", "set_texture_mipmap_bias", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Viewport.mb_set_texture_mipmap_bias, livePtr, texture_mipmap_bias)
+    Ptrcall.callVoid1(gdext.classes.Viewport.mb_set_texture_mipmap_bias, livePtr, textureMipmapBias)
   }
 
   /** Viewport.get_texture_mipmap_bias */
@@ -725,39 +726,39 @@ abstract class Viewport extends Node {
   }
 
   /** Viewport.set_anisotropic_filtering_level */
-  final def setAnisotropicFilteringLevel(anisotropic_filtering_level: Long): Unit = {
+  final def setAnisotropicFilteringLevel(anisotropicFilteringLevel: gdext.classes.Viewport.AnisotropicFiltering): Unit = {
     if (gdext.classes.Viewport.mb_set_anisotropic_filtering_level == null) gdext.classes.Viewport.mb_set_anisotropic_filtering_level = MethodBind.get("Viewport", "set_anisotropic_filtering_level", 3445583046L)
-    Ptrcall.callVoid1(gdext.classes.Viewport.mb_set_anisotropic_filtering_level, livePtr, anisotropic_filtering_level)
+    Ptrcall.callVoid1(gdext.classes.Viewport.mb_set_anisotropic_filtering_level, livePtr, anisotropicFilteringLevel)
   }
 
   /** Viewport.get_anisotropic_filtering_level */
-  final def getAnisotropicFilteringLevel(): Long = {
+  final def getAnisotropicFilteringLevel(): gdext.classes.Viewport.AnisotropicFiltering = {
     if (gdext.classes.Viewport.mb_get_anisotropic_filtering_level == null) gdext.classes.Viewport.mb_get_anisotropic_filtering_level = MethodBind.get("Viewport", "get_anisotropic_filtering_level", 3991528932L)
-    Ptrcall.call0[Long](gdext.classes.Viewport.mb_get_anisotropic_filtering_level, livePtr)
+    gdext.classes.Viewport.AnisotropicFiltering(Ptrcall.call0[Long](gdext.classes.Viewport.mb_get_anisotropic_filtering_level, livePtr))
   }
 
   /** Viewport.set_vrs_mode */
-  final def setVrsMode(mode: Long): Unit = {
+  final def setVrsMode(mode: gdext.classes.Viewport.VRSMode): Unit = {
     if (gdext.classes.Viewport.mb_set_vrs_mode == null) gdext.classes.Viewport.mb_set_vrs_mode = MethodBind.get("Viewport", "set_vrs_mode", 2749867817L)
     Ptrcall.callVoid1(gdext.classes.Viewport.mb_set_vrs_mode, livePtr, mode)
   }
 
   /** Viewport.get_vrs_mode */
-  final def getVrsMode(): Long = {
+  final def getVrsMode(): gdext.classes.Viewport.VRSMode = {
     if (gdext.classes.Viewport.mb_get_vrs_mode == null) gdext.classes.Viewport.mb_get_vrs_mode = MethodBind.get("Viewport", "get_vrs_mode", 349660525L)
-    Ptrcall.call0[Long](gdext.classes.Viewport.mb_get_vrs_mode, livePtr)
+    gdext.classes.Viewport.VRSMode(Ptrcall.call0[Long](gdext.classes.Viewport.mb_get_vrs_mode, livePtr))
   }
 
   /** Viewport.set_vrs_update_mode */
-  final def setVrsUpdateMode(mode: Long): Unit = {
+  final def setVrsUpdateMode(mode: gdext.classes.Viewport.VRSUpdateMode): Unit = {
     if (gdext.classes.Viewport.mb_set_vrs_update_mode == null) gdext.classes.Viewport.mb_set_vrs_update_mode = MethodBind.get("Viewport", "set_vrs_update_mode", 3182412319L)
     Ptrcall.callVoid1(gdext.classes.Viewport.mb_set_vrs_update_mode, livePtr, mode)
   }
 
   /** Viewport.get_vrs_update_mode */
-  final def getVrsUpdateMode(): Long = {
+  final def getVrsUpdateMode(): gdext.classes.Viewport.VRSUpdateMode = {
     if (gdext.classes.Viewport.mb_get_vrs_update_mode == null) gdext.classes.Viewport.mb_get_vrs_update_mode = MethodBind.get("Viewport", "get_vrs_update_mode", 2255951583L)
-    Ptrcall.call0[Long](gdext.classes.Viewport.mb_get_vrs_update_mode, livePtr)
+    gdext.classes.Viewport.VRSUpdateMode(Ptrcall.call0[Long](gdext.classes.Viewport.mb_get_vrs_update_mode, livePtr))
   }
 
   /** Viewport.set_vrs_texture */
@@ -902,4 +903,436 @@ object Viewport {
   private[classes] var mb_get_vrs_update_mode: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_vrs_texture: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_vrs_texture: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `Viewport.PositionalShadowAtlasQuadrantSubdiv`. */
+  opaque type PositionalShadowAtlasQuadrantSubdiv <: Long = Long
+
+  object PositionalShadowAtlasQuadrantSubdiv {
+    final val Disabled: PositionalShadowAtlasQuadrantSubdiv = 0L.asInstanceOf[PositionalShadowAtlasQuadrantSubdiv]
+    final val Subdiv1: PositionalShadowAtlasQuadrantSubdiv = 1L.asInstanceOf[PositionalShadowAtlasQuadrantSubdiv]
+    final val Subdiv4: PositionalShadowAtlasQuadrantSubdiv = 2L.asInstanceOf[PositionalShadowAtlasQuadrantSubdiv]
+    final val Subdiv16: PositionalShadowAtlasQuadrantSubdiv = 3L.asInstanceOf[PositionalShadowAtlasQuadrantSubdiv]
+    final val Subdiv64: PositionalShadowAtlasQuadrantSubdiv = 4L.asInstanceOf[PositionalShadowAtlasQuadrantSubdiv]
+    final val Subdiv256: PositionalShadowAtlasQuadrantSubdiv = 5L.asInstanceOf[PositionalShadowAtlasQuadrantSubdiv]
+    final val Subdiv1024: PositionalShadowAtlasQuadrantSubdiv = 6L.asInstanceOf[PositionalShadowAtlasQuadrantSubdiv]
+    final val Max: PositionalShadowAtlasQuadrantSubdiv = 7L.asInstanceOf[PositionalShadowAtlasQuadrantSubdiv]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): PositionalShadowAtlasQuadrantSubdiv = value.asInstanceOf[PositionalShadowAtlasQuadrantSubdiv]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[PositionalShadowAtlasQuadrantSubdiv] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L).asInstanceOf[scala.IArray[PositionalShadowAtlasQuadrantSubdiv]]
+
+    extension (self: PositionalShadowAtlasQuadrantSubdiv)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "Subdiv1"
+        case 2L => "Subdiv4"
+        case 3L => "Subdiv16"
+        case 4L => "Subdiv64"
+        case 5L => "Subdiv256"
+        case 6L => "Subdiv1024"
+        case 7L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Viewport.Scaling3DMode`. */
+  opaque type Scaling3DMode <: Long = Long
+
+  object Scaling3DMode {
+    final val Bilinear: Scaling3DMode = 0L.asInstanceOf[Scaling3DMode]
+    final val Fsr: Scaling3DMode = 1L.asInstanceOf[Scaling3DMode]
+    final val Fsr2: Scaling3DMode = 2L.asInstanceOf[Scaling3DMode]
+    final val MetalfxSpatial: Scaling3DMode = 3L.asInstanceOf[Scaling3DMode]
+    final val MetalfxTemporal: Scaling3DMode = 4L.asInstanceOf[Scaling3DMode]
+    final val Max: Scaling3DMode = 5L.asInstanceOf[Scaling3DMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): Scaling3DMode = value.asInstanceOf[Scaling3DMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[Scaling3DMode] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L).asInstanceOf[scala.IArray[Scaling3DMode]]
+
+    extension (self: Scaling3DMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Bilinear"
+        case 1L => "Fsr"
+        case 2L => "Fsr2"
+        case 3L => "MetalfxSpatial"
+        case 4L => "MetalfxTemporal"
+        case 5L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Viewport.MSAA`. */
+  opaque type MSAA <: Long = Long
+
+  object MSAA {
+    final val Disabled: MSAA = 0L.asInstanceOf[MSAA]
+    final val Msaa2x: MSAA = 1L.asInstanceOf[MSAA]
+    final val Msaa4x: MSAA = 2L.asInstanceOf[MSAA]
+    final val Msaa8x: MSAA = 3L.asInstanceOf[MSAA]
+    final val Max: MSAA = 4L.asInstanceOf[MSAA]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): MSAA = value.asInstanceOf[MSAA]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[MSAA] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[MSAA]]
+
+    extension (self: MSAA)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "Msaa2x"
+        case 2L => "Msaa4x"
+        case 3L => "Msaa8x"
+        case 4L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Viewport.AnisotropicFiltering`. */
+  opaque type AnisotropicFiltering <: Long = Long
+
+  object AnisotropicFiltering {
+    final val Disabled: AnisotropicFiltering = 0L.asInstanceOf[AnisotropicFiltering]
+    final val Anisotropy2x: AnisotropicFiltering = 1L.asInstanceOf[AnisotropicFiltering]
+    final val Anisotropy4x: AnisotropicFiltering = 2L.asInstanceOf[AnisotropicFiltering]
+    final val Anisotropy8x: AnisotropicFiltering = 3L.asInstanceOf[AnisotropicFiltering]
+    final val Anisotropy16x: AnisotropicFiltering = 4L.asInstanceOf[AnisotropicFiltering]
+    final val Max: AnisotropicFiltering = 5L.asInstanceOf[AnisotropicFiltering]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): AnisotropicFiltering = value.asInstanceOf[AnisotropicFiltering]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[AnisotropicFiltering] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L).asInstanceOf[scala.IArray[AnisotropicFiltering]]
+
+    extension (self: AnisotropicFiltering)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "Anisotropy2x"
+        case 2L => "Anisotropy4x"
+        case 3L => "Anisotropy8x"
+        case 4L => "Anisotropy16x"
+        case 5L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Viewport.ScreenSpaceAA`. */
+  opaque type ScreenSpaceAA <: Long = Long
+
+  object ScreenSpaceAA {
+    final val Disabled: ScreenSpaceAA = 0L.asInstanceOf[ScreenSpaceAA]
+    final val Fxaa: ScreenSpaceAA = 1L.asInstanceOf[ScreenSpaceAA]
+    final val Smaa: ScreenSpaceAA = 2L.asInstanceOf[ScreenSpaceAA]
+    final val Max: ScreenSpaceAA = 3L.asInstanceOf[ScreenSpaceAA]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ScreenSpaceAA = value.asInstanceOf[ScreenSpaceAA]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ScreenSpaceAA] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[ScreenSpaceAA]]
+
+    extension (self: ScreenSpaceAA)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "Fxaa"
+        case 2L => "Smaa"
+        case 3L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Viewport.RenderInfo`. */
+  opaque type RenderInfo <: Long = Long
+
+  object RenderInfo {
+    final val ObjectsInFrame: RenderInfo = 0L.asInstanceOf[RenderInfo]
+    final val PrimitivesInFrame: RenderInfo = 1L.asInstanceOf[RenderInfo]
+    final val DrawCallsInFrame: RenderInfo = 2L.asInstanceOf[RenderInfo]
+    final val Max: RenderInfo = 3L.asInstanceOf[RenderInfo]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): RenderInfo = value.asInstanceOf[RenderInfo]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[RenderInfo] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[RenderInfo]]
+
+    extension (self: RenderInfo)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "ObjectsInFrame"
+        case 1L => "PrimitivesInFrame"
+        case 2L => "DrawCallsInFrame"
+        case 3L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Viewport.RenderInfoType`. */
+  opaque type RenderInfoType <: Long = Long
+
+  object RenderInfoType {
+    final val Visible: RenderInfoType = 0L.asInstanceOf[RenderInfoType]
+    final val Shadow: RenderInfoType = 1L.asInstanceOf[RenderInfoType]
+    final val Canvas: RenderInfoType = 2L.asInstanceOf[RenderInfoType]
+    final val Max: RenderInfoType = 3L.asInstanceOf[RenderInfoType]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): RenderInfoType = value.asInstanceOf[RenderInfoType]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[RenderInfoType] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[RenderInfoType]]
+
+    extension (self: RenderInfoType)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Visible"
+        case 1L => "Shadow"
+        case 2L => "Canvas"
+        case 3L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Viewport.DebugDraw`. */
+  opaque type DebugDraw <: Long = Long
+
+  object DebugDraw {
+    final val Disabled: DebugDraw = 0L.asInstanceOf[DebugDraw]
+    final val Unshaded: DebugDraw = 1L.asInstanceOf[DebugDraw]
+    final val Lighting: DebugDraw = 2L.asInstanceOf[DebugDraw]
+    final val Overdraw: DebugDraw = 3L.asInstanceOf[DebugDraw]
+    final val Wireframe: DebugDraw = 4L.asInstanceOf[DebugDraw]
+    final val NormalBuffer: DebugDraw = 5L.asInstanceOf[DebugDraw]
+    final val VoxelGiAlbedo: DebugDraw = 6L.asInstanceOf[DebugDraw]
+    final val VoxelGiLighting: DebugDraw = 7L.asInstanceOf[DebugDraw]
+    final val VoxelGiEmission: DebugDraw = 8L.asInstanceOf[DebugDraw]
+    final val ShadowAtlas: DebugDraw = 9L.asInstanceOf[DebugDraw]
+    final val DirectionalShadowAtlas: DebugDraw = 10L.asInstanceOf[DebugDraw]
+    final val SceneLuminance: DebugDraw = 11L.asInstanceOf[DebugDraw]
+    final val Ssao: DebugDraw = 12L.asInstanceOf[DebugDraw]
+    final val Ssil: DebugDraw = 13L.asInstanceOf[DebugDraw]
+    final val PssmSplits: DebugDraw = 14L.asInstanceOf[DebugDraw]
+    final val DecalAtlas: DebugDraw = 15L.asInstanceOf[DebugDraw]
+    final val Sdfgi: DebugDraw = 16L.asInstanceOf[DebugDraw]
+    final val SdfgiProbes: DebugDraw = 17L.asInstanceOf[DebugDraw]
+    final val GiBuffer: DebugDraw = 18L.asInstanceOf[DebugDraw]
+    final val DisableLod: DebugDraw = 19L.asInstanceOf[DebugDraw]
+    final val ClusterOmniLights: DebugDraw = 20L.asInstanceOf[DebugDraw]
+    final val ClusterSpotLights: DebugDraw = 21L.asInstanceOf[DebugDraw]
+    final val ClusterDecals: DebugDraw = 22L.asInstanceOf[DebugDraw]
+    final val ClusterReflectionProbes: DebugDraw = 23L.asInstanceOf[DebugDraw]
+    final val Occluders: DebugDraw = 24L.asInstanceOf[DebugDraw]
+    final val MotionVectors: DebugDraw = 25L.asInstanceOf[DebugDraw]
+    final val InternalBuffer: DebugDraw = 26L.asInstanceOf[DebugDraw]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DebugDraw = value.asInstanceOf[DebugDraw]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DebugDraw] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 13L, 14L, 15L, 16L, 17L, 18L, 19L, 20L, 21L, 22L, 23L, 24L, 25L, 26L).asInstanceOf[scala.IArray[DebugDraw]]
+
+    extension (self: DebugDraw)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "Unshaded"
+        case 2L => "Lighting"
+        case 3L => "Overdraw"
+        case 4L => "Wireframe"
+        case 5L => "NormalBuffer"
+        case 6L => "VoxelGiAlbedo"
+        case 7L => "VoxelGiLighting"
+        case 8L => "VoxelGiEmission"
+        case 9L => "ShadowAtlas"
+        case 10L => "DirectionalShadowAtlas"
+        case 11L => "SceneLuminance"
+        case 12L => "Ssao"
+        case 13L => "Ssil"
+        case 14L => "PssmSplits"
+        case 15L => "DecalAtlas"
+        case 16L => "Sdfgi"
+        case 17L => "SdfgiProbes"
+        case 18L => "GiBuffer"
+        case 19L => "DisableLod"
+        case 20L => "ClusterOmniLights"
+        case 21L => "ClusterSpotLights"
+        case 22L => "ClusterDecals"
+        case 23L => "ClusterReflectionProbes"
+        case 24L => "Occluders"
+        case 25L => "MotionVectors"
+        case 26L => "InternalBuffer"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Viewport.DefaultCanvasItemTextureFilter`. */
+  opaque type DefaultCanvasItemTextureFilter <: Long = Long
+
+  object DefaultCanvasItemTextureFilter {
+    final val Nearest: DefaultCanvasItemTextureFilter = 0L.asInstanceOf[DefaultCanvasItemTextureFilter]
+    final val Linear: DefaultCanvasItemTextureFilter = 1L.asInstanceOf[DefaultCanvasItemTextureFilter]
+    final val LinearWithMipmaps: DefaultCanvasItemTextureFilter = 2L.asInstanceOf[DefaultCanvasItemTextureFilter]
+    final val NearestWithMipmaps: DefaultCanvasItemTextureFilter = 3L.asInstanceOf[DefaultCanvasItemTextureFilter]
+    final val Max: DefaultCanvasItemTextureFilter = 4L.asInstanceOf[DefaultCanvasItemTextureFilter]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DefaultCanvasItemTextureFilter = value.asInstanceOf[DefaultCanvasItemTextureFilter]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DefaultCanvasItemTextureFilter] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[DefaultCanvasItemTextureFilter]]
+
+    extension (self: DefaultCanvasItemTextureFilter)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Nearest"
+        case 1L => "Linear"
+        case 2L => "LinearWithMipmaps"
+        case 3L => "NearestWithMipmaps"
+        case 4L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Viewport.DefaultCanvasItemTextureRepeat`. */
+  opaque type DefaultCanvasItemTextureRepeat <: Long = Long
+
+  object DefaultCanvasItemTextureRepeat {
+    final val Disabled: DefaultCanvasItemTextureRepeat = 0L.asInstanceOf[DefaultCanvasItemTextureRepeat]
+    final val Enabled: DefaultCanvasItemTextureRepeat = 1L.asInstanceOf[DefaultCanvasItemTextureRepeat]
+    final val Mirror: DefaultCanvasItemTextureRepeat = 2L.asInstanceOf[DefaultCanvasItemTextureRepeat]
+    final val Max: DefaultCanvasItemTextureRepeat = 3L.asInstanceOf[DefaultCanvasItemTextureRepeat]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DefaultCanvasItemTextureRepeat = value.asInstanceOf[DefaultCanvasItemTextureRepeat]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DefaultCanvasItemTextureRepeat] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[DefaultCanvasItemTextureRepeat]]
+
+    extension (self: DefaultCanvasItemTextureRepeat)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "Enabled"
+        case 2L => "Mirror"
+        case 3L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Viewport.SDFOversize`. */
+  opaque type SDFOversize <: Long = Long
+
+  object SDFOversize {
+    final val Oversize100Percent: SDFOversize = 0L.asInstanceOf[SDFOversize]
+    final val Oversize120Percent: SDFOversize = 1L.asInstanceOf[SDFOversize]
+    final val Oversize150Percent: SDFOversize = 2L.asInstanceOf[SDFOversize]
+    final val Oversize200Percent: SDFOversize = 3L.asInstanceOf[SDFOversize]
+    final val Max: SDFOversize = 4L.asInstanceOf[SDFOversize]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): SDFOversize = value.asInstanceOf[SDFOversize]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[SDFOversize] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[SDFOversize]]
+
+    extension (self: SDFOversize)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Oversize100Percent"
+        case 1L => "Oversize120Percent"
+        case 2L => "Oversize150Percent"
+        case 3L => "Oversize200Percent"
+        case 4L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Viewport.SDFScale`. */
+  opaque type SDFScale <: Long = Long
+
+  object SDFScale {
+    final val Scale100Percent: SDFScale = 0L.asInstanceOf[SDFScale]
+    final val Scale50Percent: SDFScale = 1L.asInstanceOf[SDFScale]
+    final val Scale25Percent: SDFScale = 2L.asInstanceOf[SDFScale]
+    final val Max: SDFScale = 3L.asInstanceOf[SDFScale]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): SDFScale = value.asInstanceOf[SDFScale]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[SDFScale] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[SDFScale]]
+
+    extension (self: SDFScale)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Scale100Percent"
+        case 1L => "Scale50Percent"
+        case 2L => "Scale25Percent"
+        case 3L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Viewport.VRSMode`. */
+  opaque type VRSMode <: Long = Long
+
+  object VRSMode {
+    final val Disabled: VRSMode = 0L.asInstanceOf[VRSMode]
+    final val Texture: VRSMode = 1L.asInstanceOf[VRSMode]
+    final val Xr: VRSMode = 2L.asInstanceOf[VRSMode]
+    final val Max: VRSMode = 3L.asInstanceOf[VRSMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): VRSMode = value.asInstanceOf[VRSMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[VRSMode] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[VRSMode]]
+
+    extension (self: VRSMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "Texture"
+        case 2L => "Xr"
+        case 3L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Viewport.VRSUpdateMode`. */
+  opaque type VRSUpdateMode <: Long = Long
+
+  object VRSUpdateMode {
+    final val Disabled: VRSUpdateMode = 0L.asInstanceOf[VRSUpdateMode]
+    final val Once: VRSUpdateMode = 1L.asInstanceOf[VRSUpdateMode]
+    final val Always: VRSUpdateMode = 2L.asInstanceOf[VRSUpdateMode]
+    final val Max: VRSUpdateMode = 3L.asInstanceOf[VRSUpdateMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): VRSUpdateMode = value.asInstanceOf[VRSUpdateMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[VRSUpdateMode] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[VRSUpdateMode]]
+
+    extension (self: VRSUpdateMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "Once"
+        case 2L => "Always"
+        case 3L => "Max"
+        case other => other.toString
+      }
+  }
 }

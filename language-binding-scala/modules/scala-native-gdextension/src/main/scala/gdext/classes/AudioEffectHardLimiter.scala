@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class AudioEffectHardLimiter extends AudioEffect {
   }
 
   /** AudioEffectHardLimiter.set_pre_gain_db */
-  final def setPreGainDb(p_pre_gain: Double): Unit = {
+  final def setPreGainDb(pPreGain: Double): Unit = {
     if (gdext.classes.AudioEffectHardLimiter.mb_set_pre_gain_db == null) gdext.classes.AudioEffectHardLimiter.mb_set_pre_gain_db = MethodBind.get("AudioEffectHardLimiter", "set_pre_gain_db", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AudioEffectHardLimiter.mb_set_pre_gain_db, livePtr, p_pre_gain)
+    Ptrcall.callVoid1(gdext.classes.AudioEffectHardLimiter.mb_set_pre_gain_db, livePtr, pPreGain)
   }
 
   /** AudioEffectHardLimiter.get_pre_gain_db */
@@ -35,9 +36,9 @@ abstract class AudioEffectHardLimiter extends AudioEffect {
   }
 
   /** AudioEffectHardLimiter.set_release */
-  final def setRelease(p_release: Double): Unit = {
+  final def setRelease(pRelease: Double): Unit = {
     if (gdext.classes.AudioEffectHardLimiter.mb_set_release == null) gdext.classes.AudioEffectHardLimiter.mb_set_release = MethodBind.get("AudioEffectHardLimiter", "set_release", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AudioEffectHardLimiter.mb_set_release, livePtr, p_release)
+    Ptrcall.callVoid1(gdext.classes.AudioEffectHardLimiter.mb_set_release, livePtr, pRelease)
   }
 
   /** AudioEffectHardLimiter.get_release */

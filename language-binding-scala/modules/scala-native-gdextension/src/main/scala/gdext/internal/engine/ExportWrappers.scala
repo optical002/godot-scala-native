@@ -83,7 +83,7 @@ final class Tscn[T <: GodotScriptClass] private[engine] (val raw: PackedScene)(u
   def instantiate(): T =
     if (raw == null) null.asInstanceOf[T]
     else {
-      val root = raw.instantiate(0L)
+      val root = raw.instantiate()
       if (root == null) null.asInstanceOf[T] else root.cast[T]
     }
 
@@ -96,7 +96,7 @@ final class Tscn[T <: GodotScriptClass] private[engine] (val raw: PackedScene)(u
     val child = instantiate()
     if (child != null && parent != null)
       child match {
-        case n: gdext.classes.Node => parent.addChild(n, false, 0L)
+        case n: gdext.classes.Node => parent.addChild(n)
         case _                     => ()
       }
     child

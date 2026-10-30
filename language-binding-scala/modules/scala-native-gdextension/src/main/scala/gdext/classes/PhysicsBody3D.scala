@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,15 +12,15 @@ abstract class PhysicsBody3D extends CollisionObject3D {
   override def godotClassName: String = "PhysicsBody3D"
 
   /** PhysicsBody3D.move_and_collide. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def moveAndCollide(motion: gdext.builtin.Vector3, test_only: Boolean, safe_margin: Double, recovery_as_collision: Boolean, max_collisions: Long): KinematicCollision3D = {
+  final def moveAndCollide(motion: gdext.builtin.Vector3, testOnly: Boolean = false, safeMargin: Double = 0.001, recoveryAsCollision: Boolean = false, maxCollisions: Long = 1L): KinematicCollision3D = {
     if (gdext.classes.PhysicsBody3D.mb_move_and_collide == null) gdext.classes.PhysicsBody3D.mb_move_and_collide = MethodBind.get("PhysicsBody3D", "move_and_collide", 3208792678L)
-    Wrappers.owned[KinematicCollision3D](Ptrcall.call5[gdext.builtin.Vector3, Boolean, Double, Boolean, Long, Long](gdext.classes.PhysicsBody3D.mb_move_and_collide, livePtr, motion, test_only, safe_margin, recovery_as_collision, max_collisions))
+    Wrappers.owned[KinematicCollision3D](Ptrcall.call5[gdext.builtin.Vector3, Boolean, Double, Boolean, Long, Long](gdext.classes.PhysicsBody3D.mb_move_and_collide, livePtr, motion, testOnly, safeMargin, recoveryAsCollision, maxCollisions))
   }
 
   /** PhysicsBody3D.test_move */
-  final def testMove(from: gdext.builtin.Transform3D, motion: gdext.builtin.Vector3, collision: KinematicCollision3D, safe_margin: Double, recovery_as_collision: Boolean, max_collisions: Long): Boolean = {
+  final def testMove(from: gdext.builtin.Transform3D, motion: gdext.builtin.Vector3, collision: KinematicCollision3D = null, safeMargin: Double = 0.001, recoveryAsCollision: Boolean = false, maxCollisions: Long = 1L): Boolean = {
     if (gdext.classes.PhysicsBody3D.mb_test_move == null) gdext.classes.PhysicsBody3D.mb_test_move = MethodBind.get("PhysicsBody3D", "test_move", 2481691619L)
-    Ptrcall.call6[gdext.builtin.Transform3D, gdext.builtin.Vector3, GodotObject, Double, Boolean, Long, Boolean](gdext.classes.PhysicsBody3D.mb_test_move, livePtr, from, motion, Wrappers.handle(collision), safe_margin, recovery_as_collision, max_collisions)
+    Ptrcall.call6[gdext.builtin.Transform3D, gdext.builtin.Vector3, GodotObject, Double, Boolean, Long, Boolean](gdext.classes.PhysicsBody3D.mb_test_move, livePtr, from, motion, Wrappers.handle(collision), safeMargin, recoveryAsCollision, maxCollisions)
   }
 
   /** PhysicsBody3D.get_gravity */
@@ -29,13 +30,13 @@ abstract class PhysicsBody3D extends CollisionObject3D {
   }
 
   /** PhysicsBody3D.set_axis_lock */
-  final def setAxisLock(axis: Long, lock: Boolean): Unit = {
+  final def setAxisLock(axis: gdext.classes.PhysicsServer3D.BodyAxis, lock: Boolean): Unit = {
     if (gdext.classes.PhysicsBody3D.mb_set_axis_lock == null) gdext.classes.PhysicsBody3D.mb_set_axis_lock = MethodBind.get("PhysicsBody3D", "set_axis_lock", 1787895195L)
     Ptrcall.callVoid2(gdext.classes.PhysicsBody3D.mb_set_axis_lock, livePtr, axis, lock)
   }
 
   /** PhysicsBody3D.get_axis_lock */
-  final def getAxisLock(axis: Long): Boolean = {
+  final def getAxisLock(axis: gdext.classes.PhysicsServer3D.BodyAxis): Boolean = {
     if (gdext.classes.PhysicsBody3D.mb_get_axis_lock == null) gdext.classes.PhysicsBody3D.mb_get_axis_lock = MethodBind.get("PhysicsBody3D", "get_axis_lock", 2264617709L)
     Ptrcall.call1[Long, Boolean](gdext.classes.PhysicsBody3D.mb_get_axis_lock, livePtr, axis)
   }

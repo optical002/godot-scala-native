@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -29,9 +30,9 @@ abstract class EditorExportPlugin extends RefCounted {
   }
 
   /** EditorExportPlugin.add_apple_embedded_platform_plist_content */
-  final def addAppleEmbeddedPlatformPlistContent(plist_content: String): Unit = {
+  final def addAppleEmbeddedPlatformPlistContent(plistContent: String): Unit = {
     if (gdext.classes.EditorExportPlugin.mb_add_apple_embedded_platform_plist_content == null) gdext.classes.EditorExportPlugin.mb_add_apple_embedded_platform_plist_content = MethodBind.get("EditorExportPlugin", "add_apple_embedded_platform_plist_content", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.EditorExportPlugin.mb_add_apple_embedded_platform_plist_content, livePtr, plist_content)
+    Ptrcall.callVoid1(gdext.classes.EditorExportPlugin.mb_add_apple_embedded_platform_plist_content, livePtr, plistContent)
   }
 
   /** EditorExportPlugin.add_apple_embedded_platform_linker_flags */
@@ -71,9 +72,9 @@ abstract class EditorExportPlugin extends RefCounted {
   }
 
   /** EditorExportPlugin.add_ios_plist_content */
-  final def addIosPlistContent(plist_content: String): Unit = {
+  final def addIosPlistContent(plistContent: String): Unit = {
     if (gdext.classes.EditorExportPlugin.mb_add_ios_plist_content == null) gdext.classes.EditorExportPlugin.mb_add_ios_plist_content = MethodBind.get("EditorExportPlugin", "add_ios_plist_content", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.EditorExportPlugin.mb_add_ios_plist_content, livePtr, plist_content)
+    Ptrcall.callVoid1(gdext.classes.EditorExportPlugin.mb_add_ios_plist_content, livePtr, plistContent)
   }
 
   /** EditorExportPlugin.add_ios_linker_flags */

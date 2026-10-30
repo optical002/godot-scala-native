@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class PathFollow2D extends Node2D {
   }
 
   /** PathFollow2D.set_h_offset */
-  final def setHOffset(h_offset: Double): Unit = {
+  final def setHOffset(hOffset: Double): Unit = {
     if (gdext.classes.PathFollow2D.mb_set_h_offset == null) gdext.classes.PathFollow2D.mb_set_h_offset = MethodBind.get("PathFollow2D", "set_h_offset", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.PathFollow2D.mb_set_h_offset, livePtr, h_offset)
+    Ptrcall.callVoid1(gdext.classes.PathFollow2D.mb_set_h_offset, livePtr, hOffset)
   }
 
   /** PathFollow2D.get_h_offset */
@@ -35,9 +36,9 @@ abstract class PathFollow2D extends Node2D {
   }
 
   /** PathFollow2D.set_v_offset */
-  final def setVOffset(v_offset: Double): Unit = {
+  final def setVOffset(vOffset: Double): Unit = {
     if (gdext.classes.PathFollow2D.mb_set_v_offset == null) gdext.classes.PathFollow2D.mb_set_v_offset = MethodBind.get("PathFollow2D", "set_v_offset", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.PathFollow2D.mb_set_v_offset, livePtr, v_offset)
+    Ptrcall.callVoid1(gdext.classes.PathFollow2D.mb_set_v_offset, livePtr, vOffset)
   }
 
   /** PathFollow2D.get_v_offset */

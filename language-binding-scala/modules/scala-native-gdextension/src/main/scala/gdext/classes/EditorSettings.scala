@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -53,9 +54,9 @@ abstract class EditorSettings extends Resource {
   }
 
   /** EditorSettings.check_changed_settings_in_group */
-  final def checkChangedSettingsInGroup(setting_prefix: String): Boolean = {
+  final def checkChangedSettingsInGroup(settingPrefix: String): Boolean = {
     if (gdext.classes.EditorSettings.mb_check_changed_settings_in_group == null) gdext.classes.EditorSettings.mb_check_changed_settings_in_group = MethodBind.get("EditorSettings", "check_changed_settings_in_group", 3927539163L)
-    Ptrcall.call1[String, Boolean](gdext.classes.EditorSettings.mb_check_changed_settings_in_group, livePtr, setting_prefix)
+    Ptrcall.call1[String, Boolean](gdext.classes.EditorSettings.mb_check_changed_settings_in_group, livePtr, settingPrefix)
   }
 
   /** EditorSettings.mark_setting_changed */

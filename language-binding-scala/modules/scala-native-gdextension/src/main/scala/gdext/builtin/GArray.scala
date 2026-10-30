@@ -1,5 +1,6 @@
 package gdext.builtin
 
+import gdext.internal.StringNames
 import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
 import scala.scalanative.libc.string.memset

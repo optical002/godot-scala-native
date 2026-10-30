@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,9 +18,9 @@ abstract class ResourceUID extends Object {
   }
 
   /** ResourceUID.text_to_id */
-  final def textToId(text_id: String): Long = {
+  final def textToId(textId: String): Long = {
     if (gdext.classes.ResourceUID.mb_text_to_id == null) gdext.classes.ResourceUID.mb_text_to_id = MethodBind.get("ResourceUID", "text_to_id", 1321353865L)
-    Ptrcall.call1[String, Long](gdext.classes.ResourceUID.mb_text_to_id, livePtr, text_id)
+    Ptrcall.call1[String, Long](gdext.classes.ResourceUID.mb_text_to_id, livePtr, textId)
   }
 
   /** ResourceUID.create_id */
@@ -90,6 +91,42 @@ object ResourceUID {
     instance
   }
 
+  /** Forwards to [[singleton]]: ResourceUID.id_to_text */
+  final def idToText(id: Long): String =
+    singleton.idToText(id)
+
+  /** Forwards to [[singleton]]: ResourceUID.text_to_id */
+  final def textToId(textId: String): Long =
+    singleton.textToId(textId)
+
+  /** Forwards to [[singleton]]: ResourceUID.create_id */
+  final def createId(): Long =
+    singleton.createId()
+
+  /** Forwards to [[singleton]]: ResourceUID.create_id_for_path */
+  final def createIdForPath(path: String): Long =
+    singleton.createIdForPath(path)
+
+  /** Forwards to [[singleton]]: ResourceUID.has_id */
+  final def hasId(id: Long): Boolean =
+    singleton.hasId(id)
+
+  /** Forwards to [[singleton]]: ResourceUID.add_id */
+  final def addId(id: Long, path: String): Unit =
+    singleton.addId(id, path)
+
+  /** Forwards to [[singleton]]: ResourceUID.set_id */
+  final def setId(id: Long, path: String): Unit =
+    singleton.setId(id, path)
+
+  /** Forwards to [[singleton]]: ResourceUID.get_id_path */
+  final def getIdPath(id: Long): String =
+    singleton.getIdPath(id)
+
+  /** Forwards to [[singleton]]: ResourceUID.remove_id */
+  final def removeId(id: Long): Unit =
+    singleton.removeId(id)
+
   /** ResourceUID.uid_to_path */
   final def uidToPath(uid: String): String = {
     if (gdext.classes.ResourceUID.mb_uid_to_path == null) gdext.classes.ResourceUID.mb_uid_to_path = MethodBind.get("ResourceUID", "uid_to_path", 1703090593L)
@@ -103,8 +140,8 @@ object ResourceUID {
   }
 
   /** ResourceUID.ensure_path */
-  final def ensurePath(path_or_uid: String): String = {
+  final def ensurePath(pathOrUid: String): String = {
     if (gdext.classes.ResourceUID.mb_ensure_path == null) gdext.classes.ResourceUID.mb_ensure_path = MethodBind.get("ResourceUID", "ensure_path", 1703090593L)
-    Ptrcall.call1[String, String](gdext.classes.ResourceUID.mb_ensure_path, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], path_or_uid)
+    Ptrcall.call1[String, String](gdext.classes.ResourceUID.mb_ensure_path, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], pathOrUid)
   }
 }

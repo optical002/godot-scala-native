@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -65,9 +66,9 @@ abstract class CanvasItem extends Node {
   }
 
   /** CanvasItem.set_light_mask */
-  final def setLightMask(light_mask: Long): Unit = {
+  final def setLightMask(lightMask: Long): Unit = {
     if (gdext.classes.CanvasItem.mb_set_light_mask == null) gdext.classes.CanvasItem.mb_set_light_mask = MethodBind.get("CanvasItem", "set_light_mask", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.CanvasItem.mb_set_light_mask, livePtr, light_mask)
+    Ptrcall.callVoid1(gdext.classes.CanvasItem.mb_set_light_mask, livePtr, lightMask)
   }
 
   /** CanvasItem.get_light_mask */
@@ -89,9 +90,9 @@ abstract class CanvasItem extends Node {
   }
 
   /** CanvasItem.set_self_modulate */
-  final def setSelfModulate(self_modulate: gdext.builtin.Color): Unit = {
+  final def setSelfModulate(selfModulate: gdext.builtin.Color): Unit = {
     if (gdext.classes.CanvasItem.mb_set_self_modulate == null) gdext.classes.CanvasItem.mb_set_self_modulate = MethodBind.get("CanvasItem", "set_self_modulate", 2920490490L)
-    Ptrcall.callVoid1(gdext.classes.CanvasItem.mb_set_self_modulate, livePtr, self_modulate)
+    Ptrcall.callVoid1(gdext.classes.CanvasItem.mb_set_self_modulate, livePtr, selfModulate)
   }
 
   /** CanvasItem.get_self_modulate */
@@ -101,9 +102,9 @@ abstract class CanvasItem extends Node {
   }
 
   /** CanvasItem.set_z_index */
-  final def setZIndex(z_index: Long): Unit = {
+  final def setZIndex(zIndex: Long): Unit = {
     if (gdext.classes.CanvasItem.mb_set_z_index == null) gdext.classes.CanvasItem.mb_set_z_index = MethodBind.get("CanvasItem", "set_z_index", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.CanvasItem.mb_set_z_index, livePtr, z_index)
+    Ptrcall.callVoid1(gdext.classes.CanvasItem.mb_set_z_index, livePtr, zIndex)
   }
 
   /** CanvasItem.get_z_index */
@@ -149,61 +150,61 @@ abstract class CanvasItem extends Node {
   }
 
   /** CanvasItem.draw_line */
-  final def drawLine(from: gdext.builtin.Vector2, to: gdext.builtin.Vector2, color: gdext.builtin.Color, width: Double, antialiased: Boolean): Unit = {
+  final def drawLine(from: gdext.builtin.Vector2, to: gdext.builtin.Vector2, color: gdext.builtin.Color, width: Double = -1.0, antialiased: Boolean = false): Unit = {
     if (gdext.classes.CanvasItem.mb_draw_line == null) gdext.classes.CanvasItem.mb_draw_line = MethodBind.get("CanvasItem", "draw_line", 1562330099L)
     Ptrcall.callVoid5(gdext.classes.CanvasItem.mb_draw_line, livePtr, from, to, color, width, antialiased)
   }
 
   /** CanvasItem.draw_rect */
-  final def drawRect(rect: gdext.builtin.Rect2, color: gdext.builtin.Color, filled: Boolean, width: Double, antialiased: Boolean): Unit = {
+  final def drawRect(rect: gdext.builtin.Rect2, color: gdext.builtin.Color, filled: Boolean = true, width: Double = -1.0, antialiased: Boolean = false): Unit = {
     if (gdext.classes.CanvasItem.mb_draw_rect == null) gdext.classes.CanvasItem.mb_draw_rect = MethodBind.get("CanvasItem", "draw_rect", 2773573813L)
     Ptrcall.callVoid5(gdext.classes.CanvasItem.mb_draw_rect, livePtr, rect, color, filled, width, antialiased)
   }
 
   /** CanvasItem.draw_circle */
-  final def drawCircle(position: gdext.builtin.Vector2, radius: Double, color: gdext.builtin.Color, filled: Boolean, width: Double, antialiased: Boolean): Unit = {
+  final def drawCircle(position: gdext.builtin.Vector2, radius: Double, color: gdext.builtin.Color, filled: Boolean = true, width: Double = -1.0, antialiased: Boolean = false): Unit = {
     if (gdext.classes.CanvasItem.mb_draw_circle == null) gdext.classes.CanvasItem.mb_draw_circle = MethodBind.get("CanvasItem", "draw_circle", 3153026596L)
     Ptrcall.callVoid6(gdext.classes.CanvasItem.mb_draw_circle, livePtr, position, radius, color, filled, width, antialiased)
   }
 
   /** CanvasItem.draw_texture */
-  final def drawTexture(texture: Texture2D, position: gdext.builtin.Vector2, modulate: gdext.builtin.Color): Unit = {
+  final def drawTexture(texture: Texture2D, position: gdext.builtin.Vector2, modulate: gdext.builtin.Color = gdext.builtin.Color(1f, 1f, 1f, 1f)): Unit = {
     if (gdext.classes.CanvasItem.mb_draw_texture == null) gdext.classes.CanvasItem.mb_draw_texture = MethodBind.get("CanvasItem", "draw_texture", 520200117L)
     Ptrcall.callVoid3(gdext.classes.CanvasItem.mb_draw_texture, livePtr, Wrappers.handle(texture), position, modulate)
   }
 
   /** CanvasItem.draw_texture_rect */
-  final def drawTextureRect(texture: Texture2D, rect: gdext.builtin.Rect2, tile: Boolean, modulate: gdext.builtin.Color, transpose: Boolean): Unit = {
+  final def drawTextureRect(texture: Texture2D, rect: gdext.builtin.Rect2, tile: Boolean, modulate: gdext.builtin.Color = gdext.builtin.Color(1f, 1f, 1f, 1f), transpose: Boolean = false): Unit = {
     if (gdext.classes.CanvasItem.mb_draw_texture_rect == null) gdext.classes.CanvasItem.mb_draw_texture_rect = MethodBind.get("CanvasItem", "draw_texture_rect", 3832805018L)
     Ptrcall.callVoid5(gdext.classes.CanvasItem.mb_draw_texture_rect, livePtr, Wrappers.handle(texture), rect, tile, modulate, transpose)
   }
 
   /** CanvasItem.draw_texture_rect_region */
-  final def drawTextureRectRegion(texture: Texture2D, rect: gdext.builtin.Rect2, src_rect: gdext.builtin.Rect2, modulate: gdext.builtin.Color, transpose: Boolean, clip_uv: Boolean): Unit = {
+  final def drawTextureRectRegion(texture: Texture2D, rect: gdext.builtin.Rect2, srcRect: gdext.builtin.Rect2, modulate: gdext.builtin.Color = gdext.builtin.Color(1f, 1f, 1f, 1f), transpose: Boolean = false, clipUv: Boolean = true): Unit = {
     if (gdext.classes.CanvasItem.mb_draw_texture_rect_region == null) gdext.classes.CanvasItem.mb_draw_texture_rect_region = MethodBind.get("CanvasItem", "draw_texture_rect_region", 3883821411L)
-    Ptrcall.callVoid6(gdext.classes.CanvasItem.mb_draw_texture_rect_region, livePtr, Wrappers.handle(texture), rect, src_rect, modulate, transpose, clip_uv)
+    Ptrcall.callVoid6(gdext.classes.CanvasItem.mb_draw_texture_rect_region, livePtr, Wrappers.handle(texture), rect, srcRect, modulate, transpose, clipUv)
   }
 
   /** CanvasItem.draw_lcd_texture_rect_region */
-  final def drawLcdTextureRectRegion(texture: Texture2D, rect: gdext.builtin.Rect2, src_rect: gdext.builtin.Rect2, modulate: gdext.builtin.Color): Unit = {
+  final def drawLcdTextureRectRegion(texture: Texture2D, rect: gdext.builtin.Rect2, srcRect: gdext.builtin.Rect2, modulate: gdext.builtin.Color = gdext.builtin.Color(1f, 1f, 1f, 1f)): Unit = {
     if (gdext.classes.CanvasItem.mb_draw_lcd_texture_rect_region == null) gdext.classes.CanvasItem.mb_draw_lcd_texture_rect_region = MethodBind.get("CanvasItem", "draw_lcd_texture_rect_region", 3212350954L)
-    Ptrcall.callVoid4(gdext.classes.CanvasItem.mb_draw_lcd_texture_rect_region, livePtr, Wrappers.handle(texture), rect, src_rect, modulate)
+    Ptrcall.callVoid4(gdext.classes.CanvasItem.mb_draw_lcd_texture_rect_region, livePtr, Wrappers.handle(texture), rect, srcRect, modulate)
   }
 
   /** CanvasItem.draw_style_box */
-  final def drawStyleBox(style_box: StyleBox, rect: gdext.builtin.Rect2): Unit = {
+  final def drawStyleBox(styleBox: StyleBox, rect: gdext.builtin.Rect2): Unit = {
     if (gdext.classes.CanvasItem.mb_draw_style_box == null) gdext.classes.CanvasItem.mb_draw_style_box = MethodBind.get("CanvasItem", "draw_style_box", 388176283L)
-    Ptrcall.callVoid2(gdext.classes.CanvasItem.mb_draw_style_box, livePtr, Wrappers.handle(style_box), rect)
+    Ptrcall.callVoid2(gdext.classes.CanvasItem.mb_draw_style_box, livePtr, Wrappers.handle(styleBox), rect)
   }
 
   /** CanvasItem.draw_char */
-  final def drawChar(font: Font, pos: gdext.builtin.Vector2, char: String, font_size: Long, modulate: gdext.builtin.Color, oversampling: Double): Unit = {
+  final def drawChar(font: Font, pos: gdext.builtin.Vector2, char: String, fontSize: Long = 16L, modulate: gdext.builtin.Color = gdext.builtin.Color(1f, 1f, 1f, 1f), oversampling: Double = 0.0): Unit = {
     if (gdext.classes.CanvasItem.mb_draw_char == null) gdext.classes.CanvasItem.mb_draw_char = MethodBind.get("CanvasItem", "draw_char", 1336210142L)
-    Ptrcall.callVoid6(gdext.classes.CanvasItem.mb_draw_char, livePtr, Wrappers.handle(font), pos, char, font_size, modulate, oversampling)
+    Ptrcall.callVoid6(gdext.classes.CanvasItem.mb_draw_char, livePtr, Wrappers.handle(font), pos, char, fontSize, modulate, oversampling)
   }
 
   /** CanvasItem.draw_mesh */
-  final def drawMesh(mesh: Mesh, texture: Texture2D, transform: gdext.builtin.Transform2D, modulate: gdext.builtin.Color): Unit = {
+  final def drawMesh(mesh: Mesh, texture: Texture2D, transform: gdext.builtin.Transform2D, modulate: gdext.builtin.Color = gdext.builtin.Color(1f, 1f, 1f, 1f)): Unit = {
     if (gdext.classes.CanvasItem.mb_draw_mesh == null) gdext.classes.CanvasItem.mb_draw_mesh = MethodBind.get("CanvasItem", "draw_mesh", 153818295L)
     Ptrcall.callVoid4(gdext.classes.CanvasItem.mb_draw_mesh, livePtr, Wrappers.handle(mesh), Wrappers.handle(texture), transform, modulate)
   }
@@ -215,7 +216,7 @@ abstract class CanvasItem extends Node {
   }
 
   /** CanvasItem.draw_set_transform */
-  final def drawSetTransform(position: gdext.builtin.Vector2, rotation: Double, scale: gdext.builtin.Vector2): Unit = {
+  final def drawSetTransform(position: gdext.builtin.Vector2, rotation: Double = 0.0, scale: gdext.builtin.Vector2 = gdext.builtin.Vector2(1f, 1f)): Unit = {
     if (gdext.classes.CanvasItem.mb_draw_set_transform == null) gdext.classes.CanvasItem.mb_draw_set_transform = MethodBind.get("CanvasItem", "draw_set_transform", 288975085L)
     Ptrcall.callVoid3(gdext.classes.CanvasItem.mb_draw_set_transform, livePtr, position, rotation, scale)
   }
@@ -227,9 +228,9 @@ abstract class CanvasItem extends Node {
   }
 
   /** CanvasItem.draw_animation_slice */
-  final def drawAnimationSlice(animation_length: Double, slice_begin: Double, slice_end: Double, offset: Double): Unit = {
+  final def drawAnimationSlice(animationLength: Double, sliceBegin: Double, sliceEnd: Double, offset: Double = 0.0): Unit = {
     if (gdext.classes.CanvasItem.mb_draw_animation_slice == null) gdext.classes.CanvasItem.mb_draw_animation_slice = MethodBind.get("CanvasItem", "draw_animation_slice", 3112831842L)
-    Ptrcall.callVoid4(gdext.classes.CanvasItem.mb_draw_animation_slice, livePtr, animation_length, slice_begin, slice_end, offset)
+    Ptrcall.callVoid4(gdext.classes.CanvasItem.mb_draw_animation_slice, livePtr, animationLength, sliceBegin, sliceEnd, offset)
   }
 
   /** CanvasItem.draw_end_animation */
@@ -359,9 +360,9 @@ abstract class CanvasItem extends Node {
   }
 
   /** CanvasItem.make_canvas_position_local */
-  final def makeCanvasPositionLocal(viewport_point: gdext.builtin.Vector2): gdext.builtin.Vector2 = {
+  final def makeCanvasPositionLocal(viewportPoint: gdext.builtin.Vector2): gdext.builtin.Vector2 = {
     if (gdext.classes.CanvasItem.mb_make_canvas_position_local == null) gdext.classes.CanvasItem.mb_make_canvas_position_local = MethodBind.get("CanvasItem", "make_canvas_position_local", 2656412154L)
-    Ptrcall.call1[gdext.builtin.Vector2, gdext.builtin.Vector2](gdext.classes.CanvasItem.mb_make_canvas_position_local, livePtr, viewport_point)
+    Ptrcall.call1[gdext.builtin.Vector2, gdext.builtin.Vector2](gdext.classes.CanvasItem.mb_make_canvas_position_local, livePtr, viewportPoint)
   }
 
   /** CanvasItem.make_input_local. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -395,39 +396,39 @@ abstract class CanvasItem extends Node {
   }
 
   /** CanvasItem.set_texture_filter */
-  final def setTextureFilter(mode: Long): Unit = {
+  final def setTextureFilter(mode: gdext.classes.CanvasItem.TextureFilter): Unit = {
     if (gdext.classes.CanvasItem.mb_set_texture_filter == null) gdext.classes.CanvasItem.mb_set_texture_filter = MethodBind.get("CanvasItem", "set_texture_filter", 1037999706L)
     Ptrcall.callVoid1(gdext.classes.CanvasItem.mb_set_texture_filter, livePtr, mode)
   }
 
   /** CanvasItem.get_texture_filter */
-  final def getTextureFilter(): Long = {
+  final def getTextureFilter(): gdext.classes.CanvasItem.TextureFilter = {
     if (gdext.classes.CanvasItem.mb_get_texture_filter == null) gdext.classes.CanvasItem.mb_get_texture_filter = MethodBind.get("CanvasItem", "get_texture_filter", 121960042L)
-    Ptrcall.call0[Long](gdext.classes.CanvasItem.mb_get_texture_filter, livePtr)
+    gdext.classes.CanvasItem.TextureFilter(Ptrcall.call0[Long](gdext.classes.CanvasItem.mb_get_texture_filter, livePtr))
   }
 
   /** CanvasItem.set_texture_repeat */
-  final def setTextureRepeat(mode: Long): Unit = {
+  final def setTextureRepeat(mode: gdext.classes.CanvasItem.TextureRepeat): Unit = {
     if (gdext.classes.CanvasItem.mb_set_texture_repeat == null) gdext.classes.CanvasItem.mb_set_texture_repeat = MethodBind.get("CanvasItem", "set_texture_repeat", 1716472974L)
     Ptrcall.callVoid1(gdext.classes.CanvasItem.mb_set_texture_repeat, livePtr, mode)
   }
 
   /** CanvasItem.get_texture_repeat */
-  final def getTextureRepeat(): Long = {
+  final def getTextureRepeat(): gdext.classes.CanvasItem.TextureRepeat = {
     if (gdext.classes.CanvasItem.mb_get_texture_repeat == null) gdext.classes.CanvasItem.mb_get_texture_repeat = MethodBind.get("CanvasItem", "get_texture_repeat", 2667158319L)
-    Ptrcall.call0[Long](gdext.classes.CanvasItem.mb_get_texture_repeat, livePtr)
+    gdext.classes.CanvasItem.TextureRepeat(Ptrcall.call0[Long](gdext.classes.CanvasItem.mb_get_texture_repeat, livePtr))
   }
 
   /** CanvasItem.set_clip_children_mode */
-  final def setClipChildrenMode(mode: Long): Unit = {
+  final def setClipChildrenMode(mode: gdext.classes.CanvasItem.ClipChildrenMode): Unit = {
     if (gdext.classes.CanvasItem.mb_set_clip_children_mode == null) gdext.classes.CanvasItem.mb_set_clip_children_mode = MethodBind.get("CanvasItem", "set_clip_children_mode", 1319393776L)
     Ptrcall.callVoid1(gdext.classes.CanvasItem.mb_set_clip_children_mode, livePtr, mode)
   }
 
   /** CanvasItem.get_clip_children_mode */
-  final def getClipChildrenMode(): Long = {
+  final def getClipChildrenMode(): gdext.classes.CanvasItem.ClipChildrenMode = {
     if (gdext.classes.CanvasItem.mb_get_clip_children_mode == null) gdext.classes.CanvasItem.mb_get_clip_children_mode = MethodBind.get("CanvasItem", "get_clip_children_mode", 3581808349L)
-    Ptrcall.call0[Long](gdext.classes.CanvasItem.mb_get_clip_children_mode, livePtr)
+    gdext.classes.CanvasItem.ClipChildrenMode(Ptrcall.call0[Long](gdext.classes.CanvasItem.mb_get_clip_children_mode, livePtr))
   }
 
 }
@@ -503,4 +504,92 @@ object CanvasItem {
   private[classes] var mb_get_texture_repeat: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_clip_children_mode: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_clip_children_mode: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `CanvasItem.TextureFilter`. */
+  opaque type TextureFilter <: Long = Long
+
+  object TextureFilter {
+    final val ParentNode: TextureFilter = 0L.asInstanceOf[TextureFilter]
+    final val Nearest: TextureFilter = 1L.asInstanceOf[TextureFilter]
+    final val Linear: TextureFilter = 2L.asInstanceOf[TextureFilter]
+    final val NearestWithMipmaps: TextureFilter = 3L.asInstanceOf[TextureFilter]
+    final val LinearWithMipmaps: TextureFilter = 4L.asInstanceOf[TextureFilter]
+    final val NearestWithMipmapsAnisotropic: TextureFilter = 5L.asInstanceOf[TextureFilter]
+    final val LinearWithMipmapsAnisotropic: TextureFilter = 6L.asInstanceOf[TextureFilter]
+    final val Max: TextureFilter = 7L.asInstanceOf[TextureFilter]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): TextureFilter = value.asInstanceOf[TextureFilter]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[TextureFilter] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L).asInstanceOf[scala.IArray[TextureFilter]]
+
+    extension (self: TextureFilter)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "ParentNode"
+        case 1L => "Nearest"
+        case 2L => "Linear"
+        case 3L => "NearestWithMipmaps"
+        case 4L => "LinearWithMipmaps"
+        case 5L => "NearestWithMipmapsAnisotropic"
+        case 6L => "LinearWithMipmapsAnisotropic"
+        case 7L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `CanvasItem.TextureRepeat`. */
+  opaque type TextureRepeat <: Long = Long
+
+  object TextureRepeat {
+    final val ParentNode: TextureRepeat = 0L.asInstanceOf[TextureRepeat]
+    final val Disabled: TextureRepeat = 1L.asInstanceOf[TextureRepeat]
+    final val Enabled: TextureRepeat = 2L.asInstanceOf[TextureRepeat]
+    final val Mirror: TextureRepeat = 3L.asInstanceOf[TextureRepeat]
+    final val Max: TextureRepeat = 4L.asInstanceOf[TextureRepeat]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): TextureRepeat = value.asInstanceOf[TextureRepeat]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[TextureRepeat] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[TextureRepeat]]
+
+    extension (self: TextureRepeat)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "ParentNode"
+        case 1L => "Disabled"
+        case 2L => "Enabled"
+        case 3L => "Mirror"
+        case 4L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `CanvasItem.ClipChildrenMode`. */
+  opaque type ClipChildrenMode <: Long = Long
+
+  object ClipChildrenMode {
+    final val Disabled: ClipChildrenMode = 0L.asInstanceOf[ClipChildrenMode]
+    final val Only: ClipChildrenMode = 1L.asInstanceOf[ClipChildrenMode]
+    final val AndDraw: ClipChildrenMode = 2L.asInstanceOf[ClipChildrenMode]
+    final val Max: ClipChildrenMode = 3L.asInstanceOf[ClipChildrenMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ClipChildrenMode = value.asInstanceOf[ClipChildrenMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ClipChildrenMode] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[ClipChildrenMode]]
+
+    extension (self: ClipChildrenMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "Only"
+        case 2L => "AndDraw"
+        case 3L => "Max"
+        case other => other.toString
+      }
+  }
 }

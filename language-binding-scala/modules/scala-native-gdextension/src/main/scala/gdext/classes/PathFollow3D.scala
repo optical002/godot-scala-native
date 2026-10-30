@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class PathFollow3D extends Node3D {
   }
 
   /** PathFollow3D.set_h_offset */
-  final def setHOffset(h_offset: Double): Unit = {
+  final def setHOffset(hOffset: Double): Unit = {
     if (gdext.classes.PathFollow3D.mb_set_h_offset == null) gdext.classes.PathFollow3D.mb_set_h_offset = MethodBind.get("PathFollow3D", "set_h_offset", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.PathFollow3D.mb_set_h_offset, livePtr, h_offset)
+    Ptrcall.callVoid1(gdext.classes.PathFollow3D.mb_set_h_offset, livePtr, hOffset)
   }
 
   /** PathFollow3D.get_h_offset */
@@ -35,9 +36,9 @@ abstract class PathFollow3D extends Node3D {
   }
 
   /** PathFollow3D.set_v_offset */
-  final def setVOffset(v_offset: Double): Unit = {
+  final def setVOffset(vOffset: Double): Unit = {
     if (gdext.classes.PathFollow3D.mb_set_v_offset == null) gdext.classes.PathFollow3D.mb_set_v_offset = MethodBind.get("PathFollow3D", "set_v_offset", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.PathFollow3D.mb_set_v_offset, livePtr, v_offset)
+    Ptrcall.callVoid1(gdext.classes.PathFollow3D.mb_set_v_offset, livePtr, vOffset)
   }
 
   /** PathFollow3D.get_v_offset */
@@ -59,15 +60,15 @@ abstract class PathFollow3D extends Node3D {
   }
 
   /** PathFollow3D.set_rotation_mode */
-  final def setRotationMode(rotation_mode: Long): Unit = {
+  final def setRotationMode(rotationMode: gdext.classes.PathFollow3D.RotationMode): Unit = {
     if (gdext.classes.PathFollow3D.mb_set_rotation_mode == null) gdext.classes.PathFollow3D.mb_set_rotation_mode = MethodBind.get("PathFollow3D", "set_rotation_mode", 1640311967L)
-    Ptrcall.callVoid1(gdext.classes.PathFollow3D.mb_set_rotation_mode, livePtr, rotation_mode)
+    Ptrcall.callVoid1(gdext.classes.PathFollow3D.mb_set_rotation_mode, livePtr, rotationMode)
   }
 
   /** PathFollow3D.get_rotation_mode */
-  final def getRotationMode(): Long = {
+  final def getRotationMode(): gdext.classes.PathFollow3D.RotationMode = {
     if (gdext.classes.PathFollow3D.mb_get_rotation_mode == null) gdext.classes.PathFollow3D.mb_get_rotation_mode = MethodBind.get("PathFollow3D", "get_rotation_mode", 3814010545L)
-    Ptrcall.call0[Long](gdext.classes.PathFollow3D.mb_get_rotation_mode, livePtr)
+    gdext.classes.PathFollow3D.RotationMode(Ptrcall.call0[Long](gdext.classes.PathFollow3D.mb_get_rotation_mode, livePtr))
   }
 
   /** PathFollow3D.set_cubic_interpolation */
@@ -142,8 +143,36 @@ object PathFollow3D {
   private[classes] var mb_correct_posture: GDExtensionMethodBindPtr = null
 
   /** PathFollow3D.correct_posture */
-  final def correctPosture(transform: gdext.builtin.Transform3D, rotation_mode: Long): gdext.builtin.Transform3D = {
+  final def correctPosture(transform: gdext.builtin.Transform3D, rotationMode: gdext.classes.PathFollow3D.RotationMode): gdext.builtin.Transform3D = {
     if (gdext.classes.PathFollow3D.mb_correct_posture == null) gdext.classes.PathFollow3D.mb_correct_posture = MethodBind.get("PathFollow3D", "correct_posture", 2686588690L)
-    Ptrcall.call2[gdext.builtin.Transform3D, Long, gdext.builtin.Transform3D](gdext.classes.PathFollow3D.mb_correct_posture, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], transform, rotation_mode)
+    Ptrcall.call2[gdext.builtin.Transform3D, Long, gdext.builtin.Transform3D](gdext.classes.PathFollow3D.mb_correct_posture, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], transform, rotationMode)
+  }
+
+  /** Godot enum `PathFollow3D.RotationMode`. */
+  opaque type RotationMode <: Long = Long
+
+  object RotationMode {
+    final val None: RotationMode = 0L.asInstanceOf[RotationMode]
+    final val Y: RotationMode = 1L.asInstanceOf[RotationMode]
+    final val Xy: RotationMode = 2L.asInstanceOf[RotationMode]
+    final val Xyz: RotationMode = 3L.asInstanceOf[RotationMode]
+    final val Oriented: RotationMode = 4L.asInstanceOf[RotationMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): RotationMode = value.asInstanceOf[RotationMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[RotationMode] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[RotationMode]]
+
+    extension (self: RotationMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "None"
+        case 1L => "Y"
+        case 2L => "Xy"
+        case 3L => "Xyz"
+        case 4L => "Oriented"
+        case other => other.toString
+      }
   }
 }

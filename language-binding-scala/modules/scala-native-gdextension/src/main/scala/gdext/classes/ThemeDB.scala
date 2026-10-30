@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class ThemeDB extends Object {
   }
 
   /** ThemeDB.set_fallback_base_scale */
-  final def setFallbackBaseScale(base_scale: Double): Unit = {
+  final def setFallbackBaseScale(baseScale: Double): Unit = {
     if (gdext.classes.ThemeDB.mb_set_fallback_base_scale == null) gdext.classes.ThemeDB.mb_set_fallback_base_scale = MethodBind.get("ThemeDB", "set_fallback_base_scale", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.ThemeDB.mb_set_fallback_base_scale, livePtr, base_scale)
+    Ptrcall.callVoid1(gdext.classes.ThemeDB.mb_set_fallback_base_scale, livePtr, baseScale)
   }
 
   /** ThemeDB.get_fallback_base_scale */
@@ -47,9 +48,9 @@ abstract class ThemeDB extends Object {
   }
 
   /** ThemeDB.set_fallback_font_size */
-  final def setFallbackFontSize(font_size: Long): Unit = {
+  final def setFallbackFontSize(fontSize: Long): Unit = {
     if (gdext.classes.ThemeDB.mb_set_fallback_font_size == null) gdext.classes.ThemeDB.mb_set_fallback_font_size = MethodBind.get("ThemeDB", "set_fallback_font_size", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.ThemeDB.mb_set_fallback_font_size, livePtr, font_size)
+    Ptrcall.callVoid1(gdext.classes.ThemeDB.mb_set_fallback_font_size, livePtr, fontSize)
   }
 
   /** ThemeDB.get_fallback_font_size */
@@ -107,4 +108,52 @@ object ThemeDB {
         Godot.interface.global_get_singleton(StringNames.cached("ThemeDB").ptr)))
     instance
   }
+
+  /** Forwards to [[singleton]]: ThemeDB.get_default_theme */
+  final def getDefaultTheme(): Theme =
+    singleton.getDefaultTheme()
+
+  /** Forwards to [[singleton]]: ThemeDB.get_project_theme */
+  final def getProjectTheme(): Theme =
+    singleton.getProjectTheme()
+
+  /** Forwards to [[singleton]]: ThemeDB.set_fallback_base_scale */
+  final def setFallbackBaseScale(baseScale: Double): Unit =
+    singleton.setFallbackBaseScale(baseScale)
+
+  /** Forwards to [[singleton]]: ThemeDB.get_fallback_base_scale */
+  final def getFallbackBaseScale(): Double =
+    singleton.getFallbackBaseScale()
+
+  /** Forwards to [[singleton]]: ThemeDB.set_fallback_font */
+  final def setFallbackFont(font: Font): Unit =
+    singleton.setFallbackFont(font)
+
+  /** Forwards to [[singleton]]: ThemeDB.get_fallback_font */
+  final def getFallbackFont(): Font =
+    singleton.getFallbackFont()
+
+  /** Forwards to [[singleton]]: ThemeDB.set_fallback_font_size */
+  final def setFallbackFontSize(fontSize: Long): Unit =
+    singleton.setFallbackFontSize(fontSize)
+
+  /** Forwards to [[singleton]]: ThemeDB.get_fallback_font_size */
+  final def getFallbackFontSize(): Long =
+    singleton.getFallbackFontSize()
+
+  /** Forwards to [[singleton]]: ThemeDB.set_fallback_icon */
+  final def setFallbackIcon(icon: Texture2D): Unit =
+    singleton.setFallbackIcon(icon)
+
+  /** Forwards to [[singleton]]: ThemeDB.get_fallback_icon */
+  final def getFallbackIcon(): Texture2D =
+    singleton.getFallbackIcon()
+
+  /** Forwards to [[singleton]]: ThemeDB.set_fallback_stylebox */
+  final def setFallbackStylebox(stylebox: StyleBox): Unit =
+    singleton.setFallbackStylebox(stylebox)
+
+  /** Forwards to [[singleton]]: ThemeDB.get_fallback_stylebox */
+  final def getFallbackStylebox(): StyleBox =
+    singleton.getFallbackStylebox()
 }

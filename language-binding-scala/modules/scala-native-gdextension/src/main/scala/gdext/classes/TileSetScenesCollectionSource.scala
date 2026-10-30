@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -29,21 +30,21 @@ abstract class TileSetScenesCollectionSource extends TileSetSource {
   }
 
   /** TileSetScenesCollectionSource.create_scene_tile */
-  final def createSceneTile(packed_scene: PackedScene, id_override: Long): Long = {
+  final def createSceneTile(packedScene: PackedScene, idOverride: Long = -1L): Long = {
     if (gdext.classes.TileSetScenesCollectionSource.mb_create_scene_tile == null) gdext.classes.TileSetScenesCollectionSource.mb_create_scene_tile = MethodBind.get("TileSetScenesCollectionSource", "create_scene_tile", 1117465415L)
-    Ptrcall.call2[GodotObject, Long, Long](gdext.classes.TileSetScenesCollectionSource.mb_create_scene_tile, livePtr, Wrappers.handle(packed_scene), id_override)
+    Ptrcall.call2[GodotObject, Long, Long](gdext.classes.TileSetScenesCollectionSource.mb_create_scene_tile, livePtr, Wrappers.handle(packedScene), idOverride)
   }
 
   /** TileSetScenesCollectionSource.set_scene_tile_id */
-  final def setSceneTileId(id: Long, new_id: Long): Unit = {
+  final def setSceneTileId(id: Long, newId: Long): Unit = {
     if (gdext.classes.TileSetScenesCollectionSource.mb_set_scene_tile_id == null) gdext.classes.TileSetScenesCollectionSource.mb_set_scene_tile_id = MethodBind.get("TileSetScenesCollectionSource", "set_scene_tile_id", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.TileSetScenesCollectionSource.mb_set_scene_tile_id, livePtr, id, new_id)
+    Ptrcall.callVoid2(gdext.classes.TileSetScenesCollectionSource.mb_set_scene_tile_id, livePtr, id, newId)
   }
 
   /** TileSetScenesCollectionSource.set_scene_tile_scene */
-  final def setSceneTileScene(id: Long, packed_scene: PackedScene): Unit = {
+  final def setSceneTileScene(id: Long, packedScene: PackedScene): Unit = {
     if (gdext.classes.TileSetScenesCollectionSource.mb_set_scene_tile_scene == null) gdext.classes.TileSetScenesCollectionSource.mb_set_scene_tile_scene = MethodBind.get("TileSetScenesCollectionSource", "set_scene_tile_scene", 3435852839L)
-    Ptrcall.callVoid2(gdext.classes.TileSetScenesCollectionSource.mb_set_scene_tile_scene, livePtr, id, Wrappers.handle(packed_scene))
+    Ptrcall.callVoid2(gdext.classes.TileSetScenesCollectionSource.mb_set_scene_tile_scene, livePtr, id, Wrappers.handle(packedScene))
   }
 
   /** TileSetScenesCollectionSource.get_scene_tile_scene. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -53,9 +54,9 @@ abstract class TileSetScenesCollectionSource extends TileSetSource {
   }
 
   /** TileSetScenesCollectionSource.set_scene_tile_display_placeholder */
-  final def setSceneTileDisplayPlaceholder(id: Long, display_placeholder: Boolean): Unit = {
+  final def setSceneTileDisplayPlaceholder(id: Long, displayPlaceholder: Boolean): Unit = {
     if (gdext.classes.TileSetScenesCollectionSource.mb_set_scene_tile_display_placeholder == null) gdext.classes.TileSetScenesCollectionSource.mb_set_scene_tile_display_placeholder = MethodBind.get("TileSetScenesCollectionSource", "set_scene_tile_display_placeholder", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.TileSetScenesCollectionSource.mb_set_scene_tile_display_placeholder, livePtr, id, display_placeholder)
+    Ptrcall.callVoid2(gdext.classes.TileSetScenesCollectionSource.mb_set_scene_tile_display_placeholder, livePtr, id, displayPlaceholder)
   }
 
   /** TileSetScenesCollectionSource.get_scene_tile_display_placeholder */

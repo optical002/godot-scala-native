@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -41,9 +42,9 @@ abstract class EditorDock extends MarginContainer {
   }
 
   /** EditorDock.set_layout_key */
-  final def setLayoutKey(layout_key: String): Unit = {
+  final def setLayoutKey(layoutKey: String): Unit = {
     if (gdext.classes.EditorDock.mb_set_layout_key == null) gdext.classes.EditorDock.mb_set_layout_key = MethodBind.get("EditorDock", "set_layout_key", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.EditorDock.mb_set_layout_key, livePtr, layout_key)
+    Ptrcall.callVoid1(gdext.classes.EditorDock.mb_set_layout_key, livePtr, layoutKey)
   }
 
   /** EditorDock.get_layout_key */
@@ -89,15 +90,15 @@ abstract class EditorDock extends MarginContainer {
   }
 
   /** EditorDock.set_icon_name */
-  final def setIconName(icon_name: gdext.builtin.StringName): Unit = {
+  final def setIconName(iconName: String): Unit = {
     if (gdext.classes.EditorDock.mb_set_icon_name == null) gdext.classes.EditorDock.mb_set_icon_name = MethodBind.get("EditorDock", "set_icon_name", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.EditorDock.mb_set_icon_name, livePtr, icon_name)
+    Ptrcall.callVoid1(gdext.classes.EditorDock.mb_set_icon_name, livePtr, SnArg(iconName))
   }
 
   /** EditorDock.get_icon_name */
-  final def getIconName(): gdext.builtin.StringName = {
+  final def getIconName(): String = {
     if (gdext.classes.EditorDock.mb_get_icon_name == null) gdext.classes.EditorDock.mb_get_icon_name = MethodBind.get("EditorDock", "get_icon_name", 2002593661L)
-    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.EditorDock.mb_get_icon_name, livePtr)
+    Ptrcall.call0[SnArg](gdext.classes.EditorDock.mb_get_icon_name, livePtr)
   }
 
   /** EditorDock.set_dock_icon */
@@ -149,27 +150,27 @@ abstract class EditorDock extends MarginContainer {
   }
 
   /** EditorDock.set_default_slot */
-  final def setDefaultSlot(slot: Long): Unit = {
+  final def setDefaultSlot(slot: gdext.classes.EditorDock.DockSlot): Unit = {
     if (gdext.classes.EditorDock.mb_set_default_slot == null) gdext.classes.EditorDock.mb_set_default_slot = MethodBind.get("EditorDock", "set_default_slot", 4142995464L)
     Ptrcall.callVoid1(gdext.classes.EditorDock.mb_set_default_slot, livePtr, slot)
   }
 
   /** EditorDock.get_default_slot */
-  final def getDefaultSlot(): Long = {
+  final def getDefaultSlot(): gdext.classes.EditorDock.DockSlot = {
     if (gdext.classes.EditorDock.mb_get_default_slot == null) gdext.classes.EditorDock.mb_get_default_slot = MethodBind.get("EditorDock", "get_default_slot", 3298961740L)
-    Ptrcall.call0[Long](gdext.classes.EditorDock.mb_get_default_slot, livePtr)
+    gdext.classes.EditorDock.DockSlot(Ptrcall.call0[Long](gdext.classes.EditorDock.mb_get_default_slot, livePtr))
   }
 
   /** EditorDock.set_available_layouts */
-  final def setAvailableLayouts(layouts: Long): Unit = {
+  final def setAvailableLayouts(layouts: gdext.classes.EditorDock.DockLayout): Unit = {
     if (gdext.classes.EditorDock.mb_set_available_layouts == null) gdext.classes.EditorDock.mb_set_available_layouts = MethodBind.get("EditorDock", "set_available_layouts", 3440531249L)
-    Ptrcall.callVoid1(gdext.classes.EditorDock.mb_set_available_layouts, livePtr, layouts)
+    Ptrcall.callVoid1(gdext.classes.EditorDock.mb_set_available_layouts, livePtr, layouts.asInstanceOf[Long])
   }
 
   /** EditorDock.get_available_layouts */
-  final def getAvailableLayouts(): Long = {
+  final def getAvailableLayouts(): gdext.classes.EditorDock.DockLayout = {
     if (gdext.classes.EditorDock.mb_get_available_layouts == null) gdext.classes.EditorDock.mb_get_available_layouts = MethodBind.get("EditorDock", "get_available_layouts", 495015512L)
-    Ptrcall.call0[Long](gdext.classes.EditorDock.mb_get_available_layouts, livePtr)
+    gdext.classes.EditorDock.DockLayout(Ptrcall.call0[Long](gdext.classes.EditorDock.mb_get_available_layouts, livePtr))
   }
 
 }
@@ -202,4 +203,77 @@ object EditorDock {
   private[classes] var mb_get_default_slot: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_available_layouts: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_available_layouts: GDExtensionMethodBindPtr = null
+
+  /** Godot bitfield `EditorDock.DockLayout`. */
+  opaque type DockLayout = Long
+
+  object DockLayout {
+    final val Vertical: DockLayout = 1L.asInstanceOf[DockLayout]
+    final val Horizontal: DockLayout = 2L.asInstanceOf[DockLayout]
+    final val Floating: DockLayout = 4L.asInstanceOf[DockLayout]
+    final val All: DockLayout = 7L.asInstanceOf[DockLayout]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DockLayout = value.asInstanceOf[DockLayout]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DockLayout] = scala.IArray[Long](1L, 2L, 4L, 7L).asInstanceOf[scala.IArray[DockLayout]]
+
+    extension (self: DockLayout)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 1L => "Vertical"
+        case 2L => "Horizontal"
+        case 4L => "Floating"
+        case 7L => "All"
+        case other => other.toString
+      }
+    extension (self: DockLayout) {
+      inline def value: Long = self.asInstanceOf[Long]
+      inline def |(other: DockLayout): DockLayout = (self.value | other.value).asInstanceOf[DockLayout]
+      inline def &(other: DockLayout): DockLayout = (self.value & other.value).asInstanceOf[DockLayout]
+      /** Every bit of `flag` is set. */
+      inline def has(flag: DockLayout): Boolean = (self.value & flag.value) == flag.value
+    }
+  }
+
+  /** Godot enum `EditorDock.DockSlot`. */
+  opaque type DockSlot <: Long = Long
+
+  object DockSlot {
+    final val None: DockSlot = -1L.asInstanceOf[DockSlot]
+    final val LeftUl: DockSlot = 0L.asInstanceOf[DockSlot]
+    final val LeftBl: DockSlot = 1L.asInstanceOf[DockSlot]
+    final val LeftUr: DockSlot = 2L.asInstanceOf[DockSlot]
+    final val LeftBr: DockSlot = 3L.asInstanceOf[DockSlot]
+    final val RightUl: DockSlot = 4L.asInstanceOf[DockSlot]
+    final val RightBl: DockSlot = 5L.asInstanceOf[DockSlot]
+    final val RightUr: DockSlot = 6L.asInstanceOf[DockSlot]
+    final val RightBr: DockSlot = 7L.asInstanceOf[DockSlot]
+    final val Bottom: DockSlot = 8L.asInstanceOf[DockSlot]
+    final val Max: DockSlot = 9L.asInstanceOf[DockSlot]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DockSlot = value.asInstanceOf[DockSlot]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DockSlot] = scala.IArray[Long](-1L, 0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L).asInstanceOf[scala.IArray[DockSlot]]
+
+    extension (self: DockSlot)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case -1L => "None"
+        case 0L => "LeftUl"
+        case 1L => "LeftBl"
+        case 2L => "LeftUr"
+        case 3L => "LeftBr"
+        case 4L => "RightUl"
+        case 5L => "RightBl"
+        case 6L => "RightUr"
+        case 7L => "RightBr"
+        case 8L => "Bottom"
+        case 9L => "Max"
+        case other => other.toString
+      }
+  }
 }

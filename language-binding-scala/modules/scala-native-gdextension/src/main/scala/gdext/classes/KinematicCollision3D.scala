@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,57 +36,57 @@ abstract class KinematicCollision3D extends RefCounted {
   }
 
   /** KinematicCollision3D.get_position */
-  final def getPosition(collision_index: Long): gdext.builtin.Vector3 = {
+  final def getPosition(collisionIndex: Long = 0L): gdext.builtin.Vector3 = {
     if (gdext.classes.KinematicCollision3D.mb_get_position == null) gdext.classes.KinematicCollision3D.mb_get_position = MethodBind.get("KinematicCollision3D", "get_position", 1914908202L)
-    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.KinematicCollision3D.mb_get_position, livePtr, collision_index)
+    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.KinematicCollision3D.mb_get_position, livePtr, collisionIndex)
   }
 
   /** KinematicCollision3D.get_normal */
-  final def getNormal(collision_index: Long): gdext.builtin.Vector3 = {
+  final def getNormal(collisionIndex: Long = 0L): gdext.builtin.Vector3 = {
     if (gdext.classes.KinematicCollision3D.mb_get_normal == null) gdext.classes.KinematicCollision3D.mb_get_normal = MethodBind.get("KinematicCollision3D", "get_normal", 1914908202L)
-    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.KinematicCollision3D.mb_get_normal, livePtr, collision_index)
+    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.KinematicCollision3D.mb_get_normal, livePtr, collisionIndex)
   }
 
   /** KinematicCollision3D.get_angle */
-  final def getAngle(collision_index: Long, up_direction: gdext.builtin.Vector3): Double = {
+  final def getAngle(collisionIndex: Long = 0L, upDirection: gdext.builtin.Vector3 = gdext.builtin.Vector3(0f, 1f, 0f)): Double = {
     if (gdext.classes.KinematicCollision3D.mb_get_angle == null) gdext.classes.KinematicCollision3D.mb_get_angle = MethodBind.get("KinematicCollision3D", "get_angle", 1242741860L)
-    Ptrcall.call2[Long, gdext.builtin.Vector3, Double](gdext.classes.KinematicCollision3D.mb_get_angle, livePtr, collision_index, up_direction)
+    Ptrcall.call2[Long, gdext.builtin.Vector3, Double](gdext.classes.KinematicCollision3D.mb_get_angle, livePtr, collisionIndex, upDirection)
   }
 
   /** KinematicCollision3D.get_local_shape */
-  final def getLocalShape(collision_index: Long): Object = {
+  final def getLocalShape(collisionIndex: Long = 0L): Object = {
     if (gdext.classes.KinematicCollision3D.mb_get_local_shape == null) gdext.classes.KinematicCollision3D.mb_get_local_shape = MethodBind.get("KinematicCollision3D", "get_local_shape", 2639523548L)
-    Wrappers.borrowed[Object](Ptrcall.call1[Long, Long](gdext.classes.KinematicCollision3D.mb_get_local_shape, livePtr, collision_index))
+    Wrappers.borrowed[Object](Ptrcall.call1[Long, Long](gdext.classes.KinematicCollision3D.mb_get_local_shape, livePtr, collisionIndex))
   }
 
   /** KinematicCollision3D.get_collider */
-  final def getCollider(collision_index: Long): Object = {
+  final def getCollider(collisionIndex: Long = 0L): Object = {
     if (gdext.classes.KinematicCollision3D.mb_get_collider == null) gdext.classes.KinematicCollision3D.mb_get_collider = MethodBind.get("KinematicCollision3D", "get_collider", 2639523548L)
-    Wrappers.borrowed[Object](Ptrcall.call1[Long, Long](gdext.classes.KinematicCollision3D.mb_get_collider, livePtr, collision_index))
+    Wrappers.borrowed[Object](Ptrcall.call1[Long, Long](gdext.classes.KinematicCollision3D.mb_get_collider, livePtr, collisionIndex))
   }
 
   /** KinematicCollision3D.get_collider_id */
-  final def getColliderId(collision_index: Long): Long = {
+  final def getColliderId(collisionIndex: Long = 0L): Long = {
     if (gdext.classes.KinematicCollision3D.mb_get_collider_id == null) gdext.classes.KinematicCollision3D.mb_get_collider_id = MethodBind.get("KinematicCollision3D", "get_collider_id", 1591665591L)
-    Ptrcall.call1[Long, Long](gdext.classes.KinematicCollision3D.mb_get_collider_id, livePtr, collision_index)
+    Ptrcall.call1[Long, Long](gdext.classes.KinematicCollision3D.mb_get_collider_id, livePtr, collisionIndex)
   }
 
   /** KinematicCollision3D.get_collider_shape */
-  final def getColliderShape(collision_index: Long): Object = {
+  final def getColliderShape(collisionIndex: Long = 0L): Object = {
     if (gdext.classes.KinematicCollision3D.mb_get_collider_shape == null) gdext.classes.KinematicCollision3D.mb_get_collider_shape = MethodBind.get("KinematicCollision3D", "get_collider_shape", 2639523548L)
-    Wrappers.borrowed[Object](Ptrcall.call1[Long, Long](gdext.classes.KinematicCollision3D.mb_get_collider_shape, livePtr, collision_index))
+    Wrappers.borrowed[Object](Ptrcall.call1[Long, Long](gdext.classes.KinematicCollision3D.mb_get_collider_shape, livePtr, collisionIndex))
   }
 
   /** KinematicCollision3D.get_collider_shape_index */
-  final def getColliderShapeIndex(collision_index: Long): Long = {
+  final def getColliderShapeIndex(collisionIndex: Long = 0L): Long = {
     if (gdext.classes.KinematicCollision3D.mb_get_collider_shape_index == null) gdext.classes.KinematicCollision3D.mb_get_collider_shape_index = MethodBind.get("KinematicCollision3D", "get_collider_shape_index", 1591665591L)
-    Ptrcall.call1[Long, Long](gdext.classes.KinematicCollision3D.mb_get_collider_shape_index, livePtr, collision_index)
+    Ptrcall.call1[Long, Long](gdext.classes.KinematicCollision3D.mb_get_collider_shape_index, livePtr, collisionIndex)
   }
 
   /** KinematicCollision3D.get_collider_velocity */
-  final def getColliderVelocity(collision_index: Long): gdext.builtin.Vector3 = {
+  final def getColliderVelocity(collisionIndex: Long = 0L): gdext.builtin.Vector3 = {
     if (gdext.classes.KinematicCollision3D.mb_get_collider_velocity == null) gdext.classes.KinematicCollision3D.mb_get_collider_velocity = MethodBind.get("KinematicCollision3D", "get_collider_velocity", 1914908202L)
-    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.KinematicCollision3D.mb_get_collider_velocity, livePtr, collision_index)
+    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.KinematicCollision3D.mb_get_collider_velocity, livePtr, collisionIndex)
   }
 
 }

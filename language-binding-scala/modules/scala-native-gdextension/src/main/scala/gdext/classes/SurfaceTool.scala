@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,31 +12,31 @@ abstract class SurfaceTool extends RefCounted {
   override def godotClassName: String = "SurfaceTool"
 
   /** SurfaceTool.set_skin_weight_count */
-  final def setSkinWeightCount(count: Long): Unit = {
+  final def setSkinWeightCount(count: gdext.classes.SurfaceTool.SkinWeightCount): Unit = {
     if (gdext.classes.SurfaceTool.mb_set_skin_weight_count == null) gdext.classes.SurfaceTool.mb_set_skin_weight_count = MethodBind.get("SurfaceTool", "set_skin_weight_count", 618679515L)
     Ptrcall.callVoid1(gdext.classes.SurfaceTool.mb_set_skin_weight_count, livePtr, count)
   }
 
   /** SurfaceTool.get_skin_weight_count */
-  final def getSkinWeightCount(): Long = {
+  final def getSkinWeightCount(): gdext.classes.SurfaceTool.SkinWeightCount = {
     if (gdext.classes.SurfaceTool.mb_get_skin_weight_count == null) gdext.classes.SurfaceTool.mb_get_skin_weight_count = MethodBind.get("SurfaceTool", "get_skin_weight_count", 1072401130L)
-    Ptrcall.call0[Long](gdext.classes.SurfaceTool.mb_get_skin_weight_count, livePtr)
+    gdext.classes.SurfaceTool.SkinWeightCount(Ptrcall.call0[Long](gdext.classes.SurfaceTool.mb_get_skin_weight_count, livePtr))
   }
 
   /** SurfaceTool.set_custom_format */
-  final def setCustomFormat(channel_index: Long, format: Long): Unit = {
+  final def setCustomFormat(channelIndex: Long, format: gdext.classes.SurfaceTool.CustomFormat): Unit = {
     if (gdext.classes.SurfaceTool.mb_set_custom_format == null) gdext.classes.SurfaceTool.mb_set_custom_format = MethodBind.get("SurfaceTool", "set_custom_format", 4087759856L)
-    Ptrcall.callVoid2(gdext.classes.SurfaceTool.mb_set_custom_format, livePtr, channel_index, format)
+    Ptrcall.callVoid2(gdext.classes.SurfaceTool.mb_set_custom_format, livePtr, channelIndex, format)
   }
 
   /** SurfaceTool.get_custom_format */
-  final def getCustomFormat(channel_index: Long): Long = {
+  final def getCustomFormat(channelIndex: Long): gdext.classes.SurfaceTool.CustomFormat = {
     if (gdext.classes.SurfaceTool.mb_get_custom_format == null) gdext.classes.SurfaceTool.mb_get_custom_format = MethodBind.get("SurfaceTool", "get_custom_format", 839863283L)
-    Ptrcall.call1[Long, Long](gdext.classes.SurfaceTool.mb_get_custom_format, livePtr, channel_index)
+    gdext.classes.SurfaceTool.CustomFormat(Ptrcall.call1[Long, Long](gdext.classes.SurfaceTool.mb_get_custom_format, livePtr, channelIndex))
   }
 
   /** SurfaceTool.begin */
-  final def begin(primitive: Long): Unit = {
+  final def begin(primitive: gdext.classes.Mesh.PrimitiveType): Unit = {
     if (gdext.classes.SurfaceTool.mb_begin == null) gdext.classes.SurfaceTool.mb_begin = MethodBind.get("SurfaceTool", "begin", 2230304113L)
     Ptrcall.callVoid1(gdext.classes.SurfaceTool.mb_begin, livePtr, primitive)
   }
@@ -77,9 +78,9 @@ abstract class SurfaceTool extends RefCounted {
   }
 
   /** SurfaceTool.set_custom */
-  final def setCustom(channel_index: Long, custom_color: gdext.builtin.Color): Unit = {
+  final def setCustom(channelIndex: Long, customColor: gdext.builtin.Color): Unit = {
     if (gdext.classes.SurfaceTool.mb_set_custom == null) gdext.classes.SurfaceTool.mb_set_custom = MethodBind.get("SurfaceTool", "set_custom", 2878471219L)
-    Ptrcall.callVoid2(gdext.classes.SurfaceTool.mb_set_custom, livePtr, channel_index, custom_color)
+    Ptrcall.callVoid2(gdext.classes.SurfaceTool.mb_set_custom, livePtr, channelIndex, customColor)
   }
 
   /** SurfaceTool.set_smooth_group */
@@ -107,7 +108,7 @@ abstract class SurfaceTool extends RefCounted {
   }
 
   /** SurfaceTool.generate_normals */
-  final def generateNormals(flip: Boolean): Unit = {
+  final def generateNormals(flip: Boolean = false): Unit = {
     if (gdext.classes.SurfaceTool.mb_generate_normals == null) gdext.classes.SurfaceTool.mb_generate_normals = MethodBind.get("SurfaceTool", "generate_normals", 107499316L)
     Ptrcall.callVoid1(gdext.classes.SurfaceTool.mb_generate_normals, livePtr, flip)
   }
@@ -137,9 +138,9 @@ abstract class SurfaceTool extends RefCounted {
   }
 
   /** SurfaceTool.get_primitive_type */
-  final def getPrimitiveType(): Long = {
+  final def getPrimitiveType(): gdext.classes.Mesh.PrimitiveType = {
     if (gdext.classes.SurfaceTool.mb_get_primitive_type == null) gdext.classes.SurfaceTool.mb_get_primitive_type = MethodBind.get("SurfaceTool", "get_primitive_type", 768822145L)
-    Ptrcall.call0[Long](gdext.classes.SurfaceTool.mb_get_primitive_type, livePtr)
+    gdext.classes.Mesh.PrimitiveType(Ptrcall.call0[Long](gdext.classes.SurfaceTool.mb_get_primitive_type, livePtr))
   }
 
   /** SurfaceTool.clear */
@@ -155,9 +156,9 @@ abstract class SurfaceTool extends RefCounted {
   }
 
   /** SurfaceTool.create_from_blend_shape */
-  final def createFromBlendShape(existing: Mesh, surface: Long, blend_shape: String): Unit = {
+  final def createFromBlendShape(existing: Mesh, surface: Long, blendShape: String): Unit = {
     if (gdext.classes.SurfaceTool.mb_create_from_blend_shape == null) gdext.classes.SurfaceTool.mb_create_from_blend_shape = MethodBind.get("SurfaceTool", "create_from_blend_shape", 1306185582L)
-    Ptrcall.callVoid3(gdext.classes.SurfaceTool.mb_create_from_blend_shape, livePtr, Wrappers.handle(existing), surface, blend_shape)
+    Ptrcall.callVoid3(gdext.classes.SurfaceTool.mb_create_from_blend_shape, livePtr, Wrappers.handle(existing), surface, blendShape)
   }
 
   /** SurfaceTool.append_from */
@@ -167,7 +168,7 @@ abstract class SurfaceTool extends RefCounted {
   }
 
   /** SurfaceTool.commit. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def commit(existing: ArrayMesh, flags: Long): ArrayMesh = {
+  final def commit(existing: ArrayMesh = null, flags: Long = 0L): ArrayMesh = {
     if (gdext.classes.SurfaceTool.mb_commit == null) gdext.classes.SurfaceTool.mb_commit = MethodBind.get("SurfaceTool", "commit", 4107864055L)
     Wrappers.owned[ArrayMesh](Ptrcall.call2[GodotObject, Long, Long](gdext.classes.SurfaceTool.mb_commit, livePtr, Wrappers.handle(existing), flags))
   }
@@ -202,4 +203,62 @@ object SurfaceTool {
   private[classes] var mb_create_from_blend_shape: GDExtensionMethodBindPtr = null
   private[classes] var mb_append_from: GDExtensionMethodBindPtr = null
   private[classes] var mb_commit: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `SurfaceTool.CustomFormat`. */
+  opaque type CustomFormat <: Long = Long
+
+  object CustomFormat {
+    final val Rgba8Unorm: CustomFormat = 0L.asInstanceOf[CustomFormat]
+    final val Rgba8Snorm: CustomFormat = 1L.asInstanceOf[CustomFormat]
+    final val RgHalf: CustomFormat = 2L.asInstanceOf[CustomFormat]
+    final val RgbaHalf: CustomFormat = 3L.asInstanceOf[CustomFormat]
+    final val RFloat: CustomFormat = 4L.asInstanceOf[CustomFormat]
+    final val RgFloat: CustomFormat = 5L.asInstanceOf[CustomFormat]
+    final val RgbFloat: CustomFormat = 6L.asInstanceOf[CustomFormat]
+    final val RgbaFloat: CustomFormat = 7L.asInstanceOf[CustomFormat]
+    final val Max: CustomFormat = 8L.asInstanceOf[CustomFormat]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): CustomFormat = value.asInstanceOf[CustomFormat]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[CustomFormat] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L).asInstanceOf[scala.IArray[CustomFormat]]
+
+    extension (self: CustomFormat)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Rgba8Unorm"
+        case 1L => "Rgba8Snorm"
+        case 2L => "RgHalf"
+        case 3L => "RgbaHalf"
+        case 4L => "RFloat"
+        case 5L => "RgFloat"
+        case 6L => "RgbFloat"
+        case 7L => "RgbaFloat"
+        case 8L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `SurfaceTool.SkinWeightCount`. */
+  opaque type SkinWeightCount <: Long = Long
+
+  object SkinWeightCount {
+    final val Skin4Weights: SkinWeightCount = 0L.asInstanceOf[SkinWeightCount]
+    final val Skin8Weights: SkinWeightCount = 1L.asInstanceOf[SkinWeightCount]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): SkinWeightCount = value.asInstanceOf[SkinWeightCount]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[SkinWeightCount] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[SkinWeightCount]]
+
+    extension (self: SkinWeightCount)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Skin4Weights"
+        case 1L => "Skin8Weights"
+        case other => other.toString
+      }
+  }
 }

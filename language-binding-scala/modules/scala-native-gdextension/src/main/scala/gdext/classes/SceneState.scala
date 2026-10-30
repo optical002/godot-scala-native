@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -29,15 +30,15 @@ abstract class SceneState extends RefCounted {
   }
 
   /** SceneState.get_node_type */
-  final def getNodeType(idx: Long): gdext.builtin.StringName = {
+  final def getNodeType(idx: Long): String = {
     if (gdext.classes.SceneState.mb_get_node_type == null) gdext.classes.SceneState.mb_get_node_type = MethodBind.get("SceneState", "get_node_type", 659327637L)
-    Ptrcall.call1[Long, gdext.builtin.StringName](gdext.classes.SceneState.mb_get_node_type, livePtr, idx)
+    Ptrcall.call1[Long, SnArg](gdext.classes.SceneState.mb_get_node_type, livePtr, idx)
   }
 
   /** SceneState.get_node_name */
-  final def getNodeName(idx: Long): gdext.builtin.StringName = {
+  final def getNodeName(idx: Long): String = {
     if (gdext.classes.SceneState.mb_get_node_name == null) gdext.classes.SceneState.mb_get_node_name = MethodBind.get("SceneState", "get_node_name", 659327637L)
-    Ptrcall.call1[Long, gdext.builtin.StringName](gdext.classes.SceneState.mb_get_node_name, livePtr, idx)
+    Ptrcall.call1[Long, SnArg](gdext.classes.SceneState.mb_get_node_name, livePtr, idx)
   }
 
   /** SceneState.is_node_instance_placeholder */
@@ -71,9 +72,9 @@ abstract class SceneState extends RefCounted {
   }
 
   /** SceneState.get_node_property_name */
-  final def getNodePropertyName(idx: Long, prop_idx: Long): gdext.builtin.StringName = {
+  final def getNodePropertyName(idx: Long, propIdx: Long): String = {
     if (gdext.classes.SceneState.mb_get_node_property_name == null) gdext.classes.SceneState.mb_get_node_property_name = MethodBind.get("SceneState", "get_node_property_name", 351665558L)
-    Ptrcall.call2[Long, Long, gdext.builtin.StringName](gdext.classes.SceneState.mb_get_node_property_name, livePtr, idx, prop_idx)
+    Ptrcall.call2[Long, Long, SnArg](gdext.classes.SceneState.mb_get_node_property_name, livePtr, idx, propIdx)
   }
 
   /** SceneState.get_connection_count */
@@ -83,15 +84,15 @@ abstract class SceneState extends RefCounted {
   }
 
   /** SceneState.get_connection_signal */
-  final def getConnectionSignal(idx: Long): gdext.builtin.StringName = {
+  final def getConnectionSignal(idx: Long): String = {
     if (gdext.classes.SceneState.mb_get_connection_signal == null) gdext.classes.SceneState.mb_get_connection_signal = MethodBind.get("SceneState", "get_connection_signal", 659327637L)
-    Ptrcall.call1[Long, gdext.builtin.StringName](gdext.classes.SceneState.mb_get_connection_signal, livePtr, idx)
+    Ptrcall.call1[Long, SnArg](gdext.classes.SceneState.mb_get_connection_signal, livePtr, idx)
   }
 
   /** SceneState.get_connection_method */
-  final def getConnectionMethod(idx: Long): gdext.builtin.StringName = {
+  final def getConnectionMethod(idx: Long): String = {
     if (gdext.classes.SceneState.mb_get_connection_method == null) gdext.classes.SceneState.mb_get_connection_method = MethodBind.get("SceneState", "get_connection_method", 659327637L)
-    Ptrcall.call1[Long, gdext.builtin.StringName](gdext.classes.SceneState.mb_get_connection_method, livePtr, idx)
+    Ptrcall.call1[Long, SnArg](gdext.classes.SceneState.mb_get_connection_method, livePtr, idx)
   }
 
   /** SceneState.get_connection_flags */
@@ -125,4 +126,30 @@ object SceneState {
   private[classes] var mb_get_connection_method: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_connection_flags: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_connection_unbinds: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `SceneState.GenEditState`. */
+  opaque type GenEditState <: Long = Long
+
+  object GenEditState {
+    final val Disabled: GenEditState = 0L.asInstanceOf[GenEditState]
+    final val Instance: GenEditState = 1L.asInstanceOf[GenEditState]
+    final val Main: GenEditState = 2L.asInstanceOf[GenEditState]
+    final val MainInherited: GenEditState = 3L.asInstanceOf[GenEditState]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): GenEditState = value.asInstanceOf[GenEditState]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[GenEditState] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[GenEditState]]
+
+    extension (self: GenEditState)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "Instance"
+        case 2L => "Main"
+        case 3L => "MainInherited"
+        case other => other.toString
+      }
+  }
 }

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -41,9 +42,9 @@ abstract class ShapeCast3D extends Node3D {
   }
 
   /** ShapeCast3D.set_target_position */
-  final def setTargetPosition(local_point: gdext.builtin.Vector3): Unit = {
+  final def setTargetPosition(localPoint: gdext.builtin.Vector3): Unit = {
     if (gdext.classes.ShapeCast3D.mb_set_target_position == null) gdext.classes.ShapeCast3D.mb_set_target_position = MethodBind.get("ShapeCast3D", "set_target_position", 3460891852L)
-    Ptrcall.callVoid1(gdext.classes.ShapeCast3D.mb_set_target_position, livePtr, local_point)
+    Ptrcall.callVoid1(gdext.classes.ShapeCast3D.mb_set_target_position, livePtr, localPoint)
   }
 
   /** ShapeCast3D.get_target_position */
@@ -65,9 +66,9 @@ abstract class ShapeCast3D extends Node3D {
   }
 
   /** ShapeCast3D.set_max_results */
-  final def setMaxResults(max_results: Long): Unit = {
+  final def setMaxResults(maxResults: Long): Unit = {
     if (gdext.classes.ShapeCast3D.mb_set_max_results == null) gdext.classes.ShapeCast3D.mb_set_max_results = MethodBind.get("ShapeCast3D", "set_max_results", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.ShapeCast3D.mb_set_max_results, livePtr, max_results)
+    Ptrcall.callVoid1(gdext.classes.ShapeCast3D.mb_set_max_results, livePtr, maxResults)
   }
 
   /** ShapeCast3D.get_max_results */
@@ -161,15 +162,15 @@ abstract class ShapeCast3D extends Node3D {
   }
 
   /** ShapeCast3D.set_collision_mask_value */
-  final def setCollisionMaskValue(layer_number: Long, value: Boolean): Unit = {
+  final def setCollisionMaskValue(layerNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.ShapeCast3D.mb_set_collision_mask_value == null) gdext.classes.ShapeCast3D.mb_set_collision_mask_value = MethodBind.get("ShapeCast3D", "set_collision_mask_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.ShapeCast3D.mb_set_collision_mask_value, livePtr, layer_number, value)
+    Ptrcall.callVoid2(gdext.classes.ShapeCast3D.mb_set_collision_mask_value, livePtr, layerNumber, value)
   }
 
   /** ShapeCast3D.get_collision_mask_value */
-  final def getCollisionMaskValue(layer_number: Long): Boolean = {
+  final def getCollisionMaskValue(layerNumber: Long): Boolean = {
     if (gdext.classes.ShapeCast3D.mb_get_collision_mask_value == null) gdext.classes.ShapeCast3D.mb_get_collision_mask_value = MethodBind.get("ShapeCast3D", "get_collision_mask_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.ShapeCast3D.mb_get_collision_mask_value, livePtr, layer_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.ShapeCast3D.mb_get_collision_mask_value, livePtr, layerNumber)
   }
 
   /** ShapeCast3D.set_exclude_parent_body */
@@ -209,9 +210,9 @@ abstract class ShapeCast3D extends Node3D {
   }
 
   /** ShapeCast3D.set_debug_shape_custom_color */
-  final def setDebugShapeCustomColor(debug_shape_custom_color: gdext.builtin.Color): Unit = {
+  final def setDebugShapeCustomColor(debugShapeCustomColor: gdext.builtin.Color): Unit = {
     if (gdext.classes.ShapeCast3D.mb_set_debug_shape_custom_color == null) gdext.classes.ShapeCast3D.mb_set_debug_shape_custom_color = MethodBind.get("ShapeCast3D", "set_debug_shape_custom_color", 2920490490L)
-    Ptrcall.callVoid1(gdext.classes.ShapeCast3D.mb_set_debug_shape_custom_color, livePtr, debug_shape_custom_color)
+    Ptrcall.callVoid1(gdext.classes.ShapeCast3D.mb_set_debug_shape_custom_color, livePtr, debugShapeCustomColor)
   }
 
   /** ShapeCast3D.get_debug_shape_custom_color */

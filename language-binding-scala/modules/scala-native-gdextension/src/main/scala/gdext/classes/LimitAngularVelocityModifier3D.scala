@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class LimitAngularVelocityModifier3D extends SkeletonModifier3D {
   override def godotClassName: String = "LimitAngularVelocityModifier3D"
 
   /** LimitAngularVelocityModifier3D.set_root_bone_name */
-  final def setRootBoneName(index: Long, bone_name: String): Unit = {
+  final def setRootBoneName(index: Long, boneName: String): Unit = {
     if (gdext.classes.LimitAngularVelocityModifier3D.mb_set_root_bone_name == null) gdext.classes.LimitAngularVelocityModifier3D.mb_set_root_bone_name = MethodBind.get("LimitAngularVelocityModifier3D", "set_root_bone_name", 501894301L)
-    Ptrcall.callVoid2(gdext.classes.LimitAngularVelocityModifier3D.mb_set_root_bone_name, livePtr, index, bone_name)
+    Ptrcall.callVoid2(gdext.classes.LimitAngularVelocityModifier3D.mb_set_root_bone_name, livePtr, index, boneName)
   }
 
   /** LimitAngularVelocityModifier3D.get_root_bone_name */
@@ -35,9 +36,9 @@ abstract class LimitAngularVelocityModifier3D extends SkeletonModifier3D {
   }
 
   /** LimitAngularVelocityModifier3D.set_end_bone_name */
-  final def setEndBoneName(index: Long, bone_name: String): Unit = {
+  final def setEndBoneName(index: Long, boneName: String): Unit = {
     if (gdext.classes.LimitAngularVelocityModifier3D.mb_set_end_bone_name == null) gdext.classes.LimitAngularVelocityModifier3D.mb_set_end_bone_name = MethodBind.get("LimitAngularVelocityModifier3D", "set_end_bone_name", 501894301L)
-    Ptrcall.callVoid2(gdext.classes.LimitAngularVelocityModifier3D.mb_set_end_bone_name, livePtr, index, bone_name)
+    Ptrcall.callVoid2(gdext.classes.LimitAngularVelocityModifier3D.mb_set_end_bone_name, livePtr, index, boneName)
   }
 
   /** LimitAngularVelocityModifier3D.get_end_bone_name */
@@ -77,9 +78,9 @@ abstract class LimitAngularVelocityModifier3D extends SkeletonModifier3D {
   }
 
   /** LimitAngularVelocityModifier3D.set_max_angular_velocity */
-  final def setMaxAngularVelocity(angular_velocity: Double): Unit = {
+  final def setMaxAngularVelocity(angularVelocity: Double): Unit = {
     if (gdext.classes.LimitAngularVelocityModifier3D.mb_set_max_angular_velocity == null) gdext.classes.LimitAngularVelocityModifier3D.mb_set_max_angular_velocity = MethodBind.get("LimitAngularVelocityModifier3D", "set_max_angular_velocity", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.LimitAngularVelocityModifier3D.mb_set_max_angular_velocity, livePtr, angular_velocity)
+    Ptrcall.callVoid1(gdext.classes.LimitAngularVelocityModifier3D.mb_set_max_angular_velocity, livePtr, angularVelocity)
   }
 
   /** LimitAngularVelocityModifier3D.get_max_angular_velocity */

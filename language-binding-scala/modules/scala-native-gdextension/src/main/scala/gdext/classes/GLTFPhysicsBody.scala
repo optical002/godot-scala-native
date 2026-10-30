@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class GLTFPhysicsBody extends Resource {
   }
 
   /** GLTFPhysicsBody.set_body_type */
-  final def setBodyType(body_type: String): Unit = {
+  final def setBodyType(bodyType: String): Unit = {
     if (gdext.classes.GLTFPhysicsBody.mb_set_body_type == null) gdext.classes.GLTFPhysicsBody.mb_set_body_type = MethodBind.get("GLTFPhysicsBody", "set_body_type", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.GLTFPhysicsBody.mb_set_body_type, livePtr, body_type)
+    Ptrcall.callVoid1(gdext.classes.GLTFPhysicsBody.mb_set_body_type, livePtr, bodyType)
   }
 
   /** GLTFPhysicsBody.get_mass */
@@ -47,9 +48,9 @@ abstract class GLTFPhysicsBody extends Resource {
   }
 
   /** GLTFPhysicsBody.set_linear_velocity */
-  final def setLinearVelocity(linear_velocity: gdext.builtin.Vector3): Unit = {
+  final def setLinearVelocity(linearVelocity: gdext.builtin.Vector3): Unit = {
     if (gdext.classes.GLTFPhysicsBody.mb_set_linear_velocity == null) gdext.classes.GLTFPhysicsBody.mb_set_linear_velocity = MethodBind.get("GLTFPhysicsBody", "set_linear_velocity", 3460891852L)
-    Ptrcall.callVoid1(gdext.classes.GLTFPhysicsBody.mb_set_linear_velocity, livePtr, linear_velocity)
+    Ptrcall.callVoid1(gdext.classes.GLTFPhysicsBody.mb_set_linear_velocity, livePtr, linearVelocity)
   }
 
   /** GLTFPhysicsBody.get_angular_velocity */
@@ -59,9 +60,9 @@ abstract class GLTFPhysicsBody extends Resource {
   }
 
   /** GLTFPhysicsBody.set_angular_velocity */
-  final def setAngularVelocity(angular_velocity: gdext.builtin.Vector3): Unit = {
+  final def setAngularVelocity(angularVelocity: gdext.builtin.Vector3): Unit = {
     if (gdext.classes.GLTFPhysicsBody.mb_set_angular_velocity == null) gdext.classes.GLTFPhysicsBody.mb_set_angular_velocity = MethodBind.get("GLTFPhysicsBody", "set_angular_velocity", 3460891852L)
-    Ptrcall.callVoid1(gdext.classes.GLTFPhysicsBody.mb_set_angular_velocity, livePtr, angular_velocity)
+    Ptrcall.callVoid1(gdext.classes.GLTFPhysicsBody.mb_set_angular_velocity, livePtr, angularVelocity)
   }
 
   /** GLTFPhysicsBody.get_center_of_mass */
@@ -71,9 +72,9 @@ abstract class GLTFPhysicsBody extends Resource {
   }
 
   /** GLTFPhysicsBody.set_center_of_mass */
-  final def setCenterOfMass(center_of_mass: gdext.builtin.Vector3): Unit = {
+  final def setCenterOfMass(centerOfMass: gdext.builtin.Vector3): Unit = {
     if (gdext.classes.GLTFPhysicsBody.mb_set_center_of_mass == null) gdext.classes.GLTFPhysicsBody.mb_set_center_of_mass = MethodBind.get("GLTFPhysicsBody", "set_center_of_mass", 3460891852L)
-    Ptrcall.callVoid1(gdext.classes.GLTFPhysicsBody.mb_set_center_of_mass, livePtr, center_of_mass)
+    Ptrcall.callVoid1(gdext.classes.GLTFPhysicsBody.mb_set_center_of_mass, livePtr, centerOfMass)
   }
 
   /** GLTFPhysicsBody.get_inertia_diagonal */
@@ -83,9 +84,9 @@ abstract class GLTFPhysicsBody extends Resource {
   }
 
   /** GLTFPhysicsBody.set_inertia_diagonal */
-  final def setInertiaDiagonal(inertia_diagonal: gdext.builtin.Vector3): Unit = {
+  final def setInertiaDiagonal(inertiaDiagonal: gdext.builtin.Vector3): Unit = {
     if (gdext.classes.GLTFPhysicsBody.mb_set_inertia_diagonal == null) gdext.classes.GLTFPhysicsBody.mb_set_inertia_diagonal = MethodBind.get("GLTFPhysicsBody", "set_inertia_diagonal", 3460891852L)
-    Ptrcall.callVoid1(gdext.classes.GLTFPhysicsBody.mb_set_inertia_diagonal, livePtr, inertia_diagonal)
+    Ptrcall.callVoid1(gdext.classes.GLTFPhysicsBody.mb_set_inertia_diagonal, livePtr, inertiaDiagonal)
   }
 
   /** GLTFPhysicsBody.get_inertia_orientation */
@@ -95,9 +96,9 @@ abstract class GLTFPhysicsBody extends Resource {
   }
 
   /** GLTFPhysicsBody.set_inertia_orientation */
-  final def setInertiaOrientation(inertia_orientation: gdext.builtin.Quaternion): Unit = {
+  final def setInertiaOrientation(inertiaOrientation: gdext.builtin.Quaternion): Unit = {
     if (gdext.classes.GLTFPhysicsBody.mb_set_inertia_orientation == null) gdext.classes.GLTFPhysicsBody.mb_set_inertia_orientation = MethodBind.get("GLTFPhysicsBody", "set_inertia_orientation", 1727505552L)
-    Ptrcall.callVoid1(gdext.classes.GLTFPhysicsBody.mb_set_inertia_orientation, livePtr, inertia_orientation)
+    Ptrcall.callVoid1(gdext.classes.GLTFPhysicsBody.mb_set_inertia_orientation, livePtr, inertiaOrientation)
   }
 
   /** GLTFPhysicsBody.get_inertia_tensor */
@@ -107,9 +108,9 @@ abstract class GLTFPhysicsBody extends Resource {
   }
 
   /** GLTFPhysicsBody.set_inertia_tensor */
-  final def setInertiaTensor(inertia_tensor: gdext.builtin.Basis): Unit = {
+  final def setInertiaTensor(inertiaTensor: gdext.builtin.Basis): Unit = {
     if (gdext.classes.GLTFPhysicsBody.mb_set_inertia_tensor == null) gdext.classes.GLTFPhysicsBody.mb_set_inertia_tensor = MethodBind.get("GLTFPhysicsBody", "set_inertia_tensor", 1055510324L)
-    Ptrcall.callVoid1(gdext.classes.GLTFPhysicsBody.mb_set_inertia_tensor, livePtr, inertia_tensor)
+    Ptrcall.callVoid1(gdext.classes.GLTFPhysicsBody.mb_set_inertia_tensor, livePtr, inertiaTensor)
   }
 
 }
@@ -135,8 +136,8 @@ object GLTFPhysicsBody {
   private[classes] var mb_set_inertia_tensor: GDExtensionMethodBindPtr = null
 
   /** GLTFPhysicsBody.from_node. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def fromNode(body_node: CollisionObject3D): GLTFPhysicsBody = {
+  final def fromNode(bodyNode: CollisionObject3D): GLTFPhysicsBody = {
     if (gdext.classes.GLTFPhysicsBody.mb_from_node == null) gdext.classes.GLTFPhysicsBody.mb_from_node = MethodBind.get("GLTFPhysicsBody", "from_node", 420544174L)
-    Wrappers.owned[GLTFPhysicsBody](Ptrcall.call1[GodotObject, Long](gdext.classes.GLTFPhysicsBody.mb_from_node, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], Wrappers.handle(body_node)))
+    Wrappers.owned[GLTFPhysicsBody](Ptrcall.call1[GodotObject, Long](gdext.classes.GLTFPhysicsBody.mb_from_node, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], Wrappers.handle(bodyNode)))
   }
 }

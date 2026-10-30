@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,21 +12,21 @@ abstract class WebSocketMultiplayerPeer extends MultiplayerPeer {
   override def godotClassName: String = "WebSocketMultiplayerPeer"
 
   /** WebSocketMultiplayerPeer.create_client */
-  final def createClient(url: String, tls_client_options: TLSOptions): Long = {
+  final def createClient(url: String, tlsClientOptions: TLSOptions = null): gdext.classes.Error = {
     if (gdext.classes.WebSocketMultiplayerPeer.mb_create_client == null) gdext.classes.WebSocketMultiplayerPeer.mb_create_client = MethodBind.get("WebSocketMultiplayerPeer", "create_client", 1966198364L)
-    Ptrcall.call2[String, GodotObject, Long](gdext.classes.WebSocketMultiplayerPeer.mb_create_client, livePtr, url, Wrappers.handle(tls_client_options))
+    gdext.classes.Error(Ptrcall.call2[String, GodotObject, Long](gdext.classes.WebSocketMultiplayerPeer.mb_create_client, livePtr, url, Wrappers.handle(tlsClientOptions)))
   }
 
   /** WebSocketMultiplayerPeer.create_server */
-  final def createServer(port: Long, bind_address: String, tls_server_options: TLSOptions): Long = {
+  final def createServer(port: Long, bindAddress: String = "*", tlsServerOptions: TLSOptions = null): gdext.classes.Error = {
     if (gdext.classes.WebSocketMultiplayerPeer.mb_create_server == null) gdext.classes.WebSocketMultiplayerPeer.mb_create_server = MethodBind.get("WebSocketMultiplayerPeer", "create_server", 2400822951L)
-    Ptrcall.call3[Long, String, GodotObject, Long](gdext.classes.WebSocketMultiplayerPeer.mb_create_server, livePtr, port, bind_address, Wrappers.handle(tls_server_options))
+    gdext.classes.Error(Ptrcall.call3[Long, String, GodotObject, Long](gdext.classes.WebSocketMultiplayerPeer.mb_create_server, livePtr, port, bindAddress, Wrappers.handle(tlsServerOptions)))
   }
 
   /** WebSocketMultiplayerPeer.get_peer. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getPeer(peer_id: Long): WebSocketPeer = {
+  final def getPeer(peerId: Long): WebSocketPeer = {
     if (gdext.classes.WebSocketMultiplayerPeer.mb_get_peer == null) gdext.classes.WebSocketMultiplayerPeer.mb_get_peer = MethodBind.get("WebSocketMultiplayerPeer", "get_peer", 1381378851L)
-    Wrappers.owned[WebSocketPeer](Ptrcall.call1[Long, Long](gdext.classes.WebSocketMultiplayerPeer.mb_get_peer, livePtr, peer_id))
+    Wrappers.owned[WebSocketPeer](Ptrcall.call1[Long, Long](gdext.classes.WebSocketMultiplayerPeer.mb_get_peer, livePtr, peerId))
   }
 
   /** WebSocketMultiplayerPeer.get_peer_address */
@@ -47,9 +48,9 @@ abstract class WebSocketMultiplayerPeer extends MultiplayerPeer {
   }
 
   /** WebSocketMultiplayerPeer.set_inbound_buffer_size */
-  final def setInboundBufferSize(buffer_size: Long): Unit = {
+  final def setInboundBufferSize(bufferSize: Long): Unit = {
     if (gdext.classes.WebSocketMultiplayerPeer.mb_set_inbound_buffer_size == null) gdext.classes.WebSocketMultiplayerPeer.mb_set_inbound_buffer_size = MethodBind.get("WebSocketMultiplayerPeer", "set_inbound_buffer_size", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.WebSocketMultiplayerPeer.mb_set_inbound_buffer_size, livePtr, buffer_size)
+    Ptrcall.callVoid1(gdext.classes.WebSocketMultiplayerPeer.mb_set_inbound_buffer_size, livePtr, bufferSize)
   }
 
   /** WebSocketMultiplayerPeer.get_outbound_buffer_size */
@@ -59,9 +60,9 @@ abstract class WebSocketMultiplayerPeer extends MultiplayerPeer {
   }
 
   /** WebSocketMultiplayerPeer.set_outbound_buffer_size */
-  final def setOutboundBufferSize(buffer_size: Long): Unit = {
+  final def setOutboundBufferSize(bufferSize: Long): Unit = {
     if (gdext.classes.WebSocketMultiplayerPeer.mb_set_outbound_buffer_size == null) gdext.classes.WebSocketMultiplayerPeer.mb_set_outbound_buffer_size = MethodBind.get("WebSocketMultiplayerPeer", "set_outbound_buffer_size", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.WebSocketMultiplayerPeer.mb_set_outbound_buffer_size, livePtr, buffer_size)
+    Ptrcall.callVoid1(gdext.classes.WebSocketMultiplayerPeer.mb_set_outbound_buffer_size, livePtr, bufferSize)
   }
 
   /** WebSocketMultiplayerPeer.get_handshake_timeout */
@@ -77,9 +78,9 @@ abstract class WebSocketMultiplayerPeer extends MultiplayerPeer {
   }
 
   /** WebSocketMultiplayerPeer.set_max_queued_packets */
-  final def setMaxQueuedPackets(max_queued_packets: Long): Unit = {
+  final def setMaxQueuedPackets(maxQueuedPackets: Long): Unit = {
     if (gdext.classes.WebSocketMultiplayerPeer.mb_set_max_queued_packets == null) gdext.classes.WebSocketMultiplayerPeer.mb_set_max_queued_packets = MethodBind.get("WebSocketMultiplayerPeer", "set_max_queued_packets", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.WebSocketMultiplayerPeer.mb_set_max_queued_packets, livePtr, max_queued_packets)
+    Ptrcall.callVoid1(gdext.classes.WebSocketMultiplayerPeer.mb_set_max_queued_packets, livePtr, maxQueuedPackets)
   }
 
   /** WebSocketMultiplayerPeer.get_max_queued_packets */

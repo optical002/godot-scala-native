@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class RDPipelineDepthStencilState extends RefCounted {
   override def godotClassName: String = "RDPipelineDepthStencilState"
 
   /** RDPipelineDepthStencilState.set_enable_depth_test */
-  final def setEnableDepthTest(p_member: Boolean): Unit = {
+  final def setEnableDepthTest(pMember: Boolean): Unit = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_set_enable_depth_test == null) gdext.classes.RDPipelineDepthStencilState.mb_set_enable_depth_test = MethodBind.get("RDPipelineDepthStencilState", "set_enable_depth_test", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_enable_depth_test, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_enable_depth_test, livePtr, pMember)
   }
 
   /** RDPipelineDepthStencilState.get_enable_depth_test */
@@ -23,9 +24,9 @@ abstract class RDPipelineDepthStencilState extends RefCounted {
   }
 
   /** RDPipelineDepthStencilState.set_enable_depth_write */
-  final def setEnableDepthWrite(p_member: Boolean): Unit = {
+  final def setEnableDepthWrite(pMember: Boolean): Unit = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_set_enable_depth_write == null) gdext.classes.RDPipelineDepthStencilState.mb_set_enable_depth_write = MethodBind.get("RDPipelineDepthStencilState", "set_enable_depth_write", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_enable_depth_write, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_enable_depth_write, livePtr, pMember)
   }
 
   /** RDPipelineDepthStencilState.get_enable_depth_write */
@@ -35,21 +36,21 @@ abstract class RDPipelineDepthStencilState extends RefCounted {
   }
 
   /** RDPipelineDepthStencilState.set_depth_compare_operator */
-  final def setDepthCompareOperator(p_member: Long): Unit = {
+  final def setDepthCompareOperator(pMember: gdext.classes.RenderingDevice.CompareOperator): Unit = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_set_depth_compare_operator == null) gdext.classes.RDPipelineDepthStencilState.mb_set_depth_compare_operator = MethodBind.get("RDPipelineDepthStencilState", "set_depth_compare_operator", 2573711505L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_depth_compare_operator, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_depth_compare_operator, livePtr, pMember)
   }
 
   /** RDPipelineDepthStencilState.get_depth_compare_operator */
-  final def getDepthCompareOperator(): Long = {
+  final def getDepthCompareOperator(): gdext.classes.RenderingDevice.CompareOperator = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_get_depth_compare_operator == null) gdext.classes.RDPipelineDepthStencilState.mb_get_depth_compare_operator = MethodBind.get("RDPipelineDepthStencilState", "get_depth_compare_operator", 269730778L)
-    Ptrcall.call0[Long](gdext.classes.RDPipelineDepthStencilState.mb_get_depth_compare_operator, livePtr)
+    gdext.classes.RenderingDevice.CompareOperator(Ptrcall.call0[Long](gdext.classes.RDPipelineDepthStencilState.mb_get_depth_compare_operator, livePtr))
   }
 
   /** RDPipelineDepthStencilState.set_enable_depth_range */
-  final def setEnableDepthRange(p_member: Boolean): Unit = {
+  final def setEnableDepthRange(pMember: Boolean): Unit = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_set_enable_depth_range == null) gdext.classes.RDPipelineDepthStencilState.mb_set_enable_depth_range = MethodBind.get("RDPipelineDepthStencilState", "set_enable_depth_range", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_enable_depth_range, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_enable_depth_range, livePtr, pMember)
   }
 
   /** RDPipelineDepthStencilState.get_enable_depth_range */
@@ -59,9 +60,9 @@ abstract class RDPipelineDepthStencilState extends RefCounted {
   }
 
   /** RDPipelineDepthStencilState.set_depth_range_min */
-  final def setDepthRangeMin(p_member: Double): Unit = {
+  final def setDepthRangeMin(pMember: Double): Unit = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_set_depth_range_min == null) gdext.classes.RDPipelineDepthStencilState.mb_set_depth_range_min = MethodBind.get("RDPipelineDepthStencilState", "set_depth_range_min", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_depth_range_min, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_depth_range_min, livePtr, pMember)
   }
 
   /** RDPipelineDepthStencilState.get_depth_range_min */
@@ -71,9 +72,9 @@ abstract class RDPipelineDepthStencilState extends RefCounted {
   }
 
   /** RDPipelineDepthStencilState.set_depth_range_max */
-  final def setDepthRangeMax(p_member: Double): Unit = {
+  final def setDepthRangeMax(pMember: Double): Unit = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_set_depth_range_max == null) gdext.classes.RDPipelineDepthStencilState.mb_set_depth_range_max = MethodBind.get("RDPipelineDepthStencilState", "set_depth_range_max", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_depth_range_max, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_depth_range_max, livePtr, pMember)
   }
 
   /** RDPipelineDepthStencilState.get_depth_range_max */
@@ -83,9 +84,9 @@ abstract class RDPipelineDepthStencilState extends RefCounted {
   }
 
   /** RDPipelineDepthStencilState.set_enable_stencil */
-  final def setEnableStencil(p_member: Boolean): Unit = {
+  final def setEnableStencil(pMember: Boolean): Unit = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_set_enable_stencil == null) gdext.classes.RDPipelineDepthStencilState.mb_set_enable_stencil = MethodBind.get("RDPipelineDepthStencilState", "set_enable_stencil", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_enable_stencil, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_enable_stencil, livePtr, pMember)
   }
 
   /** RDPipelineDepthStencilState.get_enable_stencil */
@@ -95,57 +96,57 @@ abstract class RDPipelineDepthStencilState extends RefCounted {
   }
 
   /** RDPipelineDepthStencilState.set_front_op_fail */
-  final def setFrontOpFail(p_member: Long): Unit = {
+  final def setFrontOpFail(pMember: gdext.classes.RenderingDevice.StencilOperation): Unit = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_fail == null) gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_fail = MethodBind.get("RDPipelineDepthStencilState", "set_front_op_fail", 2092799566L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_fail, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_fail, livePtr, pMember)
   }
 
   /** RDPipelineDepthStencilState.get_front_op_fail */
-  final def getFrontOpFail(): Long = {
+  final def getFrontOpFail(): gdext.classes.RenderingDevice.StencilOperation = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_get_front_op_fail == null) gdext.classes.RDPipelineDepthStencilState.mb_get_front_op_fail = MethodBind.get("RDPipelineDepthStencilState", "get_front_op_fail", 1714732389L)
-    Ptrcall.call0[Long](gdext.classes.RDPipelineDepthStencilState.mb_get_front_op_fail, livePtr)
+    gdext.classes.RenderingDevice.StencilOperation(Ptrcall.call0[Long](gdext.classes.RDPipelineDepthStencilState.mb_get_front_op_fail, livePtr))
   }
 
   /** RDPipelineDepthStencilState.set_front_op_pass */
-  final def setFrontOpPass(p_member: Long): Unit = {
+  final def setFrontOpPass(pMember: gdext.classes.RenderingDevice.StencilOperation): Unit = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_pass == null) gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_pass = MethodBind.get("RDPipelineDepthStencilState", "set_front_op_pass", 2092799566L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_pass, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_pass, livePtr, pMember)
   }
 
   /** RDPipelineDepthStencilState.get_front_op_pass */
-  final def getFrontOpPass(): Long = {
+  final def getFrontOpPass(): gdext.classes.RenderingDevice.StencilOperation = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_get_front_op_pass == null) gdext.classes.RDPipelineDepthStencilState.mb_get_front_op_pass = MethodBind.get("RDPipelineDepthStencilState", "get_front_op_pass", 1714732389L)
-    Ptrcall.call0[Long](gdext.classes.RDPipelineDepthStencilState.mb_get_front_op_pass, livePtr)
+    gdext.classes.RenderingDevice.StencilOperation(Ptrcall.call0[Long](gdext.classes.RDPipelineDepthStencilState.mb_get_front_op_pass, livePtr))
   }
 
   /** RDPipelineDepthStencilState.set_front_op_depth_fail */
-  final def setFrontOpDepthFail(p_member: Long): Unit = {
+  final def setFrontOpDepthFail(pMember: gdext.classes.RenderingDevice.StencilOperation): Unit = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_depth_fail == null) gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_depth_fail = MethodBind.get("RDPipelineDepthStencilState", "set_front_op_depth_fail", 2092799566L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_depth_fail, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_depth_fail, livePtr, pMember)
   }
 
   /** RDPipelineDepthStencilState.get_front_op_depth_fail */
-  final def getFrontOpDepthFail(): Long = {
+  final def getFrontOpDepthFail(): gdext.classes.RenderingDevice.StencilOperation = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_get_front_op_depth_fail == null) gdext.classes.RDPipelineDepthStencilState.mb_get_front_op_depth_fail = MethodBind.get("RDPipelineDepthStencilState", "get_front_op_depth_fail", 1714732389L)
-    Ptrcall.call0[Long](gdext.classes.RDPipelineDepthStencilState.mb_get_front_op_depth_fail, livePtr)
+    gdext.classes.RenderingDevice.StencilOperation(Ptrcall.call0[Long](gdext.classes.RDPipelineDepthStencilState.mb_get_front_op_depth_fail, livePtr))
   }
 
   /** RDPipelineDepthStencilState.set_front_op_compare */
-  final def setFrontOpCompare(p_member: Long): Unit = {
+  final def setFrontOpCompare(pMember: gdext.classes.RenderingDevice.CompareOperator): Unit = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_compare == null) gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_compare = MethodBind.get("RDPipelineDepthStencilState", "set_front_op_compare", 2573711505L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_compare, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_compare, livePtr, pMember)
   }
 
   /** RDPipelineDepthStencilState.get_front_op_compare */
-  final def getFrontOpCompare(): Long = {
+  final def getFrontOpCompare(): gdext.classes.RenderingDevice.CompareOperator = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_get_front_op_compare == null) gdext.classes.RDPipelineDepthStencilState.mb_get_front_op_compare = MethodBind.get("RDPipelineDepthStencilState", "get_front_op_compare", 269730778L)
-    Ptrcall.call0[Long](gdext.classes.RDPipelineDepthStencilState.mb_get_front_op_compare, livePtr)
+    gdext.classes.RenderingDevice.CompareOperator(Ptrcall.call0[Long](gdext.classes.RDPipelineDepthStencilState.mb_get_front_op_compare, livePtr))
   }
 
   /** RDPipelineDepthStencilState.set_front_op_compare_mask */
-  final def setFrontOpCompareMask(p_member: Long): Unit = {
+  final def setFrontOpCompareMask(pMember: Long): Unit = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_compare_mask == null) gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_compare_mask = MethodBind.get("RDPipelineDepthStencilState", "set_front_op_compare_mask", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_compare_mask, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_compare_mask, livePtr, pMember)
   }
 
   /** RDPipelineDepthStencilState.get_front_op_compare_mask */
@@ -155,9 +156,9 @@ abstract class RDPipelineDepthStencilState extends RefCounted {
   }
 
   /** RDPipelineDepthStencilState.set_front_op_write_mask */
-  final def setFrontOpWriteMask(p_member: Long): Unit = {
+  final def setFrontOpWriteMask(pMember: Long): Unit = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_write_mask == null) gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_write_mask = MethodBind.get("RDPipelineDepthStencilState", "set_front_op_write_mask", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_write_mask, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_write_mask, livePtr, pMember)
   }
 
   /** RDPipelineDepthStencilState.get_front_op_write_mask */
@@ -167,9 +168,9 @@ abstract class RDPipelineDepthStencilState extends RefCounted {
   }
 
   /** RDPipelineDepthStencilState.set_front_op_reference */
-  final def setFrontOpReference(p_member: Long): Unit = {
+  final def setFrontOpReference(pMember: Long): Unit = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_reference == null) gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_reference = MethodBind.get("RDPipelineDepthStencilState", "set_front_op_reference", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_reference, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_front_op_reference, livePtr, pMember)
   }
 
   /** RDPipelineDepthStencilState.get_front_op_reference */
@@ -179,57 +180,57 @@ abstract class RDPipelineDepthStencilState extends RefCounted {
   }
 
   /** RDPipelineDepthStencilState.set_back_op_fail */
-  final def setBackOpFail(p_member: Long): Unit = {
+  final def setBackOpFail(pMember: gdext.classes.RenderingDevice.StencilOperation): Unit = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_fail == null) gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_fail = MethodBind.get("RDPipelineDepthStencilState", "set_back_op_fail", 2092799566L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_fail, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_fail, livePtr, pMember)
   }
 
   /** RDPipelineDepthStencilState.get_back_op_fail */
-  final def getBackOpFail(): Long = {
+  final def getBackOpFail(): gdext.classes.RenderingDevice.StencilOperation = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_get_back_op_fail == null) gdext.classes.RDPipelineDepthStencilState.mb_get_back_op_fail = MethodBind.get("RDPipelineDepthStencilState", "get_back_op_fail", 1714732389L)
-    Ptrcall.call0[Long](gdext.classes.RDPipelineDepthStencilState.mb_get_back_op_fail, livePtr)
+    gdext.classes.RenderingDevice.StencilOperation(Ptrcall.call0[Long](gdext.classes.RDPipelineDepthStencilState.mb_get_back_op_fail, livePtr))
   }
 
   /** RDPipelineDepthStencilState.set_back_op_pass */
-  final def setBackOpPass(p_member: Long): Unit = {
+  final def setBackOpPass(pMember: gdext.classes.RenderingDevice.StencilOperation): Unit = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_pass == null) gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_pass = MethodBind.get("RDPipelineDepthStencilState", "set_back_op_pass", 2092799566L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_pass, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_pass, livePtr, pMember)
   }
 
   /** RDPipelineDepthStencilState.get_back_op_pass */
-  final def getBackOpPass(): Long = {
+  final def getBackOpPass(): gdext.classes.RenderingDevice.StencilOperation = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_get_back_op_pass == null) gdext.classes.RDPipelineDepthStencilState.mb_get_back_op_pass = MethodBind.get("RDPipelineDepthStencilState", "get_back_op_pass", 1714732389L)
-    Ptrcall.call0[Long](gdext.classes.RDPipelineDepthStencilState.mb_get_back_op_pass, livePtr)
+    gdext.classes.RenderingDevice.StencilOperation(Ptrcall.call0[Long](gdext.classes.RDPipelineDepthStencilState.mb_get_back_op_pass, livePtr))
   }
 
   /** RDPipelineDepthStencilState.set_back_op_depth_fail */
-  final def setBackOpDepthFail(p_member: Long): Unit = {
+  final def setBackOpDepthFail(pMember: gdext.classes.RenderingDevice.StencilOperation): Unit = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_depth_fail == null) gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_depth_fail = MethodBind.get("RDPipelineDepthStencilState", "set_back_op_depth_fail", 2092799566L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_depth_fail, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_depth_fail, livePtr, pMember)
   }
 
   /** RDPipelineDepthStencilState.get_back_op_depth_fail */
-  final def getBackOpDepthFail(): Long = {
+  final def getBackOpDepthFail(): gdext.classes.RenderingDevice.StencilOperation = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_get_back_op_depth_fail == null) gdext.classes.RDPipelineDepthStencilState.mb_get_back_op_depth_fail = MethodBind.get("RDPipelineDepthStencilState", "get_back_op_depth_fail", 1714732389L)
-    Ptrcall.call0[Long](gdext.classes.RDPipelineDepthStencilState.mb_get_back_op_depth_fail, livePtr)
+    gdext.classes.RenderingDevice.StencilOperation(Ptrcall.call0[Long](gdext.classes.RDPipelineDepthStencilState.mb_get_back_op_depth_fail, livePtr))
   }
 
   /** RDPipelineDepthStencilState.set_back_op_compare */
-  final def setBackOpCompare(p_member: Long): Unit = {
+  final def setBackOpCompare(pMember: gdext.classes.RenderingDevice.CompareOperator): Unit = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_compare == null) gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_compare = MethodBind.get("RDPipelineDepthStencilState", "set_back_op_compare", 2573711505L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_compare, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_compare, livePtr, pMember)
   }
 
   /** RDPipelineDepthStencilState.get_back_op_compare */
-  final def getBackOpCompare(): Long = {
+  final def getBackOpCompare(): gdext.classes.RenderingDevice.CompareOperator = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_get_back_op_compare == null) gdext.classes.RDPipelineDepthStencilState.mb_get_back_op_compare = MethodBind.get("RDPipelineDepthStencilState", "get_back_op_compare", 269730778L)
-    Ptrcall.call0[Long](gdext.classes.RDPipelineDepthStencilState.mb_get_back_op_compare, livePtr)
+    gdext.classes.RenderingDevice.CompareOperator(Ptrcall.call0[Long](gdext.classes.RDPipelineDepthStencilState.mb_get_back_op_compare, livePtr))
   }
 
   /** RDPipelineDepthStencilState.set_back_op_compare_mask */
-  final def setBackOpCompareMask(p_member: Long): Unit = {
+  final def setBackOpCompareMask(pMember: Long): Unit = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_compare_mask == null) gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_compare_mask = MethodBind.get("RDPipelineDepthStencilState", "set_back_op_compare_mask", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_compare_mask, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_compare_mask, livePtr, pMember)
   }
 
   /** RDPipelineDepthStencilState.get_back_op_compare_mask */
@@ -239,9 +240,9 @@ abstract class RDPipelineDepthStencilState extends RefCounted {
   }
 
   /** RDPipelineDepthStencilState.set_back_op_write_mask */
-  final def setBackOpWriteMask(p_member: Long): Unit = {
+  final def setBackOpWriteMask(pMember: Long): Unit = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_write_mask == null) gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_write_mask = MethodBind.get("RDPipelineDepthStencilState", "set_back_op_write_mask", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_write_mask, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_write_mask, livePtr, pMember)
   }
 
   /** RDPipelineDepthStencilState.get_back_op_write_mask */
@@ -251,9 +252,9 @@ abstract class RDPipelineDepthStencilState extends RefCounted {
   }
 
   /** RDPipelineDepthStencilState.set_back_op_reference */
-  final def setBackOpReference(p_member: Long): Unit = {
+  final def setBackOpReference(pMember: Long): Unit = {
     if (gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_reference == null) gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_reference = MethodBind.get("RDPipelineDepthStencilState", "set_back_op_reference", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_reference, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineDepthStencilState.mb_set_back_op_reference, livePtr, pMember)
   }
 
   /** RDPipelineDepthStencilState.get_back_op_reference */

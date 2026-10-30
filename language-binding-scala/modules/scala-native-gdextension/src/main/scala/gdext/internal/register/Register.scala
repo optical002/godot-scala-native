@@ -20,12 +20,24 @@ import gdext.internal.ffi.types.GDExtensionVariantType.*
  */
 object Register {
 
-  /** Engine virtuals the framework knows how to dispatch (see ClassRegistration). */
+  /** Engine virtuals the framework knows how to dispatch (see
+    * ClassRegistration): Godot name -> the overridable Scala method
+    * (GodotScriptClass). `_update_property` keeps its Godot name: the generated
+    * `EditorProperty.updateProperty()` (non-virtual `update_property`) owns
+    * the camelCase one. */
   private val knownVirtuals = List(
-    "_ready", "_process", "_physics_process",
-    "_enter_tree", "_exit_tree", "_update_property",
-    "_can_handle", "_parse_property",
-    "_input", "_shortcut_input", "_unhandled_input", "_unhandled_key_input"
+    "_ready"               -> "ready",
+    "_process"             -> "process",
+    "_physics_process"     -> "physicsProcess",
+    "_enter_tree"          -> "enterTree",
+    "_exit_tree"           -> "exitTree",
+    "_update_property"     -> "_update_property",
+    "_can_handle"          -> "canHandle",
+    "_parse_property"      -> "parseProperty",
+    "_input"               -> "input",
+    "_shortcut_input"      -> "shortcutInput",
+    "_unhandled_input"     -> "unhandledInput",
+    "_unhandled_key_input" -> "unhandledKeyInput"
   )
 
   // No `<: GodotScriptClass` bound: the macro is invoked from the generated
@@ -75,9 +87,13 @@ object Register {
     val baseSym = TypeRepr.of[GodotScriptClass].typeSymbol
     def declaresOverride(name: String): Boolean = {
       val owners = sym.typeRef.baseClasses.takeWhile(_ != baseSym)
-      owners.exists(c => c.declaredMethods.exists(_.name == name))
+      owners.exists(c =>
+        c.declaredMethods.exists(m => m.name == name && m.flags.is(Flags.Override))
+      )
     }
-    val overridden = Expr(knownVirtuals.filter(declaresOverride).toSet)
+    val overridden = Expr(
+      knownVirtuals.collect { case (godot, scala) if declaresOverride(scala) => godot }.toSet
+    )
 
     // --- helpers ----------------------------------------------------------
     // Annotations written on a primary-ctor `var` param can attach to the ctor
@@ -117,7 +133,7 @@ object Register {
 
     // --- runtime vs. tool class ------------------------------------------
     // `is_runtime` is only meaningful for Nodes: it keeps the editor from
-    // ticking their _process/_ready while merely editing a scene. Resources
+    // ticking their process/ready while merely editing a scene. Resources
     // (and any other non-Node Object) are never ticked, and they must be REAL
     // instances in the editor because you edit and save them there. Registering
     // a Resource as runtime sends the editor down its placeholder/recreate path,

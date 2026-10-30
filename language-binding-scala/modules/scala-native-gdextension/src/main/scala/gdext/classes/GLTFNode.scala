@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,9 +18,9 @@ abstract class GLTFNode extends Resource {
   }
 
   /** GLTFNode.set_original_name */
-  final def setOriginalName(original_name: String): Unit = {
+  final def setOriginalName(originalName: String): Unit = {
     if (gdext.classes.GLTFNode.mb_set_original_name == null) gdext.classes.GLTFNode.mb_set_original_name = MethodBind.get("GLTFNode", "set_original_name", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.GLTFNode.mb_set_original_name, livePtr, original_name)
+    Ptrcall.callVoid1(gdext.classes.GLTFNode.mb_set_original_name, livePtr, originalName)
   }
 
   /** GLTFNode.get_parent */
@@ -143,9 +144,9 @@ abstract class GLTFNode extends Resource {
   }
 
   /** GLTFNode.append_child_index */
-  final def appendChildIndex(child_index: Long): Unit = {
+  final def appendChildIndex(childIndex: Long): Unit = {
     if (gdext.classes.GLTFNode.mb_append_child_index == null) gdext.classes.GLTFNode.mb_append_child_index = MethodBind.get("GLTFNode", "append_child_index", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.GLTFNode.mb_append_child_index, livePtr, child_index)
+    Ptrcall.callVoid1(gdext.classes.GLTFNode.mb_append_child_index, livePtr, childIndex)
   }
 
   /** GLTFNode.get_light */

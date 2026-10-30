@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -29,33 +30,33 @@ abstract class MeshLibrary extends Resource {
   }
 
   /** MeshLibrary.set_item_mesh_transform */
-  final def setItemMeshTransform(id: Long, mesh_transform: gdext.builtin.Transform3D): Unit = {
+  final def setItemMeshTransform(id: Long, meshTransform: gdext.builtin.Transform3D): Unit = {
     if (gdext.classes.MeshLibrary.mb_set_item_mesh_transform == null) gdext.classes.MeshLibrary.mb_set_item_mesh_transform = MethodBind.get("MeshLibrary", "set_item_mesh_transform", 3616898986L)
-    Ptrcall.callVoid2(gdext.classes.MeshLibrary.mb_set_item_mesh_transform, livePtr, id, mesh_transform)
+    Ptrcall.callVoid2(gdext.classes.MeshLibrary.mb_set_item_mesh_transform, livePtr, id, meshTransform)
   }
 
   /** MeshLibrary.set_item_mesh_cast_shadow */
-  final def setItemMeshCastShadow(id: Long, shadow_casting_setting: Long): Unit = {
+  final def setItemMeshCastShadow(id: Long, shadowCastingSetting: gdext.classes.RenderingServer.ShadowCastingSetting): Unit = {
     if (gdext.classes.MeshLibrary.mb_set_item_mesh_cast_shadow == null) gdext.classes.MeshLibrary.mb_set_item_mesh_cast_shadow = MethodBind.get("MeshLibrary", "set_item_mesh_cast_shadow", 3923400443L)
-    Ptrcall.callVoid2(gdext.classes.MeshLibrary.mb_set_item_mesh_cast_shadow, livePtr, id, shadow_casting_setting)
+    Ptrcall.callVoid2(gdext.classes.MeshLibrary.mb_set_item_mesh_cast_shadow, livePtr, id, shadowCastingSetting)
   }
 
   /** MeshLibrary.set_item_navigation_mesh */
-  final def setItemNavigationMesh(id: Long, navigation_mesh: NavigationMesh): Unit = {
+  final def setItemNavigationMesh(id: Long, navigationMesh: NavigationMesh): Unit = {
     if (gdext.classes.MeshLibrary.mb_set_item_navigation_mesh == null) gdext.classes.MeshLibrary.mb_set_item_navigation_mesh = MethodBind.get("MeshLibrary", "set_item_navigation_mesh", 3483353960L)
-    Ptrcall.callVoid2(gdext.classes.MeshLibrary.mb_set_item_navigation_mesh, livePtr, id, Wrappers.handle(navigation_mesh))
+    Ptrcall.callVoid2(gdext.classes.MeshLibrary.mb_set_item_navigation_mesh, livePtr, id, Wrappers.handle(navigationMesh))
   }
 
   /** MeshLibrary.set_item_navigation_mesh_transform */
-  final def setItemNavigationMeshTransform(id: Long, navigation_mesh: gdext.builtin.Transform3D): Unit = {
+  final def setItemNavigationMeshTransform(id: Long, navigationMesh: gdext.builtin.Transform3D): Unit = {
     if (gdext.classes.MeshLibrary.mb_set_item_navigation_mesh_transform == null) gdext.classes.MeshLibrary.mb_set_item_navigation_mesh_transform = MethodBind.get("MeshLibrary", "set_item_navigation_mesh_transform", 3616898986L)
-    Ptrcall.callVoid2(gdext.classes.MeshLibrary.mb_set_item_navigation_mesh_transform, livePtr, id, navigation_mesh)
+    Ptrcall.callVoid2(gdext.classes.MeshLibrary.mb_set_item_navigation_mesh_transform, livePtr, id, navigationMesh)
   }
 
   /** MeshLibrary.set_item_navigation_layers */
-  final def setItemNavigationLayers(id: Long, navigation_layers: Long): Unit = {
+  final def setItemNavigationLayers(id: Long, navigationLayers: Long): Unit = {
     if (gdext.classes.MeshLibrary.mb_set_item_navigation_layers == null) gdext.classes.MeshLibrary.mb_set_item_navigation_layers = MethodBind.get("MeshLibrary", "set_item_navigation_layers", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.MeshLibrary.mb_set_item_navigation_layers, livePtr, id, navigation_layers)
+    Ptrcall.callVoid2(gdext.classes.MeshLibrary.mb_set_item_navigation_layers, livePtr, id, navigationLayers)
   }
 
   /** MeshLibrary.set_item_preview */
@@ -83,9 +84,9 @@ abstract class MeshLibrary extends Resource {
   }
 
   /** MeshLibrary.get_item_mesh_cast_shadow */
-  final def getItemMeshCastShadow(id: Long): Long = {
+  final def getItemMeshCastShadow(id: Long): gdext.classes.RenderingServer.ShadowCastingSetting = {
     if (gdext.classes.MeshLibrary.mb_get_item_mesh_cast_shadow == null) gdext.classes.MeshLibrary.mb_get_item_mesh_cast_shadow = MethodBind.get("MeshLibrary", "get_item_mesh_cast_shadow", 1841766007L)
-    Ptrcall.call1[Long, Long](gdext.classes.MeshLibrary.mb_get_item_mesh_cast_shadow, livePtr, id)
+    gdext.classes.RenderingServer.ShadowCastingSetting(Ptrcall.call1[Long, Long](gdext.classes.MeshLibrary.mb_get_item_mesh_cast_shadow, livePtr, id))
   }
 
   /** MeshLibrary.get_item_navigation_mesh. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */

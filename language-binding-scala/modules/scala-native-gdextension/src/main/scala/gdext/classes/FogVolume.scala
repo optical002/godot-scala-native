@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,15 +24,15 @@ abstract class FogVolume extends VisualInstance3D {
   }
 
   /** FogVolume.set_shape */
-  final def setShape(shape: Long): Unit = {
+  final def setShape(shape: gdext.classes.RenderingServer.FogVolumeShape): Unit = {
     if (gdext.classes.FogVolume.mb_set_shape == null) gdext.classes.FogVolume.mb_set_shape = MethodBind.get("FogVolume", "set_shape", 1416323362L)
     Ptrcall.callVoid1(gdext.classes.FogVolume.mb_set_shape, livePtr, shape)
   }
 
   /** FogVolume.get_shape */
-  final def getShape(): Long = {
+  final def getShape(): gdext.classes.RenderingServer.FogVolumeShape = {
     if (gdext.classes.FogVolume.mb_get_shape == null) gdext.classes.FogVolume.mb_get_shape = MethodBind.get("FogVolume", "get_shape", 3920334604L)
-    Ptrcall.call0[Long](gdext.classes.FogVolume.mb_get_shape, livePtr)
+    gdext.classes.RenderingServer.FogVolumeShape(Ptrcall.call0[Long](gdext.classes.FogVolume.mb_get_shape, livePtr))
   }
 
   /** FogVolume.set_material */

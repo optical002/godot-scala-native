@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,51 +24,51 @@ abstract class Button extends BaseButton {
   }
 
   /** Button.set_text_overrun_behavior */
-  final def setTextOverrunBehavior(overrun_behavior: Long): Unit = {
+  final def setTextOverrunBehavior(overrunBehavior: gdext.classes.TextServer.OverrunBehavior): Unit = {
     if (gdext.classes.Button.mb_set_text_overrun_behavior == null) gdext.classes.Button.mb_set_text_overrun_behavior = MethodBind.get("Button", "set_text_overrun_behavior", 1008890932L)
-    Ptrcall.callVoid1(gdext.classes.Button.mb_set_text_overrun_behavior, livePtr, overrun_behavior)
+    Ptrcall.callVoid1(gdext.classes.Button.mb_set_text_overrun_behavior, livePtr, overrunBehavior)
   }
 
   /** Button.get_text_overrun_behavior */
-  final def getTextOverrunBehavior(): Long = {
+  final def getTextOverrunBehavior(): gdext.classes.TextServer.OverrunBehavior = {
     if (gdext.classes.Button.mb_get_text_overrun_behavior == null) gdext.classes.Button.mb_get_text_overrun_behavior = MethodBind.get("Button", "get_text_overrun_behavior", 3779142101L)
-    Ptrcall.call0[Long](gdext.classes.Button.mb_get_text_overrun_behavior, livePtr)
+    gdext.classes.TextServer.OverrunBehavior(Ptrcall.call0[Long](gdext.classes.Button.mb_get_text_overrun_behavior, livePtr))
   }
 
   /** Button.set_autowrap_mode */
-  final def setAutowrapMode(autowrap_mode: Long): Unit = {
+  final def setAutowrapMode(autowrapMode: gdext.classes.TextServer.AutowrapMode): Unit = {
     if (gdext.classes.Button.mb_set_autowrap_mode == null) gdext.classes.Button.mb_set_autowrap_mode = MethodBind.get("Button", "set_autowrap_mode", 3289138044L)
-    Ptrcall.callVoid1(gdext.classes.Button.mb_set_autowrap_mode, livePtr, autowrap_mode)
+    Ptrcall.callVoid1(gdext.classes.Button.mb_set_autowrap_mode, livePtr, autowrapMode)
   }
 
   /** Button.get_autowrap_mode */
-  final def getAutowrapMode(): Long = {
+  final def getAutowrapMode(): gdext.classes.TextServer.AutowrapMode = {
     if (gdext.classes.Button.mb_get_autowrap_mode == null) gdext.classes.Button.mb_get_autowrap_mode = MethodBind.get("Button", "get_autowrap_mode", 1549071663L)
-    Ptrcall.call0[Long](gdext.classes.Button.mb_get_autowrap_mode, livePtr)
+    gdext.classes.TextServer.AutowrapMode(Ptrcall.call0[Long](gdext.classes.Button.mb_get_autowrap_mode, livePtr))
   }
 
   /** Button.set_autowrap_trim_flags */
-  final def setAutowrapTrimFlags(autowrap_trim_flags: Long): Unit = {
+  final def setAutowrapTrimFlags(autowrapTrimFlags: gdext.classes.TextServer.LineBreakFlag): Unit = {
     if (gdext.classes.Button.mb_set_autowrap_trim_flags == null) gdext.classes.Button.mb_set_autowrap_trim_flags = MethodBind.get("Button", "set_autowrap_trim_flags", 2809697122L)
-    Ptrcall.callVoid1(gdext.classes.Button.mb_set_autowrap_trim_flags, livePtr, autowrap_trim_flags)
+    Ptrcall.callVoid1(gdext.classes.Button.mb_set_autowrap_trim_flags, livePtr, autowrapTrimFlags.asInstanceOf[Long])
   }
 
   /** Button.get_autowrap_trim_flags */
-  final def getAutowrapTrimFlags(): Long = {
+  final def getAutowrapTrimFlags(): gdext.classes.TextServer.LineBreakFlag = {
     if (gdext.classes.Button.mb_get_autowrap_trim_flags == null) gdext.classes.Button.mb_get_autowrap_trim_flags = MethodBind.get("Button", "get_autowrap_trim_flags", 2340632602L)
-    Ptrcall.call0[Long](gdext.classes.Button.mb_get_autowrap_trim_flags, livePtr)
+    gdext.classes.TextServer.LineBreakFlag(Ptrcall.call0[Long](gdext.classes.Button.mb_get_autowrap_trim_flags, livePtr))
   }
 
   /** Button.set_text_direction */
-  final def setTextDirection(direction: Long): Unit = {
+  final def setTextDirection(direction: gdext.classes.Control.TextDirection): Unit = {
     if (gdext.classes.Button.mb_set_text_direction == null) gdext.classes.Button.mb_set_text_direction = MethodBind.get("Button", "set_text_direction", 119160795L)
     Ptrcall.callVoid1(gdext.classes.Button.mb_set_text_direction, livePtr, direction)
   }
 
   /** Button.get_text_direction */
-  final def getTextDirection(): Long = {
+  final def getTextDirection(): gdext.classes.Control.TextDirection = {
     if (gdext.classes.Button.mb_get_text_direction == null) gdext.classes.Button.mb_get_text_direction = MethodBind.get("Button", "get_text_direction", 797257663L)
-    Ptrcall.call0[Long](gdext.classes.Button.mb_get_text_direction, livePtr)
+    gdext.classes.Control.TextDirection(Ptrcall.call0[Long](gdext.classes.Button.mb_get_text_direction, livePtr))
   }
 
   /** Button.set_language */
@@ -119,39 +120,39 @@ abstract class Button extends BaseButton {
   }
 
   /** Button.set_text_alignment */
-  final def setTextAlignment(alignment: Long): Unit = {
+  final def setTextAlignment(alignment: gdext.classes.HorizontalAlignment): Unit = {
     if (gdext.classes.Button.mb_set_text_alignment == null) gdext.classes.Button.mb_set_text_alignment = MethodBind.get("Button", "set_text_alignment", 2312603777L)
     Ptrcall.callVoid1(gdext.classes.Button.mb_set_text_alignment, livePtr, alignment)
   }
 
   /** Button.get_text_alignment */
-  final def getTextAlignment(): Long = {
+  final def getTextAlignment(): gdext.classes.HorizontalAlignment = {
     if (gdext.classes.Button.mb_get_text_alignment == null) gdext.classes.Button.mb_get_text_alignment = MethodBind.get("Button", "get_text_alignment", 341400642L)
-    Ptrcall.call0[Long](gdext.classes.Button.mb_get_text_alignment, livePtr)
+    gdext.classes.HorizontalAlignment(Ptrcall.call0[Long](gdext.classes.Button.mb_get_text_alignment, livePtr))
   }
 
   /** Button.set_icon_alignment */
-  final def setIconAlignment(icon_alignment: Long): Unit = {
+  final def setIconAlignment(iconAlignment: gdext.classes.HorizontalAlignment): Unit = {
     if (gdext.classes.Button.mb_set_icon_alignment == null) gdext.classes.Button.mb_set_icon_alignment = MethodBind.get("Button", "set_icon_alignment", 2312603777L)
-    Ptrcall.callVoid1(gdext.classes.Button.mb_set_icon_alignment, livePtr, icon_alignment)
+    Ptrcall.callVoid1(gdext.classes.Button.mb_set_icon_alignment, livePtr, iconAlignment)
   }
 
   /** Button.get_icon_alignment */
-  final def getIconAlignment(): Long = {
+  final def getIconAlignment(): gdext.classes.HorizontalAlignment = {
     if (gdext.classes.Button.mb_get_icon_alignment == null) gdext.classes.Button.mb_get_icon_alignment = MethodBind.get("Button", "get_icon_alignment", 341400642L)
-    Ptrcall.call0[Long](gdext.classes.Button.mb_get_icon_alignment, livePtr)
+    gdext.classes.HorizontalAlignment(Ptrcall.call0[Long](gdext.classes.Button.mb_get_icon_alignment, livePtr))
   }
 
   /** Button.set_vertical_icon_alignment */
-  final def setVerticalIconAlignment(vertical_icon_alignment: Long): Unit = {
+  final def setVerticalIconAlignment(verticalIconAlignment: gdext.classes.VerticalAlignment): Unit = {
     if (gdext.classes.Button.mb_set_vertical_icon_alignment == null) gdext.classes.Button.mb_set_vertical_icon_alignment = MethodBind.get("Button", "set_vertical_icon_alignment", 1796458609L)
-    Ptrcall.callVoid1(gdext.classes.Button.mb_set_vertical_icon_alignment, livePtr, vertical_icon_alignment)
+    Ptrcall.callVoid1(gdext.classes.Button.mb_set_vertical_icon_alignment, livePtr, verticalIconAlignment)
   }
 
   /** Button.get_vertical_icon_alignment */
-  final def getVerticalIconAlignment(): Long = {
+  final def getVerticalIconAlignment(): gdext.classes.VerticalAlignment = {
     if (gdext.classes.Button.mb_get_vertical_icon_alignment == null) gdext.classes.Button.mb_get_vertical_icon_alignment = MethodBind.get("Button", "get_vertical_icon_alignment", 3274884059L)
-    Ptrcall.call0[Long](gdext.classes.Button.mb_get_vertical_icon_alignment, livePtr)
+    gdext.classes.VerticalAlignment(Ptrcall.call0[Long](gdext.classes.Button.mb_get_vertical_icon_alignment, livePtr))
   }
 
   /** Button.set_expand_icon */

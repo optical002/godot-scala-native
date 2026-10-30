@@ -4,7 +4,7 @@ import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
 import scala.scalanative.libc.stdlib
 import gdext.Godot
-import gdext.builtin.StringNames
+import gdext.internal.StringNames
 import gdext.internal.ffi.types.*
 import gdext.internal.Addr
 import gdext.internal.engine.Wrappers
@@ -223,7 +223,7 @@ object ClassRegistration {
       val desc = ClassRegistry.classFor(Tokens.fromPtr(classUserdata))
       // Match by the StringName's text. Two StringName *handles* for the same
       // text are not pointer-equal, so we decode and compare the string.
-      val vname = gdext.builtin.StringName.toScala(name)
+      val vname = gdext.internal.StringName.toScala(name)
       val overridden = desc.overriddenVirtuals.contains(vname)
       gdext.Log.trace(
         s"getVirtual: ${desc.className} '$vname' overridden=$overridden"
@@ -265,14 +265,14 @@ object ClassRegistration {
   @exported("gdext_scala_virtual_process")
   def processExport(instance: Long, args: Long, ret: Long): Unit = {
     val scala = ClassRegistry.instanceFor(instance)
-    if (scala != null) scala._process(!Addr.ptr[CDouble](argAt(args, 0)))
+    if (scala != null) scala.process(!Addr.ptr[CDouble](argAt(args, 0)))
   }
 
   @exported("gdext_scala_virtual_physics_process")
   def physicsProcessExport(instance: Long, args: Long, ret: Long): Unit = {
     val scala = ClassRegistry.instanceFor(instance)
     if (scala != null)
-      scala._physics_process(!Addr.ptr[CDouble](argAt(args, 0)))
+      scala.physicsProcess(!Addr.ptr[CDouble](argAt(args, 0)))
   }
 
   // Input virtuals: arg0 is the InputEvent object handle, passed on as the
@@ -286,25 +286,25 @@ object ClassRegistration {
   @exported("gdext_scala_virtual_input")
   def inputExport(instance: Long, args: Long, ret: Long): Unit = {
     val scala = ClassRegistry.instanceFor(instance)
-    if (scala != null) scala._input(inputEventArg(args))
+    if (scala != null) scala.input(inputEventArg(args))
   }
 
   @exported("gdext_scala_virtual_shortcut_input")
   def shortcutInputExport(instance: Long, args: Long, ret: Long): Unit = {
     val scala = ClassRegistry.instanceFor(instance)
-    if (scala != null) scala._shortcut_input(inputEventArg(args))
+    if (scala != null) scala.shortcutInput(inputEventArg(args))
   }
 
   @exported("gdext_scala_virtual_unhandled_input")
   def unhandledInputExport(instance: Long, args: Long, ret: Long): Unit = {
     val scala = ClassRegistry.instanceFor(instance)
-    if (scala != null) scala._unhandled_input(inputEventArg(args))
+    if (scala != null) scala.unhandledInput(inputEventArg(args))
   }
 
   @exported("gdext_scala_virtual_unhandled_key_input")
   def unhandledKeyInputExport(instance: Long, args: Long, ret: Long): Unit = {
     val scala = ClassRegistry.instanceFor(instance)
-    if (scala != null) scala._unhandled_key_input(inputEventArg(args))
+    if (scala != null) scala.unhandledKeyInput(inputEventArg(args))
   }
 
   private lazy val processDispatch = virtualAt(TrampolineAddrs.process())
@@ -323,7 +323,7 @@ object ClassRegistration {
       val tok = Tokens.fromPtr(instance)
       val scala = ClassRegistry.instanceFor(tok)
       gdext.Log.trace(s"_ready: token=$tok scala=${if (scala == null) "null" else scala.getClass.getSimpleName}")
-      if (scala != null) scala._ready()
+      if (scala != null) scala.ready()
     }
 
   // --- editor virtual dispatchers ----------------------------------------
@@ -333,7 +333,7 @@ object ClassRegistration {
       val tok = Tokens.fromPtr(instance)
       val scala = ClassRegistry.instanceFor(tok)
       gdext.Log.trace(s"_enter_tree: ENTER token=$tok scala=${if (scala == null) "null" else scala.getClass.getSimpleName}")
-      if (scala != null) scala._enter_tree()
+      if (scala != null) scala.enterTree()
       gdext.Log.trace(s"_enter_tree: EXIT token=$tok")
     }
 
@@ -342,7 +342,7 @@ object ClassRegistration {
       val tok = Tokens.fromPtr(instance)
       val scala = ClassRegistry.instanceFor(tok)
       gdext.Log.trace(s"_exit_tree: ENTER token=$tok scala=${if (scala == null) "null" else scala.getClass.getSimpleName}")
-      if (scala != null) scala._exit_tree()
+      if (scala != null) scala.exitTree()
       gdext.Log.trace(s"_exit_tree: EXIT token=$tok")
     }
 
@@ -369,7 +369,7 @@ object ClassRegistration {
       gdext.Log.trace(s"_can_handle: ENTER token=$tok scala=${if (scala == null) "null" else scala.getClass.getSimpleName}")
       if (scala != null) {
         val objPtr = !args(0).asInstanceOf[Ptr[GDExtensionObjectPtr]]
-        val r = scala._can_handle(
+        val r = scala.canHandle(
           gdext.internal.engine.GodotObject.fromPtr(objPtr)
         )
         gdext.Log.trace(s"_can_handle: EXIT token=$tok result=$r")
@@ -393,7 +393,7 @@ object ClassRegistration {
         gdext.Log.trace(
           s"_parse_property: name='$name' varType=$varType hint=$hintType hintStr='$hintString' usage=$usage wide=$wide"
         )
-        val r = scala._parse_property(
+        val r = scala.parseProperty(
           gdext.internal.engine.GodotObject.fromPtr(objPtr),
           varType,
           name,
@@ -428,7 +428,7 @@ object ClassRegistration {
       else {
         val className = scala.getClass.getSimpleName
         val propName =
-          gdext.builtin.StringName.toScala(!(!pi).at_name)
+          gdext.internal.StringName.toScala(!(!pi).at_name)
         CompEnumRegistry.namesFor(className, propName, scala) match {
           case Some(names) =>
             val joined = (if (names.isEmpty) Seq("") else names).mkString(",")

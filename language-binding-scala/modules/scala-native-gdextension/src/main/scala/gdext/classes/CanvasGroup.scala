@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class CanvasGroup extends Node2D {
   override def godotClassName: String = "CanvasGroup"
 
   /** CanvasGroup.set_fit_margin */
-  final def setFitMargin(fit_margin: Double): Unit = {
+  final def setFitMargin(fitMargin: Double): Unit = {
     if (gdext.classes.CanvasGroup.mb_set_fit_margin == null) gdext.classes.CanvasGroup.mb_set_fit_margin = MethodBind.get("CanvasGroup", "set_fit_margin", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.CanvasGroup.mb_set_fit_margin, livePtr, fit_margin)
+    Ptrcall.callVoid1(gdext.classes.CanvasGroup.mb_set_fit_margin, livePtr, fitMargin)
   }
 
   /** CanvasGroup.get_fit_margin */
@@ -23,9 +24,9 @@ abstract class CanvasGroup extends Node2D {
   }
 
   /** CanvasGroup.set_clear_margin */
-  final def setClearMargin(clear_margin: Double): Unit = {
+  final def setClearMargin(clearMargin: Double): Unit = {
     if (gdext.classes.CanvasGroup.mb_set_clear_margin == null) gdext.classes.CanvasGroup.mb_set_clear_margin = MethodBind.get("CanvasGroup", "set_clear_margin", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.CanvasGroup.mb_set_clear_margin, livePtr, clear_margin)
+    Ptrcall.callVoid1(gdext.classes.CanvasGroup.mb_set_clear_margin, livePtr, clearMargin)
   }
 
   /** CanvasGroup.get_clear_margin */
@@ -35,9 +36,9 @@ abstract class CanvasGroup extends Node2D {
   }
 
   /** CanvasGroup.set_use_mipmaps */
-  final def setUseMipmaps(use_mipmaps: Boolean): Unit = {
+  final def setUseMipmaps(useMipmaps: Boolean): Unit = {
     if (gdext.classes.CanvasGroup.mb_set_use_mipmaps == null) gdext.classes.CanvasGroup.mb_set_use_mipmaps = MethodBind.get("CanvasGroup", "set_use_mipmaps", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.CanvasGroup.mb_set_use_mipmaps, livePtr, use_mipmaps)
+    Ptrcall.callVoid1(gdext.classes.CanvasGroup.mb_set_use_mipmaps, livePtr, useMipmaps)
   }
 
   /** CanvasGroup.is_using_mipmaps */

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,13 +12,13 @@ abstract class UndoRedo extends Object {
   override def godotClassName: String = "UndoRedo"
 
   /** UndoRedo.create_action */
-  final def createAction(name: String, merge_mode: Long, backward_undo_ops: Boolean): Unit = {
+  final def createAction(name: String, mergeMode: gdext.classes.UndoRedo.MergeMode = gdext.classes.UndoRedo.MergeMode(0L), backwardUndoOps: Boolean = false): Unit = {
     if (gdext.classes.UndoRedo.mb_create_action == null) gdext.classes.UndoRedo.mb_create_action = MethodBind.get("UndoRedo", "create_action", 3171901514L)
-    Ptrcall.callVoid3(gdext.classes.UndoRedo.mb_create_action, livePtr, name, merge_mode, backward_undo_ops)
+    Ptrcall.callVoid3(gdext.classes.UndoRedo.mb_create_action, livePtr, name, mergeMode, backwardUndoOps)
   }
 
   /** UndoRedo.commit_action */
-  final def commitAction(execute: Boolean): Unit = {
+  final def commitAction(execute: Boolean = true): Unit = {
     if (gdext.classes.UndoRedo.mb_commit_action == null) gdext.classes.UndoRedo.mb_commit_action = MethodBind.get("UndoRedo", "commit_action", 3216645846L)
     Ptrcall.callVoid1(gdext.classes.UndoRedo.mb_commit_action, livePtr, execute)
   }
@@ -71,9 +72,9 @@ abstract class UndoRedo extends Object {
   }
 
   /** UndoRedo.clear_history */
-  final def clearHistory(increase_version: Boolean): Unit = {
+  final def clearHistory(increaseVersion: Boolean = true): Unit = {
     if (gdext.classes.UndoRedo.mb_clear_history == null) gdext.classes.UndoRedo.mb_clear_history = MethodBind.get("UndoRedo", "clear_history", 3216645846L)
-    Ptrcall.callVoid1(gdext.classes.UndoRedo.mb_clear_history, livePtr, increase_version)
+    Ptrcall.callVoid1(gdext.classes.UndoRedo.mb_clear_history, livePtr, increaseVersion)
   }
 
   /** UndoRedo.get_current_action_name */
@@ -101,9 +102,9 @@ abstract class UndoRedo extends Object {
   }
 
   /** UndoRedo.set_max_steps */
-  final def setMaxSteps(max_steps: Long): Unit = {
+  final def setMaxSteps(maxSteps: Long): Unit = {
     if (gdext.classes.UndoRedo.mb_set_max_steps == null) gdext.classes.UndoRedo.mb_set_max_steps = MethodBind.get("UndoRedo", "set_max_steps", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.UndoRedo.mb_set_max_steps, livePtr, max_steps)
+    Ptrcall.callVoid1(gdext.classes.UndoRedo.mb_set_max_steps, livePtr, maxSteps)
   }
 
   /** UndoRedo.get_max_steps */
@@ -146,4 +147,28 @@ object UndoRedo {
   private[classes] var mb_get_max_steps: GDExtensionMethodBindPtr = null
   private[classes] var mb_redo: GDExtensionMethodBindPtr = null
   private[classes] var mb_undo: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `UndoRedo.MergeMode`. */
+  opaque type MergeMode <: Long = Long
+
+  object MergeMode {
+    final val Disable: MergeMode = 0L.asInstanceOf[MergeMode]
+    final val Ends: MergeMode = 1L.asInstanceOf[MergeMode]
+    final val All: MergeMode = 2L.asInstanceOf[MergeMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): MergeMode = value.asInstanceOf[MergeMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[MergeMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[MergeMode]]
+
+    extension (self: MergeMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disable"
+        case 1L => "Ends"
+        case 2L => "All"
+        case other => other.toString
+      }
+  }
 }

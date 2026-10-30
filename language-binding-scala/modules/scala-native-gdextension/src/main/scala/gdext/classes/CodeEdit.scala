@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class CodeEdit extends TextEdit {
   }
 
   /** CodeEdit.set_indent_using_spaces */
-  final def setIndentUsingSpaces(use_spaces: Boolean): Unit = {
+  final def setIndentUsingSpaces(useSpaces: Boolean): Unit = {
     if (gdext.classes.CodeEdit.mb_set_indent_using_spaces == null) gdext.classes.CodeEdit.mb_set_indent_using_spaces = MethodBind.get("CodeEdit", "set_indent_using_spaces", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.CodeEdit.mb_set_indent_using_spaces, livePtr, use_spaces)
+    Ptrcall.callVoid1(gdext.classes.CodeEdit.mb_set_indent_using_spaces, livePtr, useSpaces)
   }
 
   /** CodeEdit.is_indent_using_spaces */
@@ -65,9 +66,9 @@ abstract class CodeEdit extends TextEdit {
   }
 
   /** CodeEdit.convert_indent */
-  final def convertIndent(from_line: Long, to_line: Long): Unit = {
+  final def convertIndent(fromLine: Long = -1L, toLine: Long = -1L): Unit = {
     if (gdext.classes.CodeEdit.mb_convert_indent == null) gdext.classes.CodeEdit.mb_convert_indent = MethodBind.get("CodeEdit", "convert_indent", 423910286L)
-    Ptrcall.callVoid2(gdext.classes.CodeEdit.mb_convert_indent, livePtr, from_line, to_line)
+    Ptrcall.callVoid2(gdext.classes.CodeEdit.mb_convert_indent, livePtr, fromLine, toLine)
   }
 
   /** CodeEdit.set_auto_brace_completion_enabled */
@@ -95,27 +96,27 @@ abstract class CodeEdit extends TextEdit {
   }
 
   /** CodeEdit.add_auto_brace_completion_pair */
-  final def addAutoBraceCompletionPair(start_key: String, end_key: String): Unit = {
+  final def addAutoBraceCompletionPair(startKey: String, endKey: String): Unit = {
     if (gdext.classes.CodeEdit.mb_add_auto_brace_completion_pair == null) gdext.classes.CodeEdit.mb_add_auto_brace_completion_pair = MethodBind.get("CodeEdit", "add_auto_brace_completion_pair", 3186203200L)
-    Ptrcall.callVoid2(gdext.classes.CodeEdit.mb_add_auto_brace_completion_pair, livePtr, start_key, end_key)
+    Ptrcall.callVoid2(gdext.classes.CodeEdit.mb_add_auto_brace_completion_pair, livePtr, startKey, endKey)
   }
 
   /** CodeEdit.has_auto_brace_completion_open_key */
-  final def hasAutoBraceCompletionOpenKey(open_key: String): Boolean = {
+  final def hasAutoBraceCompletionOpenKey(openKey: String): Boolean = {
     if (gdext.classes.CodeEdit.mb_has_auto_brace_completion_open_key == null) gdext.classes.CodeEdit.mb_has_auto_brace_completion_open_key = MethodBind.get("CodeEdit", "has_auto_brace_completion_open_key", 3927539163L)
-    Ptrcall.call1[String, Boolean](gdext.classes.CodeEdit.mb_has_auto_brace_completion_open_key, livePtr, open_key)
+    Ptrcall.call1[String, Boolean](gdext.classes.CodeEdit.mb_has_auto_brace_completion_open_key, livePtr, openKey)
   }
 
   /** CodeEdit.has_auto_brace_completion_close_key */
-  final def hasAutoBraceCompletionCloseKey(close_key: String): Boolean = {
+  final def hasAutoBraceCompletionCloseKey(closeKey: String): Boolean = {
     if (gdext.classes.CodeEdit.mb_has_auto_brace_completion_close_key == null) gdext.classes.CodeEdit.mb_has_auto_brace_completion_close_key = MethodBind.get("CodeEdit", "has_auto_brace_completion_close_key", 3927539163L)
-    Ptrcall.call1[String, Boolean](gdext.classes.CodeEdit.mb_has_auto_brace_completion_close_key, livePtr, close_key)
+    Ptrcall.call1[String, Boolean](gdext.classes.CodeEdit.mb_has_auto_brace_completion_close_key, livePtr, closeKey)
   }
 
   /** CodeEdit.get_auto_brace_completion_close_key */
-  final def getAutoBraceCompletionCloseKey(open_key: String): String = {
+  final def getAutoBraceCompletionCloseKey(openKey: String): String = {
     if (gdext.classes.CodeEdit.mb_get_auto_brace_completion_close_key == null) gdext.classes.CodeEdit.mb_get_auto_brace_completion_close_key = MethodBind.get("CodeEdit", "get_auto_brace_completion_close_key", 3135753539L)
-    Ptrcall.call1[String, String](gdext.classes.CodeEdit.mb_get_auto_brace_completion_close_key, livePtr, open_key)
+    Ptrcall.call1[String, String](gdext.classes.CodeEdit.mb_get_auto_brace_completion_close_key, livePtr, openKey)
   }
 
   /** CodeEdit.set_draw_breakpoints_gutter */
@@ -335,7 +336,7 @@ abstract class CodeEdit extends TextEdit {
   }
 
   /** CodeEdit.set_code_region_tags */
-  final def setCodeRegionTags(start: String, end: String): Unit = {
+  final def setCodeRegionTags(start: String = "region", end: String = "endregion"): Unit = {
     if (gdext.classes.CodeEdit.mb_set_code_region_tags == null) gdext.classes.CodeEdit.mb_set_code_region_tags = MethodBind.get("CodeEdit", "set_code_region_tags", 708800718L)
     Ptrcall.callVoid2(gdext.classes.CodeEdit.mb_set_code_region_tags, livePtr, start, end)
   }
@@ -353,21 +354,21 @@ abstract class CodeEdit extends TextEdit {
   }
 
   /** CodeEdit.add_string_delimiter */
-  final def addStringDelimiter(start_key: String, end_key: String, line_only: Boolean): Unit = {
+  final def addStringDelimiter(startKey: String, endKey: String, lineOnly: Boolean = false): Unit = {
     if (gdext.classes.CodeEdit.mb_add_string_delimiter == null) gdext.classes.CodeEdit.mb_add_string_delimiter = MethodBind.get("CodeEdit", "add_string_delimiter", 3146098955L)
-    Ptrcall.callVoid3(gdext.classes.CodeEdit.mb_add_string_delimiter, livePtr, start_key, end_key, line_only)
+    Ptrcall.callVoid3(gdext.classes.CodeEdit.mb_add_string_delimiter, livePtr, startKey, endKey, lineOnly)
   }
 
   /** CodeEdit.remove_string_delimiter */
-  final def removeStringDelimiter(start_key: String): Unit = {
+  final def removeStringDelimiter(startKey: String): Unit = {
     if (gdext.classes.CodeEdit.mb_remove_string_delimiter == null) gdext.classes.CodeEdit.mb_remove_string_delimiter = MethodBind.get("CodeEdit", "remove_string_delimiter", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.CodeEdit.mb_remove_string_delimiter, livePtr, start_key)
+    Ptrcall.callVoid1(gdext.classes.CodeEdit.mb_remove_string_delimiter, livePtr, startKey)
   }
 
   /** CodeEdit.has_string_delimiter */
-  final def hasStringDelimiter(start_key: String): Boolean = {
+  final def hasStringDelimiter(startKey: String): Boolean = {
     if (gdext.classes.CodeEdit.mb_has_string_delimiter == null) gdext.classes.CodeEdit.mb_has_string_delimiter = MethodBind.get("CodeEdit", "has_string_delimiter", 3927539163L)
-    Ptrcall.call1[String, Boolean](gdext.classes.CodeEdit.mb_has_string_delimiter, livePtr, start_key)
+    Ptrcall.call1[String, Boolean](gdext.classes.CodeEdit.mb_has_string_delimiter, livePtr, startKey)
   }
 
   /** CodeEdit.clear_string_delimiters */
@@ -377,27 +378,27 @@ abstract class CodeEdit extends TextEdit {
   }
 
   /** CodeEdit.is_in_string */
-  final def isInString(line: Long, column: Long): Long = {
+  final def isInString(line: Long, column: Long = -1L): Long = {
     if (gdext.classes.CodeEdit.mb_is_in_string == null) gdext.classes.CodeEdit.mb_is_in_string = MethodBind.get("CodeEdit", "is_in_string", 688195400L)
     Ptrcall.call2[Long, Long, Long](gdext.classes.CodeEdit.mb_is_in_string, livePtr, line, column)
   }
 
   /** CodeEdit.add_comment_delimiter */
-  final def addCommentDelimiter(start_key: String, end_key: String, line_only: Boolean): Unit = {
+  final def addCommentDelimiter(startKey: String, endKey: String, lineOnly: Boolean = false): Unit = {
     if (gdext.classes.CodeEdit.mb_add_comment_delimiter == null) gdext.classes.CodeEdit.mb_add_comment_delimiter = MethodBind.get("CodeEdit", "add_comment_delimiter", 3146098955L)
-    Ptrcall.callVoid3(gdext.classes.CodeEdit.mb_add_comment_delimiter, livePtr, start_key, end_key, line_only)
+    Ptrcall.callVoid3(gdext.classes.CodeEdit.mb_add_comment_delimiter, livePtr, startKey, endKey, lineOnly)
   }
 
   /** CodeEdit.remove_comment_delimiter */
-  final def removeCommentDelimiter(start_key: String): Unit = {
+  final def removeCommentDelimiter(startKey: String): Unit = {
     if (gdext.classes.CodeEdit.mb_remove_comment_delimiter == null) gdext.classes.CodeEdit.mb_remove_comment_delimiter = MethodBind.get("CodeEdit", "remove_comment_delimiter", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.CodeEdit.mb_remove_comment_delimiter, livePtr, start_key)
+    Ptrcall.callVoid1(gdext.classes.CodeEdit.mb_remove_comment_delimiter, livePtr, startKey)
   }
 
   /** CodeEdit.has_comment_delimiter */
-  final def hasCommentDelimiter(start_key: String): Boolean = {
+  final def hasCommentDelimiter(startKey: String): Boolean = {
     if (gdext.classes.CodeEdit.mb_has_comment_delimiter == null) gdext.classes.CodeEdit.mb_has_comment_delimiter = MethodBind.get("CodeEdit", "has_comment_delimiter", 3927539163L)
-    Ptrcall.call1[String, Boolean](gdext.classes.CodeEdit.mb_has_comment_delimiter, livePtr, start_key)
+    Ptrcall.call1[String, Boolean](gdext.classes.CodeEdit.mb_has_comment_delimiter, livePtr, startKey)
   }
 
   /** CodeEdit.clear_comment_delimiters */
@@ -407,21 +408,21 @@ abstract class CodeEdit extends TextEdit {
   }
 
   /** CodeEdit.is_in_comment */
-  final def isInComment(line: Long, column: Long): Long = {
+  final def isInComment(line: Long, column: Long = -1L): Long = {
     if (gdext.classes.CodeEdit.mb_is_in_comment == null) gdext.classes.CodeEdit.mb_is_in_comment = MethodBind.get("CodeEdit", "is_in_comment", 688195400L)
     Ptrcall.call2[Long, Long, Long](gdext.classes.CodeEdit.mb_is_in_comment, livePtr, line, column)
   }
 
   /** CodeEdit.get_delimiter_start_key */
-  final def getDelimiterStartKey(delimiter_index: Long): String = {
+  final def getDelimiterStartKey(delimiterIndex: Long): String = {
     if (gdext.classes.CodeEdit.mb_get_delimiter_start_key == null) gdext.classes.CodeEdit.mb_get_delimiter_start_key = MethodBind.get("CodeEdit", "get_delimiter_start_key", 844755477L)
-    Ptrcall.call1[Long, String](gdext.classes.CodeEdit.mb_get_delimiter_start_key, livePtr, delimiter_index)
+    Ptrcall.call1[Long, String](gdext.classes.CodeEdit.mb_get_delimiter_start_key, livePtr, delimiterIndex)
   }
 
   /** CodeEdit.get_delimiter_end_key */
-  final def getDelimiterEndKey(delimiter_index: Long): String = {
+  final def getDelimiterEndKey(delimiterIndex: Long): String = {
     if (gdext.classes.CodeEdit.mb_get_delimiter_end_key == null) gdext.classes.CodeEdit.mb_get_delimiter_end_key = MethodBind.get("CodeEdit", "get_delimiter_end_key", 844755477L)
-    Ptrcall.call1[Long, String](gdext.classes.CodeEdit.mb_get_delimiter_end_key, livePtr, delimiter_index)
+    Ptrcall.call1[Long, String](gdext.classes.CodeEdit.mb_get_delimiter_end_key, livePtr, delimiterIndex)
   }
 
   /** CodeEdit.get_delimiter_start_position */
@@ -437,15 +438,15 @@ abstract class CodeEdit extends TextEdit {
   }
 
   /** CodeEdit.set_code_hint */
-  final def setCodeHint(code_hint: String): Unit = {
+  final def setCodeHint(codeHint: String): Unit = {
     if (gdext.classes.CodeEdit.mb_set_code_hint == null) gdext.classes.CodeEdit.mb_set_code_hint = MethodBind.get("CodeEdit", "set_code_hint", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.CodeEdit.mb_set_code_hint, livePtr, code_hint)
+    Ptrcall.callVoid1(gdext.classes.CodeEdit.mb_set_code_hint, livePtr, codeHint)
   }
 
   /** CodeEdit.set_code_hint_draw_below */
-  final def setCodeHintDrawBelow(draw_below: Boolean): Unit = {
+  final def setCodeHintDrawBelow(drawBelow: Boolean): Unit = {
     if (gdext.classes.CodeEdit.mb_set_code_hint_draw_below == null) gdext.classes.CodeEdit.mb_set_code_hint_draw_below = MethodBind.get("CodeEdit", "set_code_hint_draw_below", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.CodeEdit.mb_set_code_hint_draw_below, livePtr, draw_below)
+    Ptrcall.callVoid1(gdext.classes.CodeEdit.mb_set_code_hint_draw_below, livePtr, drawBelow)
   }
 
   /** CodeEdit.get_text_for_code_completion */
@@ -455,7 +456,7 @@ abstract class CodeEdit extends TextEdit {
   }
 
   /** CodeEdit.request_code_completion */
-  final def requestCodeCompletion(force: Boolean): Unit = {
+  final def requestCodeCompletion(force: Boolean = false): Unit = {
     if (gdext.classes.CodeEdit.mb_request_code_completion == null) gdext.classes.CodeEdit.mb_request_code_completion = MethodBind.get("CodeEdit", "request_code_completion", 107499316L)
     Ptrcall.callVoid1(gdext.classes.CodeEdit.mb_request_code_completion, livePtr, force)
   }
@@ -479,7 +480,7 @@ abstract class CodeEdit extends TextEdit {
   }
 
   /** CodeEdit.confirm_code_completion */
-  final def confirmCodeCompletion(replace: Boolean): Unit = {
+  final def confirmCodeCompletion(replace: Boolean = false): Unit = {
     if (gdext.classes.CodeEdit.mb_confirm_code_completion == null) gdext.classes.CodeEdit.mb_confirm_code_completion = MethodBind.get("CodeEdit", "confirm_code_completion", 107499316L)
     Ptrcall.callVoid1(gdext.classes.CodeEdit.mb_confirm_code_completion, livePtr, replace)
   }
@@ -671,4 +672,68 @@ object CodeEdit {
   private[classes] var mb_delete_lines: GDExtensionMethodBindPtr = null
   private[classes] var mb_duplicate_selection: GDExtensionMethodBindPtr = null
   private[classes] var mb_duplicate_lines: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `CodeEdit.CodeCompletionKind`. */
+  opaque type CodeCompletionKind <: Long = Long
+
+  object CodeCompletionKind {
+    final val Class: CodeCompletionKind = 0L.asInstanceOf[CodeCompletionKind]
+    final val Function: CodeCompletionKind = 1L.asInstanceOf[CodeCompletionKind]
+    final val Signal: CodeCompletionKind = 2L.asInstanceOf[CodeCompletionKind]
+    final val Variable: CodeCompletionKind = 3L.asInstanceOf[CodeCompletionKind]
+    final val Member: CodeCompletionKind = 4L.asInstanceOf[CodeCompletionKind]
+    final val Enum: CodeCompletionKind = 5L.asInstanceOf[CodeCompletionKind]
+    final val Constant: CodeCompletionKind = 6L.asInstanceOf[CodeCompletionKind]
+    final val NodePath: CodeCompletionKind = 7L.asInstanceOf[CodeCompletionKind]
+    final val FilePath: CodeCompletionKind = 8L.asInstanceOf[CodeCompletionKind]
+    final val PlainText: CodeCompletionKind = 9L.asInstanceOf[CodeCompletionKind]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): CodeCompletionKind = value.asInstanceOf[CodeCompletionKind]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[CodeCompletionKind] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L).asInstanceOf[scala.IArray[CodeCompletionKind]]
+
+    extension (self: CodeCompletionKind)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Class"
+        case 1L => "Function"
+        case 2L => "Signal"
+        case 3L => "Variable"
+        case 4L => "Member"
+        case 5L => "Enum"
+        case 6L => "Constant"
+        case 7L => "NodePath"
+        case 8L => "FilePath"
+        case 9L => "PlainText"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `CodeEdit.CodeCompletionLocation`. */
+  opaque type CodeCompletionLocation <: Long = Long
+
+  object CodeCompletionLocation {
+    final val Local: CodeCompletionLocation = 0L.asInstanceOf[CodeCompletionLocation]
+    final val ParentMask: CodeCompletionLocation = 256L.asInstanceOf[CodeCompletionLocation]
+    final val OtherUserCode: CodeCompletionLocation = 512L.asInstanceOf[CodeCompletionLocation]
+    final val Other: CodeCompletionLocation = 1024L.asInstanceOf[CodeCompletionLocation]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): CodeCompletionLocation = value.asInstanceOf[CodeCompletionLocation]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[CodeCompletionLocation] = scala.IArray[Long](0L, 256L, 512L, 1024L).asInstanceOf[scala.IArray[CodeCompletionLocation]]
+
+    extension (self: CodeCompletionLocation)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Local"
+        case 256L => "ParentMask"
+        case 512L => "OtherUserCode"
+        case 1024L => "Other"
+        case other => other.toString
+      }
+  }
 }

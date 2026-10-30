@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -47,9 +48,9 @@ abstract class AnimatedTexture extends Texture2D {
   }
 
   /** AnimatedTexture.set_one_shot */
-  final def setOneShot(one_shot: Boolean): Unit = {
+  final def setOneShot(oneShot: Boolean): Unit = {
     if (gdext.classes.AnimatedTexture.mb_set_one_shot == null) gdext.classes.AnimatedTexture.mb_set_one_shot = MethodBind.get("AnimatedTexture", "set_one_shot", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.AnimatedTexture.mb_set_one_shot, livePtr, one_shot)
+    Ptrcall.callVoid1(gdext.classes.AnimatedTexture.mb_set_one_shot, livePtr, oneShot)
   }
 
   /** AnimatedTexture.get_one_shot */

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class RDPipelineSpecializationConstant extends RefCounted {
   override def godotClassName: String = "RDPipelineSpecializationConstant"
 
   /** RDPipelineSpecializationConstant.set_constant_id */
-  final def setConstantId(constant_id: Long): Unit = {
+  final def setConstantId(constantId: Long): Unit = {
     if (gdext.classes.RDPipelineSpecializationConstant.mb_set_constant_id == null) gdext.classes.RDPipelineSpecializationConstant.mb_set_constant_id = MethodBind.get("RDPipelineSpecializationConstant", "set_constant_id", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.RDPipelineSpecializationConstant.mb_set_constant_id, livePtr, constant_id)
+    Ptrcall.callVoid1(gdext.classes.RDPipelineSpecializationConstant.mb_set_constant_id, livePtr, constantId)
   }
 
   /** RDPipelineSpecializationConstant.get_constant_id */

@@ -1,5 +1,6 @@
 package gdext
 
+import gdext.internal.StringNames
 import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
 import gdext.builtin.*
@@ -26,6 +27,7 @@ object api {
   export gdext.internal.engine.{ResPath, ScenePath, FilePath}
   export gdext.internal.register.ExportHint
   export gdext.internal.Gc
+  export gdext.internal.input.{KeyState, InputAction, KeyMod}
 
   /** Emit a (currently no-arg) signal previously declared with `@signal`. */
   export gdext.internal.register.SignalRegistration.{emit as emitSignal}
@@ -53,7 +55,7 @@ object api {
       parent match {
         case Some(p) if p != null && obj != null =>
           obj match {
-            case n: gdext.classes.Node => p.addChild(n, false, 0L)
+            case n: gdext.classes.Node => p.addChild(n)
             case _                     => ()
           }
         case _ => ()
@@ -70,7 +72,7 @@ object api {
      *
      * {{{
      *   Gd.scoped {
-     *     val tex = ResourceLoader.singleton.load(path, "", 0L)
+     *     val tex = ResourceLoader.load(path)
      *     sprite.setTexture(tex)      // the sprite takes its own reference
      *   }                             // ours is released here
      * }}}

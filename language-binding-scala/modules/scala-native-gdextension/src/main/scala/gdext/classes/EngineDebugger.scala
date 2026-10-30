@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,39 +18,39 @@ abstract class EngineDebugger extends Object {
   }
 
   /** EngineDebugger.register_profiler */
-  final def registerProfiler(name: gdext.builtin.StringName, profiler: EngineProfiler): Unit = {
+  final def registerProfiler(name: String, profiler: EngineProfiler): Unit = {
     if (gdext.classes.EngineDebugger.mb_register_profiler == null) gdext.classes.EngineDebugger.mb_register_profiler = MethodBind.get("EngineDebugger", "register_profiler", 3651669560L)
-    Ptrcall.callVoid2(gdext.classes.EngineDebugger.mb_register_profiler, livePtr, name, Wrappers.handle(profiler))
+    Ptrcall.callVoid2(gdext.classes.EngineDebugger.mb_register_profiler, livePtr, SnArg(name), Wrappers.handle(profiler))
   }
 
   /** EngineDebugger.unregister_profiler */
-  final def unregisterProfiler(name: gdext.builtin.StringName): Unit = {
+  final def unregisterProfiler(name: String): Unit = {
     if (gdext.classes.EngineDebugger.mb_unregister_profiler == null) gdext.classes.EngineDebugger.mb_unregister_profiler = MethodBind.get("EngineDebugger", "unregister_profiler", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.EngineDebugger.mb_unregister_profiler, livePtr, name)
+    Ptrcall.callVoid1(gdext.classes.EngineDebugger.mb_unregister_profiler, livePtr, SnArg(name))
   }
 
   /** EngineDebugger.is_profiling */
-  final def isProfiling(name: gdext.builtin.StringName): Boolean = {
+  final def isProfiling(name: String): Boolean = {
     if (gdext.classes.EngineDebugger.mb_is_profiling == null) gdext.classes.EngineDebugger.mb_is_profiling = MethodBind.get("EngineDebugger", "is_profiling", 2041966384L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.EngineDebugger.mb_is_profiling, livePtr, name)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.EngineDebugger.mb_is_profiling, livePtr, SnArg(name))
   }
 
   /** EngineDebugger.has_profiler */
-  final def hasProfiler(name: gdext.builtin.StringName): Boolean = {
+  final def hasProfiler(name: String): Boolean = {
     if (gdext.classes.EngineDebugger.mb_has_profiler == null) gdext.classes.EngineDebugger.mb_has_profiler = MethodBind.get("EngineDebugger", "has_profiler", 2041966384L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.EngineDebugger.mb_has_profiler, livePtr, name)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.EngineDebugger.mb_has_profiler, livePtr, SnArg(name))
   }
 
   /** EngineDebugger.unregister_message_capture */
-  final def unregisterMessageCapture(name: gdext.builtin.StringName): Unit = {
+  final def unregisterMessageCapture(name: String): Unit = {
     if (gdext.classes.EngineDebugger.mb_unregister_message_capture == null) gdext.classes.EngineDebugger.mb_unregister_message_capture = MethodBind.get("EngineDebugger", "unregister_message_capture", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.EngineDebugger.mb_unregister_message_capture, livePtr, name)
+    Ptrcall.callVoid1(gdext.classes.EngineDebugger.mb_unregister_message_capture, livePtr, SnArg(name))
   }
 
   /** EngineDebugger.has_capture */
-  final def hasCapture(name: gdext.builtin.StringName): Boolean = {
+  final def hasCapture(name: String): Boolean = {
     if (gdext.classes.EngineDebugger.mb_has_capture == null) gdext.classes.EngineDebugger.mb_has_capture = MethodBind.get("EngineDebugger", "has_capture", 2041966384L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.EngineDebugger.mb_has_capture, livePtr, name)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.EngineDebugger.mb_has_capture, livePtr, SnArg(name))
   }
 
   /** EngineDebugger.line_poll */
@@ -59,15 +60,15 @@ abstract class EngineDebugger extends Object {
   }
 
   /** EngineDebugger.debug */
-  final def debug(can_continue: Boolean, is_error_breakpoint: Boolean): Unit = {
+  final def debug(canContinue: Boolean = true, isErrorBreakpoint: Boolean = false): Unit = {
     if (gdext.classes.EngineDebugger.mb_debug == null) gdext.classes.EngineDebugger.mb_debug = MethodBind.get("EngineDebugger", "debug", 2751962654L)
-    Ptrcall.callVoid2(gdext.classes.EngineDebugger.mb_debug, livePtr, can_continue, is_error_breakpoint)
+    Ptrcall.callVoid2(gdext.classes.EngineDebugger.mb_debug, livePtr, canContinue, isErrorBreakpoint)
   }
 
   /** EngineDebugger.script_debug */
-  final def scriptDebug(language: ScriptLanguage, can_continue: Boolean, is_error_breakpoint: Boolean): Unit = {
+  final def scriptDebug(language: ScriptLanguage, canContinue: Boolean = true, isErrorBreakpoint: Boolean = false): Unit = {
     if (gdext.classes.EngineDebugger.mb_script_debug == null) gdext.classes.EngineDebugger.mb_script_debug = MethodBind.get("EngineDebugger", "script_debug", 2442343672L)
-    Ptrcall.callVoid3(gdext.classes.EngineDebugger.mb_script_debug, livePtr, Wrappers.handle(language), can_continue, is_error_breakpoint)
+    Ptrcall.callVoid3(gdext.classes.EngineDebugger.mb_script_debug, livePtr, Wrappers.handle(language), canContinue, isErrorBreakpoint)
   }
 
   /** EngineDebugger.set_lines_left */
@@ -95,9 +96,9 @@ abstract class EngineDebugger extends Object {
   }
 
   /** EngineDebugger.is_breakpoint */
-  final def isBreakpoint(line: Long, source: gdext.builtin.StringName): Boolean = {
+  final def isBreakpoint(line: Long, source: String): Boolean = {
     if (gdext.classes.EngineDebugger.mb_is_breakpoint == null) gdext.classes.EngineDebugger.mb_is_breakpoint = MethodBind.get("EngineDebugger", "is_breakpoint", 921227809L)
-    Ptrcall.call2[Long, gdext.builtin.StringName, Boolean](gdext.classes.EngineDebugger.mb_is_breakpoint, livePtr, line, source)
+    Ptrcall.call2[Long, SnArg, Boolean](gdext.classes.EngineDebugger.mb_is_breakpoint, livePtr, line, SnArg(source))
   }
 
   /** EngineDebugger.is_skipping_breakpoints */
@@ -107,15 +108,15 @@ abstract class EngineDebugger extends Object {
   }
 
   /** EngineDebugger.insert_breakpoint */
-  final def insertBreakpoint(line: Long, source: gdext.builtin.StringName): Unit = {
+  final def insertBreakpoint(line: Long, source: String): Unit = {
     if (gdext.classes.EngineDebugger.mb_insert_breakpoint == null) gdext.classes.EngineDebugger.mb_insert_breakpoint = MethodBind.get("EngineDebugger", "insert_breakpoint", 3780747571L)
-    Ptrcall.callVoid2(gdext.classes.EngineDebugger.mb_insert_breakpoint, livePtr, line, source)
+    Ptrcall.callVoid2(gdext.classes.EngineDebugger.mb_insert_breakpoint, livePtr, line, SnArg(source))
   }
 
   /** EngineDebugger.remove_breakpoint */
-  final def removeBreakpoint(line: Long, source: gdext.builtin.StringName): Unit = {
+  final def removeBreakpoint(line: Long, source: String): Unit = {
     if (gdext.classes.EngineDebugger.mb_remove_breakpoint == null) gdext.classes.EngineDebugger.mb_remove_breakpoint = MethodBind.get("EngineDebugger", "remove_breakpoint", 3780747571L)
-    Ptrcall.callVoid2(gdext.classes.EngineDebugger.mb_remove_breakpoint, livePtr, line, source)
+    Ptrcall.callVoid2(gdext.classes.EngineDebugger.mb_remove_breakpoint, livePtr, line, SnArg(source))
   }
 
   /** EngineDebugger.clear_breakpoints */
@@ -156,4 +157,80 @@ object EngineDebugger {
         Godot.interface.global_get_singleton(StringNames.cached("EngineDebugger").ptr)))
     instance
   }
+
+  /** Forwards to [[singleton]]: EngineDebugger.is_active */
+  final def isActive(): Boolean =
+    singleton.isActive()
+
+  /** Forwards to [[singleton]]: EngineDebugger.register_profiler */
+  final def registerProfiler(name: String, profiler: EngineProfiler): Unit =
+    singleton.registerProfiler(name, profiler)
+
+  /** Forwards to [[singleton]]: EngineDebugger.unregister_profiler */
+  final def unregisterProfiler(name: String): Unit =
+    singleton.unregisterProfiler(name)
+
+  /** Forwards to [[singleton]]: EngineDebugger.is_profiling */
+  final def isProfiling(name: String): Boolean =
+    singleton.isProfiling(name)
+
+  /** Forwards to [[singleton]]: EngineDebugger.has_profiler */
+  final def hasProfiler(name: String): Boolean =
+    singleton.hasProfiler(name)
+
+  /** Forwards to [[singleton]]: EngineDebugger.unregister_message_capture */
+  final def unregisterMessageCapture(name: String): Unit =
+    singleton.unregisterMessageCapture(name)
+
+  /** Forwards to [[singleton]]: EngineDebugger.has_capture */
+  final def hasCapture(name: String): Boolean =
+    singleton.hasCapture(name)
+
+  /** Forwards to [[singleton]]: EngineDebugger.line_poll */
+  final def linePoll(): Unit =
+    singleton.linePoll()
+
+  /** Forwards to [[singleton]]: EngineDebugger.debug */
+  final def debug(canContinue: Boolean = true, isErrorBreakpoint: Boolean = false): Unit =
+    singleton.debug(canContinue, isErrorBreakpoint)
+
+  /** Forwards to [[singleton]]: EngineDebugger.script_debug */
+  final def scriptDebug(language: ScriptLanguage, canContinue: Boolean = true, isErrorBreakpoint: Boolean = false): Unit =
+    singleton.scriptDebug(language, canContinue, isErrorBreakpoint)
+
+  /** Forwards to [[singleton]]: EngineDebugger.set_lines_left */
+  final def setLinesLeft(lines: Long): Unit =
+    singleton.setLinesLeft(lines)
+
+  /** Forwards to [[singleton]]: EngineDebugger.get_lines_left */
+  final def getLinesLeft(): Long =
+    singleton.getLinesLeft()
+
+  /** Forwards to [[singleton]]: EngineDebugger.set_depth */
+  final def setDepth(depth: Long): Unit =
+    singleton.setDepth(depth)
+
+  /** Forwards to [[singleton]]: EngineDebugger.get_depth */
+  final def getDepth(): Long =
+    singleton.getDepth()
+
+  /** Forwards to [[singleton]]: EngineDebugger.is_breakpoint */
+  final def isBreakpoint(line: Long, source: String): Boolean =
+    singleton.isBreakpoint(line, source)
+
+  /** Forwards to [[singleton]]: EngineDebugger.is_skipping_breakpoints */
+  final def isSkippingBreakpoints(): Boolean =
+    singleton.isSkippingBreakpoints()
+
+  /** Forwards to [[singleton]]: EngineDebugger.insert_breakpoint */
+  final def insertBreakpoint(line: Long, source: String): Unit =
+    singleton.insertBreakpoint(line, source)
+
+  /** Forwards to [[singleton]]: EngineDebugger.remove_breakpoint */
+  final def removeBreakpoint(line: Long, source: String): Unit =
+    singleton.removeBreakpoint(line, source)
+
+  /** Forwards to [[singleton]]: EngineDebugger.clear_breakpoints */
+  final def clearBreakpoints(): Unit =
+    singleton.clearBreakpoints()
 }

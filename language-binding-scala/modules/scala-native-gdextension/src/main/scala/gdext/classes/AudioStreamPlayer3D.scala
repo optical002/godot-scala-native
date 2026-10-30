@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class AudioStreamPlayer3D extends Node3D {
   }
 
   /** AudioStreamPlayer3D.set_volume_db */
-  final def setVolumeDb(volume_db: Double): Unit = {
+  final def setVolumeDb(volumeDb: Double): Unit = {
     if (gdext.classes.AudioStreamPlayer3D.mb_set_volume_db == null) gdext.classes.AudioStreamPlayer3D.mb_set_volume_db = MethodBind.get("AudioStreamPlayer3D", "set_volume_db", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer3D.mb_set_volume_db, livePtr, volume_db)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer3D.mb_set_volume_db, livePtr, volumeDb)
   }
 
   /** AudioStreamPlayer3D.get_volume_db */
@@ -35,9 +36,9 @@ abstract class AudioStreamPlayer3D extends Node3D {
   }
 
   /** AudioStreamPlayer3D.set_volume_linear */
-  final def setVolumeLinear(volume_linear: Double): Unit = {
+  final def setVolumeLinear(volumeLinear: Double): Unit = {
     if (gdext.classes.AudioStreamPlayer3D.mb_set_volume_linear == null) gdext.classes.AudioStreamPlayer3D.mb_set_volume_linear = MethodBind.get("AudioStreamPlayer3D", "set_volume_linear", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer3D.mb_set_volume_linear, livePtr, volume_linear)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer3D.mb_set_volume_linear, livePtr, volumeLinear)
   }
 
   /** AudioStreamPlayer3D.get_volume_linear */
@@ -47,9 +48,9 @@ abstract class AudioStreamPlayer3D extends Node3D {
   }
 
   /** AudioStreamPlayer3D.set_unit_size */
-  final def setUnitSize(unit_size: Double): Unit = {
+  final def setUnitSize(unitSize: Double): Unit = {
     if (gdext.classes.AudioStreamPlayer3D.mb_set_unit_size == null) gdext.classes.AudioStreamPlayer3D.mb_set_unit_size = MethodBind.get("AudioStreamPlayer3D", "set_unit_size", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer3D.mb_set_unit_size, livePtr, unit_size)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer3D.mb_set_unit_size, livePtr, unitSize)
   }
 
   /** AudioStreamPlayer3D.get_unit_size */
@@ -59,9 +60,9 @@ abstract class AudioStreamPlayer3D extends Node3D {
   }
 
   /** AudioStreamPlayer3D.set_max_db */
-  final def setMaxDb(max_db: Double): Unit = {
+  final def setMaxDb(maxDb: Double): Unit = {
     if (gdext.classes.AudioStreamPlayer3D.mb_set_max_db == null) gdext.classes.AudioStreamPlayer3D.mb_set_max_db = MethodBind.get("AudioStreamPlayer3D", "set_max_db", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer3D.mb_set_max_db, livePtr, max_db)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer3D.mb_set_max_db, livePtr, maxDb)
   }
 
   /** AudioStreamPlayer3D.get_max_db */
@@ -71,9 +72,9 @@ abstract class AudioStreamPlayer3D extends Node3D {
   }
 
   /** AudioStreamPlayer3D.set_pitch_scale */
-  final def setPitchScale(pitch_scale: Double): Unit = {
+  final def setPitchScale(pitchScale: Double): Unit = {
     if (gdext.classes.AudioStreamPlayer3D.mb_set_pitch_scale == null) gdext.classes.AudioStreamPlayer3D.mb_set_pitch_scale = MethodBind.get("AudioStreamPlayer3D", "set_pitch_scale", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer3D.mb_set_pitch_scale, livePtr, pitch_scale)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer3D.mb_set_pitch_scale, livePtr, pitchScale)
   }
 
   /** AudioStreamPlayer3D.get_pitch_scale */
@@ -83,15 +84,15 @@ abstract class AudioStreamPlayer3D extends Node3D {
   }
 
   /** AudioStreamPlayer3D.play */
-  final def play(from_position: Double): Unit = {
+  final def play(fromPosition: Double = 0.0): Unit = {
     if (gdext.classes.AudioStreamPlayer3D.mb_play == null) gdext.classes.AudioStreamPlayer3D.mb_play = MethodBind.get("AudioStreamPlayer3D", "play", 1958160172L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer3D.mb_play, livePtr, from_position)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer3D.mb_play, livePtr, fromPosition)
   }
 
   /** AudioStreamPlayer3D.seek */
-  final def seek(to_position: Double): Unit = {
+  final def seek(toPosition: Double): Unit = {
     if (gdext.classes.AudioStreamPlayer3D.mb_seek == null) gdext.classes.AudioStreamPlayer3D.mb_seek = MethodBind.get("AudioStreamPlayer3D", "seek", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer3D.mb_seek, livePtr, to_position)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer3D.mb_seek, livePtr, toPosition)
   }
 
   /** AudioStreamPlayer3D.stop */
@@ -113,15 +114,15 @@ abstract class AudioStreamPlayer3D extends Node3D {
   }
 
   /** AudioStreamPlayer3D.set_bus */
-  final def setBus(bus: gdext.builtin.StringName): Unit = {
+  final def setBus(bus: String): Unit = {
     if (gdext.classes.AudioStreamPlayer3D.mb_set_bus == null) gdext.classes.AudioStreamPlayer3D.mb_set_bus = MethodBind.get("AudioStreamPlayer3D", "set_bus", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer3D.mb_set_bus, livePtr, bus)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer3D.mb_set_bus, livePtr, SnArg(bus))
   }
 
   /** AudioStreamPlayer3D.get_bus */
-  final def getBus(): gdext.builtin.StringName = {
+  final def getBus(): String = {
     if (gdext.classes.AudioStreamPlayer3D.mb_get_bus == null) gdext.classes.AudioStreamPlayer3D.mb_get_bus = MethodBind.get("AudioStreamPlayer3D", "get_bus", 2002593661L)
-    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.AudioStreamPlayer3D.mb_get_bus, livePtr)
+    Ptrcall.call0[SnArg](gdext.classes.AudioStreamPlayer3D.mb_get_bus, livePtr)
   }
 
   /** AudioStreamPlayer3D.set_autoplay */
@@ -227,27 +228,27 @@ abstract class AudioStreamPlayer3D extends Node3D {
   }
 
   /** AudioStreamPlayer3D.set_attenuation_model */
-  final def setAttenuationModel(model: Long): Unit = {
+  final def setAttenuationModel(model: gdext.classes.AudioStreamPlayer3D.AttenuationModel): Unit = {
     if (gdext.classes.AudioStreamPlayer3D.mb_set_attenuation_model == null) gdext.classes.AudioStreamPlayer3D.mb_set_attenuation_model = MethodBind.get("AudioStreamPlayer3D", "set_attenuation_model", 2988086229L)
     Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer3D.mb_set_attenuation_model, livePtr, model)
   }
 
   /** AudioStreamPlayer3D.get_attenuation_model */
-  final def getAttenuationModel(): Long = {
+  final def getAttenuationModel(): gdext.classes.AudioStreamPlayer3D.AttenuationModel = {
     if (gdext.classes.AudioStreamPlayer3D.mb_get_attenuation_model == null) gdext.classes.AudioStreamPlayer3D.mb_get_attenuation_model = MethodBind.get("AudioStreamPlayer3D", "get_attenuation_model", 3035106060L)
-    Ptrcall.call0[Long](gdext.classes.AudioStreamPlayer3D.mb_get_attenuation_model, livePtr)
+    gdext.classes.AudioStreamPlayer3D.AttenuationModel(Ptrcall.call0[Long](gdext.classes.AudioStreamPlayer3D.mb_get_attenuation_model, livePtr))
   }
 
   /** AudioStreamPlayer3D.set_doppler_tracking */
-  final def setDopplerTracking(mode: Long): Unit = {
+  final def setDopplerTracking(mode: gdext.classes.AudioStreamPlayer3D.DopplerTracking): Unit = {
     if (gdext.classes.AudioStreamPlayer3D.mb_set_doppler_tracking == null) gdext.classes.AudioStreamPlayer3D.mb_set_doppler_tracking = MethodBind.get("AudioStreamPlayer3D", "set_doppler_tracking", 3968161450L)
     Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer3D.mb_set_doppler_tracking, livePtr, mode)
   }
 
   /** AudioStreamPlayer3D.get_doppler_tracking */
-  final def getDopplerTracking(): Long = {
+  final def getDopplerTracking(): gdext.classes.AudioStreamPlayer3D.DopplerTracking = {
     if (gdext.classes.AudioStreamPlayer3D.mb_get_doppler_tracking == null) gdext.classes.AudioStreamPlayer3D.mb_get_doppler_tracking = MethodBind.get("AudioStreamPlayer3D", "get_doppler_tracking", 1702418664L)
-    Ptrcall.call0[Long](gdext.classes.AudioStreamPlayer3D.mb_get_doppler_tracking, livePtr)
+    gdext.classes.AudioStreamPlayer3D.DopplerTracking(Ptrcall.call0[Long](gdext.classes.AudioStreamPlayer3D.mb_get_doppler_tracking, livePtr))
   }
 
   /** AudioStreamPlayer3D.set_stream_paused */
@@ -263,9 +264,9 @@ abstract class AudioStreamPlayer3D extends Node3D {
   }
 
   /** AudioStreamPlayer3D.set_max_polyphony */
-  final def setMaxPolyphony(max_polyphony: Long): Unit = {
+  final def setMaxPolyphony(maxPolyphony: Long): Unit = {
     if (gdext.classes.AudioStreamPlayer3D.mb_set_max_polyphony == null) gdext.classes.AudioStreamPlayer3D.mb_set_max_polyphony = MethodBind.get("AudioStreamPlayer3D", "set_max_polyphony", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer3D.mb_set_max_polyphony, livePtr, max_polyphony)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer3D.mb_set_max_polyphony, livePtr, maxPolyphony)
   }
 
   /** AudioStreamPlayer3D.get_max_polyphony */
@@ -275,9 +276,9 @@ abstract class AudioStreamPlayer3D extends Node3D {
   }
 
   /** AudioStreamPlayer3D.set_panning_strength */
-  final def setPanningStrength(panning_strength: Double): Unit = {
+  final def setPanningStrength(panningStrength: Double): Unit = {
     if (gdext.classes.AudioStreamPlayer3D.mb_set_panning_strength == null) gdext.classes.AudioStreamPlayer3D.mb_set_panning_strength = MethodBind.get("AudioStreamPlayer3D", "set_panning_strength", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer3D.mb_set_panning_strength, livePtr, panning_strength)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer3D.mb_set_panning_strength, livePtr, panningStrength)
   }
 
   /** AudioStreamPlayer3D.get_panning_strength */
@@ -299,15 +300,15 @@ abstract class AudioStreamPlayer3D extends Node3D {
   }
 
   /** AudioStreamPlayer3D.set_playback_type */
-  final def setPlaybackType(playback_type: Long): Unit = {
+  final def setPlaybackType(playbackType: gdext.classes.AudioServer.PlaybackType): Unit = {
     if (gdext.classes.AudioStreamPlayer3D.mb_set_playback_type == null) gdext.classes.AudioStreamPlayer3D.mb_set_playback_type = MethodBind.get("AudioStreamPlayer3D", "set_playback_type", 725473817L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer3D.mb_set_playback_type, livePtr, playback_type)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlayer3D.mb_set_playback_type, livePtr, playbackType)
   }
 
   /** AudioStreamPlayer3D.get_playback_type */
-  final def getPlaybackType(): Long = {
+  final def getPlaybackType(): gdext.classes.AudioServer.PlaybackType = {
     if (gdext.classes.AudioStreamPlayer3D.mb_get_playback_type == null) gdext.classes.AudioStreamPlayer3D.mb_get_playback_type = MethodBind.get("AudioStreamPlayer3D", "get_playback_type", 4011264623L)
-    Ptrcall.call0[Long](gdext.classes.AudioStreamPlayer3D.mb_get_playback_type, livePtr)
+    gdext.classes.AudioServer.PlaybackType(Ptrcall.call0[Long](gdext.classes.AudioStreamPlayer3D.mb_get_playback_type, livePtr))
   }
 
 }
@@ -363,4 +364,54 @@ object AudioStreamPlayer3D {
   private[classes] var mb_get_stream_playback: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_playback_type: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_playback_type: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `AudioStreamPlayer3D.AttenuationModel`. */
+  opaque type AttenuationModel <: Long = Long
+
+  object AttenuationModel {
+    final val InverseDistance: AttenuationModel = 0L.asInstanceOf[AttenuationModel]
+    final val InverseSquareDistance: AttenuationModel = 1L.asInstanceOf[AttenuationModel]
+    final val Logarithmic: AttenuationModel = 2L.asInstanceOf[AttenuationModel]
+    final val Disabled: AttenuationModel = 3L.asInstanceOf[AttenuationModel]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): AttenuationModel = value.asInstanceOf[AttenuationModel]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[AttenuationModel] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[AttenuationModel]]
+
+    extension (self: AttenuationModel)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "InverseDistance"
+        case 1L => "InverseSquareDistance"
+        case 2L => "Logarithmic"
+        case 3L => "Disabled"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `AudioStreamPlayer3D.DopplerTracking`. */
+  opaque type DopplerTracking <: Long = Long
+
+  object DopplerTracking {
+    final val Disabled: DopplerTracking = 0L.asInstanceOf[DopplerTracking]
+    final val IdleStep: DopplerTracking = 1L.asInstanceOf[DopplerTracking]
+    final val PhysicsStep: DopplerTracking = 2L.asInstanceOf[DopplerTracking]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DopplerTracking = value.asInstanceOf[DopplerTracking]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DopplerTracking] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[DopplerTracking]]
+
+    extension (self: DopplerTracking)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "IdleStep"
+        case 2L => "PhysicsStep"
+        case other => other.toString
+      }
+  }
 }

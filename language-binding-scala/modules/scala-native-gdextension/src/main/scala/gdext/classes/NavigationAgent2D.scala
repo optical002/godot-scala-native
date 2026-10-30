@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class NavigationAgent2D extends Node {
   }
 
   /** NavigationAgent2D.set_path_desired_distance */
-  final def setPathDesiredDistance(desired_distance: Double): Unit = {
+  final def setPathDesiredDistance(desiredDistance: Double): Unit = {
     if (gdext.classes.NavigationAgent2D.mb_set_path_desired_distance == null) gdext.classes.NavigationAgent2D.mb_set_path_desired_distance = MethodBind.get("NavigationAgent2D", "set_path_desired_distance", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_path_desired_distance, livePtr, desired_distance)
+    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_path_desired_distance, livePtr, desiredDistance)
   }
 
   /** NavigationAgent2D.get_path_desired_distance */
@@ -35,9 +36,9 @@ abstract class NavigationAgent2D extends Node {
   }
 
   /** NavigationAgent2D.set_target_desired_distance */
-  final def setTargetDesiredDistance(desired_distance: Double): Unit = {
+  final def setTargetDesiredDistance(desiredDistance: Double): Unit = {
     if (gdext.classes.NavigationAgent2D.mb_set_target_desired_distance == null) gdext.classes.NavigationAgent2D.mb_set_target_desired_distance = MethodBind.get("NavigationAgent2D", "set_target_desired_distance", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_target_desired_distance, livePtr, desired_distance)
+    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_target_desired_distance, livePtr, desiredDistance)
   }
 
   /** NavigationAgent2D.get_target_desired_distance */
@@ -59,9 +60,9 @@ abstract class NavigationAgent2D extends Node {
   }
 
   /** NavigationAgent2D.set_neighbor_distance */
-  final def setNeighborDistance(neighbor_distance: Double): Unit = {
+  final def setNeighborDistance(neighborDistance: Double): Unit = {
     if (gdext.classes.NavigationAgent2D.mb_set_neighbor_distance == null) gdext.classes.NavigationAgent2D.mb_set_neighbor_distance = MethodBind.get("NavigationAgent2D", "set_neighbor_distance", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_neighbor_distance, livePtr, neighbor_distance)
+    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_neighbor_distance, livePtr, neighborDistance)
   }
 
   /** NavigationAgent2D.get_neighbor_distance */
@@ -71,9 +72,9 @@ abstract class NavigationAgent2D extends Node {
   }
 
   /** NavigationAgent2D.set_max_neighbors */
-  final def setMaxNeighbors(max_neighbors: Long): Unit = {
+  final def setMaxNeighbors(maxNeighbors: Long): Unit = {
     if (gdext.classes.NavigationAgent2D.mb_set_max_neighbors == null) gdext.classes.NavigationAgent2D.mb_set_max_neighbors = MethodBind.get("NavigationAgent2D", "set_max_neighbors", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_max_neighbors, livePtr, max_neighbors)
+    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_max_neighbors, livePtr, maxNeighbors)
   }
 
   /** NavigationAgent2D.get_max_neighbors */
@@ -83,9 +84,9 @@ abstract class NavigationAgent2D extends Node {
   }
 
   /** NavigationAgent2D.set_time_horizon_agents */
-  final def setTimeHorizonAgents(time_horizon: Double): Unit = {
+  final def setTimeHorizonAgents(timeHorizon: Double): Unit = {
     if (gdext.classes.NavigationAgent2D.mb_set_time_horizon_agents == null) gdext.classes.NavigationAgent2D.mb_set_time_horizon_agents = MethodBind.get("NavigationAgent2D", "set_time_horizon_agents", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_time_horizon_agents, livePtr, time_horizon)
+    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_time_horizon_agents, livePtr, timeHorizon)
   }
 
   /** NavigationAgent2D.get_time_horizon_agents */
@@ -95,9 +96,9 @@ abstract class NavigationAgent2D extends Node {
   }
 
   /** NavigationAgent2D.set_time_horizon_obstacles */
-  final def setTimeHorizonObstacles(time_horizon: Double): Unit = {
+  final def setTimeHorizonObstacles(timeHorizon: Double): Unit = {
     if (gdext.classes.NavigationAgent2D.mb_set_time_horizon_obstacles == null) gdext.classes.NavigationAgent2D.mb_set_time_horizon_obstacles = MethodBind.get("NavigationAgent2D", "set_time_horizon_obstacles", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_time_horizon_obstacles, livePtr, time_horizon)
+    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_time_horizon_obstacles, livePtr, timeHorizon)
   }
 
   /** NavigationAgent2D.get_time_horizon_obstacles */
@@ -107,9 +108,9 @@ abstract class NavigationAgent2D extends Node {
   }
 
   /** NavigationAgent2D.set_max_speed */
-  final def setMaxSpeed(max_speed: Double): Unit = {
+  final def setMaxSpeed(maxSpeed: Double): Unit = {
     if (gdext.classes.NavigationAgent2D.mb_set_max_speed == null) gdext.classes.NavigationAgent2D.mb_set_max_speed = MethodBind.get("NavigationAgent2D", "set_max_speed", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_max_speed, livePtr, max_speed)
+    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_max_speed, livePtr, maxSpeed)
   }
 
   /** NavigationAgent2D.get_max_speed */
@@ -119,9 +120,9 @@ abstract class NavigationAgent2D extends Node {
   }
 
   /** NavigationAgent2D.set_path_max_distance */
-  final def setPathMaxDistance(max_speed: Double): Unit = {
+  final def setPathMaxDistance(maxSpeed: Double): Unit = {
     if (gdext.classes.NavigationAgent2D.mb_set_path_max_distance == null) gdext.classes.NavigationAgent2D.mb_set_path_max_distance = MethodBind.get("NavigationAgent2D", "set_path_max_distance", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_path_max_distance, livePtr, max_speed)
+    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_path_max_distance, livePtr, maxSpeed)
   }
 
   /** NavigationAgent2D.get_path_max_distance */
@@ -131,9 +132,9 @@ abstract class NavigationAgent2D extends Node {
   }
 
   /** NavigationAgent2D.set_navigation_layers */
-  final def setNavigationLayers(navigation_layers: Long): Unit = {
+  final def setNavigationLayers(navigationLayers: Long): Unit = {
     if (gdext.classes.NavigationAgent2D.mb_set_navigation_layers == null) gdext.classes.NavigationAgent2D.mb_set_navigation_layers = MethodBind.get("NavigationAgent2D", "set_navigation_layers", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_navigation_layers, livePtr, navigation_layers)
+    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_navigation_layers, livePtr, navigationLayers)
   }
 
   /** NavigationAgent2D.get_navigation_layers */
@@ -143,51 +144,51 @@ abstract class NavigationAgent2D extends Node {
   }
 
   /** NavigationAgent2D.set_navigation_layer_value */
-  final def setNavigationLayerValue(layer_number: Long, value: Boolean): Unit = {
+  final def setNavigationLayerValue(layerNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.NavigationAgent2D.mb_set_navigation_layer_value == null) gdext.classes.NavigationAgent2D.mb_set_navigation_layer_value = MethodBind.get("NavigationAgent2D", "set_navigation_layer_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.NavigationAgent2D.mb_set_navigation_layer_value, livePtr, layer_number, value)
+    Ptrcall.callVoid2(gdext.classes.NavigationAgent2D.mb_set_navigation_layer_value, livePtr, layerNumber, value)
   }
 
   /** NavigationAgent2D.get_navigation_layer_value */
-  final def getNavigationLayerValue(layer_number: Long): Boolean = {
+  final def getNavigationLayerValue(layerNumber: Long): Boolean = {
     if (gdext.classes.NavigationAgent2D.mb_get_navigation_layer_value == null) gdext.classes.NavigationAgent2D.mb_get_navigation_layer_value = MethodBind.get("NavigationAgent2D", "get_navigation_layer_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.NavigationAgent2D.mb_get_navigation_layer_value, livePtr, layer_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.NavigationAgent2D.mb_get_navigation_layer_value, livePtr, layerNumber)
   }
 
   /** NavigationAgent2D.set_pathfinding_algorithm */
-  final def setPathfindingAlgorithm(pathfinding_algorithm: Long): Unit = {
+  final def setPathfindingAlgorithm(pathfindingAlgorithm: gdext.classes.NavigationPathQueryParameters2D.PathfindingAlgorithm): Unit = {
     if (gdext.classes.NavigationAgent2D.mb_set_pathfinding_algorithm == null) gdext.classes.NavigationAgent2D.mb_set_pathfinding_algorithm = MethodBind.get("NavigationAgent2D", "set_pathfinding_algorithm", 2783519915L)
-    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_pathfinding_algorithm, livePtr, pathfinding_algorithm)
+    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_pathfinding_algorithm, livePtr, pathfindingAlgorithm)
   }
 
   /** NavigationAgent2D.get_pathfinding_algorithm */
-  final def getPathfindingAlgorithm(): Long = {
+  final def getPathfindingAlgorithm(): gdext.classes.NavigationPathQueryParameters2D.PathfindingAlgorithm = {
     if (gdext.classes.NavigationAgent2D.mb_get_pathfinding_algorithm == null) gdext.classes.NavigationAgent2D.mb_get_pathfinding_algorithm = MethodBind.get("NavigationAgent2D", "get_pathfinding_algorithm", 3000421146L)
-    Ptrcall.call0[Long](gdext.classes.NavigationAgent2D.mb_get_pathfinding_algorithm, livePtr)
+    gdext.classes.NavigationPathQueryParameters2D.PathfindingAlgorithm(Ptrcall.call0[Long](gdext.classes.NavigationAgent2D.mb_get_pathfinding_algorithm, livePtr))
   }
 
   /** NavigationAgent2D.set_path_postprocessing */
-  final def setPathPostprocessing(path_postprocessing: Long): Unit = {
+  final def setPathPostprocessing(pathPostprocessing: gdext.classes.NavigationPathQueryParameters2D.PathPostProcessing): Unit = {
     if (gdext.classes.NavigationAgent2D.mb_set_path_postprocessing == null) gdext.classes.NavigationAgent2D.mb_set_path_postprocessing = MethodBind.get("NavigationAgent2D", "set_path_postprocessing", 2864409082L)
-    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_path_postprocessing, livePtr, path_postprocessing)
+    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_path_postprocessing, livePtr, pathPostprocessing)
   }
 
   /** NavigationAgent2D.get_path_postprocessing */
-  final def getPathPostprocessing(): Long = {
+  final def getPathPostprocessing(): gdext.classes.NavigationPathQueryParameters2D.PathPostProcessing = {
     if (gdext.classes.NavigationAgent2D.mb_get_path_postprocessing == null) gdext.classes.NavigationAgent2D.mb_get_path_postprocessing = MethodBind.get("NavigationAgent2D", "get_path_postprocessing", 3798118993L)
-    Ptrcall.call0[Long](gdext.classes.NavigationAgent2D.mb_get_path_postprocessing, livePtr)
+    gdext.classes.NavigationPathQueryParameters2D.PathPostProcessing(Ptrcall.call0[Long](gdext.classes.NavigationAgent2D.mb_get_path_postprocessing, livePtr))
   }
 
   /** NavigationAgent2D.set_path_metadata_flags */
-  final def setPathMetadataFlags(flags: Long): Unit = {
+  final def setPathMetadataFlags(flags: gdext.classes.NavigationPathQueryParameters2D.PathMetadataFlags): Unit = {
     if (gdext.classes.NavigationAgent2D.mb_set_path_metadata_flags == null) gdext.classes.NavigationAgent2D.mb_set_path_metadata_flags = MethodBind.get("NavigationAgent2D", "set_path_metadata_flags", 24274129L)
-    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_path_metadata_flags, livePtr, flags)
+    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_path_metadata_flags, livePtr, flags.asInstanceOf[Long])
   }
 
   /** NavigationAgent2D.get_path_metadata_flags */
-  final def getPathMetadataFlags(): Long = {
+  final def getPathMetadataFlags(): gdext.classes.NavigationPathQueryParameters2D.PathMetadataFlags = {
     if (gdext.classes.NavigationAgent2D.mb_get_path_metadata_flags == null) gdext.classes.NavigationAgent2D.mb_get_path_metadata_flags = MethodBind.get("NavigationAgent2D", "get_path_metadata_flags", 488152976L)
-    Ptrcall.call0[Long](gdext.classes.NavigationAgent2D.mb_get_path_metadata_flags, livePtr)
+    gdext.classes.NavigationPathQueryParameters2D.PathMetadataFlags(Ptrcall.call0[Long](gdext.classes.NavigationAgent2D.mb_get_path_metadata_flags, livePtr))
   }
 
   /** NavigationAgent2D.set_target_position */
@@ -251,9 +252,9 @@ abstract class NavigationAgent2D extends Node {
   }
 
   /** NavigationAgent2D.set_path_search_max_polygons */
-  final def setPathSearchMaxPolygons(max_polygons: Long): Unit = {
+  final def setPathSearchMaxPolygons(maxPolygons: Long): Unit = {
     if (gdext.classes.NavigationAgent2D.mb_set_path_search_max_polygons == null) gdext.classes.NavigationAgent2D.mb_set_path_search_max_polygons = MethodBind.get("NavigationAgent2D", "set_path_search_max_polygons", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_path_search_max_polygons, livePtr, max_polygons)
+    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_path_search_max_polygons, livePtr, maxPolygons)
   }
 
   /** NavigationAgent2D.get_path_search_max_polygons */
@@ -371,27 +372,27 @@ abstract class NavigationAgent2D extends Node {
   }
 
   /** NavigationAgent2D.set_avoidance_layer_value */
-  final def setAvoidanceLayerValue(layer_number: Long, value: Boolean): Unit = {
+  final def setAvoidanceLayerValue(layerNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.NavigationAgent2D.mb_set_avoidance_layer_value == null) gdext.classes.NavigationAgent2D.mb_set_avoidance_layer_value = MethodBind.get("NavigationAgent2D", "set_avoidance_layer_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.NavigationAgent2D.mb_set_avoidance_layer_value, livePtr, layer_number, value)
+    Ptrcall.callVoid2(gdext.classes.NavigationAgent2D.mb_set_avoidance_layer_value, livePtr, layerNumber, value)
   }
 
   /** NavigationAgent2D.get_avoidance_layer_value */
-  final def getAvoidanceLayerValue(layer_number: Long): Boolean = {
+  final def getAvoidanceLayerValue(layerNumber: Long): Boolean = {
     if (gdext.classes.NavigationAgent2D.mb_get_avoidance_layer_value == null) gdext.classes.NavigationAgent2D.mb_get_avoidance_layer_value = MethodBind.get("NavigationAgent2D", "get_avoidance_layer_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.NavigationAgent2D.mb_get_avoidance_layer_value, livePtr, layer_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.NavigationAgent2D.mb_get_avoidance_layer_value, livePtr, layerNumber)
   }
 
   /** NavigationAgent2D.set_avoidance_mask_value */
-  final def setAvoidanceMaskValue(mask_number: Long, value: Boolean): Unit = {
+  final def setAvoidanceMaskValue(maskNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.NavigationAgent2D.mb_set_avoidance_mask_value == null) gdext.classes.NavigationAgent2D.mb_set_avoidance_mask_value = MethodBind.get("NavigationAgent2D", "set_avoidance_mask_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.NavigationAgent2D.mb_set_avoidance_mask_value, livePtr, mask_number, value)
+    Ptrcall.callVoid2(gdext.classes.NavigationAgent2D.mb_set_avoidance_mask_value, livePtr, maskNumber, value)
   }
 
   /** NavigationAgent2D.get_avoidance_mask_value */
-  final def getAvoidanceMaskValue(mask_number: Long): Boolean = {
+  final def getAvoidanceMaskValue(maskNumber: Long): Boolean = {
     if (gdext.classes.NavigationAgent2D.mb_get_avoidance_mask_value == null) gdext.classes.NavigationAgent2D.mb_get_avoidance_mask_value = MethodBind.get("NavigationAgent2D", "get_avoidance_mask_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.NavigationAgent2D.mb_get_avoidance_mask_value, livePtr, mask_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.NavigationAgent2D.mb_get_avoidance_mask_value, livePtr, maskNumber)
   }
 
   /** NavigationAgent2D.set_avoidance_priority */
@@ -443,9 +444,9 @@ abstract class NavigationAgent2D extends Node {
   }
 
   /** NavigationAgent2D.set_debug_path_custom_point_size */
-  final def setDebugPathCustomPointSize(point_size: Double): Unit = {
+  final def setDebugPathCustomPointSize(pointSize: Double): Unit = {
     if (gdext.classes.NavigationAgent2D.mb_set_debug_path_custom_point_size == null) gdext.classes.NavigationAgent2D.mb_set_debug_path_custom_point_size = MethodBind.get("NavigationAgent2D", "set_debug_path_custom_point_size", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_debug_path_custom_point_size, livePtr, point_size)
+    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_debug_path_custom_point_size, livePtr, pointSize)
   }
 
   /** NavigationAgent2D.get_debug_path_custom_point_size */
@@ -455,9 +456,9 @@ abstract class NavigationAgent2D extends Node {
   }
 
   /** NavigationAgent2D.set_debug_path_custom_line_width */
-  final def setDebugPathCustomLineWidth(line_width: Double): Unit = {
+  final def setDebugPathCustomLineWidth(lineWidth: Double): Unit = {
     if (gdext.classes.NavigationAgent2D.mb_set_debug_path_custom_line_width == null) gdext.classes.NavigationAgent2D.mb_set_debug_path_custom_line_width = MethodBind.get("NavigationAgent2D", "set_debug_path_custom_line_width", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_debug_path_custom_line_width, livePtr, line_width)
+    Ptrcall.callVoid1(gdext.classes.NavigationAgent2D.mb_set_debug_path_custom_line_width, livePtr, lineWidth)
   }
 
   /** NavigationAgent2D.get_debug_path_custom_line_width */

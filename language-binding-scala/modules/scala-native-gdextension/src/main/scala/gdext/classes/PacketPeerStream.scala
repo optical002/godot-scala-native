@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,15 +24,15 @@ abstract class PacketPeerStream extends PacketPeer {
   }
 
   /** PacketPeerStream.set_input_buffer_max_size */
-  final def setInputBufferMaxSize(max_size_bytes: Long): Unit = {
+  final def setInputBufferMaxSize(maxSizeBytes: Long): Unit = {
     if (gdext.classes.PacketPeerStream.mb_set_input_buffer_max_size == null) gdext.classes.PacketPeerStream.mb_set_input_buffer_max_size = MethodBind.get("PacketPeerStream", "set_input_buffer_max_size", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.PacketPeerStream.mb_set_input_buffer_max_size, livePtr, max_size_bytes)
+    Ptrcall.callVoid1(gdext.classes.PacketPeerStream.mb_set_input_buffer_max_size, livePtr, maxSizeBytes)
   }
 
   /** PacketPeerStream.set_output_buffer_max_size */
-  final def setOutputBufferMaxSize(max_size_bytes: Long): Unit = {
+  final def setOutputBufferMaxSize(maxSizeBytes: Long): Unit = {
     if (gdext.classes.PacketPeerStream.mb_set_output_buffer_max_size == null) gdext.classes.PacketPeerStream.mb_set_output_buffer_max_size = MethodBind.get("PacketPeerStream", "set_output_buffer_max_size", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.PacketPeerStream.mb_set_output_buffer_max_size, livePtr, max_size_bytes)
+    Ptrcall.callVoid1(gdext.classes.PacketPeerStream.mb_set_output_buffer_max_size, livePtr, maxSizeBytes)
   }
 
   /** PacketPeerStream.get_input_buffer_max_size */

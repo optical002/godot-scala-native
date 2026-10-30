@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -53,9 +54,9 @@ abstract class NavigationPolygon extends Resource {
   }
 
   /** NavigationPolygon.set_cell_size */
-  final def setCellSize(cell_size: Double): Unit = {
+  final def setCellSize(cellSize: Double): Unit = {
     if (gdext.classes.NavigationPolygon.mb_set_cell_size == null) gdext.classes.NavigationPolygon.mb_set_cell_size = MethodBind.get("NavigationPolygon", "set_cell_size", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.NavigationPolygon.mb_set_cell_size, livePtr, cell_size)
+    Ptrcall.callVoid1(gdext.classes.NavigationPolygon.mb_set_cell_size, livePtr, cellSize)
   }
 
   /** NavigationPolygon.get_cell_size */
@@ -65,9 +66,9 @@ abstract class NavigationPolygon extends Resource {
   }
 
   /** NavigationPolygon.set_border_size */
-  final def setBorderSize(border_size: Double): Unit = {
+  final def setBorderSize(borderSize: Double): Unit = {
     if (gdext.classes.NavigationPolygon.mb_set_border_size == null) gdext.classes.NavigationPolygon.mb_set_border_size = MethodBind.get("NavigationPolygon", "set_border_size", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.NavigationPolygon.mb_set_border_size, livePtr, border_size)
+    Ptrcall.callVoid1(gdext.classes.NavigationPolygon.mb_set_border_size, livePtr, borderSize)
   }
 
   /** NavigationPolygon.get_border_size */
@@ -77,27 +78,27 @@ abstract class NavigationPolygon extends Resource {
   }
 
   /** NavigationPolygon.set_sample_partition_type */
-  final def setSamplePartitionType(sample_partition_type: Long): Unit = {
+  final def setSamplePartitionType(samplePartitionType: gdext.classes.NavigationPolygon.SamplePartitionType): Unit = {
     if (gdext.classes.NavigationPolygon.mb_set_sample_partition_type == null) gdext.classes.NavigationPolygon.mb_set_sample_partition_type = MethodBind.get("NavigationPolygon", "set_sample_partition_type", 2441478482L)
-    Ptrcall.callVoid1(gdext.classes.NavigationPolygon.mb_set_sample_partition_type, livePtr, sample_partition_type)
+    Ptrcall.callVoid1(gdext.classes.NavigationPolygon.mb_set_sample_partition_type, livePtr, samplePartitionType)
   }
 
   /** NavigationPolygon.get_sample_partition_type */
-  final def getSamplePartitionType(): Long = {
+  final def getSamplePartitionType(): gdext.classes.NavigationPolygon.SamplePartitionType = {
     if (gdext.classes.NavigationPolygon.mb_get_sample_partition_type == null) gdext.classes.NavigationPolygon.mb_get_sample_partition_type = MethodBind.get("NavigationPolygon", "get_sample_partition_type", 3887422851L)
-    Ptrcall.call0[Long](gdext.classes.NavigationPolygon.mb_get_sample_partition_type, livePtr)
+    gdext.classes.NavigationPolygon.SamplePartitionType(Ptrcall.call0[Long](gdext.classes.NavigationPolygon.mb_get_sample_partition_type, livePtr))
   }
 
   /** NavigationPolygon.set_parsed_geometry_type */
-  final def setParsedGeometryType(geometry_type: Long): Unit = {
+  final def setParsedGeometryType(geometryType: gdext.classes.NavigationPolygon.ParsedGeometryType): Unit = {
     if (gdext.classes.NavigationPolygon.mb_set_parsed_geometry_type == null) gdext.classes.NavigationPolygon.mb_set_parsed_geometry_type = MethodBind.get("NavigationPolygon", "set_parsed_geometry_type", 2507971764L)
-    Ptrcall.callVoid1(gdext.classes.NavigationPolygon.mb_set_parsed_geometry_type, livePtr, geometry_type)
+    Ptrcall.callVoid1(gdext.classes.NavigationPolygon.mb_set_parsed_geometry_type, livePtr, geometryType)
   }
 
   /** NavigationPolygon.get_parsed_geometry_type */
-  final def getParsedGeometryType(): Long = {
+  final def getParsedGeometryType(): gdext.classes.NavigationPolygon.ParsedGeometryType = {
     if (gdext.classes.NavigationPolygon.mb_get_parsed_geometry_type == null) gdext.classes.NavigationPolygon.mb_get_parsed_geometry_type = MethodBind.get("NavigationPolygon", "get_parsed_geometry_type", 1073219508L)
-    Ptrcall.call0[Long](gdext.classes.NavigationPolygon.mb_get_parsed_geometry_type, livePtr)
+    gdext.classes.NavigationPolygon.ParsedGeometryType(Ptrcall.call0[Long](gdext.classes.NavigationPolygon.mb_get_parsed_geometry_type, livePtr))
   }
 
   /** NavigationPolygon.set_parsed_collision_mask */
@@ -113,45 +114,45 @@ abstract class NavigationPolygon extends Resource {
   }
 
   /** NavigationPolygon.set_parsed_collision_mask_value */
-  final def setParsedCollisionMaskValue(layer_number: Long, value: Boolean): Unit = {
+  final def setParsedCollisionMaskValue(layerNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.NavigationPolygon.mb_set_parsed_collision_mask_value == null) gdext.classes.NavigationPolygon.mb_set_parsed_collision_mask_value = MethodBind.get("NavigationPolygon", "set_parsed_collision_mask_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.NavigationPolygon.mb_set_parsed_collision_mask_value, livePtr, layer_number, value)
+    Ptrcall.callVoid2(gdext.classes.NavigationPolygon.mb_set_parsed_collision_mask_value, livePtr, layerNumber, value)
   }
 
   /** NavigationPolygon.get_parsed_collision_mask_value */
-  final def getParsedCollisionMaskValue(layer_number: Long): Boolean = {
+  final def getParsedCollisionMaskValue(layerNumber: Long): Boolean = {
     if (gdext.classes.NavigationPolygon.mb_get_parsed_collision_mask_value == null) gdext.classes.NavigationPolygon.mb_get_parsed_collision_mask_value = MethodBind.get("NavigationPolygon", "get_parsed_collision_mask_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.NavigationPolygon.mb_get_parsed_collision_mask_value, livePtr, layer_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.NavigationPolygon.mb_get_parsed_collision_mask_value, livePtr, layerNumber)
   }
 
   /** NavigationPolygon.set_source_geometry_mode */
-  final def setSourceGeometryMode(geometry_mode: Long): Unit = {
+  final def setSourceGeometryMode(geometryMode: gdext.classes.NavigationPolygon.SourceGeometryMode): Unit = {
     if (gdext.classes.NavigationPolygon.mb_set_source_geometry_mode == null) gdext.classes.NavigationPolygon.mb_set_source_geometry_mode = MethodBind.get("NavigationPolygon", "set_source_geometry_mode", 4002316705L)
-    Ptrcall.callVoid1(gdext.classes.NavigationPolygon.mb_set_source_geometry_mode, livePtr, geometry_mode)
+    Ptrcall.callVoid1(gdext.classes.NavigationPolygon.mb_set_source_geometry_mode, livePtr, geometryMode)
   }
 
   /** NavigationPolygon.get_source_geometry_mode */
-  final def getSourceGeometryMode(): Long = {
+  final def getSourceGeometryMode(): gdext.classes.NavigationPolygon.SourceGeometryMode = {
     if (gdext.classes.NavigationPolygon.mb_get_source_geometry_mode == null) gdext.classes.NavigationPolygon.mb_get_source_geometry_mode = MethodBind.get("NavigationPolygon", "get_source_geometry_mode", 459686762L)
-    Ptrcall.call0[Long](gdext.classes.NavigationPolygon.mb_get_source_geometry_mode, livePtr)
+    gdext.classes.NavigationPolygon.SourceGeometryMode(Ptrcall.call0[Long](gdext.classes.NavigationPolygon.mb_get_source_geometry_mode, livePtr))
   }
 
   /** NavigationPolygon.set_source_geometry_group_name */
-  final def setSourceGeometryGroupName(group_name: gdext.builtin.StringName): Unit = {
+  final def setSourceGeometryGroupName(groupName: String): Unit = {
     if (gdext.classes.NavigationPolygon.mb_set_source_geometry_group_name == null) gdext.classes.NavigationPolygon.mb_set_source_geometry_group_name = MethodBind.get("NavigationPolygon", "set_source_geometry_group_name", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.NavigationPolygon.mb_set_source_geometry_group_name, livePtr, group_name)
+    Ptrcall.callVoid1(gdext.classes.NavigationPolygon.mb_set_source_geometry_group_name, livePtr, SnArg(groupName))
   }
 
   /** NavigationPolygon.get_source_geometry_group_name */
-  final def getSourceGeometryGroupName(): gdext.builtin.StringName = {
+  final def getSourceGeometryGroupName(): String = {
     if (gdext.classes.NavigationPolygon.mb_get_source_geometry_group_name == null) gdext.classes.NavigationPolygon.mb_get_source_geometry_group_name = MethodBind.get("NavigationPolygon", "get_source_geometry_group_name", 2002593661L)
-    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.NavigationPolygon.mb_get_source_geometry_group_name, livePtr)
+    Ptrcall.call0[SnArg](gdext.classes.NavigationPolygon.mb_get_source_geometry_group_name, livePtr)
   }
 
   /** NavigationPolygon.set_agent_radius */
-  final def setAgentRadius(agent_radius: Double): Unit = {
+  final def setAgentRadius(agentRadius: Double): Unit = {
     if (gdext.classes.NavigationPolygon.mb_set_agent_radius == null) gdext.classes.NavigationPolygon.mb_set_agent_radius = MethodBind.get("NavigationPolygon", "set_agent_radius", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.NavigationPolygon.mb_set_agent_radius, livePtr, agent_radius)
+    Ptrcall.callVoid1(gdext.classes.NavigationPolygon.mb_set_agent_radius, livePtr, agentRadius)
   }
 
   /** NavigationPolygon.get_agent_radius */
@@ -173,9 +174,9 @@ abstract class NavigationPolygon extends Resource {
   }
 
   /** NavigationPolygon.set_baking_rect_offset */
-  final def setBakingRectOffset(rect_offset: gdext.builtin.Vector2): Unit = {
+  final def setBakingRectOffset(rectOffset: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.NavigationPolygon.mb_set_baking_rect_offset == null) gdext.classes.NavigationPolygon.mb_set_baking_rect_offset = MethodBind.get("NavigationPolygon", "set_baking_rect_offset", 743155724L)
-    Ptrcall.callVoid1(gdext.classes.NavigationPolygon.mb_set_baking_rect_offset, livePtr, rect_offset)
+    Ptrcall.callVoid1(gdext.classes.NavigationPolygon.mb_set_baking_rect_offset, livePtr, rectOffset)
   }
 
   /** NavigationPolygon.get_baking_rect_offset */
@@ -223,4 +224,80 @@ object NavigationPolygon {
   private[classes] var mb_set_baking_rect_offset: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_baking_rect_offset: GDExtensionMethodBindPtr = null
   private[classes] var mb_clear: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `NavigationPolygon.SamplePartitionType`. */
+  opaque type SamplePartitionType <: Long = Long
+
+  object SamplePartitionType {
+    final val ConvexPartition: SamplePartitionType = 0L.asInstanceOf[SamplePartitionType]
+    final val Triangulate: SamplePartitionType = 1L.asInstanceOf[SamplePartitionType]
+    final val Max: SamplePartitionType = 2L.asInstanceOf[SamplePartitionType]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): SamplePartitionType = value.asInstanceOf[SamplePartitionType]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[SamplePartitionType] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[SamplePartitionType]]
+
+    extension (self: SamplePartitionType)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "ConvexPartition"
+        case 1L => "Triangulate"
+        case 2L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `NavigationPolygon.ParsedGeometryType`. */
+  opaque type ParsedGeometryType <: Long = Long
+
+  object ParsedGeometryType {
+    final val MeshInstances: ParsedGeometryType = 0L.asInstanceOf[ParsedGeometryType]
+    final val StaticColliders: ParsedGeometryType = 1L.asInstanceOf[ParsedGeometryType]
+    final val Both: ParsedGeometryType = 2L.asInstanceOf[ParsedGeometryType]
+    final val Max: ParsedGeometryType = 3L.asInstanceOf[ParsedGeometryType]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ParsedGeometryType = value.asInstanceOf[ParsedGeometryType]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ParsedGeometryType] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[ParsedGeometryType]]
+
+    extension (self: ParsedGeometryType)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "MeshInstances"
+        case 1L => "StaticColliders"
+        case 2L => "Both"
+        case 3L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `NavigationPolygon.SourceGeometryMode`. */
+  opaque type SourceGeometryMode <: Long = Long
+
+  object SourceGeometryMode {
+    final val RootNodeChildren: SourceGeometryMode = 0L.asInstanceOf[SourceGeometryMode]
+    final val GroupsWithChildren: SourceGeometryMode = 1L.asInstanceOf[SourceGeometryMode]
+    final val GroupsExplicit: SourceGeometryMode = 2L.asInstanceOf[SourceGeometryMode]
+    final val Max: SourceGeometryMode = 3L.asInstanceOf[SourceGeometryMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): SourceGeometryMode = value.asInstanceOf[SourceGeometryMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[SourceGeometryMode] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[SourceGeometryMode]]
+
+    extension (self: SourceGeometryMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "RootNodeChildren"
+        case 1L => "GroupsWithChildren"
+        case 2L => "GroupsExplicit"
+        case 3L => "Max"
+        case other => other.toString
+      }
+  }
 }

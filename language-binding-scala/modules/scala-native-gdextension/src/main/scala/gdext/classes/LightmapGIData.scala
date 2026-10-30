@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class LightmapGIData extends Resource {
   override def godotClassName: String = "LightmapGIData"
 
   /** LightmapGIData.set_uses_spherical_harmonics */
-  final def setUsesSphericalHarmonics(uses_spherical_harmonics: Boolean): Unit = {
+  final def setUsesSphericalHarmonics(usesSphericalHarmonics: Boolean): Unit = {
     if (gdext.classes.LightmapGIData.mb_set_uses_spherical_harmonics == null) gdext.classes.LightmapGIData.mb_set_uses_spherical_harmonics = MethodBind.get("LightmapGIData", "set_uses_spherical_harmonics", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.LightmapGIData.mb_set_uses_spherical_harmonics, livePtr, uses_spherical_harmonics)
+    Ptrcall.callVoid1(gdext.classes.LightmapGIData.mb_set_uses_spherical_harmonics, livePtr, usesSphericalHarmonics)
   }
 
   /** LightmapGIData.is_using_spherical_harmonics */
@@ -35,9 +36,9 @@ abstract class LightmapGIData extends Resource {
   }
 
   /** LightmapGIData.set_light_texture */
-  final def setLightTexture(light_texture: TextureLayered): Unit = {
+  final def setLightTexture(lightTexture: TextureLayered): Unit = {
     if (gdext.classes.LightmapGIData.mb_set_light_texture == null) gdext.classes.LightmapGIData.mb_set_light_texture = MethodBind.get("LightmapGIData", "set_light_texture", 1278366092L)
-    Ptrcall.callVoid1(gdext.classes.LightmapGIData.mb_set_light_texture, livePtr, Wrappers.handle(light_texture))
+    Ptrcall.callVoid1(gdext.classes.LightmapGIData.mb_set_light_texture, livePtr, Wrappers.handle(lightTexture))
   }
 
   /** LightmapGIData.get_light_texture. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -55,4 +56,28 @@ object LightmapGIData {
   private[classes] var mb_clear_users: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_light_texture: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_light_texture: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `LightmapGIData.ShadowmaskMode`. */
+  opaque type ShadowmaskMode <: Long = Long
+
+  object ShadowmaskMode {
+    final val None: ShadowmaskMode = 0L.asInstanceOf[ShadowmaskMode]
+    final val Replace: ShadowmaskMode = 1L.asInstanceOf[ShadowmaskMode]
+    final val Overlay: ShadowmaskMode = 2L.asInstanceOf[ShadowmaskMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ShadowmaskMode = value.asInstanceOf[ShadowmaskMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ShadowmaskMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[ShadowmaskMode]]
+
+    extension (self: ShadowmaskMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "None"
+        case 1L => "Replace"
+        case 2L => "Overlay"
+        case other => other.toString
+      }
+  }
 }

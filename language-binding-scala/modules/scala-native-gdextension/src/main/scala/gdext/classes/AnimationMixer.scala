@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,45 +12,45 @@ abstract class AnimationMixer extends Node {
   override def godotClassName: String = "AnimationMixer"
 
   /** AnimationMixer.add_animation_library */
-  final def addAnimationLibrary(name: gdext.builtin.StringName, library: AnimationLibrary): Long = {
+  final def addAnimationLibrary(name: String, library: AnimationLibrary): gdext.classes.Error = {
     if (gdext.classes.AnimationMixer.mb_add_animation_library == null) gdext.classes.AnimationMixer.mb_add_animation_library = MethodBind.get("AnimationMixer", "add_animation_library", 618909818L)
-    Ptrcall.call2[gdext.builtin.StringName, GodotObject, Long](gdext.classes.AnimationMixer.mb_add_animation_library, livePtr, name, Wrappers.handle(library))
+    gdext.classes.Error(Ptrcall.call2[SnArg, GodotObject, Long](gdext.classes.AnimationMixer.mb_add_animation_library, livePtr, SnArg(name), Wrappers.handle(library)))
   }
 
   /** AnimationMixer.remove_animation_library */
-  final def removeAnimationLibrary(name: gdext.builtin.StringName): Unit = {
+  final def removeAnimationLibrary(name: String): Unit = {
     if (gdext.classes.AnimationMixer.mb_remove_animation_library == null) gdext.classes.AnimationMixer.mb_remove_animation_library = MethodBind.get("AnimationMixer", "remove_animation_library", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.AnimationMixer.mb_remove_animation_library, livePtr, name)
+    Ptrcall.callVoid1(gdext.classes.AnimationMixer.mb_remove_animation_library, livePtr, SnArg(name))
   }
 
   /** AnimationMixer.rename_animation_library */
-  final def renameAnimationLibrary(name: gdext.builtin.StringName, newname: gdext.builtin.StringName): Unit = {
+  final def renameAnimationLibrary(name: String, newname: String): Unit = {
     if (gdext.classes.AnimationMixer.mb_rename_animation_library == null) gdext.classes.AnimationMixer.mb_rename_animation_library = MethodBind.get("AnimationMixer", "rename_animation_library", 3740211285L)
-    Ptrcall.callVoid2(gdext.classes.AnimationMixer.mb_rename_animation_library, livePtr, name, newname)
+    Ptrcall.callVoid2(gdext.classes.AnimationMixer.mb_rename_animation_library, livePtr, SnArg(name), SnArg(newname))
   }
 
   /** AnimationMixer.has_animation_library */
-  final def hasAnimationLibrary(name: gdext.builtin.StringName): Boolean = {
+  final def hasAnimationLibrary(name: String): Boolean = {
     if (gdext.classes.AnimationMixer.mb_has_animation_library == null) gdext.classes.AnimationMixer.mb_has_animation_library = MethodBind.get("AnimationMixer", "has_animation_library", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.AnimationMixer.mb_has_animation_library, livePtr, name)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.AnimationMixer.mb_has_animation_library, livePtr, SnArg(name))
   }
 
   /** AnimationMixer.get_animation_library. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getAnimationLibrary(name: gdext.builtin.StringName): AnimationLibrary = {
+  final def getAnimationLibrary(name: String): AnimationLibrary = {
     if (gdext.classes.AnimationMixer.mb_get_animation_library == null) gdext.classes.AnimationMixer.mb_get_animation_library = MethodBind.get("AnimationMixer", "get_animation_library", 147342321L)
-    Wrappers.owned[AnimationLibrary](Ptrcall.call1[gdext.builtin.StringName, Long](gdext.classes.AnimationMixer.mb_get_animation_library, livePtr, name))
+    Wrappers.owned[AnimationLibrary](Ptrcall.call1[SnArg, Long](gdext.classes.AnimationMixer.mb_get_animation_library, livePtr, SnArg(name)))
   }
 
   /** AnimationMixer.has_animation */
-  final def hasAnimation(name: gdext.builtin.StringName): Boolean = {
+  final def hasAnimation(name: String): Boolean = {
     if (gdext.classes.AnimationMixer.mb_has_animation == null) gdext.classes.AnimationMixer.mb_has_animation = MethodBind.get("AnimationMixer", "has_animation", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.AnimationMixer.mb_has_animation, livePtr, name)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.AnimationMixer.mb_has_animation, livePtr, SnArg(name))
   }
 
   /** AnimationMixer.get_animation. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getAnimation(name: gdext.builtin.StringName): Animation = {
+  final def getAnimation(name: String): Animation = {
     if (gdext.classes.AnimationMixer.mb_get_animation == null) gdext.classes.AnimationMixer.mb_get_animation = MethodBind.get("AnimationMixer", "get_animation", 2933122410L)
-    Wrappers.owned[Animation](Ptrcall.call1[gdext.builtin.StringName, Long](gdext.classes.AnimationMixer.mb_get_animation, livePtr, name))
+    Wrappers.owned[Animation](Ptrcall.call1[SnArg, Long](gdext.classes.AnimationMixer.mb_get_animation, livePtr, SnArg(name)))
   }
 
   /** AnimationMixer.set_active */
@@ -77,45 +78,45 @@ abstract class AnimationMixer extends Node {
   }
 
   /** AnimationMixer.set_callback_mode_process */
-  final def setCallbackModeProcess(mode: Long): Unit = {
+  final def setCallbackModeProcess(mode: gdext.classes.AnimationMixer.AnimationCallbackModeProcess): Unit = {
     if (gdext.classes.AnimationMixer.mb_set_callback_mode_process == null) gdext.classes.AnimationMixer.mb_set_callback_mode_process = MethodBind.get("AnimationMixer", "set_callback_mode_process", 2153733086L)
     Ptrcall.callVoid1(gdext.classes.AnimationMixer.mb_set_callback_mode_process, livePtr, mode)
   }
 
   /** AnimationMixer.get_callback_mode_process */
-  final def getCallbackModeProcess(): Long = {
+  final def getCallbackModeProcess(): gdext.classes.AnimationMixer.AnimationCallbackModeProcess = {
     if (gdext.classes.AnimationMixer.mb_get_callback_mode_process == null) gdext.classes.AnimationMixer.mb_get_callback_mode_process = MethodBind.get("AnimationMixer", "get_callback_mode_process", 1394468472L)
-    Ptrcall.call0[Long](gdext.classes.AnimationMixer.mb_get_callback_mode_process, livePtr)
+    gdext.classes.AnimationMixer.AnimationCallbackModeProcess(Ptrcall.call0[Long](gdext.classes.AnimationMixer.mb_get_callback_mode_process, livePtr))
   }
 
   /** AnimationMixer.set_callback_mode_method */
-  final def setCallbackModeMethod(mode: Long): Unit = {
+  final def setCallbackModeMethod(mode: gdext.classes.AnimationMixer.AnimationCallbackModeMethod): Unit = {
     if (gdext.classes.AnimationMixer.mb_set_callback_mode_method == null) gdext.classes.AnimationMixer.mb_set_callback_mode_method = MethodBind.get("AnimationMixer", "set_callback_mode_method", 742218271L)
     Ptrcall.callVoid1(gdext.classes.AnimationMixer.mb_set_callback_mode_method, livePtr, mode)
   }
 
   /** AnimationMixer.get_callback_mode_method */
-  final def getCallbackModeMethod(): Long = {
+  final def getCallbackModeMethod(): gdext.classes.AnimationMixer.AnimationCallbackModeMethod = {
     if (gdext.classes.AnimationMixer.mb_get_callback_mode_method == null) gdext.classes.AnimationMixer.mb_get_callback_mode_method = MethodBind.get("AnimationMixer", "get_callback_mode_method", 489449656L)
-    Ptrcall.call0[Long](gdext.classes.AnimationMixer.mb_get_callback_mode_method, livePtr)
+    gdext.classes.AnimationMixer.AnimationCallbackModeMethod(Ptrcall.call0[Long](gdext.classes.AnimationMixer.mb_get_callback_mode_method, livePtr))
   }
 
   /** AnimationMixer.set_callback_mode_discrete */
-  final def setCallbackModeDiscrete(mode: Long): Unit = {
+  final def setCallbackModeDiscrete(mode: gdext.classes.AnimationMixer.AnimationCallbackModeDiscrete): Unit = {
     if (gdext.classes.AnimationMixer.mb_set_callback_mode_discrete == null) gdext.classes.AnimationMixer.mb_set_callback_mode_discrete = MethodBind.get("AnimationMixer", "set_callback_mode_discrete", 1998944670L)
     Ptrcall.callVoid1(gdext.classes.AnimationMixer.mb_set_callback_mode_discrete, livePtr, mode)
   }
 
   /** AnimationMixer.get_callback_mode_discrete */
-  final def getCallbackModeDiscrete(): Long = {
+  final def getCallbackModeDiscrete(): gdext.classes.AnimationMixer.AnimationCallbackModeDiscrete = {
     if (gdext.classes.AnimationMixer.mb_get_callback_mode_discrete == null) gdext.classes.AnimationMixer.mb_get_callback_mode_discrete = MethodBind.get("AnimationMixer", "get_callback_mode_discrete", 3493168860L)
-    Ptrcall.call0[Long](gdext.classes.AnimationMixer.mb_get_callback_mode_discrete, livePtr)
+    gdext.classes.AnimationMixer.AnimationCallbackModeDiscrete(Ptrcall.call0[Long](gdext.classes.AnimationMixer.mb_get_callback_mode_discrete, livePtr))
   }
 
   /** AnimationMixer.set_audio_max_polyphony */
-  final def setAudioMaxPolyphony(max_polyphony: Long): Unit = {
+  final def setAudioMaxPolyphony(maxPolyphony: Long): Unit = {
     if (gdext.classes.AnimationMixer.mb_set_audio_max_polyphony == null) gdext.classes.AnimationMixer.mb_set_audio_max_polyphony = MethodBind.get("AnimationMixer", "set_audio_max_polyphony", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.AnimationMixer.mb_set_audio_max_polyphony, livePtr, max_polyphony)
+    Ptrcall.callVoid1(gdext.classes.AnimationMixer.mb_set_audio_max_polyphony, livePtr, maxPolyphony)
   }
 
   /** AnimationMixer.get_audio_max_polyphony */
@@ -185,9 +186,9 @@ abstract class AnimationMixer extends Node {
   }
 
   /** AnimationMixer.capture */
-  final def capture(name: gdext.builtin.StringName, duration: Double, trans_type: Long, ease_type: Long): Unit = {
+  final def capture(name: String, duration: Double, transType: gdext.classes.Tween.TransitionType = gdext.classes.Tween.TransitionType(0L), easeType: gdext.classes.Tween.EaseType = gdext.classes.Tween.EaseType(0L)): Unit = {
     if (gdext.classes.AnimationMixer.mb_capture == null) gdext.classes.AnimationMixer.mb_capture = MethodBind.get("AnimationMixer", "capture", 1333632127L)
-    Ptrcall.callVoid4(gdext.classes.AnimationMixer.mb_capture, livePtr, name, duration, trans_type, ease_type)
+    Ptrcall.callVoid4(gdext.classes.AnimationMixer.mb_capture, livePtr, SnArg(name), duration, transType, easeType)
   }
 
   /** AnimationMixer.set_reset_on_save_enabled */
@@ -203,15 +204,15 @@ abstract class AnimationMixer extends Node {
   }
 
   /** AnimationMixer.find_animation */
-  final def findAnimation(animation: Animation): gdext.builtin.StringName = {
+  final def findAnimation(animation: Animation): String = {
     if (gdext.classes.AnimationMixer.mb_find_animation == null) gdext.classes.AnimationMixer.mb_find_animation = MethodBind.get("AnimationMixer", "find_animation", 1559484580L)
-    Ptrcall.call1[GodotObject, gdext.builtin.StringName](gdext.classes.AnimationMixer.mb_find_animation, livePtr, Wrappers.handle(animation))
+    Ptrcall.call1[GodotObject, SnArg](gdext.classes.AnimationMixer.mb_find_animation, livePtr, Wrappers.handle(animation))
   }
 
   /** AnimationMixer.find_animation_library */
-  final def findAnimationLibrary(animation: Animation): gdext.builtin.StringName = {
+  final def findAnimationLibrary(animation: Animation): String = {
     if (gdext.classes.AnimationMixer.mb_find_animation_library == null) gdext.classes.AnimationMixer.mb_find_animation_library = MethodBind.get("AnimationMixer", "find_animation_library", 1559484580L)
-    Ptrcall.call1[GodotObject, gdext.builtin.StringName](gdext.classes.AnimationMixer.mb_find_animation_library, livePtr, Wrappers.handle(animation))
+    Ptrcall.call1[GodotObject, SnArg](gdext.classes.AnimationMixer.mb_find_animation_library, livePtr, Wrappers.handle(animation))
   }
 
 }
@@ -251,4 +252,74 @@ object AnimationMixer {
   private[classes] var mb_is_reset_on_save_enabled: GDExtensionMethodBindPtr = null
   private[classes] var mb_find_animation: GDExtensionMethodBindPtr = null
   private[classes] var mb_find_animation_library: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `AnimationMixer.AnimationCallbackModeProcess`. */
+  opaque type AnimationCallbackModeProcess <: Long = Long
+
+  object AnimationCallbackModeProcess {
+    final val Physics: AnimationCallbackModeProcess = 0L.asInstanceOf[AnimationCallbackModeProcess]
+    final val Idle: AnimationCallbackModeProcess = 1L.asInstanceOf[AnimationCallbackModeProcess]
+    final val Manual: AnimationCallbackModeProcess = 2L.asInstanceOf[AnimationCallbackModeProcess]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): AnimationCallbackModeProcess = value.asInstanceOf[AnimationCallbackModeProcess]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[AnimationCallbackModeProcess] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[AnimationCallbackModeProcess]]
+
+    extension (self: AnimationCallbackModeProcess)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Physics"
+        case 1L => "Idle"
+        case 2L => "Manual"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `AnimationMixer.AnimationCallbackModeMethod`. */
+  opaque type AnimationCallbackModeMethod <: Long = Long
+
+  object AnimationCallbackModeMethod {
+    final val Deferred: AnimationCallbackModeMethod = 0L.asInstanceOf[AnimationCallbackModeMethod]
+    final val Immediate: AnimationCallbackModeMethod = 1L.asInstanceOf[AnimationCallbackModeMethod]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): AnimationCallbackModeMethod = value.asInstanceOf[AnimationCallbackModeMethod]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[AnimationCallbackModeMethod] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[AnimationCallbackModeMethod]]
+
+    extension (self: AnimationCallbackModeMethod)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Deferred"
+        case 1L => "Immediate"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `AnimationMixer.AnimationCallbackModeDiscrete`. */
+  opaque type AnimationCallbackModeDiscrete <: Long = Long
+
+  object AnimationCallbackModeDiscrete {
+    final val Dominant: AnimationCallbackModeDiscrete = 0L.asInstanceOf[AnimationCallbackModeDiscrete]
+    final val Recessive: AnimationCallbackModeDiscrete = 1L.asInstanceOf[AnimationCallbackModeDiscrete]
+    final val ForceContinuous: AnimationCallbackModeDiscrete = 2L.asInstanceOf[AnimationCallbackModeDiscrete]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): AnimationCallbackModeDiscrete = value.asInstanceOf[AnimationCallbackModeDiscrete]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[AnimationCallbackModeDiscrete] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[AnimationCallbackModeDiscrete]]
+
+    extension (self: AnimationCallbackModeDiscrete)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Dominant"
+        case 1L => "Recessive"
+        case 2L => "ForceContinuous"
+        case other => other.toString
+      }
+  }
 }

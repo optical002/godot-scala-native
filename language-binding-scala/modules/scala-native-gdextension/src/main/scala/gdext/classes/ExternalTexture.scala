@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class ExternalTexture extends Texture2D {
   }
 
   /** ExternalTexture.set_external_buffer_id */
-  final def setExternalBufferId(external_buffer_id: Long): Unit = {
+  final def setExternalBufferId(externalBufferId: Long): Unit = {
     if (gdext.classes.ExternalTexture.mb_set_external_buffer_id == null) gdext.classes.ExternalTexture.mb_set_external_buffer_id = MethodBind.get("ExternalTexture", "set_external_buffer_id", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.ExternalTexture.mb_set_external_buffer_id, livePtr, external_buffer_id)
+    Ptrcall.callVoid1(gdext.classes.ExternalTexture.mb_set_external_buffer_id, livePtr, externalBufferId)
   }
 
 }

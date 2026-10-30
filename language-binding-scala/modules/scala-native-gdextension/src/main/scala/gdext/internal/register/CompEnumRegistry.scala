@@ -2,7 +2,7 @@ package gdext.internal.register
 
 import gdext.internal.engine.{Tres, Required, ClassMeta}
 import gdext.internal.engine.GodotObject.*
-import gdext.builtin.{PackedStringArrayRead, ObjectPropertyList, StringNames}
+import gdext.builtin.{PackedStringArrayRead, ObjectPropertyList}
 import gdext.classes.{Skeleton3D, AnimationMixer, SpriteFrames, AnimationTree,
   AnimationNodeStateMachine}
 
@@ -172,7 +172,7 @@ object CompEnum {
           val stateMachine = root.cast[AnimationNodeStateMachine]
           val stateNode =
             if (stateMachine == null) null
-            else stateMachine.getNode(StringNames.cached(state))
+            else stateMachine.getNode(state)
           if (stateNode == null) Seq.empty[String]
           else
             ObjectPropertyList

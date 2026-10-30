@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class ResourceLoader extends Object {
   override def godotClassName: String = "ResourceLoader"
 
   /** ResourceLoader.load_threaded_request */
-  final def loadThreadedRequest(path: String, type_hint: String, use_sub_threads: Boolean, cache_mode: Long): Long = {
+  final def loadThreadedRequest(path: String, typeHint: String = "", useSubThreads: Boolean = false, cacheMode: gdext.classes.ResourceLoader.CacheMode = gdext.classes.ResourceLoader.CacheMode(1L)): gdext.classes.Error = {
     if (gdext.classes.ResourceLoader.mb_load_threaded_request == null) gdext.classes.ResourceLoader.mb_load_threaded_request = MethodBind.get("ResourceLoader", "load_threaded_request", 3614384323L)
-    Ptrcall.call4[String, String, Boolean, Long, Long](gdext.classes.ResourceLoader.mb_load_threaded_request, livePtr, path, type_hint, use_sub_threads, cache_mode)
+    gdext.classes.Error(Ptrcall.call4[String, String, Boolean, Long, Long](gdext.classes.ResourceLoader.mb_load_threaded_request, livePtr, path, typeHint, useSubThreads, cacheMode))
   }
 
   /** ResourceLoader.load_threaded_get. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -23,21 +24,21 @@ abstract class ResourceLoader extends Object {
   }
 
   /** ResourceLoader.load. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def load(path: String, type_hint: String, cache_mode: Long): Resource = {
+  final def load(path: String, typeHint: String = "", cacheMode: gdext.classes.ResourceLoader.CacheMode = gdext.classes.ResourceLoader.CacheMode(1L)): Resource = {
     if (gdext.classes.ResourceLoader.mb_load == null) gdext.classes.ResourceLoader.mb_load = MethodBind.get("ResourceLoader", "load", 3358495409L)
-    Wrappers.owned[Resource](Ptrcall.call3[String, String, Long, Long](gdext.classes.ResourceLoader.mb_load, livePtr, path, type_hint, cache_mode))
+    Wrappers.owned[Resource](Ptrcall.call3[String, String, Long, Long](gdext.classes.ResourceLoader.mb_load, livePtr, path, typeHint, cacheMode))
   }
 
   /** ResourceLoader.add_resource_format_loader */
-  final def addResourceFormatLoader(format_loader: ResourceFormatLoader, at_front: Boolean): Unit = {
+  final def addResourceFormatLoader(formatLoader: ResourceFormatLoader, atFront: Boolean = false): Unit = {
     if (gdext.classes.ResourceLoader.mb_add_resource_format_loader == null) gdext.classes.ResourceLoader.mb_add_resource_format_loader = MethodBind.get("ResourceLoader", "add_resource_format_loader", 2896595483L)
-    Ptrcall.callVoid2(gdext.classes.ResourceLoader.mb_add_resource_format_loader, livePtr, Wrappers.handle(format_loader), at_front)
+    Ptrcall.callVoid2(gdext.classes.ResourceLoader.mb_add_resource_format_loader, livePtr, Wrappers.handle(formatLoader), atFront)
   }
 
   /** ResourceLoader.remove_resource_format_loader */
-  final def removeResourceFormatLoader(format_loader: ResourceFormatLoader): Unit = {
+  final def removeResourceFormatLoader(formatLoader: ResourceFormatLoader): Unit = {
     if (gdext.classes.ResourceLoader.mb_remove_resource_format_loader == null) gdext.classes.ResourceLoader.mb_remove_resource_format_loader = MethodBind.get("ResourceLoader", "remove_resource_format_loader", 405397102L)
-    Ptrcall.callVoid1(gdext.classes.ResourceLoader.mb_remove_resource_format_loader, livePtr, Wrappers.handle(format_loader))
+    Ptrcall.callVoid1(gdext.classes.ResourceLoader.mb_remove_resource_format_loader, livePtr, Wrappers.handle(formatLoader))
   }
 
   /** ResourceLoader.set_abort_on_missing_resources */
@@ -59,9 +60,9 @@ abstract class ResourceLoader extends Object {
   }
 
   /** ResourceLoader.exists */
-  final def exists(path: String, type_hint: String): Boolean = {
+  final def exists(path: String, typeHint: String = ""): Boolean = {
     if (gdext.classes.ResourceLoader.mb_exists == null) gdext.classes.ResourceLoader.mb_exists = MethodBind.get("ResourceLoader", "exists", 4185558881L)
-    Ptrcall.call2[String, String, Boolean](gdext.classes.ResourceLoader.mb_exists, livePtr, path, type_hint)
+    Ptrcall.call2[String, String, Boolean](gdext.classes.ResourceLoader.mb_exists, livePtr, path, typeHint)
   }
 
   /** ResourceLoader.get_resource_uid */
@@ -92,5 +93,99 @@ object ResourceLoader {
       instance = Wrappers.borrowed[ResourceLoader](GodotObject.fromPtr(
         Godot.interface.global_get_singleton(StringNames.cached("ResourceLoader").ptr)))
     instance
+  }
+
+  /** Forwards to [[singleton]]: ResourceLoader.load_threaded_request */
+  final def loadThreadedRequest(path: String, typeHint: String = "", useSubThreads: Boolean = false, cacheMode: gdext.classes.ResourceLoader.CacheMode = gdext.classes.ResourceLoader.CacheMode(1L)): gdext.classes.Error =
+    singleton.loadThreadedRequest(path, typeHint, useSubThreads, cacheMode)
+
+  /** Forwards to [[singleton]]: ResourceLoader.load_threaded_get */
+  final def loadThreadedGet(path: String): Resource =
+    singleton.loadThreadedGet(path)
+
+  /** Forwards to [[singleton]]: ResourceLoader.load */
+  final def load(path: String, typeHint: String = "", cacheMode: gdext.classes.ResourceLoader.CacheMode = gdext.classes.ResourceLoader.CacheMode(1L)): Resource =
+    singleton.load(path, typeHint, cacheMode)
+
+  /** Forwards to [[singleton]]: ResourceLoader.add_resource_format_loader */
+  final def addResourceFormatLoader(formatLoader: ResourceFormatLoader, atFront: Boolean = false): Unit =
+    singleton.addResourceFormatLoader(formatLoader, atFront)
+
+  /** Forwards to [[singleton]]: ResourceLoader.remove_resource_format_loader */
+  final def removeResourceFormatLoader(formatLoader: ResourceFormatLoader): Unit =
+    singleton.removeResourceFormatLoader(formatLoader)
+
+  /** Forwards to [[singleton]]: ResourceLoader.set_abort_on_missing_resources */
+  final def setAbortOnMissingResources(abort: Boolean): Unit =
+    singleton.setAbortOnMissingResources(abort)
+
+  /** Forwards to [[singleton]]: ResourceLoader.has_cached */
+  final def hasCached(path: String): Boolean =
+    singleton.hasCached(path)
+
+  /** Forwards to [[singleton]]: ResourceLoader.get_cached_ref */
+  final def getCachedRef(path: String): Resource =
+    singleton.getCachedRef(path)
+
+  /** Forwards to [[singleton]]: ResourceLoader.exists */
+  final def exists(path: String, typeHint: String = ""): Boolean =
+    singleton.exists(path, typeHint)
+
+  /** Forwards to [[singleton]]: ResourceLoader.get_resource_uid */
+  final def getResourceUid(path: String): Long =
+    singleton.getResourceUid(path)
+
+  /** Godot enum `ResourceLoader.ThreadLoadStatus`. */
+  opaque type ThreadLoadStatus <: Long = Long
+
+  object ThreadLoadStatus {
+    final val InvalidResource: ThreadLoadStatus = 0L.asInstanceOf[ThreadLoadStatus]
+    final val InProgress: ThreadLoadStatus = 1L.asInstanceOf[ThreadLoadStatus]
+    final val Failed: ThreadLoadStatus = 2L.asInstanceOf[ThreadLoadStatus]
+    final val Loaded: ThreadLoadStatus = 3L.asInstanceOf[ThreadLoadStatus]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ThreadLoadStatus = value.asInstanceOf[ThreadLoadStatus]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ThreadLoadStatus] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[ThreadLoadStatus]]
+
+    extension (self: ThreadLoadStatus)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "InvalidResource"
+        case 1L => "InProgress"
+        case 2L => "Failed"
+        case 3L => "Loaded"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `ResourceLoader.CacheMode`. */
+  opaque type CacheMode <: Long = Long
+
+  object CacheMode {
+    final val Ignore: CacheMode = 0L.asInstanceOf[CacheMode]
+    final val Reuse: CacheMode = 1L.asInstanceOf[CacheMode]
+    final val Replace: CacheMode = 2L.asInstanceOf[CacheMode]
+    final val IgnoreDeep: CacheMode = 3L.asInstanceOf[CacheMode]
+    final val ReplaceDeep: CacheMode = 4L.asInstanceOf[CacheMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): CacheMode = value.asInstanceOf[CacheMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[CacheMode] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[CacheMode]]
+
+    extension (self: CacheMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Ignore"
+        case 1L => "Reuse"
+        case 2L => "Replace"
+        case 3L => "IgnoreDeep"
+        case 4L => "ReplaceDeep"
+        case other => other.toString
+      }
   }
 }

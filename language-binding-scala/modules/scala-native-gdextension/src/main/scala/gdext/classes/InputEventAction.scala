@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,15 +12,15 @@ abstract class InputEventAction extends InputEvent {
   override def godotClassName: String = "InputEventAction"
 
   /** InputEventAction.set_action */
-  final def setAction(action: gdext.builtin.StringName): Unit = {
+  final def setAction(action: String): Unit = {
     if (gdext.classes.InputEventAction.mb_set_action == null) gdext.classes.InputEventAction.mb_set_action = MethodBind.get("InputEventAction", "set_action", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.InputEventAction.mb_set_action, livePtr, action)
+    Ptrcall.callVoid1(gdext.classes.InputEventAction.mb_set_action, livePtr, SnArg(action))
   }
 
   /** InputEventAction.get_action */
-  final def getAction(): gdext.builtin.StringName = {
+  final def getAction(): String = {
     if (gdext.classes.InputEventAction.mb_get_action == null) gdext.classes.InputEventAction.mb_get_action = MethodBind.get("InputEventAction", "get_action", 2002593661L)
-    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.InputEventAction.mb_get_action, livePtr)
+    Ptrcall.call0[SnArg](gdext.classes.InputEventAction.mb_get_action, livePtr)
   }
 
   /** InputEventAction.set_pressed */

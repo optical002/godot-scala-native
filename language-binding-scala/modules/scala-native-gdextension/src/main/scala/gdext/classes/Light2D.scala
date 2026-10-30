@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class Light2D extends Node2D {
   }
 
   /** Light2D.set_editor_only */
-  final def setEditorOnly(editor_only: Boolean): Unit = {
+  final def setEditorOnly(editorOnly: Boolean): Unit = {
     if (gdext.classes.Light2D.mb_set_editor_only == null) gdext.classes.Light2D.mb_set_editor_only = MethodBind.get("Light2D", "set_editor_only", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.Light2D.mb_set_editor_only, livePtr, editor_only)
+    Ptrcall.callVoid1(gdext.classes.Light2D.mb_set_editor_only, livePtr, editorOnly)
   }
 
   /** Light2D.is_editor_only */
@@ -107,9 +108,9 @@ abstract class Light2D extends Node2D {
   }
 
   /** Light2D.set_item_cull_mask */
-  final def setItemCullMask(item_cull_mask: Long): Unit = {
+  final def setItemCullMask(itemCullMask: Long): Unit = {
     if (gdext.classes.Light2D.mb_set_item_cull_mask == null) gdext.classes.Light2D.mb_set_item_cull_mask = MethodBind.get("Light2D", "set_item_cull_mask", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.Light2D.mb_set_item_cull_mask, livePtr, item_cull_mask)
+    Ptrcall.callVoid1(gdext.classes.Light2D.mb_set_item_cull_mask, livePtr, itemCullMask)
   }
 
   /** Light2D.get_item_cull_mask */
@@ -119,9 +120,9 @@ abstract class Light2D extends Node2D {
   }
 
   /** Light2D.set_item_shadow_cull_mask */
-  final def setItemShadowCullMask(item_shadow_cull_mask: Long): Unit = {
+  final def setItemShadowCullMask(itemShadowCullMask: Long): Unit = {
     if (gdext.classes.Light2D.mb_set_item_shadow_cull_mask == null) gdext.classes.Light2D.mb_set_item_shadow_cull_mask = MethodBind.get("Light2D", "set_item_shadow_cull_mask", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.Light2D.mb_set_item_shadow_cull_mask, livePtr, item_shadow_cull_mask)
+    Ptrcall.callVoid1(gdext.classes.Light2D.mb_set_item_shadow_cull_mask, livePtr, itemShadowCullMask)
   }
 
   /** Light2D.get_item_shadow_cull_mask */
@@ -155,21 +156,21 @@ abstract class Light2D extends Node2D {
   }
 
   /** Light2D.set_shadow_filter */
-  final def setShadowFilter(filter: Long): Unit = {
+  final def setShadowFilter(filter: gdext.classes.Light2D.ShadowFilter): Unit = {
     if (gdext.classes.Light2D.mb_set_shadow_filter == null) gdext.classes.Light2D.mb_set_shadow_filter = MethodBind.get("Light2D", "set_shadow_filter", 3209356555L)
     Ptrcall.callVoid1(gdext.classes.Light2D.mb_set_shadow_filter, livePtr, filter)
   }
 
   /** Light2D.get_shadow_filter */
-  final def getShadowFilter(): Long = {
+  final def getShadowFilter(): gdext.classes.Light2D.ShadowFilter = {
     if (gdext.classes.Light2D.mb_get_shadow_filter == null) gdext.classes.Light2D.mb_get_shadow_filter = MethodBind.get("Light2D", "get_shadow_filter", 1973619177L)
-    Ptrcall.call0[Long](gdext.classes.Light2D.mb_get_shadow_filter, livePtr)
+    gdext.classes.Light2D.ShadowFilter(Ptrcall.call0[Long](gdext.classes.Light2D.mb_get_shadow_filter, livePtr))
   }
 
   /** Light2D.set_shadow_color */
-  final def setShadowColor(shadow_color: gdext.builtin.Color): Unit = {
+  final def setShadowColor(shadowColor: gdext.builtin.Color): Unit = {
     if (gdext.classes.Light2D.mb_set_shadow_color == null) gdext.classes.Light2D.mb_set_shadow_color = MethodBind.get("Light2D", "set_shadow_color", 2920490490L)
-    Ptrcall.callVoid1(gdext.classes.Light2D.mb_set_shadow_color, livePtr, shadow_color)
+    Ptrcall.callVoid1(gdext.classes.Light2D.mb_set_shadow_color, livePtr, shadowColor)
   }
 
   /** Light2D.get_shadow_color */
@@ -179,15 +180,15 @@ abstract class Light2D extends Node2D {
   }
 
   /** Light2D.set_blend_mode */
-  final def setBlendMode(mode: Long): Unit = {
+  final def setBlendMode(mode: gdext.classes.Light2D.BlendMode): Unit = {
     if (gdext.classes.Light2D.mb_set_blend_mode == null) gdext.classes.Light2D.mb_set_blend_mode = MethodBind.get("Light2D", "set_blend_mode", 2916638796L)
     Ptrcall.callVoid1(gdext.classes.Light2D.mb_set_blend_mode, livePtr, mode)
   }
 
   /** Light2D.get_blend_mode */
-  final def getBlendMode(): Long = {
+  final def getBlendMode(): gdext.classes.Light2D.BlendMode = {
     if (gdext.classes.Light2D.mb_get_blend_mode == null) gdext.classes.Light2D.mb_get_blend_mode = MethodBind.get("Light2D", "get_blend_mode", 936255250L)
-    Ptrcall.call0[Long](gdext.classes.Light2D.mb_get_blend_mode, livePtr)
+    gdext.classes.Light2D.BlendMode(Ptrcall.call0[Long](gdext.classes.Light2D.mb_get_blend_mode, livePtr))
   }
 
   /** Light2D.set_height */
@@ -237,4 +238,52 @@ object Light2D {
   private[classes] var mb_get_blend_mode: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_height: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_height: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `Light2D.ShadowFilter`. */
+  opaque type ShadowFilter <: Long = Long
+
+  object ShadowFilter {
+    final val None: ShadowFilter = 0L.asInstanceOf[ShadowFilter]
+    final val Pcf5: ShadowFilter = 1L.asInstanceOf[ShadowFilter]
+    final val Pcf13: ShadowFilter = 2L.asInstanceOf[ShadowFilter]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ShadowFilter = value.asInstanceOf[ShadowFilter]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ShadowFilter] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[ShadowFilter]]
+
+    extension (self: ShadowFilter)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "None"
+        case 1L => "Pcf5"
+        case 2L => "Pcf13"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Light2D.BlendMode`. */
+  opaque type BlendMode <: Long = Long
+
+  object BlendMode {
+    final val Add: BlendMode = 0L.asInstanceOf[BlendMode]
+    final val Sub: BlendMode = 1L.asInstanceOf[BlendMode]
+    final val Mix: BlendMode = 2L.asInstanceOf[BlendMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): BlendMode = value.asInstanceOf[BlendMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[BlendMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[BlendMode]]
+
+    extension (self: BlendMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Add"
+        case 1L => "Sub"
+        case 2L => "Mix"
+        case other => other.toString
+      }
+  }
 }

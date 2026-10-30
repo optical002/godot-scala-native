@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -71,27 +72,27 @@ abstract class CanvasTexture extends Texture2D {
   }
 
   /** CanvasTexture.set_texture_filter */
-  final def setTextureFilter(filter: Long): Unit = {
+  final def setTextureFilter(filter: gdext.classes.CanvasItem.TextureFilter): Unit = {
     if (gdext.classes.CanvasTexture.mb_set_texture_filter == null) gdext.classes.CanvasTexture.mb_set_texture_filter = MethodBind.get("CanvasTexture", "set_texture_filter", 1037999706L)
     Ptrcall.callVoid1(gdext.classes.CanvasTexture.mb_set_texture_filter, livePtr, filter)
   }
 
   /** CanvasTexture.get_texture_filter */
-  final def getTextureFilter(): Long = {
+  final def getTextureFilter(): gdext.classes.CanvasItem.TextureFilter = {
     if (gdext.classes.CanvasTexture.mb_get_texture_filter == null) gdext.classes.CanvasTexture.mb_get_texture_filter = MethodBind.get("CanvasTexture", "get_texture_filter", 121960042L)
-    Ptrcall.call0[Long](gdext.classes.CanvasTexture.mb_get_texture_filter, livePtr)
+    gdext.classes.CanvasItem.TextureFilter(Ptrcall.call0[Long](gdext.classes.CanvasTexture.mb_get_texture_filter, livePtr))
   }
 
   /** CanvasTexture.set_texture_repeat */
-  final def setTextureRepeat(repeat: Long): Unit = {
+  final def setTextureRepeat(repeat: gdext.classes.CanvasItem.TextureRepeat): Unit = {
     if (gdext.classes.CanvasTexture.mb_set_texture_repeat == null) gdext.classes.CanvasTexture.mb_set_texture_repeat = MethodBind.get("CanvasTexture", "set_texture_repeat", 1716472974L)
     Ptrcall.callVoid1(gdext.classes.CanvasTexture.mb_set_texture_repeat, livePtr, repeat)
   }
 
   /** CanvasTexture.get_texture_repeat */
-  final def getTextureRepeat(): Long = {
+  final def getTextureRepeat(): gdext.classes.CanvasItem.TextureRepeat = {
     if (gdext.classes.CanvasTexture.mb_get_texture_repeat == null) gdext.classes.CanvasTexture.mb_get_texture_repeat = MethodBind.get("CanvasTexture", "get_texture_repeat", 2667158319L)
-    Ptrcall.call0[Long](gdext.classes.CanvasTexture.mb_get_texture_repeat, livePtr)
+    gdext.classes.CanvasItem.TextureRepeat(Ptrcall.call0[Long](gdext.classes.CanvasTexture.mb_get_texture_repeat, livePtr))
   }
 
 }

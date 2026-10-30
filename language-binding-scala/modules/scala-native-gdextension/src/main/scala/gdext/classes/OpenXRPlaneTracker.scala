@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class OpenXRPlaneTracker extends OpenXRSpatialEntityTracker {
   override def godotClassName: String = "OpenXRPlaneTracker"
 
   /** OpenXRPlaneTracker.set_bounds_size */
-  final def setBoundsSize(bounds_size: gdext.builtin.Vector2): Unit = {
+  final def setBoundsSize(boundsSize: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.OpenXRPlaneTracker.mb_set_bounds_size == null) gdext.classes.OpenXRPlaneTracker.mb_set_bounds_size = MethodBind.get("OpenXRPlaneTracker", "set_bounds_size", 743155724L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRPlaneTracker.mb_set_bounds_size, livePtr, bounds_size)
+    Ptrcall.callVoid1(gdext.classes.OpenXRPlaneTracker.mb_set_bounds_size, livePtr, boundsSize)
   }
 
   /** OpenXRPlaneTracker.get_bounds_size */
@@ -23,21 +24,21 @@ abstract class OpenXRPlaneTracker extends OpenXRSpatialEntityTracker {
   }
 
   /** OpenXRPlaneTracker.set_plane_alignment */
-  final def setPlaneAlignment(plane_alignment: Long): Unit = {
+  final def setPlaneAlignment(planeAlignment: gdext.classes.OpenXRSpatialComponentPlaneAlignmentList.PlaneAlignment): Unit = {
     if (gdext.classes.OpenXRPlaneTracker.mb_set_plane_alignment == null) gdext.classes.OpenXRPlaneTracker.mb_set_plane_alignment = MethodBind.get("OpenXRPlaneTracker", "set_plane_alignment", 1214382230L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRPlaneTracker.mb_set_plane_alignment, livePtr, plane_alignment)
+    Ptrcall.callVoid1(gdext.classes.OpenXRPlaneTracker.mb_set_plane_alignment, livePtr, planeAlignment)
   }
 
   /** OpenXRPlaneTracker.get_plane_alignment */
-  final def getPlaneAlignment(): Long = {
+  final def getPlaneAlignment(): gdext.classes.OpenXRSpatialComponentPlaneAlignmentList.PlaneAlignment = {
     if (gdext.classes.OpenXRPlaneTracker.mb_get_plane_alignment == null) gdext.classes.OpenXRPlaneTracker.mb_get_plane_alignment = MethodBind.get("OpenXRPlaneTracker", "get_plane_alignment", 845541441L)
-    Ptrcall.call0[Long](gdext.classes.OpenXRPlaneTracker.mb_get_plane_alignment, livePtr)
+    gdext.classes.OpenXRSpatialComponentPlaneAlignmentList.PlaneAlignment(Ptrcall.call0[Long](gdext.classes.OpenXRPlaneTracker.mb_get_plane_alignment, livePtr))
   }
 
   /** OpenXRPlaneTracker.set_plane_label */
-  final def setPlaneLabel(plane_label: String): Unit = {
+  final def setPlaneLabel(planeLabel: String): Unit = {
     if (gdext.classes.OpenXRPlaneTracker.mb_set_plane_label == null) gdext.classes.OpenXRPlaneTracker.mb_set_plane_label = MethodBind.get("OpenXRPlaneTracker", "set_plane_label", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRPlaneTracker.mb_set_plane_label, livePtr, plane_label)
+    Ptrcall.callVoid1(gdext.classes.OpenXRPlaneTracker.mb_set_plane_label, livePtr, planeLabel)
   }
 
   /** OpenXRPlaneTracker.get_plane_label */
@@ -65,7 +66,7 @@ abstract class OpenXRPlaneTracker extends OpenXRSpatialEntityTracker {
   }
 
   /** OpenXRPlaneTracker.get_shape. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getShape(thickness: Double): Shape3D = {
+  final def getShape(thickness: Double = 0.01): Shape3D = {
     if (gdext.classes.OpenXRPlaneTracker.mb_get_shape == null) gdext.classes.OpenXRPlaneTracker.mb_get_shape = MethodBind.get("OpenXRPlaneTracker", "get_shape", 3358509884L)
     Wrappers.owned[Shape3D](Ptrcall.call1[Double, Long](gdext.classes.OpenXRPlaneTracker.mb_get_shape, livePtr, thickness))
   }

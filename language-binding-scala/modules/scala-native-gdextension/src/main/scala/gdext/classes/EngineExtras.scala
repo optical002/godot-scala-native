@@ -10,12 +10,11 @@ import gdext.builtin.{
   Dictionary,
   FromVariant,
   GArray,
-  StringName,
-  StringNames,
   ToVariant,
   Variant
 }
-import gdext.internal.engine.{MethodBind, Ptrcall}
+import gdext.internal.StringNames
+import gdext.internal.engine.{MethodBind, Ptrcall, SnArg}
 import gdext.internal.ffi.types.*
 
 /** Hand-written engine-method wrappers for methods the interface generator
@@ -28,26 +27,26 @@ import gdext.internal.ffi.types.*
 
 extension (self: Object)
   /** `Object.set(property, value)` — generic property write (Variant-typed). */
-  def set(property: StringName, value: Variant): Unit =
-    Ptrcall.callVoid2[StringName, Variant](
+  def set(property: String, value: Variant): Unit =
+    Ptrcall.callVoid2[SnArg, Variant](
       MethodBind.get("Object", "set", 3776071444L),
       self.hostObject.objectPtr,
-      property,
+      SnArg(property),
       value
     )
 
   /** `Object.get(property)` — generic property read (returns a Variant the
     * caller must `destroy()` when done). */
-  def get(property: StringName): Variant =
-    Ptrcall.call1[StringName, Variant](
+  def get(property: String): Variant =
+    Ptrcall.call1[SnArg, Variant](
       MethodBind.get("Object", "get", 2760726917L),
       self.hostObject.objectPtr,
-      property
+      SnArg(property)
     )
 
   /** [[get]] decoded straight to `A`; the intermediate Variant is destroyed
     * here, so no manual `get -> to -> destroy` dance at the call site. */
-  def getAs[A](property: StringName)(using FromVariant[A]): A = {
+  def getAs[A](property: String)(using FromVariant[A]): A = {
     val v = self.get(property)
     try v.to[A]
     finally v.destroy()
@@ -55,39 +54,39 @@ extension (self: Object)
 
   /** [[set]] from a plain Scala value; the Variant round-trip (build, write,
     * destroy) is handled here. */
-  def set[A](property: StringName, value: A)(using ToVariant[A]): Unit =
+  def set[A](property: String, value: A)(using ToVariant[A]): Unit =
     Variant.scope(value)(v => self.set(property, v))
 
   /** `Object.connect(signal, callable, flags)` — connect a built-in (or
     * `@signal`) signal to a `Callable` (typically `Callable(self, "method")`).
     * Returns the engine `Error` code as a `Long`. The generator skips it
     * (Callable arg). */
-  def connect(signal: StringName, callable: gdext.builtin.Callable, flags: Long): Long =
-    Ptrcall.call3[StringName, gdext.builtin.Callable, Long, Long](
+  def connect(signal: String, callable: gdext.builtin.Callable, flags: Long): Long =
+    Ptrcall.call3[SnArg, gdext.builtin.Callable, Long, Long](
       MethodBind.get("Object", "connect", 1518946055L),
       self.hostObject.objectPtr,
-      signal,
+      SnArg(signal),
       callable,
       flags
     )
 
   /** Connect `signal` on this object to `target.method` (a registered `@func`).
     * Builds the `Callable(target, method)` and connects it. */
-  def connectMethod(signal: StringName, target: Object, method: StringName): Long = {
+  def connectMethod(signal: String, target: Object, method: String): Long = {
     val buf = stackalloc[Byte](gdext.builtin.BuiltinSizes.Callable.toUInt)
     val callable = gdext.builtin.Callable.of(target.hostObject.objectPtr, method, buf)
     self.connect(signal, callable, 0L)
   }
 
   /** Connect a named built-in [[SignalName]] to `target.method`. */
-  def connectMethod(signal: SignalName, target: Object, method: StringName): Long =
-    self.connectMethod(StringNames.cached(signal.godotName), target, method)
+  def connectMethod(signal: SignalName, target: Object, method: String): Long =
+    self.connectMethod(signal.godotName, target, method)
 
   /** Connect `signal` on this object directly to a Scala closure — no registered
     * `@func` method needed. The closure is held alive (via a custom
     * [[gdext.internal.engine.CustomCallable]]) for as long as the connection
     * exists, and dropped when Godot frees the Callable on disconnect. */
-  def connect(signal: StringName, handler: () => Unit): Long = {
+  def connect(signal: String, handler: () => Unit): Long = {
     val buf = stackalloc[Byte](gdext.builtin.BuiltinSizes.Callable.toUInt)
     val callable = gdext.internal.engine.CustomCallable.of(handler, buf)
     self.connect(signal, callable, 0L)
@@ -95,22 +94,22 @@ extension (self: Object)
 
   /** Connect a named built-in [[SignalName]] directly to a Scala closure. */
   def connect(signal: SignalName, handler: () => Unit): Long =
-    self.connect(StringNames.cached(signal.godotName), handler)
+    self.connect(signal.godotName, handler)
 
 extension (self: AnimationTree)
   /** The root state machine's playback object (the tree's `parameters/playback`
     * property), typed — no hardcoded property string or Variant handling at the
     * call site. */
   def stateMachinePlayback: AnimationNodeStateMachinePlayback =
-    self.getAs[AnimationNodeStateMachinePlayback](StringNames.cached("parameters/playback"))
+    self.getAs[AnimationNodeStateMachinePlayback]("parameters/playback")
 
-  /** Cached `parameters/<part>/<part>/...` property path for [[get]]/[[set]] on
+  /** `parameters/<part>/<part>/...` property path for [[get]]/[[set]] on
     * this tree (e.g. `tree.paramPath(state, "Blend2/blend_amount")`). */
-  def paramPath(parts: String*): StringName =
-    StringNames.cached(parts.mkString("parameters/", "/", ""))
+  def paramPath(parts: String*): String =
+    parts.mkString("parameters/", "/", "")
 
   /** [[paramPath]] to one of a OneShot node's [[OneShotParam]] parameters. */
-  def paramPath(state: String, node: String, param: OneShotParam): StringName =
+  def paramPath(state: String, node: String, param: OneShotParam): String =
     self.paramPath(state, node, param.godotName)
 
 /** `AnimationNodeOneShot.OneShotRequest` values, for driving a OneShot node's

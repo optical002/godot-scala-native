@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -89,9 +90,9 @@ abstract class VideoStreamPlayer extends Control {
   }
 
   /** VideoStreamPlayer.set_speed_scale */
-  final def setSpeedScale(speed_scale: Double): Unit = {
+  final def setSpeedScale(speedScale: Double): Unit = {
     if (gdext.classes.VideoStreamPlayer.mb_set_speed_scale == null) gdext.classes.VideoStreamPlayer.mb_set_speed_scale = MethodBind.get("VideoStreamPlayer", "set_speed_scale", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.VideoStreamPlayer.mb_set_speed_scale, livePtr, speed_scale)
+    Ptrcall.callVoid1(gdext.classes.VideoStreamPlayer.mb_set_speed_scale, livePtr, speedScale)
   }
 
   /** VideoStreamPlayer.get_speed_scale */
@@ -173,15 +174,15 @@ abstract class VideoStreamPlayer extends Control {
   }
 
   /** VideoStreamPlayer.set_bus */
-  final def setBus(bus: gdext.builtin.StringName): Unit = {
+  final def setBus(bus: String): Unit = {
     if (gdext.classes.VideoStreamPlayer.mb_set_bus == null) gdext.classes.VideoStreamPlayer.mb_set_bus = MethodBind.get("VideoStreamPlayer", "set_bus", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.VideoStreamPlayer.mb_set_bus, livePtr, bus)
+    Ptrcall.callVoid1(gdext.classes.VideoStreamPlayer.mb_set_bus, livePtr, SnArg(bus))
   }
 
   /** VideoStreamPlayer.get_bus */
-  final def getBus(): gdext.builtin.StringName = {
+  final def getBus(): String = {
     if (gdext.classes.VideoStreamPlayer.mb_get_bus == null) gdext.classes.VideoStreamPlayer.mb_get_bus = MethodBind.get("VideoStreamPlayer", "get_bus", 2002593661L)
-    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.VideoStreamPlayer.mb_get_bus, livePtr)
+    Ptrcall.call0[SnArg](gdext.classes.VideoStreamPlayer.mb_get_bus, livePtr)
   }
 
   /** VideoStreamPlayer.get_video_texture. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */

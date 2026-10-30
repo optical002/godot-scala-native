@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -41,9 +42,9 @@ abstract class EditorFileSystemDirectory extends Object {
   }
 
   /** EditorFileSystemDirectory.get_file_type */
-  final def getFileType(idx: Long): gdext.builtin.StringName = {
+  final def getFileType(idx: Long): String = {
     if (gdext.classes.EditorFileSystemDirectory.mb_get_file_type == null) gdext.classes.EditorFileSystemDirectory.mb_get_file_type = MethodBind.get("EditorFileSystemDirectory", "get_file_type", 659327637L)
-    Ptrcall.call1[Long, gdext.builtin.StringName](gdext.classes.EditorFileSystemDirectory.mb_get_file_type, livePtr, idx)
+    Ptrcall.call1[Long, SnArg](gdext.classes.EditorFileSystemDirectory.mb_get_file_type, livePtr, idx)
   }
 
   /** EditorFileSystemDirectory.get_file_script_class_name */

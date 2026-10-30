@@ -10,7 +10,7 @@ class RegistrationScanSpec extends munit.FunSuite {
   private val base =
     """package game
       |final class Player(var speed: Double = 120.0) extends Node2D {
-      |  override def _ready(): Unit = { println("a") }
+      |  override def ready(): Unit = { println("a") }
       |  @func def score(): Int = 1
       |  def inferred = 1
       |}

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -29,15 +30,15 @@ abstract class OpenXRActionMap extends Resource {
   }
 
   /** OpenXRActionMap.add_action_set */
-  final def addActionSet(action_set: OpenXRActionSet): Unit = {
+  final def addActionSet(actionSet: OpenXRActionSet): Unit = {
     if (gdext.classes.OpenXRActionMap.mb_add_action_set == null) gdext.classes.OpenXRActionMap.mb_add_action_set = MethodBind.get("OpenXRActionMap", "add_action_set", 2093310581L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRActionMap.mb_add_action_set, livePtr, Wrappers.handle(action_set))
+    Ptrcall.callVoid1(gdext.classes.OpenXRActionMap.mb_add_action_set, livePtr, Wrappers.handle(actionSet))
   }
 
   /** OpenXRActionMap.remove_action_set */
-  final def removeActionSet(action_set: OpenXRActionSet): Unit = {
+  final def removeActionSet(actionSet: OpenXRActionSet): Unit = {
     if (gdext.classes.OpenXRActionMap.mb_remove_action_set == null) gdext.classes.OpenXRActionMap.mb_remove_action_set = MethodBind.get("OpenXRActionMap", "remove_action_set", 2093310581L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRActionMap.mb_remove_action_set, livePtr, Wrappers.handle(action_set))
+    Ptrcall.callVoid1(gdext.classes.OpenXRActionMap.mb_remove_action_set, livePtr, Wrappers.handle(actionSet))
   }
 
   /** OpenXRActionMap.get_interaction_profile_count */
@@ -59,15 +60,15 @@ abstract class OpenXRActionMap extends Resource {
   }
 
   /** OpenXRActionMap.add_interaction_profile */
-  final def addInteractionProfile(interaction_profile: OpenXRInteractionProfile): Unit = {
+  final def addInteractionProfile(interactionProfile: OpenXRInteractionProfile): Unit = {
     if (gdext.classes.OpenXRActionMap.mb_add_interaction_profile == null) gdext.classes.OpenXRActionMap.mb_add_interaction_profile = MethodBind.get("OpenXRActionMap", "add_interaction_profile", 2697953512L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRActionMap.mb_add_interaction_profile, livePtr, Wrappers.handle(interaction_profile))
+    Ptrcall.callVoid1(gdext.classes.OpenXRActionMap.mb_add_interaction_profile, livePtr, Wrappers.handle(interactionProfile))
   }
 
   /** OpenXRActionMap.remove_interaction_profile */
-  final def removeInteractionProfile(interaction_profile: OpenXRInteractionProfile): Unit = {
+  final def removeInteractionProfile(interactionProfile: OpenXRInteractionProfile): Unit = {
     if (gdext.classes.OpenXRActionMap.mb_remove_interaction_profile == null) gdext.classes.OpenXRActionMap.mb_remove_interaction_profile = MethodBind.get("OpenXRActionMap", "remove_interaction_profile", 2697953512L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRActionMap.mb_remove_interaction_profile, livePtr, Wrappers.handle(interaction_profile))
+    Ptrcall.callVoid1(gdext.classes.OpenXRActionMap.mb_remove_interaction_profile, livePtr, Wrappers.handle(interactionProfile))
   }
 
   /** OpenXRActionMap.create_default_action_sets */

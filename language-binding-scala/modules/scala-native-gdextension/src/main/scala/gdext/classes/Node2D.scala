@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -77,13 +78,13 @@ abstract class Node2D extends CanvasItem {
   }
 
   /** Node2D.move_local_x */
-  final def moveLocalX(delta: Double, scaled: Boolean): Unit = {
+  final def moveLocalX(delta: Double, scaled: Boolean = false): Unit = {
     if (gdext.classes.Node2D.mb_move_local_x == null) gdext.classes.Node2D.mb_move_local_x = MethodBind.get("Node2D", "move_local_x", 2087892650L)
     Ptrcall.callVoid2(gdext.classes.Node2D.mb_move_local_x, livePtr, delta, scaled)
   }
 
   /** Node2D.move_local_y */
-  final def moveLocalY(delta: Double, scaled: Boolean): Unit = {
+  final def moveLocalY(delta: Double, scaled: Boolean = false): Unit = {
     if (gdext.classes.Node2D.mb_move_local_y == null) gdext.classes.Node2D.mb_move_local_y = MethodBind.get("Node2D", "move_local_y", 2087892650L)
     Ptrcall.callVoid2(gdext.classes.Node2D.mb_move_local_y, livePtr, delta, scaled)
   }
@@ -191,15 +192,15 @@ abstract class Node2D extends CanvasItem {
   }
 
   /** Node2D.to_local */
-  final def toLocal(global_point: gdext.builtin.Vector2): gdext.builtin.Vector2 = {
+  final def toLocal(globalPoint: gdext.builtin.Vector2): gdext.builtin.Vector2 = {
     if (gdext.classes.Node2D.mb_to_local == null) gdext.classes.Node2D.mb_to_local = MethodBind.get("Node2D", "to_local", 2656412154L)
-    Ptrcall.call1[gdext.builtin.Vector2, gdext.builtin.Vector2](gdext.classes.Node2D.mb_to_local, livePtr, global_point)
+    Ptrcall.call1[gdext.builtin.Vector2, gdext.builtin.Vector2](gdext.classes.Node2D.mb_to_local, livePtr, globalPoint)
   }
 
   /** Node2D.to_global */
-  final def toGlobal(local_point: gdext.builtin.Vector2): gdext.builtin.Vector2 = {
+  final def toGlobal(localPoint: gdext.builtin.Vector2): gdext.builtin.Vector2 = {
     if (gdext.classes.Node2D.mb_to_global == null) gdext.classes.Node2D.mb_to_global = MethodBind.get("Node2D", "to_global", 2656412154L)
-    Ptrcall.call1[gdext.builtin.Vector2, gdext.builtin.Vector2](gdext.classes.Node2D.mb_to_global, livePtr, local_point)
+    Ptrcall.call1[gdext.builtin.Vector2, gdext.builtin.Vector2](gdext.classes.Node2D.mb_to_global, livePtr, localPoint)
   }
 
   /** Node2D.get_relative_transform_to_parent */

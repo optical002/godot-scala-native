@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,9 +36,9 @@ abstract class FoldableContainer extends Container {
   }
 
   /** FoldableContainer.set_foldable_group */
-  final def setFoldableGroup(button_group: FoldableGroup): Unit = {
+  final def setFoldableGroup(buttonGroup: FoldableGroup): Unit = {
     if (gdext.classes.FoldableContainer.mb_set_foldable_group == null) gdext.classes.FoldableContainer.mb_set_foldable_group = MethodBind.get("FoldableContainer", "set_foldable_group", 3001390597L)
-    Ptrcall.callVoid1(gdext.classes.FoldableContainer.mb_set_foldable_group, livePtr, Wrappers.handle(button_group))
+    Ptrcall.callVoid1(gdext.classes.FoldableContainer.mb_set_foldable_group, livePtr, Wrappers.handle(buttonGroup))
   }
 
   /** FoldableContainer.get_foldable_group. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -59,15 +60,15 @@ abstract class FoldableContainer extends Container {
   }
 
   /** FoldableContainer.set_title_alignment */
-  final def setTitleAlignment(alignment: Long): Unit = {
+  final def setTitleAlignment(alignment: gdext.classes.HorizontalAlignment): Unit = {
     if (gdext.classes.FoldableContainer.mb_set_title_alignment == null) gdext.classes.FoldableContainer.mb_set_title_alignment = MethodBind.get("FoldableContainer", "set_title_alignment", 2312603777L)
     Ptrcall.callVoid1(gdext.classes.FoldableContainer.mb_set_title_alignment, livePtr, alignment)
   }
 
   /** FoldableContainer.get_title_alignment */
-  final def getTitleAlignment(): Long = {
+  final def getTitleAlignment(): gdext.classes.HorizontalAlignment = {
     if (gdext.classes.FoldableContainer.mb_get_title_alignment == null) gdext.classes.FoldableContainer.mb_get_title_alignment = MethodBind.get("FoldableContainer", "get_title_alignment", 341400642L)
-    Ptrcall.call0[Long](gdext.classes.FoldableContainer.mb_get_title_alignment, livePtr)
+    gdext.classes.HorizontalAlignment(Ptrcall.call0[Long](gdext.classes.FoldableContainer.mb_get_title_alignment, livePtr))
   }
 
   /** FoldableContainer.set_language */
@@ -83,39 +84,39 @@ abstract class FoldableContainer extends Container {
   }
 
   /** FoldableContainer.set_title_text_direction */
-  final def setTitleTextDirection(text_direction: Long): Unit = {
+  final def setTitleTextDirection(textDirection: gdext.classes.Control.TextDirection): Unit = {
     if (gdext.classes.FoldableContainer.mb_set_title_text_direction == null) gdext.classes.FoldableContainer.mb_set_title_text_direction = MethodBind.get("FoldableContainer", "set_title_text_direction", 119160795L)
-    Ptrcall.callVoid1(gdext.classes.FoldableContainer.mb_set_title_text_direction, livePtr, text_direction)
+    Ptrcall.callVoid1(gdext.classes.FoldableContainer.mb_set_title_text_direction, livePtr, textDirection)
   }
 
   /** FoldableContainer.get_title_text_direction */
-  final def getTitleTextDirection(): Long = {
+  final def getTitleTextDirection(): gdext.classes.Control.TextDirection = {
     if (gdext.classes.FoldableContainer.mb_get_title_text_direction == null) gdext.classes.FoldableContainer.mb_get_title_text_direction = MethodBind.get("FoldableContainer", "get_title_text_direction", 797257663L)
-    Ptrcall.call0[Long](gdext.classes.FoldableContainer.mb_get_title_text_direction, livePtr)
+    gdext.classes.Control.TextDirection(Ptrcall.call0[Long](gdext.classes.FoldableContainer.mb_get_title_text_direction, livePtr))
   }
 
   /** FoldableContainer.set_title_text_overrun_behavior */
-  final def setTitleTextOverrunBehavior(overrun_behavior: Long): Unit = {
+  final def setTitleTextOverrunBehavior(overrunBehavior: gdext.classes.TextServer.OverrunBehavior): Unit = {
     if (gdext.classes.FoldableContainer.mb_set_title_text_overrun_behavior == null) gdext.classes.FoldableContainer.mb_set_title_text_overrun_behavior = MethodBind.get("FoldableContainer", "set_title_text_overrun_behavior", 1008890932L)
-    Ptrcall.callVoid1(gdext.classes.FoldableContainer.mb_set_title_text_overrun_behavior, livePtr, overrun_behavior)
+    Ptrcall.callVoid1(gdext.classes.FoldableContainer.mb_set_title_text_overrun_behavior, livePtr, overrunBehavior)
   }
 
   /** FoldableContainer.get_title_text_overrun_behavior */
-  final def getTitleTextOverrunBehavior(): Long = {
+  final def getTitleTextOverrunBehavior(): gdext.classes.TextServer.OverrunBehavior = {
     if (gdext.classes.FoldableContainer.mb_get_title_text_overrun_behavior == null) gdext.classes.FoldableContainer.mb_get_title_text_overrun_behavior = MethodBind.get("FoldableContainer", "get_title_text_overrun_behavior", 3779142101L)
-    Ptrcall.call0[Long](gdext.classes.FoldableContainer.mb_get_title_text_overrun_behavior, livePtr)
+    gdext.classes.TextServer.OverrunBehavior(Ptrcall.call0[Long](gdext.classes.FoldableContainer.mb_get_title_text_overrun_behavior, livePtr))
   }
 
   /** FoldableContainer.set_title_position */
-  final def setTitlePosition(title_position: Long): Unit = {
+  final def setTitlePosition(titlePosition: gdext.classes.FoldableContainer.TitlePosition): Unit = {
     if (gdext.classes.FoldableContainer.mb_set_title_position == null) gdext.classes.FoldableContainer.mb_set_title_position = MethodBind.get("FoldableContainer", "set_title_position", 2276829442L)
-    Ptrcall.callVoid1(gdext.classes.FoldableContainer.mb_set_title_position, livePtr, title_position)
+    Ptrcall.callVoid1(gdext.classes.FoldableContainer.mb_set_title_position, livePtr, titlePosition)
   }
 
   /** FoldableContainer.get_title_position */
-  final def getTitlePosition(): Long = {
+  final def getTitlePosition(): gdext.classes.FoldableContainer.TitlePosition = {
     if (gdext.classes.FoldableContainer.mb_get_title_position == null) gdext.classes.FoldableContainer.mb_get_title_position = MethodBind.get("FoldableContainer", "get_title_position", 3028840207L)
-    Ptrcall.call0[Long](gdext.classes.FoldableContainer.mb_get_title_position, livePtr)
+    gdext.classes.FoldableContainer.TitlePosition(Ptrcall.call0[Long](gdext.classes.FoldableContainer.mb_get_title_position, livePtr))
   }
 
   /** FoldableContainer.add_title_bar_control */
@@ -153,4 +154,26 @@ object FoldableContainer {
   private[classes] var mb_get_title_position: GDExtensionMethodBindPtr = null
   private[classes] var mb_add_title_bar_control: GDExtensionMethodBindPtr = null
   private[classes] var mb_remove_title_bar_control: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `FoldableContainer.TitlePosition`. */
+  opaque type TitlePosition <: Long = Long
+
+  object TitlePosition {
+    final val Top: TitlePosition = 0L.asInstanceOf[TitlePosition]
+    final val Bottom: TitlePosition = 1L.asInstanceOf[TitlePosition]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): TitlePosition = value.asInstanceOf[TitlePosition]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[TitlePosition] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[TitlePosition]]
+
+    extension (self: TitlePosition)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Top"
+        case 1L => "Bottom"
+        case other => other.toString
+      }
+  }
 }

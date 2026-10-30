@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,7 +24,7 @@ abstract class Curve3D extends Resource {
   }
 
   /** Curve3D.add_point */
-  final def addPoint(position: gdext.builtin.Vector3, in: gdext.builtin.Vector3, out: gdext.builtin.Vector3, index: Long): Unit = {
+  final def addPoint(position: gdext.builtin.Vector3, in: gdext.builtin.Vector3 = gdext.builtin.Vector3(0f, 0f, 0f), out: gdext.builtin.Vector3 = gdext.builtin.Vector3(0f, 0f, 0f), index: Long = -1L): Unit = {
     if (gdext.classes.Curve3D.mb_add_point == null) gdext.classes.Curve3D.mb_add_point = MethodBind.get("Curve3D", "add_point", 2931053748L)
     Ptrcall.callVoid4(gdext.classes.Curve3D.mb_add_point, livePtr, position, in, out, index)
   }
@@ -143,33 +144,33 @@ abstract class Curve3D extends Resource {
   }
 
   /** Curve3D.sample_baked */
-  final def sampleBaked(offset: Double, cubic: Boolean): gdext.builtin.Vector3 = {
+  final def sampleBaked(offset: Double = 0.0, cubic: Boolean = false): gdext.builtin.Vector3 = {
     if (gdext.classes.Curve3D.mb_sample_baked == null) gdext.classes.Curve3D.mb_sample_baked = MethodBind.get("Curve3D", "sample_baked", 1350085894L)
     Ptrcall.call2[Double, Boolean, gdext.builtin.Vector3](gdext.classes.Curve3D.mb_sample_baked, livePtr, offset, cubic)
   }
 
   /** Curve3D.sample_baked_with_rotation */
-  final def sampleBakedWithRotation(offset: Double, cubic: Boolean, apply_tilt: Boolean): gdext.builtin.Transform3D = {
+  final def sampleBakedWithRotation(offset: Double = 0.0, cubic: Boolean = false, applyTilt: Boolean = false): gdext.builtin.Transform3D = {
     if (gdext.classes.Curve3D.mb_sample_baked_with_rotation == null) gdext.classes.Curve3D.mb_sample_baked_with_rotation = MethodBind.get("Curve3D", "sample_baked_with_rotation", 1939359131L)
-    Ptrcall.call3[Double, Boolean, Boolean, gdext.builtin.Transform3D](gdext.classes.Curve3D.mb_sample_baked_with_rotation, livePtr, offset, cubic, apply_tilt)
+    Ptrcall.call3[Double, Boolean, Boolean, gdext.builtin.Transform3D](gdext.classes.Curve3D.mb_sample_baked_with_rotation, livePtr, offset, cubic, applyTilt)
   }
 
   /** Curve3D.sample_baked_up_vector */
-  final def sampleBakedUpVector(offset: Double, apply_tilt: Boolean): gdext.builtin.Vector3 = {
+  final def sampleBakedUpVector(offset: Double, applyTilt: Boolean = false): gdext.builtin.Vector3 = {
     if (gdext.classes.Curve3D.mb_sample_baked_up_vector == null) gdext.classes.Curve3D.mb_sample_baked_up_vector = MethodBind.get("Curve3D", "sample_baked_up_vector", 1362627031L)
-    Ptrcall.call2[Double, Boolean, gdext.builtin.Vector3](gdext.classes.Curve3D.mb_sample_baked_up_vector, livePtr, offset, apply_tilt)
+    Ptrcall.call2[Double, Boolean, gdext.builtin.Vector3](gdext.classes.Curve3D.mb_sample_baked_up_vector, livePtr, offset, applyTilt)
   }
 
   /** Curve3D.get_closest_point */
-  final def getClosestPoint(to_point: gdext.builtin.Vector3): gdext.builtin.Vector3 = {
+  final def getClosestPoint(toPoint: gdext.builtin.Vector3): gdext.builtin.Vector3 = {
     if (gdext.classes.Curve3D.mb_get_closest_point == null) gdext.classes.Curve3D.mb_get_closest_point = MethodBind.get("Curve3D", "get_closest_point", 192990374L)
-    Ptrcall.call1[gdext.builtin.Vector3, gdext.builtin.Vector3](gdext.classes.Curve3D.mb_get_closest_point, livePtr, to_point)
+    Ptrcall.call1[gdext.builtin.Vector3, gdext.builtin.Vector3](gdext.classes.Curve3D.mb_get_closest_point, livePtr, toPoint)
   }
 
   /** Curve3D.get_closest_offset */
-  final def getClosestOffset(to_point: gdext.builtin.Vector3): Double = {
+  final def getClosestOffset(toPoint: gdext.builtin.Vector3): Double = {
     if (gdext.classes.Curve3D.mb_get_closest_offset == null) gdext.classes.Curve3D.mb_get_closest_offset = MethodBind.get("Curve3D", "get_closest_offset", 1109078154L)
-    Ptrcall.call1[gdext.builtin.Vector3, Double](gdext.classes.Curve3D.mb_get_closest_offset, livePtr, to_point)
+    Ptrcall.call1[gdext.builtin.Vector3, Double](gdext.classes.Curve3D.mb_get_closest_offset, livePtr, toPoint)
   }
 
 }

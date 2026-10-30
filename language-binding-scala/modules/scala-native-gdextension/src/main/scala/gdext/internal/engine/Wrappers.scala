@@ -4,7 +4,8 @@ import scala.scalanative.unsafe.*
 import scala.scalanative.unsigned.*
 import scala.scalanative.libc.stdlib
 import gdext.Godot
-import gdext.builtin.{StringName, StringNames, BuiltinSizes}
+import gdext.builtin.BuiltinSizes
+import gdext.internal.StringNames
 import gdext.internal.ffi.types.*
 import gdext.internal.register.{ClassRegistry, GodotScriptClass, Tokens}
 
@@ -148,8 +149,7 @@ object Wrappers {
   private def engineWrapperFor(p: GDExtensionObjectPtr): GodotScriptClass = {
     val sn = stackalloc[Byte](BuiltinSizes.StringName.toCSize)
     Godot.interface.object_get_class_name(p, Godot.library, sn)
-    var name = StringNames.adopt(sn.toLong)
-    var text = StringName.toScala(name.ptr)
+    var text = StringNames.adoptText(sn.toLong)
     val f = factory
     if (f == null)
       throw new IllegalStateException(
@@ -157,8 +157,7 @@ object Wrappers {
       )
     var w = f(text)
     while (w == null && text.nonEmpty) {
-      name = gdext.classes.ClassDB.singleton.getParentClass(name)
-      text = StringName.toScala(name.ptr)
+      text = gdext.classes.ClassDB.singleton.getParentClass(text)
       w = f(text)
     }
     if (w == null) f("Object") else w

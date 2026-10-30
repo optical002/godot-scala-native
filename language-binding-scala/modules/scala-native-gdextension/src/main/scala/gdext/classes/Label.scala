@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,27 +12,27 @@ abstract class Label extends Control {
   override def godotClassName: String = "Label"
 
   /** Label.set_horizontal_alignment */
-  final def setHorizontalAlignment(alignment: Long): Unit = {
+  final def setHorizontalAlignment(alignment: gdext.classes.HorizontalAlignment): Unit = {
     if (gdext.classes.Label.mb_set_horizontal_alignment == null) gdext.classes.Label.mb_set_horizontal_alignment = MethodBind.get("Label", "set_horizontal_alignment", 2312603777L)
     Ptrcall.callVoid1(gdext.classes.Label.mb_set_horizontal_alignment, livePtr, alignment)
   }
 
   /** Label.get_horizontal_alignment */
-  final def getHorizontalAlignment(): Long = {
+  final def getHorizontalAlignment(): gdext.classes.HorizontalAlignment = {
     if (gdext.classes.Label.mb_get_horizontal_alignment == null) gdext.classes.Label.mb_get_horizontal_alignment = MethodBind.get("Label", "get_horizontal_alignment", 341400642L)
-    Ptrcall.call0[Long](gdext.classes.Label.mb_get_horizontal_alignment, livePtr)
+    gdext.classes.HorizontalAlignment(Ptrcall.call0[Long](gdext.classes.Label.mb_get_horizontal_alignment, livePtr))
   }
 
   /** Label.set_vertical_alignment */
-  final def setVerticalAlignment(alignment: Long): Unit = {
+  final def setVerticalAlignment(alignment: gdext.classes.VerticalAlignment): Unit = {
     if (gdext.classes.Label.mb_set_vertical_alignment == null) gdext.classes.Label.mb_set_vertical_alignment = MethodBind.get("Label", "set_vertical_alignment", 1796458609L)
     Ptrcall.callVoid1(gdext.classes.Label.mb_set_vertical_alignment, livePtr, alignment)
   }
 
   /** Label.get_vertical_alignment */
-  final def getVerticalAlignment(): Long = {
+  final def getVerticalAlignment(): gdext.classes.VerticalAlignment = {
     if (gdext.classes.Label.mb_get_vertical_alignment == null) gdext.classes.Label.mb_get_vertical_alignment = MethodBind.get("Label", "get_vertical_alignment", 3274884059L)
-    Ptrcall.call0[Long](gdext.classes.Label.mb_get_vertical_alignment, livePtr)
+    gdext.classes.VerticalAlignment(Ptrcall.call0[Long](gdext.classes.Label.mb_get_vertical_alignment, livePtr))
   }
 
   /** Label.set_text */
@@ -59,15 +60,15 @@ abstract class Label extends Control {
   }
 
   /** Label.set_text_direction */
-  final def setTextDirection(direction: Long): Unit = {
+  final def setTextDirection(direction: gdext.classes.Control.TextDirection): Unit = {
     if (gdext.classes.Label.mb_set_text_direction == null) gdext.classes.Label.mb_set_text_direction = MethodBind.get("Label", "set_text_direction", 119160795L)
     Ptrcall.callVoid1(gdext.classes.Label.mb_set_text_direction, livePtr, direction)
   }
 
   /** Label.get_text_direction */
-  final def getTextDirection(): Long = {
+  final def getTextDirection(): gdext.classes.Control.TextDirection = {
     if (gdext.classes.Label.mb_get_text_direction == null) gdext.classes.Label.mb_get_text_direction = MethodBind.get("Label", "get_text_direction", 797257663L)
-    Ptrcall.call0[Long](gdext.classes.Label.mb_get_text_direction, livePtr)
+    gdext.classes.Control.TextDirection(Ptrcall.call0[Long](gdext.classes.Label.mb_get_text_direction, livePtr))
   }
 
   /** Label.set_language */
@@ -83,9 +84,9 @@ abstract class Label extends Control {
   }
 
   /** Label.set_paragraph_separator */
-  final def setParagraphSeparator(paragraph_separator: String): Unit = {
+  final def setParagraphSeparator(paragraphSeparator: String): Unit = {
     if (gdext.classes.Label.mb_set_paragraph_separator == null) gdext.classes.Label.mb_set_paragraph_separator = MethodBind.get("Label", "set_paragraph_separator", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.Label.mb_set_paragraph_separator, livePtr, paragraph_separator)
+    Ptrcall.callVoid1(gdext.classes.Label.mb_set_paragraph_separator, livePtr, paragraphSeparator)
   }
 
   /** Label.get_paragraph_separator */
@@ -95,39 +96,39 @@ abstract class Label extends Control {
   }
 
   /** Label.set_autowrap_mode */
-  final def setAutowrapMode(autowrap_mode: Long): Unit = {
+  final def setAutowrapMode(autowrapMode: gdext.classes.TextServer.AutowrapMode): Unit = {
     if (gdext.classes.Label.mb_set_autowrap_mode == null) gdext.classes.Label.mb_set_autowrap_mode = MethodBind.get("Label", "set_autowrap_mode", 3289138044L)
-    Ptrcall.callVoid1(gdext.classes.Label.mb_set_autowrap_mode, livePtr, autowrap_mode)
+    Ptrcall.callVoid1(gdext.classes.Label.mb_set_autowrap_mode, livePtr, autowrapMode)
   }
 
   /** Label.get_autowrap_mode */
-  final def getAutowrapMode(): Long = {
+  final def getAutowrapMode(): gdext.classes.TextServer.AutowrapMode = {
     if (gdext.classes.Label.mb_get_autowrap_mode == null) gdext.classes.Label.mb_get_autowrap_mode = MethodBind.get("Label", "get_autowrap_mode", 1549071663L)
-    Ptrcall.call0[Long](gdext.classes.Label.mb_get_autowrap_mode, livePtr)
+    gdext.classes.TextServer.AutowrapMode(Ptrcall.call0[Long](gdext.classes.Label.mb_get_autowrap_mode, livePtr))
   }
 
   /** Label.set_autowrap_trim_flags */
-  final def setAutowrapTrimFlags(autowrap_trim_flags: Long): Unit = {
+  final def setAutowrapTrimFlags(autowrapTrimFlags: gdext.classes.TextServer.LineBreakFlag): Unit = {
     if (gdext.classes.Label.mb_set_autowrap_trim_flags == null) gdext.classes.Label.mb_set_autowrap_trim_flags = MethodBind.get("Label", "set_autowrap_trim_flags", 2809697122L)
-    Ptrcall.callVoid1(gdext.classes.Label.mb_set_autowrap_trim_flags, livePtr, autowrap_trim_flags)
+    Ptrcall.callVoid1(gdext.classes.Label.mb_set_autowrap_trim_flags, livePtr, autowrapTrimFlags.asInstanceOf[Long])
   }
 
   /** Label.get_autowrap_trim_flags */
-  final def getAutowrapTrimFlags(): Long = {
+  final def getAutowrapTrimFlags(): gdext.classes.TextServer.LineBreakFlag = {
     if (gdext.classes.Label.mb_get_autowrap_trim_flags == null) gdext.classes.Label.mb_get_autowrap_trim_flags = MethodBind.get("Label", "get_autowrap_trim_flags", 2340632602L)
-    Ptrcall.call0[Long](gdext.classes.Label.mb_get_autowrap_trim_flags, livePtr)
+    gdext.classes.TextServer.LineBreakFlag(Ptrcall.call0[Long](gdext.classes.Label.mb_get_autowrap_trim_flags, livePtr))
   }
 
   /** Label.set_justification_flags */
-  final def setJustificationFlags(justification_flags: Long): Unit = {
+  final def setJustificationFlags(justificationFlags: gdext.classes.TextServer.JustificationFlag): Unit = {
     if (gdext.classes.Label.mb_set_justification_flags == null) gdext.classes.Label.mb_set_justification_flags = MethodBind.get("Label", "set_justification_flags", 2877345813L)
-    Ptrcall.callVoid1(gdext.classes.Label.mb_set_justification_flags, livePtr, justification_flags)
+    Ptrcall.callVoid1(gdext.classes.Label.mb_set_justification_flags, livePtr, justificationFlags.asInstanceOf[Long])
   }
 
   /** Label.get_justification_flags */
-  final def getJustificationFlags(): Long = {
+  final def getJustificationFlags(): gdext.classes.TextServer.JustificationFlag = {
     if (gdext.classes.Label.mb_get_justification_flags == null) gdext.classes.Label.mb_get_justification_flags = MethodBind.get("Label", "get_justification_flags", 1583363614L)
-    Ptrcall.call0[Long](gdext.classes.Label.mb_get_justification_flags, livePtr)
+    gdext.classes.TextServer.JustificationFlag(Ptrcall.call0[Long](gdext.classes.Label.mb_get_justification_flags, livePtr))
   }
 
   /** Label.set_clip_text */
@@ -143,15 +144,15 @@ abstract class Label extends Control {
   }
 
   /** Label.set_text_overrun_behavior */
-  final def setTextOverrunBehavior(overrun_behavior: Long): Unit = {
+  final def setTextOverrunBehavior(overrunBehavior: gdext.classes.TextServer.OverrunBehavior): Unit = {
     if (gdext.classes.Label.mb_set_text_overrun_behavior == null) gdext.classes.Label.mb_set_text_overrun_behavior = MethodBind.get("Label", "set_text_overrun_behavior", 1008890932L)
-    Ptrcall.callVoid1(gdext.classes.Label.mb_set_text_overrun_behavior, livePtr, overrun_behavior)
+    Ptrcall.callVoid1(gdext.classes.Label.mb_set_text_overrun_behavior, livePtr, overrunBehavior)
   }
 
   /** Label.get_text_overrun_behavior */
-  final def getTextOverrunBehavior(): Long = {
+  final def getTextOverrunBehavior(): gdext.classes.TextServer.OverrunBehavior = {
     if (gdext.classes.Label.mb_get_text_overrun_behavior == null) gdext.classes.Label.mb_get_text_overrun_behavior = MethodBind.get("Label", "get_text_overrun_behavior", 3779142101L)
-    Ptrcall.call0[Long](gdext.classes.Label.mb_get_text_overrun_behavior, livePtr)
+    gdext.classes.TextServer.OverrunBehavior(Ptrcall.call0[Long](gdext.classes.Label.mb_get_text_overrun_behavior, livePtr))
   }
 
   /** Label.set_ellipsis_char */
@@ -179,7 +180,7 @@ abstract class Label extends Control {
   }
 
   /** Label.get_line_height */
-  final def getLineHeight(line: Long): Long = {
+  final def getLineHeight(line: Long = -1L): Long = {
     if (gdext.classes.Label.mb_get_line_height == null) gdext.classes.Label.mb_get_line_height = MethodBind.get("Label", "get_line_height", 181039630L)
     Ptrcall.call1[Long, Long](gdext.classes.Label.mb_get_line_height, livePtr, line)
   }
@@ -215,13 +216,13 @@ abstract class Label extends Control {
   }
 
   /** Label.get_visible_characters_behavior */
-  final def getVisibleCharactersBehavior(): Long = {
+  final def getVisibleCharactersBehavior(): gdext.classes.TextServer.VisibleCharactersBehavior = {
     if (gdext.classes.Label.mb_get_visible_characters_behavior == null) gdext.classes.Label.mb_get_visible_characters_behavior = MethodBind.get("Label", "get_visible_characters_behavior", 258789322L)
-    Ptrcall.call0[Long](gdext.classes.Label.mb_get_visible_characters_behavior, livePtr)
+    gdext.classes.TextServer.VisibleCharactersBehavior(Ptrcall.call0[Long](gdext.classes.Label.mb_get_visible_characters_behavior, livePtr))
   }
 
   /** Label.set_visible_characters_behavior */
-  final def setVisibleCharactersBehavior(behavior: Long): Unit = {
+  final def setVisibleCharactersBehavior(behavior: gdext.classes.TextServer.VisibleCharactersBehavior): Unit = {
     if (gdext.classes.Label.mb_set_visible_characters_behavior == null) gdext.classes.Label.mb_set_visible_characters_behavior = MethodBind.get("Label", "set_visible_characters_behavior", 3383839701L)
     Ptrcall.callVoid1(gdext.classes.Label.mb_set_visible_characters_behavior, livePtr, behavior)
   }
@@ -239,9 +240,9 @@ abstract class Label extends Control {
   }
 
   /** Label.set_lines_skipped */
-  final def setLinesSkipped(lines_skipped: Long): Unit = {
+  final def setLinesSkipped(linesSkipped: Long): Unit = {
     if (gdext.classes.Label.mb_set_lines_skipped == null) gdext.classes.Label.mb_set_lines_skipped = MethodBind.get("Label", "set_lines_skipped", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.Label.mb_set_lines_skipped, livePtr, lines_skipped)
+    Ptrcall.callVoid1(gdext.classes.Label.mb_set_lines_skipped, livePtr, linesSkipped)
   }
 
   /** Label.get_lines_skipped */
@@ -251,9 +252,9 @@ abstract class Label extends Control {
   }
 
   /** Label.set_max_lines_visible */
-  final def setMaxLinesVisible(lines_visible: Long): Unit = {
+  final def setMaxLinesVisible(linesVisible: Long): Unit = {
     if (gdext.classes.Label.mb_set_max_lines_visible == null) gdext.classes.Label.mb_set_max_lines_visible = MethodBind.get("Label", "set_max_lines_visible", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.Label.mb_set_max_lines_visible, livePtr, lines_visible)
+    Ptrcall.callVoid1(gdext.classes.Label.mb_set_max_lines_visible, livePtr, linesVisible)
   }
 
   /** Label.get_max_lines_visible */
@@ -263,15 +264,15 @@ abstract class Label extends Control {
   }
 
   /** Label.set_structured_text_bidi_override */
-  final def setStructuredTextBidiOverride(parser: Long): Unit = {
+  final def setStructuredTextBidiOverride(parser: gdext.classes.TextServer.StructuredTextParser): Unit = {
     if (gdext.classes.Label.mb_set_structured_text_bidi_override == null) gdext.classes.Label.mb_set_structured_text_bidi_override = MethodBind.get("Label", "set_structured_text_bidi_override", 55961453L)
     Ptrcall.callVoid1(gdext.classes.Label.mb_set_structured_text_bidi_override, livePtr, parser)
   }
 
   /** Label.get_structured_text_bidi_override */
-  final def getStructuredTextBidiOverride(): Long = {
+  final def getStructuredTextBidiOverride(): gdext.classes.TextServer.StructuredTextParser = {
     if (gdext.classes.Label.mb_get_structured_text_bidi_override == null) gdext.classes.Label.mb_get_structured_text_bidi_override = MethodBind.get("Label", "get_structured_text_bidi_override", 3385126229L)
-    Ptrcall.call0[Long](gdext.classes.Label.mb_get_structured_text_bidi_override, livePtr)
+    gdext.classes.TextServer.StructuredTextParser(Ptrcall.call0[Long](gdext.classes.Label.mb_get_structured_text_bidi_override, livePtr))
   }
 
   /** Label.get_character_bounds */

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -29,9 +30,9 @@ abstract class SkeletonModification2D extends Resource {
   }
 
   /** SkeletonModification2D.set_is_setup */
-  final def setIsSetup(is_setup: Boolean): Unit = {
+  final def setIsSetup(isSetup: Boolean): Unit = {
     if (gdext.classes.SkeletonModification2D.mb_set_is_setup == null) gdext.classes.SkeletonModification2D.mb_set_is_setup = MethodBind.get("SkeletonModification2D", "set_is_setup", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.SkeletonModification2D.mb_set_is_setup, livePtr, is_setup)
+    Ptrcall.callVoid1(gdext.classes.SkeletonModification2D.mb_set_is_setup, livePtr, isSetup)
   }
 
   /** SkeletonModification2D.get_is_setup */
@@ -41,9 +42,9 @@ abstract class SkeletonModification2D extends Resource {
   }
 
   /** SkeletonModification2D.set_execution_mode */
-  final def setExecutionMode(execution_mode: Long): Unit = {
+  final def setExecutionMode(executionMode: Long): Unit = {
     if (gdext.classes.SkeletonModification2D.mb_set_execution_mode == null) gdext.classes.SkeletonModification2D.mb_set_execution_mode = MethodBind.get("SkeletonModification2D", "set_execution_mode", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.SkeletonModification2D.mb_set_execution_mode, livePtr, execution_mode)
+    Ptrcall.callVoid1(gdext.classes.SkeletonModification2D.mb_set_execution_mode, livePtr, executionMode)
   }
 
   /** SkeletonModification2D.get_execution_mode */
@@ -59,9 +60,9 @@ abstract class SkeletonModification2D extends Resource {
   }
 
   /** SkeletonModification2D.set_editor_draw_gizmo */
-  final def setEditorDrawGizmo(draw_gizmo: Boolean): Unit = {
+  final def setEditorDrawGizmo(drawGizmo: Boolean): Unit = {
     if (gdext.classes.SkeletonModification2D.mb_set_editor_draw_gizmo == null) gdext.classes.SkeletonModification2D.mb_set_editor_draw_gizmo = MethodBind.get("SkeletonModification2D", "set_editor_draw_gizmo", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.SkeletonModification2D.mb_set_editor_draw_gizmo, livePtr, draw_gizmo)
+    Ptrcall.callVoid1(gdext.classes.SkeletonModification2D.mb_set_editor_draw_gizmo, livePtr, drawGizmo)
   }
 
   /** SkeletonModification2D.get_editor_draw_gizmo */

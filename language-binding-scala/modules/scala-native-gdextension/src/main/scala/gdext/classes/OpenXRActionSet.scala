@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class OpenXRActionSet extends Resource {
   override def godotClassName: String = "OpenXRActionSet"
 
   /** OpenXRActionSet.set_localized_name */
-  final def setLocalizedName(localized_name: String): Unit = {
+  final def setLocalizedName(localizedName: String): Unit = {
     if (gdext.classes.OpenXRActionSet.mb_set_localized_name == null) gdext.classes.OpenXRActionSet.mb_set_localized_name = MethodBind.get("OpenXRActionSet", "set_localized_name", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRActionSet.mb_set_localized_name, livePtr, localized_name)
+    Ptrcall.callVoid1(gdext.classes.OpenXRActionSet.mb_set_localized_name, livePtr, localizedName)
   }
 
   /** OpenXRActionSet.get_localized_name */

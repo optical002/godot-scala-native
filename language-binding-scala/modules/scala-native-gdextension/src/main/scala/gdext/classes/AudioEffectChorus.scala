@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,75 +24,75 @@ abstract class AudioEffectChorus extends AudioEffect {
   }
 
   /** AudioEffectChorus.set_voice_delay_ms */
-  final def setVoiceDelayMs(voice_idx: Long, delay_ms: Double): Unit = {
+  final def setVoiceDelayMs(voiceIdx: Long, delayMs: Double): Unit = {
     if (gdext.classes.AudioEffectChorus.mb_set_voice_delay_ms == null) gdext.classes.AudioEffectChorus.mb_set_voice_delay_ms = MethodBind.get("AudioEffectChorus", "set_voice_delay_ms", 1602489585L)
-    Ptrcall.callVoid2(gdext.classes.AudioEffectChorus.mb_set_voice_delay_ms, livePtr, voice_idx, delay_ms)
+    Ptrcall.callVoid2(gdext.classes.AudioEffectChorus.mb_set_voice_delay_ms, livePtr, voiceIdx, delayMs)
   }
 
   /** AudioEffectChorus.get_voice_delay_ms */
-  final def getVoiceDelayMs(voice_idx: Long): Double = {
+  final def getVoiceDelayMs(voiceIdx: Long): Double = {
     if (gdext.classes.AudioEffectChorus.mb_get_voice_delay_ms == null) gdext.classes.AudioEffectChorus.mb_get_voice_delay_ms = MethodBind.get("AudioEffectChorus", "get_voice_delay_ms", 2339986948L)
-    Ptrcall.call1[Long, Double](gdext.classes.AudioEffectChorus.mb_get_voice_delay_ms, livePtr, voice_idx)
+    Ptrcall.call1[Long, Double](gdext.classes.AudioEffectChorus.mb_get_voice_delay_ms, livePtr, voiceIdx)
   }
 
   /** AudioEffectChorus.set_voice_rate_hz */
-  final def setVoiceRateHz(voice_idx: Long, rate_hz: Double): Unit = {
+  final def setVoiceRateHz(voiceIdx: Long, rateHz: Double): Unit = {
     if (gdext.classes.AudioEffectChorus.mb_set_voice_rate_hz == null) gdext.classes.AudioEffectChorus.mb_set_voice_rate_hz = MethodBind.get("AudioEffectChorus", "set_voice_rate_hz", 1602489585L)
-    Ptrcall.callVoid2(gdext.classes.AudioEffectChorus.mb_set_voice_rate_hz, livePtr, voice_idx, rate_hz)
+    Ptrcall.callVoid2(gdext.classes.AudioEffectChorus.mb_set_voice_rate_hz, livePtr, voiceIdx, rateHz)
   }
 
   /** AudioEffectChorus.get_voice_rate_hz */
-  final def getVoiceRateHz(voice_idx: Long): Double = {
+  final def getVoiceRateHz(voiceIdx: Long): Double = {
     if (gdext.classes.AudioEffectChorus.mb_get_voice_rate_hz == null) gdext.classes.AudioEffectChorus.mb_get_voice_rate_hz = MethodBind.get("AudioEffectChorus", "get_voice_rate_hz", 2339986948L)
-    Ptrcall.call1[Long, Double](gdext.classes.AudioEffectChorus.mb_get_voice_rate_hz, livePtr, voice_idx)
+    Ptrcall.call1[Long, Double](gdext.classes.AudioEffectChorus.mb_get_voice_rate_hz, livePtr, voiceIdx)
   }
 
   /** AudioEffectChorus.set_voice_depth_ms */
-  final def setVoiceDepthMs(voice_idx: Long, depth_ms: Double): Unit = {
+  final def setVoiceDepthMs(voiceIdx: Long, depthMs: Double): Unit = {
     if (gdext.classes.AudioEffectChorus.mb_set_voice_depth_ms == null) gdext.classes.AudioEffectChorus.mb_set_voice_depth_ms = MethodBind.get("AudioEffectChorus", "set_voice_depth_ms", 1602489585L)
-    Ptrcall.callVoid2(gdext.classes.AudioEffectChorus.mb_set_voice_depth_ms, livePtr, voice_idx, depth_ms)
+    Ptrcall.callVoid2(gdext.classes.AudioEffectChorus.mb_set_voice_depth_ms, livePtr, voiceIdx, depthMs)
   }
 
   /** AudioEffectChorus.get_voice_depth_ms */
-  final def getVoiceDepthMs(voice_idx: Long): Double = {
+  final def getVoiceDepthMs(voiceIdx: Long): Double = {
     if (gdext.classes.AudioEffectChorus.mb_get_voice_depth_ms == null) gdext.classes.AudioEffectChorus.mb_get_voice_depth_ms = MethodBind.get("AudioEffectChorus", "get_voice_depth_ms", 2339986948L)
-    Ptrcall.call1[Long, Double](gdext.classes.AudioEffectChorus.mb_get_voice_depth_ms, livePtr, voice_idx)
+    Ptrcall.call1[Long, Double](gdext.classes.AudioEffectChorus.mb_get_voice_depth_ms, livePtr, voiceIdx)
   }
 
   /** AudioEffectChorus.set_voice_level_db */
-  final def setVoiceLevelDb(voice_idx: Long, level_db: Double): Unit = {
+  final def setVoiceLevelDb(voiceIdx: Long, levelDb: Double): Unit = {
     if (gdext.classes.AudioEffectChorus.mb_set_voice_level_db == null) gdext.classes.AudioEffectChorus.mb_set_voice_level_db = MethodBind.get("AudioEffectChorus", "set_voice_level_db", 1602489585L)
-    Ptrcall.callVoid2(gdext.classes.AudioEffectChorus.mb_set_voice_level_db, livePtr, voice_idx, level_db)
+    Ptrcall.callVoid2(gdext.classes.AudioEffectChorus.mb_set_voice_level_db, livePtr, voiceIdx, levelDb)
   }
 
   /** AudioEffectChorus.get_voice_level_db */
-  final def getVoiceLevelDb(voice_idx: Long): Double = {
+  final def getVoiceLevelDb(voiceIdx: Long): Double = {
     if (gdext.classes.AudioEffectChorus.mb_get_voice_level_db == null) gdext.classes.AudioEffectChorus.mb_get_voice_level_db = MethodBind.get("AudioEffectChorus", "get_voice_level_db", 2339986948L)
-    Ptrcall.call1[Long, Double](gdext.classes.AudioEffectChorus.mb_get_voice_level_db, livePtr, voice_idx)
+    Ptrcall.call1[Long, Double](gdext.classes.AudioEffectChorus.mb_get_voice_level_db, livePtr, voiceIdx)
   }
 
   /** AudioEffectChorus.set_voice_cutoff_hz */
-  final def setVoiceCutoffHz(voice_idx: Long, cutoff_hz: Double): Unit = {
+  final def setVoiceCutoffHz(voiceIdx: Long, cutoffHz: Double): Unit = {
     if (gdext.classes.AudioEffectChorus.mb_set_voice_cutoff_hz == null) gdext.classes.AudioEffectChorus.mb_set_voice_cutoff_hz = MethodBind.get("AudioEffectChorus", "set_voice_cutoff_hz", 1602489585L)
-    Ptrcall.callVoid2(gdext.classes.AudioEffectChorus.mb_set_voice_cutoff_hz, livePtr, voice_idx, cutoff_hz)
+    Ptrcall.callVoid2(gdext.classes.AudioEffectChorus.mb_set_voice_cutoff_hz, livePtr, voiceIdx, cutoffHz)
   }
 
   /** AudioEffectChorus.get_voice_cutoff_hz */
-  final def getVoiceCutoffHz(voice_idx: Long): Double = {
+  final def getVoiceCutoffHz(voiceIdx: Long): Double = {
     if (gdext.classes.AudioEffectChorus.mb_get_voice_cutoff_hz == null) gdext.classes.AudioEffectChorus.mb_get_voice_cutoff_hz = MethodBind.get("AudioEffectChorus", "get_voice_cutoff_hz", 2339986948L)
-    Ptrcall.call1[Long, Double](gdext.classes.AudioEffectChorus.mb_get_voice_cutoff_hz, livePtr, voice_idx)
+    Ptrcall.call1[Long, Double](gdext.classes.AudioEffectChorus.mb_get_voice_cutoff_hz, livePtr, voiceIdx)
   }
 
   /** AudioEffectChorus.set_voice_pan */
-  final def setVoicePan(voice_idx: Long, pan: Double): Unit = {
+  final def setVoicePan(voiceIdx: Long, pan: Double): Unit = {
     if (gdext.classes.AudioEffectChorus.mb_set_voice_pan == null) gdext.classes.AudioEffectChorus.mb_set_voice_pan = MethodBind.get("AudioEffectChorus", "set_voice_pan", 1602489585L)
-    Ptrcall.callVoid2(gdext.classes.AudioEffectChorus.mb_set_voice_pan, livePtr, voice_idx, pan)
+    Ptrcall.callVoid2(gdext.classes.AudioEffectChorus.mb_set_voice_pan, livePtr, voiceIdx, pan)
   }
 
   /** AudioEffectChorus.get_voice_pan */
-  final def getVoicePan(voice_idx: Long): Double = {
+  final def getVoicePan(voiceIdx: Long): Double = {
     if (gdext.classes.AudioEffectChorus.mb_get_voice_pan == null) gdext.classes.AudioEffectChorus.mb_get_voice_pan = MethodBind.get("AudioEffectChorus", "get_voice_pan", 2339986948L)
-    Ptrcall.call1[Long, Double](gdext.classes.AudioEffectChorus.mb_get_voice_pan, livePtr, voice_idx)
+    Ptrcall.call1[Long, Double](gdext.classes.AudioEffectChorus.mb_get_voice_pan, livePtr, voiceIdx)
   }
 
   /** AudioEffectChorus.set_wet */

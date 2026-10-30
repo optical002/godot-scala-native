@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class RDVertexAttribute extends RefCounted {
   override def godotClassName: String = "RDVertexAttribute"
 
   /** RDVertexAttribute.set_binding */
-  final def setBinding(p_member: Long): Unit = {
+  final def setBinding(pMember: Long): Unit = {
     if (gdext.classes.RDVertexAttribute.mb_set_binding == null) gdext.classes.RDVertexAttribute.mb_set_binding = MethodBind.get("RDVertexAttribute", "set_binding", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.RDVertexAttribute.mb_set_binding, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDVertexAttribute.mb_set_binding, livePtr, pMember)
   }
 
   /** RDVertexAttribute.get_binding */
@@ -23,9 +24,9 @@ abstract class RDVertexAttribute extends RefCounted {
   }
 
   /** RDVertexAttribute.set_location */
-  final def setLocation(p_member: Long): Unit = {
+  final def setLocation(pMember: Long): Unit = {
     if (gdext.classes.RDVertexAttribute.mb_set_location == null) gdext.classes.RDVertexAttribute.mb_set_location = MethodBind.get("RDVertexAttribute", "set_location", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.RDVertexAttribute.mb_set_location, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDVertexAttribute.mb_set_location, livePtr, pMember)
   }
 
   /** RDVertexAttribute.get_location */
@@ -35,9 +36,9 @@ abstract class RDVertexAttribute extends RefCounted {
   }
 
   /** RDVertexAttribute.set_offset */
-  final def setOffset(p_member: Long): Unit = {
+  final def setOffset(pMember: Long): Unit = {
     if (gdext.classes.RDVertexAttribute.mb_set_offset == null) gdext.classes.RDVertexAttribute.mb_set_offset = MethodBind.get("RDVertexAttribute", "set_offset", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.RDVertexAttribute.mb_set_offset, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDVertexAttribute.mb_set_offset, livePtr, pMember)
   }
 
   /** RDVertexAttribute.get_offset */
@@ -47,21 +48,21 @@ abstract class RDVertexAttribute extends RefCounted {
   }
 
   /** RDVertexAttribute.set_format */
-  final def setFormat(p_member: Long): Unit = {
+  final def setFormat(pMember: gdext.classes.RenderingDevice.DataFormat): Unit = {
     if (gdext.classes.RDVertexAttribute.mb_set_format == null) gdext.classes.RDVertexAttribute.mb_set_format = MethodBind.get("RDVertexAttribute", "set_format", 565531219L)
-    Ptrcall.callVoid1(gdext.classes.RDVertexAttribute.mb_set_format, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDVertexAttribute.mb_set_format, livePtr, pMember)
   }
 
   /** RDVertexAttribute.get_format */
-  final def getFormat(): Long = {
+  final def getFormat(): gdext.classes.RenderingDevice.DataFormat = {
     if (gdext.classes.RDVertexAttribute.mb_get_format == null) gdext.classes.RDVertexAttribute.mb_get_format = MethodBind.get("RDVertexAttribute", "get_format", 2235804183L)
-    Ptrcall.call0[Long](gdext.classes.RDVertexAttribute.mb_get_format, livePtr)
+    gdext.classes.RenderingDevice.DataFormat(Ptrcall.call0[Long](gdext.classes.RDVertexAttribute.mb_get_format, livePtr))
   }
 
   /** RDVertexAttribute.set_stride */
-  final def setStride(p_member: Long): Unit = {
+  final def setStride(pMember: Long): Unit = {
     if (gdext.classes.RDVertexAttribute.mb_set_stride == null) gdext.classes.RDVertexAttribute.mb_set_stride = MethodBind.get("RDVertexAttribute", "set_stride", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.RDVertexAttribute.mb_set_stride, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDVertexAttribute.mb_set_stride, livePtr, pMember)
   }
 
   /** RDVertexAttribute.get_stride */
@@ -71,15 +72,15 @@ abstract class RDVertexAttribute extends RefCounted {
   }
 
   /** RDVertexAttribute.set_frequency */
-  final def setFrequency(p_member: Long): Unit = {
+  final def setFrequency(pMember: gdext.classes.RenderingDevice.VertexFrequency): Unit = {
     if (gdext.classes.RDVertexAttribute.mb_set_frequency == null) gdext.classes.RDVertexAttribute.mb_set_frequency = MethodBind.get("RDVertexAttribute", "set_frequency", 522141836L)
-    Ptrcall.callVoid1(gdext.classes.RDVertexAttribute.mb_set_frequency, livePtr, p_member)
+    Ptrcall.callVoid1(gdext.classes.RDVertexAttribute.mb_set_frequency, livePtr, pMember)
   }
 
   /** RDVertexAttribute.get_frequency */
-  final def getFrequency(): Long = {
+  final def getFrequency(): gdext.classes.RenderingDevice.VertexFrequency = {
     if (gdext.classes.RDVertexAttribute.mb_get_frequency == null) gdext.classes.RDVertexAttribute.mb_get_frequency = MethodBind.get("RDVertexAttribute", "get_frequency", 4154106413L)
-    Ptrcall.call0[Long](gdext.classes.RDVertexAttribute.mb_get_frequency, livePtr)
+    gdext.classes.RenderingDevice.VertexFrequency(Ptrcall.call0[Long](gdext.classes.RDVertexAttribute.mb_get_frequency, livePtr))
   }
 
 }

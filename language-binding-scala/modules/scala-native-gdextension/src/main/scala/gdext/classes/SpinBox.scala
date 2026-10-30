@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,15 +12,15 @@ abstract class SpinBox extends Range {
   override def godotClassName: String = "SpinBox"
 
   /** SpinBox.set_horizontal_alignment */
-  final def setHorizontalAlignment(alignment: Long): Unit = {
+  final def setHorizontalAlignment(alignment: gdext.classes.HorizontalAlignment): Unit = {
     if (gdext.classes.SpinBox.mb_set_horizontal_alignment == null) gdext.classes.SpinBox.mb_set_horizontal_alignment = MethodBind.get("SpinBox", "set_horizontal_alignment", 2312603777L)
     Ptrcall.callVoid1(gdext.classes.SpinBox.mb_set_horizontal_alignment, livePtr, alignment)
   }
 
   /** SpinBox.get_horizontal_alignment */
-  final def getHorizontalAlignment(): Long = {
+  final def getHorizontalAlignment(): gdext.classes.HorizontalAlignment = {
     if (gdext.classes.SpinBox.mb_get_horizontal_alignment == null) gdext.classes.SpinBox.mb_get_horizontal_alignment = MethodBind.get("SpinBox", "get_horizontal_alignment", 341400642L)
-    Ptrcall.call0[Long](gdext.classes.SpinBox.mb_get_horizontal_alignment, livePtr)
+    gdext.classes.HorizontalAlignment(Ptrcall.call0[Long](gdext.classes.SpinBox.mb_get_horizontal_alignment, livePtr))
   }
 
   /** SpinBox.set_suffix */
@@ -53,9 +54,9 @@ abstract class SpinBox extends Range {
   }
 
   /** SpinBox.set_custom_arrow_step */
-  final def setCustomArrowStep(arrow_step: Double): Unit = {
+  final def setCustomArrowStep(arrowStep: Double): Unit = {
     if (gdext.classes.SpinBox.mb_set_custom_arrow_step == null) gdext.classes.SpinBox.mb_set_custom_arrow_step = MethodBind.get("SpinBox", "set_custom_arrow_step", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.SpinBox.mb_set_custom_arrow_step, livePtr, arrow_step)
+    Ptrcall.callVoid1(gdext.classes.SpinBox.mb_set_custom_arrow_step, livePtr, arrowStep)
   }
 
   /** SpinBox.get_custom_arrow_step */

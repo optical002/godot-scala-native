@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class UDSServer extends SocketServer {
   override def godotClassName: String = "UDSServer"
 
   /** UDSServer.listen */
-  final def listen(path: String): Long = {
+  final def listen(path: String): gdext.classes.Error = {
     if (gdext.classes.UDSServer.mb_listen == null) gdext.classes.UDSServer.mb_listen = MethodBind.get("UDSServer", "listen", 166001499L)
-    Ptrcall.call1[String, Long](gdext.classes.UDSServer.mb_listen, livePtr, path)
+    gdext.classes.Error(Ptrcall.call1[String, Long](gdext.classes.UDSServer.mb_listen, livePtr, path))
   }
 
   /** UDSServer.take_connection. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */

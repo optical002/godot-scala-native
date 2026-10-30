@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -119,9 +120,9 @@ abstract class PhysicalSkyMaterial extends Material {
   }
 
   /** PhysicalSkyMaterial.set_use_debanding */
-  final def setUseDebanding(use_debanding: Boolean): Unit = {
+  final def setUseDebanding(useDebanding: Boolean): Unit = {
     if (gdext.classes.PhysicalSkyMaterial.mb_set_use_debanding == null) gdext.classes.PhysicalSkyMaterial.mb_set_use_debanding = MethodBind.get("PhysicalSkyMaterial", "set_use_debanding", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.PhysicalSkyMaterial.mb_set_use_debanding, livePtr, use_debanding)
+    Ptrcall.callVoid1(gdext.classes.PhysicalSkyMaterial.mb_set_use_debanding, livePtr, useDebanding)
   }
 
   /** PhysicalSkyMaterial.get_use_debanding */
@@ -131,9 +132,9 @@ abstract class PhysicalSkyMaterial extends Material {
   }
 
   /** PhysicalSkyMaterial.set_night_sky */
-  final def setNightSky(night_sky: Texture2D): Unit = {
+  final def setNightSky(nightSky: Texture2D): Unit = {
     if (gdext.classes.PhysicalSkyMaterial.mb_set_night_sky == null) gdext.classes.PhysicalSkyMaterial.mb_set_night_sky = MethodBind.get("PhysicalSkyMaterial", "set_night_sky", 4051416890L)
-    Ptrcall.callVoid1(gdext.classes.PhysicalSkyMaterial.mb_set_night_sky, livePtr, Wrappers.handle(night_sky))
+    Ptrcall.callVoid1(gdext.classes.PhysicalSkyMaterial.mb_set_night_sky, livePtr, Wrappers.handle(nightSky))
   }
 
   /** PhysicalSkyMaterial.get_night_sky. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */

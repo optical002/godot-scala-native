@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -203,9 +204,9 @@ abstract class GPUParticles3D extends GeometryInstance3D {
   }
 
   /** GPUParticles3D.set_use_fixed_seed */
-  final def setUseFixedSeed(use_fixed_seed: Boolean): Unit = {
+  final def setUseFixedSeed(useFixedSeed: Boolean): Unit = {
     if (gdext.classes.GPUParticles3D.mb_set_use_fixed_seed == null) gdext.classes.GPUParticles3D.mb_set_use_fixed_seed = MethodBind.get("GPUParticles3D", "set_use_fixed_seed", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.GPUParticles3D.mb_set_use_fixed_seed, livePtr, use_fixed_seed)
+    Ptrcall.callVoid1(gdext.classes.GPUParticles3D.mb_set_use_fixed_seed, livePtr, useFixedSeed)
   }
 
   /** GPUParticles3D.get_use_fixed_seed */
@@ -227,15 +228,15 @@ abstract class GPUParticles3D extends GeometryInstance3D {
   }
 
   /** GPUParticles3D.set_draw_order */
-  final def setDrawOrder(order: Long): Unit = {
+  final def setDrawOrder(order: gdext.classes.GPUParticles3D.DrawOrder): Unit = {
     if (gdext.classes.GPUParticles3D.mb_set_draw_order == null) gdext.classes.GPUParticles3D.mb_set_draw_order = MethodBind.get("GPUParticles3D", "set_draw_order", 1208074815L)
     Ptrcall.callVoid1(gdext.classes.GPUParticles3D.mb_set_draw_order, livePtr, order)
   }
 
   /** GPUParticles3D.get_draw_order */
-  final def getDrawOrder(): Long = {
+  final def getDrawOrder(): gdext.classes.GPUParticles3D.DrawOrder = {
     if (gdext.classes.GPUParticles3D.mb_get_draw_order == null) gdext.classes.GPUParticles3D.mb_get_draw_order = MethodBind.get("GPUParticles3D", "get_draw_order", 3770381780L)
-    Ptrcall.call0[Long](gdext.classes.GPUParticles3D.mb_get_draw_order, livePtr)
+    gdext.classes.GPUParticles3D.DrawOrder(Ptrcall.call0[Long](gdext.classes.GPUParticles3D.mb_get_draw_order, livePtr))
   }
 
   /** GPUParticles3D.set_draw_passes */
@@ -275,9 +276,9 @@ abstract class GPUParticles3D extends GeometryInstance3D {
   }
 
   /** GPUParticles3D.restart */
-  final def restart(keep_seed: Boolean): Unit = {
+  final def restart(keepSeed: Boolean = false): Unit = {
     if (gdext.classes.GPUParticles3D.mb_restart == null) gdext.classes.GPUParticles3D.mb_restart = MethodBind.get("GPUParticles3D", "restart", 107499316L)
-    Ptrcall.callVoid1(gdext.classes.GPUParticles3D.mb_restart, livePtr, keep_seed)
+    Ptrcall.callVoid1(gdext.classes.GPUParticles3D.mb_restart, livePtr, keepSeed)
   }
 
   /** GPUParticles3D.capture_aabb */
@@ -317,15 +318,15 @@ abstract class GPUParticles3D extends GeometryInstance3D {
   }
 
   /** GPUParticles3D.set_transform_align */
-  final def setTransformAlign(align: Long): Unit = {
+  final def setTransformAlign(align: gdext.classes.GPUParticles3D.TransformAlign): Unit = {
     if (gdext.classes.GPUParticles3D.mb_set_transform_align == null) gdext.classes.GPUParticles3D.mb_set_transform_align = MethodBind.get("GPUParticles3D", "set_transform_align", 3892425954L)
     Ptrcall.callVoid1(gdext.classes.GPUParticles3D.mb_set_transform_align, livePtr, align)
   }
 
   /** GPUParticles3D.get_transform_align */
-  final def getTransformAlign(): Long = {
+  final def getTransformAlign(): gdext.classes.GPUParticles3D.TransformAlign = {
     if (gdext.classes.GPUParticles3D.mb_get_transform_align == null) gdext.classes.GPUParticles3D.mb_get_transform_align = MethodBind.get("GPUParticles3D", "get_transform_align", 2100992166L)
-    Ptrcall.call0[Long](gdext.classes.GPUParticles3D.mb_get_transform_align, livePtr)
+    gdext.classes.GPUParticles3D.TransformAlign(Ptrcall.call0[Long](gdext.classes.GPUParticles3D.mb_get_transform_align, livePtr))
   }
 
   /** GPUParticles3D.convert_from_particles */
@@ -347,9 +348,9 @@ abstract class GPUParticles3D extends GeometryInstance3D {
   }
 
   /** GPUParticles3D.request_particles_process */
-  final def requestParticlesProcess(process_time: Double): Unit = {
+  final def requestParticlesProcess(processTime: Double): Unit = {
     if (gdext.classes.GPUParticles3D.mb_request_particles_process == null) gdext.classes.GPUParticles3D.mb_request_particles_process = MethodBind.get("GPUParticles3D", "request_particles_process", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.GPUParticles3D.mb_request_particles_process, livePtr, process_time)
+    Ptrcall.callVoid1(gdext.classes.GPUParticles3D.mb_request_particles_process, livePtr, processTime)
   }
 
 }
@@ -412,4 +413,84 @@ object GPUParticles3D {
   private[classes] var mb_set_amount_ratio: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_amount_ratio: GDExtensionMethodBindPtr = null
   private[classes] var mb_request_particles_process: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `GPUParticles3D.DrawOrder`. */
+  opaque type DrawOrder <: Long = Long
+
+  object DrawOrder {
+    final val Index: DrawOrder = 0L.asInstanceOf[DrawOrder]
+    final val Lifetime: DrawOrder = 1L.asInstanceOf[DrawOrder]
+    final val ReverseLifetime: DrawOrder = 2L.asInstanceOf[DrawOrder]
+    final val ViewDepth: DrawOrder = 3L.asInstanceOf[DrawOrder]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DrawOrder = value.asInstanceOf[DrawOrder]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DrawOrder] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[DrawOrder]]
+
+    extension (self: DrawOrder)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Index"
+        case 1L => "Lifetime"
+        case 2L => "ReverseLifetime"
+        case 3L => "ViewDepth"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `GPUParticles3D.EmitFlags`. */
+  opaque type EmitFlags <: Long = Long
+
+  object EmitFlags {
+    final val Position: EmitFlags = 1L.asInstanceOf[EmitFlags]
+    final val RotationScale: EmitFlags = 2L.asInstanceOf[EmitFlags]
+    final val Velocity: EmitFlags = 4L.asInstanceOf[EmitFlags]
+    final val Color: EmitFlags = 8L.asInstanceOf[EmitFlags]
+    final val Custom: EmitFlags = 16L.asInstanceOf[EmitFlags]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): EmitFlags = value.asInstanceOf[EmitFlags]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[EmitFlags] = scala.IArray[Long](1L, 2L, 4L, 8L, 16L).asInstanceOf[scala.IArray[EmitFlags]]
+
+    extension (self: EmitFlags)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 1L => "Position"
+        case 2L => "RotationScale"
+        case 4L => "Velocity"
+        case 8L => "Color"
+        case 16L => "Custom"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `GPUParticles3D.TransformAlign`. */
+  opaque type TransformAlign <: Long = Long
+
+  object TransformAlign {
+    final val Disabled: TransformAlign = 0L.asInstanceOf[TransformAlign]
+    final val ZBillboard: TransformAlign = 1L.asInstanceOf[TransformAlign]
+    final val YToVelocity: TransformAlign = 2L.asInstanceOf[TransformAlign]
+    final val ZBillboardYToVelocity: TransformAlign = 3L.asInstanceOf[TransformAlign]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): TransformAlign = value.asInstanceOf[TransformAlign]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[TransformAlign] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[TransformAlign]]
+
+    extension (self: TransformAlign)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "ZBillboard"
+        case 2L => "YToVelocity"
+        case 3L => "ZBillboardYToVelocity"
+        case other => other.toString
+      }
+  }
 }

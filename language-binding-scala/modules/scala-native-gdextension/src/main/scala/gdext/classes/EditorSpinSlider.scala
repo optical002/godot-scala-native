@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,9 +36,9 @@ abstract class EditorSpinSlider extends Range {
   }
 
   /** EditorSpinSlider.set_read_only */
-  final def setReadOnly(read_only: Boolean): Unit = {
+  final def setReadOnly(readOnly: Boolean): Unit = {
     if (gdext.classes.EditorSpinSlider.mb_set_read_only == null) gdext.classes.EditorSpinSlider.mb_set_read_only = MethodBind.get("EditorSpinSlider", "set_read_only", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.EditorSpinSlider.mb_set_read_only, livePtr, read_only)
+    Ptrcall.callVoid1(gdext.classes.EditorSpinSlider.mb_set_read_only, livePtr, readOnly)
   }
 
   /** EditorSpinSlider.is_read_only */
@@ -59,21 +60,21 @@ abstract class EditorSpinSlider extends Range {
   }
 
   /** EditorSpinSlider.set_control_state */
-  final def setControlState(state: Long): Unit = {
+  final def setControlState(state: gdext.classes.EditorSpinSlider.ControlState): Unit = {
     if (gdext.classes.EditorSpinSlider.mb_set_control_state == null) gdext.classes.EditorSpinSlider.mb_set_control_state = MethodBind.get("EditorSpinSlider", "set_control_state", 1324557109L)
     Ptrcall.callVoid1(gdext.classes.EditorSpinSlider.mb_set_control_state, livePtr, state)
   }
 
   /** EditorSpinSlider.get_control_state */
-  final def getControlState(): Long = {
+  final def getControlState(): gdext.classes.EditorSpinSlider.ControlState = {
     if (gdext.classes.EditorSpinSlider.mb_get_control_state == null) gdext.classes.EditorSpinSlider.mb_get_control_state = MethodBind.get("EditorSpinSlider", "get_control_state", 3406006200L)
-    Ptrcall.call0[Long](gdext.classes.EditorSpinSlider.mb_get_control_state, livePtr)
+    gdext.classes.EditorSpinSlider.ControlState(Ptrcall.call0[Long](gdext.classes.EditorSpinSlider.mb_get_control_state, livePtr))
   }
 
   /** EditorSpinSlider.set_hide_slider */
-  final def setHideSlider(hide_slider: Boolean): Unit = {
+  final def setHideSlider(hideSlider: Boolean): Unit = {
     if (gdext.classes.EditorSpinSlider.mb_set_hide_slider == null) gdext.classes.EditorSpinSlider.mb_set_hide_slider = MethodBind.get("EditorSpinSlider", "set_hide_slider", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.EditorSpinSlider.mb_set_hide_slider, livePtr, hide_slider)
+    Ptrcall.callVoid1(gdext.classes.EditorSpinSlider.mb_set_hide_slider, livePtr, hideSlider)
   }
 
   /** EditorSpinSlider.is_hiding_slider */
@@ -83,9 +84,9 @@ abstract class EditorSpinSlider extends Range {
   }
 
   /** EditorSpinSlider.set_editing_integer */
-  final def setEditingInteger(editing_integer: Boolean): Unit = {
+  final def setEditingInteger(editingInteger: Boolean): Unit = {
     if (gdext.classes.EditorSpinSlider.mb_set_editing_integer == null) gdext.classes.EditorSpinSlider.mb_set_editing_integer = MethodBind.get("EditorSpinSlider", "set_editing_integer", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.EditorSpinSlider.mb_set_editing_integer, livePtr, editing_integer)
+    Ptrcall.callVoid1(gdext.classes.EditorSpinSlider.mb_set_editing_integer, livePtr, editingInteger)
   }
 
   /** EditorSpinSlider.is_editing_integer */
@@ -111,4 +112,28 @@ object EditorSpinSlider {
   private[classes] var mb_is_hiding_slider: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_editing_integer: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_editing_integer: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `EditorSpinSlider.ControlState`. */
+  opaque type ControlState <: Long = Long
+
+  object ControlState {
+    final val Default: ControlState = 0L.asInstanceOf[ControlState]
+    final val PreferSlider: ControlState = 1L.asInstanceOf[ControlState]
+    final val Hide: ControlState = 2L.asInstanceOf[ControlState]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ControlState = value.asInstanceOf[ControlState]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ControlState] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[ControlState]]
+
+    extension (self: ControlState)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Default"
+        case 1L => "PreferSlider"
+        case 2L => "Hide"
+        case other => other.toString
+      }
+  }
 }

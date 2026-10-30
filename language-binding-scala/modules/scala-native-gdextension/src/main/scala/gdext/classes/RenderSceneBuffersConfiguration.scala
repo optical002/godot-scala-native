@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,9 +18,9 @@ abstract class RenderSceneBuffersConfiguration extends RefCounted {
   }
 
   /** RenderSceneBuffersConfiguration.set_internal_size */
-  final def setInternalSize(internal_size: gdext.builtin.Vector2i): Unit = {
+  final def setInternalSize(internalSize: gdext.builtin.Vector2i): Unit = {
     if (gdext.classes.RenderSceneBuffersConfiguration.mb_set_internal_size == null) gdext.classes.RenderSceneBuffersConfiguration.mb_set_internal_size = MethodBind.get("RenderSceneBuffersConfiguration", "set_internal_size", 1130785943L)
-    Ptrcall.callVoid1(gdext.classes.RenderSceneBuffersConfiguration.mb_set_internal_size, livePtr, internal_size)
+    Ptrcall.callVoid1(gdext.classes.RenderSceneBuffersConfiguration.mb_set_internal_size, livePtr, internalSize)
   }
 
   /** RenderSceneBuffersConfiguration.get_target_size */
@@ -29,9 +30,9 @@ abstract class RenderSceneBuffersConfiguration extends RefCounted {
   }
 
   /** RenderSceneBuffersConfiguration.set_target_size */
-  final def setTargetSize(target_size: gdext.builtin.Vector2i): Unit = {
+  final def setTargetSize(targetSize: gdext.builtin.Vector2i): Unit = {
     if (gdext.classes.RenderSceneBuffersConfiguration.mb_set_target_size == null) gdext.classes.RenderSceneBuffersConfiguration.mb_set_target_size = MethodBind.get("RenderSceneBuffersConfiguration", "set_target_size", 1130785943L)
-    Ptrcall.callVoid1(gdext.classes.RenderSceneBuffersConfiguration.mb_set_target_size, livePtr, target_size)
+    Ptrcall.callVoid1(gdext.classes.RenderSceneBuffersConfiguration.mb_set_target_size, livePtr, targetSize)
   }
 
   /** RenderSceneBuffersConfiguration.get_view_count */
@@ -41,45 +42,45 @@ abstract class RenderSceneBuffersConfiguration extends RefCounted {
   }
 
   /** RenderSceneBuffersConfiguration.set_view_count */
-  final def setViewCount(view_count: Long): Unit = {
+  final def setViewCount(viewCount: Long): Unit = {
     if (gdext.classes.RenderSceneBuffersConfiguration.mb_set_view_count == null) gdext.classes.RenderSceneBuffersConfiguration.mb_set_view_count = MethodBind.get("RenderSceneBuffersConfiguration", "set_view_count", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.RenderSceneBuffersConfiguration.mb_set_view_count, livePtr, view_count)
+    Ptrcall.callVoid1(gdext.classes.RenderSceneBuffersConfiguration.mb_set_view_count, livePtr, viewCount)
   }
 
   /** RenderSceneBuffersConfiguration.get_scaling_3d_mode */
-  final def getScaling3dMode(): Long = {
+  final def getScaling3dMode(): gdext.classes.RenderingServer.ViewportScaling3DMode = {
     if (gdext.classes.RenderSceneBuffersConfiguration.mb_get_scaling_3d_mode == null) gdext.classes.RenderSceneBuffersConfiguration.mb_get_scaling_3d_mode = MethodBind.get("RenderSceneBuffersConfiguration", "get_scaling_3d_mode", 976778074L)
-    Ptrcall.call0[Long](gdext.classes.RenderSceneBuffersConfiguration.mb_get_scaling_3d_mode, livePtr)
+    gdext.classes.RenderingServer.ViewportScaling3DMode(Ptrcall.call0[Long](gdext.classes.RenderSceneBuffersConfiguration.mb_get_scaling_3d_mode, livePtr))
   }
 
   /** RenderSceneBuffersConfiguration.set_scaling_3d_mode */
-  final def setScaling3dMode(scaling_3d_mode: Long): Unit = {
+  final def setScaling3dMode(scaling3dMode: gdext.classes.RenderingServer.ViewportScaling3DMode): Unit = {
     if (gdext.classes.RenderSceneBuffersConfiguration.mb_set_scaling_3d_mode == null) gdext.classes.RenderSceneBuffersConfiguration.mb_set_scaling_3d_mode = MethodBind.get("RenderSceneBuffersConfiguration", "set_scaling_3d_mode", 447477857L)
-    Ptrcall.callVoid1(gdext.classes.RenderSceneBuffersConfiguration.mb_set_scaling_3d_mode, livePtr, scaling_3d_mode)
+    Ptrcall.callVoid1(gdext.classes.RenderSceneBuffersConfiguration.mb_set_scaling_3d_mode, livePtr, scaling3dMode)
   }
 
   /** RenderSceneBuffersConfiguration.get_msaa_3d */
-  final def getMsaa3d(): Long = {
+  final def getMsaa3d(): gdext.classes.RenderingServer.ViewportMSAA = {
     if (gdext.classes.RenderSceneBuffersConfiguration.mb_get_msaa_3d == null) gdext.classes.RenderSceneBuffersConfiguration.mb_get_msaa_3d = MethodBind.get("RenderSceneBuffersConfiguration", "get_msaa_3d", 3109158617L)
-    Ptrcall.call0[Long](gdext.classes.RenderSceneBuffersConfiguration.mb_get_msaa_3d, livePtr)
+    gdext.classes.RenderingServer.ViewportMSAA(Ptrcall.call0[Long](gdext.classes.RenderSceneBuffersConfiguration.mb_get_msaa_3d, livePtr))
   }
 
   /** RenderSceneBuffersConfiguration.set_msaa_3d */
-  final def setMsaa3d(msaa_3d: Long): Unit = {
+  final def setMsaa3d(msaa3d: gdext.classes.RenderingServer.ViewportMSAA): Unit = {
     if (gdext.classes.RenderSceneBuffersConfiguration.mb_set_msaa_3d == null) gdext.classes.RenderSceneBuffersConfiguration.mb_set_msaa_3d = MethodBind.get("RenderSceneBuffersConfiguration", "set_msaa_3d", 3952630748L)
-    Ptrcall.callVoid1(gdext.classes.RenderSceneBuffersConfiguration.mb_set_msaa_3d, livePtr, msaa_3d)
+    Ptrcall.callVoid1(gdext.classes.RenderSceneBuffersConfiguration.mb_set_msaa_3d, livePtr, msaa3d)
   }
 
   /** RenderSceneBuffersConfiguration.get_screen_space_aa */
-  final def getScreenSpaceAa(): Long = {
+  final def getScreenSpaceAa(): gdext.classes.RenderingServer.ViewportScreenSpaceAA = {
     if (gdext.classes.RenderSceneBuffersConfiguration.mb_get_screen_space_aa == null) gdext.classes.RenderSceneBuffersConfiguration.mb_get_screen_space_aa = MethodBind.get("RenderSceneBuffersConfiguration", "get_screen_space_aa", 641513172L)
-    Ptrcall.call0[Long](gdext.classes.RenderSceneBuffersConfiguration.mb_get_screen_space_aa, livePtr)
+    gdext.classes.RenderingServer.ViewportScreenSpaceAA(Ptrcall.call0[Long](gdext.classes.RenderSceneBuffersConfiguration.mb_get_screen_space_aa, livePtr))
   }
 
   /** RenderSceneBuffersConfiguration.set_screen_space_aa */
-  final def setScreenSpaceAa(screen_space_aa: Long): Unit = {
+  final def setScreenSpaceAa(screenSpaceAa: gdext.classes.RenderingServer.ViewportScreenSpaceAA): Unit = {
     if (gdext.classes.RenderSceneBuffersConfiguration.mb_set_screen_space_aa == null) gdext.classes.RenderSceneBuffersConfiguration.mb_set_screen_space_aa = MethodBind.get("RenderSceneBuffersConfiguration", "set_screen_space_aa", 139543108L)
-    Ptrcall.callVoid1(gdext.classes.RenderSceneBuffersConfiguration.mb_set_screen_space_aa, livePtr, screen_space_aa)
+    Ptrcall.callVoid1(gdext.classes.RenderSceneBuffersConfiguration.mb_set_screen_space_aa, livePtr, screenSpaceAa)
   }
 
   /** RenderSceneBuffersConfiguration.get_fsr_sharpness */
@@ -89,9 +90,9 @@ abstract class RenderSceneBuffersConfiguration extends RefCounted {
   }
 
   /** RenderSceneBuffersConfiguration.set_fsr_sharpness */
-  final def setFsrSharpness(fsr_sharpness: Double): Unit = {
+  final def setFsrSharpness(fsrSharpness: Double): Unit = {
     if (gdext.classes.RenderSceneBuffersConfiguration.mb_set_fsr_sharpness == null) gdext.classes.RenderSceneBuffersConfiguration.mb_set_fsr_sharpness = MethodBind.get("RenderSceneBuffersConfiguration", "set_fsr_sharpness", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.RenderSceneBuffersConfiguration.mb_set_fsr_sharpness, livePtr, fsr_sharpness)
+    Ptrcall.callVoid1(gdext.classes.RenderSceneBuffersConfiguration.mb_set_fsr_sharpness, livePtr, fsrSharpness)
   }
 
   /** RenderSceneBuffersConfiguration.get_texture_mipmap_bias */
@@ -101,21 +102,21 @@ abstract class RenderSceneBuffersConfiguration extends RefCounted {
   }
 
   /** RenderSceneBuffersConfiguration.set_texture_mipmap_bias */
-  final def setTextureMipmapBias(texture_mipmap_bias: Double): Unit = {
+  final def setTextureMipmapBias(textureMipmapBias: Double): Unit = {
     if (gdext.classes.RenderSceneBuffersConfiguration.mb_set_texture_mipmap_bias == null) gdext.classes.RenderSceneBuffersConfiguration.mb_set_texture_mipmap_bias = MethodBind.get("RenderSceneBuffersConfiguration", "set_texture_mipmap_bias", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.RenderSceneBuffersConfiguration.mb_set_texture_mipmap_bias, livePtr, texture_mipmap_bias)
+    Ptrcall.callVoid1(gdext.classes.RenderSceneBuffersConfiguration.mb_set_texture_mipmap_bias, livePtr, textureMipmapBias)
   }
 
   /** RenderSceneBuffersConfiguration.get_anisotropic_filtering_level */
-  final def getAnisotropicFilteringLevel(): Long = {
+  final def getAnisotropicFilteringLevel(): gdext.classes.RenderingServer.ViewportAnisotropicFiltering = {
     if (gdext.classes.RenderSceneBuffersConfiguration.mb_get_anisotropic_filtering_level == null) gdext.classes.RenderSceneBuffersConfiguration.mb_get_anisotropic_filtering_level = MethodBind.get("RenderSceneBuffersConfiguration", "get_anisotropic_filtering_level", 1617414954L)
-    Ptrcall.call0[Long](gdext.classes.RenderSceneBuffersConfiguration.mb_get_anisotropic_filtering_level, livePtr)
+    gdext.classes.RenderingServer.ViewportAnisotropicFiltering(Ptrcall.call0[Long](gdext.classes.RenderSceneBuffersConfiguration.mb_get_anisotropic_filtering_level, livePtr))
   }
 
   /** RenderSceneBuffersConfiguration.set_anisotropic_filtering_level */
-  final def setAnisotropicFilteringLevel(anisotropic_filtering_level: Long): Unit = {
+  final def setAnisotropicFilteringLevel(anisotropicFilteringLevel: gdext.classes.RenderingServer.ViewportAnisotropicFiltering): Unit = {
     if (gdext.classes.RenderSceneBuffersConfiguration.mb_set_anisotropic_filtering_level == null) gdext.classes.RenderSceneBuffersConfiguration.mb_set_anisotropic_filtering_level = MethodBind.get("RenderSceneBuffersConfiguration", "set_anisotropic_filtering_level", 2559658741L)
-    Ptrcall.callVoid1(gdext.classes.RenderSceneBuffersConfiguration.mb_set_anisotropic_filtering_level, livePtr, anisotropic_filtering_level)
+    Ptrcall.callVoid1(gdext.classes.RenderSceneBuffersConfiguration.mb_set_anisotropic_filtering_level, livePtr, anisotropicFilteringLevel)
   }
 
 }

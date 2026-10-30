@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class CSGPrimitive3D extends CSGShape3D {
   override def godotClassName: String = "CSGPrimitive3D"
 
   /** CSGPrimitive3D.set_flip_faces */
-  final def setFlipFaces(flip_faces: Boolean): Unit = {
+  final def setFlipFaces(flipFaces: Boolean): Unit = {
     if (gdext.classes.CSGPrimitive3D.mb_set_flip_faces == null) gdext.classes.CSGPrimitive3D.mb_set_flip_faces = MethodBind.get("CSGPrimitive3D", "set_flip_faces", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.CSGPrimitive3D.mb_set_flip_faces, livePtr, flip_faces)
+    Ptrcall.callVoid1(gdext.classes.CSGPrimitive3D.mb_set_flip_faces, livePtr, flipFaces)
   }
 
   /** CSGPrimitive3D.get_flip_faces */

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,27 +36,27 @@ abstract class GridMap extends Node3D {
   }
 
   /** GridMap.set_collision_mask_value */
-  final def setCollisionMaskValue(layer_number: Long, value: Boolean): Unit = {
+  final def setCollisionMaskValue(layerNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.GridMap.mb_set_collision_mask_value == null) gdext.classes.GridMap.mb_set_collision_mask_value = MethodBind.get("GridMap", "set_collision_mask_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.GridMap.mb_set_collision_mask_value, livePtr, layer_number, value)
+    Ptrcall.callVoid2(gdext.classes.GridMap.mb_set_collision_mask_value, livePtr, layerNumber, value)
   }
 
   /** GridMap.get_collision_mask_value */
-  final def getCollisionMaskValue(layer_number: Long): Boolean = {
+  final def getCollisionMaskValue(layerNumber: Long): Boolean = {
     if (gdext.classes.GridMap.mb_get_collision_mask_value == null) gdext.classes.GridMap.mb_get_collision_mask_value = MethodBind.get("GridMap", "get_collision_mask_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.GridMap.mb_get_collision_mask_value, livePtr, layer_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.GridMap.mb_get_collision_mask_value, livePtr, layerNumber)
   }
 
   /** GridMap.set_collision_layer_value */
-  final def setCollisionLayerValue(layer_number: Long, value: Boolean): Unit = {
+  final def setCollisionLayerValue(layerNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.GridMap.mb_set_collision_layer_value == null) gdext.classes.GridMap.mb_set_collision_layer_value = MethodBind.get("GridMap", "set_collision_layer_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.GridMap.mb_set_collision_layer_value, livePtr, layer_number, value)
+    Ptrcall.callVoid2(gdext.classes.GridMap.mb_set_collision_layer_value, livePtr, layerNumber, value)
   }
 
   /** GridMap.get_collision_layer_value */
-  final def getCollisionLayerValue(layer_number: Long): Boolean = {
+  final def getCollisionLayerValue(layerNumber: Long): Boolean = {
     if (gdext.classes.GridMap.mb_get_collision_layer_value == null) gdext.classes.GridMap.mb_get_collision_layer_value = MethodBind.get("GridMap", "get_collision_layer_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.GridMap.mb_get_collision_layer_value, livePtr, layer_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.GridMap.mb_get_collision_layer_value, livePtr, layerNumber)
   }
 
   /** GridMap.set_collision_priority */
@@ -83,9 +84,9 @@ abstract class GridMap extends Node3D {
   }
 
   /** GridMap.set_bake_navigation */
-  final def setBakeNavigation(bake_navigation: Boolean): Unit = {
+  final def setBakeNavigation(bakeNavigation: Boolean): Unit = {
     if (gdext.classes.GridMap.mb_set_bake_navigation == null) gdext.classes.GridMap.mb_set_bake_navigation = MethodBind.get("GridMap", "set_bake_navigation", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.GridMap.mb_set_bake_navigation, livePtr, bake_navigation)
+    Ptrcall.callVoid1(gdext.classes.GridMap.mb_set_bake_navigation, livePtr, bakeNavigation)
   }
 
   /** GridMap.is_baking_navigation */
@@ -95,9 +96,9 @@ abstract class GridMap extends Node3D {
   }
 
   /** GridMap.set_mesh_library */
-  final def setMeshLibrary(mesh_library: MeshLibrary): Unit = {
+  final def setMeshLibrary(meshLibrary: MeshLibrary): Unit = {
     if (gdext.classes.GridMap.mb_set_mesh_library == null) gdext.classes.GridMap.mb_set_mesh_library = MethodBind.get("GridMap", "set_mesh_library", 1488083439L)
-    Ptrcall.callVoid1(gdext.classes.GridMap.mb_set_mesh_library, livePtr, Wrappers.handle(mesh_library))
+    Ptrcall.callVoid1(gdext.classes.GridMap.mb_set_mesh_library, livePtr, Wrappers.handle(meshLibrary))
   }
 
   /** GridMap.get_mesh_library. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
@@ -143,7 +144,7 @@ abstract class GridMap extends Node3D {
   }
 
   /** GridMap.set_cell_item */
-  final def setCellItem(position: gdext.builtin.Vector3i, item: Long, orientation: Long): Unit = {
+  final def setCellItem(position: gdext.builtin.Vector3i, item: Long, orientation: Long = 0L): Unit = {
     if (gdext.classes.GridMap.mb_set_cell_item == null) gdext.classes.GridMap.mb_set_cell_item = MethodBind.get("GridMap", "set_cell_item", 3449088946L)
     Ptrcall.callVoid3(gdext.classes.GridMap.mb_set_cell_item, livePtr, position, item, orientation)
   }
@@ -179,15 +180,15 @@ abstract class GridMap extends Node3D {
   }
 
   /** GridMap.local_to_map */
-  final def localToMap(local_position: gdext.builtin.Vector3): gdext.builtin.Vector3i = {
+  final def localToMap(localPosition: gdext.builtin.Vector3): gdext.builtin.Vector3i = {
     if (gdext.classes.GridMap.mb_local_to_map == null) gdext.classes.GridMap.mb_local_to_map = MethodBind.get("GridMap", "local_to_map", 1257687843L)
-    Ptrcall.call1[gdext.builtin.Vector3, gdext.builtin.Vector3i](gdext.classes.GridMap.mb_local_to_map, livePtr, local_position)
+    Ptrcall.call1[gdext.builtin.Vector3, gdext.builtin.Vector3i](gdext.classes.GridMap.mb_local_to_map, livePtr, localPosition)
   }
 
   /** GridMap.map_to_local */
-  final def mapToLocal(map_position: gdext.builtin.Vector3i): gdext.builtin.Vector3 = {
+  final def mapToLocal(mapPosition: gdext.builtin.Vector3i): gdext.builtin.Vector3 = {
     if (gdext.classes.GridMap.mb_map_to_local == null) gdext.classes.GridMap.mb_map_to_local = MethodBind.get("GridMap", "map_to_local", 1088329196L)
-    Ptrcall.call1[gdext.builtin.Vector3i, gdext.builtin.Vector3](gdext.classes.GridMap.mb_map_to_local, livePtr, map_position)
+    Ptrcall.call1[gdext.builtin.Vector3i, gdext.builtin.Vector3](gdext.classes.GridMap.mb_map_to_local, livePtr, mapPosition)
   }
 
   /** GridMap.resource_changed */
@@ -245,9 +246,9 @@ abstract class GridMap extends Node3D {
   }
 
   /** GridMap.make_baked_meshes */
-  final def makeBakedMeshes(gen_lightmap_uv: Boolean, lightmap_uv_texel_size: Double): Unit = {
+  final def makeBakedMeshes(genLightmapUv: Boolean = false, lightmapUvTexelSize: Double = 0.1): Unit = {
     if (gdext.classes.GridMap.mb_make_baked_meshes == null) gdext.classes.GridMap.mb_make_baked_meshes = MethodBind.get("GridMap", "make_baked_meshes", 3609286057L)
-    Ptrcall.callVoid2(gdext.classes.GridMap.mb_make_baked_meshes, livePtr, gen_lightmap_uv, lightmap_uv_texel_size)
+    Ptrcall.callVoid2(gdext.classes.GridMap.mb_make_baked_meshes, livePtr, genLightmapUv, lightmapUvTexelSize)
   }
 
 }

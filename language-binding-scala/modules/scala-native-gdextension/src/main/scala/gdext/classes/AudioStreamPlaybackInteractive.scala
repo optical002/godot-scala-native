@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,15 +12,15 @@ abstract class AudioStreamPlaybackInteractive extends AudioStreamPlayback {
   override def godotClassName: String = "AudioStreamPlaybackInteractive"
 
   /** AudioStreamPlaybackInteractive.switch_to_clip_by_name */
-  final def switchToClipByName(clip_name: gdext.builtin.StringName): Unit = {
+  final def switchToClipByName(clipName: String): Unit = {
     if (gdext.classes.AudioStreamPlaybackInteractive.mb_switch_to_clip_by_name == null) gdext.classes.AudioStreamPlaybackInteractive.mb_switch_to_clip_by_name = MethodBind.get("AudioStreamPlaybackInteractive", "switch_to_clip_by_name", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlaybackInteractive.mb_switch_to_clip_by_name, livePtr, clip_name)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlaybackInteractive.mb_switch_to_clip_by_name, livePtr, SnArg(clipName))
   }
 
   /** AudioStreamPlaybackInteractive.switch_to_clip */
-  final def switchToClip(clip_index: Long): Unit = {
+  final def switchToClip(clipIndex: Long): Unit = {
     if (gdext.classes.AudioStreamPlaybackInteractive.mb_switch_to_clip == null) gdext.classes.AudioStreamPlaybackInteractive.mb_switch_to_clip = MethodBind.get("AudioStreamPlaybackInteractive", "switch_to_clip", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamPlaybackInteractive.mb_switch_to_clip, livePtr, clip_index)
+    Ptrcall.callVoid1(gdext.classes.AudioStreamPlaybackInteractive.mb_switch_to_clip, livePtr, clipIndex)
   }
 
   /** AudioStreamPlaybackInteractive.get_current_clip_index */

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,15 +12,15 @@ abstract class XMLParser extends RefCounted {
   override def godotClassName: String = "XMLParser"
 
   /** XMLParser.read */
-  final def read(): Long = {
+  final def read(): gdext.classes.Error = {
     if (gdext.classes.XMLParser.mb_read == null) gdext.classes.XMLParser.mb_read = MethodBind.get("XMLParser", "read", 166280745L)
-    Ptrcall.call0[Long](gdext.classes.XMLParser.mb_read, livePtr)
+    gdext.classes.Error(Ptrcall.call0[Long](gdext.classes.XMLParser.mb_read, livePtr))
   }
 
   /** XMLParser.get_node_type */
-  final def getNodeType(): Long = {
+  final def getNodeType(): gdext.classes.XMLParser.NodeType = {
     if (gdext.classes.XMLParser.mb_get_node_type == null) gdext.classes.XMLParser.mb_get_node_type = MethodBind.get("XMLParser", "get_node_type", 2984359541L)
-    Ptrcall.call0[Long](gdext.classes.XMLParser.mb_get_node_type, livePtr)
+    gdext.classes.XMLParser.NodeType(Ptrcall.call0[Long](gdext.classes.XMLParser.mb_get_node_type, livePtr))
   }
 
   /** XMLParser.get_node_name */
@@ -95,15 +96,15 @@ abstract class XMLParser extends RefCounted {
   }
 
   /** XMLParser.seek */
-  final def seek(position: Long): Long = {
+  final def seek(position: Long): gdext.classes.Error = {
     if (gdext.classes.XMLParser.mb_seek == null) gdext.classes.XMLParser.mb_seek = MethodBind.get("XMLParser", "seek", 844576869L)
-    Ptrcall.call1[Long, Long](gdext.classes.XMLParser.mb_seek, livePtr, position)
+    gdext.classes.Error(Ptrcall.call1[Long, Long](gdext.classes.XMLParser.mb_seek, livePtr, position))
   }
 
   /** XMLParser.open */
-  final def open(file: String): Long = {
+  final def open(file: String): gdext.classes.Error = {
     if (gdext.classes.XMLParser.mb_open == null) gdext.classes.XMLParser.mb_open = MethodBind.get("XMLParser", "open", 166001499L)
-    Ptrcall.call1[String, Long](gdext.classes.XMLParser.mb_open, livePtr, file)
+    gdext.classes.Error(Ptrcall.call1[String, Long](gdext.classes.XMLParser.mb_open, livePtr, file))
   }
 
 }
@@ -125,4 +126,36 @@ object XMLParser {
   private[classes] var mb_skip_section: GDExtensionMethodBindPtr = null
   private[classes] var mb_seek: GDExtensionMethodBindPtr = null
   private[classes] var mb_open: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `XMLParser.NodeType`. */
+  opaque type NodeType <: Long = Long
+
+  object NodeType {
+    final val None: NodeType = 0L.asInstanceOf[NodeType]
+    final val Element: NodeType = 1L.asInstanceOf[NodeType]
+    final val ElementEnd: NodeType = 2L.asInstanceOf[NodeType]
+    final val Text: NodeType = 3L.asInstanceOf[NodeType]
+    final val Comment: NodeType = 4L.asInstanceOf[NodeType]
+    final val Cdata: NodeType = 5L.asInstanceOf[NodeType]
+    final val Unknown: NodeType = 6L.asInstanceOf[NodeType]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): NodeType = value.asInstanceOf[NodeType]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[NodeType] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L).asInstanceOf[scala.IArray[NodeType]]
+
+    extension (self: NodeType)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "None"
+        case 1L => "Element"
+        case 2L => "ElementEnd"
+        case 3L => "Text"
+        case 4L => "Comment"
+        case 5L => "Cdata"
+        case 6L => "Unknown"
+        case other => other.toString
+      }
+  }
 }

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class SkeletonModification2DLookAt extends SkeletonModification2D {
   override def godotClassName: String = "SkeletonModification2DLookAt"
 
   /** SkeletonModification2DLookAt.set_bone_index */
-  final def setBoneIndex(bone_idx: Long): Unit = {
+  final def setBoneIndex(boneIdx: Long): Unit = {
     if (gdext.classes.SkeletonModification2DLookAt.mb_set_bone_index == null) gdext.classes.SkeletonModification2DLookAt.mb_set_bone_index = MethodBind.get("SkeletonModification2DLookAt", "set_bone_index", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.SkeletonModification2DLookAt.mb_set_bone_index, livePtr, bone_idx)
+    Ptrcall.callVoid1(gdext.classes.SkeletonModification2DLookAt.mb_set_bone_index, livePtr, boneIdx)
   }
 
   /** SkeletonModification2DLookAt.get_bone_index */
@@ -35,9 +36,9 @@ abstract class SkeletonModification2DLookAt extends SkeletonModification2D {
   }
 
   /** SkeletonModification2DLookAt.set_enable_constraint */
-  final def setEnableConstraint(enable_constraint: Boolean): Unit = {
+  final def setEnableConstraint(enableConstraint: Boolean): Unit = {
     if (gdext.classes.SkeletonModification2DLookAt.mb_set_enable_constraint == null) gdext.classes.SkeletonModification2DLookAt.mb_set_enable_constraint = MethodBind.get("SkeletonModification2DLookAt", "set_enable_constraint", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.SkeletonModification2DLookAt.mb_set_enable_constraint, livePtr, enable_constraint)
+    Ptrcall.callVoid1(gdext.classes.SkeletonModification2DLookAt.mb_set_enable_constraint, livePtr, enableConstraint)
   }
 
   /** SkeletonModification2DLookAt.get_enable_constraint */
@@ -47,9 +48,9 @@ abstract class SkeletonModification2DLookAt extends SkeletonModification2D {
   }
 
   /** SkeletonModification2DLookAt.set_constraint_angle_min */
-  final def setConstraintAngleMin(angle_min: Double): Unit = {
+  final def setConstraintAngleMin(angleMin: Double): Unit = {
     if (gdext.classes.SkeletonModification2DLookAt.mb_set_constraint_angle_min == null) gdext.classes.SkeletonModification2DLookAt.mb_set_constraint_angle_min = MethodBind.get("SkeletonModification2DLookAt", "set_constraint_angle_min", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.SkeletonModification2DLookAt.mb_set_constraint_angle_min, livePtr, angle_min)
+    Ptrcall.callVoid1(gdext.classes.SkeletonModification2DLookAt.mb_set_constraint_angle_min, livePtr, angleMin)
   }
 
   /** SkeletonModification2DLookAt.get_constraint_angle_min */
@@ -59,9 +60,9 @@ abstract class SkeletonModification2DLookAt extends SkeletonModification2D {
   }
 
   /** SkeletonModification2DLookAt.set_constraint_angle_max */
-  final def setConstraintAngleMax(angle_max: Double): Unit = {
+  final def setConstraintAngleMax(angleMax: Double): Unit = {
     if (gdext.classes.SkeletonModification2DLookAt.mb_set_constraint_angle_max == null) gdext.classes.SkeletonModification2DLookAt.mb_set_constraint_angle_max = MethodBind.get("SkeletonModification2DLookAt", "set_constraint_angle_max", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.SkeletonModification2DLookAt.mb_set_constraint_angle_max, livePtr, angle_max)
+    Ptrcall.callVoid1(gdext.classes.SkeletonModification2DLookAt.mb_set_constraint_angle_max, livePtr, angleMax)
   }
 
   /** SkeletonModification2DLookAt.get_constraint_angle_max */

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class FileAccess extends RefCounted {
   override def godotClassName: String = "FileAccess"
 
   /** FileAccess.resize */
-  final def resize(length: Long): Long = {
+  final def resize(length: Long): gdext.classes.Error = {
     if (gdext.classes.FileAccess.mb_resize == null) gdext.classes.FileAccess.mb_resize = MethodBind.get("FileAccess", "resize", 844576869L)
-    Ptrcall.call1[Long, Long](gdext.classes.FileAccess.mb_resize, livePtr, length)
+    gdext.classes.Error(Ptrcall.call1[Long, Long](gdext.classes.FileAccess.mb_resize, livePtr, length))
   }
 
   /** FileAccess.flush */
@@ -47,7 +48,7 @@ abstract class FileAccess extends RefCounted {
   }
 
   /** FileAccess.seek_end */
-  final def seekEnd(position: Long): Unit = {
+  final def seekEnd(position: Long = 0L): Unit = {
     if (gdext.classes.FileAccess.mb_seek_end == null) gdext.classes.FileAccess.mb_seek_end = MethodBind.get("FileAccess", "seek_end", 1995695955L)
     Ptrcall.callVoid1(gdext.classes.FileAccess.mb_seek_end, livePtr, position)
   }
@@ -137,15 +138,15 @@ abstract class FileAccess extends RefCounted {
   }
 
   /** FileAccess.set_big_endian */
-  final def setBigEndian(big_endian: Boolean): Unit = {
+  final def setBigEndian(bigEndian: Boolean): Unit = {
     if (gdext.classes.FileAccess.mb_set_big_endian == null) gdext.classes.FileAccess.mb_set_big_endian = MethodBind.get("FileAccess", "set_big_endian", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.FileAccess.mb_set_big_endian, livePtr, big_endian)
+    Ptrcall.callVoid1(gdext.classes.FileAccess.mb_set_big_endian, livePtr, bigEndian)
   }
 
   /** FileAccess.get_error */
-  final def getError(): Long = {
+  final def getError(): gdext.classes.Error = {
     if (gdext.classes.FileAccess.mb_get_error == null) gdext.classes.FileAccess.mb_get_error = MethodBind.get("FileAccess", "get_error", 3185525595L)
-    Ptrcall.call0[Long](gdext.classes.FileAccess.mb_get_error, livePtr)
+    gdext.classes.Error(Ptrcall.call0[Long](gdext.classes.FileAccess.mb_get_error, livePtr))
   }
 
   /** FileAccess.store_8 */
@@ -288,33 +289,33 @@ object FileAccess {
   private[classes] var mb_remove_extended_attribute: GDExtensionMethodBindPtr = null
 
   /** FileAccess.open. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def open(path: String, flags: Long): FileAccess = {
+  final def open(path: String, flags: gdext.classes.FileAccess.ModeFlags): FileAccess = {
     if (gdext.classes.FileAccess.mb_open == null) gdext.classes.FileAccess.mb_open = MethodBind.get("FileAccess", "open", 1247358404L)
     Wrappers.owned[FileAccess](Ptrcall.call2[String, Long, Long](gdext.classes.FileAccess.mb_open, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], path, flags))
   }
 
   /** FileAccess.open_encrypted_with_pass. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def openEncryptedWithPass(path: String, mode_flags: Long, pass: String): FileAccess = {
+  final def openEncryptedWithPass(path: String, modeFlags: gdext.classes.FileAccess.ModeFlags, pass: String): FileAccess = {
     if (gdext.classes.FileAccess.mb_open_encrypted_with_pass == null) gdext.classes.FileAccess.mb_open_encrypted_with_pass = MethodBind.get("FileAccess", "open_encrypted_with_pass", 790283377L)
-    Wrappers.owned[FileAccess](Ptrcall.call3[String, Long, String, Long](gdext.classes.FileAccess.mb_open_encrypted_with_pass, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], path, mode_flags, pass))
+    Wrappers.owned[FileAccess](Ptrcall.call3[String, Long, String, Long](gdext.classes.FileAccess.mb_open_encrypted_with_pass, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], path, modeFlags, pass))
   }
 
   /** FileAccess.open_compressed. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def openCompressed(path: String, mode_flags: Long, compression_mode: Long): FileAccess = {
+  final def openCompressed(path: String, modeFlags: gdext.classes.FileAccess.ModeFlags, compressionMode: gdext.classes.FileAccess.CompressionMode = gdext.classes.FileAccess.CompressionMode(0L)): FileAccess = {
     if (gdext.classes.FileAccess.mb_open_compressed == null) gdext.classes.FileAccess.mb_open_compressed = MethodBind.get("FileAccess", "open_compressed", 3686439335L)
-    Wrappers.owned[FileAccess](Ptrcall.call3[String, Long, Long, Long](gdext.classes.FileAccess.mb_open_compressed, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], path, mode_flags, compression_mode))
+    Wrappers.owned[FileAccess](Ptrcall.call3[String, Long, Long, Long](gdext.classes.FileAccess.mb_open_compressed, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], path, modeFlags, compressionMode))
   }
 
   /** FileAccess.get_open_error */
-  final def getOpenError(): Long = {
+  final def getOpenError(): gdext.classes.Error = {
     if (gdext.classes.FileAccess.mb_get_open_error == null) gdext.classes.FileAccess.mb_get_open_error = MethodBind.get("FileAccess", "get_open_error", 166280745L)
-    Ptrcall.call0[Long](gdext.classes.FileAccess.mb_get_open_error, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr])
+    gdext.classes.Error(Ptrcall.call0[Long](gdext.classes.FileAccess.mb_get_open_error, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr]))
   }
 
   /** FileAccess.create_temp. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def createTemp(mode_flags: Long, prefix: String, extension: String, keep: Boolean): FileAccess = {
+  final def createTemp(modeFlags: gdext.classes.FileAccess.ModeFlags, prefix: String = "", extension: String = "", keep: Boolean = false): FileAccess = {
     if (gdext.classes.FileAccess.mb_create_temp == null) gdext.classes.FileAccess.mb_create_temp = MethodBind.get("FileAccess", "create_temp", 171914364L)
-    Wrappers.owned[FileAccess](Ptrcall.call4[Long, String, String, Boolean, Long](gdext.classes.FileAccess.mb_create_temp, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], mode_flags, prefix, extension, keep))
+    Wrappers.owned[FileAccess](Ptrcall.call4[Long, String, String, Boolean, Long](gdext.classes.FileAccess.mb_create_temp, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], modeFlags, prefix, extension, keep))
   }
 
   /** FileAccess.get_file_as_string */
@@ -360,15 +361,15 @@ object FileAccess {
   }
 
   /** FileAccess.get_unix_permissions */
-  final def getUnixPermissions(file: String): Long = {
+  final def getUnixPermissions(file: String): gdext.classes.FileAccess.UnixPermissionFlags = {
     if (gdext.classes.FileAccess.mb_get_unix_permissions == null) gdext.classes.FileAccess.mb_get_unix_permissions = MethodBind.get("FileAccess", "get_unix_permissions", 524341837L)
-    Ptrcall.call1[String, Long](gdext.classes.FileAccess.mb_get_unix_permissions, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], file)
+    gdext.classes.FileAccess.UnixPermissionFlags(Ptrcall.call1[String, Long](gdext.classes.FileAccess.mb_get_unix_permissions, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], file))
   }
 
   /** FileAccess.set_unix_permissions */
-  final def setUnixPermissions(file: String, permissions: Long): Long = {
+  final def setUnixPermissions(file: String, permissions: gdext.classes.FileAccess.UnixPermissionFlags): gdext.classes.Error = {
     if (gdext.classes.FileAccess.mb_set_unix_permissions == null) gdext.classes.FileAccess.mb_set_unix_permissions = MethodBind.get("FileAccess", "set_unix_permissions", 846038644L)
-    Ptrcall.call2[String, Long, Long](gdext.classes.FileAccess.mb_set_unix_permissions, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], file, permissions)
+    gdext.classes.Error(Ptrcall.call2[String, Long, Long](gdext.classes.FileAccess.mb_set_unix_permissions, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], file, permissions.asInstanceOf[Long]))
   }
 
   /** FileAccess.get_hidden_attribute */
@@ -378,15 +379,15 @@ object FileAccess {
   }
 
   /** FileAccess.set_hidden_attribute */
-  final def setHiddenAttribute(file: String, hidden: Boolean): Long = {
+  final def setHiddenAttribute(file: String, hidden: Boolean): gdext.classes.Error = {
     if (gdext.classes.FileAccess.mb_set_hidden_attribute == null) gdext.classes.FileAccess.mb_set_hidden_attribute = MethodBind.get("FileAccess", "set_hidden_attribute", 2892558115L)
-    Ptrcall.call2[String, Boolean, Long](gdext.classes.FileAccess.mb_set_hidden_attribute, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], file, hidden)
+    gdext.classes.Error(Ptrcall.call2[String, Boolean, Long](gdext.classes.FileAccess.mb_set_hidden_attribute, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], file, hidden))
   }
 
   /** FileAccess.set_read_only_attribute */
-  final def setReadOnlyAttribute(file: String, ro: Boolean): Long = {
+  final def setReadOnlyAttribute(file: String, ro: Boolean): gdext.classes.Error = {
     if (gdext.classes.FileAccess.mb_set_read_only_attribute == null) gdext.classes.FileAccess.mb_set_read_only_attribute = MethodBind.get("FileAccess", "set_read_only_attribute", 2892558115L)
-    Ptrcall.call2[String, Boolean, Long](gdext.classes.FileAccess.mb_set_read_only_attribute, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], file, ro)
+    gdext.classes.Error(Ptrcall.call2[String, Boolean, Long](gdext.classes.FileAccess.mb_set_read_only_attribute, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], file, ro))
   }
 
   /** FileAccess.get_read_only_attribute */
@@ -396,20 +397,123 @@ object FileAccess {
   }
 
   /** FileAccess.get_extended_attribute_string */
-  final def getExtendedAttributeString(file: String, attribute_name: String): String = {
+  final def getExtendedAttributeString(file: String, attributeName: String): String = {
     if (gdext.classes.FileAccess.mb_get_extended_attribute_string == null) gdext.classes.FileAccess.mb_get_extended_attribute_string = MethodBind.get("FileAccess", "get_extended_attribute_string", 1218461987L)
-    Ptrcall.call2[String, String, String](gdext.classes.FileAccess.mb_get_extended_attribute_string, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], file, attribute_name)
+    Ptrcall.call2[String, String, String](gdext.classes.FileAccess.mb_get_extended_attribute_string, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], file, attributeName)
   }
 
   /** FileAccess.set_extended_attribute_string */
-  final def setExtendedAttributeString(file: String, attribute_name: String, data: String): Long = {
+  final def setExtendedAttributeString(file: String, attributeName: String, data: String): gdext.classes.Error = {
     if (gdext.classes.FileAccess.mb_set_extended_attribute_string == null) gdext.classes.FileAccess.mb_set_extended_attribute_string = MethodBind.get("FileAccess", "set_extended_attribute_string", 699024349L)
-    Ptrcall.call3[String, String, String, Long](gdext.classes.FileAccess.mb_set_extended_attribute_string, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], file, attribute_name, data)
+    gdext.classes.Error(Ptrcall.call3[String, String, String, Long](gdext.classes.FileAccess.mb_set_extended_attribute_string, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], file, attributeName, data))
   }
 
   /** FileAccess.remove_extended_attribute */
-  final def removeExtendedAttribute(file: String, attribute_name: String): Long = {
+  final def removeExtendedAttribute(file: String, attributeName: String): gdext.classes.Error = {
     if (gdext.classes.FileAccess.mb_remove_extended_attribute == null) gdext.classes.FileAccess.mb_remove_extended_attribute = MethodBind.get("FileAccess", "remove_extended_attribute", 852856452L)
-    Ptrcall.call2[String, String, Long](gdext.classes.FileAccess.mb_remove_extended_attribute, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], file, attribute_name)
+    gdext.classes.Error(Ptrcall.call2[String, String, Long](gdext.classes.FileAccess.mb_remove_extended_attribute, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], file, attributeName))
+  }
+
+  /** Godot enum `FileAccess.ModeFlags`. */
+  opaque type ModeFlags <: Long = Long
+
+  object ModeFlags {
+    final val Read: ModeFlags = 1L.asInstanceOf[ModeFlags]
+    final val Write: ModeFlags = 2L.asInstanceOf[ModeFlags]
+    final val ReadWrite: ModeFlags = 3L.asInstanceOf[ModeFlags]
+    final val WriteRead: ModeFlags = 7L.asInstanceOf[ModeFlags]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ModeFlags = value.asInstanceOf[ModeFlags]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ModeFlags] = scala.IArray[Long](1L, 2L, 3L, 7L).asInstanceOf[scala.IArray[ModeFlags]]
+
+    extension (self: ModeFlags)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 1L => "Read"
+        case 2L => "Write"
+        case 3L => "ReadWrite"
+        case 7L => "WriteRead"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `FileAccess.CompressionMode`. */
+  opaque type CompressionMode <: Long = Long
+
+  object CompressionMode {
+    final val Fastlz: CompressionMode = 0L.asInstanceOf[CompressionMode]
+    final val Deflate: CompressionMode = 1L.asInstanceOf[CompressionMode]
+    final val Zstd: CompressionMode = 2L.asInstanceOf[CompressionMode]
+    final val Gzip: CompressionMode = 3L.asInstanceOf[CompressionMode]
+    final val Brotli: CompressionMode = 4L.asInstanceOf[CompressionMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): CompressionMode = value.asInstanceOf[CompressionMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[CompressionMode] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[CompressionMode]]
+
+    extension (self: CompressionMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Fastlz"
+        case 1L => "Deflate"
+        case 2L => "Zstd"
+        case 3L => "Gzip"
+        case 4L => "Brotli"
+        case other => other.toString
+      }
+  }
+
+  /** Godot bitfield `FileAccess.UnixPermissionFlags`. */
+  opaque type UnixPermissionFlags = Long
+
+  object UnixPermissionFlags {
+    final val ReadOwner: UnixPermissionFlags = 256L.asInstanceOf[UnixPermissionFlags]
+    final val WriteOwner: UnixPermissionFlags = 128L.asInstanceOf[UnixPermissionFlags]
+    final val ExecuteOwner: UnixPermissionFlags = 64L.asInstanceOf[UnixPermissionFlags]
+    final val ReadGroup: UnixPermissionFlags = 32L.asInstanceOf[UnixPermissionFlags]
+    final val WriteGroup: UnixPermissionFlags = 16L.asInstanceOf[UnixPermissionFlags]
+    final val ExecuteGroup: UnixPermissionFlags = 8L.asInstanceOf[UnixPermissionFlags]
+    final val ReadOther: UnixPermissionFlags = 4L.asInstanceOf[UnixPermissionFlags]
+    final val WriteOther: UnixPermissionFlags = 2L.asInstanceOf[UnixPermissionFlags]
+    final val ExecuteOther: UnixPermissionFlags = 1L.asInstanceOf[UnixPermissionFlags]
+    final val SetUserId: UnixPermissionFlags = 2048L.asInstanceOf[UnixPermissionFlags]
+    final val SetGroupId: UnixPermissionFlags = 1024L.asInstanceOf[UnixPermissionFlags]
+    final val RestrictedDelete: UnixPermissionFlags = 512L.asInstanceOf[UnixPermissionFlags]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): UnixPermissionFlags = value.asInstanceOf[UnixPermissionFlags]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[UnixPermissionFlags] = scala.IArray[Long](1L, 2L, 4L, 8L, 16L, 32L, 64L, 128L, 256L, 512L, 1024L, 2048L).asInstanceOf[scala.IArray[UnixPermissionFlags]]
+
+    extension (self: UnixPermissionFlags)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 1L => "ExecuteOther"
+        case 2L => "WriteOther"
+        case 4L => "ReadOther"
+        case 8L => "ExecuteGroup"
+        case 16L => "WriteGroup"
+        case 32L => "ReadGroup"
+        case 64L => "ExecuteOwner"
+        case 128L => "WriteOwner"
+        case 256L => "ReadOwner"
+        case 512L => "RestrictedDelete"
+        case 1024L => "SetGroupId"
+        case 2048L => "SetUserId"
+        case other => other.toString
+      }
+    extension (self: UnixPermissionFlags) {
+      inline def value: Long = self.asInstanceOf[Long]
+      inline def |(other: UnixPermissionFlags): UnixPermissionFlags = (self.value | other.value).asInstanceOf[UnixPermissionFlags]
+      inline def &(other: UnixPermissionFlags): UnixPermissionFlags = (self.value & other.value).asInstanceOf[UnixPermissionFlags]
+      /** Every bit of `flag` is set. */
+      inline def has(flag: UnixPermissionFlags): Boolean = (self.value & flag.value) == flag.value
+    }
   }
 }

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,13 +12,13 @@ abstract class ItemList extends Control {
   override def godotClassName: String = "ItemList"
 
   /** ItemList.add_item */
-  final def addItem(text: String, icon: Texture2D, selectable: Boolean): Long = {
+  final def addItem(text: String, icon: Texture2D = null, selectable: Boolean = true): Long = {
     if (gdext.classes.ItemList.mb_add_item == null) gdext.classes.ItemList.mb_add_item = MethodBind.get("ItemList", "add_item", 359861678L)
     Ptrcall.call3[String, GodotObject, Boolean, Long](gdext.classes.ItemList.mb_add_item, livePtr, text, Wrappers.handle(icon), selectable)
   }
 
   /** ItemList.add_icon_item */
-  final def addIconItem(icon: Texture2D, selectable: Boolean): Long = {
+  final def addIconItem(icon: Texture2D, selectable: Boolean = true): Long = {
     if (gdext.classes.ItemList.mb_add_icon_item == null) gdext.classes.ItemList.mb_add_icon_item = MethodBind.get("ItemList", "add_icon_item", 4256579627L)
     Ptrcall.call2[GodotObject, Boolean, Long](gdext.classes.ItemList.mb_add_icon_item, livePtr, Wrappers.handle(icon), selectable)
   }
@@ -47,15 +48,15 @@ abstract class ItemList extends Control {
   }
 
   /** ItemList.set_item_text_direction */
-  final def setItemTextDirection(idx: Long, direction: Long): Unit = {
+  final def setItemTextDirection(idx: Long, direction: gdext.classes.Control.TextDirection): Unit = {
     if (gdext.classes.ItemList.mb_set_item_text_direction == null) gdext.classes.ItemList.mb_set_item_text_direction = MethodBind.get("ItemList", "set_item_text_direction", 1707680378L)
     Ptrcall.callVoid2(gdext.classes.ItemList.mb_set_item_text_direction, livePtr, idx, direction)
   }
 
   /** ItemList.get_item_text_direction */
-  final def getItemTextDirection(idx: Long): Long = {
+  final def getItemTextDirection(idx: Long): gdext.classes.Control.TextDirection = {
     if (gdext.classes.ItemList.mb_get_item_text_direction == null) gdext.classes.ItemList.mb_get_item_text_direction = MethodBind.get("ItemList", "get_item_text_direction", 4235602388L)
-    Ptrcall.call1[Long, Long](gdext.classes.ItemList.mb_get_item_text_direction, livePtr, idx)
+    gdext.classes.Control.TextDirection(Ptrcall.call1[Long, Long](gdext.classes.ItemList.mb_get_item_text_direction, livePtr, idx))
   }
 
   /** ItemList.set_item_language */
@@ -71,15 +72,15 @@ abstract class ItemList extends Control {
   }
 
   /** ItemList.set_item_auto_translate_mode */
-  final def setItemAutoTranslateMode(idx: Long, mode: Long): Unit = {
+  final def setItemAutoTranslateMode(idx: Long, mode: gdext.classes.Node.AutoTranslateMode): Unit = {
     if (gdext.classes.ItemList.mb_set_item_auto_translate_mode == null) gdext.classes.ItemList.mb_set_item_auto_translate_mode = MethodBind.get("ItemList", "set_item_auto_translate_mode", 287402019L)
     Ptrcall.callVoid2(gdext.classes.ItemList.mb_set_item_auto_translate_mode, livePtr, idx, mode)
   }
 
   /** ItemList.get_item_auto_translate_mode */
-  final def getItemAutoTranslateMode(idx: Long): Long = {
+  final def getItemAutoTranslateMode(idx: Long): gdext.classes.Node.AutoTranslateMode = {
     if (gdext.classes.ItemList.mb_get_item_auto_translate_mode == null) gdext.classes.ItemList.mb_get_item_auto_translate_mode = MethodBind.get("ItemList", "get_item_auto_translate_mode", 906302372L)
-    Ptrcall.call1[Long, Long](gdext.classes.ItemList.mb_get_item_auto_translate_mode, livePtr, idx)
+    gdext.classes.Node.AutoTranslateMode(Ptrcall.call1[Long, Long](gdext.classes.ItemList.mb_get_item_auto_translate_mode, livePtr, idx))
   }
 
   /** ItemList.set_item_icon_transposed */
@@ -143,9 +144,9 @@ abstract class ItemList extends Control {
   }
 
   /** ItemList.set_item_custom_bg_color */
-  final def setItemCustomBgColor(idx: Long, custom_bg_color: gdext.builtin.Color): Unit = {
+  final def setItemCustomBgColor(idx: Long, customBgColor: gdext.builtin.Color): Unit = {
     if (gdext.classes.ItemList.mb_set_item_custom_bg_color == null) gdext.classes.ItemList.mb_set_item_custom_bg_color = MethodBind.get("ItemList", "set_item_custom_bg_color", 2878471219L)
-    Ptrcall.callVoid2(gdext.classes.ItemList.mb_set_item_custom_bg_color, livePtr, idx, custom_bg_color)
+    Ptrcall.callVoid2(gdext.classes.ItemList.mb_set_item_custom_bg_color, livePtr, idx, customBgColor)
   }
 
   /** ItemList.get_item_custom_bg_color */
@@ -155,9 +156,9 @@ abstract class ItemList extends Control {
   }
 
   /** ItemList.set_item_custom_fg_color */
-  final def setItemCustomFgColor(idx: Long, custom_fg_color: gdext.builtin.Color): Unit = {
+  final def setItemCustomFgColor(idx: Long, customFgColor: gdext.builtin.Color): Unit = {
     if (gdext.classes.ItemList.mb_set_item_custom_fg_color == null) gdext.classes.ItemList.mb_set_item_custom_fg_color = MethodBind.get("ItemList", "set_item_custom_fg_color", 2878471219L)
-    Ptrcall.callVoid2(gdext.classes.ItemList.mb_set_item_custom_fg_color, livePtr, idx, custom_fg_color)
+    Ptrcall.callVoid2(gdext.classes.ItemList.mb_set_item_custom_fg_color, livePtr, idx, customFgColor)
   }
 
   /** ItemList.get_item_custom_fg_color */
@@ -167,7 +168,7 @@ abstract class ItemList extends Control {
   }
 
   /** ItemList.get_item_rect */
-  final def getItemRect(idx: Long, expand: Boolean): gdext.builtin.Rect2 = {
+  final def getItemRect(idx: Long, expand: Boolean = true): gdext.builtin.Rect2 = {
     if (gdext.classes.ItemList.mb_get_item_rect == null) gdext.classes.ItemList.mb_get_item_rect = MethodBind.get("ItemList", "get_item_rect", 159227807L)
     Ptrcall.call2[Long, Boolean, gdext.builtin.Rect2](gdext.classes.ItemList.mb_get_item_rect, livePtr, idx, expand)
   }
@@ -197,7 +198,7 @@ abstract class ItemList extends Control {
   }
 
   /** ItemList.select */
-  final def select(idx: Long, single: Boolean): Unit = {
+  final def select(idx: Long, single: Boolean = true): Unit = {
     if (gdext.classes.ItemList.mb_select == null) gdext.classes.ItemList.mb_select = MethodBind.get("ItemList", "select", 972357352L)
     Ptrcall.callVoid2(gdext.classes.ItemList.mb_select, livePtr, idx, single)
   }
@@ -221,9 +222,9 @@ abstract class ItemList extends Control {
   }
 
   /** ItemList.move_item */
-  final def moveItem(from_idx: Long, to_idx: Long): Unit = {
+  final def moveItem(fromIdx: Long, toIdx: Long): Unit = {
     if (gdext.classes.ItemList.mb_move_item == null) gdext.classes.ItemList.mb_move_item = MethodBind.get("ItemList", "move_item", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.ItemList.mb_move_item, livePtr, from_idx, to_idx)
+    Ptrcall.callVoid2(gdext.classes.ItemList.mb_move_item, livePtr, fromIdx, toIdx)
   }
 
   /** ItemList.set_item_count */
@@ -305,27 +306,27 @@ abstract class ItemList extends Control {
   }
 
   /** ItemList.set_select_mode */
-  final def setSelectMode(mode: Long): Unit = {
+  final def setSelectMode(mode: gdext.classes.ItemList.SelectMode): Unit = {
     if (gdext.classes.ItemList.mb_set_select_mode == null) gdext.classes.ItemList.mb_set_select_mode = MethodBind.get("ItemList", "set_select_mode", 928267388L)
     Ptrcall.callVoid1(gdext.classes.ItemList.mb_set_select_mode, livePtr, mode)
   }
 
   /** ItemList.get_select_mode */
-  final def getSelectMode(): Long = {
+  final def getSelectMode(): gdext.classes.ItemList.SelectMode = {
     if (gdext.classes.ItemList.mb_get_select_mode == null) gdext.classes.ItemList.mb_get_select_mode = MethodBind.get("ItemList", "get_select_mode", 1191945842L)
-    Ptrcall.call0[Long](gdext.classes.ItemList.mb_get_select_mode, livePtr)
+    gdext.classes.ItemList.SelectMode(Ptrcall.call0[Long](gdext.classes.ItemList.mb_get_select_mode, livePtr))
   }
 
   /** ItemList.set_icon_mode */
-  final def setIconMode(mode: Long): Unit = {
+  final def setIconMode(mode: gdext.classes.ItemList.IconMode): Unit = {
     if (gdext.classes.ItemList.mb_set_icon_mode == null) gdext.classes.ItemList.mb_set_icon_mode = MethodBind.get("ItemList", "set_icon_mode", 2025053633L)
     Ptrcall.callVoid1(gdext.classes.ItemList.mb_set_icon_mode, livePtr, mode)
   }
 
   /** ItemList.get_icon_mode */
-  final def getIconMode(): Long = {
+  final def getIconMode(): gdext.classes.ItemList.IconMode = {
     if (gdext.classes.ItemList.mb_get_icon_mode == null) gdext.classes.ItemList.mb_get_icon_mode = MethodBind.get("ItemList", "get_icon_mode", 3353929232L)
-    Ptrcall.call0[Long](gdext.classes.ItemList.mb_get_icon_mode, livePtr)
+    gdext.classes.ItemList.IconMode(Ptrcall.call0[Long](gdext.classes.ItemList.mb_get_icon_mode, livePtr))
   }
 
   /** ItemList.set_fixed_icon_size */
@@ -419,7 +420,7 @@ abstract class ItemList extends Control {
   }
 
   /** ItemList.get_item_at_position */
-  final def getItemAtPosition(position: gdext.builtin.Vector2, exact: Boolean): Long = {
+  final def getItemAtPosition(position: gdext.builtin.Vector2, exact: Boolean = false): Long = {
     if (gdext.classes.ItemList.mb_get_item_at_position == null) gdext.classes.ItemList.mb_get_item_at_position = MethodBind.get("ItemList", "get_item_at_position", 2300324924L)
     Ptrcall.call2[gdext.builtin.Vector2, Boolean, Long](gdext.classes.ItemList.mb_get_item_at_position, livePtr, position, exact)
   }
@@ -443,21 +444,21 @@ abstract class ItemList extends Control {
   }
 
   /** ItemList.set_scroll_hint_mode */
-  final def setScrollHintMode(scroll_hint_mode: Long): Unit = {
+  final def setScrollHintMode(scrollHintMode: gdext.classes.ItemList.ScrollHintMode): Unit = {
     if (gdext.classes.ItemList.mb_set_scroll_hint_mode == null) gdext.classes.ItemList.mb_set_scroll_hint_mode = MethodBind.get("ItemList", "set_scroll_hint_mode", 2917787337L)
-    Ptrcall.callVoid1(gdext.classes.ItemList.mb_set_scroll_hint_mode, livePtr, scroll_hint_mode)
+    Ptrcall.callVoid1(gdext.classes.ItemList.mb_set_scroll_hint_mode, livePtr, scrollHintMode)
   }
 
   /** ItemList.get_scroll_hint_mode */
-  final def getScrollHintMode(): Long = {
+  final def getScrollHintMode(): gdext.classes.ItemList.ScrollHintMode = {
     if (gdext.classes.ItemList.mb_get_scroll_hint_mode == null) gdext.classes.ItemList.mb_get_scroll_hint_mode = MethodBind.get("ItemList", "get_scroll_hint_mode", 2522227939L)
-    Ptrcall.call0[Long](gdext.classes.ItemList.mb_get_scroll_hint_mode, livePtr)
+    gdext.classes.ItemList.ScrollHintMode(Ptrcall.call0[Long](gdext.classes.ItemList.mb_get_scroll_hint_mode, livePtr))
   }
 
   /** ItemList.set_tile_scroll_hint */
-  final def setTileScrollHint(tile_scroll_hint: Boolean): Unit = {
+  final def setTileScrollHint(tileScrollHint: Boolean): Unit = {
     if (gdext.classes.ItemList.mb_set_tile_scroll_hint == null) gdext.classes.ItemList.mb_set_tile_scroll_hint = MethodBind.get("ItemList", "set_tile_scroll_hint", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.ItemList.mb_set_tile_scroll_hint, livePtr, tile_scroll_hint)
+    Ptrcall.callVoid1(gdext.classes.ItemList.mb_set_tile_scroll_hint, livePtr, tileScrollHint)
   }
 
   /** ItemList.is_scroll_hint_tiled */
@@ -467,15 +468,15 @@ abstract class ItemList extends Control {
   }
 
   /** ItemList.set_text_overrun_behavior */
-  final def setTextOverrunBehavior(overrun_behavior: Long): Unit = {
+  final def setTextOverrunBehavior(overrunBehavior: gdext.classes.TextServer.OverrunBehavior): Unit = {
     if (gdext.classes.ItemList.mb_set_text_overrun_behavior == null) gdext.classes.ItemList.mb_set_text_overrun_behavior = MethodBind.get("ItemList", "set_text_overrun_behavior", 1008890932L)
-    Ptrcall.callVoid1(gdext.classes.ItemList.mb_set_text_overrun_behavior, livePtr, overrun_behavior)
+    Ptrcall.callVoid1(gdext.classes.ItemList.mb_set_text_overrun_behavior, livePtr, overrunBehavior)
   }
 
   /** ItemList.get_text_overrun_behavior */
-  final def getTextOverrunBehavior(): Long = {
+  final def getTextOverrunBehavior(): gdext.classes.TextServer.OverrunBehavior = {
     if (gdext.classes.ItemList.mb_get_text_overrun_behavior == null) gdext.classes.ItemList.mb_get_text_overrun_behavior = MethodBind.get("ItemList", "get_text_overrun_behavior", 3779142101L)
-    Ptrcall.call0[Long](gdext.classes.ItemList.mb_get_text_overrun_behavior, livePtr)
+    gdext.classes.TextServer.OverrunBehavior(Ptrcall.call0[Long](gdext.classes.ItemList.mb_get_text_overrun_behavior, livePtr))
   }
 
   /** ItemList.set_wraparound_items */
@@ -580,4 +581,76 @@ object ItemList {
   private[classes] var mb_set_wraparound_items: GDExtensionMethodBindPtr = null
   private[classes] var mb_has_wraparound_items: GDExtensionMethodBindPtr = null
   private[classes] var mb_force_update_list_size: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `ItemList.IconMode`. */
+  opaque type IconMode <: Long = Long
+
+  object IconMode {
+    final val Top: IconMode = 0L.asInstanceOf[IconMode]
+    final val Left: IconMode = 1L.asInstanceOf[IconMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): IconMode = value.asInstanceOf[IconMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[IconMode] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[IconMode]]
+
+    extension (self: IconMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Top"
+        case 1L => "Left"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `ItemList.SelectMode`. */
+  opaque type SelectMode <: Long = Long
+
+  object SelectMode {
+    final val Single: SelectMode = 0L.asInstanceOf[SelectMode]
+    final val Multi: SelectMode = 1L.asInstanceOf[SelectMode]
+    final val Toggle: SelectMode = 2L.asInstanceOf[SelectMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): SelectMode = value.asInstanceOf[SelectMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[SelectMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[SelectMode]]
+
+    extension (self: SelectMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Single"
+        case 1L => "Multi"
+        case 2L => "Toggle"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `ItemList.ScrollHintMode`. */
+  opaque type ScrollHintMode <: Long = Long
+
+  object ScrollHintMode {
+    final val Disabled: ScrollHintMode = 0L.asInstanceOf[ScrollHintMode]
+    final val Both: ScrollHintMode = 1L.asInstanceOf[ScrollHintMode]
+    final val Top: ScrollHintMode = 2L.asInstanceOf[ScrollHintMode]
+    final val Bottom: ScrollHintMode = 3L.asInstanceOf[ScrollHintMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ScrollHintMode = value.asInstanceOf[ScrollHintMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ScrollHintMode] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[ScrollHintMode]]
+
+    extension (self: ScrollHintMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "Both"
+        case 2L => "Top"
+        case 3L => "Bottom"
+        case other => other.toString
+      }
+  }
 }

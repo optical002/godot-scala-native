@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,13 +12,13 @@ abstract class EditorUndoRedoManager extends Object {
   override def godotClassName: String = "EditorUndoRedoManager"
 
   /** EditorUndoRedoManager.create_action */
-  final def createAction(name: String, merge_mode: Long, custom_context: Object, backward_undo_ops: Boolean, mark_unsaved: Boolean): Unit = {
+  final def createAction(name: String, mergeMode: gdext.classes.UndoRedo.MergeMode = gdext.classes.UndoRedo.MergeMode(0L), customContext: Object = null, backwardUndoOps: Boolean = false, markUnsaved: Boolean = true): Unit = {
     if (gdext.classes.EditorUndoRedoManager.mb_create_action == null) gdext.classes.EditorUndoRedoManager.mb_create_action = MethodBind.get("EditorUndoRedoManager", "create_action", 796197507L)
-    Ptrcall.callVoid5(gdext.classes.EditorUndoRedoManager.mb_create_action, livePtr, name, merge_mode, Wrappers.handle(custom_context), backward_undo_ops, mark_unsaved)
+    Ptrcall.callVoid5(gdext.classes.EditorUndoRedoManager.mb_create_action, livePtr, name, mergeMode, Wrappers.handle(customContext), backwardUndoOps, markUnsaved)
   }
 
   /** EditorUndoRedoManager.commit_action */
-  final def commitAction(execute: Boolean): Unit = {
+  final def commitAction(execute: Boolean = true): Unit = {
     if (gdext.classes.EditorUndoRedoManager.mb_commit_action == null) gdext.classes.EditorUndoRedoManager.mb_commit_action = MethodBind.get("EditorUndoRedoManager", "commit_action", 3216645846L)
     Ptrcall.callVoid1(gdext.classes.EditorUndoRedoManager.mb_commit_action, livePtr, execute)
   }
@@ -59,9 +60,9 @@ abstract class EditorUndoRedoManager extends Object {
   }
 
   /** EditorUndoRedoManager.clear_history */
-  final def clearHistory(id: Long, increase_version: Boolean): Unit = {
+  final def clearHistory(id: Long = -99L, increaseVersion: Boolean = true): Unit = {
     if (gdext.classes.EditorUndoRedoManager.mb_clear_history == null) gdext.classes.EditorUndoRedoManager.mb_clear_history = MethodBind.get("EditorUndoRedoManager", "clear_history", 2020603371L)
-    Ptrcall.callVoid2(gdext.classes.EditorUndoRedoManager.mb_clear_history, livePtr, id, increase_version)
+    Ptrcall.callVoid2(gdext.classes.EditorUndoRedoManager.mb_clear_history, livePtr, id, increaseVersion)
   }
 
 }
@@ -76,4 +77,28 @@ object EditorUndoRedoManager {
   private[classes] var mb_get_object_history_id: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_history_undo_redo: GDExtensionMethodBindPtr = null
   private[classes] var mb_clear_history: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `EditorUndoRedoManager.SpecialHistory`. */
+  opaque type SpecialHistory <: Long = Long
+
+  object SpecialHistory {
+    final val GlobalHistory: SpecialHistory = 0L.asInstanceOf[SpecialHistory]
+    final val RemoteHistory: SpecialHistory = -9L.asInstanceOf[SpecialHistory]
+    final val InvalidHistory: SpecialHistory = -99L.asInstanceOf[SpecialHistory]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): SpecialHistory = value.asInstanceOf[SpecialHistory]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[SpecialHistory] = scala.IArray[Long](-99L, -9L, 0L).asInstanceOf[scala.IArray[SpecialHistory]]
+
+    extension (self: SpecialHistory)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case -99L => "InvalidHistory"
+        case -9L => "RemoteHistory"
+        case 0L => "GlobalHistory"
+        case other => other.toString
+      }
+  }
 }

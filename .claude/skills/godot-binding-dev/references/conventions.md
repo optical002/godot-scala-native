@@ -48,13 +48,19 @@ inside a probe loop: a throwaway `--script` that sets `MemoryProbe.step`,
   `gdext.internal`.
 - `ConcurrentHashMap.computeIfAbsent(key, _ => ...)` allocates a capturing
   closure even on a hit: `get` first.
+- `java.util.Arrays.binarySearch(long[], ...)` allocates (96 B/call measured):
+  hand-roll the loop (`HiddenActions.Table.find`).
+- A cached StringName can cross ptrcall as its 8-byte **handle word** passed as
+  a `Long` arg (`Ptrcall.callN[Long, ...]`): a `const StringName &` param only
+  reads those bytes, the cache keeps the reference alive, no `Ptr` boxes.
+  `internal/input` (`InputQuery.handleOf`) does this for action names.
 - Generic `Function1/4` and typeclass methods over `A` box primitives and Ptrs;
   registration getters/setters are specialized with `inline` + `erasedValue`.
 
 ## StringName
 Two StringName *storage pointers* for the same text are NOT pointer-equal, but
 the 8-byte handle word they contain (`_data`) IS unique per text while alive —
-`StringNames.adopt` keys on it. Compare by decoding (`StringName.toScala`) when
+`StringNames.adopt` keys on it. Compare by decoding (`gdext.internal.StringName.toScala`) when
 you only have an engine pointer, e.g. in `get_virtual` dispatch.
 
 ## Ref<T> ptrcall returns (verified, Godot 4.6.1)
@@ -178,7 +184,7 @@ Consumers import only `gdext.api.*`, `gdext.classes`, `gdext.builtin`,
 `harness-scala` consumes the binding + plugin as **published** artifacts (no
 source `ProjectRef`), so any change in `language-binding-scala` needs
 `sbt publishLocal` before `sbt godotBuild` — see the skill body, which the
-`check-publish-local` hook enforces. Both publish under `0.1.10`.
+`check-publish-local` hook enforces. Both publish under `0.1.12`.
 Changing the plugin's task/setting keys or the embedded `gdext` version requires
 a republish to take effect downstream.
 

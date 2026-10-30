@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,9 +36,9 @@ abstract class PrimitiveMesh extends Mesh {
   }
 
   /** PrimitiveMesh.set_flip_faces */
-  final def setFlipFaces(flip_faces: Boolean): Unit = {
+  final def setFlipFaces(flipFaces: Boolean): Unit = {
     if (gdext.classes.PrimitiveMesh.mb_set_flip_faces == null) gdext.classes.PrimitiveMesh.mb_set_flip_faces = MethodBind.get("PrimitiveMesh", "set_flip_faces", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.PrimitiveMesh.mb_set_flip_faces, livePtr, flip_faces)
+    Ptrcall.callVoid1(gdext.classes.PrimitiveMesh.mb_set_flip_faces, livePtr, flipFaces)
   }
 
   /** PrimitiveMesh.get_flip_faces */
@@ -47,9 +48,9 @@ abstract class PrimitiveMesh extends Mesh {
   }
 
   /** PrimitiveMesh.set_add_uv2 */
-  final def setAddUv2(add_uv2: Boolean): Unit = {
+  final def setAddUv2(addUv2: Boolean): Unit = {
     if (gdext.classes.PrimitiveMesh.mb_set_add_uv2 == null) gdext.classes.PrimitiveMesh.mb_set_add_uv2 = MethodBind.get("PrimitiveMesh", "set_add_uv2", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.PrimitiveMesh.mb_set_add_uv2, livePtr, add_uv2)
+    Ptrcall.callVoid1(gdext.classes.PrimitiveMesh.mb_set_add_uv2, livePtr, addUv2)
   }
 
   /** PrimitiveMesh.get_add_uv2 */
@@ -59,9 +60,9 @@ abstract class PrimitiveMesh extends Mesh {
   }
 
   /** PrimitiveMesh.set_uv2_padding */
-  final def setUv2Padding(uv2_padding: Double): Unit = {
+  final def setUv2Padding(uv2Padding: Double): Unit = {
     if (gdext.classes.PrimitiveMesh.mb_set_uv2_padding == null) gdext.classes.PrimitiveMesh.mb_set_uv2_padding = MethodBind.get("PrimitiveMesh", "set_uv2_padding", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.PrimitiveMesh.mb_set_uv2_padding, livePtr, uv2_padding)
+    Ptrcall.callVoid1(gdext.classes.PrimitiveMesh.mb_set_uv2_padding, livePtr, uv2Padding)
   }
 
   /** PrimitiveMesh.get_uv2_padding */

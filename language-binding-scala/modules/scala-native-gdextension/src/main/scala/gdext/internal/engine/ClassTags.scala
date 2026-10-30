@@ -2,7 +2,7 @@ package gdext.internal.engine
 
 import scala.scalanative.unsafe.*
 import gdext.Godot
-import gdext.builtin.StringNames
+import gdext.internal.StringNames
 import gdext.internal.ffi.types.*
 
 /**

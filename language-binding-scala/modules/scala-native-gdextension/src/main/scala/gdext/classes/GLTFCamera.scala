@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -47,9 +48,9 @@ abstract class GLTFCamera extends Resource {
   }
 
   /** GLTFCamera.set_size_mag */
-  final def setSizeMag(size_mag: Double): Unit = {
+  final def setSizeMag(sizeMag: Double): Unit = {
     if (gdext.classes.GLTFCamera.mb_set_size_mag == null) gdext.classes.GLTFCamera.mb_set_size_mag = MethodBind.get("GLTFCamera", "set_size_mag", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.GLTFCamera.mb_set_size_mag, livePtr, size_mag)
+    Ptrcall.callVoid1(gdext.classes.GLTFCamera.mb_set_size_mag, livePtr, sizeMag)
   }
 
   /** GLTFCamera.get_depth_far */
@@ -59,9 +60,9 @@ abstract class GLTFCamera extends Resource {
   }
 
   /** GLTFCamera.set_depth_far */
-  final def setDepthFar(zdepth_far: Double): Unit = {
+  final def setDepthFar(zdepthFar: Double): Unit = {
     if (gdext.classes.GLTFCamera.mb_set_depth_far == null) gdext.classes.GLTFCamera.mb_set_depth_far = MethodBind.get("GLTFCamera", "set_depth_far", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.GLTFCamera.mb_set_depth_far, livePtr, zdepth_far)
+    Ptrcall.callVoid1(gdext.classes.GLTFCamera.mb_set_depth_far, livePtr, zdepthFar)
   }
 
   /** GLTFCamera.get_depth_near */
@@ -71,9 +72,9 @@ abstract class GLTFCamera extends Resource {
   }
 
   /** GLTFCamera.set_depth_near */
-  final def setDepthNear(zdepth_near: Double): Unit = {
+  final def setDepthNear(zdepthNear: Double): Unit = {
     if (gdext.classes.GLTFCamera.mb_set_depth_near == null) gdext.classes.GLTFCamera.mb_set_depth_near = MethodBind.get("GLTFCamera", "set_depth_near", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.GLTFCamera.mb_set_depth_near, livePtr, zdepth_near)
+    Ptrcall.callVoid1(gdext.classes.GLTFCamera.mb_set_depth_near, livePtr, zdepthNear)
   }
 
 }
@@ -93,8 +94,8 @@ object GLTFCamera {
   private[classes] var mb_set_depth_near: GDExtensionMethodBindPtr = null
 
   /** GLTFCamera.from_node. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def fromNode(camera_node: Camera3D): GLTFCamera = {
+  final def fromNode(cameraNode: Camera3D): GLTFCamera = {
     if (gdext.classes.GLTFCamera.mb_from_node == null) gdext.classes.GLTFCamera.mb_from_node = MethodBind.get("GLTFCamera", "from_node", 237784L)
-    Wrappers.owned[GLTFCamera](Ptrcall.call1[GodotObject, Long](gdext.classes.GLTFCamera.mb_from_node, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], Wrappers.handle(camera_node)))
+    Wrappers.owned[GLTFCamera](Ptrcall.call1[GodotObject, Long](gdext.classes.GLTFCamera.mb_from_node, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], Wrappers.handle(cameraNode)))
   }
 }

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -41,9 +42,9 @@ abstract class Bone2D extends Node2D {
   }
 
   /** Bone2D.set_autocalculate_length_and_angle */
-  final def setAutocalculateLengthAndAngle(auto_calculate: Boolean): Unit = {
+  final def setAutocalculateLengthAndAngle(autoCalculate: Boolean): Unit = {
     if (gdext.classes.Bone2D.mb_set_autocalculate_length_and_angle == null) gdext.classes.Bone2D.mb_set_autocalculate_length_and_angle = MethodBind.get("Bone2D", "set_autocalculate_length_and_angle", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.Bone2D.mb_set_autocalculate_length_and_angle, livePtr, auto_calculate)
+    Ptrcall.callVoid1(gdext.classes.Bone2D.mb_set_autocalculate_length_and_angle, livePtr, autoCalculate)
   }
 
   /** Bone2D.get_autocalculate_length_and_angle */

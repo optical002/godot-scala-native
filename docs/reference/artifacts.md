@@ -32,6 +32,54 @@ sbt clean godotBuild
 A clean build makes sure no stale Scala Native intermediate files from the old
 binding are linked.
 
+### From 0.1.11 to 0.1.12
+
+0.1.12 renames the engine virtuals and types the engine API more strictly. The
+compiler points at every place that needs a change:
+
+1. **Virtual overrides drop the underscore and use camelCase.** Rename
+   `_ready`, `_process`, `_physics_process`, `_enter_tree`, `_exit_tree`,
+   `_input`, `_unhandled_input`, `_shortcut_input` and `_unhandled_key_input`
+   to `ready`, `process`, `physicsProcess`, `enterTree`, `exitTree`, `input`,
+   `unhandledInput`, `shortcutInput` and `unhandledKeyInput`. Rename
+   `super._ready()` calls the same way.
+
+    ```scala
+    // 0.1.11
+    override def _process(delta: Double): Unit = ...
+    // 0.1.12
+    override def process(delta: Double): Unit = ...
+    ```
+
+2. **Enum arguments take typed constants, not numbers.** Each error names the
+   expected type, and its constants are in that type's companion. Optional
+   arguments can now be left out.
+
+    ```scala
+    // 0.1.11
+    node.setProcessMode(4L)
+    ResourceLoader.singleton.load(path, "", 1L)
+    addChild(child, false, 0L)
+    // 0.1.12
+    node.setProcessMode(Node.ProcessMode.Disabled)
+    ResourceLoader.load(path)
+    addChild(child)
+    ```
+
+    A method that returns a bitfield (`Mesh.surfaceGetFormat`) returns the
+    bitfield type. Use `.has(flag)`, or `.value` for the raw bits.
+3. **`StringName` is gone from the public API.** Pass and receive `String`.
+   Drop `StringNames.cached(...)` and `StringName.toScala(...)` calls.
+4. **Named arguments to engine methods are camelCase**
+   (`exactMatch = true`, not `exact_match = true`).
+5. **`game.Actions` is generated** from your Input Map (see
+   [Input](../guides/input.md#actions)). If you already have a `game.Actions`,
+   rename the generated one with `godotActionsObject := "InputActions"`, or turn
+   it off with `godotInputActions := false`.
+
+`godotBuild` also updates the `addons/godot_scala` editor addon to version
+0.1.1. Local edits to that addon are overwritten.
+
 ### From 0.1.9 to 0.1.10
 
 No code changes are needed. Two new defaults can affect a project:

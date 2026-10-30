@@ -160,9 +160,9 @@ import gdext.api.Gd
 import gdext.classes.{ResourceLoader, PackedScene}
 
 Gd.scoped {
-  val scene = ResourceLoader.singleton.load("res://enemy.tscn", "", 1L).cast[PackedScene]
+  val scene = ResourceLoader.load("res://enemy.tscn").cast[PackedScene]
   val enemy = scene.instantiate(0L)
-  addChild(enemy, false, 0L)     // the tree owns the node
+  addChild(enemy)                // the tree owns the node
 }                                // our reference to the PackedScene is released
 ```
 

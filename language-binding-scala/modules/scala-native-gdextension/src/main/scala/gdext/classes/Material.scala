@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class Material extends Resource {
   override def godotClassName: String = "Material"
 
   /** Material.set_next_pass */
-  final def setNextPass(next_pass: Material): Unit = {
+  final def setNextPass(nextPass: Material): Unit = {
     if (gdext.classes.Material.mb_set_next_pass == null) gdext.classes.Material.mb_set_next_pass = MethodBind.get("Material", "set_next_pass", 2757459619L)
-    Ptrcall.callVoid1(gdext.classes.Material.mb_set_next_pass, livePtr, Wrappers.handle(next_pass))
+    Ptrcall.callVoid1(gdext.classes.Material.mb_set_next_pass, livePtr, Wrappers.handle(nextPass))
   }
 
   /** Material.get_next_pass. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */

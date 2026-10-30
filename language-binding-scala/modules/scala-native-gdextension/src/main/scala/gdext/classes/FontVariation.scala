@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,9 +36,9 @@ abstract class FontVariation extends Font {
   }
 
   /** FontVariation.set_variation_face_index */
-  final def setVariationFaceIndex(face_index: Long): Unit = {
+  final def setVariationFaceIndex(faceIndex: Long): Unit = {
     if (gdext.classes.FontVariation.mb_set_variation_face_index == null) gdext.classes.FontVariation.mb_set_variation_face_index = MethodBind.get("FontVariation", "set_variation_face_index", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.FontVariation.mb_set_variation_face_index, livePtr, face_index)
+    Ptrcall.callVoid1(gdext.classes.FontVariation.mb_set_variation_face_index, livePtr, faceIndex)
   }
 
   /** FontVariation.get_variation_face_index */
@@ -59,15 +60,15 @@ abstract class FontVariation extends Font {
   }
 
   /** FontVariation.set_spacing */
-  final def setSpacing(spacing: Long, value: Long): Unit = {
+  final def setSpacing(spacing: gdext.classes.TextServer.SpacingType, value: Long): Unit = {
     if (gdext.classes.FontVariation.mb_set_spacing == null) gdext.classes.FontVariation.mb_set_spacing = MethodBind.get("FontVariation", "set_spacing", 3122339690L)
     Ptrcall.callVoid2(gdext.classes.FontVariation.mb_set_spacing, livePtr, spacing, value)
   }
 
   /** FontVariation.set_baseline_offset */
-  final def setBaselineOffset(baseline_offset: Double): Unit = {
+  final def setBaselineOffset(baselineOffset: Double): Unit = {
     if (gdext.classes.FontVariation.mb_set_baseline_offset == null) gdext.classes.FontVariation.mb_set_baseline_offset = MethodBind.get("FontVariation", "set_baseline_offset", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.FontVariation.mb_set_baseline_offset, livePtr, baseline_offset)
+    Ptrcall.callVoid1(gdext.classes.FontVariation.mb_set_baseline_offset, livePtr, baselineOffset)
   }
 
   /** FontVariation.get_baseline_offset */

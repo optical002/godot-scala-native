@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class Curve extends Resource {
   }
 
   /** Curve.add_point */
-  final def addPoint(position: gdext.builtin.Vector2, left_tangent: Double, right_tangent: Double, left_mode: Long, right_mode: Long): Long = {
+  final def addPoint(position: gdext.builtin.Vector2, leftTangent: Double = 0.0, rightTangent: Double = 0.0, leftMode: gdext.classes.Curve.TangentMode = gdext.classes.Curve.TangentMode(0L), rightMode: gdext.classes.Curve.TangentMode = gdext.classes.Curve.TangentMode(0L)): Long = {
     if (gdext.classes.Curve.mb_add_point == null) gdext.classes.Curve.mb_add_point = MethodBind.get("Curve", "add_point", 434072736L)
-    Ptrcall.call5[gdext.builtin.Vector2, Double, Double, Long, Long, Long](gdext.classes.Curve.mb_add_point, livePtr, position, left_tangent, right_tangent, left_mode, right_mode)
+    Ptrcall.call5[gdext.builtin.Vector2, Double, Double, Long, Long, Long](gdext.classes.Curve.mb_add_point, livePtr, position, leftTangent, rightTangent, leftMode, rightMode)
   }
 
   /** Curve.remove_point */
@@ -83,15 +84,15 @@ abstract class Curve extends Resource {
   }
 
   /** Curve.get_point_left_mode */
-  final def getPointLeftMode(index: Long): Long = {
+  final def getPointLeftMode(index: Long): gdext.classes.Curve.TangentMode = {
     if (gdext.classes.Curve.mb_get_point_left_mode == null) gdext.classes.Curve.mb_get_point_left_mode = MethodBind.get("Curve", "get_point_left_mode", 426950354L)
-    Ptrcall.call1[Long, Long](gdext.classes.Curve.mb_get_point_left_mode, livePtr, index)
+    gdext.classes.Curve.TangentMode(Ptrcall.call1[Long, Long](gdext.classes.Curve.mb_get_point_left_mode, livePtr, index))
   }
 
   /** Curve.get_point_right_mode */
-  final def getPointRightMode(index: Long): Long = {
+  final def getPointRightMode(index: Long): gdext.classes.Curve.TangentMode = {
     if (gdext.classes.Curve.mb_get_point_right_mode == null) gdext.classes.Curve.mb_get_point_right_mode = MethodBind.get("Curve", "get_point_right_mode", 426950354L)
-    Ptrcall.call1[Long, Long](gdext.classes.Curve.mb_get_point_right_mode, livePtr, index)
+    gdext.classes.Curve.TangentMode(Ptrcall.call1[Long, Long](gdext.classes.Curve.mb_get_point_right_mode, livePtr, index))
   }
 
   /** Curve.set_point_left_tangent */
@@ -107,13 +108,13 @@ abstract class Curve extends Resource {
   }
 
   /** Curve.set_point_left_mode */
-  final def setPointLeftMode(index: Long, mode: Long): Unit = {
+  final def setPointLeftMode(index: Long, mode: gdext.classes.Curve.TangentMode): Unit = {
     if (gdext.classes.Curve.mb_set_point_left_mode == null) gdext.classes.Curve.mb_set_point_left_mode = MethodBind.get("Curve", "set_point_left_mode", 1217242874L)
     Ptrcall.callVoid2(gdext.classes.Curve.mb_set_point_left_mode, livePtr, index, mode)
   }
 
   /** Curve.set_point_right_mode */
-  final def setPointRightMode(index: Long, mode: Long): Unit = {
+  final def setPointRightMode(index: Long, mode: gdext.classes.Curve.TangentMode): Unit = {
     if (gdext.classes.Curve.mb_set_point_right_mode == null) gdext.classes.Curve.mb_set_point_right_mode = MethodBind.get("Curve", "set_point_right_mode", 1217242874L)
     Ptrcall.callVoid2(gdext.classes.Curve.mb_set_point_right_mode, livePtr, index, mode)
   }
@@ -237,4 +238,28 @@ object Curve {
   private[classes] var mb_bake: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_bake_resolution: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_bake_resolution: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `Curve.TangentMode`. */
+  opaque type TangentMode <: Long = Long
+
+  object TangentMode {
+    final val Free: TangentMode = 0L.asInstanceOf[TangentMode]
+    final val Linear: TangentMode = 1L.asInstanceOf[TangentMode]
+    final val ModeCount: TangentMode = 2L.asInstanceOf[TangentMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): TangentMode = value.asInstanceOf[TangentMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[TangentMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[TangentMode]]
+
+    extension (self: TangentMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Free"
+        case 1L => "Linear"
+        case 2L => "ModeCount"
+        case other => other.toString
+      }
+  }
 }

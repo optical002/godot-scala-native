@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -59,9 +60,9 @@ abstract class SkeletonModification2DJiggle extends SkeletonModification2D {
   }
 
   /** SkeletonModification2DJiggle.set_use_gravity */
-  final def setUseGravity(use_gravity: Boolean): Unit = {
+  final def setUseGravity(useGravity: Boolean): Unit = {
     if (gdext.classes.SkeletonModification2DJiggle.mb_set_use_gravity == null) gdext.classes.SkeletonModification2DJiggle.mb_set_use_gravity = MethodBind.get("SkeletonModification2DJiggle", "set_use_gravity", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.SkeletonModification2DJiggle.mb_set_use_gravity, livePtr, use_gravity)
+    Ptrcall.callVoid1(gdext.classes.SkeletonModification2DJiggle.mb_set_use_gravity, livePtr, useGravity)
   }
 
   /** SkeletonModification2DJiggle.get_use_gravity */
@@ -83,9 +84,9 @@ abstract class SkeletonModification2DJiggle extends SkeletonModification2D {
   }
 
   /** SkeletonModification2DJiggle.set_use_colliders */
-  final def setUseColliders(use_colliders: Boolean): Unit = {
+  final def setUseColliders(useColliders: Boolean): Unit = {
     if (gdext.classes.SkeletonModification2DJiggle.mb_set_use_colliders == null) gdext.classes.SkeletonModification2DJiggle.mb_set_use_colliders = MethodBind.get("SkeletonModification2DJiggle", "set_use_colliders", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.SkeletonModification2DJiggle.mb_set_use_colliders, livePtr, use_colliders)
+    Ptrcall.callVoid1(gdext.classes.SkeletonModification2DJiggle.mb_set_use_colliders, livePtr, useColliders)
   }
 
   /** SkeletonModification2DJiggle.get_use_colliders */
@@ -95,9 +96,9 @@ abstract class SkeletonModification2DJiggle extends SkeletonModification2D {
   }
 
   /** SkeletonModification2DJiggle.set_collision_mask */
-  final def setCollisionMask(collision_mask: Long): Unit = {
+  final def setCollisionMask(collisionMask: Long): Unit = {
     if (gdext.classes.SkeletonModification2DJiggle.mb_set_collision_mask == null) gdext.classes.SkeletonModification2DJiggle.mb_set_collision_mask = MethodBind.get("SkeletonModification2DJiggle", "set_collision_mask", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.SkeletonModification2DJiggle.mb_set_collision_mask, livePtr, collision_mask)
+    Ptrcall.callVoid1(gdext.classes.SkeletonModification2DJiggle.mb_set_collision_mask, livePtr, collisionMask)
   }
 
   /** SkeletonModification2DJiggle.get_collision_mask */
@@ -107,87 +108,87 @@ abstract class SkeletonModification2DJiggle extends SkeletonModification2D {
   }
 
   /** SkeletonModification2DJiggle.set_jiggle_joint_bone_index */
-  final def setJiggleJointBoneIndex(joint_idx: Long, bone_idx: Long): Unit = {
+  final def setJiggleJointBoneIndex(jointIdx: Long, boneIdx: Long): Unit = {
     if (gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_bone_index == null) gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_bone_index = MethodBind.get("SkeletonModification2DJiggle", "set_jiggle_joint_bone_index", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_bone_index, livePtr, joint_idx, bone_idx)
+    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_bone_index, livePtr, jointIdx, boneIdx)
   }
 
   /** SkeletonModification2DJiggle.get_jiggle_joint_bone_index */
-  final def getJiggleJointBoneIndex(joint_idx: Long): Long = {
+  final def getJiggleJointBoneIndex(jointIdx: Long): Long = {
     if (gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_bone_index == null) gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_bone_index = MethodBind.get("SkeletonModification2DJiggle", "get_jiggle_joint_bone_index", 923996154L)
-    Ptrcall.call1[Long, Long](gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_bone_index, livePtr, joint_idx)
+    Ptrcall.call1[Long, Long](gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_bone_index, livePtr, jointIdx)
   }
 
   /** SkeletonModification2DJiggle.set_jiggle_joint_override */
-  final def setJiggleJointOverride(joint_idx: Long, `override`: Boolean): Unit = {
+  final def setJiggleJointOverride(jointIdx: Long, `override`: Boolean): Unit = {
     if (gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_override == null) gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_override = MethodBind.get("SkeletonModification2DJiggle", "set_jiggle_joint_override", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_override, livePtr, joint_idx, `override`)
+    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_override, livePtr, jointIdx, `override`)
   }
 
   /** SkeletonModification2DJiggle.get_jiggle_joint_override */
-  final def getJiggleJointOverride(joint_idx: Long): Boolean = {
+  final def getJiggleJointOverride(jointIdx: Long): Boolean = {
     if (gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_override == null) gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_override = MethodBind.get("SkeletonModification2DJiggle", "get_jiggle_joint_override", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_override, livePtr, joint_idx)
+    Ptrcall.call1[Long, Boolean](gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_override, livePtr, jointIdx)
   }
 
   /** SkeletonModification2DJiggle.set_jiggle_joint_stiffness */
-  final def setJiggleJointStiffness(joint_idx: Long, stiffness: Double): Unit = {
+  final def setJiggleJointStiffness(jointIdx: Long, stiffness: Double): Unit = {
     if (gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_stiffness == null) gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_stiffness = MethodBind.get("SkeletonModification2DJiggle", "set_jiggle_joint_stiffness", 1602489585L)
-    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_stiffness, livePtr, joint_idx, stiffness)
+    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_stiffness, livePtr, jointIdx, stiffness)
   }
 
   /** SkeletonModification2DJiggle.get_jiggle_joint_stiffness */
-  final def getJiggleJointStiffness(joint_idx: Long): Double = {
+  final def getJiggleJointStiffness(jointIdx: Long): Double = {
     if (gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_stiffness == null) gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_stiffness = MethodBind.get("SkeletonModification2DJiggle", "get_jiggle_joint_stiffness", 2339986948L)
-    Ptrcall.call1[Long, Double](gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_stiffness, livePtr, joint_idx)
+    Ptrcall.call1[Long, Double](gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_stiffness, livePtr, jointIdx)
   }
 
   /** SkeletonModification2DJiggle.set_jiggle_joint_mass */
-  final def setJiggleJointMass(joint_idx: Long, mass: Double): Unit = {
+  final def setJiggleJointMass(jointIdx: Long, mass: Double): Unit = {
     if (gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_mass == null) gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_mass = MethodBind.get("SkeletonModification2DJiggle", "set_jiggle_joint_mass", 1602489585L)
-    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_mass, livePtr, joint_idx, mass)
+    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_mass, livePtr, jointIdx, mass)
   }
 
   /** SkeletonModification2DJiggle.get_jiggle_joint_mass */
-  final def getJiggleJointMass(joint_idx: Long): Double = {
+  final def getJiggleJointMass(jointIdx: Long): Double = {
     if (gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_mass == null) gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_mass = MethodBind.get("SkeletonModification2DJiggle", "get_jiggle_joint_mass", 2339986948L)
-    Ptrcall.call1[Long, Double](gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_mass, livePtr, joint_idx)
+    Ptrcall.call1[Long, Double](gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_mass, livePtr, jointIdx)
   }
 
   /** SkeletonModification2DJiggle.set_jiggle_joint_damping */
-  final def setJiggleJointDamping(joint_idx: Long, damping: Double): Unit = {
+  final def setJiggleJointDamping(jointIdx: Long, damping: Double): Unit = {
     if (gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_damping == null) gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_damping = MethodBind.get("SkeletonModification2DJiggle", "set_jiggle_joint_damping", 1602489585L)
-    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_damping, livePtr, joint_idx, damping)
+    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_damping, livePtr, jointIdx, damping)
   }
 
   /** SkeletonModification2DJiggle.get_jiggle_joint_damping */
-  final def getJiggleJointDamping(joint_idx: Long): Double = {
+  final def getJiggleJointDamping(jointIdx: Long): Double = {
     if (gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_damping == null) gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_damping = MethodBind.get("SkeletonModification2DJiggle", "get_jiggle_joint_damping", 2339986948L)
-    Ptrcall.call1[Long, Double](gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_damping, livePtr, joint_idx)
+    Ptrcall.call1[Long, Double](gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_damping, livePtr, jointIdx)
   }
 
   /** SkeletonModification2DJiggle.set_jiggle_joint_use_gravity */
-  final def setJiggleJointUseGravity(joint_idx: Long, use_gravity: Boolean): Unit = {
+  final def setJiggleJointUseGravity(jointIdx: Long, useGravity: Boolean): Unit = {
     if (gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_use_gravity == null) gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_use_gravity = MethodBind.get("SkeletonModification2DJiggle", "set_jiggle_joint_use_gravity", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_use_gravity, livePtr, joint_idx, use_gravity)
+    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_use_gravity, livePtr, jointIdx, useGravity)
   }
 
   /** SkeletonModification2DJiggle.get_jiggle_joint_use_gravity */
-  final def getJiggleJointUseGravity(joint_idx: Long): Boolean = {
+  final def getJiggleJointUseGravity(jointIdx: Long): Boolean = {
     if (gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_use_gravity == null) gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_use_gravity = MethodBind.get("SkeletonModification2DJiggle", "get_jiggle_joint_use_gravity", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_use_gravity, livePtr, joint_idx)
+    Ptrcall.call1[Long, Boolean](gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_use_gravity, livePtr, jointIdx)
   }
 
   /** SkeletonModification2DJiggle.set_jiggle_joint_gravity */
-  final def setJiggleJointGravity(joint_idx: Long, gravity: gdext.builtin.Vector2): Unit = {
+  final def setJiggleJointGravity(jointIdx: Long, gravity: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_gravity == null) gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_gravity = MethodBind.get("SkeletonModification2DJiggle", "set_jiggle_joint_gravity", 163021252L)
-    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_gravity, livePtr, joint_idx, gravity)
+    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DJiggle.mb_set_jiggle_joint_gravity, livePtr, jointIdx, gravity)
   }
 
   /** SkeletonModification2DJiggle.get_jiggle_joint_gravity */
-  final def getJiggleJointGravity(joint_idx: Long): gdext.builtin.Vector2 = {
+  final def getJiggleJointGravity(jointIdx: Long): gdext.builtin.Vector2 = {
     if (gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_gravity == null) gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_gravity = MethodBind.get("SkeletonModification2DJiggle", "get_jiggle_joint_gravity", 2299179447L)
-    Ptrcall.call1[Long, gdext.builtin.Vector2](gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_gravity, livePtr, joint_idx)
+    Ptrcall.call1[Long, gdext.builtin.Vector2](gdext.classes.SkeletonModification2DJiggle.mb_get_jiggle_joint_gravity, livePtr, jointIdx)
   }
 
 }

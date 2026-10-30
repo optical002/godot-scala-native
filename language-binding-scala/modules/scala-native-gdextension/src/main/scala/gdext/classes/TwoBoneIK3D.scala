@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class TwoBoneIK3D extends IKModifier3D {
   override def godotClassName: String = "TwoBoneIK3D"
 
   /** TwoBoneIK3D.set_root_bone_name */
-  final def setRootBoneName(index: Long, bone_name: String): Unit = {
+  final def setRootBoneName(index: Long, boneName: String): Unit = {
     if (gdext.classes.TwoBoneIK3D.mb_set_root_bone_name == null) gdext.classes.TwoBoneIK3D.mb_set_root_bone_name = MethodBind.get("TwoBoneIK3D", "set_root_bone_name", 501894301L)
-    Ptrcall.callVoid2(gdext.classes.TwoBoneIK3D.mb_set_root_bone_name, livePtr, index, bone_name)
+    Ptrcall.callVoid2(gdext.classes.TwoBoneIK3D.mb_set_root_bone_name, livePtr, index, boneName)
   }
 
   /** TwoBoneIK3D.get_root_bone_name */
@@ -35,9 +36,9 @@ abstract class TwoBoneIK3D extends IKModifier3D {
   }
 
   /** TwoBoneIK3D.set_middle_bone_name */
-  final def setMiddleBoneName(index: Long, bone_name: String): Unit = {
+  final def setMiddleBoneName(index: Long, boneName: String): Unit = {
     if (gdext.classes.TwoBoneIK3D.mb_set_middle_bone_name == null) gdext.classes.TwoBoneIK3D.mb_set_middle_bone_name = MethodBind.get("TwoBoneIK3D", "set_middle_bone_name", 501894301L)
-    Ptrcall.callVoid2(gdext.classes.TwoBoneIK3D.mb_set_middle_bone_name, livePtr, index, bone_name)
+    Ptrcall.callVoid2(gdext.classes.TwoBoneIK3D.mb_set_middle_bone_name, livePtr, index, boneName)
   }
 
   /** TwoBoneIK3D.get_middle_bone_name */
@@ -59,15 +60,15 @@ abstract class TwoBoneIK3D extends IKModifier3D {
   }
 
   /** TwoBoneIK3D.set_pole_direction */
-  final def setPoleDirection(index: Long, direction: Long): Unit = {
+  final def setPoleDirection(index: Long, direction: gdext.classes.SkeletonModifier3D.SecondaryDirection): Unit = {
     if (gdext.classes.TwoBoneIK3D.mb_set_pole_direction == null) gdext.classes.TwoBoneIK3D.mb_set_pole_direction = MethodBind.get("TwoBoneIK3D", "set_pole_direction", 258741388L)
     Ptrcall.callVoid2(gdext.classes.TwoBoneIK3D.mb_set_pole_direction, livePtr, index, direction)
   }
 
   /** TwoBoneIK3D.get_pole_direction */
-  final def getPoleDirection(index: Long): Long = {
+  final def getPoleDirection(index: Long): gdext.classes.SkeletonModifier3D.SecondaryDirection = {
     if (gdext.classes.TwoBoneIK3D.mb_get_pole_direction == null) gdext.classes.TwoBoneIK3D.mb_get_pole_direction = MethodBind.get("TwoBoneIK3D", "get_pole_direction", 377522128L)
-    Ptrcall.call1[Long, Long](gdext.classes.TwoBoneIK3D.mb_get_pole_direction, livePtr, index)
+    gdext.classes.SkeletonModifier3D.SecondaryDirection(Ptrcall.call1[Long, Long](gdext.classes.TwoBoneIK3D.mb_get_pole_direction, livePtr, index))
   }
 
   /** TwoBoneIK3D.set_pole_direction_vector */
@@ -83,9 +84,9 @@ abstract class TwoBoneIK3D extends IKModifier3D {
   }
 
   /** TwoBoneIK3D.set_end_bone_name */
-  final def setEndBoneName(index: Long, bone_name: String): Unit = {
+  final def setEndBoneName(index: Long, boneName: String): Unit = {
     if (gdext.classes.TwoBoneIK3D.mb_set_end_bone_name == null) gdext.classes.TwoBoneIK3D.mb_set_end_bone_name = MethodBind.get("TwoBoneIK3D", "set_end_bone_name", 501894301L)
-    Ptrcall.callVoid2(gdext.classes.TwoBoneIK3D.mb_set_end_bone_name, livePtr, index, bone_name)
+    Ptrcall.callVoid2(gdext.classes.TwoBoneIK3D.mb_set_end_bone_name, livePtr, index, boneName)
   }
 
   /** TwoBoneIK3D.get_end_bone_name */
@@ -131,15 +132,15 @@ abstract class TwoBoneIK3D extends IKModifier3D {
   }
 
   /** TwoBoneIK3D.set_end_bone_direction */
-  final def setEndBoneDirection(index: Long, bone_direction: Long): Unit = {
+  final def setEndBoneDirection(index: Long, boneDirection: gdext.classes.SkeletonModifier3D.BoneDirection): Unit = {
     if (gdext.classes.TwoBoneIK3D.mb_set_end_bone_direction == null) gdext.classes.TwoBoneIK3D.mb_set_end_bone_direction = MethodBind.get("TwoBoneIK3D", "set_end_bone_direction", 2838484201L)
-    Ptrcall.callVoid2(gdext.classes.TwoBoneIK3D.mb_set_end_bone_direction, livePtr, index, bone_direction)
+    Ptrcall.callVoid2(gdext.classes.TwoBoneIK3D.mb_set_end_bone_direction, livePtr, index, boneDirection)
   }
 
   /** TwoBoneIK3D.get_end_bone_direction */
-  final def getEndBoneDirection(index: Long): Long = {
+  final def getEndBoneDirection(index: Long): gdext.classes.SkeletonModifier3D.BoneDirection = {
     if (gdext.classes.TwoBoneIK3D.mb_get_end_bone_direction == null) gdext.classes.TwoBoneIK3D.mb_get_end_bone_direction = MethodBind.get("TwoBoneIK3D", "get_end_bone_direction", 1843036459L)
-    Ptrcall.call1[Long, Long](gdext.classes.TwoBoneIK3D.mb_get_end_bone_direction, livePtr, index)
+    gdext.classes.SkeletonModifier3D.BoneDirection(Ptrcall.call1[Long, Long](gdext.classes.TwoBoneIK3D.mb_get_end_bone_direction, livePtr, index))
   }
 
   /** TwoBoneIK3D.set_end_bone_length */

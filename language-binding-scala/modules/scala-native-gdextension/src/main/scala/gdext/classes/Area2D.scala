@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,15 +12,15 @@ abstract class Area2D extends CollisionObject2D {
   override def godotClassName: String = "Area2D"
 
   /** Area2D.set_gravity_space_override_mode */
-  final def setGravitySpaceOverrideMode(space_override_mode: Long): Unit = {
+  final def setGravitySpaceOverrideMode(spaceOverrideMode: gdext.classes.Area2D.SpaceOverride): Unit = {
     if (gdext.classes.Area2D.mb_set_gravity_space_override_mode == null) gdext.classes.Area2D.mb_set_gravity_space_override_mode = MethodBind.get("Area2D", "set_gravity_space_override_mode", 2879900038L)
-    Ptrcall.callVoid1(gdext.classes.Area2D.mb_set_gravity_space_override_mode, livePtr, space_override_mode)
+    Ptrcall.callVoid1(gdext.classes.Area2D.mb_set_gravity_space_override_mode, livePtr, spaceOverrideMode)
   }
 
   /** Area2D.get_gravity_space_override_mode */
-  final def getGravitySpaceOverrideMode(): Long = {
+  final def getGravitySpaceOverrideMode(): gdext.classes.Area2D.SpaceOverride = {
     if (gdext.classes.Area2D.mb_get_gravity_space_override_mode == null) gdext.classes.Area2D.mb_get_gravity_space_override_mode = MethodBind.get("Area2D", "get_gravity_space_override_mode", 3990256304L)
-    Ptrcall.call0[Long](gdext.classes.Area2D.mb_get_gravity_space_override_mode, livePtr)
+    gdext.classes.Area2D.SpaceOverride(Ptrcall.call0[Long](gdext.classes.Area2D.mb_get_gravity_space_override_mode, livePtr))
   }
 
   /** Area2D.set_gravity_is_point */
@@ -35,9 +36,9 @@ abstract class Area2D extends CollisionObject2D {
   }
 
   /** Area2D.set_gravity_point_unit_distance */
-  final def setGravityPointUnitDistance(distance_scale: Double): Unit = {
+  final def setGravityPointUnitDistance(distanceScale: Double): Unit = {
     if (gdext.classes.Area2D.mb_set_gravity_point_unit_distance == null) gdext.classes.Area2D.mb_set_gravity_point_unit_distance = MethodBind.get("Area2D", "set_gravity_point_unit_distance", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Area2D.mb_set_gravity_point_unit_distance, livePtr, distance_scale)
+    Ptrcall.callVoid1(gdext.classes.Area2D.mb_set_gravity_point_unit_distance, livePtr, distanceScale)
   }
 
   /** Area2D.get_gravity_point_unit_distance */
@@ -83,33 +84,33 @@ abstract class Area2D extends CollisionObject2D {
   }
 
   /** Area2D.set_linear_damp_space_override_mode */
-  final def setLinearDampSpaceOverrideMode(space_override_mode: Long): Unit = {
+  final def setLinearDampSpaceOverrideMode(spaceOverrideMode: gdext.classes.Area2D.SpaceOverride): Unit = {
     if (gdext.classes.Area2D.mb_set_linear_damp_space_override_mode == null) gdext.classes.Area2D.mb_set_linear_damp_space_override_mode = MethodBind.get("Area2D", "set_linear_damp_space_override_mode", 2879900038L)
-    Ptrcall.callVoid1(gdext.classes.Area2D.mb_set_linear_damp_space_override_mode, livePtr, space_override_mode)
+    Ptrcall.callVoid1(gdext.classes.Area2D.mb_set_linear_damp_space_override_mode, livePtr, spaceOverrideMode)
   }
 
   /** Area2D.get_linear_damp_space_override_mode */
-  final def getLinearDampSpaceOverrideMode(): Long = {
+  final def getLinearDampSpaceOverrideMode(): gdext.classes.Area2D.SpaceOverride = {
     if (gdext.classes.Area2D.mb_get_linear_damp_space_override_mode == null) gdext.classes.Area2D.mb_get_linear_damp_space_override_mode = MethodBind.get("Area2D", "get_linear_damp_space_override_mode", 3990256304L)
-    Ptrcall.call0[Long](gdext.classes.Area2D.mb_get_linear_damp_space_override_mode, livePtr)
+    gdext.classes.Area2D.SpaceOverride(Ptrcall.call0[Long](gdext.classes.Area2D.mb_get_linear_damp_space_override_mode, livePtr))
   }
 
   /** Area2D.set_angular_damp_space_override_mode */
-  final def setAngularDampSpaceOverrideMode(space_override_mode: Long): Unit = {
+  final def setAngularDampSpaceOverrideMode(spaceOverrideMode: gdext.classes.Area2D.SpaceOverride): Unit = {
     if (gdext.classes.Area2D.mb_set_angular_damp_space_override_mode == null) gdext.classes.Area2D.mb_set_angular_damp_space_override_mode = MethodBind.get("Area2D", "set_angular_damp_space_override_mode", 2879900038L)
-    Ptrcall.callVoid1(gdext.classes.Area2D.mb_set_angular_damp_space_override_mode, livePtr, space_override_mode)
+    Ptrcall.callVoid1(gdext.classes.Area2D.mb_set_angular_damp_space_override_mode, livePtr, spaceOverrideMode)
   }
 
   /** Area2D.get_angular_damp_space_override_mode */
-  final def getAngularDampSpaceOverrideMode(): Long = {
+  final def getAngularDampSpaceOverrideMode(): gdext.classes.Area2D.SpaceOverride = {
     if (gdext.classes.Area2D.mb_get_angular_damp_space_override_mode == null) gdext.classes.Area2D.mb_get_angular_damp_space_override_mode = MethodBind.get("Area2D", "get_angular_damp_space_override_mode", 3990256304L)
-    Ptrcall.call0[Long](gdext.classes.Area2D.mb_get_angular_damp_space_override_mode, livePtr)
+    gdext.classes.Area2D.SpaceOverride(Ptrcall.call0[Long](gdext.classes.Area2D.mb_get_angular_damp_space_override_mode, livePtr))
   }
 
   /** Area2D.set_linear_damp */
-  final def setLinearDamp(linear_damp: Double): Unit = {
+  final def setLinearDamp(linearDamp: Double): Unit = {
     if (gdext.classes.Area2D.mb_set_linear_damp == null) gdext.classes.Area2D.mb_set_linear_damp = MethodBind.get("Area2D", "set_linear_damp", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Area2D.mb_set_linear_damp, livePtr, linear_damp)
+    Ptrcall.callVoid1(gdext.classes.Area2D.mb_set_linear_damp, livePtr, linearDamp)
   }
 
   /** Area2D.get_linear_damp */
@@ -119,9 +120,9 @@ abstract class Area2D extends CollisionObject2D {
   }
 
   /** Area2D.set_angular_damp */
-  final def setAngularDamp(angular_damp: Double): Unit = {
+  final def setAngularDamp(angularDamp: Double): Unit = {
     if (gdext.classes.Area2D.mb_set_angular_damp == null) gdext.classes.Area2D.mb_set_angular_damp = MethodBind.get("Area2D", "set_angular_damp", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.Area2D.mb_set_angular_damp, livePtr, angular_damp)
+    Ptrcall.callVoid1(gdext.classes.Area2D.mb_set_angular_damp, livePtr, angularDamp)
   }
 
   /** Area2D.get_angular_damp */
@@ -191,15 +192,15 @@ abstract class Area2D extends CollisionObject2D {
   }
 
   /** Area2D.set_audio_bus_name */
-  final def setAudioBusName(name: gdext.builtin.StringName): Unit = {
+  final def setAudioBusName(name: String): Unit = {
     if (gdext.classes.Area2D.mb_set_audio_bus_name == null) gdext.classes.Area2D.mb_set_audio_bus_name = MethodBind.get("Area2D", "set_audio_bus_name", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.Area2D.mb_set_audio_bus_name, livePtr, name)
+    Ptrcall.callVoid1(gdext.classes.Area2D.mb_set_audio_bus_name, livePtr, SnArg(name))
   }
 
   /** Area2D.get_audio_bus_name */
-  final def getAudioBusName(): gdext.builtin.StringName = {
+  final def getAudioBusName(): String = {
     if (gdext.classes.Area2D.mb_get_audio_bus_name == null) gdext.classes.Area2D.mb_get_audio_bus_name = MethodBind.get("Area2D", "get_audio_bus_name", 2002593661L)
-    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.Area2D.mb_get_audio_bus_name, livePtr)
+    Ptrcall.call0[SnArg](gdext.classes.Area2D.mb_get_audio_bus_name, livePtr)
   }
 
   /** Area2D.set_audio_bus_override */
@@ -251,4 +252,32 @@ object Area2D {
   private[classes] var mb_get_audio_bus_name: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_audio_bus_override: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_overriding_audio_bus: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `Area2D.SpaceOverride`. */
+  opaque type SpaceOverride <: Long = Long
+
+  object SpaceOverride {
+    final val Disabled: SpaceOverride = 0L.asInstanceOf[SpaceOverride]
+    final val Combine: SpaceOverride = 1L.asInstanceOf[SpaceOverride]
+    final val CombineReplace: SpaceOverride = 2L.asInstanceOf[SpaceOverride]
+    final val Replace: SpaceOverride = 3L.asInstanceOf[SpaceOverride]
+    final val ReplaceCombine: SpaceOverride = 4L.asInstanceOf[SpaceOverride]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): SpaceOverride = value.asInstanceOf[SpaceOverride]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[SpaceOverride] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[SpaceOverride]]
+
+    extension (self: SpaceOverride)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "Combine"
+        case 2L => "CombineReplace"
+        case 3L => "Replace"
+        case 4L => "ReplaceCombine"
+        case other => other.toString
+      }
+  }
 }

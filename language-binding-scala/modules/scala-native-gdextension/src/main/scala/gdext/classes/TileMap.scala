@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,7 +12,7 @@ abstract class TileMap extends Node2D {
   override def godotClassName: String = "TileMap"
 
   /** TileMap.force_update */
-  final def forceUpdate(layer: Long): Unit = {
+  final def forceUpdate(layer: Long = -1L): Unit = {
     if (gdext.classes.TileMap.mb_force_update == null) gdext.classes.TileMap.mb_force_update = MethodBind.get("TileMap", "force_update", 1025054187L)
     Ptrcall.callVoid1(gdext.classes.TileMap.mb_force_update, livePtr, layer)
   }
@@ -47,15 +48,15 @@ abstract class TileMap extends Node2D {
   }
 
   /** TileMap.add_layer */
-  final def addLayer(to_position: Long): Unit = {
+  final def addLayer(toPosition: Long): Unit = {
     if (gdext.classes.TileMap.mb_add_layer == null) gdext.classes.TileMap.mb_add_layer = MethodBind.get("TileMap", "add_layer", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.TileMap.mb_add_layer, livePtr, to_position)
+    Ptrcall.callVoid1(gdext.classes.TileMap.mb_add_layer, livePtr, toPosition)
   }
 
   /** TileMap.move_layer */
-  final def moveLayer(layer: Long, to_position: Long): Unit = {
+  final def moveLayer(layer: Long, toPosition: Long): Unit = {
     if (gdext.classes.TileMap.mb_move_layer == null) gdext.classes.TileMap.mb_move_layer = MethodBind.get("TileMap", "move_layer", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.TileMap.mb_move_layer, livePtr, layer, to_position)
+    Ptrcall.callVoid2(gdext.classes.TileMap.mb_move_layer, livePtr, layer, toPosition)
   }
 
   /** TileMap.remove_layer */
@@ -101,9 +102,9 @@ abstract class TileMap extends Node2D {
   }
 
   /** TileMap.set_layer_y_sort_enabled */
-  final def setLayerYSortEnabled(layer: Long, y_sort_enabled: Boolean): Unit = {
+  final def setLayerYSortEnabled(layer: Long, ySortEnabled: Boolean): Unit = {
     if (gdext.classes.TileMap.mb_set_layer_y_sort_enabled == null) gdext.classes.TileMap.mb_set_layer_y_sort_enabled = MethodBind.get("TileMap", "set_layer_y_sort_enabled", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.TileMap.mb_set_layer_y_sort_enabled, livePtr, layer, y_sort_enabled)
+    Ptrcall.callVoid2(gdext.classes.TileMap.mb_set_layer_y_sort_enabled, livePtr, layer, ySortEnabled)
   }
 
   /** TileMap.is_layer_y_sort_enabled */
@@ -113,9 +114,9 @@ abstract class TileMap extends Node2D {
   }
 
   /** TileMap.set_layer_y_sort_origin */
-  final def setLayerYSortOrigin(layer: Long, y_sort_origin: Long): Unit = {
+  final def setLayerYSortOrigin(layer: Long, ySortOrigin: Long): Unit = {
     if (gdext.classes.TileMap.mb_set_layer_y_sort_origin == null) gdext.classes.TileMap.mb_set_layer_y_sort_origin = MethodBind.get("TileMap", "set_layer_y_sort_origin", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.TileMap.mb_set_layer_y_sort_origin, livePtr, layer, y_sort_origin)
+    Ptrcall.callVoid2(gdext.classes.TileMap.mb_set_layer_y_sort_origin, livePtr, layer, ySortOrigin)
   }
 
   /** TileMap.get_layer_y_sort_origin */
@@ -125,9 +126,9 @@ abstract class TileMap extends Node2D {
   }
 
   /** TileMap.set_layer_z_index */
-  final def setLayerZIndex(layer: Long, z_index: Long): Unit = {
+  final def setLayerZIndex(layer: Long, zIndex: Long): Unit = {
     if (gdext.classes.TileMap.mb_set_layer_z_index == null) gdext.classes.TileMap.mb_set_layer_z_index = MethodBind.get("TileMap", "set_layer_z_index", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.TileMap.mb_set_layer_z_index, livePtr, layer, z_index)
+    Ptrcall.callVoid2(gdext.classes.TileMap.mb_set_layer_z_index, livePtr, layer, zIndex)
   }
 
   /** TileMap.get_layer_z_index */
@@ -161,33 +162,33 @@ abstract class TileMap extends Node2D {
   }
 
   /** TileMap.set_collision_visibility_mode */
-  final def setCollisionVisibilityMode(collision_visibility_mode: Long): Unit = {
+  final def setCollisionVisibilityMode(collisionVisibilityMode: gdext.classes.TileMap.VisibilityMode): Unit = {
     if (gdext.classes.TileMap.mb_set_collision_visibility_mode == null) gdext.classes.TileMap.mb_set_collision_visibility_mode = MethodBind.get("TileMap", "set_collision_visibility_mode", 3193440636L)
-    Ptrcall.callVoid1(gdext.classes.TileMap.mb_set_collision_visibility_mode, livePtr, collision_visibility_mode)
+    Ptrcall.callVoid1(gdext.classes.TileMap.mb_set_collision_visibility_mode, livePtr, collisionVisibilityMode)
   }
 
   /** TileMap.get_collision_visibility_mode */
-  final def getCollisionVisibilityMode(): Long = {
+  final def getCollisionVisibilityMode(): gdext.classes.TileMap.VisibilityMode = {
     if (gdext.classes.TileMap.mb_get_collision_visibility_mode == null) gdext.classes.TileMap.mb_get_collision_visibility_mode = MethodBind.get("TileMap", "get_collision_visibility_mode", 1697018252L)
-    Ptrcall.call0[Long](gdext.classes.TileMap.mb_get_collision_visibility_mode, livePtr)
+    gdext.classes.TileMap.VisibilityMode(Ptrcall.call0[Long](gdext.classes.TileMap.mb_get_collision_visibility_mode, livePtr))
   }
 
   /** TileMap.set_navigation_visibility_mode */
-  final def setNavigationVisibilityMode(navigation_visibility_mode: Long): Unit = {
+  final def setNavigationVisibilityMode(navigationVisibilityMode: gdext.classes.TileMap.VisibilityMode): Unit = {
     if (gdext.classes.TileMap.mb_set_navigation_visibility_mode == null) gdext.classes.TileMap.mb_set_navigation_visibility_mode = MethodBind.get("TileMap", "set_navigation_visibility_mode", 3193440636L)
-    Ptrcall.callVoid1(gdext.classes.TileMap.mb_set_navigation_visibility_mode, livePtr, navigation_visibility_mode)
+    Ptrcall.callVoid1(gdext.classes.TileMap.mb_set_navigation_visibility_mode, livePtr, navigationVisibilityMode)
   }
 
   /** TileMap.get_navigation_visibility_mode */
-  final def getNavigationVisibilityMode(): Long = {
+  final def getNavigationVisibilityMode(): gdext.classes.TileMap.VisibilityMode = {
     if (gdext.classes.TileMap.mb_get_navigation_visibility_mode == null) gdext.classes.TileMap.mb_get_navigation_visibility_mode = MethodBind.get("TileMap", "get_navigation_visibility_mode", 1697018252L)
-    Ptrcall.call0[Long](gdext.classes.TileMap.mb_get_navigation_visibility_mode, livePtr)
+    gdext.classes.TileMap.VisibilityMode(Ptrcall.call0[Long](gdext.classes.TileMap.mb_get_navigation_visibility_mode, livePtr))
   }
 
   /** TileMap.set_cell */
-  final def setCell(layer: Long, coords: gdext.builtin.Vector2i, source_id: Long, atlas_coords: gdext.builtin.Vector2i, alternative_tile: Long): Unit = {
+  final def setCell(layer: Long, coords: gdext.builtin.Vector2i, sourceId: Long = -1L, atlasCoords: gdext.builtin.Vector2i = gdext.builtin.Vector2i(-1, -1), alternativeTile: Long = 0L): Unit = {
     if (gdext.classes.TileMap.mb_set_cell == null) gdext.classes.TileMap.mb_set_cell = MethodBind.get("TileMap", "set_cell", 966713560L)
-    Ptrcall.callVoid5(gdext.classes.TileMap.mb_set_cell, livePtr, layer, coords, source_id, atlas_coords, alternative_tile)
+    Ptrcall.callVoid5(gdext.classes.TileMap.mb_set_cell, livePtr, layer, coords, sourceId, atlasCoords, alternativeTile)
   }
 
   /** TileMap.erase_cell */
@@ -197,51 +198,51 @@ abstract class TileMap extends Node2D {
   }
 
   /** TileMap.get_cell_source_id */
-  final def getCellSourceId(layer: Long, coords: gdext.builtin.Vector2i, use_proxies: Boolean): Long = {
+  final def getCellSourceId(layer: Long, coords: gdext.builtin.Vector2i, useProxies: Boolean = false): Long = {
     if (gdext.classes.TileMap.mb_get_cell_source_id == null) gdext.classes.TileMap.mb_get_cell_source_id = MethodBind.get("TileMap", "get_cell_source_id", 551761942L)
-    Ptrcall.call3[Long, gdext.builtin.Vector2i, Boolean, Long](gdext.classes.TileMap.mb_get_cell_source_id, livePtr, layer, coords, use_proxies)
+    Ptrcall.call3[Long, gdext.builtin.Vector2i, Boolean, Long](gdext.classes.TileMap.mb_get_cell_source_id, livePtr, layer, coords, useProxies)
   }
 
   /** TileMap.get_cell_atlas_coords */
-  final def getCellAtlasCoords(layer: Long, coords: gdext.builtin.Vector2i, use_proxies: Boolean): gdext.builtin.Vector2i = {
+  final def getCellAtlasCoords(layer: Long, coords: gdext.builtin.Vector2i, useProxies: Boolean = false): gdext.builtin.Vector2i = {
     if (gdext.classes.TileMap.mb_get_cell_atlas_coords == null) gdext.classes.TileMap.mb_get_cell_atlas_coords = MethodBind.get("TileMap", "get_cell_atlas_coords", 1869815066L)
-    Ptrcall.call3[Long, gdext.builtin.Vector2i, Boolean, gdext.builtin.Vector2i](gdext.classes.TileMap.mb_get_cell_atlas_coords, livePtr, layer, coords, use_proxies)
+    Ptrcall.call3[Long, gdext.builtin.Vector2i, Boolean, gdext.builtin.Vector2i](gdext.classes.TileMap.mb_get_cell_atlas_coords, livePtr, layer, coords, useProxies)
   }
 
   /** TileMap.get_cell_alternative_tile */
-  final def getCellAlternativeTile(layer: Long, coords: gdext.builtin.Vector2i, use_proxies: Boolean): Long = {
+  final def getCellAlternativeTile(layer: Long, coords: gdext.builtin.Vector2i, useProxies: Boolean = false): Long = {
     if (gdext.classes.TileMap.mb_get_cell_alternative_tile == null) gdext.classes.TileMap.mb_get_cell_alternative_tile = MethodBind.get("TileMap", "get_cell_alternative_tile", 551761942L)
-    Ptrcall.call3[Long, gdext.builtin.Vector2i, Boolean, Long](gdext.classes.TileMap.mb_get_cell_alternative_tile, livePtr, layer, coords, use_proxies)
+    Ptrcall.call3[Long, gdext.builtin.Vector2i, Boolean, Long](gdext.classes.TileMap.mb_get_cell_alternative_tile, livePtr, layer, coords, useProxies)
   }
 
   /** TileMap.get_cell_tile_data */
-  final def getCellTileData(layer: Long, coords: gdext.builtin.Vector2i, use_proxies: Boolean): TileData = {
+  final def getCellTileData(layer: Long, coords: gdext.builtin.Vector2i, useProxies: Boolean = false): TileData = {
     if (gdext.classes.TileMap.mb_get_cell_tile_data == null) gdext.classes.TileMap.mb_get_cell_tile_data = MethodBind.get("TileMap", "get_cell_tile_data", 2849631287L)
-    Wrappers.borrowed[TileData](Ptrcall.call3[Long, gdext.builtin.Vector2i, Boolean, Long](gdext.classes.TileMap.mb_get_cell_tile_data, livePtr, layer, coords, use_proxies))
+    Wrappers.borrowed[TileData](Ptrcall.call3[Long, gdext.builtin.Vector2i, Boolean, Long](gdext.classes.TileMap.mb_get_cell_tile_data, livePtr, layer, coords, useProxies))
   }
 
   /** TileMap.is_cell_flipped_h */
-  final def isCellFlippedH(layer: Long, coords: gdext.builtin.Vector2i, use_proxies: Boolean): Boolean = {
+  final def isCellFlippedH(layer: Long, coords: gdext.builtin.Vector2i, useProxies: Boolean = false): Boolean = {
     if (gdext.classes.TileMap.mb_is_cell_flipped_h == null) gdext.classes.TileMap.mb_is_cell_flipped_h = MethodBind.get("TileMap", "is_cell_flipped_h", 2908343862L)
-    Ptrcall.call3[Long, gdext.builtin.Vector2i, Boolean, Boolean](gdext.classes.TileMap.mb_is_cell_flipped_h, livePtr, layer, coords, use_proxies)
+    Ptrcall.call3[Long, gdext.builtin.Vector2i, Boolean, Boolean](gdext.classes.TileMap.mb_is_cell_flipped_h, livePtr, layer, coords, useProxies)
   }
 
   /** TileMap.is_cell_flipped_v */
-  final def isCellFlippedV(layer: Long, coords: gdext.builtin.Vector2i, use_proxies: Boolean): Boolean = {
+  final def isCellFlippedV(layer: Long, coords: gdext.builtin.Vector2i, useProxies: Boolean = false): Boolean = {
     if (gdext.classes.TileMap.mb_is_cell_flipped_v == null) gdext.classes.TileMap.mb_is_cell_flipped_v = MethodBind.get("TileMap", "is_cell_flipped_v", 2908343862L)
-    Ptrcall.call3[Long, gdext.builtin.Vector2i, Boolean, Boolean](gdext.classes.TileMap.mb_is_cell_flipped_v, livePtr, layer, coords, use_proxies)
+    Ptrcall.call3[Long, gdext.builtin.Vector2i, Boolean, Boolean](gdext.classes.TileMap.mb_is_cell_flipped_v, livePtr, layer, coords, useProxies)
   }
 
   /** TileMap.is_cell_transposed */
-  final def isCellTransposed(layer: Long, coords: gdext.builtin.Vector2i, use_proxies: Boolean): Boolean = {
+  final def isCellTransposed(layer: Long, coords: gdext.builtin.Vector2i, useProxies: Boolean = false): Boolean = {
     if (gdext.classes.TileMap.mb_is_cell_transposed == null) gdext.classes.TileMap.mb_is_cell_transposed = MethodBind.get("TileMap", "is_cell_transposed", 2908343862L)
-    Ptrcall.call3[Long, gdext.builtin.Vector2i, Boolean, Boolean](gdext.classes.TileMap.mb_is_cell_transposed, livePtr, layer, coords, use_proxies)
+    Ptrcall.call3[Long, gdext.builtin.Vector2i, Boolean, Boolean](gdext.classes.TileMap.mb_is_cell_transposed, livePtr, layer, coords, useProxies)
   }
 
   /** TileMap.map_pattern */
-  final def mapPattern(position_in_tilemap: gdext.builtin.Vector2i, coords_in_pattern: gdext.builtin.Vector2i, pattern: TileMapPattern): gdext.builtin.Vector2i = {
+  final def mapPattern(positionInTilemap: gdext.builtin.Vector2i, coordsInPattern: gdext.builtin.Vector2i, pattern: TileMapPattern): gdext.builtin.Vector2i = {
     if (gdext.classes.TileMap.mb_map_pattern == null) gdext.classes.TileMap.mb_map_pattern = MethodBind.get("TileMap", "map_pattern", 1864516957L)
-    Ptrcall.call3[gdext.builtin.Vector2i, gdext.builtin.Vector2i, GodotObject, gdext.builtin.Vector2i](gdext.classes.TileMap.mb_map_pattern, livePtr, position_in_tilemap, coords_in_pattern, Wrappers.handle(pattern))
+    Ptrcall.call3[gdext.builtin.Vector2i, gdext.builtin.Vector2i, GodotObject, gdext.builtin.Vector2i](gdext.classes.TileMap.mb_map_pattern, livePtr, positionInTilemap, coordsInPattern, Wrappers.handle(pattern))
   }
 
   /** TileMap.set_pattern */
@@ -275,7 +276,7 @@ abstract class TileMap extends Node2D {
   }
 
   /** TileMap.notify_runtime_tile_data_update */
-  final def notifyRuntimeTileDataUpdate(layer: Long): Unit = {
+  final def notifyRuntimeTileDataUpdate(layer: Long = -1L): Unit = {
     if (gdext.classes.TileMap.mb_notify_runtime_tile_data_update == null) gdext.classes.TileMap.mb_notify_runtime_tile_data_update = MethodBind.get("TileMap", "notify_runtime_tile_data_update", 1025054187L)
     Ptrcall.callVoid1(gdext.classes.TileMap.mb_notify_runtime_tile_data_update, livePtr, layer)
   }
@@ -287,19 +288,19 @@ abstract class TileMap extends Node2D {
   }
 
   /** TileMap.map_to_local */
-  final def mapToLocal(map_position: gdext.builtin.Vector2i): gdext.builtin.Vector2 = {
+  final def mapToLocal(mapPosition: gdext.builtin.Vector2i): gdext.builtin.Vector2 = {
     if (gdext.classes.TileMap.mb_map_to_local == null) gdext.classes.TileMap.mb_map_to_local = MethodBind.get("TileMap", "map_to_local", 108438297L)
-    Ptrcall.call1[gdext.builtin.Vector2i, gdext.builtin.Vector2](gdext.classes.TileMap.mb_map_to_local, livePtr, map_position)
+    Ptrcall.call1[gdext.builtin.Vector2i, gdext.builtin.Vector2](gdext.classes.TileMap.mb_map_to_local, livePtr, mapPosition)
   }
 
   /** TileMap.local_to_map */
-  final def localToMap(local_position: gdext.builtin.Vector2): gdext.builtin.Vector2i = {
+  final def localToMap(localPosition: gdext.builtin.Vector2): gdext.builtin.Vector2i = {
     if (gdext.classes.TileMap.mb_local_to_map == null) gdext.classes.TileMap.mb_local_to_map = MethodBind.get("TileMap", "local_to_map", 837806996L)
-    Ptrcall.call1[gdext.builtin.Vector2, gdext.builtin.Vector2i](gdext.classes.TileMap.mb_local_to_map, livePtr, local_position)
+    Ptrcall.call1[gdext.builtin.Vector2, gdext.builtin.Vector2i](gdext.classes.TileMap.mb_local_to_map, livePtr, localPosition)
   }
 
   /** TileMap.get_neighbor_cell */
-  final def getNeighborCell(coords: gdext.builtin.Vector2i, neighbor: Long): gdext.builtin.Vector2i = {
+  final def getNeighborCell(coords: gdext.builtin.Vector2i, neighbor: gdext.classes.TileSet.CellNeighbor): gdext.builtin.Vector2i = {
     if (gdext.classes.TileMap.mb_get_neighbor_cell == null) gdext.classes.TileMap.mb_get_neighbor_cell = MethodBind.get("TileMap", "get_neighbor_cell", 986575103L)
     Ptrcall.call2[gdext.builtin.Vector2i, Long, gdext.builtin.Vector2i](gdext.classes.TileMap.mb_get_neighbor_cell, livePtr, coords, neighbor)
   }
@@ -356,4 +357,28 @@ object TileMap {
   private[classes] var mb_map_to_local: GDExtensionMethodBindPtr = null
   private[classes] var mb_local_to_map: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_neighbor_cell: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `TileMap.VisibilityMode`. */
+  opaque type VisibilityMode <: Long = Long
+
+  object VisibilityMode {
+    final val Default: VisibilityMode = 0L.asInstanceOf[VisibilityMode]
+    final val ForceHide: VisibilityMode = 2L.asInstanceOf[VisibilityMode]
+    final val ForceShow: VisibilityMode = 1L.asInstanceOf[VisibilityMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): VisibilityMode = value.asInstanceOf[VisibilityMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[VisibilityMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[VisibilityMode]]
+
+    extension (self: VisibilityMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Default"
+        case 1L => "ForceShow"
+        case 2L => "ForceHide"
+        case other => other.toString
+      }
+  }
 }

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,27 +24,27 @@ abstract class TextParagraph extends RefCounted {
   }
 
   /** TextParagraph.set_direction */
-  final def setDirection(direction: Long): Unit = {
+  final def setDirection(direction: gdext.classes.TextServer.Direction): Unit = {
     if (gdext.classes.TextParagraph.mb_set_direction == null) gdext.classes.TextParagraph.mb_set_direction = MethodBind.get("TextParagraph", "set_direction", 1418190634L)
     Ptrcall.callVoid1(gdext.classes.TextParagraph.mb_set_direction, livePtr, direction)
   }
 
   /** TextParagraph.get_direction */
-  final def getDirection(): Long = {
+  final def getDirection(): gdext.classes.TextServer.Direction = {
     if (gdext.classes.TextParagraph.mb_get_direction == null) gdext.classes.TextParagraph.mb_get_direction = MethodBind.get("TextParagraph", "get_direction", 2516697328L)
-    Ptrcall.call0[Long](gdext.classes.TextParagraph.mb_get_direction, livePtr)
+    gdext.classes.TextServer.Direction(Ptrcall.call0[Long](gdext.classes.TextParagraph.mb_get_direction, livePtr))
   }
 
   /** TextParagraph.get_inferred_direction */
-  final def getInferredDirection(): Long = {
+  final def getInferredDirection(): gdext.classes.TextServer.Direction = {
     if (gdext.classes.TextParagraph.mb_get_inferred_direction == null) gdext.classes.TextParagraph.mb_get_inferred_direction = MethodBind.get("TextParagraph", "get_inferred_direction", 2516697328L)
-    Ptrcall.call0[Long](gdext.classes.TextParagraph.mb_get_inferred_direction, livePtr)
+    gdext.classes.TextServer.Direction(Ptrcall.call0[Long](gdext.classes.TextParagraph.mb_get_inferred_direction, livePtr))
   }
 
   /** TextParagraph.set_custom_punctuation */
-  final def setCustomPunctuation(custom_punctuation: String): Unit = {
+  final def setCustomPunctuation(customPunctuation: String): Unit = {
     if (gdext.classes.TextParagraph.mb_set_custom_punctuation == null) gdext.classes.TextParagraph.mb_set_custom_punctuation = MethodBind.get("TextParagraph", "set_custom_punctuation", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.TextParagraph.mb_set_custom_punctuation, livePtr, custom_punctuation)
+    Ptrcall.callVoid1(gdext.classes.TextParagraph.mb_set_custom_punctuation, livePtr, customPunctuation)
   }
 
   /** TextParagraph.get_custom_punctuation */
@@ -53,15 +54,15 @@ abstract class TextParagraph extends RefCounted {
   }
 
   /** TextParagraph.set_orientation */
-  final def setOrientation(orientation: Long): Unit = {
+  final def setOrientation(orientation: gdext.classes.TextServer.Orientation): Unit = {
     if (gdext.classes.TextParagraph.mb_set_orientation == null) gdext.classes.TextParagraph.mb_set_orientation = MethodBind.get("TextParagraph", "set_orientation", 42823726L)
     Ptrcall.callVoid1(gdext.classes.TextParagraph.mb_set_orientation, livePtr, orientation)
   }
 
   /** TextParagraph.get_orientation */
-  final def getOrientation(): Long = {
+  final def getOrientation(): gdext.classes.TextServer.Orientation = {
     if (gdext.classes.TextParagraph.mb_get_orientation == null) gdext.classes.TextParagraph.mb_get_orientation = MethodBind.get("TextParagraph", "get_orientation", 175768116L)
-    Ptrcall.call0[Long](gdext.classes.TextParagraph.mb_get_orientation, livePtr)
+    gdext.classes.TextServer.Orientation(Ptrcall.call0[Long](gdext.classes.TextParagraph.mb_get_orientation, livePtr))
   }
 
   /** TextParagraph.set_preserve_invalid */
@@ -89,9 +90,9 @@ abstract class TextParagraph extends RefCounted {
   }
 
   /** TextParagraph.set_dropcap */
-  final def setDropcap(text: String, font: Font, font_size: Long, dropcap_margins: gdext.builtin.Rect2, language: String): Boolean = {
+  final def setDropcap(text: String, font: Font, fontSize: Long, dropcapMargins: gdext.builtin.Rect2 = gdext.builtin.Rect2(0f, 0f, 0f, 0f), language: String = ""): Boolean = {
     if (gdext.classes.TextParagraph.mb_set_dropcap == null) gdext.classes.TextParagraph.mb_set_dropcap = MethodBind.get("TextParagraph", "set_dropcap", 2498990330L)
-    Ptrcall.call5[String, GodotObject, Long, gdext.builtin.Rect2, String, Boolean](gdext.classes.TextParagraph.mb_set_dropcap, livePtr, text, Wrappers.handle(font), font_size, dropcap_margins, language)
+    Ptrcall.call5[String, GodotObject, Long, gdext.builtin.Rect2, String, Boolean](gdext.classes.TextParagraph.mb_set_dropcap, livePtr, text, Wrappers.handle(font), fontSize, dropcapMargins, language)
   }
 
   /** TextParagraph.clear_dropcap */
@@ -101,51 +102,51 @@ abstract class TextParagraph extends RefCounted {
   }
 
   /** TextParagraph.set_alignment */
-  final def setAlignment(alignment: Long): Unit = {
+  final def setAlignment(alignment: gdext.classes.HorizontalAlignment): Unit = {
     if (gdext.classes.TextParagraph.mb_set_alignment == null) gdext.classes.TextParagraph.mb_set_alignment = MethodBind.get("TextParagraph", "set_alignment", 2312603777L)
     Ptrcall.callVoid1(gdext.classes.TextParagraph.mb_set_alignment, livePtr, alignment)
   }
 
   /** TextParagraph.get_alignment */
-  final def getAlignment(): Long = {
+  final def getAlignment(): gdext.classes.HorizontalAlignment = {
     if (gdext.classes.TextParagraph.mb_get_alignment == null) gdext.classes.TextParagraph.mb_get_alignment = MethodBind.get("TextParagraph", "get_alignment", 341400642L)
-    Ptrcall.call0[Long](gdext.classes.TextParagraph.mb_get_alignment, livePtr)
+    gdext.classes.HorizontalAlignment(Ptrcall.call0[Long](gdext.classes.TextParagraph.mb_get_alignment, livePtr))
   }
 
   /** TextParagraph.set_break_flags */
-  final def setBreakFlags(flags: Long): Unit = {
+  final def setBreakFlags(flags: gdext.classes.TextServer.LineBreakFlag): Unit = {
     if (gdext.classes.TextParagraph.mb_set_break_flags == null) gdext.classes.TextParagraph.mb_set_break_flags = MethodBind.get("TextParagraph", "set_break_flags", 2809697122L)
-    Ptrcall.callVoid1(gdext.classes.TextParagraph.mb_set_break_flags, livePtr, flags)
+    Ptrcall.callVoid1(gdext.classes.TextParagraph.mb_set_break_flags, livePtr, flags.asInstanceOf[Long])
   }
 
   /** TextParagraph.get_break_flags */
-  final def getBreakFlags(): Long = {
+  final def getBreakFlags(): gdext.classes.TextServer.LineBreakFlag = {
     if (gdext.classes.TextParagraph.mb_get_break_flags == null) gdext.classes.TextParagraph.mb_get_break_flags = MethodBind.get("TextParagraph", "get_break_flags", 2340632602L)
-    Ptrcall.call0[Long](gdext.classes.TextParagraph.mb_get_break_flags, livePtr)
+    gdext.classes.TextServer.LineBreakFlag(Ptrcall.call0[Long](gdext.classes.TextParagraph.mb_get_break_flags, livePtr))
   }
 
   /** TextParagraph.set_justification_flags */
-  final def setJustificationFlags(flags: Long): Unit = {
+  final def setJustificationFlags(flags: gdext.classes.TextServer.JustificationFlag): Unit = {
     if (gdext.classes.TextParagraph.mb_set_justification_flags == null) gdext.classes.TextParagraph.mb_set_justification_flags = MethodBind.get("TextParagraph", "set_justification_flags", 2877345813L)
-    Ptrcall.callVoid1(gdext.classes.TextParagraph.mb_set_justification_flags, livePtr, flags)
+    Ptrcall.callVoid1(gdext.classes.TextParagraph.mb_set_justification_flags, livePtr, flags.asInstanceOf[Long])
   }
 
   /** TextParagraph.get_justification_flags */
-  final def getJustificationFlags(): Long = {
+  final def getJustificationFlags(): gdext.classes.TextServer.JustificationFlag = {
     if (gdext.classes.TextParagraph.mb_get_justification_flags == null) gdext.classes.TextParagraph.mb_get_justification_flags = MethodBind.get("TextParagraph", "get_justification_flags", 1583363614L)
-    Ptrcall.call0[Long](gdext.classes.TextParagraph.mb_get_justification_flags, livePtr)
+    gdext.classes.TextServer.JustificationFlag(Ptrcall.call0[Long](gdext.classes.TextParagraph.mb_get_justification_flags, livePtr))
   }
 
   /** TextParagraph.set_text_overrun_behavior */
-  final def setTextOverrunBehavior(overrun_behavior: Long): Unit = {
+  final def setTextOverrunBehavior(overrunBehavior: gdext.classes.TextServer.OverrunBehavior): Unit = {
     if (gdext.classes.TextParagraph.mb_set_text_overrun_behavior == null) gdext.classes.TextParagraph.mb_set_text_overrun_behavior = MethodBind.get("TextParagraph", "set_text_overrun_behavior", 1008890932L)
-    Ptrcall.callVoid1(gdext.classes.TextParagraph.mb_set_text_overrun_behavior, livePtr, overrun_behavior)
+    Ptrcall.callVoid1(gdext.classes.TextParagraph.mb_set_text_overrun_behavior, livePtr, overrunBehavior)
   }
 
   /** TextParagraph.get_text_overrun_behavior */
-  final def getTextOverrunBehavior(): Long = {
+  final def getTextOverrunBehavior(): gdext.classes.TextServer.OverrunBehavior = {
     if (gdext.classes.TextParagraph.mb_get_text_overrun_behavior == null) gdext.classes.TextParagraph.mb_get_text_overrun_behavior = MethodBind.get("TextParagraph", "get_text_overrun_behavior", 3779142101L)
-    Ptrcall.call0[Long](gdext.classes.TextParagraph.mb_get_text_overrun_behavior, livePtr)
+    gdext.classes.TextServer.OverrunBehavior(Ptrcall.call0[Long](gdext.classes.TextParagraph.mb_get_text_overrun_behavior, livePtr))
   }
 
   /** TextParagraph.set_ellipsis_char */
@@ -197,9 +198,9 @@ abstract class TextParagraph extends RefCounted {
   }
 
   /** TextParagraph.set_max_lines_visible */
-  final def setMaxLinesVisible(max_lines_visible: Long): Unit = {
+  final def setMaxLinesVisible(maxLinesVisible: Long): Unit = {
     if (gdext.classes.TextParagraph.mb_set_max_lines_visible == null) gdext.classes.TextParagraph.mb_set_max_lines_visible = MethodBind.get("TextParagraph", "set_max_lines_visible", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.TextParagraph.mb_set_max_lines_visible, livePtr, max_lines_visible)
+    Ptrcall.callVoid1(gdext.classes.TextParagraph.mb_set_max_lines_visible, livePtr, maxLinesVisible)
   }
 
   /** TextParagraph.get_max_lines_visible */
@@ -209,9 +210,9 @@ abstract class TextParagraph extends RefCounted {
   }
 
   /** TextParagraph.set_line_spacing */
-  final def setLineSpacing(line_spacing: Double): Unit = {
+  final def setLineSpacing(lineSpacing: Double): Unit = {
     if (gdext.classes.TextParagraph.mb_set_line_spacing == null) gdext.classes.TextParagraph.mb_set_line_spacing = MethodBind.get("TextParagraph", "set_line_spacing", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.TextParagraph.mb_set_line_spacing, livePtr, line_spacing)
+    Ptrcall.callVoid1(gdext.classes.TextParagraph.mb_set_line_spacing, livePtr, lineSpacing)
   }
 
   /** TextParagraph.get_line_spacing */

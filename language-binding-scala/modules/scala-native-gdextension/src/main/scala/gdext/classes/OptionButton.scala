@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,13 +12,13 @@ abstract class OptionButton extends Button {
   override def godotClassName: String = "OptionButton"
 
   /** OptionButton.add_item */
-  final def addItem(label: String, id: Long): Unit = {
+  final def addItem(label: String, id: Long = -1L): Unit = {
     if (gdext.classes.OptionButton.mb_add_item == null) gdext.classes.OptionButton.mb_add_item = MethodBind.get("OptionButton", "add_item", 2697778442L)
     Ptrcall.callVoid2(gdext.classes.OptionButton.mb_add_item, livePtr, label, id)
   }
 
   /** OptionButton.add_icon_item */
-  final def addIconItem(texture: Texture2D, label: String, id: Long): Unit = {
+  final def addIconItem(texture: Texture2D, label: String, id: Long = -1L): Unit = {
     if (gdext.classes.OptionButton.mb_add_icon_item == null) gdext.classes.OptionButton.mb_add_icon_item = MethodBind.get("OptionButton", "add_icon_item", 3781678508L)
     Ptrcall.callVoid3(gdext.classes.OptionButton.mb_add_icon_item, livePtr, Wrappers.handle(texture), label, id)
   }
@@ -53,7 +54,7 @@ abstract class OptionButton extends Button {
   }
 
   /** OptionButton.set_item_auto_translate_mode */
-  final def setItemAutoTranslateMode(idx: Long, mode: Long): Unit = {
+  final def setItemAutoTranslateMode(idx: Long, mode: gdext.classes.Node.AutoTranslateMode): Unit = {
     if (gdext.classes.OptionButton.mb_set_item_auto_translate_mode == null) gdext.classes.OptionButton.mb_set_item_auto_translate_mode = MethodBind.get("OptionButton", "set_item_auto_translate_mode", 287402019L)
     Ptrcall.callVoid2(gdext.classes.OptionButton.mb_set_item_auto_translate_mode, livePtr, idx, mode)
   }
@@ -89,9 +90,9 @@ abstract class OptionButton extends Button {
   }
 
   /** OptionButton.get_item_auto_translate_mode */
-  final def getItemAutoTranslateMode(idx: Long): Long = {
+  final def getItemAutoTranslateMode(idx: Long): gdext.classes.Node.AutoTranslateMode = {
     if (gdext.classes.OptionButton.mb_get_item_auto_translate_mode == null) gdext.classes.OptionButton.mb_get_item_auto_translate_mode = MethodBind.get("OptionButton", "get_item_auto_translate_mode", 906302372L)
-    Ptrcall.call1[Long, Long](gdext.classes.OptionButton.mb_get_item_auto_translate_mode, livePtr, idx)
+    gdext.classes.Node.AutoTranslateMode(Ptrcall.call1[Long, Long](gdext.classes.OptionButton.mb_get_item_auto_translate_mode, livePtr, idx))
   }
 
   /** OptionButton.is_item_disabled */
@@ -107,7 +108,7 @@ abstract class OptionButton extends Button {
   }
 
   /** OptionButton.add_separator */
-  final def addSeparator(text: String): Unit = {
+  final def addSeparator(text: String = ""): Unit = {
     if (gdext.classes.OptionButton.mb_add_separator == null) gdext.classes.OptionButton.mb_add_separator = MethodBind.get("OptionButton", "add_separator", 3005725572L)
     Ptrcall.callVoid1(gdext.classes.OptionButton.mb_add_separator, livePtr, text)
   }
@@ -173,9 +174,9 @@ abstract class OptionButton extends Button {
   }
 
   /** OptionButton.get_selectable_item */
-  final def getSelectableItem(from_last: Boolean): Long = {
+  final def getSelectableItem(fromLast: Boolean = false): Long = {
     if (gdext.classes.OptionButton.mb_get_selectable_item == null) gdext.classes.OptionButton.mb_get_selectable_item = MethodBind.get("OptionButton", "get_selectable_item", 894402480L)
-    Ptrcall.call1[Boolean, Long](gdext.classes.OptionButton.mb_get_selectable_item, livePtr, from_last)
+    Ptrcall.call1[Boolean, Long](gdext.classes.OptionButton.mb_get_selectable_item, livePtr, fromLast)
   }
 
   /** OptionButton.set_fit_to_longest_item */

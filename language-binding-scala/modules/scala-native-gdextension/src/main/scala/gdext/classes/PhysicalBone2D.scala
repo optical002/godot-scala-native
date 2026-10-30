@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,15 +24,15 @@ abstract class PhysicalBone2D extends RigidBody2D {
   }
 
   /** PhysicalBone2D.set_auto_configure_joint */
-  final def setAutoConfigureJoint(auto_configure_joint: Boolean): Unit = {
+  final def setAutoConfigureJoint(autoConfigureJoint: Boolean): Unit = {
     if (gdext.classes.PhysicalBone2D.mb_set_auto_configure_joint == null) gdext.classes.PhysicalBone2D.mb_set_auto_configure_joint = MethodBind.get("PhysicalBone2D", "set_auto_configure_joint", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.PhysicalBone2D.mb_set_auto_configure_joint, livePtr, auto_configure_joint)
+    Ptrcall.callVoid1(gdext.classes.PhysicalBone2D.mb_set_auto_configure_joint, livePtr, autoConfigureJoint)
   }
 
   /** PhysicalBone2D.set_simulate_physics */
-  final def setSimulatePhysics(simulate_physics: Boolean): Unit = {
+  final def setSimulatePhysics(simulatePhysics: Boolean): Unit = {
     if (gdext.classes.PhysicalBone2D.mb_set_simulate_physics == null) gdext.classes.PhysicalBone2D.mb_set_simulate_physics = MethodBind.get("PhysicalBone2D", "set_simulate_physics", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.PhysicalBone2D.mb_set_simulate_physics, livePtr, simulate_physics)
+    Ptrcall.callVoid1(gdext.classes.PhysicalBone2D.mb_set_simulate_physics, livePtr, simulatePhysics)
   }
 
   /** PhysicalBone2D.get_simulate_physics */
@@ -47,9 +48,9 @@ abstract class PhysicalBone2D extends RigidBody2D {
   }
 
   /** PhysicalBone2D.set_bone2d_index */
-  final def setBone2dIndex(bone_index: Long): Unit = {
+  final def setBone2dIndex(boneIndex: Long): Unit = {
     if (gdext.classes.PhysicalBone2D.mb_set_bone2d_index == null) gdext.classes.PhysicalBone2D.mb_set_bone2d_index = MethodBind.get("PhysicalBone2D", "set_bone2d_index", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.PhysicalBone2D.mb_set_bone2d_index, livePtr, bone_index)
+    Ptrcall.callVoid1(gdext.classes.PhysicalBone2D.mb_set_bone2d_index, livePtr, boneIndex)
   }
 
   /** PhysicalBone2D.get_bone2d_index */
@@ -59,9 +60,9 @@ abstract class PhysicalBone2D extends RigidBody2D {
   }
 
   /** PhysicalBone2D.set_follow_bone_when_simulating */
-  final def setFollowBoneWhenSimulating(follow_bone: Boolean): Unit = {
+  final def setFollowBoneWhenSimulating(followBone: Boolean): Unit = {
     if (gdext.classes.PhysicalBone2D.mb_set_follow_bone_when_simulating == null) gdext.classes.PhysicalBone2D.mb_set_follow_bone_when_simulating = MethodBind.get("PhysicalBone2D", "set_follow_bone_when_simulating", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.PhysicalBone2D.mb_set_follow_bone_when_simulating, livePtr, follow_bone)
+    Ptrcall.callVoid1(gdext.classes.PhysicalBone2D.mb_set_follow_bone_when_simulating, livePtr, followBone)
   }
 
   /** PhysicalBone2D.get_follow_bone_when_simulating */

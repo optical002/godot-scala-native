@@ -28,8 +28,8 @@ class Skeleton(
   var height: Double,
 ) extends Enemy(hp, None, Tscn.unassigned[Player]) {
 
-  override def _ready(): Unit = {
-    super._ready() // inherited Enemy._ready still runs
+  override def ready(): Unit = {
+    super.ready() // inherited Enemy.ready still runs
     Gd.print(s"Skeleton._ready (skeletonName=$skeletonName, hp=$hp)")
   }
 }

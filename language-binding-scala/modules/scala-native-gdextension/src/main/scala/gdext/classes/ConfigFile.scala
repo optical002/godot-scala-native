@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,21 +36,21 @@ abstract class ConfigFile extends RefCounted {
   }
 
   /** ConfigFile.load */
-  final def load(path: String): Long = {
+  final def load(path: String): gdext.classes.Error = {
     if (gdext.classes.ConfigFile.mb_load == null) gdext.classes.ConfigFile.mb_load = MethodBind.get("ConfigFile", "load", 166001499L)
-    Ptrcall.call1[String, Long](gdext.classes.ConfigFile.mb_load, livePtr, path)
+    gdext.classes.Error(Ptrcall.call1[String, Long](gdext.classes.ConfigFile.mb_load, livePtr, path))
   }
 
   /** ConfigFile.parse */
-  final def parse(data: String): Long = {
+  final def parse(data: String): gdext.classes.Error = {
     if (gdext.classes.ConfigFile.mb_parse == null) gdext.classes.ConfigFile.mb_parse = MethodBind.get("ConfigFile", "parse", 166001499L)
-    Ptrcall.call1[String, Long](gdext.classes.ConfigFile.mb_parse, livePtr, data)
+    gdext.classes.Error(Ptrcall.call1[String, Long](gdext.classes.ConfigFile.mb_parse, livePtr, data))
   }
 
   /** ConfigFile.save */
-  final def save(path: String): Long = {
+  final def save(path: String): gdext.classes.Error = {
     if (gdext.classes.ConfigFile.mb_save == null) gdext.classes.ConfigFile.mb_save = MethodBind.get("ConfigFile", "save", 166001499L)
-    Ptrcall.call1[String, Long](gdext.classes.ConfigFile.mb_save, livePtr, path)
+    gdext.classes.Error(Ptrcall.call1[String, Long](gdext.classes.ConfigFile.mb_save, livePtr, path))
   }
 
   /** ConfigFile.encode_to_text */
@@ -59,15 +60,15 @@ abstract class ConfigFile extends RefCounted {
   }
 
   /** ConfigFile.load_encrypted_pass */
-  final def loadEncryptedPass(path: String, password: String): Long = {
+  final def loadEncryptedPass(path: String, password: String): gdext.classes.Error = {
     if (gdext.classes.ConfigFile.mb_load_encrypted_pass == null) gdext.classes.ConfigFile.mb_load_encrypted_pass = MethodBind.get("ConfigFile", "load_encrypted_pass", 852856452L)
-    Ptrcall.call2[String, String, Long](gdext.classes.ConfigFile.mb_load_encrypted_pass, livePtr, path, password)
+    gdext.classes.Error(Ptrcall.call2[String, String, Long](gdext.classes.ConfigFile.mb_load_encrypted_pass, livePtr, path, password))
   }
 
   /** ConfigFile.save_encrypted_pass */
-  final def saveEncryptedPass(path: String, password: String): Long = {
+  final def saveEncryptedPass(path: String, password: String): gdext.classes.Error = {
     if (gdext.classes.ConfigFile.mb_save_encrypted_pass == null) gdext.classes.ConfigFile.mb_save_encrypted_pass = MethodBind.get("ConfigFile", "save_encrypted_pass", 852856452L)
-    Ptrcall.call2[String, String, Long](gdext.classes.ConfigFile.mb_save_encrypted_pass, livePtr, path, password)
+    gdext.classes.Error(Ptrcall.call2[String, String, Long](gdext.classes.ConfigFile.mb_save_encrypted_pass, livePtr, path, password))
   }
 
   /** ConfigFile.clear */

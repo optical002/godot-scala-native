@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,57 +12,57 @@ abstract class Camera3D extends Node3D {
   override def godotClassName: String = "Camera3D"
 
   /** Camera3D.project_ray_normal */
-  final def projectRayNormal(screen_point: gdext.builtin.Vector2): gdext.builtin.Vector3 = {
+  final def projectRayNormal(screenPoint: gdext.builtin.Vector2): gdext.builtin.Vector3 = {
     if (gdext.classes.Camera3D.mb_project_ray_normal == null) gdext.classes.Camera3D.mb_project_ray_normal = MethodBind.get("Camera3D", "project_ray_normal", 1718073306L)
-    Ptrcall.call1[gdext.builtin.Vector2, gdext.builtin.Vector3](gdext.classes.Camera3D.mb_project_ray_normal, livePtr, screen_point)
+    Ptrcall.call1[gdext.builtin.Vector2, gdext.builtin.Vector3](gdext.classes.Camera3D.mb_project_ray_normal, livePtr, screenPoint)
   }
 
   /** Camera3D.project_local_ray_normal */
-  final def projectLocalRayNormal(screen_point: gdext.builtin.Vector2): gdext.builtin.Vector3 = {
+  final def projectLocalRayNormal(screenPoint: gdext.builtin.Vector2): gdext.builtin.Vector3 = {
     if (gdext.classes.Camera3D.mb_project_local_ray_normal == null) gdext.classes.Camera3D.mb_project_local_ray_normal = MethodBind.get("Camera3D", "project_local_ray_normal", 1718073306L)
-    Ptrcall.call1[gdext.builtin.Vector2, gdext.builtin.Vector3](gdext.classes.Camera3D.mb_project_local_ray_normal, livePtr, screen_point)
+    Ptrcall.call1[gdext.builtin.Vector2, gdext.builtin.Vector3](gdext.classes.Camera3D.mb_project_local_ray_normal, livePtr, screenPoint)
   }
 
   /** Camera3D.project_ray_origin */
-  final def projectRayOrigin(screen_point: gdext.builtin.Vector2): gdext.builtin.Vector3 = {
+  final def projectRayOrigin(screenPoint: gdext.builtin.Vector2): gdext.builtin.Vector3 = {
     if (gdext.classes.Camera3D.mb_project_ray_origin == null) gdext.classes.Camera3D.mb_project_ray_origin = MethodBind.get("Camera3D", "project_ray_origin", 1718073306L)
-    Ptrcall.call1[gdext.builtin.Vector2, gdext.builtin.Vector3](gdext.classes.Camera3D.mb_project_ray_origin, livePtr, screen_point)
+    Ptrcall.call1[gdext.builtin.Vector2, gdext.builtin.Vector3](gdext.classes.Camera3D.mb_project_ray_origin, livePtr, screenPoint)
   }
 
   /** Camera3D.unproject_position */
-  final def unprojectPosition(world_point: gdext.builtin.Vector3): gdext.builtin.Vector2 = {
+  final def unprojectPosition(worldPoint: gdext.builtin.Vector3): gdext.builtin.Vector2 = {
     if (gdext.classes.Camera3D.mb_unproject_position == null) gdext.classes.Camera3D.mb_unproject_position = MethodBind.get("Camera3D", "unproject_position", 3758901831L)
-    Ptrcall.call1[gdext.builtin.Vector3, gdext.builtin.Vector2](gdext.classes.Camera3D.mb_unproject_position, livePtr, world_point)
+    Ptrcall.call1[gdext.builtin.Vector3, gdext.builtin.Vector2](gdext.classes.Camera3D.mb_unproject_position, livePtr, worldPoint)
   }
 
   /** Camera3D.is_position_behind */
-  final def isPositionBehind(world_point: gdext.builtin.Vector3): Boolean = {
+  final def isPositionBehind(worldPoint: gdext.builtin.Vector3): Boolean = {
     if (gdext.classes.Camera3D.mb_is_position_behind == null) gdext.classes.Camera3D.mb_is_position_behind = MethodBind.get("Camera3D", "is_position_behind", 3108956480L)
-    Ptrcall.call1[gdext.builtin.Vector3, Boolean](gdext.classes.Camera3D.mb_is_position_behind, livePtr, world_point)
+    Ptrcall.call1[gdext.builtin.Vector3, Boolean](gdext.classes.Camera3D.mb_is_position_behind, livePtr, worldPoint)
   }
 
   /** Camera3D.project_position */
-  final def projectPosition(screen_point: gdext.builtin.Vector2, z_depth: Double): gdext.builtin.Vector3 = {
+  final def projectPosition(screenPoint: gdext.builtin.Vector2, zDepth: Double): gdext.builtin.Vector3 = {
     if (gdext.classes.Camera3D.mb_project_position == null) gdext.classes.Camera3D.mb_project_position = MethodBind.get("Camera3D", "project_position", 2171975744L)
-    Ptrcall.call2[gdext.builtin.Vector2, Double, gdext.builtin.Vector3](gdext.classes.Camera3D.mb_project_position, livePtr, screen_point, z_depth)
+    Ptrcall.call2[gdext.builtin.Vector2, Double, gdext.builtin.Vector3](gdext.classes.Camera3D.mb_project_position, livePtr, screenPoint, zDepth)
   }
 
   /** Camera3D.set_perspective */
-  final def setPerspective(fov: Double, z_near: Double, z_far: Double): Unit = {
+  final def setPerspective(fov: Double, zNear: Double, zFar: Double): Unit = {
     if (gdext.classes.Camera3D.mb_set_perspective == null) gdext.classes.Camera3D.mb_set_perspective = MethodBind.get("Camera3D", "set_perspective", 2385087082L)
-    Ptrcall.callVoid3(gdext.classes.Camera3D.mb_set_perspective, livePtr, fov, z_near, z_far)
+    Ptrcall.callVoid3(gdext.classes.Camera3D.mb_set_perspective, livePtr, fov, zNear, zFar)
   }
 
   /** Camera3D.set_orthogonal */
-  final def setOrthogonal(size: Double, z_near: Double, z_far: Double): Unit = {
+  final def setOrthogonal(size: Double, zNear: Double, zFar: Double): Unit = {
     if (gdext.classes.Camera3D.mb_set_orthogonal == null) gdext.classes.Camera3D.mb_set_orthogonal = MethodBind.get("Camera3D", "set_orthogonal", 2385087082L)
-    Ptrcall.callVoid3(gdext.classes.Camera3D.mb_set_orthogonal, livePtr, size, z_near, z_far)
+    Ptrcall.callVoid3(gdext.classes.Camera3D.mb_set_orthogonal, livePtr, size, zNear, zFar)
   }
 
   /** Camera3D.set_frustum */
-  final def setFrustum(size: Double, offset: gdext.builtin.Vector2, z_near: Double, z_far: Double): Unit = {
+  final def setFrustum(size: Double, offset: gdext.builtin.Vector2, zNear: Double, zFar: Double): Unit = {
     if (gdext.classes.Camera3D.mb_set_frustum == null) gdext.classes.Camera3D.mb_set_frustum = MethodBind.get("Camera3D", "set_frustum", 354890663L)
-    Ptrcall.callVoid4(gdext.classes.Camera3D.mb_set_frustum, livePtr, size, offset, z_near, z_far)
+    Ptrcall.callVoid4(gdext.classes.Camera3D.mb_set_frustum, livePtr, size, offset, zNear, zFar)
   }
 
   /** Camera3D.make_current */
@@ -71,9 +72,9 @@ abstract class Camera3D extends Node3D {
   }
 
   /** Camera3D.clear_current */
-  final def clearCurrent(enable_next: Boolean): Unit = {
+  final def clearCurrent(enableNext: Boolean = true): Unit = {
     if (gdext.classes.Camera3D.mb_clear_current == null) gdext.classes.Camera3D.mb_clear_current = MethodBind.get("Camera3D", "clear_current", 3216645846L)
-    Ptrcall.callVoid1(gdext.classes.Camera3D.mb_clear_current, livePtr, enable_next)
+    Ptrcall.callVoid1(gdext.classes.Camera3D.mb_clear_current, livePtr, enableNext)
   }
 
   /** Camera3D.set_current */
@@ -161,13 +162,13 @@ abstract class Camera3D extends Node3D {
   }
 
   /** Camera3D.get_projection */
-  final def getProjection(): Long = {
+  final def getProjection(): gdext.classes.Camera3D.ProjectionType = {
     if (gdext.classes.Camera3D.mb_get_projection == null) gdext.classes.Camera3D.mb_get_projection = MethodBind.get("Camera3D", "get_projection", 2624185235L)
-    Ptrcall.call0[Long](gdext.classes.Camera3D.mb_get_projection, livePtr)
+    gdext.classes.Camera3D.ProjectionType(Ptrcall.call0[Long](gdext.classes.Camera3D.mb_get_projection, livePtr))
   }
 
   /** Camera3D.set_projection */
-  final def setProjection(mode: Long): Unit = {
+  final def setProjection(mode: gdext.classes.Camera3D.ProjectionType): Unit = {
     if (gdext.classes.Camera3D.mb_set_projection == null) gdext.classes.Camera3D.mb_set_projection = MethodBind.get("Camera3D", "set_projection", 4218540108L)
     Ptrcall.callVoid1(gdext.classes.Camera3D.mb_set_projection, livePtr, mode)
   }
@@ -245,45 +246,45 @@ abstract class Camera3D extends Node3D {
   }
 
   /** Camera3D.set_keep_aspect_mode */
-  final def setKeepAspectMode(mode: Long): Unit = {
+  final def setKeepAspectMode(mode: gdext.classes.Camera3D.KeepAspect): Unit = {
     if (gdext.classes.Camera3D.mb_set_keep_aspect_mode == null) gdext.classes.Camera3D.mb_set_keep_aspect_mode = MethodBind.get("Camera3D", "set_keep_aspect_mode", 1740651252L)
     Ptrcall.callVoid1(gdext.classes.Camera3D.mb_set_keep_aspect_mode, livePtr, mode)
   }
 
   /** Camera3D.get_keep_aspect_mode */
-  final def getKeepAspectMode(): Long = {
+  final def getKeepAspectMode(): gdext.classes.Camera3D.KeepAspect = {
     if (gdext.classes.Camera3D.mb_get_keep_aspect_mode == null) gdext.classes.Camera3D.mb_get_keep_aspect_mode = MethodBind.get("Camera3D", "get_keep_aspect_mode", 2790278316L)
-    Ptrcall.call0[Long](gdext.classes.Camera3D.mb_get_keep_aspect_mode, livePtr)
+    gdext.classes.Camera3D.KeepAspect(Ptrcall.call0[Long](gdext.classes.Camera3D.mb_get_keep_aspect_mode, livePtr))
   }
 
   /** Camera3D.set_doppler_tracking */
-  final def setDopplerTracking(mode: Long): Unit = {
+  final def setDopplerTracking(mode: gdext.classes.Camera3D.DopplerTracking): Unit = {
     if (gdext.classes.Camera3D.mb_set_doppler_tracking == null) gdext.classes.Camera3D.mb_set_doppler_tracking = MethodBind.get("Camera3D", "set_doppler_tracking", 3109431270L)
     Ptrcall.callVoid1(gdext.classes.Camera3D.mb_set_doppler_tracking, livePtr, mode)
   }
 
   /** Camera3D.get_doppler_tracking */
-  final def getDopplerTracking(): Long = {
+  final def getDopplerTracking(): gdext.classes.Camera3D.DopplerTracking = {
     if (gdext.classes.Camera3D.mb_get_doppler_tracking == null) gdext.classes.Camera3D.mb_get_doppler_tracking = MethodBind.get("Camera3D", "get_doppler_tracking", 1584483649L)
-    Ptrcall.call0[Long](gdext.classes.Camera3D.mb_get_doppler_tracking, livePtr)
+    gdext.classes.Camera3D.DopplerTracking(Ptrcall.call0[Long](gdext.classes.Camera3D.mb_get_doppler_tracking, livePtr))
   }
 
   /** Camera3D.is_position_in_frustum */
-  final def isPositionInFrustum(world_point: gdext.builtin.Vector3): Boolean = {
+  final def isPositionInFrustum(worldPoint: gdext.builtin.Vector3): Boolean = {
     if (gdext.classes.Camera3D.mb_is_position_in_frustum == null) gdext.classes.Camera3D.mb_is_position_in_frustum = MethodBind.get("Camera3D", "is_position_in_frustum", 3108956480L)
-    Ptrcall.call1[gdext.builtin.Vector3, Boolean](gdext.classes.Camera3D.mb_is_position_in_frustum, livePtr, world_point)
+    Ptrcall.call1[gdext.builtin.Vector3, Boolean](gdext.classes.Camera3D.mb_is_position_in_frustum, livePtr, worldPoint)
   }
 
   /** Camera3D.set_cull_mask_value */
-  final def setCullMaskValue(layer_number: Long, value: Boolean): Unit = {
+  final def setCullMaskValue(layerNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.Camera3D.mb_set_cull_mask_value == null) gdext.classes.Camera3D.mb_set_cull_mask_value = MethodBind.get("Camera3D", "set_cull_mask_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.Camera3D.mb_set_cull_mask_value, livePtr, layer_number, value)
+    Ptrcall.callVoid2(gdext.classes.Camera3D.mb_set_cull_mask_value, livePtr, layerNumber, value)
   }
 
   /** Camera3D.get_cull_mask_value */
-  final def getCullMaskValue(layer_number: Long): Boolean = {
+  final def getCullMaskValue(layerNumber: Long): Boolean = {
     if (gdext.classes.Camera3D.mb_get_cull_mask_value == null) gdext.classes.Camera3D.mb_get_cull_mask_value = MethodBind.get("Camera3D", "get_cull_mask_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.Camera3D.mb_get_cull_mask_value, livePtr, layer_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.Camera3D.mb_get_cull_mask_value, livePtr, layerNumber)
   }
 
 }
@@ -335,4 +336,74 @@ object Camera3D {
   private[classes] var mb_is_position_in_frustum: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_cull_mask_value: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_cull_mask_value: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `Camera3D.ProjectionType`. */
+  opaque type ProjectionType <: Long = Long
+
+  object ProjectionType {
+    final val Perspective: ProjectionType = 0L.asInstanceOf[ProjectionType]
+    final val Orthogonal: ProjectionType = 1L.asInstanceOf[ProjectionType]
+    final val Frustum: ProjectionType = 2L.asInstanceOf[ProjectionType]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ProjectionType = value.asInstanceOf[ProjectionType]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ProjectionType] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[ProjectionType]]
+
+    extension (self: ProjectionType)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Perspective"
+        case 1L => "Orthogonal"
+        case 2L => "Frustum"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Camera3D.KeepAspect`. */
+  opaque type KeepAspect <: Long = Long
+
+  object KeepAspect {
+    final val Width: KeepAspect = 0L.asInstanceOf[KeepAspect]
+    final val Height: KeepAspect = 1L.asInstanceOf[KeepAspect]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): KeepAspect = value.asInstanceOf[KeepAspect]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[KeepAspect] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[KeepAspect]]
+
+    extension (self: KeepAspect)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Width"
+        case 1L => "Height"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Camera3D.DopplerTracking`. */
+  opaque type DopplerTracking <: Long = Long
+
+  object DopplerTracking {
+    final val Disabled: DopplerTracking = 0L.asInstanceOf[DopplerTracking]
+    final val IdleStep: DopplerTracking = 1L.asInstanceOf[DopplerTracking]
+    final val PhysicsStep: DopplerTracking = 2L.asInstanceOf[DopplerTracking]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DopplerTracking = value.asInstanceOf[DopplerTracking]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DopplerTracking] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[DopplerTracking]]
+
+    extension (self: DopplerTracking)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "IdleStep"
+        case 2L => "PhysicsStep"
+        case other => other.toString
+      }
+  }
 }

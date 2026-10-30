@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class TCPServer extends SocketServer {
   override def godotClassName: String = "TCPServer"
 
   /** TCPServer.listen */
-  final def listen(port: Long, bind_address: String): Long = {
+  final def listen(port: Long, bindAddress: String = "*"): gdext.classes.Error = {
     if (gdext.classes.TCPServer.mb_listen == null) gdext.classes.TCPServer.mb_listen = MethodBind.get("TCPServer", "listen", 3167955072L)
-    Ptrcall.call2[Long, String, Long](gdext.classes.TCPServer.mb_listen, livePtr, port, bind_address)
+    gdext.classes.Error(Ptrcall.call2[Long, String, Long](gdext.classes.TCPServer.mb_listen, livePtr, port, bindAddress))
   }
 
   /** TCPServer.get_local_port */

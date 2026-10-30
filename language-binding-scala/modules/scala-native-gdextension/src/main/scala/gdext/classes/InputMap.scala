@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,69 +12,69 @@ abstract class InputMap extends Object {
   override def godotClassName: String = "InputMap"
 
   /** InputMap.has_action */
-  final def hasAction(action: gdext.builtin.StringName): Boolean = {
+  final def hasAction(action: String): Boolean = {
     if (gdext.classes.InputMap.mb_has_action == null) gdext.classes.InputMap.mb_has_action = MethodBind.get("InputMap", "has_action", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.InputMap.mb_has_action, livePtr, action)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.InputMap.mb_has_action, livePtr, SnArg(action))
   }
 
   /** InputMap.add_action */
-  final def addAction(action: gdext.builtin.StringName, deadzone: Double): Unit = {
+  final def addAction(action: String, deadzone: Double = 0.2): Unit = {
     if (gdext.classes.InputMap.mb_add_action == null) gdext.classes.InputMap.mb_add_action = MethodBind.get("InputMap", "add_action", 1195233573L)
-    Ptrcall.callVoid2(gdext.classes.InputMap.mb_add_action, livePtr, action, deadzone)
+    Ptrcall.callVoid2(gdext.classes.InputMap.mb_add_action, livePtr, SnArg(action), deadzone)
   }
 
   /** InputMap.erase_action */
-  final def eraseAction(action: gdext.builtin.StringName): Unit = {
+  final def eraseAction(action: String): Unit = {
     if (gdext.classes.InputMap.mb_erase_action == null) gdext.classes.InputMap.mb_erase_action = MethodBind.get("InputMap", "erase_action", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.InputMap.mb_erase_action, livePtr, action)
+    Ptrcall.callVoid1(gdext.classes.InputMap.mb_erase_action, livePtr, SnArg(action))
   }
 
   /** InputMap.get_action_description */
-  final def getActionDescription(action: gdext.builtin.StringName): String = {
+  final def getActionDescription(action: String): String = {
     if (gdext.classes.InputMap.mb_get_action_description == null) gdext.classes.InputMap.mb_get_action_description = MethodBind.get("InputMap", "get_action_description", 957595536L)
-    Ptrcall.call1[gdext.builtin.StringName, String](gdext.classes.InputMap.mb_get_action_description, livePtr, action)
+    Ptrcall.call1[SnArg, String](gdext.classes.InputMap.mb_get_action_description, livePtr, SnArg(action))
   }
 
   /** InputMap.action_set_deadzone */
-  final def actionSetDeadzone(action: gdext.builtin.StringName, deadzone: Double): Unit = {
+  final def actionSetDeadzone(action: String, deadzone: Double): Unit = {
     if (gdext.classes.InputMap.mb_action_set_deadzone == null) gdext.classes.InputMap.mb_action_set_deadzone = MethodBind.get("InputMap", "action_set_deadzone", 4135858297L)
-    Ptrcall.callVoid2(gdext.classes.InputMap.mb_action_set_deadzone, livePtr, action, deadzone)
+    Ptrcall.callVoid2(gdext.classes.InputMap.mb_action_set_deadzone, livePtr, SnArg(action), deadzone)
   }
 
   /** InputMap.action_get_deadzone */
-  final def actionGetDeadzone(action: gdext.builtin.StringName): Double = {
+  final def actionGetDeadzone(action: String): Double = {
     if (gdext.classes.InputMap.mb_action_get_deadzone == null) gdext.classes.InputMap.mb_action_get_deadzone = MethodBind.get("InputMap", "action_get_deadzone", 1391627649L)
-    Ptrcall.call1[gdext.builtin.StringName, Double](gdext.classes.InputMap.mb_action_get_deadzone, livePtr, action)
+    Ptrcall.call1[SnArg, Double](gdext.classes.InputMap.mb_action_get_deadzone, livePtr, SnArg(action))
   }
 
   /** InputMap.action_add_event */
-  final def actionAddEvent(action: gdext.builtin.StringName, event: InputEvent): Unit = {
+  final def actionAddEvent(action: String, event: InputEvent): Unit = {
     if (gdext.classes.InputMap.mb_action_add_event == null) gdext.classes.InputMap.mb_action_add_event = MethodBind.get("InputMap", "action_add_event", 518302593L)
-    Ptrcall.callVoid2(gdext.classes.InputMap.mb_action_add_event, livePtr, action, Wrappers.handle(event))
+    Ptrcall.callVoid2(gdext.classes.InputMap.mb_action_add_event, livePtr, SnArg(action), Wrappers.handle(event))
   }
 
   /** InputMap.action_has_event */
-  final def actionHasEvent(action: gdext.builtin.StringName, event: InputEvent): Boolean = {
+  final def actionHasEvent(action: String, event: InputEvent): Boolean = {
     if (gdext.classes.InputMap.mb_action_has_event == null) gdext.classes.InputMap.mb_action_has_event = MethodBind.get("InputMap", "action_has_event", 1185871985L)
-    Ptrcall.call2[gdext.builtin.StringName, GodotObject, Boolean](gdext.classes.InputMap.mb_action_has_event, livePtr, action, Wrappers.handle(event))
+    Ptrcall.call2[SnArg, GodotObject, Boolean](gdext.classes.InputMap.mb_action_has_event, livePtr, SnArg(action), Wrappers.handle(event))
   }
 
   /** InputMap.action_erase_event */
-  final def actionEraseEvent(action: gdext.builtin.StringName, event: InputEvent): Unit = {
+  final def actionEraseEvent(action: String, event: InputEvent): Unit = {
     if (gdext.classes.InputMap.mb_action_erase_event == null) gdext.classes.InputMap.mb_action_erase_event = MethodBind.get("InputMap", "action_erase_event", 518302593L)
-    Ptrcall.callVoid2(gdext.classes.InputMap.mb_action_erase_event, livePtr, action, Wrappers.handle(event))
+    Ptrcall.callVoid2(gdext.classes.InputMap.mb_action_erase_event, livePtr, SnArg(action), Wrappers.handle(event))
   }
 
   /** InputMap.action_erase_events */
-  final def actionEraseEvents(action: gdext.builtin.StringName): Unit = {
+  final def actionEraseEvents(action: String): Unit = {
     if (gdext.classes.InputMap.mb_action_erase_events == null) gdext.classes.InputMap.mb_action_erase_events = MethodBind.get("InputMap", "action_erase_events", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.InputMap.mb_action_erase_events, livePtr, action)
+    Ptrcall.callVoid1(gdext.classes.InputMap.mb_action_erase_events, livePtr, SnArg(action))
   }
 
   /** InputMap.event_is_action */
-  final def eventIsAction(event: InputEvent, action: gdext.builtin.StringName, exact_match: Boolean): Boolean = {
+  final def eventIsAction(event: InputEvent, action: String, exactMatch: Boolean = false): Boolean = {
     if (gdext.classes.InputMap.mb_event_is_action == null) gdext.classes.InputMap.mb_event_is_action = MethodBind.get("InputMap", "event_is_action", 3193353650L)
-    Ptrcall.call3[GodotObject, gdext.builtin.StringName, Boolean, Boolean](gdext.classes.InputMap.mb_event_is_action, livePtr, Wrappers.handle(event), action, exact_match)
+    Ptrcall.call3[GodotObject, SnArg, Boolean, Boolean](gdext.classes.InputMap.mb_event_is_action, livePtr, Wrappers.handle(event), SnArg(action), exactMatch)
   }
 
   /** InputMap.load_from_project_settings */
@@ -107,4 +108,52 @@ object InputMap {
         Godot.interface.global_get_singleton(StringNames.cached("InputMap").ptr)))
     instance
   }
+
+  /** Forwards to [[singleton]]: InputMap.has_action */
+  final def hasAction(action: String): Boolean =
+    singleton.hasAction(action)
+
+  /** Forwards to [[singleton]]: InputMap.add_action */
+  final def addAction(action: String, deadzone: Double = 0.2): Unit =
+    singleton.addAction(action, deadzone)
+
+  /** Forwards to [[singleton]]: InputMap.erase_action */
+  final def eraseAction(action: String): Unit =
+    singleton.eraseAction(action)
+
+  /** Forwards to [[singleton]]: InputMap.get_action_description */
+  final def getActionDescription(action: String): String =
+    singleton.getActionDescription(action)
+
+  /** Forwards to [[singleton]]: InputMap.action_set_deadzone */
+  final def actionSetDeadzone(action: String, deadzone: Double): Unit =
+    singleton.actionSetDeadzone(action, deadzone)
+
+  /** Forwards to [[singleton]]: InputMap.action_get_deadzone */
+  final def actionGetDeadzone(action: String): Double =
+    singleton.actionGetDeadzone(action)
+
+  /** Forwards to [[singleton]]: InputMap.action_add_event */
+  final def actionAddEvent(action: String, event: InputEvent): Unit =
+    singleton.actionAddEvent(action, event)
+
+  /** Forwards to [[singleton]]: InputMap.action_has_event */
+  final def actionHasEvent(action: String, event: InputEvent): Boolean =
+    singleton.actionHasEvent(action, event)
+
+  /** Forwards to [[singleton]]: InputMap.action_erase_event */
+  final def actionEraseEvent(action: String, event: InputEvent): Unit =
+    singleton.actionEraseEvent(action, event)
+
+  /** Forwards to [[singleton]]: InputMap.action_erase_events */
+  final def actionEraseEvents(action: String): Unit =
+    singleton.actionEraseEvents(action)
+
+  /** Forwards to [[singleton]]: InputMap.event_is_action */
+  final def eventIsAction(event: InputEvent, action: String, exactMatch: Boolean = false): Boolean =
+    singleton.eventIsAction(event, action, exactMatch)
+
+  /** Forwards to [[singleton]]: InputMap.load_from_project_settings */
+  final def loadFromProjectSettings(): Unit =
+    singleton.loadFromProjectSettings()
 }

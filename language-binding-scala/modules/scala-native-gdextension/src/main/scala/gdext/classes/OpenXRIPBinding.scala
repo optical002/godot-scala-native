@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class OpenXRIPBinding extends Resource {
   }
 
   /** OpenXRIPBinding.set_binding_path */
-  final def setBindingPath(binding_path: String): Unit = {
+  final def setBindingPath(bindingPath: String): Unit = {
     if (gdext.classes.OpenXRIPBinding.mb_set_binding_path == null) gdext.classes.OpenXRIPBinding.mb_set_binding_path = MethodBind.get("OpenXRIPBinding", "set_binding_path", 83702148L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRIPBinding.mb_set_binding_path, livePtr, binding_path)
+    Ptrcall.callVoid1(gdext.classes.OpenXRIPBinding.mb_set_binding_path, livePtr, bindingPath)
   }
 
   /** OpenXRIPBinding.get_binding_path */

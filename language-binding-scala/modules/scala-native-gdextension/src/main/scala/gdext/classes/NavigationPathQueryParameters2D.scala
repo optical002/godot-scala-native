@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,33 +12,33 @@ abstract class NavigationPathQueryParameters2D extends RefCounted {
   override def godotClassName: String = "NavigationPathQueryParameters2D"
 
   /** NavigationPathQueryParameters2D.set_pathfinding_algorithm */
-  final def setPathfindingAlgorithm(pathfinding_algorithm: Long): Unit = {
+  final def setPathfindingAlgorithm(pathfindingAlgorithm: gdext.classes.NavigationPathQueryParameters2D.PathfindingAlgorithm): Unit = {
     if (gdext.classes.NavigationPathQueryParameters2D.mb_set_pathfinding_algorithm == null) gdext.classes.NavigationPathQueryParameters2D.mb_set_pathfinding_algorithm = MethodBind.get("NavigationPathQueryParameters2D", "set_pathfinding_algorithm", 2783519915L)
-    Ptrcall.callVoid1(gdext.classes.NavigationPathQueryParameters2D.mb_set_pathfinding_algorithm, livePtr, pathfinding_algorithm)
+    Ptrcall.callVoid1(gdext.classes.NavigationPathQueryParameters2D.mb_set_pathfinding_algorithm, livePtr, pathfindingAlgorithm)
   }
 
   /** NavigationPathQueryParameters2D.get_pathfinding_algorithm */
-  final def getPathfindingAlgorithm(): Long = {
+  final def getPathfindingAlgorithm(): gdext.classes.NavigationPathQueryParameters2D.PathfindingAlgorithm = {
     if (gdext.classes.NavigationPathQueryParameters2D.mb_get_pathfinding_algorithm == null) gdext.classes.NavigationPathQueryParameters2D.mb_get_pathfinding_algorithm = MethodBind.get("NavigationPathQueryParameters2D", "get_pathfinding_algorithm", 3000421146L)
-    Ptrcall.call0[Long](gdext.classes.NavigationPathQueryParameters2D.mb_get_pathfinding_algorithm, livePtr)
+    gdext.classes.NavigationPathQueryParameters2D.PathfindingAlgorithm(Ptrcall.call0[Long](gdext.classes.NavigationPathQueryParameters2D.mb_get_pathfinding_algorithm, livePtr))
   }
 
   /** NavigationPathQueryParameters2D.set_path_postprocessing */
-  final def setPathPostprocessing(path_postprocessing: Long): Unit = {
+  final def setPathPostprocessing(pathPostprocessing: gdext.classes.NavigationPathQueryParameters2D.PathPostProcessing): Unit = {
     if (gdext.classes.NavigationPathQueryParameters2D.mb_set_path_postprocessing == null) gdext.classes.NavigationPathQueryParameters2D.mb_set_path_postprocessing = MethodBind.get("NavigationPathQueryParameters2D", "set_path_postprocessing", 2864409082L)
-    Ptrcall.callVoid1(gdext.classes.NavigationPathQueryParameters2D.mb_set_path_postprocessing, livePtr, path_postprocessing)
+    Ptrcall.callVoid1(gdext.classes.NavigationPathQueryParameters2D.mb_set_path_postprocessing, livePtr, pathPostprocessing)
   }
 
   /** NavigationPathQueryParameters2D.get_path_postprocessing */
-  final def getPathPostprocessing(): Long = {
+  final def getPathPostprocessing(): gdext.classes.NavigationPathQueryParameters2D.PathPostProcessing = {
     if (gdext.classes.NavigationPathQueryParameters2D.mb_get_path_postprocessing == null) gdext.classes.NavigationPathQueryParameters2D.mb_get_path_postprocessing = MethodBind.get("NavigationPathQueryParameters2D", "get_path_postprocessing", 3798118993L)
-    Ptrcall.call0[Long](gdext.classes.NavigationPathQueryParameters2D.mb_get_path_postprocessing, livePtr)
+    gdext.classes.NavigationPathQueryParameters2D.PathPostProcessing(Ptrcall.call0[Long](gdext.classes.NavigationPathQueryParameters2D.mb_get_path_postprocessing, livePtr))
   }
 
   /** NavigationPathQueryParameters2D.set_start_position */
-  final def setStartPosition(start_position: gdext.builtin.Vector2): Unit = {
+  final def setStartPosition(startPosition: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.NavigationPathQueryParameters2D.mb_set_start_position == null) gdext.classes.NavigationPathQueryParameters2D.mb_set_start_position = MethodBind.get("NavigationPathQueryParameters2D", "set_start_position", 743155724L)
-    Ptrcall.callVoid1(gdext.classes.NavigationPathQueryParameters2D.mb_set_start_position, livePtr, start_position)
+    Ptrcall.callVoid1(gdext.classes.NavigationPathQueryParameters2D.mb_set_start_position, livePtr, startPosition)
   }
 
   /** NavigationPathQueryParameters2D.get_start_position */
@@ -47,9 +48,9 @@ abstract class NavigationPathQueryParameters2D extends RefCounted {
   }
 
   /** NavigationPathQueryParameters2D.set_target_position */
-  final def setTargetPosition(target_position: gdext.builtin.Vector2): Unit = {
+  final def setTargetPosition(targetPosition: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.NavigationPathQueryParameters2D.mb_set_target_position == null) gdext.classes.NavigationPathQueryParameters2D.mb_set_target_position = MethodBind.get("NavigationPathQueryParameters2D", "set_target_position", 743155724L)
-    Ptrcall.callVoid1(gdext.classes.NavigationPathQueryParameters2D.mb_set_target_position, livePtr, target_position)
+    Ptrcall.callVoid1(gdext.classes.NavigationPathQueryParameters2D.mb_set_target_position, livePtr, targetPosition)
   }
 
   /** NavigationPathQueryParameters2D.get_target_position */
@@ -59,9 +60,9 @@ abstract class NavigationPathQueryParameters2D extends RefCounted {
   }
 
   /** NavigationPathQueryParameters2D.set_navigation_layers */
-  final def setNavigationLayers(navigation_layers: Long): Unit = {
+  final def setNavigationLayers(navigationLayers: Long): Unit = {
     if (gdext.classes.NavigationPathQueryParameters2D.mb_set_navigation_layers == null) gdext.classes.NavigationPathQueryParameters2D.mb_set_navigation_layers = MethodBind.get("NavigationPathQueryParameters2D", "set_navigation_layers", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.NavigationPathQueryParameters2D.mb_set_navigation_layers, livePtr, navigation_layers)
+    Ptrcall.callVoid1(gdext.classes.NavigationPathQueryParameters2D.mb_set_navigation_layers, livePtr, navigationLayers)
   }
 
   /** NavigationPathQueryParameters2D.get_navigation_layers */
@@ -71,15 +72,15 @@ abstract class NavigationPathQueryParameters2D extends RefCounted {
   }
 
   /** NavigationPathQueryParameters2D.set_metadata_flags */
-  final def setMetadataFlags(flags: Long): Unit = {
+  final def setMetadataFlags(flags: gdext.classes.NavigationPathQueryParameters2D.PathMetadataFlags): Unit = {
     if (gdext.classes.NavigationPathQueryParameters2D.mb_set_metadata_flags == null) gdext.classes.NavigationPathQueryParameters2D.mb_set_metadata_flags = MethodBind.get("NavigationPathQueryParameters2D", "set_metadata_flags", 24274129L)
-    Ptrcall.callVoid1(gdext.classes.NavigationPathQueryParameters2D.mb_set_metadata_flags, livePtr, flags)
+    Ptrcall.callVoid1(gdext.classes.NavigationPathQueryParameters2D.mb_set_metadata_flags, livePtr, flags.asInstanceOf[Long])
   }
 
   /** NavigationPathQueryParameters2D.get_metadata_flags */
-  final def getMetadataFlags(): Long = {
+  final def getMetadataFlags(): gdext.classes.NavigationPathQueryParameters2D.PathMetadataFlags = {
     if (gdext.classes.NavigationPathQueryParameters2D.mb_get_metadata_flags == null) gdext.classes.NavigationPathQueryParameters2D.mb_get_metadata_flags = MethodBind.get("NavigationPathQueryParameters2D", "get_metadata_flags", 488152976L)
-    Ptrcall.call0[Long](gdext.classes.NavigationPathQueryParameters2D.mb_get_metadata_flags, livePtr)
+    gdext.classes.NavigationPathQueryParameters2D.PathMetadataFlags(Ptrcall.call0[Long](gdext.classes.NavigationPathQueryParameters2D.mb_get_metadata_flags, livePtr))
   }
 
   /** NavigationPathQueryParameters2D.set_simplify_path */
@@ -131,9 +132,9 @@ abstract class NavigationPathQueryParameters2D extends RefCounted {
   }
 
   /** NavigationPathQueryParameters2D.set_path_search_max_polygons */
-  final def setPathSearchMaxPolygons(max_polygons: Long): Unit = {
+  final def setPathSearchMaxPolygons(maxPolygons: Long): Unit = {
     if (gdext.classes.NavigationPathQueryParameters2D.mb_set_path_search_max_polygons == null) gdext.classes.NavigationPathQueryParameters2D.mb_set_path_search_max_polygons = MethodBind.get("NavigationPathQueryParameters2D", "set_path_search_max_polygons", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.NavigationPathQueryParameters2D.mb_set_path_search_max_polygons, livePtr, max_polygons)
+    Ptrcall.callVoid1(gdext.classes.NavigationPathQueryParameters2D.mb_set_path_search_max_polygons, livePtr, maxPolygons)
   }
 
   /** NavigationPathQueryParameters2D.get_path_search_max_polygons */
@@ -181,4 +182,83 @@ object NavigationPathQueryParameters2D {
   private[classes] var mb_get_path_search_max_polygons: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_path_search_max_distance: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_path_search_max_distance: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `NavigationPathQueryParameters2D.PathfindingAlgorithm`. */
+  opaque type PathfindingAlgorithm <: Long = Long
+
+  object PathfindingAlgorithm {
+    final val PathfindingAlgorithmAstar: PathfindingAlgorithm = 0L.asInstanceOf[PathfindingAlgorithm]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): PathfindingAlgorithm = value.asInstanceOf[PathfindingAlgorithm]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[PathfindingAlgorithm] = scala.IArray[Long](0L).asInstanceOf[scala.IArray[PathfindingAlgorithm]]
+
+    extension (self: PathfindingAlgorithm)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "PathfindingAlgorithmAstar"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `NavigationPathQueryParameters2D.PathPostProcessing`. */
+  opaque type PathPostProcessing <: Long = Long
+
+  object PathPostProcessing {
+    final val Corridorfunnel: PathPostProcessing = 0L.asInstanceOf[PathPostProcessing]
+    final val Edgecentered: PathPostProcessing = 1L.asInstanceOf[PathPostProcessing]
+    final val None: PathPostProcessing = 2L.asInstanceOf[PathPostProcessing]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): PathPostProcessing = value.asInstanceOf[PathPostProcessing]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[PathPostProcessing] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[PathPostProcessing]]
+
+    extension (self: PathPostProcessing)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Corridorfunnel"
+        case 1L => "Edgecentered"
+        case 2L => "None"
+        case other => other.toString
+      }
+  }
+
+  /** Godot bitfield `NavigationPathQueryParameters2D.PathMetadataFlags`. */
+  opaque type PathMetadataFlags = Long
+
+  object PathMetadataFlags {
+    final val None: PathMetadataFlags = 0L.asInstanceOf[PathMetadataFlags]
+    final val Types: PathMetadataFlags = 1L.asInstanceOf[PathMetadataFlags]
+    final val Rids: PathMetadataFlags = 2L.asInstanceOf[PathMetadataFlags]
+    final val Owners: PathMetadataFlags = 4L.asInstanceOf[PathMetadataFlags]
+    final val All: PathMetadataFlags = 7L.asInstanceOf[PathMetadataFlags]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): PathMetadataFlags = value.asInstanceOf[PathMetadataFlags]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[PathMetadataFlags] = scala.IArray[Long](0L, 1L, 2L, 4L, 7L).asInstanceOf[scala.IArray[PathMetadataFlags]]
+
+    extension (self: PathMetadataFlags)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "None"
+        case 1L => "Types"
+        case 2L => "Rids"
+        case 4L => "Owners"
+        case 7L => "All"
+        case other => other.toString
+      }
+    extension (self: PathMetadataFlags) {
+      inline def value: Long = self.asInstanceOf[Long]
+      inline def |(other: PathMetadataFlags): PathMetadataFlags = (self.value | other.value).asInstanceOf[PathMetadataFlags]
+      inline def &(other: PathMetadataFlags): PathMetadataFlags = (self.value & other.value).asInstanceOf[PathMetadataFlags]
+      /** Every bit of `flag` is set. */
+      inline def has(flag: PathMetadataFlags): Boolean = (self.value & flag.value) == flag.value
+    }
+  }
 }

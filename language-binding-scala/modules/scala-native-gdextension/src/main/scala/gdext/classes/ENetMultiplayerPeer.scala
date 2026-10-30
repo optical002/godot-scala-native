@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,27 +12,27 @@ abstract class ENetMultiplayerPeer extends MultiplayerPeer {
   override def godotClassName: String = "ENetMultiplayerPeer"
 
   /** ENetMultiplayerPeer.create_server */
-  final def createServer(port: Long, max_clients: Long, max_channels: Long, in_bandwidth: Long, out_bandwidth: Long): Long = {
+  final def createServer(port: Long, maxClients: Long = 32L, maxChannels: Long = 0L, inBandwidth: Long = 0L, outBandwidth: Long = 0L): gdext.classes.Error = {
     if (gdext.classes.ENetMultiplayerPeer.mb_create_server == null) gdext.classes.ENetMultiplayerPeer.mb_create_server = MethodBind.get("ENetMultiplayerPeer", "create_server", 2917761309L)
-    Ptrcall.call5[Long, Long, Long, Long, Long, Long](gdext.classes.ENetMultiplayerPeer.mb_create_server, livePtr, port, max_clients, max_channels, in_bandwidth, out_bandwidth)
+    gdext.classes.Error(Ptrcall.call5[Long, Long, Long, Long, Long, Long](gdext.classes.ENetMultiplayerPeer.mb_create_server, livePtr, port, maxClients, maxChannels, inBandwidth, outBandwidth))
   }
 
   /** ENetMultiplayerPeer.create_client */
-  final def createClient(address: String, port: Long, channel_count: Long, in_bandwidth: Long, out_bandwidth: Long, local_port: Long): Long = {
+  final def createClient(address: String, port: Long, channelCount: Long = 0L, inBandwidth: Long = 0L, outBandwidth: Long = 0L, localPort: Long = 0L): gdext.classes.Error = {
     if (gdext.classes.ENetMultiplayerPeer.mb_create_client == null) gdext.classes.ENetMultiplayerPeer.mb_create_client = MethodBind.get("ENetMultiplayerPeer", "create_client", 2327163476L)
-    Ptrcall.call6[String, Long, Long, Long, Long, Long, Long](gdext.classes.ENetMultiplayerPeer.mb_create_client, livePtr, address, port, channel_count, in_bandwidth, out_bandwidth, local_port)
+    gdext.classes.Error(Ptrcall.call6[String, Long, Long, Long, Long, Long, Long](gdext.classes.ENetMultiplayerPeer.mb_create_client, livePtr, address, port, channelCount, inBandwidth, outBandwidth, localPort))
   }
 
   /** ENetMultiplayerPeer.create_mesh */
-  final def createMesh(unique_id: Long): Long = {
+  final def createMesh(uniqueId: Long): gdext.classes.Error = {
     if (gdext.classes.ENetMultiplayerPeer.mb_create_mesh == null) gdext.classes.ENetMultiplayerPeer.mb_create_mesh = MethodBind.get("ENetMultiplayerPeer", "create_mesh", 844576869L)
-    Ptrcall.call1[Long, Long](gdext.classes.ENetMultiplayerPeer.mb_create_mesh, livePtr, unique_id)
+    gdext.classes.Error(Ptrcall.call1[Long, Long](gdext.classes.ENetMultiplayerPeer.mb_create_mesh, livePtr, uniqueId))
   }
 
   /** ENetMultiplayerPeer.add_mesh_peer */
-  final def addMeshPeer(peer_id: Long, host: ENetConnection): Long = {
+  final def addMeshPeer(peerId: Long, host: ENetConnection): gdext.classes.Error = {
     if (gdext.classes.ENetMultiplayerPeer.mb_add_mesh_peer == null) gdext.classes.ENetMultiplayerPeer.mb_add_mesh_peer = MethodBind.get("ENetMultiplayerPeer", "add_mesh_peer", 1293458335L)
-    Ptrcall.call2[Long, GodotObject, Long](gdext.classes.ENetMultiplayerPeer.mb_add_mesh_peer, livePtr, peer_id, Wrappers.handle(host))
+    gdext.classes.Error(Ptrcall.call2[Long, GodotObject, Long](gdext.classes.ENetMultiplayerPeer.mb_add_mesh_peer, livePtr, peerId, Wrappers.handle(host)))
   }
 
   /** ENetMultiplayerPeer.set_bind_ip */

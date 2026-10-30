@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -29,21 +30,21 @@ abstract class Slider extends Range {
   }
 
   /** Slider.set_ticks_on_borders */
-  final def setTicksOnBorders(ticks_on_border: Boolean): Unit = {
+  final def setTicksOnBorders(ticksOnBorder: Boolean): Unit = {
     if (gdext.classes.Slider.mb_set_ticks_on_borders == null) gdext.classes.Slider.mb_set_ticks_on_borders = MethodBind.get("Slider", "set_ticks_on_borders", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.Slider.mb_set_ticks_on_borders, livePtr, ticks_on_border)
+    Ptrcall.callVoid1(gdext.classes.Slider.mb_set_ticks_on_borders, livePtr, ticksOnBorder)
   }
 
   /** Slider.get_ticks_position */
-  final def getTicksPosition(): Long = {
+  final def getTicksPosition(): gdext.classes.Slider.TickPosition = {
     if (gdext.classes.Slider.mb_get_ticks_position == null) gdext.classes.Slider.mb_get_ticks_position = MethodBind.get("Slider", "get_ticks_position", 3567635531L)
-    Ptrcall.call0[Long](gdext.classes.Slider.mb_get_ticks_position, livePtr)
+    gdext.classes.Slider.TickPosition(Ptrcall.call0[Long](gdext.classes.Slider.mb_get_ticks_position, livePtr))
   }
 
   /** Slider.set_ticks_position */
-  final def setTicksPosition(ticks_on_border: Long): Unit = {
+  final def setTicksPosition(ticksOnBorder: gdext.classes.Slider.TickPosition): Unit = {
     if (gdext.classes.Slider.mb_set_ticks_position == null) gdext.classes.Slider.mb_set_ticks_position = MethodBind.get("Slider", "set_ticks_position", 2952822224L)
-    Ptrcall.callVoid1(gdext.classes.Slider.mb_set_ticks_position, livePtr, ticks_on_border)
+    Ptrcall.callVoid1(gdext.classes.Slider.mb_set_ticks_position, livePtr, ticksOnBorder)
   }
 
   /** Slider.set_editable */
@@ -83,4 +84,30 @@ object Slider {
   private[classes] var mb_is_editable: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_scrollable: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_scrollable: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `Slider.TickPosition`. */
+  opaque type TickPosition <: Long = Long
+
+  object TickPosition {
+    final val BottomRight: TickPosition = 0L.asInstanceOf[TickPosition]
+    final val TopLeft: TickPosition = 1L.asInstanceOf[TickPosition]
+    final val Both: TickPosition = 2L.asInstanceOf[TickPosition]
+    final val Center: TickPosition = 3L.asInstanceOf[TickPosition]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): TickPosition = value.asInstanceOf[TickPosition]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[TickPosition] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[TickPosition]]
+
+    extension (self: TickPosition)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "BottomRight"
+        case 1L => "TopLeft"
+        case 2L => "Both"
+        case 3L => "Center"
+        case other => other.toString
+      }
+  }
 }

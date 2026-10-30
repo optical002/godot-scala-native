@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,7 +12,7 @@ abstract class EditorFileDialog extends FileDialog {
   override def godotClassName: String = "EditorFileDialog"
 
   /** EditorFileDialog.add_side_menu */
-  final def addSideMenu(menu: Control, title: String): Unit = {
+  final def addSideMenu(menu: Control, title: String = ""): Unit = {
     if (gdext.classes.EditorFileDialog.mb_add_side_menu == null) gdext.classes.EditorFileDialog.mb_add_side_menu = MethodBind.get("EditorFileDialog", "add_side_menu", 402368861L)
     Ptrcall.callVoid2(gdext.classes.EditorFileDialog.mb_add_side_menu, livePtr, Wrappers.handle(menu), title)
   }

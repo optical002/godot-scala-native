@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,15 +12,15 @@ abstract class AnimationNodeStateMachinePlayback extends Resource {
   override def godotClassName: String = "AnimationNodeStateMachinePlayback"
 
   /** AnimationNodeStateMachinePlayback.travel */
-  final def travel(to_node: gdext.builtin.StringName, reset_on_teleport: Boolean): Unit = {
+  final def travel(toNode: String, resetOnTeleport: Boolean = true): Unit = {
     if (gdext.classes.AnimationNodeStateMachinePlayback.mb_travel == null) gdext.classes.AnimationNodeStateMachinePlayback.mb_travel = MethodBind.get("AnimationNodeStateMachinePlayback", "travel", 3823612587L)
-    Ptrcall.callVoid2(gdext.classes.AnimationNodeStateMachinePlayback.mb_travel, livePtr, to_node, reset_on_teleport)
+    Ptrcall.callVoid2(gdext.classes.AnimationNodeStateMachinePlayback.mb_travel, livePtr, SnArg(toNode), resetOnTeleport)
   }
 
   /** AnimationNodeStateMachinePlayback.start */
-  final def start(node: gdext.builtin.StringName, reset: Boolean): Unit = {
+  final def start(node: String, reset: Boolean = true): Unit = {
     if (gdext.classes.AnimationNodeStateMachinePlayback.mb_start == null) gdext.classes.AnimationNodeStateMachinePlayback.mb_start = MethodBind.get("AnimationNodeStateMachinePlayback", "start", 3823612587L)
-    Ptrcall.callVoid2(gdext.classes.AnimationNodeStateMachinePlayback.mb_start, livePtr, node, reset)
+    Ptrcall.callVoid2(gdext.classes.AnimationNodeStateMachinePlayback.mb_start, livePtr, SnArg(node), reset)
   }
 
   /** AnimationNodeStateMachinePlayback.next */
@@ -41,9 +42,9 @@ abstract class AnimationNodeStateMachinePlayback extends Resource {
   }
 
   /** AnimationNodeStateMachinePlayback.get_current_node */
-  final def getCurrentNode(): gdext.builtin.StringName = {
+  final def getCurrentNode(): String = {
     if (gdext.classes.AnimationNodeStateMachinePlayback.mb_get_current_node == null) gdext.classes.AnimationNodeStateMachinePlayback.mb_get_current_node = MethodBind.get("AnimationNodeStateMachinePlayback", "get_current_node", 2002593661L)
-    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.AnimationNodeStateMachinePlayback.mb_get_current_node, livePtr)
+    Ptrcall.call0[SnArg](gdext.classes.AnimationNodeStateMachinePlayback.mb_get_current_node, livePtr)
   }
 
   /** AnimationNodeStateMachinePlayback.get_current_play_position */
@@ -59,9 +60,9 @@ abstract class AnimationNodeStateMachinePlayback extends Resource {
   }
 
   /** AnimationNodeStateMachinePlayback.get_fading_from_node */
-  final def getFadingFromNode(): gdext.builtin.StringName = {
+  final def getFadingFromNode(): String = {
     if (gdext.classes.AnimationNodeStateMachinePlayback.mb_get_fading_from_node == null) gdext.classes.AnimationNodeStateMachinePlayback.mb_get_fading_from_node = MethodBind.get("AnimationNodeStateMachinePlayback", "get_fading_from_node", 2002593661L)
-    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.AnimationNodeStateMachinePlayback.mb_get_fading_from_node, livePtr)
+    Ptrcall.call0[SnArg](gdext.classes.AnimationNodeStateMachinePlayback.mb_get_fading_from_node, livePtr)
   }
 
   /** AnimationNodeStateMachinePlayback.get_fading_from_play_position */

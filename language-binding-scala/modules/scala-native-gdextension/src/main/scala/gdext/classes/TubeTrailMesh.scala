@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class TubeTrailMesh extends PrimitiveMesh {
   }
 
   /** TubeTrailMesh.set_radial_steps */
-  final def setRadialSteps(radial_steps: Long): Unit = {
+  final def setRadialSteps(radialSteps: Long): Unit = {
     if (gdext.classes.TubeTrailMesh.mb_set_radial_steps == null) gdext.classes.TubeTrailMesh.mb_set_radial_steps = MethodBind.get("TubeTrailMesh", "set_radial_steps", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.TubeTrailMesh.mb_set_radial_steps, livePtr, radial_steps)
+    Ptrcall.callVoid1(gdext.classes.TubeTrailMesh.mb_set_radial_steps, livePtr, radialSteps)
   }
 
   /** TubeTrailMesh.get_radial_steps */
@@ -47,9 +48,9 @@ abstract class TubeTrailMesh extends PrimitiveMesh {
   }
 
   /** TubeTrailMesh.set_section_length */
-  final def setSectionLength(section_length: Double): Unit = {
+  final def setSectionLength(sectionLength: Double): Unit = {
     if (gdext.classes.TubeTrailMesh.mb_set_section_length == null) gdext.classes.TubeTrailMesh.mb_set_section_length = MethodBind.get("TubeTrailMesh", "set_section_length", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.TubeTrailMesh.mb_set_section_length, livePtr, section_length)
+    Ptrcall.callVoid1(gdext.classes.TubeTrailMesh.mb_set_section_length, livePtr, sectionLength)
   }
 
   /** TubeTrailMesh.get_section_length */
@@ -59,9 +60,9 @@ abstract class TubeTrailMesh extends PrimitiveMesh {
   }
 
   /** TubeTrailMesh.set_section_rings */
-  final def setSectionRings(section_rings: Long): Unit = {
+  final def setSectionRings(sectionRings: Long): Unit = {
     if (gdext.classes.TubeTrailMesh.mb_set_section_rings == null) gdext.classes.TubeTrailMesh.mb_set_section_rings = MethodBind.get("TubeTrailMesh", "set_section_rings", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.TubeTrailMesh.mb_set_section_rings, livePtr, section_rings)
+    Ptrcall.callVoid1(gdext.classes.TubeTrailMesh.mb_set_section_rings, livePtr, sectionRings)
   }
 
   /** TubeTrailMesh.get_section_rings */
@@ -71,9 +72,9 @@ abstract class TubeTrailMesh extends PrimitiveMesh {
   }
 
   /** TubeTrailMesh.set_cap_top */
-  final def setCapTop(cap_top: Boolean): Unit = {
+  final def setCapTop(capTop: Boolean): Unit = {
     if (gdext.classes.TubeTrailMesh.mb_set_cap_top == null) gdext.classes.TubeTrailMesh.mb_set_cap_top = MethodBind.get("TubeTrailMesh", "set_cap_top", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.TubeTrailMesh.mb_set_cap_top, livePtr, cap_top)
+    Ptrcall.callVoid1(gdext.classes.TubeTrailMesh.mb_set_cap_top, livePtr, capTop)
   }
 
   /** TubeTrailMesh.is_cap_top */
@@ -83,9 +84,9 @@ abstract class TubeTrailMesh extends PrimitiveMesh {
   }
 
   /** TubeTrailMesh.set_cap_bottom */
-  final def setCapBottom(cap_bottom: Boolean): Unit = {
+  final def setCapBottom(capBottom: Boolean): Unit = {
     if (gdext.classes.TubeTrailMesh.mb_set_cap_bottom == null) gdext.classes.TubeTrailMesh.mb_set_cap_bottom = MethodBind.get("TubeTrailMesh", "set_cap_bottom", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.TubeTrailMesh.mb_set_cap_bottom, livePtr, cap_bottom)
+    Ptrcall.callVoid1(gdext.classes.TubeTrailMesh.mb_set_cap_bottom, livePtr, capBottom)
   }
 
   /** TubeTrailMesh.is_cap_bottom */

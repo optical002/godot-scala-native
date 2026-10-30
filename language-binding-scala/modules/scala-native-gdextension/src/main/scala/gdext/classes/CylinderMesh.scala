@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -71,9 +72,9 @@ abstract class CylinderMesh extends PrimitiveMesh {
   }
 
   /** CylinderMesh.set_cap_top */
-  final def setCapTop(cap_top: Boolean): Unit = {
+  final def setCapTop(capTop: Boolean): Unit = {
     if (gdext.classes.CylinderMesh.mb_set_cap_top == null) gdext.classes.CylinderMesh.mb_set_cap_top = MethodBind.get("CylinderMesh", "set_cap_top", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.CylinderMesh.mb_set_cap_top, livePtr, cap_top)
+    Ptrcall.callVoid1(gdext.classes.CylinderMesh.mb_set_cap_top, livePtr, capTop)
   }
 
   /** CylinderMesh.is_cap_top */
@@ -83,9 +84,9 @@ abstract class CylinderMesh extends PrimitiveMesh {
   }
 
   /** CylinderMesh.set_cap_bottom */
-  final def setCapBottom(cap_bottom: Boolean): Unit = {
+  final def setCapBottom(capBottom: Boolean): Unit = {
     if (gdext.classes.CylinderMesh.mb_set_cap_bottom == null) gdext.classes.CylinderMesh.mb_set_cap_bottom = MethodBind.get("CylinderMesh", "set_cap_bottom", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.CylinderMesh.mb_set_cap_bottom, livePtr, cap_bottom)
+    Ptrcall.callVoid1(gdext.classes.CylinderMesh.mb_set_cap_bottom, livePtr, capBottom)
   }
 
   /** CylinderMesh.is_cap_bottom */

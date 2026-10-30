@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class CompressedTexture2D extends Texture2D {
   override def godotClassName: String = "CompressedTexture2D"
 
   /** CompressedTexture2D.load */
-  final def load(path: String): Long = {
+  final def load(path: String): gdext.classes.Error = {
     if (gdext.classes.CompressedTexture2D.mb_load == null) gdext.classes.CompressedTexture2D.mb_load = MethodBind.get("CompressedTexture2D", "load", 166001499L)
-    Ptrcall.call1[String, Long](gdext.classes.CompressedTexture2D.mb_load, livePtr, path)
+    gdext.classes.Error(Ptrcall.call1[String, Long](gdext.classes.CompressedTexture2D.mb_load, livePtr, path))
   }
 
   /** CompressedTexture2D.get_load_path */

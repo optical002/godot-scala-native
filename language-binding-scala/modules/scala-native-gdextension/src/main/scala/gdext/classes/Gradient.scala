@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -65,27 +66,27 @@ abstract class Gradient extends Resource {
   }
 
   /** Gradient.set_interpolation_mode */
-  final def setInterpolationMode(interpolation_mode: Long): Unit = {
+  final def setInterpolationMode(interpolationMode: gdext.classes.Gradient.InterpolationMode): Unit = {
     if (gdext.classes.Gradient.mb_set_interpolation_mode == null) gdext.classes.Gradient.mb_set_interpolation_mode = MethodBind.get("Gradient", "set_interpolation_mode", 1971444490L)
-    Ptrcall.callVoid1(gdext.classes.Gradient.mb_set_interpolation_mode, livePtr, interpolation_mode)
+    Ptrcall.callVoid1(gdext.classes.Gradient.mb_set_interpolation_mode, livePtr, interpolationMode)
   }
 
   /** Gradient.get_interpolation_mode */
-  final def getInterpolationMode(): Long = {
+  final def getInterpolationMode(): gdext.classes.Gradient.InterpolationMode = {
     if (gdext.classes.Gradient.mb_get_interpolation_mode == null) gdext.classes.Gradient.mb_get_interpolation_mode = MethodBind.get("Gradient", "get_interpolation_mode", 3674172981L)
-    Ptrcall.call0[Long](gdext.classes.Gradient.mb_get_interpolation_mode, livePtr)
+    gdext.classes.Gradient.InterpolationMode(Ptrcall.call0[Long](gdext.classes.Gradient.mb_get_interpolation_mode, livePtr))
   }
 
   /** Gradient.set_interpolation_color_space */
-  final def setInterpolationColorSpace(interpolation_color_space: Long): Unit = {
+  final def setInterpolationColorSpace(interpolationColorSpace: gdext.classes.Gradient.ColorSpace): Unit = {
     if (gdext.classes.Gradient.mb_set_interpolation_color_space == null) gdext.classes.Gradient.mb_set_interpolation_color_space = MethodBind.get("Gradient", "set_interpolation_color_space", 3685995981L)
-    Ptrcall.callVoid1(gdext.classes.Gradient.mb_set_interpolation_color_space, livePtr, interpolation_color_space)
+    Ptrcall.callVoid1(gdext.classes.Gradient.mb_set_interpolation_color_space, livePtr, interpolationColorSpace)
   }
 
   /** Gradient.get_interpolation_color_space */
-  final def getInterpolationColorSpace(): Long = {
+  final def getInterpolationColorSpace(): gdext.classes.Gradient.ColorSpace = {
     if (gdext.classes.Gradient.mb_get_interpolation_color_space == null) gdext.classes.Gradient.mb_get_interpolation_color_space = MethodBind.get("Gradient", "get_interpolation_color_space", 1538296000L)
-    Ptrcall.call0[Long](gdext.classes.Gradient.mb_get_interpolation_color_space, livePtr)
+    gdext.classes.Gradient.ColorSpace(Ptrcall.call0[Long](gdext.classes.Gradient.mb_get_interpolation_color_space, livePtr))
   }
 
 }
@@ -104,4 +105,52 @@ object Gradient {
   private[classes] var mb_get_interpolation_mode: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_interpolation_color_space: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_interpolation_color_space: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `Gradient.InterpolationMode`. */
+  opaque type InterpolationMode <: Long = Long
+
+  object InterpolationMode {
+    final val Linear: InterpolationMode = 0L.asInstanceOf[InterpolationMode]
+    final val Constant: InterpolationMode = 1L.asInstanceOf[InterpolationMode]
+    final val Cubic: InterpolationMode = 2L.asInstanceOf[InterpolationMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): InterpolationMode = value.asInstanceOf[InterpolationMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[InterpolationMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[InterpolationMode]]
+
+    extension (self: InterpolationMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Linear"
+        case 1L => "Constant"
+        case 2L => "Cubic"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Gradient.ColorSpace`. */
+  opaque type ColorSpace <: Long = Long
+
+  object ColorSpace {
+    final val Srgb: ColorSpace = 0L.asInstanceOf[ColorSpace]
+    final val LinearSrgb: ColorSpace = 1L.asInstanceOf[ColorSpace]
+    final val Oklab: ColorSpace = 2L.asInstanceOf[ColorSpace]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ColorSpace = value.asInstanceOf[ColorSpace]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ColorSpace] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[ColorSpace]]
+
+    extension (self: ColorSpace)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Srgb"
+        case 1L => "LinearSrgb"
+        case 2L => "Oklab"
+        case other => other.toString
+      }
+  }
 }

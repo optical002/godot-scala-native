@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,15 +24,15 @@ abstract class Window extends Viewport {
   }
 
   /** Window.set_initial_position */
-  final def setInitialPosition(initial_position: Long): Unit = {
+  final def setInitialPosition(initialPosition: gdext.classes.Window.WindowInitialPosition): Unit = {
     if (gdext.classes.Window.mb_set_initial_position == null) gdext.classes.Window.mb_set_initial_position = MethodBind.get("Window", "set_initial_position", 4084468099L)
-    Ptrcall.callVoid1(gdext.classes.Window.mb_set_initial_position, livePtr, initial_position)
+    Ptrcall.callVoid1(gdext.classes.Window.mb_set_initial_position, livePtr, initialPosition)
   }
 
   /** Window.get_initial_position */
-  final def getInitialPosition(): Long = {
+  final def getInitialPosition(): gdext.classes.Window.WindowInitialPosition = {
     if (gdext.classes.Window.mb_get_initial_position == null) gdext.classes.Window.mb_get_initial_position = MethodBind.get("Window", "get_initial_position", 4294066647L)
-    Ptrcall.call0[Long](gdext.classes.Window.mb_get_initial_position, livePtr)
+    gdext.classes.Window.WindowInitialPosition(Ptrcall.call0[Long](gdext.classes.Window.mb_get_initial_position, livePtr))
   }
 
   /** Window.set_current_screen */
@@ -95,9 +96,9 @@ abstract class Window extends Viewport {
   }
 
   /** Window.set_max_size */
-  final def setMaxSize(max_size: gdext.builtin.Vector2i): Unit = {
+  final def setMaxSize(maxSize: gdext.builtin.Vector2i): Unit = {
     if (gdext.classes.Window.mb_set_max_size == null) gdext.classes.Window.mb_set_max_size = MethodBind.get("Window", "set_max_size", 1130785943L)
-    Ptrcall.callVoid1(gdext.classes.Window.mb_set_max_size, livePtr, max_size)
+    Ptrcall.callVoid1(gdext.classes.Window.mb_set_max_size, livePtr, maxSize)
   }
 
   /** Window.get_max_size */
@@ -107,9 +108,9 @@ abstract class Window extends Viewport {
   }
 
   /** Window.set_min_size */
-  final def setMinSize(min_size: gdext.builtin.Vector2i): Unit = {
+  final def setMinSize(minSize: gdext.builtin.Vector2i): Unit = {
     if (gdext.classes.Window.mb_set_min_size == null) gdext.classes.Window.mb_set_min_size = MethodBind.get("Window", "set_min_size", 1130785943L)
-    Ptrcall.callVoid1(gdext.classes.Window.mb_set_min_size, livePtr, min_size)
+    Ptrcall.callVoid1(gdext.classes.Window.mb_set_min_size, livePtr, minSize)
   }
 
   /** Window.get_min_size */
@@ -119,25 +120,25 @@ abstract class Window extends Viewport {
   }
 
   /** Window.set_mode */
-  final def setMode(mode: Long): Unit = {
+  final def setMode(mode: gdext.classes.Window.Mode): Unit = {
     if (gdext.classes.Window.mb_set_mode == null) gdext.classes.Window.mb_set_mode = MethodBind.get("Window", "set_mode", 3095236531L)
     Ptrcall.callVoid1(gdext.classes.Window.mb_set_mode, livePtr, mode)
   }
 
   /** Window.get_mode */
-  final def getMode(): Long = {
+  final def getMode(): gdext.classes.Window.Mode = {
     if (gdext.classes.Window.mb_get_mode == null) gdext.classes.Window.mb_get_mode = MethodBind.get("Window", "get_mode", 2566346114L)
-    Ptrcall.call0[Long](gdext.classes.Window.mb_get_mode, livePtr)
+    gdext.classes.Window.Mode(Ptrcall.call0[Long](gdext.classes.Window.mb_get_mode, livePtr))
   }
 
   /** Window.set_flag */
-  final def setFlag(flag: Long, enabled: Boolean): Unit = {
+  final def setFlag(flag: gdext.classes.Window.Flags, enabled: Boolean): Unit = {
     if (gdext.classes.Window.mb_set_flag == null) gdext.classes.Window.mb_set_flag = MethodBind.get("Window", "set_flag", 3426449779L)
     Ptrcall.callVoid2(gdext.classes.Window.mb_set_flag, livePtr, flag, enabled)
   }
 
   /** Window.get_flag */
-  final def getFlag(flag: Long): Boolean = {
+  final def getFlag(flag: gdext.classes.Window.Flags): Boolean = {
     if (gdext.classes.Window.mb_get_flag == null) gdext.classes.Window.mb_get_flag = MethodBind.get("Window", "get_flag", 3062752289L)
     Ptrcall.call1[Long, Boolean](gdext.classes.Window.mb_get_flag, livePtr, flag)
   }
@@ -251,7 +252,7 @@ abstract class Window extends Viewport {
   }
 
   /** Window.start_resize */
-  final def startResize(edge: Long): Unit = {
+  final def startResize(edge: gdext.classes.DisplayServer.WindowResizeEdge): Unit = {
     if (gdext.classes.Window.mb_start_resize == null) gdext.classes.Window.mb_start_resize = MethodBind.get("Window", "start_resize", 122288853L)
     Ptrcall.callVoid1(gdext.classes.Window.mb_start_resize, livePtr, edge)
   }
@@ -281,9 +282,9 @@ abstract class Window extends Viewport {
   }
 
   /** Window.set_force_native */
-  final def setForceNative(force_native: Boolean): Unit = {
+  final def setForceNative(forceNative: Boolean): Unit = {
     if (gdext.classes.Window.mb_set_force_native == null) gdext.classes.Window.mb_set_force_native = MethodBind.get("Window", "set_force_native", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.Window.mb_set_force_native, livePtr, force_native)
+    Ptrcall.callVoid1(gdext.classes.Window.mb_set_force_native, livePtr, forceNative)
   }
 
   /** Window.get_force_native */
@@ -305,39 +306,39 @@ abstract class Window extends Viewport {
   }
 
   /** Window.set_content_scale_mode */
-  final def setContentScaleMode(mode: Long): Unit = {
+  final def setContentScaleMode(mode: gdext.classes.Window.ContentScaleMode): Unit = {
     if (gdext.classes.Window.mb_set_content_scale_mode == null) gdext.classes.Window.mb_set_content_scale_mode = MethodBind.get("Window", "set_content_scale_mode", 2937716473L)
     Ptrcall.callVoid1(gdext.classes.Window.mb_set_content_scale_mode, livePtr, mode)
   }
 
   /** Window.get_content_scale_mode */
-  final def getContentScaleMode(): Long = {
+  final def getContentScaleMode(): gdext.classes.Window.ContentScaleMode = {
     if (gdext.classes.Window.mb_get_content_scale_mode == null) gdext.classes.Window.mb_get_content_scale_mode = MethodBind.get("Window", "get_content_scale_mode", 161585230L)
-    Ptrcall.call0[Long](gdext.classes.Window.mb_get_content_scale_mode, livePtr)
+    gdext.classes.Window.ContentScaleMode(Ptrcall.call0[Long](gdext.classes.Window.mb_get_content_scale_mode, livePtr))
   }
 
   /** Window.set_content_scale_aspect */
-  final def setContentScaleAspect(aspect: Long): Unit = {
+  final def setContentScaleAspect(aspect: gdext.classes.Window.ContentScaleAspect): Unit = {
     if (gdext.classes.Window.mb_set_content_scale_aspect == null) gdext.classes.Window.mb_set_content_scale_aspect = MethodBind.get("Window", "set_content_scale_aspect", 2370399418L)
     Ptrcall.callVoid1(gdext.classes.Window.mb_set_content_scale_aspect, livePtr, aspect)
   }
 
   /** Window.get_content_scale_aspect */
-  final def getContentScaleAspect(): Long = {
+  final def getContentScaleAspect(): gdext.classes.Window.ContentScaleAspect = {
     if (gdext.classes.Window.mb_get_content_scale_aspect == null) gdext.classes.Window.mb_get_content_scale_aspect = MethodBind.get("Window", "get_content_scale_aspect", 4158790715L)
-    Ptrcall.call0[Long](gdext.classes.Window.mb_get_content_scale_aspect, livePtr)
+    gdext.classes.Window.ContentScaleAspect(Ptrcall.call0[Long](gdext.classes.Window.mb_get_content_scale_aspect, livePtr))
   }
 
   /** Window.set_content_scale_stretch */
-  final def setContentScaleStretch(stretch: Long): Unit = {
+  final def setContentScaleStretch(stretch: gdext.classes.Window.ContentScaleStretch): Unit = {
     if (gdext.classes.Window.mb_set_content_scale_stretch == null) gdext.classes.Window.mb_set_content_scale_stretch = MethodBind.get("Window", "set_content_scale_stretch", 349355940L)
     Ptrcall.callVoid1(gdext.classes.Window.mb_set_content_scale_stretch, livePtr, stretch)
   }
 
   /** Window.get_content_scale_stretch */
-  final def getContentScaleStretch(): Long = {
+  final def getContentScaleStretch(): gdext.classes.Window.ContentScaleStretch = {
     if (gdext.classes.Window.mb_get_content_scale_stretch == null) gdext.classes.Window.mb_get_content_scale_stretch = MethodBind.get("Window", "get_content_scale_stretch", 536857316L)
-    Ptrcall.call0[Long](gdext.classes.Window.mb_get_content_scale_stretch, livePtr)
+    gdext.classes.Window.ContentScaleStretch(Ptrcall.call0[Long](gdext.classes.Window.mb_get_content_scale_stretch, livePtr))
   }
 
   /** Window.set_nonclient_area */
@@ -353,9 +354,9 @@ abstract class Window extends Viewport {
   }
 
   /** Window.set_keep_title_visible */
-  final def setKeepTitleVisible(title_visible: Boolean): Unit = {
+  final def setKeepTitleVisible(titleVisible: Boolean): Unit = {
     if (gdext.classes.Window.mb_set_keep_title_visible == null) gdext.classes.Window.mb_set_keep_title_visible = MethodBind.get("Window", "set_keep_title_visible", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.Window.mb_set_keep_title_visible, livePtr, title_visible)
+    Ptrcall.callVoid1(gdext.classes.Window.mb_set_keep_title_visible, livePtr, titleVisible)
   }
 
   /** Window.get_keep_title_visible */
@@ -407,15 +408,15 @@ abstract class Window extends Viewport {
   }
 
   /** Window.set_theme_type_variation */
-  final def setThemeTypeVariation(theme_type: gdext.builtin.StringName): Unit = {
+  final def setThemeTypeVariation(themeType: String): Unit = {
     if (gdext.classes.Window.mb_set_theme_type_variation == null) gdext.classes.Window.mb_set_theme_type_variation = MethodBind.get("Window", "set_theme_type_variation", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.Window.mb_set_theme_type_variation, livePtr, theme_type)
+    Ptrcall.callVoid1(gdext.classes.Window.mb_set_theme_type_variation, livePtr, SnArg(themeType))
   }
 
   /** Window.get_theme_type_variation */
-  final def getThemeTypeVariation(): gdext.builtin.StringName = {
+  final def getThemeTypeVariation(): String = {
     if (gdext.classes.Window.mb_get_theme_type_variation == null) gdext.classes.Window.mb_get_theme_type_variation = MethodBind.get("Window", "get_theme_type_variation", 2002593661L)
-    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.Window.mb_get_theme_type_variation, livePtr)
+    Ptrcall.call0[SnArg](gdext.classes.Window.mb_get_theme_type_variation, livePtr)
   }
 
   /** Window.begin_bulk_theme_override */
@@ -431,183 +432,183 @@ abstract class Window extends Viewport {
   }
 
   /** Window.add_theme_icon_override */
-  final def addThemeIconOverride(name: gdext.builtin.StringName, texture: Texture2D): Unit = {
+  final def addThemeIconOverride(name: String, texture: Texture2D): Unit = {
     if (gdext.classes.Window.mb_add_theme_icon_override == null) gdext.classes.Window.mb_add_theme_icon_override = MethodBind.get("Window", "add_theme_icon_override", 1373065600L)
-    Ptrcall.callVoid2(gdext.classes.Window.mb_add_theme_icon_override, livePtr, name, Wrappers.handle(texture))
+    Ptrcall.callVoid2(gdext.classes.Window.mb_add_theme_icon_override, livePtr, SnArg(name), Wrappers.handle(texture))
   }
 
   /** Window.add_theme_stylebox_override */
-  final def addThemeStyleboxOverride(name: gdext.builtin.StringName, stylebox: StyleBox): Unit = {
+  final def addThemeStyleboxOverride(name: String, stylebox: StyleBox): Unit = {
     if (gdext.classes.Window.mb_add_theme_stylebox_override == null) gdext.classes.Window.mb_add_theme_stylebox_override = MethodBind.get("Window", "add_theme_stylebox_override", 4188838905L)
-    Ptrcall.callVoid2(gdext.classes.Window.mb_add_theme_stylebox_override, livePtr, name, Wrappers.handle(stylebox))
+    Ptrcall.callVoid2(gdext.classes.Window.mb_add_theme_stylebox_override, livePtr, SnArg(name), Wrappers.handle(stylebox))
   }
 
   /** Window.add_theme_font_override */
-  final def addThemeFontOverride(name: gdext.builtin.StringName, font: Font): Unit = {
+  final def addThemeFontOverride(name: String, font: Font): Unit = {
     if (gdext.classes.Window.mb_add_theme_font_override == null) gdext.classes.Window.mb_add_theme_font_override = MethodBind.get("Window", "add_theme_font_override", 3518018674L)
-    Ptrcall.callVoid2(gdext.classes.Window.mb_add_theme_font_override, livePtr, name, Wrappers.handle(font))
+    Ptrcall.callVoid2(gdext.classes.Window.mb_add_theme_font_override, livePtr, SnArg(name), Wrappers.handle(font))
   }
 
   /** Window.add_theme_font_size_override */
-  final def addThemeFontSizeOverride(name: gdext.builtin.StringName, font_size: Long): Unit = {
+  final def addThemeFontSizeOverride(name: String, fontSize: Long): Unit = {
     if (gdext.classes.Window.mb_add_theme_font_size_override == null) gdext.classes.Window.mb_add_theme_font_size_override = MethodBind.get("Window", "add_theme_font_size_override", 2415702435L)
-    Ptrcall.callVoid2(gdext.classes.Window.mb_add_theme_font_size_override, livePtr, name, font_size)
+    Ptrcall.callVoid2(gdext.classes.Window.mb_add_theme_font_size_override, livePtr, SnArg(name), fontSize)
   }
 
   /** Window.add_theme_color_override */
-  final def addThemeColorOverride(name: gdext.builtin.StringName, color: gdext.builtin.Color): Unit = {
+  final def addThemeColorOverride(name: String, color: gdext.builtin.Color): Unit = {
     if (gdext.classes.Window.mb_add_theme_color_override == null) gdext.classes.Window.mb_add_theme_color_override = MethodBind.get("Window", "add_theme_color_override", 4260178595L)
-    Ptrcall.callVoid2(gdext.classes.Window.mb_add_theme_color_override, livePtr, name, color)
+    Ptrcall.callVoid2(gdext.classes.Window.mb_add_theme_color_override, livePtr, SnArg(name), color)
   }
 
   /** Window.add_theme_constant_override */
-  final def addThemeConstantOverride(name: gdext.builtin.StringName, constant: Long): Unit = {
+  final def addThemeConstantOverride(name: String, constant: Long): Unit = {
     if (gdext.classes.Window.mb_add_theme_constant_override == null) gdext.classes.Window.mb_add_theme_constant_override = MethodBind.get("Window", "add_theme_constant_override", 2415702435L)
-    Ptrcall.callVoid2(gdext.classes.Window.mb_add_theme_constant_override, livePtr, name, constant)
+    Ptrcall.callVoid2(gdext.classes.Window.mb_add_theme_constant_override, livePtr, SnArg(name), constant)
   }
 
   /** Window.remove_theme_icon_override */
-  final def removeThemeIconOverride(name: gdext.builtin.StringName): Unit = {
+  final def removeThemeIconOverride(name: String): Unit = {
     if (gdext.classes.Window.mb_remove_theme_icon_override == null) gdext.classes.Window.mb_remove_theme_icon_override = MethodBind.get("Window", "remove_theme_icon_override", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.Window.mb_remove_theme_icon_override, livePtr, name)
+    Ptrcall.callVoid1(gdext.classes.Window.mb_remove_theme_icon_override, livePtr, SnArg(name))
   }
 
   /** Window.remove_theme_stylebox_override */
-  final def removeThemeStyleboxOverride(name: gdext.builtin.StringName): Unit = {
+  final def removeThemeStyleboxOverride(name: String): Unit = {
     if (gdext.classes.Window.mb_remove_theme_stylebox_override == null) gdext.classes.Window.mb_remove_theme_stylebox_override = MethodBind.get("Window", "remove_theme_stylebox_override", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.Window.mb_remove_theme_stylebox_override, livePtr, name)
+    Ptrcall.callVoid1(gdext.classes.Window.mb_remove_theme_stylebox_override, livePtr, SnArg(name))
   }
 
   /** Window.remove_theme_font_override */
-  final def removeThemeFontOverride(name: gdext.builtin.StringName): Unit = {
+  final def removeThemeFontOverride(name: String): Unit = {
     if (gdext.classes.Window.mb_remove_theme_font_override == null) gdext.classes.Window.mb_remove_theme_font_override = MethodBind.get("Window", "remove_theme_font_override", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.Window.mb_remove_theme_font_override, livePtr, name)
+    Ptrcall.callVoid1(gdext.classes.Window.mb_remove_theme_font_override, livePtr, SnArg(name))
   }
 
   /** Window.remove_theme_font_size_override */
-  final def removeThemeFontSizeOverride(name: gdext.builtin.StringName): Unit = {
+  final def removeThemeFontSizeOverride(name: String): Unit = {
     if (gdext.classes.Window.mb_remove_theme_font_size_override == null) gdext.classes.Window.mb_remove_theme_font_size_override = MethodBind.get("Window", "remove_theme_font_size_override", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.Window.mb_remove_theme_font_size_override, livePtr, name)
+    Ptrcall.callVoid1(gdext.classes.Window.mb_remove_theme_font_size_override, livePtr, SnArg(name))
   }
 
   /** Window.remove_theme_color_override */
-  final def removeThemeColorOverride(name: gdext.builtin.StringName): Unit = {
+  final def removeThemeColorOverride(name: String): Unit = {
     if (gdext.classes.Window.mb_remove_theme_color_override == null) gdext.classes.Window.mb_remove_theme_color_override = MethodBind.get("Window", "remove_theme_color_override", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.Window.mb_remove_theme_color_override, livePtr, name)
+    Ptrcall.callVoid1(gdext.classes.Window.mb_remove_theme_color_override, livePtr, SnArg(name))
   }
 
   /** Window.remove_theme_constant_override */
-  final def removeThemeConstantOverride(name: gdext.builtin.StringName): Unit = {
+  final def removeThemeConstantOverride(name: String): Unit = {
     if (gdext.classes.Window.mb_remove_theme_constant_override == null) gdext.classes.Window.mb_remove_theme_constant_override = MethodBind.get("Window", "remove_theme_constant_override", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.Window.mb_remove_theme_constant_override, livePtr, name)
+    Ptrcall.callVoid1(gdext.classes.Window.mb_remove_theme_constant_override, livePtr, SnArg(name))
   }
 
   /** Window.get_theme_icon. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getThemeIcon(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName): Texture2D = {
+  final def getThemeIcon(name: String, themeType: String = ""): Texture2D = {
     if (gdext.classes.Window.mb_get_theme_icon == null) gdext.classes.Window.mb_get_theme_icon = MethodBind.get("Window", "get_theme_icon", 3163973443L)
-    Wrappers.owned[Texture2D](Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Long](gdext.classes.Window.mb_get_theme_icon, livePtr, name, theme_type))
+    Wrappers.owned[Texture2D](Ptrcall.call2[SnArg, SnArg, Long](gdext.classes.Window.mb_get_theme_icon, livePtr, SnArg(name), SnArg(themeType)))
   }
 
   /** Window.get_theme_stylebox. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getThemeStylebox(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName): StyleBox = {
+  final def getThemeStylebox(name: String, themeType: String = ""): StyleBox = {
     if (gdext.classes.Window.mb_get_theme_stylebox == null) gdext.classes.Window.mb_get_theme_stylebox = MethodBind.get("Window", "get_theme_stylebox", 604739069L)
-    Wrappers.owned[StyleBox](Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Long](gdext.classes.Window.mb_get_theme_stylebox, livePtr, name, theme_type))
+    Wrappers.owned[StyleBox](Ptrcall.call2[SnArg, SnArg, Long](gdext.classes.Window.mb_get_theme_stylebox, livePtr, SnArg(name), SnArg(themeType)))
   }
 
   /** Window.get_theme_font. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getThemeFont(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName): Font = {
+  final def getThemeFont(name: String, themeType: String = ""): Font = {
     if (gdext.classes.Window.mb_get_theme_font == null) gdext.classes.Window.mb_get_theme_font = MethodBind.get("Window", "get_theme_font", 2826986490L)
-    Wrappers.owned[Font](Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Long](gdext.classes.Window.mb_get_theme_font, livePtr, name, theme_type))
+    Wrappers.owned[Font](Ptrcall.call2[SnArg, SnArg, Long](gdext.classes.Window.mb_get_theme_font, livePtr, SnArg(name), SnArg(themeType)))
   }
 
   /** Window.get_theme_font_size */
-  final def getThemeFontSize(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName): Long = {
+  final def getThemeFontSize(name: String, themeType: String = ""): Long = {
     if (gdext.classes.Window.mb_get_theme_font_size == null) gdext.classes.Window.mb_get_theme_font_size = MethodBind.get("Window", "get_theme_font_size", 1327056374L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Long](gdext.classes.Window.mb_get_theme_font_size, livePtr, name, theme_type)
+    Ptrcall.call2[SnArg, SnArg, Long](gdext.classes.Window.mb_get_theme_font_size, livePtr, SnArg(name), SnArg(themeType))
   }
 
   /** Window.get_theme_color */
-  final def getThemeColor(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName): gdext.builtin.Color = {
+  final def getThemeColor(name: String, themeType: String = ""): gdext.builtin.Color = {
     if (gdext.classes.Window.mb_get_theme_color == null) gdext.classes.Window.mb_get_theme_color = MethodBind.get("Window", "get_theme_color", 2798751242L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, gdext.builtin.Color](gdext.classes.Window.mb_get_theme_color, livePtr, name, theme_type)
+    Ptrcall.call2[SnArg, SnArg, gdext.builtin.Color](gdext.classes.Window.mb_get_theme_color, livePtr, SnArg(name), SnArg(themeType))
   }
 
   /** Window.get_theme_constant */
-  final def getThemeConstant(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName): Long = {
+  final def getThemeConstant(name: String, themeType: String = ""): Long = {
     if (gdext.classes.Window.mb_get_theme_constant == null) gdext.classes.Window.mb_get_theme_constant = MethodBind.get("Window", "get_theme_constant", 1327056374L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Long](gdext.classes.Window.mb_get_theme_constant, livePtr, name, theme_type)
+    Ptrcall.call2[SnArg, SnArg, Long](gdext.classes.Window.mb_get_theme_constant, livePtr, SnArg(name), SnArg(themeType))
   }
 
   /** Window.has_theme_icon_override */
-  final def hasThemeIconOverride(name: gdext.builtin.StringName): Boolean = {
+  final def hasThemeIconOverride(name: String): Boolean = {
     if (gdext.classes.Window.mb_has_theme_icon_override == null) gdext.classes.Window.mb_has_theme_icon_override = MethodBind.get("Window", "has_theme_icon_override", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.Window.mb_has_theme_icon_override, livePtr, name)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.Window.mb_has_theme_icon_override, livePtr, SnArg(name))
   }
 
   /** Window.has_theme_stylebox_override */
-  final def hasThemeStyleboxOverride(name: gdext.builtin.StringName): Boolean = {
+  final def hasThemeStyleboxOverride(name: String): Boolean = {
     if (gdext.classes.Window.mb_has_theme_stylebox_override == null) gdext.classes.Window.mb_has_theme_stylebox_override = MethodBind.get("Window", "has_theme_stylebox_override", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.Window.mb_has_theme_stylebox_override, livePtr, name)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.Window.mb_has_theme_stylebox_override, livePtr, SnArg(name))
   }
 
   /** Window.has_theme_font_override */
-  final def hasThemeFontOverride(name: gdext.builtin.StringName): Boolean = {
+  final def hasThemeFontOverride(name: String): Boolean = {
     if (gdext.classes.Window.mb_has_theme_font_override == null) gdext.classes.Window.mb_has_theme_font_override = MethodBind.get("Window", "has_theme_font_override", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.Window.mb_has_theme_font_override, livePtr, name)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.Window.mb_has_theme_font_override, livePtr, SnArg(name))
   }
 
   /** Window.has_theme_font_size_override */
-  final def hasThemeFontSizeOverride(name: gdext.builtin.StringName): Boolean = {
+  final def hasThemeFontSizeOverride(name: String): Boolean = {
     if (gdext.classes.Window.mb_has_theme_font_size_override == null) gdext.classes.Window.mb_has_theme_font_size_override = MethodBind.get("Window", "has_theme_font_size_override", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.Window.mb_has_theme_font_size_override, livePtr, name)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.Window.mb_has_theme_font_size_override, livePtr, SnArg(name))
   }
 
   /** Window.has_theme_color_override */
-  final def hasThemeColorOverride(name: gdext.builtin.StringName): Boolean = {
+  final def hasThemeColorOverride(name: String): Boolean = {
     if (gdext.classes.Window.mb_has_theme_color_override == null) gdext.classes.Window.mb_has_theme_color_override = MethodBind.get("Window", "has_theme_color_override", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.Window.mb_has_theme_color_override, livePtr, name)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.Window.mb_has_theme_color_override, livePtr, SnArg(name))
   }
 
   /** Window.has_theme_constant_override */
-  final def hasThemeConstantOverride(name: gdext.builtin.StringName): Boolean = {
+  final def hasThemeConstantOverride(name: String): Boolean = {
     if (gdext.classes.Window.mb_has_theme_constant_override == null) gdext.classes.Window.mb_has_theme_constant_override = MethodBind.get("Window", "has_theme_constant_override", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.Window.mb_has_theme_constant_override, livePtr, name)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.Window.mb_has_theme_constant_override, livePtr, SnArg(name))
   }
 
   /** Window.has_theme_icon */
-  final def hasThemeIcon(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName): Boolean = {
+  final def hasThemeIcon(name: String, themeType: String = ""): Boolean = {
     if (gdext.classes.Window.mb_has_theme_icon == null) gdext.classes.Window.mb_has_theme_icon = MethodBind.get("Window", "has_theme_icon", 866386512L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Boolean](gdext.classes.Window.mb_has_theme_icon, livePtr, name, theme_type)
+    Ptrcall.call2[SnArg, SnArg, Boolean](gdext.classes.Window.mb_has_theme_icon, livePtr, SnArg(name), SnArg(themeType))
   }
 
   /** Window.has_theme_stylebox */
-  final def hasThemeStylebox(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName): Boolean = {
+  final def hasThemeStylebox(name: String, themeType: String = ""): Boolean = {
     if (gdext.classes.Window.mb_has_theme_stylebox == null) gdext.classes.Window.mb_has_theme_stylebox = MethodBind.get("Window", "has_theme_stylebox", 866386512L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Boolean](gdext.classes.Window.mb_has_theme_stylebox, livePtr, name, theme_type)
+    Ptrcall.call2[SnArg, SnArg, Boolean](gdext.classes.Window.mb_has_theme_stylebox, livePtr, SnArg(name), SnArg(themeType))
   }
 
   /** Window.has_theme_font */
-  final def hasThemeFont(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName): Boolean = {
+  final def hasThemeFont(name: String, themeType: String = ""): Boolean = {
     if (gdext.classes.Window.mb_has_theme_font == null) gdext.classes.Window.mb_has_theme_font = MethodBind.get("Window", "has_theme_font", 866386512L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Boolean](gdext.classes.Window.mb_has_theme_font, livePtr, name, theme_type)
+    Ptrcall.call2[SnArg, SnArg, Boolean](gdext.classes.Window.mb_has_theme_font, livePtr, SnArg(name), SnArg(themeType))
   }
 
   /** Window.has_theme_font_size */
-  final def hasThemeFontSize(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName): Boolean = {
+  final def hasThemeFontSize(name: String, themeType: String = ""): Boolean = {
     if (gdext.classes.Window.mb_has_theme_font_size == null) gdext.classes.Window.mb_has_theme_font_size = MethodBind.get("Window", "has_theme_font_size", 866386512L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Boolean](gdext.classes.Window.mb_has_theme_font_size, livePtr, name, theme_type)
+    Ptrcall.call2[SnArg, SnArg, Boolean](gdext.classes.Window.mb_has_theme_font_size, livePtr, SnArg(name), SnArg(themeType))
   }
 
   /** Window.has_theme_color */
-  final def hasThemeColor(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName): Boolean = {
+  final def hasThemeColor(name: String, themeType: String = ""): Boolean = {
     if (gdext.classes.Window.mb_has_theme_color == null) gdext.classes.Window.mb_has_theme_color = MethodBind.get("Window", "has_theme_color", 866386512L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Boolean](gdext.classes.Window.mb_has_theme_color, livePtr, name, theme_type)
+    Ptrcall.call2[SnArg, SnArg, Boolean](gdext.classes.Window.mb_has_theme_color, livePtr, SnArg(name), SnArg(themeType))
   }
 
   /** Window.has_theme_constant */
-  final def hasThemeConstant(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName): Boolean = {
+  final def hasThemeConstant(name: String, themeType: String = ""): Boolean = {
     if (gdext.classes.Window.mb_has_theme_constant == null) gdext.classes.Window.mb_has_theme_constant = MethodBind.get("Window", "has_theme_constant", 866386512L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Boolean](gdext.classes.Window.mb_has_theme_constant, livePtr, name, theme_type)
+    Ptrcall.call2[SnArg, SnArg, Boolean](gdext.classes.Window.mb_has_theme_constant, livePtr, SnArg(name), SnArg(themeType))
   }
 
   /** Window.get_theme_default_base_scale */
@@ -659,15 +660,15 @@ abstract class Window extends Viewport {
   }
 
   /** Window.set_layout_direction */
-  final def setLayoutDirection(direction: Long): Unit = {
+  final def setLayoutDirection(direction: gdext.classes.Window.LayoutDirection): Unit = {
     if (gdext.classes.Window.mb_set_layout_direction == null) gdext.classes.Window.mb_set_layout_direction = MethodBind.get("Window", "set_layout_direction", 3094704184L)
     Ptrcall.callVoid1(gdext.classes.Window.mb_set_layout_direction, livePtr, direction)
   }
 
   /** Window.get_layout_direction */
-  final def getLayoutDirection(): Long = {
+  final def getLayoutDirection(): gdext.classes.Window.LayoutDirection = {
     if (gdext.classes.Window.mb_get_layout_direction == null) gdext.classes.Window.mb_get_layout_direction = MethodBind.get("Window", "get_layout_direction", 3909617982L)
-    Ptrcall.call0[Long](gdext.classes.Window.mb_get_layout_direction, livePtr)
+    gdext.classes.Window.LayoutDirection(Ptrcall.call0[Long](gdext.classes.Window.mb_get_layout_direction, livePtr))
   }
 
   /** Window.is_layout_rtl */
@@ -707,57 +708,57 @@ abstract class Window extends Viewport {
   }
 
   /** Window.popup_on_parent */
-  final def popupOnParent(parent_rect: gdext.builtin.Rect2i): Unit = {
+  final def popupOnParent(parentRect: gdext.builtin.Rect2i): Unit = {
     if (gdext.classes.Window.mb_popup_on_parent == null) gdext.classes.Window.mb_popup_on_parent = MethodBind.get("Window", "popup_on_parent", 1763793166L)
-    Ptrcall.callVoid1(gdext.classes.Window.mb_popup_on_parent, livePtr, parent_rect)
+    Ptrcall.callVoid1(gdext.classes.Window.mb_popup_on_parent, livePtr, parentRect)
   }
 
   /** Window.popup_centered */
-  final def popupCentered(minsize: gdext.builtin.Vector2i): Unit = {
+  final def popupCentered(minsize: gdext.builtin.Vector2i = gdext.builtin.Vector2i(0, 0)): Unit = {
     if (gdext.classes.Window.mb_popup_centered == null) gdext.classes.Window.mb_popup_centered = MethodBind.get("Window", "popup_centered", 3447975422L)
     Ptrcall.callVoid1(gdext.classes.Window.mb_popup_centered, livePtr, minsize)
   }
 
   /** Window.popup_centered_ratio */
-  final def popupCenteredRatio(ratio: Double): Unit = {
+  final def popupCenteredRatio(ratio: Double = 0.8): Unit = {
     if (gdext.classes.Window.mb_popup_centered_ratio == null) gdext.classes.Window.mb_popup_centered_ratio = MethodBind.get("Window", "popup_centered_ratio", 1014814997L)
     Ptrcall.callVoid1(gdext.classes.Window.mb_popup_centered_ratio, livePtr, ratio)
   }
 
   /** Window.popup_centered_clamped */
-  final def popupCenteredClamped(minsize: gdext.builtin.Vector2i, fallback_ratio: Double): Unit = {
+  final def popupCenteredClamped(minsize: gdext.builtin.Vector2i = gdext.builtin.Vector2i(0, 0), fallbackRatio: Double = 0.75): Unit = {
     if (gdext.classes.Window.mb_popup_centered_clamped == null) gdext.classes.Window.mb_popup_centered_clamped = MethodBind.get("Window", "popup_centered_clamped", 2613752477L)
-    Ptrcall.callVoid2(gdext.classes.Window.mb_popup_centered_clamped, livePtr, minsize, fallback_ratio)
+    Ptrcall.callVoid2(gdext.classes.Window.mb_popup_centered_clamped, livePtr, minsize, fallbackRatio)
   }
 
   /** Window.popup_exclusive */
-  final def popupExclusive(from_node: Node, rect: gdext.builtin.Rect2i): Unit = {
+  final def popupExclusive(fromNode: Node, rect: gdext.builtin.Rect2i): Unit = {
     if (gdext.classes.Window.mb_popup_exclusive == null) gdext.classes.Window.mb_popup_exclusive = MethodBind.get("Window", "popup_exclusive", 2134721627L)
-    Ptrcall.callVoid2(gdext.classes.Window.mb_popup_exclusive, livePtr, Wrappers.handle(from_node), rect)
+    Ptrcall.callVoid2(gdext.classes.Window.mb_popup_exclusive, livePtr, Wrappers.handle(fromNode), rect)
   }
 
   /** Window.popup_exclusive_on_parent */
-  final def popupExclusiveOnParent(from_node: Node, parent_rect: gdext.builtin.Rect2i): Unit = {
+  final def popupExclusiveOnParent(fromNode: Node, parentRect: gdext.builtin.Rect2i): Unit = {
     if (gdext.classes.Window.mb_popup_exclusive_on_parent == null) gdext.classes.Window.mb_popup_exclusive_on_parent = MethodBind.get("Window", "popup_exclusive_on_parent", 2344671043L)
-    Ptrcall.callVoid2(gdext.classes.Window.mb_popup_exclusive_on_parent, livePtr, Wrappers.handle(from_node), parent_rect)
+    Ptrcall.callVoid2(gdext.classes.Window.mb_popup_exclusive_on_parent, livePtr, Wrappers.handle(fromNode), parentRect)
   }
 
   /** Window.popup_exclusive_centered */
-  final def popupExclusiveCentered(from_node: Node, minsize: gdext.builtin.Vector2i): Unit = {
+  final def popupExclusiveCentered(fromNode: Node, minsize: gdext.builtin.Vector2i = gdext.builtin.Vector2i(0, 0)): Unit = {
     if (gdext.classes.Window.mb_popup_exclusive_centered == null) gdext.classes.Window.mb_popup_exclusive_centered = MethodBind.get("Window", "popup_exclusive_centered", 3357594017L)
-    Ptrcall.callVoid2(gdext.classes.Window.mb_popup_exclusive_centered, livePtr, Wrappers.handle(from_node), minsize)
+    Ptrcall.callVoid2(gdext.classes.Window.mb_popup_exclusive_centered, livePtr, Wrappers.handle(fromNode), minsize)
   }
 
   /** Window.popup_exclusive_centered_ratio */
-  final def popupExclusiveCenteredRatio(from_node: Node, ratio: Double): Unit = {
+  final def popupExclusiveCenteredRatio(fromNode: Node, ratio: Double = 0.8): Unit = {
     if (gdext.classes.Window.mb_popup_exclusive_centered_ratio == null) gdext.classes.Window.mb_popup_exclusive_centered_ratio = MethodBind.get("Window", "popup_exclusive_centered_ratio", 2284776287L)
-    Ptrcall.callVoid2(gdext.classes.Window.mb_popup_exclusive_centered_ratio, livePtr, Wrappers.handle(from_node), ratio)
+    Ptrcall.callVoid2(gdext.classes.Window.mb_popup_exclusive_centered_ratio, livePtr, Wrappers.handle(fromNode), ratio)
   }
 
   /** Window.popup_exclusive_centered_clamped */
-  final def popupExclusiveCenteredClamped(from_node: Node, minsize: gdext.builtin.Vector2i, fallback_ratio: Double): Unit = {
+  final def popupExclusiveCenteredClamped(fromNode: Node, minsize: gdext.builtin.Vector2i = gdext.builtin.Vector2i(0, 0), fallbackRatio: Double = 0.75): Unit = {
     if (gdext.classes.Window.mb_popup_exclusive_centered_clamped == null) gdext.classes.Window.mb_popup_exclusive_centered_clamped = MethodBind.get("Window", "popup_exclusive_centered_clamped", 2612708785L)
-    Ptrcall.callVoid3(gdext.classes.Window.mb_popup_exclusive_centered_clamped, livePtr, Wrappers.handle(from_node), minsize, fallback_ratio)
+    Ptrcall.callVoid3(gdext.classes.Window.mb_popup_exclusive_centered_clamped, livePtr, Wrappers.handle(fromNode), minsize, fallbackRatio)
   }
 
 }
@@ -894,5 +895,214 @@ object Window {
   final def getFocusedWindow(): Window = {
     if (gdext.classes.Window.mb_get_focused_window == null) gdext.classes.Window.mb_get_focused_window = MethodBind.get("Window", "get_focused_window", 1835468782L)
     Wrappers.borrowed[Window](Ptrcall.call0[Long](gdext.classes.Window.mb_get_focused_window, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr]))
+  }
+
+  /** Godot enum `Window.Mode`. */
+  opaque type Mode <: Long = Long
+
+  object Mode {
+    final val Windowed: Mode = 0L.asInstanceOf[Mode]
+    final val Minimized: Mode = 1L.asInstanceOf[Mode]
+    final val Maximized: Mode = 2L.asInstanceOf[Mode]
+    final val Fullscreen: Mode = 3L.asInstanceOf[Mode]
+    final val ExclusiveFullscreen: Mode = 4L.asInstanceOf[Mode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): Mode = value.asInstanceOf[Mode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[Mode] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[Mode]]
+
+    extension (self: Mode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Windowed"
+        case 1L => "Minimized"
+        case 2L => "Maximized"
+        case 3L => "Fullscreen"
+        case 4L => "ExclusiveFullscreen"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Window.Flags`. */
+  opaque type Flags <: Long = Long
+
+  object Flags {
+    final val ResizeDisabled: Flags = 0L.asInstanceOf[Flags]
+    final val Borderless: Flags = 1L.asInstanceOf[Flags]
+    final val AlwaysOnTop: Flags = 2L.asInstanceOf[Flags]
+    final val Transparent: Flags = 3L.asInstanceOf[Flags]
+    final val NoFocus: Flags = 4L.asInstanceOf[Flags]
+    final val Popup: Flags = 5L.asInstanceOf[Flags]
+    final val ExtendToTitle: Flags = 6L.asInstanceOf[Flags]
+    final val MousePassthrough: Flags = 7L.asInstanceOf[Flags]
+    final val SharpCorners: Flags = 8L.asInstanceOf[Flags]
+    final val ExcludeFromCapture: Flags = 9L.asInstanceOf[Flags]
+    final val PopupWmHint: Flags = 10L.asInstanceOf[Flags]
+    final val MinimizeDisabled: Flags = 11L.asInstanceOf[Flags]
+    final val MaximizeDisabled: Flags = 12L.asInstanceOf[Flags]
+    final val Max: Flags = 13L.asInstanceOf[Flags]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): Flags = value.asInstanceOf[Flags]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[Flags] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 13L).asInstanceOf[scala.IArray[Flags]]
+
+    extension (self: Flags)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "ResizeDisabled"
+        case 1L => "Borderless"
+        case 2L => "AlwaysOnTop"
+        case 3L => "Transparent"
+        case 4L => "NoFocus"
+        case 5L => "Popup"
+        case 6L => "ExtendToTitle"
+        case 7L => "MousePassthrough"
+        case 8L => "SharpCorners"
+        case 9L => "ExcludeFromCapture"
+        case 10L => "PopupWmHint"
+        case 11L => "MinimizeDisabled"
+        case 12L => "MaximizeDisabled"
+        case 13L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Window.ContentScaleMode`. */
+  opaque type ContentScaleMode <: Long = Long
+
+  object ContentScaleMode {
+    final val Disabled: ContentScaleMode = 0L.asInstanceOf[ContentScaleMode]
+    final val CanvasItems: ContentScaleMode = 1L.asInstanceOf[ContentScaleMode]
+    final val Viewport: ContentScaleMode = 2L.asInstanceOf[ContentScaleMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ContentScaleMode = value.asInstanceOf[ContentScaleMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ContentScaleMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[ContentScaleMode]]
+
+    extension (self: ContentScaleMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disabled"
+        case 1L => "CanvasItems"
+        case 2L => "Viewport"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Window.ContentScaleAspect`. */
+  opaque type ContentScaleAspect <: Long = Long
+
+  object ContentScaleAspect {
+    final val Ignore: ContentScaleAspect = 0L.asInstanceOf[ContentScaleAspect]
+    final val Keep: ContentScaleAspect = 1L.asInstanceOf[ContentScaleAspect]
+    final val KeepWidth: ContentScaleAspect = 2L.asInstanceOf[ContentScaleAspect]
+    final val KeepHeight: ContentScaleAspect = 3L.asInstanceOf[ContentScaleAspect]
+    final val Expand: ContentScaleAspect = 4L.asInstanceOf[ContentScaleAspect]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ContentScaleAspect = value.asInstanceOf[ContentScaleAspect]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ContentScaleAspect] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L).asInstanceOf[scala.IArray[ContentScaleAspect]]
+
+    extension (self: ContentScaleAspect)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Ignore"
+        case 1L => "Keep"
+        case 2L => "KeepWidth"
+        case 3L => "KeepHeight"
+        case 4L => "Expand"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Window.ContentScaleStretch`. */
+  opaque type ContentScaleStretch <: Long = Long
+
+  object ContentScaleStretch {
+    final val Fractional: ContentScaleStretch = 0L.asInstanceOf[ContentScaleStretch]
+    final val Integer: ContentScaleStretch = 1L.asInstanceOf[ContentScaleStretch]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ContentScaleStretch = value.asInstanceOf[ContentScaleStretch]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ContentScaleStretch] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[ContentScaleStretch]]
+
+    extension (self: ContentScaleStretch)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Fractional"
+        case 1L => "Integer"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Window.LayoutDirection`. */
+  opaque type LayoutDirection <: Long = Long
+
+  object LayoutDirection {
+    final val Inherited: LayoutDirection = 0L.asInstanceOf[LayoutDirection]
+    final val ApplicationLocale: LayoutDirection = 1L.asInstanceOf[LayoutDirection]
+    final val Ltr: LayoutDirection = 2L.asInstanceOf[LayoutDirection]
+    final val Rtl: LayoutDirection = 3L.asInstanceOf[LayoutDirection]
+    final val SystemLocale: LayoutDirection = 4L.asInstanceOf[LayoutDirection]
+    final val Max: LayoutDirection = 5L.asInstanceOf[LayoutDirection]
+    final val Locale: LayoutDirection = 1L.asInstanceOf[LayoutDirection]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): LayoutDirection = value.asInstanceOf[LayoutDirection]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[LayoutDirection] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L).asInstanceOf[scala.IArray[LayoutDirection]]
+
+    extension (self: LayoutDirection)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Inherited"
+        case 1L => "ApplicationLocale"
+        case 2L => "Ltr"
+        case 3L => "Rtl"
+        case 4L => "SystemLocale"
+        case 5L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Window.WindowInitialPosition`. */
+  opaque type WindowInitialPosition <: Long = Long
+
+  object WindowInitialPosition {
+    final val Absolute: WindowInitialPosition = 0L.asInstanceOf[WindowInitialPosition]
+    final val CenterPrimaryScreen: WindowInitialPosition = 1L.asInstanceOf[WindowInitialPosition]
+    final val CenterMainWindowScreen: WindowInitialPosition = 2L.asInstanceOf[WindowInitialPosition]
+    final val CenterOtherScreen: WindowInitialPosition = 3L.asInstanceOf[WindowInitialPosition]
+    final val CenterScreenWithMouseFocus: WindowInitialPosition = 4L.asInstanceOf[WindowInitialPosition]
+    final val CenterScreenWithKeyboardFocus: WindowInitialPosition = 5L.asInstanceOf[WindowInitialPosition]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): WindowInitialPosition = value.asInstanceOf[WindowInitialPosition]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[WindowInitialPosition] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L).asInstanceOf[scala.IArray[WindowInitialPosition]]
+
+    extension (self: WindowInitialPosition)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Absolute"
+        case 1L => "CenterPrimaryScreen"
+        case 2L => "CenterMainWindowScreen"
+        case 3L => "CenterOtherScreen"
+        case 4L => "CenterScreenWithMouseFocus"
+        case 5L => "CenterScreenWithKeyboardFocus"
+        case other => other.toString
+      }
   }
 }

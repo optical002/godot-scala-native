@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -29,9 +30,9 @@ abstract class VoxelGIData extends Resource {
   }
 
   /** VoxelGIData.set_dynamic_range */
-  final def setDynamicRange(dynamic_range: Double): Unit = {
+  final def setDynamicRange(dynamicRange: Double): Unit = {
     if (gdext.classes.VoxelGIData.mb_set_dynamic_range == null) gdext.classes.VoxelGIData.mb_set_dynamic_range = MethodBind.get("VoxelGIData", "set_dynamic_range", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.VoxelGIData.mb_set_dynamic_range, livePtr, dynamic_range)
+    Ptrcall.callVoid1(gdext.classes.VoxelGIData.mb_set_dynamic_range, livePtr, dynamicRange)
   }
 
   /** VoxelGIData.get_dynamic_range */

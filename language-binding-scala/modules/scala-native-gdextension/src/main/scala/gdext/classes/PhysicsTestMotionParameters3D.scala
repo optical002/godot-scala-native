@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -53,9 +54,9 @@ abstract class PhysicsTestMotionParameters3D extends RefCounted {
   }
 
   /** PhysicsTestMotionParameters3D.set_max_collisions */
-  final def setMaxCollisions(max_collisions: Long): Unit = {
+  final def setMaxCollisions(maxCollisions: Long): Unit = {
     if (gdext.classes.PhysicsTestMotionParameters3D.mb_set_max_collisions == null) gdext.classes.PhysicsTestMotionParameters3D.mb_set_max_collisions = MethodBind.get("PhysicsTestMotionParameters3D", "set_max_collisions", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.PhysicsTestMotionParameters3D.mb_set_max_collisions, livePtr, max_collisions)
+    Ptrcall.callVoid1(gdext.classes.PhysicsTestMotionParameters3D.mb_set_max_collisions, livePtr, maxCollisions)
   }
 
   /** PhysicsTestMotionParameters3D.is_collide_separation_ray_enabled */

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -29,51 +30,51 @@ abstract class Control extends CanvasItem {
   }
 
   /** Control.set_anchors_preset */
-  final def setAnchorsPreset(preset: Long, keep_offsets: Boolean): Unit = {
+  final def setAnchorsPreset(preset: gdext.classes.Control.LayoutPreset, keepOffsets: Boolean = false): Unit = {
     if (gdext.classes.Control.mb_set_anchors_preset == null) gdext.classes.Control.mb_set_anchors_preset = MethodBind.get("Control", "set_anchors_preset", 509135270L)
-    Ptrcall.callVoid2(gdext.classes.Control.mb_set_anchors_preset, livePtr, preset, keep_offsets)
+    Ptrcall.callVoid2(gdext.classes.Control.mb_set_anchors_preset, livePtr, preset, keepOffsets)
   }
 
   /** Control.set_offsets_preset */
-  final def setOffsetsPreset(preset: Long, resize_mode: Long, margin: Long): Unit = {
+  final def setOffsetsPreset(preset: gdext.classes.Control.LayoutPreset, resizeMode: gdext.classes.Control.LayoutPresetMode = gdext.classes.Control.LayoutPresetMode(0L), margin: Long = 0L): Unit = {
     if (gdext.classes.Control.mb_set_offsets_preset == null) gdext.classes.Control.mb_set_offsets_preset = MethodBind.get("Control", "set_offsets_preset", 3724524307L)
-    Ptrcall.callVoid3(gdext.classes.Control.mb_set_offsets_preset, livePtr, preset, resize_mode, margin)
+    Ptrcall.callVoid3(gdext.classes.Control.mb_set_offsets_preset, livePtr, preset, resizeMode, margin)
   }
 
   /** Control.set_anchors_and_offsets_preset */
-  final def setAnchorsAndOffsetsPreset(preset: Long, resize_mode: Long, margin: Long): Unit = {
+  final def setAnchorsAndOffsetsPreset(preset: gdext.classes.Control.LayoutPreset, resizeMode: gdext.classes.Control.LayoutPresetMode = gdext.classes.Control.LayoutPresetMode(0L), margin: Long = 0L): Unit = {
     if (gdext.classes.Control.mb_set_anchors_and_offsets_preset == null) gdext.classes.Control.mb_set_anchors_and_offsets_preset = MethodBind.get("Control", "set_anchors_and_offsets_preset", 3724524307L)
-    Ptrcall.callVoid3(gdext.classes.Control.mb_set_anchors_and_offsets_preset, livePtr, preset, resize_mode, margin)
+    Ptrcall.callVoid3(gdext.classes.Control.mb_set_anchors_and_offsets_preset, livePtr, preset, resizeMode, margin)
   }
 
   /** Control.set_anchor */
-  final def setAnchor(side: Long, anchor: Double, keep_offset: Boolean, push_opposite_anchor: Boolean): Unit = {
+  final def setAnchor(side: gdext.classes.Side, anchor: Double, keepOffset: Boolean = false, pushOppositeAnchor: Boolean = true): Unit = {
     if (gdext.classes.Control.mb_set_anchor == null) gdext.classes.Control.mb_set_anchor = MethodBind.get("Control", "set_anchor", 2302782885L)
-    Ptrcall.callVoid4(gdext.classes.Control.mb_set_anchor, livePtr, side, anchor, keep_offset, push_opposite_anchor)
+    Ptrcall.callVoid4(gdext.classes.Control.mb_set_anchor, livePtr, side, anchor, keepOffset, pushOppositeAnchor)
   }
 
   /** Control.get_anchor */
-  final def getAnchor(side: Long): Double = {
+  final def getAnchor(side: gdext.classes.Side): Double = {
     if (gdext.classes.Control.mb_get_anchor == null) gdext.classes.Control.mb_get_anchor = MethodBind.get("Control", "get_anchor", 2869120046L)
     Ptrcall.call1[Long, Double](gdext.classes.Control.mb_get_anchor, livePtr, side)
   }
 
   /** Control.set_offset */
-  final def setOffset(side: Long, offset: Double): Unit = {
+  final def setOffset(side: gdext.classes.Side, offset: Double): Unit = {
     if (gdext.classes.Control.mb_set_offset == null) gdext.classes.Control.mb_set_offset = MethodBind.get("Control", "set_offset", 4290182280L)
     Ptrcall.callVoid2(gdext.classes.Control.mb_set_offset, livePtr, side, offset)
   }
 
   /** Control.get_offset */
-  final def getOffset(offset: Long): Double = {
+  final def getOffset(offset: gdext.classes.Side): Double = {
     if (gdext.classes.Control.mb_get_offset == null) gdext.classes.Control.mb_get_offset = MethodBind.get("Control", "get_offset", 2869120046L)
     Ptrcall.call1[Long, Double](gdext.classes.Control.mb_get_offset, livePtr, offset)
   }
 
   /** Control.set_anchor_and_offset */
-  final def setAnchorAndOffset(side: Long, anchor: Double, offset: Double, push_opposite_anchor: Boolean): Unit = {
+  final def setAnchorAndOffset(side: gdext.classes.Side, anchor: Double, offset: Double, pushOppositeAnchor: Boolean = false): Unit = {
     if (gdext.classes.Control.mb_set_anchor_and_offset == null) gdext.classes.Control.mb_set_anchor_and_offset = MethodBind.get("Control", "set_anchor_and_offset", 4031722181L)
-    Ptrcall.callVoid4(gdext.classes.Control.mb_set_anchor_and_offset, livePtr, side, anchor, offset, push_opposite_anchor)
+    Ptrcall.callVoid4(gdext.classes.Control.mb_set_anchor_and_offset, livePtr, side, anchor, offset, pushOppositeAnchor)
   }
 
   /** Control.set_begin */
@@ -89,15 +90,15 @@ abstract class Control extends CanvasItem {
   }
 
   /** Control.set_position */
-  final def setPosition(position: gdext.builtin.Vector2, keep_offsets: Boolean): Unit = {
+  final def setPosition(position: gdext.builtin.Vector2, keepOffsets: Boolean = false): Unit = {
     if (gdext.classes.Control.mb_set_position == null) gdext.classes.Control.mb_set_position = MethodBind.get("Control", "set_position", 2436320129L)
-    Ptrcall.callVoid2(gdext.classes.Control.mb_set_position, livePtr, position, keep_offsets)
+    Ptrcall.callVoid2(gdext.classes.Control.mb_set_position, livePtr, position, keepOffsets)
   }
 
   /** Control.set_size */
-  final def setSize(size: gdext.builtin.Vector2, keep_offsets: Boolean): Unit = {
+  final def setSize(size: gdext.builtin.Vector2, keepOffsets: Boolean = false): Unit = {
     if (gdext.classes.Control.mb_set_size == null) gdext.classes.Control.mb_set_size = MethodBind.get("Control", "set_size", 2436320129L)
-    Ptrcall.callVoid2(gdext.classes.Control.mb_set_size, livePtr, size, keep_offsets)
+    Ptrcall.callVoid2(gdext.classes.Control.mb_set_size, livePtr, size, keepOffsets)
   }
 
   /** Control.reset_size */
@@ -113,9 +114,9 @@ abstract class Control extends CanvasItem {
   }
 
   /** Control.set_global_position */
-  final def setGlobalPosition(position: gdext.builtin.Vector2, keep_offsets: Boolean): Unit = {
+  final def setGlobalPosition(position: gdext.builtin.Vector2, keepOffsets: Boolean = false): Unit = {
     if (gdext.classes.Control.mb_set_global_position == null) gdext.classes.Control.mb_set_global_position = MethodBind.get("Control", "set_global_position", 2436320129L)
-    Ptrcall.callVoid2(gdext.classes.Control.mb_set_global_position, livePtr, position, keep_offsets)
+    Ptrcall.callVoid2(gdext.classes.Control.mb_set_global_position, livePtr, position, keepOffsets)
   }
 
   /** Control.set_rotation */
@@ -137,9 +138,9 @@ abstract class Control extends CanvasItem {
   }
 
   /** Control.set_pivot_offset */
-  final def setPivotOffset(pivot_offset: gdext.builtin.Vector2): Unit = {
+  final def setPivotOffset(pivotOffset: gdext.builtin.Vector2): Unit = {
     if (gdext.classes.Control.mb_set_pivot_offset == null) gdext.classes.Control.mb_set_pivot_offset = MethodBind.get("Control", "set_pivot_offset", 743155724L)
-    Ptrcall.callVoid1(gdext.classes.Control.mb_set_pivot_offset, livePtr, pivot_offset)
+    Ptrcall.callVoid1(gdext.classes.Control.mb_set_pivot_offset, livePtr, pivotOffset)
   }
 
   /** Control.set_pivot_offset_ratio */
@@ -245,45 +246,45 @@ abstract class Control extends CanvasItem {
   }
 
   /** Control.set_focus_mode */
-  final def setFocusMode(mode: Long): Unit = {
+  final def setFocusMode(mode: gdext.classes.Control.FocusMode): Unit = {
     if (gdext.classes.Control.mb_set_focus_mode == null) gdext.classes.Control.mb_set_focus_mode = MethodBind.get("Control", "set_focus_mode", 3232914922L)
     Ptrcall.callVoid1(gdext.classes.Control.mb_set_focus_mode, livePtr, mode)
   }
 
   /** Control.get_focus_mode */
-  final def getFocusMode(): Long = {
+  final def getFocusMode(): gdext.classes.Control.FocusMode = {
     if (gdext.classes.Control.mb_get_focus_mode == null) gdext.classes.Control.mb_get_focus_mode = MethodBind.get("Control", "get_focus_mode", 2132829277L)
-    Ptrcall.call0[Long](gdext.classes.Control.mb_get_focus_mode, livePtr)
+    gdext.classes.Control.FocusMode(Ptrcall.call0[Long](gdext.classes.Control.mb_get_focus_mode, livePtr))
   }
 
   /** Control.get_focus_mode_with_override */
-  final def getFocusModeWithOverride(): Long = {
+  final def getFocusModeWithOverride(): gdext.classes.Control.FocusMode = {
     if (gdext.classes.Control.mb_get_focus_mode_with_override == null) gdext.classes.Control.mb_get_focus_mode_with_override = MethodBind.get("Control", "get_focus_mode_with_override", 2132829277L)
-    Ptrcall.call0[Long](gdext.classes.Control.mb_get_focus_mode_with_override, livePtr)
+    gdext.classes.Control.FocusMode(Ptrcall.call0[Long](gdext.classes.Control.mb_get_focus_mode_with_override, livePtr))
   }
 
   /** Control.set_focus_behavior_recursive */
-  final def setFocusBehaviorRecursive(focus_behavior_recursive: Long): Unit = {
+  final def setFocusBehaviorRecursive(focusBehaviorRecursive: gdext.classes.Control.FocusBehaviorRecursive): Unit = {
     if (gdext.classes.Control.mb_set_focus_behavior_recursive == null) gdext.classes.Control.mb_set_focus_behavior_recursive = MethodBind.get("Control", "set_focus_behavior_recursive", 4256832521L)
-    Ptrcall.callVoid1(gdext.classes.Control.mb_set_focus_behavior_recursive, livePtr, focus_behavior_recursive)
+    Ptrcall.callVoid1(gdext.classes.Control.mb_set_focus_behavior_recursive, livePtr, focusBehaviorRecursive)
   }
 
   /** Control.get_focus_behavior_recursive */
-  final def getFocusBehaviorRecursive(): Long = {
+  final def getFocusBehaviorRecursive(): gdext.classes.Control.FocusBehaviorRecursive = {
     if (gdext.classes.Control.mb_get_focus_behavior_recursive == null) gdext.classes.Control.mb_get_focus_behavior_recursive = MethodBind.get("Control", "get_focus_behavior_recursive", 2435707181L)
-    Ptrcall.call0[Long](gdext.classes.Control.mb_get_focus_behavior_recursive, livePtr)
+    gdext.classes.Control.FocusBehaviorRecursive(Ptrcall.call0[Long](gdext.classes.Control.mb_get_focus_behavior_recursive, livePtr))
   }
 
   /** Control.has_focus */
-  final def hasFocus(ignore_hidden_focus: Boolean): Boolean = {
+  final def hasFocus(ignoreHiddenFocus: Boolean = false): Boolean = {
     if (gdext.classes.Control.mb_has_focus == null) gdext.classes.Control.mb_has_focus = MethodBind.get("Control", "has_focus", 3302206351L)
-    Ptrcall.call1[Boolean, Boolean](gdext.classes.Control.mb_has_focus, livePtr, ignore_hidden_focus)
+    Ptrcall.call1[Boolean, Boolean](gdext.classes.Control.mb_has_focus, livePtr, ignoreHiddenFocus)
   }
 
   /** Control.grab_focus */
-  final def grabFocus(hide_focus: Boolean): Unit = {
+  final def grabFocus(hideFocus: Boolean = false): Unit = {
     if (gdext.classes.Control.mb_grab_focus == null) gdext.classes.Control.mb_grab_focus = MethodBind.get("Control", "grab_focus", 107499316L)
-    Ptrcall.callVoid1(gdext.classes.Control.mb_grab_focus, livePtr, hide_focus)
+    Ptrcall.callVoid1(gdext.classes.Control.mb_grab_focus, livePtr, hideFocus)
   }
 
   /** Control.release_focus */
@@ -305,21 +306,21 @@ abstract class Control extends CanvasItem {
   }
 
   /** Control.find_valid_focus_neighbor */
-  final def findValidFocusNeighbor(side: Long): Control = {
+  final def findValidFocusNeighbor(side: gdext.classes.Side): Control = {
     if (gdext.classes.Control.mb_find_valid_focus_neighbor == null) gdext.classes.Control.mb_find_valid_focus_neighbor = MethodBind.get("Control", "find_valid_focus_neighbor", 1543910170L)
     Wrappers.borrowed[Control](Ptrcall.call1[Long, Long](gdext.classes.Control.mb_find_valid_focus_neighbor, livePtr, side))
   }
 
   /** Control.set_h_size_flags */
-  final def setHSizeFlags(flags: Long): Unit = {
+  final def setHSizeFlags(flags: gdext.classes.Control.SizeFlags): Unit = {
     if (gdext.classes.Control.mb_set_h_size_flags == null) gdext.classes.Control.mb_set_h_size_flags = MethodBind.get("Control", "set_h_size_flags", 394851643L)
-    Ptrcall.callVoid1(gdext.classes.Control.mb_set_h_size_flags, livePtr, flags)
+    Ptrcall.callVoid1(gdext.classes.Control.mb_set_h_size_flags, livePtr, flags.asInstanceOf[Long])
   }
 
   /** Control.get_h_size_flags */
-  final def getHSizeFlags(): Long = {
+  final def getHSizeFlags(): gdext.classes.Control.SizeFlags = {
     if (gdext.classes.Control.mb_get_h_size_flags == null) gdext.classes.Control.mb_get_h_size_flags = MethodBind.get("Control", "get_h_size_flags", 3781367401L)
-    Ptrcall.call0[Long](gdext.classes.Control.mb_get_h_size_flags, livePtr)
+    gdext.classes.Control.SizeFlags(Ptrcall.call0[Long](gdext.classes.Control.mb_get_h_size_flags, livePtr))
   }
 
   /** Control.set_stretch_ratio */
@@ -335,15 +336,15 @@ abstract class Control extends CanvasItem {
   }
 
   /** Control.set_v_size_flags */
-  final def setVSizeFlags(flags: Long): Unit = {
+  final def setVSizeFlags(flags: gdext.classes.Control.SizeFlags): Unit = {
     if (gdext.classes.Control.mb_set_v_size_flags == null) gdext.classes.Control.mb_set_v_size_flags = MethodBind.get("Control", "set_v_size_flags", 394851643L)
-    Ptrcall.callVoid1(gdext.classes.Control.mb_set_v_size_flags, livePtr, flags)
+    Ptrcall.callVoid1(gdext.classes.Control.mb_set_v_size_flags, livePtr, flags.asInstanceOf[Long])
   }
 
   /** Control.get_v_size_flags */
-  final def getVSizeFlags(): Long = {
+  final def getVSizeFlags(): gdext.classes.Control.SizeFlags = {
     if (gdext.classes.Control.mb_get_v_size_flags == null) gdext.classes.Control.mb_get_v_size_flags = MethodBind.get("Control", "get_v_size_flags", 3781367401L)
-    Ptrcall.call0[Long](gdext.classes.Control.mb_get_v_size_flags, livePtr)
+    gdext.classes.Control.SizeFlags(Ptrcall.call0[Long](gdext.classes.Control.mb_get_v_size_flags, livePtr))
   }
 
   /** Control.set_theme */
@@ -359,15 +360,15 @@ abstract class Control extends CanvasItem {
   }
 
   /** Control.set_theme_type_variation */
-  final def setThemeTypeVariation(theme_type: gdext.builtin.StringName): Unit = {
+  final def setThemeTypeVariation(themeType: String): Unit = {
     if (gdext.classes.Control.mb_set_theme_type_variation == null) gdext.classes.Control.mb_set_theme_type_variation = MethodBind.get("Control", "set_theme_type_variation", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.Control.mb_set_theme_type_variation, livePtr, theme_type)
+    Ptrcall.callVoid1(gdext.classes.Control.mb_set_theme_type_variation, livePtr, SnArg(themeType))
   }
 
   /** Control.get_theme_type_variation */
-  final def getThemeTypeVariation(): gdext.builtin.StringName = {
+  final def getThemeTypeVariation(): String = {
     if (gdext.classes.Control.mb_get_theme_type_variation == null) gdext.classes.Control.mb_get_theme_type_variation = MethodBind.get("Control", "get_theme_type_variation", 2002593661L)
-    Ptrcall.call0[gdext.builtin.StringName](gdext.classes.Control.mb_get_theme_type_variation, livePtr)
+    Ptrcall.call0[SnArg](gdext.classes.Control.mb_get_theme_type_variation, livePtr)
   }
 
   /** Control.begin_bulk_theme_override */
@@ -383,183 +384,183 @@ abstract class Control extends CanvasItem {
   }
 
   /** Control.add_theme_icon_override */
-  final def addThemeIconOverride(name: gdext.builtin.StringName, texture: Texture2D): Unit = {
+  final def addThemeIconOverride(name: String, texture: Texture2D): Unit = {
     if (gdext.classes.Control.mb_add_theme_icon_override == null) gdext.classes.Control.mb_add_theme_icon_override = MethodBind.get("Control", "add_theme_icon_override", 1373065600L)
-    Ptrcall.callVoid2(gdext.classes.Control.mb_add_theme_icon_override, livePtr, name, Wrappers.handle(texture))
+    Ptrcall.callVoid2(gdext.classes.Control.mb_add_theme_icon_override, livePtr, SnArg(name), Wrappers.handle(texture))
   }
 
   /** Control.add_theme_stylebox_override */
-  final def addThemeStyleboxOverride(name: gdext.builtin.StringName, stylebox: StyleBox): Unit = {
+  final def addThemeStyleboxOverride(name: String, stylebox: StyleBox): Unit = {
     if (gdext.classes.Control.mb_add_theme_stylebox_override == null) gdext.classes.Control.mb_add_theme_stylebox_override = MethodBind.get("Control", "add_theme_stylebox_override", 4188838905L)
-    Ptrcall.callVoid2(gdext.classes.Control.mb_add_theme_stylebox_override, livePtr, name, Wrappers.handle(stylebox))
+    Ptrcall.callVoid2(gdext.classes.Control.mb_add_theme_stylebox_override, livePtr, SnArg(name), Wrappers.handle(stylebox))
   }
 
   /** Control.add_theme_font_override */
-  final def addThemeFontOverride(name: gdext.builtin.StringName, font: Font): Unit = {
+  final def addThemeFontOverride(name: String, font: Font): Unit = {
     if (gdext.classes.Control.mb_add_theme_font_override == null) gdext.classes.Control.mb_add_theme_font_override = MethodBind.get("Control", "add_theme_font_override", 3518018674L)
-    Ptrcall.callVoid2(gdext.classes.Control.mb_add_theme_font_override, livePtr, name, Wrappers.handle(font))
+    Ptrcall.callVoid2(gdext.classes.Control.mb_add_theme_font_override, livePtr, SnArg(name), Wrappers.handle(font))
   }
 
   /** Control.add_theme_font_size_override */
-  final def addThemeFontSizeOverride(name: gdext.builtin.StringName, font_size: Long): Unit = {
+  final def addThemeFontSizeOverride(name: String, fontSize: Long): Unit = {
     if (gdext.classes.Control.mb_add_theme_font_size_override == null) gdext.classes.Control.mb_add_theme_font_size_override = MethodBind.get("Control", "add_theme_font_size_override", 2415702435L)
-    Ptrcall.callVoid2(gdext.classes.Control.mb_add_theme_font_size_override, livePtr, name, font_size)
+    Ptrcall.callVoid2(gdext.classes.Control.mb_add_theme_font_size_override, livePtr, SnArg(name), fontSize)
   }
 
   /** Control.add_theme_color_override */
-  final def addThemeColorOverride(name: gdext.builtin.StringName, color: gdext.builtin.Color): Unit = {
+  final def addThemeColorOverride(name: String, color: gdext.builtin.Color): Unit = {
     if (gdext.classes.Control.mb_add_theme_color_override == null) gdext.classes.Control.mb_add_theme_color_override = MethodBind.get("Control", "add_theme_color_override", 4260178595L)
-    Ptrcall.callVoid2(gdext.classes.Control.mb_add_theme_color_override, livePtr, name, color)
+    Ptrcall.callVoid2(gdext.classes.Control.mb_add_theme_color_override, livePtr, SnArg(name), color)
   }
 
   /** Control.add_theme_constant_override */
-  final def addThemeConstantOverride(name: gdext.builtin.StringName, constant: Long): Unit = {
+  final def addThemeConstantOverride(name: String, constant: Long): Unit = {
     if (gdext.classes.Control.mb_add_theme_constant_override == null) gdext.classes.Control.mb_add_theme_constant_override = MethodBind.get("Control", "add_theme_constant_override", 2415702435L)
-    Ptrcall.callVoid2(gdext.classes.Control.mb_add_theme_constant_override, livePtr, name, constant)
+    Ptrcall.callVoid2(gdext.classes.Control.mb_add_theme_constant_override, livePtr, SnArg(name), constant)
   }
 
   /** Control.remove_theme_icon_override */
-  final def removeThemeIconOverride(name: gdext.builtin.StringName): Unit = {
+  final def removeThemeIconOverride(name: String): Unit = {
     if (gdext.classes.Control.mb_remove_theme_icon_override == null) gdext.classes.Control.mb_remove_theme_icon_override = MethodBind.get("Control", "remove_theme_icon_override", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.Control.mb_remove_theme_icon_override, livePtr, name)
+    Ptrcall.callVoid1(gdext.classes.Control.mb_remove_theme_icon_override, livePtr, SnArg(name))
   }
 
   /** Control.remove_theme_stylebox_override */
-  final def removeThemeStyleboxOverride(name: gdext.builtin.StringName): Unit = {
+  final def removeThemeStyleboxOverride(name: String): Unit = {
     if (gdext.classes.Control.mb_remove_theme_stylebox_override == null) gdext.classes.Control.mb_remove_theme_stylebox_override = MethodBind.get("Control", "remove_theme_stylebox_override", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.Control.mb_remove_theme_stylebox_override, livePtr, name)
+    Ptrcall.callVoid1(gdext.classes.Control.mb_remove_theme_stylebox_override, livePtr, SnArg(name))
   }
 
   /** Control.remove_theme_font_override */
-  final def removeThemeFontOverride(name: gdext.builtin.StringName): Unit = {
+  final def removeThemeFontOverride(name: String): Unit = {
     if (gdext.classes.Control.mb_remove_theme_font_override == null) gdext.classes.Control.mb_remove_theme_font_override = MethodBind.get("Control", "remove_theme_font_override", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.Control.mb_remove_theme_font_override, livePtr, name)
+    Ptrcall.callVoid1(gdext.classes.Control.mb_remove_theme_font_override, livePtr, SnArg(name))
   }
 
   /** Control.remove_theme_font_size_override */
-  final def removeThemeFontSizeOverride(name: gdext.builtin.StringName): Unit = {
+  final def removeThemeFontSizeOverride(name: String): Unit = {
     if (gdext.classes.Control.mb_remove_theme_font_size_override == null) gdext.classes.Control.mb_remove_theme_font_size_override = MethodBind.get("Control", "remove_theme_font_size_override", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.Control.mb_remove_theme_font_size_override, livePtr, name)
+    Ptrcall.callVoid1(gdext.classes.Control.mb_remove_theme_font_size_override, livePtr, SnArg(name))
   }
 
   /** Control.remove_theme_color_override */
-  final def removeThemeColorOverride(name: gdext.builtin.StringName): Unit = {
+  final def removeThemeColorOverride(name: String): Unit = {
     if (gdext.classes.Control.mb_remove_theme_color_override == null) gdext.classes.Control.mb_remove_theme_color_override = MethodBind.get("Control", "remove_theme_color_override", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.Control.mb_remove_theme_color_override, livePtr, name)
+    Ptrcall.callVoid1(gdext.classes.Control.mb_remove_theme_color_override, livePtr, SnArg(name))
   }
 
   /** Control.remove_theme_constant_override */
-  final def removeThemeConstantOverride(name: gdext.builtin.StringName): Unit = {
+  final def removeThemeConstantOverride(name: String): Unit = {
     if (gdext.classes.Control.mb_remove_theme_constant_override == null) gdext.classes.Control.mb_remove_theme_constant_override = MethodBind.get("Control", "remove_theme_constant_override", 3304788590L)
-    Ptrcall.callVoid1(gdext.classes.Control.mb_remove_theme_constant_override, livePtr, name)
+    Ptrcall.callVoid1(gdext.classes.Control.mb_remove_theme_constant_override, livePtr, SnArg(name))
   }
 
   /** Control.get_theme_icon. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getThemeIcon(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName): Texture2D = {
+  final def getThemeIcon(name: String, themeType: String = ""): Texture2D = {
     if (gdext.classes.Control.mb_get_theme_icon == null) gdext.classes.Control.mb_get_theme_icon = MethodBind.get("Control", "get_theme_icon", 3163973443L)
-    Wrappers.owned[Texture2D](Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Long](gdext.classes.Control.mb_get_theme_icon, livePtr, name, theme_type))
+    Wrappers.owned[Texture2D](Ptrcall.call2[SnArg, SnArg, Long](gdext.classes.Control.mb_get_theme_icon, livePtr, SnArg(name), SnArg(themeType)))
   }
 
   /** Control.get_theme_stylebox. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getThemeStylebox(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName): StyleBox = {
+  final def getThemeStylebox(name: String, themeType: String = ""): StyleBox = {
     if (gdext.classes.Control.mb_get_theme_stylebox == null) gdext.classes.Control.mb_get_theme_stylebox = MethodBind.get("Control", "get_theme_stylebox", 604739069L)
-    Wrappers.owned[StyleBox](Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Long](gdext.classes.Control.mb_get_theme_stylebox, livePtr, name, theme_type))
+    Wrappers.owned[StyleBox](Ptrcall.call2[SnArg, SnArg, Long](gdext.classes.Control.mb_get_theme_stylebox, livePtr, SnArg(name), SnArg(themeType)))
   }
 
   /** Control.get_theme_font. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getThemeFont(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName): Font = {
+  final def getThemeFont(name: String, themeType: String = ""): Font = {
     if (gdext.classes.Control.mb_get_theme_font == null) gdext.classes.Control.mb_get_theme_font = MethodBind.get("Control", "get_theme_font", 2826986490L)
-    Wrappers.owned[Font](Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Long](gdext.classes.Control.mb_get_theme_font, livePtr, name, theme_type))
+    Wrappers.owned[Font](Ptrcall.call2[SnArg, SnArg, Long](gdext.classes.Control.mb_get_theme_font, livePtr, SnArg(name), SnArg(themeType)))
   }
 
   /** Control.get_theme_font_size */
-  final def getThemeFontSize(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName): Long = {
+  final def getThemeFontSize(name: String, themeType: String = ""): Long = {
     if (gdext.classes.Control.mb_get_theme_font_size == null) gdext.classes.Control.mb_get_theme_font_size = MethodBind.get("Control", "get_theme_font_size", 1327056374L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Long](gdext.classes.Control.mb_get_theme_font_size, livePtr, name, theme_type)
+    Ptrcall.call2[SnArg, SnArg, Long](gdext.classes.Control.mb_get_theme_font_size, livePtr, SnArg(name), SnArg(themeType))
   }
 
   /** Control.get_theme_color */
-  final def getThemeColor(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName): gdext.builtin.Color = {
+  final def getThemeColor(name: String, themeType: String = ""): gdext.builtin.Color = {
     if (gdext.classes.Control.mb_get_theme_color == null) gdext.classes.Control.mb_get_theme_color = MethodBind.get("Control", "get_theme_color", 2798751242L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, gdext.builtin.Color](gdext.classes.Control.mb_get_theme_color, livePtr, name, theme_type)
+    Ptrcall.call2[SnArg, SnArg, gdext.builtin.Color](gdext.classes.Control.mb_get_theme_color, livePtr, SnArg(name), SnArg(themeType))
   }
 
   /** Control.get_theme_constant */
-  final def getThemeConstant(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName): Long = {
+  final def getThemeConstant(name: String, themeType: String = ""): Long = {
     if (gdext.classes.Control.mb_get_theme_constant == null) gdext.classes.Control.mb_get_theme_constant = MethodBind.get("Control", "get_theme_constant", 1327056374L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Long](gdext.classes.Control.mb_get_theme_constant, livePtr, name, theme_type)
+    Ptrcall.call2[SnArg, SnArg, Long](gdext.classes.Control.mb_get_theme_constant, livePtr, SnArg(name), SnArg(themeType))
   }
 
   /** Control.has_theme_icon_override */
-  final def hasThemeIconOverride(name: gdext.builtin.StringName): Boolean = {
+  final def hasThemeIconOverride(name: String): Boolean = {
     if (gdext.classes.Control.mb_has_theme_icon_override == null) gdext.classes.Control.mb_has_theme_icon_override = MethodBind.get("Control", "has_theme_icon_override", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.Control.mb_has_theme_icon_override, livePtr, name)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.Control.mb_has_theme_icon_override, livePtr, SnArg(name))
   }
 
   /** Control.has_theme_stylebox_override */
-  final def hasThemeStyleboxOverride(name: gdext.builtin.StringName): Boolean = {
+  final def hasThemeStyleboxOverride(name: String): Boolean = {
     if (gdext.classes.Control.mb_has_theme_stylebox_override == null) gdext.classes.Control.mb_has_theme_stylebox_override = MethodBind.get("Control", "has_theme_stylebox_override", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.Control.mb_has_theme_stylebox_override, livePtr, name)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.Control.mb_has_theme_stylebox_override, livePtr, SnArg(name))
   }
 
   /** Control.has_theme_font_override */
-  final def hasThemeFontOverride(name: gdext.builtin.StringName): Boolean = {
+  final def hasThemeFontOverride(name: String): Boolean = {
     if (gdext.classes.Control.mb_has_theme_font_override == null) gdext.classes.Control.mb_has_theme_font_override = MethodBind.get("Control", "has_theme_font_override", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.Control.mb_has_theme_font_override, livePtr, name)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.Control.mb_has_theme_font_override, livePtr, SnArg(name))
   }
 
   /** Control.has_theme_font_size_override */
-  final def hasThemeFontSizeOverride(name: gdext.builtin.StringName): Boolean = {
+  final def hasThemeFontSizeOverride(name: String): Boolean = {
     if (gdext.classes.Control.mb_has_theme_font_size_override == null) gdext.classes.Control.mb_has_theme_font_size_override = MethodBind.get("Control", "has_theme_font_size_override", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.Control.mb_has_theme_font_size_override, livePtr, name)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.Control.mb_has_theme_font_size_override, livePtr, SnArg(name))
   }
 
   /** Control.has_theme_color_override */
-  final def hasThemeColorOverride(name: gdext.builtin.StringName): Boolean = {
+  final def hasThemeColorOverride(name: String): Boolean = {
     if (gdext.classes.Control.mb_has_theme_color_override == null) gdext.classes.Control.mb_has_theme_color_override = MethodBind.get("Control", "has_theme_color_override", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.Control.mb_has_theme_color_override, livePtr, name)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.Control.mb_has_theme_color_override, livePtr, SnArg(name))
   }
 
   /** Control.has_theme_constant_override */
-  final def hasThemeConstantOverride(name: gdext.builtin.StringName): Boolean = {
+  final def hasThemeConstantOverride(name: String): Boolean = {
     if (gdext.classes.Control.mb_has_theme_constant_override == null) gdext.classes.Control.mb_has_theme_constant_override = MethodBind.get("Control", "has_theme_constant_override", 2619796661L)
-    Ptrcall.call1[gdext.builtin.StringName, Boolean](gdext.classes.Control.mb_has_theme_constant_override, livePtr, name)
+    Ptrcall.call1[SnArg, Boolean](gdext.classes.Control.mb_has_theme_constant_override, livePtr, SnArg(name))
   }
 
   /** Control.has_theme_icon */
-  final def hasThemeIcon(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName): Boolean = {
+  final def hasThemeIcon(name: String, themeType: String = ""): Boolean = {
     if (gdext.classes.Control.mb_has_theme_icon == null) gdext.classes.Control.mb_has_theme_icon = MethodBind.get("Control", "has_theme_icon", 866386512L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Boolean](gdext.classes.Control.mb_has_theme_icon, livePtr, name, theme_type)
+    Ptrcall.call2[SnArg, SnArg, Boolean](gdext.classes.Control.mb_has_theme_icon, livePtr, SnArg(name), SnArg(themeType))
   }
 
   /** Control.has_theme_stylebox */
-  final def hasThemeStylebox(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName): Boolean = {
+  final def hasThemeStylebox(name: String, themeType: String = ""): Boolean = {
     if (gdext.classes.Control.mb_has_theme_stylebox == null) gdext.classes.Control.mb_has_theme_stylebox = MethodBind.get("Control", "has_theme_stylebox", 866386512L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Boolean](gdext.classes.Control.mb_has_theme_stylebox, livePtr, name, theme_type)
+    Ptrcall.call2[SnArg, SnArg, Boolean](gdext.classes.Control.mb_has_theme_stylebox, livePtr, SnArg(name), SnArg(themeType))
   }
 
   /** Control.has_theme_font */
-  final def hasThemeFont(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName): Boolean = {
+  final def hasThemeFont(name: String, themeType: String = ""): Boolean = {
     if (gdext.classes.Control.mb_has_theme_font == null) gdext.classes.Control.mb_has_theme_font = MethodBind.get("Control", "has_theme_font", 866386512L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Boolean](gdext.classes.Control.mb_has_theme_font, livePtr, name, theme_type)
+    Ptrcall.call2[SnArg, SnArg, Boolean](gdext.classes.Control.mb_has_theme_font, livePtr, SnArg(name), SnArg(themeType))
   }
 
   /** Control.has_theme_font_size */
-  final def hasThemeFontSize(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName): Boolean = {
+  final def hasThemeFontSize(name: String, themeType: String = ""): Boolean = {
     if (gdext.classes.Control.mb_has_theme_font_size == null) gdext.classes.Control.mb_has_theme_font_size = MethodBind.get("Control", "has_theme_font_size", 866386512L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Boolean](gdext.classes.Control.mb_has_theme_font_size, livePtr, name, theme_type)
+    Ptrcall.call2[SnArg, SnArg, Boolean](gdext.classes.Control.mb_has_theme_font_size, livePtr, SnArg(name), SnArg(themeType))
   }
 
   /** Control.has_theme_color */
-  final def hasThemeColor(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName): Boolean = {
+  final def hasThemeColor(name: String, themeType: String = ""): Boolean = {
     if (gdext.classes.Control.mb_has_theme_color == null) gdext.classes.Control.mb_has_theme_color = MethodBind.get("Control", "has_theme_color", 866386512L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Boolean](gdext.classes.Control.mb_has_theme_color, livePtr, name, theme_type)
+    Ptrcall.call2[SnArg, SnArg, Boolean](gdext.classes.Control.mb_has_theme_color, livePtr, SnArg(name), SnArg(themeType))
   }
 
   /** Control.has_theme_constant */
-  final def hasThemeConstant(name: gdext.builtin.StringName, theme_type: gdext.builtin.StringName): Boolean = {
+  final def hasThemeConstant(name: String, themeType: String = ""): Boolean = {
     if (gdext.classes.Control.mb_has_theme_constant == null) gdext.classes.Control.mb_has_theme_constant = MethodBind.get("Control", "has_theme_constant", 866386512L)
-    Ptrcall.call2[gdext.builtin.StringName, gdext.builtin.StringName, Boolean](gdext.classes.Control.mb_has_theme_constant, livePtr, name, theme_type)
+    Ptrcall.call2[SnArg, SnArg, Boolean](gdext.classes.Control.mb_has_theme_constant, livePtr, SnArg(name), SnArg(themeType))
   }
 
   /** Control.get_theme_default_base_scale */
@@ -587,39 +588,39 @@ abstract class Control extends CanvasItem {
   }
 
   /** Control.set_h_grow_direction */
-  final def setHGrowDirection(direction: Long): Unit = {
+  final def setHGrowDirection(direction: gdext.classes.Control.GrowDirection): Unit = {
     if (gdext.classes.Control.mb_set_h_grow_direction == null) gdext.classes.Control.mb_set_h_grow_direction = MethodBind.get("Control", "set_h_grow_direction", 2022385301L)
     Ptrcall.callVoid1(gdext.classes.Control.mb_set_h_grow_direction, livePtr, direction)
   }
 
   /** Control.get_h_grow_direction */
-  final def getHGrowDirection(): Long = {
+  final def getHGrowDirection(): gdext.classes.Control.GrowDirection = {
     if (gdext.classes.Control.mb_get_h_grow_direction == null) gdext.classes.Control.mb_get_h_grow_direction = MethodBind.get("Control", "get_h_grow_direction", 3635610155L)
-    Ptrcall.call0[Long](gdext.classes.Control.mb_get_h_grow_direction, livePtr)
+    gdext.classes.Control.GrowDirection(Ptrcall.call0[Long](gdext.classes.Control.mb_get_h_grow_direction, livePtr))
   }
 
   /** Control.set_v_grow_direction */
-  final def setVGrowDirection(direction: Long): Unit = {
+  final def setVGrowDirection(direction: gdext.classes.Control.GrowDirection): Unit = {
     if (gdext.classes.Control.mb_set_v_grow_direction == null) gdext.classes.Control.mb_set_v_grow_direction = MethodBind.get("Control", "set_v_grow_direction", 2022385301L)
     Ptrcall.callVoid1(gdext.classes.Control.mb_set_v_grow_direction, livePtr, direction)
   }
 
   /** Control.get_v_grow_direction */
-  final def getVGrowDirection(): Long = {
+  final def getVGrowDirection(): gdext.classes.Control.GrowDirection = {
     if (gdext.classes.Control.mb_get_v_grow_direction == null) gdext.classes.Control.mb_get_v_grow_direction = MethodBind.get("Control", "get_v_grow_direction", 3635610155L)
-    Ptrcall.call0[Long](gdext.classes.Control.mb_get_v_grow_direction, livePtr)
+    gdext.classes.Control.GrowDirection(Ptrcall.call0[Long](gdext.classes.Control.mb_get_v_grow_direction, livePtr))
   }
 
   /** Control.set_tooltip_auto_translate_mode */
-  final def setTooltipAutoTranslateMode(mode: Long): Unit = {
+  final def setTooltipAutoTranslateMode(mode: gdext.classes.Node.AutoTranslateMode): Unit = {
     if (gdext.classes.Control.mb_set_tooltip_auto_translate_mode == null) gdext.classes.Control.mb_set_tooltip_auto_translate_mode = MethodBind.get("Control", "set_tooltip_auto_translate_mode", 776149714L)
     Ptrcall.callVoid1(gdext.classes.Control.mb_set_tooltip_auto_translate_mode, livePtr, mode)
   }
 
   /** Control.get_tooltip_auto_translate_mode */
-  final def getTooltipAutoTranslateMode(): Long = {
+  final def getTooltipAutoTranslateMode(): gdext.classes.Node.AutoTranslateMode = {
     if (gdext.classes.Control.mb_get_tooltip_auto_translate_mode == null) gdext.classes.Control.mb_get_tooltip_auto_translate_mode = MethodBind.get("Control", "get_tooltip_auto_translate_mode", 2498906432L)
-    Ptrcall.call0[Long](gdext.classes.Control.mb_get_tooltip_auto_translate_mode, livePtr)
+    gdext.classes.Node.AutoTranslateMode(Ptrcall.call0[Long](gdext.classes.Control.mb_get_tooltip_auto_translate_mode, livePtr))
   }
 
   /** Control.set_tooltip_text */
@@ -635,27 +636,27 @@ abstract class Control extends CanvasItem {
   }
 
   /** Control.get_tooltip */
-  final def getTooltip(at_position: gdext.builtin.Vector2): String = {
+  final def getTooltip(atPosition: gdext.builtin.Vector2 = gdext.builtin.Vector2(0f, 0f)): String = {
     if (gdext.classes.Control.mb_get_tooltip == null) gdext.classes.Control.mb_get_tooltip = MethodBind.get("Control", "get_tooltip", 2895288280L)
-    Ptrcall.call1[gdext.builtin.Vector2, String](gdext.classes.Control.mb_get_tooltip, livePtr, at_position)
+    Ptrcall.call1[gdext.builtin.Vector2, String](gdext.classes.Control.mb_get_tooltip, livePtr, atPosition)
   }
 
   /** Control.set_default_cursor_shape */
-  final def setDefaultCursorShape(shape: Long): Unit = {
+  final def setDefaultCursorShape(shape: gdext.classes.Control.CursorShape): Unit = {
     if (gdext.classes.Control.mb_set_default_cursor_shape == null) gdext.classes.Control.mb_set_default_cursor_shape = MethodBind.get("Control", "set_default_cursor_shape", 217062046L)
     Ptrcall.callVoid1(gdext.classes.Control.mb_set_default_cursor_shape, livePtr, shape)
   }
 
   /** Control.get_default_cursor_shape */
-  final def getDefaultCursorShape(): Long = {
+  final def getDefaultCursorShape(): gdext.classes.Control.CursorShape = {
     if (gdext.classes.Control.mb_get_default_cursor_shape == null) gdext.classes.Control.mb_get_default_cursor_shape = MethodBind.get("Control", "get_default_cursor_shape", 2359535750L)
-    Ptrcall.call0[Long](gdext.classes.Control.mb_get_default_cursor_shape, livePtr)
+    gdext.classes.Control.CursorShape(Ptrcall.call0[Long](gdext.classes.Control.mb_get_default_cursor_shape, livePtr))
   }
 
   /** Control.get_cursor_shape */
-  final def getCursorShape(position: gdext.builtin.Vector2): Long = {
+  final def getCursorShape(position: gdext.builtin.Vector2 = gdext.builtin.Vector2(0f, 0f)): gdext.classes.Control.CursorShape = {
     if (gdext.classes.Control.mb_get_cursor_shape == null) gdext.classes.Control.mb_get_cursor_shape = MethodBind.get("Control", "get_cursor_shape", 1395773853L)
-    Ptrcall.call1[gdext.builtin.Vector2, Long](gdext.classes.Control.mb_get_cursor_shape, livePtr, position)
+    gdext.classes.Control.CursorShape(Ptrcall.call1[gdext.builtin.Vector2, Long](gdext.classes.Control.mb_get_cursor_shape, livePtr, position))
   }
 
   /** Control.accessibility_drag */
@@ -695,51 +696,51 @@ abstract class Control extends CanvasItem {
   }
 
   /** Control.set_accessibility_live */
-  final def setAccessibilityLive(mode: Long): Unit = {
+  final def setAccessibilityLive(mode: gdext.classes.DisplayServer.AccessibilityLiveMode): Unit = {
     if (gdext.classes.Control.mb_set_accessibility_live == null) gdext.classes.Control.mb_set_accessibility_live = MethodBind.get("Control", "set_accessibility_live", 1720261470L)
     Ptrcall.callVoid1(gdext.classes.Control.mb_set_accessibility_live, livePtr, mode)
   }
 
   /** Control.get_accessibility_live */
-  final def getAccessibilityLive(): Long = {
+  final def getAccessibilityLive(): gdext.classes.DisplayServer.AccessibilityLiveMode = {
     if (gdext.classes.Control.mb_get_accessibility_live == null) gdext.classes.Control.mb_get_accessibility_live = MethodBind.get("Control", "get_accessibility_live", 3311037003L)
-    Ptrcall.call0[Long](gdext.classes.Control.mb_get_accessibility_live, livePtr)
+    gdext.classes.DisplayServer.AccessibilityLiveMode(Ptrcall.call0[Long](gdext.classes.Control.mb_get_accessibility_live, livePtr))
   }
 
   /** Control.set_mouse_filter */
-  final def setMouseFilter(filter: Long): Unit = {
+  final def setMouseFilter(filter: gdext.classes.Control.MouseFilter): Unit = {
     if (gdext.classes.Control.mb_set_mouse_filter == null) gdext.classes.Control.mb_set_mouse_filter = MethodBind.get("Control", "set_mouse_filter", 3891156122L)
     Ptrcall.callVoid1(gdext.classes.Control.mb_set_mouse_filter, livePtr, filter)
   }
 
   /** Control.get_mouse_filter */
-  final def getMouseFilter(): Long = {
+  final def getMouseFilter(): gdext.classes.Control.MouseFilter = {
     if (gdext.classes.Control.mb_get_mouse_filter == null) gdext.classes.Control.mb_get_mouse_filter = MethodBind.get("Control", "get_mouse_filter", 1572545674L)
-    Ptrcall.call0[Long](gdext.classes.Control.mb_get_mouse_filter, livePtr)
+    gdext.classes.Control.MouseFilter(Ptrcall.call0[Long](gdext.classes.Control.mb_get_mouse_filter, livePtr))
   }
 
   /** Control.get_mouse_filter_with_override */
-  final def getMouseFilterWithOverride(): Long = {
+  final def getMouseFilterWithOverride(): gdext.classes.Control.MouseFilter = {
     if (gdext.classes.Control.mb_get_mouse_filter_with_override == null) gdext.classes.Control.mb_get_mouse_filter_with_override = MethodBind.get("Control", "get_mouse_filter_with_override", 1572545674L)
-    Ptrcall.call0[Long](gdext.classes.Control.mb_get_mouse_filter_with_override, livePtr)
+    gdext.classes.Control.MouseFilter(Ptrcall.call0[Long](gdext.classes.Control.mb_get_mouse_filter_with_override, livePtr))
   }
 
   /** Control.set_mouse_behavior_recursive */
-  final def setMouseBehaviorRecursive(mouse_behavior_recursive: Long): Unit = {
+  final def setMouseBehaviorRecursive(mouseBehaviorRecursive: gdext.classes.Control.MouseBehaviorRecursive): Unit = {
     if (gdext.classes.Control.mb_set_mouse_behavior_recursive == null) gdext.classes.Control.mb_set_mouse_behavior_recursive = MethodBind.get("Control", "set_mouse_behavior_recursive", 849284636L)
-    Ptrcall.callVoid1(gdext.classes.Control.mb_set_mouse_behavior_recursive, livePtr, mouse_behavior_recursive)
+    Ptrcall.callVoid1(gdext.classes.Control.mb_set_mouse_behavior_recursive, livePtr, mouseBehaviorRecursive)
   }
 
   /** Control.get_mouse_behavior_recursive */
-  final def getMouseBehaviorRecursive(): Long = {
+  final def getMouseBehaviorRecursive(): gdext.classes.Control.MouseBehaviorRecursive = {
     if (gdext.classes.Control.mb_get_mouse_behavior_recursive == null) gdext.classes.Control.mb_get_mouse_behavior_recursive = MethodBind.get("Control", "get_mouse_behavior_recursive", 3779367402L)
-    Ptrcall.call0[Long](gdext.classes.Control.mb_get_mouse_behavior_recursive, livePtr)
+    gdext.classes.Control.MouseBehaviorRecursive(Ptrcall.call0[Long](gdext.classes.Control.mb_get_mouse_behavior_recursive, livePtr))
   }
 
   /** Control.set_force_pass_scroll_events */
-  final def setForcePassScrollEvents(force_pass_scroll_events: Boolean): Unit = {
+  final def setForcePassScrollEvents(forcePassScrollEvents: Boolean): Unit = {
     if (gdext.classes.Control.mb_set_force_pass_scroll_events == null) gdext.classes.Control.mb_set_force_pass_scroll_events = MethodBind.get("Control", "set_force_pass_scroll_events", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.Control.mb_set_force_pass_scroll_events, livePtr, force_pass_scroll_events)
+    Ptrcall.callVoid1(gdext.classes.Control.mb_set_force_pass_scroll_events, livePtr, forcePassScrollEvents)
   }
 
   /** Control.is_force_pass_scroll_events */
@@ -803,15 +804,15 @@ abstract class Control extends CanvasItem {
   }
 
   /** Control.set_layout_direction */
-  final def setLayoutDirection(direction: Long): Unit = {
+  final def setLayoutDirection(direction: gdext.classes.Control.LayoutDirection): Unit = {
     if (gdext.classes.Control.mb_set_layout_direction == null) gdext.classes.Control.mb_set_layout_direction = MethodBind.get("Control", "set_layout_direction", 3310692370L)
     Ptrcall.callVoid1(gdext.classes.Control.mb_set_layout_direction, livePtr, direction)
   }
 
   /** Control.get_layout_direction */
-  final def getLayoutDirection(): Long = {
+  final def getLayoutDirection(): gdext.classes.Control.LayoutDirection = {
     if (gdext.classes.Control.mb_get_layout_direction == null) gdext.classes.Control.mb_get_layout_direction = MethodBind.get("Control", "get_layout_direction", 1546772008L)
-    Ptrcall.call0[Long](gdext.classes.Control.mb_get_layout_direction, livePtr)
+    gdext.classes.Control.LayoutDirection(Ptrcall.call0[Long](gdext.classes.Control.mb_get_layout_direction, livePtr))
   }
 
   /** Control.is_layout_rtl */
@@ -986,4 +987,370 @@ object Control {
   private[classes] var mb_is_auto_translating: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_localize_numeral_system: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_localizing_numeral_system: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `Control.FocusMode`. */
+  opaque type FocusMode <: Long = Long
+
+  object FocusMode {
+    final val None: FocusMode = 0L.asInstanceOf[FocusMode]
+    final val Click: FocusMode = 1L.asInstanceOf[FocusMode]
+    final val All: FocusMode = 2L.asInstanceOf[FocusMode]
+    final val Accessibility: FocusMode = 3L.asInstanceOf[FocusMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): FocusMode = value.asInstanceOf[FocusMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[FocusMode] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[FocusMode]]
+
+    extension (self: FocusMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "None"
+        case 1L => "Click"
+        case 2L => "All"
+        case 3L => "Accessibility"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Control.FocusBehaviorRecursive`. */
+  opaque type FocusBehaviorRecursive <: Long = Long
+
+  object FocusBehaviorRecursive {
+    final val Inherited: FocusBehaviorRecursive = 0L.asInstanceOf[FocusBehaviorRecursive]
+    final val Disabled: FocusBehaviorRecursive = 1L.asInstanceOf[FocusBehaviorRecursive]
+    final val Enabled: FocusBehaviorRecursive = 2L.asInstanceOf[FocusBehaviorRecursive]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): FocusBehaviorRecursive = value.asInstanceOf[FocusBehaviorRecursive]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[FocusBehaviorRecursive] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[FocusBehaviorRecursive]]
+
+    extension (self: FocusBehaviorRecursive)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Inherited"
+        case 1L => "Disabled"
+        case 2L => "Enabled"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Control.MouseBehaviorRecursive`. */
+  opaque type MouseBehaviorRecursive <: Long = Long
+
+  object MouseBehaviorRecursive {
+    final val Inherited: MouseBehaviorRecursive = 0L.asInstanceOf[MouseBehaviorRecursive]
+    final val Disabled: MouseBehaviorRecursive = 1L.asInstanceOf[MouseBehaviorRecursive]
+    final val Enabled: MouseBehaviorRecursive = 2L.asInstanceOf[MouseBehaviorRecursive]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): MouseBehaviorRecursive = value.asInstanceOf[MouseBehaviorRecursive]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[MouseBehaviorRecursive] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[MouseBehaviorRecursive]]
+
+    extension (self: MouseBehaviorRecursive)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Inherited"
+        case 1L => "Disabled"
+        case 2L => "Enabled"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Control.CursorShape`. */
+  opaque type CursorShape <: Long = Long
+
+  object CursorShape {
+    final val Arrow: CursorShape = 0L.asInstanceOf[CursorShape]
+    final val Ibeam: CursorShape = 1L.asInstanceOf[CursorShape]
+    final val PointingHand: CursorShape = 2L.asInstanceOf[CursorShape]
+    final val Cross: CursorShape = 3L.asInstanceOf[CursorShape]
+    final val Wait: CursorShape = 4L.asInstanceOf[CursorShape]
+    final val Busy: CursorShape = 5L.asInstanceOf[CursorShape]
+    final val Drag: CursorShape = 6L.asInstanceOf[CursorShape]
+    final val CanDrop: CursorShape = 7L.asInstanceOf[CursorShape]
+    final val Forbidden: CursorShape = 8L.asInstanceOf[CursorShape]
+    final val Vsize: CursorShape = 9L.asInstanceOf[CursorShape]
+    final val Hsize: CursorShape = 10L.asInstanceOf[CursorShape]
+    final val Bdiagsize: CursorShape = 11L.asInstanceOf[CursorShape]
+    final val Fdiagsize: CursorShape = 12L.asInstanceOf[CursorShape]
+    final val Move: CursorShape = 13L.asInstanceOf[CursorShape]
+    final val Vsplit: CursorShape = 14L.asInstanceOf[CursorShape]
+    final val Hsplit: CursorShape = 15L.asInstanceOf[CursorShape]
+    final val Help: CursorShape = 16L.asInstanceOf[CursorShape]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): CursorShape = value.asInstanceOf[CursorShape]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[CursorShape] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 13L, 14L, 15L, 16L).asInstanceOf[scala.IArray[CursorShape]]
+
+    extension (self: CursorShape)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Arrow"
+        case 1L => "Ibeam"
+        case 2L => "PointingHand"
+        case 3L => "Cross"
+        case 4L => "Wait"
+        case 5L => "Busy"
+        case 6L => "Drag"
+        case 7L => "CanDrop"
+        case 8L => "Forbidden"
+        case 9L => "Vsize"
+        case 10L => "Hsize"
+        case 11L => "Bdiagsize"
+        case 12L => "Fdiagsize"
+        case 13L => "Move"
+        case 14L => "Vsplit"
+        case 15L => "Hsplit"
+        case 16L => "Help"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Control.LayoutPreset`. */
+  opaque type LayoutPreset <: Long = Long
+
+  object LayoutPreset {
+    final val TopLeft: LayoutPreset = 0L.asInstanceOf[LayoutPreset]
+    final val TopRight: LayoutPreset = 1L.asInstanceOf[LayoutPreset]
+    final val BottomLeft: LayoutPreset = 2L.asInstanceOf[LayoutPreset]
+    final val BottomRight: LayoutPreset = 3L.asInstanceOf[LayoutPreset]
+    final val CenterLeft: LayoutPreset = 4L.asInstanceOf[LayoutPreset]
+    final val CenterTop: LayoutPreset = 5L.asInstanceOf[LayoutPreset]
+    final val CenterRight: LayoutPreset = 6L.asInstanceOf[LayoutPreset]
+    final val CenterBottom: LayoutPreset = 7L.asInstanceOf[LayoutPreset]
+    final val Center: LayoutPreset = 8L.asInstanceOf[LayoutPreset]
+    final val LeftWide: LayoutPreset = 9L.asInstanceOf[LayoutPreset]
+    final val TopWide: LayoutPreset = 10L.asInstanceOf[LayoutPreset]
+    final val RightWide: LayoutPreset = 11L.asInstanceOf[LayoutPreset]
+    final val BottomWide: LayoutPreset = 12L.asInstanceOf[LayoutPreset]
+    final val VcenterWide: LayoutPreset = 13L.asInstanceOf[LayoutPreset]
+    final val HcenterWide: LayoutPreset = 14L.asInstanceOf[LayoutPreset]
+    final val FullRect: LayoutPreset = 15L.asInstanceOf[LayoutPreset]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): LayoutPreset = value.asInstanceOf[LayoutPreset]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[LayoutPreset] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 13L, 14L, 15L).asInstanceOf[scala.IArray[LayoutPreset]]
+
+    extension (self: LayoutPreset)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "TopLeft"
+        case 1L => "TopRight"
+        case 2L => "BottomLeft"
+        case 3L => "BottomRight"
+        case 4L => "CenterLeft"
+        case 5L => "CenterTop"
+        case 6L => "CenterRight"
+        case 7L => "CenterBottom"
+        case 8L => "Center"
+        case 9L => "LeftWide"
+        case 10L => "TopWide"
+        case 11L => "RightWide"
+        case 12L => "BottomWide"
+        case 13L => "VcenterWide"
+        case 14L => "HcenterWide"
+        case 15L => "FullRect"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Control.LayoutPresetMode`. */
+  opaque type LayoutPresetMode <: Long = Long
+
+  object LayoutPresetMode {
+    final val Minsize: LayoutPresetMode = 0L.asInstanceOf[LayoutPresetMode]
+    final val KeepWidth: LayoutPresetMode = 1L.asInstanceOf[LayoutPresetMode]
+    final val KeepHeight: LayoutPresetMode = 2L.asInstanceOf[LayoutPresetMode]
+    final val KeepSize: LayoutPresetMode = 3L.asInstanceOf[LayoutPresetMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): LayoutPresetMode = value.asInstanceOf[LayoutPresetMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[LayoutPresetMode] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[LayoutPresetMode]]
+
+    extension (self: LayoutPresetMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Minsize"
+        case 1L => "KeepWidth"
+        case 2L => "KeepHeight"
+        case 3L => "KeepSize"
+        case other => other.toString
+      }
+  }
+
+  /** Godot bitfield `Control.SizeFlags`. */
+  opaque type SizeFlags = Long
+
+  object SizeFlags {
+    final val ShrinkBegin: SizeFlags = 0L.asInstanceOf[SizeFlags]
+    final val Fill: SizeFlags = 1L.asInstanceOf[SizeFlags]
+    final val Expand: SizeFlags = 2L.asInstanceOf[SizeFlags]
+    final val ExpandFill: SizeFlags = 3L.asInstanceOf[SizeFlags]
+    final val ShrinkCenter: SizeFlags = 4L.asInstanceOf[SizeFlags]
+    final val ShrinkEnd: SizeFlags = 8L.asInstanceOf[SizeFlags]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): SizeFlags = value.asInstanceOf[SizeFlags]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[SizeFlags] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 8L).asInstanceOf[scala.IArray[SizeFlags]]
+
+    extension (self: SizeFlags)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "ShrinkBegin"
+        case 1L => "Fill"
+        case 2L => "Expand"
+        case 3L => "ExpandFill"
+        case 4L => "ShrinkCenter"
+        case 8L => "ShrinkEnd"
+        case other => other.toString
+      }
+    extension (self: SizeFlags) {
+      inline def value: Long = self.asInstanceOf[Long]
+      inline def |(other: SizeFlags): SizeFlags = (self.value | other.value).asInstanceOf[SizeFlags]
+      inline def &(other: SizeFlags): SizeFlags = (self.value & other.value).asInstanceOf[SizeFlags]
+      /** Every bit of `flag` is set. */
+      inline def has(flag: SizeFlags): Boolean = (self.value & flag.value) == flag.value
+    }
+  }
+
+  /** Godot enum `Control.MouseFilter`. */
+  opaque type MouseFilter <: Long = Long
+
+  object MouseFilter {
+    final val Stop: MouseFilter = 0L.asInstanceOf[MouseFilter]
+    final val Pass: MouseFilter = 1L.asInstanceOf[MouseFilter]
+    final val Ignore: MouseFilter = 2L.asInstanceOf[MouseFilter]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): MouseFilter = value.asInstanceOf[MouseFilter]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[MouseFilter] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[MouseFilter]]
+
+    extension (self: MouseFilter)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Stop"
+        case 1L => "Pass"
+        case 2L => "Ignore"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Control.GrowDirection`. */
+  opaque type GrowDirection <: Long = Long
+
+  object GrowDirection {
+    final val Begin: GrowDirection = 0L.asInstanceOf[GrowDirection]
+    final val End: GrowDirection = 1L.asInstanceOf[GrowDirection]
+    final val Both: GrowDirection = 2L.asInstanceOf[GrowDirection]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): GrowDirection = value.asInstanceOf[GrowDirection]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[GrowDirection] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[GrowDirection]]
+
+    extension (self: GrowDirection)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Begin"
+        case 1L => "End"
+        case 2L => "Both"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Control.Anchor`. */
+  opaque type Anchor <: Long = Long
+
+  object Anchor {
+    final val Begin: Anchor = 0L.asInstanceOf[Anchor]
+    final val End: Anchor = 1L.asInstanceOf[Anchor]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): Anchor = value.asInstanceOf[Anchor]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[Anchor] = scala.IArray[Long](0L, 1L).asInstanceOf[scala.IArray[Anchor]]
+
+    extension (self: Anchor)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Begin"
+        case 1L => "End"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Control.LayoutDirection`. */
+  opaque type LayoutDirection <: Long = Long
+
+  object LayoutDirection {
+    final val Inherited: LayoutDirection = 0L.asInstanceOf[LayoutDirection]
+    final val ApplicationLocale: LayoutDirection = 1L.asInstanceOf[LayoutDirection]
+    final val Ltr: LayoutDirection = 2L.asInstanceOf[LayoutDirection]
+    final val Rtl: LayoutDirection = 3L.asInstanceOf[LayoutDirection]
+    final val SystemLocale: LayoutDirection = 4L.asInstanceOf[LayoutDirection]
+    final val Max: LayoutDirection = 5L.asInstanceOf[LayoutDirection]
+    final val Locale: LayoutDirection = 1L.asInstanceOf[LayoutDirection]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): LayoutDirection = value.asInstanceOf[LayoutDirection]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[LayoutDirection] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L).asInstanceOf[scala.IArray[LayoutDirection]]
+
+    extension (self: LayoutDirection)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Inherited"
+        case 1L => "ApplicationLocale"
+        case 2L => "Ltr"
+        case 3L => "Rtl"
+        case 4L => "SystemLocale"
+        case 5L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `Control.TextDirection`. */
+  opaque type TextDirection <: Long = Long
+
+  object TextDirection {
+    final val Inherited: TextDirection = 3L.asInstanceOf[TextDirection]
+    final val Auto: TextDirection = 0L.asInstanceOf[TextDirection]
+    final val Ltr: TextDirection = 1L.asInstanceOf[TextDirection]
+    final val Rtl: TextDirection = 2L.asInstanceOf[TextDirection]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): TextDirection = value.asInstanceOf[TextDirection]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[TextDirection] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[TextDirection]]
+
+    extension (self: TextDirection)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Auto"
+        case 1L => "Ltr"
+        case 2L => "Rtl"
+        case 3L => "Inherited"
+        case other => other.toString
+      }
+  }
 }

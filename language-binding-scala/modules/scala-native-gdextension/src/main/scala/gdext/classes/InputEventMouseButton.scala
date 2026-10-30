@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,15 +24,15 @@ abstract class InputEventMouseButton extends InputEventMouse {
   }
 
   /** InputEventMouseButton.set_button_index */
-  final def setButtonIndex(button_index: Long): Unit = {
+  final def setButtonIndex(buttonIndex: gdext.classes.MouseButton): Unit = {
     if (gdext.classes.InputEventMouseButton.mb_set_button_index == null) gdext.classes.InputEventMouseButton.mb_set_button_index = MethodBind.get("InputEventMouseButton", "set_button_index", 3624991109L)
-    Ptrcall.callVoid1(gdext.classes.InputEventMouseButton.mb_set_button_index, livePtr, button_index)
+    Ptrcall.callVoid1(gdext.classes.InputEventMouseButton.mb_set_button_index, livePtr, buttonIndex)
   }
 
   /** InputEventMouseButton.get_button_index */
-  final def getButtonIndex(): Long = {
+  final def getButtonIndex(): gdext.classes.MouseButton = {
     if (gdext.classes.InputEventMouseButton.mb_get_button_index == null) gdext.classes.InputEventMouseButton.mb_get_button_index = MethodBind.get("InputEventMouseButton", "get_button_index", 1132662608L)
-    Ptrcall.call0[Long](gdext.classes.InputEventMouseButton.mb_get_button_index, livePtr)
+    gdext.classes.MouseButton(Ptrcall.call0[Long](gdext.classes.InputEventMouseButton.mb_get_button_index, livePtr))
   }
 
   /** InputEventMouseButton.set_pressed */
@@ -47,9 +48,9 @@ abstract class InputEventMouseButton extends InputEventMouse {
   }
 
   /** InputEventMouseButton.set_double_click */
-  final def setDoubleClick(double_click: Boolean): Unit = {
+  final def setDoubleClick(doubleClick: Boolean): Unit = {
     if (gdext.classes.InputEventMouseButton.mb_set_double_click == null) gdext.classes.InputEventMouseButton.mb_set_double_click = MethodBind.get("InputEventMouseButton", "set_double_click", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.InputEventMouseButton.mb_set_double_click, livePtr, double_click)
+    Ptrcall.callVoid1(gdext.classes.InputEventMouseButton.mb_set_double_click, livePtr, doubleClick)
   }
 
   /** InputEventMouseButton.is_double_click */

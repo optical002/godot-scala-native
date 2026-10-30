@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,9 +18,9 @@ abstract class SkeletonModificationStack2D extends Resource {
   }
 
   /** SkeletonModificationStack2D.execute */
-  final def execute(delta: Double, execution_mode: Long): Unit = {
+  final def execute(delta: Double, executionMode: Long): Unit = {
     if (gdext.classes.SkeletonModificationStack2D.mb_execute == null) gdext.classes.SkeletonModificationStack2D.mb_execute = MethodBind.get("SkeletonModificationStack2D", "execute", 1005356550L)
-    Ptrcall.callVoid2(gdext.classes.SkeletonModificationStack2D.mb_execute, livePtr, delta, execution_mode)
+    Ptrcall.callVoid2(gdext.classes.SkeletonModificationStack2D.mb_execute, livePtr, delta, executionMode)
   }
 
   /** SkeletonModificationStack2D.enable_all_modifications */
@@ -29,9 +30,9 @@ abstract class SkeletonModificationStack2D extends Resource {
   }
 
   /** SkeletonModificationStack2D.get_modification. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def getModification(mod_idx: Long): SkeletonModification2D = {
+  final def getModification(modIdx: Long): SkeletonModification2D = {
     if (gdext.classes.SkeletonModificationStack2D.mb_get_modification == null) gdext.classes.SkeletonModificationStack2D.mb_get_modification = MethodBind.get("SkeletonModificationStack2D", "get_modification", 2570274329L)
-    Wrappers.owned[SkeletonModification2D](Ptrcall.call1[Long, Long](gdext.classes.SkeletonModificationStack2D.mb_get_modification, livePtr, mod_idx))
+    Wrappers.owned[SkeletonModification2D](Ptrcall.call1[Long, Long](gdext.classes.SkeletonModificationStack2D.mb_get_modification, livePtr, modIdx))
   }
 
   /** SkeletonModificationStack2D.add_modification */
@@ -41,15 +42,15 @@ abstract class SkeletonModificationStack2D extends Resource {
   }
 
   /** SkeletonModificationStack2D.delete_modification */
-  final def deleteModification(mod_idx: Long): Unit = {
+  final def deleteModification(modIdx: Long): Unit = {
     if (gdext.classes.SkeletonModificationStack2D.mb_delete_modification == null) gdext.classes.SkeletonModificationStack2D.mb_delete_modification = MethodBind.get("SkeletonModificationStack2D", "delete_modification", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.SkeletonModificationStack2D.mb_delete_modification, livePtr, mod_idx)
+    Ptrcall.callVoid1(gdext.classes.SkeletonModificationStack2D.mb_delete_modification, livePtr, modIdx)
   }
 
   /** SkeletonModificationStack2D.set_modification */
-  final def setModification(mod_idx: Long, modification: SkeletonModification2D): Unit = {
+  final def setModification(modIdx: Long, modification: SkeletonModification2D): Unit = {
     if (gdext.classes.SkeletonModificationStack2D.mb_set_modification == null) gdext.classes.SkeletonModificationStack2D.mb_set_modification = MethodBind.get("SkeletonModificationStack2D", "set_modification", 1098262544L)
-    Ptrcall.callVoid2(gdext.classes.SkeletonModificationStack2D.mb_set_modification, livePtr, mod_idx, Wrappers.handle(modification))
+    Ptrcall.callVoid2(gdext.classes.SkeletonModificationStack2D.mb_set_modification, livePtr, modIdx, Wrappers.handle(modification))
   }
 
   /** SkeletonModificationStack2D.set_modification_count */

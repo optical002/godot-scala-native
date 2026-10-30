@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,15 +24,15 @@ abstract class MultiplayerPeer extends PacketPeer {
   }
 
   /** MultiplayerPeer.set_transfer_mode */
-  final def setTransferMode(mode: Long): Unit = {
+  final def setTransferMode(mode: gdext.classes.MultiplayerPeer.TransferMode): Unit = {
     if (gdext.classes.MultiplayerPeer.mb_set_transfer_mode == null) gdext.classes.MultiplayerPeer.mb_set_transfer_mode = MethodBind.get("MultiplayerPeer", "set_transfer_mode", 950411049L)
     Ptrcall.callVoid1(gdext.classes.MultiplayerPeer.mb_set_transfer_mode, livePtr, mode)
   }
 
   /** MultiplayerPeer.get_transfer_mode */
-  final def getTransferMode(): Long = {
+  final def getTransferMode(): gdext.classes.MultiplayerPeer.TransferMode = {
     if (gdext.classes.MultiplayerPeer.mb_get_transfer_mode == null) gdext.classes.MultiplayerPeer.mb_get_transfer_mode = MethodBind.get("MultiplayerPeer", "get_transfer_mode", 3369852622L)
-    Ptrcall.call0[Long](gdext.classes.MultiplayerPeer.mb_get_transfer_mode, livePtr)
+    gdext.classes.MultiplayerPeer.TransferMode(Ptrcall.call0[Long](gdext.classes.MultiplayerPeer.mb_get_transfer_mode, livePtr))
   }
 
   /** MultiplayerPeer.set_target_peer */
@@ -53,9 +54,9 @@ abstract class MultiplayerPeer extends PacketPeer {
   }
 
   /** MultiplayerPeer.get_packet_mode */
-  final def getPacketMode(): Long = {
+  final def getPacketMode(): gdext.classes.MultiplayerPeer.TransferMode = {
     if (gdext.classes.MultiplayerPeer.mb_get_packet_mode == null) gdext.classes.MultiplayerPeer.mb_get_packet_mode = MethodBind.get("MultiplayerPeer", "get_packet_mode", 3369852622L)
-    Ptrcall.call0[Long](gdext.classes.MultiplayerPeer.mb_get_packet_mode, livePtr)
+    gdext.classes.MultiplayerPeer.TransferMode(Ptrcall.call0[Long](gdext.classes.MultiplayerPeer.mb_get_packet_mode, livePtr))
   }
 
   /** MultiplayerPeer.poll */
@@ -71,15 +72,15 @@ abstract class MultiplayerPeer extends PacketPeer {
   }
 
   /** MultiplayerPeer.disconnect_peer */
-  final def disconnectPeer(peer: Long, force: Boolean): Unit = {
+  final def disconnectPeer(peer: Long, force: Boolean = false): Unit = {
     if (gdext.classes.MultiplayerPeer.mb_disconnect_peer == null) gdext.classes.MultiplayerPeer.mb_disconnect_peer = MethodBind.get("MultiplayerPeer", "disconnect_peer", 4023243586L)
     Ptrcall.callVoid2(gdext.classes.MultiplayerPeer.mb_disconnect_peer, livePtr, peer, force)
   }
 
   /** MultiplayerPeer.get_connection_status */
-  final def getConnectionStatus(): Long = {
+  final def getConnectionStatus(): gdext.classes.MultiplayerPeer.ConnectionStatus = {
     if (gdext.classes.MultiplayerPeer.mb_get_connection_status == null) gdext.classes.MultiplayerPeer.mb_get_connection_status = MethodBind.get("MultiplayerPeer", "get_connection_status", 2147374275L)
-    Ptrcall.call0[Long](gdext.classes.MultiplayerPeer.mb_get_connection_status, livePtr)
+    gdext.classes.MultiplayerPeer.ConnectionStatus(Ptrcall.call0[Long](gdext.classes.MultiplayerPeer.mb_get_connection_status, livePtr))
   }
 
   /** MultiplayerPeer.get_unique_id */
@@ -132,4 +133,52 @@ object MultiplayerPeer {
   private[classes] var mb_set_refuse_new_connections: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_refusing_new_connections: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_server_relay_supported: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `MultiplayerPeer.ConnectionStatus`. */
+  opaque type ConnectionStatus <: Long = Long
+
+  object ConnectionStatus {
+    final val Disconnected: ConnectionStatus = 0L.asInstanceOf[ConnectionStatus]
+    final val Connecting: ConnectionStatus = 1L.asInstanceOf[ConnectionStatus]
+    final val Connected: ConnectionStatus = 2L.asInstanceOf[ConnectionStatus]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): ConnectionStatus = value.asInstanceOf[ConnectionStatus]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[ConnectionStatus] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[ConnectionStatus]]
+
+    extension (self: ConnectionStatus)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Disconnected"
+        case 1L => "Connecting"
+        case 2L => "Connected"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `MultiplayerPeer.TransferMode`. */
+  opaque type TransferMode <: Long = Long
+
+  object TransferMode {
+    final val Unreliable: TransferMode = 0L.asInstanceOf[TransferMode]
+    final val UnreliableOrdered: TransferMode = 1L.asInstanceOf[TransferMode]
+    final val Reliable: TransferMode = 2L.asInstanceOf[TransferMode]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): TransferMode = value.asInstanceOf[TransferMode]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[TransferMode] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[TransferMode]]
+
+    extension (self: TransferMode)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Unreliable"
+        case 1L => "UnreliableOrdered"
+        case 2L => "Reliable"
+        case other => other.toString
+      }
+  }
 }

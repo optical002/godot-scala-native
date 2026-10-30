@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,15 +24,15 @@ abstract class InputEventMIDI extends InputEvent {
   }
 
   /** InputEventMIDI.set_message */
-  final def setMessage(message: Long): Unit = {
+  final def setMessage(message: gdext.classes.MIDIMessage): Unit = {
     if (gdext.classes.InputEventMIDI.mb_set_message == null) gdext.classes.InputEventMIDI.mb_set_message = MethodBind.get("InputEventMIDI", "set_message", 1064271510L)
     Ptrcall.callVoid1(gdext.classes.InputEventMIDI.mb_set_message, livePtr, message)
   }
 
   /** InputEventMIDI.get_message */
-  final def getMessage(): Long = {
+  final def getMessage(): gdext.classes.MIDIMessage = {
     if (gdext.classes.InputEventMIDI.mb_get_message == null) gdext.classes.InputEventMIDI.mb_get_message = MethodBind.get("InputEventMIDI", "get_message", 1936512097L)
-    Ptrcall.call0[Long](gdext.classes.InputEventMIDI.mb_get_message, livePtr)
+    gdext.classes.MIDIMessage(Ptrcall.call0[Long](gdext.classes.InputEventMIDI.mb_get_message, livePtr))
   }
 
   /** InputEventMIDI.set_pitch */
@@ -83,9 +84,9 @@ abstract class InputEventMIDI extends InputEvent {
   }
 
   /** InputEventMIDI.set_controller_number */
-  final def setControllerNumber(controller_number: Long): Unit = {
+  final def setControllerNumber(controllerNumber: Long): Unit = {
     if (gdext.classes.InputEventMIDI.mb_set_controller_number == null) gdext.classes.InputEventMIDI.mb_set_controller_number = MethodBind.get("InputEventMIDI", "set_controller_number", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.InputEventMIDI.mb_set_controller_number, livePtr, controller_number)
+    Ptrcall.callVoid1(gdext.classes.InputEventMIDI.mb_set_controller_number, livePtr, controllerNumber)
   }
 
   /** InputEventMIDI.get_controller_number */
@@ -95,9 +96,9 @@ abstract class InputEventMIDI extends InputEvent {
   }
 
   /** InputEventMIDI.set_controller_value */
-  final def setControllerValue(controller_value: Long): Unit = {
+  final def setControllerValue(controllerValue: Long): Unit = {
     if (gdext.classes.InputEventMIDI.mb_set_controller_value == null) gdext.classes.InputEventMIDI.mb_set_controller_value = MethodBind.get("InputEventMIDI", "set_controller_value", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.InputEventMIDI.mb_set_controller_value, livePtr, controller_value)
+    Ptrcall.callVoid1(gdext.classes.InputEventMIDI.mb_set_controller_value, livePtr, controllerValue)
   }
 
   /** InputEventMIDI.get_controller_value */

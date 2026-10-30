@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -83,4 +84,30 @@ object AnimationNode {
   private[classes] var mb_is_filter_enabled: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_processing_animation_tree_instance_id: GDExtensionMethodBindPtr = null
   private[classes] var mb_is_process_testing: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `AnimationNode.FilterAction`. */
+  opaque type FilterAction <: Long = Long
+
+  object FilterAction {
+    final val Ignore: FilterAction = 0L.asInstanceOf[FilterAction]
+    final val Pass: FilterAction = 1L.asInstanceOf[FilterAction]
+    final val Stop: FilterAction = 2L.asInstanceOf[FilterAction]
+    final val Blend: FilterAction = 3L.asInstanceOf[FilterAction]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): FilterAction = value.asInstanceOf[FilterAction]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[FilterAction] = scala.IArray[Long](0L, 1L, 2L, 3L).asInstanceOf[scala.IArray[FilterAction]]
+
+    extension (self: FilterAction)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Ignore"
+        case 1L => "Pass"
+        case 2L => "Stop"
+        case 3L => "Blend"
+        case other => other.toString
+      }
+  }
 }

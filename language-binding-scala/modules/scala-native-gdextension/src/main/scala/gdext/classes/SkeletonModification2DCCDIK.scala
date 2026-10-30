@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,75 +24,75 @@ abstract class SkeletonModification2DCCDIK extends SkeletonModification2D {
   }
 
   /** SkeletonModification2DCCDIK.set_ccdik_joint_bone_index */
-  final def setCcdikJointBoneIndex(joint_idx: Long, bone_idx: Long): Unit = {
+  final def setCcdikJointBoneIndex(jointIdx: Long, boneIdx: Long): Unit = {
     if (gdext.classes.SkeletonModification2DCCDIK.mb_set_ccdik_joint_bone_index == null) gdext.classes.SkeletonModification2DCCDIK.mb_set_ccdik_joint_bone_index = MethodBind.get("SkeletonModification2DCCDIK", "set_ccdik_joint_bone_index", 3937882851L)
-    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DCCDIK.mb_set_ccdik_joint_bone_index, livePtr, joint_idx, bone_idx)
+    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DCCDIK.mb_set_ccdik_joint_bone_index, livePtr, jointIdx, boneIdx)
   }
 
   /** SkeletonModification2DCCDIK.get_ccdik_joint_bone_index */
-  final def getCcdikJointBoneIndex(joint_idx: Long): Long = {
+  final def getCcdikJointBoneIndex(jointIdx: Long): Long = {
     if (gdext.classes.SkeletonModification2DCCDIK.mb_get_ccdik_joint_bone_index == null) gdext.classes.SkeletonModification2DCCDIK.mb_get_ccdik_joint_bone_index = MethodBind.get("SkeletonModification2DCCDIK", "get_ccdik_joint_bone_index", 923996154L)
-    Ptrcall.call1[Long, Long](gdext.classes.SkeletonModification2DCCDIK.mb_get_ccdik_joint_bone_index, livePtr, joint_idx)
+    Ptrcall.call1[Long, Long](gdext.classes.SkeletonModification2DCCDIK.mb_get_ccdik_joint_bone_index, livePtr, jointIdx)
   }
 
   /** SkeletonModification2DCCDIK.set_ccdik_joint_rotate_from_joint */
-  final def setCcdikJointRotateFromJoint(joint_idx: Long, rotate_from_joint: Boolean): Unit = {
+  final def setCcdikJointRotateFromJoint(jointIdx: Long, rotateFromJoint: Boolean): Unit = {
     if (gdext.classes.SkeletonModification2DCCDIK.mb_set_ccdik_joint_rotate_from_joint == null) gdext.classes.SkeletonModification2DCCDIK.mb_set_ccdik_joint_rotate_from_joint = MethodBind.get("SkeletonModification2DCCDIK", "set_ccdik_joint_rotate_from_joint", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DCCDIK.mb_set_ccdik_joint_rotate_from_joint, livePtr, joint_idx, rotate_from_joint)
+    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DCCDIK.mb_set_ccdik_joint_rotate_from_joint, livePtr, jointIdx, rotateFromJoint)
   }
 
   /** SkeletonModification2DCCDIK.get_ccdik_joint_rotate_from_joint */
-  final def getCcdikJointRotateFromJoint(joint_idx: Long): Boolean = {
+  final def getCcdikJointRotateFromJoint(jointIdx: Long): Boolean = {
     if (gdext.classes.SkeletonModification2DCCDIK.mb_get_ccdik_joint_rotate_from_joint == null) gdext.classes.SkeletonModification2DCCDIK.mb_get_ccdik_joint_rotate_from_joint = MethodBind.get("SkeletonModification2DCCDIK", "get_ccdik_joint_rotate_from_joint", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.SkeletonModification2DCCDIK.mb_get_ccdik_joint_rotate_from_joint, livePtr, joint_idx)
+    Ptrcall.call1[Long, Boolean](gdext.classes.SkeletonModification2DCCDIK.mb_get_ccdik_joint_rotate_from_joint, livePtr, jointIdx)
   }
 
   /** SkeletonModification2DCCDIK.set_ccdik_joint_enable_constraint */
-  final def setCcdikJointEnableConstraint(joint_idx: Long, enable_constraint: Boolean): Unit = {
+  final def setCcdikJointEnableConstraint(jointIdx: Long, enableConstraint: Boolean): Unit = {
     if (gdext.classes.SkeletonModification2DCCDIK.mb_set_ccdik_joint_enable_constraint == null) gdext.classes.SkeletonModification2DCCDIK.mb_set_ccdik_joint_enable_constraint = MethodBind.get("SkeletonModification2DCCDIK", "set_ccdik_joint_enable_constraint", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DCCDIK.mb_set_ccdik_joint_enable_constraint, livePtr, joint_idx, enable_constraint)
+    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DCCDIK.mb_set_ccdik_joint_enable_constraint, livePtr, jointIdx, enableConstraint)
   }
 
   /** SkeletonModification2DCCDIK.get_ccdik_joint_enable_constraint */
-  final def getCcdikJointEnableConstraint(joint_idx: Long): Boolean = {
+  final def getCcdikJointEnableConstraint(jointIdx: Long): Boolean = {
     if (gdext.classes.SkeletonModification2DCCDIK.mb_get_ccdik_joint_enable_constraint == null) gdext.classes.SkeletonModification2DCCDIK.mb_get_ccdik_joint_enable_constraint = MethodBind.get("SkeletonModification2DCCDIK", "get_ccdik_joint_enable_constraint", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.SkeletonModification2DCCDIK.mb_get_ccdik_joint_enable_constraint, livePtr, joint_idx)
+    Ptrcall.call1[Long, Boolean](gdext.classes.SkeletonModification2DCCDIK.mb_get_ccdik_joint_enable_constraint, livePtr, jointIdx)
   }
 
   /** SkeletonModification2DCCDIK.set_ccdik_joint_constraint_angle_min */
-  final def setCcdikJointConstraintAngleMin(joint_idx: Long, angle_min: Double): Unit = {
+  final def setCcdikJointConstraintAngleMin(jointIdx: Long, angleMin: Double): Unit = {
     if (gdext.classes.SkeletonModification2DCCDIK.mb_set_ccdik_joint_constraint_angle_min == null) gdext.classes.SkeletonModification2DCCDIK.mb_set_ccdik_joint_constraint_angle_min = MethodBind.get("SkeletonModification2DCCDIK", "set_ccdik_joint_constraint_angle_min", 1602489585L)
-    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DCCDIK.mb_set_ccdik_joint_constraint_angle_min, livePtr, joint_idx, angle_min)
+    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DCCDIK.mb_set_ccdik_joint_constraint_angle_min, livePtr, jointIdx, angleMin)
   }
 
   /** SkeletonModification2DCCDIK.get_ccdik_joint_constraint_angle_min */
-  final def getCcdikJointConstraintAngleMin(joint_idx: Long): Double = {
+  final def getCcdikJointConstraintAngleMin(jointIdx: Long): Double = {
     if (gdext.classes.SkeletonModification2DCCDIK.mb_get_ccdik_joint_constraint_angle_min == null) gdext.classes.SkeletonModification2DCCDIK.mb_get_ccdik_joint_constraint_angle_min = MethodBind.get("SkeletonModification2DCCDIK", "get_ccdik_joint_constraint_angle_min", 2339986948L)
-    Ptrcall.call1[Long, Double](gdext.classes.SkeletonModification2DCCDIK.mb_get_ccdik_joint_constraint_angle_min, livePtr, joint_idx)
+    Ptrcall.call1[Long, Double](gdext.classes.SkeletonModification2DCCDIK.mb_get_ccdik_joint_constraint_angle_min, livePtr, jointIdx)
   }
 
   /** SkeletonModification2DCCDIK.set_ccdik_joint_constraint_angle_max */
-  final def setCcdikJointConstraintAngleMax(joint_idx: Long, angle_max: Double): Unit = {
+  final def setCcdikJointConstraintAngleMax(jointIdx: Long, angleMax: Double): Unit = {
     if (gdext.classes.SkeletonModification2DCCDIK.mb_set_ccdik_joint_constraint_angle_max == null) gdext.classes.SkeletonModification2DCCDIK.mb_set_ccdik_joint_constraint_angle_max = MethodBind.get("SkeletonModification2DCCDIK", "set_ccdik_joint_constraint_angle_max", 1602489585L)
-    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DCCDIK.mb_set_ccdik_joint_constraint_angle_max, livePtr, joint_idx, angle_max)
+    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DCCDIK.mb_set_ccdik_joint_constraint_angle_max, livePtr, jointIdx, angleMax)
   }
 
   /** SkeletonModification2DCCDIK.get_ccdik_joint_constraint_angle_max */
-  final def getCcdikJointConstraintAngleMax(joint_idx: Long): Double = {
+  final def getCcdikJointConstraintAngleMax(jointIdx: Long): Double = {
     if (gdext.classes.SkeletonModification2DCCDIK.mb_get_ccdik_joint_constraint_angle_max == null) gdext.classes.SkeletonModification2DCCDIK.mb_get_ccdik_joint_constraint_angle_max = MethodBind.get("SkeletonModification2DCCDIK", "get_ccdik_joint_constraint_angle_max", 2339986948L)
-    Ptrcall.call1[Long, Double](gdext.classes.SkeletonModification2DCCDIK.mb_get_ccdik_joint_constraint_angle_max, livePtr, joint_idx)
+    Ptrcall.call1[Long, Double](gdext.classes.SkeletonModification2DCCDIK.mb_get_ccdik_joint_constraint_angle_max, livePtr, jointIdx)
   }
 
   /** SkeletonModification2DCCDIK.set_ccdik_joint_constraint_angle_invert */
-  final def setCcdikJointConstraintAngleInvert(joint_idx: Long, invert: Boolean): Unit = {
+  final def setCcdikJointConstraintAngleInvert(jointIdx: Long, invert: Boolean): Unit = {
     if (gdext.classes.SkeletonModification2DCCDIK.mb_set_ccdik_joint_constraint_angle_invert == null) gdext.classes.SkeletonModification2DCCDIK.mb_set_ccdik_joint_constraint_angle_invert = MethodBind.get("SkeletonModification2DCCDIK", "set_ccdik_joint_constraint_angle_invert", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DCCDIK.mb_set_ccdik_joint_constraint_angle_invert, livePtr, joint_idx, invert)
+    Ptrcall.callVoid2(gdext.classes.SkeletonModification2DCCDIK.mb_set_ccdik_joint_constraint_angle_invert, livePtr, jointIdx, invert)
   }
 
   /** SkeletonModification2DCCDIK.get_ccdik_joint_constraint_angle_invert */
-  final def getCcdikJointConstraintAngleInvert(joint_idx: Long): Boolean = {
+  final def getCcdikJointConstraintAngleInvert(jointIdx: Long): Boolean = {
     if (gdext.classes.SkeletonModification2DCCDIK.mb_get_ccdik_joint_constraint_angle_invert == null) gdext.classes.SkeletonModification2DCCDIK.mb_get_ccdik_joint_constraint_angle_invert = MethodBind.get("SkeletonModification2DCCDIK", "get_ccdik_joint_constraint_angle_invert", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.SkeletonModification2DCCDIK.mb_get_ccdik_joint_constraint_angle_invert, livePtr, joint_idx)
+    Ptrcall.call1[Long, Boolean](gdext.classes.SkeletonModification2DCCDIK.mb_get_ccdik_joint_constraint_angle_invert, livePtr, jointIdx)
   }
 
 }

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -47,9 +48,9 @@ abstract class FogMaterial extends Material {
   }
 
   /** FogMaterial.set_height_falloff */
-  final def setHeightFalloff(height_falloff: Double): Unit = {
+  final def setHeightFalloff(heightFalloff: Double): Unit = {
     if (gdext.classes.FogMaterial.mb_set_height_falloff == null) gdext.classes.FogMaterial.mb_set_height_falloff = MethodBind.get("FogMaterial", "set_height_falloff", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.FogMaterial.mb_set_height_falloff, livePtr, height_falloff)
+    Ptrcall.callVoid1(gdext.classes.FogMaterial.mb_set_height_falloff, livePtr, heightFalloff)
   }
 
   /** FogMaterial.get_height_falloff */
@@ -59,9 +60,9 @@ abstract class FogMaterial extends Material {
   }
 
   /** FogMaterial.set_edge_fade */
-  final def setEdgeFade(edge_fade: Double): Unit = {
+  final def setEdgeFade(edgeFade: Double): Unit = {
     if (gdext.classes.FogMaterial.mb_set_edge_fade == null) gdext.classes.FogMaterial.mb_set_edge_fade = MethodBind.get("FogMaterial", "set_edge_fade", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.FogMaterial.mb_set_edge_fade, livePtr, edge_fade)
+    Ptrcall.callVoid1(gdext.classes.FogMaterial.mb_set_edge_fade, livePtr, edgeFade)
   }
 
   /** FogMaterial.get_edge_fade */
@@ -71,9 +72,9 @@ abstract class FogMaterial extends Material {
   }
 
   /** FogMaterial.set_density_texture */
-  final def setDensityTexture(density_texture: Texture3D): Unit = {
+  final def setDensityTexture(densityTexture: Texture3D): Unit = {
     if (gdext.classes.FogMaterial.mb_set_density_texture == null) gdext.classes.FogMaterial.mb_set_density_texture = MethodBind.get("FogMaterial", "set_density_texture", 1188404210L)
-    Ptrcall.callVoid1(gdext.classes.FogMaterial.mb_set_density_texture, livePtr, Wrappers.handle(density_texture))
+    Ptrcall.callVoid1(gdext.classes.FogMaterial.mb_set_density_texture, livePtr, Wrappers.handle(densityTexture))
   }
 
   /** FogMaterial.get_density_texture. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */

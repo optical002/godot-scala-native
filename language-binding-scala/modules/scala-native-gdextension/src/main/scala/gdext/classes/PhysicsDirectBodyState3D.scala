@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -101,19 +102,19 @@ abstract class PhysicsDirectBodyState3D extends Object {
   }
 
   /** PhysicsDirectBodyState3D.get_velocity_at_local_position */
-  final def getVelocityAtLocalPosition(local_position: gdext.builtin.Vector3): gdext.builtin.Vector3 = {
+  final def getVelocityAtLocalPosition(localPosition: gdext.builtin.Vector3): gdext.builtin.Vector3 = {
     if (gdext.classes.PhysicsDirectBodyState3D.mb_get_velocity_at_local_position == null) gdext.classes.PhysicsDirectBodyState3D.mb_get_velocity_at_local_position = MethodBind.get("PhysicsDirectBodyState3D", "get_velocity_at_local_position", 192990374L)
-    Ptrcall.call1[gdext.builtin.Vector3, gdext.builtin.Vector3](gdext.classes.PhysicsDirectBodyState3D.mb_get_velocity_at_local_position, livePtr, local_position)
+    Ptrcall.call1[gdext.builtin.Vector3, gdext.builtin.Vector3](gdext.classes.PhysicsDirectBodyState3D.mb_get_velocity_at_local_position, livePtr, localPosition)
   }
 
   /** PhysicsDirectBodyState3D.apply_central_impulse */
-  final def applyCentralImpulse(impulse: gdext.builtin.Vector3): Unit = {
+  final def applyCentralImpulse(impulse: gdext.builtin.Vector3 = gdext.builtin.Vector3(0f, 0f, 0f)): Unit = {
     if (gdext.classes.PhysicsDirectBodyState3D.mb_apply_central_impulse == null) gdext.classes.PhysicsDirectBodyState3D.mb_apply_central_impulse = MethodBind.get("PhysicsDirectBodyState3D", "apply_central_impulse", 2007698547L)
     Ptrcall.callVoid1(gdext.classes.PhysicsDirectBodyState3D.mb_apply_central_impulse, livePtr, impulse)
   }
 
   /** PhysicsDirectBodyState3D.apply_impulse */
-  final def applyImpulse(impulse: gdext.builtin.Vector3, position: gdext.builtin.Vector3): Unit = {
+  final def applyImpulse(impulse: gdext.builtin.Vector3, position: gdext.builtin.Vector3 = gdext.builtin.Vector3(0f, 0f, 0f)): Unit = {
     if (gdext.classes.PhysicsDirectBodyState3D.mb_apply_impulse == null) gdext.classes.PhysicsDirectBodyState3D.mb_apply_impulse = MethodBind.get("PhysicsDirectBodyState3D", "apply_impulse", 2754756483L)
     Ptrcall.callVoid2(gdext.classes.PhysicsDirectBodyState3D.mb_apply_impulse, livePtr, impulse, position)
   }
@@ -125,13 +126,13 @@ abstract class PhysicsDirectBodyState3D extends Object {
   }
 
   /** PhysicsDirectBodyState3D.apply_central_force */
-  final def applyCentralForce(force: gdext.builtin.Vector3): Unit = {
+  final def applyCentralForce(force: gdext.builtin.Vector3 = gdext.builtin.Vector3(0f, 0f, 0f)): Unit = {
     if (gdext.classes.PhysicsDirectBodyState3D.mb_apply_central_force == null) gdext.classes.PhysicsDirectBodyState3D.mb_apply_central_force = MethodBind.get("PhysicsDirectBodyState3D", "apply_central_force", 2007698547L)
     Ptrcall.callVoid1(gdext.classes.PhysicsDirectBodyState3D.mb_apply_central_force, livePtr, force)
   }
 
   /** PhysicsDirectBodyState3D.apply_force */
-  final def applyForce(force: gdext.builtin.Vector3, position: gdext.builtin.Vector3): Unit = {
+  final def applyForce(force: gdext.builtin.Vector3, position: gdext.builtin.Vector3 = gdext.builtin.Vector3(0f, 0f, 0f)): Unit = {
     if (gdext.classes.PhysicsDirectBodyState3D.mb_apply_force == null) gdext.classes.PhysicsDirectBodyState3D.mb_apply_force = MethodBind.get("PhysicsDirectBodyState3D", "apply_force", 2754756483L)
     Ptrcall.callVoid2(gdext.classes.PhysicsDirectBodyState3D.mb_apply_force, livePtr, force, position)
   }
@@ -143,13 +144,13 @@ abstract class PhysicsDirectBodyState3D extends Object {
   }
 
   /** PhysicsDirectBodyState3D.add_constant_central_force */
-  final def addConstantCentralForce(force: gdext.builtin.Vector3): Unit = {
+  final def addConstantCentralForce(force: gdext.builtin.Vector3 = gdext.builtin.Vector3(0f, 0f, 0f)): Unit = {
     if (gdext.classes.PhysicsDirectBodyState3D.mb_add_constant_central_force == null) gdext.classes.PhysicsDirectBodyState3D.mb_add_constant_central_force = MethodBind.get("PhysicsDirectBodyState3D", "add_constant_central_force", 2007698547L)
     Ptrcall.callVoid1(gdext.classes.PhysicsDirectBodyState3D.mb_add_constant_central_force, livePtr, force)
   }
 
   /** PhysicsDirectBodyState3D.add_constant_force */
-  final def addConstantForce(force: gdext.builtin.Vector3, position: gdext.builtin.Vector3): Unit = {
+  final def addConstantForce(force: gdext.builtin.Vector3, position: gdext.builtin.Vector3 = gdext.builtin.Vector3(0f, 0f, 0f)): Unit = {
     if (gdext.classes.PhysicsDirectBodyState3D.mb_add_constant_force == null) gdext.classes.PhysicsDirectBodyState3D.mb_add_constant_force = MethodBind.get("PhysicsDirectBodyState3D", "add_constant_force", 2754756483L)
     Ptrcall.callVoid2(gdext.classes.PhysicsDirectBodyState3D.mb_add_constant_force, livePtr, force, position)
   }
@@ -227,63 +228,63 @@ abstract class PhysicsDirectBodyState3D extends Object {
   }
 
   /** PhysicsDirectBodyState3D.get_contact_local_position */
-  final def getContactLocalPosition(contact_idx: Long): gdext.builtin.Vector3 = {
+  final def getContactLocalPosition(contactIdx: Long): gdext.builtin.Vector3 = {
     if (gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_local_position == null) gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_local_position = MethodBind.get("PhysicsDirectBodyState3D", "get_contact_local_position", 711720468L)
-    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_local_position, livePtr, contact_idx)
+    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_local_position, livePtr, contactIdx)
   }
 
   /** PhysicsDirectBodyState3D.get_contact_local_normal */
-  final def getContactLocalNormal(contact_idx: Long): gdext.builtin.Vector3 = {
+  final def getContactLocalNormal(contactIdx: Long): gdext.builtin.Vector3 = {
     if (gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_local_normal == null) gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_local_normal = MethodBind.get("PhysicsDirectBodyState3D", "get_contact_local_normal", 711720468L)
-    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_local_normal, livePtr, contact_idx)
+    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_local_normal, livePtr, contactIdx)
   }
 
   /** PhysicsDirectBodyState3D.get_contact_impulse */
-  final def getContactImpulse(contact_idx: Long): gdext.builtin.Vector3 = {
+  final def getContactImpulse(contactIdx: Long): gdext.builtin.Vector3 = {
     if (gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_impulse == null) gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_impulse = MethodBind.get("PhysicsDirectBodyState3D", "get_contact_impulse", 711720468L)
-    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_impulse, livePtr, contact_idx)
+    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_impulse, livePtr, contactIdx)
   }
 
   /** PhysicsDirectBodyState3D.get_contact_local_shape */
-  final def getContactLocalShape(contact_idx: Long): Long = {
+  final def getContactLocalShape(contactIdx: Long): Long = {
     if (gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_local_shape == null) gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_local_shape = MethodBind.get("PhysicsDirectBodyState3D", "get_contact_local_shape", 923996154L)
-    Ptrcall.call1[Long, Long](gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_local_shape, livePtr, contact_idx)
+    Ptrcall.call1[Long, Long](gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_local_shape, livePtr, contactIdx)
   }
 
   /** PhysicsDirectBodyState3D.get_contact_local_velocity_at_position */
-  final def getContactLocalVelocityAtPosition(contact_idx: Long): gdext.builtin.Vector3 = {
+  final def getContactLocalVelocityAtPosition(contactIdx: Long): gdext.builtin.Vector3 = {
     if (gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_local_velocity_at_position == null) gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_local_velocity_at_position = MethodBind.get("PhysicsDirectBodyState3D", "get_contact_local_velocity_at_position", 711720468L)
-    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_local_velocity_at_position, livePtr, contact_idx)
+    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_local_velocity_at_position, livePtr, contactIdx)
   }
 
   /** PhysicsDirectBodyState3D.get_contact_collider_position */
-  final def getContactColliderPosition(contact_idx: Long): gdext.builtin.Vector3 = {
+  final def getContactColliderPosition(contactIdx: Long): gdext.builtin.Vector3 = {
     if (gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_collider_position == null) gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_collider_position = MethodBind.get("PhysicsDirectBodyState3D", "get_contact_collider_position", 711720468L)
-    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_collider_position, livePtr, contact_idx)
+    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_collider_position, livePtr, contactIdx)
   }
 
   /** PhysicsDirectBodyState3D.get_contact_collider_id */
-  final def getContactColliderId(contact_idx: Long): Long = {
+  final def getContactColliderId(contactIdx: Long): Long = {
     if (gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_collider_id == null) gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_collider_id = MethodBind.get("PhysicsDirectBodyState3D", "get_contact_collider_id", 923996154L)
-    Ptrcall.call1[Long, Long](gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_collider_id, livePtr, contact_idx)
+    Ptrcall.call1[Long, Long](gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_collider_id, livePtr, contactIdx)
   }
 
   /** PhysicsDirectBodyState3D.get_contact_collider_object */
-  final def getContactColliderObject(contact_idx: Long): Object = {
+  final def getContactColliderObject(contactIdx: Long): Object = {
     if (gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_collider_object == null) gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_collider_object = MethodBind.get("PhysicsDirectBodyState3D", "get_contact_collider_object", 3332903315L)
-    Wrappers.borrowed[Object](Ptrcall.call1[Long, Long](gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_collider_object, livePtr, contact_idx))
+    Wrappers.borrowed[Object](Ptrcall.call1[Long, Long](gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_collider_object, livePtr, contactIdx))
   }
 
   /** PhysicsDirectBodyState3D.get_contact_collider_shape */
-  final def getContactColliderShape(contact_idx: Long): Long = {
+  final def getContactColliderShape(contactIdx: Long): Long = {
     if (gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_collider_shape == null) gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_collider_shape = MethodBind.get("PhysicsDirectBodyState3D", "get_contact_collider_shape", 923996154L)
-    Ptrcall.call1[Long, Long](gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_collider_shape, livePtr, contact_idx)
+    Ptrcall.call1[Long, Long](gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_collider_shape, livePtr, contactIdx)
   }
 
   /** PhysicsDirectBodyState3D.get_contact_collider_velocity_at_position */
-  final def getContactColliderVelocityAtPosition(contact_idx: Long): gdext.builtin.Vector3 = {
+  final def getContactColliderVelocityAtPosition(contactIdx: Long): gdext.builtin.Vector3 = {
     if (gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_collider_velocity_at_position == null) gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_collider_velocity_at_position = MethodBind.get("PhysicsDirectBodyState3D", "get_contact_collider_velocity_at_position", 711720468L)
-    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_collider_velocity_at_position, livePtr, contact_idx)
+    Ptrcall.call1[Long, gdext.builtin.Vector3](gdext.classes.PhysicsDirectBodyState3D.mb_get_contact_collider_velocity_at_position, livePtr, contactIdx)
   }
 
   /** PhysicsDirectBodyState3D.get_step */

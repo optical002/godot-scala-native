@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,7 +24,7 @@ abstract class Curve2D extends Resource {
   }
 
   /** Curve2D.add_point */
-  final def addPoint(position: gdext.builtin.Vector2, in: gdext.builtin.Vector2, out: gdext.builtin.Vector2, index: Long): Unit = {
+  final def addPoint(position: gdext.builtin.Vector2, in: gdext.builtin.Vector2 = gdext.builtin.Vector2(0f, 0f), out: gdext.builtin.Vector2 = gdext.builtin.Vector2(0f, 0f), index: Long = -1L): Unit = {
     if (gdext.classes.Curve2D.mb_add_point == null) gdext.classes.Curve2D.mb_add_point = MethodBind.get("Curve2D", "add_point", 4175465202L)
     Ptrcall.callVoid4(gdext.classes.Curve2D.mb_add_point, livePtr, position, in, out, index)
   }
@@ -107,27 +108,27 @@ abstract class Curve2D extends Resource {
   }
 
   /** Curve2D.sample_baked */
-  final def sampleBaked(offset: Double, cubic: Boolean): gdext.builtin.Vector2 = {
+  final def sampleBaked(offset: Double = 0.0, cubic: Boolean = false): gdext.builtin.Vector2 = {
     if (gdext.classes.Curve2D.mb_sample_baked == null) gdext.classes.Curve2D.mb_sample_baked = MethodBind.get("Curve2D", "sample_baked", 3464257706L)
     Ptrcall.call2[Double, Boolean, gdext.builtin.Vector2](gdext.classes.Curve2D.mb_sample_baked, livePtr, offset, cubic)
   }
 
   /** Curve2D.sample_baked_with_rotation */
-  final def sampleBakedWithRotation(offset: Double, cubic: Boolean): gdext.builtin.Transform2D = {
+  final def sampleBakedWithRotation(offset: Double = 0.0, cubic: Boolean = false): gdext.builtin.Transform2D = {
     if (gdext.classes.Curve2D.mb_sample_baked_with_rotation == null) gdext.classes.Curve2D.mb_sample_baked_with_rotation = MethodBind.get("Curve2D", "sample_baked_with_rotation", 3296056341L)
     Ptrcall.call2[Double, Boolean, gdext.builtin.Transform2D](gdext.classes.Curve2D.mb_sample_baked_with_rotation, livePtr, offset, cubic)
   }
 
   /** Curve2D.get_closest_point */
-  final def getClosestPoint(to_point: gdext.builtin.Vector2): gdext.builtin.Vector2 = {
+  final def getClosestPoint(toPoint: gdext.builtin.Vector2): gdext.builtin.Vector2 = {
     if (gdext.classes.Curve2D.mb_get_closest_point == null) gdext.classes.Curve2D.mb_get_closest_point = MethodBind.get("Curve2D", "get_closest_point", 2656412154L)
-    Ptrcall.call1[gdext.builtin.Vector2, gdext.builtin.Vector2](gdext.classes.Curve2D.mb_get_closest_point, livePtr, to_point)
+    Ptrcall.call1[gdext.builtin.Vector2, gdext.builtin.Vector2](gdext.classes.Curve2D.mb_get_closest_point, livePtr, toPoint)
   }
 
   /** Curve2D.get_closest_offset */
-  final def getClosestOffset(to_point: gdext.builtin.Vector2): Double = {
+  final def getClosestOffset(toPoint: gdext.builtin.Vector2): Double = {
     if (gdext.classes.Curve2D.mb_get_closest_offset == null) gdext.classes.Curve2D.mb_get_closest_offset = MethodBind.get("Curve2D", "get_closest_offset", 2276447920L)
-    Ptrcall.call1[gdext.builtin.Vector2, Double](gdext.classes.Curve2D.mb_get_closest_offset, livePtr, to_point)
+    Ptrcall.call1[gdext.builtin.Vector2, Double](gdext.classes.Curve2D.mb_get_closest_offset, livePtr, toPoint)
   }
 
 }

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,9 +36,9 @@ abstract class OpenXRFrameSynthesisExtension extends OpenXRExtensionWrapper {
   }
 
   /** OpenXRFrameSynthesisExtension.set_relax_frame_interval */
-  final def setRelaxFrameInterval(relax_frame_interval: Boolean): Unit = {
+  final def setRelaxFrameInterval(relaxFrameInterval: Boolean): Unit = {
     if (gdext.classes.OpenXRFrameSynthesisExtension.mb_set_relax_frame_interval == null) gdext.classes.OpenXRFrameSynthesisExtension.mb_set_relax_frame_interval = MethodBind.get("OpenXRFrameSynthesisExtension", "set_relax_frame_interval", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.OpenXRFrameSynthesisExtension.mb_set_relax_frame_interval, livePtr, relax_frame_interval)
+    Ptrcall.callVoid1(gdext.classes.OpenXRFrameSynthesisExtension.mb_set_relax_frame_interval, livePtr, relaxFrameInterval)
   }
 
   /** OpenXRFrameSynthesisExtension.skip_next_frame */

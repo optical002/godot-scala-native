@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class PacketPeer extends RefCounted {
   override def godotClassName: String = "PacketPeer"
 
   /** PacketPeer.get_packet_error */
-  final def getPacketError(): Long = {
+  final def getPacketError(): gdext.classes.Error = {
     if (gdext.classes.PacketPeer.mb_get_packet_error == null) gdext.classes.PacketPeer.mb_get_packet_error = MethodBind.get("PacketPeer", "get_packet_error", 3185525595L)
-    Ptrcall.call0[Long](gdext.classes.PacketPeer.mb_get_packet_error, livePtr)
+    gdext.classes.Error(Ptrcall.call0[Long](gdext.classes.PacketPeer.mb_get_packet_error, livePtr))
   }
 
   /** PacketPeer.get_available_packet_count */
@@ -29,9 +30,9 @@ abstract class PacketPeer extends RefCounted {
   }
 
   /** PacketPeer.set_encode_buffer_max_size */
-  final def setEncodeBufferMaxSize(max_size: Long): Unit = {
+  final def setEncodeBufferMaxSize(maxSize: Long): Unit = {
     if (gdext.classes.PacketPeer.mb_set_encode_buffer_max_size == null) gdext.classes.PacketPeer.mb_set_encode_buffer_max_size = MethodBind.get("PacketPeer", "set_encode_buffer_max_size", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.PacketPeer.mb_set_encode_buffer_max_size, livePtr, max_size)
+    Ptrcall.callVoid1(gdext.classes.PacketPeer.mb_set_encode_buffer_max_size, livePtr, maxSize)
   }
 
 }

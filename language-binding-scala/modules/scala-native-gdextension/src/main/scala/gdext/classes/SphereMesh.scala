@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,9 +36,9 @@ abstract class SphereMesh extends PrimitiveMesh {
   }
 
   /** SphereMesh.set_radial_segments */
-  final def setRadialSegments(radial_segments: Long): Unit = {
+  final def setRadialSegments(radialSegments: Long): Unit = {
     if (gdext.classes.SphereMesh.mb_set_radial_segments == null) gdext.classes.SphereMesh.mb_set_radial_segments = MethodBind.get("SphereMesh", "set_radial_segments", 1286410249L)
-    Ptrcall.callVoid1(gdext.classes.SphereMesh.mb_set_radial_segments, livePtr, radial_segments)
+    Ptrcall.callVoid1(gdext.classes.SphereMesh.mb_set_radial_segments, livePtr, radialSegments)
   }
 
   /** SphereMesh.get_radial_segments */
@@ -59,9 +60,9 @@ abstract class SphereMesh extends PrimitiveMesh {
   }
 
   /** SphereMesh.set_is_hemisphere */
-  final def setIsHemisphere(is_hemisphere: Boolean): Unit = {
+  final def setIsHemisphere(isHemisphere: Boolean): Unit = {
     if (gdext.classes.SphereMesh.mb_set_is_hemisphere == null) gdext.classes.SphereMesh.mb_set_is_hemisphere = MethodBind.get("SphereMesh", "set_is_hemisphere", 2586408642L)
-    Ptrcall.callVoid1(gdext.classes.SphereMesh.mb_set_is_hemisphere, livePtr, is_hemisphere)
+    Ptrcall.callVoid1(gdext.classes.SphereMesh.mb_set_is_hemisphere, livePtr, isHemisphere)
   }
 
   /** SphereMesh.get_is_hemisphere */

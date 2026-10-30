@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class DampedSpringJoint2D extends Joint2D {
   }
 
   /** DampedSpringJoint2D.set_rest_length */
-  final def setRestLength(rest_length: Double): Unit = {
+  final def setRestLength(restLength: Double): Unit = {
     if (gdext.classes.DampedSpringJoint2D.mb_set_rest_length == null) gdext.classes.DampedSpringJoint2D.mb_set_rest_length = MethodBind.get("DampedSpringJoint2D", "set_rest_length", 373806689L)
-    Ptrcall.callVoid1(gdext.classes.DampedSpringJoint2D.mb_set_rest_length, livePtr, rest_length)
+    Ptrcall.callVoid1(gdext.classes.DampedSpringJoint2D.mb_set_rest_length, livePtr, restLength)
   }
 
   /** DampedSpringJoint2D.get_rest_length */

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -11,9 +12,9 @@ abstract class AudioStreamOggVorbis extends AudioStream {
   override def godotClassName: String = "AudioStreamOggVorbis"
 
   /** AudioStreamOggVorbis.set_packet_sequence */
-  final def setPacketSequence(packet_sequence: OggPacketSequence): Unit = {
+  final def setPacketSequence(packetSequence: OggPacketSequence): Unit = {
     if (gdext.classes.AudioStreamOggVorbis.mb_set_packet_sequence == null) gdext.classes.AudioStreamOggVorbis.mb_set_packet_sequence = MethodBind.get("AudioStreamOggVorbis", "set_packet_sequence", 438882457L)
-    Ptrcall.callVoid1(gdext.classes.AudioStreamOggVorbis.mb_set_packet_sequence, livePtr, Wrappers.handle(packet_sequence))
+    Ptrcall.callVoid1(gdext.classes.AudioStreamOggVorbis.mb_set_packet_sequence, livePtr, Wrappers.handle(packetSequence))
   }
 
   /** AudioStreamOggVorbis.get_packet_sequence. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */

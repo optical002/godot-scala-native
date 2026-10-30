@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -17,19 +18,19 @@ abstract class RegEx extends RefCounted {
   }
 
   /** RegEx.compile */
-  final def compile(pattern: String, show_error: Boolean): Long = {
+  final def compile(pattern: String, showError: Boolean = true): gdext.classes.Error = {
     if (gdext.classes.RegEx.mb_compile == null) gdext.classes.RegEx.mb_compile = MethodBind.get("RegEx", "compile", 3565188097L)
-    Ptrcall.call2[String, Boolean, Long](gdext.classes.RegEx.mb_compile, livePtr, pattern, show_error)
+    gdext.classes.Error(Ptrcall.call2[String, Boolean, Long](gdext.classes.RegEx.mb_compile, livePtr, pattern, showError))
   }
 
   /** RegEx.search. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def search(subject: String, offset: Long, end: Long): RegExMatch = {
+  final def search(subject: String, offset: Long = 0L, end: Long = -1L): RegExMatch = {
     if (gdext.classes.RegEx.mb_search == null) gdext.classes.RegEx.mb_search = MethodBind.get("RegEx", "search", 3365977994L)
     Wrappers.owned[RegExMatch](Ptrcall.call3[String, Long, Long, Long](gdext.classes.RegEx.mb_search, livePtr, subject, offset, end))
   }
 
   /** RegEx.sub */
-  final def sub(subject: String, replacement: String, all: Boolean, offset: Long, end: Long): String = {
+  final def sub(subject: String, replacement: String, all: Boolean = false, offset: Long = 0L, end: Long = -1L): String = {
     if (gdext.classes.RegEx.mb_sub == null) gdext.classes.RegEx.mb_sub = MethodBind.get("RegEx", "sub", 54019702L)
     Ptrcall.call5[String, String, Boolean, Long, Long, String](gdext.classes.RegEx.mb_sub, livePtr, subject, replacement, all, offset, end)
   }
@@ -65,8 +66,8 @@ object RegEx {
   private[classes] var mb_get_group_count: GDExtensionMethodBindPtr = null
 
   /** RegEx.create_from_string. Returns an owned reference: release it with `unref()` or inside `Gd.scoped`. */
-  final def createFromString(pattern: String, show_error: Boolean): RegEx = {
+  final def createFromString(pattern: String, showError: Boolean = true): RegEx = {
     if (gdext.classes.RegEx.mb_create_from_string == null) gdext.classes.RegEx.mb_create_from_string = MethodBind.get("RegEx", "create_from_string", 4249111514L)
-    Wrappers.owned[RegEx](Ptrcall.call2[String, Boolean, Long](gdext.classes.RegEx.mb_create_from_string, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], pattern, show_error))
+    Wrappers.owned[RegEx](Ptrcall.call2[String, Boolean, Long](gdext.classes.RegEx.mb_create_from_string, null.asInstanceOf[gdext.internal.ffi.types.GDExtensionObjectPtr], pattern, showError))
   }
 }

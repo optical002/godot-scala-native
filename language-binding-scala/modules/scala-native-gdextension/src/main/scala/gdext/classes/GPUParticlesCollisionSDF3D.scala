@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,15 +24,15 @@ abstract class GPUParticlesCollisionSDF3D extends GPUParticlesCollision3D {
   }
 
   /** GPUParticlesCollisionSDF3D.set_resolution */
-  final def setResolution(resolution: Long): Unit = {
+  final def setResolution(resolution: gdext.classes.GPUParticlesCollisionSDF3D.Resolution): Unit = {
     if (gdext.classes.GPUParticlesCollisionSDF3D.mb_set_resolution == null) gdext.classes.GPUParticlesCollisionSDF3D.mb_set_resolution = MethodBind.get("GPUParticlesCollisionSDF3D", "set_resolution", 1155629297L)
     Ptrcall.callVoid1(gdext.classes.GPUParticlesCollisionSDF3D.mb_set_resolution, livePtr, resolution)
   }
 
   /** GPUParticlesCollisionSDF3D.get_resolution */
-  final def getResolution(): Long = {
+  final def getResolution(): gdext.classes.GPUParticlesCollisionSDF3D.Resolution = {
     if (gdext.classes.GPUParticlesCollisionSDF3D.mb_get_resolution == null) gdext.classes.GPUParticlesCollisionSDF3D.mb_get_resolution = MethodBind.get("GPUParticlesCollisionSDF3D", "get_resolution", 2919555867L)
-    Ptrcall.call0[Long](gdext.classes.GPUParticlesCollisionSDF3D.mb_get_resolution, livePtr)
+    gdext.classes.GPUParticlesCollisionSDF3D.Resolution(Ptrcall.call0[Long](gdext.classes.GPUParticlesCollisionSDF3D.mb_get_resolution, livePtr))
   }
 
   /** GPUParticlesCollisionSDF3D.set_texture */
@@ -71,15 +72,15 @@ abstract class GPUParticlesCollisionSDF3D extends GPUParticlesCollision3D {
   }
 
   /** GPUParticlesCollisionSDF3D.set_bake_mask_value */
-  final def setBakeMaskValue(layer_number: Long, value: Boolean): Unit = {
+  final def setBakeMaskValue(layerNumber: Long, value: Boolean): Unit = {
     if (gdext.classes.GPUParticlesCollisionSDF3D.mb_set_bake_mask_value == null) gdext.classes.GPUParticlesCollisionSDF3D.mb_set_bake_mask_value = MethodBind.get("GPUParticlesCollisionSDF3D", "set_bake_mask_value", 300928843L)
-    Ptrcall.callVoid2(gdext.classes.GPUParticlesCollisionSDF3D.mb_set_bake_mask_value, livePtr, layer_number, value)
+    Ptrcall.callVoid2(gdext.classes.GPUParticlesCollisionSDF3D.mb_set_bake_mask_value, livePtr, layerNumber, value)
   }
 
   /** GPUParticlesCollisionSDF3D.get_bake_mask_value */
-  final def getBakeMaskValue(layer_number: Long): Boolean = {
+  final def getBakeMaskValue(layerNumber: Long): Boolean = {
     if (gdext.classes.GPUParticlesCollisionSDF3D.mb_get_bake_mask_value == null) gdext.classes.GPUParticlesCollisionSDF3D.mb_get_bake_mask_value = MethodBind.get("GPUParticlesCollisionSDF3D", "get_bake_mask_value", 1116898809L)
-    Ptrcall.call1[Long, Boolean](gdext.classes.GPUParticlesCollisionSDF3D.mb_get_bake_mask_value, livePtr, layer_number)
+    Ptrcall.call1[Long, Boolean](gdext.classes.GPUParticlesCollisionSDF3D.mb_get_bake_mask_value, livePtr, layerNumber)
   }
 
 }
@@ -97,4 +98,36 @@ object GPUParticlesCollisionSDF3D {
   private[classes] var mb_get_bake_mask: GDExtensionMethodBindPtr = null
   private[classes] var mb_set_bake_mask_value: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_bake_mask_value: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `GPUParticlesCollisionSDF3D.Resolution`. */
+  opaque type Resolution <: Long = Long
+
+  object Resolution {
+    final val Resolution16: Resolution = 0L.asInstanceOf[Resolution]
+    final val Resolution32: Resolution = 1L.asInstanceOf[Resolution]
+    final val Resolution64: Resolution = 2L.asInstanceOf[Resolution]
+    final val Resolution128: Resolution = 3L.asInstanceOf[Resolution]
+    final val Resolution256: Resolution = 4L.asInstanceOf[Resolution]
+    final val Resolution512: Resolution = 5L.asInstanceOf[Resolution]
+    final val Max: Resolution = 6L.asInstanceOf[Resolution]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): Resolution = value.asInstanceOf[Resolution]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[Resolution] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L).asInstanceOf[scala.IArray[Resolution]]
+
+    extension (self: Resolution)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Resolution16"
+        case 1L => "Resolution32"
+        case 2L => "Resolution64"
+        case 3L => "Resolution128"
+        case 4L => "Resolution256"
+        case 5L => "Resolution512"
+        case 6L => "Max"
+        case other => other.toString
+      }
+  }
 }

@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,9 +24,9 @@ abstract class Path3D extends Node3D {
   }
 
   /** Path3D.set_debug_custom_color */
-  final def setDebugCustomColor(debug_custom_color: gdext.builtin.Color): Unit = {
+  final def setDebugCustomColor(debugCustomColor: gdext.builtin.Color): Unit = {
     if (gdext.classes.Path3D.mb_set_debug_custom_color == null) gdext.classes.Path3D.mb_set_debug_custom_color = MethodBind.get("Path3D", "set_debug_custom_color", 2920490490L)
-    Ptrcall.callVoid1(gdext.classes.Path3D.mb_set_debug_custom_color, livePtr, debug_custom_color)
+    Ptrcall.callVoid1(gdext.classes.Path3D.mb_set_debug_custom_color, livePtr, debugCustomColor)
   }
 
   /** Path3D.get_debug_custom_color */

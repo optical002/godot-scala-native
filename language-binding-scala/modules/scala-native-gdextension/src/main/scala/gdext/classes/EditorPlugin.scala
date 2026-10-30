@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -23,13 +24,13 @@ abstract class EditorPlugin extends Node {
   }
 
   /** EditorPlugin.add_control_to_container */
-  final def addControlToContainer(container: Long, control: Control): Unit = {
+  final def addControlToContainer(container: gdext.classes.EditorPlugin.CustomControlContainer, control: Control): Unit = {
     if (gdext.classes.EditorPlugin.mb_add_control_to_container == null) gdext.classes.EditorPlugin.mb_add_control_to_container = MethodBind.get("EditorPlugin", "add_control_to_container", 3092750152L)
     Ptrcall.callVoid2(gdext.classes.EditorPlugin.mb_add_control_to_container, livePtr, container, Wrappers.handle(control))
   }
 
   /** EditorPlugin.remove_control_from_container */
-  final def removeControlFromContainer(container: Long, control: Control): Unit = {
+  final def removeControlFromContainer(container: gdext.classes.EditorPlugin.CustomControlContainer, control: Control): Unit = {
     if (gdext.classes.EditorPlugin.mb_remove_control_from_container == null) gdext.classes.EditorPlugin.mb_remove_control_from_container = MethodBind.get("EditorPlugin", "remove_control_from_container", 3092750152L)
     Ptrcall.callVoid2(gdext.classes.EditorPlugin.mb_remove_control_from_container, livePtr, container, Wrappers.handle(control))
   }
@@ -65,7 +66,7 @@ abstract class EditorPlugin extends Node {
   }
 
   /** EditorPlugin.add_control_to_dock */
-  final def addControlToDock(slot: Long, control: Control, shortcut: Shortcut): Unit = {
+  final def addControlToDock(slot: gdext.classes.EditorPlugin.DockSlot, control: Control, shortcut: Shortcut = null): Unit = {
     if (gdext.classes.EditorPlugin.mb_add_control_to_dock == null) gdext.classes.EditorPlugin.mb_add_control_to_dock = MethodBind.get("EditorPlugin", "add_control_to_dock", 2994930786L)
     Ptrcall.callVoid3(gdext.classes.EditorPlugin.mb_add_control_to_dock, livePtr, slot, Wrappers.handle(control), Wrappers.handle(shortcut))
   }
@@ -83,7 +84,7 @@ abstract class EditorPlugin extends Node {
   }
 
   /** EditorPlugin.add_control_to_bottom_panel */
-  final def addControlToBottomPanel(control: Control, title: String, shortcut: Shortcut): Button = {
+  final def addControlToBottomPanel(control: Control, title: String, shortcut: Shortcut = null): Button = {
     if (gdext.classes.EditorPlugin.mb_add_control_to_bottom_panel == null) gdext.classes.EditorPlugin.mb_add_control_to_bottom_panel = MethodBind.get("EditorPlugin", "add_control_to_bottom_panel", 111032269L)
     Wrappers.borrowed[Button](Ptrcall.call3[GodotObject, String, GodotObject, Long](gdext.classes.EditorPlugin.mb_add_control_to_bottom_panel, livePtr, Wrappers.handle(control), title, Wrappers.handle(shortcut)))
   }
@@ -149,9 +150,9 @@ abstract class EditorPlugin extends Node {
   }
 
   /** EditorPlugin.add_import_plugin */
-  final def addImportPlugin(importer: EditorImportPlugin, first_priority: Boolean): Unit = {
+  final def addImportPlugin(importer: EditorImportPlugin, firstPriority: Boolean = false): Unit = {
     if (gdext.classes.EditorPlugin.mb_add_import_plugin == null) gdext.classes.EditorPlugin.mb_add_import_plugin = MethodBind.get("EditorPlugin", "add_import_plugin", 3113975762L)
-    Ptrcall.callVoid2(gdext.classes.EditorPlugin.mb_add_import_plugin, livePtr, Wrappers.handle(importer), first_priority)
+    Ptrcall.callVoid2(gdext.classes.EditorPlugin.mb_add_import_plugin, livePtr, Wrappers.handle(importer), firstPriority)
   }
 
   /** EditorPlugin.remove_import_plugin */
@@ -161,27 +162,27 @@ abstract class EditorPlugin extends Node {
   }
 
   /** EditorPlugin.add_scene_format_importer_plugin */
-  final def addSceneFormatImporterPlugin(scene_format_importer: EditorSceneFormatImporter, first_priority: Boolean): Unit = {
+  final def addSceneFormatImporterPlugin(sceneFormatImporter: EditorSceneFormatImporter, firstPriority: Boolean = false): Unit = {
     if (gdext.classes.EditorPlugin.mb_add_scene_format_importer_plugin == null) gdext.classes.EditorPlugin.mb_add_scene_format_importer_plugin = MethodBind.get("EditorPlugin", "add_scene_format_importer_plugin", 2764104752L)
-    Ptrcall.callVoid2(gdext.classes.EditorPlugin.mb_add_scene_format_importer_plugin, livePtr, Wrappers.handle(scene_format_importer), first_priority)
+    Ptrcall.callVoid2(gdext.classes.EditorPlugin.mb_add_scene_format_importer_plugin, livePtr, Wrappers.handle(sceneFormatImporter), firstPriority)
   }
 
   /** EditorPlugin.remove_scene_format_importer_plugin */
-  final def removeSceneFormatImporterPlugin(scene_format_importer: EditorSceneFormatImporter): Unit = {
+  final def removeSceneFormatImporterPlugin(sceneFormatImporter: EditorSceneFormatImporter): Unit = {
     if (gdext.classes.EditorPlugin.mb_remove_scene_format_importer_plugin == null) gdext.classes.EditorPlugin.mb_remove_scene_format_importer_plugin = MethodBind.get("EditorPlugin", "remove_scene_format_importer_plugin", 2637776123L)
-    Ptrcall.callVoid1(gdext.classes.EditorPlugin.mb_remove_scene_format_importer_plugin, livePtr, Wrappers.handle(scene_format_importer))
+    Ptrcall.callVoid1(gdext.classes.EditorPlugin.mb_remove_scene_format_importer_plugin, livePtr, Wrappers.handle(sceneFormatImporter))
   }
 
   /** EditorPlugin.add_scene_post_import_plugin */
-  final def addScenePostImportPlugin(scene_import_plugin: EditorScenePostImportPlugin, first_priority: Boolean): Unit = {
+  final def addScenePostImportPlugin(sceneImportPlugin: EditorScenePostImportPlugin, firstPriority: Boolean = false): Unit = {
     if (gdext.classes.EditorPlugin.mb_add_scene_post_import_plugin == null) gdext.classes.EditorPlugin.mb_add_scene_post_import_plugin = MethodBind.get("EditorPlugin", "add_scene_post_import_plugin", 3492436322L)
-    Ptrcall.callVoid2(gdext.classes.EditorPlugin.mb_add_scene_post_import_plugin, livePtr, Wrappers.handle(scene_import_plugin), first_priority)
+    Ptrcall.callVoid2(gdext.classes.EditorPlugin.mb_add_scene_post_import_plugin, livePtr, Wrappers.handle(sceneImportPlugin), firstPriority)
   }
 
   /** EditorPlugin.remove_scene_post_import_plugin */
-  final def removeScenePostImportPlugin(scene_import_plugin: EditorScenePostImportPlugin): Unit = {
+  final def removeScenePostImportPlugin(sceneImportPlugin: EditorScenePostImportPlugin): Unit = {
     if (gdext.classes.EditorPlugin.mb_remove_scene_post_import_plugin == null) gdext.classes.EditorPlugin.mb_remove_scene_post_import_plugin = MethodBind.get("EditorPlugin", "remove_scene_post_import_plugin", 3045178206L)
-    Ptrcall.callVoid1(gdext.classes.EditorPlugin.mb_remove_scene_post_import_plugin, livePtr, Wrappers.handle(scene_import_plugin))
+    Ptrcall.callVoid1(gdext.classes.EditorPlugin.mb_remove_scene_post_import_plugin, livePtr, Wrappers.handle(sceneImportPlugin))
   }
 
   /** EditorPlugin.add_export_plugin */
@@ -257,7 +258,7 @@ abstract class EditorPlugin extends Node {
   }
 
   /** EditorPlugin.add_context_menu_plugin */
-  final def addContextMenuPlugin(slot: Long, plugin: EditorContextMenuPlugin): Unit = {
+  final def addContextMenuPlugin(slot: gdext.classes.EditorContextMenuPlugin.ContextMenuSlot, plugin: EditorContextMenuPlugin): Unit = {
     if (gdext.classes.EditorPlugin.mb_add_context_menu_plugin == null) gdext.classes.EditorPlugin.mb_add_context_menu_plugin = MethodBind.get("EditorPlugin", "add_context_menu_plugin", 1904221872L)
     Ptrcall.callVoid2(gdext.classes.EditorPlugin.mb_add_context_menu_plugin, livePtr, slot, Wrappers.handle(plugin))
   }
@@ -349,4 +350,110 @@ object EditorPlugin {
   private[classes] var mb_add_debugger_plugin: GDExtensionMethodBindPtr = null
   private[classes] var mb_remove_debugger_plugin: GDExtensionMethodBindPtr = null
   private[classes] var mb_get_plugin_version: GDExtensionMethodBindPtr = null
+
+  /** Godot enum `EditorPlugin.CustomControlContainer`. */
+  opaque type CustomControlContainer <: Long = Long
+
+  object CustomControlContainer {
+    final val Toolbar: CustomControlContainer = 0L.asInstanceOf[CustomControlContainer]
+    final val SpatialEditorMenu: CustomControlContainer = 1L.asInstanceOf[CustomControlContainer]
+    final val SpatialEditorSideLeft: CustomControlContainer = 2L.asInstanceOf[CustomControlContainer]
+    final val SpatialEditorSideRight: CustomControlContainer = 3L.asInstanceOf[CustomControlContainer]
+    final val SpatialEditorBottom: CustomControlContainer = 4L.asInstanceOf[CustomControlContainer]
+    final val CanvasEditorMenu: CustomControlContainer = 5L.asInstanceOf[CustomControlContainer]
+    final val CanvasEditorSideLeft: CustomControlContainer = 6L.asInstanceOf[CustomControlContainer]
+    final val CanvasEditorSideRight: CustomControlContainer = 7L.asInstanceOf[CustomControlContainer]
+    final val CanvasEditorBottom: CustomControlContainer = 8L.asInstanceOf[CustomControlContainer]
+    final val InspectorBottom: CustomControlContainer = 9L.asInstanceOf[CustomControlContainer]
+    final val ProjectSettingTabLeft: CustomControlContainer = 10L.asInstanceOf[CustomControlContainer]
+    final val ProjectSettingTabRight: CustomControlContainer = 11L.asInstanceOf[CustomControlContainer]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): CustomControlContainer = value.asInstanceOf[CustomControlContainer]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[CustomControlContainer] = scala.IArray[Long](0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L).asInstanceOf[scala.IArray[CustomControlContainer]]
+
+    extension (self: CustomControlContainer)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Toolbar"
+        case 1L => "SpatialEditorMenu"
+        case 2L => "SpatialEditorSideLeft"
+        case 3L => "SpatialEditorSideRight"
+        case 4L => "SpatialEditorBottom"
+        case 5L => "CanvasEditorMenu"
+        case 6L => "CanvasEditorSideLeft"
+        case 7L => "CanvasEditorSideRight"
+        case 8L => "CanvasEditorBottom"
+        case 9L => "InspectorBottom"
+        case 10L => "ProjectSettingTabLeft"
+        case 11L => "ProjectSettingTabRight"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `EditorPlugin.DockSlot`. */
+  opaque type DockSlot <: Long = Long
+
+  object DockSlot {
+    final val None: DockSlot = -1L.asInstanceOf[DockSlot]
+    final val LeftUl: DockSlot = 0L.asInstanceOf[DockSlot]
+    final val LeftBl: DockSlot = 1L.asInstanceOf[DockSlot]
+    final val LeftUr: DockSlot = 2L.asInstanceOf[DockSlot]
+    final val LeftBr: DockSlot = 3L.asInstanceOf[DockSlot]
+    final val RightUl: DockSlot = 4L.asInstanceOf[DockSlot]
+    final val RightBl: DockSlot = 5L.asInstanceOf[DockSlot]
+    final val RightUr: DockSlot = 6L.asInstanceOf[DockSlot]
+    final val RightBr: DockSlot = 7L.asInstanceOf[DockSlot]
+    final val Bottom: DockSlot = 8L.asInstanceOf[DockSlot]
+    final val Max: DockSlot = 9L.asInstanceOf[DockSlot]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): DockSlot = value.asInstanceOf[DockSlot]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[DockSlot] = scala.IArray[Long](-1L, 0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L).asInstanceOf[scala.IArray[DockSlot]]
+
+    extension (self: DockSlot)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case -1L => "None"
+        case 0L => "LeftUl"
+        case 1L => "LeftBl"
+        case 2L => "LeftUr"
+        case 3L => "LeftBr"
+        case 4L => "RightUl"
+        case 5L => "RightBl"
+        case 6L => "RightUr"
+        case 7L => "RightBr"
+        case 8L => "Bottom"
+        case 9L => "Max"
+        case other => other.toString
+      }
+  }
+
+  /** Godot enum `EditorPlugin.AfterGUIInput`. */
+  opaque type AfterGUIInput <: Long = Long
+
+  object AfterGUIInput {
+    final val Pass: AfterGUIInput = 0L.asInstanceOf[AfterGUIInput]
+    final val Stop: AfterGUIInput = 1L.asInstanceOf[AfterGUIInput]
+    final val Custom: AfterGUIInput = 2L.asInstanceOf[AfterGUIInput]
+
+    /** A value from its raw Godot integer. */
+    inline def apply(value: Long): AfterGUIInput = value.asInstanceOf[AfterGUIInput]
+
+    /** Every named value, ascending, aliases once. */
+    val values: scala.IArray[AfterGUIInput] = scala.IArray[Long](0L, 1L, 2L).asInstanceOf[scala.IArray[AfterGUIInput]]
+
+    extension (self: AfterGUIInput)
+      /** The constant's Scala name, or the number for an unnamed value. */
+      def name: String = self.asInstanceOf[Long] match {
+        case 0L => "Pass"
+        case 1L => "Stop"
+        case 2L => "Custom"
+        case other => other.toString
+      }
+  }
 }

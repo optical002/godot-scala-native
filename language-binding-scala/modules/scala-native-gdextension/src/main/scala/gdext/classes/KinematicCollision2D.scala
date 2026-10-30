@@ -2,6 +2,7 @@ package gdext.classes
 
 import gdext.Godot
 import gdext.builtin.*
+import gdext.internal.StringNames
 import gdext.internal.engine.*
 import gdext.internal.engine.GodotObject.*
 import gdext.internal.ffi.types.GDExtensionMethodBindPtr
@@ -35,9 +36,9 @@ abstract class KinematicCollision2D extends RefCounted {
   }
 
   /** KinematicCollision2D.get_angle */
-  final def getAngle(up_direction: gdext.builtin.Vector2): Double = {
+  final def getAngle(upDirection: gdext.builtin.Vector2 = gdext.builtin.Vector2(0f, -1f)): Double = {
     if (gdext.classes.KinematicCollision2D.mb_get_angle == null) gdext.classes.KinematicCollision2D.mb_get_angle = MethodBind.get("KinematicCollision2D", "get_angle", 2841063350L)
-    Ptrcall.call1[gdext.builtin.Vector2, Double](gdext.classes.KinematicCollision2D.mb_get_angle, livePtr, up_direction)
+    Ptrcall.call1[gdext.builtin.Vector2, Double](gdext.classes.KinematicCollision2D.mb_get_angle, livePtr, upDirection)
   }
 
   /** KinematicCollision2D.get_depth */
